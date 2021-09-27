@@ -1,0 +1,793 @@
+<aside #mainSidebar class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a [routerLink]="['/dashBoard']" class="brand-link">
+    <img
+      src="assets/img/whsLogo.png"
+      alt="AdminLTE Logo"
+      class="brand-image img-circle elevation-3"
+      style="opacity: 0.8;"
+    />
+    <span class="brand-text font-weight-light">Admin WHS</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img
+          src="assets/img/avatar5.png"
+          class="img-circle elevation-2"
+          alt="User Image"
+        />
+      </div>
+      <div class="info">
+        <a [routerLink]="['/profile']" class="d-block">Akash Makde</a>
+      </div>
+    </div> -->
+
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <!-- <li class="nav-item" [ngClass]="{'menu-open':step==true}" > -->
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
+            <p>
+              Dashboard
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <!-- <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
+            <p>
+              Dynamic Form
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Site Inspection Form
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Hazard Report Form
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a> -->
+          <!-- <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Employees on return to work plans</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard2']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>First aid treatment injuries</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hazards reported</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Lost time injuries</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Medical treatment injuries</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Near misses</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Notifiable Incidents</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Inductions Completed</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Toolbox Talks</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Safety Meetings/Forums Conducted</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Safety Inspections/Audits Conducted</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>SWMS’s Completed</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Risk Assessments</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hand Injury </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Leg Injury </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Torso</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Body Sections to be defined</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard3']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Corrective actions </p>
+              </a>
+            </li>            
+          </ul> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-briefcase mr-1"></i>            <p>
+              Employees on return to work plans
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/dynamicForm']" class="nav-link">
+            <i class="fas fa-first-aid mr-1"></i>            <p>
+Dynamic form              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-first-aid mr-1"></i>            <p>
+              First aid treatment injuries
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/forms/hazardRep']" class="nav-link">
+            <i class="fas fa-chart-line mr-1"></i>    
+             <p>
+              Hazards reported
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
+            <i class="fas fa-user-injured mr-1"></i>
+            <p>
+              Lost time injuries
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-user-injured mr-1"></i>
+                        <p>
+              Medical treatment injuries
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-car-crash mr-1"></i>            <p>
+              Near misses
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/forms/incidentRep']" class="nav-link">
+            <i class="fas fa-car-crash mr-1"></i>            <p>
+              Notifiable Incidents
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-clipboard-list mr-1"></i>            <p>
+              Inductions Completed
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+            <a [routerLink]="['/admin/forms/toolboxTalk']" class="nav-link">
+            <i class="fas fa-toolbox mr-1"></i>            <p>
+              Toolbox Talks
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+            <a [routerLink]="['/admin/forms/siteInspect']" class="nav-link">
+            <i class="fas fa-toolbox mr-1"></i>            <p>
+              Site Inspection
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="far fa-handshake mr-1"></i>            <p>
+              Safety Meetings/Forums Conducted
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a  class="nav-link">
+            <i class="fas fa-chart-bar mr-1"></i>            <p>
+              Safety Inspections/Audits Conducted
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-clipboard-list mr-1"></i>            <p>
+              SWMS’s Completed
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/forms/riskAssessSWMS']" class="nav-link">
+            <i class="fas fa-chart-line mr-1"></i>                  
+            <p>
+              Risk Assessments
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-hand-holding-medical mr-1"></i>            
+            <p>
+              Hand Injury 
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-hand-holding-medical mr-1"></i>            
+            <p>
+              Leg Injury 
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
+            <p>
+              Torso 
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
+            <p>
+              Body Sections to be defined
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
+            <p>
+              Corrective actions 
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+         </li>
+        
+        <!-- <li class="nav-item">
+          <a [routerLink]="['/widgets']" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Widgets
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              Charts
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/charts/chartjs']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>ChartJS</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/charts/flot']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Flot</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/charts/inline']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Inline</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/charts/uplot']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>uPlot</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tree"></i>
+            <p>
+              UI Elements
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/UI/general']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>General</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/icons']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Icons</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/buttons']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Buttons</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/sliders']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sliders</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/modals']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Modals & Alerts</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/navbar']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Navbar & Tabs</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/timeline']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Timeline</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/UI/ribbons']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ribbons</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              Forms
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/forms/general']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>General Elements</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/forms/advanced']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Advanced Elements</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/forms/editors']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Editors</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/forms/validation']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Validation</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/tables']" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>Sample Tables</p>
+          </a>
+        </li>
+        <li class="nav-header">EXAMPLES</li>
+        <li class="nav-item">
+          <a [routerLink]="['/calendar']" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+            <p>
+              Calendar
+              <span class="badge badge-info right">2</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/gallery']" class="nav-link">
+            <i class="nav-icon far fa-image"></i>
+            <p>
+              Gallery
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/kanban']" class="nav-link">
+            <i class="nav-icon fas fa-columns"></i>
+            <p>
+              Kanban Board
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fa-envelope"></i>
+            <p>
+              Mailbox
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/mailbox/mailbox']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Inbox</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/mailbox/compose']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Compose</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/mailbox/read-mail']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Read</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Pages
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/examples/invoice']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Invoice</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/profile']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Profile</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/e-commerce']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>E-commerce</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/projects']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Projects</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/project/add']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Project Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/project/edit']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Project Edit</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/project/detail']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Project Detail</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/contacts']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Contacts</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/faq']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>FAQ</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/contact-us']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Contact us</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fa-plus-square"></i>
+            <p>
+              Extras
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                  Login & Register v1
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/login']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login v1</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/register']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Register v1</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/forgot-password']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Forgot Password v1</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/recover-password']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Recover Password v1</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                  Login & Register v2
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/login-v2']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login v2</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/register-v2']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Register v2</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/forgot-password-v2']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Forgot Password v2</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLink]="['/examples/recover-password-v2']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Recover Password v2</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/lockscreen']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Lockscreen</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/legacy-user-menu']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Legacy User Menu</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/language-menu']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Language Menu</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/404']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Error 404</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/500']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Error 500</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/pace']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pace</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/blank']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Blank Page</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/examples/starter']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Starter Page</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-search"></i>
+            <p>
+              Search
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/search/simple']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Simple Search</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/search/enhanced']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Enhanced</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-header">MISCELLANEOUS</li>
+        <li class="nav-item">
+          <a [routerLink]="['/iframe']" class="nav-link">
+            <i class="nav-icon fas fa-ellipsis-h"></i>
+            <p>Tabbed IFrame Plugin</p>
+          </a>
+        </li> -->
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+

@@ -1,0 +1,599 @@
+<div class="container mt-4" [formGroup]="sidePreview">
+    <h2 class="text-center pt-3">
+      <p>Site Inspection Preview</p>
+    </h2>
+  
+  
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button [ngClass]="siteshow ===true ? 'nav-link active' : 'nav-link'"  id="siteInspection-tab" data-bs-toggle="tab" data-bs-target="#siteInspection" type="button" role="tab" aria-controls="siteInspection" (click)="showsite()" aria-selected="true">Site Inspection</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button [ngClass]="siteAction ===true ? 'nav-link active' : 'nav-link'" id="siteAction-tab" data-bs-toggle="tab" data-bs-target="#siteAction" type="button" role="tab" aria-controls="siteAction"  (click)="showAction()" aria-selected="false">Site Inspection Corrective Action</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="siteInspection" role="tabpanel" *ngIf="siteshow" aria-labelledby="siteInspection-tab">
+    
+      <div class="pt-3">
+        <strong >Site Information</strong>
+
+      </div>
+    <div>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Site Name</label>
+          <input type="text" class="form-control" id="siteName" />
+        </div>
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Customer Name</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Site Address</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Customer Contact</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Customer Contact Phone</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Customer Contact Email</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Job Number</label>
+  
+          <select class="form-select form-control col" aria-label="Default select example">
+            <option selected hidden>Select</option>
+            <option value="1">1000</option>
+            <option value="2">1001</option>
+            <option value="3">1002</option>
+          </select>
+        </div>
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Project Manager</label>
+          <select class="form-select form-control col" aria-label="Default select example">
+            <option selected hidden>Select</option>
+            <option value="1">John</option>
+            <option value="2">Akash</option>
+            <option value="3">Rahul</option>
+          </select>
+        </div>
+  
+      </div>
+      <div class="row">
+  
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label">Date</label>
+          <input type="date" class="form-control" />
+        </div>
+  
+        <!-- <div class="mb-3 col">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Signature*</label
+              >
+              <input type="text" class="form-control" />
+            </div> -->
+      </div>
+    </div>
+  
+  
+    <div class="mt-4">
+      <strong>Site Control</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Is the Hazard Signage up to date </p>
+        <p><input type="radio" class="mr-1"  name="hazardSignage" value="yes" >Yes</p>
+        <p> <input type="radio" class="mr-1" name="hazardSignage" value="no" >No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Is the documentation up to date </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="documentation">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="documentation">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Have all workers been inducted onsite </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="workeronsite">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="workeronsite">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Have all workers been inducted into the SWMS </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="SWMS">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="SWMS">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Are regular toobox talks taking place </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="tooboxtalk">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="tooboxtalk">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <label for="exampleFormControlInput1" class="form-label">Date of last toolbox talk</label>
+        <input type="date" class="form-control" />
+      </div>
+    </div>
+  
+  
+    <div class="mt-4">
+  
+      <strong>WHS Documentation</strong>
+    </div>
+    <div class="row">
+      <div class=" mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">WHS Manual is avaiable to all workers</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="WHSManual">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="WHSManual">No</p>
+      </div>
+      <div class=" mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Incident Report form available </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="IncidentReport">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="IncidentReport">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Hazard Report form available </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="HazardReport">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="HazardReport">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Emergrncy Evacuation plan displayed </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="EmergrncyEvacuation">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="EmergrncyEvacuation">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Training Records are up tp date</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="TrainingRecords">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="TrainingRecords">No</p>
+      </div>
+  
+    </div>
+  
+  
+    <div class="mt-4">
+  
+      <strong>Display Material</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">WHS Policy Displayed on notice board</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="WHSPolicy">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="WHSPolicy">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Return to Work Form avaliable </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ReturnToWork">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ReturnToWork">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Hazard Report form avaliable </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="DisplayHazardReport">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="DisplayHazardReport">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Emergrncy Evacuation plan displayed </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="DisplayEmergrncyEvacuation">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="DisplayEmergrncyEvacuation">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">No Smoking signs displayed</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="NoSmoking">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="NoSmoking">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">PPE Signage displayed</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="PPESignage">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="PPESignage">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Report the Hazard signs displayed</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ReportHazardsigns">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ReportHazardsigns">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Manual Handling Signs Displayed</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ManualHandlingSigns">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ManualHandlingSigns">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Notice Board is up to date</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="NoticeBoard">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="NoticeBoard">No</p>
+      </div>
+  
+    </div>
+  
+  
+    <div class="mt-4">
+  
+      <strong>Access And Egrass</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">No oil, grease or other slip hazard</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="AccessEgrassHazards">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="AccessEgrassHazards">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Walkways clearly marked </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="Walkways">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="Walkways">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Walkways are free of clutter or obstructions </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="Walkwaysfree">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="Walkwaysfree">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Stairs are not blocked and good condition </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="StairsConditionGood">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="StairsConditionGood">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Hoardings/fence and getes secure</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="HoardingsFenceGates">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="HoardingsFenceGates">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Loose matrials secure from wind</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="LosseMatrialSecure">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="LosseMatrialSecure">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Bins/Skips located suitable areas</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="BinsSkipsLocated">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="BinsSkipsLocated">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Bins/Skips are not overflowing</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="BinsSkipsOverflowing">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="BinsSkipsOverflowing">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Notice Board is up to date</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="NoticeBoard">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="NoticeBoard">No</p>
+      </div>
+  
+    </div>
+  
+  
+    <div class="mt-4">
+  
+      <strong>Electrical Equipment</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Mainboard lockable</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ElectricalMainboardLock">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ElectricalMainboardLock">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Powerleads tested and tagged</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="PowerleadsTested">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="PowerleadsTested">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Appropriate giards on equipment</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="EquipmentGiards">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="EquipmentGiards">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Equipment in good condition </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="EquipmentCondition">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="EquipmentCondition">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Leads safety placed</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="LeadsSafety">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="LeadsSafety">No</p>
+      </div>
+  
+    </div>
+  
+  
+  
+    <div class="mt-4">
+  
+      <strong>Chemicals</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Safey Data Sheet(SDS) available</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="SDSavailable">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="SDSavailable">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">All Chemicals Are stored as per the SDS</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ChemicalsStoredSDS">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ChemicalsStoredSDS">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">SDS Register is availables and up to date</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="SDSRegisterAvailables">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="SDSRegisterAvailables">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Correct PPE on hand and in use </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="CorrectPPHand">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="CorrectPPHand">No</p>
+      </div>
+  
+    </div>
+  
+    <div class="mt-4">
+  
+      <strong>First Aid</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">First Aid Kit available</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="FirstAidavailable">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="FirstAidavailable">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">First Kit stocked as per contents list</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="FirstKitContentsList">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="FirstKitContentsList">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">First Aid Kit accessable to all workers</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="KitAccessableWorkers">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="KitAccessableWorkers">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">All workers aware of the first Aid kit location </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="AwarefirstKitLocation">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="AwarefirstKitLocation">No</p>
+      </div>
+  
+    </div>
+  
+    <div class="mt-4">
+  
+      <strong>Fire and Evacuation</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4 ">
+        <p for="exampleFormControlInput1" class="form-label">Extinguishers are in place</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="Extinguishers">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="Extinguishers">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Extinguishers are clearly maked </p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ExtinguishersClearlyMaked">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ExtinguishersClearlyMaked">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Extinguishers seviced and up to date</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ExtinguishersSevicedUpdate">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ExtinguishersSevicedUpdate">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Exit Sings are in Working condition </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ExitSingsCondition">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ExitSingsCondition">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Exit Doors not blocked </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ExitDoorsBlocked">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ExitDoorsBlocked">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Exit Doors can be easily opened </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="ExitDoorsOpened">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="ExitDoorsOpened">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Fire Alarm tested and inspected up to date</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="FireAlarmTested">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="FireAlarmTested">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Evacuation Plans displayed</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="EvacuationPlans">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="EvacuationPlans">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Emergency Drill conduct within the last year</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="EmergencyDrillConduct">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="EmergencyDrillConduct">No</p>
+      </div>
+  
+    </div>
+  
+    <div class="mt-4">
+  
+      <strong>Plant Equipment</strong>
+    </div>
+    <div class="row">
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Risk Assessment and SWMS completed</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="RiskAssessmentSWMS">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="RiskAssessmentSWMS">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Plant is within valid service/inspection period</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="PlantValidService">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="PlantValidService">No</p>
+      </div>
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Opertion procedures and SOP's in place</p>
+  
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="OpertionProceduresSOPs">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="OpertionProceduresSOPs">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">PPE available</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="PPEAvailable">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="PPEAvailable">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Emergency Plan in place</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="EmergencyPlan">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="EmergencyPlan">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Plant is in good Condition </p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="PlantGoodCondition">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="PlantGoodCondition">No</p>
+      </div>
+  
+      <div class="mt-2 col-4">
+        <p for="exampleFormControlInput1" class="form-label">Appropriate guards fitted</p>
+        <!-- <input type="text" class="form-control" formControlName="index" /> -->
+        <p><input type="radio"  class="mr-1" value="yes" formControlName="AppropriateGuards">Yes</p>
+        <p> <input type="radio" class="mr-1" value="no" formControlName="AppropriateGuards">No</p>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="tab-pane fade show active" id="siteAction" role="tabpanel" *ngIf="siteAction" aria-labelledby="siteAction-tab">
+  
+  
+  
+  
+    <div formArrayName="siteAction">
+      <div *ngFor="let row of add().controls; let filed=index ">
+        <div [formGroupName]="filed ">
+  
+          <div class="row">
+          <div class="mb-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label">Item</label>
+            <select
+              class="form-select form-control col" aria-label="Default select example" formControlName="item">
+              <option selected hidden>Select</option>
+              <option  class="mr-1" value="yes">Yes</option>
+              <option class="mr-1" value="no">No</option>
+            </select>
+          </div>
+  
+          <div class="mb-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label">Action</label>
+            <select class="form-select form-control col" aria-label="Default select example"formControlName="action" >
+              <option selected hidden>Select</option>
+              <option  class="mr-1" value="yes">Yes</option>
+              <option class="mr-1" value="no">No</option>
+            </select>
+          </div>
+  
+          <div class="mb-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label" >Person Responsible</label >
+            <select class="form-select form-control col" aria-label="Default select example" formControlName="PersonResponsible" >
+              <option selected hidden>Select</option>
+              <option  class="mr-1" value="yes">Yes</option>
+              <option class="mr-1" value="no">No</option>
+            </select>
+          </div>
+  
+          <div class="mb-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label">Complete</label >
+            <select class="form-select form-control col" aria-label="Default select example"formControlName="complete">
+              <option selected hidden>Select</option>
+              <option  class="mr-1" value="yes">Yes</option>
+              <option class="mr-1" value="no">No</option>
+            </select>
+          </div>
+  
+        </div>
+  
+          </div>
+          </div>
+    </div><span class="material-icons" (click)="addAction()">add_circle_outline </span>
+  
+      <span class="material-icons" (click)="removeAction()">
+        remove_circle_outline 
+        </span>
+        <span class="material-icons">
+          keyboard_arrow_up
+          </span>
+          <span class="material-icons">
+            keyboard_arrow_down
+            </span>
+  
+  
+    </div>
+  
+  </div>
+  

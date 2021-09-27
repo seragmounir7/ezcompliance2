@@ -1,0 +1,1142 @@
+<div class="container mt-4" [formGroup]="riskAssessmentFb">
+  <h2 class="text-center mt-3 pt-3">
+    <p>Risk Assessment Preview</p>
+  </h2>
+
+  <ul class="nav nav-tabs my-3" style="width: 50%" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        [ngClass]="RiskAssessment === true ? 'nav-link active' : 'nav-link'"
+        id="RISKAssessment-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#RISKAssessment"
+        type="button"
+        role="tab"
+        aria-controls="RISKAssessment"
+        (click)="showsite()"
+        aria-selected="true"
+      >
+        RISK Assessment
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        [ngClass]="SWMSShow === true ? 'nav-link active' : 'nav-link'"
+        id="SWSS-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#SWSS"
+        type="button"
+        role="tab"
+        aria-controls="siteAction"
+        (click)="showAction()"
+        aria-selected="false"
+      >
+        SWMS
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div
+      class="tab-pane fade show active"
+      id="RISKAssessment"
+      role="tabpanel"
+      *ngIf="RiskAssessment"
+      aria-labelledby="RISKAssessment-tab"
+    >
+      <strong>Site Information</strong>
+      <div>
+        <div class="row">
+          <div class="my-3 col">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Site Name</label
+            >
+            <select
+              class="form-select form-control col"
+              id="siteName"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+            <!-- <input type="text" class="form-control" id="siteName" /> -->
+          </div>
+          <div class="my-3 col">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Customer Name</label
+            >
+            <select
+              class="form-select form-control col"
+              id="CustomerName"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Street Number</label
+            >
+            <select
+              class="form-select form-control col"
+              id="StreetNumber"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+          <div class="my-3 col-4">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Street Address</label
+            >
+            <select
+              class="form-select form-control col"
+              id="StreetAddress"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+          <div class="my-3 col-4">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Suburb</label
+            >
+            <select
+              class="form-select form-control col"
+              id="Suburb"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+          <div class="my-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >State</label
+            >
+            <select
+              class="form-select form-control col"
+              id="State"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="my-3 col">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Customer Contact</label
+            >
+            <select
+              class="form-select form-control col"
+              id="CustomerContact"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+          <div class="my-3 col">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Customer Contact Phone</label
+            >
+            <select
+              class="form-select form-control col"
+              id="CustomerContactPhone"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-4">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Customer Email</label
+            >
+            <select
+              class="form-select form-control col"
+              id="CustomerEmail"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select>
+          </div>
+          <div class="my-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Job Number</label
+            >
+
+            <select
+              class="form-select form-control col"
+              id="JobNumbe"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+              <option value="1">1000</option>
+              <option value="2">1001</option>
+              <option value="3">1002</option>
+            </select>
+          </div>
+          <div class="my-3 col-6">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Project Manager</label
+            >
+            <select
+              class="form-select form-control col"
+              id="ProjectManager"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+              <option value="1">John</option>
+              <option value="2">Akash</option>
+              <option value="3">Rahul</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-4">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Date</label
+            >
+            <input type="date" class="form-control" id="date" />
+          </div>
+        </div>
+
+        <!-- Job Tasks -->
+        <div class="mt-4">
+          <h3><strong>Job Tasks</strong></h3>
+        </div>
+
+        <div class="row">
+          <div class="mt-2 col-4" *ngFor="let item of jobTask">
+            <p>
+              <input
+                type="checkbox"
+                class="mr-1"
+                value="Activities Involving chemicals"
+              />{{ item.label }}
+            </p>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- table -->
+        <div class="row mt-4">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th colspan="7" class="L_1">Risk Level Matrix</th>
+                <th colspan="8" class="L_1">Risk Analysis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th colspan="2" rowspan="2"></th>
+                <td colspan="5">Consequence</td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Likelihood</div>
+                </td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Consequence</div>
+                </td>
+              </tr>
+              <tr>
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <th rowspan="5"><div class="like_1">Likelihood</div></th>
+                <td>5</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2"><div class="space_1">1</div></td>
+                <td colspan="2">Rare</td>
+                <td colspan="2"><div class="space_1">1</div></td>
+                <td colspan="2">Insignificant</td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Unlikely</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Minor</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+              </tr>
+              <tr>
+                <th scope="col">2</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Likely</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Major</td>
+              </tr>
+              <tr>
+                <th scope="col">1</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td colspan="2" class="mr-2 ml-2">5</td>
+                <td colspan="2">Almost Certain</td>
+                <td colspan="2">5</td>
+                <td colspan="2">Catastrophic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <mat-divider></mat-divider>
+
+        <!-- High Risk Construction -->
+        <div class="mt-4">
+          <h4>High Risk Construction</h4>
+        </div>
+
+        <div class="row">
+          <div class="col-4" *ngFor="let item of highRiskConstruction">
+            <p>
+              <input type="checkbox" class="mr-1" value="" />{{ item.label }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PPE Selection -->
+      <div class="mt-4">
+        <h3><strong>PPE Selection</strong></h3>
+      </div>
+
+      <div class="row">
+        <div class="mt-2 col-4" *ngFor="let item of PPEselection">
+          <p><input type="checkbox" class="mr-1" value="" />{{ item.label }}</p>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="mt-4">
+        <h3><strong>Licence and Qualifications</strong></h3>
+      </div>
+
+      <div class="row">
+        <div class="col-4" *ngFor="let item of licenseAndQualification">
+          <p>
+            <input type="checkbox" class="mr-1" value="Open Cable Licence" />{{
+              item.label
+            }}
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h4>
+          Toolbox this document with all workers and contractors on sit & sign
+          off
+        </h4>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Employee 1</label
+          >
+          <p>
+            <input
+              type="input"
+              class="mr-1 form-control"
+              value=""
+              formControlName="Employee1"
+            />
+          </p>
+        </div>
+        <div class="col-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Signature</label
+          >
+          <div style="border: 1px solid rgb(149 162 173)">
+            <signature-pad
+              [options]="signaturePadOptions1"
+              (onBeginEvent)="drawStart1()"
+              (onEndEvent)="drawComplete1()"
+              #Signature1
+            ></signature-pad>
+          </div>
+          <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+            Clear
+          </button>
+        </div>
+        <div class="col-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Date/Time</label
+          >
+          <p>
+            <input
+              type="date"
+              class="mr-1 form-control"
+              value=""
+              formControlName="dateTime"
+            />
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="tab-pane fade show active"
+    id="SWSS"
+    role="tabpanel"
+    *ngIf="!RiskAssessment"
+    aria-labelledby="SWSS-tab"
+  >
+    <!--SWMS Forms-->
+    <div class="container content-center">
+      <form class="px-4 py-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="my-3">
+              <label for="exampleInputFullname" class="form-label"
+                >Site Name</label
+              >
+              <input
+                type="fullname"
+                class="form-control"
+                id="exampleInputFullname"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="my-3">
+              <label for="exampleInputSurname" class="form-label"
+                >Customer Name</label
+              >
+              <input
+                type="surname"
+                class="form-control"
+                id="exampleInputSurname"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="my-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Street Number</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="my-3">
+              <label for="exampleInputPhone" class="form-label"
+                >Street Name</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputPhone"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="my-3">
+              <label for="exampleInputDepartment" class="form-label"
+                >Town/City</label
+              >
+              <input
+                type="department"
+                class="form-control"
+                id="exampleInputDepartment"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="my-3">
+              <label for="exampleInputPosition" class="form-label">State</label>
+              <input
+                type="position"
+                class="form-control"
+                id="exampleInputPosition"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Customer Contact</label
+              >
+              <input
+                type="Projectnumber"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Customer Contact Phone</label
+              >
+              <input
+                type="tel"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Customer Contact Email</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Job Number</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Project Manager</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-2">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Jurisdiction</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="my-3">
+              <label for="sel2">Safety Legislation</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Regulator & other Legislation</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+        </div>
+        <hr />
+        <!-- High Risk Construction2 -->
+        <h4>High Risk Construction</h4>
+        <div class="row">
+          <div class="mt-2 col-4" *ngFor="let item of highRiskConstruction2">
+            <p>
+              <input type="checkbox" class="mr-1" value="no" />{{ item.label }}
+            </p>
+          </div>
+          <hr />
+        </div>
+        <div class="row">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th colspan="7" class="L_1">Risk Level Matrix</th>
+                <th colspan="8" class="L_1">Risk Analysis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th colspan="2" rowspan="2"></th>
+                <td colspan="5">Consequence</td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Likelihood</div>
+                </td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Consequence</div>
+                </td>
+              </tr>
+              <tr>
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <th rowspan="5"><div class="like_1">Likelihood</div></th>
+                <td>5</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2"><div class="space_1">1</div></td>
+                <td colspan="2">Rare</td>
+                <td colspan="2"><div class="space_1">1</div></td>
+                <td colspan="2">Insignificant</td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Unlikely</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Minor</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+              </tr>
+              <tr>
+                <th scope="col">2</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Likely</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Major</td>
+              </tr>
+              <tr>
+                <th scope="col">1</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td colspan="2" class="mr-2 ml-2">5</td>
+                <td colspan="2">Almost Certain</td>
+                <td colspan="2">5</td>
+                <td colspan="2">Catastrophic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <!--PPE Selection 2  -->
+        <h4>PPE Selection</h4>
+        <div class="row">
+          <div class="mt-2 col-4" *ngFor="let item of PPEselection2">
+            <p>
+              <input type="checkbox" class="mr-1" value="no" />{{ item.label }}
+            </p>
+          </div>
+        </div>
+        <hr />
+        <h4>SDS Registor</h4>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Name of Chemical</label
+              >
+              <input
+                type="Projectnumber"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Location</label
+              >
+              <input
+                type="tel"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Hazardous</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Qty</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Expiry Date</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="formFile" class="form-label">Attach SDS Sheet</label>
+              <input class="form-control" type="file" id="formFile" />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <span class="material-icons" style="margin-top: 30%"
+              >add_circle_outline
+            </span>
+            <span class="material-icons"> remove_circle_outline </span>
+          </div>
+        </div>
+        <hr />
+        <h4>Working outdoors</h4>
+
+        <div class="row">
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Identity Hazards</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>Subburn</option>
+                <option>Dust</option>
+                <option>Increase body heat</option>
+                <option>Deccrease body heat</option>
+                <option>Trips, slips & falls from obscured view</option>
+                <option>Deccrease body heat</option>
+                <option>
+                  Insect & animal bites Cuts, lacirations, bruises & abrations
+                </option>
+                <option>Heat stroke</option>
+                <option>Musculoskeleton Injuries</option>
+                <option>Spains & Strains Dehyderation</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Risk</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option selected>L5</option>
+            </select>
+          </div>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Control and Action Required</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>-Complete works early AM to aviod heat</option>
+                <option>
+                  -Light cotton clothing worn neck to wrist to ankle in extreme
+                  conditions, Hats, Sunscreen, dust masks
+                </option>
+                <option>-Regular break periods and rotation of tasks</option>
+                <option>-Adequate liquid consumption</option>
+                <option>-Provide shading over work areas</option>
+                <option>-Shaded areas or indoors for breaks</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Residual Risk</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option>L5</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="sel1">Person Responsible</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>Project Manager</option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <h4>Activities involving chemicals</h4>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Identity Hazards</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>Reaction of products creating gas or fire</option>
+                <option>Exposure to skin Exposure to eyes Inhalation</option>
+                <option>
+                  Inadvertent Ingestion via transfer Personal injury / illness
+                </option>
+                <option>
+                  Health affects Skin Irrelations Brething difficulty
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option selected>L5</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Control and Action Required</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>
+                  -Health Affacts Skin Irritation s Brething difficulty
+                </option>
+                <option>-Delineation and separation of product</option>
+                <option>-Apply strict labelling, placarding and singage</option>
+                <option>
+                  -Quantities management within storage facilities to eliminate
+                  decanting etc
+                </option>
+                <option>
+                  -Specialist work area for use such as chemical storage
+                </option>
+                <option>
+                  -Buding for containment (where required by MSDS)
+                </option>
+                <option>
+                  -Spill kit & Eye wash provision (where required by MSDS)
+                </option>
+                <option>-Qualified train staff (where required)</option>
+                <option>-MSDS registers at point of use</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option>L5</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="sel1">Person Responsible</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>Project Manager</option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <h4>Activities involving Manual Handling</h4>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Identity Hazards</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>
+                  Inappropriate storage and handling Packaging sizes too large
+                  and heavy
+                </option>
+                <option>
+                  Awkward postures repetative and/or sudden movements
+                </option>
+                <option>Incorrect lifting techniques Sustained Postures</option>
+                <option>
+                  Extensive lifting, pushing and pulling movements
+                  Musculoskeletal
+                </option>
+                <option>
+                  Injuries Muscle Sprains and Strain Muscular Stress
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option selected>L5</option>
+            </select>
+          </div>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Control and Action Required</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>
+                  -Use only correctly tagged and calibrated equipment
+                </option>
+                <option>-Accurate mark pilot holes before drilling</option>
+                <option>
+                  -Use minimum drillingspeed consistent with effective work
+                </option>
+                <option>-Use goggles for eye protection</option>
+                <option>-Wear safety helmet if required</option>
+                <option>-Wear protective gloves</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option>L5</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="sel1">Person Responsible</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>Project Manager</option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <h4>Restore Area and Leaving Site</h4>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Identity Hazards</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>
+                  Slips / Trips Injury To Others-Slips / Trips / Falls
+                </option>
+                <option>
+                  Client unaware of status of work Poor communication
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option selected>L5</option>
+            </select>
+          </div>
+          <div class="col-md-10">
+            <div class="my-3">
+              <label for="sel2">Control and Action Required</label>
+              <select multiple class="form-control" id="sel2" name="sellist2">
+                <option>-Ensure The Area is Free From Obstacles</option>
+                <option>-Ensure The Area is Restored To Pre work Status</option>
+                <option>
+                  -Use minimum drillingspeed consistent with effective work
+                </option>
+                <option>
+                  -Barricade areas that cannot be restored and present a hazard,
+                  notify supervisor and client
+                </option>
+                <option>-Sign Off Log Book Or Leave Call Card</option>
+                <option>-Complete Paper Work</option>
+                <option>-Remove barricading and singage</option>
+                <option>
+                  -Tell owner , facility manager or deligate status of job
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 my-3">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>L1</option>
+              <option>L2</option>
+              <option>L3</option>
+              <option>L4</option>
+              <option>L5</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="sel1">Person Responsible</label>
+            <select class="form-control" id="sel1" name="sellist1">
+              <option>Project Manager</option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <h3>
+            Worker consultation, instruction, training, toolbox talks, review,
+            acceptance record:
+          </h3>
+          <br /><br />
+          <h3>
+            Only persons who have completed the singoff are authorised to work
+            on the relevent tasks covered by this document. <br />
+            Note: Work must be performed in accordance with this SWMS, any Risk
+            Assessment prepared in relation to this work and any <br />
+            relevent Safe WorkProcedures.<br />
+            This SWMS must be accessible for inspection untill the energised
+            electrical work to which this SWMS relates is completed. If the
+            <br />
+            SWMS is revised, all version should be kept.<br />
+            If a Notifiable incident occurs in relation to the high-risk
+            construction work in this SWMS, the SWMS must be kept for at least 2
+            years<br />
+            from the date of the Notifiable incident.<br /><br />
+            If Changes are made to the work practice and the content of the SWMS
+            workers will need sign to confirm that they haverecieved an<br />
+            updated briefing, undestand the content and will comply with the
+            requirements.<br /><br />
+            Where there are other parties working adjascent to the contractor
+            and the work activity that could impact upon the safety and
+            welfare<br />
+            of others not directly employed, SWMS will make references to how
+            they will coordinate the work activity and where applicable<br />
+            communicate to the other parties.<br /><br />
+          </h3>
+        </div>
+        <hr />
+        <h3>Name of worker (Print and Sign)</h3>
+        <div class="row">
+          <div class="col-md-7">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Employee 1</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputProjectNumber"
+                aria-describedby="emailHelp"
+              />
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-floating">
+              <p>Signature*</p>
+              <div style="border: 1px solid rgb(149 162 173)">
+                <signature-pad
+                  [options]="signaturePadOptions2"
+                  (onBeginEvent)="drawStart2()"
+                  (onEndEvent)="drawComplete2()"
+                  #Signature2
+                ></signature-pad>
+              </div>
+              <button class="btn btn-outline-primary mt-1" (click)="clear2()">
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

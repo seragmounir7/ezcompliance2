@@ -1,0 +1,271 @@
+<div class="container mt-4" [formGroup]="toolBox">
+  <h1 class="pt-3">
+    <p>Toolbox Talk Preview</p>
+  </h1>
+
+  <div> 
+    <strong>Site Information</strong>
+    <div>
+      <div class="row">
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Site Name</label
+          >
+          <input type="text" class="form-control" id="siteName" />
+        </div>
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Customer Name</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Site Address</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Customer Contact</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Customer Contact Phone</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Customer Contact Email</label
+          >
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Job Number</label
+          >
+
+          <select
+            class="form-select form-control col"
+            aria-label="Default select example"
+          >
+            <option selected hidden>Select</option>
+            <option value="1">1000</option>
+            <option value="2">1001</option>
+            <option value="3">1002</option>
+          </select>
+        </div>
+
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Date</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Meeting Conducted By</label
+          >
+          <select
+            class="form-select form-control col"
+            aria-label="Default select example"
+          >
+            <option selected hidden>Select</option>
+            <option value="1">John</option>
+            <option value="2">Akash</option>
+            <option value="3">Rahul</option>
+          </select>
+        </div>
+        <div class="my-3 col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Signature*</label
+          >
+          <div style="border: 1px solid rgb(149 162 173)">
+            <signature-pad
+              [options]="signaturePadOptions1"
+              (onBeginEvent)="drawStart1()"
+              (onEndEvent)="drawComplete1()"
+              #Signature1
+            ></signature-pad>
+          </div>
+          <button class="btn btn-outline-primary mt-1" (click)="clear1()">Clear</button>
+
+        </div>
+      </div>
+    </div>
+    <div>
+      <strong>Issues/Topics to be covered:</strong>
+    </div>
+    <ng-container formArrayName="issues">
+      <ng-container
+        *ngFor="let control of issues().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div>
+          <div class="row">
+            <div class="my-3 col-2">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Issue</label
+              >
+              <input type="text" class="form-control" formControlName="index" />
+            </div>
+            <div class="my-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Topic of discussion</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="topicDisc"
+              />
+            </div>
+            <div class="my-3 col-2">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Topic Resolution</label
+              >
+              <select
+                class="form-select form-control col"
+                aria-label="Default select example"
+                formControlName="topicRes"
+              >
+                <option selected hidden>Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="my-3 col-1 my-auto">
+              <span class="material-icons" (click)="addIssues()"
+                >add_circle_outline
+              </span>
+            </div>
+            <div class="my-3 col-1 my-auto">
+              <span class="material-icons" (click)="removeIssues(i)">
+                remove_circle_outline
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <strong>Corrective Action</strong>
+    <div formArrayName="corrAction">
+      <ng-container
+        *ngFor="let control of correctAct().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="row">
+          <div class="my-3 col-6">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Action</label
+            >
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="action"
+            >
+              <option selected hidden>Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="my-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Person Responsible</label
+            >
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="personRes"
+            >
+              <option selected hidden>Select</option>
+              <option value="John">John</option>
+              <option value="Micheal">Micheal</option>
+            </select>
+          </div>
+          <div class="my-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Complete</label
+            >
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="complete"
+            >
+              <option selected hidden>Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="my-3 col-1 my-auto">
+            <span class="material-icons" (click)="addCorrectAct()"
+              >add_circle_outline
+            </span>
+          </div>
+          <div class="my-3 col-1 my-auto">
+            <span class="material-icons" (click)="removeCorrectAct(i)">
+              remove_circle_outline
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <strong>Attendee (Print and Sign)</strong>
+    <div formArrayName="attendees">
+      <ng-container
+        *ngFor="let control of attendee().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="row">
+          <div class="my-3 col-5">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Employee {{i+1}}</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="employee"
+            />
+          </div>
+          <div class="my-3 col-5">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Signature</label
+            >
+          
+            <div style="border: 1px solid rgb(149 162 173)">
+              <signature-pad
+                [options]="signaturePadOptions2"
+                (onBeginEvent)="drawStart2()"
+                (onEndEvent)="drawComplete2()"
+                #Signature2
+              ></signature-pad>
+            </div>
+            <button class="btn btn-outline-primary mt-1" (click)="clear2()">Clear</button>
+
+          </div>
+
+          <div class="my-3 col-1 my-auto">
+            <span class="material-icons" (click)="addAttendee()"
+              >add_circle_outline
+            </span>
+          </div>
+          <div class="my-3 col-1 my-auto">
+            <span class="material-icons" (click)="removeAttendee(i)">
+              remove_circle_outline
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

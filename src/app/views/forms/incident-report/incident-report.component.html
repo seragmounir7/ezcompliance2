@@ -1,0 +1,893 @@
+<div class="container mt-4" [formGroup]="SiteIncident">
+  <h2 class="text-center pt-3">
+    <p>Incident Report Form Preview</p>
+  </h2>
+
+  <h4>Site Information</h4>
+  <div>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="project Number" class="form-label"
+            >Project Number</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            formControlName="projectNumber"
+            id="projectNumber"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="project name" class="form-label"
+            >Project Name</label
+          >
+          <input
+            type="text"
+            formControlName="projectName"
+            class="form-control"
+            id="projectName"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div>
+          <label class="cols" for="site Name" class="form-label"
+            >Site Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="siteName"
+            id="siteName"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="customerName" class="form-label"
+            >Customer Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="customerName"
+            id="customerName"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="siteAddress" class="form-label"
+            >Site Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="siteAddress"
+            id="siteAddress"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="customerContact" class="form-label"
+            >Customer Contact</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="customerContact"
+            id="customerContact"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="projectManager" class="form-label"
+            >Project Manager</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="projectManager"
+            id="projectManager"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="personCompletingForm" class="form-label"
+            >Person Completing Form
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="personCompletingForm"
+            id="personCompletingForm"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="customerContactPhone" class="form-label"
+            >Customer Contact Phone</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="customerContactPhone"
+            id="customerContactPhone"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="customerContactEmail" class="form-label"
+            >Customer Contact Email</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="customerContactEmail"
+            id="customerContactEmail"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="cols" for="dateOfFormCompletion" class="form-label"
+          >Date of Form Completion</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          formControlName="dateOfFormCompletion"
+          id="dateOfFormCompletion"
+        />
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="mt-4">
+    <h4>Type of Incident</h4>
+  </div>
+  <div class="row">
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="nearMiss" />NearMiss
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="lossInjuiry"
+      />LossInjuiry
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="propertyDamage"
+      />PropertyDamage
+    </div>
+
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        formControlName="firstAidTreatment"
+        class="mr-1"
+      />FirstAidTreatment
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="death" />Death
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="medicalTreatment"
+      />MedicalTreatment
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="abestosDetection"
+      />AbestosDetection
+    </div>
+  </div>
+  <hr />
+  <h4>Instructions</h4>
+  <div>
+    Complete this form as soon as possible after an incident that results in
+    serious inquiry or illness or death.<br />
+    Use to investigate a minor injuiry or near-miss that could have resulted in
+    a serious injury or illness.
+  </div>
+  <br />
+  <hr />
+  <h4>Injuired or Affected Person</h4>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          id
+          id="name"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="department" class="form-label"
+          >Department</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="department"
+          id="department"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="position" class="form-label">position</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="position"
+          id="position"
+        />
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h4>Nature of Incident</h4>
+  <div class="row">
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="abrasion" />Abrasion
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="bruise" />Bruise
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="cuts" />Cuts
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="illness" />illness
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="amputation"
+      />Amputation
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="burn" />Burn
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="hernia" />Hernia
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="brokenBone"
+      />BrokenBone
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="other" />other
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="crushingInjuiry"
+      />CrushingInjuiry
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="headinjury"
+      />HeadInjury
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="locationOfTheIncident" class="form-label"
+          >Location of the incident</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="locationOfTheIncident"
+          id="locationOfTheIncident"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <label class="cols" for="dateOfTheIncident" class="form-label"
+          >Date of the incident</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          formControlName="dateOfTheIncident"
+          id="dateOfTheIncident"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <label class="cols" for="timeOfTheIncident" class="form-label"
+          >Time of the incident</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          formControlName="timeOfTheIncident"
+          id="timeOfTheIncident"
+        />
+      </div>
+    </div>
+  </div>
+  <br />
+  <h5>Incident Information</h5>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label">
+          Name of Witness</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option>Select</option>
+          <option value="1">Option1</option>
+          <option value="2">Option2</option>
+          <option value="3">Option3</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Witness Statement</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option>Select</option>
+          <option value="1">Option1</option>
+          <option value="2">Option2</option>
+          <option value="3">Option3</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Attachments</label
+        >
+
+        <input type="file" class="form-control" (change)="selectFile($event)" />
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <h4>What PPE was in Use ?</h4>
+  <div class="row">
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="disposalDustMask"
+      />Disposal dust mask
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="halfFaceRespirator"
+      />Half face respirator
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="longSLeeve" />Long
+      sleeve/Long pants
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="safetyGlasses"
+      />Safety glasses
+    </div>
+
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="dustMask" />DustMask
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="hardHat" />Hard Hat
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="outOfService" />Out
+      Of Service
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="sun" /> SunScreen
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="faceShield"
+      />FaceShield
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="hearing"
+      />HearingProtection
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="protectiveGloves" />
+      protective gloves
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="torch" /> Torch
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="fullFaceRespirator"
+      />
+      Full face respirator
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="highVisClothing" />
+      High-Vis Clothing
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="rescueKit" /> Rescue
+      Kit
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="gattors" /> Gattors
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="lockOutTags"
+      />LockOutTags
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="safetyBoots" />
+      Safety boots
+    </div>
+  </div>
+  <hr />
+  <h4>What was the rootcause of incident happen?</h4>
+  <div class="row">
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="insufficentGuard"
+      />Insufficent guard
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="fualtyPPE" />Fualty
+      PPE
+    </div>
+
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="defectiveSafety"
+      />Defective Safety Deveince
+    </div>
+
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="notWearingCorrectPPE"
+      />Not Wearing Correct PPE
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="poorLiftingtechnic"
+      />Poor lifting technic
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="defectiveEquipment"
+      />Defective equipment
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="incorrectTools" />
+      Incorrect Tools
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="horsePlay" />Horse
+      play
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="poorLighting" />Poor
+      Lighting
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="lackOfTraining" />
+      Lack of training
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="rootCauseOther" />
+      Other
+    </div>
+    <div class="mt-2 col-3">
+      <input type="checkbox" class="mr-1" formControlName="lack" /> lack of
+      Ventilation
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="unauthorisedOperation"
+      />Unauthorised operation
+    </div>
+    <div class="mt-2 col-3">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="incorrectOperation"
+      />Incorrect operation of plant or eqiupment
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <label
+          class="cols"
+          for="whyDidtheUnsafeConditonExist"
+          class="form-label"
+          >Why did the unsafe conditon exist</label
+        >
+
+        <input
+          type="text"
+          formControlName="whyDidtheUnsafeConditonExist"
+          class="form-control"
+          id="whyDidtheUnsafeConditonExist"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Was the unsafe act or hazard reported prior to the incident?</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option>Select</option>
+          <option value="yes">yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Has a similar incident Occured</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option>Select</option>
+          <option value="yes">yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <h4>What changes can be made ?</h4>
+  <div class="row">
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="stopTheActivity"
+      />Stop the Activity
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="SOP" /> Write the a
+      new SOP or Process
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="supervisorTraining"
+      />
+      SupervisorTraining
+    </div>
+
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="enforceCurrentPolicy"
+      />EnforceCurrentPolicy
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="wearPPE" />WearPPE
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="changesOther" />Other
+    </div>
+    <div class="mt-2 col-4">
+      <input type="checkbox" class="mr-1" formControlName="reassessTheTasks" />
+      Re-assess the tasks
+    </div>
+    <div class="mt-2 col-4">
+      <input
+        type="checkbox"
+        class="mr-1"
+        formControlName="employeeTraining"
+      />EmployeeTraining
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-7">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >CorrectiveAction</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option>Select....</option>
+          <option>Update Hazaord Signage</option>
+          <option>Update Site Documentation</option>
+          <option>Induct Workers</option>
+          <option>Induct Workers into SWWS</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Person Responsible</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option selected hidden>Select...</option>
+          <option value="ProjectManager">Project Manager</option>
+          <option value="SiteSupervisor">Site Supervisor</option>
+          <option value="WHSManager">WHS Manager</option>
+          <option value="WorkGroup">Work Group</option>
+          <option value="ComplianceManager">Compliance Manager</option>
+          <option value="OperatonsManager">Operatons Manager</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Complete</label
+        >
+
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option selected hidden>Select</option>
+          <option value="yes">yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h4>The Form was Completed by:</h4>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="CompletedName"
+          formControlName="CompletedName"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="position" class="form-label">Position </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="CompletedPosition"
+          id="CompletedPosition"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="department" class="form-label"
+          >Department</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="CompletedDepartment"
+          id="CompletedDepartment"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="date" class="form-label">Date </label>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="CompletedDate"
+          id="CompletedDate"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Signature</label
+        >
+        <div style="border: 1px solid #5f7b96;width: 1200px;">
+          <signature-pad [options]="signaturePadOptions"
+          (onBeginEvent)="drawStart()"
+          (onEndEvent)="drawComplete()"
+           #signature1>
+          </signature-pad>
+        </div>
+        <button class="btn btn-outline-primary mt-1" (click)="clear()">Clear</button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <h4>The Form was Reviewed by:</h4>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="Name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="reviewedName"
+          formControlName="reviewedName"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="position" class="form-label">Position </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="reviewedPosition"
+          id="reviewedPosition"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="department" class="form-label"
+          >Department</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="reviewedDepartment"
+          id="reviewedDepartment"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="date" class="form-label">Date </label>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="reviewedDate"
+          id="reviewedDate"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <label class="cols" for="exampleFormControlInput1" class="form-label"
+          >Signature</label
+        >
+        <div style="border: 1px solid rgb(90, 96, 102);width: 1200px;">
+          <signature-pad
+            [options]="signaturePadOptions1"
+            (onBeginEvent)="drawStart1()"
+            (onEndEvent)="drawComplete1()"
+            #signature2
+          ></signature-pad>
+        </div>
+        <button class="btn btn-outline-primary mt-1" (click)="clear1()">Clear</button>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+<br />
+
+<div class="container">
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </div>
+</div>
