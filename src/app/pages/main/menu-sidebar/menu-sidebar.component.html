@@ -5,7 +5,7 @@
       src="assets/img/whsLogo.png"
       alt="AdminLTE Logo"
       class="brand-image img-circle elevation-3"
-      style="opacity: 0.8;"
+      style="opacity: 0.8"
     />
     <span class="brand-text font-weight-light">Admin WHS</span>
   </a>
@@ -29,7 +29,12 @@
     <!-- SidebarSearch Form -->
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
-        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <input
+          class="form-control form-control-sidebar"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
         <div class="input-group-append">
           <button class="btn btn-sidebar">
             <i class="fas fa-search fa-fw"></i>
@@ -40,10 +45,15 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <!-- <li class="nav-item" [ngClass]="{'menu-open':step==true}" > -->
+        <li class="nav-item" [ngClass]="{ 'menu-open': step == true }"></li>
         <li class="nav-item">
           <a class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
@@ -184,38 +194,64 @@
             </li>            
           </ul> -->
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-briefcase mr-1"></i>            <p>
+            <i class="fas fa-briefcase mr-1"></i>
+            <p>
               Employees on return to work plans
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
-        <li class="nav-item">
+        </li> -->
+        <!-- <li class="nav-item">
           <a [routerLink]="['/admin/dynamicForm']" class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>            <p>
-Dynamic form              <!-- <i class="right fas fa-angle-left"></i> -->
+            <i class="fas fa-first-aid mr-1"></i>
+            <p>
+              Dynamic form
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-         </li>
+        </li> -->
+        <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
+          <a  class="nav-link">
+            <i class="fas fa-first-aid mr-1"></i>
+            <p>
+              Dynamic form
+              <i class="right fas fa-angle-left"></i>
+            </p>          
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Category</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Forms</p>
+              </a>
+            </li>            
+          </ul>        
+        </li>
         <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>            <p>
+            <i class="fas fa-first-aid mr-1"></i>
+            <p>
               First aid treatment injuries
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a [routerLink]="['/admin/forms/hazardRep']" class="nav-link">
-            <i class="fas fa-chart-line mr-1"></i>    
-             <p>
+            <i class="fas fa-chart-line mr-1"></i>
+            <p>
               Hazards reported
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
             <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
@@ -225,135 +261,140 @@ Dynamic form              <!-- <i class="right fas fa-angle-left"></i> -->
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
             <i class="fas fa-user-injured mr-1"></i>
-                        <p>
+            <p>
               Medical treatment injuries
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-car-crash mr-1"></i>            <p>
+            <i class="fas fa-car-crash mr-1"></i>
+            <p>
               Near misses
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a [routerLink]="['/admin/forms/incidentRep']" class="nav-link">
-            <i class="fas fa-car-crash mr-1"></i>            <p>
+            <i class="fas fa-car-crash mr-1"></i>
+            <p>
               Notifiable Incidents
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-clipboard-list mr-1"></i>            <p>
+            <i class="fas fa-clipboard-list mr-1"></i>
+            <p>
               Inductions Completed
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
-            <a [routerLink]="['/admin/forms/toolboxTalk']" class="nav-link">
-            <i class="fas fa-toolbox mr-1"></i>            <p>
+          <a [routerLink]="['/admin/forms/toolboxTalk']" class="nav-link">
+            <i class="fas fa-toolbox mr-1"></i>
+            <p>
               Toolbox Talks
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
-            <a [routerLink]="['/admin/forms/siteInspect']" class="nav-link">
-            <i class="fas fa-toolbox mr-1"></i>            <p>
+          <a [routerLink]="['/admin/forms/siteInspect']" class="nav-link">
+            <i class="fas fa-toolbox mr-1"></i>
+            <p>
               Site Inspection
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
-        <li class="nav-item">
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link">
-            <i class="far fa-handshake mr-1"></i>            <p>
+            <i class="far fa-handshake mr-1"></i>
+            <p>
               Safety Meetings/Forums Conducted
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
-        <li class="nav-item">
-          <a  class="nav-link">
-            <i class="fas fa-chart-bar mr-1"></i>            <p>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link">
+            <i class="fas fa-chart-bar mr-1"></i>
+            <p>
               Safety Inspections/Audits Conducted
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-clipboard-list mr-1"></i>            <p>
+            <i class="fas fa-clipboard-list mr-1"></i>
+            <p>
               SWMS’s Completed
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a [routerLink]="['/admin/forms/riskAssessSWMS']" class="nav-link">
-            <i class="fas fa-chart-line mr-1"></i>                  
+            <i class="fas fa-chart-line mr-1"></i>
             <p>
               Risk Assessments
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-hand-holding-medical mr-1"></i>            
+            <i class="fas fa-hand-holding-medical mr-1"></i>
             <p>
-              Hand Injury 
+              Hand Injury
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
-            <i class="fas fa-hand-holding-medical mr-1"></i>            
+            <i class="fas fa-hand-holding-medical mr-1"></i>
             <p>
-              Leg Injury 
+              Leg Injury
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li>
         <li class="nav-item">
           <a class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
             <p>
-              Torso 
+              Torso
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
-        <li class="nav-item">
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
             <p>
               Body Sections to be defined
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
             <p>
-              Corrective actions 
+              Corrective actions
               <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-         </li>
-        
+        </li>
+
         <!-- <li class="nav-item">
           <a [routerLink]="['/widgets']" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
@@ -789,5 +830,3 @@ Dynamic form              <!-- <i class="right fas fa-angle-left"></i> -->
   </div>
   <!-- /.sidebar -->
 </aside>
-
-

@@ -68,7 +68,7 @@
 
         <div class="my-3 col">
           <label for="exampleFormControlInput1" class="form-label">Date</label>
-          <input type="text" class="form-control" />
+          <input type="date" class="form-control" />
         </div>
       </div>
       <div class="row">
@@ -239,7 +239,7 @@
           </div>
           <div class="my-3 col-5">
             <label for="exampleFormControlInput1" class="form-label"
-              >Signature</label
+              >Signature {{i+1}}</label
             >
           
             <div style="border: 1px solid rgb(149 162 173)">
@@ -247,10 +247,10 @@
                 [options]="signaturePadOptions2"
                 (onBeginEvent)="drawStart2()"
                 (onEndEvent)="drawComplete2()"
-                #Signature2
+                #Signature
               ></signature-pad>
             </div>
-            <button class="btn btn-outline-primary mt-1" (click)="clear2()">Clear</button>
+            <button class="btn btn-outline-primary mt-1" (click)="clear2(i)">Clear</button>
 
           </div>
 

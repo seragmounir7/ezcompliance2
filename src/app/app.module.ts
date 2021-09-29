@@ -42,7 +42,6 @@ import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.componen
 import { DxButtonModule } from 'devextreme-angular';
 import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
-import { Dynamic1Component } from './dynamic1/dynamic1.component';
 import { SignaturePadModule } from 'angular2-signaturepad';
 
 registerLocaleData(localeEn, 'en-EN');
@@ -73,7 +72,6 @@ registerLocaleData(localeEn, 'en-EN');
     TutorialsEditComponent,
     SortableDirective,
     DynamicFormComponent,
-    Dynamic1Component,
   ],
   imports: [
     BrowserModule,

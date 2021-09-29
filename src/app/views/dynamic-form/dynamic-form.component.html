@@ -5,12 +5,12 @@
         <button (click)="initReport()" class="btn btn-primary pull-left">
           Response
         </button>
-        <button (click)="updateForm()" class="btn btn-primary pull-right">
+        <!-- <button (click)="updateForm()" class="btn btn-primary pull-right">
           Update
         </button>
         <button class="btn btn-primary pull-right" style="margin-right: 3px">
           View <i class="fa fa-external-link"></i>
-        </button>
+        </button> -->
         <!-- routerLink="/application/{{model._id}}" -->
       </div>
     </div>
@@ -18,7 +18,7 @@
   <div class="spacer30"></div>
   <div class="row mt-3">
     <div class="col-2 ml-2">
-      <div class="row">
+      <!-- <div class="row">
         <label class="col-8">Background Color</label>
         <input
           class="colorpick col-4"
@@ -35,19 +35,19 @@
           name="textColor"
           [(ngModel)]="model.theme.textColor"
         />
-      </div>
+      </div> -->
 
-      <h5>Select Fields</h5>
-      <p>Customize your form by drag and drop below fields to the form area.</p>
+      <!-- <h5>Select Fields</h5> -->
+      <!-- <p>Customize your form by drag and drop below fields to the form area.</p> -->
       <!--a draggable element left side items with icons-->
-      <div class="fields" *ngFor="let item of fieldModels">
+      <div class="fields mt-4" *ngFor="let item of fieldModels">
         <div
           class="field pointer shadow-bg container"
           [dndDraggable]="item"
           [dndEffectAllowed]="'copy'"
           (dndEnd)="onDragEnd($event)"
         >
-          <i [ngClass]="item.icon" class="fa" style="margin-left: auto;"></i>
+          <i [ngClass]="item.icon" class="fa" style="margin-left: auto"></i>
           <h5>{{ item.label }}</h5>
         </div>
       </div>
@@ -59,11 +59,16 @@
         [style.color]="model.theme.textColor"
       >
         <span class="mb-3"
-          ><input class="form-control" type="text" [(ngModel)]="model.name"
+          ><input
+            class="form-control"
+            type="text"
+            [(ngModel)]="model.name"
+            placeholder="Form Name"
         /></span>
         <input
           class="form-control"
           type="text"
+          placeholder="Form Description"
           [(ngModel)]="model.description"
         />
       </div>
@@ -78,7 +83,7 @@
         [ngClass]="{ empty: model.attributes.length == 0 }"
         [style.backgroundColor]="model.theme.bgColor"
         [style.color]="model.theme.textColor"
-        style="min-height: 1200px;"
+        style="min-height: 1200px"
       >
         <div
           class="field"
@@ -89,10 +94,15 @@
           [dndEffectAllowed]="'all'"
           [dndDraggable]="item"
         >
-        <!-- item -->
+          <!-- item -->
           <div class="row form-group">
             <div class="col-1">
-              <i class="fa fa-ellipsis-v dndHandle" dndHandle (click)="deleteItem()">a</i>
+              <i
+                class="fa fa-ellipsis-v dndHandle"
+                dndHandle
+                (click)="deleteItem()"
+                >a</i
+              >
             </div>
             <div class="col-7">
               <!-- <i [ngClass]="item.icon" class="fa pull-left"></i>
@@ -185,6 +195,21 @@
                   >(File can't be uploaded right now)</small
                 >
               </div>
+              <div *ngIf="item.type == 'signature'">
+                <label>{{ item.label }}</label>
+                <label *ngIf="item.required" class="text-danger">*</label>
+                <div style="border: 1px solid rgb(149 162 173)">
+                  <signature-pad
+                    [options]="signaturePadOptions"
+                    (onBeginEvent)="drawStart()"
+                    (onEndEvent)="drawComplete()"
+                    #Signature
+                  ></signature-pad>
+                </div>
+                <button class="btn btn-outline-primary mt-1" (click)="clear(i)">
+                  Clear
+                </button>
+              </div>
               <div *ngIf="item.type == 'paragraph'">
                 <p class="form-text">{{ item.placeholder }}</p>
               </div>
@@ -250,7 +275,10 @@
                 (click)="item.toggle = true"
                 class="fa fa-chevron-down pull-right"
               ></i>
-              <i (click)="removeField(i)" class="fa fa-trash pull-right"></i>
+              <i
+                (click)="removeField(i, item.label)"
+                class="fa fa-trash pull-right"
+              ></i>
             </div>
           </div>
           <!-- edit item -->
@@ -475,7 +503,10 @@
     </div>
     <form class="ftheme">
       <div *ngIf="!success" class="col-12">
-        <div *ngFor="let item of model.attributes" class="form-group">
+        <div
+          *ngFor="let item of model.attributes; let i = index"
+          class="form-group"
+        >
           <div *ngIf="item.type == 'text'">
             <label>{{ item.label }}</label>
             <label *ngIf="item.required" class="text-danger">*</label>
@@ -488,7 +519,14 @@
               [required]="item.required"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
+              [class.is-invalid]="item.required && !item.value && submitBtn"
             />
+            <span
+              *ngIf="item.required && !item.value && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.placeholder }}</h4>
+            </span>
           </div>
           <div *ngIf="item.type == 'email'">
             <label>{{ item.label }}</label>
@@ -501,7 +539,20 @@
               [(ngModel)]="item.value"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
+              [class.is-invalid]="item.required && !item.value && submitBtn"
             />
+            <span
+              *ngIf="item.required && !item.value && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.placeholder }}</h4>
+            </span>
+            <span
+              *ngIf="item.required && regexErr[i] && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.errorText }}</h4>
+            </span>
           </div>
           <div *ngIf="item.type == 'phone'">
             <label>{{ item.label }}</label>
@@ -514,7 +565,14 @@
               [(ngModel)]="item.value"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
+              [class.is-invalid]="item.required && !item.value && submitBtn"
             />
+            <span
+              *ngIf="item.required && !item.value && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.placeholder }}</h4>
+            </span>
           </div>
           <div *ngIf="item.type == 'number'">
             <label>{{ item.label }}</label>
@@ -529,7 +587,14 @@
               [(ngModel)]="item.value"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
+              [class.is-invalid]="item.required && !item.value && submitBtn"
             />
+            <span
+              *ngIf="item.required && !item.value && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.placeholder }}</h4>
+            </span>
           </div>
           <div *ngIf="item.type == 'date'">
             <label>{{ item.label }}</label>
@@ -542,7 +607,14 @@
               [(ngModel)]="item.value"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
+              [class.is-invalid]="item.required && !item.value && submitBtn"
             />
+            <span
+              *ngIf="item.required && !item.value && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.placeholder }}</h4>
+            </span>
           </div>
           <div *ngIf="item.type == 'datetime-local'">
             <label>{{ item.label }}</label>
@@ -555,7 +627,13 @@
               [(ngModel)]="item.value"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
-            />
+              [class.is-invalid]="item.required && !item.value && submitBtn"
+            /><span
+              *ngIf="item.required && !item.value && submitBtn"
+              class="invalid-feedback"
+            >
+              <h4>{{ item.placeholder }}</h4>
+            </span>
           </div>
           <div *ngIf="item.type == 'textarea'">
             <label>{{ item.label }}</label>
@@ -567,7 +645,10 @@
               [(ngModel)]="item.value"
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
+              [class.is-invalid]="item.required && !item.value && submitBtn"
             >
+<span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
+              <h4>{{ item.placeholder }}</h4> </span>
             </textarea>
           </div>
           <div *ngIf="item.type == 'file'">
@@ -647,16 +728,16 @@
             />
           </div>
         </div>
-
+<!-- 
         <p (click)="showData()" class="marginT60 pointer">
           Show developer data
-        </p>
+        </p> -->
       </div>
     </form>
   </div>
 </div>
 
-<pre *ngIf="show == 1 && model">
+<pre *ngIf="show == true && model">
       {{ model | json }}
   </pre
 >
