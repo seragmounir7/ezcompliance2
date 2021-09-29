@@ -18,10 +18,10 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { TutorialsDetailsComponent } from './components/tutorials-details/tutorials-details.component';
 import { TutorialsEditComponent } from './components/tutorials-edit/tutorials-edit.component';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
-import { Dynamic1Component } from './dynamic1/dynamic1.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
+  { path: 'landing', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
 
   {    
     path: 'admin',
@@ -47,7 +47,6 @@ const routes: Routes = [
     ],
   },
  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
- { path: 'dynamic1', component: Dynamic1Component },
   {
     path: 'register',
     component: RegisterComponent,

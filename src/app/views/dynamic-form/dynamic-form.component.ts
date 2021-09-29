@@ -1,19 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { field, value } from './global.model';
 import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { ActivatedRoute } from '@angular/router';
+import { SignaturePad } from 'angular2-signaturepad';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
 })
 export class DynamicFormComponent implements OnInit {
+  @ViewChildren('Signature') SignaturePad:QueryList<SignaturePad>;
+  public signaturePadOptions: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 500,
+    canvasHeight: 100,
+  };
   value:value={
     label:"",
     value:""
   };
+  submitBtn =false;
   success = false;
-  show=0;
+  show=false;
   fieldModels:Array<field>=[
     {
       "type": "text",
@@ -54,7 +64,7 @@ export class DynamicFormComponent implements OnInit {
     {
       "type": "number",
       "label": "Number",
-      "icon": "fa-html5",
+      "icon": "fas fa-sort-numeric-up",
       "description": "Age",
       "placeholder": "Enter your age",
       "className": "form-control",
@@ -151,6 +161,13 @@ export class DynamicFormComponent implements OnInit {
       "subtype": "file"
     },
     {
+      "type": "signature",
+      "icon":"fas fa-file-signature",
+      "label": "Signature",
+     // "className": "form-control",
+     // "subtype": "file"
+    },
+    {
       "type": "button",
       "icon":"fa-paper-plane",
       "subtype": "submit",
@@ -160,8 +177,8 @@ export class DynamicFormComponent implements OnInit {
 
   modelFields:Array<field>=[];
   model:any = {
-    name:'App name...',
-    description:'App Description...',
+    name:'',
+    description:'',
     theme:{
       bgColor:"#ffffff",
       textColor:"#555555",
@@ -189,7 +206,6 @@ export class DynamicFormComponent implements OnInit {
 
     // this.model = this.cs.data; 
     // console.log(this.model.data);
-
   }
 
   onDragStart(event:DragEvent) {
@@ -244,22 +260,22 @@ export class DynamicFormComponent implements OnInit {
     console.log("dedle");
     
   }
-  removeField(i){
-            this.model.attributes.splice(i,1);
+  removeField(i,item){
+console.log("item",item);
 
-    // swal({
-    //   title: 'Are you sure?',
-    //   text: "Do you want to remove this field?",
-    //   type: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#00B96F',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Yes, remove!'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.model.attributes.splice(i,1);
-    //   }
-    // });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to remove "${item}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove!'
+    }).then((result) => {
+      if (result.value) {
+        this.model.attributes.splice(i,1);
+      }
+    });
 
     console.log(i);
     
@@ -277,7 +293,7 @@ export class DynamicFormComponent implements OnInit {
 
     // this.us.putDataApi('/admin/updateForm',input).subscribe(r=>{
     //   console.log(r);
-    //   swal('Success','App updated successfully','success');
+    //   Swal.fire('Success','App updated successfully','success');
     // });
   }
 
@@ -306,35 +322,52 @@ export class DynamicFormComponent implements OnInit {
     item.selected = !item.selected;
   }
   showData(){
-    this.show=1;
+    this.show=!this.show;
   }
+  regexErr = [];
   submit(){
+    this.regexErr = [];
+
+    this.submitBtn =true;
     let valid = true;
+    console.log("this.model.attributes",this.model.attributes);
     let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
-    validationArray.reverse().forEach(field => {
-      console.log(field.label+'=>'+field.required+"=>"+field.value);
+    validationArray.reverse().forEach((field,index) => {
+     console.log(field.label+'=>'+field.required+"=>"+field.value);
       // if(field.required && !field.value && field.type != 'checkbox'){
-      //   swal('Error','Please enter '+field.label,'error');
+      //   console.log("field.required ",field.required );
+      //   console.log("!field.value",!field.value);
+      //   console.log("field",field);
+        
+      //   Swal.fire('Error','Please enter '+field.label,'error');
       //   valid = false;
       //   return false;
       // }
+console.log("field.regex",field.regex + "field.label",field.label+"index",index);
+
       if(field.required && field.regex){
         let regex = new RegExp(field.regex);
         if(regex.test(field.value) == false){
-          // swal('Error',field.errorText,'error');
+          // Swal.fire('Error',field.errorText,'error');
           // valid = false;
           // return false;
+          this.regexErr[index]=true;
         }
+      }else{
+        this.regexErr[index]=false;
+
       }
       if(field.required && field.type == 'checkbox'){
         if(field.values.filter(r=>r.selected).length == 0){
-          // swal('Error','Please enterrr '+field.label,'error');
-          // valid = false;
-          // return false;
+          Swal.fire('Error','Please enterrr '+field.label,'error');
+          valid = false;
+          return false;
         }
 
       }
     });
+    console.log(this.regexErr);
+    
     if(!valid){
       return false;
     }
@@ -344,11 +377,46 @@ export class DynamicFormComponent implements OnInit {
     input.append('attributes',JSON.stringify(this.model.attributes))
     // this.us.postDataApi('/user/formFill',input).subscribe(r=>{
     //   console.log(r);
-    //   swal('Success','You have contact sucessfully','success');
+    //   Swal.fire('Success','You have contact sucessfully','success');
     //   this.success = true;
     // },error=>{
-    //   swal('Error',error.message,'error');
+    //   Swal.fire('Error',error.message,'error');
     // });
   }
 
+
+  ngAfterViewInit() {
+   
+   console.log(this.SignaturePad.toArray());
+   console.log(this.SignaturePad.toArray()[0]);
+  }
+  drawComplete() {
+    // will be notified of szimek/signature_pad's onEnd event
+   // console.log(this.signaturePad1.toDataURL());
+  }
+  clear(k) {
+    // this.SignaturePad.toArray()[i].clear();
+    // this.SignaturePad.toArray()[i].clear();
+    console.log(this.SignaturePad.toArray());
+    
+    let indexOfSignature = new Map();
+    let  index =0;
+
+    for(let i=0;i<this.model.attributes.length;i++){
+      
+      if(this.model.attributes[i].type === 'signature'){
+        indexOfSignature.set(i,index)
+        index++;
+      }
+    }
+    
+    let j = indexOfSignature.get(k);
+    
+   this.SignaturePad.toArray()[j].clear()
+
+  }
+  drawStart() {
+    // will be notified of szimek/signature_pad's onBegin event
+    console.log('begin drawing');
+  }
 }
