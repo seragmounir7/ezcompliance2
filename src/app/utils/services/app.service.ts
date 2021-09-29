@@ -14,17 +14,17 @@ export class AppService {
   constructor(private router: Router) {}
 
   login() {
-    localStorage.setItem('token', 'LOGGED_IN');
+    sessionStorage.setItem('token', 'LOGGED_IN');
     this.router.navigate(['/']);
   }
 
   register() {
-    localStorage.setItem('token', 'LOGGED_IN');
+    sessionStorage.setItem('token', 'LOGGED_IN');
     this.router.navigate(['/']);
   }
 
   logout() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 }

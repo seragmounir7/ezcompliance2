@@ -29,7 +29,7 @@ export class UserDropdownMenuComponent implements OnInit {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private appService: AppService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +53,11 @@ export class UserDropdownMenuComponent implements OnInit {
   }
 
   logout() {
-  //  this.appService.logout();
-  console.log("logout");
-  
-  localStorage.removeItem('accessToken');
-  window.location.reload();
-// this.router.navigate['/'];
+    //  this.appService.logout();
+    console.log('logout');
+
+    sessionStorage.removeItem('accessToken');
+    window.location.reload();
+    // this.router.navigate['/'];
   }
 }

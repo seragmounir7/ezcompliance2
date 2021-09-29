@@ -5,15 +5,15 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
-  Router
+  Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private router:Router ){}
+  constructor(private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,10 +22,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      if(!localStorage.getItem('accessToken'))
-        this.router.navigate(['/']);
-      
-    return localStorage.getItem('accessToken')?true:false;
+    if (!sessionStorage.getItem('accessToken')) this.router.navigate(['/']);
+
+    return sessionStorage.getItem('accessToken') ? true : false;
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,

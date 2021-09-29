@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private toastr: ToastrService,
     private appService: AppService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,18 +29,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     if (this.loginForm.valid) {
-      if(this.loginForm.get('email').value=="akash@gmail.com" && this.loginForm.get('password').value=="11111"){
-        this.toastr.success('Login Successful','',{timeOut:1500});
-        localStorage.setItem('accessToken','value');
+      if (
+        this.loginForm.get('email').value == 'akash@gmail.com' &&
+        this.loginForm.get('password').value == '11111'
+      ) {
+        this.toastr.success('Login Successful', '', { timeOut: 1500 });
+        sessionStorage.setItem('accessToken', 'value');
         this.router.navigate(['/admin']);
-
-      }else{
-        this.toastr.error('Wrong credentials','',{timeOut:1500});
-
+      } else {
+        this.toastr.error('Wrong credentials', '', { timeOut: 1500 });
       }
-     // this.appService.login();
+      // this.appService.login();
     } else {
-      this.toastr.error('Enter valid username/password','',{timeOut:1500});
+      this.toastr.error('Enter valid username/password', '', { timeOut: 1500 });
     }
   }
 
