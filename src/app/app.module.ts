@@ -44,6 +44,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
 
+
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
