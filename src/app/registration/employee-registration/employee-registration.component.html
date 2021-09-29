@@ -20,7 +20,7 @@
        
         <div class="row">
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">profTitie</label>
+            <label for="exampleFormControlInput1" class="form-label">Titie</label>
             <input type="text" formControlName="profTitie" class="form-control" id="siteName" />
           </div>
           <div class="mb-3 mt-3 col">
@@ -55,14 +55,14 @@
             <input type="text"formControlName="porfMobile"  class="form-control" />
           </div>
         </div>
-        <div class="row">
-          <div class="mt-2 col-1">
+        <div class="row text-center">
+          <div class="mt-2 col-2">
             <p><input type="checkbox"  formControlName="porfEmployee" class="mr-1" value="yes">Employee</p>
         </div>
-        <div class="mt-2 col-1">
+        <div class="mt-2 col-2">
           <p><input type="checkbox" formControlName="porfManager"  class="mr-1" value="yes">Manager</p>
       </div>
-      <div class="mt-2 col-1">
+      <div class="mt-2 col-2">
         <p><input type="checkbox"  formControlName="porfAdministrater" class="mr-1" value="yes">Administrater</p>
     </div>
       </div>
@@ -86,8 +86,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-3 mt-2">
-        <img src="" alt="" width="130" height="130">
+        <div class=" offset-1  col-3 mt-2 ">
+        <img src="../../../assets/img/avatar5.png" alt="" width="130" height="130">
         </div>
         <div class="col-5 ml-4">
             <div class="my-3">
@@ -169,7 +169,8 @@
   </div>
   </div>
   </div>
-  <div class="col-2  float-right " style="margin-top:-50px"><button (click)="addFiled()" style=" width:100%">Add</button></div>
+  <div class="col-2  float-right " style="margin-top:-50px">
+    <button (click)="addFiled()"class="btn btn-primary" style=" width:100%">Add</button></div>
       </div>
   
       <div class="tab-pane fade show active" id="PPERegister" role="tabpanel" *ngIf="PPERegister" aria-labelledby="PPERegister-tab">
