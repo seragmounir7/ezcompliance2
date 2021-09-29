@@ -18,6 +18,8 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { TutorialsDetailsComponent } from './components/tutorials-details/tutorials-details.component';
 import { TutorialsEditComponent } from './components/tutorials-edit/tutorials-edit.component';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
+import { CategoriesComponent } from './views/dynamic-form/categories/categories.component';
+import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -42,6 +44,8 @@ const routes: Routes = [
       { path: 'tutorials', component: TutorialsListComponent },
       { path: 'tutorials/details/:id', component: TutorialsDetailsComponent },
       { path: 'tutorials/edit/:id', component: TutorialsEditComponent },
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'forms', component: FormsComponent },
       { path: 'forms', loadChildren: () => import('./views/forms/forms.module').then(m => m.FormsModule1) },
 
     ],

@@ -212,7 +212,7 @@
           </a>
         </li> -->
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
-          <a  class="nav-link">
+          <a  class="nav-link" (click)="menuOpen()">
             <i class="fas fa-first-aid mr-1"></i>
             <p>
               Dynamic form
@@ -221,13 +221,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a [routerLink]="['/']" class="nav-link">
+              <a [routerLink]="['/admin/categories']" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Category</p>
               </a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="['/']" class="nav-link">
+              <a [routerLink]="['/admin/forms']" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Forms</p>
               </a>

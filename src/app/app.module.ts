@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -43,7 +44,11 @@ import { DxButtonModule } from 'devextreme-angular';
 import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
-
+import { CategoriesComponent } from './views/dynamic-form/categories/categories.component';
+import { FormsComponent } from './views/dynamic-form/forms/forms.component';
+import { AddEditCategoryComponent } from './views/dynamic-form/categories/add-edit-category/add-edit-category.component';
+import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
+import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
@@ -72,9 +77,14 @@ registerLocaleData(localeEn, 'en-EN');
     TutorialsEditComponent,
     SortableDirective,
     DynamicFormComponent,
+    CategoriesComponent,
+    FormsComponent,
+    AddEditCategoryComponent,
+    AddFormComponent,
+    ViewFormsComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,SharedModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

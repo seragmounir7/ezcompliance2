@@ -23,7 +23,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.mainSidebarHeight.emit(this.mainSidebar.nativeElement.offsetHeight);
   }
-  step=true;
+  step=false;
   menuOpen(){
 this.step=!this.step;
   }
