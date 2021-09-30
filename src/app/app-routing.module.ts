@@ -47,7 +47,9 @@ const routes: Routes = [
       { path: 'categories', component: CategoriesComponent },
       { path: 'forms', component: FormsComponent },
       { path: 'forms', loadChildren: () => import('./views/forms/forms.module').then(m => m.FormsModule1) },
-
+      { path: 'registration', loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationModule) },
+  
+      
     ],
   },
  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
