@@ -24,9 +24,9 @@ import { UserDropdownMenuComponent } from './pages/main/header/user-dropdown-men
 import { BlankComponent } from './views/blank/blank.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppButtonComponent } from './components/app-button/app-button.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ProjectsComponent } from './project/projects/projects.component';
 import { ProjectAddComponent } from './project/project-add/project-add.component';
 import { ProjectEditComponent } from './project/project-edit/project-edit.component';
@@ -78,6 +78,7 @@ registerLocaleData(localeEn, 'en-EN');
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,SignaturePadModule,
@@ -95,6 +96,7 @@ registerLocaleData(localeEn, 'en-EN');
       apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM'
     })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })
