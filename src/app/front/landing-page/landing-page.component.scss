@@ -1,9 +1,9 @@
 
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing:border-box;  
-    font-size: 12px;
+  //  margin: 0;
+  //  padding: 0;
+   // box-sizing:border-box;  
+   // font-size: 12px;
     line-height: 2rem;
     font-family:sans-serif;
 }
@@ -825,3 +825,9 @@ ul li a:hover::after {
         bottom: 20px;}
         .headtes{font-size: 20px;
         text-transform: capitalize;}
+
+
+        .carousel1{
+          width: 100%;
+          height: auto;
+        }

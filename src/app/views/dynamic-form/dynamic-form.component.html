@@ -2,9 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div class="btn-cont">
-        <button (click)="initReport()" class="btn btn-primary pull-left">
-          Response
-        </button>
+     
         <!-- <button (click)="updateForm()" class="btn btn-primary pull-right">
           Update
         </button>
@@ -471,14 +469,14 @@
       <!-- <pre>{{reports|json}}</pre> -->
     </div>
     <!-- if no records found -->
-    <div *ngIf="reports?.length == 0" class="col-12 btn-cont">
+    <!-- <div *ngIf="reports?.length == 0" class="col-12 btn-cont">
       No response found
-    </div>
+    </div> -->
   </div>
 </div>
 
 <!-- <pre *ngIf="model">{{model|json}}</pre> -->
-
+<ng-container *ngIf="report">
 <div
   *ngIf="model"
   class="container marginT60 marginB30"
@@ -736,7 +734,12 @@
     </form>
   </div>
 </div>
-
+</ng-container>
+<div class=" row">
+<button (click)="initReport()" class="btn btn-primary col-2  m-auto mb-2">
+  Response
+</button>
+</div>
 <pre *ngIf="show == true && model">
       {{ model | json }}
   </pre
