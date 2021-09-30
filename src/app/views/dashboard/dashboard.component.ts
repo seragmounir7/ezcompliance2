@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
-
+import { NgxSpinnerService } from "ngx-spinner";
 interface marker {
   lat: number;
   lng: number;
@@ -158,12 +158,21 @@ export class DashboardComponent implements OnInit {
       draggable: true,
     },
   ];
-  constructor() {}
+  constructor(private spinner: NgxSpinnerService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
+  }
+  
   public chartOptions: any = {
     labels: {
       render: 'percentage'      
     }
   }
 }
+
+
