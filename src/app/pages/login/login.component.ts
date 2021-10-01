@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { AppService } from '../../utils/services/app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import {AuthService} from '../../utils/services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -16,30 +17,40 @@ export class LoginComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private toastr: ToastrService,
     private appService: AppService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.renderer.addClass(document.querySelector('app-root'), 'login-page');
+    private router: Router,
+    private AuthService: AuthService
+  ) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
     });
   }
 
+  ngOnInit() {
+    this.renderer.addClass(document.querySelector('app-root'), 'login-page');
+  }
+
   login() {
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+    const data = {
+      ...this.loginForm.value,
+    };
+    console.log("data",data)
     if (this.loginForm.valid) {
-      if (
-        this.loginForm.get('email').value == 'akash@gmail.com' &&
-        this.loginForm.get('password').value == '11111'
-      ) {
-        this.toastr.success('Login Successful', '', { timeOut: 1500 });
-        sessionStorage.setItem('accessToken', 'value');
-        this.router.navigate(['/admin']);
-      } else {
-        this.toastr.error('Wrong credentials', '', { timeOut: 1500 });
+      this.AuthService.login(data).subscribe((resData: any) =>{
+        console.log("res",resData.status);
+        if (resData.status == "SUCCESS"){
+          this.router.navigate(['/admin']);
+          this.toastr.success('Login Successful', '');
+        }
+      },(err)=>{
+        console.log(err)
+        this.toastr.error('Wrong credentials', '');
       }
-      // this.appService.login();
+      )
     } else {
       this.toastr.error('Enter valid username/password', '', { timeOut: 1500 });
     }
