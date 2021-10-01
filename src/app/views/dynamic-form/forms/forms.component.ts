@@ -4,7 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddFormComponent } from './add-form/add-form.component';
 import Swal from 'sweetalert2'
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { TutorialService } from 'src/app/services/tutorial.service';
 export interface PeriodicElement {
   categories: string;
   position: number;
@@ -40,12 +41,30 @@ export class FormsComponent implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
  
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  closeResult: string;
+  categorie:any
+   page = 1;
+  pageSize = 10;
+  collectionSize = 300;
+  tutorials=[
+    {position: 1,formName:'Form1' ,categories: 'Category1',  symbol: ''},
+    {position: 1,formName:'Form2' ,categories: 'Category1',  symbol: ''},
+    {position: 1,formName:'Form3' ,categories: 'Category1',  symbol: ''},
+    {position: 1,formName:'FormA' ,categories: 'Category2',  symbol: ''},
+    {position: 1,formName:'FormB' ,categories: 'Category2',  symbol: ''},
+    {position: 1,formName:'FormC' ,categories: 'Category2',  symbol: ''},
+    {position: 1,formName:'FormA1' ,categories: 'Category3',  symbol: ''},
+    {position: 1,formName:'FormA2' ,categories: 'Category3',  symbol: ''},
+    {position: 1,formName:'FormA3' ,categories: 'Category3',  symbol: ''},
+    {position: 1,formName:'FormB1' ,categories: 'Category4',  symbol: ''},
+    {position: 1,formName:'FormB2' ,categories: 'Category4',  symbol: ''},
+    {position: 1,formName:'FormB3' ,categories: 'Category4',  symbol: ''},
+  ]
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
   
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,private tutorialService: TutorialService,private modalService: NgbModal) {}
 
   openDialog(action): void {
     const dialogRef = this.dialog.open(AddFormComponent, {
@@ -59,6 +78,7 @@ export class FormsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.refreshList();
   }
   delete(item){
     
@@ -78,5 +98,44 @@ export class FormsComponent implements OnInit {
     
         
       }
-
+      refreshList(): void {
+        this.retrieveTutorials({ page: this.page, pageSize: this.pageSize });
+      }
+      retrieveTutorials(params: any): void {
+        // this.tutorialService.getAll(params).subscribe(
+        //   (data) => {
+        //     this.tutorials = data;
+        //     console.log(data);
+        //   },
+        //   (error) => {
+        //     console.log(error);
+        //   }
+        // );
+      }
+      addFormopen(content) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+ 
+      }
+    
+      deleteopen(content,value) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    this.categorie=value
+      }
+      private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+          return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+          return 'by clicking on a backdrop';
+        } else {
+          return  `with: ${reason}`;
+        }
+      }
 }

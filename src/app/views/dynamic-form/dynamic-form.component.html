@@ -171,7 +171,7 @@
               <div *ngIf="item.type == 'textarea'">
                 <label>{{ item.label }}</label>
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <textarea
+                <textarea style="height: 100px;"
                   class="form-control"
                   id="{{ item.name }}"
                   placeholder="{{ item.placeholder }}"
@@ -450,7 +450,7 @@
 <div *ngIf="report" class="padding20 white-bg">
   <div class="row">
     <div class="col-12 btn-cont">
-      <button (click)="report = false" class="btn btn-primary"><< Back</button>
+      <button (click)="report = false" class="btn btn-primary">Back</button>
     </div>
     <div class="col-12 spacer30"></div>
     <!-- if records found -->
@@ -644,6 +644,7 @@
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
               [class.is-invalid]="item.required && !item.value && submitBtn"
+              style="height: 100px;"
             >
 <span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
               <h4>{{ item.placeholder }}</h4> </span>
