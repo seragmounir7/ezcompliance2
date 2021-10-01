@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-site-inspection',
   templateUrl: './site-inspection.component.html',
@@ -10,6 +10,9 @@ export class SiteInspectionComponent implements OnInit {
   SiteControl!: FormArray;
   siteshow = true;
   siteAction = false;
+  itemvalue:any
+  item_values: any = ["In Progress", "Completed", "Closed"];
+  
   constructor(private fb: FormBuilder) {
     this.sidePreview = this.fb.group({
       Hazard: ['', Validators.required],
@@ -72,7 +75,9 @@ export class SiteInspectionComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   addAction() {
     {
       this.add().push(this.newAction());
@@ -92,13 +97,39 @@ export class SiteInspectionComponent implements OnInit {
   showsite() {
     this.siteshow = true;
     this.siteAction = false;
+    console.log(this.sidePreview);
+  
   }
   showAction() {
     this.siteAction = true;
     this.siteshow = false;
+    this.add().clear()
+    let key= Object.keys(this.sidePreview.value)
+    for(let i =0;i<key.length-2; i++){
+      let tempValue= this.sidePreview.controls[key[i]].value
+        if(tempValue!=""){
+          if(tempValue!="yes"){
+            let index =this.add().length
+            this.addAction()
+            this.add().controls[index].get("item").setValue(tempValue)
+          }
+          
+        }
+      }
   }
   removeAction() {
     let index = this.add().length;
     this.add().removeAt(index - 1);
   }
+  addAcionTab(event){
+    
+    let b= Object.keys(this.sidePreview.value)
+  //   let index =this.add().length
+  //   this.addAction()
+  // this.add().controls[index].get("item").setValue(event.target.value)
+ 
+  //  console.log(this.sidePreview.controls[b[0]].value);
+   
+  }
+ 
 }
