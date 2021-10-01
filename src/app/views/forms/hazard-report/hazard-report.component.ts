@@ -80,7 +80,7 @@ export class HazardReportComponent implements OnInit {
 
   public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 1,
-    'canvasWidth': 1050,
+    'canvasWidth': 500,
     'canvasHeight': 100,
   };
 

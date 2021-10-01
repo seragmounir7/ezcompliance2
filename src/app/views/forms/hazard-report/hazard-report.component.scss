@@ -1,5 +1,5 @@
 .report_1 {
-  background-color: #d7e2e2;
+  background-color: #f1f7f7;
   border-left: 4px solid blue;
 }
 
@@ -71,6 +71,7 @@ label {
 }
 .sign {
   border: 1px solid lightgray;
+  width: 500px;
 }
 .sign:hover {
   border-color: rgba(46, 105, 255, 0.5);
@@ -106,7 +107,14 @@ button {
   text-align: center;
   font-family: Inter, sans-serif;
 }
-// input[type='file'] {
-//   height: 10%;
-//   padding: 0%;
-// }
+input[type='file'] {
+  height: 36%;
+  padding: 0%;
+}
+.pt-3{
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: Inter, sans-serif;
+}

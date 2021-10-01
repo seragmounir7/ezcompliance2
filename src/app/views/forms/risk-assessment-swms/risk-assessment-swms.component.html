@@ -1,13 +1,14 @@
-<div class="container card p-5 mt-4" [formGroup]="riskAssessmentFb">
+
+<div class="container card px-4 py-4" [formGroup]="riskAssessmentFb">
   <h2 class="text-center pt-3">
     <p class="title">Risk Assessment Preview</p>
   </h2>
 
-  <ul class="nav nav-tabs px-4 my-3" id="myTab" role="tablist">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button
         [ngClass]="
-          RiskAssessment === true ? 'nav-link active' : 'nav-link outline'
+          RiskAssessment === true ? 'nav-link active' : 'nav-link outline myBtn'
         "
         id="RISKAssessment-tab"
         data-bs-toggle="tab"
@@ -23,7 +24,7 @@
     </li>
     <li class="nav-item" role="presentation">
       <button
-        [ngClass]="SWMSShow === true ? 'nav-link active' : 'nav-link outline'"
+        [ngClass]="SWMSShow === true ? 'nav-link active' : 'nav-link outline myBtn'"
         id="SWSS-tab"
         data-bs-toggle="tab"
         data-bs-target="#SWSS"

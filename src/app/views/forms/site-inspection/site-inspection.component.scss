@@ -9,7 +9,7 @@ input[type="radio"]{
     border-radius: 3px;
     color: blue;
     padding: 0 6px;
-   margin: 10px 0 0;
+ //  margin: 10px 0 0;
    top: 2px;
    
 }
@@ -25,9 +25,7 @@ input[type="radio"]:hover::before {
     position: relative;
     top: -2px;
     right:2px ;
-    bottom: 1px;
-    
-   
+    bottom: 1px;   
     //margin: 0 100px 10px 0;
     width: 20px;
     height: 20px;

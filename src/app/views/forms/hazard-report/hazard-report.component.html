@@ -1,8 +1,10 @@
 <div class="container card px-4 py-4 content-center">
   <form class="px-4 py-4" [formGroup]="hazardReport">
     <div class="mb-3">
-      <p class="text-center title">Hazard Report Form Preview</p>
+      <p class="text-center title">Hazard Report Form Preview</p>      
     </div>
+    <hr class="mt-5">
+   
     <div class="row py-4">
       <div class="col-md-12">
         <div style="padding: 0px" class="col-md-6">
@@ -13,7 +15,8 @@
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
-              type="checkbox"
+              type="radio"
+              name="postionRep"
               formControlName="employeeFulltime"
               id="inlineCheckbox1"
               value="option1"
@@ -25,10 +28,11 @@
           <div class="form-check form-check-inline ml-4">
             <input
               class="form-check-input checkbox-lg"
-              type="checkbox"
+              type="radio"
+              name="postionRep"
               formControlName="employeeParttime"
               id="inlineCheckbox2"
-              value="option2"
+              value="option1"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox2"
               >Part-time Employee</label
@@ -37,8 +41,9 @@
           <div class="form-check form-check-inline ml-4">
             <input
               class="form-check-input"
-              type="checkbox"
-              formControlName="employeeCasual"
+              type="radio"
+              name="postionRep"
+              formControlName="employeeParttime"
               id="inlineCheckbox2"
               value="option2"
             />
@@ -49,8 +54,9 @@
           <div class="form-check form-check-inline ml-4">
             <input
               class="form-check-input"
-              type="checkbox"
-              formControlName="employeeContractor"
+              type="radio"
+              name="postionRep"
+              formControlName="employeeParttime"
               id="inlineCheckbox2"
               value="option2"
             />
@@ -424,20 +430,21 @@
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            type="checkbox"
-            formControlName="actionimmediate"
+            type="radio"
+            name="action"
+
             id="inlineCheckbox1"
             value="option1"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox1"
-            >immediately</label
+            >Immediately</label
           >
         </div>
         <div class="form-check form-check-inline ml-4">
           <input
             class="form-check-input"
-            type="checkbox"
-            formControlName="actionToday"
+            type="radio"
+            name="action"
             id="inlineCheckbox2"
             value="option2"
           />
@@ -448,8 +455,8 @@
         <div class="form-check form-check-inline ml-4">
           <input
             class="form-check-input"
-            type="checkbox"
-            formControlName="actionweek"
+            type="radio"
+            name="action"
             id="inlineCheckbox2"
             value="option2"
           />
@@ -460,8 +467,8 @@
         <div class="form-check form-check-inline ml-4">
           <input
             class="form-check-input"
-            type="checkbox"
-            formControlName="actionMonth"
+            type="radio"
+            name="action"
             id="inlineCheckbox2"
             value="option2"
           />

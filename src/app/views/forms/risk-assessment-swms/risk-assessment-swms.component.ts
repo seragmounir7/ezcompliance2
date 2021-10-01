@@ -229,10 +229,10 @@ PPEselection2=[
   
   showsite(){
     this.RiskAssessment=true
-    //this.SWMSShow=false
+    this.SWMSShow=false
   }
   showAction(){
-//this.SWMSShow=true
+this.SWMSShow=true
     this.RiskAssessment=false
   }
   public signaturePadOptions1: Object = {
