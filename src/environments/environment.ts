@@ -4,7 +4,7 @@ export const environment = {
   // apiUrl:"http://3.6.80.178:3311/api/v1/",
   // apiUrl:"http://192.168.0.178:3311/api/v1/"
   // apiUrl:"http://localhost:3311/api/v1/",
-  apiUrl:"https://api.whealthylife.in/api/v1/",
+  apiUrl:"http://13.127.90.176:3148/api/v1/",
   //  apiUrl:"http://localhost:3311/api/v1/",
   // apiUrl:"http://15.207.7.56:3322/api/v1/",
   // apiUrl:"http://3.128.207.146:3322/api/v1/",
