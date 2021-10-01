@@ -124,3 +124,21 @@ body{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+input[type='file'] {
+  height: 10%;
+  padding: 0%;
+}
+
+.myLabel{
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  word-break: break-word;
+  font-family: Inter,sans-serif;
+  width: 100%;
+  margin-left: 2px;
+  margin-bottom: 14px;
+}
+label{
+  font-weight: 550 !important;
+}

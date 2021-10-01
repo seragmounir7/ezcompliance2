@@ -15,7 +15,7 @@
   </div>
   <div class="spacer30"></div>
   <div class="row mt-3">
-    <div class="col-2 ml-2">
+    <div class="col-2 ml-2 mt-4">
       <!-- <div class="row">
         <label class="col-8">Background Color</label>
         <input
@@ -38,7 +38,7 @@
       <!-- <h5>Select Fields</h5> -->
       <!-- <p>Customize your form by drag and drop below fields to the form area.</p> -->
       <!--a draggable element left side items with icons-->
-      <div class="fields mt-4" *ngFor="let item of fieldModels">
+      <div class="fields mt-3" *ngFor="let item of fieldModels">
         <div
           class="field pointer shadow-bg container"
           [dndDraggable]="item"
@@ -51,25 +51,32 @@
       </div>
     </div>
     <div class="col-8">
-      <div
+      <p class="text-center" style="font-size: 30px;">Employee Details</p>
+      <p class="text-center" style="font-size: 18px;">Category 1</p>
+      <!-- <div
         class="form-group"
         [style.backgroundColor]="model.theme.bgColor"
         [style.color]="model.theme.textColor"
       >
-        <span class="mb-3"
+        <span class="mb-1"
           ><input
             class="form-control"
             type="text"
             [(ngModel)]="model.name"
             placeholder="Form Name"
         /></span>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Form Description"
-          [(ngModel)]="model.description"
-        />
+       
       </div>
+      <div   class="form-group"
+      [style.backgroundColor]="model.theme.bgColor"
+      [style.color]="model.theme.textColor">
+      <input
+      class="form-control"
+      type="text"
+      placeholder="Form Category"
+      [(ngModel)]="model.description"
+    />
+      </div> -->
 
       <!--a dropzone-->
       <!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
@@ -81,7 +88,7 @@
         [ngClass]="{ empty: model.attributes.length == 0 }"
         [style.backgroundColor]="model.theme.bgColor"
         [style.color]="model.theme.textColor"
-        style="min-height: 1200px"
+        style="min-height: 1250px"
       >
         <div
           class="field"
@@ -107,7 +114,7 @@
               <h5>{{item.label}}
               <span *ngIf="item.required" class="red">*</span></h5> -->
               <div *ngIf="item.type == 'text'">
-                <label>{{ item.label }}</label>
+                <label class="form-label" >{{ item.label }}</label>
                 <label *ngIf="item.required" class="text-danger">*</label>
                 <input
                   type="text"
@@ -180,7 +187,9 @@
               </div>
               <div *ngIf="item.type == 'file'">
                 <label
-                  >{{ item.label }} (File can't be uploaded right now)</label
+                  >{{ item.label }}
+                   <!-- (File can't be uploaded right now) -->
+                   </label
                 >
                 <label *ngIf="item.required" class="text-danger">*</label>
                 <input
@@ -189,14 +198,15 @@
                   id="{{ item.name }}"
                   placeholder="{{ item.placeholder }}"
                 />
-                <small class="form-text text-danger"
-                  >(File can't be uploaded right now)</small
+                <small class="form-text text-danger">
+                  <!-- (File can't be uploaded right now) -->
+                  </small
                 >
               </div>
               <div *ngIf="item.type == 'signature'">
                 <label>{{ item.label }}</label>
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div style="border: 1px solid rgb(149 162 173);">
+                <div style="border: 1px solid rgb(149 162 173); border-radius: 10px;">
                   <signature-pad
                     [options]="signaturePadOptions"
                     (onBeginEvent)="drawStart()"
@@ -644,14 +654,16 @@
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
               [class.is-invalid]="item.required && !item.value && submitBtn"
-              style="height: 100px;"
+              style="height: 120px; border: 1px solid rgb(149 162 173);"
             >
 <span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
               <h4>{{ item.placeholder }}</h4> </span>
             </textarea>
           </div>
           <div *ngIf="item.type == 'file'">
-            <label>{{ item.label }} (File can't be uploaded right now)</label>
+            <label>{{ item.label }} 
+              <!-- (File can't be uploaded right now) -->
+            </label>
             <label *ngIf="item.required" class="text-danger">*</label>
             <input
               type="file"
@@ -662,8 +674,9 @@
               [ngModelOptions]="{ standalone: true }"
               autocomplete="off"
             />
-            <small class="form-text text-danger"
-              >(File can't be uploaded right now)</small
+            <small class="form-text text-danger">
+              <!-- (File can't be uploaded right now) -->
+              </small
             >
           </div>
           <div *ngIf="item.type == 'paragraph'">
@@ -736,8 +749,8 @@
   </div>
 </div>
 </ng-container>
-<div class=" row">
-<button (click)="initReport()" class="btn btn-primary col-2  m-auto mb-2">
+<div class="text-center my-2">
+<button (click)="initReport()" class="btn btn-primary  ">
   Response
 </button>
 </div>

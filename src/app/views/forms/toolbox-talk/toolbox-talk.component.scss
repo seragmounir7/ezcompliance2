@@ -6,3 +6,79 @@ label:not(.form-check-label):not(.custom-file-label) {
 //     margin-bottom: 4%;
 //     margin-top: 2%;
 // }
+
+// label {
+//     margin-bottom: 4%;
+//     margin-top: 2%;
+// }
+input:focus {
+    border:  2px solid dodgerblue;
+   
+}
+label{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    word-break: break-word;
+    font-family: Inter,sans-serif;
+}
+.form-control:hover {
+    border-color: rgba(46,105,255,.5);
+    box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
+} 
+
+.pt-3{
+    display: inline-block;
+    font-size: 32px;
+    font-weight: 700;
+    word-break: break-word;
+    font-family: Inter, sans-serif;
+
+
+}
+.container{
+    background-color: white;
+
+}
+.sign{
+    padding: 10px;
+    border: 1px solid  rgba(46,105,255,.5);
+    
+    border-radius: 5px;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+  .form-dropdown {
+    padding: 0 1.875em 0 .625em;
+    background-image:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='240' height='240'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z'/%3E%3C/svg%3E");
+    background-position: right 10px bottom 50%;
+    background-size: 0.925em;
+   
+    background-repeat: no-repeat;
+}
+.title{
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    word-break: break-word; 
+    font-family: Inter,sans-serif;
+ }
+ .sign:hover{
+    border: 1px solid;
+	border-color: #2e69ff40;
+    box-shadow: 0 0 0 3px rgb(46,105, 255 ,0.25);
+  }
+  .form-Label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    word-break: break-word;
+    font-family: Inter, sans-serif;
+    width: 100%;
+    margin-left: 2px;
+    margin-bottom: 14px;
+  }

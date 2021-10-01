@@ -2,3 +2,61 @@ input[type='file'] {
     height: 10%;
     padding: 0%;
 }
+
+.outline:hover {
+    border: 1px solid;
+    border-color: #2e69ff40;
+    box-shadow: 0 0 0 3px rgb(46, 105, 255, 0.25);
+  }
+  
+  .outline:focus {
+    border: 1px solid;
+    border-color: #2e69ff40;
+    box-shadow: 0 0 0 3px rgb(46, 105, 255, 0.25);
+  }
+  .title {
+    display: inline-block;
+    font-size: 32px;
+    font-weight: 700;
+    word-break: break-word;
+    font-family: Inter, sans-serif;
+  }
+  .subtitel {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    word-break: break-word;
+    font-family: Inter, sans-serif;
+  }
+  .form-Label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    word-break: break-word;
+    font-family: Inter, sans-serif;
+    width: 100%;
+    margin-left: 2px;
+    margin-bottom: 14px;
+  }
+  
+  input[type=checkbox]{
+    height: 15px;
+    width:15px;
+  }
+  input[type=checkbox]:hover {
+    border: 1px solid;
+    border-color: #2e69ff40;
+    box-shadow: 0 0 0 3px rgb(46, 105, 255, 0.25);
+    height: 15px;
+    width:15px;
+  }
+  
+  input[type=checkbox]:focus {
+    border: 1px solid;
+    border-color: #2e69ff40;
+    box-shadow: 0 0 0 3px rgb(46, 105, 255, 0.25);
+    height: 15px;
+    width:15px;
+  }
+
+  

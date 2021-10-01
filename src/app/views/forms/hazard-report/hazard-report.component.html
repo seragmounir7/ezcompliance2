@@ -1,496 +1,896 @@
-<div class="container content-center">
-    <form class="px-4 py-4 w-100" [formGroup]="hazardReport">
-      <div class="my-3">
-       <h2 class="text-center">Hazard Report Form Preview</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div style="padding: 0px;" class="col-md-6">
-            <h4 class="my-3">Part A - Form Details</h4>
-            <p>Position Reporting The Hazard</p>
-          </div>
-          <div style="padding: 0px;" class="col-md-12">
-            <div class="form-check form-check-inline ">
-              <input class="form-check-input" type="checkbox" formControlName="employeeFulltime" id="inlineCheckbox1" value="option1">
-              <label class="form-check-label ml-1" for="inlineCheckbox1">Fulltime Employee</label>
-            </div>
-            <div class="form-check form-check-inline ml-4">
-              <input class="form-check-input" type="checkbox" formControlName="employeeParttime" id="inlineCheckbox2" value="option2">
-              <label class="form-check-label ml-1" for="inlineCheckbox2">Part-time Employee</label>
-            </div>
-            <div class="form-check form-check-inline ml-4">
-              <input class="form-check-input" type="checkbox" formControlName="employeeCasual" id="inlineCheckbox2" value="option2">
-              <label class="form-check-label ml-1" for="inlineCheckbox2">Casual</label>
-            </div>
-            <div class="form-check form-check-inline ml-4">
-              <input class="form-check-input" type="checkbox" formControlName="employeeContractor" id="inlineCheckbox2" value="option2">
-              <label class="form-check-label ml-1" for="inlineCheckbox2">Contractor</label>
-            </div>
-           
-          </div>
-          
+<div class="container card px-4 py-4 content-center">
+  <form class="px-4 py-4" [formGroup]="hazardReport">
+    <div class="mb-3">
+      <p class="text-center title">Hazard Report Form Preview</p>
+    </div>
+    <div class="row py-4">
+      <div class="col-md-12">
+        <div style="padding: 0px" class="col-md-6">
+          <h3 class="mb-3 text_1">Part A - Form Details</h3>
+          <h4 class="text_2">Position Reporting The Hazard</h4>
         </div>
-      </div>
-      <div class="row">
-        
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputFullname" class="form-label">Full Name</label>
-            <input type="fullname" class="form-control" formControlName="fullName" id="exampleInputFullname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputSurname" class="form-label">Surname</label>
-            <input type="surname" class="form-control" formControlName="surname" id="exampleInputSurname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputPhone" class="form-label">Phone</label>
-            <input type="email" class="form-control" formControlName="phone" id="exampleInputPhone" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputDepartment" class="form-label">Department</label>
-            <input type="department" class="form-control" formControlName="department" id="exampleInputDepartment" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputPosition" class="form-label">Position</label>
-            <input type="position" class="form-control" formControlName="position" id="exampleInputPosition" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputProjectNumber" class="form-label">Project Number</label>
-            <input type="Projectnumber" class="form-control" formControlName="projectName" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-      </div>
-      
-      <hr>
-      <div class="row">
-        <div class="col-md-12 report_1">
-          <h5 style="margin-top: 1.5%;">Report to be sent to the following</h5>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label class="form-label">Manager/Supervisor</label>
-            <input type="text" class="form-control" formControlName="managerSupervisor" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" formControlName="managerSupervisorEmail" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputProjectNumber" class="form-label">WHS Manager</label>
-            <input type="Projectnumber" class="form-control" formControlName="whsManager" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" formControlName="whsManagerEmail" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-        
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <p>Hazard Details</p>
-        </div>
-        <div class="col-md-12">
-          <div class="form-floating">
-            <p>Describe the Hazard</p>
-            <textarea class="form-control" formControlName="describeHazard" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"></textarea>
-            
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="my-3">
-            <label for="email" class="form-label">Date Hazard Reported</label>
-            <input type="text" class="form-control" formControlName="dateHazardReport" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="my-3">
-            <label for="email" class="form-label">Location of Hazard</label>
-            <input type="text" class="form-control" formControlName="locationHazard" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="my-3">
-            <label for="email" class="form-label">Date Hazard Identified</label>
-            <input type="text" class="form-control" formControlName="dateHazardIdentify" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="my-3">
-            <label for="email" class="form-label">Job Number</label>
-            <input type="number" class="form-control" formControlName="jobNumber" id="exampleInputProjectNumber" aria-describedby="emailHelp">
-          </div>
-        </div>
-      </div>
-      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-      <div class="row">
-        <div class="col-md-12">
-          <h5>Hazard Treatment</h5>
-        </div>
-        <div class="col-md-12">
-          <table class="table table-bordered text-center">
-              <thead>
-                <tr>
-                  <th colspan="7" class="L_1">Risk Level Matrix</th>
-                  <th colspan="8" class="L_1">Risk Analysis</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th colspan="2" rowspan="2"></th>
-                  <td colspan="5">Consequence</td>
-                  <td colspan="4" rowspan="2"><div class="like_2">Likelihood</div></td>
-                  <td colspan="4" rowspan="2"><div class="like_2">Consequence</div></td>
-                </tr>
-                <tr>
-                  <th>1</th>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>5</td>
-                </tr>
-                <tr>
-                  <th rowspan="5"><div class="like_1">Likelihood</div></th>
-                  <td >5</td>
-                  <td class="M_1">M</td>
-                  <td class="H_1">H</td>
-                  <td class="H_1">H</td>
-                  <td class="H_1">H</td>
-                  <td class="H_1">H</td>
-                  <td colspan="2"><div class="space_1">1</div> </td>
-                  <td colspan="2">Rare</td>
-                  <td colspan="2"><div class="space_1">1</div></td>
-                  <td colspan="2">Insignificant</td>
-                </tr>
-                <tr>
-                  <th>4</th>
-                  <td class="M_1">M</td>
-                  <td class="M_1">M</td>
-                  <td class="M_1">M</td>
-                  <td class="H_1">H</td>
-                  <td class="H_1">H</td>
-                  <td colspan="2">2</td>
-                  <td colspan="2">Unlikely</td>
-                  <td colspan="2">2</td>
-                  <td colspan="2">Minor</td>
-                </tr>
-                <tr>
-                  <th>3</th>
-                  <td class="L_1">L</td>
-                  <td class="M_1">M</td>
-                  <td class="M_1">M</td>
-                  <td class="H_1">H</td>
-                  <td class="H_1">H</td>
-                  <td colspan="2">3</td>
-                  <td colspan="2">Moderate</td>
-                  <td colspan="2">3</td>
-                  <td colspan="2">Moderate</td>
-                </tr>
-                <tr>
-                  <th scope="col">2</th>
-                  <td class="L_1">L</td>
-                  <td class="L_1">L</td>
-                  <td class="M_1">M</td>
-                  <td class="M_1">M</td>
-                  <td class="H_1">H</td>
-                  <td colspan="2">4</td>
-                  <td colspan="2">Likely</td>
-                  <td colspan="2">4</td>
-                  <td colspan="2">Major</td>
-                </tr>
-                <tr>
-                  <th scope="col">1</th>
-                  <td class="L_1">L</td>
-                  <td class="L_1">L</td>
-                  <td class="L_1">L</td>
-                  <td class="M_1">M</td>
-                  <td class="M_1">M</td>
-                  <td colspan="2" class="mr-2 ml-2">5</td>
-                  <td colspan="2">Almost Certain</td>
-                  <td colspan="2">5</td>
-                  <td colspan="2">Catastrophic</td>
-                </tr>
-              </tbody>
-            
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="my-3 col">
-          <label for="exampleFormControlInput1" class="form-label">Consequence</label>
-  
-          <select class="form-select form-control col" aria-label="Default select example">
-            <option selected hidden>Select</option>
-            <option value="1">1-Insignificant</option>
-            <option value="2">2-Minor</option>
-            <option value="3">3-Moderate</option>
-            <option value="4">4-Major</option>
-            <option value="5">5-Catastrophic</option>
-          </select>
-        </div>
-        <div class="my-3 col">
-          <label for="exampleFormControlInput1" class="form-label">Likelihood</label>
-          <select class="form-select form-control col" aria-label="Default select example">
-            <option selected hidden>Select</option>
-            <option value="1">1-Insignificant</option>
-            <option value="2">2-Minor</option>
-            <option value="3">3-Moderate</option>
-            <option value="4">4-Major</option>
-            <option value="5">5-Catastrophic</option>
-          </select>
-        </div>
-        <div class="my-3 col">
-          <label for="exampleFormControlInput1" class="form-label">Risk Rating</label>
-          <select class="form-select form-control col" aria-label="Default select example">
-            <option selected hidden>Select</option>
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
-          </select>
-        </div>
-  
-      </div>
-      <div class="row">
-        <div class="col-md">
-          <p>Action Required</p>
-          <div class="form-check form-check-inline ">
-            <input class="form-check-input" type="checkbox" formControlName="actionimmediate" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label ml-1" for="inlineCheckbox1">immediately</label>
+        <div style="padding: 0px" class="col-md-12">
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="employeeFulltime"
+              id="inlineCheckbox1"
+              value="option1"
+            />
+            <label class="form-check-label ml-1" for="inlineCheckbox1"
+              >Fulltime Employee</label
+            >
           </div>
           <div class="form-check form-check-inline ml-4">
-            <input class="form-check-input" type="checkbox" formControlName="actionToday" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label ml-1" for="inlineCheckbox2">Today</label>
+            <input
+              class="form-check-input checkbox-lg"
+              type="checkbox"
+              formControlName="employeeParttime"
+              id="inlineCheckbox2"
+              value="option2"
+            />
+            <label class="form-check-label ml-1" for="inlineCheckbox2"
+              >Part-time Employee</label
+            >
           </div>
           <div class="form-check form-check-inline ml-4">
-            <input class="form-check-input" type="checkbox" formControlName="actionweek" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label ml-1" for="inlineCheckbox2">This week</label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="employeeCasual"
+              id="inlineCheckbox2"
+              value="option2"
+            />
+            <label class="form-check-label ml-1" for="inlineCheckbox2"
+              >Casual</label
+            >
           </div>
           <div class="form-check form-check-inline ml-4">
-            <input class="form-check-input" type="checkbox" formControlName="actionMonth" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label ml-1" for="inlineCheckbox2">This Month</label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="employeeContractor"
+              id="inlineCheckbox2"
+              value="option2"
+            />
+            <label class="form-check-label ml-1" for="inlineCheckbox2"
+              >Contractor</label
+            >
           </div>
-         
         </div>
       </div>
-      <h3 class="mt-3">Corrective Action</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label">Full Name</label>
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="fullName"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label">Surname</label>
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="surname"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label">Phone</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="phone"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputDepartment" class="form-label"
+            >Department</label
+          >
+          <input
+            type="department"
+            class="form-control"
+            formControlName="department"
+            id="exampleInputDepartment"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputPosition" class="form-label">Position</label>
+          <input
+            type="position"
+            class="form-control"
+            formControlName="position"
+            id="exampleInputPosition"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputProjectNumber" class="form-label"
+            >Project Number</label
+          >
+          <input
+            type="Projectnumber"
+            class="form-control"
+            formControlName="projectName"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-4">
-          <div class="my-3">
-            <label for="exampleInputFullname" class="form-label">Can you eliminate the hazard</label>
-            <input type="fullname" class="form-control" formControlName="eliminateHazard" id="exampleInputFullname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="my-3">
-            <label for="exampleInputSurname" class="form-label">Corrective Action</label>
-            <input type="surname" class="form-control" formControlName="eliminateCorrect" id="exampleInputSurname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="my-3 ">
-            <label for="exampleInputEmail1" class="form-label">Actioned by</label>
-            <input type="email" class="form-control" formControlName="elliminateAction" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="my-3">
-            <label for="exampleInputPhone" class="form-label">By when</label>
-            <input type="date" class="form-control" formControlName="eliminateWhen" id="exampleInputPhone" aria-describedby="emailHelp">
-          </div>
-          </div>
-          <div class="col-md-4">
-            <div class="my-3">
-              <label for="exampleInputFullname" class="form-label">Can you substitute a safe process</label>
-              <input type="fullname" class="form-control" formControlName="substitute" id="exampleInputFullname" aria-describedby="emailHelp">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="my-3">
-              <label for="exampleInputSurname" class="form-label">Corrective Action</label>
-              <input type="surname" class="form-control" formControlName="substituteCorrect" id="exampleInputSurname" aria-describedby="emailHelp">
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="my-3">
-              <label for="exampleInputEmail1" class="form-label">Actioned by</label>
-              <input type="email" class="form-control" formControlName="substituteAction" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="my-3">
-              <label for="exampleInputPhone" class="form-label">By when</label>
-              <input type="date" class="form-control" formControlName="substituteWhen" id="exampleInputPhone" aria-describedby="emailHelp">
-            </div>
-            </div>
-            <div class="col-md-4">
-              <div class="my-3">
-                <label for="exampleInputFullname" class="form-label">Can the hazard be isolated</label>
-                <input type="fullname" class="form-control" formControlName="isolated" id="exampleInputFullname" aria-describedby="emailHelp">
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="my-3">
-                <label for="exampleInputSurname" class="form-label">Corrective Action</label>
-                <input type="surname" class="form-control" formControlName="isolatedCorrect" id="exampleInputSurname" aria-describedby="emailHelp">
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="my-3">
-                <label for="exampleInputEmail1" class="form-label">Actioned by</label>
-                <input type="email" class="form-control" formControlName="isolatedAction" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="my-3">
-                <label for="exampleInputPhone" class="form-label">By when</label>
-                <input type="date" class="form-control" formControlName="isolatedWhen" id="exampleInputPhone" aria-describedby="emailHelp">
-              </div>
-              </div>
-              <div class="col-md-4">
-                <div class="my-3">
-                  <label for="exampleInputFullname" class="form-label">Can a solution be engreed</label>
-                  <input type="fullname" class="form-control" formControlName="solution" id="exampleInputFullname" aria-describedby="emailHelp">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="my-3">
-                  <label for="exampleInputSurname" class="form-label">Corrective Action</label>
-                  <input type="surname" class="form-control" formControlName="solutionCorrect" id="exampleInputSurname" aria-describedby="emailHelp">
-                </div>
-              </div>
-              <div class="col-md-2">
-                <div class="my-3">
-                  <label for="exampleInputEmail1" class="form-label">Actioned by</label>
-                  <input type="email" class="form-control" formControlName="solutionAction" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-              </div>
-              <div class="col-md-2">
-                <div class="my-3">
-                  <label for="exampleInputPhone" class="form-label">By when</label>
-                  <input type="date" class="form-control" formControlName="solutionWhen" id="exampleInputPhone" aria-describedby="emailHelp">
-                </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="my-3">
-                    <label for="exampleInputFullname" class="form-label">Can procedures remove or reduce the risk</label>
-                    <input type="fullname" class="form-control" formControlName="procedureRemove" id="exampleInputFullname" aria-describedby="emailHelp">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="my-3">
-                    <label for="exampleInputSurname" class="form-label">Corrective Action</label>
-                    <input type="surname" class="form-control" formControlName="procedureRemoveCorrect" id="exampleInputSurname" aria-describedby="emailHelp">
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="my-3">
-                    <label for="exampleInputEmail1" class="form-label">Actioned by</label>
-                    <input type="email" class="form-control" formControlName="procedureRemoveAction" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="my-3">
-                    <label for="exampleInputPhone" class="form-label">By when</label>
-                    <input type="date" class="form-control" formControlName="procedureRemoveWhen" id="exampleInputPhone" aria-describedby="emailHelp">
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="my-3">
-                      <label for="exampleInputFullname" class="form-label">Can the use PPE reduce the risk</label>
-                      <input type="fullname" class="form-control" formControlName="PPE" id="exampleInputFullname" aria-describedby="emailHelp">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="my-3">
-                      <label for="exampleInputSurname" class="form-label">Corrective Action</label>
-                      <input type="surname" class="form-control" formControlName="PPEcorrect" id="exampleInputSurname" aria-describedby="emailHelp">
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="my-3">
-                      <label for="exampleInputEmail1" class="form-label">Actioned by</label>
-                      <input type="email" class="form-control" formControlName="PPEaction" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="my-3">
-                      <label for="exampleInputPhone" class="form-label">By when</label>
-                      <input type="date" class="form-control" formControlName="PPEwhen" id="exampleInputPhone" aria-describedby="emailHelp">
-                    </div>
-                    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-12 report_1">
+        <h3 style="margin-top: 1.5%">Report to be sent to the following</h3>
       </div>
-      <h3>The form was compiled by:</h3>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label class="form-label">Manager/Supervisor</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="managerSupervisor"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="managerSupervisorEmail"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputProjectNumber" class="form-label"
+            >WHS Manager</label
+          >
+          <input
+            type="Projectnumber"
+            class="form-control"
+            formControlName="whsManager"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="whsManagerEmail"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text_3">Hazard Details</h2>
+      </div>
+      <div class="col-md-12 py-4">
+        <div class="form-floating">
+          <h3>Describe the Hazard</h3>
+          <textarea
+            class="form-control"
+            formControlName="describeHazard"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            style="height: 120px"
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="email" class="form-label">Date Hazard Reported</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="dateHazardReport"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="email" class="form-label">Location of Hazard</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="locationHazard"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="email" class="form-label">Date Hazard Identified</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="dateHazardIdentify"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="email" class="form-label">Job Number</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="jobNumber"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row py-4">
+      <div class="col-md-12">
+        <h2>Hazard Treatment</h2>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th colspan="7" class="L_1">Risk Level Matrix</th>
+              <th colspan="8" class="L_1">Risk Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th colspan="2" rowspan="2"></th>
+              <td colspan="5">Consequence</td>
+              <td colspan="4" rowspan="2">
+                <div class="like_2">Likelihood</div>
+              </td>
+              <td colspan="4" rowspan="2">
+                <div class="like_2">Consequence</div>
+              </td>
+            </tr>
+            <tr>
+              <th>1</th>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <th rowspan="5"><div class="like_1">Likelihood</div></th>
+              <td>5</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2"><div class="space_1">1</div></td>
+              <td colspan="2">Rare</td>
+              <td colspan="2"><div class="space_1">1</div></td>
+              <td colspan="2">Insignificant</td>
+            </tr>
+            <tr>
+              <th>4</th>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">2</td>
+              <td colspan="2">Unlikely</td>
+              <td colspan="2">2</td>
+              <td colspan="2">Minor</td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">3</td>
+              <td colspan="2">Moderate</td>
+              <td colspan="2">3</td>
+              <td colspan="2">Moderate</td>
+            </tr>
+            <tr>
+              <th scope="col">2</th>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td colspan="2">4</td>
+              <td colspan="2">Likely</td>
+              <td colspan="2">4</td>
+              <td colspan="2">Major</td>
+            </tr>
+            <tr>
+              <th scope="col">1</th>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td colspan="2" class="mr-2 ml-2">5</td>
+              <td colspan="2">Almost Certain</td>
+              <td colspan="2">5</td>
+              <td colspan="2">Catastrophic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Consequence</label
+        >
 
-      <div class="row">
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputFullname" class="form-label">Name</label>
-            <input type="fullname" class="form-control" formControlName="name" id="exampleInputFullname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputSurname" class="form-label">Position</label>
-            <input type="surname" class="form-control" formControlName="compilePosition" id="exampleInputSurname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputSurname" class="form-label">Department</label>
-            <input type="surname" class="form-control" formControlName="compileDepartment"  id="exampleInputSurname" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="my-3 col-md-6">
-          <label  class="form-label">File Upload</label>
-          <input class="form-control"  formControlName="fileUpload"  type="file" id="formFile">
-        </div>
-        <div class="col-md-6">
-          <div class="my-3">
-            <label for="exampleInputSurname" class="form-label">Date</label>
-            <input type="date" class="form-control" formControlName="date"  id="exampleInputSurname" aria-describedby="emailHelp">
-           
-          </div>
-        </div>
-        <div class="col-md-12">
-        <h4>Signature</h4> 
-          <div style="border: 1px solid rgb(16, 18, 20)">
-            <signature-pad
-              [options]="signaturePadOptions"
-              (onBeginEvent)="drawStart()"
-              (onEndEvent)="drawComplete()"
-            ></signature-pad>
-          </div>
-          <button class="btn btn-outline-primary my-3" (click)="clear()" >Clear</button>  
-        </div>
-         
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option selected hidden>Select</option>
+          <option value="1">1-Insignificant</option>
+          <option value="2">2-Minor</option>
+          <option value="3">3-Moderate</option>
+          <option value="4">4-Major</option>
+          <option value="5">5-Catastrophic</option>
+        </select>
       </div>
-    </form>
-  </div>
-  
-  
-  
-  
-  
+      <div class="mb-3 col">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Likelihood</label
+        >
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option selected hidden>Select</option>
+          <option value="1">1-Insignificant</option>
+          <option value="2">2-Minor</option>
+          <option value="3">3-Moderate</option>
+          <option value="4">4-Major</option>
+          <option value="5">5-Catastrophic</option>
+        </select>
+      </div>
+      <div class="mb-3 col">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Risk Rating</label
+        >
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+        >
+          <option selected hidden>Select</option>
+          <option value="1">Low</option>
+          <option value="2">Medium</option>
+          <option value="3">High</option>
+        </select>
+      </div>
+    </div>
+    <div class="row py-4">
+      <div class="col-md">
+        <h2>Action Required</h2>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="actionimmediate"
+            id="inlineCheckbox1"
+            value="option1"
+          />
+          <label class="form-check-label ml-1" for="inlineCheckbox1"
+            >immediately</label
+          >
+        </div>
+        <div class="form-check form-check-inline ml-4">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="actionToday"
+            id="inlineCheckbox2"
+            value="option2"
+          />
+          <label class="form-check-label ml-1" for="inlineCheckbox2"
+            >Today</label
+          >
+        </div>
+        <div class="form-check form-check-inline ml-4">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="actionweek"
+            id="inlineCheckbox2"
+            value="option2"
+          />
+          <label class="form-check-label ml-1" for="inlineCheckbox2"
+            >This week</label
+          >
+        </div>
+        <div class="form-check form-check-inline ml-4">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="actionMonth"
+            id="inlineCheckbox2"
+            value="option2"
+          />
+          <label class="form-check-label ml-1" for="inlineCheckbox2"
+            >This Month</label
+          >
+        </div>
+      </div>
+    </div>
+    <h2 class="mt-3">Corrective Action</h2>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label"
+            >Can you eliminate the hazard</label
+          >
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="eliminateHazard"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label"
+            >Corrective Action</label
+          >
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="eliminateCorrect"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label label_1"
+            >Actioned by</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="elliminateAction"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label label_1"
+            >By when</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            formControlName="eliminateWhen"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label"
+            >Can you substitute a safe process</label
+          >
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="substitute"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label"
+            >Corrective Action</label
+          >
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="substituteCorrect"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label label_1"
+            >Actioned by</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="substituteAction"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label label_1"
+            >By when</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            formControlName="substituteWhen"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label"
+            >Can the hazard be isolated</label
+          >
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="isolated"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label"
+            >Corrective Action</label
+          >
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="isolatedCorrect"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label label_1"
+            >Actioned by</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="isolatedAction"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label label_1"
+            >By when</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            formControlName="isolatedWhen"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label"
+            >Can a solution be engreed</label
+          >
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="solution"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label"
+            >Corrective Action</label
+          >
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="solutionCorrect"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label label_1"
+            >Actioned by</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="solutionAction"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label label_1"
+            >By when</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            formControlName="solutionWhen"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label"
+            >Can procedures remove or reduce the risk</label
+          >
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="procedureRemove"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label"
+            >Corrective Action</label
+          >
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="procedureRemoveCorrect"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label label_1"
+            >Actioned by</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="procedureRemoveAction"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label label_1"
+            >By when</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            formControlName="procedureRemoveWhen"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label"
+            >Can the use PPE reduce the risk</label
+          >
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="PPE"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label"
+            >Corrective Action</label
+          >
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="PPEcorrect"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label label_1"
+            >Actioned by</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="PPEaction"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label label_1"
+            >By when</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            formControlName="PPEwhen"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
+    <h2>The form was compiled by:</h2>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputFullname" class="form-label">Name</label>
+          <input
+            type="fullname"
+            class="form-control"
+            formControlName="name"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label">Position</label>
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="compilePosition"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label">Department</label>
+          <input
+            type="surname"
+            class="form-control"
+            formControlName="compileDepartment"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="mb-3 col-md-6">
+        <label class="form-label">File Upload</label>
+        <input
+          class="form-control"
+          formControlName="fileUpload"
+          type="file"
+          id="formFile"
+        />
+      </div>
+      <div class="col-md-6">
+        <!-- <mat-form-field appearance="outline">
+          <input formControlName="date" class="date_1" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>  -->
+        <div class="mb-3">
+          <label for="exampleInputSurname" class="form-label">Date</label>
+          <input
+            type="date"
+            value=""
+            class="form-control"
+            formControlName="date"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label>Signature</label>
+        <div class="sign">
+          <signature-pad
+            [options]="signaturePadOptions"
+            (onBeginEvent)="drawStart()"
+            (onEndEvent)="drawComplete()"
+          ></signature-pad>
+        </div>
+        <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
+        <button class="btn btn-outline-primary my-3" (click)="clear()">
+          Clear
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
