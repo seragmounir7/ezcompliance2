@@ -4,6 +4,7 @@ import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { ActivatedRoute } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import Swal from 'sweetalert2'
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -167,6 +168,13 @@ export class DynamicFormComponent implements OnInit {
      // "className": "form-control",
      // "subtype": "file"
     },
+    // {
+    //   "type": "table",
+    //   "icon":"fas fa-file-signature",
+    //   "label": "Table",
+    //   "row": 3,
+    //   "col": 3,  
+    // },
     {
       "type": "button",
       "icon":"fa-paper-plane",
@@ -189,12 +197,19 @@ export class DynamicFormComponent implements OnInit {
 
   report = false;
   reports:any = [];
-
+  formNameRecieved="";
+  categoryNameRecieved="";
   constructor(
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private dynamicFormsService:DynamicFormsService
   ) { }
 
   ngOnInit() {
+ this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
+ this.categoryNameRecieved =this.dynamicFormsService.categoryNameRecieved;
+
+    
+   
     // this.route.params.subscribe( params =>{
     //   console.log(params);
     //   this.us.getDataApi('/admin/getFormById',{id:params.id}).subscribe(r=>{

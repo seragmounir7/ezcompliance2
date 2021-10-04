@@ -8,6 +8,8 @@ export class field{
     regex?:any;
     errorText?:any;
     label?:any;
+    row?:any;
+    col?:any;
     description?:any;
     placeholder?:any;
     className?:any;

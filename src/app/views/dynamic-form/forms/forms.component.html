@@ -83,16 +83,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let tutorial of tutorials">
-                  <td>{{ tutorial.position }}</td>
-                  <td>{{ tutorial.formName }}</td>
-                  <td>{{ tutorial.categories }}</td>
+                <tr *ngFor="let form of allForms;let i=index">
+                  <td>{{ i+1 }}</td>
+                  <td>{{ form.title }}</td>
+                  <td>{{ form.category }}</td>
                   <td>
                     <button class="btn btn-info btn-sm mr-2" [routerLink]="['/admin/dynamicForm']"><i
                         class="fas fa-pencil-alt mr-2"></i>Edit</button>
 
                     <button class="btn btn-primary btn-sm mr-2"><i class="fas fa-folder mr-2 "></i>View</button>
-                    <button class="btn btn-danger btn-sm mr-2" (click)="deleteopen(deletemodal,tutorial.categories )"><i
+                    <button class="btn btn-danger btn-sm mr-2" (click)="deleteopen(deletemodal,form )"><i
                         class="fas fa-trash mr-2"></i>Delete</button>
                   </td>
                 </tr>
@@ -137,38 +137,40 @@
   </div>
   <div class="modal-body deletebody">
     <p></p>
-    <p>Do you want to delete {{categorie}}</p>
+    <p>Do you want to delete {{form}} form of category {{category}}</p>
   </div>
   <div class="modal-footer footer">
-    <button type="button" class="btn  mr-3" style="background-color: #eeeeee" (click)="modal.close('Save click')">Cancel</button>
+    <button type="button" class="btn  mr-3" style="background-color: #eeeeee" (click)="modal.dismiss('Save click')">Cancel</button>
     <button type="button" class="btn btn-danger ml-3" aria-label="Close"
-      (click)="modal.dismiss('Cross click')">Delete</button>
+      (click)="modal.close('Cross click')">Delete</button>
   </div>
 
 </ng-template>
 
 
 <ng-template #addFormModal let-modal>
+  <ng-container [formGroup]="addForm">
+
   <div class="modal-header modalheader">
     <h2 class="modal-title " id="modal-basic-title">Add Form</h2>
   </div>
   <div class="modal-body">
     <label for="exampleInputProjectNumber" class="form-label ml-3">Form Name</label>
-    <input type="text" class="form-control inputalign" placeholder="" aria-label="" aria-describedby="basic-addon1">
+    <input type="text" class="form-control inputalign" placeholder="" aria-label="" aria-describedby="basic-addon1" formControlName="formName" >
     <label for="exampleInputProjectNumber" class="form-label ml-3">Category Name</label>
 
-    <select class="custom-select inputalign ">
-      <option selected hidden>Select category</option>
-      <option value="1">category1</option>
-      <option value="2">category2</option>
-      <option value="3">category3</option>
-      <option value="3">category4</option>
+    <select class="custom-select inputalign"  formControlName="category" >
+      <option [value]="null" selected hidden>Select category</option>
+      <option [value]="category._id" *ngFor="let category of categories">{{category.title}}</option>
+     
     </select>
   </div>
   <div class="modal-footer footer ">
-    <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.dismiss('Save click')">Close</button>
 
     <button type="button" class="btn btn-primary ml-3" aria-label="Close"
-      (click)="modal.dismiss('Cross click')">Submit</button>
+      (click)="modal.close(addForm.value)" [disabled]="!(addForm.get('formName').value && addForm.get('category').value)">Submit</button>
   </div>
+</ng-container>
+
 </ng-template>

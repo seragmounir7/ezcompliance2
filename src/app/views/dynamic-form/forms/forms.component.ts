@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,6 +7,8 @@ import { AddFormComponent } from './add-form/add-form.component';
 import Swal from 'sweetalert2'
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+
 export interface PeriodicElement {
   categories: string;
   position: number;
@@ -46,6 +49,14 @@ export class FormsComponent implements OnInit {
    page = 1;
   pageSize = 10;
   collectionSize = 300;
+  categories=[];
+  allForms=[];
+  categorySelected="";
+  formName="";
+  addForm:FormGroup;
+  category="";
+form="";
+
   tutorials=[
     {position: 1,formName:'Form1' ,categories: 'Category1',  symbol: ''},
     {position: 1,formName:'Form2' ,categories: 'Category1',  symbol: ''},
@@ -64,7 +75,7 @@ export class FormsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   
-  constructor(public dialog: MatDialog,private tutorialService: TutorialService,private modalService: NgbModal) {}
+  constructor(public dialog: MatDialog,private fb:FormBuilder,private tutorialService: TutorialService,private dynamicFormServise:DynamicFormsService,private modalService: NgbModal) {}
 
   openDialog(action): void {
     const dialogRef = this.dialog.open(AddFormComponent, {
@@ -78,8 +89,60 @@ export class FormsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.addForm=this.fb.group({
+      formName:[null,Validators.required],
+      category:[null,Validators.required]
+    })
+    
+    this.getAllForms();
+    this.getAllCategories();
     this.refreshList();
+
   }
+getAllForms(){
+  this.dynamicFormServise.getAllForm().subscribe((resF)=>{
+    // this.allForms=res.data;
+    console.log("allForms",resF.data);
+    this.dynamicFormServise.getAllCategory().subscribe((resC)=>{
+     resF.data.forEach((element,index) => {
+       for(let i=0;i<resC.data.length;i++){
+         if(element.categoryId ===resC.data[i]._id){
+           resF.data[index].category = resC.data[i].title;
+           break;
+         }
+       }
+     });
+     console.log(" after data formation",resF.data);
+     
+   this.allForms =  resF.data;
+   let length = this.allForms.length;
+       if((length%10)!=0){
+        this.collectionSize = length + (10-length%10);
+      }
+       else{
+        this.collectionSize = length ;
+       }
+    
+    })
+    
+  })
+}
+  getAllCategories(){
+    this.dynamicFormServise.getAllCategory().subscribe((res)=>{
+      console.log("all categories=>",res);
+      this.categories=res.data;
+      let length = res.data.length;
+      console.log("this.pageSize",this.pageSize);
+      
+      // if((length%10)!=0){
+      //   this.collectionSize = length + (10-length%10);
+      // }
+      //  else{
+      //   this.collectionSize = length ;
+      //  }
+    })
+  }
+
   delete(item){
     
         Swal.fire({
@@ -114,20 +177,43 @@ export class FormsComponent implements OnInit {
       }
       addFormopen(content) {
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+          console.log(result);
+          let data = {
+            categoryId: this.addForm.get('category').value,
+            title: this.addForm.get('formName').value
+          }
+          console.log(data);
+          this.dynamicFormServise.addForm(data).subscribe((res)=>{
+            console.log(res);
+            this.getAllForms();
+            this.addForm.reset();
+          })
+
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
+          this.addForm.reset();
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
  
       }
     
-      deleteopen(content,value) {
+      deleteopen(content,form) {
+        this.category=form.category;
+        this.form=form.title;
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
+          console.log("id",form._id);
+          this.dynamicFormServise.deleteForm(form._id).subscribe((res)=>{
+            console.log("deleted res",res);
+            this.getAllForms();
+          })
+          
         }, (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          console.log("dismissed");
+          
         });
-    this.categorie=value
+  
       }
       private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {

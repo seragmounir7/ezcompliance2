@@ -77,14 +77,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let tutorial of tutorials">
-                    <td>{{ tutorial.position }}</td>
-                    <td>{{ tutorial.categories }}</td>
+                  <tr *ngFor="let category of categories;let i=index;">
+                    <td>{{i+1}}</td>
+                    <td>{{ category.title }}</td>
                     <td>
-                      <button class="btn btn-info btn-sm mr-2" (click)="open(viewmodal,tutorial.categories )"><i class="fas fa-pencil-alt mr-2"></i>Edit</button>
-                      
-                      <button class="btn btn-primary btn-sm mr-2" (click)="eidtopen(editmodal,tutorial.categories )"><i class="fas fa-folder mr-2"></i>View</button>
-                      <button class="btn btn-danger btn-sm mr-2" (click)="deleteopen(deletemodal,tutorial.categories )"><i class="fas fa-trash mr-2"></i>Delete</button>
+                      <button class="btn btn-info btn-sm mr-2" (click)="open(viewmodal,category.title,category._id )"><i class="fas fa-pencil-alt mr-2"></i>Edit</button>                      
+                      <button class="btn btn-primary btn-sm mr-2" (click)="eidtopen(editmodal,category.title )"><i class="fas fa-folder mr-2"></i>View</button>
+                      <button class="btn btn-danger btn-sm mr-2" (click)="deleteopen(deletemodal,category.title,category._id )"><i class="fas fa-trash mr-2"></i>Delete</button>
                       
                     </td>
                   </tr>
@@ -137,12 +136,12 @@
     
   </div>
   <div class="modal-body">
-    <input type="text" class="form-control" [value]="categorie" placeholder="" aria-label="" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" [(ngModel)]="categorie" placeholder="" aria-label="" aria-describedby="basic-addon1">
   </div>
   <div class="modal-footer footer">
     <button type="button"class="btn mr-3 " style="background-color: #eeeeee" aria-label="Close" (click)="modal.dismiss('Cross click')">Close</button>
     
-      <button type="button" class="btn btn-primary ml-3" (click)="modal.close('Save click')">Submit</button>
+      <button type="button" class="btn btn-primary ml-3" (click)="modal.close(categorie)">Submit</button>
      
   </div>
 </ng-template>
@@ -175,11 +174,11 @@
   </div>
   <div class="modal-body deletebody">
     <p></p>
-  <p>Do you want to delete {{categorie}}</p>
+  <p>Do you want to delete "{{categorie}}"</p>
   </div>
   <div class="modal-footer footer">
-      <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-danger ml-3" aria-label="Close" (click)="modal.dismiss('Cross click')">Delete</button>
+      <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.dismiss('Save click')">Cancel</button>
+      <button type="button" class="btn btn-danger ml-3" aria-label="Close" (click)="modal.close('delete')">Delete</button>
      
   </div>
 </ng-template>
@@ -190,11 +189,11 @@
     
   </div>
   <div class="modal-body deletebody">
-    <input type="text" class="form-control"  placeholder="" aria-label="" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" [(ngModel)]="addCategory" placeholder="" aria-label="" aria-describedby="basic-addon1">
   </div>
   <div class="modal-footer footer">
-      <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.close('Save click')">Close</button>
-      <button type="button" class="btn btn-primary ml-3" aria-label="Close" (click)="modal.dismiss('Cross click')">Submit</button>
+      <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.dismiss('closed')">Close</button>
+      <button type="button" class="btn btn-primary ml-3" aria-label="Close" (click)="modal.close(addCategory)">Add</button>
      
   </div>
 </ng-template>
