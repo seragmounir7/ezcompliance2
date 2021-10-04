@@ -5,6 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import Swal from 'sweetalert2'
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router,  ParamMap } from '@angular/router';
+
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -168,13 +171,13 @@ export class DynamicFormComponent implements OnInit {
      // "className": "form-control",
      // "subtype": "file"
     },
-    // {
-    //   "type": "table",
-    //   "icon":"fas fa-file-signature",
-    //   "label": "Table",
-    //   "row": 3,
-    //   "col": 3,  
-    // },
+    {
+      "type": "table",
+      "icon":"fas fa-file-signature",
+      "label": "Table",
+      "row": 3,
+      "col": 3,  
+    },
     {
       "type": "button",
       "icon":"fa-paper-plane",
@@ -182,8 +185,13 @@ export class DynamicFormComponent implements OnInit {
       "label": "Submit"
     }
   ];
+  type:string="";
+  formIdRec="";
 rows=[
-
+["","","","",""],
+["","","","",""],
+["","","","",""],
+["","","","",""],
 ]
   modelFields:Array<field>=[];
   model:any = {
@@ -201,14 +209,56 @@ rows=[
   reports:any = [];
   formNameRecieved="";
   categoryNameRecieved="";
-  constructor(
-    private route:ActivatedRoute,
+  categoryIdRecieved="";
+  constructor(public router:Router,
+    private route:ActivatedRoute,private spinner: NgxSpinnerService,
     private dynamicFormsService:DynamicFormsService
   ) { }
 
   ngOnInit() {
- this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
- this.categoryNameRecieved =this.dynamicFormsService.categoryNameRecieved;
+    this.type="";
+    this.route
+    .queryParams
+    .subscribe(params => {
+      if(params['type']=='add'){
+        this.type = 'add';
+        this.formNameRecieved = params['formName'];
+        this.categoryIdRecieved = params['categoryId'];
+        // this.categoryNameRecieved = params['categoryId'];
+        this.dynamicFormsService.getAllCategory().subscribe(res=>{
+          res.data.forEach(element => {
+            if(params['categoryId']==element._id)
+            this.categoryNameRecieved = element.title;
+          });   
+          
+        })
+        console.log( this.formNameRecieved, this.categoryNameRecieved);
+      }
+     if(params['type']=='edit'){
+      this.type = 'edit';
+      this.formIdRec=params['formId'];
+      this.spinner.show();
+       this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
+         console.log("form=>",res);
+         this.model.attributes = res.data.htmlObject;
+         this.spinner.hide();
+
+       })
+     }
+     if(params['type']=='view'){
+      this.type = 'view';
+      this.spinner.show();
+       this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
+         console.log("form=>",res);
+         this.report = true;
+         this.model.attributes = res.data.htmlObject;
+         this.spinner.hide();
+       })
+     }
+      
+    });
+//  this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
+//  this.categoryNameRecieved =this.dynamicFormsService.categoryNameRecieved;
 
     
    
@@ -274,7 +324,7 @@ rows=[
     this.value={label:"",value:""};
   }
   deleteItem(){
-    console.log("dedle");
+    console.log("delete");
     
   }
   removeField(i,item){
@@ -436,4 +486,62 @@ console.log("field.regex",field.regex + "field.label",field.label+"index",index)
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
   }
+
+  ////table//add row column
+  addCol(i){
+    console.log("add col",i)
+   this.rows.forEach(row=>{
+   row.push("");
+   }) 
+  }
+removeCol(i){
+  console.log("remove col",i)
+  this.rows.forEach(row=>{
+    row.pop();
+    }) 
+}
+addRow(i){
+  console.log("add row",i)
+
+}
+removeRow(i){
+  console.log("remove row",i)
+}
+addForm(){
+  console.log("formAdded succesfully=>",this.model.attributes);
+
+  let data={
+    title:this.formNameRecieved,
+    categoryId:this.categoryIdRecieved,
+    htmlObject:this.model.attributes
+  };
+    console.log("form type=>",this.type);
+
+  if(this.type == "add"){
+    console.log("add");
+
+    this.dynamicFormsService.addForm(data).subscribe((res)=>{
+      console.log(res);
+            Swal.fire('Form added successfully');
+            this.router.navigate(['/admin/forms'])
+  
+  });
+  }
+  if(this.type =='edit'){
+    console.log("edit");
+    
+    let data={
+      htmlObject:this.model.attributes
+    }
+    this.dynamicFormsService.editForm(data,this.formIdRec).subscribe((res)=>{
+      console.log(res);
+           Swal.fire('Form edited successfully');
+            this.router.navigate(['/admin/forms'])
+  
+  });
+  }
+  
+}
+
+
 }

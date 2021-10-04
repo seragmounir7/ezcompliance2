@@ -262,24 +262,42 @@
                   </label>
                 </div>
               </div>
+              <!-- table -->
            <div *ngIf="item.type == 'table'" class="btn-cont">
-             
-             <table class="table">
-              <!-- <thead>
-                <tr>
-                  <th scope="col"*ngFor="let row of rows">
-
-                  </th>
-             
-                </tr>
-              </thead> -->
-              <tbody>
-                <tr *ngFor="let row of rows">
-                  <td *ngFor="let col of row"><input type="text"> 
-                  </td>                 
-                </tr>              
-              </tbody>
-            </table>
+             <div class="row">
+               <div class="col-11">
+                <table class="table">            
+                  <tbody>
+                    <tr *ngFor="let row of rows">
+                      <td *ngFor="let col of row"><input class="form-control" type="text"> 
+                      </td>                 
+                    </tr>              
+                  </tbody>
+                </table>
+               </div>    
+               <div class="col-1">
+                 <div class="row">
+                  <span class="material-icons" (click)="addCol(i)"
+                  >add_circle_outline
+                </span>
+                 </div>
+                 <div class="row mt-2">
+                  <span class="material-icons" (click)="removeCol(i)"
+                  >remove_circle_outline
+                </span>
+                 </div>
+               </div>        
+              </div>
+              <div class="row">
+                <span class="material-icons"  (click)="addRow(i)"
+                >add_circle_outline
+              </span>
+              <span class="material-icons ml-2" (click)="removeRow(i)"
+                >remove_circle_outline
+              </span>
+              </div>
+            
+            
               </div>
 
               <!-- button -->
@@ -507,6 +525,7 @@
 </div>
 
 <!-- <pre *ngIf="model">{{model|json}}</pre> -->
+<!--  real form response -->
 <ng-container *ngIf="report">
 <div
   *ngIf="model"
@@ -532,6 +551,7 @@
     </div>
     <form class="ftheme">
       <div *ngIf="!success" class="col-12">
+        
         <div
           *ngFor="let item of model.attributes; let i = index"
           class="form-group"
@@ -603,6 +623,39 @@
               <h4>{{ item.placeholder }}</h4>
             </span>
           </div>
+          <div *ngIf="item.type == 'table'" class="btn-cont">
+            <div class="row">
+              <div class="col-11">
+               <table class="table">            
+                 <tbody>
+                   <tr *ngFor="let row of rows">
+                     <td *ngFor="let col of row"><input class="form-control" type="text"> 
+                     </td>                 
+                   </tr>              
+                 </tbody>
+               </table>
+              </div>    
+                    
+             </div>
+           
+           
+           
+             </div>
+             <div *ngIf="item.type == 'signature'">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div style="border: 1px solid rgb(149 162 173); border-radius: 10px;">
+                <signature-pad
+                  [options]="signaturePadOptions"
+                  (onBeginEvent)="drawStart()"
+                  (onEndEvent)="drawComplete()"
+                  #Signature
+                ></signature-pad>
+              </div>
+              <button class="btn btn-outline-primary mt-1" (click)="clear(i)">
+                Clear
+              </button>
+            </div>
           <div *ngIf="item.type == 'number'">
             <label>{{ item.label }}</label>
             <label *ngIf="item.required" class="text-danger">*</label>
@@ -771,8 +824,14 @@
 </div>
 </ng-container>
 <div class="text-center my-2">
-<button (click)="initReport()" class="btn btn-primary  ">
+<button *ngIf="!report" (click)="initReport()"  class="btn btn-primary  ">
   Response
+</button>
+<button *ngIf="report && type=='add'" (click)="addForm()" class="btn btn-primary  ">
+  Add Form
+</button>
+<button *ngIf="report && type=='edit'" (click)="addForm()" class="btn btn-primary  ">
+  Edit Form
 </button>
 </div>
 <pre *ngIf="show == true && model">

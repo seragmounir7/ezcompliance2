@@ -8,6 +8,8 @@ import Swal from 'sweetalert2'
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 
 export interface PeriodicElement {
   categories: string;
@@ -75,7 +77,10 @@ form="";
     this.dataSource.paginator = this.paginator;
   }
   
-  constructor(public dialog: MatDialog,private fb:FormBuilder,private tutorialService: TutorialService,private dynamicFormServise:DynamicFormsService,private modalService: NgbModal) {}
+  constructor(public dialog: MatDialog,private spinner: NgxSpinnerService,public router:Router,private fb:FormBuilder,private tutorialService: TutorialService,private dynamicFormServise:DynamicFormsService,private modalService: NgbModal) {
+   
+
+  }
 
   openDialog(action): void {
     const dialogRef = this.dialog.open(AddFormComponent, {
@@ -100,6 +105,7 @@ form="";
 
   }
 getAllForms(){
+  this.spinner.show();
   this.dynamicFormServise.getAllForm().subscribe((resF)=>{
     // this.allForms=res.data;
     console.log("allForms",resF.data);
@@ -114,15 +120,16 @@ getAllForms(){
      });
      console.log(" after data formation",resF.data);
      
-   this.allForms =  resF.data;
-   let length = this.allForms.length;
-       if((length%10)!=0){
-        this.collectionSize = length + (10-length%10);
-      }
-       else{
-        this.collectionSize = length ;
-       }
-    
+          this.allForms =  resF.data;
+          let length = this.allForms.length;
+              if((length%10)!=0){
+                this.collectionSize = length + (10-length%10);
+              }
+              else{
+                this.collectionSize = length ;
+              }
+              this.spinner.hide();
+
     })
     
   })
@@ -178,16 +185,14 @@ getAllForms(){
       addFormopen(content) {
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
           console.log(result);
-          let data = {
-            categoryId: this.addForm.get('category').value,
-            title: this.addForm.get('formName').value
-          }
-          console.log(data);
-          this.dynamicFormServise.addForm(data).subscribe((res)=>{
-            console.log(res);
-            this.getAllForms();
-            this.addForm.reset();
-          })
+        
+          this.router.navigate(['/admin/dynamicForm'],
+          {queryParams: {type:'add', categoryId: this.addForm.get('category').value, formName: this.addForm.get('formName').value}});
+          // this.dynamicFormServise.addForm(data).subscribe((res)=>{
+          //   console.log(res);
+          //   this.getAllForms();
+          //   this.addForm.reset();
+          // })
 
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
@@ -197,6 +202,16 @@ getAllForms(){
  
       }
     
+      editForm(form){
+        console.log(form);        
+        this.router.navigate(['/admin/dynamicForm'],
+        {queryParams: {type:'edit',formId:form._id,categoryId: form.category, formName: form.title }});
+      }
+      viewForm(form){
+        console.log("view",form);        
+        this.router.navigate(['/admin/dynamicForm'],
+        {queryParams: {type:'view',formId:form._id,categoryId: form.category, formName: form.title }});
+      }
       deleteopen(content,form) {
         this.category=form.category;
         this.form=form.title;
