@@ -182,7 +182,9 @@ export class DynamicFormComponent implements OnInit {
       "label": "Submit"
     }
   ];
+rows=[
 
+]
   modelFields:Array<field>=[];
   model:any = {
     name:'',

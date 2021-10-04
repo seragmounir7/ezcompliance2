@@ -262,37 +262,27 @@
                   </label>
                 </div>
               </div>
-              <!-- <div *ngIf="item.type == 'table'" class="btn-cont">
+           <div *ngIf="item.type == 'table'" class="btn-cont">
              
              <table class="table">
-              <thead>
+              <!-- <thead>
                 <tr>
-                  <th scope="col"*ngFor="let"></th>
+                  <th scope="col"*ngFor="let row of rows">
+
+                  </th>
              
                 </tr>
-              </thead>
+              </thead> -->
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+                <tr *ngFor="let row of rows">
+                  <td *ngFor="let col of row"><input type="text"> 
+                  </td>                 
+                </tr>              
               </tbody>
             </table>
-              </div> -->
+              </div>
+
+              <!-- button -->
               <div *ngIf="item.type == 'button'" class="btn-cont">
                 <input
                   type="{{ item.subtype }}"
