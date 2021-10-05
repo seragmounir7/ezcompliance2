@@ -187,12 +187,8 @@ export class DynamicFormComponent implements OnInit {
   ];
   type:string="";
   formIdRec="";
-rows=[
-["","","","",""],
-["","","","",""],
-["","","","",""],
-["","","","",""],
-]
+rows=[];
+tableIndexMap= new Map();
   modelFields:Array<field>=[];
   model:any = {
     name:'',
@@ -208,8 +204,6 @@ rows=[
   report = false;
   reports:any = [];
   formNameRecieved="";
-  categoryNameRecieved="";
-  categoryIdRecieved="";
   constructor(public router:Router,
     private route:ActivatedRoute,private spinner: NgxSpinnerService,
     private dynamicFormsService:DynamicFormsService
@@ -223,16 +217,8 @@ rows=[
       if(params['type']=='add'){
         this.type = 'add';
         this.formNameRecieved = params['formName'];
-        this.categoryIdRecieved = params['categoryId'];
-        // this.categoryNameRecieved = params['categoryId'];
-        this.dynamicFormsService.getAllCategory().subscribe(res=>{
-          res.data.forEach(element => {
-            if(params['categoryId']==element._id)
-            this.categoryNameRecieved = element.title;
-          });   
-          
-        })
-        console.log( this.formNameRecieved, this.categoryNameRecieved);
+      
+        console.log( this.formNameRecieved);
       }
      if(params['type']=='edit'){
       this.type = 'edit';
@@ -242,7 +228,6 @@ rows=[
          console.log("form=>",res);
          this.model.attributes = res.data.htmlObject;
          this.spinner.hide();
-
        })
      }
      if(params['type']=='view'){
@@ -258,7 +243,6 @@ rows=[
       
     });
 //  this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
-//  this.categoryNameRecieved =this.dynamicFormsService.categoryNameRecieved;
 
     
    
@@ -307,8 +291,9 @@ rows=[
   }
   
   onDrop( event:DndDropEvent, list?:any[] ) {
-    if( list && (event.dropEffect === "copy" || event.dropEffect === "move") ) {
-      
+    console.log("event",event);
+    
+    if( list && (event.dropEffect === "copy" || event.dropEffect === "move") ) {      
       if(event.dropEffect === "copy")
       event.data.name = event.data.type+'-'+new Date().getTime();
       let index = event.index;
@@ -316,6 +301,32 @@ rows=[
         index = list.length;
       }
       list.splice( index, 0, event.data );
+
+      // if(event.data.type =="table"){
+      //   let tempRows=[
+      //     ["","","",""],
+      //     ["","","",""],
+      //     ["","","",""],
+      //     ["","","",""],
+      //     ];
+      // this.rows.push(tempRows)
+
+      // }
+      // let tablendex=0;
+      // this.tableIndexMap.clear();
+      //     this.model.attributes.forEach((element,i )=> {
+      //   if(element.type == 'table'){
+      //     index++;
+      //     this.tableIndexMap.set(i,index);
+      //     ///this.rows.push(tempRows)
+      //   }
+      // });
+
+     
+      
+console.log("table Map",this.tableIndexMap);
+
+      
     }
   }
 
@@ -512,10 +523,8 @@ addForm(){
 
   let data={
     title:this.formNameRecieved,
-    categoryId:this.categoryIdRecieved,
     htmlObject:this.model.attributes
   };
-    console.log("form type=>",this.type);
 
   if(this.type == "add"){
     console.log("add");

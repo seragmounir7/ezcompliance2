@@ -1,67 +1,10 @@
+<div class="text-center"><h1>Forms List</h1></div>
 <div class="row">
-  <div class="col">
-    <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="addFormopen(addFormModal)">Add
+  <div class="col  ml-2 mb-2">
+    <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-left" (click)="addFormopen(addFormModal)">Add
       Form</button>
   </div>
 </div>
-<!-- <div class="mat-elevation-z8  mt-4">
-    <table mat-table [dataSource]="dataSource">
-  
-      ######### Position Column ###########
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
-  
-    ######### Name Column #########
-      <ng-container matColumnDef="formName">
-        <th mat-header-cell *matHeaderCellDef> Form Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.formName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="categories">
-        <th mat-header-cell *matHeaderCellDef> Category Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.categories}} </td>
-      </ng-container>
-  
-    
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element"> 
-            <span
-                class="material-icons mr-2"
-                style="cursor: pointer"  
-                [routerLink]="['/admin/dynamicForm']"   
-              >
-                create
-              </span>
-              <span
-              class="material-icons mr-2"
-              style="cursor: pointer"
-            >
-            visibility
-
-            </span>
-              <span
-              class="material-icons"
-              style="cursor: pointer"
-              (click)="delete(element.formName)"
-            >
-              delete
-            </span>
-
-        </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                   showFirstLastButtons 
-                   aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </div> -->
-
 
 
 <section class="content">
@@ -78,7 +21,6 @@
                 <tr>
                   <th style="width: 10%">No.</th>
                   <th style="width: 30%">Form Name</th>
-                  <th style="width: 30%"> Category Name</th>
                   <th> Action</th>
                 </tr>
               </thead>
@@ -86,7 +28,6 @@
                 <tr *ngFor="let form of allForms;let i=index">
                   <td>{{ i+1 }}</td>
                   <td>{{ form.title }}</td>
-                  <td>{{ form.category }}</td>
                   <td>
                     <button class="btn btn-info btn-sm mr-2" (click)="editForm(form)"><i
                         class="fas fa-pencil-alt mr-2"></i>Edit</button>
@@ -137,7 +78,7 @@
   </div>
   <div class="modal-body deletebody">
     <p></p>
-    <p>Do you want to delete {{form}} form of category {{category}}</p>
+    <p>Do you want to delete {{form}}</p>
   </div>
   <div class="modal-footer footer">
     <button type="button" class="btn  mr-3" style="background-color: #eeeeee" (click)="modal.dismiss('Save click')">Cancel</button>
@@ -157,19 +98,13 @@
   <div class="modal-body">
     <label for="exampleInputProjectNumber" class="form-label ml-3">Form Name</label>
     <input type="text" class="form-control inputalign" placeholder="" aria-label="" aria-describedby="basic-addon1" formControlName="formName" >
-    <label for="exampleInputProjectNumber" class="form-label ml-3">Category Name</label>
-
-    <select class="custom-select inputalign"  formControlName="category" >
-      <option [value]="null" selected hidden>Select category</option>
-      <option [value]="category._id" *ngFor="let category of categories">{{category.title}}</option>
-     
-    </select>
+  
   </div>
   <div class="modal-footer footer ">
     <button type="button" class="btn mr-3 " style="background-color: #eeeeee" (click)="modal.dismiss('Save click')">Close</button>
 
     <button type="button" class="btn btn-primary ml-3" aria-label="Close"
-      (click)="modal.close(addForm.value)" [disabled]="!(addForm.get('formName').value && addForm.get('category').value)">Submit</button>
+      (click)="modal.close(addForm.value)" [disabled]="!(addForm.get('formName').value)">Add</button>
   </div>
 </ng-container>
 

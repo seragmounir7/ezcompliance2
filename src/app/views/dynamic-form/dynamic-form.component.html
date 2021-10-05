@@ -52,7 +52,6 @@
     </div>
     <div class="col-8">
       <p class="text-center" style="font-size: 30px;">{{formNameRecieved}}</p>
-      <p class="text-center" style="font-size: 18px;">{{categoryNameRecieved}}</p>
       <!-- <div
         class="form-group"
         [style.backgroundColor]="model.theme.bgColor"
@@ -268,7 +267,7 @@
                <div class="col-11">
                 <table class="table">            
                   <tbody>
-                    <tr *ngFor="let row of rows">
+                    <tr *ngFor="let row of rows[i]">
                       <td *ngFor="let col of row"><input class="form-control" type="text"> 
                       </td>                 
                     </tr>              

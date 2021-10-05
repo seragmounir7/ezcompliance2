@@ -48,7 +48,8 @@ const routes: Routes = [
       { path: 'forms', component: FormsComponent },
       { path: 'forms', loadChildren: () => import('./views/forms/forms.module').then(m => m.FormsModule1) },
       { path: 'registration', loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationModule) },
-  
+      { path: 'landingPageInfo', loadChildren: () => import('./landing-page-info/landing-page-info.module').then(m => m.LandingPageInfoModule) },
+
       
     ],
   },

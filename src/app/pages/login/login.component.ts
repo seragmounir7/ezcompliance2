@@ -41,9 +41,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     console.log("data",data)
     if (this.loginForm.valid) {
       this.AuthService.login(data).subscribe((resData: any) =>{
+        console.log("resData",resData);
         console.log("res",resData.status);
         if (resData.status == "SUCCESS"){
-          this.router.navigate(['/admin']);
+          sessionStorage.setItem('userName', resData.data.username);   
+          sessionStorage.setItem('phoneNo', resData.data.phone);   
+                 this.router.navigate(['/admin']);
           this.toastr.success('Login Successful', '');
         }
       },(err)=>{

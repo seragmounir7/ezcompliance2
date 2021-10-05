@@ -50,17 +50,7 @@ export class CategoriesComponent implements AfterViewInit, OnInit {
    page = 1;
   pageSize = 10;
   collectionSize = 20;
-  //tutorials?: Tutorial[];
-  // categories=[
-  //   {position: 1, categories: 'Category1',  symbol: 'H'},
-  // {position: 1, categories: 'Category2',  symbol: 'H'},
-  // {position: 1, categories: 'Category3',  symbol: 'H'},
-  // {position: 1, categories: 'Category4',  symbol: 'H'},
-  // {position: 1, categories: 'Category5',  symbol: 'H'},
-  // {position: 1, categories: 'Category6',  symbol: 'H'},
-  // {position: 1, categories: 'Category7',  symbol: 'H'},
-  // {position: 1, categories: 'Category8',  symbol: 'H'},
-  // ]
+  
   categories=[];
   title = '';
   constructor(public dialog: MatDialog,

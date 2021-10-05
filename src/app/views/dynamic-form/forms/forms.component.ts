@@ -47,16 +47,12 @@ export class FormsComponent implements OnInit {
  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   closeResult: string;
-  categorie:any
    page = 1;
   pageSize = 10;
-  collectionSize = 300;
-  categories=[];
+  collectionSize = 10;
   allForms=[];
-  categorySelected="";
   formName="";
   addForm:FormGroup;
-  category="";
 form="";
 
   tutorials=[
@@ -96,11 +92,9 @@ form="";
   ngOnInit(): void {
     this.addForm=this.fb.group({
       formName:[null,Validators.required],
-      category:[null,Validators.required]
     })
     
     this.getAllForms();
-    this.getAllCategories();
     this.refreshList();
 
   }
@@ -108,47 +102,23 @@ getAllForms(){
   this.spinner.show();
   this.dynamicFormServise.getAllForm().subscribe((resF)=>{
     // this.allForms=res.data;
+    console.log("resF",resF);
     console.log("allForms",resF.data);
-    this.dynamicFormServise.getAllCategory().subscribe((resC)=>{
-     resF.data.forEach((element,index) => {
-       for(let i=0;i<resC.data.length;i++){
-         if(element.categoryId ===resC.data[i]._id){
-           resF.data[index].category = resC.data[i].title;
-           break;
-         }
-       }
-     });
-     console.log(" after data formation",resF.data);
-     
-          this.allForms =  resF.data;
-          let length = this.allForms.length;
-              if((length%10)!=0){
-                this.collectionSize = length + (10-length%10);
-              }
-              else{
-                this.collectionSize = length ;
-              }
-              this.spinner.hide();
-
-    })
-    
+    this.allForms =  resF.data;
+    let length = this.allForms.length;
+if(length){
+  if((length%10)!=0){
+    this.collectionSize = length + (10-length%10);
+  }
+  else{
+    this.collectionSize = length ;
+  }
+}
+      
+        this.spinner.hide();
   })
 }
-  getAllCategories(){
-    this.dynamicFormServise.getAllCategory().subscribe((res)=>{
-      console.log("all categories=>",res);
-      this.categories=res.data;
-      let length = res.data.length;
-      console.log("this.pageSize",this.pageSize);
-      
-      // if((length%10)!=0){
-      //   this.collectionSize = length + (10-length%10);
-      // }
-      //  else{
-      //   this.collectionSize = length ;
-      //  }
-    })
-  }
+
 
   delete(item){
     
@@ -187,7 +157,7 @@ getAllForms(){
           console.log(result);
         
           this.router.navigate(['/admin/dynamicForm'],
-          {queryParams: {type:'add', categoryId: this.addForm.get('category').value, formName: this.addForm.get('formName').value}});
+          {queryParams: {type:'add', formName: this.addForm.get('formName').value}});
           // this.dynamicFormServise.addForm(data).subscribe((res)=>{
           //   console.log(res);
           //   this.getAllForms();
@@ -205,15 +175,14 @@ getAllForms(){
       editForm(form){
         console.log(form);        
         this.router.navigate(['/admin/dynamicForm'],
-        {queryParams: {type:'edit',formId:form._id,categoryId: form.category, formName: form.title }});
+        {queryParams: {type:'edit',formId:form._id, formName: form.title }});
       }
       viewForm(form){
         console.log("view",form);        
         this.router.navigate(['/admin/dynamicForm'],
-        {queryParams: {type:'view',formId:form._id,categoryId: form.category, formName: form.title }});
+        {queryParams: {type:'view',formId:form._id, formName: form.title }});
       }
       deleteopen(content,form) {
-        this.category=form.category;
         this.form=form.title;
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;

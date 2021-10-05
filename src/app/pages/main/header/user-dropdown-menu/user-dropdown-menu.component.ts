@@ -31,9 +31,12 @@ export class UserDropdownMenuComponent implements OnInit {
     private appService: AppService,
     private router: Router
   ) {}
-
+userName="";
+phoneNo="";
   ngOnInit(): void {
     this.user = this.appService.user;
+this.userName=sessionStorage.getItem('userName');
+this.phoneNo=sessionStorage.getItem('phoneNo');
   }
 
   toggleDropdownMenu() {
@@ -57,6 +60,8 @@ export class UserDropdownMenuComponent implements OnInit {
     console.log('logout');
 
     sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('userName');
+    sessionStorage.removeItem('phoneNo');
     window.location.reload();
     // this.router.navigate['/'];
   }
