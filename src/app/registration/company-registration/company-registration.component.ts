@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 
 @Component({
   selector: 'app-company-registration',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CompanyRegistrationComponent implements OnInit {
   companyInfo: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dynamicFormsService: DynamicFormsService) {
     this.companyInfo = fb.group({
       'companyName' : [null, Validators.required],
       'ABN' : [null, Validators.required],
@@ -31,6 +32,8 @@ export class CompanyRegistrationComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.dynamicFormsService.homebarTitle.next('Register Company Form');
+
   }
   onFormSubmit(){
     console.log("this.companyInfo.value",this.companyInfo.value)

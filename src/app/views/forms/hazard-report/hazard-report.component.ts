@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 @Component({
   selector: 'app-hazard-report',
   templateUrl: './hazard-report.component.html',
@@ -17,7 +18,7 @@ export class HazardReportComponent implements OnInit {
   hazardReport: FormGroup;
  @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) {
     this.hazardReport = this.fb.group({
       siteAction: this.fb.array([]),
       employeeFulltime: ['', Validators.required],
@@ -76,7 +77,10 @@ export class HazardReportComponent implements OnInit {
       signature: ['', Validators.required],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
+
+  }
 
   public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 1,

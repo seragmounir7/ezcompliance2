@@ -90,13 +90,16 @@ form="";
     });
   }
   ngOnInit(): void {
+    sessionStorage.setItem('formId','');
+    sessionStorage.setItem('type','');
+    sessionStorage.setItem('formTitle','');
     this.addForm=this.fb.group({
       formName:[null,Validators.required],
     })
     
     this.getAllForms();
     this.refreshList();
-
+this.dynamicFormServise.homebarTitle.next('Dynamic Forms List');
   }
 getAllForms(){
   this.spinner.show();
@@ -155,9 +158,13 @@ if(length){
       addFormopen(content) {
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
           console.log(result);
-        
-          this.router.navigate(['/admin/dynamicForm'],
-          {queryParams: {type:'add', formName: this.addForm.get('formName').value}});
+
+          sessionStorage.setItem('type','add');
+          sessionStorage.setItem('formTitle',this.addForm.get('formName').value);
+        this.dynamicFormServise.formTitle = this.addForm.get('formName').value;
+        this.dynamicFormServise.formType = "add";
+          this.router.navigate(['/admin/dynamicForm'] );
+      
           // this.dynamicFormServise.addForm(data).subscribe((res)=>{
           //   console.log(res);
           //   this.getAllForms();
@@ -173,14 +180,36 @@ if(length){
       }
     
       editForm(form){
-        console.log(form);        
-        this.router.navigate(['/admin/dynamicForm'],
-        {queryParams: {type:'edit',formId:form._id, formName: form.title }});
+        console.log(form);    
+        sessionStorage.setItem('formId',form._id);
+        sessionStorage.setItem('type','edit');
+        sessionStorage.setItem('formTitle',form.title);
+        // let data={
+        //   type:'edit',formId:form._id, formName: form.title
+        // }    
+        this.dynamicFormServise.formIdEdit = form._id;
+        this.dynamicFormServise.formType = "edit";
+        this.dynamicFormServise.formTitle = form.title;
+        this.router.navigate(['/admin/dynamicForm']);
+      //   this.router.navigate(['/admin/dynamicForm'],
+        
+      //   {queryParams: {  type:'edit',formId:form._id, formName: form.title}});
       }
       viewForm(form){
-        console.log("view",form);        
+        console.log("view",form);    
+        // let data={
+        //   type:'view',formId:form._id, formName: form.title
+        // }  
+        sessionStorage.setItem('formId',form._id);
+        sessionStorage.setItem('type','view');
+        sessionStorage.setItem('formTitle',form.title);
+        this.dynamicFormServise.formIdEdit = form._id;
+        this.dynamicFormServise.formType = "view";
+        this.dynamicFormServise.formTitle = form.title;  
+        // this.router.navigate(['/admin/dynamicForm'],
+        // {queryParams: { type:'view',formId:form._id, formName: form.title}});
         this.router.navigate(['/admin/dynamicForm'],
-        {queryParams: {type:'view',formId:form._id, formName: form.title }});
+      );
       }
       deleteopen(content,form) {
         this.form=form.title;

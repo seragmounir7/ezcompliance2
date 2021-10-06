@@ -13,10 +13,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private renderer: Renderer2,
     private toastr: ToastrService,
-    private appService: AppService
+    private appService: AppService,
+    
   ) {}
 
   ngOnInit() {
+   
     this.renderer.addClass(document.querySelector('app-root'), 'register-page');
     this.registerForm = new FormGroup({
       fullName: new FormControl(null, Validators.required),

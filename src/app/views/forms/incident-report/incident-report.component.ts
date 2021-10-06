@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { format } from 'devextreme/ui/widget/ui.widget';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 
 @Component({
   selector: 'app-incident-report',
@@ -19,7 +20,7 @@ export class IncidentReportComponent implements OnInit {
   @ViewChild('signature1') signaturePad: SignaturePad;
   @ViewChild('signature2') signaturePad1: SignaturePad;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) {
     this.SiteIncident = this.fb.group({
       incidents: this.fb.array([]),
       natureOFIncidents: this.fb.array([]),
@@ -57,7 +58,10 @@ export class IncidentReportComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.dynamicFormsService.homebarTitle.next('Incident Report Form');
+
+   }
 
   selectFile(event: any) {
     this.fileData = event.target.files[0];

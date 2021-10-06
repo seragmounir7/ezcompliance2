@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +10,10 @@ export class DynamicFormsService {
   apiUrl = environment.apiUrl
   constructor(private https: HttpClient) {}
 
+  homebarTitle = new BehaviorSubject('');
+  formIdEdit= "";
+  formType= "";
+  formTitle= "";
   login(data){
     return this.https.post(this.apiUrl + "authentication/login",data).pipe(map((res :any) => {
       console.log("res.data.accessToken",res.data.accessToken)
@@ -110,6 +115,8 @@ addMyForm(formNameRecieved,categoryNameRecieved){
 this.formNameRecieved=formNameRecieved;
 this.categoryNameRecieved=categoryNameRecieved;
 }
+getFormIdType(){
 
+}
 
 }

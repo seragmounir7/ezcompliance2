@@ -72,7 +72,7 @@ export class DynamicFormComponent implements OnInit {
       "description": "Age",
       "placeholder": "Enter your age",
       "className": "form-control",
-      "value": "20",
+      "value": "",
       "min": 12,
       "max": 90
     },
@@ -94,6 +94,12 @@ export class DynamicFormComponent implements OnInit {
       "type": "textarea",
       "icon":"fa-text-width",
       "label": "Textarea" 
+    },
+    {
+      "type": "externalLink",
+      "icon":"fa-link",
+      "label": "Click here" ,
+      "linkAddr": "" ,
     },
     {
       "type": "paragraph",
@@ -173,7 +179,7 @@ export class DynamicFormComponent implements OnInit {
     },
     {
       "type": "table",
-      "icon":"fas fa-file-signature",
+      "icon":"fas fa-table",
       "label": "Table",
       "row": 3,
       "col": 3,  
@@ -210,38 +216,82 @@ tableIndexMap= new Map();
   ) { }
 
   ngOnInit() {
-    this.type="";
-    this.route
-    .queryParams
-    .subscribe(params => {
-      if(params['type']=='add'){
-        this.type = 'add';
-        this.formNameRecieved = params['formName'];
-      
-        console.log( this.formNameRecieved);
-      }
-     if(params['type']=='edit'){
+    console.log("sessionStorage.getItem('type')",sessionStorage.getItem('type'));
+    
+    this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
+
+    if(sessionStorage.getItem('type') =='add'){
+      this.type = 'add';
+    // if(this.dynamicFormsService.formType =='add'){
+      // this.formNameRecieved = this.dynamicFormsService.formTitle;
+      this.formNameRecieved = sessionStorage.getItem('formTitle');
+    }
+    if(sessionStorage.getItem('type') =='edit'){
+    // if(this.dynamicFormsService.formType =='edit'){
+      this.formNameRecieved = sessionStorage.getItem('formTitle');;
+      // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.type = 'edit';
-      this.formIdRec=params['formId'];
+      // this.formIdRec=this.dynamicFormsService.formIdEdit;
+      this.formIdRec=sessionStorage.getItem('formId');
       this.spinner.show();
-       this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
+       this.dynamicFormsService.getFormById(this.formIdRec).subscribe(res=>{
          console.log("form=>",res);
+        // this.formNameRecieved = res.data.title;
          this.model.attributes = res.data.htmlObject;
          this.spinner.hide();
        })
-     }
-     if(params['type']=='view'){
+    }
+    if(sessionStorage.getItem('type')=='view'){
+      this.report=false;
+    // if(this.dynamicFormsService.formType =='view'){
+      // this.formNameRecieved = this.dynamicFormsService.formTitle;
+      this.formNameRecieved = sessionStorage.getItem('formTitle');
       this.type = 'view';
+      // this.formIdRec=this.dynamicFormsService.formIdEdit;
+      this.formIdRec= sessionStorage.getItem('formId');
       this.spinner.show();
-       this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
+       this.dynamicFormsService.getFormById(this.formIdRec).subscribe(res=>{
          console.log("form=>",res);
-         this.report = true;
+         this.formNameRecieved = res.data.title;
          this.model.attributes = res.data.htmlObject;
          this.spinner.hide();
        })
-     }
+    }
+    
+    // this.route
+    // .queryParams
+    // .subscribe(params => {
+    //   console.log("params",params['data'].type);
       
-    });
+    //   if(params['type']=='add'){
+    //     this.type = 'add';
+    //     this.formNameRecieved = params['formName'];
+      
+    //     console.log( this.formNameRecieved);
+    //   }
+    //  if(params['type']=='edit'){
+    //   this.type = 'edit';
+    //   this.formIdRec=params['formId'];
+    //   this.spinner.show();
+    //    this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
+    //      console.log("form=>",res);
+    //      this.formNameRecieved = res.data.title;
+    //      this.model.attributes = res.data.htmlObject;
+    //      this.spinner.hide();
+    //    })
+    //  }
+    //  if(params['type']=='view'){
+    //   this.type = 'view';
+    //   this.spinner.show();
+    //    this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
+    //      console.log("form=>",res);
+    //      this.report = true;
+    //      this.model.attributes = res.data.htmlObject;
+    //      this.spinner.hide();
+    //    })
+    //  }
+      
+    // });
 //  this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
 
     
@@ -292,6 +342,7 @@ tableIndexMap= new Map();
   
   onDrop( event:DndDropEvent, list?:any[] ) {
     console.log("event",event);
+    console.log("list",list);
     
     if( list && (event.dropEffect === "copy" || event.dropEffect === "move") ) {      
       if(event.dropEffect === "copy")
@@ -302,13 +353,41 @@ tableIndexMap= new Map();
       }
       list.splice( index, 0, event.data );
 
+    
+      console.log("event.data.type ",event.data.type  );
+
+      if(event.data.type == 'table'){
+        let tablendex=0;
+        this.tableIndexMap.clear();
+
+      this.model.attributes.forEach((element,i) => {
+        console.log(element.type );
+
+        if(element.type == 'table'){
+          console.log(element.type );
+          
+          this.tableIndexMap.set(i,tablendex);
+          tablendex++;
+        }
+      });
+      
+      let tempRow=[
+        ["","","",""],
+        ["","","",""],
+        ["","","",""],
+        ["","","",""],
+        ];
+
+    this.rows.splice( this.tableIndexMap.get(event.index),0,tempRow);
+
+
+    
+    }
+
+            console.log(this.rows);
+       
       // if(event.data.type =="table"){
-      //   let tempRows=[
-      //     ["","","",""],
-      //     ["","","",""],
-      //     ["","","",""],
-      //     ["","","",""],
-      //     ];
+       
       // this.rows.push(tempRows)
 
       // }
@@ -351,12 +430,24 @@ console.log("item",item);
       confirmButtonText: 'Yes, remove!'
     }).then((result) => {
       if (result.value) {
+        console.log("this.model.attributes",this.model.attributes);
+        console.log("this.model.attributes[i]",this.model.attributes[i]);
+        
+        if(this.model.attributes[i].type == 'table'){
+          console.log("table found",i);   
+         let index = this.tableIndexMap.get(i);
+
+          this.rows.splice(index,1)      
+        }
         this.model.attributes.splice(i,1);
+
+        // let index = this.tableIndexMap.get(i);
+        // this.rows.splice();
+
       }
     });
 
     console.log(i);
-    
   }
 
   updateForm(){
@@ -500,23 +591,45 @@ console.log("field.regex",field.regex + "field.label",field.label+"index",index)
 
   ////table//add row column
   addCol(i){
-    console.log("add col",i)
-   this.rows.forEach(row=>{
+    console.log(this.tableIndexMap);
+    
+    console.log("add col",i);
+    let index = this.tableIndexMap.get(i);
+    let tempRow = this.rows[index];
+    tempRow.forEach(row=>{
    row.push("");
    }) 
   }
 removeCol(i){
-  console.log("remove col",i)
-  this.rows.forEach(row=>{
-    row.pop();
-    }) 
+  let index = this.tableIndexMap.get(i);
+
+  console.log("remove col",i);
+  let tempRow = this.rows[index];
+
+  if(tempRow[0].length>1){
+    tempRow.forEach(row=>{
+      row.pop();
+      }) 
+  }
+ 
 }
 addRow(i){
   console.log("add row",i)
-
+  let index = this.tableIndexMap.get(i);
+  let tempRow = this.rows[index];
+ 
+ let arr=[];
+for(let i=0;i< tempRow[0].length;i++){
+  arr.push("");
+}
+this.rows[index].push(arr)
 }
 removeRow(i){
-  console.log("remove row",i)
+  console.log("remove row",i);
+  let index = this.tableIndexMap.get(i);
+  if(this.rows[index].length>1)
+  this.rows[index].pop();
+ 
 }
 addForm(){
   console.log("formAdded succesfully=>",this.model.attributes);

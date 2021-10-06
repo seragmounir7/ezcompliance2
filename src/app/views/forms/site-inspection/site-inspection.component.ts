@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+
 @Component({
   selector: 'app-site-inspection',
   templateUrl: './site-inspection.component.html',
@@ -13,7 +15,7 @@ export class SiteInspectionComponent implements OnInit {
   itemvalue:any
   item_values: any = ["In Progress", "Completed", "Closed"];
   
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private dynamicFormsService:DynamicFormsService ) {
     this.sidePreview = this.fb.group({
       Hazard: ['', Validators.required],
       documentation: ['', Validators.required],
@@ -76,7 +78,8 @@ export class SiteInspectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.dynamicFormsService.homebarTitle.next('Site Inspection Form');
+
   }
   addAction() {
     {

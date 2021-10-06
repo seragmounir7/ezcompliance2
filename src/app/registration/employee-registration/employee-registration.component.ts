@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 
 @Component({
   selector: 'app-employee-registration',
@@ -11,7 +12,7 @@ export class EmployeeRegistrationComponent implements OnInit {
   PPERegister=false;
   LicenceInfo=false;
   profile=true;
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private dynamicFormsService: DynamicFormsService) { 
     this.empDetails=this.fb.group({
 
       profTitie:['', Validators.required],
@@ -49,7 +50,9 @@ export class EmployeeRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addFiled()
+    this.addFiled();
+    this.dynamicFormsService.homebarTitle.next('Employee Registration');
+
   }
 
 

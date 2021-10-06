@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup , FormArray } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+
 @Component({
   selector: 'app-risk-assessment-swms',
   templateUrl: './risk-assessment-swms.component.html',
@@ -138,7 +140,7 @@ PPEselection2=[
 
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) { 
     
     this.riskAssessmentFb=this.fb.group({
       SWMSTab: this.fb.array([]),
@@ -222,6 +224,8 @@ PPEselection2=[
 
  
   ngOnInit(): void {
+    this.dynamicFormsService.homebarTitle.next('Risk Assesment Form');
+
   }
   
 

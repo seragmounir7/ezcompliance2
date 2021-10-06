@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 
 @Component({
   selector: 'app-toolbox-talk',
@@ -13,7 +14,7 @@ export class ToolboxTalkComponent implements OnInit {
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) {
     this.toolBox = this.fb.group({
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),
@@ -25,6 +26,7 @@ export class ToolboxTalkComponent implements OnInit {
     this.addIssues();
     this.addCorrectAct();
     this.addAttendee();
+    this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
   }
   addIssues() {
     this.issues().push(this.issuesForm());

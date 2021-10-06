@@ -7,6 +7,7 @@ export class field{
     required?:any;
     regex?:any;
     errorText?:any;
+    linkAddr?:any;
     label?:any;
     row?:any;
     col?:any;
