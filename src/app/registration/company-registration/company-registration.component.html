@@ -1,3 +1,4 @@
+
 <!-- <div class="container">
 
     <form class="px-4 py-4" [formGroup]="companyInfo" (ngSubmit)="onFormSubmit()">
@@ -286,7 +287,7 @@
           <div class="col-md-4">
             <div class=" my-3">
               <p for="formFile" class="form-Label">Upload Logo</p>
-              <input class="form-control" formControlName="file" type="file" id="formFile" />
+              <input class="form-control"   formControlName="file" type="file" id="formFile" (change)="browser($event)"/>
             </div>
           </div>
         </div>

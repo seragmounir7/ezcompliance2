@@ -242,7 +242,7 @@ tableIndexMap= new Map();
        })
     }
     if(sessionStorage.getItem('type')=='view'){
-      this.report=false;
+      this.report=true;
     // if(this.dynamicFormsService.formType =='view'){
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.formNameRecieved = sessionStorage.getItem('formTitle');

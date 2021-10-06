@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { CompanyRegistrationService } from 'src/app/utils/services/company-registration.service';
 
 @Component({
   selector: 'app-company-registration',
@@ -9,7 +9,9 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 })
 export class CompanyRegistrationComponent implements OnInit {
   companyInfo: FormGroup;
-  constructor(private fb: FormBuilder, private dynamicFormsService: DynamicFormsService) {
+  selectedImage: any;
+  constructor(private fb: FormBuilder, private company:CompanyRegistrationService,
+              ) {
     this.companyInfo = fb.group({
       'companyName' : [null, Validators.required],
       'ABN' : [null, Validators.required],
@@ -28,14 +30,41 @@ export class CompanyRegistrationComponent implements OnInit {
       'postalSuburb' : [null, Validators.required],
       'postalState' : [null, Validators.required],
       'postalPostcode' : [null, Validators.required],
+      'file': [null, Validators.required],
     })
    }
 
   ngOnInit(): void {
-    this.dynamicFormsService.homebarTitle.next('Register Company Form');
-
   }
+
+  browser(event) {
+    console.log("event=>",event);
+    
+    const files = event.target.files[0];
+    console.log("event.target=>",event.target.files[0]);
+    const formdata= new FormData()
+    formdata.append("",files) 
+    console.log(files);
+    
+    this.company
+      .upload(formdata)
+      .subscribe((res) => {
+        console.log("AddProductComponent -> browser -> res", res);
+       
+        this.selectedImage = res.files;
+       // this.HeaderInformation.get("uploadImage").patchValue(this.selectedImage)
+        console.log(
+          "AddProductComponent -> browse -> this.selectedImage",
+          this.selectedImage
+        );
+      })
+    } 
   onFormSubmit(){
+    // this.companyInfo.controls["file"].setValue(this.selectedImage);
     console.log("this.companyInfo.value",this.companyInfo.value)
+    this.company.addCompanyInfo(this.companyInfo.value).subscribe((data)=>{
+console.log("data=>", data);
+this.browser(event);
+    })
   }
 }
