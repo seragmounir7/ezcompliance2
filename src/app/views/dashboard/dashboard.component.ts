@@ -29,9 +29,10 @@ export class DashboardComponent implements OnInit {
       backgroundColor: [
         // 'rgba(110, 114, 20, 1)',
         // 'rgba(118, 183, 172, 1)',
-        'rgba(128, 128, 128, 0.8)',
+        'rgba(128, 128, 128, 0.8)',//near miss
         'rgba(0, 0, 128, 0.8)',
-        'rgba(150, 0, 0, 1)',
+        'rgba(199,20,55,1)',//hazard
+        
       ],
     },
   ];
@@ -46,10 +47,13 @@ export class DashboardComponent implements OnInit {
   // ];
   public horiztChartColor: Color[] = [
     { backgroundColor: [
-      'rgba(200, 0, 0, 0.4)',
-      'rgba(200, 0, 0, 0.6)',
-      'rgba(200, 0, 0, 0.8)',
-      'rgba(200, 0, 0, 1)',
+      // 'rgba(200, 0, 0, 0.4)',
+      // 'rgba(200, 0, 0, 0.6)',
+      // 'rgba(200, 0, 0, 0.8)',
+      'rgba(199,20,55,0.4)',
+      'rgba(199,20,55,0.6)',
+      'rgba(199,20,55,0.8)',
+      'rgba(199,20,55,1)',
      
     ]},
   
@@ -57,7 +61,7 @@ export class DashboardComponent implements OnInit {
   public barChartColor: Color[] = [
     { backgroundColor:'rgba(128, 128, 128, 0.8)'},
     { backgroundColor: 'rgba(0, 0, 128, 0.8)',},
-    { backgroundColor: 'rgba(150, 0, 0, 1)'},
+    { backgroundColor: 'rgba(199,20,55,1)'},
   ]
 
     

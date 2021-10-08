@@ -29,6 +29,12 @@ export class DynamicFormComponent implements OnInit {
   success = false;
   show=false;
   fieldModels:Array<field>=[
+   
+    {
+      "type": "blank",
+      "icon": "fa-box",
+      "label": "Blank",   
+    },
     {
       "type": "text",
       "icon": "fa-font",
@@ -177,13 +183,13 @@ export class DynamicFormComponent implements OnInit {
      // "className": "form-control",
      // "subtype": "file"
     },
-    {
-      "type": "table",
-      "icon":"fas fa-table",
-      "label": "Table",
-      "row": 3,
-      "col": 3,  
-    },
+    // {
+    //   "type": "table",
+    //   "icon":"fas fa-table",
+    //   "label": "Table",
+    //   "row": 3,
+    //   "col": 3,  
+    // },
     {
       "type": "button",
       "icon":"fa-paper-plane",
@@ -195,18 +201,63 @@ export class DynamicFormComponent implements OnInit {
   formIdRec="";
 rows=[];
 tableIndexMap= new Map();
-  modelFields:Array<field>=[];
-  model:any = {
-    name:'',
-    description:'',
-    theme:{
-      bgColor:"#ffffff",
-      textColor:"#555555",
-      bannerImage:""
+  modelFields0:Array<field>=[];
+  modelFields1:Array<field>=[];
+  modelFields2:Array<field>=[];
+  modelFields3:Array<field>=[];
+  modelFields4:Array<field>=[];
+  model:any =[
+    {
+      name:'',
+      description:'',
+      theme:{
+        bgColor:"#ffffff",
+        textColor:"#555555",
+        bannerImage:""
+      },
+      attributes:this.modelFields0
     },
-    attributes:this.modelFields
-  };
-
+    {
+      name:'',
+      description:'',
+      theme:{
+        bgColor:"#ffffff",
+        textColor:"#555555",
+        bannerImage:""
+      },
+      attributes:this.modelFields1
+    },
+    {
+      name:'',
+      description:'',
+      theme:{
+        bgColor:"#ffffff",
+        textColor:"#555555",
+        bannerImage:""
+      },
+      attributes:this.modelFields2
+    },
+    {
+      name:'',
+      description:'',
+      theme:{
+        bgColor:"#ffffff",
+        textColor:"#555555",
+        bannerImage:""
+      },
+      attributes:this.modelFields3
+    },
+    {
+      name:'',
+      description:'',
+      theme:{
+        bgColor:"#ffffff",
+        textColor:"#555555",
+        bannerImage:""
+      },
+      attributes:this.modelFields4
+    }
+  ]
   report = false;
   reports:any = [];
   formNameRecieved="";
@@ -417,7 +468,7 @@ console.log("table Map",this.tableIndexMap);
     console.log("delete");
     
   }
-  removeField(i,item){
+  removeField(j,i,item){
 console.log("item",item);
 
     Swal.fire({
@@ -430,16 +481,15 @@ console.log("item",item);
       confirmButtonText: 'Yes, remove!'
     }).then((result) => {
       if (result.value) {
-        console.log("this.model.attributes",this.model.attributes);
-        console.log("this.model.attributes[i]",this.model.attributes[i]);
+        console.log("this.model.attributes[i]",this.model[j].attributes[i]);
         
-        if(this.model.attributes[i].type == 'table'){
+        if(this.model[j].attributes[i].type == 'table'){
           console.log("table found",i);   
          let index = this.tableIndexMap.get(i);
 
           this.rows.splice(index,1)      
         }
-        this.model.attributes.splice(i,1);
+        this.model[j].attributes.splice(i,1);
 
         // let index = this.tableIndexMap.get(i);
         // this.rows.splice();
