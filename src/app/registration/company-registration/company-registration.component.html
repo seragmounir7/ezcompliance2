@@ -1,4 +1,5 @@
-<div class="container">
+<!-- <div class="container">
+
     <form class="px-4 py-4" [formGroup]="companyInfo" (ngSubmit)="onFormSubmit()">
         <div class="row">
          <div class="col-12">
@@ -146,4 +147,271 @@
           </div>
           </div>
 </form>
+</div> -->
+<div class="container card p-5">
+  <form class="px-4 py-4" [formGroup]="companyInfo" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center"><p class="title">Company Information</p></h2>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputFullname" class="form-Label">Company Name</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="companyName"
+            id="exampleInputFullname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputSurname" class="form-Label">ABN</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="ABN"
+            id="exampleInputSurname"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputEmail1" class="form-Label">ACN</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="ACN"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputPhone" class="form-Label">Website</p>
+          <input
+            type="email"
+            class="form-control outline"
+            formControlName="website"
+            id="exampleInputPhone"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputDepartment" class="form-Label">Email</p>
+          <input
+            type="department"
+            class="form-control outline"
+            formControlName="email"
+            id="exampleInputDepartment"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputPosition" class="form-Label">Phone</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="phone"
+            id="exampleInputPosition"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputProjectNumber" class="form-Label">
+            Customer Type
+          </p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="customerType"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputProjectNumber" class="form-Label">
+            Business license
+          </p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="businessLicense"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-12">
+        <h3><p class="subtitel">Company Address</p></h3>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputProjectNumber" class="form-Label">
+            Street Address
+          </p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="streetAddress"
+            id="exampleInputStreetAddress"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <p for="exampleInputProjectNumber" class="form-Label">Suburb</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="suburb"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <p for="exampleInputProjectNumber" class="form-Label">State</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="state"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="mb-3">
+          <p for="exampleInputProjectNumber" class="form-Label">Postcode</p>
+          <input
+            type="text"
+            class="form-control outline"
+            formControlName="postcode"
+            id="exampleInputProjectNumber"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-12">
+        <h3><p class="subtitel">Street Address</p></h3>
+      </div>
+      <div class="mt-2 col-4">
+        <p>
+          <input
+            type="checkbox"
+            class="mr-1"
+            value="no"
+            formControlName="sameAsStreet"
+          />Same as Street
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <p for="exampleInputProjectNumber" class="form-Label">PO Box</p>
+            <input
+              type="email"
+              class="form-control outline"
+              formControlName="PObox"
+              id="exampleInputStreetAddress"
+              aria-describedby="emailHelp"
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <p for="exampleInputProjectNumber" class="form-Label">
+              Postal Suburb
+            </p>
+            <input
+              type="text"
+              class="form-control outline"
+              formControlName="postalSuburb"
+              id="exampleInputProjectNumber"
+              aria-describedby="emailHelp"
+            />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="mb-3">
+            <p for="exampleInputProjectNumber" class="form-Label">
+              Postal State
+            </p>
+            <input
+              type="text"
+              class="form-control outline"
+              formControlName="postalState"
+              id="exampleInputProjectNumber"
+              aria-describedby="emailHelp"
+            />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="mb-3">
+            <p for="exampleInputProjectNumber" class="form-Label">
+              Postal Postcode
+            </p>
+            <input
+              type="text"
+              class="form-control outline"
+              formControlName="postalPostcode"
+              id="exampleInputProjectNumber"
+              aria-describedby="emailHelp"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-12">
+            <h3><p class="subtitel">Logo and Print Information</p></h3>
+          </div>
+          <div class="col-10 offset-1 col-3 mt-1">
+            <img src="../../../assets/img/whsLogo.png" alt="" width="100%" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="my-3">
+          <p for="formFile" class="form-Label">Upload Logo</p>
+          <input
+            class="form-control"
+            formControlName="file"
+            type="file"
+            id="formFile"
+            (change)="browser($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-10 col-2">
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+      </div>
+    </div>
+  </form>
 </div>

@@ -737,7 +737,7 @@ ul li a:hover::after {
 }
 .slick-slide img {
   display: block;
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 .slick-slide.slick-loading img {
   display: none;
@@ -1107,7 +1107,7 @@ section.customer-logos.slider.imgtxt {
 .testimonials {
   .owl-carousel .item {
     display: inline-block !important;
-    width: 30% !important;
+    width: 100% !important;
     padding: 5% 15px !important;
     opacity: 1 !important;
 
@@ -1283,4 +1283,20 @@ span.currentYear {
 .twoBlk input.inrbtnqus {
   height: 40px !important;
   border-radius: 0 6px 6px 0;
+}
+.owl-carousel {
+  display: block !important;
+  width: 100%;
+  z-index: 1;
+}
+
+.foottext p {
+  text-align: left !important;
+}
+
+@media only screen and (max-width: 991px) {
+  .btnfoot {
+    border-radius: 15px 0 0 15px;
+    width: 61%;
+  }
 }

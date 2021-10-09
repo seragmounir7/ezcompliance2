@@ -1,126 +1,166 @@
-body{
+body {
   font-size: 14px;
 }
 
-.h5, h5 {
+.h5,
+h5 {
   font-size: 14px;
 }
 
-.clearfix{clear:both;}
-.pointer{cursor: pointer;}
-.ucfirst{text-transform: capitalize;}
-.min300{min-height:500px}
-.app-box{
+.clearfix {
+  clear: both;
+}
+.pointer {
+  cursor: pointer;
+}
+.ucfirst {
+  text-transform: capitalize;
+}
+.min300 {
+  min-height: 500px;
+}
+.app-box {
   padding: 10px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
   height: 230px;
   background: #b5e8d4;
   overflow: hidden;
   box-shadow: 1px 1px 4px #ccc;
 }
-.app-box:hover{
+.app-box:hover {
   box-shadow: 1px 1px 4px #999;
 }
-.app-box .remove{
+.app-box .remove {
   position: absolute;
   right: 21px;
   top: 0px;
   color: #545454;
-  display:none;
+  display: none;
 }
-.app-box:hover .remove{
-  display:block;
+.app-box:hover .remove {
+  display: block;
 }
-.inline-btn{
+.inline-btn {
   background: #00b970;
   padding: 1px 5px;
   color: white;
   display: inline-block;
   margin-bottom: 5px;
 }
-.box{
+.box {
   padding: 10px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   overflow: auto;
   box-shadow: 1px 1px 4px #ddd;
 }
-.form-group .form-control{
-  font-size:inherit;
+.form-group .form-control {
+  font-size: inherit;
   background-color: inherit;
 }
 
-.dndDropArea{
-  padding: 10px;
+.dndDropArea {
+  padding: 5px;
   /* border: dotted #ddd 2px; */
 }
 
-.dndDropArea.empty{
-  min-height:500px;
+.dndDropArea.empty {
+  min-height: 500px;
   border: dotted #ddd 2px;
 }
 
-.field{
-  padding:5px;
-  margin-bottom:10px;
+.field {
+  padding: 5px;
+  margin-bottom: 10px;
   position: relative;
 }
-.field:hover{
+.field:hover {
   box-shadow: 1px 1px 4px #ddd;
 }
-.toggle-Wrapper{
+.toggle-Wrapper {
   padding: 15px;
   background: #d6d6d629;
 }
-.dndHandle{
+.dndHandle {
   cursor: pointer;
   color: #999;
 }
-.dndDraggingSource{
-  opacity:0.3;
+.dndDraggingSource {
+  opacity: 0.3;
 }
-.dndPlaceholder{
-  background: rgb(206, 238, 238); border-radius: 2px; padding: 20px;
-  margin-bottom:10px;
+.dndPlaceholder {
+  background: rgb(206, 238, 238);
+  border-radius: 2px;
+  padding: 20px;
+  margin-bottom: 10px;
 }
-.field .fa{
+.field .fa {
   width: 30px;
-  height: 30px;
+  height: 20px;
   text-align: center;
   font-size: 18px;
   vertical-align: middle;
-
 }
-.red{color:#d9534f}
-.fa-trash{color:#d9534f}
-.marginT60{
-  margin-top:60px;
+.red {
+  color: #d9534f;
 }
-
-.color-red{color:red;}
-.report-block{
-  padding:10px;
-  background:#f8f8f8;
-  margin-bottom:20px;
+.fa-trash {
+  color: #d9534f;
 }
-.report-block .row:nth-child(even){
-  background:#fff;
+.marginT60 {
+  margin-top: 60px;
 }
 
-.ftheme{
-  width:100%;
+.color-red {
+  color: red;
+}
+.report-block {
+  padding: 10px;
+  background: #f8f8f8;
+  margin-bottom: 20px;
+}
+.report-block .row:nth-child(even) {
+  background: #fff;
 }
 
-.dndDropArea .field .fa{
-  opacity:0;
-}
-.dndDropArea .field:hover .fa{
-  opacity:1;
+.ftheme {
+  width: 100%;
 }
 
-.colorpick{
+.dndDropArea .field .fa {
+  opacity: 0;
+}
+.dndDropArea .field:hover .fa {
+  opacity: 1;
+}
+
+.colorpick {
   height: 25px;
   background: white;
   border: none;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+input[type='file'] {
+  height: 10%;
+  padding: 0%;
+}
+
+.myLabel {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  word-break: break-word;
+  font-family: Inter, sans-serif;
+  width: 100%;
+  margin-left: 2px;
+  margin-bottom: 14px;
+}
+label {
+  font-weight: 520 !important;
+}

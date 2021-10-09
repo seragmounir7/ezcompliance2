@@ -1,38 +1,69 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CompanyRegistrationService } from 'src/app/utils/services/company-registration.service';
 
 @Component({
   selector: 'app-company-registration',
   templateUrl: './company-registration.component.html',
-  styleUrls: ['./company-registration.component.scss']
+  styleUrls: ['./company-registration.component.scss'],
 })
 export class CompanyRegistrationComponent implements OnInit {
   companyInfo: FormGroup;
-  constructor(private fb: FormBuilder) {
+  selectedImage: any;
+  constructor(
+    private fb: FormBuilder,
+    private company: CompanyRegistrationService
+  ) {
     this.companyInfo = fb.group({
-      'companyName' : [null, Validators.required],
-      'ABN' : [null, Validators.required],
-      'ACN' : [null, Validators.required],
-      'website' : [null, Validators.required],
-      'email' : [null, Validators.required],
-      'phone' : [null, Validators.required],
-      'customerType' : [null, Validators.required],
-      'businessLicense' : [null, Validators.required],
-      'streetAddress' : [null, Validators.required],
-      'suburb' : [null, Validators.required],
-      'state' : [null, Validators.required],
-      'postcode' : [null, Validators.required],
-      'sameAsStreet' : [null, Validators.required],
-      'PObox' : [null, Validators.required],
-      'postalSuburb' : [null, Validators.required],
-      'postalState' : [null, Validators.required],
-      'postalPostcode' : [null, Validators.required],
-    })
-   }
-
-  ngOnInit(): void {
+      companyName: [null, Validators.required],
+      ABN: [null, Validators.required],
+      ACN: [null, Validators.required],
+      website: [null, Validators.required],
+      email: [null, Validators.required],
+      phone: [null, Validators.required],
+      customerType: [null, Validators.required],
+      businessLicense: [null, Validators.required],
+      streetAddress: [null, Validators.required],
+      suburb: [null, Validators.required],
+      state: [null, Validators.required],
+      postcode: [null, Validators.required],
+      sameAsStreet: [null, Validators.required],
+      PObox: [null, Validators.required],
+      postalSuburb: [null, Validators.required],
+      postalState: [null, Validators.required],
+      postalPostcode: [null, Validators.required],
+      file: [null, Validators.required],
+    });
   }
-  onFormSubmit(){
-    console.log("this.companyInfo.value",this.companyInfo.value)
+
+  ngOnInit(): void {}
+
+  browser(event) {
+    console.log('event=>', event);
+
+    const files = event.target.files[0];
+    console.log('event.target=>', event.target.files[0]);
+    const formdata = new FormData();
+    formdata.append('', files);
+    console.log(files);
+
+    this.company.upload(formdata).subscribe((res) => {
+      console.log('AddProductComponent -> browser -> res', res);
+
+      this.selectedImage = res.files;
+      // this.HeaderInformation.get("uploadImage").patchValue(this.selectedImage)
+      console.log(
+        'AddProductComponent -> browse -> this.selectedImage',
+        this.selectedImage
+      );
+    });
+  }
+  onFormSubmit() {
+    // this.companyInfo.controls["file"].setValue(this.selectedImage);
+    console.log('this.companyInfo.value', this.companyInfo.value);
+    this.company.addCompanyInfo(this.companyInfo.value).subscribe((data) => {
+      console.log('data=>', data);
+      this.browser(event);
+    });
   }
 }

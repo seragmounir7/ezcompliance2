@@ -77,7 +77,7 @@
   <div class="clearfix"></div>
   <div class="row info-box-set m-b-30 m-t-30">
     <div class="col-lg-2 offset-1 servimg">
-      <img src="assets/img/infoBox-1.jpg" alt="Box-image" />
+      <img src="assets/img/service.jpg" alt="Box-image" />
     </div>
     <div class="col-lg-9 servtxt">
       <h4 class="txt-theme-highlight">Smart healthy and sefety Software</h4>
@@ -94,7 +94,7 @@
   </div>
   <div class="row servtp info-box-set m-b-30">
     <div class="col-lg-2 offset-1 servimg">
-      <img src="assets/img/infoBox-2.jpg" alt="Box-image" />
+      <img src="assets/img/skills.png" alt="Box-image" />
     </div>
     <div class="col-lg-9 servtxt">
       <h4 class="txt-theme-highlight">get started</h4>
@@ -129,7 +129,7 @@
     est minus?
   </p>
   <section class="customer-logos slider imgtxt">
-    <div class="slide">
+    <!-- <div class="slide">
       <img src="assets/img/energy.jpg " width="50%" height="40%" />
       <p>Energy Managment</p>
     </div>
@@ -144,7 +144,22 @@
     <div class="slide">
       <img src="assets/img/riske.jpg" width="50%" height="40%" />
       <p>Risk Managment</p>
-    </div>
+    </div> -->
+
+    <ngx-slick-carousel
+      class="carousel"
+      #slickModal="slick-carousel"
+      [config]="slideConfig"
+      (init)="slickInit($event)"
+      (breakpoint)="breakpoint($event)"
+      (afterChange)="afterChange($event)"
+      (beforeChange)="beforeChange($event)"
+    >
+      <div ngxSlickItem *ngFor="let slide of images" class="slide">
+        <img src="{{ slide.path }}" alt="" width="100%" />
+        <p>{{ slide.title }}</p>
+      </div>
+    </ngx-slick-carousel>
   </section>
 </section>
 <!-- our patner-------------------------------------- -->
@@ -313,7 +328,34 @@
       ex est minus?
     </p>
     <div class="owl-carousel owl-theme test m-t-30">
-      <div class="item first prev">
+      <ngx-slick-carousel
+        class="carousel"
+        #slickModal="slick-carousel"
+        [config]="slideConfig2"
+        (init)="slickInit($event)"
+        (breakpoint)="breakpoint($event)"
+        (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)"
+      >
+        <div ngxSlickItem *ngFor="let slide of image2" class="slide">
+          <div class="item first prev">
+            <div class="card border-0 py-0">
+              <div class="midway"></div>
+              <div class="setimg">
+                <img src="{{ slide.path }}" class="img-fluid profile-pic" />
+              </div>
+              <div class="wrote">
+                <h6 class="mb-3 mt-5">{{ slide.name }}</h6>
+                <p class="hedunder txt-main-sub f-16">
+                  {{ slide.title }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+
+      <!-- <div class="item first prev">
         <div class="card border-0 py-0">
           <div class="midway"></div>
           <div class="setimg">
@@ -363,7 +405,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -371,7 +413,7 @@
 <!-- footer section-------------------------------------- -->
 <div class="clearfix"></div>
 <section class="container-fluid qukhead footbg m-b-30 m-t-30">
-  <div class="row">
+  <div class="row container">
     <div class="col-lg-6 foottext">
       <p>we help you</p>
       <p>Get Started</p>

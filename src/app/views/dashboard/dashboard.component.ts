@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 interface marker {
   lat: number;
   lng: number;
@@ -29,9 +29,9 @@ export class DashboardComponent implements OnInit {
       backgroundColor: [
         // 'rgba(110, 114, 20, 1)',
         // 'rgba(118, 183, 172, 1)',
-        'rgba(128, 128, 128, 0.8)',
+        'rgba(128, 128, 128, 0.8)', //near miss
         'rgba(0, 0, 128, 0.8)',
-        'rgba(150, 0, 0, 1)',
+        'rgba(199,20,55,1)', //hazard
       ],
     },
   ];
@@ -40,29 +40,29 @@ export class DashboardComponent implements OnInit {
   //     backgroundColor: [
   //       // 'rgba(110, 114, 20, 1)',
   //       'rgba(118, 183, 172, 1)',
-       
+
   //     ],
   //   },
   // ];
   public horiztChartColor: Color[] = [
-    { backgroundColor: [
-      'rgba(200, 0, 0, 0.4)',
-      'rgba(200, 0, 0, 0.6)',
-      'rgba(200, 0, 0, 0.8)',
-      'rgba(200, 0, 0, 1)',
-     
-    ]},
-  
-  ]
+    {
+      backgroundColor: [
+        // 'rgba(200, 0, 0, 0.4)',
+        // 'rgba(200, 0, 0, 0.6)',
+        // 'rgba(200, 0, 0, 0.8)',
+        'rgba(199,20,55,0.4)',
+        'rgba(199,20,55,0.6)',
+        'rgba(199,20,55,0.8)',
+        'rgba(199,20,55,1)',
+      ],
+    },
+  ];
   public barChartColor: Color[] = [
-    { backgroundColor:'rgba(128, 128, 128, 0.8)'},
-    { backgroundColor: 'rgba(0, 0, 128, 0.8)',},
-    { backgroundColor: 'rgba(150, 0, 0, 1)'},
-  ]
+    { backgroundColor: 'rgba(128, 128, 128, 0.8)' },
+    { backgroundColor: 'rgba(0, 0, 128, 0.8)' },
+    { backgroundColor: 'rgba(199,20,55,1)' },
+  ];
 
-    
-  
-  
   // public barChartColor=[
   //   {
   //    backgroundColor: [
@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     { data: [55, 59, 80, 81, 56, 55, 40], label: 'Near miss' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label:  'Incident'},
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Incident' },
     { data: [18, 28, 20, 49, 36, 37, 50], label: 'Hazard' },
   ];
 
@@ -100,7 +100,7 @@ export class DashboardComponent implements OnInit {
   public barChartLegendH = true;
 
   public barChartDataH: ChartDataSets[] = [
-    { data: [70,15 ,10, 5], label: 'Safety Consequences', stack: 'a' },
+    { data: [70, 15, 10, 5], label: 'Safety Consequences', stack: 'a' },
     // { data: [1, 2, 3], label: 'Accepted', stack: 'a' },
     // { data: [1, 2, 3], label: 'Open', stack: 'a' },
     // { data: [1, 2, 3], label: 'In Progress', stack: 'a' },
@@ -158,12 +158,19 @@ export class DashboardComponent implements OnInit {
       draggable: true,
     },
   ];
-  constructor() {}
+  constructor(private spinner: NgxSpinnerService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
+  }
+
   public chartOptions: any = {
     labels: {
-      render: 'percentage'      
-    }
-  }
+      render: 'percentage',
+    },
+  };
 }

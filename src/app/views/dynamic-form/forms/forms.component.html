@@ -1,0 +1,163 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center"><h1>Forms List</h1></div>
+        <div class="row">
+          <div class="col ml-2 mb-2">
+            <button
+              type="button"
+              class="btn btn-outline-primary mt-1 mr-2 float-left"
+              (click)="addFormopen(addFormModal)"
+            >
+              Add Form
+            </button>
+          </div>
+        </div>
+        <!-- Default box -->
+        <div class="cards">
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                  <th style="width: 10%">No.</th>
+                  <th style="width: 30%">Form Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let form of allForms; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ form.title }}</td>
+                  <td>
+                    <button
+                      class="btn btn-info btn-sm mr-2"
+                      (click)="editForm(form)"
+                    >
+                      <i class="fas fa-pencil-alt mr-2"></i>Edit
+                    </button>
+
+                    <button
+                      class="btn btn-primary btn-sm mr-2"
+                      (click)="viewForm(form)"
+                    >
+                      <i class="fas fa-folder mr-2"></i>View
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm mr-2"
+                      (click)="deleteopen(deletemodal, form)"
+                    >
+                      <i class="fas fa-trash mr-2"></i>Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer clearfix">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <select
+                    class="form-control custom-select"
+                    style="width: auto"
+                    [(ngModel)]="pageSize"
+                    (ngModelChange)="refreshList()"
+                  >
+                    <option *ngFor="let size of [10, 20, 30]" [ngValue]="size">
+                      {{ size }} Items
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <ngb-pagination
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [collectionSize]="collectionSize"
+                  (pageChange)="refreshList()"
+                  class="pagination"
+                  [maxSize]="5"
+                ></ngb-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Boostrap Modal-->
+
+<ng-template #deletemodal let-modal>
+  <div class="modal-header titel">
+    <h2 class="modal-title titel" id="modal-basic-title">Are you sure?</h2>
+  </div>
+  <div class="modal-body deletebody">
+    <p></p>
+    <p>Do you want to delete {{ form }}</p>
+  </div>
+  <div class="modal-footer footer">
+    <button
+      type="button"
+      class="btn mr-3"
+      style="background-color: #eeeeee"
+      (click)="modal.dismiss('Save click')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger ml-3"
+      aria-label="Close"
+      (click)="modal.close('Cross click')"
+    >
+      Delete
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #addFormModal let-modal>
+  <ng-container [formGroup]="addForm">
+    <div class="modal-header modalheader">
+      <h2 class="modal-title" id="modal-basic-title">Add Form</h2>
+    </div>
+    <div class="modal-body">
+      <label for="exampleInputProjectNumber" class="form-label ml-3"
+        >Form Name</label
+      >
+      <input
+        type="text"
+        class="form-control inputalign"
+        placeholder=""
+        aria-label=""
+        aria-describedby="basic-addon1"
+        formControlName="formName"
+      />
+    </div>
+    <div class="modal-footer footer">
+      <button
+        type="button"
+        class="btn mr-3"
+        style="background-color: #eeeeee"
+        (click)="modal.dismiss('Save click')"
+      >
+        Close
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary ml-3"
+        aria-label="Close"
+        (click)="modal.close(addForm.value)"
+        [disabled]="!addForm.get('formName').value"
+      >
+        Add
+      </button>
+    </div>
+  </ng-container>
+</ng-template>

@@ -1,210 +1,492 @@
-<div class="container mt-4" [formGroup]="empDetails">
+<!-- <div class="container card px-4 py-4">
+  <form [formGroup]="empDetails">
     <h1 class="text-center mt-3 pt-3">
-      <p> Employee Information Preview</p>
-    </h1> 
-   
-    
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button [ngClass]="profile ===true ? 'nav-link active' : 'nav-link'"  id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" (click)="profileshow()" aria-selected="true">Profile</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button [ngClass]="LicenceInfo ===true ? 'nav-link active' : 'nav-link'" id="LicenceInfo-tab" data-bs-toggle="tab" data-bs-target="#LicenceInfo" type="button" role="tab" aria-controls="LicenceInfo"  (click)="LicenceInfoshow()" aria-selected="false">Licence And Quaifications</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button [ngClass]="PPERegister ===true ? 'nav-link active' : 'nav-link'" id="PPERegister-tab" data-bs-toggle="tab" data-bs-target="#PPERegister" type="button" role="tab" aria-controls="PPERegister"  (click)="PPERegisteshow()" aria-selected="false">PPE Register</button>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="profile" role="tabpanel" *ngIf="profile" aria-labelledby="profile-tab">
-       
+      <p class="title">Employee Information Preview</p>
+    </h1>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          [ngClass]="profile === true ? 'nav-link active' : 'nav-link outline'"
+          id="profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#profile"
+          type="button"
+          role="tab"
+          aria-controls="profile"
+          (click)="profileshow()"
+          aria-selected="true"
+        >
+          Profile
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          [ngClass]="
+            LicenceInfo === true ? 'nav-link active' : 'nav-link outline'
+          "
+          id="LicenceInfo-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#LicenceInfo"
+          type="button"
+          role="tab"
+          aria-controls="LicenceInfo"
+          (click)="LicenceInfoshow()"
+          aria-selected="false"
+        >
+          Licence And Quaifications
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          [ngClass]="
+            PPERegister === true ? 'nav-link active' : 'nav-link outline'
+          "
+          id="PPERegister-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#PPERegister"
+          type="button"
+          role="tab"
+          aria-controls="PPERegister"
+          (click)="PPERegisteshow()"
+          aria-selected="false"
+        >
+          PPE Register
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="profile"
+        role="tabpanel"
+        *ngIf="profile"
+        aria-labelledby="profile-tab"
+      >
         <div class="row">
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Titie</label>
-            <input type="text" formControlName="profTitie" class="form-control" id="siteName" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Title</label
+            >
+            <input
+              type="text"
+              formControlName="profTitie"
+              class="form-control"
+              id="siteName"
+            />
           </div>
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">First</label>
-            <input type="text" formControlName="profFirst" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >First Name</label
+            >
+            <input
+              type="text"
+              formControlName="profFirst"
+              class="form-control"
+            />
           </div>
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">List Name</label>
-            <input type="text" formControlName="porfListName" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              formControlName="porfListName"
+              class="form-control"
+            />
           </div>
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input type="text"  formControlName="porfEmail" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email</label
+            >
+            <input
+              type="text"
+              formControlName="porfEmail"
+              class="form-control"
+            />
           </div>
         </div>
-      
+
         <div class="row">
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Position</label>
-            <input type="text" formControlName="porfPosition" class="form-control" id="siteName" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Position</label
+            >
+            <input
+              type="text"
+              formControlName="porfPosition"
+              class="form-control"
+              id="siteName"
+            />
           </div>
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Department</label>
-            <input type="text" formControlName="porfDepartment" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Department</label
+            >
+            <input
+              type="text"
+              formControlName="porfDepartment"
+              class="form-control"
+            />
           </div>
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Phone</label>
-            <input type="text" formControlName="porfEmail" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Phone</label
+            >
+            <input
+              type="text"
+              formControlName="porfPhone"
+              class="form-control"
+            />
           </div>
           <div class="mb-3 mt-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Mobile</label>
-            <input type="text"formControlName="porfMobile"  class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Mobile</label
+            >
+            <input
+              type="text"
+              formControlName="porfMobile"
+              class="form-control"
+            />
           </div>
         </div>
         <div class="row text-center">
           <div class="mt-2 col-2">
-            <p><input type="checkbox"  formControlName="porfEmployee" class="mr-1" value="yes">Employee</p>
+            <input
+              type="radio"
+              formControlName="porfEmployee"
+              name="porfEmployee"
+              class="form-check-input mr-1"
+              value="Employee"
+            />
+            <label for="exampleFormControlInput1" class="form-label label_2"
+              >Employee</label
+            >
+          </div>
+          <div class="mt-2 col-2">
+            <input
+              type="radio"
+              formControlName="porfEmployee"
+              name="porfEmployee"
+              class="form-check-input mr-1"
+              value="Manager"
+            />
+            <label for="exampleFormControlInput1" class="form-label label_2"
+              >Manager</label
+            >
+          </div>
+          <div class="mt-2 col-2">
+            <input
+              type="radio"
+              formControlName="porfEmployee"
+              name="porfEmployee"
+              class="form-check-input mr-1"
+              value="Administrater"
+            />
+            <label for="exampleFormControlInput1" class="form-label label_2"
+              >Administrater</label
+            >
+          </div>
         </div>
-        <div class="mt-2 col-2">
-          <p><input type="checkbox" formControlName="porfManager"  class="mr-1" value="yes">Manager</p>
-      </div>
-      <div class="mt-2 col-2">
-        <p><input type="checkbox"  formControlName="porfAdministrater" class="mr-1" value="yes">Administrater</p>
-    </div>
-      </div>
-  
-      <div class="row">
-        <div class="mb-3 mt-3 col-5">
-          <label for="exampleFormControlInput1" class="form-label">Street Address</label>
-          <input type="text" formControlName="porfStreetAddress"  class="form-control" id="siteName" />
+
+        <div class="row">
+          <div class="mb-3 mt-3 col-5">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Street Address</label
+            >
+            <input
+              type="text"
+              formControlName="porfStreetAddress"
+              class="form-control"
+              id="siteName"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >City/town</label
+            >
+            <input
+              type="text"
+              formControlName="porfCityTown"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >State</label
+            >
+            <input
+              type="text"
+              formControlName="porfState"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-2">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Postal Code</label
+            >
+            <input
+              type="text"
+              formControlName="porfPostalCode"
+              class="form-control"
+            />
+          </div>
         </div>
-        <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label">City/town</label>
-          <input type="text"formControlName="porfCityTown"  class="form-control" />
-        </div>
-        <div class="mb-3 mt-3 col-2">
-          <label for="exampleFormControlInput1" class="form-label">State</label>
-          <input type="text" formControlName="porfState" class="form-control" />
-        </div>
-        <div class="mb-3 mt-3 col-2">
-          <label for="exampleFormControlInput1" class="form-label">Postal Code</label>
-          <input type="text" formControlName="porfPostalCode" class="form-control" />
-        </div>
-      </div>
-      <div class="row">
-        <div class=" offset-1  col-3 mt-2 ">
-        <img src="../../../assets/img/avatar5.png" alt="" width="130" height="130">
-        </div>
-        <div class="col-5 ml-4">
+        <div class="row py-3">
+          <div class="offset-1 col-3 mt-2">
+            <img
+              src="../../../assets/img/avatar5.png"
+              alt=""
+              width="130"
+              height="130"
+            />
+          </div>
+          <div class="col-5 ml-4">
             <div class="my-3">
-            <label for="formFile" class="form-label ">Upload Image</label>
-            <input class="form-control"formControlName="porfUploadImage"  type="file" id="formFile" />
+              <label for="formFile" class="form-label">Upload Image</label>
+              <input
+                class="form-control"
+                formControlName="porfUploadImage"
+                type="file"
+                id="formFile"
+                (change)="browser1($event)"
+              />
             </div>
+          </div>
         </div>
-      </div>
-  
-      <div class="row mt-3">
-      <div class="col-12">
-        <h2><strong>Emergency Contact Informaytion</strong></h2>
-      </div>
-    </div>
-  
-    <div class="row">
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">First</label>
-        <input type="text" formControlName="EmpFirst"  class="form-control" id="siteName" />
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-        <input type="text" formControlName="empLastName"  class="form-control" />
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Relationship</label>
-        <input type="text"  formControlName="empRelationship" class="form-control" />
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Email </label>
-        <input type="text" formControlName="empEmail" class="form-control" />
-      </div>
-    </div>
-  
-    <div class="row">
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Phone</label>
-        <input type="text" formControlName="empPhone" class="form-control" id="siteName" />
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Mobile</label>
-        <input type="text" formControlName="empMobile" class="form-control" />
-      </div>
-    </div>
-  
-    </div>
-    
-    <div class="tab-pane fade show active" id="LicenceInfo" role="tabpanel" *ngIf="LicenceInfo" aria-labelledby="LicenceInfo-tab">
-    
-      <div class="row">
-        <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label">Licence Name</label>
-          <input type="text" formControlName="LicenceName" class="form-control" id="siteName" />
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <p class="emergrncy_1">Emergency Contact Information</p>
+          </div>
         </div>
-        <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label">Licence Number</label>
-          <input type="text"formControlName="LicenceNumber"  class="form-control" />
-        </div>
-        <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label">Training Qrginisation</label>
-          <input type="text"  formControlName="TrainingQrginisation" class="form-control" />
-        </div>
-        <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label">Expiry Date </label>
-          <input type="text" formControlName="ExpiryDate" class="form-control" />
-        </div>
-      </div>
-      <div  formArrayName="UploadLicenceArr">
-        <div *ngFor="let row of addLicence().controls; let filed=index ">
-          <div [formGroupName]="filed ">
-    <div class="row">
-      <div class="col-10">
-      <div class=" my-3">
-        <label for="formFile" class="form-label ">Upload Licence</label>
-        <input class="form-control" formControlName="file" type="file" id="formFile" />
-      </div>
-    </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  <div class="col-2  float-right " style="margin-top:-50px">
-    <button (click)="addFiled()"class="btn btn-primary" style=" width:100%">Add</button></div>
-      </div>
-  
-      <div class="tab-pane fade show active" id="PPERegister" role="tabpanel" *ngIf="PPERegister" aria-labelledby="PPERegister-tab">
-    
-    
+
         <div class="row">
           <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">PPE Supplied</label>
-            <input type="text" formControlName="PPESupplied" class="form-control" id="siteName" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >First</label
+            >
+            <input
+              type="text"
+              formControlName="EmpFirst"
+              class="form-control"
+              id="siteName"
+            />
           </div>
           <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Brand or Type</label>
-            <input type="text" formControlName="BrandOrType" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              formControlName="empLastName"
+              class="form-control"
+            />
           </div>
           <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Issue Date</label>
-            <input type="text" formControlName=">IssueDate" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Relationship</label
+            >
+            <input
+              type="text"
+              formControlName="empRelationship"
+              class="form-control"
+            />
           </div>
           <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Replacement Date </label>
-            <input type="text" formControlName="ReplacementDate" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email
+            </label>
+            <input
+              type="text"
+              formControlName="empEmail"
+              class="form-control"
+            />
           </div>
         </div>
-    <div class="row">
-      <div class="mb-3 mt-3 col-12">
-        <label for="exampleFormControlInput1" class="form-label">Signature </label>
-        <input type="text" formControlName="Signature" class="form-control" />
+
+        <div class="row">
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Phone</label
+            >
+            <input
+              type="text"
+              formControlName="empPhone"
+              class="form-control"
+              id="siteName"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Mobile</label
+            >
+            <input
+              type="text"
+              formControlName="empMobile"
+              class="form-control"
+            />
+          </div>
+        </div>
       </div>
-      <div class="col"><p>Clear</p></div>
-    </div>
-    
-    
+
+      <div
+        class="tab-pane fade show active"
+        id="LicenceInfo"
+        role="tabpanel"
+        *ngIf="LicenceInfo"
+        aria-labelledby="LicenceInfo-tab"
+      >
+        <div class="row">
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Licence Name</label
+            >
+            <input
+              type="text"
+              formControlName="LicenceName"
+              class="form-control"
+              id="siteName"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Licence Number</label
+            >
+            <input
+              type="text"
+              formControlName="LicenceNumber"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Training Organisation</label
+            >
+            <input
+              type="text"
+              formControlName="TrainingQrginisation"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Expiry Date
+            </label>
+            <input
+              type="date"
+              formControlName="ExpiryDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div formArrayName="UploadLicenceArr">
+          <div *ngFor="let row of addLicence().controls; let filed = index">
+            <div [formGroupName]="filed">
+              <div class="row">
+                <div class="col-10">
+                  <div class="my-3">
+                    <label for="formFile" class="form-label"
+                      >Upload Licence</label
+                    >
+                    <input
+                      class="form-control"
+                      formControlName="file"
+                      type="file"
+                      id="formFile"
+                      (change)="browser($event)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 float-right" style="margin-top: -50px">
+          <button
+            (click)="addFiled()"
+            class="btn btn-primary"
+            style="width: 100%"
+          >
+            Add
+          </button>
+        </div>
       </div>
-    
+
+      <div
+        class="tab-pane fade show active"
+        id="PPERegister"
+        role="tabpanel"
+        *ngIf="PPERegister"
+        aria-labelledby="PPERegister-tab"
+      >
+        <div class="row">
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >PPE Supplied</label
+            >
+            <input
+              type="text"
+              formControlName="PPESupplied"
+              class="form-control"
+              id="siteName"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Brand or Type</label
+            >
+            <input
+              type="text"
+              formControlName="BrandOrType"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Issue Date</label
+            >
+            <input
+              type="date"
+              formControlName="IssueDate"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Replacement Date
+            </label>
+            <input
+              type="date"
+              formControlName="ReplacementDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 mt-3 col-12">
+            <label>Signature</label>
+            <div class="sign">
+              <signature-pad
+                value="Signature"
+                [options]="signaturePadOptions"
+                (onBeginEvent)="drawStart()"
+                (onEndEvent)="drawComplete()"
+              ></signature-pad>
+            </div>
+          </div>
+          <button class="btn btn-outline-primary btn_1" (click)="clear()">
+            Clear
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary btn_1"
+            (click)="onFormSubmit()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
-    
-  
+  </form>
+</div> -->

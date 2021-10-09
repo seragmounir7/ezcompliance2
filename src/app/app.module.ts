@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,9 +25,9 @@ import { UserDropdownMenuComponent } from './pages/main/header/user-dropdown-men
 import { BlankComponent } from './views/blank/blank.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppButtonComponent } from './components/app-button/app-button.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProjectsComponent } from './project/projects/projects.component';
 import { ProjectAddComponent } from './project/project-add/project-add.component';
 import { ProjectEditComponent } from './project/project-edit/project-edit.component';
@@ -43,7 +44,12 @@ import { DxButtonModule } from 'devextreme-angular';
 import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
-
+import { CategoriesComponent } from './views/dynamic-form/categories/categories.component';
+import { FormsComponent } from './views/dynamic-form/forms/forms.component';
+import { AddEditCategoryComponent } from './views/dynamic-form/categories/add-edit-category/add-edit-category.component';
+import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
+import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -73,14 +79,23 @@ registerLocaleData(localeEn, 'en-EN');
     TutorialsEditComponent,
     SortableDirective,
     DynamicFormComponent,
+    CategoriesComponent,
+    FormsComponent,
+    AddEditCategoryComponent,
+    AddFormComponent,
+    ViewFormsComponent,
   ],
   imports: [
     BrowserModule,
+    SharedModule,
+    SlickCarouselModule,
     AppRoutingModule,
     FormsModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    CommonModule,SignaturePadModule,
+    CommonModule,
+    SignaturePadModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
@@ -92,9 +107,10 @@ registerLocaleData(localeEn, 'en-EN');
     DxButtonModule,
     ChartsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM'
-    })
+      apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM',
+    }),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })
