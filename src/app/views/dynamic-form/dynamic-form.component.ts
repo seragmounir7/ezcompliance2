@@ -200,6 +200,7 @@ export class DynamicFormComponent implements OnInit {
   type:string="";
   formIdRec="";
 rows=[];
+formData=[];
 tableIndexMap= new Map();
   modelFields0:Array<field>=[];
   modelFields1:Array<field>=[];
@@ -518,10 +519,22 @@ console.log("item",item);
 
 
   initReport(){
+    console.log("model.attributes=>",this.model);
+    console.log("akaksks");
     this.report = true; 
-    let input = {
-      id:this.model._id
+    this.formData = [];
+    for(let j=0;j<this.model[0].attributes.length;j++){
+      let temp = [];
+      for(let i=0;i<this.model.length;i++){
+        temp.push( this.model[i].attributes[j]); 
+      }
+      this.formData.push(temp);
     }
+console.log("formData",this.formData);
+
+    // let input = {
+    //   id:this.model._id
+    // }
     // this.us.getDataApi('/admin/allFilledForms',input).subscribe(r=>{
     //   this.reports = r.data;
     //   console.log('reports',this.reports);
