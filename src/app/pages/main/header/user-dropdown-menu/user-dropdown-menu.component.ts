@@ -31,12 +31,12 @@ export class UserDropdownMenuComponent implements OnInit {
     private appService: AppService,
     private router: Router
   ) {}
-userName="";
-phoneNo="";
+  userName = '';
+  phoneNo = '';
   ngOnInit(): void {
     this.user = this.appService.user;
-this.userName=sessionStorage.getItem('userName');
-this.phoneNo=sessionStorage.getItem('phoneNo');
+    this.userName = sessionStorage.getItem('userName');
+    this.phoneNo = sessionStorage.getItem('phoneNo');
   }
 
   toggleDropdownMenu() {

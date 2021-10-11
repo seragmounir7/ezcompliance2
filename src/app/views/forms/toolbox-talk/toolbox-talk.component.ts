@@ -14,7 +14,10 @@ export class ToolboxTalkComponent implements OnInit {
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
 
-  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) {
+  constructor(
+    private fb: FormBuilder,
+    private dynamicFormsService: DynamicFormsService
+  ) {
     this.toolBox = this.fb.group({
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),

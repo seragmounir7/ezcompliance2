@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { AppService } from '../../utils/services/app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {AuthService} from '../../utils/services/auth.service'
+import { AuthService } from '../../utils/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,29 +31,30 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-
     if (this.loginForm.invalid) {
       return;
     }
     const data = {
       ...this.loginForm.value,
     };
-    console.log("data",data)
+    console.log('data', data);
     if (this.loginForm.valid) {
-      this.AuthService.login(data).subscribe((resData: any) =>{
-        console.log("resData",resData);
-        console.log("res",resData.status);
-        if (resData.status == "SUCCESS"){
-          sessionStorage.setItem('userName', resData.data.username);   
-          sessionStorage.setItem('phoneNo', resData.data.phone);   
-                 this.router.navigate(['/admin']);
-          this.toastr.success('Login Successful', '');
+      this.AuthService.login(data).subscribe(
+        (resData: any) => {
+          console.log('resData', resData);
+          console.log('res', resData.status);
+          if (resData.status == 'SUCCESS') {
+            sessionStorage.setItem('userName', resData.data.username);
+            sessionStorage.setItem('phoneNo', resData.data.phone);
+            this.router.navigate(['/admin']);
+            this.toastr.success('Login Successful', '');
+          }
+        },
+        (err) => {
+          console.log(err);
+          this.toastr.error('Wrong credentials', '');
         }
-      },(err)=>{
-        console.log(err)
-        this.toastr.error('Wrong credentials', '');
-      }
-      )
+      );
     } else {
       this.toastr.error('Enter valid username/password', '', { timeOut: 1500 });
     }

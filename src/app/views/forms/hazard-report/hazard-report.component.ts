@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -16,9 +11,12 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 export class HazardReportComponent implements OnInit {
   title = 'hazardReport';
   hazardReport: FormGroup;
- @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) {
+  constructor(
+    private fb: FormBuilder,
+    private dynamicFormsService: DynamicFormsService
+  ) {
     this.hazardReport = this.fb.group({
       siteAction: this.fb.array([]),
       employeeFulltime: ['', Validators.required],
@@ -79,22 +77,19 @@ export class HazardReportComponent implements OnInit {
   }
   ngOnInit() {
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
-
   }
 
-  public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-    'minWidth': 1,
-    'canvasWidth': 500,
-    'canvasHeight': 100,
+  public signaturePadOptions: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 500,
+    canvasHeight: 100,
   };
-
-
-
 
   ngAfterViewInit() {
     // this.signaturePad is now available
     this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
-   this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
+    this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
     this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
   }
 
@@ -102,9 +97,9 @@ export class HazardReportComponent implements OnInit {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad.toDataURL());
   }
-clear(){
-  this.signaturePad.clear();
-}
+  clear() {
+    this.signaturePad.clear();
+  }
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');

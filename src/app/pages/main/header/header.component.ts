@@ -11,15 +11,18 @@ export class HeaderComponent implements OnInit {
   @Output() toggleMenuSidebar: EventEmitter<any> = new EventEmitter<any>();
   public searchForm: FormGroup;
 
-  constructor(private appService: AppService,private dynamicFormsService: DynamicFormsService,) {}
-  currentComp='admin';
+  constructor(
+    private appService: AppService,
+    private dynamicFormsService: DynamicFormsService
+  ) {}
+  currentComp = 'admin';
   ngOnInit() {
     this.searchForm = new FormGroup({
       search: new FormControl(null),
     });
-this.dynamicFormsService.homebarTitle.subscribe(res=>{
-  this.currentComp = res;
-})
+    this.dynamicFormsService.homebarTitle.subscribe((res) => {
+      this.currentComp = res;
+    });
   }
 
   logout() {

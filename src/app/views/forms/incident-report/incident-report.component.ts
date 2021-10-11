@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { format } from 'devextreme/ui/widget/ui.widget';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -20,7 +26,10 @@ export class IncidentReportComponent implements OnInit {
   @ViewChild('signature1') signaturePad: SignaturePad;
   @ViewChild('signature2') signaturePad1: SignaturePad;
 
-  constructor(private fb: FormBuilder,private dynamicFormsService: DynamicFormsService) {
+  constructor(
+    private fb: FormBuilder,
+    private dynamicFormsService: DynamicFormsService
+  ) {
     this.SiteIncident = this.fb.group({
       incidents: this.fb.array([]),
       natureOFIncidents: this.fb.array([]),
@@ -60,8 +69,7 @@ export class IncidentReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
-
-   }
+  }
 
   selectFile(event: any) {
     this.fileData = event.target.files[0];
@@ -80,19 +88,18 @@ export class IncidentReportComponent implements OnInit {
     console.log(this.SiteIncident.value);
   }
 
-  public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-    'minWidth': 1,
-    'canvasWidth': 480,
-    'canvasHeight': 100,
+  public signaturePadOptions: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 480,
+    canvasHeight: 100,
   };
-  public signaturePadOptions1: Object = { // passed through to szimek/signature_pad constructor
-    'minWidth': 1,
-    'canvasWidth': 480,
-    'canvasHeight': 100,
+  public signaturePadOptions1: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 480,
+    canvasHeight: 100,
   };
-
-
-
 
   ngAfterViewInit() {
     // this.signaturePad is now available
@@ -114,7 +121,7 @@ export class IncidentReportComponent implements OnInit {
     this.signaturePad.clear();
   }
   clear1() {
-    console.log("cl1");
+    console.log('cl1');
 
     this.signaturePad1.clear();
   }
@@ -134,29 +141,26 @@ export class IncidentReportComponent implements OnInit {
     { name: 'MedicalTreatment', value: 'medicalTreatment' },
     { name: 'AbestosDetection', value: 'abestosDetection' },
     { name: 'Death', value: 'death' },
-  ]
+  ];
 
   onChangeIncident(e: any) {
-    const checkArray: FormArray = this.SiteIncident.get('incidents') as FormArray
+    const checkArray: FormArray = this.SiteIncident.get(
+      'incidents'
+    ) as FormArray;
     let item = e.target.value;
     if (e.target.checked) {
       checkArray.push(new FormControl(item));
-      console.log(item)
-    }
-
-    else {
+      console.log(item);
+    } else {
       let i: number = 0;
       checkArray.controls.forEach((item) => {
         if (item.value == e.target.value) {
-          checkArray.removeAt(i)
+          checkArray.removeAt(i);
         }
-      })
+      });
     }
-
-
   }
   natureOFIncidents: Array<any> = [
-
     { name: 'Abrasion', value: 'abrasion' },
     { name: 'Bruise', value: 'bruise' },
     { name: 'Cuts', value: 'cuts' },
@@ -168,26 +172,23 @@ export class IncidentReportComponent implements OnInit {
     { name: 'Other', value: 'other' },
     { name: 'CrushingInjuiry', value: 'crushingInjuiry' },
     { name: 'Headinjury', value: 'headinjury' },
-
-  ]
+  ];
   onNatureOFIncidents(e: any) {
-    const NatureArray: FormArray = this.SiteIncident.get('natureOFIncidents') as FormArray
+    const NatureArray: FormArray = this.SiteIncident.get(
+      'natureOFIncidents'
+    ) as FormArray;
     let item = e.target.value;
     if (e.target.checked) {
       NatureArray.push(new FormControl(item));
-      console.log(item)
-    }
-
-    else {
+      console.log(item);
+    } else {
       let i: number = 0;
       NatureArray.controls.forEach((item) => {
         if (item.value == e.target.value) {
-          NatureArray.removeAt(i)
+          NatureArray.removeAt(i);
         }
-      })
+      });
     }
-
-
   }
 
   PPE: Array<any> = [
@@ -209,28 +210,23 @@ export class IncidentReportComponent implements OnInit {
     { name: 'Gattors', value: 'gattors' },
     { name: 'LockOutTags', value: 'lockOutTags' },
     { name: 'safetyBoots', value: 'safetyBoots' },
-  ]
+  ];
   onPPE(e: any) {
-    const PPEArray: FormArray = this.SiteIncident.get('PPE') as FormArray
+    const PPEArray: FormArray = this.SiteIncident.get('PPE') as FormArray;
     let item = e.target.value;
     if (e.target.checked) {
       PPEArray.push(new FormControl(item));
-      console.log(item)
-    }
-
-    else {
+      console.log(item);
+    } else {
       let i: number = 0;
       PPEArray.controls.forEach((item) => {
         if (item.value == e.target.value) {
-          PPEArray.removeAt(i)
+          PPEArray.removeAt(i);
         }
-      })
+      });
     }
-
-
   }
   rootCauseIncident: Array<any> = [
-
     { name: 'InsufficentGuard', value: 'insufficentGuard' },
     { name: 'FualtyPPE', value: 'fualtyPPE' },
     { name: 'DefectiveSafety', value: 'defectiveSafety' },
@@ -246,25 +242,23 @@ export class IncidentReportComponent implements OnInit {
     { name: 'Unauthorised operation', value: 'unauthorisedOperation' },
     // { name: 'IncorrectOperationOfPlantorEqiupment', value: 'incorrectOperation' },
     { name: 'IncorrectOperationPlantorEqiupment', value: 'incorrectOperation' },
-  ]
+  ];
   onRootCauseIncident(e: any) {
-    const IncidentArray: FormArray = this.SiteIncident.get('rootCauseIncident') as FormArray
+    const IncidentArray: FormArray = this.SiteIncident.get(
+      'rootCauseIncident'
+    ) as FormArray;
     let item = e.target.value;
     if (e.target.checked) {
       IncidentArray.push(new FormControl(item));
-      console.log(item)
-    }
-
-    else {
+      console.log(item);
+    } else {
       let i: number = 0;
       IncidentArray.controls.forEach((item) => {
         if (item.value == e.target.value) {
-          IncidentArray.removeAt(i)
+          IncidentArray.removeAt(i);
         }
-      })
+      });
     }
-
-
   }
 
   changes: Array<any> = [
@@ -278,25 +272,23 @@ export class IncidentReportComponent implements OnInit {
     { name: 'EmployeeTraining', value: 'employeeTraining' },
     { name: 'LackOfVentilation', value: 'lack' },
     { name: 'LackOfVentilation', value: 'lack' },
-  ]
+  ];
   onChanges(e: any) {
-    const ChangeArray: FormArray = this.SiteIncident.get('changes') as FormArray
+    const ChangeArray: FormArray = this.SiteIncident.get(
+      'changes'
+    ) as FormArray;
     let item = e.target.value;
     if (e.target.checked) {
       ChangeArray.push(new FormControl(item));
-      console.log(item)
-    }
-
-    else {
+      console.log(item);
+    } else {
       let i: number = 0;
       ChangeArray.controls.forEach((item) => {
         if (item.value == e.target.value) {
-          ChangeArray.removeAt(i)
+          ChangeArray.removeAt(i);
         }
-      })
+      });
     }
-
-
   }
   // upload(e) {
   //   const fileListAsArray = Array.from(e);

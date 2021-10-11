@@ -23,15 +23,19 @@ import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'landing', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
+  {
+    path: 'landing',
+    loadChildren: () =>
+      import('./front/front.module').then((m) => m.FrontModule),
+  },
 
-  {    
+  {
     path: 'admin',
     component: MainComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-     // { path: '', component: LoginComponent },
+      // { path: '', component: LoginComponent },
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'dynamicForm', component: DynamicFormComponent },
@@ -46,20 +50,34 @@ const routes: Routes = [
       { path: 'tutorials/edit/:id', component: TutorialsEditComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: 'forms', component: FormsComponent },
-      { path: 'forms', loadChildren: () => import('./views/forms/forms.module').then(m => m.FormsModule1) },
-      { path: 'registration', loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationModule) },
-      { path: 'landingPageInfo', loadChildren: () => import('./landing-page-info/landing-page-info.module').then(m => m.LandingPageInfoModule) },
-
-      
+      {
+        path: 'forms',
+        loadChildren: () =>
+          import('./views/forms/forms.module').then((m) => m.FormsModule1),
+      },
+      {
+        path: 'registration',
+        loadChildren: () =>
+          import('./registration/registration.module').then(
+            (m) => m.RegistrationModule
+          ),
+      },
+      {
+        path: 'landingPageInfo',
+        loadChildren: () =>
+          import('./landing-page-info/landing-page-info.module').then(
+            (m) => m.LandingPageInfoModule
+          ),
+      },
     ],
   },
- { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
   {
     path: 'register',
     component: RegisterComponent,
     canActivate: [NonAuthGuard],
   },
-  
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

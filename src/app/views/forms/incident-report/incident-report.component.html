@@ -1,22 +1,23 @@
 <div class="container card px-4 py-4" [formGroup]="SiteIncident">
-  <h2 class="text-center pt-3 ">
+  <h2 class="text-center pt-3">
     <p>Incident Report Form Preview</p>
   </h2>
-  <hr>
-    
-  <p class=" title ">Site Information</p>
-  
+  <hr />
+
+  <p class="title">Site Information</p>
 
   <div class="box">
     <div class="row">
       <div class="col-md-6">
-      
         <div>
-          <label class="cols" for="project Number" for="exampleFormControlInput1" class="form-Label"
+          <label
+            class="cols"
+            for="project Number"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Project Number</label
           >
           <input
-        
             type="number"
             class="form-control"
             formControlName="projectNumber"
@@ -26,11 +27,14 @@
       </div>
       <div class="col-md-6">
         <div>
-          <label class="cols" for="project name" for="exampleFormControlInput1" class="form-Label"
+          <label
+            class="cols"
+            for="project name"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Project Name</label
           >
           <input
-        
             type="text"
             formControlName="projectName"
             class="form-control"
@@ -42,7 +46,11 @@
     <div class="row">
       <div class="col-sm-6">
         <div>
-          <label class="cols" for="site Name"for="exampleFormControlInput1"  class="form-Label"
+          <label
+            class="cols"
+            for="site Name"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Site Name</label
           >
           <input
@@ -55,7 +63,11 @@
       </div>
       <div class="col-md-6">
         <div>
-          <label class="cols" for="customerName"for="exampleFormControlInput1"  class="form-Label"
+          <label
+            class="cols"
+            for="customerName"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Customer Name</label
           >
           <input
@@ -70,7 +82,11 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="siteAddress" for="exampleFormControlInput1" class="form-Label"
+          <label
+            class="cols"
+            for="siteAddress"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Site Address</label
           >
           <input
@@ -83,11 +99,15 @@
       </div>
       <div class="col-md-6">
         <div>
-          <label class="cols" for="customerContact"for="exampleFormControlInput1"  class="form-Label"
+          <label
+            class="cols"
+            for="customerContact"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Customer Contact</label
           >
           <input
-          placeholder="(000) 000-0000"
+            placeholder="(000) 000-0000"
             type="text"
             class="form-control"
             formControlName="customerContact"
@@ -99,7 +119,11 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="projectManager" for="exampleFormControlInput1"  class="form-Label"
+          <label
+            class="cols"
+            for="projectManager"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Project Manager</label
           >
           <input
@@ -113,7 +137,11 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" for="personCompletingForm" for="exampleFormControlInput1" class="form-Label"
+          <label
+            class="cols"
+            for="personCompletingForm"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Person Completing Form
           </label>
           <input
@@ -128,11 +156,15 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="customerContactPhone" for="exampleFormControlInput1" class="form-Label" 
+          <label
+            class="cols"
+            for="customerContactPhone"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Customer Contact Phone</label
           >
           <input
-          placeholder="(000) 000-0000"
+            placeholder="(000) 000-0000"
             type="text"
             class="form-control"
             formControlName="customerContactPhone"
@@ -143,11 +175,15 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" for="customerContactEmail"for="exampleFormControlInput1"  class="form-Label" 
+          <label
+            class="cols"
+            for="customerContactEmail"
+            for="exampleFormControlInput1"
+            class="form-Label"
             >Customer Contact Email</label
           >
           <input
-          placeholder="ex: email@yahoo.com"
+            placeholder="ex: email@yahoo.com"
             type="text"
             class="form-control"
             formControlName="customerContactEmail"
@@ -172,37 +208,43 @@
   </div>
   <hr />
   <div class="col-12" class="mt-3">
-    <p class="title">Type of Incident </p>
+    <p class="title">Type of Incident</p>
   </div>
   <div class="row">
-    <div class="mt-2 col-4" *ngFor="let incident of incidents" >
+    <div class="mt-2 col-4" *ngFor="let incident of incidents">
       <div class="checkrdobtn">
-        <input class="rdovstchk"  class="mr-1  " type="checkbox" [value]="incident.value " (change)="onChangeIncident($event)"/> 
-        <span class="txtdefault fs-16 weight500 text-center ">{{incident.name}}</span>					
+        <input
+          class="rdovstchk"
+          class="mr-1"
+          type="checkbox"
+          [value]="incident.value"
+          (change)="onChangeIncident($event)"
+        />
+        <span class="txtdefault fs-16 weight500 text-center">{{
+          incident.name
+        }}</span>
       </div>
     </div>
   </div>
- 
-  
 
   <hr />
   <div class="row">
     <div class="col-12">
-  
-   <p class="title">Instructions </p>
-   </div>
-   <div class="mt-3 text-center ">
-     <p class="form-Label">Complete this form as soon as possible after an incident that results in
-    serious inquiry or illness or death.
-    Use to investigate a minor injuiry or near-miss that could have resulted in
-    a serious injury or illness.</p>
-  </div>
+      <p class="title">Instructions</p>
+    </div>
+    <div class="mt-3 text-center">
+      <p class="form-Label">
+        Complete this form as soon as possible after an incident that results in
+        serious inquiry or illness or death. Use to investigate a minor injuiry
+        or near-miss that could have resulted in a serious injury or illness.
+      </p>
+    </div>
   </div>
   <br />
   <hr />
   <div class="col-12">
-  <p class="title"> Injuired or Affected Person </p>
-</div>
+    <p class="title">Injuired or Affected Person</p>
+  </div>
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
@@ -230,7 +272,7 @@
       </div>
     </div>
   </div>
-  <div  class="box"  class="row">
+  <div class="box" class="row">
     <div class="col-md-6">
       <div>
         <label class="cols" for="position" class="form-Label">position</label>
@@ -245,20 +287,26 @@
   </div>
   <hr />
   <div class="col-12">
- <p class="title">Nature of Incident </p> 
-</div>
-  <div class="box"  class="row">
-    
-      <div class="mt-3 col-4" *ngFor="let nature of natureOFIncidents" >
-        <div class="checkrdobtn">
-          <input class="rdovstchk" type="checkbox"  class="mr-1" [value]="nature.value " (change)="onNatureOFIncidents($event)"/> 
-          <span class="txtdefault fs-16 weight500 text-center">{{nature.name}}</span>					
-        </div>
-
+    <p class="title">Nature of Incident</p>
   </div>
+  <div class="box" class="row">
+    <div class="mt-3 col-4" *ngFor="let nature of natureOFIncidents">
+      <div class="checkrdobtn">
+        <input
+          class="rdovstchk"
+          type="checkbox"
+          class="mr-1"
+          [value]="nature.value"
+          (change)="onNatureOFIncidents($event)"
+        />
+        <span class="txtdefault fs-16 weight500 text-center">{{
+          nature.name
+        }}</span>
+      </div>
+    </div>
   </div>
   <hr />
-  <div class="box"  class="row">
+  <div class="box" class="row">
     <div class="col-md-6">
       <div>
         <label class="cols" for="locationOfTheIncident" class="form-Label"
@@ -301,11 +349,10 @@
   </div>
   <br />
   <div class="col-12">
-   <p class="title">Incident Information </p>
-
-</div>
-  <div  class="box"  class="row ">
-    <div class="col-md-6 ">
+    <p class="title">Incident Information</p>
+  </div>
+  <div class="box" class="row">
+    <div class="col-md-6">
       <div>
         <label class="cols" for="exampleFormControlInput1" class="form-Label">
           Name of Witness</label
@@ -313,7 +360,6 @@
 
         <select
           class="form-select form-control col form-dropdown"
-          
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
@@ -332,7 +378,6 @@
 
         <select
           class="form-select form-control col form-dropdown"
-          
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
@@ -342,48 +387,65 @@
         </select>
       </div>
     </div>
-     </div>
-     <div class="box"  class="row">
+  </div>
+  <div class="box" class="row">
     <div class="col-md-12">
       <div>
-       
-       
-       
-        <label for="formFile" class="form-Label ">Attachments </label>
-        <input class="form-control" formControlName="file" type="file" id="formFile" />
-      
+        <label for="formFile" class="form-Label">Attachments </label>
+        <input
+          class="form-control"
+          formControlName="file"
+          type="file"
+          id="formFile"
+        />
       </div>
     </div>
   </div>
   <br />
-  
-    <div class="col-12">
-   <p class="title"> What PPE was in Use ?  </p>
+
+  <div class="col-12">
+    <p class="title">What PPE was in Use ?</p>
   </div>
-  <div  class="box"  class="row">
-    <div class="mt-3 col-3" *ngFor="let PPES of PPE" >
+  <div class="box" class="row">
+    <div class="mt-3 col-3" *ngFor="let PPES of PPE">
       <div class="checkrdobtn">
-        <input class="rdovstchk" type="checkbox"  class="mr-1" [value]="PPES.value " (change)="onPPE($event)"/> 
-        <span class="txtdefault fs-16 weight500 text-center">{{PPES.name}}</span>					
+        <input
+          class="rdovstchk"
+          type="checkbox"
+          class="mr-1"
+          [value]="PPES.value"
+          (change)="onPPE($event)"
+        />
+        <span class="txtdefault fs-16 weight500 text-center">{{
+          PPES.name
+        }}</span>
       </div>
+    </div>
   </div>
-  </div>
-  <br>
+  <br />
   <hr />
   <div class="col-12">
- <p class="title"> What was the rootcause of incident happen? </p> 
-</div>
-  <div  class="box" class="row">
-    <div class="mt-3 col-3" *ngFor="let rootCause of rootCauseIncident" >
+    <p class="title">What was the rootcause of incident happen?</p>
+  </div>
+  <div class="box" class="row">
+    <div class="mt-3 col-3" *ngFor="let rootCause of rootCauseIncident">
       <div class="checkrdobtn">
-        <input class="rdovstchk" type="checkbox" class="mr-1" [value]="rootCause.value " (change)=" onRootCauseIncident($event)"/> 
-        <span class="txtdefault fs-16 weight500 text-center">{{rootCause.name}}</span>					
+        <input
+          class="rdovstchk"
+          type="checkbox"
+          class="mr-1"
+          [value]="rootCause.value"
+          (change)="onRootCauseIncident($event)"
+        />
+        <span class="txtdefault fs-16 weight500 text-center">{{
+          rootCause.name
+        }}</span>
       </div>
+    </div>
   </div>
-  </div>
-  <br>
-  
-  <div   class="row">
+  <br />
+
+  <div class="row">
     <div class="col-md-12">
       <div>
         <label
@@ -393,27 +455,25 @@
           >Why did the unsafe conditon exist</label
         >
 
-        <textarea 
+        <textarea
           type="text"
           formControlName="whyDidtheUnsafeConditonExist"
           class="form-control"
-          id="whyDidtheUnsafeConditonExist">
+          id="whyDidtheUnsafeConditonExist"
+        >
         </textarea>
       </div>
     </div>
-    <div  class="col-md-6">
+    <div class="col-md-6">
       <div>
         <label class="cols" for="exampleFormControlInput1" class="form-Label"
           >Was the unsafe act or hazard reported prior to the incident?</label
         >
 
         <select
-        
-          class="form-select form-control col  form-dropdown"
-          
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
-       
           <option selected hidden>Select</option>
           <option value="yes">yes</option>
           <option value="no">No</option>
@@ -426,9 +486,8 @@
           >Has a similar incident Occured</label
         >
 
-        <select 
+        <select
           class="form-select form-control col form-dropdown"
-          
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
@@ -440,25 +499,35 @@
   </div>
 
   <hr />
-  <br>
+  <br />
   <div class="col-12">
- <p class="title"> What changes can be made ? </p>
-</div>
-  <div class="row">
-    <div class="mt-2 col-4 mb-0" *ngFor="let change of changes" >
-      <div class="checkrdobtn">
-        <input class="rdovstchk" type="checkbox"  class="mr-1" [value]="change.value " (change)="onChanges($event)"/> 
-        <span class="txtdefault fs-16 weight500 text-center">{{change.name}}</span>					
-      </div>
+    <p class="title">What changes can be made ?</p>
   </div>
+  <div class="row">
+    <div class="mt-2 col-4 mb-0" *ngFor="let change of changes">
+      <div class="checkrdobtn">
+        <input
+          class="rdovstchk"
+          type="checkbox"
+          class="mr-1"
+          [value]="change.value"
+          (change)="onChanges($event)"
+        />
+        <span class="txtdefault fs-16 weight500 text-center">{{
+          change.name
+        }}</span>
+      </div>
+    </div>
   </div>
   <hr />
-  <div   class="box" class="row">
+  <div class="box" class="row">
     <div class="col-6 mb-4">
       <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label" >CorrectiveAction</label>
+        <label class="cols" for="exampleFormControlInput1" class="form-Label"
+          >CorrectiveAction</label
+        >
 
-        <select  
+        <select
           class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
@@ -470,13 +539,13 @@
         </select>
       </div>
     </div>
-    <div class="col-md-3 ">
+    <div class="col-md-3">
       <div>
         <label class="cols" for="exampleFormControlInput1" class="form-Label"
           >Person Responsible</label
         >
 
-        <select 
+        <select
           class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
@@ -496,7 +565,7 @@
           >Complete</label
         >
 
-        <select 
+        <select
           class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
@@ -509,160 +578,168 @@
   </div>
   <hr />
   <div class="col-12">
- <p class="title">   The Form was Completed by: </p> 
- </div>
+    <p class="title">The Form was Completed by:</p>
+  </div>
   <div>
-  <div   class="box"  class="row">
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="name" class="form-Label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="CompletedName"
-          formControlName="CompletedName"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="position" class="form-Label">Position </label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="CompletedPosition"
-          id="CompletedPosition"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="box" class="row">
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="department" class="form-Label"
-          >Department</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          formControlName="CompletedDepartment"
-          id="CompletedDepartment"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="date" class="form-Label">Date </label>
-        <input
-          type="date"
-          class="form-control"
-          formControlName="CompletedDate"
-          id="CompletedDate"
-        />
-      </div>
-    </div>
-  </div>
-  <div  class="row">
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
-          >Signature</label
-        >
-        <div  class="sign"  >
-          <signature-pad [options]="signaturePadOptions"
-          (onBeginEvent)="drawStart()"
-          (onEndEvent)="drawComplete()"
-           #signature1>
-          </signature-pad>
+    <div class="box" class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="name" class="form-Label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="CompletedName"
+            formControlName="CompletedName"
+          />
         </div>
-        <button class="btn btn-outline-primary mt-1" (click)="clear()">Clear</button>
+      </div>
+
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="position" class="form-Label"
+            >Position
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="CompletedPosition"
+            id="CompletedPosition"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="box" class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="department" class="form-Label"
+            >Department</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="CompletedDepartment"
+            id="CompletedDepartment"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="date" class="form-Label">Date </label>
+          <input
+            type="date"
+            class="form-control"
+            formControlName="CompletedDate"
+            id="CompletedDate"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="exampleFormControlInput1" class="form-Label"
+            >Signature</label
+          >
+          <div class="sign">
+            <signature-pad
+              [options]="signaturePadOptions"
+              (onBeginEvent)="drawStart()"
+              (onEndEvent)="drawComplete()"
+              #signature1
+            >
+            </signature-pad>
+          </div>
+          <button class="btn btn-outline-primary mt-1" (click)="clear()">
+            Clear
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
   <br />
-   <p class="title" >The Form was Reviewed by:  </p>
+  <p class="title">The Form was Reviewed by:</p>
   <div>
-  <div class="box"  class="row">
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="Name" class="form-Label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="reviewedName"
-          formControlName="reviewedName"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="position" class="form-Label">Position </label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="reviewedPosition"
-          id="reviewedPosition"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="box"  class="row">
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="department" class="form-Label"
-          >Department</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          formControlName="reviewedDepartment"
-          id="reviewedDepartment"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="date" class="form-Label">Date </label>
-        <input
-          type="date"
-          class="form-control"
-          formControlName="reviewedDate"
-          id="reviewedDate"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="box"  class="row">
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
-          >Signature</label
-        >
-        <div  class="sign" >
-          <signature-pad
-            [options]="signaturePadOptions1"
-            (onBeginEvent)="drawStart1()"
-            (onEndEvent)="drawComplete1()"
-            #signature2
-          ></signature-pad>
+    <div class="box" class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="Name" class="form-Label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="reviewedName"
+            formControlName="reviewedName"
+          />
         </div>
-        <button class="btn btn-outline-primary mt-1" (click)="clear1()">Clear</button>
+      </div>
+
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="position" class="form-Label"
+            >Position
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="reviewedPosition"
+            id="reviewedPosition"
+          />
+        </div>
       </div>
     </div>
-  </div>
+    <div class="box" class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="department" class="form-Label"
+            >Department</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="reviewedDepartment"
+            id="reviewedDepartment"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="date" class="form-Label">Date </label>
+          <input
+            type="date"
+            class="form-control"
+            formControlName="reviewedDate"
+            id="reviewedDate"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="box" class="row">
+      <div class="col-md-6">
+        <div>
+          <label class="cols" for="exampleFormControlInput1" class="form-Label"
+            >Signature</label
+          >
+          <div class="sign">
+            <signature-pad
+              [options]="signaturePadOptions1"
+              (onBeginEvent)="drawStart1()"
+              (onEndEvent)="drawComplete1()"
+              #signature2
+            ></signature-pad>
+          </div>
+          <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <hr />
 
-<br />
-
+  <br />
 
   <div class="col-md-2">
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
   </div>
-
 </div>

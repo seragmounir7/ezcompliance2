@@ -15,7 +15,7 @@
   <div class="spacer30"></div>
   <p class="text-center my-3" style="font-size: 30px">{{ formNameRecieved }}</p>
 
-  <div class="row mt-2" >
+  <div class="row mt-2">
     <div class="col-1 ml-2">
       <!-- <div class="row">
         <label class="col-8">Background Color</label>
@@ -87,7 +87,7 @@
         [ngClass]="{ empty: model[0].attributes.length == 0 }"
         [style.backgroundColor]="model[0].theme.bgColor"
         [style.color]="model[00].theme.textColor"
-        style="min-height: 1300px;"
+        style="min-height: 1300px"
       >
         <div
           class="field"
@@ -131,7 +131,7 @@
                 </div>
               </div>
               <div *ngIf="item.type == 'externalLink'">
-                <a [href]="item.linkAddr"  target="_blank">{{ item.label }}</a>
+                <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
               </div>
               <!-- email -->
               <div *ngIf="item.type == 'email'">
@@ -274,11 +274,16 @@
               </div>
               <!-- radio -->
               <div *ngIf="item.type == 'radio'">
-                <div><label>{{ item.label }}</label></div>
-                
+                <div>
+                  <label>{{ item.label }}</label>
+                </div>
+
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="form-check form-check-inline">
-                  <label  class="form-check-label">
+                <div
+                  *ngFor="let v of item.values"
+                  class="form-check form-check-inline"
+                >
+                  <label class="form-check-label">
                     <input
                       type="radio"
                       [value]="v.value"
@@ -352,7 +357,7 @@
                 class="fa fa-chevron-down pull-right"
               ></i>
               <i
-                (click)="removeField(0,i, item.label)"
+                (click)="removeField(0, i, item.label)"
                 class="fa fa-trash pull-right"
               ></i>
             </div>
@@ -381,11 +386,25 @@
                 [(ngModel)]="item.label"
               />
             </div>
-            <div  *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Name</label>
               <input class="form-control" type="text" [(ngModel)]="item.name" />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group" >
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Placeholder</label>
               <input
                 class="form-control"
@@ -393,7 +412,14 @@
                 [(ngModel)]="item.placeholder"
               />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Regex</label>
               <input
                 class="form-control"
@@ -401,7 +427,7 @@
                 [(ngModel)]="item.regex"
               />
             </div>
-            <div *ngIf="item.type =='externalLink'" class="form-group">
+            <div *ngIf="item.type == 'externalLink'" class="form-group">
               <label>Link Address</label>
               <input
                 class="form-control"
@@ -612,7 +638,7 @@
               </div>
               <!-- externalLink -->
               <div *ngIf="item.type == 'externalLink'">
-                <a [href]="item.linkAddr"  target="_blank">{{ item.label }}</a>
+                <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
               </div>
               <!-- email -->
               <div *ngIf="item.type == 'email'">
@@ -755,11 +781,16 @@
               </div>
               <!-- radio -->
               <div *ngIf="item.type == 'radio'">
-                <div><label>{{ item.label }}</label></div>
-                
+                <div>
+                  <label>{{ item.label }}</label>
+                </div>
+
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="form-check form-check-inline">
-                  <label  class="form-check-label">
+                <div
+                  *ngFor="let v of item.values"
+                  class="form-check form-check-inline"
+                >
+                  <label class="form-check-label">
                     <input
                       type="radio"
                       [value]="v.value"
@@ -833,7 +864,7 @@
                 class="fa fa-chevron-down pull-right"
               ></i>
               <i
-                (click)="removeField(1,i, item.label)"
+                (click)="removeField(1, i, item.label)"
                 class="fa fa-trash pull-right"
               ></i>
             </div>
@@ -862,11 +893,25 @@
                 [(ngModel)]="item.label"
               />
             </div>
-            <div  *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Name</label>
               <input class="form-control" type="text" [(ngModel)]="item.name" />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group" >
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Placeholder</label>
               <input
                 class="form-control"
@@ -874,7 +919,14 @@
                 [(ngModel)]="item.placeholder"
               />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Regex</label>
               <input
                 class="form-control"
@@ -882,7 +934,7 @@
                 [(ngModel)]="item.regex"
               />
             </div>
-            <div *ngIf="item.type =='externalLink'" class="form-group">
+            <div *ngIf="item.type == 'externalLink'" class="form-group">
               <label>Link Address</label>
               <input
                 class="form-control"
@@ -1093,7 +1145,7 @@
               </div>
               <!-- externalLink -->
               <div *ngIf="item.type == 'externalLink'">
-                <a [href]="item.linkAddr"  target="_blank">{{ item.label }}</a>
+                <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
               </div>
               <!-- email -->
               <div *ngIf="item.type == 'email'">
@@ -1236,11 +1288,16 @@
               </div>
               <!-- radio -->
               <div *ngIf="item.type == 'radio'">
-                <div><label>{{ item.label }}</label></div>
-                
+                <div>
+                  <label>{{ item.label }}</label>
+                </div>
+
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="form-check form-check-inline">
-                  <label  class="form-check-label">
+                <div
+                  *ngFor="let v of item.values"
+                  class="form-check form-check-inline"
+                >
+                  <label class="form-check-label">
                     <input
                       type="radio"
                       [value]="v.value"
@@ -1314,7 +1371,7 @@
                 class="fa fa-chevron-down pull-right"
               ></i>
               <i
-                (click)="removeField(2,i, item.label)"
+                (click)="removeField(2, i, item.label)"
                 class="fa fa-trash pull-right"
               ></i>
             </div>
@@ -1343,11 +1400,25 @@
                 [(ngModel)]="item.label"
               />
             </div>
-            <div  *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Name</label>
               <input class="form-control" type="text" [(ngModel)]="item.name" />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group" >
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Placeholder</label>
               <input
                 class="form-control"
@@ -1355,7 +1426,14 @@
                 [(ngModel)]="item.placeholder"
               />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Regex</label>
               <input
                 class="form-control"
@@ -1363,7 +1441,7 @@
                 [(ngModel)]="item.regex"
               />
             </div>
-            <div *ngIf="item.type =='externalLink'" class="form-group">
+            <div *ngIf="item.type == 'externalLink'" class="form-group">
               <label>Link Address</label>
               <input
                 class="form-control"
@@ -1573,7 +1651,7 @@
               </div>
               <!-- externalLink -->
               <div *ngIf="item.type == 'externalLink'">
-                <a [href]="item.linkAddr"  target="_blank">{{ item.label }}</a>
+                <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
               </div>
               <!-- email -->
               <div *ngIf="item.type == 'email'">
@@ -1716,11 +1794,16 @@
               </div>
               <!-- radio -->
               <div *ngIf="item.type == 'radio'">
-                <div><label>{{ item.label }}</label></div>
-                
+                <div>
+                  <label>{{ item.label }}</label>
+                </div>
+
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="form-check form-check-inline">
-                  <label  class="form-check-label">
+                <div
+                  *ngFor="let v of item.values"
+                  class="form-check form-check-inline"
+                >
+                  <label class="form-check-label">
                     <input
                       type="radio"
                       [value]="v.value"
@@ -1794,7 +1877,7 @@
                 class="fa fa-chevron-down pull-right"
               ></i>
               <i
-                (click)="removeField(3,i, item.label)"
+                (click)="removeField(3, i, item.label)"
                 class="fa fa-trash pull-right"
               ></i>
             </div>
@@ -1823,11 +1906,25 @@
                 [(ngModel)]="item.label"
               />
             </div>
-            <div  *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Name</label>
               <input class="form-control" type="text" [(ngModel)]="item.name" />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group" >
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Placeholder</label>
               <input
                 class="form-control"
@@ -1835,7 +1932,14 @@
                 [(ngModel)]="item.placeholder"
               />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Regex</label>
               <input
                 class="form-control"
@@ -1843,7 +1947,7 @@
                 [(ngModel)]="item.regex"
               />
             </div>
-            <div *ngIf="item.type =='externalLink'" class="form-group">
+            <div *ngIf="item.type == 'externalLink'" class="form-group">
               <label>Link Address</label>
               <input
                 class="form-control"
@@ -2051,7 +2155,7 @@
               </div>
               <!-- externalLink -->
               <div *ngIf="item.type == 'externalLink'">
-                <a [href]="item.linkAddr"  target="_blank">{{ item.label }}</a>
+                <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
               </div>
               <!-- email -->
               <div *ngIf="item.type == 'email'">
@@ -2194,11 +2298,16 @@
               </div>
               <!-- radio -->
               <div *ngIf="item.type == 'radio'">
-                <div><label>{{ item.label }}</label></div>
-                
+                <div>
+                  <label>{{ item.label }}</label>
+                </div>
+
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="form-check form-check-inline">
-                  <label  class="form-check-label">
+                <div
+                  *ngFor="let v of item.values"
+                  class="form-check form-check-inline"
+                >
+                  <label class="form-check-label">
                     <input
                       type="radio"
                       [value]="v.value"
@@ -2272,7 +2381,7 @@
                 class="fa fa-chevron-down pull-right"
               ></i>
               <i
-                (click)="removeField(4,i, item.label)"
+                (click)="removeField(4, i, item.label)"
                 class="fa fa-trash pull-right"
               ></i>
             </div>
@@ -2301,11 +2410,25 @@
                 [(ngModel)]="item.label"
               />
             </div>
-            <div  *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Name</label>
               <input class="form-control" type="text" [(ngModel)]="item.name" />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group" >
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Placeholder</label>
               <input
                 class="form-control"
@@ -2313,7 +2436,14 @@
                 [(ngModel)]="item.placeholder"
               />
             </div>
-            <div *ngIf="item.type!='textarea' && item.type!='signature' && item.type !='externalLink'" class="form-group">
+            <div
+              *ngIf="
+                item.type != 'textarea' &&
+                item.type != 'signature' &&
+                item.type != 'externalLink'
+              "
+              class="form-group"
+            >
               <label>Regex</label>
               <input
                 class="form-control"
@@ -2321,7 +2451,7 @@
                 [(ngModel)]="item.regex"
               />
             </div>
-            <div *ngIf="item.type =='externalLink'" class="form-group">
+            <div *ngIf="item.type == 'externalLink'" class="form-group">
               <label>Link Address</label>
               <input
                 class="form-control"
@@ -2451,7 +2581,6 @@
         <div class="dndPlaceholder" dndPlaceholderRef></div>
       </section>
     </div>
-   
   </div>
 </div>
 

@@ -50,14 +50,14 @@ export class ApplicationServiceInfoComponent implements OnInit {
 
     let serviceData = {
       ' title': this.serviceDetail.get('title').value,
-      'description': this.serviceDetail.get('description').value,
+      description: this.serviceDetail.get('description').value,
 
-      'arrObj': [
+      arrObj: [
         {
-          'fileUrl': this.serviceDetail.value.appService[0].fileUrl,
-          'title': this.serviceDetail.value.appService[0].title,
-          'description': this.serviceDetail.value.appService[0].description,
-          'subTitle': '',
+          fileUrl: this.serviceDetail.value.appService[0].fileUrl,
+          title: this.serviceDetail.value.appService[0].title,
+          description: this.serviceDetail.value.appService[0].description,
+          subTitle: '',
         },
       ],
     };

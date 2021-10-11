@@ -1,11 +1,12 @@
 table {
-    width: 100%;
-  }
-  .table td, .table th {
-    padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-    text-align: center;
+  width: 100%;
+}
+.table td,
+.table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
 }
 
 .modal-header.titel {
@@ -14,15 +15,15 @@ table {
   justify-content: center;
   padding: 1rem;
   border-bottom: 1px solid #e9ecef;
-  border-top-left-radius: calc(.3rem - 1px);
-  border-top-right-radius: calc(.3rem - 1px);
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
 }
 
 .modal-body.deletebody {
   text-align: center;
   font-size: 16px;
 }
-::ng-deep.modal-content{
+::ng-deep.modal-content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,7 +31,7 @@ table {
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 50%);
   outline: 0;
@@ -40,8 +41,8 @@ table {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: .75rem;
+  padding: 0.75rem;
   border-top: 1px solid #e9ecef;
-  border-bottom-right-radius: calc(.3rem - 1px);
-  border-bottom-left-radius: calc(.3rem - 1px);
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
 }

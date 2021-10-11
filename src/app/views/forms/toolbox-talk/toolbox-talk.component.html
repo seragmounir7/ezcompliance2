@@ -1,59 +1,51 @@
-<div class="container px-4 py-4  card " [formGroup]="toolBox">
+<div class="container px-4 py-4 card" [formGroup]="toolBox">
   <h1 class="text-center pt-3">
     <p>Toolbox Talk Preview</p>
   </h1>
-    <hr>
-  <div> 
+  <hr />
+  <div>
     <p class="title">Site Information</p>
     <div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Site Name</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
           <input type="text" class="form-control" id="siteName" />
         </div>
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Customer Name</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
           <input type="text" class="form-control" />
         </div>
       </div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Site Address</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">Site Address</p>
           <input type="text" class="form-control" />
         </div>
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Customer Contact</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">
+            Customer Contact
+          </p>
           <input type="text" class="form-control" />
         </div>
       </div>
 
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Customer Contact Phone</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">
+            Customer Contact Phone
+          </p>
           <input type="text" class="form-control" />
         </div>
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Customer Contact Email</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">
+            Customer Contact Email
+          </p>
           <input type="text" class="form-control" />
         </div>
       </div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Job Number</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">Job Number</p>
 
           <select
             class="form-select form-control col form-dropdown"
@@ -73,9 +65,9 @@
       </div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Meeting Conducted By</p
-          >
+          <p for="exampleFormControlInput1" class="form-Label">
+            Meeting Conducted By
+          </p>
           <select
             class="form-select form-control col form-dropdown"
             aria-label="Default select example"
@@ -87,10 +79,8 @@
           </select>
         </div>
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label"
-            >Signature*</p
-          >
-          <div  class="sign"  style="border: 1px solid rgb(149 162 173)">
+          <p for="exampleFormControlInput1" class="form-Label">Signature*</p>
+          <div class="sign" style="border: 1px solid rgb(149 162 173)">
             <signature-pad
               [options]="signaturePadOptions1"
               (onBeginEvent)="drawStart1()"
@@ -98,8 +88,9 @@
               #Signature1
             ></signature-pad>
           </div>
-          <button class="btn btn-outline-primary mt-1" (click)="clear1()">Clear</button>
-
+          <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+            Clear
+          </button>
         </div>
       </div>
     </div>
@@ -114,15 +105,13 @@
         <div>
           <div class="row">
             <div class="my-3 col-2">
-              <p for="exampleFormControlInput1" class="form-Label"
-                >Issue</p
-              >
+              <p for="exampleFormControlInput1" class="form-Label">Issue</p>
               <input type="text" class="form-control" formControlName="index" />
             </div>
             <div class="my-3 col-6">
-              <p for="exampleFormControlInput1" class="form-Label"
-                >Topic of discussion</p
-              >
+              <p for="exampleFormControlInput1" class="form-Label">
+                Topic of discussion
+              </p>
               <input
                 type="text"
                 class="form-control"
@@ -130,9 +119,9 @@
               />
             </div>
             <div class="my-3 col-2">
-              <p for="exampleFormControlInput1" class="form-Label"
-                >Topic Resolution</p
-              >
+              <p for="exampleFormControlInput1" class="form-Label">
+                Topic Resolution
+              </p>
               <select
                 class="form-select form-control col form-dropdown"
                 aria-label="Default select example"
@@ -144,12 +133,19 @@
               </select>
             </div>
             <div class="my-3 col-1 my-auto">
-              <span class="material-icons" style="margin-top: 35%"  (click)="addIssues()"
+              <span
+                class="material-icons"
+                style="margin-top: 35%"
+                (click)="addIssues()"
                 >add_circle_outline
               </span>
             </div>
             <div class="my-3 col-1 my-auto">
-              <span class="material-icons" style="margin-top: 35%"  (click)="removeIssues(i)">
+              <span
+                class="material-icons"
+                style="margin-top: 35%"
+                (click)="removeIssues(i)"
+              >
                 remove_circle_outline
               </span>
             </div>
@@ -166,9 +162,7 @@
       >
         <div class="row">
           <div class="my-3 col-6">
-            <p for="exampleFormControlInput1" class="form-Label"
-              >Action</p
-            >
+            <p for="exampleFormControlInput1" class="form-Label">Action</p>
             <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
@@ -180,9 +174,9 @@
             </select>
           </div>
           <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-Label"
-              >Person Responsible</p
-            >
+            <p for="exampleFormControlInput1" class="form-Label">
+              Person Responsible
+            </p>
             <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
@@ -194,9 +188,7 @@
             </select>
           </div>
           <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-Label"
-              >Complete</p
-            >
+            <p for="exampleFormControlInput1" class="form-Label">Complete</p>
             <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
@@ -208,12 +200,19 @@
             </select>
           </div>
           <div class="my-3 col-1 my-auto">
-            <span class="material-icons" style="margin-top: 35%"  (click)="addCorrectAct()"
+            <span
+              class="material-icons"
+              style="margin-top: 35%"
+              (click)="addCorrectAct()"
               >add_circle_outline
             </span>
           </div>
-          <div class="my-3  col-1 my-auto ">
-            <span class="material-icons" style="margin-top: 35%"  (click)="removeCorrectAct(i)">
+          <div class="my-3 col-1 my-auto">
+            <span
+              class="material-icons"
+              style="margin-top: 35%"
+              (click)="removeCorrectAct(i)"
+            >
               remove_circle_outline
             </span>
           </div>
@@ -228,9 +227,9 @@
       >
         <div class="row">
           <div class="my-3 col-5">
-            <p for="exampleFormControlInput1" class="form-Label"
-              >Employee {{i+1}}</p
-            >
+            <p for="exampleFormControlInput1" class="form-Label">
+              Employee {{ i + 1 }}
+            </p>
             <input
               type="text"
               class="form-control"
@@ -238,11 +237,9 @@
             />
           </div>
           <div class="my-3 col-5">
-            <p for="exampleFormControlInput1" class="form-Label"
-              >Signature</p
-            >
-          
-            <div  class="sign" style="border: 1px solid rgb(149 162 173)">
+            <p for="exampleFormControlInput1" class="form-Label">Signature</p>
+
+            <div class="sign" style="border: 1px solid rgb(149 162 173)">
               <signature-pad
                 [options]="signaturePadOptions2"
                 (onBeginEvent)="drawStart2()"
@@ -250,8 +247,9 @@
                 #Signature2
               ></signature-pad>
             </div>
-            <button class="btn btn-outline-primary mt-1" (click)="clear2()">Clear</button>
-
+            <button class="btn btn-outline-primary mt-1" (click)="clear2()">
+              Clear
+            </button>
           </div>
 
           <div class="my-3 col-1 my-auto">

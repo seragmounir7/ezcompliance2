@@ -8,9 +8,8 @@ describe('ViewFormsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewFormsComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewFormsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -3,18 +3,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-view-forms',
   templateUrl: './view-forms.component.html',
-  styleUrls: ['./view-forms.component.scss']
+  styleUrls: ['./view-forms.component.scss'],
 })
 export class ViewFormsComponent implements OnInit {
-
   constructor(
     public dialogRef: MatDialogRef<ViewFormsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

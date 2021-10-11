@@ -4,20 +4,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-edit-category',
   templateUrl: './add-edit-category.component.html',
-  styleUrls: ['./add-edit-category.component.scss']
+  styleUrls: ['./add-edit-category.component.scss'],
 })
 export class AddEditCategoryComponent implements OnInit {
-
   constructor(
     public dialogRef: MatDialogRef<AddEditCategoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
   ngOnInit(): void {
-    console.log("data",this.data);
-    
+    console.log('data', this.data);
   }
-
 }

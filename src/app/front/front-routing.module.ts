@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
-  {path:'',component:LandingPageComponent},
-  {path:'contactUs',component:ContactUsComponent},
-  {path:'faq',component:FaqComponent},
+  { path: '', component: LandingPageComponent },
+  { path: 'contactUs', component: ContactUsComponent },
+  { path: 'faq', component: FaqComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class FrontRoutingModule { }
+export class FrontRoutingModule {}

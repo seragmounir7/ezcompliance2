@@ -7,13 +7,17 @@ import { LandingPageInfoComponent } from './landing-page-info.component';
 import { HeaderInfoComponent } from './header-info/header-info.component';
 import { ApplicationServiceInfoComponent } from './application-service-info/application-service-info.component';
 
-
 @NgModule({
-  declarations: [LandingPageInfoComponent, HeaderInfoComponent, ApplicationServiceInfoComponent],
+  declarations: [
+    LandingPageInfoComponent,
+    HeaderInfoComponent,
+    ApplicationServiceInfoComponent,
+  ],
   imports: [
-    CommonModule,FormsModule,
+    CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    LandingPageInfoRoutingModule
-  ]
+    LandingPageInfoRoutingModule,
+  ],
 })
-export class LandingPageInfoModule { }
+export class LandingPageInfoModule {}
