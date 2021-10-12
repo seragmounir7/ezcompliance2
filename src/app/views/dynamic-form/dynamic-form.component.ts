@@ -29,11 +29,7 @@ export class DynamicFormComponent implements OnInit {
   success = false;
   show = false;
   fieldModels: Array<field> = [
-    {
-      type: 'blank',
-      icon: 'fa-box',
-      label: 'Blank',
-    },
+   
     {
       type: 'text',
       icon: 'fa-font',
@@ -78,8 +74,8 @@ export class DynamicFormComponent implements OnInit {
       placeholder: 'Enter your age',
       className: 'form-control',
       value: '',
-      min: 12,
-      max: 90,
+      min: null,
+      max: null,
     },
     {
       type: 'date',
@@ -182,13 +178,18 @@ export class DynamicFormComponent implements OnInit {
       // "className": "form-control",
       // "subtype": "file"
     },
-    // {
-    //   "type": "table",
-    //   "icon":"fas fa-table",
-    //   "label": "Table",
-    //   "row": 3,
-    //   "col": 3,
-    // },
+    {
+      "type": "table",
+      "icon":"fas fa-table",
+      "label": "Table",
+      "tableHeading":['', '', '', ''],
+      "tableRows":[
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+      ]
+    },
     {
       type: 'button',
       icon: 'fa-paper-plane',
@@ -201,63 +202,35 @@ export class DynamicFormComponent implements OnInit {
 rows=[];
 formData=[];
 tableIndexMap= new Map();
-  modelFields0:Array<field>=[];
-  modelFields1:Array<field>=[];
-  modelFields2:Array<field>=[];
-  modelFields3:Array<field>=[];
-  modelFields4:Array<field>=[];
+//   modelFields:Array<field>=[];
+//  modelFields:Array<field>=[];
+
   model:any =[
-    {
-      name: '',
-      description: '',
-      theme: {
-        bgColor: '#ffffff',
-        textColor: '#555555',
-        bannerImage: '',
-      },
-      attributes: this.modelFields0,
-    },
-    {
-      name: '',
-      description: '',
-      theme: {
-        bgColor: '#ffffff',
-        textColor: '#555555',
-        bannerImage: '',
-      },
-      attributes: this.modelFields1,
-    },
-    {
-      name: '',
-      description: '',
-      theme: {
-        bgColor: '#ffffff',
-        textColor: '#555555',
-        bannerImage: '',
-      },
-      attributes: this.modelFields2,
-    },
-    {
-      name: '',
-      description: '',
-      theme: {
-        bgColor: '#ffffff',
-        textColor: '#555555',
-        bannerImage: '',
-      },
-      attributes: this.modelFields3,
-    },
-    {
-      name: '',
-      description: '',
-      theme: {
-        bgColor: '#ffffff',
-        textColor: '#555555',
-        bannerImage: '',
-      },
-      attributes: this.modelFields4,
-    },
+    // {
+    //   name: '',
+    //   description: '',
+    //   theme: {
+    //     bgColor: '#ffffff',
+    //     textColor: '#555555',
+    //     bannerImage: '',
+    //   },
+    //   attributes: this.modelFields0,
+    // },
+    
+    // {
+    //   name: '',
+    //   description: '',
+    //   theme: {
+    //     bgColor: '#ffffff',
+    //     textColor: '#555555',
+    //     bannerImage: '',
+    //   },
+    //   attributes: this.modelFields1,
+    // },
+    
+   
   ];
+  totalModels=["","","","","","","","","","",]
   report = false;
   reports: any = [];
   formNameRecieved = '';
@@ -268,7 +241,9 @@ tableIndexMap= new Map();
     private dynamicFormsService: DynamicFormsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {  
+
+
     console.log(
       "sessionStorage.getItem('type')",
       sessionStorage.getItem('type')
@@ -281,19 +256,40 @@ tableIndexMap= new Map();
       // if(this.dynamicFormsService.formType =='add'){
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.formNameRecieved = sessionStorage.getItem('formTitle');
+      for(let i=0;i<this.totalModels.length;i++){
+        let   modelFields:Array<field>=[];
+        let modelRow = {
+          name: '',
+          description: '',
+          theme: {
+            bgColor: '#ffffff',
+            textColor: '#555555',
+            bannerImage: '',
+          },
+          attributes: modelFields,
+        };
+        this.model.push(modelRow);
+      }
     }
     if (sessionStorage.getItem('type') == 'edit') {
       // if(this.dynamicFormsService.formType =='edit'){
       this.formNameRecieved = sessionStorage.getItem('formTitle');
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.type = 'edit';
+
       // this.formIdRec=this.dynamicFormsService.formIdEdit;
       this.formIdRec = sessionStorage.getItem('formId');
       this.spinner.show();
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
+        this.model =[];
+
+       res.data.htmlObject.forEach((item)=>{
+        this.model.push(item)
+       })
+      
         // this.formNameRecieved = res.data.title;
-        this.model.attributes = res.data.htmlObject;
+        // this.model.attributes = res.data.htmlObject;
         this.spinner.hide();
       });
     }
@@ -361,7 +357,30 @@ tableIndexMap= new Map();
     // this.model = this.cs.data;
     // console.log(this.model.data);
   }
-
+  addDragAndDropRow(position,index){
+    let   modelFields:Array<field>=[];
+    let modelRow = {
+      name: '',
+      description: '',
+      theme: {
+        bgColor: '#ffffff',
+        textColor: '#555555',
+        bannerImage: '',
+      },
+      attributes: modelFields,
+    };
+    if(position =='inTheEnd'){
+      this.model.push(modelRow);
+    }
+    if(position =='inBetween'){
+      this.model.splice(index+1,0,modelRow);
+    }
+    
+  }
+  removeDragAndDropRow(j){
+    if(this.model.length>1)
+    this.model.splice(j,1);
+  }
   onDragStart(event: DragEvent) {
     console.log('drag started', JSON.stringify(event, null, 2));
   }
@@ -408,30 +427,30 @@ tableIndexMap= new Map();
 
       console.log('event.data.type ', event.data.type);
 
-      if (event.data.type == 'table') {
-        let tablendex = 0;
-        this.tableIndexMap.clear();
+      // if (event.data.type == 'table') {
+      //   let tablendex = 0;
+      //   this.tableIndexMap.clear();
 
-        this.model.attributes.forEach((element, i) => {
-          console.log(element.type);
+      //   this.model.attributes.forEach((element, i) => {
+      //     console.log(element.type);
 
-          if (element.type == 'table') {
-            console.log(element.type);
+      //     if (element.type == 'table') {
+      //       console.log(element.type);
 
-            this.tableIndexMap.set(i, tablendex);
-            tablendex++;
-          }
-        });
+      //       this.tableIndexMap.set(i, tablendex);
+      //       tablendex++;
+      //     }
+      //   });
 
-        let tempRow = [
-          ['', '', '', ''],
-          ['', '', '', ''],
-          ['', '', '', ''],
-          ['', '', '', ''],
-        ];
+      //   let tempRow = [
+      //     ['', '', '', ''],
+      //     ['', '', '', ''],
+      //     ['', '', '', ''],
+      //     ['', '', '', ''],
+      //   ];
 
-        this.rows.splice(this.tableIndexMap.get(event.index), 0, tempRow);
-      }
+      //   this.rows.splice(this.tableIndexMap.get(event.index), 0, tempRow);
+      // }
 
       console.log(this.rows);
 
@@ -450,7 +469,7 @@ tableIndexMap= new Map();
       //   }
       // });
 
-      console.log('table Map', this.tableIndexMap);
+     // console.log('table Map', this.tableIndexMap);
     }
   }
 
@@ -641,50 +660,70 @@ console.log("formData",this.formData);
   }
 
   ////table//add row column
-  addCol(i) {
-    console.log(this.tableIndexMap);
-
-    console.log('add col', i);
-    let index = this.tableIndexMap.get(i);
-    let tempRow = this.rows[index];
-    tempRow.forEach((row) => {
-      row.push('');
+  addCol(j,i) {
+    console.log(this.model[j].attributes);
+    
+    this.model[j].attributes[i].tableHeading.push('');
+    this.model[j].attributes[i].tableRows.forEach(item=>{
+      item.push('')
     });
+
+    // console.log(this.tableIndexMap);
+
+    // console.log('add col', i);
+    // let index = this.tableIndexMap.get(i);
+    // let tempRow = this.rows[index];
+    // tempRow.forEach((row) => {
+    //   row.push('');
+    // });
   }
-  removeCol(i) {
-    let index = this.tableIndexMap.get(i);
-
-    console.log('remove col', i);
-    let tempRow = this.rows[index];
-
-    if (tempRow[0].length > 1) {
-      tempRow.forEach((row) => {
-        row.pop();
-      });
+  removeCol(j,i) {
+    if(this.model[j].attributes[i].tableHeading.length>1 && this.model[j].attributes[i].tableRows[0].length>1){
+      this.model[j].attributes[i].tableHeading.pop();
+      this.model[j].attributes[i].tableRows.forEach(item=>{
+        item.pop();
+      })
     }
-  }
-  addRow(i) {
-    console.log('add row', i);
-    let index = this.tableIndexMap.get(i);
-    let tempRow = this.rows[index];
+    // let index = this.tableIndexMap.get(i);
 
-    let arr = [];
-    for (let i = 0; i < tempRow[0].length; i++) {
+    // console.log('remove col', i);
+    // let tempRow = this.rows[index];
+
+    // if (tempRow[0].length > 1) {
+    //   tempRow.forEach((row) => {
+    //     row.pop();
+    //   });
+    // }
+  }
+  addRow(j,i) {
+    
+    
+     let arr = [];
+    for (let k = 0; k < this.model[j].attributes[i].tableRows[0].length; k++) {
       arr.push('');
     }
-    this.rows[index].push(arr);
+   this.model[j].attributes[i].tableRows.push(arr);
+    // console.log('add row', i);
+    // let index = this.tableIndexMap.get(i);
+    // let tempRow = this.rows[index];
+
+    // let arr = [];
+    // for (let i = 0; i < tempRow[0].length; i++) {
+    //   arr.push('');
+    // }
+    // this.rows[index].push(arr);
   }
-  removeRow(i) {
-    console.log('remove row', i);
-    let index = this.tableIndexMap.get(i);
-    if (this.rows[index].length > 1) this.rows[index].pop();
+  removeRow(j,i) {
+    // let index = this.tableIndexMap.get(i);
+    if ( this.model[j].attributes[i].tableRows.length > 1)
+    this.model[j].attributes[i].tableRows.pop();
   }
   addForm() {
     console.log('formAdded succesfully=>', this.model.attributes);
 
     let data = {
       title: this.formNameRecieved,
-      htmlObject: this.model.attributes,
+      htmlObject: this.model,
     };
 
     if (this.type == 'add') {
@@ -700,8 +739,11 @@ console.log("formData",this.formData);
       console.log('edit');
 
       let data = {
-        htmlObject: this.model.attributes,
+        title: this.formNameRecieved,
+        htmlObject: this.model,
       };
+      console.log("edit form data",data);
+      
       this.dynamicFormsService
         .editForm(data, this.formIdRec)
         .subscribe((res) => {
