@@ -14,7 +14,7 @@
   </div>
   <div class="spacer30"></div>
   <p class="text-center my-3" style="font-size: 30px">{{ formNameRecieved }}</p>
-  <div class="col-3 container" *ngIf="type == 'edit'">    
+  <div class="col-3 container mb-3" *ngIf="type == 'edit'">    
     <input type="text" class="form-control" [(ngModel)]="formNameRecieved" >
   </div>
   <div class="row mt-2">
@@ -246,7 +246,7 @@
                   </div>
                   <!-- paragraph-->
                   <div *ngIf="item.type == 'paragraph'">
-                    <p class="form-text"><strong>{{ item.placeholder }}</strong></p>
+                    <p class="form-text subtitle"><strong>{{ item.placeholder }}</strong></p>
                   </div>
                   <div *ngIf="item.type == 'autocomplete'">
                     <label>{{ item.label }}</label>
@@ -663,9 +663,9 @@
             *ngFor="let row of model; let i = index"
             class="form-group row"
           >
-            <div *ngFor="let item of row.attributes" class="col form-group justify-content-between">
+            <div *ngFor="let item of row.attributes;let j=index" class="col form-group justify-content-between">
               <!--Each row  -->
-              <div *ngIf="item.type == 'text'" class="col mr-1">
+              <div *ngIf="item.type == 'text'" class="col=6 mr-1">
                 <label>{{ item.label }}</label>
                 <label *ngIf="item.required" class="text-danger">*</label>
                 <input
@@ -734,14 +734,27 @@
               </div>
               <div *ngIf="item.type == 'table'" class="btn-cont" class="col mr-1">
                 <div class="row">
-                  <div class="col">
-                    <table class="table">
+                  <div class="col-11">
+                    <table class="table table-bordered ">
+                      <thead>
+                        <tr>
+                          <th scope="col" *ngFor="let row of item.tableHeading;let l=index">
+                            <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]"  [ngModelOptions]="{ standalone: true }"/> -->
+                            <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/>
+                          </th>                         
+                        </tr>
+                      </thead>
                       <tbody>
-                        <tr *ngFor="let row of rows">
+                        <tr
+                          *ngFor="
+                            let row of item.tableRows
+                          "
+                        >
                           <td *ngFor="let col of row">
                             <input class="form-control" type="text" />
                           </td>
                         </tr>
+                       
                       </tbody>
                     </table>
                   </div>
@@ -866,7 +879,7 @@
                 </small>
               </div>
               <div *ngIf="item.type == 'paragraph'" class="col mr-1">
-                <p class="form-text">{{ item.placeholder }}</p>
+                <p class="form-text subtitle">{{ item.placeholder }}</p>
               </div>
               <div *ngIf="item.type == 'externalLink'" class="col mr-1">
                 <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
@@ -971,3 +984,5 @@
       {{ model | json }}
   </pre
 >
+
+

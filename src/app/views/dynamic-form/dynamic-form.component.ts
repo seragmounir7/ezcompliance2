@@ -28,6 +28,7 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
+  nameth=[,,,];
   fieldModels: Array<field> = [
    
     {
@@ -182,7 +183,7 @@ export class DynamicFormComponent implements OnInit {
       "type": "table",
       "icon":"fas fa-table",
       "label": "Table",
-      "tableHeading":['', '', '', ''],
+      "tableHeading":['','','',''],
       "tableRows":[
         ['', '', '', ''],
         ['', '', '', ''],
@@ -566,6 +567,8 @@ console.log("formData",this.formData);
   }
   regexErr = [];
   submit() {
+    console.log("model",this.model);
+    
     this.regexErr = [];
 
     this.submitBtn = true;
@@ -718,7 +721,22 @@ console.log("formData",this.formData);
     if ( this.model[j].attributes[i].tableRows.length > 1)
     this.model[j].attributes[i].tableRows.pop();
   }
+
+  changeValueTH(e,i,j,l){
+console.log("event",e);
+console.log("i",i);
+console.log("j",j);
+console.log("l",l);
+this.model[i].attributes[j].tableHeading[l]=e.target.value;
+console.log("this.model[i].attributes[j].tableHeading",this.model[i].attributes[j].tableHeading);
+console.log("this.model[i].attributes[j].tableHeading[l]",this.model[i].attributes[j].tableHeading[l]);
+console.log("model=.",this.model);
+
+
+  }
   addForm() {
+
+
     console.log('formAdded succesfully=>', this.model.attributes);
 
     let data = {
@@ -754,3 +772,7 @@ console.log("formData",this.formData);
     }
   }
 }
+
+
+
+
