@@ -8,22 +8,15 @@ import { map } from 'rxjs/operators';
 export class LandingPageInfoServiceService {
   apiUrl = environment.apiUrl;
   constructor(private https: HttpClient) {}
-
   getAppServiceById(id: any) {
-    return this.https.get(this.apiUrl + '' + id).pipe(
+    return this.https.get(this.apiUrl + 'module/get/data/' + id).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
       })
     );
   }
-  // editAppService(data,id){
-  //   return this.https.put(this.apiUrl + "" +id,data).pipe(map((res :any) => {
-  //     console.log("res.data=>",res.data)
-  //     return res
-  //   }));
-  // }
-
+ 
   addAppService(data) {
     return this.https.post(this.apiUrl + 'module/multiple', data).pipe(
       map((res: any) => {
@@ -32,10 +25,52 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-  // deleteAppService(id){
-  //   return this.https.delete(this.apiUrl + "" +id).pipe(map((res :any) => {
-  //     console.log("res.data=>",res.data)
-  //     return res
-  //   }));
-  // }
+  editModule(data,id){
+    return this.https.put(this.apiUrl + 'module/update/' +id,data).pipe(map((res :any) => {
+      console.log("res.data=>",res.data)
+      return res
+    }));
+  }
+  deleteModule(id){
+    return this.https.delete(this.apiUrl + 'module/delete/' +id).pipe(map((res :any) => {
+      console.log("res.data=>",res.data)
+      return res
+    }));
+  }
+  editHeader(data) {
+    return this.https.post(this.apiUrl + 'mainPage/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getHeaderBYId() {
+    return this.https.get(this.apiUrl + 'mainPage/get').pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editsubModule(data,id){
+    return this.https.put(this.apiUrl + 'subModule/update/' +id,data).pipe(map((res :any) => {
+      console.log("res.data=>",res.data)
+      return res
+    }));
+  }
+  deletesubModule(id){
+    return this.https.delete(this.apiUrl + 'subModule/delete/' +id).pipe(map((res :any) => {
+      console.log("res.data=>",res.data)
+      return res
+    }));
+  }
+  addFAQ(data) {
+    return this.https.post(this.apiUrl + 'question/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
 }

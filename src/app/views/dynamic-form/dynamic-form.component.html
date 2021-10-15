@@ -258,6 +258,7 @@
                     </select>
                     <!-- <small class="form-text text-muted">{{item.description}}</small> -->
                   </div>
+                  
                   <!-- checkbox -->
                   <div *ngIf="item.type == 'checkbox'">
                     <label>{{ item.label }}</label>
@@ -412,6 +413,7 @@
                     [(ngModel)]="item.label"
                   />
                 </div>
+           
                 <!-- <div
                   *ngIf="
                     item.type != 'textarea' &&
@@ -504,7 +506,8 @@
                   *ngIf="
                     item.type == 'radio' ||
                     item.type == 'checkbox' ||
-                    item.type == 'autocomplete'
+                    item.type == 'autocomplete'||
+                    item.type == 'autocompleteCond'
                   "
                 >
                   <div class="row">
@@ -580,6 +583,7 @@
                     </div>
                   </div>
                 </div>
+               
               </div>
             </div>
             <!--optional placeholder element for dropzone-->
@@ -739,8 +743,9 @@
                       <thead>
                         <tr>
                           <th scope="col" *ngFor="let row of item.tableHeading;let l=index">
-                            <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]"  [ngModelOptions]="{ standalone: true }"/> -->
-                            <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/>
+                            <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]" (change)="changeValueTH($event,i,j,l)" [ngModelOptions]="{ standalone: true }"/> -->
+                            <input class="form-control tableHeadings" type="text" placeholder="heading"/>
+                            <!-- <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/> -->
                           </th>                         
                         </tr>
                       </thead>
@@ -899,6 +904,7 @@
                 </select>
                 <!-- <small class="form-text text-muted">{{item.description}}</small> -->
               </div>
+              
               <div *ngIf="item.type == 'checkbox'" class="col mr-1">
                 <label>{{ item.label }}</label>
                 <label *ngIf="item.required" class="text-danger">*</label>

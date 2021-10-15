@@ -22,7 +22,7 @@ export class field {
   value?: any;
   values?: Array<value>;
   tableRows?:Array<any>;
-  tableHeading?:Array<any>
+  tableHeading?:Array<any>;
 }
 
 export class value {

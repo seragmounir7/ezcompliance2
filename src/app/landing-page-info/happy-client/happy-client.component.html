@@ -1,88 +1,74 @@
-<!-- <div
-  class="container px-4 py-4 card"
-  [formGroup]="clientDetail"
-  (ngSubmit)="onFormSubmit()"
->
-  <h1 class="text-center pt-3">
-    <p>OurHappyClient</p>
-  </h1>
-  <hr />
-  <div class="row">
-    <div class="col-sm-12">
-      <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-      <input
-        type="text"
-        formControlName="title"
-        style="height: 50px"
-        class="form-control"
-        id="heading"
-      />
-    </div>
+<div class="text-center">
+  <h1 class="card"> Our Happy Client  List</h1>
+</div>
+<!-- <div class="row">
+  <div class="col ml-2 mb-2">
+    <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-left" (click)="addForm('')">
+      Add Client
+    </button>
   </div>
-  <br />
-  <hr />
-  <ng-container formArrayName="clientArr">
-    <ng-container
-      *ngFor="let control of clientArr().controls; let i = index"
-      [formGroupName]="i"
-    >
-      <div>
-        <div class="row">
-          <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-Label">UploadImage</p>
-            <img
-              src="../../../assets/img/uploadImg.png"
-              alt=""
-              width="150"
-              height="100"
-            />
-            <input
-              type="file"
-              class="d-none"
-              #file
-              id="file"
-              formControlName="fileUrl"
-              class="custom-file-input img1 form-control"
-              name="avatar"
-              (change)="browser($event)"
-            />
-            <span
-              class="material-icons material-file"
-              (click)="file.click()"
-              class="btn border bg-white z-index"
-              style="
-                position: absolute;
-                top: 120px;
-                left: 150;
-                font-size: 1rem !important;
-              "
-            >
-              <i
-                class="fa fa-upload"
-                aria-hidden="true"
-                style="margin: 0px"
-              ></i>
-            </span>
-          </div>
+</div> -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                
+                  <th style="width: 70%"> Heading</th>
+                  <th style="width: 30%">Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  >
+                  <td>{{ happyClientData.title }}</td>
 
-          <div class="my-1 col-1 my-auto">
-            <span class="material-icons" (click)="addHappyClient()"
-              >add_circle_outline
-            </span>
-          </div>
-          <div class="my-1 col-1 my-auto">
-            <span class="material-icons" (click)="removeHappyClient(i)">
-              remove_circle_outline
-            </span>
+                  <td><button class="btn btn-info btn-sm mr-2" (click)="editForm(happyClientData._id,false)">
+                      <i class="fas fa-pencil-alt mr-2"></i> Edit
+                    </button></td>
+                </tr>
+              </tbody>
+             </table>
           </div>
         </div>
       </div>
-
-      <hr />
-    </ng-container>
-  </ng-container>
-
-  <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </div>
   </div>
-</div> -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+       <div class="card">
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                  <th style="width: 80%">Images</th>
+                  
+                  <th>Action</th>
+                
+
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of happyClientData.subModules; let i=index">
+                  <td><img src="{{ data.fileUrl }}" height="150px" width="150px"></td>
+ 
+                  <td><button (click)="editForm(data._id,true,i)" class="btn btn-info btn-sm mr-2">
+                      <i class="fas fa-pencil-alt mr-2"></i>Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</section>

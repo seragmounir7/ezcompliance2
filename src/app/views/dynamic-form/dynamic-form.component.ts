@@ -28,9 +28,7 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
-  nameth=[,,,];
-  fieldModels: Array<field> = [
-   
+  fieldModels: Array<field> = [   
     {
       type: 'text',
       icon: 'fa-font',
@@ -143,6 +141,7 @@ export class DynamicFormComponent implements OnInit {
         },
       ],
     },
+   
     {
       type: 'autocomplete',
       icon: 'fa-bars',
@@ -180,11 +179,11 @@ export class DynamicFormComponent implements OnInit {
       // "subtype": "file"
     },
     {
-      "type": "table",
-      "icon":"fas fa-table",
-      "label": "Table",
-      "tableHeading":['','','',''],
-      "tableRows":[
+      type: "table",
+      icon:"fas fa-table",
+    label: "Table",
+      tableHeading:[' ',' ',' ',' '],
+      tableRows:[
         ['', '', '', ''],
         ['', '', '', ''],
         ['', '', '', ''],
@@ -567,6 +566,10 @@ console.log("formData",this.formData);
   }
   regexErr = [];
   submit() {
+    let t =document.getElementsByClassName('tableHeadings')	;
+    console.log("heading=>",t);
+  //  console.log("heading=>",t[0]);
+    
     console.log("model",this.model);
     
     this.regexErr = [];
@@ -723,13 +726,14 @@ console.log("formData",this.formData);
   }
 
   changeValueTH(e,i,j,l){
-console.log("event",e);
+console.log("event.target.value",e);
+// console.log("event.target.value",e.target.value);
 console.log("i",i);
 console.log("j",j);
 console.log("l",l);
 this.model[i].attributes[j].tableHeading[l]=e.target.value;
-console.log("this.model[i].attributes[j].tableHeading",this.model[i].attributes[j].tableHeading);
-console.log("this.model[i].attributes[j].tableHeading[l]",this.model[i].attributes[j].tableHeading[l]);
+// console.log("this.model[i].attributes[j].tableHeading",this.model[i].attributes[j].tableHeading);
+// console.log("this.model[i].attributes[j].tableHeading[l]",this.model[i].attributes[j].tableHeading[l]);
 console.log("model=.",this.model);
 
 
@@ -771,6 +775,7 @@ console.log("model=.",this.model);
         });
     }
   }
+
 }
 
 

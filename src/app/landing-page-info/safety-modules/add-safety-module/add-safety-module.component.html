@@ -1,0 +1,233 @@
+
+<div
+class="container px-4 py-4 card"
+[formGroup]="safetyDetail"
+
+>
+<h1 class="text-center pt-3">
+  <p>Online Safety Module Info</p>
+</h1>
+<hr />
+
+<div>
+  <div class="row" *ngIf="module" >
+    <div class="col-sm-6">
+      <p for="exampleFormControlInput1" class="form-Label">Heading</p>
+      <input
+        type="text"
+        formControlName="title"
+        style="height: 50px"
+        class="form-control"
+        id="heading"
+      />
+    </div>
+
+    <div class="col-sm-6">
+      <p for="exampleFormControlInput1" class="form-Label">Description</p>
+      <textarea
+        rows="3"
+        type="text"
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+    </div>
+  </div>
+ 
+  <ng-container formArrayName="arrObj"  *ngIf="subModule">
+    <ng-container
+      *ngFor="let control of safetyImgArr().controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div>
+        <div class="row">
+          <div class="my-3 col-3">
+            <p for="exampleFormControlInput1" class="form-Label">
+              UploadImage
+            </p>
+            <img
+              [src]="selectedImage"
+              onerror=" this.src='../../../assets/img/uploadImg.png' "
+              alt=""
+              width="150"
+              height="100"
+              class="imageService"
+            />
+            <input
+              type="file"
+              class="d-none"
+              #file
+              id="file"
+              class="custom-file-input img1 form-control"
+              name="avatar"
+              (change)="browser($event,i)"
+            />
+            <span
+              class="material-icons material-file"
+              (click)="file.click()"
+              class="btn border bg-white z-index mb-1"
+              style="
+                position: absolute;
+                top: 120px;
+                left: 0;
+                font-size: 1rem !important;
+              "
+            >
+              <i
+                class="fa fa-upload"
+                aria-hidden="true"
+                style="margin: 0px"
+              ></i>
+            </span>
+          </div>
+          <div class="my-3 col-5">
+            <p for="exampleFormControlInput1" class="form-Label">Name</p>
+            <input
+              type="text"
+              formControlName="title"
+              style="height: 90px"
+              class="form-control"
+              id="name"
+            />
+          </div>
+          <!-- <div class="my-3 col-1 my-auto">
+            <span class="material-icons" (click)="addSafetyModule()"
+              >add_circle_outline
+            </span>
+          </div>
+          <div class="my-3 col-1 my-auto">
+            <span class="material-icons" (click)="removeSafetyModule(i)">
+              remove_circle_outline
+            </span>
+          </div> -->
+        </div>
+      </div>
+      <hr />
+    </ng-container>
+  </ng-container>
+ 
+  <div class="col-md-2">
+    <button
+      type="submit"
+      *ngIf="module" (click)="editModule()" 
+      class="btn btn-primary btn-block"
+    >
+    Update
+    </button>
+    <button
+      type="submit"
+      *ngIf="subModule" (click)="editSubModule()" 
+      class="btn btn-primary btn-block"
+    >
+    Update
+    </button>
+  </div>
+</div>
+</div>
+<!-- <div>
+    <div class="row" *ngIf="module == moduleName" >
+      <div class="col-sm-6">
+        <p for="exampleFormControlInput1" class="form-Label">Heading</p>
+        <input
+          type="text"
+          formControlName="title"
+          style="height: 50px"
+          class="form-control"
+          id="heading"
+        />
+      </div>
+  
+      <div class="col-sm-6">
+        <p for="exampleFormControlInput1" class="form-Label">Description</p>
+        <textarea
+          rows="3"
+          type="text"
+          formControlName="description"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <ng-container formArrayName="arrObj"  *ngIf="subModule == moduleName">
+      <ng-container
+        *ngFor="let control of safetyImgArr().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div>
+          <div class="row">
+            <div class="my-3 col-3">
+              <p for="exampleFormControlInput1" class="form-Label">
+                UploadImage
+              </p>
+              <img
+                [src]="selectedImage"
+                onerror=" this.src='../../../assets/img/uploadImg.png' "
+                alt=""
+                width="150"
+                height="100"
+                class="imageService"
+              />
+              <input
+                type="file"
+                class="d-none"
+                #file
+                id="file"
+                class="custom-file-input img1 form-control"
+                name="avatar"
+                (change)="browser($event,i)"
+              />
+              <span
+                class="material-icons material-file"
+                (click)="file.click()"
+                class="btn border bg-white z-index mb-1"
+                style="
+                  position: absolute;
+                  top: 120px;
+                  left: 0;
+                  font-size: 1rem !important;
+                "
+              >
+                <i
+                  class="fa fa-upload"
+                  aria-hidden="true"
+                  style="margin: 0px"
+                ></i>
+              </span>
+            </div>
+            <div class="my-3 col-5">
+              <p for="exampleFormControlInput1" class="form-Label">Name</p>
+              <input
+                type="text"
+                formControlName="title"
+                style="height: 90px"
+                class="form-control"
+                id="name"
+              />
+            </div>
+            <div class="my-3 col-1 my-auto">
+              <span class="material-icons" (click)="addSafetyModule()"
+                >add_circle_outline
+              </span>
+            </div>
+            <div class="my-3 col-1 my-auto">
+              <span class="material-icons" (click)="removeSafetyModule(i)">
+                remove_circle_outline
+              </span>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </ng-container>
+    </ng-container>
+    <br />
+    <hr />
+    <div class="col-md-2">
+      <button
+        type="submit"
+        (click)="onFormSubmit()"
+        class="btn btn-primary btn-block"
+      >
+        Submit
+      </button>
+    </div>
+  </div> -->
