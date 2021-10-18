@@ -235,7 +235,7 @@ tableIndexMap= new Map();
     
    
   ];
-  totalModels=["","","","","","","","","","",]
+  totalModels=["","","","",""]
   report = false;
   reports: any = [];
   formNameRecieved = '';
