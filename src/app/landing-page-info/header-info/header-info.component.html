@@ -1,1 +1,203 @@
-<p>header-info works!</p>
+<!-- <div class="container card px-4 py-4">
+  
+  <h2 class="text-center pt-3">
+    <p>Header Information</p>
+  </h2>
+  <hr />
+  <!-- <div class="box" [formGroup]="HeaderInformation" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <label
+            class="cols"
+            for="heading text"
+            for="exampleFormControlInput1"
+            class="form-Label"
+            >Heading</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="heading"
+            formControlName="title"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6" style="height: 1px">
+        <div>
+          <label class="cols" for="description text" class="form-Label"
+            >Description</label
+          >
+
+          <textarea
+            class="form-control"
+            id="description"
+            formControlName="description"
+          >
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2" style="height: 30px">
+      <label for="formFile" class="form-Label">Upload Image</label>
+    </div>
+    <div class="col-sm-3 mt-3">
+      <img
+        [src]="selectedImage[0]"
+        onerror="this.src='../../../assets/img/uploadImg.png'"
+        class="imageStud"
+        alt=""
+        width="130"
+        height="130"
+      />
+      <input
+        type="file"
+        #contactImage
+        class="custom-file-input img1 form-control"
+        (change)="browser($event)"
+        id="inputGroupFile01"
+        name="avatar"
+        style="display: none"
+      />
+      <span
+        class="material-icons material-file outline"
+        (click)="contactImage.click()"
+      >
+        <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
+      </span>
+    </div>
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <button class="btn btn-primary rounded-pill" (click)="onSubmit()">
+          Submit
+        </button>
+        <button class="btn btn-primary rounded-pill" (click)="edit()">
+          Update
+        </button>
+      </div>
+    </div> -->
+
+     <!-- <div class="row">
+          <div class="row py-3">
+              <div class=" offset-1  col-3 mt-2 ">
+              <img src="../../../assets/img/workers.jpg" alt="" width="130" height="130">
+              </div>
+            </div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="my-3">
+          <label for="formFile" class="form-label">Upload Image</label>
+          <button  >Select File</button>
+          <input class="form-control" hidden formControlName="porfUploadImage"  type="file" id="formFile" />
+          </div>
+      </div> -->
+  <!-- </div>  --> 
+  
+    
+
+  <section class="content" [formGroup]="serviceDetail">
+    <div class="container-fluid">
+      <!-- <div class="row">
+        <div class="col text-center">
+          <h1>Header Format</h1>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col pt-3">
+          <h1>Header Format</h1>
+        </div>
+        <div class="col pt-2">
+          <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="openDialog($event)">Add
+            Form</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <!-- Default box -->
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <table class="table table-hover text-wrap" >
+                <thead>
+                  <tr>
+                    <th style="width: 20%">Images</th>
+                    <th style="width: 20%">Heading</th>
+                    <th style="width: 25%"> Description</th>
+                    <!-- <th style="width: 20%">Title</th>
+                    <th style="width: 20%">SubTitle</th> -->
+                  
+                    <th style="width: 30%">Action</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img src ="{{ infoData?.fileUrl }}" height="80px" width="80p"></td>
+                    <!-- <td>{{ data.title }}</td>
+                    <td>{{ data.description }}</td> -->
+                    <td>{{ infoData?.title }}</td>
+                    <td>{{ infoData?.description }}</td>
+                  
+                  
+                    <td>
+                      <button
+                        class="btn btn-info btn-sm mr-2"
+                        (click)="openDialogEdit(serviceDetail)"
+                      >
+                        <i class="fas fa-pencil-alt mr-2"></i>Edit
+                      </button>
+  
+                      <!-- <button
+                        class="btn btn-primary btn-sm mr-2"
+                       
+                      >
+                        <i class="fas fa-folder mr-2"></i>View
+                      </button>
+                      <button
+                        class="btn btn-danger btn-sm mr-2"
+                       
+                      >
+                        <i class="fas fa-trash mr-2"></i>Delete
+                      </button> -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+  
+            <!-- <div class="card-footer clearfix">
+              <div class="row"> -->
+                <!-- <div class="col-6">
+                  <div class="form-group">
+                    <select
+                      class="form-control custom-select"
+                      style="width: auto"
+                      [(ngModel)]="pageSize"
+                      (ngModelChange)="refreshList()"
+                    >
+                      <option *ngFor="let size of [10, 20, 30]" [ngValue]="size">
+                        {{ size }} Items
+                      </option>
+                    </select>
+                  </div>
+                </div> -->
+                <!-- <div class="col-6">
+                  <ngb-pagination
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    [collectionSize]="collectionSize"
+                    (pageChange)="refreshList()"
+                    class="pagination"
+                    [maxSize]="5"
+                  ></ngb-pagination>
+                </div> -->
+              <!-- </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 

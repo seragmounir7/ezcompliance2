@@ -59,7 +59,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
   getServiceData() {
     this.mode = 'Service';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('serviceData=>', data);
+      console.log('ApplicationServiceData=>', data);
      
       this.ServiceData = data.data[0];
    
@@ -90,7 +90,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
           moduleName:name,
       },
       
-      width: '800px',
+      width: '1000px',
       height:'500px'
        
         

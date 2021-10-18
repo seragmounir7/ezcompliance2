@@ -47,7 +47,7 @@ export class SafetyModulesComponent implements OnInit {
     this.mode = 'Safety';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       this.safetyData = data.data[0];
-      console.log('ssss', this.safetyData);
+      console.log('safety modules', data);
     });
   }
   editForm(id,name:boolean, i?:any) {

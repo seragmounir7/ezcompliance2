@@ -11,6 +11,7 @@ import { AddHappyClientComponent } from './happy-client/add-happy-client/add-hap
 import { HappyClientComponent } from './happy-client/happy-client.component';
 import { SafetyModulesComponent } from './safety-modules/safety-modules.component';
 import { AddSafetyModuleComponent } from './safety-modules/add-safety-module/add-safety-module.component';
+import { HeaderComponent } from './header-info/header/header.component';
 @NgModule({
   declarations: [
     LandingPageInfoComponent,
@@ -18,7 +19,7 @@ import { AddSafetyModuleComponent } from './safety-modules/add-safety-module/add
     ApplicationServiceInfoComponent,
     HappyClientComponent,
     AddApplicationServiceInfoComponent,
-    AddHappyClientComponent,SafetyModulesComponent,AddSafetyModuleComponent
+    AddHappyClientComponent,SafetyModulesComponent,AddSafetyModuleComponent, HeaderComponent
   ],
   imports: [
     CommonModule,

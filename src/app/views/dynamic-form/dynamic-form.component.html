@@ -131,7 +131,7 @@
                   </div>
                   <!-- externalLink -->
 
-                  <div *ngIf="item.type == 'externalLink'">
+                  <div *ngIf="item.type == 'externalLink'" class="my-auto">
                     <a [href]="item.linkAddr" target="_blank">{{
                       item.label
                     }}</a>
@@ -268,21 +268,24 @@
                   <div *ngIf="item.type == 'checkbox'">
                     <label>{{ item.label }}</label>
                     <label *ngIf="item.required" class="text-danger">*</label>
+                   <div class="row">
                     <div
-                      *ngFor="let v of item.values"
-                      class="inline-form-group"
-                    >
-                      <label class="cust-check-bx">
-                        <input
-                          type="checkbox"
-                          [value]="v.value"
-                          name="{{ item.name }}"
-                          (click)="toggleValue(v)"
-                        />
-                        {{ v.label }}
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
+                    *ngFor="let v of item.values"
+                    class="col-3"
+                  >
+                    <label class="cust-check-bx">
+                      <input
+                        type="checkbox"
+                        [value]="v.value"
+                        name="{{ item.name }}"
+                        (click)="toggleValue(v)"
+                      />
+                      {{ v.label }}
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+                   
                   </div>
                   <!-- radio -->
                   <div *ngIf="item.type == 'radio'">
@@ -625,7 +628,7 @@
 
 <div *ngIf="report" class="padding20 white-bg">
   <div class="row">
-    <div class="col-12 btn-cont mt-1 ml-1">
+    <div class="col-12 btn-cont mt-1 ml-1" *ngIf="type != 'view'">
       <button (click)="report = false" class="btn btn-primary">Back</button>
     </div>
     <div class="col-12 spacer30"></div>
@@ -662,7 +665,7 @@
       [style.color]="bgTheme.textColor"
     >
       <div class="col-12">
-        <h2>{{ model[0].name }}</h2>
+        <!-- <h2>{{ model[0].name }}</h2> -->
       </div>
       <div class="col-12">
         <!-- <p>{{ model[0].description }}</p> -->
@@ -921,18 +924,21 @@
               <div *ngIf="item.type == 'checkbox'" class="col mr-1">
                 <label>{{ item.label }}</label>
                 <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="inline-form-group">
-                  <label class="cust-check-bx">
-                    <input
-                      type="checkbox"
-                      [value]="v.value"
-                      name="{{ item.name }}"
-                      (click)="toggleValue(v)"
-                    />
-                    {{ v.label }}
-                    <span class="checkmark"></span>
-                  </label>
+                <div class="row">
+                  <div *ngFor="let v of item.values" class="inline-form-group col-3">
+                    <label class="cust-check-bx">
+                      <input
+                        type="checkbox"
+                        [value]="v.value"
+                        name="{{ item.name }}"
+                        (click)="toggleValue(v)"
+                      />
+                      {{ v.label }}
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
                 </div>
+               
               </div>
               <div *ngIf="item.type == 'radio'" class="col mr-1">
                 <label>{{ item.label }}</label>

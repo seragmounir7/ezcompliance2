@@ -37,7 +37,23 @@ export class LandingPageInfoServiceService {
       return res
     }));
   }
-  editHeader(data) {
+  // editHeader(data) {
+  //   return this.https.post(this.apiUrl + 'mainPage/add', data).pipe(
+  //     map((res: any) => {
+  //       console.log('res.data=>', res.data);
+  //       return res;
+  //     })
+  //   );
+  // }
+  editHeader(id, data) {
+    return this.https.put(this.apiUrl + 'mainPage/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  AddHeader(data) {
     return this.https.post(this.apiUrl + 'mainPage/add', data).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);

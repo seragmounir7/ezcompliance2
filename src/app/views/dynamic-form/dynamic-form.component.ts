@@ -302,9 +302,9 @@ tableIndexMap= new Map();
       this.formIdRec = sessionStorage.getItem('formId');
       this.spinner.show();
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
-        console.log('form=>', res);
+        console.log('formView=>', res);
         this.formNameRecieved = res.data.title;
-        this.model.attributes = res.data.htmlObject;
+        this.model = res.data.htmlObject;
         this.spinner.hide();
       });
     }
@@ -371,8 +371,21 @@ tableIndexMap= new Map();
     
   }
   removeDragAndDropRow(j){
-    if(this.model.length>1)
-    this.model.splice(j,1);
+    if(this.model.length>1){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to remove this Row?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#00B96F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, remove!',
+      }).then((result) => {
+        if (result.value) {
+          this.model.splice(j,1);           
+        }
+      });
+    }
   }
   onDragStart(event: DragEvent) {
     console.log('drag started', JSON.stringify(event, null, 2));
