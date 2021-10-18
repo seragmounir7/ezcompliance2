@@ -14,11 +14,11 @@
   </div>
   <div class="spacer30"></div>
   <p class="text-center my-3" style="font-size: 30px">{{ formNameRecieved }}</p>
-  <div class="col-3 container mb-3" *ngIf="type == 'edit'">    
-    <input type="text" class="form-control" [(ngModel)]="formNameRecieved" >
+  <div class="col-3 container mb-3" *ngIf="type == 'edit'">
+    <input type="text" class="form-control" [(ngModel)]="formNameRecieved" />
   </div>
   <div class="row mt-2">
-    <div class="col-1 ml-2">
+    <div class="col-1 ml-2 sideWalkSet scrollbar">
       <!-- <div class="row">
         <label class="col-8">Background Color</label>
         <input
@@ -54,7 +54,10 @@
       </div>
     </div>
     <div class="col-10">
-      <div class="row" *ngFor="let modelRow of model; let j = index">
+      <div
+        class="row position-relative mt-20 p-l-15 p-r-15"
+        *ngFor="let modelRow of model; let j = index"
+      >
         <!-- <div
           class="form-group"
           [style.backgroundColor]="model.theme.bgColor"
@@ -246,7 +249,9 @@
                   </div>
                   <!-- paragraph-->
                   <div *ngIf="item.type == 'paragraph'">
-                    <p class="form-text subtitle"><strong>{{ item.placeholder }}</strong></p>
+                    <p class="form-text subtitle">
+                      <strong>{{ item.placeholder }}</strong>
+                    </p>
                   </div>
                   <div *ngIf="item.type == 'autocomplete'">
                     <label>{{ item.label }}</label>
@@ -307,18 +312,23 @@
                   <div *ngIf="item.type == 'table'" class="btn-cont">
                     <div class="row">
                       <div class="col-11">
-                        <table class="table table-bordered ">
+                        <table class="table table-bordered">
                           <thead>
                             <tr>
-                              <th scope="col" *ngFor="let row of item.tableHeading"><input class="form-control" type="text" placeholder="heading" /></th>                         
+                              <th
+                                scope="col"
+                                *ngFor="let row of item.tableHeading"
+                              >
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  placeholder="heading"
+                                />
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr
-                              *ngFor="
-                                let row of item.tableRows
-                              "
-                            >
+                            <tr *ngFor="let row of item.tableRows">
                               <td *ngFor="let col of row">
                                 <input class="form-control" type="text" />
                               </td>
@@ -337,24 +347,24 @@
                       </div>
                       <div class="col-1">
                         <div class="row">
-                          <span class="material-icons" (click)="addCol(j,i)"
+                          <span class="material-icons" (click)="addCol(j, i)"
                             >add_circle_outline
                           </span>
                         </div>
                         <div class="row mt-2">
-                          <span class="material-icons" (click)="removeCol(j,i)"
+                          <span class="material-icons" (click)="removeCol(j, i)"
                             >remove_circle_outline
-                          </span>         
-                        
-                         
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <span class="material-icons" (click)="addRow(j,i)"
+                      <span class="material-icons" (click)="addRow(j, i)"
                         >add_circle_outline
                       </span>
-                      <span class="material-icons ml-2" (click)="removeRow(j,i)"
+                      <span
+                        class="material-icons ml-2"
+                        (click)="removeRow(j, i)"
                         >remove_circle_outline
                       </span>
                     </div>
@@ -589,13 +599,15 @@
           </section>
         </ng-container>
 
-        <div class="col text-center ">
+        <div class="col text-center setPosFor">
           <span class="material-icons" (click)="removeDragAndDropRow(j)"
             >remove_circle_outline
           </span>
-          <span class="material-icons" (click)="addDragAndDropRow('inBetween',j)"
-          >add_circle_outline
-        </span>
+          <span
+            class="material-icons"
+            (click)="addDragAndDropRow('inBetween', j)"
+            >add_circle_outline
+          </span>
         </div>
       </div>
       <!-- <div class="text-center my-4">
@@ -658,12 +670,14 @@
       </div>
       <form class="ftheme">
         <div *ngIf="!success">
-          <p class="text-center mb-5" style="font-size: 30px">{{ formNameRecieved }}</p>
-          <div
-            *ngFor="let row of model; let i = index"
-            class="form-group row"
-          >
-            <div *ngFor="let item of row.attributes;let j=index" class="col form-group justify-content-between">
+          <p class="text-center mb-5" style="font-size: 30px">
+            {{ formNameRecieved }}
+          </p>
+          <div *ngFor="let row of model; let i = index" class="form-group row">
+            <div
+              *ngFor="let item of row.attributes; let j = index"
+              class="col form-group justify-content-between"
+            >
               <!--Each row  -->
               <div *ngIf="item.type == 'text'" class="col=6 mr-1">
                 <label>{{ item.label }}</label>
@@ -732,29 +746,37 @@
                   <h4>{{ item.placeholder }}</h4>
                 </span>
               </div>
-              <div *ngIf="item.type == 'table'" class="btn-cont" class="col mr-1">
+              <div
+                *ngIf="item.type == 'table'"
+                class="btn-cont"
+                class="col mr-1"
+              >
                 <div class="row">
                   <div class="col-11">
-                    <table class="table table-bordered ">
+                    <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th scope="col" *ngFor="let row of item.tableHeading;let l=index">
+                          <th
+                            scope="col"
+                            *ngFor="let row of item.tableHeading; let l = index"
+                          >
                             <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]"  [ngModelOptions]="{ standalone: true }"/> -->
-                            <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/>
-                          </th>                         
+                            <input
+                              class="form-control"
+                              type="text"
+                              placeholder="heading"
+                              [value]="item.tableHeading[l]"
+                              (change)="changeValueTH($event, i, j, l)"
+                            />
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr
-                          *ngFor="
-                            let row of item.tableRows
-                          "
-                        >
+                        <tr *ngFor="let row of item.tableRows">
                           <td *ngFor="let col of row">
                             <input class="form-control" type="text" />
                           </td>
                         </tr>
-                       
                       </tbody>
                     </table>
                   </div>
@@ -984,5 +1006,3 @@
       {{ model | json }}
   </pre
 >
-
-
