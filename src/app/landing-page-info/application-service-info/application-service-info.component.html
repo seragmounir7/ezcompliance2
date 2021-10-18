@@ -1,106 +1,156 @@
-<div class="container px-4 py-4 card">
-  <form [formGroup]="serviceDetail" (ngSubmit)="onFormSubmit()">
-    <h1 class="text-center pt-3">
-      <p>ApplicationServiceInfo</p>
-    </h1>
-    <hr />
+<div class="text-center">
+  <h1 class="card"> Our Application Service List</h1>
+</div>
+<!-- <div class="row">
+  <div class="col ml-2 mb-2">
+    <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-left" (click)="addForm('')">
+      Add Service
+    </button>
+  </div>
+</div> -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                  <th style="width: 30%">Heading</th>
+                  <th style="width: 40%"> Description</th>
+                  <th style="width: 30%">Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  >
+                  <td>{{ ServiceData.title }}</td>
+                  <td>{{ ServiceData.description }}</td>
+                  <td><button class="btn btn-info btn-sm mr-2" (click)="editForm(ServiceData._id,false)">
+                      <i class="fas fa-pencil-alt mr-2"></i> Edit
+                    </button></td>
+                </tr>
+              </tbody>
+             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+       <div class="card">
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                  <th style="width: 25%">Images</th>
+                  <th style="width: 25%">Title</th>
+                  <th style="width: 30%">Description</th>
+                  <th>Action</th>
+                  <!-- <th ><button      (click)="addForm('')"
+                  class="btn btn-danger btn-sm mr-2">
+                  <i class="fas fa-folder-plus mr-2"></i>Add
+                </button>
+               </th>  -->
+
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of ServiceData.subModules; let i=index">
+                  <td><img src="{{ data.fileUrl }}" height="150px" width="150px"></td>
+                  <td>{{ data.title }}</td>
+                  <td>{{ data.description }}</td>
+                  <td><button (click)="editForm(data._id,true,i)" class="btn btn-info btn-sm mr-2">
+                      <i class="fas fa-pencil-alt mr-2"></i>Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- --------BootStapModel----------- -->
+<ng-template #deletemodal let-modal>
+  <div class="modal-header titel">
+    <h2 class="modal-title titel" id="modal-basic-title">Are you sure?</h2>
+  </div>
+  <div class="modal-body deletebody">
+    <p></p>
+    <p>Do you want to delete </p>
+  </div>
+  <div class="modal-footer footer">
+    <button type="button" class="btn mr-3" style="background-color: #eeeeee">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-danger ml-3" aria-label="Close">
+      Delete
+    </button>
+  </div>
+</ng-template>
+<!-- 
+<ng-template #addFormModal let-modal>
+  <ng-container [formGroup]="serviceDetail">
+    <div class="modal-header modalheader">
+      <h2 class="modal-title" id="modal-basic-title">Add ApplicationServiceInfo</h2>
+    </div>
+    <div class="modal-body">
       <div class="row">
         <div class="col-sm-6">
           <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-          <input
-            type="text"
-            formControlName="title"
-            style="height: 50px"
-            class="form-control"
-            id="heading"
-          />
+          <input type="text" formControlName="title" style="height: 50px" class="form-control" id="heading" />
         </div>
 
         <div class="col-sm-6">
           <p for="exampleFormControlInput1" class="form-Label">Description</p>
-          <textarea
-            rows="3"
-            type="text"
-            formControlName="description"
-            class="form-control"
-          ></textarea>
+          <textarea rows="3" type="text" formControlName="description" class="form-control"></textarea>
         </div>
       </div>
       <br />
       <hr />
-      <ng-container formArrayName="appService">
-        <ng-container
-          *ngFor="let control of appService().controls; let i = index"
-          [formGroupName]="i"
-        >
+      <ng-container formArrayName="arrObj">
+        <ng-container *ngFor="let control of appService().controls; let i = index" [formGroupName]="i">
           <div>
             <div class="row">
               <div class="my-3 col-2">
                 <p for="exampleFormControlInput1" class="form-Label">
                   UploadImage
                 </p>
-                <img
-                  [src]="selectedImage"
-                  onerror=" this.src='../../../assets/img/uploadImg.png' "
-                  alt=""
-                  width="150"
-                  height="100"
-                  class="imageService"
-                />
-                <input
-                  type="file"
-                  class="d-none"
-                  #file
-                  id="file"
-                  formControlName="fileUrl"
-                  class="custom-file-input img1 form-control"
-                  name="files[]"
-                  (change)="browser($event)"
-                />
-                <span
-                  class="material-icons material-file"
-                  (click)="file.click()"
-                  class="btn border bg-white z-index"
+                <img [src]="selectedImage[i]" onerror=" this.src='../../../assets/img/uploadImg.png' " alt=""
+                  width="150" height="100" class="imageService" />
+                <input type="file" class="d-none" #file id="file" class="custom-file-input img1 form-control"
+                  name="file" (change)="browser($event, i)" />
+                <span class="material-icons material-file" (click)="file.click()" class="btn border bg-white z-index"
                   style="
                     position: absolute;
                     top: 120px;
                     left: 150;
                     font-size: 1rem !important;
-                  "
-                >
-                  <i
-                    class="fa fa-upload"
-                    aria-hidden="true"
-                    style="margin: 0px"
-                  ></i>
+                  ">
+                  <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
                 </span>
               </div>
               <div class="my-3 col-4">
                 <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-                <input
-                  type="text"
-                  formControlName="title"
-                  style="height: 50px"
-                  class="form-control"
-                  id="title"
-                />
+                <input type="text" formControlName="title" style="height: 50px" class="form-control" id="title" />
               </div>
               <div class="my-3 col-4">
                 <p for="exampleFormControlInput1" class="form-Label">
                   Description
                 </p>
-                <textarea
-                  rows="3"
-                  type="text"
-                  formControlName="description"
-                  class="form-control"
-                ></textarea>
+                <textarea rows="3" type="text" formControlName="description" class="form-control"></textarea>
               </div>
               <div class="my-1 col-1 my-auto">
-                <span class="material-icons" (click)="addAppService()"
-                  >add_circle_outline
+                <span class="material-icons" (click)="addAppService()">add_circle_outline
                 </span>
               </div>
               <div class="my-1 col-1 my-auto">
@@ -114,10 +164,15 @@
           <hr />
         </ng-container>
       </ng-container>
-
-      <div class="col-md-2">
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-      </div>
     </div>
-  </form>
-</div>
+    <div class="modal-footer footer">
+      <button type="button" class="btn mr-3" style="background-color: #eeeeee">
+        Close
+      </button>
+
+      <button type="button" class="btn btn-primary ml-3" aria-label="Close">
+        Add
+      </button>
+    </div>
+  </ng-container>
+</ng-template> -->

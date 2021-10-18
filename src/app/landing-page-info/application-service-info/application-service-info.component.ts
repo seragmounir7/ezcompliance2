@@ -1,22 +1,13 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-application-service-info',
-//   templateUrl: './application-service-info.component.html',
-//   styleUrls: ['./application-service-info.component.scss']
-// })
-// export class ApplicationServiceInfoComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { UploadFileServiceService } from './../../utils/services/upload-file-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AddApplicationServiceInfoComponent } from './add-application-service-info/add-application-service-info.component';
 @Component({
   selector: 'app-application-service-info',
   templateUrl: './application-service-info.component.html',
@@ -24,92 +15,116 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 })
 export class ApplicationServiceInfoComponent implements OnInit {
   serviceDetail: FormGroup;
-  selectedImage: any;
+  selectedImage: any ;
   myId: any;
   isEdit = false;
-  data: any;
+  data: any=[];
   enum: any;
   serviceData: any;
+  Is_id: any;
+  Edit = false;
+  Add = false;
+  page = 1;
+  pageSize = 10;
+  ServiceData: any=[];
+  Service: any=[];
+  mode:any;
+  collectionSize = 10;
+  hide=false;
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
-    public upload: UploadFileServiceService
+    public upload: UploadFileServiceService,
+    private modalService: NgbModal,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    public router: Router,
   ) {
     this.serviceDetail = fb.group({
-      appService: this.fb.array([]),
+      arrObj: this.fb.array([]),
       title: ['', Validators.required],
       description: ['', Validators.required],
+      mode: 'Service',
     });
   }
 
   ngOnInit(): void {
-    this.addAppService();
+    this.getServiceData();
+   
   }
-  onFormSubmit() {
-    console.log(this.serviceDetail.value);
-
-    let serviceData = {
-      ' title': this.serviceDetail.get('title').value,
-      description: this.serviceDetail.get('description').value,
-
-      arrObj: [
-        {
-          fileUrl: this.serviceDetail.value.appService[0].fileUrl,
-          title: this.serviceDetail.value.appService[0].title,
-          description: this.serviceDetail.value.appService[0].description,
-          subTitle: '',
-        },
-      ],
-    };
-
-    console.log('file: ~ onFormSubmit ~ data', serviceData);
-
-    this.landingPageInfo.addAppService(serviceData).subscribe((data) => {
-      console.log('data=>', data);
-      this.serviceData = data;
+ 
+  service:any
+  getServiceData() {
+    this.mode = 'Service';
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      console.log('serviceData=>', data);
+     
+      this.ServiceData = data.data[0];
+   
+      console.log('sakshiiiii',this.Service);
     });
   }
+  
 
-  addAppService() {
-    this.appService().push(this.serviceForm());
-    console.log(this.serviceDetail.value);
-  }
-  appService(): FormArray {
-    return this.serviceDetail.get('appService') as FormArray;
-  }
-  serviceForm(): FormGroup {
-    return this.fb.group({
-      title: [],
-      description: [],
-      fileUrl: [],
+  editForm(id,name:boolean, i?:any) {
+    console.log("sakshi",id)
+    this.myId=id;
+    this.isEdit=true;
+     this.mode = 'Service';
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      console.log('serviceData=>', data);
+      this.ServiceData = data.data[0];
+      console.log("",this.ServiceData);
+      
+   
+   
+    let dialogRef = this.dialog.open(AddApplicationServiceInfoComponent, {
+      data: {
+        
+        action: "edit",
+   
+         EditData: this.ServiceData,
+          index:i,
+          moduleName:name,
+      },
+      
+      width: '800px',
+      height:'500px'
+       
+        
     });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("-> openDialog -> result", result);
+
+      if ((result = "true")) {
+        this.ngOnInit();
+       
+      }
+      console.log("The dialog was closed");
+    });
+  });
   }
-  removeAppService(i) {
-    const item = <FormArray>this.serviceDetail.controls['appService'];
-    if (item.length > 1) item.removeAt(i);
-  }
-  browser(event) {
-    console.log(event);
-    const files = event.target.files[0];
-    const formData = new FormData();
-    formData.append('', files);
-    this.upload.upload(formData).subscribe((res) => {
-      console.log(' browser -> res', res);
-      this.serviceDetail.patchValue({
-        filePath: res.filePath,
+  
+  addForm(id){
+  
+    let dialogRef = this.dialog.open(AddApplicationServiceInfoComponent, {
+     data:{
+      action:"new",
+      ID: id,
+     },
+     width: '800px',
+     height:'500px'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("openDialog->result", result)
+      if ((result = "true")) {
+        this.ngOnInit();
+      }
       });
-      this.selectedImage = res.files;
-      console.log('browse -> this.selectedImage', this.selectedImage);
-    });
   }
-  editService(id) {
-    console.log(id);
-    this.myId = id;
-    this.isEdit = true;
-    this.landingPageInfo.getAppServiceById(id).subscribe((res) => {
-      console.log('Data Set response' + res);
-      this.data = res.data;
-      console.log('new response' + this.data);
-    });
+  close() {
+    this.hide = false;
   }
 }

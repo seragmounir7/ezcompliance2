@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LandingPageInfoServiceService } from './../../utils/services/landing-page-info-service.service';
-import { UploadFileServiceService } from './../../utils/services/upload-file-service.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AddHappyClientComponent } from './add-happy-client/add-happy-client.component'; 
 @Component({
   selector: 'app-happy-client',
   templateUrl: './happy-client.component.html',
@@ -9,73 +14,97 @@ import { UploadFileServiceService } from './../../utils/services/upload-file-ser
 })
 export class HappyClientComponent implements OnInit {
   clientDetail: FormGroup;
-  happyClientData: any;
+  happyClientData: any=[''];
   selectedImage: any;
+mode:any;
+myId: any;
+isEdit = false;
+hide=false;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
-    public upload: UploadFileServiceService
+    public upload: UploadFileServiceService,
+    private modalService: NgbModal,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    public router: Router,
   ) {
     this.clientDetail = fb.group({
-      clientArr: this.fb.array([]),
-      heading: ['', Validators.required],
+      arrObj: this.fb.array([]),
+      title: ['', Validators.required],
+      mode: 'HappyClient',
     });
   }
   ngOnInit(): void {
-    this.addHappyClient();
+  this.getHappyClient()
   }
-
-  onFormSubmit() {
-    console.log(this.clientDetail.value);
-
-    let happyData = {
-      ' title': this.clientDetail.get('title').value,
-      description: '',
-
-      arrObj: [
-        {
-          fileUrl: this.clientDetail.value.clientArr[0].fileUrl,
-          title: '',
-          description: '',
-          subTitle: '',
-        },
-      ],
-    };
-    console.log('file: ~ onFormSubmit ~ data', happyData);
-
-    this.landingPageInfo.addAppService(happyData).subscribe((data) => {
-      console.log('data=>', data);
-      this.happyClientData = data;
+  getHappyClient() {
+    this.mode = 'HappyClient';
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      console.log('happyClientData=>', data);
+      this.happyClientData = data.data[0];
+      console.log('happy', this.happyClientData);
     });
   }
-  addHappyClient() {
-    this.clientArr().push(this.clientForm());
-    console.log(this.clientDetail.value);
-  }
-  clientArr(): FormArray {
-    return this.clientDetail.get('clientArr') as FormArray;
-  }
-  clientForm(): FormGroup {
-    return this.fb.group({
-      UploadImage: [],
+  
+  editForm(id,name:boolean, i?:any) {
+    console.log("sakshi",id)
+    this.myId=id;
+    this.isEdit=true;
+     this.mode = 'HappyClient';
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      console.log('HappyClient=>', data);
+      this.happyClientData = data.data[0];
+      console.log("",this.happyClientData);
+      
+   
+   
+    let dialogRef = this.dialog.open(AddHappyClientComponent, {
+      data: {
+        
+        action: "edit",
+   
+         EditData: this.happyClientData,
+          index:i,
+          moduleName:name,
+      },
+      
+        width: '800px',
+        height:'600px'
+       
+        
     });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("-> openDialog -> result", result);
+
+      if ((result = "true")) {
+        this.ngOnInit();
+       
+      }
+      console.log("The dialog was closed");
+    });
+  });
   }
-  removeHappyClient(i) {
-    const item = <FormArray>this.clientDetail.controls['clientArr'];
-    if (item.length > 1) item.removeAt(i);
-  }
-  browser(event) {
-    console.log(event);
-    const files = event.target.files[0];
-    const formData = new FormData();
-    formData.append('', files);
-    this.upload.upload(formData).subscribe((res) => {
-      console.log(' browser -> res', res);
-      this.clientDetail.patchValue({
-        filePath: res.filePath,
+  
+  addForm(id){
+  
+    let dialogRef = this.dialog.open(AddHappyClientComponent, {
+     data:{
+      action:"new",
+      ID: id,
+     },
+     width: '800px',
+     height:'600px'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("openDialog->result", result)
+      if ((result = "true")) {
+        this.ngOnInit();
+      }
       });
-      this.selectedImage = res.files;
-      console.log('browse -> this.selectedImage', this.selectedImage);
-    });
   }
+  close() {
+    this.hide = false;
+  }
+
 }
