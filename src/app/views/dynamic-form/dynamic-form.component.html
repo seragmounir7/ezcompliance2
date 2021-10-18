@@ -17,7 +17,7 @@
   <div class="col-3 container mb-3" *ngIf="type == 'edit'">
     <input type="text" class="form-control" [(ngModel)]="formNameRecieved" />
   </div>
-  <div class="row mt-2">
+  <div class="row mt-2 position-relative">
     <div class="col-1 ml-2 sideWalkSet scrollbar">
       <!-- <div class="row">
         <label class="col-8">Background Color</label>
@@ -273,7 +273,7 @@
                     *ngFor="let v of item.values"
                     class="col-3"
                   >
-                    <label class="cust-check-bx">
+                    <label class="cust-check-bx checkbox-inline">
                       <input
                         type="checkbox"
                         [value]="v.value"
@@ -461,6 +461,7 @@
                   *ngIf="
                     item.type != 'textarea' &&
                     item.type != 'signature' &&
+                    item.type != 'autocomplete' &&
                     item.type != 'externalLink'
                   "
                   class="form-group"
