@@ -25,6 +25,11 @@ export class DynamicFormComponent implements OnInit {
     label: '',
     value: '',
   };
+  bgTheme = {
+    bgColor: '#ffffff',
+    textColor: '#555555',
+    bannerImage: '',
+  };
   submitBtn = false;
   success = false;
   show = false;
@@ -259,13 +264,7 @@ tableIndexMap= new Map();
       for(let i=0;i<this.totalModels.length;i++){
         let   modelFields:Array<field>=[];
         let modelRow = {
-          name: '',
-          description: '',
-          theme: {
-            bgColor: '#ffffff',
-            textColor: '#555555',
-            bannerImage: '',
-          },
+       
           attributes: modelFields,
         };
         this.model.push(modelRow);
@@ -360,13 +359,7 @@ tableIndexMap= new Map();
   addDragAndDropRow(position,index){
     let   modelFields:Array<field>=[];
     let modelRow = {
-      name: '',
-      description: '',
-      theme: {
-        bgColor: '#ffffff',
-        textColor: '#555555',
-        bannerImage: '',
-      },
+    
       attributes: modelFields,
     };
     if(position =='inTheEnd'){
@@ -513,12 +506,12 @@ tableIndexMap= new Map();
 
   updateForm() {
     let input = new FormData();
-    input.append('id', this.model._id);
-    input.append('name', this.model.name);
-    input.append('description', this.model.description);
-    input.append('bannerImage', this.model.theme.bannerImage);
-    input.append('bgColor', this.model.theme.bgColor);
-    input.append('textColor', this.model.theme.textColor);
+ //   input.append('id', this.model._id);
+  //  input.append('name', this.model.name);
+//input.append('description', this.model.description);
+  //  input.append('bannerImage', this.model.theme.bannerImage);
+  //  input.append('bgColor', this.model.theme.bgColor);
+   // input.append('textColor', this.model.theme.textColor);
     input.append('attributes', JSON.stringify(this.model.attributes));
 
     // this.us.putDataApi('/admin/updateForm',input).subscribe(r=>{
@@ -566,9 +559,15 @@ console.log("formData",this.formData);
   }
   regexErr = [];
   submit() {
-    let t =document.getElementsByClassName('tableHeadings')	;
-    console.log("heading=>",t);
-  //  console.log("heading=>",t[0]);
+    let allTableHeadings =Array.from(document.querySelectorAll('.tableHeadings'))	;
+    let allTableRows =Array.from(document.querySelectorAll('.tableRows'))	;
+    allTableHeadings.forEach((element:any) => {
+      console.log("allTableHeadings.value",element.value);      
+    });
+    allTableRows.forEach((element:any) => {
+      console.log("allTableRows.value",element.value);      
+    });
+  //  console.log("heading=>",t[0]);  
     
     console.log("model",this.model);
     
@@ -576,6 +575,7 @@ console.log("formData",this.formData);
 
     this.submitBtn = true;
     let valid = true;
+    /* commenting for future use
     console.log('this.model.attributes', this.model.attributes);
     let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
     validationArray.reverse().forEach((field, index) => {
@@ -623,7 +623,8 @@ console.log("formData",this.formData);
     console.log('Save', this.model);
     let input = new FormData();
     input.append('formId', this.model._id);
-    input.append('attributes', JSON.stringify(this.model.attributes));
+    input.append('attributes', JSON.stringify(this.model.attributes));*/
+    //////////////////upto this//////////
     // this.us.postDataApi('/user/formFill',input).subscribe(r=>{
     //   console.log(r);
     //   Swal.fire('Success','You have contact sucessfully','success');
