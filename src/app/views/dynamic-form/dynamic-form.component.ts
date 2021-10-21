@@ -33,7 +33,7 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
-  fieldModels: Array<field> = [   
+  fieldModels: Array<field> = [
     {
       type: 'text',
       icon: 'fa-font',
@@ -107,10 +107,22 @@ export class DynamicFormComponent implements OnInit {
       linkAddr: '',
     },
     {
+      type: 'heading',
+      icon: 'fa-heading',
+      label: 'Heading',
+      placeholder: 'This is Heading',
+    },
+    {
       type: 'paragraph',
       icon: 'fa-paragraph',
       label: 'Paragraph',
-      placeholder: 'Type your text to display here only',
+      placeholder: 'This is paragraph',
+    },
+    {
+      type: 'addRemove',
+      icon: 'fa-minus-circle',
+      label: 'Add Remove',
+      //  placeholder: 'Type your text to display here only',
     },
     {
       type: 'checkbox',
@@ -121,11 +133,11 @@ export class DynamicFormComponent implements OnInit {
       inline: true,
       values: [
         {
-          label: 'Option 1',
+          label: 'Option1',
           value: 'option-1',
         },
         {
-          label: 'Option 2',
+          label: 'Option2',
           value: 'option-2',
         },
       ],
@@ -137,16 +149,16 @@ export class DynamicFormComponent implements OnInit {
       description: 'Radio boxes',
       values: [
         {
-          label: 'Option 1',
+          label: 'Option1',
           value: 'option-1',
         },
         {
-          label: 'Option 2',
+          label: 'Option2',
           value: 'option-2',
         },
       ],
     },
-   
+
     {
       type: 'autocomplete',
       icon: 'fa-bars',
@@ -184,16 +196,16 @@ export class DynamicFormComponent implements OnInit {
       // "subtype": "file"
     },
     {
-      type: "table",
-      icon:"fas fa-table",
-    label: "Table",
-      tableHeading:[' ',' ',' ',' '],
-      tableRows:[
+      type: 'table',
+      icon: 'fas fa-table',
+      label: 'Table',
+      tableHeading: [' ', ' ', ' ', ' '],
+      tableRows: [
         ['', '', '', ''],
         ['', '', '', ''],
         ['', '', '', ''],
         ['', '', '', ''],
-      ]
+      ],
     },
     {
       type: 'button',
@@ -202,15 +214,15 @@ export class DynamicFormComponent implements OnInit {
       label: 'Submit',
     },
   ];
-  type:string="";
-  formIdRec="";
-rows=[];
-formData=[];
-tableIndexMap= new Map();
-//   modelFields:Array<field>=[];
-//  modelFields:Array<field>=[];
+  type: string = '';
+  formIdRec = '';
+  rows = [];
+  formData = [];
+  tableIndexMap = new Map();
+  //   modelFields:Array<field>=[];
+  //  modelFields:Array<field>=[];
 
-  model:any =[
+  model: any = [
     // {
     //   name: '',
     //   description: '',
@@ -221,7 +233,6 @@ tableIndexMap= new Map();
     //   },
     //   attributes: this.modelFields0,
     // },
-    
     // {
     //   name: '',
     //   description: '',
@@ -232,10 +243,8 @@ tableIndexMap= new Map();
     //   },
     //   attributes: this.modelFields1,
     // },
-    
-   
   ];
-  totalModels=["","","","",""]
+  totalModels = ['', '', '', '', ''];
   report = false;
   reports: any = [];
   formNameRecieved = '';
@@ -246,9 +255,7 @@ tableIndexMap= new Map();
     private dynamicFormsService: DynamicFormsService
   ) {}
 
-  ngOnInit() {  
-
-
+  ngOnInit() {
     console.log(
       "sessionStorage.getItem('type')",
       sessionStorage.getItem('type')
@@ -261,10 +268,9 @@ tableIndexMap= new Map();
       // if(this.dynamicFormsService.formType =='add'){
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.formNameRecieved = sessionStorage.getItem('formTitle');
-      for(let i=0;i<this.totalModels.length;i++){
-        let   modelFields:Array<field>=[];
+      for (let i = 0; i < this.totalModels.length; i++) {
+        let modelFields: Array<field> = [];
         let modelRow = {
-       
           attributes: modelFields,
         };
         this.model.push(modelRow);
@@ -281,12 +287,12 @@ tableIndexMap= new Map();
       this.spinner.show();
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
-        this.model =[];
+        this.model = [];
 
-       res.data.htmlObject.forEach((item)=>{
-        this.model.push(item)
-       })
-      
+        res.data.htmlObject.forEach((item) => {
+          this.model.push(item);
+        });
+
         // this.formNameRecieved = res.data.title;
         // this.model.attributes = res.data.htmlObject;
         this.spinner.hide();
@@ -356,22 +362,20 @@ tableIndexMap= new Map();
     // this.model = this.cs.data;
     // console.log(this.model.data);
   }
-  addDragAndDropRow(position,index){
-    let   modelFields:Array<field>=[];
+  addDragAndDropRow(position, index) {
+    let modelFields: Array<field> = [];
     let modelRow = {
-    
       attributes: modelFields,
     };
-    if(position =='inTheEnd'){
+    if (position == 'inTheEnd') {
       this.model.push(modelRow);
     }
-    if(position =='inBetween'){
-      this.model.splice(index+1,0,modelRow);
+    if (position == 'inBetween') {
+      this.model.splice(index + 1, 0, modelRow);
     }
-    
   }
-  removeDragAndDropRow(j){
-    if(this.model.length>1){
+  removeDragAndDropRow(j) {
+    if (this.model.length > 1) {
       Swal.fire({
         title: 'Are you sure?',
         text: `Do you want to remove this Row?`,
@@ -382,25 +386,25 @@ tableIndexMap= new Map();
         confirmButtonText: 'Yes, remove!',
       }).then((result) => {
         if (result.value) {
-          this.model.splice(j,1);           
+          this.model.splice(j, 1);
         }
       });
     }
   }
   onDragStart(event: DragEvent) {
-    console.log('drag started', JSON.stringify(event, null, 2));
+    //  console.log('drag started', JSON.stringify(event, null, 2));
   }
 
   onDragEnd(event: DragEvent) {
-    console.log('drag ended', JSON.stringify(event, null, 2));
+    // console.log('drag ended', JSON.stringify(event, null, 2));
   }
 
   onDraggableCopied(event: DragEvent) {
-    console.log('draggable copied', JSON.stringify(event, null, 2));
+    //  console.log('draggable copied', JSON.stringify(event, null, 2));
   }
 
   onDraggableLinked(event: DragEvent) {
-    console.log('draggable linked', JSON.stringify(event, null, 2));
+    // console.log('draggable linked', JSON.stringify(event, null, 2));
   }
 
   onDragged(item: any, list: any[], effect: DropEffect) {
@@ -411,11 +415,11 @@ tableIndexMap= new Map();
   }
 
   onDragCanceled(event: DragEvent) {
-    console.log('drag cancelled', JSON.stringify(event, null, 2));
+    //  console.log('drag cancelled', JSON.stringify(event, null, 2));
   }
 
   onDragover(event: DragEvent) {
-    console.log('dragover', JSON.stringify(event, null, 2));
+    //   console.log('dragover', JSON.stringify(event, null, 2));
   }
 
   onDrop(event: DndDropEvent, list?: any[]) {
@@ -475,7 +479,7 @@ tableIndexMap= new Map();
       //   }
       // });
 
-     // console.log('table Map', this.tableIndexMap);
+      // console.log('table Map', this.tableIndexMap);
     }
   }
 
@@ -519,12 +523,12 @@ tableIndexMap= new Map();
 
   updateForm() {
     let input = new FormData();
- //   input.append('id', this.model._id);
-  //  input.append('name', this.model.name);
-//input.append('description', this.model.description);
-  //  input.append('bannerImage', this.model.theme.bannerImage);
-  //  input.append('bgColor', this.model.theme.bgColor);
-   // input.append('textColor', this.model.theme.textColor);
+    //   input.append('id', this.model._id);
+    //  input.append('name', this.model.name);
+    //input.append('description', this.model.description);
+    //  input.append('bannerImage', this.model.theme.bannerImage);
+    //  input.append('bgColor', this.model.theme.bgColor);
+    // input.append('textColor', this.model.theme.textColor);
     input.append('attributes', JSON.stringify(this.model.attributes));
 
     // this.us.putDataApi('/admin/updateForm',input).subscribe(r=>{
@@ -533,20 +537,18 @@ tableIndexMap= new Map();
     // });
   }
 
-
-  initReport(){
-    console.log("model.attributes=>",this.model);
-    console.log("akaksks");
-    this.report = true; 
+  initReport() {
+  //  console.log('model.attributes=>', this.model);
+    this.report = true;
     this.formData = [];
-    for(let j=0;j<this.model[0].attributes.length;j++){
+    for (let j = 0; j < this.model[0].attributes.length; j++) {
       let temp = [];
-      for(let i=0;i<this.model.length;i++){
-        temp.push( this.model[i].attributes[j]); 
+      for (let i = 0; i < this.model.length; i++) {
+        temp.push(this.model[i].attributes[j]);
       }
       this.formData.push(temp);
     }
-console.log("formData",this.formData);
+   // console.log('formData', this.formData);
 
     // let input = {
     //   id:this.model._id
@@ -572,18 +574,20 @@ console.log("formData",this.formData);
   }
   regexErr = [];
   submit() {
-    let allTableHeadings =Array.from(document.querySelectorAll('.tableHeadings'))	;
-    let allTableRows =Array.from(document.querySelectorAll('.tableRows'))	;
-    allTableHeadings.forEach((element:any) => {
-      console.log("allTableHeadings.value",element.value);      
+    let allTableHeadings = Array.from(
+      document.querySelectorAll('.tableHeadings')
+    );
+    let allTableRows = Array.from(document.querySelectorAll('.tableRows'));
+    allTableHeadings.forEach((element: any) => {
+      console.log('allTableHeadings.value', element.value);
     });
-    allTableRows.forEach((element:any) => {
-      console.log("allTableRows.value",element.value);      
+    allTableRows.forEach((element: any) => {
+      console.log('allTableRows.value', element.value);
     });
-  //  console.log("heading=>",t[0]);  
-    
-    console.log("model",this.model);
-    
+    //  console.log("heading=>",t[0]);
+
+    console.log('model', this.model);
+
     this.regexErr = [];
 
     this.submitBtn = true;
@@ -655,24 +659,24 @@ console.log("formData",this.formData);
     // will be notified of szimek/signature_pad's onEnd event
     // console.log(this.signaturePad1.toDataURL());
   }
-  clear(k) {
-    // this.SignaturePad.toArray()[i].clear();
-    // this.SignaturePad.toArray()[i].clear();
-    console.log(this.SignaturePad.toArray());
-
+  clear(i, j) {
     let indexOfSignature = new Map();
     let index = 0;
 
-    for (let i = 0; i < this.model.attributes.length; i++) {
-      if (this.model.attributes[i].type === 'signature') {
-        indexOfSignature.set(i, index);
-        index++;
-      }
-    }
+    this.model.forEach((modelRow, k) => {
+      modelRow.attributes.forEach((element, l) => {
+        if (element.type == 'signature') {
+          let myIndex = k.toString() + l.toString();
+          indexOfSignature.set(myIndex, index);
+          index++;
+        }
+      });
+    });
 
-    let j = indexOfSignature.get(k);
+    let temp = i.toString() + j.toString();//making unique code
+    let m = indexOfSignature.get(temp);
 
-    this.SignaturePad.toArray()[j].clear();
+    this.SignaturePad.toArray()[m].clear();
   }
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
@@ -680,12 +684,12 @@ console.log("formData",this.formData);
   }
 
   ////table//add row column
-  addCol(j,i) {
+  addCol(j, i) {
     console.log(this.model[j].attributes);
-    
+
     this.model[j].attributes[i].tableHeading.push('');
-    this.model[j].attributes[i].tableRows.forEach(item=>{
-      item.push('')
+    this.model[j].attributes[i].tableRows.forEach((item) => {
+      item.push('');
     });
 
     // console.log(this.tableIndexMap);
@@ -697,12 +701,15 @@ console.log("formData",this.formData);
     //   row.push('');
     // });
   }
-  removeCol(j,i) {
-    if(this.model[j].attributes[i].tableHeading.length>1 && this.model[j].attributes[i].tableRows[0].length>1){
+  removeCol(j, i) {
+    if (
+      this.model[j].attributes[i].tableHeading.length > 1 &&
+      this.model[j].attributes[i].tableRows[0].length > 1
+    ) {
       this.model[j].attributes[i].tableHeading.pop();
-      this.model[j].attributes[i].tableRows.forEach(item=>{
+      this.model[j].attributes[i].tableRows.forEach((item) => {
         item.pop();
-      })
+      });
     }
     // let index = this.tableIndexMap.get(i);
 
@@ -715,14 +722,12 @@ console.log("formData",this.formData);
     //   });
     // }
   }
-  addRow(j,i) {
-    
-    
-     let arr = [];
+  addRow(j, i) {
+    let arr = [];
     for (let k = 0; k < this.model[j].attributes[i].tableRows[0].length; k++) {
       arr.push('');
     }
-   this.model[j].attributes[i].tableRows.push(arr);
+    this.model[j].attributes[i].tableRows.push(arr);
     // console.log('add row', i);
     // let index = this.tableIndexMap.get(i);
     // let tempRow = this.rows[index];
@@ -733,30 +738,16 @@ console.log("formData",this.formData);
     // }
     // this.rows[index].push(arr);
   }
-  removeRow(j,i) {
+  removeRow(j, i) {
     // let index = this.tableIndexMap.get(i);
-    if ( this.model[j].attributes[i].tableRows.length > 1)
-    this.model[j].attributes[i].tableRows.pop();
+    if (this.model[j].attributes[i].tableRows.length > 1)
+      this.model[j].attributes[i].tableRows.pop();
   }
 
-  changeValueTH(e,i,j,l){
-console.log("event.target.value",e);
-// console.log("event.target.value",e.target.value);
-console.log("i",i);
-console.log("j",j);
-console.log("l",l);
-this.model[i].attributes[j].tableHeading[l]=e.target.value;
-// console.log("this.model[i].attributes[j].tableHeading",this.model[i].attributes[j].tableHeading);
-// console.log("this.model[i].attributes[j].tableHeading[l]",this.model[i].attributes[j].tableHeading[l]);
-console.log("model=.",this.model);
-
-
+  changeValueTH(e, i, j, l) {
+    this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
-
-
-    console.log('formAdded succesfully=>', this.model.attributes);
-
     let data = {
       title: this.formNameRecieved,
       htmlObject: this.model,
@@ -766,7 +757,6 @@ console.log("model=.",this.model);
       console.log('add');
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
-        console.log(res);
         Swal.fire('Form added successfully');
         this.router.navigate(['/admin/forms']);
       });
@@ -778,18 +768,40 @@ console.log("model=.",this.model);
         title: this.formNameRecieved,
         htmlObject: this.model,
       };
-      console.log("edit form data",data);
-      
+
       this.dynamicFormsService
         .editForm(data, this.formIdRec)
         .subscribe((res) => {
-          console.log(res);
           Swal.fire('Form edited successfully');
           this.router.navigate(['/admin/forms']);
         });
     }
   }
+  duplicate(i, j) {
+    console.log('duplicate', i, j, this.model[i].attributes);
+    let modelFields: Array<field> = [];
+    let modelRow = {
+      attributes: modelFields,
+    };
 
+    this.model[i].attributes.forEach((element) => {
+      this.fieldModels.forEach((field) => {
+        if (element.type == field.type) {
+          console.log('field', field);
+          field.label = element.label;
+          let temp = Object.assign({}, element);
+          modelFields.push(temp);
+        }
+      });
+    });
+
+    this.model.splice(i + 1, 0, modelRow);
+  }
+  removeDuplicate(i, j) {
+    console.log('remove duplicate', i, j);
+
+    this.model.splice(i, 1);
+  }
 }
 
 

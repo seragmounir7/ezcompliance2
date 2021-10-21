@@ -1,4 +1,9 @@
 <div *ngIf="model && !report" class="padding20 white-bg">
+  <div>
+    <div class="col-12 btn-cont mt-1 ml-1">
+      <button class="btn btn-primary" [routerLink]="['/admin/forms']">Back</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-12">
       <div class="btn-cont">
@@ -13,7 +18,7 @@
     </div>
   </div>
   <div class="spacer30"></div>
-  <p class="text-center my-5" style="font-size: 30px">{{ formNameRecieved }}</p>
+  <p class="text-center mb-3" style="font-size: 30px">{{ formNameRecieved }}</p>
   <div class="col-3 container mb-3" *ngIf="type == 'edit'">
     <input type="text" class="form-control" [(ngModel)]="formNameRecieved" />
   </div>
@@ -97,7 +102,7 @@
             style="min-height: 100px; min-width: 100%"
           >
             <div
-              class="field col"
+              class="field col my-auto"
               *ngFor="let item of model[j].attributes; let i = index"
               (dndStart)="onDragStart($event)"
               (dndCanceled)="onDragCanceled($event)"
@@ -106,7 +111,7 @@
               [dndDraggable]="item"
             >
               <!-- item -->
-              <div class="row form-group justify-content-center">
+              <div class="row  form-group justify-content-center">
                 <div class="col-2">
                   <i
                     class="fa fa-ellipsis-v dndHandle"
@@ -242,16 +247,25 @@
                     </div>
                     <button
                       class="btn btn-outline-primary mt-1"
-                      (click)="clear(i)"
+                      (click)="clear(j,i)"
                     >
                       Clear
                     </button>
                   </div>
                   <!-- paragraph-->
-                  <div *ngIf="item.type == 'paragraph'">
+                  <div *ngIf="item.type == 'heading'">
                     <p class="form-text subtitle">
                       <strong>{{ item.placeholder }}</strong>
                     </p>
+                  </div>
+                  <div *ngIf="item.type == 'paragraph'">
+                    <p class="form-text">
+                     {{ item.placeholder }}
+                    </p>
+                  </div>
+                  <div *ngIf="item.type == 'addRemove'" class="my-auto">
+                    <span class="material-icons my-auto mr-3">add_circle_outline</span>
+                    <span class="material-icons my-auto">remove_circle_outline</span>
                   </div>
                   <div *ngIf="item.type == 'autocomplete'">
                     <label>{{ item.label }}</label>
@@ -271,7 +285,7 @@
                    <div class="row">
                     <div
                     *ngFor="let v of item.values"
-                    class="col-3"
+                    class="col-3 inline-form-group"
                   >
                     <label class="cust-check-bx checkbox-inline">
                       <input
@@ -462,6 +476,8 @@
                     item.type != 'textarea' &&
                     item.type != 'signature' &&
                     item.type != 'autocomplete' &&
+                    item.type != 'checkbox' &&
+                    item.type != 'radio' &&
                     item.type != 'externalLink'
                   "
                   class="form-group"
@@ -627,11 +643,16 @@
   </div>
 </div>
 
+
 <div *ngIf="report" class="padding20 white-bg">
   <div class="row">
+      <div class="col-12 btn-cont mt-1 ml-1"  *ngIf="type == 'view'">
+        <button class="btn btn-primary" [routerLink]="['/admin/forms']">Back</button>
+      </div>
     <div class="col-12 btn-cont mt-1 ml-1" *ngIf="type != 'view'">
       <button (click)="report = false" class="btn btn-primary">Back</button>
     </div>
+    
     <div class="col-12 spacer30"></div>
     <!-- if records found -->
     <div *ngIf="reports?.length > 0" class="col-12">
@@ -682,296 +703,609 @@
             {{ formNameRecieved }}
           </p>
           <div *ngFor="let row of model; let i = index" class="form-group row">
+           <ng-container *ngIf="row.attributes.length == 1;else elseBlock">
             <div
-              *ngFor="let item of row.attributes; let j = index"
-              class="col form-group justify-content-between"
-            >
-              <!--Each row  -->
-              <div *ngIf="item.type == 'text'" class="col=6 mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [required]="item.required"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                />
-                <span
-                  *ngIf="item.required && !item.value && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.placeholder }}</h4>
-                </span>
-              </div>
-              <div *ngIf="item.type == 'email'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                />
-                <span
-                  *ngIf="item.required && !item.value && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.placeholder }}</h4>
-                </span>
-                <span
-                  *ngIf="item.required && regexErr[i] && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.errorText }}</h4>
-                </span>
-              </div>
-              <div *ngIf="item.type == 'phone'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                />
-                <span
-                  *ngIf="item.required && !item.value && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.placeholder }}</h4>
-                </span>
-              </div>
-              <div
-                *ngIf="item.type == 'table'"
-                class="btn-cont"
-                class="col mr-1"
+            *ngFor="let item of row.attributes; let j = index"
+            class="col-6 form-group justify-content-between"
+          >
+            <!--Each row  -->
+            <div *ngIf="item.type == 'text'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [required]="item.required"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
               >
-                <div class="row">
-                  <div class="col-11">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col" *ngFor="let row of item.tableHeading;let l=index">
-                            <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]" (change)="changeValueTH($event,i,j,l)" [ngModelOptions]="{ standalone: true }"/> -->
-                            <input class="form-control tableHeadings" type="text" placeholder="heading"/>
-                            <!-- <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/> -->
-                          </th>                         
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let row of item.tableRows">
-                          <td *ngFor="let col of row">
-                            <input class="form-control tableRows" type="text" />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'email'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="email"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+              <span
+                *ngIf="item.required && regexErr[i] && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.errorText }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'phone'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="email"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div
+              *ngIf="item.type == 'table'"
+              class="btn-cont"
+              class="col mr-1"
+            >
+              <div class="row">
+                <div class="col-11">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col" *ngFor="let row of item.tableHeading;let l=index">
+                          <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]" (change)="changeValueTH($event,i,j,l)" [ngModelOptions]="{ standalone: true }"/> -->
+                          <input class="form-control tableHeadings" type="text" placeholder="heading"/>
+                          <!-- <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/> -->
+                        </th>                         
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of item.tableRows">
+                        <td *ngFor="let col of row">
+                          <input class="form-control tableRows" type="text" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div *ngIf="item.type == 'signature'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <div
-                  style="
-                    border: 1px solid rgb(149 162 173);
-                    border-radius: 10px;
-                  "
-                >
-                  <signature-pad
-                    [options]="signaturePadOptions"
-                    (onBeginEvent)="drawStart()"
-                    (onEndEvent)="drawComplete()"
-                    #Signature
-                  ></signature-pad>
-                </div>
-                <button class="btn btn-outline-primary mt-1" (click)="clear(i)">
-                  Clear
-                </button>
+            </div>
+            <div *ngIf="item.type == 'signature'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div
+                style="
+                  border: 1px solid rgb(149 162 173);
+                  border-radius: 10px;
+                "
+              >
+                <signature-pad
+                  [options]="signaturePadOptions"
+                  (onBeginEvent)="drawStart()"
+                  (onEndEvent)="drawComplete()"
+                  #Signature
+                ></signature-pad>
               </div>
-              <div *ngIf="item.type == 'number'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  min="{{ item.min }}"
-                  max="{{ item.max }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                />
-                <span
-                  *ngIf="item.required && !item.value && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.placeholder }}</h4>
-                </span>
-              </div>
-              <div *ngIf="item.type == 'date'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                />
-                <span
-                  *ngIf="item.required && !item.value && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.placeholder }}</h4>
-                </span>
-              </div>
-              <div *ngIf="item.type == 'datetime-local'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="datetime-local"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                /><span
-                  *ngIf="item.required && !item.value && submitBtn"
-                  class="invalid-feedback"
-                >
-                  <h4>{{ item.placeholder }}</h4>
-                </span>
-              </div>
-              <div *ngIf="item.type == 'textarea'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <textarea
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                  [class.is-invalid]="item.required && !item.value && submitBtn"
-                  style="height: 120px; border: 1px solid rgb(149 162 173)"
-                >
-  <span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
-                <h4>{{ item.placeholder }}</h4> </span>
-              </textarea
-                >
-              </div>
-              <div *ngIf="item.type == 'file'" class="col mr-1">
-                <label
-                  >{{ item.label }}
-                  <!-- (File can't be uploaded right now) -->
-                </label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="{{ item.name }}"
-                  placeholder="{{ item.placeholder }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                  autocomplete="off"
-                />
-                <small class="form-text text-danger">
-                  <!-- (File can't be uploaded right now) -->
-                </small>
-              </div>
-              <div *ngIf="item.type == 'paragraph'" class="col mr-1">
-                <p class="form-text subtitle">{{ item.placeholder }}</p>
-              </div>
-              <div *ngIf="item.type == 'externalLink'" class="col mr-1">
-                <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
-              </div>
-              <div *ngIf="item.type == 'autocomplete'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <select
-                  class="form-control"
-                  id="{{ item.name }}"
-                  [(ngModel)]="item.value"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <option *ngFor="let v of item.values" [value]="v.value">
-                    {{ v.label }}
-                  </option>
-                </select>
-                <!-- <small class="form-text text-muted">{{item.description}}</small> -->
-              </div>
-              
-              <div *ngIf="item.type == 'checkbox'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <div class="row">
-                  <div *ngFor="let v of item.values" class="inline-form-group col-3">
-                    <label class="cust-check-bx">
-                      <input
-                        type="checkbox"
-                        [value]="v.value"
-                        name="{{ item.name }}"
-                        (click)="toggleValue(v)"
-                      />
-                      {{ v.label }}
-                      <span class="checkmark"></span>
-                    </label>
-                  </div>
-                </div>
-               
-              </div>
-              <div *ngIf="item.type == 'radio'" class="col mr-1">
-                <label>{{ item.label }}</label>
-                <label *ngIf="item.required" class="text-danger">*</label>
-                <div *ngFor="let v of item.values" class="inline-form-group">
+              <button class="btn btn-outline-primary mt-1" (click)="clear(i,j)">
+                Clear
+              </button>
+            </div>
+            <div *ngIf="item.type == 'number'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="number"
+                class="form-control"
+                id="{{ item.name }}"
+                min="{{ item.min }}"
+                max="{{ item.max }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'date'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="date"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'datetime-local'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              /><span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'textarea'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <textarea
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+                style="height: 120px; border: 1px solid rgb(149 162 173)"
+              >
+<span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
+              <h4>{{ item.placeholder }}</h4> </span>
+            </textarea
+              >
+            </div>
+            <div *ngIf="item.type == 'file'" class="col mr-1">
+              <label
+                >{{ item.label }}
+                <!-- (File can't be uploaded right now) -->
+              </label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="file"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+              />
+              <small class="form-text text-danger">
+                <!-- (File can't be uploaded right now) -->
+              </small>
+            </div>
+            <div *ngIf="item.type == 'heading'">
+              <p class="form-text subtitle">
+                <strong>{{ item.placeholder }}</strong>
+              </p>
+            </div>
+            <div *ngIf="item.type == 'paragraph'">
+              <p class="form-text subtitle">
+               {{ item.placeholder }}
+              </p>
+            </div>
+            <div *ngIf="item.type == 'externalLink'" class="col mr-1">
+              <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
+            </div>
+            <div *ngIf="item.type == 'autocomplete'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <select
+                class="form-control"
+                id="{{ item.name }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <option *ngFor="let v of item.values" [value]="v.value">
+                  {{ v.label }}
+                </option>
+              </select>
+              <!-- <small class="form-text text-muted">{{item.description}}</small> -->
+            </div>
+            
+            <div *ngIf="item.type == 'checkbox'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div class="row">
+                <div *ngFor="let v of item.values" class="inline-form-group col-3">
                   <label class="cust-check-bx">
                     <input
-                      type="radio"
+                      type="checkbox"
                       [value]="v.value"
                       name="{{ item.name }}"
-                      [(ngModel)]="item.value"
-                      [ngModelOptions]="{ standalone: true }"
+                      (click)="toggleValue(v)"
                     />
                     {{ v.label }}
                     <span class="checkmark"></span>
                   </label>
                 </div>
               </div>
-              <div
-                *ngIf="item.type == 'button'"
-                class="btn-cont"
-                class="col mr-1"
-              >
-                <input
-                  type="{{ item.subtype }}"
-                  (click)="submit()"
-                  value="{{ item.label }}"
-                  class="btn btn-primary"
-                  id="{{ item.name }}"
-                />
+             
+            </div>
+            <div *ngIf="item.type == 'radio'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div *ngFor="let v of item.values" class="inline-form-group">
+                <label class="cust-check-bx">
+                  <input
+                    type="radio"
+                    [value]="v.value"
+                    name="{{ item.name }}"
+                    [(ngModel)]="item.value"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                  {{ v.label }}
+                  <span class="checkmark"></span>
+                </label>
               </div>
             </div>
+            <div
+              *ngIf="item.type == 'button'"
+              class="btn-cont"
+              class="col mr-1"
+            >
+              <input
+                type="{{ item.subtype }}"
+                (click)="submit()"
+                value="{{ item.label }}"
+                class="btn btn-primary"
+                id="{{ item.name }}"
+              />
+            </div>
+          </div>
+           </ng-container>
+           <ng-template #elseBlock>
+            <div
+            *ngFor="let item of row.attributes; let j = index"
+            class="col my-auto form-group justify-content-between"
+          >
+            <!--Each row  -->
+            <div *ngIf="item.type == 'text'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [required]="item.required"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'email'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="email"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+              <span
+                *ngIf="item.required && regexErr[i] && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.errorText }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'phone'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="email"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div
+              *ngIf="item.type == 'table'"
+              class="btn-cont"
+              class="col mr-1"
+            >
+              <div class="row">
+                <div class="col-11">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col" *ngFor="let row of item.tableHeading;let l=index">
+                          <!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]" (change)="changeValueTH($event,i,j,l)" [ngModelOptions]="{ standalone: true }"/> -->
+                          <input class="form-control tableHeadings" type="text" placeholder="heading"/>
+                          <!-- <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/> -->
+                        </th>                         
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of item.tableRows">
+                        <td *ngFor="let col of row">
+                          <input class="form-control tableRows" type="text" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="item.type == 'signature'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div
+                style="
+                  border: 1px solid rgb(149 162 173);
+                  border-radius: 10px;
+                "
+              >
+                <signature-pad
+                  [options]="signaturePadOptions"
+                  (onBeginEvent)="drawStart()"
+                  (onEndEvent)="drawComplete()"
+                  #Signature
+                ></signature-pad>
+              </div>
+              <button class="btn btn-outline-primary mt-1" (click)="clear(i,j)">
+                Clear
+              </button>
+            </div>
+            <div *ngIf="item.type == 'number'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="number"
+                class="form-control"
+                id="{{ item.name }}"
+                min="{{ item.min }}"
+                max="{{ item.max }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'date'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="date"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              />
+              <span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'datetime-local'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+              /><span
+                *ngIf="item.required && !item.value && submitBtn"
+                class="invalid-feedback"
+              >
+                <h4>{{ item.placeholder }}</h4>
+              </span>
+            </div>
+            <div *ngIf="item.type == 'textarea'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <textarea
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+                [class.is-invalid]="item.required && !item.value && submitBtn"
+                style="height: 120px; border: 1px solid rgb(149 162 173)"
+              >
+<span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
+              <h4>{{ item.placeholder }}</h4> </span>
+            </textarea
+              >
+            </div>
+            <div *ngIf="item.type == 'file'" class="col mr-1">
+              <label
+                >{{ item.label }}
+                <!-- (File can't be uploaded right now) -->
+              </label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <input
+                type="file"
+                class="form-control"
+                id="{{ item.name }}"
+                placeholder="{{ item.placeholder }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+              />
+              <small class="form-text text-danger">
+                <!-- (File can't be uploaded right now) -->
+              </small>
+            </div>
+            <div *ngIf="item.type == 'heading'">
+              <p class="form-text subtitle">
+                <strong>{{ item.placeholder }}</strong>
+              </p>
+            </div>
+            <div *ngIf="item.type == 'paragraph'">
+              <p class="form-text ">
+               {{ item.placeholder }}
+              </p>
+            </div>
+            <div *ngIf="item.type == 'addRemove'" class="col mr-1">
+              <span class="material-icons my-auto mr-3" (click)="duplicate(i,j)">add_circle_outline</span>
+              <span class="material-icons my-auto" (click)="removeDuplicate(i,j)">remove_circle_outline</span>
+            </div>
+            <div *ngIf="item.type == 'externalLink'" class="col mr-1">
+              <a [href]="item.linkAddr" target="_blank">{{ item.label }}</a>
+            </div>
+            <div *ngIf="item.type == 'autocomplete'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <select
+                class="form-control"
+                id="{{ item.name }}"
+                [(ngModel)]="item.value"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <option *ngFor="let v of item.values" [value]="v.value">
+                  {{ v.label }}
+                </option>
+              </select>
+              <!-- <small class="form-text text-muted">{{item.description}}</small> -->
+            </div>
+            
+            <div *ngIf="item.type == 'checkbox'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div class="row">
+                <div *ngFor="let v of item.values" class="inline-form-group col-3">
+                  <label class="cust-check-bx">
+                    <input
+                      type="checkbox"
+                      [value]="v.value"
+                      name="{{ item.name }}"
+                      (click)="toggleValue(v)"
+                    />
+                    {{ v.label }}
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+             
+            </div>
+            <div *ngIf="item.type == 'radio'" class="col mr-1">
+              <label>{{ item.label }}</label>
+              <label *ngIf="item.required" class="text-danger">*</label>
+              <div *ngFor="let v of item.values" class="inline-form-group">
+                <label class="cust-check-bx">
+                  <input
+                    type="radio"
+                    [value]="v.value"
+                    name="{{ item.name }}"
+                    [(ngModel)]="item.value"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                  {{ v.label }}
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div
+              *ngIf="item.type == 'button'"
+              class="btn-cont"
+              class="col mr-1"
+            >
+              <input
+                type="{{ item.subtype }}"
+                (click)="submit()"
+                value="{{ item.label }}"
+                class="btn btn-primary"
+                id="{{ item.name }}"
+              />
+            </div>
+          </div>
+           </ng-template>
+           
           </div>
           <!-- 
         <p (click)="showData()" class="marginT60 pointer">
