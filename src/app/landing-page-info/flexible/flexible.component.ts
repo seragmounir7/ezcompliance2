@@ -35,7 +35,7 @@ export class FlexibleComponent implements OnInit {
   hide = false;
   closeResult: string;
   FlexibleData: any = [];
-  flexible?: any;
+  flexible: any =[];
   mode: any;
   constructor(
     private fb: FormBuilder,
@@ -134,6 +134,8 @@ export class FlexibleComponent implements OnInit {
       console.log('flexibleData=>', data);
       this.flexibleData = data.data[0];
       this.flexible = this.flexibleData.subModules[0].title;
+      console.log("newwww",this.flexibleData)
+      console.log("newwww",this.flexible)
     });
   }
   editForm(id, name: boolean, i?: any) {

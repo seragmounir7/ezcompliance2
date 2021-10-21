@@ -1,5 +1,5 @@
 <div class="container px-4 py-4 card">
-  <form [formGroup]="serviceDetail">
+  <form [formGroup]="flexibleDetail">
     <h1 class="text-center pt-3">
       <p style="text-align: center">Flexible complience Info</p>
     </h1>
@@ -32,7 +32,7 @@
       <div *ngIf="subModule">
         <ng-container formArrayName="arrObj">
           <ng-container
-            *ngFor="let control of appService().controls; let i = index"
+            *ngFor="let control of add().controls; let i = index"
             [formGroupName]="i"
           >
             <div>
