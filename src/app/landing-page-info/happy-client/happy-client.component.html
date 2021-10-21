@@ -1,13 +1,7 @@
 <div class="text-center">
-  <h1 class="card"> Our Happy Client  List</h1>
+  <h1 class="card">Our Happy Client List</h1>
 </div>
-<!-- <div class="row">
-  <div class="col ml-2 mb-2">
-    <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-left" (click)="addForm('')">
-      Add Client
-    </button>
-  </div>
-</div> -->
+
 <section class="content">
   <div class="container-fluid">
     <div class="row">
@@ -17,58 +11,119 @@
             <table class="table table-hover text-wrap">
               <thead>
                 <tr>
-                
-                  <th style="width: 70%"> Heading</th>
-                  <th style="width: 30%">Action
-                  </th>
+                  <th style="width: 70% text-center">Heading</th>
+                  <th style="width: 30%">Edit</th>
                 </tr>
               </thead>
               <tbody>
-                <tr  >
+                <tr>
                   <td>{{ happyClientData.title }}</td>
 
-                  <td><button class="btn btn-info btn-sm mr-2" (click)="editForm(happyClientData._id,false)">
+                  <td>
+                    <button
+                      class="btn btn-info btn-sm mr-2"
+                      (click)="editForm(happyClientData._id, false)"
+                    >
                       <i class="fas fa-pencil-alt mr-2"></i> Edit
-                    </button></td>
-                </tr>
-              </tbody>
-             </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-       <div class="card">
-          <div class="card-body p-0">
-            <table class="table table-hover text-wrap">
-              <thead>
-                <tr>
-                  <th style="width: 80%">Images</th>
-                  
-                  <th>Action</th>
-                
-
-                </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let data of happyClientData.subModules; let i=index">
-                  <td><img src="{{ data.fileUrl }}" height="150px" width="150px"></td>
- 
-                  <td><button (click)="editForm(data._id,true,i)" class="btn btn-info btn-sm mr-2">
-                      <i class="fas fa-pencil-alt mr-2"></i>Edit
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-         </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="row">
+  <div class="col ml-2 mb-2">
+    <button
+      (click)="addForm('')"
+      class="btn btn-outline-primary mt-1 mr-2 float-left"
+    >
+      <i class="fas fa-folder-plus mr-2"></i>AddClient
+    </button>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                  <th style="width: 50%">Images</th>
+
+                  <th style="width: 25%">Edit</th>
+                  <th style="width: 25%">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let data of happyClientData.subModules; let i = index"
+                >
+                  <td>
+                    <img
+                      src="{{ data.fileUrl }}"
+                      height="150px"
+                      width="150px"
+                    />
+                  </td>
+
+                  <td>
+                    <button
+                      (click)="editForm(data._id, true, i)"
+                      class="btn btn-info btn-sm mr-2"
+                    >
+                      <i class="fas fa-pencil-alt mr-2"></i>Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger btn-sm mr-2"
+                      (click)="deleteopen(deletemodal, data._id)"
+                    >
+                      <i class="fas fa-trash mr-2"></i>Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #deletemodal let-modal>
+  <div class="modal-header titel">
+    <h2 class="modal-title titel" id="modal-basic-title">Are you sure?</h2>
+  </div>
+  <div class="modal-body deletebody">
+    <p></p>
+    <p>Do you want to delete this Client</p>
+  </div>
+  <div class="modal-footer footer">
+    <button
+      type="button"
+      class="btn mr-3"
+      style="background-color: #eeeeee"
+      (click)="modal.dismiss('Save click')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger ml-3"
+      aria-label="Close"
+      (click)="modal.close('Cross click')"
+    >
+      Delete
+    </button>
+  </div>
+</ng-template>
