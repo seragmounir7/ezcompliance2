@@ -17,6 +17,7 @@ import { AddClientInfoComponent } from './happy-client/add-client-info/add-clien
 import { AddModulesInfoComponent } from './safety-modules/add-modules-info/add-modules-info.component';
 import { EditFlexibleInfoComponent } from './flexible/edit-flexible-info/edit-flexible-info.component';
 import { AddFlexibleInfoComponent } from './flexible/add-flexible-info/add-flexible-info.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 @NgModule({
   declarations: [
     LandingPageInfoComponent,
@@ -33,6 +34,7 @@ import { AddFlexibleInfoComponent } from './flexible/add-flexible-info/add-flexi
     AddModulesInfoComponent,
     EditFlexibleInfoComponent,
     AddFlexibleInfoComponent,
+    AboutUsComponent,
   ],
   imports: [
     CommonModule,

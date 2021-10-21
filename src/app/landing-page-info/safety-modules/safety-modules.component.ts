@@ -125,10 +125,7 @@ export class SafetyModulesComponent implements OnInit {
           console.log('dismissed');
         }
       );
-    this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-      console.log('deleted res', res);
-      this.ngOnInit();
-    });
+    
   }
   delete(item) {
     Swal.fire({

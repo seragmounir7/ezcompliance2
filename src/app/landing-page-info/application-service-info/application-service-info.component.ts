@@ -94,7 +94,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
         console.log('-> openDialog -> result', result);
 
         if ((result = 'true')) {
-          this.ngOnInit();
+          this.getServiceData();
         }
         console.log('The dialog was closed');
       });
@@ -118,7 +118,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
         console.log('openDialog->result', result);
         if ((result = 'true')) {
-          this.ngOnInit();
+          this.getServiceData();
         }
       });
     });
@@ -128,28 +128,26 @@ export class ApplicationServiceInfoComponent implements OnInit {
   }
 
   deleteopen(content, id) {
-    console.log(id);
+    console.log("deleteopen close id=>",id);
     this.Is_id = id;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
-
+console.log("deleting")
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
             console.log('deleted res', res);
-            this.ngOnInit();
+            this.getServiceData();
           });
         },
         (reason) => {
+
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           console.log('dismissed');
         }
       );
-    this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-      console.log('deleted res', res);
-      this.ngOnInit();
-    });
+    
   }
   delete(item) {
     Swal.fire({
