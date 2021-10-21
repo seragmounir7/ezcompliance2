@@ -55,7 +55,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }"></li>
         <li class="nav-item">
-          <a class="nav-link">
+          <a class="nav-link" [routerLink]="['/admin']">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20.00pt"
@@ -69,156 +69,9 @@
             </svg>
             <p >Dashboard</p>
           </a>
-          <!-- <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
-            <p>
-              Dynamic Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Site Inspection Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Hazard Report Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a> -->
-          <!-- <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Employees on return to work plans</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard2']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>First aid treatment injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hazards reported</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Lost time injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Medical treatment injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Near misses</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Notifiable Incidents</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inductions Completed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Toolbox Talks</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Safety Meetings/Forums Conducted</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Safety Inspections/Audits Conducted</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>SWMS’s Completed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Risk Assessments</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hand Injury </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Leg Injury </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Torso</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Body Sections to be defined</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Corrective actions </p>
-              </a>
-            </li>            
-          </ul> -->
+          
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-briefcase mr-1"></i>
-            <p>
-              Employees on return to work plans
-            </p>
-          </a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a [routerLink]="['/admin/dynamicForm']" class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>
-            <p>
-              Dynamic form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-        </li> -->
-        <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
+       <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
           <a class="nav-link" (click)="menuOpen()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
