@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormArray,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from './../../utils/services/upload-file-service.service';
@@ -14,8 +8,7 @@ import { EditCustomerTestimonailComponent } from './edit-customer-testimonail/ed
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-customertestimonials',
   templateUrl: './customertestimonials.component.html',
@@ -25,6 +18,7 @@ export class CustomertestimonialsComponent implements OnInit {
   testiomnial: FormGroup;
   selectedImage: any = [];
   myId: any;
+  items = ['akash', 'sakshi', 'salim', 'kamlesh'];
   isEdit = false;
   data: any = [];
   enum: any;
@@ -34,7 +28,7 @@ export class CustomertestimonialsComponent implements OnInit {
   Add = false;
   page = 1;
   pageSize = 10;
-  testimonialData: any = [''];
+  testimonialData: any = [];
   Service: any = [];
   mode: any;
   collectionSize = 10;
@@ -64,6 +58,7 @@ export class CustomertestimonialsComponent implements OnInit {
   getTestimonal() {
     this.mode = 'Testimonial';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      console.log('getTestimonal=>', data);
       this.testimonialData = data.data[0];
     });
   }
@@ -127,26 +122,24 @@ export class CustomertestimonialsComponent implements OnInit {
   }
 
   deleteopen(content, id) {
-    console.log("deleteopen close id=>",id);
+    console.log('deleteopen close id=>', id);
     this.Is_id = id;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
-console.log("deleting")
+          console.log('deleting');
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
             console.log('deleted res', res);
             this.getTestimonal();
           });
         },
         (reason) => {
-
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           console.log('dismissed');
         }
       );
-    
   }
   delete(item) {
     Swal.fire({

@@ -16,8 +16,10 @@ import { AddServiceInfoComponent } from './application-service-info/add-service-
 import { AddClientInfoComponent } from './happy-client/add-client-info/add-client-info.component';
 import { AddModulesInfoComponent } from './safety-modules/add-modules-info/add-modules-info.component';
 import { EditFlexibleInfoComponent } from './flexible/edit-flexible-info/edit-flexible-info.component';
+import { FlexibleComponent } from './flexible/flexible.component';
 import { AddFlexibleInfoComponent } from './flexible/add-flexible-info/add-flexible-info.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CustomertestimonialsComponent } from './customertestimonials/customertestimonials.component';
 import { AddCustomerTestimonailComponent } from './customertestimonials/add-customer-testimonail/add-customer-testimonail.component';
 import { EditCustomerTestimonailComponent } from './customertestimonials/edit-customer-testimonail/edit-customer-testimonail.component';
 
@@ -40,6 +42,8 @@ import { EditCustomerTestimonailComponent } from './customertestimonials/edit-cu
     AboutUsComponent,
     AddCustomerTestimonailComponent,
     EditCustomerTestimonailComponent,
+    CustomertestimonialsComponent,
+    FlexibleComponent,
   ],
   imports: [
     CommonModule,

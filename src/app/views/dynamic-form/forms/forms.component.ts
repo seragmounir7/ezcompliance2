@@ -1,8 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { AddFormComponent } from './add-form/add-form.component';
 import Swal from 'sweetalert2';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +9,6 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-
 export interface PeriodicElement {
   categories: string;
   position: number;
@@ -90,8 +88,8 @@ export class FormsComponent implements OnInit {
     this.spinner.show();
     this.dynamicFormServise.getAllForm().subscribe((resF) => {
       // this.allForms=res.data;
-      console.log('resF', resF);
-      console.log('allForms', resF.data);
+      console.log('allForms', resF);
+      // console.log('allForms', resF.data);
       this.allForms = resF.data;
       let length = this.allForms.length;
       if (length) {
@@ -105,7 +103,24 @@ export class FormsComponent implements OnInit {
       this.spinner.hide();
     });
   }
+  slideChanged(e,form){
+    console.log(form,e.checked);
+    let data = {
+      title: form.title,
+      htmlObject:form.htmlObject,
+      enable:e.checked
+    };
 
+    this.dynamicFormServise
+      .editForm(data, form._id)
+      .subscribe((res) => {
+        if(e.checked)
+        Swal.fire('Form Enabled successfully');
+        else
+        Swal.fire('Form Disabled successfully');
+        this.router.navigate(['/admin/forms']);
+      });
+  }
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',

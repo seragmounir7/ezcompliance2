@@ -32,7 +32,7 @@
                   <td>{{ i + 1 }}</td>
                   <td>{{ form.title }}</td>
                   <td>                 
-                  <mat-slide-toggle color="primary" value="true"></mat-slide-toggle>
+                  <mat-slide-toggle color="primary" [checked]="form.enable" (change)="slideChanged($event,form)"></mat-slide-toggle>
                 </td>
                   <td>
                     <button

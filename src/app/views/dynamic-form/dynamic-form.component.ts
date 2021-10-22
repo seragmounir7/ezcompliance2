@@ -752,7 +752,6 @@ export class DynamicFormComponent implements OnInit {
     let data = {
       title: this.formNameRecieved,
       htmlObject: this.model,
-      enable:true
     };
 
     if (this.type == 'add') {

@@ -1,9 +1,8 @@
-import { ApplicationServiceInfoComponent } from './application-service-info/application-service-info.component';
 import { NgModule } from '@angular/core';
+import { ApplicationServiceInfoComponent } from './application-service-info/application-service-info.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HeaderInfoComponent } from './header-info/header-info.component';
 
-import { LandingPageInfoComponent } from './landing-page-info.component';
 import { CustomertestimonialsComponent } from './customertestimonials/customertestimonials.component';
 import { FlexibleComponent } from './flexible/flexible.component';
 import { HappyClientComponent } from './happy-client/happy-client.component';
