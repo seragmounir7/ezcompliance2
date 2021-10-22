@@ -1290,7 +1290,7 @@
                 </label>
               </div>
             </div>
-            <div
+            <!-- <div
               *ngIf="item.type == 'button'"
               class="btn-cont"
               class="col mr-1"
@@ -1302,11 +1302,12 @@
                 class="btn btn-primary"
                 id="{{ item.name }}"
               />
-            </div>
+            </div> -->
           </div>
            </ng-template>
            
           </div>
+          <div class="btn btn-primary mt-4"(click)="submit()">Submit</div>
           <!-- 
         <p (click)="showData()" class="marginT60 pointer">
           Show developer data

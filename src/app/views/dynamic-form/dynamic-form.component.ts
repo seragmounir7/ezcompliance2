@@ -33,6 +33,7 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
+  enableForm:boolean;
   fieldModels: Array<field> = [
     {
       type: 'text',
@@ -207,12 +208,12 @@ export class DynamicFormComponent implements OnInit {
         ['', '', '', ''],
       ],
     },
-    {
-      type: 'button',
-      icon: 'fa-paper-plane',
-      subtype: 'submit',
-      label: 'Submit',
-    },
+    // {
+    //   type: 'button',
+    //   icon: 'fa-paper-plane',
+    //   subtype: 'submit',
+    //   label: 'Submit',
+    // },
   ];
   type: string = '';
   formIdRec = '';
@@ -288,7 +289,7 @@ export class DynamicFormComponent implements OnInit {
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
         this.model = [];
-
+        this.enableForm=res.data.enable;
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -751,6 +752,7 @@ export class DynamicFormComponent implements OnInit {
     let data = {
       title: this.formNameRecieved,
       htmlObject: this.model,
+      enable:true
     };
 
     if (this.type == 'add') {
@@ -767,6 +769,7 @@ export class DynamicFormComponent implements OnInit {
       let data = {
         title: this.formNameRecieved,
         htmlObject: this.model,
+        enable:this.enableForm
       };
 
       this.dynamicFormsService
@@ -797,10 +800,24 @@ export class DynamicFormComponent implements OnInit {
 
     this.model.splice(i + 1, 0, modelRow);
   }
-  removeDuplicate(i, j) {
+  removeDuplicate(i,j) {
     console.log('remove duplicate', i, j);
-
+console.log(this.model)
+console.log(this.model[i])
     this.model.splice(i, 1);
+   
+    for(let k=0;k<this.model.length;k++){
+      if(this.model[i].length == this.model[k].length && i!=k){
+        for(let l=0;l<this.model[k].attributes.length;l++){
+          if(this.model[k].attributes[l].type == this.model[i].attributes[j].type 
+            && this.model[k].attributes[l].label == this.model[i].attributes[j].label  ){
+
+            }
+        }
+      }
+     
+    }
+  
   }
 }
 

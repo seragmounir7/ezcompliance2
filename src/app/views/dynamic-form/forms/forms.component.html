@@ -23,6 +23,7 @@
                 <tr>
                   <th style="width: 10%">No.</th>
                   <th style="width: 30%">Form Name</th>
+                  <th style="width: 30%">Disable/Enable</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -30,6 +31,9 @@
                 <tr *ngFor="let form of allForms; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ form.title }}</td>
+                  <td>                 
+                  <mat-slide-toggle color="primary" value="true"></mat-slide-toggle>
+                </td>
                   <td>
                     <button
                       class="btn btn-info btn-sm mr-2"

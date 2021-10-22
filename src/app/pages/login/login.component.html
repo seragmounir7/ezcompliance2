@@ -22,6 +22,7 @@
             type="email"
             class="form-control"
             placeholder="Email"
+            [class.is-invalid]="loginForm.get('email').hasError('required') && loginForm.get('email').touched"
           />
           <div class="input-group-append">
             <div class="input-group-text">
@@ -35,6 +36,8 @@
             type="password"
             class="form-control"
             placeholder="Password"
+            [class.is-invalid]="loginForm.get('password').hasError('required') && loginForm.get('password').touched"
+
           />
           <div class="input-group-append">
             <div class="input-group-text">
