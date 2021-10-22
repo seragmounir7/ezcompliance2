@@ -127,26 +127,24 @@ export class CustomertestimonialsComponent implements OnInit {
   }
 
   deleteopen(content, id) {
-    console.log("deleteopen close id=>",id);
+    console.log('deleteopen close id=>', id);
     this.Is_id = id;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
-console.log("deleting")
+          console.log('deleting');
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
             console.log('deleted res', res);
             this.getTestimonal();
           });
         },
         (reason) => {
-
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           console.log('dismissed');
         }
       );
-    
   }
   delete(item) {
     Swal.fire({
