@@ -35,7 +35,7 @@ export class FlexibleComponent implements OnInit {
   hide = false;
   closeResult: string;
   FlexibleData: any = [];
-  flexible: any =[];
+  flexible?: any;
   mode: any;
   constructor(
     private fb: FormBuilder,
@@ -60,82 +60,18 @@ export class FlexibleComponent implements OnInit {
     this.getFlexible();
   }
 
-  // addAction() {
-  //   {
-  //     this.add().push(this.newAction());
-  //   }
-  // }
-  // add(): FormArray {
-  //   return this.flexibleDetail.get('arrObj') as FormArray;
-  // }
-  // newAction(): FormGroup {
-  //   return this.fb.group({
-  //     fileUrl: ['', Validators.required],
-  //     subTitle: ['', Validators.required],
-  //     title: ['', Validators.required],
-  //     description: ['', Validators.required],
-  //   });
-  // }
-  onFormSubmit() {
-    console.log(this.flexibleDetail.value);
 
-    let data = {
-      //   "title": this.flexibleDetail.get("heading").value,
-      // "description": this.flexibleDetail.get("description").value,
-      // "mode": "Flexible",
-      // "arrObj": [
-      //     {
-      //         "title": this.flexibleDetail.get("subheading").value,
-      //         "subTitle":this.flexibleDetail.value.flrxibleImgArr[0].name,
-      //         "description": "",
-      //         "fileUrl":this.flexibleDetail.value.flrxibleImgArr[0].UploadImage,
-      //     }
-      //   ]
-    };
-    this.landingPageInfo
-      .addAppService(this.flexibleDetail.value)
-      .subscribe((res) => {
-        console.log('AddProductComponent -> browser -> res', res);
-        // this.studDetail.patchValue({
-        //   filePath: res.filePath,
-        // });
-        this.selectedImage = res.files;
-        console.log(
-          'AddProductComponent -> browse -> this.selectedImage',
-          this.selectedImage
-        );
-      });
-  }
 
-  // removeSafetyModule(i) {
-  //   this.add().removeAt(i);
-  // }
-  browser(event) {
-    const files = event.target.files[0];
-    console.log(event);
-    const formdata = new FormData();
-    formdata.append('', files);
 
-    this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
-      // this.studDetail.patchValue({
-      //   filePath: res.filePath,
-      // });
-      this.selectedImage = res.files;
-      console.log(
-        'AddProductComponent -> browse -> this.selectedImage',
-        this.selectedImage
-      );
-    });
-  }
+
   getFlexible() {
     this.mode = 'Flexible';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       console.log('flexibleData=>', data);
       this.flexibleData = data.data[0];
       this.flexible = this.flexibleData.subModules[0].title;
-      console.log("newwww",this.flexibleData)
-      console.log("newwww",this.flexible)
+      console.log('newwww', this.flexibleData);
+      console.log('wwww', this.flexible);
     });
   }
   editForm(id, name: boolean, i?: any) {
@@ -197,8 +133,9 @@ export class FlexibleComponent implements OnInit {
     this.hide = false;
   }
 
+  
   deleteopen(content, id) {
-    console.log(id);
+  
     this.Is_id = id;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
@@ -208,18 +145,16 @@ export class FlexibleComponent implements OnInit {
 
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
             console.log('deleted res', res);
-            this.ngOnInit();
+            this.getFlexible();
           });
         },
         (reason) => {
+
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           console.log('dismissed');
         }
       );
-    this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-      console.log('deleted res', res);
-      this.ngOnInit();
-    });
+    
   }
   delete(item) {
     Swal.fire({
