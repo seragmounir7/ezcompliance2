@@ -79,7 +79,7 @@ export class EditFlexibleInfoComponent implements OnInit {
       });
       this.add().at(0).patchValue({
         title: this.data.EditData.subModules[this.data.index].title,
-        description: this.data.EditData.subModules[this.data.index].description,
+        subTitle: this.data.EditData.subModules[this.data.index].subTitle,
       });
       (this.selectedImage = this.data.EditData.subModules[
         this.data.index
@@ -186,7 +186,7 @@ export class EditFlexibleInfoComponent implements OnInit {
         moduleId: this.data.EditData._id,
         title: this.add().at(0).get('title')?.value,
         fileUrl: this.selectedImage,
-        description: this.add().at(0).get('description')?.value,
+        subTitle: this.add().at(0).get('subTitle')?.value,
       };
       console.log('wqwertyuytrewsdfg', submodulesData);
       console.log('selectedImage', this.selectedImage);
