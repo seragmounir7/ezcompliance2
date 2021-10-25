@@ -16,33 +16,33 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+
 @Component({
-  selector: 'app-add-flexible-info',
-  templateUrl: './add-flexible-info.component.html',
-  styleUrls: ['./add-flexible-info.component.scss'],
+  selector: 'app-add-customer-testimonail',
+  templateUrl: './add-customer-testimonail.component.html',
+  styleUrls: ['./add-customer-testimonail.component.scss'],
 })
-export class AddFlexibleInfoComponent implements OnInit {
+export class AddCustomerTestimonailComponent implements OnInit {
   selectedImage: any = [];
-  flexibleDetail!: FormGroup;
-  flexibleData: any;
+  testiomnial!: FormGroup;
+  testimonailData: any;
   ID: any;
   hide: boolean = true;
   constructor(
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
     public upload: UploadFileServiceService,
-    public dialogRef: MatDialogRef<AddFlexibleInfoComponent>,
+    public dialogRef: MatDialogRef<AddCustomerTestimonailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.flexibleDetail = this.fb.group({
+    this.testiomnial = this.fb.group({
       moduleId: this.data.EditData,
-      title: ['', Validators.required],
       subTitle: ['', Validators.required],
+      description: ['', Validators.required],
       fileUrl: ['', Validators.required],
     });
     console.log('', data);
   }
-
   ngOnInit(): void {}
   browser(event) {
     const files = event.target.files[0];
@@ -60,19 +60,17 @@ export class AddFlexibleInfoComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.flexibleDetail
-      .get('fileUrl')
-      ?.setValue(this.selectedImage[0].toString());
-    console.log(this.flexibleDetail.value);
+    this.testiomnial.get('fileUrl')?.setValue(this.selectedImage[0].toString());
+    console.log(this.testiomnial.value);
 
-    console.log(this.flexibleDetail.value);
+    console.log(this.testiomnial.value);
     this.landingPageInfo
-      .addSubModule(this.flexibleDetail.value)
+      .addSubModule(this.testiomnial.value)
       .subscribe((data) => {
         console.log('data=>', data);
-        this.flexibleData = data;
+        this.testimonailData = data;
         this.dialogRef.close('true');
-        this.flexibleDetail.reset();
+        this.testiomnial.reset();
       });
   }
 }

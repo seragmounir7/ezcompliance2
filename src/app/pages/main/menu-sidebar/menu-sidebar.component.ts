@@ -25,10 +25,18 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   }
   step = false;
   stepL = false;
+  subscription = false;
+  siteInfoVal = false;
   menuOpen() {
     this.step = !this.step;
   }
   landingPageEditOpen() {
     this.stepL = !this.stepL;
+  }
+  subscriptionFun() {
+    this.subscription = !this.subscription;
+  }
+  siteInfo() {
+    this.siteInfoVal = !this.siteInfoVal;
   }
 }

@@ -33,6 +33,8 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
+  enableForm:boolean;
+  frequency:any;
   fieldModels: Array<field> = [
     {
       type: 'text',
@@ -207,12 +209,12 @@ export class DynamicFormComponent implements OnInit {
         ['', '', '', ''],
       ],
     },
-    {
-      type: 'button',
-      icon: 'fa-paper-plane',
-      subtype: 'submit',
-      label: 'Submit',
-    },
+    // {
+    //   type: 'button',
+    //   icon: 'fa-paper-plane',
+    //   subtype: 'submit',
+    //   label: 'Submit',
+    // },
   ];
   type: string = '';
   formIdRec = '';
@@ -288,7 +290,8 @@ export class DynamicFormComponent implements OnInit {
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
         this.model = [];
-
+        this.enableForm=res.data.enable;
+        this.frequency=res.data.frequency;
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -748,13 +751,15 @@ export class DynamicFormComponent implements OnInit {
     this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
-    let data = {
-      title: this.formNameRecieved,
-      htmlObject: this.model,
-    };
+ 
 
     if (this.type == 'add') {
-      console.log('add');
+      let data = {
+        title: this.formNameRecieved,
+        frequency: sessionStorage.getItem('frequency'),
+        htmlObject: this.model,
+      };
+      console.log('add',data);
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
         Swal.fire('Form added successfully');
@@ -767,6 +772,8 @@ export class DynamicFormComponent implements OnInit {
       let data = {
         title: this.formNameRecieved,
         htmlObject: this.model,
+        enable:this.enableForm,
+        frequency:this.frequency
       };
 
       this.dynamicFormsService
@@ -797,10 +804,32 @@ export class DynamicFormComponent implements OnInit {
 
     this.model.splice(i + 1, 0, modelRow);
   }
-  removeDuplicate(i, j) {
+  removeDuplicate(i,j) {
     console.log('remove duplicate', i, j);
-
+console.log(this.model)
+console.log(this.model[i])
     this.model.splice(i, 1);
+   
+    for(let k=0;k<this.model.length;k++){
+      if(this.model[i].length == this.model[k].length && i!=k){
+        let notMatch =false;
+        for(let l=0;l<this.model[k].attributes.length;l++){
+          if(this.model[k].attributes[l].type == this.model[i].attributes[j].type 
+            && this.model[k].attributes[l].label == this.model[i].attributes[j].label  ){
+
+            }
+            else{
+              notMatch =true;
+              break;
+            }
+        }
+        if(!notMatch){
+
+        }
+      }
+     
+    }
+  
   }
 }
 

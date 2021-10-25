@@ -13,6 +13,7 @@ import { AuthService } from '../../utils/services/auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   public isAuthLoading = false;
+  submitBtn=false;
   constructor(
     private renderer: Renderer2,
     private toastr: ToastrService,
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private AuthService: AuthService
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required,Validators.email]),
       password: new FormControl(null, Validators.required),
     });
   }
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    this.submitBtn=true;
     if (this.loginForm.invalid) {
       return;
     }
