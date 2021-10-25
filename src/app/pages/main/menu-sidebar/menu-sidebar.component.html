@@ -55,7 +55,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }"></li>
         <li class="nav-item">
-          <a class="nav-link">
+          <a class="nav-link" [routerLink]="['/admin']">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20.00pt"
@@ -64,160 +64,12 @@
             >
               <path
                 d="M384 1152q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm192-448q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm428 481l101-382q6-26-7.5-48.5t-38.5-29.5-48 6.5-30 39.5l-101 382q-60 5-107 43.5t-63 98.5q-20 77 20 146t117 89 146-20 89-117q16-60-6-117t-72-91zm660-33q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm-640-640q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm448 192q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm320 448q0 261-141 483-19 29-54 29h-1402q-35 0-54-29-141-221-141-483 0-182 71-348t191-286 286-191 348-71 348 71 286 191 191 286 71 348z"
-                fill="#C71437"
+                fill="#524f4f"
               />
             </svg>
             <p>Dashboard</p>
           </a>
-          <!-- <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
-            <p>
-              Dynamic Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Site Inspection Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Hazard Report Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a> -->
-          <!-- <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Employees on return to work plans</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard2']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>First aid treatment injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hazards reported</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Lost time injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Medical treatment injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Near misses</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Notifiable Incidents</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inductions Completed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Toolbox Talks</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Safety Meetings/Forums Conducted</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Safety Inspections/Audits Conducted</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>SWMS’s Completed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Risk Assessments</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hand Injury </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Leg Injury </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Torso</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Body Sections to be defined</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Corrective actions </p>
-              </a>
-            </li>            
-          </ul> -->
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-briefcase mr-1"></i>
-            <p>
-              Employees on return to work plans
-            </p>
-          </a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a [routerLink]="['/admin/dynamicForm']" class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>
-            <p>
-              Dynamic form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-        </li> -->
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
           <a class="nav-link" (click)="menuOpen()">
             <svg
@@ -227,15 +79,15 @@
               height="20.00pt"
             >
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
               />
             </svg>
@@ -274,19 +126,364 @@
                   height="20.00pt"
                 >
                   <path
-                    fill="#C71437"
+                    fill="#524f4f"
                     d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
                   />
                   <path
-                    fill="#C71437"
+                    fill="#524f4f"
                     d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
                   />
                   <path
-                    fill="#C71437"
+                    fill="#524f4f"
                     d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
                   />
                 </svg>
                 <p>Forms</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+       <li class="nav-item" [ngClass]="{ 'menu-open': subscription == true }">
+          <a class="nav-link" (click)="subscriptionFun()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 64 64"
+              width="20.00pt"
+              height="20.00pt"
+            >
+              <path
+                fill="#524f4f"
+                d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+              />
+            </svg>
+            <p>
+              Subscription Rates
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <!-- <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/categories']" class="nav-link">
+                <svg
+                  class="mr-2 mb-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 100 100"
+                >
+                  <image
+                    id="icons8-category-100"
+                    width="100"
+                    height="100"
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAACBElEQVR4nO3czW0TURhG4fNFCBYEGgDRACARNlADlABL5NQU2IYKiEQJsAMEHQwUgIBF2FwWE36E7JkIruNXznm2Y0efcnTtuZnogiRJkiRJkiRJkqTzq+Ze0Fp7ABwA19c/zlb7CCyq6uXUi04TZMAYvQxVdWPqBZNBWmtXgc9dR9KVqvq66uLOzJtvdh5GM7/TuSCPOw6i0aOpiys/slprd4FXwMXeE51zx8D9qnq77OLSFXIS4wXGWIdLwFFrbW/ZxV8rpLW2C9xm/Jh6gjHW7TvwDHgOvP/5RV/uM2KM+xT3GVGGaq21TU+h3+Zue3XGDBLGIGEMEsYgYQwSxiBhDBLGIGEMEsYgYS70/oFVNfuPE9uk998CXSFhDBLGIGF8HhLGFRLGIGEMEsYgYQwSxiBhDBLGIGEMEsYgYQwSxuch/8nnIVvOIGEMEsbnIWFcIWEMEsYgYQwSxiBhDBLGIGEMEsYgYQwSxiBhdhhPoVGGYQdYAMOmJxEDsP/nAWaXgVuMB5gt8ACzdTsGnjIeYPahqr7BijMXW2t3gCPg2pmNd758Ah5W1bu/L0wdgrkHvMaV0tsxcG9ZDJi4y6qqN4xnAqqvg1UxYP6297DzMBq/M1aaO2p8F/jSdRz9+1HjJ290n9LPMBUDTrdTd5/SxwDsb3oISZIkSZIkSZIkScl+AJ3DbTOdkV8AAAAAAElFTkSuQmCC"
+                  />
+                </svg>
+                <p>Category</p>
+              </a>
+            </li> -->
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/forms']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Monthly/Yearly</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+       <li class="nav-item" [ngClass]="{ 'menu-open': siteInfoVal == true }">
+          <a class="nav-link" (click)="siteInfo()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 64 64"
+              width="20.00pt"
+              height="20.00pt"
+            >
+              <path
+                fill="#524f4f"
+                d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+              />
+            </svg>
+            <p>
+              Site Info
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Add Site</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" [ngClass]="{ 'menu-open': stepL == true }">
+          <a class="nav-link" (click)="landingPageEditOpen()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 64 64"
+              width="20.00pt"
+              height="20.00pt"
+            >
+              <path
+                fill="#524f4f"
+                d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+              />
+            </svg>
+            <p>
+              Edit Landing Page
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/header']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Header</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/applicationSerInfo']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Application Service Info</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/safetyModule']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Safety Module</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/happyClient']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Happy Client</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/flexible']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Flexible</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/customer']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>CustomerTestimonial</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/aboutUs']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>About-Us</p>
               </a>
             </li>
           </ul>
@@ -300,7 +497,7 @@
               height="20.00pt"
             >
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M21.5,21H20V7.5A.49.49,0,0,0,19.66,7L16,5.47V21H15V3.5a.5.5,0,0,0-.5-.5h-9a.5.5,0,0,0-.5.5V21H3.5a.5.5,0,0,0,0,1h18a.5.5,0,0,0,0-1Zm-4-12h1a.5.5,0,0,1,.5.5.51.51,0,0,1-.5.5h-1a.51.51,0,0,1-.5-.5A.5.5,0,0,1,17.5,9Zm0,3h1a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm0,3h1a.51.51,0,0,1,.5.5.5.5,0,0,1-.5.5h-1a.5.5,0,0,1-.5-.5A.51.51,0,0,1,17.5,15Zm0,3h1a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1ZM11,6h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1Zm0,3h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1Zm0,3h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1Zm0,3h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1ZM7.94,6H9A.5.5,0,0,1,9,7h-1a.5.5,0,0,1,0-1Zm0,3H9a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm0,3H9a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm0,3H9a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm2.56,6V19h-1v2h-1V18.47A.5.5,0,0,1,9,18h2a.5.5,0,0,1,.5.5V21Z"
               />
             </svg>
@@ -323,7 +520,7 @@
               height="20.00pt"
             >
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M80.8 53.8c-1.7-.6-3.6-.1-4.6 1.2l-5.1 7c-.3.4-.8.4-1.1 0l-5.1-7c-1-1.3-2.9-1.8-4.6-1.2-2 .7-3.7 1.4-5.2 2.1-.7.3-.7 1.3 0 1.7 6.1 3.5 9.2 7.3 10.3 14.1.1.5.5.8.9.8h26.3c1.3 0 2.4-.9 2.4-2C95 60.8 91.3 57.6 80.8 53.8zM66.2 22.9c-11.4.3-11.2 13-7 20.7.6 1.1 1.6 2.3 2.6 3.1.8.6 1.8.9 2.8.9.2 0 .4-.1.5-.2 1.3 1.4 3.2 2.9 5.5 2.9 0 0 .1 0 .1 0 1.9 0 3.8-1 5.5-2.9.1.1.3.1.5.1h0c.9 0 1.7-.2 2.5-.7 1-.7 1.9-1.8 2.6-2.6C89.8 33.9 81.6 12.9 66.2 22.9zM79.2 32.7c.3 2.3-.6 6.3-1.9 10.1-1.8 3.5-4.5 5.7-6.5 5.5-3.9-.3-6.4-5.2-6.4-5.3-1.2-3.5-2.2-7-2.2-8.1 0-.2.2-.4.4-.5 3.4-1.2 5.5-4.3 6.2-5.6.2-.3.6-.4.8-.1 2.2 2.4 7.7 3.3 9.2 3.6C79 32.2 79.2 32.4 79.2 32.7zM48 58.7c-1.6-.7-3.5-.1-4.5 1.4L38 68.8c-.2.3-.7.3-.8-.1l-2.3-7.6c-.1-.3 0-.7.2-.9l1.7-1.7c.4-.3.1-1-.4-1h-2.5-1-2.5c-.5 0-.8.6-.4 1l1.7 1.7c.2.2.3.6.2.9l-2.3 7.6c-.1.4-.6.4-.8.1l-5.5-8.7c-1-1.5-2.8-2.1-4.5-1.4C8.6 62.9 5 66.6 5 77.4c0 1.3 1 2.3 2.3 2.3h25.6 1 25.6c1.3 0 2.3-1 2.3-2.3C61.8 66.6 58.1 62.9 48 58.7zM33.4 54.2c13.4 0 20.4-30.5 0-30.8C13 23.8 20 54.2 33.4 54.2z"
               />
             </svg>
@@ -333,17 +530,7 @@
             </p>
           </a>
         </li>
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>
-            <p>
-              First aid treatment injuries
-               <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> -->
-        <!-- //   ----------------------------// -->
+      
         <li class="nav-item">
           <a [routerLink]="['/admin/forms/hazardRep']" class="nav-link">
             <svg
@@ -353,65 +540,65 @@
               width="20.00pt"
               height="20.00pt"
             >
-              <circle cx="8" cy="8" r="7.5" fill="#C71437" />
+              <circle cx="8" cy="8" r="7.5" fill="#524f4f" />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M1.5,8A7.49442,7.49442,0,0,1,8.5.52521C8.334.51422,8.16882.5,8,.5a7.5,7.5,0,0,0,0,15c.16882,0,.334-.01422.5-.02521A7.49442,7.49442,0,0,1,1.5,8Z"
               />
               <circle cx="8" cy="8" r="5.5" fill="#fff" />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M3.5,8a5.49864,5.49864,0,0,1,5-5.47479C8.33508,2.51031,8.16882,2.5,8,2.5a5.5,5.5,0,0,0,0,11c.16882,0,.33508-.01031.5-.02521A5.49868,5.49868,0,0,1,3.5,8Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M10.5 8.5H9a.5.5 0 0 1 0-1h1.5a.5.5 0 0 1 0 1zM7.874 7.51221a.49971.49971 0 0 1-.5-.5V4.87256a.5.5 0 1 1 1 0V7.01221A.49971.49971 0 0 1 7.874 7.51221z"
               />
               <circle
                 cx="8"
                 cy="8"
                 r="1"
-                fill="#C71437"
+                fill="#524f4f"
                 transform="rotate(-37.84 8 8)"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M3.476,24.5h1a1,1,0,0,1,1,1v6a0,0,0,0,1,0,0h-3a0,0,0,0,1,0,0v-6A1,1,0,0,1,3.476,24.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M4.476,24.5h-1a1,1,0,0,0-1,1v6h1v-6A1,1,0,0,1,4.476,24.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M13.476,31.5h-3v-9a1,1,0,0,1,1-1h1a1,1,0,0,1,1,1Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M12.476,21.5h-1a1,1,0,0,0-1,1v9h1v-9A1,1,0,0,1,12.476,21.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M19.476,17.5h1a1,1,0,0,1,1,1v13a0,0,0,0,1,0,0h-3a0,0,0,0,1,0,0v-13A1,1,0,0,1,19.476,17.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M20.476,17.5h-1a1,1,0,0,0-1,1v13h1v-13A1,1,0,0,1,20.476,17.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M27.476,10.5h1a1,1,0,0,1,1,1v20a0,0,0,0,1,0,0h-3a0,0,0,0,1,0,0v-20A1,1,0,0,1,27.476,10.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M28.476,10.5h-1a1,1,0,0,0-1,1v20h1v-20A1,1,0,0,1,28.476,10.5Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M2.47559,22a.49994.49994,0,0,1-.11084-.9873,40.44361,40.44361,0,0,0,15.80908-6.91113A38.9502,38.9502,0,0,0,29.0332,1.26758a.50015.50015,0,1,1,.88574.46484,39.96836,39.96836,0,0,1-11.14062,13.166A41.41209,41.41209,0,0,1,2.5874,21.9873.49109.49109,0,0,1,2.47559,22Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M30.5,5a.50039.50039,0,0,1-.47412-.34082l-.8623-2.56689L26.666,2.97168a.5.5,0,1,1-.332-.94336L29.31006.98047a.50061.50061,0,0,1,.64014.3125l1.02393,3.04785A.49978.49978,0,0,1,30.5,5Z"
               />
             </svg>
@@ -462,11 +649,11 @@
               height="20.00pt"
             >
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M41.66016,39.09326a.99775.99775,0,0,0-1.32813.48535,17.99961,17.99961,0,1,1-6.85889-22.88769.99971.99971,0,0,0,1.05372-1.69922A19.97334,19.97334,0,0,0,6.04608,40.75543a.97276.97276,0,0,0-.01239.50238,10.5576,10.5576,0,0,1,.00147,5.47949,10.37756,10.37756,0,0,1-1.82569,3.64991A1.00011,1.00011,0,0,0,4.99951,52a1.05528,1.05528,0,0,0,.11768-.00684c2.03564-.24023,4.08545-.582,6.09424-1.01562,1.36145-.29431,2.72564-.63556,4.05426-1.01343A19.84421,19.84421,0,0,0,24,52,20.08022,20.08022,0,0,0,42.14551,40.42139.9997.9997,0,0,0,41.66016,39.09326Zm-30.8711,9.9292c-1.24951.27-2.51611.50293-3.78418.69678a12.30879,12.30879,0,0,0,.96-2.45654,12.278,12.278,0,0,0,.42243-2.79621,20.1521,20.1521,0,0,0,4.40521,4.08826C12.1272,48.72144,11.45789,48.878,10.78906,49.02246Z"
               />
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M27 32a1 1 0 0 0 1 1h.00977A1 1 0 1 0 27 32zM22.99268 32a1 1 0 0 0 1 1h.00976a1 1 0 1 0-1.00976-1zM18.99023 32a1.00005 1.00005 0 0 0 1 1H20a1 1 0 1 0-1.00977-1zM35.2041 18.9707a.998.998 0 0 0-1.30029.55616 10.88224 10.88224 0 0 0 .80371 9.81152.9998.9998 0 1 0 1.706-1.043 8.90194 8.90194 0 0 1-.65332-8.02441A.99992.99992 0 0 0 35.2041 18.9707zM54.37305 18.61377a.9998.9998 0 1 0 1.706-1.043 12.02964 12.02964 0 0 0-8.51318-5.52148 1 1 0 1 0-.30469 1.97656A10.03983 10.03983 0 0 1 54.37305 18.61377zM57.687 24.603a2.46391 2.46391 0 0 0-2.20654-.16992l-2.99609-4.90186a8.18379 8.18379 0 0 0-8.59882-3.53851 2.99 2.99 0 0 0-.42658-1.85211 3.32705 3.32705 0 0 0-4.39209-1.13086 3.10828 3.10828 0 0 0-1.53906 1.9331 2.99719 2.99719 0 0 0 .34473 2.35693 3.149 3.149 0 0 0 1.44494 1.22577 7.733 7.733 0 0 0-1.82238 3.24494 7.12168 7.12168 0 0 0 .80713 5.60742l2.95068 4.82861a2.27656 2.27656 0 0 0-.90918 1.93213 2.6461 2.6461 0 0 0 1.37061 2.17871 2.83043 2.83043 0 0 0 2.75341.0166l1.38752-.75671a3.79832 3.79832 0 0 0 2.946 1.38513 3.66853 3.66853 0 0 0 3.73779-3.58594 3.456 3.456 0 0 0-.25909-1.303l5.29718-2.88892A2.621 2.621 0 0 0 57.687 24.603zM39.46 15.46045a1.12671 1.12671 0 0 1 .56494-.69482 1.32379 1.32379 0 0 1 .63574-.15967 1.27551 1.27551 0 0 1 1.09229.57763 1.015 1.015 0 0 1 .11914.79639 1.12875 1.12875 0 0 1-.56543.69482 1.32107 1.32107 0 0 1-1.72754-.41748A1.01424 1.01424 0 0 1 39.46 15.46045zm11.0791 17.916a1.66909 1.66909 0 0 1-1.73779 1.58594 1.81121 1.81121 0 0 1-1.11054-.38611L50.478 33.05621A1.43869 1.43869 0 0 1 50.53906 33.37646zm6.08008-5.94775L43.51025 34.57813a.837.837 0 0 1-.81738-.00538.65006.65006 0 0 1-.35156-.53271.31.31 0 0 1 .17773-.27734l.59961-.32715a1.00038 1.00038 0 0 0 .374-1.39942L40.0083 26.335a5.144 5.144 0 0 1-.581-4.04785 5.92088 5.92088 0 0 1 2.96045-3.65576 6.69508 6.69508 0 0 1 3.20654-.81787 6.01537 6.01537 0 0 1 5.18408 2.76074l3.48438 5.70117a.9984.9984 0 0 0 1.33154.35645l.60058-.32715a.46536.46536 0 0 1 .45606.00879V26.314a.62488.62488 0 0 1 .33008.561A.64171.64171 0 0 1 56.61914 27.42871z"
               />
             </svg>
@@ -496,7 +683,7 @@
               viewBox="0 0 32 32"
             >
               <path
-                fill="#C71437"
+                fill="#524f4f"
                 d="M30 10h-8a2 2 0 0 1-2 2h10v4H20a2 2 0 0 1 2 2h8v12H2V18h8a2 2 0 0 1 2-2H2v-4h10a2 2 0 0 1-2-2H2a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V12a2 2 0 0 0-2-2zm-18 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2zm0-4h8v2h-8V8zm-2 10v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2zm10 2h-8v-2h8v2z"
               />
             </svg>
@@ -517,7 +704,7 @@
             >
               <path
                 fill="none"
-                stroke="#C71437"
+                stroke="#524f4f"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
@@ -525,7 +712,7 @@
               />
               <path
                 fill="none"
-                stroke="#C71437"
+                stroke="#524f4f"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
@@ -537,7 +724,7 @@
                 y1="21"
                 y2="15"
                 fill="none"
-                stroke="#C71437"
+                stroke="#524f4f"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
@@ -548,7 +735,7 @@
                 y1="19"
                 y2="17"
                 fill="none"
-                stroke="#C71437"
+                stroke="#524f4f"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
@@ -596,13 +783,13 @@
               height="20.00pt"
               viewBox="0 0 35 32"
             >
-              <g fill="#C71437">
+              <g fill="#524f4f">
                 <path
-                  fill="#C71437"
+                  fill="#524f4f"
                   d="M21.799 2.954C20.694 1.05 19.19 0 17.564 0c-1.626 0-3.131 1.05-4.236 2.954L1.059 24.087c-1.12 1.947-1.24 3.969-.33 5.546.866 1.5 2.565 2.363 4.664 2.367H29.735c2.102-.004 3.804-.864 4.667-2.361.905-1.567.783-3.581-.335-5.525L21.799 2.954zm11.738 26.185c-.681 1.18-2.067 1.858-3.804 1.861H5.394c-1.731-.003-3.115-.684-3.799-1.867-.727-1.26-.606-2.917.33-4.546L14.193 3.456C15.112 1.872 16.309 1 17.564 1s2.452.872 3.37 2.456l12.268 21.157c.935 1.626 1.057 3.276.335 4.526z"
                 />
                 <path
-                  fill="#C71437"
+                  fill="#524f4f"
                   d="M17.564 20a.5.5 0 00.5-.5v-10a.5.5 0 00-1 0v10a.5.5 0 00.5.5zM17.5 22.5c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2zm0 3a1.001 1.001 0 010-2 1.001 1.001 0 010 2z"
                 />
               </g>

@@ -1,124 +1,5 @@
-<!-- <div
-  class="container px-4 py-4 card"
-  [formGroup]="safetyDetail"
-  (ngSubmit)="onFormSubmit()"
->
-  <h1 class="text-center pt-3">
-    <p>OnlineSafetyModuleInfo</p>
-  </h1>
-  <hr />
-
-  <div>
-    <div class="row">
-      <div class="col-sm-6">
-        <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-        <input
-          type="text"
-          formControlName="title"
-          style="height: 50px"
-          class="form-control"
-          id="heading"
-        />
-      </div>
-
-      <div class="col-sm-6">
-        <p for="exampleFormControlInput1" class="form-Label">Description</p>
-        <textarea
-          rows="3"
-          type="text"
-          formControlName="description"
-          class="form-control"
-        ></textarea>
-      </div>
-    </div>
-    <br />
-    <hr />
-    <ng-container formArrayName="arrObj">
-      <ng-container
-        *ngFor="let control of safetyImgArr().controls; let i = index"
-        [formGroupName]="i"
-      >
-        <div>
-          <div class="row">
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label">
-                UploadImage
-              </p>
-              <img
-                [src]="selectedImage[i]"
-                onerror=" this.src='../../../assets/img/uploadImg.png' "
-                alt=""
-                width="150"
-                height="100"
-                class="imageService"
-              />
-              <input
-                type="file"
-                class="d-none"
-                #file
-                id="file"
-                class="custom-file-input img1 form-control"
-                name="avatar"
-                (change)="browser($event,i)"
-              />
-              <span
-                class="material-icons material-file"
-                (click)="file.click()"
-                class="btn border bg-white z-index mb-1"
-                style="
-                  position: absolute;
-                  top: 120px;
-                  left: 0;
-                  font-size: 1rem !important;
-                "
-              >
-                <i
-                  class="fa fa-upload"
-                  aria-hidden="true"
-                  style="margin: 0px"
-                ></i>
-              </span>
-            </div>
-            <div class="my-3 col-5">
-              <p for="exampleFormControlInput1" class="form-Label">Name</p>
-              <input
-                type="text"
-                formControlName="title"
-                style="height: 90px"
-                class="form-control"
-                id="name"
-              />
-            </div>
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" (click)="addSafetyModule()"
-                >add_circle_outline
-              </span>
-            </div>
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" (click)="removeSafetyModule(i)">
-                remove_circle_outline
-              </span>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </ng-container>
-    </ng-container>
-    <br />
-    <hr />
-    <div class="col-md-2">
-      <button
-        type="submit"
-        (click)="onFormSubmit()"
-        class="btn btn-primary btn-block"
-      >
-        Submit
-      </button>
-    </div>
-  </div>
-</div> -->
 <div class="text-center">
-  <h1 class="card"> Our Safety Modules </h1>
+  <h1 class="card">Our Safety Modules</h1>
 </div>
 <section class="content">
   <div class="container-fluid">
@@ -130,21 +11,25 @@
               <thead>
                 <tr>
                   <th style="width: 30%">Heading</th>
-                  <th style="width: 40%"> Description</th>
-                  <th style="width: 30%">Action
-                  </th>
+                  <th style="width: 40%">Description</th>
+                  <th style="width: 30%">Edit</th>
                 </tr>
               </thead>
               <tbody>
-                <tr  >
+                <tr>
                   <td>{{ safetyData.title }}</td>
                   <td>{{ safetyData.description }}</td>
-                  <td><button class="btn btn-info btn-sm mr-2" (click)="editForm(safetyData._id,false)">
+                  <td>
+                    <button
+                      class="btn btn-info btn-sm mr-2"
+                      (click)="editForm(safetyData._id, false)"
+                    >
                       <i class="fas fa-pencil-alt mr-2"></i> Edit
-                    </button></td>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
-             </table>
+            </table>
           </div>
         </div>
       </div>
@@ -152,42 +37,92 @@
   </div>
 </section>
 
+<div class="row">
+  <div class="col ml-2 mb-2">
+    <button
+      (click)="addForm('')"
+      class="btn btn-outline-primary mt-1 mr-2 float-left"
+    >
+      <i class="fas fa-folder-plus mr-2"></i>AddModules
+    </button>
+  </div>
+</div>
 <section class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-       <div class="card">
+        <div class="card">
           <div class="card-body p-0">
             <table class="table table-hover text-wrap">
               <thead>
                 <tr>
                   <th style="width: 25%">Images</th>
                   <th style="width: 25%">Title</th>
-                
-                  <th>Action</th>
-                  <!-- <th ><button      (click)="addForm('')"
-                  class="btn btn-danger btn-sm mr-2">
-                  <i class="fas fa-folder-plus mr-2"></i>Add
-                </button>
-               </th>  -->
 
+                  <th style="width: 25%">Edit</th>
+                  <th style="width: 25%">Delete</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let data of safetyData.subModules; let i=index">
-                  <td><img src="{{ data.fileUrl }}" height="150px" width="150px"></td>
+                <tr *ngFor="let data of safetyData.subModules; let i = index">
+                  <td>
+                    <img
+                      src="{{ data.fileUrl }}"
+                      height="150px"
+                      width="150px"
+                    />
+                  </td>
                   <td>{{ data.title }}</td>
-                
-                  <td><button (click)="editForm(data._id,true,i)" class="btn btn-info btn-sm mr-2">
+
+                  <td>
+                    <button
+                      (click)="editForm(data._id, true, i)"
+                      class="btn btn-info btn-sm mr-2"
+                    >
                       <i class="fas fa-pencil-alt mr-2"></i>Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger btn-sm mr-2"
+                      (click)="deleteopen(deletemodal, data._id)"
+                    >
+                      <i class="fas fa-trash mr-2"></i>Delete
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-         </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+<ng-template #deletemodal let-modal>
+  <div class="modal-header titel">
+    <h2 class="modal-title titel" id="modal-basic-title">Are you sure?</h2>
+  </div>
+  <div class="modal-body deletebody">
+    <p></p>
+    <p>Do you want to delete this Module</p>
+  </div>
+  <div class="modal-footer footer">
+    <button
+      type="button"
+      class="btn mr-3"
+      style="background-color: #eeeeee"
+      (click)="modal.dismiss('Save click')"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger ml-3"
+      aria-label="Close"
+      (click)="modal.close('Cross click')"
+    >
+      Delete
+    </button>
+  </div>
+</ng-template>
