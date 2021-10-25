@@ -46,20 +46,13 @@ export class HeaderInfoComponent implements OnInit {
     public router: Router,
   ) {
     this.serviceDetail = fb.group({
-      // fileUrl: "fileUrl",
       title: ['', Validators.required],
       description: ['', Validators.required],
-      // mode: 'Service',
     });
   }
 
   ngOnInit(): void {
     this.getHeaderById();
-    // if (this.Is_id != '') {
-    //   this.Eddit();
-    // } else {
-    //   this.Added();
-    // }
   }
   Added() {
     if (this.Edit == true) {

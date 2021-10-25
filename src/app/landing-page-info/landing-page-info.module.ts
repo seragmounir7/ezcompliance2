@@ -18,6 +18,9 @@ import { AddModulesInfoComponent } from './safety-modules/add-modules-info/add-m
 import { EditFlexibleInfoComponent } from './flexible/edit-flexible-info/edit-flexible-info.component';
 import { AddFlexibleInfoComponent } from './flexible/add-flexible-info/add-flexible-info.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
+import { ViewContactComponent } from './contact-us/view-contact/view-contact.component';
 @NgModule({
   declarations: [
     LandingPageInfoComponent,
@@ -35,6 +38,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
     EditFlexibleInfoComponent,
     AddFlexibleInfoComponent,
     AboutUsComponent,
+    ContactUsComponent,
+    AddContactComponent,
+    ViewContactComponent,
   ],
   imports: [
     CommonModule,
