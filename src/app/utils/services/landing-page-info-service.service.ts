@@ -98,7 +98,6 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-<<<<<<< HEAD
 
   addContact(data) {
     return this.https.post(this.apiUrl + 'contactUs/add', data).pipe(
@@ -138,10 +137,6 @@ export class LandingPageInfoServiceService {
 
   deleteContactUs(id) {
     return this.https.delete(this.apiUrl + 'contactUs/delete/' + id).pipe(
-=======
-  addAboutUs(data) {
-    return this.https.post(this.apiUrl + 'aboutUs/multiple', data).pipe(
->>>>>>> 2d591db9b8ecdcef194eba0ab2f8592a15eeb034
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
