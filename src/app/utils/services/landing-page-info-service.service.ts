@@ -41,14 +41,7 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-  // editHeader(data) {
-  //   return this.https.post(this.apiUrl + 'mainPage/add', data).pipe(
-  //     map((res: any) => {
-  //       console.log('res.data=>', res.data);
-  //       return res;
-  //     })
-  //   );
-  // }
+
   editHeader(id, data) {
     return this.https.put(this.apiUrl + 'mainPage/update/' + id, data).pipe(
       map((res: any) => {
@@ -99,6 +92,14 @@ export class LandingPageInfoServiceService {
   }
   addSubModule(data) {
     return this.https.post(this.apiUrl + 'subModule/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  addAboutUs(data) {
+    return this.https.post(this.apiUrl + 'aboutUs/multiple', data).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
