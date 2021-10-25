@@ -19,16 +19,12 @@ import { EditFlexibleInfoComponent } from './flexible/edit-flexible-info/edit-fl
 import { FlexibleComponent } from './flexible/flexible.component';
 import { AddFlexibleInfoComponent } from './flexible/add-flexible-info/add-flexible-info.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-<<<<<<< HEAD
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
-import { ViewContactComponent } from './contact-us/view-contact/view-contact.component';
-=======
 import { CustomertestimonialsComponent } from './customertestimonials/customertestimonials.component';
 import { AddCustomerTestimonailComponent } from './customertestimonials/add-customer-testimonail/add-customer-testimonail.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ViewContactComponent } from './contact-us/view-contact/view-contact.component';
 import { EditCustomerTestimonailComponent } from './customertestimonials/edit-customer-testimonail/edit-customer-testimonail.component';
-
->>>>>>> 2d591db9b8ecdcef194eba0ab2f8592a15eeb034
+import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
 @NgModule({
   declarations: [
     LandingPageInfoComponent,
@@ -46,16 +42,10 @@ import { EditCustomerTestimonailComponent } from './customertestimonials/edit-cu
     EditFlexibleInfoComponent,
     AddFlexibleInfoComponent,
     AboutUsComponent,
-<<<<<<< HEAD
-    ContactUsComponent,
-    AddContactComponent,
-    ViewContactComponent,
-=======
     AddCustomerTestimonailComponent,
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
-    FlexibleComponent,
->>>>>>> 2d591db9b8ecdcef194eba0ab2f8592a15eeb034
+    FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent
   ],
   imports: [
     CommonModule,
