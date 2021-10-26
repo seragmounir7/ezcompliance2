@@ -1,7 +1,7 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service'; 
-import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service'; 
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,7 +21,7 @@ export class HeaderInfoComponent implements OnInit {
   // HeaderInformation!: FormGroup;
   myId: any;
   isEdit = false;
-  data: any=[];
+  data: any = [];
   enum: any;
   serviceData: any;
   Is_id: any;
@@ -30,10 +30,10 @@ export class HeaderInfoComponent implements OnInit {
   page = 1;
   pageSize = 10;
   ServiceData: any;
-  mode:any;
+  mode: any;
   collectionSize = 10;
   allHeaderData: any;
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   infoData: any;
   constructor(
@@ -43,7 +43,7 @@ export class HeaderInfoComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router,
+    public router: Router
   ) {
     this.serviceDetail = fb.group({
       title: ['', Validators.required],
@@ -72,7 +72,6 @@ export class HeaderInfoComponent implements OnInit {
     }
   }
 
-
   browser(event, i) {
     console.log(event, i);
     const files = event.target.files[0];
@@ -100,13 +99,11 @@ export class HeaderInfoComponent implements OnInit {
     }
   }
 
-  
-
   editService(id) {
     console.log(id);
     this.myId = id;
     this.isEdit = true;
-    this.url.editHeader(id,data).subscribe((res) => {
+    this.url.editHeader(id, data).subscribe((res) => {
       console.log('Data Set response' + res);
       this.data = res.data;
       console.log('new response' + this.data);
@@ -116,9 +113,9 @@ export class HeaderInfoComponent implements OnInit {
     const dialogRef = this.dialog.open(HeaderComponent, {
       width: '800px',
       data: {
-				action: "new",
-				userId: id
-			},
+        action: 'new',
+        userId: id,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -127,28 +124,29 @@ export class HeaderInfoComponent implements OnInit {
   }
 
   openDialogEdit(serviceDetail) {
-		let dialogRef = this.dialog.open(HeaderComponent, {
-		  data: {
-			action:"edit",
-		    headerData:  this.infoData,
-		// headerId: id
-		  },
-		});
-		// this.expensesId = expenses.Action;
-		dialogRef.afterClosed().subscribe((result) => {
-		  console.log("ExpensesInfoComponent -> openDialog -> result", result);
-		  this.getHeaderById();
-		//   if ((result == "true")) {
-		// 	this.getAllExpenses();
-		//   }
-		  console.log("The dialog was closed");
-		});
-	}
+    let dialogRef = this.dialog.open(HeaderComponent, {
+      data: {
+        action: 'edit',
+        headerData: this.infoData,
+        // headerId: id
+      },
+      width: '800px',
+    });
+    // this.expensesId = expenses.Action;
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('ExpensesInfoComponent -> openDialog -> result', result);
+      this.getHeaderById();
+      //   if ((result == "true")) {
+      // 	this.getAllExpenses();
+      //   }
+      console.log('The dialog was closed');
+    });
+  }
   refreshList(): void {
     this.retrieveTutorials({ page: this.page, pageSize: this.pageSize });
   }
   retrieveTutorials(params: any): void {}
-  service:any
+  service: any;
   getHeaderById() {
     this.url.getHeaderBYId().subscribe((data) => {
       console.log('mode=>', data);
