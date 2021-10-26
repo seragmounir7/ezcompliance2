@@ -32,8 +32,8 @@ export class AboutUsComponent implements OnInit {
   Is_id: any;
   closeResult: string;
   mode: any;
-  myId: any;
-  Id: any;
+  myId:any;
+  Id:any
   constructor(
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
@@ -56,11 +56,12 @@ export class AboutUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.getTeam();
   }
   /////////////////////// 61767ab18031f2102a69ef71 it is aboutusId and it never  be change so plz do not remove from this //////////////////
   getTeam() {
-    this.Id = '61767ab18031f2102a69ef71';
+   this.Id ='61767ab18031f2102a69ef71'
     this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
       console.log('teamData=>', data);
       this.teamData = data.data[0];
@@ -72,7 +73,7 @@ export class AboutUsComponent implements OnInit {
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
-    this.Id = '61767ab18031f2102a69ef71';
+    this.Id ='61767ab18031f2102a69ef71'
     this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
       console.log('teamData=>', data);
       this.teamData = data.data[0];
@@ -81,14 +82,14 @@ export class AboutUsComponent implements OnInit {
       let dialogRef = this.dialog.open(EditTeamInfoComponent, {
         data: {
           action: 'edit',
-
+      
           EditData: this.teamData,
           index: i,
           moduleName: name,
         },
 
         width: '900px',
-        height: '500px',
+        height: '600px',
       });
       dialogRef.afterClosed().subscribe((result) => {
         console.log('-> openDialog -> result', result);
@@ -112,7 +113,7 @@ export class AboutUsComponent implements OnInit {
           ID: id,
           EditData: this.teamData._id,
         },
-        width: '800px',
+        width: '600px',
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
@@ -127,24 +128,26 @@ export class AboutUsComponent implements OnInit {
     this.hide = false;
   }
   deleteopen(content, id) {
-    console.log('deleteopen close id=>', id);
+    console.log("deleteopen close id=>",id);
     this.Is_id = id;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
-          console.log('deleting');
+console.log("deleting")
           this.landingPageInfo.deleteTeam(this.Is_id).subscribe((res) => {
             console.log('deleted res', res);
             this.getTeam();
           });
         },
         (reason) => {
+
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           console.log('dismissed');
         }
       );
+    
   }
   delete(item) {
     Swal.fire({
@@ -170,4 +173,5 @@ export class AboutUsComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
 }
