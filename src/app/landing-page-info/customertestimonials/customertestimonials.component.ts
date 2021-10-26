@@ -18,7 +18,7 @@ export class CustomertestimonialsComponent implements OnInit {
   testiomnial: FormGroup;
   selectedImage: any = [];
   myId: any;
-  items = ['akash', 'sakshi', 'salim', 'kamlesh'];
+
   isEdit = false;
   data: any = [];
   enum: any;

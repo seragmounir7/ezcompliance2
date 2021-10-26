@@ -8,6 +8,7 @@ import { FlexibleComponent } from './flexible/flexible.component';
 import { HappyClientComponent } from './happy-client/happy-client.component';
 import { SafetyModulesComponent } from './safety-modules/safety-modules.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', component: HeaderInfoComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'flexible', component: FlexibleComponent },
   { path: 'header', component: HeaderInfoComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  {path:'aboutUs',component:AboutUsComponent},
 ];
 
 @NgModule({

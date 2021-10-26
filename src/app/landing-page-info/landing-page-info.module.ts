@@ -25,6 +25,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ViewContactComponent } from './contact-us/view-contact/view-contact.component';
 import { EditCustomerTestimonailComponent } from './customertestimonials/edit-customer-testimonail/edit-customer-testimonail.component';
 import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
+import { AddTeamInfoComponent } from './about-us/add-team-info/add-team-info.component';
+import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.component';
 @NgModule({
 
 
@@ -47,7 +49,9 @@ import { AddContactComponent } from './contact-us/add-contact/add-contact.compon
     AddCustomerTestimonailComponent,
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
-    FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent
+    FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
+    EditTeamInfoComponent,AddTeamInfoComponent
+
   ],
   imports: [
     CommonModule,

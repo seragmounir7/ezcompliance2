@@ -49,7 +49,6 @@ export class FlexibleComponent implements OnInit {
     this.flexibleDetail = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      // uploadImage: ['', Validators.required],
       mode: 'Flexible',
       arrObj: this.fb.array([]),
     });
@@ -59,10 +58,6 @@ export class FlexibleComponent implements OnInit {
     //  this.addAction();
     this.getFlexible();
   }
-
-
-
-
 
   getFlexible() {
     this.mode = 'Flexible';
@@ -133,9 +128,7 @@ export class FlexibleComponent implements OnInit {
     this.hide = false;
   }
 
-  
   deleteopen(content, id) {
-  
     this.Is_id = id;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
@@ -149,12 +142,10 @@ export class FlexibleComponent implements OnInit {
           });
         },
         (reason) => {
-
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           console.log('dismissed');
         }
       );
-    
   }
   delete(item) {
     Swal.fire({
