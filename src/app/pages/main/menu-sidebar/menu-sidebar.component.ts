@@ -40,7 +40,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
       this.step=false;
       this.subscription = !this.subscription;
     }
-    if(key ==='siteInfoVal'){
+    if(key ==='siteInfo'){
       this.stepL = false;
       this.subscription = false;
       this.step=false;
