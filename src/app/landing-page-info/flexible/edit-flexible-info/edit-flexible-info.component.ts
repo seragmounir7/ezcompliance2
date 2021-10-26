@@ -163,15 +163,15 @@ export class EditFlexibleInfoComponent implements OnInit {
 
   editModule() {
     if (this.data.action == 'edit') {
-      let ServiceData = {
+      let flexibleData = {
         title: this.flexibleDetail.controls.title.value,
         description: this.flexibleDetail.controls.description.value,
-        mode: 'Service',
+        mode: 'Flexible',
       };
-      console.log('asdfgh', ServiceData);
+      console.log('flexibleData=>', flexibleData);
       console.log('this.EditData', this.data.EditData._id);
       this.landingPageInfo
-        .editModule(ServiceData, this.data.EditData._id)
+        .editModule(flexibleData, this.data.EditData._id)
         .subscribe((resData) => {
           console.log('editModule', resData);
 
@@ -202,7 +202,7 @@ export class EditFlexibleInfoComponent implements OnInit {
         });
     } else {
       let data = {
-        mode: 'Service',
+        mode: 'Flexible',
 
         title: this.flexibleDetail.controls.title.value,
         description: this.flexibleDetail.controls.description.value,

@@ -98,7 +98,54 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-
+  getAboutUsById(id: any) {
+    return this.https.get(this.apiUrl + 'aboutUs/getAll/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  addAboutUs(data) {
+    return this.https.post(this.apiUrl + 'aboutUs/multiple', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editAboutUs(data, id) {
+    return this.https.put(this.apiUrl + 'aboutUs/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  addTeam(data) {
+    return this.https.post(this.apiUrl + 'team/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editTeam(data, id) {
+    return this.https.put(this.apiUrl + 'team/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deleteTeam(id) {
+    return this.https.delete(this.apiUrl + 'team/delete/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
   addContact(data) {
     return this.https.post(this.apiUrl + 'contactUs/add', data).pipe(
       map((res: any) => {
@@ -107,7 +154,6 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-
   editContactUs(id, data){
     return this.https.put(this.apiUrl + 'contactUs/update/' + id, data).pipe(
       map((res: any) => {
@@ -116,7 +162,6 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-
   getContactById(id) {
     return this.https.get(this.apiUrl + 'contactUs/get/' + id).pipe(
       map((res: any) => {
@@ -137,14 +182,6 @@ export class LandingPageInfoServiceService {
 
   deleteContactUs(id) {
     return this.https.delete(this.apiUrl + 'contactUs/delete/' + id).pipe(
-      map((res: any) => {
-        console.log('res.data=>', res.data);
-        return res;
-      })
-    );
-  }
-  addAboutUs(data) {
-    return this.https.post(this.apiUrl + 'aboutUs/multiple', data).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
