@@ -2,10 +2,21 @@
     <div class="row" formGroup="rateAndCoupon">
         <div class="col">
             <h1>Monthly And Yearly Rate Per Employee</h1>
-            <!-- <label formControlName="monthly" for="">Monthly:${{monthly}}</label>
-            <label formControlName="yearly" for="">Yearly: ${{yearly}}</label> -->
+            <label for="">Monthly:${{this.dataPlan.monthly}}</label>&nbsp;
+            <label  for="">Yearly: ${{this.dataPlan.yearly}}</label><br>
             
-            <button><i class="fas fa-pencil-alt mr-2"></i></button>
+            <i class="fas fa-pencil-alt mr-2" (click)="editPlan()"></i><br>
+
+        </div>
+      
+    </div>
+    <div class="row" *ngIf="isValid">
+        <div class="col" >
+            <label for="">Monthly</label>&nbsp;
+            <input type="text" formControlName="monthly" [value]="this.dataPlan.monthly"><br>
+            <label  for="">Yearly</label>
+            <input type="text" formControlName="yearly" [value]="this.dataPlan.yearly"><br>
+            <button (click)="editPlanInfo($event)">Submit</button>
         </div>
     </div>
 </div>

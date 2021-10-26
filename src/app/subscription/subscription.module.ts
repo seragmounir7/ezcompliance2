@@ -10,7 +10,8 @@ import { RateAndCouponComponent } from './rate-and-coupon/rate-and-coupon.compon
   declarations: [SubscriptionComponent, RateAndCouponComponent],
   imports: [
     CommonModule,
-    SubscriptionRoutingModule
+    SubscriptionRoutingModule,
+    
   ]
 })
 export class SubscriptionModule { }
