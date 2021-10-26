@@ -1,1 +1,85 @@
-<router-outlet></router-outlet>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center mt-2"><h1>Forms List</h1></div>
+
+        <!-- Default box -->
+        <div class="cards">
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <table class="table table-hover text-wrap">
+              <thead>
+                <tr>
+                  <th style="width: 10%">No.</th>
+                  <th style="width: 20%">Form Name</th>
+                  <th style="width: 20%">Form Frquency</th>
+                  <th style="width: 10%">Disable/Enable</th>
+                  <th style="width: 10%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let form of allForms;let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{form.title}}</td>
+                  <td>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="quaterly">Quaterly</option>
+                      <option value="halfYearly">Half yearly</option>
+                      <option value="yearly">Yearly</option>
+                      <option value="onceOff">Once Off</option>
+                    </select>
+                  </td>
+                  <td>
+                    <mat-slide-toggle color="primary" checked></mat-slide-toggle>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm mr-2" [routerLink]="form.link">
+                      <i class="fas fa-folder mr-2"></i>View
+                    </button>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+
+          <!-- <div class="card-footer clearfix">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <select
+                    class="form-control custom-select"
+                    style="width: auto"
+                    [(ngModel)]="pageSize"
+                    (ngModelChange)="refreshList()"
+                  >
+                    <option *ngFor="let size of [10, 20, 30]" [ngValue]="size">
+                      {{ size }} Items
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <ngb-pagination
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [collectionSize]="collectionSize"
+                  (pageChange)="refreshList()"
+                  class="pagination"
+                  [maxSize]="5"
+                ></ngb-pagination>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
