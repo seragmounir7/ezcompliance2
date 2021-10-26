@@ -70,6 +70,7 @@ const routes: Routes = [
           ),
       },
       { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule) },
+      { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule) },
 
     ],
   },

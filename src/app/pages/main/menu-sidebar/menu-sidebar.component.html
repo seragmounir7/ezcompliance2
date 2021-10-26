@@ -27,7 +27,7 @@
     </div> -->
 
     <!-- SidebarSearch Form -->
-    <div class="form-inline">
+    <!-- <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
         <input
           class="form-control form-control-sidebar"
@@ -41,7 +41,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -71,7 +71,7 @@
           </a>
         </li>
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
-          <a class="nav-link" (click)="menuOpen()">
+          <a class="nav-link" (click)="menuOpen('dynamic')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 64 64"
@@ -144,7 +144,7 @@
           </ul>
         </li>
        <li class="nav-item" [ngClass]="{ 'menu-open': subscription == true }">
-          <a class="nav-link" (click)="subscriptionFun()">
+          <a class="nav-link" (click)="menuOpen('subscription')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 64 64"
@@ -191,7 +191,7 @@
               </a>
             </li> -->
             <li class="nav-item ml-3">
-              <a [routerLink]="['/admin/forms']" class="nav-link">
+              <a [routerLink]="['/admin/subscrpt']" class="nav-link">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 64 64"
@@ -217,7 +217,7 @@
           </ul>
         </li>
        <li class="nav-item" [ngClass]="{ 'menu-open': siteInfoVal == true }">
-          <a class="nav-link" (click)="siteInfo()">
+          <a class="nav-link" (click)="menuOpen('siteInfo')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 64 64"
@@ -271,7 +271,7 @@
           </ul>
         </li>
         <li class="nav-item" [ngClass]="{ 'menu-open': stepL == true }">
-          <a class="nav-link" (click)="landingPageEditOpen()">
+          <a class="nav-link" (click)="menuOpen('landingPageInfo')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 64 64"
