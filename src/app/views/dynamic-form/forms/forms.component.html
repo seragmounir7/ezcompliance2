@@ -22,8 +22,9 @@
               <thead>
                 <tr>
                   <th style="width: 10%">No.</th>
-                  <th style="width: 30%">Form Name</th>
-                  <th style="width: 30%">Disable/Enable</th>
+                  <th style="width: 20%">Form Name</th>
+                  <th style="width: 30%">Form Frquency</th>
+                  <th style="width: 10%">Disable/Enable</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -31,6 +32,16 @@
                 <tr *ngFor="let form of allForms; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ form.title }}</td>
+                  <td> 
+                    <select class="form-select" aria-label="Default select example" [value]="form.frequency"(change)="frequencyChange($event,form)">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="quaterly">Quaterly</option>
+                    <option value="halfYearly">Half yearly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="onceOff">Once Off</option>
+                  </select>
+                </td>
                   <td>                 
                   <mat-slide-toggle color="primary" [checked]="form.enable" (change)="slideChanged($event,form)"></mat-slide-toggle>
                 </td>
@@ -142,6 +153,18 @@
         aria-describedby="basic-addon1"
         formControlName="formName"
       />
+      <label for="exampleInputProjectNumber" class="form-label mt-1 ml-3"
+      >Set Frequency</label
+    >
+      <select class="custom-select custom-select-lg form-control inputalign mb-3" formControlName="frequency">
+        <option selected hidden>Frequency</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="quaterly">Quaterly</option>
+        <option value="halfYearly">Half yearly</option>
+        <option value="yearly">Yearly</option>
+        <option value="onceOff">Once Off</option>
+      </select>
     </div>
     <div class="modal-footer footer">
       <button

@@ -21,11 +21,13 @@ import { AddFlexibleInfoComponent } from './flexible/add-flexible-info/add-flexi
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CustomertestimonialsComponent } from './customertestimonials/customertestimonials.component';
 import { AddCustomerTestimonailComponent } from './customertestimonials/add-customer-testimonail/add-customer-testimonail.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ViewContactComponent } from './contact-us/view-contact/view-contact.component';
 import { EditCustomerTestimonailComponent } from './customertestimonials/edit-customer-testimonail/edit-customer-testimonail.component';
-import { AddTeamInfoComponent } from './about-us/add-team-info/add-team-info.component';
-import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.component';
-
+import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
 @NgModule({
+
+
   declarations: [
     LandingPageInfoComponent,
     HeaderInfoComponent,
@@ -45,9 +47,7 @@ import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.
     AddCustomerTestimonailComponent,
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
-    FlexibleComponent,
-    AddTeamInfoComponent,
-    EditTeamInfoComponent,
+    FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent
   ],
   imports: [
     CommonModule,

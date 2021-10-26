@@ -69,6 +69,9 @@ const routes: Routes = [
             (m) => m.LandingPageInfoModule
           ),
       },
+      { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule) },
+      { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule) },
+
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
