@@ -143,7 +143,6 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-
   addAboutUs(data) {
     return this.https.post(this.apiUrl + 'aboutUs/multiple', data).pipe(
       map((res: any) => {
@@ -152,5 +151,4 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-
 }

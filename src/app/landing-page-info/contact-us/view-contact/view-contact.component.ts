@@ -28,7 +28,8 @@ export class ViewContactComponent implements OnInit {
       email: ['', Validators.required],
       query: ['', Validators.required],
       
-    });if(this.data1.action=="view"){
+    });
+    if(this.data1.action=="view"){
       this.contactUsForm.patchValue({
         "fullName": this.data1.headerData.fullname,
         "phone": this.data1.headerData.phone,
