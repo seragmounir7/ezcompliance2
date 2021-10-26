@@ -10,9 +10,11 @@ import { HighRiskConComponent } from './high-risk-con/high-risk-con.component';
 import { PpeSelectComponent } from './ppe-select/ppe-select.component';
 import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.component';
 import { SharedModule } from './../shared/shared.module';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+
 
 @NgModule({
-  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent],
+  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent],
   imports: [
     CommonModule,
     SiteInfoRoutingModule,
