@@ -26,6 +26,8 @@ import { ViewContactComponent } from './contact-us/view-contact/view-contact.com
 import { EditCustomerTestimonailComponent } from './customertestimonials/edit-customer-testimonail/edit-customer-testimonail.component';
 import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
 @NgModule({
+
+
   declarations: [
     LandingPageInfoComponent,
     HeaderInfoComponent,
