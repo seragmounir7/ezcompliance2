@@ -8,6 +8,14 @@ import {
 } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { EditTeamInfoComponent } from './edit-team-info/edit-team-info.component';
+import { AddServiceInfoComponent } from '../application-service-info/add-service-info/add-service-info.component';
+import { AddTeamInfoComponent } from './add-team-info/add-team-info.component';
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
@@ -16,12 +24,24 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 export class AboutUsComponent implements OnInit {
   companyDetail!: FormGroup;
   selectedImage: any = [];
-  Image: any = [];
-  Image1: any = [];
+  teamData: any = [''];
+  Image: any;
+  Image1: any;
+  isEdit = false;
+  hide = false;
+  Is_id: any;
+  closeResult: string;
+  mode: any;
+  myId: any;
+  Id: any;
   constructor(
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
-    public upload: UploadFileServiceService
+    public upload: UploadFileServiceService,
+    private modalService: NgbModal,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    public router: Router
   ) {
     this.companyDetail = this.fb.group({
       imageUrl: ['', Validators.required],
@@ -36,113 +56,118 @@ export class AboutUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addAction();
+    this.getTeam();
   }
-  addAction() {
-    {
-      this.add().push(this.newAction());
-    }
-  }
-  add(): FormArray {
-    return this.companyDetail.get('arrObj') as FormArray;
-  }
-  newAction(): FormGroup {
-    return this.fb.group({
-      imageUrl: ['', Validators.required],
-      title: ['', Validators.required],
+  /////////////////////// 61767ab18031f2102a69ef71 it is aboutusId and it never  be change so plz do not remove from this //////////////////
+  getTeam() {
+    this.Id = '61767ab18031f2102a69ef71';
+    this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
+      console.log('teamData=>', data);
+      this.teamData = data.data[0];
+      console.log('teammm', this.teamData);
     });
   }
-  onFormSubmit() {
-    this.companyDetail.get('imageUrl')?.setValue(this.Image1[0].toString());
-    this.companyDetail.get('fileUrl')?.setValue(this.Image[0].toString());
-    console.log(this.companyDetail.value);
-    let value = this.selectedImage[0];
-    console.log('vvvvvv', value);
-    // let value1= this.Image[0];
-    // console.log('vvvvvv', value1);
-    // let value2 = this.Image1[0];
-    // console.log('vvvvvv', value2);
 
-    let arrlength = this.add().length;
-    for (let i = 0; i < arrlength; i++) {
-      this.add()
-        .at(i)
-        .get('imageUrl')
-        ?.setValue(this.selectedImage[i].toString());
-    }
-    console.log(this.companyDetail.value);
+  editForm(id, name: boolean, i?: any) {
+    console.log('sakshi', id);
+    this.myId = id;
+    this.isEdit = true;
+    this.Id = '61767ab18031f2102a69ef71';
+    this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
+      console.log('teamData=>', data);
+      this.teamData = data.data[0];
+      console.log('', this.teamData);
 
-    this.landingPageInfo
-      .addAboutUs(this.companyDetail.value)
-      .subscribe((res) => {
-        console.log('landingPageInfo -> Api -> res', res);
-        console.log(
-          'AddProductComponent -> browse -> this.selectedImage',
-          this.selectedImage
-        );
+      let dialogRef = this.dialog.open(EditTeamInfoComponent, {
+        data: {
+          action: 'edit',
+
+          EditData: this.teamData,
+          index: i,
+          moduleName: name,
+        },
+
+        width: '900px',
+        height: '500px',
       });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('-> openDialog -> result', result);
+
+        if ((result = 'true')) {
+          this.ngOnInit();
+        }
+        console.log('The dialog was closed');
+      });
+    });
   }
 
-  removeSafetyModule(i) {
-    const item = <FormArray>this.companyDetail.controls['arrObj'];
-    if (item.length > 1) {
-      item.removeAt(i);
-      this.selectedImage.splice(i, 1);
-    }
-  }
-
-  browser(event, i) {
-    console.log(event, i);
-    const files = event.target.files[0];
-    const formData = new FormData();
-    formData.append('', files);
-    let value = this.selectedImage[0];
-    console.log('vvvvvv', value);
-
-    if (value) {
-      this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
-
-        this.selectedImage[i] = res.files[0];
+  addForm(id) {
+    this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
+      console.log('teamData=>', data);
+      this.teamData = data.data[0];
+      console.log('', this.teamData);
+      let dialogRef = this.dialog.open(AddTeamInfoComponent, {
+        data: {
+          action: 'new',
+          ID: id,
+          EditData: this.teamData._id,
+        },
+        width: '800px',
+        height: '500px',
       });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('openDialog->result', result);
+        if ((result = 'true')) {
+          this.ngOnInit();
+        }
+      });
+    });
+  }
+  close() {
+    this.hide = false;
+  }
+  deleteopen(content, id) {
+    console.log('deleteopen close id=>', id);
+    this.Is_id = id;
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+          console.log('deleting');
+          this.landingPageInfo.deleteTeam(this.Is_id).subscribe((res) => {
+            console.log('deleted res', res);
+            this.getTeam();
+          });
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          console.log('dismissed');
+        }
+      );
+  }
+  delete(item) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        // this.model.attributes.splice(i,1);
+      }
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
     } else {
-      this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
-        this.companyDetail.patchValue({
-          filePath: res.filePath,
-        });
-        this.selectedImage.push(res.files[0]);
-
-        console.log('browse -> this.selectedImage', this.selectedImage);
-      });
+      return `with: ${reason}`;
     }
-  }
-  image(event) {
-    const files = event.target.files[0];
-    const formdata = new FormData();
-    formdata.append('', files);
-    console.log(files);
-
-    this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
-
-      this.Image.push(res.files[0]);
-
-      console.log('AddProductComponent -> browse -> this.Image', this.Image);
-    });
-  }
-  uploadImage(event) {
-    const files = event.target.files[0];
-    const formdata = new FormData();
-    formdata.append('', files);
-    console.log(files);
-
-    this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
-
-      this.Image1.push(res.files[0]);
-
-      console.log('AddProductComponent -> browse -> this.Image', this.Image);
-    });
   }
 }

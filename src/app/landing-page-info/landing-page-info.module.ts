@@ -22,6 +22,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { CustomertestimonialsComponent } from './customertestimonials/customertestimonials.component';
 import { AddCustomerTestimonailComponent } from './customertestimonials/add-customer-testimonail/add-customer-testimonail.component';
 import { EditCustomerTestimonailComponent } from './customertestimonials/edit-customer-testimonail/edit-customer-testimonail.component';
+import { AddTeamInfoComponent } from './about-us/add-team-info/add-team-info.component';
+import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { EditCustomerTestimonailComponent } from './customertestimonials/edit-cu
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
     FlexibleComponent,
+    AddTeamInfoComponent,
+    EditTeamInfoComponent,
   ],
   imports: [
     CommonModule,
