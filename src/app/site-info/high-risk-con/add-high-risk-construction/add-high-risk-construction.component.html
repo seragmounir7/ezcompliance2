@@ -1,0 +1,29 @@
+
+      <div class="container px-4 py-4 card">
+        <form [formGroup]="riskDetails" (ngSubmit)=" onFormSubmit()">
+          <h1 class="text-center pt-3">
+            <p style="text-align: center">High Risk Construction</p>
+          </h1>
+          <hr />
+          <div>
+            <div class="row">
+              <div class="col-8">
+                <p for="exampleFormControlInput1" class="form-Label">Add Parameter</p>
+                <input
+                  type="text"
+                  formControlName="title"
+                  class="form-control"
+                  id="name"
+                  
+                />
+
+              </div>
+              </div>
+              </div>
+              <br>
+              <hr>
+              <div class="col-md-2"> 
+                <button type="submit" [disabled]="riskDetails.get('title').hasError('required')" class="btn btn-primary "> Add</button>
+              </div>
+              </form>
+            </div>

@@ -205,4 +205,29 @@ getFormDataById(id: any) {
     })
   );
 }
+deleteSubComponent(id:any){
+  return this.https.delete(this.apiUrl + 'subComponent/delete/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+editSubComponent(data, id) {
+  return this.https.put(this.apiUrl + 'subComponent/update/' + id, data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+
+addSubComponent(data:any) {
+  return this.https.post(this.apiUrl + 'subComponent/add', data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
 }

@@ -223,7 +223,6 @@ export class JobTaskComponent implements OnInit {
       console.log('jobTaskDetails=>', data);
         this.jobTaskData = data.data[0];
       this.task = data.data.subComponents;
-
       console.log('jobTaskData', this.jobTaskData);
     });
   }
@@ -231,31 +230,24 @@ export class JobTaskComponent implements OnInit {
     this.mode = 'Risk';
     this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
       console.log('Risk=>', data);
-
-      this.highRiskConstructionData = data.data[0];
-    
-      console.log('risk', this.highRiskData);
+     this.highRiskConstructionData = data.data[0];
+    console.log('risk', this.highRiskConstructionData);
     });
   }
   getPPEById(){
     this.mode = 'PPE';
     this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
       console.log('PPE=>', data);
-
-      this.PPESelectionData = data.data[0];
-     
-      console.log('PPE', this.jobTaskData);
+       this.PPESelectionData = data.data[0];
+      console.log('PPE', this.PPESelectionData);
     });
   }
   getLicenceById(){
     this.mode = 'Licence';
     this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
       console.log('Licence=>', data);
-
-      this.licenseAndQualificationData = data.data[0];
-    
-
-      console.log('Licence', this.jobTaskData);
+       this.licenseAndQualificationData = data.data[0];
+     console.log('Licence', this.licenseAndQualificationData);
     });
   }
 
