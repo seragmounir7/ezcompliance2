@@ -20,7 +20,7 @@ export class HighRiskConComponent implements OnInit {
     private LandingPageInfoService:LandingPageInfoServiceService
   ) { 
     this.jobTaskDetails=this.fb.group({
-      mode:"JobTask",
+      mode:"JOBTask",
       arrObj: this.fb.array([]),
     });
     console.log('jobTaskDetails=>', this.jobTaskDetails);

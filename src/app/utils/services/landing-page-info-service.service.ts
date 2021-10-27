@@ -196,4 +196,13 @@ export class LandingPageInfoServiceService {
       })
     );
   }
+
+getFormDataById(id: any) {
+  return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
 }
