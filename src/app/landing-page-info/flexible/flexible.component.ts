@@ -70,6 +70,7 @@ export class FlexibleComponent implements OnInit {
     });
   }
   editForm(id, name: boolean, i?: any) {
+    this.spinner.show();
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
@@ -99,10 +100,12 @@ export class FlexibleComponent implements OnInit {
         }
         console.log('The dialog was closed');
       });
+      this.spinner.hide();
     });
   }
 
   addForm(id) {
+    this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       console.log('flexibleData=>', data);
       this.flexibleData = data.data[0];
@@ -122,6 +125,7 @@ export class FlexibleComponent implements OnInit {
           this.ngOnInit();
         }
       });
+      this.spinner.hide();
     });
   }
   close() {
@@ -137,6 +141,7 @@ export class FlexibleComponent implements OnInit {
           this.closeResult = `Closed with: ${result}`;
 
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
+            Swal.fire('Deleted Successfully')
             console.log('deleted res', res);
             this.getFlexible();
           });

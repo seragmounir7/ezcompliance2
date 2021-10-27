@@ -63,6 +63,7 @@ export class CustomertestimonialsComponent implements OnInit {
     });
   }
   editForm(id, name: boolean, i?: any) {
+    this.spinner.show();
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
@@ -92,10 +93,12 @@ export class CustomertestimonialsComponent implements OnInit {
         }
         console.log('The dialog was closed');
       });
+      this.spinner.hide();
     });
   }
 
   addForm(id) {
+    this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       console.log('Testimonial=>', data);
       this.testimonialData = data.data[0];
@@ -115,6 +118,7 @@ export class CustomertestimonialsComponent implements OnInit {
           this.getTestimonal();
         }
       });
+      this.spinner.hide();
     });
   }
   close() {
@@ -131,6 +135,8 @@ export class CustomertestimonialsComponent implements OnInit {
           this.closeResult = `Closed with: ${result}`;
           console.log('deleting');
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
+
+            Swal.fire('Deleted Successfully')
             console.log('deleted res', res);
             this.getTestimonal();
           });

@@ -21,10 +21,7 @@
                   <td>{{ ServiceData.title }}</td>
                   <td>{{ ServiceData.description }}</td>
                   <td>
-                    <button
-                      class="btn btn-info btn-sm mr-2"
-                      (click)="editForm(ServiceData._id, false)"
-                    >
+                    <button class="btn btn-info btn-sm mr-2" (click)="editForm(ServiceData._id, false)">
                       <i class="fas fa-pencil-alt mr-2"></i> Edit
                     </button>
                   </td>
@@ -39,10 +36,7 @@
 </section>
 <div class="row">
   <div class="col ml-2 mb-2">
-    <button
-      (click)="addForm('')"
-      class="btn btn-outline-primary mt-1 mr-2 float-left"
-    >
+    <button (click)="addForm('')" class="btn btn-outline-primary mt-1 mr-2 float-left">
       <i class="fas fa-folder-plus mr-2"></i>Add Service
     </button>
   </div>
@@ -66,27 +60,17 @@
               <tbody>
                 <tr *ngFor="let data of ServiceData.subModules; let i = index">
                   <td>
-                    <img
-                      src="{{ data.fileUrl }}"
-                      height="150px"
-                      width="150px"
-                    />
+                    <img src="{{ data.fileUrl }}" height="150px" width="150px" />
                   </td>
                   <td>{{ data.title }}</td>
                   <td>{{ data.description }}</td>
                   <td>
-                    <button
-                      (click)="editForm(data._id, true, i)"
-                      class="btn btn-info btn-sm mr-2"
-                    >
+                    <button (click)="editForm(data._id, true, i)" class="btn btn-info btn-sm mr-2">
                       <i class="fas fa-pencil-alt mr-2"></i>Edit
                     </button>
                   </td>
                   <td>
-                    <button
-                      class="btn btn-danger btn-sm mr-2"
-                      (click)="deleteopen(deletemodal, data._id)"
-                    >
+                    <button class="btn btn-danger btn-sm mr-2" (click)="deleteopen(deletemodal, data._id)">
                       <i class="fas fa-trash mr-2"></i>Delete
                     </button>
                   </td>
@@ -109,14 +93,11 @@
     <p>Do you want to delete this Service</p>
   </div>
   <div class="modal-footer footer">
-    <button type="button" class="btn mr-3" style="background-color: #eeeeee" (click)="modal.dismiss('Save click')"
-    >
+    <button type="button" class="btn mr-3" style="background-color: #eeeeee" (click)="modal.dismiss('Save click')">
       Cancel
     </button>
-    <button type="button" class="btn btn-danger ml-3"
-     aria-label="Close"  (click)="modal.close('Cross click')">
+    <button type="button" class="btn btn-danger ml-3" aria-label="Close" (click)="modal.close('Cross click')">
       Delete
     </button>
   </div>
 </ng-template>
-

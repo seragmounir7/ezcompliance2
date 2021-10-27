@@ -46,7 +46,7 @@
       </form>
     </div> -->
 <div class="text-center">
-  <h1 class="card">Our Job Task List</h1>
+  <h1 class="card"> Job Task List</h1>
 </div>
 
 <section class="content">
@@ -58,11 +58,13 @@
             <table class="table table-hover text-wrap">
               <thead>
                 <tr>
-                  <th  style="width: 10%">Index</th>
-                  <th style="width: 20%">Job Task List </th>
-                  <th  style="width: 30%">High Risk Construction </th>
-                  <th  style="width: 30%">PPE</th>
-                 </tr>
+                  <th style="width: 5%">Index</th>
+                  <th style="width: 25%">Job Task List </th>
+                  <th style="width: 20%">High Risk Construction </th>
+                  <th style="width: 20%">PPE</th>
+                  <th style="width: 20%">Licence&Qualification</th>
+
+                </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let task of  jobTask; let i = index">
@@ -71,28 +73,46 @@
                   <td>
                     <mat-form-field appearance="fill">
                       <mat-label>HighRiskConstruction</mat-label>
-                      <mat-select [formControl]="toppings"  multiple>
+                      <mat-select [formControl]="toppings" multiple>
                         <mat-select-trigger>
                           {{toppings.value ? toppings.value[0] : ''}}
                           <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
                             (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
                           </span>
                         </mat-select-trigger>
-                        <mat-option *ngFor="let topping of highRiskConstruction" [value]="topping.value">{{topping.label}}</mat-option>
+                        <mat-option *ngFor="let topping of highRiskConstruction" [value]="topping.value">
+                          {{topping.label}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </td>
                   <td>
                     <mat-form-field appearance="fill">
                       <mat-label>PPE selection</mat-label>
-                      <mat-select [formControl]="PPE"  multiple>
+                      <mat-select [formControl]="PPE" multiple>
                         <mat-select-trigger>
                           {{PPE.value ? PPE.value[0] : ''}}
                           <span *ngIf="PPE.value?.length > 1" class="example-additional-selection">
                             (+{{PPE.value.length - 1}} {{PPE.value?.length === 2 ? 'other' : 'others'}})
                           </span>
                         </mat-select-trigger>
-                        <mat-option *ngFor="let topping of PPEselection" [value]="topping.value">{{topping.label}}</mat-option>
+                        <mat-option *ngFor="let topping of PPEselection" [value]="topping.value">{{topping.label}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Licence and Qualifications
+                      </mat-label>
+                      <mat-select [formControl]="Licence" multiple>
+                        <mat-select-trigger>
+                          {{Licence.value ? Licence.value[0] : ''}}
+                          <span *ngIf="PPE.value?.length > 1" class="example-additional-selection">
+                            (+{{Licence.value.length - 1}} {{Licence.value?.length === 2 ? 'other' : 'others'}})
+                          </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let topping of  licenseAndQualification" [value]="topping.value">
+                          {{topping.label}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </td>
