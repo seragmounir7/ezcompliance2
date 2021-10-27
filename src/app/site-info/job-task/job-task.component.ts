@@ -185,6 +185,7 @@ export class JobTaskComponent implements OnInit {
 
 
   ngOnInit(): void {
+    //this.addAction();
     this.addAction();
     this.getJobTaskById();
    this.getHighRiskById()

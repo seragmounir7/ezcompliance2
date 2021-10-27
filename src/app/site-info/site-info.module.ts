@@ -13,16 +13,26 @@ import { SharedModule } from './../shared/shared.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './high-risk-con/edit-high-risk-construction/edit-high-risk-construction.component';
-
+import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
 
 @NgModule({
-  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent, AddHighRiskConstructionComponent, EditHighRiskConstructionComponent],
+  declarations: [
+    SiteInfoComponent,
+    AddSiteInfoComponent,
+    JobTaskComponent,
+    HighRiskConComponent,
+    PpeSelectComponent,
+    LicenceAndQualComponent,
+    AddCustomerComponent,
+    AddHighRiskConstructionComponent,
+    EditHighRiskConstructionComponent,AddJobTaskComponent
+  ],
   imports: [
     CommonModule,
     SiteInfoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class SiteInfoModule { }
+export class SiteInfoModule {}

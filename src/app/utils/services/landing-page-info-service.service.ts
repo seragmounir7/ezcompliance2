@@ -16,6 +16,14 @@ export class LandingPageInfoServiceService {
       })
     );
   }
+  getJobTaskListById(id: any) {
+    return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
 
   addAppService(data) {
     return this.https.post(this.apiUrl + 'module/multiple', data).pipe(
