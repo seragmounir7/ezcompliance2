@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'customer', component: CustomertestimonialsComponent },
   { path: 'flexible', component: FlexibleComponent },
   { path: 'header', component: HeaderInfoComponent },
-  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'contactUs', component: ContactUsComponent },
   {path:'aboutUs',component:AboutUsComponent},
 ];
 
