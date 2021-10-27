@@ -1,54 +1,46 @@
-<div class="container px-4 py-4 bg-white" [formGroup]="PPEselect">
+<div class="container px-4 py-4 bg-white">
   
-    <div class="mt-4">
-        <h2>PPE Selection</h2>
-      </div>
-    
-  
-      <ng-container formArrayName="issues" >
+  <form [formGroup]="PPEselect" (ngSubmit)=" onFormSubmit()">
+    <h2 class="text-center">PPE Selection </h2>
+   <br>
+   <hr>
+    <ng-container formArrayName="arrObj">
         <ng-container
-        *ngFor="let control of issues().controls; let i = index"
-        [formGroupName]="i"
-      >
-        <div>
+          *ngFor="let control of add().controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div>
             <div class="row">
-            
-              <div class="my-3 col-6">
-                
+             
+              <div class="col-8">
+                <!-- <p for="exampleFormControlInput1" class="form-Label">Job Task Type</p> -->
                 <input
                   type="text"
-                  class="form-control"
-                  formControlName="topicDisc"
+                  formControlName="title"
+                
+                  class="form-control sign"
+                  id="name"
                 />
               </div>
-            
-              <div class="my-3 col-1 my-auto">
-                <span
-                  class="material-icons"
-                  style="margin-top: 10%"
-                  (click)="addIssues()"
-                  >add_circle_outline
-                </span>
-              </div>
-              <div class="my-3 col-1 my-auto">
-                <span
-                  class="material-icons"
-                  style="margin-top: 10%"
-                  (click)="removeIssues(i)"
-                >
-                  remove_circle_outline
-                </span>
-              </div>
+              <div class="col-1 mt-2">
+              <span class="material-icons" (click)="addAction()"
+                >add_circle_outline
+              </span>
+            </div> 
+               <div class="col-1 mt-2">
+              <span class="material-icons" (click)="removeSafetyModule(i)">
+                remove_circle_outline
+              </span>
+            </div> 
             </div>
-           
           </div>
+          <hr />
         </ng-container>
       </ng-container>
-      <div class="row">
-        <button class="btn btn-outline-primary mt-1">
-            Submit
-          </button>
+      <br>
+    
+      <div class="col-md-2"> 
+        <button type="submit" class="btn btn-primary "> Submit</button>
+      </div>
+      </form>
     </div>
-</div>
-
-

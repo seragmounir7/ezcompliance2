@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { AddLicenceAndQualificationComponent } from './add-licence-and-qualification/add-licence-and-qualification.component';
 
 @Component({
   selector: 'app-licence-and-qual',
@@ -9,91 +13,62 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 })
 export class LicenceAndQualComponent implements OnInit {
   licenceAndQual: FormGroup;
+  formData: any;
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService
+    private LandingPageInfoService:LandingPageInfoServiceService,
+    private modalService: NgbModal,
+    public dialog: MatDialog,
   ) { 
-    this.licenceAndQual = this.fb.group({
-      issues: this.fb.array([]),
-      corrAction: this.fb.array([]),
-      attendees: this.fb.array([]),
+    this.licenceAndQual=this.fb.group({
+      mode:"Licence",
+      arrObj: this.fb.array([]),
     });
+    console.log('jobTaskDetails=>', this.licenceAndQual);
   }
 
   ngOnInit(): void {
-    this.addIssues();
-    this.addCorrectAct();
-    this.addAttendee();
-    this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
+    this.addAction();
   }
-  addIssues() {
-    this.issues().push(this.issuesForm());
+  addAction() {
+    {
+      this.add().push(this.newAction());
+    }
   }
-  issues(): FormArray {
-    return this.licenceAndQual.get('issues') as FormArray;
+  add(): FormArray {
+    return this.licenceAndQual.get('arrObj') as FormArray;
   }
-  issuesForm(): FormGroup {
+  newAction(): FormGroup {
     return this.fb.group({
-      index: [],
-      topicDisc: [],
-      topicRes: [],
+     
+      title: ['', Validators.required],
     });
   }
-  removeIssues(i) {
-    const item = <FormArray>this.licenceAndQual.controls['issues'];
-    if (item.length > 1) item.removeAt(i);
-  }
-  addCorrectAct() {
-    this.correctAct().push(this.correctActForm());
-  }
-  correctAct(): FormArray {
-    return this.licenceAndQual.get('corrAction') as FormArray;
-  }
-  correctActForm(): FormGroup {
-    return this.fb.group({
-      action: [],
-      personRes: [],
-      complete: [],
-    });
-  }
-  removeCorrectAct(i) {
-    const item = <FormArray>this.licenceAndQual.controls['corrAction'];
-    if (item.length > 1) item.removeAt(i);
-  }
-  addAttendee() {
-    this.attendee().push(this.attendeeForm());
-  }
-  attendee(): FormArray {
-    return this.licenceAndQual.get('attendees') as FormArray;
-  }
-  attendeeForm(): FormGroup {
-    return this.fb.group({
-      employee: [],
-      signature: [],
-    });
-  }
-  removeAttendee(i) {
-    const item = <FormArray>this.licenceAndQual.controls['attendees'];
-    if (item.length > 1) item.removeAt(i);
-  }
-  public signaturePadOptions1: Object = {
-    // passed through to szimek/signature_pad constructor
-    minWidth: 1,
-    canvasWidth: 550,
-    canvasHeight: 100,
-  };
-  public signaturePadOptions2: Object = {
-    // passed through to szimek/signature_pad constructor
-    minWidth: 1,
-    canvasWidth: 450,
-    canvasHeight: 100,
-  };
-
   
-  drawStart2() {
-    // will be notified of szimek/signature_pad's onBegin event
-    console.log('begin drawing');
+  removeSafetyModule(i) {
+    const item = <FormArray>this.licenceAndQual.controls['arrObj'];
+    if (item.length > 1) {
+      item.removeAt(i);
+    
+    }
+  }
+  onFormSubmit() {
+    console.log(this.licenceAndQual);
+    this.LandingPageInfoService.addFormData(this.licenceAndQual.getRawValue()).subscribe((data) => {
+      console.log('teamData=>', data);
+      this.formData = data;
+    });
+  }
+
+  openDialog(id): void {
+    const dialogRef = this.dialog.open(AddLicenceAndQualificationComponent, {
+      // width: '800px',
+      data: {
+				action: "new",
+				userId: id
+			},
+    });
   }
  
 }
