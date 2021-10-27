@@ -52,6 +52,7 @@
 <section class="content">
   <div class="container-fluid">
     <div class="row">
+      <div class="btn btn-outline-primary float-right" [routerLink]="['/admin/siteInfo/addJobTask']">Add Job task</div>
       <div class="col-12">
         <div class="card">
           <div class="card-body p-0">
@@ -107,7 +108,7 @@
                       <mat-select [formControl]="Licence" multiple>
                         <mat-select-trigger>
                           {{Licence.value ? Licence.value[0] : ''}}
-                          <span *ngIf="PPE.value?.length > 1" class="example-additional-selection">
+                          <span *ngIf="Licence.value?.length > 1" class="example-additional-selection">
                             (+{{Licence.value.length - 1}} {{Licence.value?.length === 2 ? 'other' : 'others'}})
                           </span>
                         </mat-select-trigger>

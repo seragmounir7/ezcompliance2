@@ -6,6 +6,7 @@ import {
   FormArray,
   FormControl,
 } from '@angular/forms';
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 @Component({
   selector: 'app-job-task',
   templateUrl: './job-task.component.html',
@@ -166,7 +167,7 @@ export class JobTaskComponent implements OnInit {
     { label: 'Wide Brim Hat', value: '' },
   ];
   constructor(
-    private fb: FormBuilder,
+    private fb: FormBuilder,private landingPageService:LandingPageInfoServiceService
   ) { 
     this.JobTaskDetail=this.fb.group({
       arrObj: this.fb.array([]),
@@ -175,7 +176,8 @@ export class JobTaskComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.addAction();
+    //this.addAction();
+  //  this.landingPageService.getJobTaskListById()
   }
   addAction() {
     {

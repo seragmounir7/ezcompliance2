@@ -11,10 +11,11 @@ import { PpeSelectComponent } from './ppe-select/ppe-select.component';
 import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.component';
 import { SharedModule } from './../shared/shared.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
 
 
 @NgModule({
-  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent],
+  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent, AddJobTaskComponent],
   imports: [
     CommonModule,
     SiteInfoRoutingModule,
