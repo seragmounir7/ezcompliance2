@@ -21,17 +21,31 @@ import { AddPPEselectComponent } from './ppe-select/add-ppeselect/add-ppeselect.
 =======
 import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './high-risk-con/edit-high-risk-construction/edit-high-risk-construction.component';
-
+import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent, AddHighRiskConstructionComponent, EditHighRiskConstructionComponent],
 >>>>>>> 38eb876445187d438fa387a58872be073e5b1b4d
+=======
+  declarations: [
+    SiteInfoComponent,
+    AddSiteInfoComponent,
+    JobTaskComponent,
+    HighRiskConComponent,
+    PpeSelectComponent,
+    LicenceAndQualComponent,
+    AddCustomerComponent,
+    AddHighRiskConstructionComponent,
+    EditHighRiskConstructionComponent,AddJobTaskComponent
+  ],
+>>>>>>> 10d691589bb5b5fd0db2b024688af0b90b35168c
   imports: [
     CommonModule,
     SiteInfoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class SiteInfoModule { }
+export class SiteInfoModule {}
