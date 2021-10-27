@@ -1,1 +1,54 @@
-<p>ppe-select works!</p>
+<div class="container px-4 py-4 bg-white" [formGroup]="PPEselect">
+  
+    <div class="mt-4">
+        <h2>PPE Selection</h2>
+      </div>
+    
+  
+      <ng-container formArrayName="issues" >
+        <ng-container
+        *ngFor="let control of issues().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div>
+            <div class="row">
+            
+              <div class="my-3 col-6">
+                
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="topicDisc"
+                />
+              </div>
+            
+              <div class="my-3 col-1 my-auto">
+                <span
+                  class="material-icons"
+                  style="margin-top: 10%"
+                  (click)="addIssues()"
+                  >add_circle_outline
+                </span>
+              </div>
+              <div class="my-3 col-1 my-auto">
+                <span
+                  class="material-icons"
+                  style="margin-top: 10%"
+                  (click)="removeIssues(i)"
+                >
+                  remove_circle_outline
+                </span>
+              </div>
+            </div>
+           
+          </div>
+        </ng-container>
+      </ng-container>
+      <div class="row">
+        <button class="btn btn-outline-primary mt-1">
+            Submit
+          </button>
+    </div>
+</div>
+
+

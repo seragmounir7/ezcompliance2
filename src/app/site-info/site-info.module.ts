@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { SiteInfoRoutingModule } from './site-info-routing.module';
 import { SiteInfoComponent } from './site-info.component';
@@ -14,7 +15,9 @@ import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.com
   declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent],
   imports: [
     CommonModule,
-    SiteInfoRoutingModule
+    SiteInfoRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class SiteInfoModule { }

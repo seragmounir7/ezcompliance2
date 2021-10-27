@@ -39,5 +39,12 @@ export class ViewContactComponent implements OnInit {
       })
     }
   }
-
+  getContact() {
+    // this.myId= '61743207ad581a5f5d60d90a';
+    this.url.getContact().subscribe((data) => {
+      console.log('mode=>', data);
+      this.dataContact = data.data;
+      
+    });
+  }
 }
