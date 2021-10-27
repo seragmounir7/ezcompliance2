@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import {
   FormBuilder,
   FormGroup,
@@ -12,13 +13,17 @@ import {
   styleUrls: ['./high-risk-con.component.scss']
 })
 export class HighRiskConComponent implements OnInit {
-  riskDetails!: FormGroup;
+  jobTaskDetails!: FormGroup;
+  formData: any;;
   constructor(
     private fb: FormBuilder,
+    private LandingPageInfoService:LandingPageInfoServiceService
   ) { 
-    this.riskDetails=this.fb.group({
+    this.jobTaskDetails=this.fb.group({
+      mode:"JobTask",
       arrObj: this.fb.array([]),
     });
+    console.log('jobTaskDetails=>', this.jobTaskDetails);
   }
 
   ngOnInit(): void {
@@ -30,7 +35,7 @@ export class HighRiskConComponent implements OnInit {
     }
   }
   add(): FormArray {
-    return this.riskDetails.get('arrObj') as FormArray;
+    return this.jobTaskDetails.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
     return this.fb.group({
@@ -40,15 +45,18 @@ export class HighRiskConComponent implements OnInit {
   }
   
   removeSafetyModule(i) {
-    const item = <FormArray>this.riskDetails.controls['arrObj'];
+    const item = <FormArray>this.jobTaskDetails.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
     
     }
   }
   onFormSubmit() {
-    console.log(this.riskDetails);
-    
+    console.log(this.jobTaskDetails);
+    this.LandingPageInfoService.addFormData(this.jobTaskDetails.getRawValue()).subscribe((data) => {
+      console.log('teamData=>', data);
+      this.formData = data;
+    });
   }
 
 }

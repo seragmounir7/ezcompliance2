@@ -188,4 +188,12 @@ export class LandingPageInfoServiceService {
       })
     );
   }
+  addFormData(data:any){
+    return this.https.post(this.apiUrl + 'component/multiple', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
 }

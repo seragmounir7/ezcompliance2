@@ -15,6 +15,7 @@ export class JobTaskComponent implements OnInit {
   JobTaskDetail!: FormGroup;
   toppings = new FormControl();
   PPE = new FormControl();
+  Licence = new FormControl();
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   jobTask = [
     { label: 'Activities Involving chemicals', value: '' },
