@@ -25,10 +25,54 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   }
   step = false;
   stepL = false;
-  menuOpen() {
-    this.step = !this.step;
+  subscription = false;
+  siteInfoVal = false;
+  static = false;
+  menuOpen(key) {
+    if(key ==='dynamic'){
+      this.stepL = false;
+      this.static = false;
+      this.subscription = false;
+      this.siteInfoVal = false;
+      this.step = !this.step;
+    }
+    if(key ==='subscription'){
+      this.stepL = false;
+      this.static = false;
+      this.siteInfoVal = false;
+      this.step=false;
+      this.subscription = !this.subscription;
+    }
+    if(key ==='siteInfo'){
+      this.stepL = false;
+      this.static = false;
+      this.subscription = false;
+      this.step=false;
+      this.siteInfoVal = !this.siteInfoVal;
+    }
+    if(key ==='landingPageInfo'){
+      this.subscription = false;
+      this.static = false;
+      this.siteInfoVal = false;
+      this.step=false;
+      this.stepL = !this.stepL;
+    }
+    if(key ==='static'){
+      this.stepL = false;
+      this.subscription = false;
+      this.siteInfoVal = false;
+      this.step=false;
+      this.static = !this.static;
+    }
+
   }
-  landingPageEditOpen() {
-    this.stepL = !this.stepL;
-  }
+  // landingPageEditOpen() {
+  //   this.stepL = !this.stepL;
+  // }
+  // subscriptionFun() {
+  //   this.subscription = !this.subscription;
+  // }
+  // siteInfo() {
+  //   this.siteInfoVal = !this.siteInfoVal;
+  // }
 }

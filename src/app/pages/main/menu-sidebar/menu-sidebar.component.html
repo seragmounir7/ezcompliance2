@@ -27,7 +27,7 @@
     </div> -->
 
     <!-- SidebarSearch Form -->
-    <div class="form-inline">
+    <!-- <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
         <input
           class="form-control form-control-sidebar"
@@ -41,7 +41,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -55,7 +55,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }"></li>
         <li class="nav-item">
-          <a class="nav-link">
+          <a class="nav-link" [routerLink]="['/admin']">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20.00pt"
@@ -67,159 +67,11 @@
                 fill="#524f4f"
               />
             </svg>
-            <p >Dashboard</p>
+            <p>Dashboard</p>
           </a>
-          <!-- <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
-            <p>
-              Dynamic Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Site Inspection Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Hazard Report Form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a> -->
-          <!-- <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Employees on return to work plans</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard2']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>First aid treatment injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hazards reported</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Lost time injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Medical treatment injuries</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Near misses</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Notifiable Incidents</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inductions Completed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Toolbox Talks</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Safety Meetings/Forums Conducted</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Safety Inspections/Audits Conducted</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>SWMS’s Completed</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Risk Assessments</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hand Injury </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Leg Injury </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Torso</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Body Sections to be defined</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/dashboard3']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Corrective actions </p>
-              </a>
-            </li>            
-          </ul> -->
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-briefcase mr-1"></i>
-            <p>
-              Employees on return to work plans
-            </p>
-          </a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a [routerLink]="['/admin/dynamicForm']" class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>
-            <p>
-              Dynamic form
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-        </li> -->
         <li class="nav-item" [ngClass]="{ 'menu-open': step == true }">
-          <a class="nav-link" (click)="menuOpen()">
+          <a class="nav-link" (click)="menuOpen('dynamic')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 64 64"
@@ -241,6 +93,79 @@
             </svg>
             <p>
               Dynamic form
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <!-- <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/categories']" class="nav-link">
+                <svg
+                  class="mr-2 mb-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 100 100"
+                >
+                  <image
+                    id="icons8-category-100"
+                    width="100"
+                    height="100"
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAACBElEQVR4nO3czW0TURhG4fNFCBYEGgDRACARNlADlABL5NQU2IYKiEQJsAMEHQwUgIBF2FwWE36E7JkIruNXznm2Y0efcnTtuZnogiRJkiRJkiRJkqTzq+Ze0Fp7ABwA19c/zlb7CCyq6uXUi04TZMAYvQxVdWPqBZNBWmtXgc9dR9KVqvq66uLOzJtvdh5GM7/TuSCPOw6i0aOpiys/slprd4FXwMXeE51zx8D9qnq77OLSFXIS4wXGWIdLwFFrbW/ZxV8rpLW2C9xm/Jh6gjHW7TvwDHgOvP/5RV/uM2KM+xT3GVGGaq21TU+h3+Zue3XGDBLGIGEMEsYgYQwSxiBhDBLGIGEMEsYgYS70/oFVNfuPE9uk998CXSFhDBLGIGF8HhLGFRLGIGEMEsYgYQwSxiBhDBLGIGEMEsYgYQwSxuch/8nnIVvOIGEMEsbnIWFcIWEMEsYgYQwSxiBhDBLGIGEMEsYgYQwSxiBhdhhPoVGGYQdYAMOmJxEDsP/nAWaXgVuMB5gt8ACzdTsGnjIeYPahqr7BijMXW2t3gCPg2pmNd758Ah5W1bu/L0wdgrkHvMaV0tsxcG9ZDJi4y6qqN4xnAqqvg1UxYP6297DzMBq/M1aaO2p8F/jSdRz9+1HjJ290n9LPMBUDTrdTd5/SxwDsb3oISZIkSZIkSZIkScl+AJ3DbTOdkV8AAAAAAElFTkSuQmCC"
+                  />
+                </svg>
+                <p>Category</p>
+              </a>
+            </li> -->
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/dynamicFormsList']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Forms</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" [ngClass]="{ 'menu-open': static == true }">
+          <a class="nav-link" (click)="menuOpen('static')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 64 64"
+              width="20.00pt"
+              height="20.00pt"
+            >
+              <path
+                fill="#524f4f"
+                d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+              />
+            </svg>
+            <p>
+              Static forms
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -291,8 +216,255 @@
             </li>
           </ul>
         </li>
+       <li class="nav-item" [ngClass]="{ 'menu-open': subscription == true }">
+          <a class="nav-link" (click)="menuOpen('subscription')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 64 64"
+              width="20.00pt"
+              height="20.00pt"
+            >
+              <path
+                fill="#524f4f"
+                d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+              />
+            </svg>
+            <p>
+              Subscription Rates
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <!-- <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/categories']" class="nav-link">
+                <svg
+                  class="mr-2 mb-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 100 100"
+                >
+                  <image
+                    id="icons8-category-100"
+                    width="100"
+                    height="100"
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAACBElEQVR4nO3czW0TURhG4fNFCBYEGgDRACARNlADlABL5NQU2IYKiEQJsAMEHQwUgIBF2FwWE36E7JkIruNXznm2Y0efcnTtuZnogiRJkiRJkiRJkqTzq+Ze0Fp7ABwA19c/zlb7CCyq6uXUi04TZMAYvQxVdWPqBZNBWmtXgc9dR9KVqvq66uLOzJtvdh5GM7/TuSCPOw6i0aOpiys/slprd4FXwMXeE51zx8D9qnq77OLSFXIS4wXGWIdLwFFrbW/ZxV8rpLW2C9xm/Jh6gjHW7TvwDHgOvP/5RV/uM2KM+xT3GVGGaq21TU+h3+Zue3XGDBLGIGEMEsYgYQwSxiBhDBLGIGEMEsYgYS70/oFVNfuPE9uk998CXSFhDBLGIGF8HhLGFRLGIGEMEsYgYQwSxiBhDBLGIGEMEsYgYQwSxuch/8nnIVvOIGEMEsbnIWFcIWEMEsYgYQwSxiBhDBLGIGEMEsYgYQwSxiBhdhhPoVGGYQdYAMOmJxEDsP/nAWaXgVuMB5gt8ACzdTsGnjIeYPahqr7BijMXW2t3gCPg2pmNd758Ah5W1bu/L0wdgrkHvMaV0tsxcG9ZDJi4y6qqN4xnAqqvg1UxYP6297DzMBq/M1aaO2p8F/jSdRz9+1HjJ290n9LPMBUDTrdTd5/SxwDsb3oISZIkSZIkSZIkScl+AJ3DbTOdkV8AAAAAAElFTkSuQmCC"
+                  />
+                </svg>
+                <p>Category</p>
+              </a>
+            </li> -->
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/subscrpt']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Monthly/Yearly</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+       <li class="nav-item" [ngClass]="{ 'menu-open': siteInfoVal == true }">
+          <a class="nav-link" (click)="menuOpen('siteInfo')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 64 64"
+              width="20.00pt"
+              height="20.00pt"
+            >
+              <path
+                fill="#524f4f"
+                d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+              />
+              <path
+                fill="#524f4f"
+                d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+              />
+            </svg>
+            <p>
+              Site Info
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo/addSite']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Add Site</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo/addCustomer']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Add Customer</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo/jobTask']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Job Task</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo/highRisk']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>High Risk Construct</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo/licenceAndQual']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Licence And Qualification</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a [routerLink]="['/admin/siteInfo/ppeSel']" class="nav-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>PPE Selection</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item" [ngClass]="{ 'menu-open': stepL == true }">
-          <a class="nav-link" (click)="landingPageEditOpen()">
+          <a class="nav-link" (click)="menuOpen('landingPageInfo')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 64 64"
@@ -317,9 +489,12 @@
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">            
+          <ul class="nav nav-treeview">
             <li class="nav-item ml-3">
-              <a [routerLink]="['/admin/landingPageInfo/header']" class="nav-link">
+              <a
+                [routerLink]="['/admin/landingPageInfo/header']"
+                class="nav-link"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 64 64"
@@ -343,7 +518,10 @@
               </a>
             </li>
             <li class="nav-item ml-3">
-              <a [routerLink]="['/admin/landingPageInfo/applicationSerInfo']" class="nav-link">
+              <a
+                [routerLink]="['/admin/landingPageInfo/applicationSerInfo']"
+                class="nav-link"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 64 64"
@@ -367,7 +545,10 @@
               </a>
             </li>
             <li class="nav-item ml-3">
-              <a [routerLink]="['/admin/landingPageInfo/safetyModule']" class="nav-link">
+              <a
+                [routerLink]="['/admin/landingPageInfo/safetyModule']"
+                class="nav-link"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 64 64"
@@ -391,7 +572,10 @@
               </a>
             </li>
             <li class="nav-item ml-3">
-              <a [routerLink]="['/admin/landingPageInfo/happyClient']" class="nav-link">
+              <a
+                [routerLink]="['/admin/landingPageInfo/happyClient']"
+                class="nav-link"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 64 64"
@@ -414,10 +598,90 @@
                 <p>Happy Client</p>
               </a>
             </li>
-            
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/flexible']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>Flexible</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/customer']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>CustomerTestimonial</p>
+              </a>
+            </li>
+            <li class="nav-item ml-3">
+              <a
+                [routerLink]="['/admin/landingPageInfo/aboutUs']"
+                class="nav-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="20.00pt"
+                  height="20.00pt"
+                >
+                  <path
+                    fill="#524f4f"
+                    d="M54,59.11H10a1,1,0,0,1-1-1V5.89a1,1,0,0,1,1-1H42.3A1,1,0,0,1,43,5.2l11.7,12.12A1,1,0,0,1,55,18v40.1A1,1,0,0,1,54,59.11Zm-43-2H53V18.41L41.88,6.89H11Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M42.3,19a1,1,0,0,1-1-1V5.89a1,1,0,0,1,2,0V18A1,1,0,0,1,42.3,19Z"
+                  />
+                  <path
+                    fill="#524f4f"
+                    d="M48 19H42.3a1 1 0 0 1 0-2H48a1 1 0 0 1 0 2zM29.09 25.86H17.18a1 1 0 0 1-1-1V13a1 1 0 0 1 1-1H29.09a1 1 0 0 1 1 1V24.86A1 1 0 0 1 29.09 25.86zm-10.91-2h9.91V14H18.18zM46.84 34H17.16a1 1 0 1 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 41.85H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2zM46.84 49.71H17.16a1 1 0 0 1 0-2H46.84a1 1 0 0 1 0 2z"
+                  />
+                </svg>
+                <p>About-Us</p>
+              </a>
+            </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" [routerLink]="['/admin/registration']">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -432,11 +696,10 @@
             </svg>
             <p>
               Company Registration
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-        </li>
-        <li class="nav-item">
+        </li> -->
+        <!-- <li class="nav-item">
           <a
             class="nav-link"
             [routerLink]="['/admin/registration/employeeRegistration']"
@@ -455,22 +718,11 @@
             </svg>
             <p>
               Employee Registration
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-        </li>
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-first-aid mr-1"></i>
-            <p>
-              First aid treatment injuries
-               <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
         </li> -->
-        <!-- //   ----------------------------// -->
-        <li class="nav-item">
+      
+        <!-- <li class="nav-item">
           <a [routerLink]="['/admin/forms/hazardRep']" class="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -543,43 +795,11 @@
             </svg>
             <p>
               Hazards reported
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-        </li>
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link"> -->
-        <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
-        <!-- <i class="fas fa-user-injured mr-1"></i>
-            <p>
-              Lost time injuries -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
         </li> -->
-        <!-- //   ----------not working ------------------// -->
+        
         <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-user-injured mr-1"></i>
-            <p>
-              Medical treatment injuries -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> -->
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-car-crash mr-1"></i>
-            <p>
-              Near misses -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> -->
-        <!-- //   ----------------------------// -->
-        <li class="nav-item">
           <a [routerLink]="['/admin/forms/incidentRep']" class="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -598,22 +818,11 @@
             </svg>
             <p>
               Notifiable Incidents
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-        </li>
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-clipboard-list mr-1"></i>
-            <p>
-              Inductions Completed -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
         </li> -->
-        <!-- //   ----------------------------// -->
-        <li class="nav-item">
+      
+        <!-- <li class="nav-item">
           <a [routerLink]="['/admin/forms/toolboxTalk']" class="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -628,11 +837,10 @@
             </svg>
             <p>
               Toolbox Talks
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
           </a>
-        </li>
-        <li class="nav-item">
+        </li> -->
+        <!-- <li class="nav-item">
           <a [routerLink]="['/admin/forms/siteInspect']" class="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -683,38 +891,11 @@
             </svg>
             <p>
               Site Inspection
-              <!-- <i class="right fas fa-angle-left"></i> -->
-            </p>
-          </a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="far fa-handshake mr-1"></i>
-            <p>
-              Safety Meetings/Forums Conducted
             </p>
           </a>
         </li> -->
+        
         <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-chart-bar mr-1"></i>
-            <p>
-              Safety Inspections/Audits Conducted
-            </p>
-          </a>
-        </li> -->
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-clipboard-list mr-1"></i>
-            <p>
-              SWMS’s Completed -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> -->
-        <!-- //   ----------------------------// -->
-        <li class="nav-item">
           <a [routerLink]="['/admin/forms/riskAssessSWMS']" class="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -735,485 +916,7 @@
             </svg>
             <p>
               Risk Assessments
-              <!-- <i class="right fas fa-angle-left"></i> -->
             </p>
-          </a>
-        </li>
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-hand-holding-medical mr-1"></i>
-            <p>
-              Hand Injury
-              <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> 
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-hand-holding-medical mr-1"></i>
-            <p>
-              Leg Injury -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
-            <p>
-              Torso -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> -->
-        <!---------- ---------------------------- -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
-            <p>
-              Body Sections to be defined
-            </p>
-          </a>
-        </li> -->
-        <!-- //   ----------not working ------------------// -->
-        <!-- <li class="nav-item">
-          <a class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt mr-1"></i>
-            <p>
-              Corrective actions -->
-        <!-- <i class="right fas fa-angle-left"></i> -->
-        <!-- </p>
-          </a>
-        </li> -->
-        <!-- //   ---------------------------// -->
-        <!-- <li class="nav-item">
-          <a [routerLink]="['/widgets']" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Widgets
-              <span class="right badge badge-danger">New</span>
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>
-              Charts
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/charts/chartjs']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>ChartJS</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/charts/flot']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Flot</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/charts/inline']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inline</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/charts/uplot']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>uPlot</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tree"></i>
-            <p>
-              UI Elements
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/UI/general']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>General</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/icons']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Icons</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/buttons']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Buttons</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/sliders']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Sliders</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/modals']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Modals & Alerts</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/navbar']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Navbar & Tabs</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/timeline']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Timeline</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/UI/ribbons']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ribbons</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-edit"></i>
-            <p>
-              Forms
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/forms/general']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>General Elements</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/forms/advanced']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Advanced Elements</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/forms/editors']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Editors</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/forms/validation']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Validation</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a [routerLink]="['/tables']" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
-            <p>Sample Tables</p>
-          </a>
-        </li>
-        <li class="nav-header">EXAMPLES</li>
-        <li class="nav-item">
-          <a [routerLink]="['/calendar']" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
-            <p>
-              Calendar
-              <span class="badge badge-info right">2</span>
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a [routerLink]="['/gallery']" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
-            <p>
-              Gallery
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a [routerLink]="['/kanban']" class="nav-link">
-            <i class="nav-icon fas fa-columns"></i>
-            <p>
-              Kanban Board
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon far fa-envelope"></i>
-            <p>
-              Mailbox
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/mailbox/mailbox']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inbox</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/mailbox/compose']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Compose</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/mailbox/read-mail']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Read</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item menu-open">
-          <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-book"></i>
-            <p>
-              Pages
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/examples/invoice']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Invoice</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/profile']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Profile</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/e-commerce']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>E-commerce</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/projects']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Projects</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/project/add']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Project Add</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/project/edit']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Project Edit</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/project/detail']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Project Detail</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/contacts']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Contacts</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/faq']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>FAQ</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/contact-us']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Contact us</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon far fa-plus-square"></i>
-            <p>
-              Extras
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>
-                  Login & Register v1
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/login']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Login v1</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/register']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Register v1</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/forgot-password']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Forgot Password v1</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/recover-password']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Recover Password v1</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>
-                  Login & Register v2
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/login-v2']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Login v2</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/register-v2']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Register v2</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/forgot-password-v2']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Forgot Password v2</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a [routerLink]="['/examples/recover-password-v2']" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Recover Password v2</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/lockscreen']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Lockscreen</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/legacy-user-menu']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Legacy User Menu</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/language-menu']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Language Menu</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/404']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Error 404</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/500']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Error 500</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/pace']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Pace</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/blank']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Blank Page</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/examples/starter']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Starter Page</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-search"></i>
-            <p>
-              Search
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/search/simple']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Simple Search</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/search/enhanced']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Enhanced</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-header">MISCELLANEOUS</li>
-        <li class="nav-item">
-          <a [routerLink]="['/iframe']" class="nav-link">
-            <i class="nav-icon fas fa-ellipsis-h"></i>
-            <p>Tabbed IFrame Plugin</p>
           </a>
         </li> -->
       </ul>

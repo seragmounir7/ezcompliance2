@@ -8,7 +8,7 @@
       width="50"
       style="opacity: 1"
     /> -->
-    <a [routerLink]="['/dd']" style="color: #c61437;"><b>AdminWHS</b></a>
+    <a [routerLink]="['/dd']" style="color: #c61437"><b>AdminWHS</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -16,12 +16,16 @@
       <p class="login-box-msg">Sign in to start your session</p>
 
       <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <div class="input-group mb-3">
+        <div class="input-group">
           <input
             formControlName="email"
             type="email"
             class="form-control"
             placeholder="Email"
+            [class.is-invalid]="
+              loginForm.get('email').hasError('required') &&
+              loginForm.get('email').touched
+            "
           />
           <div class="input-group-append">
             <div class="input-group-text">
@@ -29,18 +33,42 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="mb-3">
+          <span
+            class="text-danger"
+            *ngIf="
+              loginForm.get('email').hasError('required') &&
+              loginForm.get('email').touched && submitBtn
+            "
+            >Email is Required</span
+          >
+        </div>
+        <div class="input-group">
           <input
             formControlName="password"
             type="password"
             class="form-control"
             placeholder="Password"
+            [class.is-invalid]="
+              loginForm.get('password').hasError('required') &&
+              loginForm.get('password').touched
+            "
           />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+        </div>
+        <div class="mb-3">
+          <span
+            class="text-danger"
+            *ngIf="
+              loginForm.get('password').hasError('required') &&
+              loginForm.get('password').touched && submitBtn
+            "
+            >Password is Required</span
+          >
         </div>
         <div>
           <!-- <div class="col-7">

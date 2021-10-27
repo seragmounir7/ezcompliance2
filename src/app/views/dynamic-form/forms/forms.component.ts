@@ -1,8 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { AddFormComponent } from './add-form/add-form.component';
 import Swal from 'sweetalert2';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +9,6 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-
 export interface PeriodicElement {
   categories: string;
   position: number;
@@ -37,20 +35,7 @@ export class FormsComponent implements OnInit {
   addForm: FormGroup;
   form = '';
 
-  tutorials = [
-    { position: 1, formName: 'Form1', categories: 'Category1', symbol: '' },
-    { position: 1, formName: 'Form2', categories: 'Category1', symbol: '' },
-    { position: 1, formName: 'Form3', categories: 'Category1', symbol: '' },
-    { position: 1, formName: 'FormA', categories: 'Category2', symbol: '' },
-    { position: 1, formName: 'FormB', categories: 'Category2', symbol: '' },
-    { position: 1, formName: 'FormC', categories: 'Category2', symbol: '' },
-    { position: 1, formName: 'FormA1', categories: 'Category3', symbol: '' },
-    { position: 1, formName: 'FormA2', categories: 'Category3', symbol: '' },
-    { position: 1, formName: 'FormA3', categories: 'Category3', symbol: '' },
-    { position: 1, formName: 'FormB1', categories: 'Category4', symbol: '' },
-    { position: 1, formName: 'FormB2', categories: 'Category4', symbol: '' },
-    { position: 1, formName: 'FormB3', categories: 'Category4', symbol: '' },
-  ];
+  
   ngAfterViewInit() {
   }
 
@@ -78,8 +63,10 @@ export class FormsComponent implements OnInit {
     sessionStorage.setItem('formId', '');
     sessionStorage.setItem('type', '');
     sessionStorage.setItem('formTitle', '');
+    sessionStorage.setItem('frequency', '');
     this.addForm = this.fb.group({
       formName: [null, Validators.required],
+      frequency: [null, Validators.required],
     });
 
     this.getAllForms();
@@ -90,8 +77,8 @@ export class FormsComponent implements OnInit {
     this.spinner.show();
     this.dynamicFormServise.getAllForm().subscribe((resF) => {
       // this.allForms=res.data;
-      console.log('resF', resF);
-      console.log('allForms', resF.data);
+      console.log('allForms', resF);
+      // console.log('allForms', resF.data);
       this.allForms = resF.data;
       let length = this.allForms.length;
       if (length) {
@@ -105,7 +92,23 @@ export class FormsComponent implements OnInit {
       this.spinner.hide();
     });
   }
+  slideChanged(e,form){
+    let data = {
+      title: form.title,
+      htmlObject:form.htmlObject,
+      enable:e.checked,
+      frequency:form.frequency
+    };
 
+    this.dynamicFormServise
+      .editForm(data, form._id)
+      .subscribe((res) => {
+        if(e.checked)
+        Swal.fire('Form Enabled successfully');
+        else
+        Swal.fire('Form Disabled successfully');
+      });
+  }
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',
@@ -147,10 +150,14 @@ export class FormsComponent implements OnInit {
             'formTitle',
             this.addForm.get('formName').value
           );
-          this.dynamicFormServise.formTitle = this.addForm.get(
-            'formName'
-          ).value;
-          this.dynamicFormServise.formType = 'add';
+          sessionStorage.setItem(
+            'frequency',
+            this.addForm.get('frequency').value
+          );
+          // this.dynamicFormServise.formTitle = this.addForm.get(
+          //   'formName'
+          // ).value;
+          // this.dynamicFormServise.formType = 'add';
           this.router.navigate(['/admin/dynamicForm']);
 
           // this.dynamicFormServise.addForm(data).subscribe((res)=>{
@@ -173,12 +180,11 @@ export class FormsComponent implements OnInit {
     sessionStorage.setItem('formId', form._id);
     sessionStorage.setItem('type', 'edit');
     sessionStorage.setItem('formTitle', form.title);
-    // let data={
-    //   type:'edit',formId:form._id, formName: form.title
-    // }
-    this.dynamicFormServise.formIdEdit = form._id;
-    this.dynamicFormServise.formType = 'edit';
-    this.dynamicFormServise.formTitle = form.title;
+    sessionStorage.setItem('frequency', form.frequency);
+  
+    // this.dynamicFormServise.formIdEdit = form._id;
+    // this.dynamicFormServise.formType = 'edit';
+    // this.dynamicFormServise.formTitle = form.title;
     this.router.navigate(['/admin/dynamicForm']);
     //   this.router.navigate(['/admin/dynamicForm'],
 
@@ -192,9 +198,10 @@ export class FormsComponent implements OnInit {
     sessionStorage.setItem('formId', form._id);
     sessionStorage.setItem('type', 'view');
     sessionStorage.setItem('formTitle', form.title);
-    this.dynamicFormServise.formIdEdit = form._id;
-    this.dynamicFormServise.formType = 'view';
-    this.dynamicFormServise.formTitle = form.title;
+    sessionStorage.setItem('frequency', form.frequency);
+    // this.dynamicFormServise.formIdEdit = form._id;
+    // this.dynamicFormServise.formType = 'view';
+    // this.dynamicFormServise.formTitle = form.title;
     // this.router.navigate(['/admin/dynamicForm'],
     // {queryParams: { type:'view',formId:form._id, formName: form.title}});
     this.router.navigate(['/admin/dynamicForm']);
@@ -217,6 +224,23 @@ export class FormsComponent implements OnInit {
           console.log('dismissed');
         }
       );
+  }
+  frequencyChange(e,form){
+console.log(e.target.value);
+let data = {
+  title: form.title,
+  htmlObject:form.htmlObject,
+  enable:form.enable,
+  frequency:e.target.value
+};
+
+this.dynamicFormServise
+  .editForm(data, form._id)
+  .subscribe((res) => {
+    Swal.fire('Form Frequency Changed successfully');
+    //this.router.navigate(['/admin/forms']);
+  });
+
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
