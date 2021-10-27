@@ -11,11 +11,21 @@ import { PpeSelectComponent } from './ppe-select/ppe-select.component';
 import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.component';
 import { SharedModule } from './../shared/shared.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+<<<<<<< HEAD
 import { AddLicenceAndQualificationComponent } from './licence-and-qual/add-licence-and-qualification/add-licence-and-qualification.component';
+import { AddPPEselectComponent } from './ppe-select/add-ppeselect/add-ppeselect.component';
 
 
 @NgModule({
-  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent, AddLicenceAndQualificationComponent],
+  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent, AddLicenceAndQualificationComponent, AddPPEselectComponent],
+=======
+import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
+import { EditHighRiskConstructionComponent } from './high-risk-con/edit-high-risk-construction/edit-high-risk-construction.component';
+
+
+@NgModule({
+  declarations: [SiteInfoComponent, AddSiteInfoComponent, JobTaskComponent, HighRiskConComponent, PpeSelectComponent, LicenceAndQualComponent, AddCustomerComponent, AddHighRiskConstructionComponent, EditHighRiskConstructionComponent],
+>>>>>>> 38eb876445187d438fa387a58872be073e5b1b4d
   imports: [
     CommonModule,
     SiteInfoRoutingModule,
