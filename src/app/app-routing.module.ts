@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'tutorials/details/:id', component: TutorialsDetailsComponent },
       { path: 'tutorials/edit/:id', component: TutorialsEditComponent },
       { path: 'categories', component: CategoriesComponent },
-      { path: 'forms', component: FormsComponent },
+      { path: 'dynamicFormsList', component: FormsComponent },
       {
         path: 'forms',
         loadChildren: () =>

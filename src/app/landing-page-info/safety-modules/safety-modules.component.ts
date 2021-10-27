@@ -54,6 +54,7 @@ export class SafetyModulesComponent implements OnInit {
     });
   }
   editForm(id, name: boolean, i?: any) {
+    this.spinner.show();
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
@@ -81,11 +82,15 @@ export class SafetyModulesComponent implements OnInit {
         }
         console.log('The dialog was closed');
       });
+      
+      this.spinner.hide();
     });
   }
 
   addForm(id) {
+    this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      Swal.fire('Deleted Successfully')
       this.safetyData = data.data[0];
       console.log('ssss', this.safetyData);
       let dialogRef = this.dialog.open(AddModulesInfoComponent, {
@@ -104,6 +109,8 @@ export class SafetyModulesComponent implements OnInit {
           this.ngOnInit();
         }
       });
+      
+      this.spinner.hide();
     });
   }
   deleteopen(content, id) {
