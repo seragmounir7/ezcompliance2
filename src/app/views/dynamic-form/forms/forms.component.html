@@ -33,7 +33,7 @@
                   <td>{{ i + 1 }}</td>
                   <td>{{ form.title }}</td>
                   <td> 
-                    <select class="form-select" aria-label="Default select example" [value]="form.frequency"(change)="frequencyChange($event,form)">
+                    <select class="form-select form-control" aria-label="Default select example" [value]="form.frequency"(change)="frequencyChange($event,form)">
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
                     <option value="quaterly">Quaterly</option>
