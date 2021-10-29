@@ -80,6 +80,7 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [NonAuthGuard],
   },
+  { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule) },
 
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

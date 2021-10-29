@@ -1,3 +1,4 @@
+import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { PpeSelectComponent } from './ppe-select/ppe-select.component';
 import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.component';
@@ -12,7 +13,13 @@ import { SiteInfoComponent } from './site-info.component';
 const routes: Routes = [
   { path: 'addSite', component: AddSiteInfoComponent },
   { path: 'addCustomer', component: AddCustomerComponent },
-  { path: 'jobTask', component: JobTaskComponent },
+  { path: 'jobTask', component: JobTaskComponent,
+// children:[
+//   {path:'addJobTask',component:AddJobTaskComponent},
+// ]
+},
+  {path:'addJobTask',component:AddJobTaskComponent},
+
   { path: 'highRisk', component: HighRiskConComponent },
   { path: 'licenceAndQual', component: LicenceAndQualComponent },
   { path: 'ppeSel', component: PpeSelectComponent },

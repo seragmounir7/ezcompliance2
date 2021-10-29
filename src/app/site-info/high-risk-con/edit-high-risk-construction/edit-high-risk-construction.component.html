@@ -1,8 +1,11 @@
-<section class="content">
-<div class="container px-4 py-4 bg-white">
+
+ 
+<div class="container px-4 py-4 card">
   
     <form [formGroup]="riskDetails" (ngSubmit)=" onFormSubmit()">
-      <h1 class="">Add High Risk Construction Technique</h1>
+      <h2 class="text-center">High Risk Construction </h2>
+     <br>
+     <hr>
       <ng-container formArrayName="arrObj">
           <ng-container
             *ngFor="let control of add().controls; let i = index"
@@ -10,8 +13,9 @@
           >
             <div>
               <div class="row">
-               
+             <p for="exampleFormControlInput1" class="form-Label">Edit High Risk Construction</p>
                 <div class="col-8">
+
                <input
                     type="text"
                     formControlName="title"
@@ -19,16 +23,7 @@
                     id="name"
                   />
                 </div>
-                <div class="col-1 mt-2">
-                <span class="material-icons" (click)="addAction()"
-                  >add_circle_outline
-                </span>
-              </div> 
-                 <div class="col-1 mt-2">
-                <span class="material-icons" (click)="removeSafetyModule(i)">
-                  remove_circle_outline
-                </span>
-              </div> 
+                 
               </div>
             </div>
             <hr />
@@ -37,9 +32,7 @@
         <br>
       
         <div class="col-md-2"> 
-          <button type="submit" class="btn btn-primary "> Submit</button>
+          <button type="submit"   (click)="editSubComponent()"  class="btn btn-primary "> Update</button>
         </div>
         </form>
-      </div>
-    </section>
-  
+      </div> 

@@ -69,6 +69,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
   }
 
   editForm(id, name: boolean, i?: any) {
+    this.spinner.show();
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
@@ -98,10 +99,14 @@ export class ApplicationServiceInfoComponent implements OnInit {
         }
         console.log('The dialog was closed');
       });
+      
+      this.spinner.hide();
     });
   }
 
+
   addForm(id) {
+    this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       console.log('serviceData=>', data);
       this.ServiceData = data.data[0];
@@ -121,6 +126,8 @@ export class ApplicationServiceInfoComponent implements OnInit {
           this.getServiceData();
         }
       });
+      
+      this.spinner.hide();
     });
   }
   close() {
@@ -135,8 +142,9 @@ export class ApplicationServiceInfoComponent implements OnInit {
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
-console.log("deleting")
+           console.log("deleting")
           this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
+            Swal.fire('Deleted Successfully')
             console.log('deleted res', res);
             this.getServiceData();
           });
@@ -149,6 +157,7 @@ console.log("deleting")
       );
     
   }
+
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',

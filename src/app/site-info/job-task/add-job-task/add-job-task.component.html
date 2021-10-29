@@ -1,20 +1,24 @@
-<section class="content">
+<div class="btn btn-outline-primary " [routerLink]="['/admin/siteInfo/jobTask']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="container px-4 py-4 bg-white">
   
-    <form [formGroup]="riskDetails" (ngSubmit)=" onFormSubmit()">
-      <h1 class="">Add High Risk Construction Technique</h1>
+    <form [formGroup]="jobTaskDetails" (ngSubmit)=" onFormSubmit()">
+      <h2 class="text-center">Add Job Task </h2>
+     <br>
+     <hr>
       <ng-container formArrayName="arrObj">
           <ng-container
             *ngFor="let control of add().controls; let i = index"
             [formGroupName]="i"
           >
             <div>
-              <div class="row">
+              <div class="row justify-content-center">
                
                 <div class="col-8">
-               <input
+                  <!-- <p for="exampleFormControlInput1" class="form-Label">Job Task Type</p> -->
+                  <input
                     type="text"
                     formControlName="title"
+                  
                     class="form-control sign"
                     id="name"
                   />
@@ -41,5 +45,4 @@
         </div>
         </form>
       </div>
-    </section>
   

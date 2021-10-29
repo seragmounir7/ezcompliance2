@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import {
   FormBuilder,
   FormGroup,
@@ -15,69 +16,77 @@ export class JobTaskComponent implements OnInit {
   JobTaskDetail!: FormGroup;
   toppings = new FormControl();
   PPE = new FormControl();
+  Licence = new FormControl();
+  mode:any;
+  jobTaskData:any=[];
+  highRiskData:any=[];
+  PPESelectionData: any=[];
+  licenseAndQualificationData: any=[];
+  highRiskConstructionData: any=[];
+  task:any=[];
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  jobTask = [
-    { label: 'Activities Involving chemicals', value: '' },
-    { label: 'Assess Hazards', value: '' },
-    { label: 'Cable installation into cables tray', value: '' },
-    { label: 'Cable Support installation', value: '' },
-    { label: 'Camera Installation', value: '' },
-    { label: 'conduit Installation in ceiling or walls', value: '' },
-    { label: 'Conduit installation in trench', value: '' },
-    { label: 'conduit installation prior to concreate Pour', value: '' },
-    { label: 'Control Panel Installation', value: '' },
-    { label: 'Heat Shrinking cable joints', value: '' },
-    { label: 'Hot Works', value: '' },
-    { label: 'Installation of cables', value: '' },
-    { label: 'Leaving Site', value: '' },
-    { label: 'Maual Handling', value: '' },
-    { label: 'Site establishment', value: '' },
-    { label: 'Terminination of fibre optic cables', value: '' },
-    { label: 'Use of Elevated Work Platform', value: '' },
-    { label: 'Use of EWP', value: '' },
-    { label: 'Use of Ladders', value: '' },
-    { label: 'Use of Plant & Equipment', value: '' },
-    { label: 'Use of plant Equipment', value: '' },
-    { label: 'Working false ceilings', value: '' },
-    { label: 'Working in communication pits less than 1.5m deep', value: '' },
-    { label: 'Working near around Pedistrians', value: '' },
-    { label: 'Working near Asbestos', value: '' },
-    { label: 'Working near Lead containing materials', value: '' },
-    { label: 'Working outdoors', value: '' },
-    { label: 'Working with hand and power tools', value: '' },
-  ];
+  // jobTask = [
+  //   { label: 'Activities Involving chemicals', value: '' },
+  //   { label: 'Assess Hazards', value: '' },
+  //   { label: 'Cable installation into cables tray', value: '' },
+  //   { label: 'Cable Support installation', value: '' },
+  //   { label: 'Camera Installation', value: '' },
+  //   { label: 'conduit Installation in ceiling or walls', value: '' },
+  //   { label: 'Conduit installation in trench', value: '' },
+  //   { label: 'conduit installation prior to concreate Pour', value: '' },
+  //   { label: 'Control Panel Installation', value: '' },
+  //   { label: 'Heat Shrinking cable joints', value: '' },
+  //   { label: 'Hot Works', value: '' },
+  //   { label: 'Installation of cables', value: '' },
+  //   { label: 'Leaving Site', value: '' },
+  //   { label: 'Maual Handling', value: '' },
+  //   { label: 'Site establishment', value: '' },
+  //   { label: 'Terminination of fibre optic cables', value: '' },
+  //   { label: 'Use of Elevated Work Platform', value: '' },
+  //   { label: 'Use of EWP', value: '' },
+  //   { label: 'Use of Ladders', value: '' },
+  //   { label: 'Use of Plant & Equipment', value: '' },
+  //   { label: 'Use of plant Equipment', value: '' },
+  //   { label: 'Working false ceilings', value: '' },
+  //   { label: 'Working in communication pits less than 1.5m deep', value: '' },
+  //   { label: 'Working near around Pedistrians', value: '' },
+  //   { label: 'Working near Asbestos', value: '' },
+  //   { label: 'Working near Lead containing materials', value: '' },
+  //   { label: 'Working outdoors', value: '' },
+  //   { label: 'Working with hand and power tools', value: '' },
+  // ];
 
-  highRiskConstruction =[ 
-    {
-      label: 'Working in or near trenches or shafts deeper than 1.5metres',
-      value: '',
-    },
-    { label: 'Work in or near a confined space', value: '' },
-    {
-      label:
-        'Work in an area that may have a contaminated or flammable atmosphere',
-      value: '',
-    },
-    { label: 'Working around or near mobile plant', value: '' },
-    { label: 'Work with near or near asbestos', value: '' },
-    { label: 'Working with hazardous substances', value: '' },
-    { label: 'Working with or near tilt-up/precast concrete', value: '' },
-    { label: 'Risk of falls higher than 2 metres', value: '' },
-    {
-      label: 'Working near on or adjacent to a road or rail corridor',
-      value: '',
-    },
-    { label: 'Working on or near telecommunication tower', value: '' },
-    { label: 'Working on or near telecommunication tower', value: '' },
-    { label: 'Work near explosives', value: '' },
-    {
-      label:
-        'Work in or near water or other liquid that involves a risk of drowning',
-      value: '',
-    },
-    { label: 'Demolition of load-bearing structure', value: '' },
-    { label: 'Diving work', value: '' },
-  ];
+  // highRiskConstruction =[ 
+  //   {
+  //     label: 'Working in or near trenches or shafts deeper than 1.5metres',
+  //     value: '',
+  //   },
+  //   { label: 'Work in or near a confined space', value: '' },
+  //   {
+  //     label:
+  //       'Work in an area that may have a contaminated or flammable atmosphere',
+  //     value: '',
+  //   },
+  //   { label: 'Working around or near mobile plant', value: '' },
+  //   { label: 'Work with near or near asbestos', value: '' },
+  //   { label: 'Working with hazardous substances', value: '' },
+  //   { label: 'Working with or near tilt-up/precast concrete', value: '' },
+  //   { label: 'Risk of falls higher than 2 metres', value: '' },
+  //   {
+  //     label: 'Working near on or adjacent to a road or rail corridor',
+  //     value: '',
+  //   },
+  //   { label: 'Working on or near telecommunication tower', value: '' },
+  //   { label: 'Working on or near telecommunication tower', value: '' },
+  //   { label: 'Work near explosives', value: '' },
+  //   {
+  //     label:
+  //       'Work in or near water or other liquid that involves a risk of drowning',
+  //     value: '',
+  //   },
+  //   { label: 'Demolition of load-bearing structure', value: '' },
+  //   { label: 'Diving work', value: '' },
+  // ];
   
   PPEselection = [
     { label: 'Disposable dust mask', value: '' },
@@ -164,8 +173,10 @@ export class JobTaskComponent implements OnInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
+ 
   constructor(
     private fb: FormBuilder,
+    private LandingPageInfoService:LandingPageInfoServiceService
   ) { 
     this.JobTaskDetail=this.fb.group({
       arrObj: this.fb.array([]),
@@ -174,7 +185,12 @@ export class JobTaskComponent implements OnInit {
 
 
   ngOnInit(): void {
+    //this.addAction();
     this.addAction();
+    this.getJobTaskById();
+   this.getHighRiskById()
+   this.getLicenceById();
+   this.getPPEById();
   }
   addAction() {
     {
@@ -202,5 +218,41 @@ export class JobTaskComponent implements OnInit {
     console.log(this.JobTaskDetail);
     
   }
+  getJobTaskById(){
+    this.mode = 'JOBTask';
+    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
+      console.log('jobTaskDetails=>', data);
+        this.jobTaskData = data.data[0];
+      this.task = data.data.subComponents;
+      console.log('jobTaskData', this.jobTaskData);
+    });
+  }
+  getHighRiskById(){
+    this.mode = 'Risk';
+    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
+      console.log('Risk=>', data);
+     this.highRiskConstructionData = data.data[0];
+    console.log('risk', this.highRiskConstructionData);
+    });
+  }
+  getPPEById(){
+    this.mode = 'PPE';
+    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
+      console.log('PPE=>', data);
+       this.PPESelectionData = data.data[0];
+      console.log('PPE', this.PPESelectionData);
+    });
+  }
+  getLicenceById(){
+    this.mode = 'Licence';
+    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
+      console.log('Licence=>', data);
+       this.licenseAndQualificationData = data.data[0];
+     console.log('Licence', this.licenseAndQualificationData);
+    });
+  }
+
+
+  }
   
-}
+

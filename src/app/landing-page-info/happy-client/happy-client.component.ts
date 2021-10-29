@@ -52,11 +52,13 @@ export class HappyClientComponent implements OnInit {
   }
 
   editForm(id, name: boolean, i?: any) {
+    this.spinner.show();
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
     this.mode = 'HappyClient';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      Swal.fire('Deleted Successfully')
       console.log('HappyClient=>', data);
       this.happyClientData = data.data[0];
       console.log('', this.happyClientData);
@@ -81,10 +83,12 @@ export class HappyClientComponent implements OnInit {
         }
         console.log('The dialog was closed');
       });
+      this.spinner.hide();
     });
   }
 
   addForm(id) {
+    this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       console.log('HappyClient=>', data);
       this.happyClientData = data.data[0];
@@ -104,6 +108,7 @@ export class HappyClientComponent implements OnInit {
           this.ngOnInit();
         }
       });
+      this.spinner.hide();
     });
   }
   close() {
