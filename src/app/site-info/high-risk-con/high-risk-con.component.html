@@ -1,9 +1,8 @@
+<section class="content">
 <div class="container px-4 py-4 bg-white">
   
     <form [formGroup]="riskDetails" (ngSubmit)=" onFormSubmit()">
-      <h2 class="text-center">Add High Risk Construction Technique</h2>
-     <br>
-     <hr>
+      <h1 class="">Add High Risk Construction Technique</h1>
       <ng-container formArrayName="arrObj">
           <ng-container
             *ngFor="let control of add().controls; let i = index"
@@ -44,4 +43,5 @@
         </div>
         </form>
       </div>
+    </section>
   

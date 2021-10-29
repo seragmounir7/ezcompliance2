@@ -24,7 +24,7 @@
                   <td>{{form.title}}</td>
                   <td>
                     <select
-                      class="form-select"
+                      class="form-select form-control w-set"
                       aria-label="Default select example"
                     >
                       <option value="daily">Daily</option>
@@ -39,8 +39,8 @@
                     <mat-slide-toggle color="primary" checked></mat-slide-toggle>
                   </td>
                   <td>
-                    <button class="btn btn-primary btn-sm mr-2" [routerLink]="form.link">
-                      <i class="fas fa-folder mr-2"></i>View
+                    <button class="btn viewBtn mr-2" [routerLink]="form.link">
+                      <i class="fas fa-folder mr-2"  title="View"></i>
                     </button>
                   </td>
                 </tr>
