@@ -43,7 +43,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-
+// import {MatPaginator} from '@angular/material/paginator';
+// import {MatTableDataSource} from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -92,7 +93,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-   
+ //   MatPaginator,
+  //  MatTableDataSource
   ],
   exports: [
     A11yModule,
@@ -137,7 +139,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatTreeModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule,      
+    ScrollingModule,  
+   // MatPaginator,
+  //  MatTableDataSource    
 	],
 })
 export class SharedModule { }

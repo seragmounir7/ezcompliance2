@@ -1,258 +1,101 @@
-import { Component, OnInit } from '@angular/core';
-import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormArray,
-  FormControl,
-} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import Swal from 'sweetalert2';
+
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+
 @Component({
   selector: 'app-job-task',
   templateUrl: './job-task.component.html',
-  styleUrls: ['./job-task.component.scss']
+  styleUrls: ['./job-task.component.scss'],
 })
-export class JobTaskComponent implements OnInit {
-  JobTaskDetail!: FormGroup;
-  toppings = new FormControl();
-  PPE = new FormControl();
-  Licence = new FormControl();
-  mode:any;
-  jobTaskData:any=[];
-  highRiskData:any=[];
-  PPESelectionData: any=[];
-  licenseAndQualificationData: any=[];
-  highRiskConstructionData: any=[];
-  task:any=[];
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  // jobTask = [
-  //   { label: 'Activities Involving chemicals', value: '' },
-  //   { label: 'Assess Hazards', value: '' },
-  //   { label: 'Cable installation into cables tray', value: '' },
-  //   { label: 'Cable Support installation', value: '' },
-  //   { label: 'Camera Installation', value: '' },
-  //   { label: 'conduit Installation in ceiling or walls', value: '' },
-  //   { label: 'Conduit installation in trench', value: '' },
-  //   { label: 'conduit installation prior to concreate Pour', value: '' },
-  //   { label: 'Control Panel Installation', value: '' },
-  //   { label: 'Heat Shrinking cable joints', value: '' },
-  //   { label: 'Hot Works', value: '' },
-  //   { label: 'Installation of cables', value: '' },
-  //   { label: 'Leaving Site', value: '' },
-  //   { label: 'Maual Handling', value: '' },
-  //   { label: 'Site establishment', value: '' },
-  //   { label: 'Terminination of fibre optic cables', value: '' },
-  //   { label: 'Use of Elevated Work Platform', value: '' },
-  //   { label: 'Use of EWP', value: '' },
-  //   { label: 'Use of Ladders', value: '' },
-  //   { label: 'Use of Plant & Equipment', value: '' },
-  //   { label: 'Use of plant Equipment', value: '' },
-  //   { label: 'Working false ceilings', value: '' },
-  //   { label: 'Working in communication pits less than 1.5m deep', value: '' },
-  //   { label: 'Working near around Pedistrians', value: '' },
-  //   { label: 'Working near Asbestos', value: '' },
-  //   { label: 'Working near Lead containing materials', value: '' },
-  //   { label: 'Working outdoors', value: '' },
-  //   { label: 'Working with hand and power tools', value: '' },
-  // ];
+export class JobTaskComponent implements AfterViewInit, OnInit {
+  mode: any;
+  jobTaskData: any = [];
+  ELEMENT_DATA = [];
+  /////////////mat table////////////////
+  displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-  // highRiskConstruction =[ 
-  //   {
-  //     label: 'Working in or near trenches or shafts deeper than 1.5metres',
-  //     value: '',
-  //   },
-  //   { label: 'Work in or near a confined space', value: '' },
-  //   {
-  //     label:
-  //       'Work in an area that may have a contaminated or flammable atmosphere',
-  //     value: '',
-  //   },
-  //   { label: 'Working around or near mobile plant', value: '' },
-  //   { label: 'Work with near or near asbestos', value: '' },
-  //   { label: 'Working with hazardous substances', value: '' },
-  //   { label: 'Working with or near tilt-up/precast concrete', value: '' },
-  //   { label: 'Risk of falls higher than 2 metres', value: '' },
-  //   {
-  //     label: 'Working near on or adjacent to a road or rail corridor',
-  //     value: '',
-  //   },
-  //   { label: 'Working on or near telecommunication tower', value: '' },
-  //   { label: 'Working on or near telecommunication tower', value: '' },
-  //   { label: 'Work near explosives', value: '' },
-  //   {
-  //     label:
-  //       'Work in or near water or other liquid that involves a risk of drowning',
-  //     value: '',
-  //   },
-  //   { label: 'Demolition of load-bearing structure', value: '' },
-  //   { label: 'Diving work', value: '' },
-  // ];
-  
-  PPEselection = [
-    { label: 'Disposable dust mask', value: '' },
-    { label: 'Dust Mas', value: '' },
-    { label: 'Face shield', value: '' },
-    { label: 'Full face respirator', value: '' },
-    { label: 'Gttors', value: '' },
-    { label: 'Half face respirator', value: '' },
-    { label: 'Hard Hat', value: '' },
-    { label: 'Hearing protection', value: '' },
-    { label: 'High-Vis Clothing', value: '' },
-    { label: 'Lock Out Tags', value: '' },
-    { label: 'Long sleeve/Long pants', value: '' },
-    { label: 'Out of Service Tags', value: '' },
-    { label: 'Protective gloves', value: '' },
-    { label: 'Rescue kit', value: '' },
-    { label: 'Safety boots', value: '' },
-    { label: 'Safety glasses', value: '' },
-    { label: 'Sun Screen', value: '' },
-    { label: 'torch', value: '' },
-    { label: 'Wide Brim Hat', value: '' },
-  ];
 
-  licenseAndQualification = [
-    { label: 'Open Cable Licence', value: '' },
-    { label: 'White Card', value: '' },
-    { label: 'EWP Licence', value: '' },
-    { label: 'Working At Heights', value: '' },
-    { label: 'Security Licence', value: '' },
-    { label: 'Asbestos Awarness', value: '' },
-    { label: 'Working In Confined Space', value: '' },
-  ];
-
-  highRiskConstruction2 = [
-    {
-      label: 'Working in or near trenches or shafts deeper than 1.5metres',
-      value: '',
-    },
-    { label: 'Work in or near a confined space', value: '' },
-    {
-      label:
-        'Work in an area that may have a contaminated or flammable atmosphere',
-      value: '',
-    },
-    { label: 'Working around or near mobile plant', value: '' },
-    { label: 'Work with near or near asbestos', value: '' },
-    { label: 'Working with hazardous substances', value: '' },
-    { label: 'Working with or near tilt-up/precast concrete', value: '' },
-    { label: 'Risk of falls higher than 2 metres', value: '' },
-    {
-      label: 'Working near on or adjacent to a road or rail corridor',
-      value: '',
-    },
-    { label: 'Working on or near telecommunication tower', value: '' },
-    { label: 'Working on or near telecommunication tower', value: '' },
-    { label: 'Work near explosives', value: '' },
-    {
-      label:
-        'Work in or near water or other liquid that involves a risk of drowning',
-      value: '',
-    },
-    { label: 'Demolition of load-bearing structure', value: '' },
-    { label: 'Diving work', value: '' },
-  ];
-
-  PPEselection2 = [
-    { label: 'Disposable dust mask', value: '' },
-    { label: 'Dust Mas', value: '' },
-    { label: 'Face shield', value: '' },
-    { label: 'Full face respirator', value: '' },
-    { label: 'Gttors', value: '' },
-    { label: 'Half face respirator', value: '' },
-    { label: 'Hard Hat', value: '' },
-    { label: 'Hearing protection', value: '' },
-    { label: 'High-Vis Clothing', value: '' },
-    { label: 'Lock Out Tags', value: '' },
-    { label: 'Long sleeve/Long pants', value: '' },
-    { label: 'Out of Service Tags', value: '' },
-    { label: 'Protective gloves', value: '' },
-    { label: 'Rescue kit', value: '' },
-    { label: 'Safety boots', value: '' },
-    { label: 'Safety glasses', value: '' },
-    { label: 'Sun Screen', value: '' },
-    { label: 'torch', value: '' },
-    { label: 'Wide Brim Hat', value: '' },
-  ];
- 
-  constructor(
-    private fb: FormBuilder,
-    private LandingPageInfoService:LandingPageInfoServiceService
-  ) { 
-    this.JobTaskDetail=this.fb.group({
-      arrObj: this.fb.array([]),
-    });
+relation=[
+  {
+    jobTitle:'title1',jobId:'', riskArr:[{title:"",id:"",index:""}]
   }
+]
 
+
+
+
+
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+  /////////////mat table end////////////////
+
+  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
 
   ngOnInit(): void {
-    //this.addAction();
-    this.addAction();
     this.getJobTaskById();
-   this.getHighRiskById()
-   this.getLicenceById();
-   this.getPPEById();
   }
-  addAction() {
-    {
-      this.add().push(this.newAction());
-    }
-  }
-  add(): FormArray {
-    return this.JobTaskDetail.get('arrObj') as FormArray;
-  }
-  newAction(): FormGroup {
-    return this.fb.group({
-     
-      title: ['', Validators.required],
-    });
-  }
-  
-  removeSafetyModule(i) {
-    const item = <FormArray>this.JobTaskDetail.controls['arrObj'];
-    if (item.length > 1) {
-      item.removeAt(i);
-    
-    }
-  }
-  onFormSubmit() {
-    console.log(this.JobTaskDetail);
-    
-  }
-  getJobTaskById(){
+
+  getJobTaskById() {
     this.mode = 'JOBTask';
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('jobTaskDetails=>', data);
-        this.jobTaskData = data.data[0];
-      this.task = data.data.subComponents;
-      console.log('jobTaskData', this.jobTaskData);
-    });
-  }
-  getHighRiskById(){
-    this.mode = 'Risk';
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('Risk=>', data);
-     this.highRiskConstructionData = data.data[0];
-    console.log('risk', this.highRiskConstructionData);
-    });
-  }
-  getPPEById(){
-    this.mode = 'PPE';
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('PPE=>', data);
-       this.PPESelectionData = data.data[0];
-      console.log('PPE', this.PPESelectionData);
-    });
-  }
-  getLicenceById(){
-    this.mode = 'Licence';
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('Licence=>', data);
-       this.licenseAndQualificationData = data.data[0];
-     console.log('Licence', this.licenseAndQualificationData);
-    });
-  }
+    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+      console.log('jobTaskDetails=>', res);
+      // this.jobTaskData = res.data[0].subComponents;
+      let data = res.data[0].subComponents;
+      data.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
 
+      this.ELEMENT_DATA = data;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
 
+      //  this.task = res.data.subComponents;
+    });
+ 
   }
-  
-
+  edit(element){
+    const dialogRef = this.dialog.open(EditTaskComponent, {
+      width: "550px",
+      data: element,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if ((result == "true")) {
+        this.getJobTaskById();
+      }
+      console.log("The dialog was closed");
+    });
+  }
+  delete(item) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.title}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        this.logicalFormInfo
+        .deleteSubComponent(item._id)
+        .subscribe((res) => {
+          Swal.fire('Deleted Successfully');
+          console.log('deleted res', res);
+          this.getJobTaskById();
+            
+        });
+      }
+    });
+  }
+}

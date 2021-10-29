@@ -14,6 +14,8 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './high-risk-con/edit-high-risk-construction/edit-high-risk-construction.component';
 import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
+import { AddPPEComponent } from './ppe-select/add-ppe/add-ppe.component';
+import { EditTaskComponent } from './job-task/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.compon
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent
+    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent
   ],
   imports: [
     CommonModule,

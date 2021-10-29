@@ -23,56 +23,39 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.mainSidebarHeight.emit(this.mainSidebar.nativeElement.offsetHeight);
   }
-  step = false;
-  stepL = false;
+  dynamic = false;
+  landingPageVal = false;
   subscription = false;
   siteInfoVal = false;
   static = false;
+  confiLogic = false;
   menuOpen(key) {
-    if(key ==='dynamic'){
-      this.stepL = false;
-      this.static = false;
-      this.subscription = false;
-      this.siteInfoVal = false;
-      this.step = !this.step;
-    }
-    if(key ==='subscription'){
-      this.stepL = false;
-      this.static = false;
-      this.siteInfoVal = false;
-      this.step=false;
-      this.subscription = !this.subscription;
-    }
-    if(key ==='siteInfo'){
-      this.stepL = false;
-      this.static = false;
-      this.subscription = false;
-      this.step=false;
-      this.siteInfoVal = !this.siteInfoVal;
-    }
-    if(key ==='landingPageInfo'){
-      this.subscription = false;
-      this.static = false;
-      this.siteInfoVal = false;
-      this.step=false;
-      this.stepL = !this.stepL;
-    }
-    if(key ==='static'){
-      this.stepL = false;
-      this.subscription = false;
-      this.siteInfoVal = false;
-      this.step=false;
-      this.static = !this.static;
-    }
+    if (key != 'dynamic') this.dynamic = false;
 
+    if (key != 'subscription') this.subscription = false;
+
+    if (key != 'siteInfo') this.siteInfoVal = false;
+
+    if (key != 'landingPageInfo') this.landingPageVal = false;
+
+    if (key != 'static') this.static = false;
+    if (key != 'confiLogic') this.confiLogic = false;
+
+    if (key === 'dynamic') this.dynamic = !this.dynamic;
+    else if (key === 'subscription') this.subscription = !this.subscription;
+    else if (key === 'siteInfo') this.siteInfoVal = !this.siteInfoVal;
+    else if (key === 'landingPageInfo')
+      this.landingPageVal = !this.landingPageVal;
+    else if (key === 'static') this.static = !this.static;
+    else if (key === 'confiLogic') this.confiLogic = !this.confiLogic;
   }
-  // landingPageEditOpen() {
-  //   this.stepL = !this.stepL;
-  // }
-  // subscriptionFun() {
-  //   this.subscription = !this.subscription;
-  // }
-  // siteInfo() {
-  //   this.siteInfoVal = !this.siteInfoVal;
-  // }
+  resetAll(){
+    this.dynamic = false;
+    this.landingPageVal = false;
+    this.subscription = false;
+    this.siteInfoVal = false;
+    this.static = false; 
+    this.confiLogic = false; 
+  }
+
 }

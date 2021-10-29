@@ -1,3 +1,4 @@
+import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
 import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { PpeSelectComponent } from './ppe-select/ppe-select.component';
@@ -13,12 +14,9 @@ import { SiteInfoComponent } from './site-info.component';
 const routes: Routes = [
   { path: 'addSite', component: AddSiteInfoComponent },
   { path: 'addCustomer', component: AddCustomerComponent },
-  { path: 'jobTask', component: JobTaskComponent,
-// children:[
-//   {path:'addJobTask',component:AddJobTaskComponent},
-// ]
-},
+  { path: 'jobTask', component: JobTaskComponent},
   {path:'addJobTask',component:AddJobTaskComponent},
+  {path:'addHighRisk',component:AddHighRiskConstructionComponent},
 
   { path: 'highRisk', component: HighRiskConComponent },
   { path: 'licenceAndQual', component: LicenceAndQualComponent },

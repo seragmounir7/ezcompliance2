@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormArray,
-  FormControl,
+  
 } from '@angular/forms'
-
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-job-task',
   templateUrl: './add-job-task.component.html',
@@ -19,10 +19,11 @@ export class AddJobTaskComponent implements OnInit {
   formData: any;;
   constructor(
     private fb: FormBuilder,
-    private LandingPageInfoService:LandingPageInfoServiceService
+    private router: Router,
+    private logicalFormInfo:LogicalFormInfoService
   ) { 
     this.jobTaskDetails=this.fb.group({
-      mode:"JobTask",
+     // mode:"JobTask",
       arrObj: this.fb.array([]),
     });
     console.log('jobTaskDetails=>', this.jobTaskDetails);
@@ -54,10 +55,31 @@ export class AddJobTaskComponent implements OnInit {
     }
   }
   onFormSubmit() {
-    console.log(this.jobTaskDetails);
-    this.LandingPageInfoService.addFormData(this.jobTaskDetails.getRawValue()).subscribe((data) => {
-      console.log('teamData=>', data);
-      this.formData = data;
-    });
+    console.log(this.jobTaskDetails.value);
+    let data={
+      arrObj:this.jobTaskDetails.get('arrObj').value
+    }
+    this.logicalFormInfo.uploadMultiple(data,'JOBTask').subscribe((data) => {
+      console.log('JOBTask=>', data);
+      this.router.navigate(['/admin/siteInfo/jobTask']);      
+    },(err)=>{console.error(err);} 
+  
+    );
+    
   }
+  // onFormSubmit() {
+  //   console.log(this.jobTaskDetails);
+  //   let data = {
+  //     componentId: this.data.EditData,
+  //     title: this.jobTaskDetails.get('title').value,
+  //   }
+  //   this.logicalFormInfo.addSubComponent(data).subscribe((data) => {
+  //     console.log('riskDetails=>', data);
+  //     this.jobTaskDetails = data;
+  //     this.dialogRef.close('true');
+  //     this.jobTaskDetails.reset();
+  //     Swal.fire('Parameter added successfully');
+
+  //   });
+  // }
 }

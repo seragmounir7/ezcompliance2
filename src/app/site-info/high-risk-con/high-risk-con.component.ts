@@ -3,31 +3,28 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 
 import { UploadFileServiceService } from './../../utils/services/upload-file-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormArray,
-  FormControl,
-} from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AddHighRiskConstructionComponent } from './add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './edit-high-risk-construction/edit-high-risk-construction.component';
+import { AfterViewInit,ViewChild } from '@angular/core';
+
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-high-risk-con',
   templateUrl: './high-risk-con.component.html',
-  styleUrls: ['./high-risk-con.component.scss']
+  styleUrls: ['./high-risk-con.component.scss'],
 })
-export class HighRiskConComponent implements OnInit {
-  riskDetails!: FormGroup;
+export class HighRiskConComponent implements AfterViewInit, OnInit {
   formData: any;
-  mode:any;
-  highRiskConstructionData:any=[];
+  mode: any;
+  highRiskConstructionData: any = [];
   myId: any;
   isEdit = false;
   Is_id: any;
@@ -36,154 +33,175 @@ export class HighRiskConComponent implements OnInit {
   collectionSize = 10;
   hide = false;
   closeResult: string;
+  componentId = '';
+  ELEMENT_DATA = [];
+  /////////////mat table////////////////
+  displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
-    private fb: FormBuilder,
-    private LandingPageInfoService:LandingPageInfoServiceService,
-    public upload: UploadFileServiceService,
-    private modalService: NgbModal,
+    private logicalFormInfo: LogicalFormInfoService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router
-  ) { 
-    this.riskDetails=this.fb.group({
-      mode:"Risk",
-      arrObj: this.fb.array([]),
-    });
-    console.log('riskDetails=>', this.riskDetails);
+  ) {
+    
   }
 
   ngOnInit(): void {
-    this.addAction();
     this.getHighRiskById();
   }
-  addAction() {
-    {
-      this.add().push(this.newAction());
-    }
-  }
-  add(): FormArray {
-    return this.riskDetails.get('arrObj') as FormArray;
-  }
-  newAction(): FormGroup {
-    return this.fb.group({
-     
-      title: ['', Validators.required],
-    });
-  }
   
-  removeSafetyModule(i) {
-    const item = <FormArray>this.riskDetails.controls['arrObj'];
-    if (item.length > 1) {
-      item.removeAt(i);
-    
-    }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
-  onFormSubmit() {
-    console.log(this.riskDetails);
-    this.LandingPageInfoService.addFormData(this.riskDetails.getRawValue()).subscribe((data) => {
-      console.log('risk=>', data);
-      this.formData = data;
-    });
-  }
-  getHighRiskById(){
+ 
+  // onFormSubmit() {
+  //   console.log(this.riskDetails);
+  //   this.logicalFormInfo
+  //     .addFormData(this.riskDetails.getRawValue())
+  //     .subscribe((data) => {
+  //       console.log('risk=>', data);
+  //       this.formData = data;
+  //     });
+  // }
+  // getHighRiskById() {
+  //   this.mode = 'Risk';
+  //   this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+  //     console.log('riskDetails data=>', res);
+  //     this.componentId = res.data[0]._id;
+  //     this.highRiskConstructionData = res.data[0];
+  //     console.log('highRiskConstructionData', this.highRiskConstructionData);
+  //   });
+  // }
+  // editTask(title,id, i) {
+  //   console.log('id', id);
+  //   this.myId = id;
+  //   this.isEdit = true;
+  //   this.mode = 'Risk';
+
+  //   let dialogRef = this.dialog.open(EditHighRiskConstructionComponent, {
+  //     data: {        
+  //       EditData: id,
+  //       componentId: this.componentId,
+  //       index: i,
+  //       title:title
+  //       // moduleName: name,
+  //     },
+
+  //     width: '1000px',
+  //     height: '500px',
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log('-> openDialog -> result', result);
+
+  //     if ((result = 'true')) {
+  //       this.getHighRiskById();
+  //     }
+  //     console.log('The dialog was closed');
+  //   });
+  // }
+
+  // addTask() {
+  //   let dialogRef = this.dialog.open(AddHighRiskConstructionComponent, {
+  //     data: {
+  //       action: 'new',
+  //       EditData: this.componentId,
+  //     },
+  //     width: '600px',
+  //     height: '400px',
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log('openDialog->result', result);
+  //     if ((result = 'true')) {
+  //       this.getHighRiskById();
+  //     }
+  //   });
+
+  // }
+  // deleteopen(content, id) {
+  //   console.log('deleteopen close id=>', id);
+  //   this.Is_id = id;
+  //   this.modalService
+  //     .open(content, { ariaLabelledBy: 'modal-basic-title' })
+  //     .result.then(
+  //       (result) => {
+  //         this.closeResult = `Closed with: ${result}`;
+  //         console.log('deleting');
+  //         this.logicalFormInfo
+  //           .deleteSubComponent(this.Is_id)
+  //           .subscribe((res) => {
+  //             Swal.fire('Deleted Successfully');
+  //             console.log('deleted res', res);
+  //             this.getHighRiskById();
+  //           });
+  //       },
+  //       (reason) => {
+  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //         console.log('dismissed');
+  //       }
+  //     );
+  // }
+
+  // delete(item) {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: `Do you want to delete "${item}"?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#00B96F',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, Delete!',
+  //   }).then((result) => {
+  //     if (result.value) {
+  //     }
+  //   });
+  // }
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return `with: ${reason}`;
+  //   }
+  // }
+  getHighRiskById() {
     this.mode = 'Risk';
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('riskDetails=>', data);
-        this.highRiskConstructionData = data.data[0];
-       console.log('highRiskConstructionData', this.highRiskConstructionData);
+    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+      console.log('Risk=>', res);
+      // this.jobTaskData = res.data[0].subComponents;
+      let data = res.data[0].subComponents;
+      data.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+
+      this.ELEMENT_DATA = data;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+
+      //  this.task = res.data.subComponents;
+    });
+ 
+  }
+  edit(element){
+    const dialogRef = this.dialog.open(EditHighRiskConstructionComponent, {
+      width: "550px",
+      data: element,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if ((result == "true")) {
+        this.getHighRiskById();
+      }
+      console.log("The dialog was closed");
     });
   }
-  editTask(id, i?: any) {
-    this.spinner.show();
-    console.log('sakshi', id);
-    this.myId = id;
-    this.isEdit = true;
-    this.mode = 'Risk';
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('riskDetails=>', data);
-        this.highRiskConstructionData = data.data[0];
-       console.log('highRiskConstructionData', this.highRiskConstructionData);
-
-      let dialogRef = this.dialog.open(EditHighRiskConstructionComponent, {
-        data: {
-          action: 'edit',
-
-          EditData: this.highRiskConstructionData,
-          index: i,
-         // moduleName: name,
-        },
-
-        width: '1000px',
-        height: '500px',
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('-> openDialog -> result', result);
-
-        if ((result = 'true')) {
-          this. getHighRiskById();
-        }
-        console.log('The dialog was closed');
-      });
-      
-      this.spinner.hide();
-    });
-  }
-
-
-  addTask(id) {
-    this.spinner.show();
-    this.LandingPageInfoService.getFormDataById(this.mode).subscribe((data) => {
-      console.log('riskDetails=>', data);
-      this.highRiskConstructionData = data.data[0];
-      console.log('', this.highRiskConstructionData);
-      let dialogRef = this.dialog.open(AddHighRiskConstructionComponent, {
-        data: {
-          action: 'new',
-          ID: id,
-          EditData: this.highRiskConstructionData._id,
-        },
-        width: '600px',
-        height: '500px',
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('openDialog->result', result);
-        if ((result = 'true')) {
-          this.getHighRiskById();
-        }
-      });
-      
-      this.spinner.hide();
-    });
-  }
-  deleteopen(content, id) {
-    console.log("deleteopen close id=>",id);
-    this.Is_id = id;
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-           console.log("deleting")
-          this.LandingPageInfoService.deleteSubComponent
-          (this.Is_id).subscribe((res) => {
-            Swal.fire('Deleted Successfully')
-            console.log('deleted res', res);
-            this.getHighRiskById();
-          });
-        },
-        (reason) => {
-
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          console.log('dismissed');
-        }
-      );
-    
-  }
-
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item}"?`,
+      text: `Do you want to delete "${item.title}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',
@@ -191,18 +209,15 @@ export class HighRiskConComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       
+        this.logicalFormInfo
+        .deleteSubComponent(item._id)
+        .subscribe((res) => {
+          Swal.fire('Deleted Successfully');
+          console.log('deleted res', res);
+          this.getHighRiskById();
+            
+        });
       }
     });
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 }
-
