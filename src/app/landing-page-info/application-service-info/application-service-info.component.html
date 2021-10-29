@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-</section>
+
 <div class="row">
   <div class="col ml-2 mb-2">
     <button (click)="addForm('')" class="btn btn-outline-primary mt-1 mr-2 float-left">
@@ -41,7 +41,7 @@
     </button>
   </div>
 </div>
-<section class="content">
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
@@ -65,13 +65,19 @@
                   <td>{{ data.title }}</td>
                   <td>{{ data.description }}</td>
                   <td>
-                    <button (click)="editForm(data._id, true, i)" class="btn btn-info btn-sm mr-2">
-                      <i class="fas fa-pencil-alt mr-2"></i>Edit
+                    <button
+                      (click)="editForm(data._id, true, i)"
+                      class="btn editBtn mr-2"
+                    >
+                      <i class="fas fa-pencil-alt mr-2" title="Edit"></i>
                     </button>
                   </td>
                   <td>
-                    <button class="btn btn-danger btn-sm mr-2" (click)="deleteopen(deletemodal, data._id)">
-                      <i class="fas fa-trash mr-2"></i>Delete
+                    <button
+                      class="btn deleteBtn mr-2"
+                      (click)="deleteopen(deletemodal, data._id)"
+                    >
+                      <i class="fas fa-trash mr-2" title="Delete"></i>
                     </button>
                   </td>
                 </tr>

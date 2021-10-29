@@ -2,18 +2,19 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="text-center mt-2"><h1>Forms List</h1></div>
-        <div class="row">
-          <div class="col ml-2 mb-2">
+        <div class="text-center mt-2 mb-4">
+          <h1>
+            Forms List
             <button
               type="button"
-              class="btn btn-outline-primary mt-1 mr-2 float-left"
+              class="btn btn-outline-primary mt-1 mr-2 float-right"
               (click)="addFormopen(addFormModal)"
             >
-              Add Form
+            <i class="fas fa-plus"></i> Add Form
             </button>
-          </div>
+          </h1>
         </div>
+        
         <!-- Default box -->
         <div class="cards">
           <!-- /.card-header -->
@@ -33,7 +34,7 @@
                   <td>{{ i + 1 }}</td>
                   <td>{{ form.title }}</td>
                   <td> 
-                    <select class="form-select form-control" aria-label="Default select example" [value]="form.frequency"(change)="frequencyChange($event,form)">
+                    <select class="form-select form-control w-set" aria-label="Default select example" [value]="form.frequency"(change)="frequencyChange($event,form)">
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
                     <option value="quaterly">Quaterly</option>
@@ -47,23 +48,23 @@
                 </td>
                   <td>
                     <button
-                      class="btn btn-info btn-sm mr-2"
+                      class="btn editBtn btnSet mr-2"
                       (click)="editForm(form)"
                     >
-                      <i class="fas fa-pencil-alt mr-2"></i>Edit
+                      <i class="fas fa-pencil-alt mr-2" title="Edit"></i>
                     </button>
 
                     <button
-                      class="btn btn-primary btn-sm mr-2"
+                      class="btn viewBtn btnSet mr-2"
                       (click)="viewForm(form)"
                     >
-                      <i class="fas fa-folder mr-2"></i>View
+                      <i class="fas fa-folder mr-2" title="View"></i>
                     </button>
                     <button
-                      class="btn btn-danger btn-sm mr-2"
+                      class="btn deleteBtn btnSet mr-2"
                       (click)="deleteopen(deletemodal, form)"
                     >
-                      <i class="fas fa-trash mr-2"></i>Delete
+                      <i class="fas fa-trash mr-2" title="Delete"></i>
                     </button>
                   </td>
                 </tr>
@@ -74,7 +75,7 @@
 
           <div class="card-footer clearfix">
             <div class="row">
-              <div class="col-6">
+              <div class="col-6 text-left">
                 <div class="form-group">
                   <select
                     class="form-control custom-select"
@@ -88,7 +89,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-6 paginationSet">
                 <ngb-pagination
                   [(page)]="page"
                   [pageSize]="pageSize"
