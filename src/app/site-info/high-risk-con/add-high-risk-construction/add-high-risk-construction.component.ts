@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
@@ -90,7 +91,12 @@ export class AddHighRiskConstructionComponent implements OnInit {
     }
     this.logicalFormInfo.uploadMultiple(data,'Risk').subscribe((data) => {
       console.log('Risk=>', data);
-      this.router.navigate(['/admin/siteInfo/highRisk']);      
+      this.router.navigate(['/admin/siteInfo/highRisk']);    
+      Swal.fire({
+        title: 'Parameter Edited successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });  
     },(err)=>{console.error(err);} 
   
     );

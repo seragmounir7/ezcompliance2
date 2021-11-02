@@ -86,7 +86,11 @@ export class EditHighRiskConstructionComponent implements OnInit {
         console.log('submodulesData', resData);
 
         this.dialogRef.close('true');
-        Swal.fire('Parameter Edited successfully');
+        Swal.fire({
+          title: 'Parameter Edited successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
         this.riskDetails.reset();
       });
   }

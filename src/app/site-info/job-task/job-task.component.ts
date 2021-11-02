@@ -19,20 +19,6 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
   /////////////mat table////////////////
   displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-
-
-relation=[
-  {
-    jobTitle:'title1',jobId:'', riskArr:[{title:"",id:"",index:""}]
-  }
-]
-
-
-
-
-
-
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -43,15 +29,14 @@ relation=[
   constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
 
   ngOnInit(): void {
-    this.getJobTaskById();
+    this.getAllJobTask();
   }
 
-  getJobTaskById() {
-    this.mode = 'JOBTask';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+  getAllJobTask() {
+    this.logicalFormInfo.getAllJobtask().subscribe((res:any) => {
       console.log('jobTaskDetails=>', res);
       // this.jobTaskData = res.data[0].subComponents;
-      let data = res.data[0].subComponents;
+      let data = res.data
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
@@ -71,7 +56,7 @@ relation=[
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getJobTaskById();
+        this.getAllJobTask();
       }
       console.log("The dialog was closed");
     });
@@ -88,11 +73,14 @@ relation=[
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteSubComponent(item._id)
+        .deleteJobTask(item._id)
         .subscribe((res) => {
-          Swal.fire('Deleted Successfully');
-          console.log('deleted res', res);
-          this.getJobTaskById();
+          Swal.fire({
+            title: 'Parameter Deleted successfully',
+            showConfirmButton: false,
+            timer: 1200,
+          });          console.log('deleted res', res);
+          this.getAllJobTask();
             
         });
       }

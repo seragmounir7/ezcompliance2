@@ -1,7 +1,7 @@
 <h2> PPE List</h2>
     <div class="col ml-2 mb-2">
       
-      <button  class="btn btn-outline-primary mt-1 mr-2 float-right"[routerLink]="['/admin/siteInfo/addJobTask']">
+      <button  class="btn btn-outline-primary mt-1 mr-2 float-right"[routerLink]="['/admin/siteInfo/addPPE']">
         <i class="fas fa-folder-plus mr-2"></i>Add PPE 
       </button>
     </div>
@@ -21,7 +21,16 @@
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.title}} </td>
     </ng-container>
-
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element"(click)="edit(element)"> <i class="fas fa-pencil-alt "></i> 
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element"(click)="delete(element)"> <i class="fas fa-trash "></i> 
+        </td>
+      </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

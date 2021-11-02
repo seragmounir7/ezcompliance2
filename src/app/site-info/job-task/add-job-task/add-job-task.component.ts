@@ -5,7 +5,9 @@ import {
   Validators,
   FormArray,
   
-} from '@angular/forms'
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
 @Component({
@@ -26,7 +28,6 @@ export class AddJobTaskComponent implements OnInit {
      // mode:"JobTask",
       arrObj: this.fb.array([]),
     });
-    console.log('jobTaskDetails=>', this.jobTaskDetails);
   }
 
   ngOnInit(): void {
@@ -41,8 +42,7 @@ export class AddJobTaskComponent implements OnInit {
     return this.jobTaskDetails.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
-    return this.fb.group({
-     
+    return this.fb.group({     
       title: ['', Validators.required],
     });
   }
@@ -59,27 +59,14 @@ export class AddJobTaskComponent implements OnInit {
     let data={
       arrObj:this.jobTaskDetails.get('arrObj').value
     }
-    this.logicalFormInfo.uploadMultiple(data,'JOBTask').subscribe((data) => {
+    this.logicalFormInfo.addJobTask(data).subscribe((data) => {
       console.log('JOBTask=>', data);
+
       this.router.navigate(['/admin/siteInfo/jobTask']);      
     },(err)=>{console.error(err);} 
   
     );
     
   }
-  // onFormSubmit() {
-  //   console.log(this.jobTaskDetails);
-  //   let data = {
-  //     componentId: this.data.EditData,
-  //     title: this.jobTaskDetails.get('title').value,
-  //   }
-  //   this.logicalFormInfo.addSubComponent(data).subscribe((data) => {
-  //     console.log('riskDetails=>', data);
-  //     this.jobTaskDetails = data;
-  //     this.dialogRef.close('true');
-  //     this.jobTaskDetails.reset();
-  //     Swal.fire('Parameter added successfully');
-
-  //   });
-  // }
+ 
 }

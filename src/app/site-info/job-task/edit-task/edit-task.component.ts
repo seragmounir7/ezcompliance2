@@ -14,6 +14,9 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class EditTaskComponent implements OnInit {
   editTitle: FormGroup;
   dataRec: any;
+
+
+
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
@@ -35,13 +38,17 @@ export class EditTaskComponent implements OnInit {
       componentId:this.dataRec.componentId
     }
     this.logicalFormInfo
-      .editSubComponent(data, this.dataRec._id)
+      .updateJobTask(data, this.dataRec._id)
       .subscribe((resData) => {
         console.log('submodulesData', resData);
 
         this.dialogRef.close('true');
-        Swal.fire('Parameter Edited successfully');
-      });
+        Swal.fire({
+          title: 'Parameter Edited successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });  
+          });
   }
   closeDialog(){
     this.dialogRef.close('false');

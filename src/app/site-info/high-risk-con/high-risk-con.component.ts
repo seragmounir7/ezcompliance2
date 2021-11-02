@@ -212,7 +212,11 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
         this.logicalFormInfo
         .deleteSubComponent(item._id)
         .subscribe((res) => {
-          Swal.fire('Deleted Successfully');
+          Swal.fire({
+            title: 'Parameter Deleted successfully',
+            showConfirmButton: false,
+            timer: 1200,
+          });
           console.log('deleted res', res);
           this.getHighRiskById();
             

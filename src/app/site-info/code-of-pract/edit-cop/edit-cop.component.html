@@ -1,0 +1,17 @@
+<form [formGroup]="editTitle" >
+    <mat-form-field appearance="legacy"
+    class="example-full-width" style="width: 498px;">
+    <mat-label>Edit Code Of Practice</mat-label>
+    <input matInput  formControlName="title" style="text-transform: capitalize !important;">
+    </mat-form-field>
+    <div class="row">
+        <div class="col-sm-2 offset-8 ">
+            <button mat-raised-button (click)="closeDialog()">Close</button>
+        </div>
+        <div class="col-sm-2  ">
+            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Edit</button>
+        </div>
+    </div>
+</form>   
+
+
