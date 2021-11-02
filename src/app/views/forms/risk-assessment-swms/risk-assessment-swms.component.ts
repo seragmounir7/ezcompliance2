@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
@@ -20,6 +21,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   highRiskConstruction=[];
   PPEselection=[];
   licenseAndQualification=[];
+  checkArray=[];
   // jobTask = [
   //   { label: 'Activities Involving chemicals', value: '' },
   //   { label: 'Assess Hazards', value: '' },
@@ -171,6 +173,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   riskArr=[];
   ppeArr=[];
   licenceArr=[];
+  jobTaskData=[]
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
@@ -259,9 +262,10 @@ export class RiskAssessmentSWMSComponent implements OnInit {
 
   ngOnInit(): void {
     this.dynamicFormsService.homebarTitle.next('Risk Assesment Form');
-   this.getJobTaskById() ;
+   this.getAllJobTask() ;
      this.getPPEById() ;    
      this.getHighRiskById() ;
+     this.getAllLicence() ;
     
   }
 
@@ -290,8 +294,8 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     // this.signaturePad is now available
     //this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
    // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
-    this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
+    //this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
+   // this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
     console.log('clear1 &2');
   }
 
@@ -322,24 +326,28 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     console.log('begin drawing');
   }
 
-  
-  getJobTaskById() {
-    let mode = 'JOBTask';
-    this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-      console.log('jobTaskDetails=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
-     this.jobTask = res.data[0].subComponents;      
-   
-      //  this.task = res.data.subComponents;
+  getAllJobTask() {
+    this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
+      this.jobTaskData = res.data;
+      console.log('jobTaskDetails=>', this.jobTaskData);
     });
- 
   }
+  // getJobTaskById() {
+  //   let mode = 'JOBTask';
+  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
+  //     console.log('jobTaskDetails=>', res);
+  //     // this.jobTaskData = res.data[0].subComponents;
+  //    this.jobTask = res.data[0].subComponents;      
+   
+  //     //  this.task = res.data.subComponents;
+  //   });
+ 
+  // }
   getPPEById() {
    let mode = 'PPE';
     this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-      console.log('getPPEById=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
       this.PPEselection = res.data[0].subComponents;  
+      console.log('this.PPEselection=>', this.PPEselection);
       for(let i=0;i<this.PPEselection.length;i++){
         this.ppeArr[i]=0;
        }
@@ -348,8 +356,8 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   getHighRiskById() {
     let mode = 'Risk';
     this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-      console.log('Risk=>', res);
       this.highRiskConstruction= res.data[0].subComponents;
+      console.log(' this.highRiskConstruction=>',  this.highRiskConstruction);
      for(let i=0;i<this.highRiskConstruction.length;i++){
       this.riskArr[i]=0;
      }
@@ -358,16 +366,64 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   }
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
-      console.log('getAllLicence=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
       this.licenseAndQualification = res.data;
+      console.log('this.licenseAndQualification=>', this.licenseAndQualification);
       for(let i=0;i<this.licenseAndQualification.length;i++){
         this.licenceArr[i]=0;
        }    
     }); 
   }
   onJobtaskSelect(e){
-    console.log(e);
-    
+    console.log("event",e);
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.checkArray.push(item);
+    } else {
+      this.checkArray.forEach((item,j) => {
+        if (item == e.target.value) {
+         this.checkArray.splice(j,1);
+          return;
+        }
+      });
+    }
+   for(let k=0;k<this.riskArr.length;k++){
+     this.riskArr[k]=0;
+   }
+   for(let k=0;k<this.ppeArr.length;k++){
+     this.ppeArr[k]=0;
+   }
+   for(let k=0;k<this.licenceArr.length;k++){
+     this.licenceArr[k]=0;
+   }
+    console.log(this.checkArray);
+    this.checkArray.forEach((id)=>{
+        this.jobTaskData.forEach((element)=>{
+          if(id === element._id){
+            element.risk.forEach(riskItem => {
+              this.highRiskConstruction.forEach((highRisk,riskIndex)=>{
+               if(highRisk._id ===riskItem.riskId){
+                 this.riskArr[riskIndex]=1;
+               }
+              })
+            });
+            element.PPE.forEach(riskItem => {
+              this.PPEselection.forEach((highRisk,index)=>{
+
+               if(highRisk._id ===riskItem.PPEId){
+                 
+                 this.ppeArr[index]=1;
+               }
+              })
+            });
+            element.licence.forEach(riskItem => {
+              this.licenseAndQualification.forEach((highRisk,index)=>{
+               if(highRisk._id ===riskItem.licenceId){
+                 this.licenceArr[index]=1;
+               }
+              })
+            });
+          }
+        })
+    })
   }
 }

@@ -29,7 +29,7 @@
                       <td >
                         <mat-form-field appearance="fill">
                           <!-- <mat-label>HighRiskConstruction</mat-label> -->
-                          <mat-select value multiple #risk>
+                          <mat-select  multiple #risk>
                             <mat-select-trigger>
                               <!-- {{highRiskArr.value ? highRiskArr.value[0] : ''}} -->
                               <!-- <span *ngIf="highRiskArr.value?.length > 1" class="example-additional-selection">
@@ -80,10 +80,10 @@
                         </mat-label> -->
                         <mat-select  multiple #licence>
                           <mat-select-trigger>
-                            {{licence.value ? licence.value[0] : ''}}
+                            <!-- {{licence.value ? licence.value[0] : ''}}
                             <span *ngIf="licence.value?.length > 1" class="example-additional-selection">
                               (+{{licence.value.length - 1}} {{licence.value?.length === 2 ? 'other' : 'others'}})
-                            </span>
+                            </span> -->
                           </mat-select-trigger>
                           <mat-option *ngFor="let parameter of  licenseAndQualificationData" [value]="parameter._id">
                             {{parameter.title}}</mat-option>
@@ -94,19 +94,19 @@
                       <mat-form-field appearance="fill">
                         <!-- <mat-label>Licence and Qualifications
                         </mat-label> -->
-                        <mat-select  multiple #codOfCond>
+                        <mat-select  multiple #codOfPractice>
                           <mat-select-trigger>
                             <!-- {{codeOfPract.value ? codeOfPract.value[0] : ''}}
                             <span *ngIf="codeOfPract.value?.length > 1" class="example-additional-selection">
                               (+{{codeOfPract.value.length - 1}} {{codeOfPract.value?.length === 2 ? 'other' : 'others'}})
                             </span> -->
                           </mat-select-trigger>
-                          <mat-option *ngFor="let parameter of  licenseAndQualificationData" [value]="parameter._id">
+                          <mat-option *ngFor="let parameter of codeOfPract.subComponents" [value]="parameter._id">
                             {{parameter.title}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </td>
-                    <td><button class="btn btn-primary" (click)="setRelation(risk,ppeSel,licence,codOfCond,i,task._id)">Set</button></td>
+                    <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,licence.value,codOfPractice.value,task.title,task._id)">Set</button></td>
                   </tr>
                 </tbody>
               </table>

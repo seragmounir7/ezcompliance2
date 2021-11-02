@@ -93,7 +93,7 @@ export class AddHighRiskConstructionComponent implements OnInit {
       console.log('Risk=>', data);
       this.router.navigate(['/admin/siteInfo/highRisk']);    
       Swal.fire({
-        title: 'Parameter Edited successfully',
+        title: 'Parameter Added successfully',
         showConfirmButton: false,
         timer: 1200,
       });  

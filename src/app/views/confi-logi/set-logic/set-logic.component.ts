@@ -1,28 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { MatSelect } from '@angular/material/select';
+import { Component, OnInit, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  Validators,
   FormArray,
-  FormControl,
 } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 @Component({
   selector: 'app-set-logic',
   templateUrl: './set-logic.component.html',
   styleUrls: ['./set-logic.component.scss'],
 })
-export class SetLogicComponent implements OnInit {
+export class SetLogicComponent implements AfterViewInit, OnInit {
   JobTaskDetail!: FormGroup;
-  highRiskConstr = new FormControl();
-  PPE = new FormControl();
-  Licence = new FormControl();
-  codeOfPract = new FormControl();
+
   mode: any;
   jobTaskData: any = [];
   highRiskData: any = [];
   PPESelectionData: any = [];
-  codeOfCond: any = [];
+  codeOfPract: any = [];
   licenseAndQual: any = [];
   licenseAndQualificationData: any = [];
   licenceCatAll: any = [];
@@ -114,6 +111,8 @@ export class SetLogicComponent implements OnInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
+  // @ViewChild('risk') risk: any;
+  @ViewChildren(MatSelect) Risk: QueryList<any>;
 
   constructor(
     private fb: FormBuilder,
@@ -137,6 +136,22 @@ export class SetLogicComponent implements OnInit {
     this.getPPEById();
     this.getCodOfCond();
   }
+  
+  ngAfterViewInit() {
+    console.log(this.Risk.toArray());
+    
+this.Risk.toArray().forEach((res)=>{
+  
+console.log("rres",res);
+
+    });
+//     this.risk.changes.subscribe((res)=>{
+// console.log(res);
+
+//     })
+    // console.log("this.risk._results()",this.risk._results);
+    // console.log(this.risk.toArray()[0]);
+  }
   addActionHighRisk() {
     {
       this.addHighRisk().push(this.newActionHighRisk());
@@ -159,10 +174,6 @@ export class SetLogicComponent implements OnInit {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
-      console.log('jobTaskData', this.jobTaskData);
-      // this.jobTaskData.forEach(element => {
-      //   this.addActionHighRisk();
-      // });
     });
   }
   getHighRiskById() {
@@ -170,7 +181,6 @@ export class SetLogicComponent implements OnInit {
     this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
       console.log('Risk=>', data);
       this.highRiskConstructionData = data.data[0];
-      console.log('risk', this.highRiskConstructionData);
     });
   }
   getPPEById() {
@@ -178,47 +188,103 @@ export class SetLogicComponent implements OnInit {
     this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
       console.log('PPE=>', data);
       this.PPESelectionData = data.data[0];
-      console.log('PPE', this.PPESelectionData);
     });
   }
   getCodOfCond() {
     this.mode = 'codeOfPractice';
     this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
       console.log('codeOfPractice=>', data);
-      this.codeOfCond = data.data[0];
-      console.log('codeOfPractice', this.codeOfCond);
+      this.codeOfPract = data.data[0];
     });
   }
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       console.log('Licence=>', res);
       this.licenseAndQual = res.data;
-      console.log('Licence', this.licenseAndQual);
     });
   }
   getAllCategories() {
     this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
       this.licenceCatAll = res.data;
-      console.log('Licence', this.licenceCatAll);
     });
   }
 
-  setRelation(risk, ppe, licence, codOfCond, index, id) {
-    console.log(risk._value);
-    console.log(ppe._value);
-    console.log(licence._value);
-    console.log(codOfCond._value);
-    console.log(index);
+  setRelation(riskIds, ppeIDs, licenceIds, codOfPractIds, title, id) {
+    console.log('risk', riskIds);
+    console.log('ppe', ppeIDs);
+    console.log('licence', licenceIds);
+    console.log('codOfPract', codOfPractIds);
+    console.log('index', title);
+    console.log('id', id);
+
+    let PPE = [];
+    let risk = [];
+    let codeOfPractice = [];
+    let licence = [];
+    if (riskIds) {
+      riskIds.forEach((element) => {
+        let data = {
+          riskId: element,
+        };
+        risk.push(data);
+      });
+    }
+    if (ppeIDs) {
+      ppeIDs.forEach((element) => {
+        let data = {
+          PPEId: element,
+        };
+        PPE.push(data);
+      });
+    }
+    if (licenceIds) {
+      licenceIds.forEach((element) => {
+        let data = {
+          licenceId: element,
+        };
+        licence.push(data);
+      });
+    }
+    if (codOfPractIds) {
+      codOfPractIds.forEach((element) => {
+        let data = {
+          codeOfPracticeId: element,
+        };
+        codeOfPractice.push(data);
+      });
+    }
+    //  console.log(risk);
+    //  console.log(PPE);
+    //  console.log(licence);
+    //  console.log(codeOfPractice);
+
+    let data = {
+      title: title,
+      PPE: PPE,
+      risk: risk,
+      licence: licence,
+      codeOfPractice: codeOfPractice,
+    };
+    console.log(data);
+
+    this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
+      console.log('resJob Task=>', res);
+      Swal.fire({
+        title: 'Relation set successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      }); 
+    });
   }
-  categorySel(catArr){
-    this.licenseAndQualificationData=[];
+  categorySel(catArr) {
+    this.licenseAndQualificationData = [];
 
     console.log(catArr);
     catArr.forEach((element) => {
-      this.licenseAndQual.forEach(item => {
-        if(element === item.licenceCategoryId._id){
-          this.licenseAndQualificationData.push(item)
+      this.licenseAndQual.forEach((item) => {
+        if (element === item.licenceCategoryId._id) {
+          this.licenseAndQualificationData.push(item);
         }
       });
     });

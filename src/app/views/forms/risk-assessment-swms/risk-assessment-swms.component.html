@@ -213,12 +213,12 @@
         </div>
 
         <div class="row">
-          <div *ngFor="let item of jobTask " class="mt-2 col-4">
+          <div *ngFor="let item of jobTaskData;let i=index" class="mt-2 col-4">
             <input
               type="checkbox"
               class="form-check-input"
               [value]="item._id"
-              (change)="onJobtaskSelect($event.target.value)"
+              (change)="onJobtaskSelect($event)"
             />
             <label class="form-check-label label_2" for="inlineCheckbox1"
               >{{item.title}}</label
@@ -852,12 +852,12 @@
       </div>
 
       <div class="row">
-        <div *ngFor="let item of PPEselection" class="mt-2 col-4">
+        <div *ngFor="let item of PPEselection;let i=index" class="mt-2 col-4">
           <input
             type="checkbox"
             class="form-check-input"
             value="Disposable dust mask"
-            
+            [checked]="ppeArr[i]"
           />
           <label class="form-check-label label_2" for="inlineCheckbox1"
             >{{item.title}}</label
@@ -1088,11 +1088,12 @@
       </div>
 
       <div class="row">
-        <div  *ngFor="let item of licenseAndQualification"class="mt-2 col-4">
+        <div  *ngFor="let item of licenseAndQualification;let i=index"class="mt-2 col-4">
           <input
             type="checkbox"
             class="form-check-input"
             value="Open Cable Licence"
+            [checked]="licenceArr[i]"
           />
           <label class="form-check-label label_2" for="inlineCheckbox1"
             >{{item.title}}</label
@@ -1434,7 +1435,43 @@
         <hr />
 
         <h2>High Risk Construction</h2>
-        <div class="row py-4">
+        <div class="row">
+          <div *ngFor="let item of highRiskConstruction;let i=index" class="mt-2 col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Working in or near trenches or shafts deeper than 1.5metres"
+              [checked]="riskArr[i]"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1"
+              >{{item.title}}</label
+            >
+          </div>
+          <!-- <div class="col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Work in or near a confined space"
+              formControlName="nearConfinedSpace"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1"
+              >Work in or near a confined space</label
+            >
+          </div>
+          <div class="col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Work in an area that may have a contaminated or flammable atmosphere"
+              formControlName="areaFlammableAtmosphere"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1"
+              >Work in an area that may have a contaminated or flammable
+              atmosphere</label
+            >
+          </div> -->
+        </div>
+        <!-- <div class="row py-4">
           <div class="col-4">
             <input class="form-check-input" type="checkbox" value="no" />
             <label class="form-check-label label_2" for="inlineCheckbox1"
@@ -1537,7 +1574,7 @@
             >
           </div>
           <hr />
-        </div>
+        </div> -->
         <hr />
         <div class="row">
           <table class="table table-bordered text-center">
@@ -1638,6 +1675,41 @@
         <hr />
         <h2>PPE Selection</h2>
         <div class="row">
+          <div *ngFor="let item of PPEselection;let i=index" class="mt-2 col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Disposable dust mask"
+              [checked]="ppeArr[i]"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1"
+              >{{item.title}}</label
+            >
+          </div>
+          <!-- <div class="mt-2 col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Dust Mask"
+              formControlName="dustMask"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1"
+              >Dust Mask</label
+            >
+          </div>
+          <div class="mt-2 col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Face shield"
+              formControlName="faceShield"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1"
+              >Face shield</label
+            >
+          </div> -->
+        </div>
+        <!-- <div class="row">
           <div class="mt-2 col-4">
             <p>
               <input class="form-check-input" type="checkbox" value="no" />
@@ -1760,7 +1832,7 @@
               >Wide Brim Hat</label
             >
           </div>
-        </div>
+        </div> -->
         <hr />
         <h2>SDS Registor</h2>
         <div class="row">

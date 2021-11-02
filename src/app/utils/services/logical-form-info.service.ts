@@ -11,7 +11,6 @@ export class LogicalFormInfoService {
   getJobTaskListById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -19,7 +18,6 @@ export class LogicalFormInfoService {
   addFormData(data: any) {
     return this.https.post(this.apiUrl + 'component/multiple', data).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -28,7 +26,6 @@ export class LogicalFormInfoService {
   getFormDataById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -36,7 +33,6 @@ export class LogicalFormInfoService {
   deleteSubComponent(id: any) {
     return this.https.delete(this.apiUrl + 'subComponent/delete/' + id).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -44,7 +40,6 @@ export class LogicalFormInfoService {
   editSubComponent(data, id) {
     return this.https.put(this.apiUrl + 'subComponent/update/' + id, data).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -54,7 +49,6 @@ export class LogicalFormInfoService {
       .put(this.apiUrl + 'component/upload/multiple/' + id, data)
       .pipe(
         map((res: any) => {
-          console.log('res.data=>', res.data);
           return res;
         })
       );
@@ -63,7 +57,6 @@ export class LogicalFormInfoService {
   addSubComponent(data: any) {
     return this.https.post(this.apiUrl + 'subComponent/add', data).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -72,7 +65,6 @@ export class LogicalFormInfoService {
   getAllLicence(){
     return this.https.get(this.apiUrl + 'licence/getAll').pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -101,7 +93,6 @@ export class LogicalFormInfoService {
   updateLicence(data, id) {
     return this.https.put(this.apiUrl + 'licence/update/' + id, data).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -109,7 +100,6 @@ export class LogicalFormInfoService {
   deleteLicence(id){
     return this.https.delete(this.apiUrl + 'licence/delete/' + id).pipe(
       map((res: any) => {
-        console.log('res.data=>', res.data);
         return res;
       })
     );
@@ -125,7 +115,6 @@ addLicenceCat(data){
 getAllLicenceCat(){
   return this.https.get(this.apiUrl + 'licenceCategory/getAll').pipe(
     map((res: any) => {
-      console.log('res.data=>', res.data);
       return res;
     })
   );
@@ -133,7 +122,6 @@ getAllLicenceCat(){
 updateLicenceCat(data,id){
   return this.https.put(this.apiUrl + 'licenceCategory/update/' + id, data).pipe(
     map((res: any) => {
-      console.log('res.data=>', res.data);
       return res;
     })
   );
@@ -142,7 +130,6 @@ updateLicenceCat(data,id){
 deleteLicenceCat(id){
   return this.https.delete(this.apiUrl + 'licenceCategory/delete/' + id).pipe(
     map((res: any) => {
-      console.log('res.data=>', res.data);
       return res;
     })
   );
@@ -152,6 +139,9 @@ deleteLicenceCat(id){
   //job task crud///
   addJobTask(data){
     return this.https.post(this.apiUrl + 'jobTask/add', data);
+  }
+  addMultipleJobTask(data){
+    return this.https.post(this.apiUrl + 'jobTask/add/multiple', data);
   }
   updateJobTask(data,id){
     return this.https.put(this.apiUrl + 'jobTask/update/' + id, data);      
