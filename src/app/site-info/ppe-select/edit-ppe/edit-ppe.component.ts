@@ -9,7 +9,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./edit-ppe.component.scss']
 })
 export class EditPPEComponent implements OnInit {
-  editTitle: FormGroup;
+  editTitle!: FormGroup;
   dataRec: any;
   constructor(
     private fb: FormBuilder,

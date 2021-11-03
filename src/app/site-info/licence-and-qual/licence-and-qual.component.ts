@@ -7,12 +7,15 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-licence-and-qual',
   templateUrl: './licence-and-qual.component.html',
   styleUrls: ['./licence-and-qual.component.scss']
 })
 export class LicenceAndQualComponent implements OnInit {
+  licenceAndQual: FormGroup;
+  formData: any;
 
   mode: any;
   jobTaskData: any = [];

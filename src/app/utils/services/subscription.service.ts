@@ -10,8 +10,8 @@ export class SubscriptionService {
   apiUrl = environment.apiUrl;
   constructor(private https: HttpClient) {}
 
-  getPlan() {
-    return this.https.get(this.apiUrl + 'plan/add' ).pipe(
+  getPlan(id: any) {
+    return this.https.get(this.apiUrl + 'plan/get/' + id ).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
