@@ -1,5 +1,5 @@
 import { MatSelect } from '@angular/material/select';
-import { Component, OnInit, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, AfterViewInit, AfterViewChecked } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-set-logic',
   templateUrl: './set-logic.component.html',
@@ -112,14 +113,18 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     { label: 'Wide Brim Hat', value: '' },
   ];
   // @ViewChild('risk') risk: any;
-  @ViewChildren(MatSelect) Risk: QueryList<any>;
+  @ViewChildren('risk') Risk: QueryList<any>;
 
   constructor(
     private fb: FormBuilder,
-    private logicalFormInfo: LogicalFormInfoService
+    private logicalFormInfo: LogicalFormInfoService,
+    private setTitle:SetTitleService
+
   ) {}
 
+
   ngOnInit(): void {
+    this.setTitle.setTitle('WHS-Set Relation');
     this.JobTaskDetail = this.fb.group({
       highRiskConstr: this.fb.array([]),
       // PPE: this.fb.array([]),
@@ -138,13 +143,16 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   }
   
   ngAfterViewInit() {
-    console.log(this.Risk.toArray());
-    
-this.Risk.toArray().forEach((res)=>{
-  
-console.log("rres",res);
+    setTimeout(() => {
+      console.log(this.Risk.toArray());
 
-    });
+    }, 2000);
+    
+// this.Risk.toArray().forEach((res)=>{
+  
+// console.log("rres",res);
+
+//     });
 //     this.risk.changes.subscribe((res)=>{
 // console.log(res);
 
@@ -152,6 +160,7 @@ console.log("rres",res);
     // console.log("this.risk._results()",this.risk._results);
     // console.log(this.risk.toArray()[0]);
   }
+ 
   addActionHighRisk() {
     {
       this.addHighRisk().push(this.newActionHighRisk());
@@ -268,14 +277,14 @@ console.log("rres",res);
     };
     console.log(data);
 
-    this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
-      console.log('resJob Task=>', res);
-      Swal.fire({
-        title: 'Relation set successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      }); 
-    });
+    // this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
+    //   console.log('resJob Task=>', res);
+    //   Swal.fire({
+    //     title: 'Relation set successfully',
+    //     showConfirmButton: false,
+    //     timer: 1200,
+    //   }); 
+    // });
   }
   categorySel(catArr) {
     this.licenseAndQualificationData = [];
@@ -288,5 +297,7 @@ console.log("rres",res);
         }
       });
     });
+    console.log(" this.licenseAndQualificationData", this.licenseAndQualificationData);
+    
   }
 }

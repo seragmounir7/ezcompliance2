@@ -1,3 +1,4 @@
+import { SetTitleService } from './../../utils/services/set-title.service';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { field, value } from './global.model';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
@@ -7,7 +8,6 @@ import Swal from 'sweetalert2';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ParamMap } from '@angular/router';
-
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -254,7 +254,8 @@ export class DynamicFormComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private dynamicFormsService: DynamicFormsService
+    private dynamicFormsService: DynamicFormsService,
+    private setTitle:SetTitleService
   ) {}
 
   ngOnInit() {
@@ -262,8 +263,8 @@ export class DynamicFormComponent implements OnInit {
       "sessionStorage.getItem('type')",
       sessionStorage.getItem('type')
     );
-
-    this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
+this.setTitle.setTitle('WHS-Dynamic Forms');
+   // this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
 
     if (sessionStorage.getItem('type') == 'add') {
       this.type = 'add';
