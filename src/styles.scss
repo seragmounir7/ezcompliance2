@@ -15,133 +15,57 @@
   width: 0px;
   background: transparent;
 }
-/* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
-// body{
-//   font-size: 14px;
-// }
-
-// .h5, h5 {
-//   font-size: 14px;
-// }
-
-// .clearfix{clear:both;}
-// .pointer{cursor: pointer;}
-// .ucfirst{text-transform: capitalize;}
-// .min300{min-height:300px}
-// .app-box{
-//   padding: 10px;
-//   margin-bottom:20px;
-//   height: 230px;
-//   background: #b5e8d4;
-//   overflow: hidden;
-//   box-shadow: 1px 1px 4px #ccc;
-// }
-// .app-box:hover{
-//   box-shadow: 1px 1px 4px #999;
-// }
-// .app-box .remove{
-//   position: absolute;
-//   right: 21px;
-//   top: 0px;
-//   color: #545454;
-//   display:none;
-// }
-// .app-box:hover .remove{
-//   display:block;
-// }
-// .inline-btn{
-//   background: #00b970;
-//   padding: 1px 5px;
-//   color: white;
-//   display: inline-block;
-//   margin-bottom: 5px;
-// }
-// .box{
-//   padding: 10px;
-//   margin-bottom:10px;
-//   overflow: auto;
-//   box-shadow: 1px 1px 4px #ddd;
-// }
-// .form-group .form-control{
-//   font-size:inherit;
-//   background-color: inherit;
-// }
-
-// .dndDropArea{
-//   padding: 10px;
-//   /* border: dotted #ddd 2px; */
-// }
-
-// .dndDropArea.empty{
-//   min-height:200px;
-//   border: dotted #ddd 2px;
-// }
-
-// .field{
-//   padding:5px;
-//   margin-bottom:10px;
-//   position: relative;
-// }
-// .field:hover{
-//   box-shadow: 1px 1px 4px #ddd;
-// }
-// .toggle-Wrapper{
-//   padding: 15px;
-//   background: #d6d6d629;
-// }
-// .dndHandle{
-//   cursor: pointer;
-//   color: #999;
-// }
-// .dndDraggingSource{
-//   opacity:0.3;
-// }
-// .dndPlaceholder{
-//   background: rgb(206, 238, 238); border-radius: 2px; padding: 20px;
-//   margin-bottom:10px;
-// }
-// .field .fa{
-//   width: 30px;
-//   height: 30px;
-//   text-align: center;
-//   font-size: 18px;
-//   vertical-align: middle;
-
-// }
-// .red{color:#d9534f}
-// .fa-trash{color:#d9534f}
-// .marginT60{
-//   margin-top:60px;
-// }
-
-// .color-red{color:red;}
-// .report-block{
-//   padding:10px;
-//   background:#f8f8f8;
-//   margin-bottom:20px;
-// }
-// .report-block .row:nth-child(even){
-//   background:#fff;
-// }
-
-// .ftheme{
-//   width:100%;
-// }
-
-// .dndDropArea .field .fa{
-//   opacity:0;
-// }
-// .dndDropArea .field:hover .fa{
-//   opacity:1;
-// }
-
-// .colorpick{
-//   height: 25px;
-//   background: white;
-//   border: none;
-// }
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+section.content {
+  background: #ffffff;
+  padding: 15px 2%;
+  box-shadow: rgb(17 17 26 / 5%) 0px 1px 0px, rgb(17 17 26 / 10%) 0px 0px 8px;
+  height: 100vh;
+}
+section.content h1 {
+  text-align: left;
+  font-weight: 600;
+  font-size: 20px;
+  color: #343a40 !important;
+}
+.btnSet {
+  text-align: center;
+  padding: 0;
+  color: #5d5d5d !important;
+}
+.editBtn i {
+  color: #316123;
+}
+.viewBtn i {
+  color: #007bff;
+}
+.deleteBtn i {
+  color: #f00;
+}
+.paginationSet .pagination {
+  justify-content: flex-end;
+}
+.card-footer {
+  background: transparent;
+  border: 1px solid #e5e5e5;
+  border-left: none;
+  border-right: none;
+  padding-bottom: 0;
+}
+.table td, .table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+}
+select.w-set {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.main-sidebar {
+  height: 100vh;
+  overflow: unset !important;
+  position: fixed;
+}

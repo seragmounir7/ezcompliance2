@@ -1,19 +1,12 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import {  Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import Swal from 'sweetalert2';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TutorialService } from 'src/app/services/tutorial.service';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-export interface PeriodicElement {
-  categories: string;
-  position: number;
-  symbol: string;
-  formName: string;
-}
+
 
 @Component({
   selector: 'app-forms',
@@ -46,9 +39,7 @@ export class FormsComponent implements OnInit {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router,
-    private fb: FormBuilder,
-    private dynamicFormServise: DynamicFormsService,
-    private modalService: NgbModal
+ 
   ) {}
 
  

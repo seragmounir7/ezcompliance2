@@ -1,19 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Router, ParamMap } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog'
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 @Component({
   selector: 'app-edit-high-risk-construction',
   templateUrl: './edit-high-risk-construction.component.html',
-  styleUrls: ['./edit-high-risk-construction.component.scss']
+  styleUrls: ['./edit-high-risk-construction.component.scss'],
 })
 export class EditHighRiskConstructionComponent implements OnInit {
   riskDetails: FormGroup;
@@ -27,51 +23,31 @@ export class EditHighRiskConstructionComponent implements OnInit {
   Edit = false;
   Add = false;
   type: string = '';
-  Update = false;
   module = false;
   subModule = false;
   moduleName: boolean;
   constructor(
     private fb: FormBuilder,
-    private landingPageInfo: LandingPageInfoServiceService,
+    private logicalFormInfo: LogicalFormInfoService,
     public upload: UploadFileServiceService,
     public router: Router,
-    private route: ActivatedRoute,
-    private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<EditHighRiskConstructionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.riskDetails = fb.group({
       arrObj: this.fb.array([]),
-
-      mode: 'Risk',
     });
-    console.log('data action=>', this.data.action);
+    console.log('data =>', this.data);
   }
 
   ngOnInit(): void {
     this.addAction();
-    console.log('data action=>', this.data.action);
-    if (this.data.action == 'edit') {
-      this.Update = true;
-      console.log('data to patch=>', this.data);
-      this.riskDetails.patchValue({
-        mode: 'Risk',
+    console.log('data =>', this.data);
 
-      });
-      this.add().at(0).patchValue({
-        title: this.data.EditData.subComponents[this.data.index].title,
-
-      });
-
-    }
-
-    let index = this.data.index;
-    this.subId = this.data.EditData.subComponents[index]._id;
-
-    console.log('subId=>', this.subId);
+    this.add().at(0).patchValue({
+      title: this.data.title,
+    });
   }
-
 
   addAction() {
     {
@@ -83,7 +59,6 @@ export class EditHighRiskConstructionComponent implements OnInit {
   }
   newAction(): FormGroup {
     return this.fb.group({
-
       title: ['', Validators.required],
     });
   }
@@ -92,7 +67,6 @@ export class EditHighRiskConstructionComponent implements OnInit {
     const item = <FormArray>this.riskDetails.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
-
     }
   }
   onFormSubmit() {
@@ -100,23 +74,24 @@ export class EditHighRiskConstructionComponent implements OnInit {
     this.editSubComponent();
   }
   editSubComponent() {
-    if (this.data.action == 'edit') {
-      let SubComponentData = {
-        componentId: this.data.EditData._id,
-        title: this.add().at(0).get('title')?.value,
+    let SubComponentData = {
+      componentId: this.data.componentId,
+      title: this.add().at(0).get('title')?.value,
+    };
+    console.log('SubComponent=>', SubComponentData);
+    console.log('this.data.EditData=>',this.data.EditData);
+    this.logicalFormInfo
+      .editSubComponent(SubComponentData, this.data.EditData)
+      .subscribe((resData) => {
+        console.log('submodulesData', resData);
 
-      };
-      console.log('SubComponent=>', SubComponentData);
-      console.log('this.EditData', this.data.EditData._id);
-      this.landingPageInfo
-        .editSubComponent(SubComponentData, this.subId)
-        .subscribe((resData) => {
-          console.log('submodulesData', resData);
-
-          this.dialogRef.close('true');
-          this.riskDetails.reset();
+        this.dialogRef.close('true');
+        Swal.fire({
+          title: 'Parameter Edited successfully',
+          showConfirmButton: false,
+          timer: 1200,
         });
-    }
+        this.riskDetails.reset();
+      });
   }
-
 }

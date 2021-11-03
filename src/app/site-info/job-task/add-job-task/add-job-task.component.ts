@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormArray,
-  FormControl,
-} from '@angular/forms'
+  
+} from '@angular/forms';
+import Swal from 'sweetalert2';
 
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-job-task',
   templateUrl: './add-job-task.component.html',
@@ -19,13 +21,13 @@ export class AddJobTaskComponent implements OnInit {
   formData: any;;
   constructor(
     private fb: FormBuilder,
-    private LandingPageInfoService:LandingPageInfoServiceService
+    private router: Router,
+    private logicalFormInfo:LogicalFormInfoService
   ) { 
     this.jobTaskDetails=this.fb.group({
-      mode:"JobTask",
+     // mode:"JobTask",
       arrObj: this.fb.array([]),
     });
-    console.log('jobTaskDetails=>', this.jobTaskDetails);
   }
 
   ngOnInit(): void {
@@ -40,8 +42,7 @@ export class AddJobTaskComponent implements OnInit {
     return this.jobTaskDetails.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
-    return this.fb.group({
-     
+    return this.fb.group({     
       title: ['', Validators.required],
     });
   }
@@ -54,10 +55,22 @@ export class AddJobTaskComponent implements OnInit {
     }
   }
   onFormSubmit() {
-    console.log(this.jobTaskDetails);
-    this.LandingPageInfoService.addFormData(this.jobTaskDetails.getRawValue()).subscribe((data) => {
-      console.log('teamData=>', data);
-      this.formData = data;
-    });
+    console.log(this.jobTaskDetails.get('arrObj').value);
+    let data={
+      arrObj:this.jobTaskDetails.get('arrObj').value
+    }
+    this.logicalFormInfo.addMultipleJobTask(data).subscribe((data) => {
+      console.log('JOBTask=>', data);
+      Swal.fire({
+        title: 'Parameter Added successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      }); 
+      this.router.navigate(['/admin/siteInfo/jobTask']);      
+    },(err)=>{console.error(err);} 
+  
+    );
+    
   }
+ 
 }

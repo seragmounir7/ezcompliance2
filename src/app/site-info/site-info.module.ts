@@ -16,7 +16,17 @@ import { AddPPEselectComponent } from './ppe-select/add-ppeselect/add-ppeselect.
 import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './high-risk-con/edit-high-risk-construction/edit-high-risk-construction.component';
 import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
-import { EditPPEselectComponent } from './ppe-select/edit-ppeselect/edit-ppeselect.component';
+import { AddPPEComponent } from './ppe-select/add-ppe/add-ppe.component';
+import { EditTaskComponent } from './job-task/edit-task/edit-task.component';
+import { EditPPEComponent } from './ppe-select/edit-ppe/edit-ppe.component';
+import { EditLicenceComponent } from './licence-and-qual/edit-licence/edit-licence.component';
+import { AddLicenceComponent } from './licence-and-qual/add-licence/add-licence.component';
+import { LicenceCatComponent } from './licence-and-qual/licence-cat/licence-cat.component';
+import { AddLicenceCatComponent } from './licence-and-qual/licence-cat/add-licence-cat/add-licence-cat.component';
+import { EditLicenceCatComponent } from './licence-and-qual/licence-cat/edit-licence-cat/edit-licence-cat.component';
+import { CodeOfPractComponent } from './code-of-pract/code-of-pract.component';
+import { AddCOPComponent } from './code-of-pract/add-cop/add-cop.component';
+import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +38,7 @@ import { EditPPEselectComponent } from './ppe-select/edit-ppeselect/edit-ppesele
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent,
-    AddLicenceAndQualificationComponent,AddPPEselectComponent, EditPPEselectComponent
+    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent
   ],
 
   imports: [
