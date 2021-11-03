@@ -16,6 +16,7 @@ import { AfterViewInit,ViewChild } from '@angular/core';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-high-risk-con',
   templateUrl: './high-risk-con.component.html',
@@ -44,13 +45,15 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     private logicalFormInfo: LogicalFormInfoService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle:SetTitleService
   ) {
     
   }
 
   ngOnInit(): void {
     this.getHighRiskById();
+    this.setTitle.setTitle('WHS-High Risk Construction List');
   }
   
 

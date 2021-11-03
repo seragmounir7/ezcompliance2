@@ -32,8 +32,8 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
-  enableForm:boolean;
-  frequency:any;
+  enableForm: boolean;
+  frequency: any;
   fieldModels: Array<field> = [
     {
       type: 'text',
@@ -253,16 +253,16 @@ export class DynamicFormComponent implements OnInit {
     public router: Router,
     private spinner: NgxSpinnerService,
     private dynamicFormsService: DynamicFormsService,
-    private setTitle:SetTitleService
-  ) {}
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit() {
     console.log(
       "sessionStorage.getItem('type')",
       sessionStorage.getItem('type')
     );
-this.setTitle.setTitle('WHS-Dynamic Forms');
-   // this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
+    this.setTitle.setTitle('WHS-Dynamic Forms');
+    // this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
 
     if (sessionStorage.getItem('type') == 'add') {
       this.type = 'add';
@@ -289,8 +289,8 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
         this.model = [];
-        this.enableForm=res.data.enable;
-        this.frequency=res.data.frequency;
+        this.enableForm = res.data.enable;
+        this.frequency = res.data.frequency;
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -540,7 +540,7 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
   }
 
   initReport() {
-  //  console.log('model.attributes=>', this.model);
+    //  console.log('model.attributes=>', this.model);
     this.report = true;
     this.formData = [];
     for (let j = 0; j < this.model[0].attributes.length; j++) {
@@ -550,7 +550,7 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
       }
       this.formData.push(temp);
     }
-   // console.log('formData', this.formData);
+    // console.log('formData', this.formData);
 
     // let input = {
     //   id:this.model._id
@@ -750,7 +750,7 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
     this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
- 
+
 
     if (this.type == 'add') {
       let data = {
@@ -758,7 +758,7 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
         frequency: sessionStorage.getItem('frequency'),
         htmlObject: this.model,
       };
-      console.log('add',data);
+      console.log('add', data);
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
         Swal.fire('Form added successfully');
@@ -771,8 +771,8 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
       let data = {
         title: this.formNameRecieved,
         htmlObject: this.model,
-        enable:this.enableForm,
-        frequency:this.frequency
+        enable: this.enableForm,
+        frequency: this.frequency
       };
 
       this.dynamicFormsService
@@ -803,32 +803,32 @@ this.setTitle.setTitle('WHS-Dynamic Forms');
 
     this.model.splice(i + 1, 0, modelRow);
   }
-  removeDuplicate(i,j) {
+  removeDuplicate(i, j) {
     console.log('remove duplicate', i, j);
-console.log(this.model)
-console.log(this.model[i])
+    console.log(this.model)
+    console.log(this.model[i])
     this.model.splice(i, 1);
-   
-    for(let k=0;k<this.model.length;k++){
-      if(this.model[i].length == this.model[k].length && i!=k){
-        let notMatch =false;
-        for(let l=0;l<this.model[k].attributes.length;l++){
-          if(this.model[k].attributes[l].type == this.model[i].attributes[j].type 
-            && this.model[k].attributes[l].label == this.model[i].attributes[j].label  ){
 
-            }
-            else{
-              notMatch =true;
-              break;
-            }
+    for (let k = 0; k < this.model.length; k++) {
+      if (this.model[i].length == this.model[k].length && i != k) {
+        let notMatch = false;
+        for (let l = 0; l < this.model[k].attributes.length; l++) {
+          if (this.model[k].attributes[l].type == this.model[i].attributes[j].type
+            && this.model[k].attributes[l].label == this.model[i].attributes[j].label) {
+
+          }
+          else {
+            notMatch = true;
+            break;
+          }
         }
-        if(!notMatch){
+        if (!notMatch) {
 
         }
       }
-     
+
     }
-  
+
   }
 }
 

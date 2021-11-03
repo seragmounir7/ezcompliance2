@@ -7,6 +7,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-site-inspection',
@@ -23,7 +24,8 @@ export class SiteInspectionComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService
+    private dynamicFormsService: DynamicFormsService,
+    private setTitle:SetTitleService
   ) {
     this.sidePreview = this.fb.group({
       Hazard: ['', Validators.required],
@@ -88,6 +90,7 @@ export class SiteInspectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.dynamicFormsService.homebarTitle.next('Site Inspection Form');
+    this.setTitle.setTitle('WHS-Site Inspection Form');
   }
   addAction() {
     {

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-toolbox-talk',
@@ -16,7 +17,8 @@ export class ToolboxTalkComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService
+    private dynamicFormsService: DynamicFormsService,
+    private setTitle:SetTitleService
   ) {
     this.toolBox = this.fb.group({
       issues: this.fb.array([]),
@@ -30,6 +32,7 @@ export class ToolboxTalkComponent implements OnInit {
     this.addCorrectAct();
     this.addAttendee();
     this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
+    this.setTitle.setTitle('WHS-ToolBox Talk Form');
   }
   addIssues() {
     this.issues().push(this.issuesForm());

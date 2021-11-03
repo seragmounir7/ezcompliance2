@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -180,6 +181,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
+    private setTitle:SetTitleService
   ) {
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
@@ -266,6 +268,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
      this.getPPEById() ;    
      this.getHighRiskById() ;
      this.getAllLicence() ;
+     this.setTitle.setTitle('WHS-Risk Assesment Form');
     
   }
 

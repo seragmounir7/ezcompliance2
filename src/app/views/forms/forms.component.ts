@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 
 @Component({
@@ -39,13 +40,13 @@ export class FormsComponent implements OnInit {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router,
- 
+    private setTitle:SetTitleService
   ) {}
 
  
   ngOnInit(): void {
   
-
+    this.setTitle.setTitle('WHS-All Form');
    
   }
 

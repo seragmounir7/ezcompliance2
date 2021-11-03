@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/utils/services/app.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +8,9 @@ import { AppService } from 'src/app/utils/services/app.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(public appService: AppService) {}
+  constructor(public appService: AppService, private setTitle:SetTitleService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setTitle.setTitle('WHS-Profile');
+  }
 }
