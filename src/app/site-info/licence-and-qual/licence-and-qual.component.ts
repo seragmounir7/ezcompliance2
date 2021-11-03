@@ -8,6 +8,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup } from '@angular/forms';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-licence-and-qual',
   templateUrl: './licence-and-qual.component.html',
@@ -32,10 +33,12 @@ export class LicenceAndQualComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog,
+    private setTitle: SetTitleService) {}
 
   ngOnInit(): void {
     this.getAllLicence();
+    this.setTitle.setTitle('WHS-License and Qualification List');
   }
 
   getAllLicence() {

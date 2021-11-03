@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-hazard-report',
@@ -16,7 +17,8 @@ export class HazardReportComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService
+    private dynamicFormsService: DynamicFormsService,
+    private setTitle:SetTitleService
   ) {
     this.hazardReport = this.fb.group({
       siteAction: this.fb.array([]),
@@ -78,6 +80,7 @@ export class HazardReportComponent implements OnInit {
   }
   ngOnInit() {
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
+    this.setTitle.setTitle('WHS-Hazard Report Form');
   }
 
   public signaturePadOptions: Object = {

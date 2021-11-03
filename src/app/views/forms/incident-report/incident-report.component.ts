@@ -11,6 +11,7 @@ import {
 import { SignaturePad } from 'angular2-signaturepad';
 import { format } from 'devextreme/ui/widget/ui.widget';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-incident-report',
@@ -28,7 +29,8 @@ export class IncidentReportComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService
+    private dynamicFormsService: DynamicFormsService,
+    private setTitle:SetTitleService
   ) {
     this.SiteIncident = this.fb.group({
       incidents: this.fb.array([]),
@@ -69,6 +71,7 @@ export class IncidentReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
+    this.setTitle.setTitle('WHS-Hazard Report Form');
   }
 
   selectFile(event: any) {
