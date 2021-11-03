@@ -27,6 +27,10 @@ import { EditLicenceCatComponent } from './licence-and-qual/licence-cat/edit-lic
 import { CodeOfPractComponent } from './code-of-pract/code-of-pract.component';
 import { AddCOPComponent } from './code-of-pract/add-cop/add-cop.component';
 import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
+import { AddSiteComponent } from './add-site-info/add-site/add-site.component';
+import { EditSiteComponent } from './add-site-info/edit-site/edit-site.component';
+import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
+import { EditCustComponent } from './add-customer/edit-cust/edit-cust.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,7 @@ import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent
+    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent
   ],
 
   imports: [

@@ -132,8 +132,9 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       // codeOfPract: this.fb.array([]),
     });
 
-    //this.addAction();
-    // this.addAction();
+    this.addActionHighRisk();
+    this.addActionHighRisk();
+    this.addActionHighRisk();
     this.getJobTask();
     this.getHighRiskById();
     this.getAllLicence();
@@ -143,10 +144,10 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   }
   
   ngAfterViewInit() {
-    setTimeout(() => {
-      console.log(this.Risk.toArray());
+    // setTimeout(() => {
+    //   console.log(this.Risk.toArray());
 
-    }, 2000);
+    // }, 2000);
     
 // this.Risk.toArray().forEach((res)=>{
   
@@ -171,7 +172,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   }
   newActionHighRisk(): FormGroup {
     return this.fb.group({
-      highRiskArr: [],
+      highRiskArr: ['']
     });
   }
 
@@ -183,6 +184,8 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
+      console.log(this.Risk.toArray());
+
     });
   }
   getHighRiskById() {
@@ -219,8 +222,9 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     });
   }
 
-  setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
-    console.log('risk', riskIds);
+  // setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
+  setRelation( ppeIDs, codOfPractIds, title, id) {
+   // console.log('risk', riskIds);
     console.log('ppe', ppeIDs);
    /// console.log('licence', licenceIds);
     console.log('codOfPract', codOfPractIds);
@@ -231,14 +235,14 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     let risk = [];
     let codeOfPractice = [];
     let licence = [];
-    if (riskIds) {
-      riskIds.forEach((element) => {
-        let data = {
-          riskId: element,
-        };
-        risk.push(data);
-      });
-    }
+    // if (riskIds) {
+    //   riskIds.forEach((element) => {
+    //     let data = {
+    //       riskId: element,
+    //     };
+    //     risk.push(data);
+    //   });
+    // }
     if (ppeIDs) {
       ppeIDs.forEach((element) => {
         let data = {

@@ -25,13 +25,13 @@
                   <tr *ngFor="let task of  jobTaskData; let i = index">
                     <td>{{i+1}}</td>
                     <td>{{ task.title }}</td>
-                    <ng-container >
-                      <td >
+                    <ng-container formArrayName="highRiskConstr">
+                      <td [formGroupName]="i">
                         <mat-form-field appearance="fill">
-                          <!-- <mat-label>HighRiskConstruction</mat-label> -->
-                          <mat-select  multiple #risk>
+                          <mat-label>HighRiskConstruction</mat-label>
+                          <mat-select formControlName="highRiskArr" multiple >
                             <mat-select-trigger>
-                              <!-- {{highRiskArr.value ? highRiskArr.value[0] : ''}} -->
+                              {{JobTaskDetail.controls['highRiskConstr'].controls[i].get('highRiskArr').value ? JobTaskDetail.controls['highRiskConstr'].controls[i].get('highRiskArr').value[0] : ''}}
                               <!-- <span *ngIf="highRiskArr.value?.length > 1" class="example-additional-selection">
                                 (+{{highRiskArr.value.length - 1}} {{highRiskArr.value?.length === 2 ? 'other' : 'others'}})
                               </span> -->
@@ -91,7 +91,8 @@
                         </mat-select>
                       </mat-form-field>
                     </td>
-                    <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td>
+                    <!-- <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td> -->
+                    <td><button class="btn btn-primary" (click)="setRelation(ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td>
                   </tr>
                 </tbody>
               </table>
