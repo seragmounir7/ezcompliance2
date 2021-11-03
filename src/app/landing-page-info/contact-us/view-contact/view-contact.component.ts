@@ -11,17 +11,20 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 export class ViewContactComponent implements OnInit {
   contactUsForm!: FormGroup;
   contactDetail:any;
-  dataContact: any;
+  Contact: any=[];
   constructor(
     private url: LandingPageInfoServiceService,
     private dialogRef: MatDialogRef<ViewContactComponent>,
     @Inject(MAT_DIALOG_DATA) public data1: any,
     private fb: FormBuilder,
   ) {
-    this.dataContact = data1.headerData; 
+    this.Contact = data1.headerData; 
    }
 
   ngOnInit(): void {
+    this.getContact();
+    console.log("this.dataContact",this.Contact);
+    
     this.contactUsForm = this.fb.group({
       fullName: ['', Validators.required],
       phone: ['', Validators.required],
@@ -39,5 +42,13 @@ export class ViewContactComponent implements OnInit {
       })
     }
   }
-
+  getContact() {
+    // this.myId= '61743207ad581a5f5d60d90a';
+    this.url.getContact().subscribe((data) => {
+      console.log('mode=>', data);
+      this.Contact = data.data[0];
+      console.log("contact=>",this.Contact);
+      
+    });
+  }
 }

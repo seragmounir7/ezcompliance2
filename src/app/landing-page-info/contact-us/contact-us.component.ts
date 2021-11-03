@@ -45,41 +45,17 @@ export class ContactUsComponent implements OnInit {
       query: ['', Validators.required],
       
     });
-    // this.flexibleInfo = this.fb.group({
-    //   moduleId: '',
-    //   title: ['', Validators.required],
-    //   description: ['', Validators.required],
-    //   fileUrl: ['', Validators.required],
-    // });
+    
   }
 
   ngOnInit(): void {
    this.getContact();
-    // for (let i = 0; i < 6; i++) {
-    //   this.addAction()
-    // }
-    // this.addAction();
+   
     
     
   }
 
-  // addAction() {
-  //   {
-  //     this.add().push(this.newAction());
-  //   }
-  // }
-  // add(): FormArray {
-  //   return this.flexibleDetail.get('arrObj') as FormArray;
-  // }
-  // newAction(): FormGroup {
-  //   return this.fb.group({
-  //     fileUrl: ['', Validators.required],
-  //     subTitle: ['', Validators.required],
-  //     title: ['', Validators.required],
-  //     description: ['', Validators.required],
-  //   });
-  // }
- 
+  
 
   removeSafetyModule(i) {
     const item = <FormArray>this.ContactUsDetail.controls['arrObj'];
@@ -102,6 +78,7 @@ export class ContactUsComponent implements OnInit {
   openView(id) {
     console.log("dataView",this.dataContact)
 		let dialogRef = this.dialog.open(ViewContactComponent, {
+      width: '800px',
 		  data: {
 			action:"view",
       headerData:  this.dataContact,

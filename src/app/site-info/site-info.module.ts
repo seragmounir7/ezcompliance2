@@ -11,6 +11,8 @@ import { PpeSelectComponent } from './ppe-select/ppe-select.component';
 import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.component';
 import { SharedModule } from './../shared/shared.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+// import { AddLicenceAndQualificationComponent } from './licence-and-qual/add-licence-and-qualification/add-licence-and-qualification.component';
+// import { AddPPEselectComponent } from './ppe-select/add-ppeselect/add-ppeselect.component';
 import { AddHighRiskConstructionComponent } from './high-risk-con/add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './high-risk-con/edit-high-risk-construction/edit-high-risk-construction.component';
 import { AddJobTaskComponent } from './job-task/add-job-task/add-job-task.component';
@@ -38,6 +40,7 @@ import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
     AddHighRiskConstructionComponent,
     EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent
   ],
+
   imports: [
     CommonModule,
     SiteInfoRoutingModule,

@@ -219,10 +219,10 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     });
   }
 
-  setRelation(riskIds, ppeIDs, licenceIds, codOfPractIds, title, id) {
+  setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
     console.log('risk', riskIds);
     console.log('ppe', ppeIDs);
-    console.log('licence', licenceIds);
+   /// console.log('licence', licenceIds);
     console.log('codOfPract', codOfPractIds);
     console.log('index', title);
     console.log('id', id);
@@ -247,10 +247,11 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
         PPE.push(data);
       });
     }
-    if (licenceIds) {
-      licenceIds.forEach((element) => {
+    if (this.licenseAndQualificationData.length) {
+     // console.log("this.licenseAndQualificationData",this.licenseAndQualificationData)
+      this.licenseAndQualificationData.forEach((element) => {
         let data = {
-          licenceId: element,
+          licenceId: element._id,
         };
         licence.push(data);
       });
@@ -277,14 +278,14 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     };
     console.log(data);
 
-    // this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
-    //   console.log('resJob Task=>', res);
-    //   Swal.fire({
-    //     title: 'Relation set successfully',
-    //     showConfirmButton: false,
-    //     timer: 1200,
-    //   }); 
-    // });
+    this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
+      console.log('resJob Task=>', res);
+      Swal.fire({
+        title: 'Relation set successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      }); 
+    });
   }
   categorySel(catArr) {
     this.licenseAndQualificationData = [];

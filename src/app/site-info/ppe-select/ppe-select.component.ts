@@ -7,6 +7,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditPPEComponent } from './edit-ppe/edit-ppe.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-ppe-select',
   templateUrl: './ppe-select.component.html',
@@ -30,11 +31,14 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
   constructor(
 
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private setTitle:SetTitleService
   ) {}
 
   ngOnInit(): void {
     this.getPPEById();
+    this.setTitle.setTitle('WHS-PPE List');
+
   }
 
   getPPEById() {
