@@ -14,8 +14,8 @@
                     <th style="width: 20%">Job Task List </th>
                     <th style="width: 15%">High Risk Construction </th>
                     <th style="width: 15%">PPE</th>
-                    <th style="width: 15%">Category</th>
-                    <th style="width: 15%">Licence&Qualification</th>
+                    <th style="width: 15%">Licence Category</th>
+                    <!-- <th style="width: 15%">Licence&Qualification</th> -->
                     <th style="width: 15%">Code Of Practice</th>
                     <th style="width: 15%">Action</th>
   
@@ -74,22 +74,7 @@
                         </mat-select>
                       </mat-form-field>
                     </td>
-                    <td>
-                      <mat-form-field appearance="fill">
-                        <!-- <mat-label>Licence and Qualifications
-                        </mat-label> -->
-                        <mat-select  multiple #licence>
-                          <mat-select-trigger>
-                            <!-- {{licence.value ? licence.value[0] : ''}}
-                            <span *ngIf="licence.value?.length > 1" class="example-additional-selection">
-                              (+{{licence.value.length - 1}} {{licence.value?.length === 2 ? 'other' : 'others'}})
-                            </span> -->
-                          </mat-select-trigger>
-                          <mat-option *ngFor="let parameter of  licenseAndQualificationData" [value]="parameter._id">
-                            {{parameter.title}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </td>
+                  
                     <td>
                       <mat-form-field appearance="fill">
                         <!-- <mat-label>Licence and Qualifications
@@ -106,7 +91,7 @@
                         </mat-select>
                       </mat-form-field>
                     </td>
-                    <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,licence.value,codOfPractice.value,task.title,task._id)">Set</button></td>
+                    <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td>
                   </tr>
                 </tbody>
               </table>

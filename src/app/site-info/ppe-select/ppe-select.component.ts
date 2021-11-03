@@ -37,7 +37,8 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
 
   ngOnInit(): void {
     this.getPPEById();
-    this.setTitle.setTitle('WHS-PPE Select List');
+    this.setTitle.setTitle('WHS-PPE List');
+
   }
 
   getPPEById() {

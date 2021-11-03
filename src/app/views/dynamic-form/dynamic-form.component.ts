@@ -2,12 +2,11 @@ import { SetTitleService } from './../../utils/services/set-title.service';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { field, value } from './global.model';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
-import { ActivatedRoute } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import Swal from 'sweetalert2';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -252,7 +251,6 @@ export class DynamicFormComponent implements OnInit {
   formNameRecieved = '';
   constructor(
     public router: Router,
-    private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private dynamicFormsService: DynamicFormsService,
     private setTitle: SetTitleService
