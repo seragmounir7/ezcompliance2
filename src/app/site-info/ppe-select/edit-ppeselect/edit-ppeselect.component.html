@@ -1,0 +1,36 @@
+<div class="container px-4 py-4 card">
+  
+    <form [formGroup]="PPEdetails" (ngSubmit)=" onFormSubmit()">
+      <h2 class="text-center">High Risk Construction </h2>
+     <br>
+     <hr>
+      <ng-container formArrayName="arrObj">
+          <ng-container
+            *ngFor="let control of add().controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div>
+              <div class="row">
+             <p for="exampleFormControlInput1" class="form-Label">Edit High Risk Construction</p>
+                <div class="col-8">
+
+               <input
+                    type="text"
+                    formControlName="title"
+                    class="form-control sign"
+                    id="name"
+                  />
+                </div>
+                 
+              </div>
+            </div>
+            <hr />
+          </ng-container>
+        </ng-container>
+        <br>
+      
+        <div class="col-md-2"> 
+          <button type="submit"   (click)="editSubComponent()"  class="btn btn-primary "> Update</button>
+        </div>
+        </form>
+      </div>
