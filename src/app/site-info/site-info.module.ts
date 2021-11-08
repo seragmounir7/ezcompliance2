@@ -31,6 +31,15 @@ import { AddSiteComponent } from './add-site-info/add-site/add-site.component';
 import { EditSiteComponent } from './add-site-info/edit-site/edit-site.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
 import { EditCustComponent } from './add-customer/edit-cust/edit-cust.component';
+import { IdentifyHazardsComponent } from './identify-hazards/identify-hazards.component';
+import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.component';
+import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
+import { EditHazardComponent } from './identify-hazards/edit-hazard/edit-hazard.component';
+import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
+import { EditContActComponent } from './contr-and-act-req/edit-cont-act/edit-cont-act.component';
+import { UploadBulkDataComponent } from './upload-bulk-data/upload-bulk-data.component';
+import { ProjectManagerComponent } from './project-manager/project-manager.component';
+import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/add-edit-proj-mang.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +51,7 @@ import { EditCustComponent } from './add-customer/edit-cust/edit-cust.component'
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent
+    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent, IdentifyHazardsComponent, ContrAndActReqComponent, AddHazardComponent, EditHazardComponent, AddContrActComponent, EditContActComponent, UploadBulkDataComponent, ProjectManagerComponent, AddEditProjMangComponent
   ],
 
   imports: [

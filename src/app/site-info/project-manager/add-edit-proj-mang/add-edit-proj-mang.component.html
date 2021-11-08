@@ -1,8 +1,10 @@
 <form [formGroup]="editTitle" >
-    <h2>Edit PPE</h2>
+    <h3 *ngIf="!dataRec">Add Project Manager</h3>
+    <h3 *ngIf="dataRec">Edit Project Manager</h3>
     <mat-form-field appearance="legacy"
     class="example-full-width" style="width: 498px;">
-    <!-- <mat-label>Edit PPE</mat-label> -->
+    <!-- <mat-label >Add Licence Category</mat-label> -->
+    <!-- <mat-label >Edit Licence Category</mat-label> -->
     <input matInput  formControlName="title" style="text-transform: capitalize !important;">
     </mat-form-field>
     <div class="row">
@@ -10,7 +12,8 @@
             <button mat-raised-button (click)="closeDialog()">Close</button>
         </div>
         <div class="col-sm-2  ">
-            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
+            <button mat-raised-button *ngIf="dataRec" [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
+            <button mat-raised-button  *ngIf="!dataRec"  [disabled]="!editTitle.valid"(click)="addForm()">Add</button>
         </div>
     </div>
 </form>   

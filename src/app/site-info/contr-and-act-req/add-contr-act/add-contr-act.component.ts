@@ -9,11 +9,12 @@ import {
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-add-ppe',
-  templateUrl: './add-ppe.component.html',
-  styleUrls: ['./add-ppe.component.scss']
+  selector: 'app-add-contr-act',
+  templateUrl: './add-contr-act.component.html',
+  styleUrls: ['./add-contr-act.component.scss']
 })
-export class AddPPEComponent implements OnInit {
+export class AddContrActComponent implements OnInit {
+
   PPEformgp!: FormGroup;
   formData: any;;
   constructor(
@@ -65,5 +66,4 @@ export class AddPPEComponent implements OnInit {
     );
     
   }
-
 }

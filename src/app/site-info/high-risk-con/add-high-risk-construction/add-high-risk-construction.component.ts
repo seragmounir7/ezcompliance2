@@ -85,18 +85,20 @@ export class AddHighRiskConstructionComponent implements OnInit {
     }
   }
   onFormSubmit() {
-    console.log(this.riskConstr.value);
+    // console.log(this.riskConstr.value);
     let data={
       arrObj:this.riskConstr.get('arrObj').value
     }
-    this.logicalFormInfo.uploadMultiple(data,'Risk').subscribe((data) => {
+    // console.log(data);
+    
+    this.logicalFormInfo.addMultipleRisk(data).subscribe((data) => {
       console.log('Risk=>', data);
-      this.router.navigate(['/admin/siteInfo/highRisk']);    
       Swal.fire({
         title: 'Parameter Added successfully',
         showConfirmButton: false,
         timer: 1200,
       });  
+      this.router.navigate(['/admin/siteInfo/highRisk']);    
     },(err)=>{console.error(err);} 
   
     );

@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table'
-import { AddLicenceCatComponent } from './add-licence-cat/add-licence-cat.component';
 @Component({
   selector: 'app-licence-cat',
   templateUrl: './licence-cat.component.html',
