@@ -6,10 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfiLogiRoutingModule } from './confi-logi-routing.module';
 import { ConfiLogiComponent } from './confi-logi.component';
 import { SetLogicComponent } from './set-logic/set-logic.component';
+import { JobNumberComponent } from './job-number/job-number.component';
+import { CreateJobNoComponent } from './job-number/create-job-no/create-job-no.component';
 
 
 @NgModule({
-  declarations: [ConfiLogiComponent, SetLogicComponent],
+  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent],
   imports: [
     CommonModule,
     ConfiLogiRoutingModule,SharedModule,FormsModule,

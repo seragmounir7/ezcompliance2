@@ -1,29 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormArray,
-  
-} from '@angular/forms'
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-hazard',
   templateUrl: './add-hazard.component.html',
-  styleUrls: ['./add-hazard.component.scss']
+  styleUrls: ['./add-hazard.component.scss'],
 })
 export class AddHazardComponent implements OnInit {
-
-  PPEformgp!: FormGroup;
-  formData: any;;
+  hazardFG!: FormGroup;
+  formData: any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private logicalFormInfo:LogicalFormInfoService
-  ) { 
-    this.PPEformgp=this.fb.group({
-     // mode:"JobTask",
+    private logicalFormInfo: LogicalFormInfoService
+  ) {
+    this.hazardFG = this.fb.group({
       arrObj: this.fb.array([]),
     });
   }
@@ -37,35 +29,33 @@ export class AddHazardComponent implements OnInit {
     }
   }
   add(): FormArray {
-    return this.PPEformgp.get('arrObj') as FormArray;
+    return this.hazardFG.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
     return this.fb.group({
-     
       title: ['', Validators.required],
     });
   }
-  
+
   removeSafetyModule(i) {
-    const item = <FormArray>this.PPEformgp.controls['arrObj'];
+    const item = <FormArray>this.hazardFG.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
-    
     }
   }
   onFormSubmit() {
-    console.log(this.PPEformgp.value);
-    let data={
-      arrObj:this.PPEformgp.get('arrObj').value
-    }
-    this.logicalFormInfo.addMultiplePPE(data).subscribe((data) => {
-      console.log('PPE=>', data);
-      this.router.navigate(['/admin/siteInfo/ppeSel']);      
-    },(err)=>{console.error(err);} 
-  
+    console.log(this.hazardFG.value);
+    let data = {
+      arrObj: this.hazardFG.get('arrObj').value,
+    };
+    this.logicalFormInfo.addMultipleCOP(data).subscribe(
+      (data) => {
+        console.log('PPE=>', data);
+        this.router.navigate(['/admin/siteInfo/hazards']);
+      },
+      (err) => {
+        console.error(err);
+      }
     );
-    
   }
-
-
 }

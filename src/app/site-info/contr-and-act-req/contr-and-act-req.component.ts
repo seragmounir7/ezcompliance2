@@ -36,13 +36,13 @@ export class ContrAndActReqComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllPPEs();
+    this.getAllContrlActReq();
     this.setTitle.setTitle('WHS-PPE List');
 
   }
 
-  getAllPPEs() {
-    this.logicalFormInfo.getAllPPE().subscribe((res:any) => {
+  getAllContrlActReq() {
+    this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
       console.log('PPEAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -64,7 +64,7 @@ export class ContrAndActReqComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getAllPPEs();
+        this.getAllContrlActReq();
       }
       console.log("The dialog was closed");
     });
@@ -89,7 +89,7 @@ export class ContrAndActReqComponent implements OnInit {
             timer: 1200,
           });
           console.log('deleted res', res);
-          this.getAllPPEs();
+          this.getAllContrlActReq();
             
         });
       }

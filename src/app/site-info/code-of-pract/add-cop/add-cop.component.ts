@@ -59,7 +59,7 @@ export class AddCOPComponent implements OnInit {
     let data={
       arrObj:this.codeOfPractFG.get('arrObj').value
     }
-    this.logicalFormInfo.uploadMultiple(data,'codeOfPractice').subscribe((data) => {
+    this.logicalFormInfo.addMultipleCOP(data).subscribe((data) => {
       console.log('codeOfPractice=>', data);
 
       this.router.navigate(['/admin/siteInfo/codeOfpract']);      

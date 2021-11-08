@@ -21,15 +21,6 @@ export class CodeOfPractComponent implements OnInit {
   displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-
-
-
-
-
-
-
-
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -45,11 +36,11 @@ export class CodeOfPractComponent implements OnInit {
   }
 
   getAllCodeOfPractice() {
-    this.mode = 'codeOfPractice';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+   
+    this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
       console.log('codeOfPractice=>', res);
       // this.jobTaskData = res.data[0].subComponents;
-      let data = res.data[0].subComponents;
+      let data = res.data;
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
@@ -86,7 +77,7 @@ export class CodeOfPractComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteSubComponent(item._id)
+        .deleteCOP(item._id)
         .subscribe((res) => {
           Swal.fire({
             title: 'Parameter Deleted successfully',

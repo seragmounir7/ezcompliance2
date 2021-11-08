@@ -1,9 +1,9 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/ppeSel']">
+<div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/contrlActReq']">
     <i class="fa fa-arrow-left" aria-hidden="true"></i>
   </div>
   <div class="container px-4 py-4 bg-white">
-    <form [formGroup]="PPEformgp" (ngSubmit)="onFormSubmit()">
-      <h2 class="text-center">Add PPE</h2>
+    <form [formGroup]="contrlAndActFG" (ngSubmit)="onFormSubmit()">
+      <h2 class="text-center">Add Control And Action</h2>
       <br />
       <hr />
       <ng-container formArrayName="arrObj">
@@ -44,7 +44,7 @@
       <br />
   
       <div class="col-md-2">
-        <button type="submit" class="btn btn-primary"[disabled]="PPEformgp.get('arrObj').invalid">Add</button>
+        <button type="submit" class="btn btn-primary"[disabled]="contrlAndActFG.get('arrObj').invalid">Add</button>
       </div>
     </form>
   </div>

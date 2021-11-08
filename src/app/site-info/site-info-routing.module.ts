@@ -1,3 +1,7 @@
+import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
+import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.component';
+import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
+import { IdentifyHazardsComponent } from './identify-hazards/identify-hazards.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { UploadBulkDataComponent } from './upload-bulk-data/upload-bulk-data.component';
 import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
@@ -48,6 +52,10 @@ const routes: Routes = [
   { path: 'editCOP', component: EditCOPComponent },
   { path: 'uploadData', component: UploadBulkDataComponent },
   { path: 'projMang', component: ProjectManagerComponent },
+  { path: 'hazards', component: IdentifyHazardsComponent },
+  { path: 'addHazards', component: AddHazardComponent },
+  { path: 'contrlActReq', component: ContrAndActReqComponent },
+  { path: 'addContrlActReq', component: AddContrActComponent },
 ];
 
 @NgModule({

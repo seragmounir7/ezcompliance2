@@ -15,14 +15,14 @@ import { Router } from '@angular/router';
 })
 export class AddContrActComponent implements OnInit {
 
-  PPEformgp!: FormGroup;
+  contrlAndActFG!: FormGroup;
   formData: any;;
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private logicalFormInfo:LogicalFormInfoService
   ) { 
-    this.PPEformgp=this.fb.group({
+    this.contrlAndActFG=this.fb.group({
      // mode:"JobTask",
       arrObj: this.fb.array([]),
     });
@@ -37,7 +37,7 @@ export class AddContrActComponent implements OnInit {
     }
   }
   add(): FormArray {
-    return this.PPEformgp.get('arrObj') as FormArray;
+    return this.contrlAndActFG.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
     return this.fb.group({
@@ -47,20 +47,20 @@ export class AddContrActComponent implements OnInit {
   }
   
   removeSafetyModule(i) {
-    const item = <FormArray>this.PPEformgp.controls['arrObj'];
+    const item = <FormArray>this.contrlAndActFG.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
     
     }
   }
   onFormSubmit() {
-    console.log(this.PPEformgp.value);
+    console.log(this.contrlAndActFG.value);
     let data={
-      arrObj:this.PPEformgp.get('arrObj').value
+      arrObj:this.contrlAndActFG.get('arrObj').value
     }
-    this.logicalFormInfo.addMultiplePPE(data).subscribe((data) => {
+    this.logicalFormInfo.addMultipleContrlActReq(data).subscribe((data) => {
       console.log('PPE=>', data);
-      this.router.navigate(['/admin/siteInfo/ppeSel']);      
+      this.router.navigate(['/admin/siteInfo/contrlActReq']);      
     },(err)=>{console.error(err);} 
   
     );

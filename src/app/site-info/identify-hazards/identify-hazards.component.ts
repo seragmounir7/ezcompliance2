@@ -37,14 +37,14 @@ export class IdentifyHazardsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllPPEs();
+    this.getAllHazards();
     this.setTitle.setTitle('WHS-PPE List');
 
   }
 
-  getAllPPEs() {
-    this.logicalFormInfo.getAllPPE().subscribe((res:any) => {
-      console.log('PPEAll=>', res);
+  getAllHazards() {
+    this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
+      console.log('getAllHazards=>', res);
       let data = res.data;
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
@@ -65,7 +65,7 @@ export class IdentifyHazardsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getAllPPEs();
+        this.getAllHazards();
       }
       console.log("The dialog was closed");
     });
@@ -90,7 +90,7 @@ export class IdentifyHazardsComponent implements OnInit {
             timer: 1200,
           });
           console.log('deleted res', res);
-          this.getAllPPEs();
+          this.getAllHazards();
             
         });
       }

@@ -200,9 +200,68 @@ deleteLicenceCat(id){
   //add ppe end
 
   //add Identify Hazards
- 
-  //add Identify Hazardsend
+  addHazards(data){
+    return this.https.post(this.apiUrl + 'identifyHazard/add', data);
+  }
+  addMultipleHazards(data){
+    return this.https.post(this.apiUrl + 'identifyHazard/add/multiple', data);
+  }
+  updateHazards(data,id){
+    return this.https.put(this.apiUrl + 'identifyHazard/update/' + id, data);      
+  }
+  deleteHazards(id){
+    return this.https.delete(this.apiUrl + 'identifyHazard/delete/' + id)
+  }
+  getAllHazards(){
+    return this.https.get(this.apiUrl + 'identifyHazard/getAll')
+  }
+  getHazardsById(id){
+    return this.https.get(this.apiUrl + 'identifyHazard/get/' + id)
+  }
+  //add Identify Hazards end
 
+
+  ///add control ation required///
+  addContrlActReq(data){
+    return this.https.post(this.apiUrl + 'controlActionRequired/add', data);
+  }
+  addMultipleContrlActReq(data){
+    return this.https.post(this.apiUrl + 'controlActionRequired/add/multiple', data);
+  }
+  updateContrlActReq(data,id){
+    return this.https.put(this.apiUrl + 'controlActionRequired/update/' + id, data);      
+  }
+  deleteContrlActReq(id){
+    return this.https.delete(this.apiUrl + 'controlActionRequired/delete/' + id)
+  }
+  getAllContrlActReq(){
+    return this.https.get(this.apiUrl + 'controlActionRequired/getAll')
+  }
+  getContrlActReqById(id){
+    return this.https.get(this.apiUrl + 'controlActionRequired/get/' + id)
+  }
+  ///add control ation required end///
+
+////code of practice///
+addCOP(data){
+    return this.https.post(this.apiUrl + 'cop/add', data);
+  }
+  addMultipleCOP(data){
+    return this.https.post(this.apiUrl + 'cop/add/multiple', data);
+  }
+  updateCOP(data,id){
+    return this.https.put(this.apiUrl + 'cop/update/' + id, data);      
+  }
+  deleteCOP(id){
+    return this.https.delete(this.apiUrl + 'cop/delete/' + id)
+  }
+  getAllCOP(){
+    return this.https.get(this.apiUrl + 'cop/getAll')
+  }
+  getCOPById(id){
+    return this.https.get(this.apiUrl + 'cop/get/' + id)
+  }
+////code of practice end///
   ///project manager/////
   addProjectMang(data){
     return this.https.post(this.apiUrl + 'projectManager/add', data);
