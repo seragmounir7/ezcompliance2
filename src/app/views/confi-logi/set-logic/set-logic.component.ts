@@ -1,34 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { MatSelect } from '@angular/material/select';
 import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormArray,
-  FormControl,
-} from '@angular/forms';
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  AfterViewInit,
+  AfterViewChecked,
+} from '@angular/core';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-set-logic',
   templateUrl: './set-logic.component.html',
   styleUrls: ['./set-logic.component.scss'],
 })
-export class SetLogicComponent implements OnInit {
+export class SetLogicComponent implements AfterViewInit, OnInit {
   JobTaskDetail!: FormGroup;
-  highRiskConstr = new FormControl();
-  PPE = new FormControl();
-  Licence = new FormControl();
-  codeOfPract = new FormControl();
+
   mode: any;
   jobTaskData: any = [];
   highRiskData: any = [];
   PPESelectionData: any = [];
-  codeOfCond: any = [];
+  codeOfPract: any = [];
   licenseAndQual: any = [];
   licenseAndQualificationData: any = [];
   licenceCatAll: any = [];
   highRiskConstructionData: any = [];
   task: any = [];
-
+  riskLevel='';
+  residuleRiskL='';
   PPEselection = [
     { label: 'Disposable dust mask', value: '' },
     { label: 'Dust Mas', value: '' },
@@ -114,113 +116,258 @@ export class SetLogicComponent implements OnInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
+  // @ViewChild('risk') risk: any;
+  @ViewChildren('risk') Risk: QueryList<any>;
 
   constructor(
     private fb: FormBuilder,
-    private logicalFormInfo: LogicalFormInfoService
+    private logicalFormInfo: LogicalFormInfoService,
+    private setTitle: SetTitleService
   ) {}
 
   ngOnInit(): void {
+    this.setTitle.setTitle('WHS-Set Relation');
+
     this.JobTaskDetail = this.fb.group({
       highRiskConstr: this.fb.array([]),
-      // PPE: this.fb.array([]),
-      // Licence: this.fb.array([]),
-      // codeOfPract: this.fb.array([]),
+      PPE: this.fb.array([]),
+      LicenceCat: this.fb.array([]),
+      identifyHazrds: this.fb.array([]),
+      contrActReq: this.fb.array([]),
+      codeOfPract: this.fb.array([]),
     });
 
-    //this.addAction();
-    // this.addAction();
     this.getJobTask();
-    this.getHighRiskById();
+    this.getAllHighRisk();
     this.getAllLicence();
     this.getAllCategories();
-    this.getPPEById();
-    this.getCodOfCond();
+    this.getAllPPE();
+    this.getAllHazard();
+    //  this.getCodOfCond();
   }
+
+  ngAfterViewInit() {}
+
   addActionHighRisk() {
     {
-      this.addHighRisk().push(this.newActionHighRisk());
+      this.highRiskFA().push(this.highRiskFG());
     }
   }
-  addHighRisk(): FormArray {
+  addActionPPE() {
+    {
+      this.PPE_FA().push(this.PPE_FG());
+    }
+  }
+  addActionLicnCat() {
+    {
+      this.licenceCatFA().push(this.licenceCatFG());
+    }
+  }
+  addActionContrActReq() {
+    {
+      this.contrActReqFA().push(this.contrActReqFG());
+    }
+  }
+  addActionIdentifyHazrds() {
+    {
+      this.identifyHazrdsFA().push(this.identifyHazrdsFG());
+    }
+  }
+  addActionCOP() {
+    {
+      this.addCOP().push(this.newActionCOP());
+    }
+  }
+  highRiskFA(): FormArray {
     return this.JobTaskDetail.get('highRiskConstr') as FormArray;
   }
-  newActionHighRisk(): FormGroup {
+  PPE_FA(): FormArray {
+    return this.JobTaskDetail.get('PPE') as FormArray;
+  }
+  licenceCatFA(): FormArray {
+    return this.JobTaskDetail.get('LicenceCat') as FormArray;
+  }
+  identifyHazrdsFA(): FormArray {
+    return this.JobTaskDetail.get('identifyHazrds') as FormArray;
+  }
+  contrActReqFA(): FormArray {
+    return this.JobTaskDetail.get('contrActReq') as FormArray;
+  }
+  addCOP(): FormArray {
+    return this.JobTaskDetail.get('codeOfPract') as FormArray;
+  }
+  highRiskFG(): FormGroup {
     return this.fb.group({
-      highRiskArr: [],
+      highRiskArr: [''],
+    });
+  }
+  PPE_FG(): FormGroup {
+    return this.fb.group({
+      ppeArr: [''],
+    });
+  }
+  licenceCatFG(): FormGroup {
+    return this.fb.group({
+      licenceArr: [''],
+    });
+  }
+  identifyHazrdsFG(): FormGroup {
+    return this.fb.group({
+      hazardsArr: [''],
+    });
+  }
+  contrActReqFG(): FormGroup {
+    return this.fb.group({
+      contrActReqArr: [''],
+    });
+  }
+  newActionCOP(): FormGroup {
+    //code of practice
+    return this.fb.group({
+      copArr: [''],
     });
   }
 
   onFormSubmit() {
     console.log(this.JobTaskDetail);
   }
-
   getJobTask() {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
-      console.log('jobTaskData', this.jobTaskData);
-      // this.jobTaskData.forEach(element => {
-      //   this.addActionHighRisk();
-      // });
+      this.jobTaskData.forEach(() => {
+        this.addActionHighRisk();
+        this.addActionPPE();
+        this.addActionLicnCat();
+       // this.addActionCOP();
+        this.addActionContrActReq();
+        this.addActionIdentifyHazrds();  
+      });
     });
   }
-  getHighRiskById() {
-    this.mode = 'Risk';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
-      console.log('Risk=>', data);
-      this.highRiskConstructionData = data.data[0];
-      console.log('risk', this.highRiskConstructionData);
+  getAllHighRisk() {
+    this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
+      console.log('Risk=>', res);
+      this.highRiskConstructionData = res.data;
     });
   }
-  getPPEById() {
-    this.mode = 'PPE';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
-      console.log('PPE=>', data);
-      this.PPESelectionData = data.data[0];
-      console.log('PPE', this.PPESelectionData);
+  getAllPPE() {
+    this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
+      console.log('PPE=>', res);
+      this.PPESelectionData = res.data;
     });
   }
   getCodOfCond() {
     this.mode = 'codeOfPractice';
     this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
       console.log('codeOfPractice=>', data);
-      this.codeOfCond = data.data[0];
-      console.log('codeOfPractice', this.codeOfCond);
+      this.codeOfPract = data.data[0];
     });
   }
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       console.log('Licence=>', res);
       this.licenseAndQual = res.data;
-      console.log('Licence', this.licenseAndQual);
+    });
+  }
+  getAllHazard() {
+    this.logicalFormInfo.getAllLicence().subscribe((res) => {
+      console.log('Licence=>', res);
+      this.licenseAndQual = res.data;
     });
   }
   getAllCategories() {
     this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
       this.licenceCatAll = res.data;
-      console.log('Licence', this.licenceCatAll);
     });
   }
 
-  setRelation(risk, ppe, licence, codOfCond, index, id) {
-    console.log(risk._value);
-    console.log(ppe._value);
-    console.log(licence._value);
-    console.log(codOfCond._value);
-    console.log(index);
+  // setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
+  setRelation(title, id) {
+    // console.log('risk', riskIds);
+    console.log(this.JobTaskDetail.controls['highRiskConstr'].value[0]);
+
+    // console.log('ppe', ppeIDs);
+    /// console.log('licence', licenceIds);
+    // console.log('codOfPract', codOfPractIds);
+    console.log('index', title);
+    console.log('id', id);
+
+    let PPE = [];
+    let risk = [];
+    let codeOfPractice = [];
+    let licence = [];
+    // if (riskIds) {
+    //   riskIds.forEach((element) => {
+    //     let data = {
+    //       riskId: element,
+    //     };
+    //     risk.push(data);
+    //   });
+    // }
+    // if (ppeIDs) {
+    //   ppeIDs.forEach((element) => {
+    //     let data = {
+    //       PPEId: element,
+    //     };
+    //     PPE.push(data);
+    //   });
+    // }
+    if (this.licenseAndQualificationData.length) {
+      // console.log("this.licenseAndQualificationData",this.licenseAndQualificationData)
+      this.licenseAndQualificationData.forEach((element) => {
+        let data = {
+          licenceId: element._id,
+        };
+        licence.push(data);
+      });
+    }
+    // if (codOfPractIds) {
+    //   codOfPractIds.forEach((element) => {
+    //     let data = {
+    //       codeOfPracticeId: element,
+    //     };
+    //     codeOfPractice.push(data);
+    //   });
+    // }
+    //  console.log(risk);
+    //  console.log(PPE);
+    //  console.log(licence);
+    //  console.log(codeOfPractice);
+
+    let data = {
+      title: title,
+      PPE: PPE,
+      risk: risk,
+      licence: licence,
+      codeOfPractice: codeOfPractice,
+    };
+    console.log(data);
+
+    this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
+      console.log('resJob Task=>', res);
+      Swal.fire({
+        title: 'Relation set successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+    });
   }
-  categorySel(catArr){
-    this.licenseAndQualificationData=[];
+  categorySel(catArr) {
+    this.licenseAndQualificationData = [];
 
     console.log(catArr);
     catArr.forEach((element) => {
-      this.licenseAndQual.forEach(item => {
-        if(element === item.licenceCategoryId._id){
-          this.licenseAndQualificationData.push(item)
+      this.licenseAndQual.forEach((item) => {
+        if (element === item.licenceCategoryId._id) {
+          this.licenseAndQualificationData.push(item);
         }
       });
     });
+    console.log(
+      ' this.licenseAndQualificationData',
+      this.licenseAndQualificationData
+    );
   }
 }

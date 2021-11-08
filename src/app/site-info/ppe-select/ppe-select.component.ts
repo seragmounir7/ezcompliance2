@@ -7,13 +7,13 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditPPEComponent } from './edit-ppe/edit-ppe.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-ppe-select',
   templateUrl: './ppe-select.component.html',
   styleUrls: ['./ppe-select.component.scss'],
 })
 export class PpeSelectComponent implements AfterViewInit,OnInit {
-  mode: any;
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
@@ -30,19 +30,20 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
   constructor(
 
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private setTitle:SetTitleService
   ) {}
 
   ngOnInit(): void {
-    this.getPPEById();
+    this.getAllPPEs();
+    this.setTitle.setTitle('WHS-PPE List');
+
   }
 
-  getPPEById() {
-    this.mode = 'PPE';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
-      console.log('getPPEById=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
-      let data = res.data[0].subComponents;
+  getAllPPEs() {
+    this.logicalFormInfo.getAllPPE().subscribe((res:any) => {
+      console.log('PPEAll=>', res);
+      let data = res.data;
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
@@ -62,7 +63,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getPPEById();
+        this.getAllPPEs();
       }
       console.log("The dialog was closed");
     });
@@ -79,7 +80,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteSubComponent(item._id)
+        .deletePPE(item._id)
         .subscribe((res) => {
           Swal.fire({
             title: 'Parameter Deleted successfully',
@@ -87,7 +88,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
             timer: 1200,
           });
           console.log('deleted res', res);
-          this.getPPEById();
+          this.getAllPPEs();
             
         });
       }

@@ -1,13 +1,12 @@
+import { SetTitleService } from './../../utils/services/set-title.service';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { field, value } from './global.model';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
-import { ActivatedRoute } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import Swal from 'sweetalert2';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router, ParamMap } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -33,8 +32,8 @@ export class DynamicFormComponent implements OnInit {
   submitBtn = false;
   success = false;
   show = false;
-  enableForm:boolean;
-  frequency:any;
+  enableForm: boolean;
+  frequency: any;
   fieldModels: Array<field> = [
     {
       type: 'text',
@@ -252,18 +251,18 @@ export class DynamicFormComponent implements OnInit {
   formNameRecieved = '';
   constructor(
     public router: Router,
-    private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private dynamicFormsService: DynamicFormsService
-  ) {}
+    private dynamicFormsService: DynamicFormsService,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit() {
     console.log(
       "sessionStorage.getItem('type')",
       sessionStorage.getItem('type')
     );
-
-    this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
+    this.setTitle.setTitle('WHS-Dynamic Forms');
+    // this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
 
     if (sessionStorage.getItem('type') == 'add') {
       this.type = 'add';
@@ -290,8 +289,8 @@ export class DynamicFormComponent implements OnInit {
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
         this.model = [];
-        this.enableForm=res.data.enable;
-        this.frequency=res.data.frequency;
+        this.enableForm = res.data.enable;
+        this.frequency = res.data.frequency;
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -541,7 +540,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   initReport() {
-  //  console.log('model.attributes=>', this.model);
+    //  console.log('model.attributes=>', this.model);
     this.report = true;
     this.formData = [];
     for (let j = 0; j < this.model[0].attributes.length; j++) {
@@ -551,7 +550,7 @@ export class DynamicFormComponent implements OnInit {
       }
       this.formData.push(temp);
     }
-   // console.log('formData', this.formData);
+    // console.log('formData', this.formData);
 
     // let input = {
     //   id:this.model._id
@@ -751,7 +750,7 @@ export class DynamicFormComponent implements OnInit {
     this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
- 
+
 
     if (this.type == 'add') {
       let data = {
@@ -759,7 +758,7 @@ export class DynamicFormComponent implements OnInit {
         frequency: sessionStorage.getItem('frequency'),
         htmlObject: this.model,
       };
-      console.log('add',data);
+      console.log('add', data);
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
         Swal.fire('Form added successfully');
@@ -772,8 +771,8 @@ export class DynamicFormComponent implements OnInit {
       let data = {
         title: this.formNameRecieved,
         htmlObject: this.model,
-        enable:this.enableForm,
-        frequency:this.frequency
+        enable: this.enableForm,
+        frequency: this.frequency
       };
 
       this.dynamicFormsService
@@ -804,32 +803,32 @@ export class DynamicFormComponent implements OnInit {
 
     this.model.splice(i + 1, 0, modelRow);
   }
-  removeDuplicate(i,j) {
+  removeDuplicate(i, j) {
     console.log('remove duplicate', i, j);
-console.log(this.model)
-console.log(this.model[i])
+    console.log(this.model)
+    console.log(this.model[i])
     this.model.splice(i, 1);
-   
-    for(let k=0;k<this.model.length;k++){
-      if(this.model[i].length == this.model[k].length && i!=k){
-        let notMatch =false;
-        for(let l=0;l<this.model[k].attributes.length;l++){
-          if(this.model[k].attributes[l].type == this.model[i].attributes[j].type 
-            && this.model[k].attributes[l].label == this.model[i].attributes[j].label  ){
 
-            }
-            else{
-              notMatch =true;
-              break;
-            }
+    for (let k = 0; k < this.model.length; k++) {
+      if (this.model[i].length == this.model[k].length && i != k) {
+        let notMatch = false;
+        for (let l = 0; l < this.model[k].attributes.length; l++) {
+          if (this.model[k].attributes[l].type == this.model[i].attributes[j].type
+            && this.model[k].attributes[l].label == this.model[i].attributes[j].label) {
+
+          }
+          else {
+            notMatch = true;
+            break;
+          }
         }
-        if(!notMatch){
+        if (!notMatch) {
 
         }
       }
-     
+
     }
-  
+
   }
 }
 

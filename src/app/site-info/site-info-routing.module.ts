@@ -1,3 +1,9 @@
+import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
+import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.component';
+import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
+import { IdentifyHazardsComponent } from './identify-hazards/identify-hazards.component';
+import { ProjectManagerComponent } from './project-manager/project-manager.component';
+import { UploadBulkDataComponent } from './upload-bulk-data/upload-bulk-data.component';
 import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
 import { AddCOPComponent } from './code-of-pract/add-cop/add-cop.component';
 import { CodeOfPractComponent } from './code-of-pract/code-of-pract.component';
@@ -19,9 +25,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SiteInfoComponent } from './site-info.component';
 import { AddLicenceCatComponent } from './licence-and-qual/licence-cat/add-licence-cat/add-licence-cat.component';
+import { AddSiteComponent } from './add-site-info/add-site/add-site.component';
+import { EditSiteComponent } from './add-site-info/edit-site/edit-site.component';
 
 const routes: Routes = [
-  { path: 'addSite', component: AddSiteInfoComponent },
+  { path: 'addSite', component: AddSiteInfoComponent, children:[
+    { path: 'addSite1', component: AddSiteComponent},
+    { path: 'editSite', component: EditSiteComponent}
+  ] },
   { path: 'addCustomer', component: AddCustomerComponent },
   { path: 'jobTask', component: JobTaskComponent},
   {path:'addJobTask',component:AddJobTaskComponent},
@@ -39,6 +50,12 @@ const routes: Routes = [
   { path: 'codeOfpract', component: CodeOfPractComponent },
   { path: 'addCOP', component: AddCOPComponent },
   { path: 'editCOP', component: EditCOPComponent },
+  { path: 'uploadData', component: UploadBulkDataComponent },
+  { path: 'projMang', component: ProjectManagerComponent },
+  { path: 'hazards', component: IdentifyHazardsComponent },
+  { path: 'addHazards', component: AddHazardComponent },
+  { path: 'contrlActReq', component: ContrAndActReqComponent },
+  { path: 'addContrlActReq', component: AddContrActComponent },
 ];
 
 @NgModule({

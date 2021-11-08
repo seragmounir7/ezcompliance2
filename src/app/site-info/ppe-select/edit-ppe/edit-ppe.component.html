@@ -1,7 +1,8 @@
 <form [formGroup]="editTitle" >
+    <h2>Edit PPE</h2>
     <mat-form-field appearance="legacy"
     class="example-full-width" style="width: 498px;">
-    <mat-label>Edit PPE</mat-label>
+    <!-- <mat-label>Edit PPE</mat-label> -->
     <input matInput  formControlName="title" style="text-transform: capitalize !important;">
     </mat-form-field>
     <div class="row">
@@ -9,7 +10,7 @@
             <button mat-raised-button (click)="closeDialog()">Close</button>
         </div>
         <div class="col-sm-2  ">
-            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Edit</button>
+            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
         </div>
     </div>
 </form>   

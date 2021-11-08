@@ -6,6 +6,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-job-task',
@@ -17,7 +18,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
+  displayedColumns: string[] = ['index', 'title', 'edit', 'delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -26,14 +27,16 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog,
+    private setTitle: SetTitleService) { }
 
   ngOnInit(): void {
     this.getAllJobTask();
+    this.setTitle.setTitle('WHS-Job Task List');
   }
-
+ 
   getAllJobTask() {
-    this.logicalFormInfo.getAllJobtask().subscribe((res:any) => {
+    this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data
@@ -47,9 +50,9 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
 
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditTaskComponent, {
       width: "550px",
       data: element,
@@ -73,16 +76,16 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteJobTask(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
-          });          console.log('deleted res', res);
-          this.getAllJobTask();
-            
-        });
+          .deleteJobTask(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            }); console.log('deleted res', res);
+            this.getAllJobTask();
+
+          });
       }
     });
   }

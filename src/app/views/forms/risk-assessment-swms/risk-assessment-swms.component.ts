@@ -1,9 +1,11 @@
+import { element } from 'protractor';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -16,10 +18,113 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   RiskAssessment = true;
   SWMSShow = false;
   //checkboxes array
-  jobTask=[];
-  highRiskConstruction=[];
-  PPEselection=[];
-  licenseAndQualification=[];
+  jobTask = [];
+  highRiskConstruction = [];
+  PPEselection = [];
+  licenseAndQualification = [];
+  checkArray = [];
+  statesData = [
+    {
+      states: 'NSW',
+      juridiction: {
+        act: 'Act: Work Health and Safety Act 2011 (NSW)',
+        regulation: 'Regulation: Work Health and Safety Regulation 2017 (NSW)',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: SafeWork NSW',
+        codes: 'Codes: NSW Codes of Practice',
+      },
+    },
+    {
+      states: 'ACT',      
+      juridiction: {
+        act: 'Act: Work Health and Safety Act 2011 (ACT)',
+        regulation: 'Regulation: Work Health and Safety Regulation 2011 (ACT)',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: WorkSafe ACT',
+        codes: 'Codes: ACT Codes of Practice',
+      },
+    },
+   
+    {
+      states: 'QLD',
+      juridiction: {
+        act: 'Act: Work Health and Safety Act 2011 (Qld)',
+        regulation: 'Regulation: Work Health and Safety Regulation 2011 (Qld)',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: Workplace Health and Safety Queensland',
+        codes: 'Codes: Qld Codes of Practice ',
+      },
+    },
+    {
+      states: 'NT',
+      juridiction: {
+        act: 'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
+        regulation: 'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: NT WorkSafe',
+        codes: 'Codes: NT Codes of Practice',
+      },
+    },
+    {
+      states: 'SA',
+      juridiction: {
+        act: 'Act: Work Health and Safety Act 2012 (SA)',
+        regulation: 'Regulation: Work Health and Safety Regulation 2012 (SA) ',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: SafeWork SA',
+        codes: 'Codes: SA Codes of Practice',
+      },
+    },
+    {
+      states: 'TAS',
+      juridiction: {
+        act: 'Act: Work Health and Safety Act 2012 (Tas) ',
+        regulation: 'Regulation: Work Health and Safety Regulation 2012 (Tas) ',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: WorkSafe Tasmania',
+        codes: 'Codes: Tas Codes of Practice',
+      },
+    },
+    {
+      states: 'NZ',
+      juridiction: {
+        act: 'Act: Health and Safety at Work Act 2015 (NZ)',
+        regulation: '',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: WorkSafe New Zealand',
+        codes: 'Codes: NZ Codes of Practice',
+      },
+    },
+    {
+      states: 'VIC',
+      juridiction: {
+        act: 'Act: Occupational Health and Safety Act 2004 (Vic) ',
+        regulation: 'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: WorkSafe Victoria',
+        codes: 'Codes: Vic Compliance Codes',
+      },
+    },
+    {
+      states: 'WA',
+      juridiction: {
+        act: 'Act: Occupational Safety and Health Act 1984 (WA)',
+        regulation: 'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
+      },
+      safetyLegislation: {
+        regulator: 'Regulator: WorkSafe WA',
+        codes: 'Codes: WA Codes of Practice',
+      },
+    },
+  ];
   // jobTask = [
   //   { label: 'Activities Involving chemicals', value: '' },
   //   { label: 'Assess Hazards', value: '' },
@@ -168,15 +273,17 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
-  riskArr=[];
-  ppeArr=[];
-  licenceArr=[];
+  riskArr = [];
+  ppeArr = [];
+  licenceArr = [];
+  jobTaskData = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
+    private setTitle: SetTitleService
   ) {
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
@@ -254,15 +361,74 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       securityLicence: [''],
       Employee1: [''],
       dateTime: [''],
+      statesSWMS: [''],
+      jurisdiction: [''],
+      safetyLeg: [''],
+      regulator: [''],
     });
   }
 
   ngOnInit(): void {
-    this.dynamicFormsService.homebarTitle.next('Risk Assesment Form');
-   this.getJobTaskById() ;
-     this.getPPEById() ;    
-     this.getHighRiskById() ;
-    
+    this.getAllJobTask();
+    this.getAllPPE();
+    this.getAllHighRisk();
+    this.getAllLicence();
+    this.setTitle.setTitle('WHS-Risk Assesment Form');
+this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res)=>{
+if(res){
+  
+console.log(res);
+
+  switch (res) {
+    case 'NSW':
+      this.riskAssessmentFb.get('jurisdiction').setValue('NSW');
+      this.riskAssessmentFb.get('safetyLeg').setValue('NSW_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_NSW');
+      break;
+    case 'ACT':
+      this.riskAssessmentFb.get('jurisdiction').setValue('ACT');
+      this.riskAssessmentFb.get('safetyLeg').setValue('ACT_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_ACT');
+      break;
+    case 'QLD':
+      this.riskAssessmentFb.get('jurisdiction').setValue('QLD');
+      this.riskAssessmentFb.get('safetyLeg').setValue('QLD_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_QLD');
+      break;
+    case 'NT':
+      this.riskAssessmentFb.get('jurisdiction').setValue('NT');
+      this.riskAssessmentFb.get('safetyLeg').setValue('NT_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_NT');
+      break;
+    case 'SA':
+      this.riskAssessmentFb.get('jurisdiction').setValue('SA');
+      this.riskAssessmentFb.get('safetyLeg').setValue('SA_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_SA');
+      break;
+    case 'NZ':
+      this.riskAssessmentFb.get('jurisdiction').setValue('NZ');
+      this.riskAssessmentFb.get('safetyLeg').setValue('NZ_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_NZ');
+      break;
+    case 'TAS':
+      this.riskAssessmentFb.get('jurisdiction').setValue('TAS');
+      this.riskAssessmentFb.get('safetyLeg').setValue('TAS_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_TAS');
+      break;
+    case 'VIC':
+      this.riskAssessmentFb.get('jurisdiction').setValue('VIC');
+      this.riskAssessmentFb.get('safetyLeg').setValue('VIC_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_VIC');
+      break;
+    case 'WA':
+      this.riskAssessmentFb.get('jurisdiction').setValue('WA');
+      this.riskAssessmentFb.get('safetyLeg').setValue('WA_Act');
+      this.riskAssessmentFb.get('regulator').setValue('Reg_WA');
+      break; 
+ 
+  }
+}
+});
   }
 
   showsite() {
@@ -289,9 +455,9 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   ngAfterViewInit() {
     // this.signaturePad is now available
     //this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-   // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
-    this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
+    // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    //this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
+    // this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
     console.log('clear1 &2');
   }
 
@@ -322,52 +488,122 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     console.log('begin drawing');
   }
 
-  
-  getJobTaskById() {
-    let mode = 'JOBTask';
-    this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-      console.log('jobTaskDetails=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
-     this.jobTask = res.data[0].subComponents;      
-   
-      //  this.task = res.data.subComponents;
+  getAllJobTask() {
+    this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
+      this.jobTaskData = res.data;
+      console.log('jobTaskDetails=>', this.jobTaskData);
     });
- 
   }
-  getPPEById() {
-   let mode = 'PPE';
-    this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-      console.log('getPPEById=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
-      this.PPEselection = res.data[0].subComponents;  
-      for(let i=0;i<this.PPEselection.length;i++){
-        this.ppeArr[i]=0;
-       }
+  // getJobTaskById() {
+  //   let mode = 'JOBTask';
+  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
+  //     console.log('jobTaskDetails=>', res);
+  //     // this.jobTaskData = res.data[0].subComponents;
+  //    this.jobTask = res.data[0].subComponents;
+
+  //     //  this.task = res.data.subComponents;
+  //   });
+
+  // }
+  getAllPPE() {
+    this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
+      console.log('PPE=>', res);
+      this.PPEselection = res.data;
+      for (let i = 0; i < this.PPEselection.length; i++) {
+        this.ppeArr[i] = 0;
+      }
+    });
+  }
+  // getPPEById() {
+  //   let mode = 'PPE';
+  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
+  //     this.PPEselection = res.data[0].subComponents;
+  //     console.log('this.PPEselection=>', this.PPEselection);
+  //     for (let i = 0; i < this.PPEselection.length; i++) {
+  //       this.ppeArr[i] = 0;
+  //     }
+  //   });
+  // }
+  getAllHighRisk() {
+    this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
+      console.log('Risk=>', res);
+      this.highRiskConstruction = res.data;
+      for (let i = 0; i < this.highRiskConstruction.length; i++) {
+        this.riskArr[i] = 0;
+      }
     });
   }
   getHighRiskById() {
     let mode = 'Risk';
     this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-      console.log('Risk=>', res);
-      this.highRiskConstruction= res.data[0].subComponents;
-     for(let i=0;i<this.highRiskConstruction.length;i++){
-      this.riskArr[i]=0;
-     }
+      this.highRiskConstruction = res.data[0].subComponents;
+      console.log(' this.highRiskConstruction=>', this.highRiskConstruction);
+      for (let i = 0; i < this.highRiskConstruction.length; i++) {
+        this.riskArr[i] = 0;
+      }
     });
- 
   }
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
-      console.log('getAllLicence=>', res);
-      // this.jobTaskData = res.data[0].subComponents;
       this.licenseAndQualification = res.data;
-      for(let i=0;i<this.licenseAndQualification.length;i++){
-        this.licenceArr[i]=0;
-       }    
-    }); 
+      console.log(
+        'this.licenseAndQualification=>',
+        this.licenseAndQualification
+      );
+      for (let i = 0; i < this.licenseAndQualification.length; i++) {
+        this.licenceArr[i] = 0;
+      }
+    });
   }
-  onJobtaskSelect(e){
-    console.log(e);
-    
+  onJobtaskSelect(e) {
+    console.log('event', e);
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.checkArray.push(item);
+    } else {
+      this.checkArray.forEach((item, j) => {
+        if (item == e.target.value) {
+          this.checkArray.splice(j, 1);
+          return;
+        }
+      });
+    }
+    for (let k = 0; k < this.riskArr.length; k++) {
+      this.riskArr[k] = 0;
+    }
+    for (let k = 0; k < this.ppeArr.length; k++) {
+      this.ppeArr[k] = 0;
+    }
+    for (let k = 0; k < this.licenceArr.length; k++) {
+      this.licenceArr[k] = 0;
+    }
+    console.log(this.checkArray);
+    this.checkArray.forEach((id) => {
+      this.jobTaskData.forEach((element) => {
+        if (id === element._id) {
+          element.risk.forEach((riskItem) => {
+            this.highRiskConstruction.forEach((highRisk, riskIndex) => {
+              if (highRisk._id === riskItem.riskId) {
+                this.riskArr[riskIndex] = 1;
+              }
+            });
+          });
+          element.PPE.forEach((riskItem) => {
+            this.PPEselection.forEach((highRisk, index) => {
+              if (highRisk._id === riskItem.PPEId) {
+                this.ppeArr[index] = 1;
+              }
+            });
+          });
+          element.licence.forEach((riskItem) => {
+            this.licenseAndQualification.forEach((highRisk, index) => {
+              if (highRisk._id === riskItem.licenceId) {
+                this.licenceArr[index] = 1;
+              }
+            });
+          });
+        }
+      });
+    });
   }
 }

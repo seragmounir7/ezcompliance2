@@ -13,15 +13,16 @@
                 for="fname"
                 >Full Name</label
               >
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">{{this.data1.headerData.fullname}}
-                <!-- <input
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input
                   type="text"
                   class="form-control"
                   formControlName="fullName"
                   id="fname"
                   placeholder=""
                   name="fname"
-                /> -->
+                  value="{{ Contact.email}}"
+                />
               </div>
             </div>
             <div class="form-group">
@@ -30,15 +31,16 @@
                 for="phone"
                 >Phone Number</label
               >
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">{{"phone"}}
-                <!-- <input
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input
                   type="text"
                   class="form-control"
                   formControlName="phone"
                   id="phone"
                   placeholder=""
                   name="phone"
-                /> -->
+                  value="{{ Contact.email}}"
+                />
               </div>
             </div>
             <div class="form-group">
@@ -47,15 +49,16 @@
                 for="email"
                 >Email</label
               >
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">{{"email"}}
-                <!-- <input
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input
                   type="email"
                   class="form-control"
                   formControlName="email"
                   id="email"
                   placeholder=""
                   name="email"
-                /> -->
+                  value="{{ Contact.email}}"
+                />
               </div>
             </div>
             <div class="form-group">
@@ -64,8 +67,8 @@
                 for="query"
                 >Query</label
               >
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">{{"query"}}
-                <!-- <textarea class="form-control"  formControlName="query" id="query" name="query"></textarea> -->
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <textarea class="form-control"  formControlName="query" id="query" value="{{ Contact.query}}" name="query"></textarea>
               </div>
             </div>
             <!-- <div class="form-group">

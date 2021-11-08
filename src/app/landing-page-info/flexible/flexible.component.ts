@@ -16,6 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AddFlexibleInfoComponent } from './add-flexible-info/add-flexible-info.component';
 import { EditFlexibleInfoComponent } from './edit-flexible-info/edit-flexible-info.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-flexible',
   templateUrl: './flexible.component.html',
@@ -44,7 +45,8 @@ export class FlexibleComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.flexibleDetail = this.fb.group({
       title: ['', Validators.required],
@@ -57,6 +59,7 @@ export class FlexibleComponent implements OnInit {
   ngOnInit(): void {
     //  this.addAction();
     this.getFlexible();
+    this.setTitle.setTitle('WHS-Flexible Complience');
   }
 
   getFlexible() {

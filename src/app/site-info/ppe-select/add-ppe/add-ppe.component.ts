@@ -57,7 +57,7 @@ export class AddPPEComponent implements OnInit {
     let data={
       arrObj:this.PPEformgp.get('arrObj').value
     }
-    this.logicalFormInfo.uploadMultiple(data,'PPE').subscribe((data) => {
+    this.logicalFormInfo.addMultiplePPE(data).subscribe((data) => {
       console.log('PPE=>', data);
       this.router.navigate(['/admin/siteInfo/ppeSel']);      
     },(err)=>{console.error(err);} 

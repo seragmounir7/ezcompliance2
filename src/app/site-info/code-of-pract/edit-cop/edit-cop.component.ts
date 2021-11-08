@@ -35,12 +35,11 @@ export class EditCOPComponent implements OnInit {
      
     let data={
       title :this.editTitle.get('title').value,
-      componentId:this.dataRec.componentId
     }
     this.logicalFormInfo
-      .editSubComponent(data, this.dataRec._id)
+      .updateCOP(data, this.dataRec._id)
       .subscribe((resData) => {
-        console.log('submodulesData', resData);
+        console.log('resData', resData);
 
         this.dialogRef.close('true');
         Swal.fire({

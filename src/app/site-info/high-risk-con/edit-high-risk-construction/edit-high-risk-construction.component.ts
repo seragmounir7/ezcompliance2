@@ -12,86 +12,46 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./edit-high-risk-construction.component.scss'],
 })
 export class EditHighRiskConstructionComponent implements OnInit {
-  riskDetails: FormGroup;
-  myId: boolean;
-  Is_subMod: boolean;
-  isEdit = false;
-  enum: any;
-  subId: any;
-  riskData: any;
-  Is_Mod: any;
-  Edit = false;
-  Add = false;
-  type: string = '';
-  module = false;
-  subModule = false;
-  moduleName: boolean;
+  editTitle: FormGroup;
+  dataRec: any;
+
+
+
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
-    public upload: UploadFileServiceService,
-    public router: Router,
     public dialogRef: MatDialogRef<EditHighRiskConstructionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.riskDetails = fb.group({
-      arrObj: this.fb.array([]),
-    });
-    console.log('data =>', this.data);
+    this.dataRec = data;
   }
 
   ngOnInit(): void {
-    this.addAction();
-    console.log('data =>', this.data);
-
-    this.add().at(0).patchValue({
-      title: this.data.title,
+    console.log("this.dataRec",this.dataRec);
+    
+    this.editTitle = this.fb.group({
+      title: [this.dataRec.title, Validators.required],
     });
-  }
-
-  addAction() {
-    {
-      this.add().push(this.newAction());
-    }
-  }
-  add(): FormArray {
-    return this.riskDetails.get('arrObj') as FormArray;
-  }
-  newAction(): FormGroup {
-    return this.fb.group({
-      title: ['', Validators.required],
-    });
-  }
-
-  removeSafetyModule(i) {
-    const item = <FormArray>this.riskDetails.controls['arrObj'];
-    if (item.length > 1) {
-      item.removeAt(i);
-    }
   }
   onFormSubmit() {
-    console.log('data action=>', this.data.action);
-    this.editSubComponent();
-  }
-  editSubComponent() {
-    let SubComponentData = {
-      componentId: this.data.componentId,
-      title: this.add().at(0).get('title')?.value,
-    };
-    console.log('SubComponent=>', SubComponentData);
-    console.log('this.data.EditData=>',this.data.EditData);
+     
+    let data={
+      title :this.editTitle.get('title').value,
+    }
     this.logicalFormInfo
-      .editSubComponent(SubComponentData, this.data.EditData)
+      .updateRisk(data, this.dataRec._id)
       .subscribe((resData) => {
-        console.log('submodulesData', resData);
 
         this.dialogRef.close('true');
         Swal.fire({
           title: 'Parameter Edited successfully',
           showConfirmButton: false,
           timer: 1200,
-        });
-        this.riskDetails.reset();
-      });
+        });  
+          });
+  }
+  closeDialog(){
+    this.dialogRef.close('false');
+
   }
 }

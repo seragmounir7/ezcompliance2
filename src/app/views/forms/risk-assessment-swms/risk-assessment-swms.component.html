@@ -43,10 +43,11 @@
   </ul>
   <div class="tab-content" id="myTabContent">
     <div
+    *ngIf="RiskAssessment"
       class="tab-pane fade show active px-4 py-4"
       id="RISKAssessment"
       role="tabpanel"
-      *ngIf="RiskAssessment"
+     
       aria-labelledby="RISKAssessment-tab"
     >
       <h2>Site Information</h2>
@@ -213,343 +214,20 @@
         </div>
 
         <div class="row">
-          <div *ngFor="let item of jobTask " class="mt-2 col-4">
+          <div *ngFor="let item of jobTaskData;let i=index" class="mt-2 col-4">
             <input
               type="checkbox"
               class="form-check-input"
               [value]="item._id"
-              (change)="onJobtaskSelect($event.target.value)"
+              (change)="onJobtaskSelect($event)"
             />
             <label class="form-check-label label_2" for="inlineCheckbox1"
               >{{item.title}}</label
             >
           </div>
-          <!-- <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Assess Hazards"
-              formControlName="assessHazards"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Assess Hazards</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Cable installation into cables tray"
-              formControlName="CableInstallation"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Cable installation into cables tray</label
-            >
-          </div> -->
-        </div>
+      </div>
 
-        <!-- <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Cable Support installation"
-              formControlName="CableSupport"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Cable Support installation</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Camera Installation"
-              formControlName="CameraInstallation"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Camera Installation</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="conduit Installation in ceiling or walls"
-              formControlName="conduitCeilingWalls"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >conduit Installation in ceiling or walls</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Conduit installation in trench"
-              formControlName="ConduitTrench"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Conduit installation in trench</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="conduit installation prior to concreate Pour"
-              formControlName="conduitPour"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >conduit installation prior to concreate Pour</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Control Panel Installation"
-              formControlName="ControlPanelInstallation"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Control Panel Installation</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Heat Shrinking cable joints"
-              formControlName="HeatShrinkingJoints"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Heat Shrinking cable joints</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Hot Works"
-              formControlName="HotWorks"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Hot Works</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Installation of cables"
-              formControlName="InstallationCables"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Installation of cables</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Leaving Site"
-              formControlName="LeavingSite"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Leaving Site</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Maual Handling"
-              formControlName="MaualHandling"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Maual Handling</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Site establishment"
-              formControlName="SiteEstablishment"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Site establishment</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Terminination of fibre optic cables"
-              formControlName="fibreOpticCables"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Terminination of fibre optic cables</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Use of Elevated Work Platform "
-              formControlName="ElevatedWorkPlatform"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Use of Elevated Work Platform</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="ElevatedWorkPlatform"
-              formControlName="EWP"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Use of EWP</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Use of Ladders"
-              formControlName="UseLadders"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Use of Ladders</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Use of Plant & Equipment"
-              formControlName="PlantAndEquipment"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Use of Plant & Equipment</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Use of plant equipment"
-              formControlName="plantequipment"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Use of plant Equipment</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working false ceilings"
-              formControlName="falseCeilings"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working false ceilings</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working in communication pits less than 1.5m deep"
-              formControlName="WorkingCommunication"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working in communication pits less than 1.5m deep</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working near around Pedistrian"
-              formControlName="WorkingNearPedistrian"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near around Pedistrians</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working near Asbestos"
-              formControlName="WorkingNearAsbestos"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near Asbestos</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working near Lead containing materials"
-              formControlName="LeadContainingMaterials"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near Lead containing materials</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working outdoor"
-              formControlName="WorkingOutdoor"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working outdoors</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working with hand and power tools"
-              formControlName="WorkingHandPowertools"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working with hand and power tools</label
-            >
-          </div>
-        </div> -->
-        <hr />
+      <hr />
         <div class="row mt-4">
           <table class="table table-bordered text-center">
             <thead>
@@ -689,175 +367,19 @@
           </div> -->
         </div>
 
-        <!-- <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="mobilePlant"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working around or near mobile plant</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Work with near or near asbestos"
-              formControlName="nearAsbestos"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work with near or near asbestos</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working with hazardous substances"
-              formControlName="hazardousSubstances"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working with hazardous substances</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value=" Working with or near tilt-up/precast concrete"
-              formControlName="tiltUpPrecastConcrete"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working with or near tilt-up/precast concrete</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Risk of falls higher than 2 metres"
-              formControlName="RiskFallsHigher"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Risk of falls higher than 2 metres</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working near on or adjacent to a road or rail corridor"
-              formControlName="adjacentRoadRail"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near on or adjacent to a road or rail corridor</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value=" Working on or near telecommunication tower"
-              formControlName="telecommunicationTower"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working on or near telecommunication tower</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working near pressured gas lines or pipes"
-              formControlName="pressuredGasLinesPipes"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near pressured gas lines or pipes</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Work near explosives"
-              formControlName="WorkNearExplosives"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work near explosives</label
-            >
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Working in areas with artificial extremes of temperature"
-              formControlName="areasArtificialTemperature"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working in areas with artificial extremes of temperature</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Work in or near water or other liquid that involves a risk of drowning"
-              formControlName="liquidRiskDrowning"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work in or near water or other liquid that involves a risk of
-              drowning</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Demolition of load-bearing structure"
-              formControlName="demolitionStructure"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Demolition of load-bearing structure</label
-            >
-          </div>
-        </div>
-        <div class="row">
-          <div class="mt-2 col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Diving work"
-              formControlName="divingWork"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Diving work</label
-            >
-          </div>
-        </div> -->
-      </div>
+    </div>
       <hr />
       <div class="mt-4">
         <h2>PPE Selection</h2>
       </div>
 
       <div class="row">
-        <div *ngFor="let item of PPEselection" class="mt-2 col-4">
+        <div *ngFor="let item of PPEselection;let i=index" class="mt-2 col-4">
           <input
             type="checkbox"
             class="form-check-input"
             value="Disposable dust mask"
-            
+            [checked]="ppeArr[i]"
           />
           <label class="form-check-label label_2" for="inlineCheckbox1"
             >{{item.title}}</label
@@ -887,200 +409,7 @@
         </div> -->
       </div>
 
-      <!-- <div class="row">
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Full face respirator"
-            formControlName="faceRespirator"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Full face respirator</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Gttors"
-            formControlName="Gttors"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Gttors</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Half face respirator"
-            formControlName="halfFaceRespirator"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Half face respirator</label
-          >
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Hard Hat"
-            formControlName="hardHat"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Hard Hat</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Hearing protection"
-            formControlName="hearingProtection"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Hearing protection</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="High-Vis Clothingr"
-            formControlName="highVisClothing"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >High-Vis Clothing</label
-          >
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Lock Out Tags"
-            formControlName="lockTags"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Lock Out Tags</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Long sleeve/Long pants"
-            formControlName="longSleevePants"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Long sleeve/Long pants</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Out of Service Tags"
-            formControlName="outServiceTags"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Out of Service Tags</label
-          >
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Protective gloves"
-            formControlName="protectiveGloves"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Protective gloves</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Rescue kit"
-            formControlName="rescueKit"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Rescue kit</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Safety boots"
-            formControlName="safetyBoots"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Safety boots</label
-          >
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Safety glasses"
-            formControlName="SafetyGlasses"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Safety glasses</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Sun Screen"
-            formControlName="sunScreen"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Sun Screen</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Torch"
-            formControlName="Torch"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >torch</label
-          >
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Wide Brim Hat"
-            formControlName="wideBrimHat"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Wide Brim Hat</label
-          >
-        </div>
-      </div> -->
-
+   
       <hr />
 
       <div class="mt-4">
@@ -1088,90 +417,20 @@
       </div>
 
       <div class="row">
-        <div  *ngFor="let item of licenseAndQualification"class="mt-2 col-4">
+        <div  *ngFor="let item of licenseAndQualification;let i=index"class="mt-2 col-4">
           <input
             type="checkbox"
             class="form-check-input"
             value="Open Cable Licence"
+            [checked]="licenceArr[i]"
           />
           <label class="form-check-label label_2" for="inlineCheckbox1"
             >{{item.title}}</label
           >
         </div>
-        <!-- <div class="col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="White Card"
-            formControlName="whiteCard"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >White Card</label
-          >
-        </div>
-        <div class="col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="EWP Licence"
-            formControlName="EWPLicence"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >EWP Licence</label
-          >
-        </div> -->
-      </div>
+    </div>
 
-      <!-- <div class="row">
-        <div class="col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Working At Heights"
-            formControlName="workingHeights"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Working At Heights</label
-          >
-        </div>
-        <div class="col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Security Licence"
-            formControlName="securityLicence"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Security Licence</label
-          >
-        </div>
-        <div class="col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Asbestos Awarness"
-            formControlName="asbestosAwarness"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Asbestos Awarness</label
-          >
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Working In Confined Space"
-            formControlName="confinedSpace"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Working In Confined Space</label
-          >
-        </div>
-      </div> -->
-
+  
       <hr />
       <h2>
         Toolbox this document with all workers and contractors on sit & sign off
@@ -1233,7 +492,7 @@
   >
     <!--SWMS Forms-->
     <div class="container content-center">
-      <form class="px-4 py-4">
+      <div class="px-4 py-4">
         <div class="row">
           <div class="col-md-6">
             <div class="my-3">
@@ -1303,12 +562,24 @@
           <div class="col-md-2">
             <div class="my-3">
               <label for="exampleInputPosition" class="form-label">State</label>
-              <input
-                type="position"
-                class="form-control"
-                id="exampleInputPosition"
-                aria-describedby="emailHelp"
-              />
+              <select
+              class="form-select form-control col"
+              id="siteName"
+              aria-label="Default select example"
+              formControlName="statesSWMS"
+
+            >
+              <option selected hidden>Select</option>
+              <option value="NSW">NSW</option>
+              <option value="ACT">ACT</option>
+              <option value="QLD">QLD</option>
+              <option value="NT">NT</option>
+              <option value="SA">SA</option>
+              <option value="NZ">NZ</option>
+              <option value="TAS">TAS</option>
+              <option value="VIC">VIC</option>
+              <option value="WA">WA</option>
+            </select>
             </div>
           </div>
           <div class="col-md-6">
@@ -1384,23 +655,65 @@
               <label for="exampleInputProjectNumber" class="form-label"
                 >Jurisdiction</label
               >
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputProjectNumber"
-                aria-describedby="emailHelp"
-              />
+              <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="jurisdiction"
+            >
+              <option selected hidden>Select</option>
+              <option value="NSW">NSW</option>
+              <option value="ACT">ACT</option>
+              <option value="QLD">QLD</option>
+              <option value="NT">NT</option>
+              <option value="SA">SA</option>
+              <option value="NZ">NZ</option>
+              <option value="TAS">TAS</option>
+              <option value="VIC">VIC</option>
+              <option value="WA">WA</option>
+            </select>
             </div>
           </div>
           <div class="col-md-5">
             <div class="my-3">
               <label for="sel2">Safety Legislation</label>
-              <select multiple class="form-control" id="sel2" name="sellist2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <select  class="form-control" id="sel2" name="sellist2" formControlName="safetyLeg">
+                <option value="" selected hidden>Select</option>
+                <option value="NSW_Act">                   
+                  Act: Work Health and Safety Act 2011 (NSW)&nbsp;
+                   Regulation: Work Health and Safety Regulation 2017 (NSW)                  
+                  </option>
+              <option value="ACT_Act">
+                Act: Work Health and Safety Act 2011 (ACT)&nbsp;
+                 Regulation: Work Health and Safety Regulation 2011 (ACT)
+                </option>
+                <option value="QLD_Act"> 
+                  Act: Work Health and Safety Act 2011 (Qld)&nbsp;
+                   Regulation: Work Health and Safety Regulation 2011 (Qld)
+                  </option>
+                  <option value="NT_Act">
+                     Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) &nbsp;
+                     Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)
+                  </option>
+                  <option value="SA_Act">
+                     Act: Work Health and Safety Act 2012 (SA)&nbsp;
+                     Regulation: Work Health and Safety Regulation 2012 (SA) 
+                  </option>
+                  <option value="TAS_Act">
+                     Act: Work Health and Safety Act 2012 (Tas) &nbsp;
+                     Regulation: Work Health and Safety Regulation 2012 (Tas) 
+                  </option>
+                  <option value="NZ_Act">
+                    Act: Health and Safety at Work Act 2015 (NZ)   &nbsp;
+                    Regulation: 
+                  </option>
+                  <option value="VIC_Act">
+                     Act: Occupational Health and Safety Act 2004 (Vic) &nbsp;
+                    Regulation: Occupational Health and Safety Regulations 2017 (Vic)
+                  </option>
+                  <option value="WA_Act">
+                    Act: Occupational Safety and Health Act 1984 (WA)
+                    Regulation: Occupational Safety and Health Regulations 1996 (WA)
+                  </option>
               </select>
             </div>
           </div>
@@ -1422,123 +735,43 @@
               <label for="exampleInputProjectNumber" class="form-label"
                 >Regulator & other Legislation</label
               >
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputProjectNumber"
-                aria-describedby="emailHelp"
-              />
+              <select
+              class="form-select form-control col"
+              id="siteName"
+              aria-label="Default select example"
+              formControlName="regulator"
+            >
+              <option selected hidden>Select</option>
+              <option value="Reg_NSW">Regulator: SafeWork NSW</option>
+              <option value="Reg_ACT">Regulator: WorkSafe ACT</option>
+              <option value="Reg_QLD">Regulator: Workplace Health and Safety Queensland</option>
+              <option value="Reg_NT">Regulator: NT WorkSafe</option>
+              <option value="Reg_SA">Regulator: SafeWork SA</option>
+              <option value="Reg_TAS">Regulator: WorkSafe Tasmania</option>
+              <option value="Reg_NZ">Regulator: WorkSafe New Zealand</option>
+              <option value="Reg_VIC">Regulator: WorkSafe Victoria</option>
+              <option value="Reg_WA">Regulator: WorkSafe WA</option>
+            </select>
             </div>
           </div>
         </div>
         <hr />
 
         <h2>High Risk Construction</h2>
-        <div class="row py-4">
-          <div class="col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
+        <div class="row">
+          <div *ngFor="let item of highRiskConstruction;let i=index" class="mt-2 col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Working in or near trenches or shafts deeper than 1.5metres"
+              [checked]="riskArr[i]"
+            />
             <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Fulltime Employee</label
+              >{{item.title}}</label
             >
           </div>
-          <div class="col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work in or near a confined space</label
-            >
-          </div>
-          <div class="col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work in an area that may have a contaminated or flamable
-              atmosphere</label
-            >
-          </div>
-
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working around or near mobile plant</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working with near or near asbestos</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working with hazardous substances</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working with or near tilt-up/precast concrete</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Risk of falls higher than 2 metres</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near on or adjacent to a road or rail corridor</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working on or near telecommunication tower</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Working near pressured gas lines or pipe</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work near explosives</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work in areas with artificial extremesof temperature</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <div>
-              <input class="form-check-input" type="checkbox" value="no" />
-              <label class="form-check-label label_2" for="inlineCheckbox1"
-                >Work in or near water other liquid that involves a risk of
-                drowning</label
-              >
-            </div>
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Demolition of load-bearing structure</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Diving</label
-            >
-          </div>
-          <hr />
-        </div>
-        <hr />
+      </div>
+    <hr />
         <div class="row">
           <table class="table table-bordered text-center">
             <thead>
@@ -1638,130 +871,19 @@
         <hr />
         <h2>PPE Selection</h2>
         <div class="row">
-          <div class="mt-2 col-4">
-            <p>
-              <input class="form-check-input" type="checkbox" value="no" />
-              <label class="form-check-label label_2" for="inlineCheckbox1"
-                >Disposable dust mask</label
-              >
-
-              <label class="form-check-label label_2" for="inlineCheckbox1"
-                >Fulltime Employee</label
-              >
-            </p>
-          </div>
-
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
+          <div *ngFor="let item of PPEselection;let i=index" class="mt-2 col-4">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Disposable dust mask"
+              [checked]="ppeArr[i]"
+            />
             <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Dust Masks</label
+              >{{item.title}}</label
             >
           </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Face sheild</label
-            >
-          </div>
-
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Full face respirator</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Gattors</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Half face respirator</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Hard Hats</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Hearing protection</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >High-Vis Clothing</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Lock Out Tags</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Long sleeve/Long pants</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Out of service Tags</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Protective gloves</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Rescue kit</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Safety boots</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Safety glasses</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Sun Screen</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Torch</label
-            >
-          </div>
-          <div class="mt-2 col-4">
-            <input class="form-check-input" type="checkbox" value="no" />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Wide Brim Hat</label
-            >
-          </div>
-        </div>
-        <hr />
+    </div>
+      <hr />
         <h2>SDS Registor</h2>
         <div class="row">
           <div class="col-md-3">
@@ -2190,7 +1312,7 @@
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

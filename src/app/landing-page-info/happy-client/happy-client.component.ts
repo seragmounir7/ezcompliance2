@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AddHappyClientComponent } from './add-happy-client/add-happy-client.component';
 import { AddClientInfoComponent } from './add-client-info/add-client-info.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-happy-client',
   templateUrl: './happy-client.component.html',
@@ -31,7 +32,8 @@ export class HappyClientComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.clientDetail = fb.group({
       arrObj: this.fb.array([]),
@@ -41,6 +43,7 @@ export class HappyClientComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getHappyClient();
+    this.setTitle.setTitle('WHS-Happy Client');
   }
   getHappyClient() {
     this.mode = 'HappyClient';

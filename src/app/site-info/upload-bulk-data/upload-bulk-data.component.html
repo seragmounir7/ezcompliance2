@@ -1,0 +1,86 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Task</th>
+        <th scope="col">High Risk</th>
+        <th scope="col">PPE</th>
+        <th scope="col">Licence</th>
+        <th scope="col">Indentify Hazards</th>
+        <th scope="col">Controls and action required</th>
+      </tr>
+    </thead>
+    <tbody [formGroup]="uploadData">
+        <ng-container formArrayName="arrObj">
+
+      <tr *ngFor="let control of add().controls; let i = index"
+      [formGroupName]="i">
+        <td>{{i+1}}</td>
+        <td>
+            <input
+            type="text"
+            formControlName="task"
+            class="form-control sign"
+            id="name"
+          />
+        </td>
+        <td>
+            <input
+            type="text"
+            formControlName="highRisk"
+            class="form-control sign"
+            id="name"
+          />
+        </td>
+        <td>
+            <input
+            type="text"
+            formControlName="ppe"
+            class="form-control sign"
+            id="name"
+          />
+        </td>
+        <td>
+            <input
+            type="text"
+            formControlName="licence"
+            class="form-control sign"
+            id="name"
+          />
+        </td>
+        <td>
+            <input
+            type="text"
+            formControlName="identifyHaz"
+            class="form-control sign"
+            id="name"
+          />
+        </td>
+        <td>
+            <input
+            type="text"
+            formControlName="contrlAct"
+            class="form-control sign"
+            id="name"
+          />
+        </td>
+     
+      </tr>
+    </ng-container>
+     
+    </tbody>
+  </table>
+  <div class="col mt-2 text-center ">
+    <span class="material-icons " (click)="addAction()"
+      >add_circle_outline
+    </span>
+    <span class="material-icons" (click)="removeSafetyModule()">
+      remove_circle_outline
+    </span>
+  </div>
+  <div class="col">
+    <!-- <span class="material-icons" (click)="removeSafetyModule(i)">
+      remove_circle_outline
+    </span> -->
+    <button class="btn btn-primary"(click)="uploadAllData()">Upload</button>
+  </div>

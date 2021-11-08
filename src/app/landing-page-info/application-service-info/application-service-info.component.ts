@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AddApplicationServiceInfoComponent } from './add-application-service-info/add-application-service-info.component';
 import { AddServiceInfoComponent } from './add-service-info/add-service-info.component';
 import Swal from 'sweetalert2';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-application-service-info',
   templateUrl: './application-service-info.component.html',
@@ -42,7 +43,8 @@ export class ApplicationServiceInfoComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.serviceDetail = fb.group({
       arrObj: this.fb.array([]),
@@ -54,6 +56,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getServiceData();
+    this.setTitle.setTitle('WHS-Application Service Info');
   }
 
   service: any;

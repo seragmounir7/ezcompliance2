@@ -1,6 +1,8 @@
 .main-sidebar {
   height: 100vh;
-  overflow: unset !important;
+  //@extend: unset !important;
+  overflow: scroll;
+
   position: fixed;
 }
 .m-t-20 {

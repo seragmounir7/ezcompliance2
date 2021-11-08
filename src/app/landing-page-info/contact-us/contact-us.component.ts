@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { ViewContactComponent } from './view-contact/view-contact.component';
@@ -35,7 +36,7 @@ export class ContactUsComponent implements OnInit {
     public upload: UploadFileServiceService,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    
+    private setTitle: SetTitleService
   ) {
     
     this.ContactUsDetail = this.fb.group({
@@ -45,41 +46,17 @@ export class ContactUsComponent implements OnInit {
       query: ['', Validators.required],
       
     });
-    // this.flexibleInfo = this.fb.group({
-    //   moduleId: '',
-    //   title: ['', Validators.required],
-    //   description: ['', Validators.required],
-    //   fileUrl: ['', Validators.required],
-    // });
+    
   }
 
   ngOnInit(): void {
    this.getContact();
-    // for (let i = 0; i < 6; i++) {
-    //   this.addAction()
-    // }
-    // this.addAction();
+   this.setTitle.setTitle('WHS-Contact Us');
     
     
   }
 
-  // addAction() {
-  //   {
-  //     this.add().push(this.newAction());
-  //   }
-  // }
-  // add(): FormArray {
-  //   return this.flexibleDetail.get('arrObj') as FormArray;
-  // }
-  // newAction(): FormGroup {
-  //   return this.fb.group({
-  //     fileUrl: ['', Validators.required],
-  //     subTitle: ['', Validators.required],
-  //     title: ['', Validators.required],
-  //     description: ['', Validators.required],
-  //   });
-  // }
- 
+  
 
   removeSafetyModule(i) {
     const item = <FormArray>this.ContactUsDetail.controls['arrObj'];
@@ -102,6 +79,7 @@ export class ContactUsComponent implements OnInit {
   openView(id) {
     console.log("dataView",this.dataContact)
 		let dialogRef = this.dialog.open(ViewContactComponent, {
+      width: '800px',
 		  data: {
 			action:"view",
       headerData:  this.dataContact,

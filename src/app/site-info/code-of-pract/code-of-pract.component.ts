@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-code-of-pract',
   templateUrl: './code-of-pract.component.html',
@@ -20,15 +21,6 @@ export class CodeOfPractComponent implements OnInit {
   displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-
-
-
-
-
-
-
-
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -36,18 +28,19 @@ export class CodeOfPractComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog, private setTitle: SetTitleService) {}
 
   ngOnInit(): void {
     this.getAllCodeOfPractice();
+    this.setTitle.setTitle('WHS-Code of Practice');
   }
 
   getAllCodeOfPractice() {
-    this.mode = 'codeOfPractice';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+   
+    this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
       console.log('codeOfPractice=>', res);
       // this.jobTaskData = res.data[0].subComponents;
-      let data = res.data[0].subComponents;
+      let data = res.data;
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
@@ -84,7 +77,7 @@ export class CodeOfPractComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteSubComponent(item._id)
+        .deleteCOP(item._id)
         .subscribe((res) => {
           Swal.fire({
             title: 'Parameter Deleted successfully',

@@ -55,13 +55,17 @@ export class AddJobTaskComponent implements OnInit {
     }
   }
   onFormSubmit() {
-    console.log(this.jobTaskDetails.value);
+    console.log(this.jobTaskDetails.get('arrObj').value);
     let data={
       arrObj:this.jobTaskDetails.get('arrObj').value
     }
-    this.logicalFormInfo.addJobTask(data).subscribe((data) => {
+    this.logicalFormInfo.addMultipleJobTask(data).subscribe((data) => {
       console.log('JOBTask=>', data);
-
+      Swal.fire({
+        title: 'Parameter Added successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      }); 
       this.router.navigate(['/admin/siteInfo/jobTask']);      
     },(err)=>{console.error(err);} 
   

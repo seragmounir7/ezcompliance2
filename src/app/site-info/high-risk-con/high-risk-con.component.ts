@@ -16,6 +16,7 @@ import { AfterViewInit,ViewChild } from '@angular/core';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-high-risk-con',
   templateUrl: './high-risk-con.component.html',
@@ -44,13 +45,15 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     private logicalFormInfo: LogicalFormInfoService,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle:SetTitleService
   ) {
     
   }
 
   ngOnInit(): void {
-    this.getHighRiskById();
+    this.getAllHighRisk();
+    this.setTitle.setTitle('WHS-High Risk Construction List');
   }
   
 
@@ -67,7 +70,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //       this.formData = data;
   //     });
   // }
-  // getHighRiskById() {
+  // getAllHighRisk() {
   //   this.mode = 'Risk';
   //   this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
   //     console.log('riskDetails data=>', res);
@@ -98,7 +101,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //     console.log('-> openDialog -> result', result);
 
   //     if ((result = 'true')) {
-  //       this.getHighRiskById();
+  //       this.getAllHighRisk();
   //     }
   //     console.log('The dialog was closed');
   //   });
@@ -116,7 +119,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //   dialogRef.afterClosed().subscribe((result) => {
   //     console.log('openDialog->result', result);
   //     if ((result = 'true')) {
-  //       this.getHighRiskById();
+  //       this.getAllHighRisk();
   //     }
   //   });
 
@@ -135,7 +138,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //           .subscribe((res) => {
   //             Swal.fire('Deleted Successfully');
   //             console.log('deleted res', res);
-  //             this.getHighRiskById();
+  //             this.getAllHighRisk();
   //           });
   //       },
   //       (reason) => {
@@ -168,12 +171,11 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //     return `with: ${reason}`;
   //   }
   // }
-  getHighRiskById() {
-    this.mode = 'Risk';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
+  getAllHighRisk() {
+    this.logicalFormInfo.getAllRisk().subscribe((res:any) => {
       console.log('Risk=>', res);
       // this.jobTaskData = res.data[0].subComponents;
-      let data = res.data[0].subComponents;
+      let data = res.data;
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
@@ -193,7 +195,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getHighRiskById();
+        this.getAllHighRisk();
       }
       console.log("The dialog was closed");
     });
@@ -210,7 +212,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteSubComponent(item._id)
+        .deleteRisk(item._id)
         .subscribe((res) => {
           Swal.fire({
             title: 'Parameter Deleted successfully',
@@ -218,7 +220,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
             timer: 1200,
           });
           console.log('deleted res', res);
-          this.getHighRiskById();
+          this.getAllHighRisk();
             
         });
       }

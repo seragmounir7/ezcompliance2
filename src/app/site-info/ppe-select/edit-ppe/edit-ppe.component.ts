@@ -9,7 +9,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./edit-ppe.component.scss']
 })
 export class EditPPEComponent implements OnInit {
-  editTitle: FormGroup;
+  editTitle!: FormGroup;
   dataRec: any;
   constructor(
     private fb: FormBuilder,
@@ -28,13 +28,12 @@ export class EditPPEComponent implements OnInit {
   onFormSubmit() {
      
     let data={
-      title :this.editTitle.get('title').value,
-      componentId:this.dataRec.componentId
+      title :this.editTitle.get('title').value
     }
     this.logicalFormInfo
-      .editSubComponent(data, this.dataRec._id)
+      .updatePPE(data, this.dataRec._id)
       .subscribe((resData) => {
-        console.log('submodulesData', resData);
+        console.log('resData', resData);
 
         this.dialogRef.close('true');
         Swal.fire({
