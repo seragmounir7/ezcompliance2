@@ -6,14 +6,16 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { EditPPEComponent } from './edit-ppe/edit-ppe.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { EditHazardComponent } from './edit-hazard/edit-hazard.component';
 @Component({
-  selector: 'app-ppe-select',
-  templateUrl: './ppe-select.component.html',
-  styleUrls: ['./ppe-select.component.scss'],
+  selector: 'app-identify-hazards',
+  templateUrl: './identify-hazards.component.html',
+  styleUrls: ['./identify-hazards.component.scss']
 })
-export class PpeSelectComponent implements AfterViewInit,OnInit {
+export class IdentifyHazardsComponent implements OnInit {
+
+  mode: any;
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
@@ -57,7 +59,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     });
   }
   edit(element){
-    const dialogRef = this.dialog.open(EditPPEComponent, {
+    const dialogRef = this.dialog.open(EditHazardComponent, {
       width: "550px",
       data: element,
     });
@@ -94,4 +96,5 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
       }
     });
   }
+
 }

@@ -4,17 +4,18 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 @Component({
-  selector: 'app-edit-ppe',
-  templateUrl: './edit-ppe.component.html',
-  styleUrls: ['./edit-ppe.component.scss']
+  selector: 'app-edit-hazard',
+  templateUrl: './edit-hazard.component.html',
+  styleUrls: ['./edit-hazard.component.scss']
 })
-export class EditPPEComponent implements OnInit {
+export class EditHazardComponent implements OnInit {
+
   editTitle!: FormGroup;
   dataRec: any;
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
-    public dialogRef: MatDialogRef<EditPPEComponent>,
+    public dialogRef: MatDialogRef<EditHazardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.dataRec = data;

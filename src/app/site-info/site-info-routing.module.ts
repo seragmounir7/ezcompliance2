@@ -1,3 +1,5 @@
+import { ProjectManagerComponent } from './project-manager/project-manager.component';
+import { UploadBulkDataComponent } from './upload-bulk-data/upload-bulk-data.component';
 import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
 import { AddCOPComponent } from './code-of-pract/add-cop/add-cop.component';
 import { CodeOfPractComponent } from './code-of-pract/code-of-pract.component';
@@ -44,6 +46,8 @@ const routes: Routes = [
   { path: 'codeOfpract', component: CodeOfPractComponent },
   { path: 'addCOP', component: AddCOPComponent },
   { path: 'editCOP', component: EditCOPComponent },
+  { path: 'uploadData', component: UploadBulkDataComponent },
+  { path: 'projMang', component: ProjectManagerComponent },
 ];
 
 @NgModule({

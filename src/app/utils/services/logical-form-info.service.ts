@@ -136,7 +136,28 @@ deleteLicenceCat(id){
 }
   ///licence category end crud///
 
-  //job task crud///
+  //risk crud///
+  addRisk(data){
+    return this.https.post(this.apiUrl + 'risk/add', data);
+  }
+  addMultipleRisk(data){
+    return this.https.post(this.apiUrl + 'risk/add/multiple', data);
+  }
+  updateRisk(data,id){
+    return this.https.put(this.apiUrl + 'risk/update/' + id, data);      
+  }
+  deleteRisk(id){
+    return this.https.delete(this.apiUrl + 'risk/delete/' + id)
+  }
+  getAllRisk(){
+    return this.https.get(this.apiUrl + 'risk/getAll')
+  }
+  getRiskById(id){
+    return this.https.get(this.apiUrl + 'risk/get/' + id)
+  }
+  //add risk end
+
+  //add job task
   addJobTask(data){
     return this.https.post(this.apiUrl + 'jobTask/add', data);
   }
@@ -154,6 +175,52 @@ deleteLicenceCat(id){
   }
   getJobtaskById(id){
     return this.https.get(this.apiUrl + 'jobTask/get/' + id)
-
   }
+  //add job task end
+
+  //add ppe
+  addPPE(data){
+    return this.https.post(this.apiUrl + 'ppe/add', data);
+  }
+  addMultiplePPE(data){
+    return this.https.post(this.apiUrl + 'ppe/add/multiple', data);
+  }
+  updatePPE(data,id){
+    return this.https.put(this.apiUrl + 'ppe/update/' + id, data);      
+  }
+  deletePPE(id){
+    return this.https.delete(this.apiUrl + 'ppe/delete/' + id)
+  }
+  getAllPPE(){
+    return this.https.get(this.apiUrl + 'ppe/getAll')
+  }
+  getPPEById(id){
+    return this.https.get(this.apiUrl + 'ppe/get/' + id)
+  }
+  //add ppe end
+
+  //add Identify Hazards
+ 
+  //add Identify Hazardsend
+
+  ///project manager/////
+  addProjectMang(data){
+    return this.https.post(this.apiUrl + 'projectManager/add', data);
+  }
+  addMultipleProjectManager(data){
+    return this.https.post(this.apiUrl + 'projectManager/add/multiple', data);
+  }
+  updateProjectMang(data,id){
+    return this.https.put(this.apiUrl + 'projectManager/update/' + id, data);      
+  }
+  deleteProjectMang(id){
+    return this.https.delete(this.apiUrl + 'projectManager/delete/' + id)
+  }
+  getAllProjectMang(){
+    return this.https.get(this.apiUrl + 'projectManager/getAll')
+  }
+  getProjectMangById(id){
+    return this.https.get(this.apiUrl + 'projectManager/get/' + id)
+  }
+  ///project manager end/////
 }

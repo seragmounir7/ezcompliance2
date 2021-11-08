@@ -1,10 +1,13 @@
 import { MatSelect } from '@angular/material/select';
-import { Component, OnInit, QueryList, ViewChildren, AfterViewInit, AfterViewChecked } from '@angular/core';
 import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-} from '@angular/forms';
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  AfterViewInit,
+  AfterViewChecked,
+} from '@angular/core';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -26,7 +29,8 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   licenceCatAll: any = [];
   highRiskConstructionData: any = [];
   task: any = [];
-
+  riskLevel='';
+  residuleRiskL='';
   PPEselection = [
     { label: 'Disposable dust mask', value: '' },
     { label: 'Dust Mas', value: '' },
@@ -118,88 +122,139 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
-    private setTitle:SetTitleService
-
+    private setTitle: SetTitleService
   ) {}
-
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Set Relation');
+
     this.JobTaskDetail = this.fb.group({
       highRiskConstr: this.fb.array([]),
-      // PPE: this.fb.array([]),
-      // Licence: this.fb.array([]),
-      // codeOfPract: this.fb.array([]),
+      PPE: this.fb.array([]),
+      LicenceCat: this.fb.array([]),
+      identifyHazrds: this.fb.array([]),
+      contrActReq: this.fb.array([]),
+      codeOfPract: this.fb.array([]),
     });
 
-    this.addActionHighRisk();
-    this.addActionHighRisk();
-    this.addActionHighRisk();
     this.getJobTask();
-    this.getHighRiskById();
+    this.getAllHighRisk();
     this.getAllLicence();
     this.getAllCategories();
-    this.getPPEById();
-    this.getCodOfCond();
+    this.getAllPPE();
+    this.getAllHazard();
+    //  this.getCodOfCond();
   }
-  
-  ngAfterViewInit() {
-    // setTimeout(() => {
-    //   console.log(this.Risk.toArray());
 
-    // }, 2000);
-    
-// this.Risk.toArray().forEach((res)=>{
-  
-// console.log("rres",res);
+  ngAfterViewInit() {}
 
-//     });
-//     this.risk.changes.subscribe((res)=>{
-// console.log(res);
-
-//     })
-    // console.log("this.risk._results()",this.risk._results);
-    // console.log(this.risk.toArray()[0]);
-  }
- 
   addActionHighRisk() {
     {
-      this.addHighRisk().push(this.newActionHighRisk());
+      this.highRiskFA().push(this.highRiskFG());
     }
   }
-  addHighRisk(): FormArray {
+  addActionPPE() {
+    {
+      this.PPE_FA().push(this.PPE_FG());
+    }
+  }
+  addActionLicnCat() {
+    {
+      this.licenceCatFA().push(this.licenceCatFG());
+    }
+  }
+  addActionContrActReq() {
+    {
+      this.contrActReqFA().push(this.contrActReqFG());
+    }
+  }
+  addActionIdentifyHazrds() {
+    {
+      this.identifyHazrdsFA().push(this.identifyHazrdsFG());
+    }
+  }
+  addActionCOP() {
+    {
+      this.addCOP().push(this.newActionCOP());
+    }
+  }
+  highRiskFA(): FormArray {
     return this.JobTaskDetail.get('highRiskConstr') as FormArray;
   }
-  newActionHighRisk(): FormGroup {
+  PPE_FA(): FormArray {
+    return this.JobTaskDetail.get('PPE') as FormArray;
+  }
+  licenceCatFA(): FormArray {
+    return this.JobTaskDetail.get('LicenceCat') as FormArray;
+  }
+  identifyHazrdsFA(): FormArray {
+    return this.JobTaskDetail.get('identifyHazrds') as FormArray;
+  }
+  contrActReqFA(): FormArray {
+    return this.JobTaskDetail.get('contrActReq') as FormArray;
+  }
+  addCOP(): FormArray {
+    return this.JobTaskDetail.get('codeOfPract') as FormArray;
+  }
+  highRiskFG(): FormGroup {
     return this.fb.group({
-      highRiskArr: ['']
+      highRiskArr: [''],
+    });
+  }
+  PPE_FG(): FormGroup {
+    return this.fb.group({
+      ppeArr: [''],
+    });
+  }
+  licenceCatFG(): FormGroup {
+    return this.fb.group({
+      licenceArr: [''],
+    });
+  }
+  identifyHazrdsFG(): FormGroup {
+    return this.fb.group({
+      hazardsArr: [''],
+    });
+  }
+  contrActReqFG(): FormGroup {
+    return this.fb.group({
+      contrActReqArr: [''],
+    });
+  }
+  newActionCOP(): FormGroup {
+    //code of practice
+    return this.fb.group({
+      copArr: [''],
     });
   }
 
   onFormSubmit() {
     console.log(this.JobTaskDetail);
   }
-
   getJobTask() {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
-      console.log(this.Risk.toArray());
-
+      this.jobTaskData.forEach(() => {
+        this.addActionHighRisk();
+        this.addActionPPE();
+        this.addActionLicnCat();
+       // this.addActionCOP();
+        this.addActionContrActReq();
+        this.addActionIdentifyHazrds();  
+      });
     });
   }
-  getHighRiskById() {
-    this.mode = 'Risk';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
-      console.log('Risk=>', data);
-      this.highRiskConstructionData = data.data[0];
+  getAllHighRisk() {
+    this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
+      console.log('Risk=>', res);
+      this.highRiskConstructionData = res.data;
     });
   }
-  getPPEById() {
-    this.mode = 'PPE';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
-      console.log('PPE=>', data);
-      this.PPESelectionData = data.data[0];
+  getAllPPE() {
+    this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
+      console.log('PPE=>', res);
+      this.PPESelectionData = res.data;
     });
   }
   getCodOfCond() {
@@ -215,6 +270,12 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       this.licenseAndQual = res.data;
     });
   }
+  getAllHazard() {
+    this.logicalFormInfo.getAllLicence().subscribe((res) => {
+      console.log('Licence=>', res);
+      this.licenseAndQual = res.data;
+    });
+  }
   getAllCategories() {
     this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
@@ -223,11 +284,13 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   }
 
   // setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
-  setRelation( ppeIDs, codOfPractIds, title, id) {
-   // console.log('risk', riskIds);
-    console.log('ppe', ppeIDs);
-   /// console.log('licence', licenceIds);
-    console.log('codOfPract', codOfPractIds);
+  setRelation(title, id) {
+    // console.log('risk', riskIds);
+    console.log(this.JobTaskDetail.controls['highRiskConstr'].value[0]);
+
+    // console.log('ppe', ppeIDs);
+    /// console.log('licence', licenceIds);
+    // console.log('codOfPract', codOfPractIds);
     console.log('index', title);
     console.log('id', id);
 
@@ -243,16 +306,16 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     //     risk.push(data);
     //   });
     // }
-    if (ppeIDs) {
-      ppeIDs.forEach((element) => {
-        let data = {
-          PPEId: element,
-        };
-        PPE.push(data);
-      });
-    }
+    // if (ppeIDs) {
+    //   ppeIDs.forEach((element) => {
+    //     let data = {
+    //       PPEId: element,
+    //     };
+    //     PPE.push(data);
+    //   });
+    // }
     if (this.licenseAndQualificationData.length) {
-     // console.log("this.licenseAndQualificationData",this.licenseAndQualificationData)
+      // console.log("this.licenseAndQualificationData",this.licenseAndQualificationData)
       this.licenseAndQualificationData.forEach((element) => {
         let data = {
           licenceId: element._id,
@@ -260,14 +323,14 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
         licence.push(data);
       });
     }
-    if (codOfPractIds) {
-      codOfPractIds.forEach((element) => {
-        let data = {
-          codeOfPracticeId: element,
-        };
-        codeOfPractice.push(data);
-      });
-    }
+    // if (codOfPractIds) {
+    //   codOfPractIds.forEach((element) => {
+    //     let data = {
+    //       codeOfPracticeId: element,
+    //     };
+    //     codeOfPractice.push(data);
+    //   });
+    // }
     //  console.log(risk);
     //  console.log(PPE);
     //  console.log(licence);
@@ -288,7 +351,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
         title: 'Relation set successfully',
         showConfirmButton: false,
         timer: 1200,
-      }); 
+      });
     });
   }
   categorySel(catArr) {
@@ -302,7 +365,9 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
         }
       });
     });
-    console.log(" this.licenseAndQualificationData", this.licenseAndQualificationData);
-    
+    console.log(
+      ' this.licenseAndQualificationData',
+      this.licenseAndQualificationData
+    );
   }
 }

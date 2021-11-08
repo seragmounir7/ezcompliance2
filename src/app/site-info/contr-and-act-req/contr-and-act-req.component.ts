@@ -1,19 +1,20 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { AfterViewInit, ViewChild } from '@angular/core';
+import {  ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { EditPPEComponent } from './edit-ppe/edit-ppe.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { EditContActComponent } from './edit-cont-act/edit-cont-act.component';
 @Component({
-  selector: 'app-ppe-select',
-  templateUrl: './ppe-select.component.html',
-  styleUrls: ['./ppe-select.component.scss'],
+  selector: 'app-contr-and-act-req',
+  templateUrl: './contr-and-act-req.component.html',
+  styleUrls: ['./contr-and-act-req.component.scss']
 })
-export class PpeSelectComponent implements AfterViewInit,OnInit {
+export class ContrAndActReqComponent implements OnInit {
+
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
@@ -57,7 +58,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     });
   }
   edit(element){
-    const dialogRef = this.dialog.open(EditPPEComponent, {
+    const dialogRef = this.dialog.open(EditContActComponent, {
       width: "550px",
       data: element,
     });
@@ -94,4 +95,5 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
       }
     });
   }
+
 }
