@@ -42,7 +42,7 @@ import { EditCustComponent } from './add-customer/edit-cust/edit-cust.component'
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent
+    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent,
   ],
 
   imports: [

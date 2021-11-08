@@ -4,6 +4,7 @@ import { AppService } from '../../utils/services/app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../utils/services/auth.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private appService: AppService,
     private router: Router,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private setTitle: SetTitleService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required,Validators.email]),
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.renderer.addClass(document.querySelector('app-root'), 'login-page');
+    this.setTitle.setTitle('WHS-Login');
   }
 
   login() {

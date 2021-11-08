@@ -34,7 +34,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
     this.getAllJobTask();
     this.setTitle.setTitle('WHS-Job Task List');
   }
-
+ 
   getAllJobTask() {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);

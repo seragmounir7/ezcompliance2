@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { ViewContactComponent } from './view-contact/view-contact.component';
@@ -35,7 +36,7 @@ export class ContactUsComponent implements OnInit {
     public upload: UploadFileServiceService,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    
+    private setTitle: SetTitleService
   ) {
     
     this.ContactUsDetail = this.fb.group({
@@ -50,7 +51,7 @@ export class ContactUsComponent implements OnInit {
 
   ngOnInit(): void {
    this.getContact();
-   
+   this.setTitle.setTitle('WHS-Contact Us');
     
     
   }

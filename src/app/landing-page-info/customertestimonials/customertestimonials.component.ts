@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-customertestimonials',
   templateUrl: './customertestimonials.component.html',
@@ -41,7 +42,8 @@ export class CustomertestimonialsComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.testiomnial = this.fb.group({
       title: ['', Validators.required],
@@ -54,6 +56,7 @@ export class CustomertestimonialsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTestimonal();
+    this.setTitle.setTitle('WHS-Customer Testiomnial');
   }
   getTestimonal() {
     this.mode = 'Testimonial';

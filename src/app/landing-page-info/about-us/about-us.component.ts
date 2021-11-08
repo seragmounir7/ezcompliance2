@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import { EditTeamInfoComponent } from './edit-team-info/edit-team-info.component';
 import { AddServiceInfoComponent } from '../application-service-info/add-service-info/add-service-info.component';
 import { AddTeamInfoComponent } from './add-team-info/add-team-info.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
@@ -41,7 +42,8 @@ export class AboutUsComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.companyDetail = this.fb.group({
       imageUrl: ['', Validators.required],
@@ -56,7 +58,7 @@ export class AboutUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.setTitle.setTitle('WHS-About Us');
     this.getTeam();
   }
   /////////////////////// 61767ab18031f2102a69ef71 it is aboutusId and it never  be change so plz do not remove from this //////////////////

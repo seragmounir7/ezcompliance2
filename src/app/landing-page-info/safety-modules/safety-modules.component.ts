@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AddSafetyModuleComponent } from './add-safety-module/add-safety-module.component';
 import { AddModulesInfoComponent } from './add-modules-info/add-modules-info.component';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-safety-modules',
   templateUrl: './safety-modules.component.html',
@@ -34,7 +35,8 @@ export class SafetyModulesComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.safetyDetail = fb.group({
       mode: 'Safety',
@@ -45,6 +47,7 @@ export class SafetyModulesComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getSafety();
+    this.setTitle.setTitle('WHS-Safty Module');
   }
   getSafety() {
     this.mode = 'Safety';

@@ -19,9 +19,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SiteInfoComponent } from './site-info.component';
 import { AddLicenceCatComponent } from './licence-and-qual/licence-cat/add-licence-cat/add-licence-cat.component';
+import { AddSiteComponent } from './add-site-info/add-site/add-site.component';
+import { EditSiteComponent } from './add-site-info/edit-site/edit-site.component';
 
 const routes: Routes = [
-  { path: 'addSite', component: AddSiteInfoComponent },
+  { path: 'addSite', component: AddSiteInfoComponent, children:[
+    { path: 'addSite1', component: AddSiteComponent},
+    { path: 'editSite', component: EditSiteComponent}
+  ] },
   { path: 'addCustomer', component: AddCustomerComponent },
   { path: 'jobTask', component: JobTaskComponent},
   {path:'addJobTask',component:AddJobTaskComponent},

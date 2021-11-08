@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-code-of-pract',
   templateUrl: './code-of-pract.component.html',
@@ -36,10 +37,11 @@ export class CodeOfPractComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog, private setTitle: SetTitleService) {}
 
   ngOnInit(): void {
     this.getAllCodeOfPractice();
+    this.setTitle.setTitle('WHS-Code of Practice');
   }
 
   getAllCodeOfPractice() {

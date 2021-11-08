@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { data } from 'jquery';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-header-info',
   templateUrl: './header-info.component.html',
@@ -43,7 +44,8 @@ export class HeaderInfoComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    public router: Router
+    public router: Router,
+    private setTitle: SetTitleService
   ) {
     this.serviceDetail = fb.group({
       title: ['', Validators.required],
@@ -53,6 +55,7 @@ export class HeaderInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeaderById();
+    this.setTitle.setTitle('WHS-Header Info');
   }
   Added() {
     if (this.Edit == true) {

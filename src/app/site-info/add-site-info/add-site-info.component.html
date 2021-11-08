@@ -1,118 +1,70 @@
-<section class="content">
-<div class="container px-4 py-4 bg-white">
-  <h1>Site Information</h1>
 
-  <div class="row">
-    <!-- <div class="my-3 col">
-      <p for="exampleFormControlInput1" class="form-Label">Job Number</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="jobNumber"
-        id="siteName"
-      />
-    </div> -->
-    <div class="my-3 col-6">
-      <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="siteName"
-        id="siteName"
-      />
+
+<h2>Site Information List</h2>
+    <div class="col ml-2 mb-2">
+      
+      <div class="col-sm-9" style="display: flex; justify-content: flex-end">
+        <span class="material-icons" (click)="openDialog('abcd')" style="cursor: pointer">
+            control_point
+        </span>
     </div>
-    <div class="my-3 col-6">
-      <p for="exampleFormControlInput1" class="form-Label">Site Foremen</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="siteName"
-        id="siteName"
-      />
     </div>
-  </div>
-  <!-- <div class="row">
-    <div class="my-3 col">
-      <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="customerName"
-        id="siteName"
-      />
+    <div class="mat-elevation-z8 ml-2">
+      <table mat-table [dataSource]="dataSource">
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element">{{element.index}}</td>
+        </ng-container>
+    
+        <!-- Name Column -->
+       
+    <!-- Name Column -->
+    <ng-container matColumnDef="siteName">
+      <th mat-header-cell *matHeaderCellDef> Site Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.siteName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="siteForemen">
+      <th mat-header-cell *matHeaderCellDef> Site Foremen </th>
+      <td mat-cell *matCellDef="let element"> {{element.siteForemen}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="streetAddress">
+      <th mat-header-cell *matHeaderCellDef> Street Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.streetAddress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Suburb">
+      <th mat-header-cell *matHeaderCellDef> Suburb </th>
+      <td mat-cell *matCellDef="let element"> {{element.Suburb}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="State">
+      <th mat-header-cell *matHeaderCellDef> State </th>
+      <td mat-cell *matCellDef="let element"> {{element.State}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let element"(click)="edit(element)"> <i class="fas fa-pencil-alt "></i> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element"(click)="delete(element)"> <i class="fas fa-trash "></i> 
+      </td>
+    </ng-container>
+
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons 
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
     </div>
-    <div class="my-3 col">
-      <p for="exampleFormControlInput1" class="form-Label">Customer Contact</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="customerContact"
-        id="siteName"
-      />
-    </div>
-  </div> -->
-  <div class="row">
-    <div class="my-3 col-2">
-      <p for="exampleFormControlInput1" class="form-Label">Street Number</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="streetNumber"
-        id="siteName"
-      />
-    </div>
-    <div class="my-3 col-4">
-      <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="streetAddress"
-        id="siteName"
-      />
-    </div>
-    <div class="my-3 col-2">
-      <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="suburb"
-        id="siteName"
-      />
-    </div>
-    <div class="my-3 col-4">
-      <p for="exampleFormControlInput1" class="form-Label">State</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="state"
-        id="siteName"
-      />
-    </div>
-  </div>
-<div class="btn btn-primary">
-Submit
-</div>
-  <!-- <div class="row">
-    <div class="my-3 col">
-      <p for="exampleFormControlInput1" class="form-Label">
-        Customer Contact Phone
-      </p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="customerContactPhone"
-        id="siteName"
-      />
-    </div>
-    <div class="my-3 col">
-      <p for="exampleFormControlInput1" class="form-Label">Project Manager</p>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="projectManager"
-        id="siteName"
-      />
-    </div>
-  </div> -->
-</div>
-</section>
+    

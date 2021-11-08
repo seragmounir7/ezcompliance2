@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SetTitleService } from '../utils/services/set-title.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private setTitle: SetTitleService) { }
 
   ngOnInit(): void {
+    this.setTitle.setTitle('WHS-Registration');
   }
 
 }
