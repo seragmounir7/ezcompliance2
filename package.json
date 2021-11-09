@@ -1,5 +1,5 @@
 {
-  "name": "adminlte",
+  "name": "WHS-ADMINPORTAL",
   "version": "0.1.0",
   "scripts": {
     "start": "node server.js",
@@ -13,17 +13,6 @@
     "server": "json-server --watch ./server/database.json"
   },
   "private": true,
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "node ng-lint-staged.js dev:lint",
-      "prettier --write"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged && ng lint && lint-staged"
-    }
-  },
   "dependencies": {
     "@agm/core": "^3.0.0-beta.0",
     "@angular/animations": "11.0.3",
