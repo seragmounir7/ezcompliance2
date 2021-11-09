@@ -49,7 +49,6 @@ import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 import { AddEditCategoryComponent } from './views/dynamic-form/categories/add-edit-category/add-edit-category.component';
 import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
 import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -88,7 +87,6 @@ registerLocaleData(localeEn, 'en-EN');
   imports: [
     BrowserModule,
     SharedModule,
-    SlickCarouselModule,
     AppRoutingModule,
     FormsModule,
     NgxSpinnerModule,
@@ -104,7 +102,7 @@ registerLocaleData(localeEn, 'en-EN');
     NgbModule,
     HttpClientModule,
     DndModule,
-    DxButtonModule,
+ //   DxButtonModule,
     ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM',

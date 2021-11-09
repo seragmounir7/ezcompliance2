@@ -56,6 +56,7 @@ const routes: Routes = [
   { path: 'addHazards', component: AddHazardComponent },
   { path: 'contrlActReq', component: ContrAndActReqComponent },
   { path: 'addContrlActReq', component: AddContrActComponent },
+  { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 
 @NgModule({

@@ -34,7 +34,7 @@ export class EditContActComponent implements OnInit {
       title: this.editTitle.get('title').value,
     };
     this.logicalFormInfo
-      .updateRisk(data, this.dataRec._id)
+      .updateContrlActReq(data, this.dataRec._id)
       .subscribe((resData) => {
         this.dialogRef.close('true');
         Swal.fire({

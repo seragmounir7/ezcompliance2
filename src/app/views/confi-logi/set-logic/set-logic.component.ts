@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { MatSelect } from '@angular/material/select';
 import {
   Component,
@@ -18,8 +19,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 })
 export class SetLogicComponent implements AfterViewInit, OnInit {
   JobTaskDetail!: FormGroup;
-
-  mode: any;
+  allHazards=[];
+  allContrlActReq=[];
   jobTaskData: any = [];
   highRiskData: any = [];
   PPESelectionData: any = [];
@@ -134,7 +135,9 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       LicenceCat: this.fb.array([]),
       identifyHazrds: this.fb.array([]),
       contrActReq: this.fb.array([]),
-      codeOfPract: this.fb.array([]),
+      riskLevel: this.fb.array([]),
+      residualRisk: this.fb.array([]),
+    //  codeOfPract: this.fb.array([]),
     });
 
     this.getJobTask();
@@ -143,6 +146,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     this.getAllCategories();
     this.getAllPPE();
     this.getAllHazard();
+    this.getAllContrActReq();
     //  this.getCodOfCond();
   }
 
@@ -173,6 +177,16 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       this.identifyHazrdsFA().push(this.identifyHazrdsFG());
     }
   }
+  addActionRiskLevel() {
+    {
+      this.riskLevelFA().push(this.riskLevelFG());
+    }
+  }
+  addActionResiRiskLevel() {
+    {
+      this.residlRiskLevelFA().push(this.residlRiskLevelFG());
+    }
+  }
   addActionCOP() {
     {
       this.addCOP().push(this.newActionCOP());
@@ -195,6 +209,12 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   }
   addCOP(): FormArray {
     return this.JobTaskDetail.get('codeOfPract') as FormArray;
+  }
+  riskLevelFA(): FormArray {
+    return this.JobTaskDetail.get('riskLevel') as FormArray;
+  }
+  residlRiskLevelFA(): FormArray {
+    return this.JobTaskDetail.get('residualRisk') as FormArray;
   }
   highRiskFG(): FormGroup {
     return this.fb.group({
@@ -221,6 +241,16 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       contrActReqArr: [''],
     });
   }
+  riskLevelFG(): FormGroup {
+    return this.fb.group({
+      riskLevel: [''],
+    });
+  }
+  residlRiskLevelFG(): FormGroup {
+    return this.fb.group({
+      resiRiskLevel: [''],
+    });
+  }
   newActionCOP(): FormGroup {
     //code of practice
     return this.fb.group({
@@ -235,14 +265,24 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
-      this.jobTaskData.forEach(() => {
+      this.jobTaskData.forEach((item,i) => {
         this.addActionHighRisk();
         this.addActionPPE();
         this.addActionLicnCat();
-       // this.addActionCOP();
         this.addActionContrActReq();
-        this.addActionIdentifyHazrds();  
-      });
+        this.addActionIdentifyHazrds(); 
+        this.addActionRiskLevel(); 
+        this.addActionResiRiskLevel();   
+        this.highRiskFA().controls[i].get('highRiskArr').setValue(item.risk);
+        this.PPE_FA().controls[i].get('ppeArr').setValue(item.PPE);
+        this.licenceCatFA().controls[i].get('licenceArr').setValue(item.licence);
+        this.identifyHazrdsFA().controls[i].get('hazardsArr').setValue(item.identifyHazard);
+        this.contrActReqFA().controls[i].get('contrActReqArr').setValue(item.controlActionRequired);
+        this.riskLevelFA().controls[i].get('riskLevel').setValue(item.riskLevel);
+        this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(item.residualRisk);
+
+        });
+
     });
   }
   getAllHighRisk() {
@@ -257,13 +297,13 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       this.PPESelectionData = res.data;
     });
   }
-  getCodOfCond() {
-    this.mode = 'codeOfPractice';
-    this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
-      console.log('codeOfPractice=>', data);
-      this.codeOfPract = data.data[0];
-    });
-  }
+  // getCodOfCond() {
+  //   this.mode = 'codeOfPractice';
+  //   this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
+  //     console.log('codeOfPractice=>', data);
+  //     this.codeOfPract = data.data[0];
+  //   });
+  // }
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       console.log('Licence=>', res);
@@ -271,9 +311,15 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     });
   }
   getAllHazard() {
-    this.logicalFormInfo.getAllLicence().subscribe((res) => {
-      console.log('Licence=>', res);
-      this.licenseAndQual = res.data;
+    this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
+      console.log('getAllHazards=>', res);
+      this.allHazards = res.data;
+    });
+  }
+  getAllContrActReq()  {
+    this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
+      console.log('getAllHazards=>', res);
+      this.allContrlActReq = res.data;
     });
   }
   getAllCategories() {
@@ -284,69 +330,63 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   }
 
   // setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
-  setRelation(title, id) {
+  setRelation(title, id,i) {
     // console.log('risk', riskIds);
-    console.log(this.JobTaskDetail.controls['highRiskConstr'].value[0]);
 
     // console.log('ppe', ppeIDs);
     /// console.log('licence', licenceIds);
     // console.log('codOfPract', codOfPractIds);
     console.log('index', title);
     console.log('id', id);
-
-    let PPE = [];
-    let risk = [];
-    let codeOfPractice = [];
-    let licence = [];
-    // if (riskIds) {
-    //   riskIds.forEach((element) => {
-    //     let data = {
-    //       riskId: element,
-    //     };
-    //     risk.push(data);
-    //   });
-    // }
-    // if (ppeIDs) {
-    //   ppeIDs.forEach((element) => {
-    //     let data = {
-    //       PPEId: element,
-    //     };
-    //     PPE.push(data);
-    //   });
-    // }
-    if (this.licenseAndQualificationData.length) {
-      // console.log("this.licenseAndQualificationData",this.licenseAndQualificationData)
-      this.licenseAndQualificationData.forEach((element) => {
-        let data = {
-          licenceId: element._id,
-        };
-        licence.push(data);
-      });
-    }
-    // if (codOfPractIds) {
-    //   codOfPractIds.forEach((element) => {
-    //     let data = {
-    //       codeOfPracticeId: element,
-    //     };
-    //     codeOfPractice.push(data);
-    //   });
-    // }
-    //  console.log(risk);
-    //  console.log(PPE);
-    //  console.log(licence);
-    //  console.log(codeOfPractice);
+    console.log('id', i);
+let risk = [],
+ppe=[],
+licence=[],
+identifyHazard=[],
+controlActionRequired=[];
+  if(this.highRiskFA().controls[i].get('highRiskArr').value){
+    this.highRiskFA().controls[i].get('highRiskArr').value.forEach(element => {
+      risk.push(element._id)
+    });
+  }
+  if(this.PPE_FA().controls[i].get('ppeArr').value){
+    this.PPE_FA().controls[i].get('ppeArr').value.forEach(element => {
+      ppe.push(element._id)
+    });
+  }
+  if(this.licenceCatFA().controls[i].get('licenceArr').value){
+    this.licenceCatFA().controls[i].get('licenceArr').value.forEach(element => {
+      licence.push(element._id)
+    });
+  }
+  if(this.identifyHazrdsFA().controls[i].get('hazardsArr').value){
+    this.identifyHazrdsFA().controls[i].get('hazardsArr').value.forEach(element => {
+      identifyHazard.push(element._id)
+    });
+  }
+  if(this.contrActReqFA().controls[i].get('contrActReqArr').value){
+    this.contrActReqFA().controls[i].get('contrActReqArr').value.forEach(element => {
+      controlActionRequired.push(element._id)
+    });
+  }
 
     let data = {
       title: title,
-      PPE: PPE,
-      risk: risk,
-      licence: licence,
-      codeOfPractice: codeOfPractice,
+      risk: this.highRiskFA().controls[i].get('highRiskArr').value,
+      PPE: this.PPE_FA().controls[i].get('ppeArr').value,
+      licence: this.licenceCatFA().controls[i].get('licenceArr').value,
+      identifyHazard:this.identifyHazrdsFA().controls[i].get('hazardsArr').value,
+      controlActionRequired: this.contrActReqFA().controls[i].get('contrActReqArr').value,
+      riskLevel:this.riskLevelFA().controls[i].get('riskLevel').value ,
+      residualRisk: this.residlRiskLevelFA().controls[i].get('resiRiskLevel').value,
+      set:true      
     };
     console.log(data);
 
-    this.logicalFormInfo.updateJobTask(data, id).subscribe((res) => {
+    this.logicalFormInfo.updateJobTask(data,id).subscribe((res) => {
       console.log('resJob Task=>', res);
+      this.getJobTask();
+
       Swal.fire({
         title: 'Relation set successfully',
         showConfirmButton: false,

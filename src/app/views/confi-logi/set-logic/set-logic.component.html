@@ -34,19 +34,16 @@
                           <mat-label>HighRiskConstruction</mat-label>
                           <mat-select formControlName="highRiskArr" multiple >
                             <mat-select-trigger>
-<<<<<<< HEAD
-                              <!-- {{JobTaskDetail.controls['highRiskConstr'].controls[i].get('highRiskArr').value ? JobTaskDetail.controls['highRiskConstr'].controls[i].get('highRiskArr').value[0] : ''}} -->
-                              <!-- <span *ngIf="highRiskArr.value?.length > 1" class="example-additional-selection">
-                                (+{{highRiskArr.value.length - 1}} {{highRiskArr.value?.length === 2 ? 'other' : 'others'}})
-                              </span> -->
-=======
-                              {{highRiskFA().controls[i].get('highRiskArr').value ? highRiskFA().controls[i].get('highRiskArr').value[0].title : ''}}
-                              <span *ngIf="highRiskFA().controls[i].get('highRiskArr').value?.length > 1" class="example-additional-selection">
-                                (+{{highRiskFA().controls[i].get('highRiskArr').value.length - 1}} {{highRiskFA().controls[i].get('highRiskArr').value?.length === 2 ? 'other' : 'others'}})
+                              <span *ngIf="!highRiskFA().controls[i].get('highRiskArr').value?.length" class="example-additional-selection">
                               </span>
->>>>>>> f8e2fab4f5b7a0c0bc40837e7d07573dd875149a
+                              <span *ngIf="highRiskFA().controls[i].get('highRiskArr').value?.length == 1" class="example-additional-selection">
+                                One Item selected
+                              </span>
+                              <span *ngIf="highRiskFA().controls[i].get('highRiskArr').value?.length > 1" class="example-additional-selection">
+                                More than one selected
+                              </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of highRiskConstructionData" [value]="parameter">
+                            <mat-option *ngFor="let parameter of highRiskConstructionData" [value]="parameter._id">
                               {{parameter.title}}</mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -58,12 +55,17 @@
                           <mat-label>PPE selection</mat-label>
                           <mat-select formControlName="ppeArr" multiple >
                             <mat-select-trigger>
-                              {{PPE_FA().controls[i].get('ppeArr').value ? PPE_FA().controls[i].get('ppeArr').value[0].title : ''}}
+                              <span *ngIf="!PPE_FA().controls[i].get('ppeArr').value?.length " class="example-additional-selection">
+                               
+                              </span>
+                              <span *ngIf="PPE_FA().controls[i].get('ppeArr').value?.length == 1" class="example-additional-selection">
+                               One Item selected
+                              </span>
                               <span *ngIf="PPE_FA().controls[i].get('ppeArr').value?.length > 1" class="example-additional-selection">
-                                (+{{PPE_FA().controls[i].get('ppeArr').value.length - 1}} {{PPE_FA().controls[i].get('ppeArr').value?.length === 2 ? 'other' : 'others'}})
+                                More than one selected
                               </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of PPESelectionData" [value]="parameter">{{parameter.title}}
+                            <mat-option *ngFor="let parameter of PPESelectionData" [value]="parameter._id">{{parameter.title}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -75,12 +77,16 @@
                           <mat-label>Licence Categories</mat-label>
                           <mat-select formControlName="licenceArr" multiple >
                             <mat-select-trigger>
-                              {{licenceCatFA().controls[i].get('licenceArr').value ? licenceCatFA().controls[i].get('licenceArr').value[0].title : ''}}
+                              <span *ngIf="!licenceCatFA().controls[i].get('licenceArr').value?.length" class="example-additional-selection">
+                              </span>
+                              <span *ngIf="licenceCatFA().controls[i].get('licenceArr').value?.length == 1" class="example-additional-selection">
+                                One Item selected
+                              </span>
                               <span *ngIf="licenceCatFA().controls[i].get('licenceArr').value?.length > 1" class="example-additional-selection">
-                                (+{{licenceCatFA().controls[i].get('licenceArr').value.length - 1}} {{licenceCatFA().controls[i].get('licenceArr').value?.length === 2 ? 'other' : 'others'}})
+                                More than one selected
                               </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of licenceCatAll" [value]="parameter">{{parameter.title}}
+                            <mat-option *ngFor="let parameter of licenceCatAll" [value]="parameter._id">{{parameter.title}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -92,21 +98,26 @@
                           <mat-label>Identify Hazards</mat-label>
                           <mat-select formControlName="hazardsArr" multiple >
                             <mat-select-trigger>
-                              {{identifyHazrdsFA().controls[i].get('hazardsArr').value ? identifyHazrdsFA().controls[i].get('hazardsArr').value[0].title : ''}}
+                              <span *ngIf="!identifyHazrdsFA().controls[i].get('hazardsArr').value?.length" class="example-additional-selection">
+                              </span>
+                              <span *ngIf="identifyHazrdsFA().controls[i].get('hazardsArr').value?.length == 1" class="example-additional-selection">
+                                One Item selected
+                              </span>
                               <span *ngIf="identifyHazrdsFA().controls[i].get('hazardsArr').value?.length > 1" class="example-additional-selection">
-                                (+{{identifyHazrdsFA().controls[i].get('hazardsArr').value.length - 1}} {{identifyHazrdsFA().controls[i].get('hazardsArr').value?.length === 2 ? 'other' : 'others'}})
+                                More than one selected
                               </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of licenceCatAll" [value]="parameter">{{parameter.title}}
+                            <mat-option *ngFor="let parameter of allHazards" [value]="parameter">{{parameter.title}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
                       </td>
                     </ng-container>
-                    <td>
+                  <ng-container formArrayName="riskLevel">
+                    <td [formGroupName]="i">
                       <mat-form-field appearance="fill">
                       <mat-label>Risk</mat-label>
-                      <mat-select [(value)]="riskLevel" >
+                      <mat-select formControlName="riskLevel" >
                         <mat-option value="L1">L1</mat-option>
                         <mat-option value="L2">L2</mat-option>
                         <mat-option value="L3">L3</mat-option>
@@ -115,35 +126,45 @@
                       </mat-select>
                     </mat-form-field>
                     </td>
+                  </ng-container>
+                   
                     <ng-container formArrayName="contrActReq">
                       <td [formGroupName]="i">
                         <mat-form-field appearance="fill">
                           <mat-label>Control Actions Required</mat-label>
                           <mat-select formControlName="contrActReqArr" multiple >
                             <mat-select-trigger>
-                              {{contrActReqFA().controls[i].get('contrActReqArr').value ? contrActReqFA().controls[i].get('contrActReqArr').value[0].title : ''}}
+                              <span *ngIf="!contrActReqFA().controls[i].get('contrActReqArr').value?.length" class="example-additional-selection">
+                              </span>
+                              <span *ngIf="contrActReqFA().controls[i].get('contrActReqArr').value?.length == 1" class="example-additional-selection">
+                                One Item selected
+                              </span>
                               <span *ngIf="contrActReqFA().controls[i].get('contrActReqArr').value?.length > 1" class="example-additional-selection">
-                                (+{{contrActReqFA().controls[i].get('contrActReqArr').value.length - 1}} {{contrActReqFA().controls[i].get('contrActReqArr').value?.length === 2 ? 'other' : 'others'}})
+                                More than one selected
                               </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of licenceCatAll" [value]="parameter">{{parameter.title}}
+                            <mat-option *ngFor="let parameter of allContrlActReq" [value]="parameter">{{parameter.title}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
                       </td>
                     </ng-container>
-                   <td>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Residule Risk</mat-label>
-                      <mat-select [(value)]="residuleRiskL" >
-                        <mat-option value="L1">L1</mat-option>
-                        <mat-option value="L2">L2</mat-option>
-                        <mat-option value="L3">L3</mat-option>
-                        <mat-option value="L4">L4</mat-option>
-                        <mat-option value="L5">L5</mat-option>                        
-                      </mat-select>
-                    </mat-form-field>
-                   </td>
+
+                    <ng-container formArrayName="residualRisk">
+                      <td [formGroupName]="i">
+                        <mat-form-field appearance="fill">
+                        <mat-label>Residule Risk</mat-label>
+                        <mat-select formControlName="resiRiskLevel" >
+                          <mat-option value="L1">L1</mat-option>
+                          <mat-option value="L2">L2</mat-option>
+                          <mat-option value="L3">L3</mat-option>
+                          <mat-option value="L4">L4</mat-option>
+                          <mat-option value="L5">L5</mat-option>                        
+                        </mat-select>
+                      </mat-form-field>
+                      </td>
+                    </ng-container>
+                 
                  
                   <!-- <ng-container formArrayName="codeOfPract">
                     <td [formGroupName]="i">
@@ -165,7 +186,8 @@
                   </ng-container> -->
                  
                     <!-- <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td> -->
-                    <td><button class="btn btn-primary" (click)="setRelation(task.title,task._id)">Set</button></td>
+                    <td *ngIf="!task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Set</button></td>
+                    <td *ngIf="task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Update</button></td>
                   </tr>
                 </tbody>
               </table>
