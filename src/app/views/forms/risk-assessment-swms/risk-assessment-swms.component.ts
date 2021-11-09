@@ -542,17 +542,7 @@ console.log(res);
       console.log('jobTaskDetails=>', this.jobTaskData);
     });
   }
-  // getJobTaskById() {
-  //   let mode = 'JOBTask';
-  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-  //     console.log('jobTaskDetails=>', res);
-  //     // this.jobTaskData = res.data[0].subComponents;
-  //    this.jobTask = res.data[0].subComponents;
 
-  //     //  this.task = res.data.subComponents;
-  //   });
-
-  // }
   getAllPPE() {
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
       console.log('PPE=>', res);
@@ -562,16 +552,7 @@ console.log(res);
       }
     });
   }
-  // getPPEById() {
-  //   let mode = 'PPE';
-  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-  //     this.PPEselection = res.data[0].subComponents;
-  //     console.log('this.PPEselection=>', this.PPEselection);
-  //     for (let i = 0; i < this.PPEselection.length; i++) {
-  //       this.ppeArr[i] = 0;
-  //     }
-  //   });
-  // }
+
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
       console.log('Risk=>', res);
@@ -659,7 +640,20 @@ console.log(res);
         }
       });
     });
-   
+  
+    while(this.riskLevelFA().length){
+      this.riskLevelFA().removeAt(0);
+    }
+    while(this.residlRiskLevelFA().length){
+      this.residlRiskLevelFA().removeAt(0);
+    }
+    this.jobTaskSelected.forEach((data,i)=>{
+     this.addActionRiskLevel();
+     this.addActionResiRiskLevel(); 
+     this.riskLevelFA().controls[i].get('riskLevel').setValue(item.riskLevel);
+     this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(item.residualRisk);
+ })
+
    console.log("jobTaskSelected",this.jobTaskSelected);
     
   }

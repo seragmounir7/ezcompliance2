@@ -362,28 +362,6 @@
             >{{item.title}}</label
           >
         </div>
-        <!-- <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Dust Mask"
-            formControlName="dustMask"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Dust Mask</label
-          >
-        </div>
-        <div class="mt-2 col-4">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            value="Face shield"
-            formControlName="faceShield"
-          />
-          <label class="form-check-label label_2" for="inlineCheckbox1"
-            >Face shield</label
-          >
-        </div> -->
       </div>
 
    
@@ -965,7 +943,7 @@
                 </select>
               </div>
             </div>
-            <ng-container >
+            <!-- <ng-container >
               <div class="col-md-1">
                 <label for="sel1">Residual Risk</label>
                 <select class="form-control" id="sel1" name="sellist1" >
@@ -976,8 +954,8 @@
                   <option  value="L5">L5</option>
                 </select>
               </div>
-            </ng-container>
-            <!-- <ng-container formArrayName="riskLevel">
+            </ng-container> -->
+            <ng-container formArrayName="riskLevel">
               <div class="col-md-1" [formGroupName]="i">
                 <label for="sel1">Residual Risk</label>
                 <select class="form-control" id="sel1" name="sellist1" formControlName="riskLevel">
@@ -988,7 +966,7 @@
                   <option  value="L5">L5</option>
                 </select>
               </div>
-            </ng-container> -->
+            </ng-container>
             <div class="col-md-4 my-3">
               <div class="">
                 <label for="sel2">Control and Action Required</label>
@@ -997,7 +975,7 @@
                 </select>
               </div>
             </div>
-            <ng-container>
+            <!-- <ng-container>
               <div class="col-md-1">
                 <label for="sel1">Residual Risk</label>
                 <select class="form-control" id="sel1" name="sellist1">
@@ -1008,8 +986,8 @@
                   <option  value="L5">L5</option>
                 </select>
               </div>
-            </ng-container>
-            <!-- <ng-container formArrayName="residualRisk">
+            </ng-container> -->
+            <ng-container formArrayName="residualRisk">
               <div class="col-md-1" [formGroupName]="i">
                 <label for="sel1">Residual Risk</label>
                 <select class="form-control" id="sel1" name="sellist1" formControlName="resiRiskLevel">
@@ -1020,7 +998,7 @@
                   <option  value="L5">L5</option>
                 </select>
               </div>
-            </ng-container> -->
+            </ng-container>
         
             <div class="col-md-2 my-3">
               <label for="sel1">Person Responsible</label>
