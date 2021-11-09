@@ -83,14 +83,6 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-  addFAQ(data) {
-    return this.https.post(this.apiUrl + 'question/add', data).pipe(
-      map((res: any) => {
-        console.log('res.data=>', res.data);
-        return res;
-      })
-    );
-  }
   addSubModule(data) {
     return this.https.post(this.apiUrl + 'subModule/add', data).pipe(
       map((res: any) => {
@@ -189,5 +181,77 @@ export class LandingPageInfoServiceService {
       })
     );
   }
- 
+ getAllPortal(){
+  return this.https.get(this.apiUrl + 'portal/getAll').pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+  
+ }
+ addPortal(data){
+  return this.https.post(this.apiUrl + 'portal/add', data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+ }
+ editportal(data,id){
+  return this.https.put(this.apiUrl + 'portal/update/' + id, data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+ }
+deletePortal(id){
+  return this.https.delete(this.apiUrl + 'portal/delete/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+getAllFaq(){
+  return this.https.get(this.apiUrl + 'faq/getAll').pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+addFAQ(data){
+  return this.https.post(this.apiUrl + 'faq/add', data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+ }
+ editFAQ(data,id){
+  return this.https.put(this.apiUrl + 'faq/update/' + id, data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+ }
+deleteFaq(id){
+  return this.https.delete(this.apiUrl + 'faq/delete/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+getAllFaqbasedOnPortal(id){
+  return this.https.get(this.apiUrl + 'portal/getAll/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
 }

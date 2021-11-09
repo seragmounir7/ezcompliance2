@@ -1,0 +1,18 @@
+<form [formGroup]="editPortal" >
+  <mat-form-field appearance="legacy"
+  class="example-full-width" style="width: 498px;">
+  <mat-label *ngIf="!dataRec">Add Portal </mat-label>
+  <mat-label *ngIf="dataRec">Edit Portal </mat-label>
+  <input matInput  formControlName="title"  
+ style="text-transform: capitalize !important;">
+  </mat-form-field>
+  <div class="row">
+      <div class="col-sm-2 offset-8 ">
+          <button mat-raised-button (click)="closeDialog()">Close</button>
+      </div>
+      <div class="col-sm-2  ">
+          <button mat-raised-button *ngIf="dataRec" [disabled]="!editPortal.valid"(click)="onFormSubmit()">Update</button>
+          <button mat-raised-button  *ngIf="!dataRec"  [disabled]="!editPortal.valid"(click)="addForm()">Add</button>
+      </div>
+  </div>
+</form> 

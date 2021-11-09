@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LandingPageInfoRoutingModule } from './landing-page-info-routing.module';
 import { LandingPageInfoComponent } from './landing-page-info.component';
@@ -27,6 +28,13 @@ import { EditCustomerTestimonailComponent } from './customertestimonials/edit-cu
 import { AddContactComponent } from './contact-us/add-contact/add-contact.component';
 import { AddTeamInfoComponent } from './about-us/add-team-info/add-team-info.component';
 import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.component';
+import { FAQComponent } from './faq/faq.component';
+import { AddFaqComponent } from './faq/add-faq/add-faq.component';
+import { EditFaqComponent } from './faq/edit-faq/edit-faq.component';
+import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
+import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
+import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
+
 @NgModule({
 
 
@@ -50,7 +58,7 @@ import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
     FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
-    EditTeamInfoComponent,AddTeamInfoComponent
+    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent
 
   ],
   imports: [
@@ -58,6 +66,7 @@ import { EditTeamInfoComponent } from './about-us/edit-team-info/edit-team-info.
     FormsModule,
     ReactiveFormsModule,
     LandingPageInfoRoutingModule,
+    SharedModule
   ],
 })
 export class LandingPageInfoModule {}
