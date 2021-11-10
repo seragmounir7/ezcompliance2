@@ -1,3 +1,6 @@
+import { value } from './../../../views/dynamic-form/global.model';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { FormBuilder } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -9,10 +12,22 @@ import { Router } from '@angular/router';
 })
 export class AddSiteComponent implements OnInit {
 
-  constructor( private dialogRef: MatDialogRef<AddSiteComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any,) { }
+  addSitesForm
+  constructor( 
+    private dialogRef: MatDialogRef<AddSiteComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: any,
+    private fb:FormBuilder,
+    private logicalFormInfoService: LogicalFormInfoService
+    ) { }
 
   ngOnInit(): void {
+    this.addSitesForm = this.fb.group({
+      siteName:[''],
+      streetNumber:[''],
+      streetAddress:[''],
+      suburb:[''],
+      state:[''],
+    })
   }
   state = [
       { label: 'New South Wales', value: '' },
@@ -22,4 +37,11 @@ export class AddSiteComponent implements OnInit {
       { label: 'Victoria', value: '' },
       { label: 'Western Australia', value: '' },
     ];
+    onSubmit(){
+      console.log(this.addSitesForm.value)
+      this.logicalFormInfoService.addSite(this.addSitesForm.value).subscribe(res => {
+        console.log(res);
+        this.dialogRef.close('ok')
+      })
+    }
 }
