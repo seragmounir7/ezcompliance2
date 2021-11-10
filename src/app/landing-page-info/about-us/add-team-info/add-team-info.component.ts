@@ -66,4 +66,7 @@ export class AddTeamInfoComponent implements OnInit {
       this.dialogRef.close('true');
     });
   }
+  close() {
+    this.dialogRef.close();
+}
 }

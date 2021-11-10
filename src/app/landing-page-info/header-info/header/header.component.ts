@@ -115,6 +115,9 @@ export class HeaderComponent implements OnInit {
 
         });
       }
+      close() {
+        this.dialogRef.close();
+    }
   onFormSubmit() {
     let value = this.selectedImage[0];
     console.log('value', value);

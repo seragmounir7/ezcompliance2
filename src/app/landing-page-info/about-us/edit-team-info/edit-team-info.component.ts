@@ -265,4 +265,7 @@ export class EditTeamInfoComponent implements OnInit {
         });
     }
   }
+  close() {
+    this.dialogRef.close();
+}
 }

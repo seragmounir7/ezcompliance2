@@ -255,4 +255,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
         });
     }
   }
+  close() {
+    this.dialogRef.close();
+}
 }

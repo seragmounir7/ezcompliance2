@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 export class AddFaqComponent implements OnInit {
   portalDetails!: FormGroup;
   formData: any;;
+  hide = true;
   constructor( private fb: FormBuilder,
     private router: Router,
     private landingPageInfoService:LandingPageInfoServiceService
@@ -69,5 +70,8 @@ export class AddFaqComponent implements OnInit {
     );
     
   }
+  close() {
+    this.hide = false;
 
+}
 }

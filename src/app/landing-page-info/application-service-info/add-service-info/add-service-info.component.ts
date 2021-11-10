@@ -77,4 +77,7 @@ export class AddServiceInfoComponent implements OnInit {
         this.serviceDetail.reset();
       });
   }
+  close() {
+    this.dialogRef.close();
+}
 }

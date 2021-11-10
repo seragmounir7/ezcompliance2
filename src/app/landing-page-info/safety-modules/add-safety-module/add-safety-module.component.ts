@@ -243,4 +243,7 @@ export class AddSafetyModuleComponent implements OnInit {
      }
   
     }
+    close() {
+      this.dialogRef.close();
+  }
 }

@@ -20,6 +20,7 @@ export class AddQuestionComponent implements OnInit {
   portalData:any=[];
   faqDetails!: FormGroup;
   formData: any;
+  hide=false;
   constructor( private fb: FormBuilder,
     private router: Router,
     private landingPageInfoService:LandingPageInfoServiceService
@@ -58,4 +59,5 @@ export class AddQuestionComponent implements OnInit {
      
       })
     }
+   
 }

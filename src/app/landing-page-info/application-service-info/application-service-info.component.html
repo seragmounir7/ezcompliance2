@@ -21,8 +21,8 @@
                   <td>{{ ServiceData.title }}</td>
                   <td>{{ ServiceData.description }}</td>
                   <td>
-                    <button class="btn btn-info btn-sm mr-2" (click)="editForm(ServiceData._id, false)">
-                      <i class="fas fa-pencil-alt mr-2"></i> Edit
+                    <button class="btn editBtn mr-2" (click)="editForm(ServiceData._id, false)">
+                      <i class="fas fa-pencil-alt mr-2" title="edit"></i> 
                     </button>
                   </td>
                 </tr>
@@ -34,13 +34,13 @@
     </div>
   </div>
 
-<div class="row">
-  <div class="col ml-2 mb-2">
-    <button (click)="addForm('')" class="btn btn-outline-primary mt-1 mr-2 float-left">
-      <i class="fas fa-folder-plus mr-2"></i>Add Service
-    </button>
+  <div class="row">
+    <div class="col ml-2 mb-2">
+      <button (click)="addForm('')" class="btn btn-outline-primary mt-1 mr-2 float-right">
+        <i class="fas fa-plus mr-2"></i>Add Service
+      </button>
+    </div>
   </div>
-</div>
 
   <div class="container-fluid">
     <div class="row">
@@ -50,6 +50,7 @@
             <table class="table table-hover text-wrap">
               <thead>
                 <tr>
+                  <th style="width:10%">Index</th>
                   <th style="width: 25%">Images</th>
                   <th style="width: 25%">Title</th>
                   <th style="width: 30%">Description</th>
@@ -59,26 +60,21 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of ServiceData.subModules; let i = index">
+                  <td>{{i+1}}</td>
                   <td>
                     <img src="{{ data.fileUrl }}" height="150px" width="150px" />
                   </td>
                   <td>{{ data.title }}</td>
                   <td>{{ data.description }}</td>
                   <td>
-                    <button
-                      (click)="editForm(data._id, true, i)"
-                      class="btn editBtn mr-2"
-                    >
+                    <button (click)="editForm(data._id, true, i)" class="btn editBtn mr-2">
                       <i class="fas fa-pencil-alt mr-2" title="Edit"></i>
                     </button>
                   </td>
                   <td>
-                    <button
-                      class="btn deleteBtn mr-2"
-                      (click)="deleteopen(deletemodal, data._id)"
-                    >
-                      <i class="fas fa-trash mr-2" title="Delete"></i>
-                    </button>
+                    <span (click)="deleteopen(deletemodal, data._id)">
+                      <i class="fas fa-trash mr-2" aria-hidden="true" title="Delete"></i>
+                    </span>
                   </td>
                 </tr>
               </tbody>
