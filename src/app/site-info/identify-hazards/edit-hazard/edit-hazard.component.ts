@@ -32,7 +32,7 @@ export class EditHazardComponent implements OnInit {
       title :this.editTitle.get('title').value
     }
     this.logicalFormInfo
-      .updatePPE(data, this.dataRec._id)
+      .updateHazards(data, this.dataRec._id)
       .subscribe((resData) => {
         console.log('resData', resData);
 

@@ -1,3 +1,4 @@
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
@@ -82,7 +83,7 @@ const routes: Routes = [
     canActivate: [NonAuthGuard],
   },
 
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', component: NotFoundPageComponent/* redirectTo: '', pathMatch: 'full' */ },
 ];
 
 @NgModule({

@@ -8,6 +8,8 @@ import {
 } from '@angular/forms'
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-add-contr-act',
   templateUrl: './add-contr-act.component.html',
@@ -60,6 +62,11 @@ export class AddContrActComponent implements OnInit {
     }
     this.logicalFormInfo.addMultipleContrlActReq(data).subscribe((data) => {
       console.log('PPE=>', data);
+      Swal.fire({
+        title: 'Parameter Added successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
       this.router.navigate(['/admin/siteInfo/contrlActReq']);      
     },(err)=>{console.error(err);} 
   

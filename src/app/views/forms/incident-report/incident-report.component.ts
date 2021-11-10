@@ -9,7 +9,6 @@ import {
   FormControl,
 } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
-import { format } from 'devextreme/ui/widget/ui.widget';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 

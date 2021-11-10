@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/shubham/documents/wh-compliance/WHS-Adminportal/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! D:\angular\angular-adminlte-WHS\angular-adminlte-WHS\src\polyfills.ts */"hN/g");
 
 
 /***/ }),

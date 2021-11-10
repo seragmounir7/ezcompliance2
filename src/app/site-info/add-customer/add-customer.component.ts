@@ -1,3 +1,5 @@
+import  Swal  from 'sweetalert2';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,17 +15,31 @@ import { EditCustComponent } from './edit-cust/edit-cust.component';
 })
 export class AddCustomerComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'siteName','siteForemen','streetAddress','Suburb','State', 'edit', 'delete'];
+  displayedColumns: string[] = ['index', 'customerName','customerContact','customerContactPhone','customerEmail', 'edit', 'delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor( private setTitle: SetTitleService, private dialog: MatDialog) { }
+  constructor( 
+    private setTitle: SetTitleService, 
+    private dialog: MatDialog,
+    private logicalFormInfoService: LogicalFormInfoService
+    ) { }
 
   ngOnInit(): void {
+    this.getAllCustomers()
     this.setTitle.setTitle('WHS-Add Customer');
+    
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  getAllCustomers(){
+    this.logicalFormInfoService.getAllCustomer().subscribe((res:any) => {
+      console.log(res)
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+    })
   }
 
   getAllJobTask() {
@@ -46,52 +62,58 @@ export class AddCustomerComponent implements OnInit {
 
   openDialog(id) {
 		let dialogRef = this.dialog.open(AddingCustComponent, {
+      height:'80%',
 			data: {
 				action: "new",
 				userId: id,
 			},
 		});
 		dialogRef.afterClosed().subscribe((result) => {
+      if(result === 'ok' ){
+        this.getAllCustomers()
+      }
 			console.log("CustomerInfoComponent -> openDialog -> result", result);
 			
 			console.log("The dialog was closed");
 		});
 	}
   edit(element) {
+    console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
       width: "550px",
+      height:"80%",
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "true")) {
-        this.getAllJobTask();
+      if ((result == "ok")) {
+        this.getAllCustomers();
       }
       console.log("The dialog was closed");
     });
   }
   delete(item) {
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: `Do you want to delete "${item.title}"?`,
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#00B96F',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Yes, Delete!',
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.logicalFormInfo
-    //       .deleteJobTask(item._id)
-    //       .subscribe((res) => {
-    //         Swal.fire({
-    //           title: 'Parameter Deleted successfully',
-    //           showConfirmButton: false,
-    //           timer: 1200,
-    //         }); console.log('deleted res', res);
-    //         this.getAllJobTask();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.title}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        this.logicalFormInfoService
+          .deleteCustomer(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            }); console.log('deleted res', res);
+            this.getAllCustomers();
 
-    //       });
-    //   }
-    // });
+          });
+      }
+    });
   }
 }

@@ -30016,8 +30016,57 @@ button.toast-close-button {
   width: 0px;
   background: transparent;
 }
-/* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
+section.content {
+  background: #ffffff;
+  padding: 15px 2%;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  height: 100vh;
+}
+section.content h1 {
+  text-align: left;
+  font-weight: 600;
+  font-size: 20px;
+  color: #343a40 !important;
+}
+.btnSet {
+  text-align: center;
+  padding: 0;
+  color: #5d5d5d !important;
+}
+.editBtn i {
+  color: #316123;
+}
+.viewBtn i {
+  color: #007bff;
+}
+.deleteBtn i {
+  color: #f00;
+}
+.paginationSet .pagination {
+  justify-content: flex-end;
+}
+.card-footer {
+  background: transparent;
+  border: 1px solid #e5e5e5;
+  border-left: none;
+  border-right: none;
+  padding-bottom: 0;
+}
+.table td, .table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+}
+select.w-set {
+  width: 70%;
+  margin: 0 auto;
+}
+.main-sidebar {
+  height: 100vh;
+  overflow: unset !important;
+  position: fixed;
+}
 /* Slider */
 .slick-slider {
   position: relative;
