@@ -1,3 +1,4 @@
+import { value } from './../../dynamic-form/global.model';
 import { element } from 'protractor';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -280,6 +282,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   licenceArr = [];
   jobTaskData = [];
   jobTaskSelected=[];
+  projectMang=[];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
@@ -290,78 +293,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   ) {
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
-      chemicalsActivitie: [''],
-      assessHazards: [''],
-      CableInstallation: [''],
-      CableSupport: [''],
-      CameraInstallation: [''],
-      conduitCeilingWalls: [''],
-      ConduitTrench: [''],
-      conduitPour: [''],
-      ControlPanelInstallation: [''],
-      HeatShrinkingJoints: [''],
-      HotWorks: [''],
-      InstallationCables: [''],
-      LeavingSite: [''],
-      MaualHandling: [''],
-      SiteEstablishment: [''],
-      fibreOpticCables: [''],
-      ElevatedWorkPlatform: [''],
-      EWP: [''],
-      UseLadders: [''],
-      PlantAndEquipment: [''],
-      plantequipment: [''],
-      falseCeilings: [''],
-      WorkingCommunication: [''],
-      WorkingNearPedistrian: [''],
-      WorkingNearAsbestos: [''],
-      LeadContainingMaterials: [''],
-      WorkingOutdoor: [''],
-      WorkingHandPowertools: [''],
-      trenchesShaftsDeeper: [''],
-      nearConfinedSpace: [''],
-      areaFlammableAtmosphere: [''],
-      mobilePlant: [''],
-      nearAsbestos: [''],
-      hazardousSubstances: [''],
-      tiltUpPrecastConcrete: [''],
-      RiskFallsHigher: [''],
-      adjacentRoadRail: [''],
-      telecommunicationTower: [''],
-      pressuredGasLinesPipes: [''],
-      WorkNearExplosives: [''],
-      areasArtificialTemperature: [''],
-      liquidRiskDrowning: [''],
-      demolitionStructure: [''],
-      divingWork: [''],
-      disposableDustMask: [''],
-      dustMask: [''],
-      faceShield: [''],
-      EvacuationPlans: [''],
-      faceRespirator: [''],
-      Gttors: [''],
-      halfFaceRespirator: [''],
-      hardHat: [''],
-      hearingProtection: [''],
-      highVisClothing: [''],
-      lockTags: [''],
-      longSleevePants: [''],
-      outServiceTags: [''],
-      protectiveGloves: [''],
-      rescueKit: [''],
-      safetyBoots: [''],
-      SafetyGlasses: [''],
-      sunScreen: [''],
-      torch: [''],
-      wideBrimHat: [''],
-      cableLicence: [''],
-      whiteCard: [''],
-      EWPLicence: [''],
-      workingHeights: [''],
-      asbestosAwarness: [''],
-      confinedSpace: [''],
-      Torch: [''],
-      securityLicence: [''],
+      
       Employee1: [''],
       dateTime: [''],
       statesSWMS: [''],
@@ -369,6 +301,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       safetyLeg: [''],
       regulator: [''],
       CodeOfPract: [''],
+      SDSRegister: this.fb.array([]),
       riskLevel: this.fb.array([]),
       residualRisk: this.fb.array([]),
     });
@@ -379,7 +312,10 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     this.getAllPPE();
     this.getAllHighRisk();
     this.getAllLicence();
+    this.getAllProjectMang();
+    this.addActionSDSRegister();
     this.setTitle.setTitle('WHS-Risk Assesment Form');
+
 this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res)=>{
 if(res){
   
@@ -463,11 +399,19 @@ console.log(res);
       this.residlRiskLevelFA().push(this.residlRiskLevelFG());
     }
   }
+  addActionSDSRegister() {
+    {
+      this.sdsRegisterFA().push(this.sdsRegisterFG());
+    }
+  }
   riskLevelFA(): FormArray {
     return this.riskAssessmentFb.get('riskLevel') as FormArray;
   }
   residlRiskLevelFA(): FormArray {
     return this.riskAssessmentFb.get('residualRisk') as FormArray;
+  }
+  sdsRegisterFA(): FormArray {
+    return this.riskAssessmentFb.get('SDSRegister') as FormArray;
   }
   riskLevelFG(): FormGroup {
     return this.fb.group({
@@ -478,6 +422,22 @@ console.log(res);
     return this.fb.group({
       resiRiskLevel: [''],
     });
+  }
+  sdsRegisterFG(): FormGroup {
+    return this.fb.group({
+      chemicalName: [''],
+      location: [''],
+      hazardous: [''],
+      quantity: [''],
+      expDate: [''],
+    });
+  }
+  removeSDSRegister(i) {
+    const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
+    if (item.length > 1) {
+      item.removeAt(i);
+    
+    }
   }
   showsite() {
     this.RiskAssessment = true;
@@ -552,7 +512,16 @@ console.log(res);
       }
     });
   }
+  getAllProjectMang() {
+    this.logicalFormInfo.getAllProjectMang().subscribe((res:any) => {
+      this.projectMang = res.data;
+      console.log('getAllProjectMang=>',  this.projectMang );
+    
 
+
+    });
+ 
+  }
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
       console.log('Risk=>', res);
@@ -650,11 +619,30 @@ console.log(res);
     this.jobTaskSelected.forEach((data,i)=>{
      this.addActionRiskLevel();
      this.addActionResiRiskLevel(); 
-     this.riskLevelFA().controls[i].get('riskLevel').setValue(item.riskLevel);
-     this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(item.residualRisk);
+     this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
+     this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
  })
 
    console.log("jobTaskSelected",this.jobTaskSelected);
+    console.log(this.residlRiskLevelFA().value);
     
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.jobTaskSelected, event.previousIndex, event.currentIndex);
+    while(this.riskLevelFA().length){
+      this.riskLevelFA().removeAt(0);
+    }
+    while(this.residlRiskLevelFA().length){
+      this.residlRiskLevelFA().removeAt(0);
+    }
+    this.jobTaskSelected.forEach((data,i)=>{
+     this.addActionRiskLevel();
+     this.addActionResiRiskLevel(); 
+     this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
+     this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
+ });
+ console.log(this.residlRiskLevelFA().value);
+
   }
 }

@@ -276,12 +276,17 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
         this.highRiskFA().controls[i].get('highRiskArr').setValue(item.risk);
         this.PPE_FA().controls[i].get('ppeArr').setValue(item.PPE);
         this.licenceCatFA().controls[i].get('licenceArr').setValue(item.licence);
+        console.log("item.identifyHazard",item.identifyHazard+"i",i);
+        console.log("item.controlActionRequired",item.controlActionRequired+"i",i);
+        
+        
         this.identifyHazrdsFA().controls[i].get('hazardsArr').setValue(item.identifyHazard);
         this.contrActReqFA().controls[i].get('contrActReqArr').setValue(item.controlActionRequired);
         this.riskLevelFA().controls[i].get('riskLevel').setValue(item.riskLevel);
         this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(item.residualRisk);
 
         });
+console.log("this.identifyHazrdsFA()", this.identifyHazrdsFA().value);
 
     });
   }
