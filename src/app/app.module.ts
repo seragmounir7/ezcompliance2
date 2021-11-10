@@ -90,7 +90,6 @@ registerLocaleData(localeEn, 'en-EN');
   imports: [
     BrowserModule,
     SharedModule,
-    SlickCarouselModule,
     AppRoutingModule,
     FormsModule,
     NgxSpinnerModule,
@@ -106,7 +105,7 @@ registerLocaleData(localeEn, 'en-EN');
     NgbModule,
     HttpClientModule,
     DndModule,
-    DxButtonModule,
+ //   DxButtonModule,
     ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM',

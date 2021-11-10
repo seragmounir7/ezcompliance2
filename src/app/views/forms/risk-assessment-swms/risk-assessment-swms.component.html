@@ -219,7 +219,7 @@
               type="checkbox"
               class="form-check-input"
               [value]="item._id"
-              (change)="onJobtaskSelect($event)"
+              (change)="onJobtaskSelect($event,item)"
             />
             <label class="form-check-label label_2" for="inlineCheckbox1"
               >{{item.title}}</label
@@ -341,30 +341,7 @@
             <label class="form-check-label label_2" for="inlineCheckbox1"
               >{{item.title}}</label
             >
-          </div>
-          <!-- <div class="col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Work in or near a confined space"
-              formControlName="nearConfinedSpace"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work in or near a confined space</label
-            >
-          </div>
-          <div class="col-4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              value="Work in an area that may have a contaminated or flammable atmosphere"
-              formControlName="areaFlammableAtmosphere"
-            />
-            <label class="form-check-label label_2" for="inlineCheckbox1"
-              >Work in an area that may have a contaminated or flammable
-              atmosphere</label
-            >
-          </div> -->
+          </div>         
         </div>
 
     </div>
@@ -716,21 +693,8 @@
                   </option>
               </select>
             </div>
-          </div>
-          <div class="col-md-2">
-            <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
-                >Code Of Practice</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputProjectNumber"
-                aria-describedby="emailHelp"
-              />
-            </div>
-          </div>
-          <div class="col-md-3">
+          </div>        
+          <div class="col-md-5">
             <div class="my-3">
               <label for="exampleInputProjectNumber" class="form-label"
                 >Regulator & other Legislation</label
@@ -751,6 +715,30 @@
               <option value="Reg_NZ">Regulator: WorkSafe New Zealand</option>
               <option value="Reg_VIC">Regulator: WorkSafe Victoria</option>
               <option value="Reg_WA">Regulator: WorkSafe WA</option>
+            </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="my-3">
+              <label for="exampleInputProjectNumber" class="form-label"
+                >Code Of Practice</label
+              >
+              <select
+              class="form-select form-control col"
+              id="siteName"
+              aria-label="Default select example"
+              formControlName="CodeOfPract"
+            >
+              <option selected hidden>Select</option>
+              <option value="code_NSW">Codes: NSW Codes of Practice </option>
+              <option value="code_ACT">Codes: ACT Codes of Practice</option>
+              <option value="code_QLD">Codes: Qld Codes of Practice </option>
+              <option value="code_NT">Codes: NT Codes of Practice</option>
+              <option value="code_SA">Codes: SA Codes of Practice</option>
+              <option value="code_TAS">Codes: Tas Codes of Practice</option>
+              <option value="code_NZ">Codes: NZ Codes of Practice</option>
+              <option value="code_VIC">Codes: Vic Compliance Codes</option>
+              <option value="code_WA">Codes: WA Codes of Practice</option>
             </select>
             </div>
           </div>
@@ -965,73 +953,86 @@
           </div>
         </div>
         <hr />
-        <h2>Working outdoors</h2>
+        <ng-container *ngFor="let item of jobTaskSelected;let i=index">
+          <h2>{{item.title}}</h2>
 
-        <div class="row">
-          <div class="col-md-4 my-3">
-            <div class="">
-              <label for="sel2">Identity Hazards</label>
-              <select multiple class="form-control" id="sel2" name="sellist2">
-                <option>Subburn</option>
-                <option>Dust</option>
-                <option>Increase body heat</option>
-                <option>Deccrease body heat</option>
-                <option>Trips, slips & falls from obscured view</option>
-                <option>Deccrease body heat</option>
-                <option>
-                  Insect & animal bites Cuts, lacirations, bruises & abrations
-                </option>
-                <option>Heat stroke</option>
-                <option>Musculoskeleton Injuries</option>
-                <option>Spains & Strains Dehyderation</option>
+          <div class="row">
+            <div class="col-md-4 my-3">
+              <div class="">
+                <label for="sel2">Identity Hazards</label>
+                <select multiple class="form-control" id="sel2" name="sellist2">
+                  <option *ngFor="let hazard of item.identifyHazard">{{hazard.title}}</option>                  
+                </select>
+              </div>
+            </div>
+            <ng-container >
+              <div class="col-md-1">
+                <label for="sel1">Residual Risk</label>
+                <select class="form-control" id="sel1" name="sellist1" >
+                  <option value="L1">L1</option>
+                  <option value="L2">L2</option>
+                  <option value="L3">L3</option>
+                  <option  value="L4">L4</option>
+                  <option  value="L5">L5</option>
+                </select>
+              </div>
+            </ng-container>
+            <!-- <ng-container formArrayName="riskLevel">
+              <div class="col-md-1" [formGroupName]="i">
+                <label for="sel1">Residual Risk</label>
+                <select class="form-control" id="sel1" name="sellist1" formControlName="riskLevel">
+                  <option value="L1">L1</option>
+                  <option value="L2">L2</option>
+                  <option value="L3">L3</option>
+                  <option  value="L4">L4</option>
+                  <option  value="L5">L5</option>
+                </select>
+              </div>
+            </ng-container> -->
+            <div class="col-md-4 my-3">
+              <div class="">
+                <label for="sel2">Control and Action Required</label>
+                <select multiple class="form-control" id="sel2" name="sellist2">
+                  <option *ngFor="let contrlActReq of item.controlActionRequired">{{contrlActReq.title}}</option>
+                </select>
+              </div>
+            </div>
+            <ng-container>
+              <div class="col-md-1">
+                <label for="sel1">Residual Risk</label>
+                <select class="form-control" id="sel1" name="sellist1">
+                  <option value="L1">L1</option>
+                  <option value="L2">L2</option>
+                  <option value="L3">L3</option>
+                  <option  value="L4">L4</option>
+                  <option  value="L5">L5</option>
+                </select>
+              </div>
+            </ng-container>
+            <!-- <ng-container formArrayName="residualRisk">
+              <div class="col-md-1" [formGroupName]="i">
+                <label for="sel1">Residual Risk</label>
+                <select class="form-control" id="sel1" name="sellist1" formControlName="resiRiskLevel">
+                  <option value="L1">L1</option>
+                  <option value="L2">L2</option>
+                  <option value="L3">L3</option>
+                  <option  value="L4">L4</option>
+                  <option  value="L5">L5</option>
+                </select>
+              </div>
+            </ng-container> -->
+        
+            <div class="col-md-2 my-3">
+              <label for="sel1">Person Responsible</label>
+              <select class="form-control" id="sel1" name="sellist1">
+                <option>Project Manager</option>
               </select>
             </div>
           </div>
-          <div class="col-md-1 my-3">
-            <label for="sel1">Risk</label>
-            <select class="form-control" id="sel1" name="sellist1">
-              <option>L1</option>
-              <option>L2</option>
-              <option>L3</option>
-              <option>L4</option>
-              <option selected>L5</option>
-            </select>
-          </div>
-          <div class="col-md-4 my-3">
-            <div class="">
-              <label for="sel2">Control and Action Required</label>
-              <select multiple class="form-control" id="sel2" name="sellist2">
-                <option>-Complete works early AM to aviod heat</option>
-                <option>
-                  -Light cotton clothing worn neck to wrist to ankle in extreme
-                  conditions, Hats, Sunscreen, dust masks
-                </option>
-                <option>-Regular break periods and rotation of tasks</option>
-                <option>-Adequate liquid consumption</option>
-                <option>-Provide shading over work areas</option>
-                <option>-Shaded areas or indoors for breaks</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <label for="sel1">Residual Risk</label>
-            <select class="form-control" id="sel1" name="sellist1">
-              <option>L1</option>
-              <option>L2</option>
-              <option>L3</option>
-              <option>L4</option>
-              <option>L5</option>
-            </select>
-          </div>
-          <div class="col-md-2 my-3">
-            <label for="sel1">Person Responsible</label>
-            <select class="form-control" id="sel1" name="sellist1">
-              <option>Project Manager</option>
-            </select>
-          </div>
-        </div>
-        <hr />
-        <h2>Activities involving chemicals</h2>
+          <hr />
+        </ng-container>
+       
+        <!-- <h2>Activities involving chemicals</h2>
         <div class="row">
           <div class="col-md-4 my-4">
             <div class="my-3">
@@ -1245,8 +1246,8 @@
             </div>
             
           </div>
-        </div>
-        <hr />
+        </div> -->
+        <!-- <hr /> -->
         <div class="row">
           <h2>
             Worker consultation, instruction, training, toolbox talks, review,

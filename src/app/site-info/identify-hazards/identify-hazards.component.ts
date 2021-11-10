@@ -82,7 +82,7 @@ export class IdentifyHazardsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deletePPE(item._id)
+        .deleteHazards(item._id)
         .subscribe((res) => {
           Swal.fire({
             title: 'Parameter Deleted successfully',
