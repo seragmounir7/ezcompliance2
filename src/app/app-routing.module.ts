@@ -83,7 +83,7 @@ const routes: Routes = [
     canActivate: [NonAuthGuard],
   },
 
-  { path: '**', component: NotFoundPageComponent/* redirectTo: '', pathMatch: 'full' */ },
+  { path: '**',  redirectTo: 'admin', pathMatch: 'full' },
 ];
 
 @NgModule({

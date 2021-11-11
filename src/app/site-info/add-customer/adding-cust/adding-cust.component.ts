@@ -28,6 +28,8 @@ export class AddingCustComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.addCustomerForm.value);
+    
     this.logicalFormInfoService.addCustomer(this.addCustomerForm.value).subscribe(res => {
       console.log(res)
       this.dialogRef.close('ok')

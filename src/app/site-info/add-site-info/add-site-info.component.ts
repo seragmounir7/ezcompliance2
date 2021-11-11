@@ -19,7 +19,7 @@ export class AddSiteInfoComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'siteName',/* 'siteForemen', */'streetAddress','Suburb','State', 'edit', 'delete'];
+  displayedColumns: string[] = ['index', 'siteName',/* 'siteForemen', */'streetNo','streetAddress','Suburb','State', 'edit', 'delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   allSites: any[]=[];

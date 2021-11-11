@@ -1,4 +1,4 @@
-import Swal  from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { CreateJobNoComponent } from './create-job-no/create-job-no.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -12,7 +12,7 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-job-number',
   templateUrl: './job-number.component.html',
-  styleUrls: ['./job-number.component.scss']
+  styleUrls: ['./job-number.component.scss'],
 })
 export class JobNumberComponent implements OnInit {
   mode: any;
@@ -24,13 +24,14 @@ export class JobNumberComponent implements OnInit {
     'siteName',
     'streetNumber',
     'streetAddress',
+    'suburb',
     'state',
     'customerName',
     'customerContact',
-    'customerContactPhone',
-    'customerEmail',
+    //'customerContactPhone',
+   // 'customerEmail',
     /* 'edit', */
-    'delete'
+    'delete',
   ];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,22 +41,24 @@ export class JobNumberComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private setTitle: SetTitleService,
-    private logicalFormInfoService :LogicalFormInfoService
-    ) { }
+    private logicalFormInfoService: LogicalFormInfoService
+  ) {}
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Add Site Info');
-    this.getAllJobNumber()
+    this.getAllJobNumber();
   }
-  getAllJobNumber(){
-    this.logicalFormInfoService.getAllJobNumber().subscribe((res:any) => {
-      console.log(res)
-      this.dataSource.data = res.data
-      this.dataSource.paginator = this.paginator
-    })
+  getAllJobNumber() {
+    this.logicalFormInfoService.getAllJobNumber().subscribe((res: any) => {
+      console.log(res);
+      this.dataSource.data = res.data;
+      console.log("getAllJobNumber",res.data);
+      
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   getAllJobTask() {
@@ -66,40 +69,45 @@ export class JobNumberComponent implements OnInit {
     //   data.forEach((element, index) => {
     //     element.index = index + 1; //adding index
     //   });
-
     //   this.ELEMENT_DATA = data;
     //   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     //   this.dataSource.paginator = this.paginator;
-
     //   //  this.task = res.data.subComponents;
     // });
-
   }
 
   openDialog(id) {
-		let dialogRef = this.dialog.open(CreateJobNoComponent, {
-      height:'80%',
-			data: {
-				action: "new",
-				userId: id,
-			},
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-			console.log("CustomerInfoComponent -> openDialog -> result", result);
-			
-			console.log("The dialog was closed");
-		});
-	}
+    let dialogRef = this.dialog.open(CreateJobNoComponent, {
+      height: '80%',
+      data: {
+        action: 'new',
+        userId: id,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('CustomerInfoComponent -> openDialog -> result', result);
+     console.log("result",result);
+     if(result ==="success"){
+      this.getAllJobNumber();
+      Swal.fire({
+        title: 'Job Number created successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+     }
+      console.log('The dialog was closed');
+    });
+  }
   edit(element) {
     const dialogRef = this.dialog.open(EditSiteComponent, {
-      width: "550px",
+      width: '550px',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "true")) {
+      if (result == 'true') {
         this.getAllJobTask();
       }
-      console.log("The dialog was closed");
+      console.log('The dialog was closed');
     });
   }
   delete(item) {
@@ -120,14 +128,11 @@ export class JobNumberComponent implements OnInit {
               title: 'Job Number Deleted successfully',
               showConfirmButton: false,
               timer: 1200,
-            }); console.log('deleted res', res);
+            });
+            console.log('deleted res', res);
             this.getAllJobNumber();
-
           });
       }
     });
   }
-
-  
-
 }

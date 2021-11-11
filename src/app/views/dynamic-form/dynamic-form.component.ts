@@ -104,7 +104,7 @@ export class DynamicFormComponent implements OnInit {
     {
       type: 'externalLink',
       icon: 'fa-link',
-      label: 'Click here',
+      label: 'Add link',
       linkAddr: '',
     },
     {
