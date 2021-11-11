@@ -76,4 +76,7 @@ export class AddModulesInfoComponent implements OnInit {
         this.safetyDetail.reset();
       });
   }
+  close() {
+    this.dialogRef.close();
+}
 }

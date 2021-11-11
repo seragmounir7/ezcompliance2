@@ -15,7 +15,7 @@ label {
   border-color: rgba(46, 105, 255, 0.5);
   box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
 }
-.pt-3 {
+.pt-2 {
   display: inline-block;
   font-size: 32px;
   font-weight: 700;
@@ -50,4 +50,9 @@ label {
 .imgStyle {
   border: 2px solid #2e69ff40;
   border-radius: 10px;
+}
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

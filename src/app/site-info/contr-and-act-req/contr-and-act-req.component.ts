@@ -81,7 +81,7 @@ export class ContrAndActReqComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deletePPE(item._id)
+        .deleteContrlActReq(item._id)
         .subscribe((res) => {
           Swal.fire({
             title: 'Parameter Deleted successfully',

@@ -1,64 +1,37 @@
 <div class="container px-4 py-4 card" [formGroup]="clientDetail">
-  <h1 class="text-center pt-3">
-    <p>OurHappyClient</p>
-  </h1>
-
+  <div mat-dialog-title class="dialog-title">
+    <h1 class="text-center pt-3">
+      <p>Edit Happy Client Info</p>
+    </h1>
+    <button type="button" class="close" style="font-size: 40px;" (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
   <div class="row" *ngIf="module">
     <div class="col-sm-12">
       <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-      <input
-        type="text"
-        formControlName="title"
-        style="height: 50px"
-        class="form-control"
-        id="heading"
-      />
+      <input type="text" formControlName="title" style="height: 50px" class="form-control" id="heading" />
     </div>
   </div>
   <br />
   <hr />
   <ng-container formArrayName="arrObj" *ngIf="subModule">
-    <ng-container
-      *ngFor="let control of clientArr().controls; let i = index"
-      [formGroupName]="i"
-    >
+    <ng-container *ngFor="let control of clientArr().controls; let i = index" [formGroupName]="i">
       <div>
         <div class="row">
           <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-Label">UploadImage</p>
-            <img
-              [src]="selectedImage"
-              onerror=" this.src='../../../assets/img/uploadImg.png' "
-              alt=""
-              width="150"
-              height="100"
-              class="imageService"
-            />
-            <input
-              type="file"
-              class="d-none"
-              #file
-              id="file"
-              class="custom-file-input img1 form-control"
-              name="avatar"
-              (change)="browser($event, i)"
-            />
-            <span
-              class="material-icons material-file"
-              (click)="file.click()"
-              class="btn border bg-white z-index"
-              style="
+            <p for="exampleFormControlInput1" class="form-Label">Upload Image</p>
+            <img [src]="selectedImage" onerror=" this.src='../../../assets/img/uploadImg.png' " alt="" width="150"
+              height="100" class="imageService" />
+            <input type="file" class="d-none" #file id="file" class="custom-file-input img1 form-control" name="avatar"
+              (change)="browser($event, i)" />
+            <span class="material-icons material-file" (click)="file.click()" class="btn border bg-white z-index" style="
                 position: absolute;
                 top: 120px;
                 left: 150;
                 font-size: 1rem !important;
-              "
-            >
-              <i
-                class="fa fa-upload"
-                aria-hidden="true"
-                style="margin: 0px"
-              ></i>
+              ">
+              <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
             </span>
           </div>
         </div>
@@ -69,20 +42,10 @@
   </ng-container>
 
   <div class="col-md-2">
-    <button
-      type="submit"
-      *ngIf="module"
-      (click)="editModule()"
-      class="btn btn-primary btn-block"
-    >
+    <button type="submit" *ngIf="module" (click)="editModule()" class="btn btn-primary btn-block">
       Update
     </button>
-    <button
-      type="submit"
-      class="btn btn-primary btn-block"
-      *ngIf="subModule"
-      (click)="editSubModule()"
-    >
+    <button type="submit" class="btn btn-primary btn-block" *ngIf="subModule" (click)="editSubModule()">
       Update
     </button>
   </div>

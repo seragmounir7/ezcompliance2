@@ -51,4 +51,7 @@ export class ViewContactComponent implements OnInit {
       
     });
   }
+  close() {
+    this.dialogRef.close();
+}
 }

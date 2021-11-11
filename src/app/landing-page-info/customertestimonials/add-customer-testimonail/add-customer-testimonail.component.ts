@@ -73,4 +73,7 @@ export class AddCustomerTestimonailComponent implements OnInit {
         this.testiomnial.reset();
       });
   }
+  close() {
+    this.dialogRef.close();
+}
 }

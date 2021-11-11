@@ -1,3 +1,4 @@
+import { value } from './../../dynamic-form/global.model';
 import { element } from 'protractor';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -23,6 +25,9 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   PPEselection = [];
   licenseAndQualification = [];
   checkArray = [];
+  allJobNumbers = [];
+  // riskLevel = [];
+  // resdRiskLevel = [];
   statesData = [
     {
       states: 'NSW',
@@ -36,7 +41,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       },
     },
     {
-      states: 'ACT',      
+      states: 'ACT',
       juridiction: {
         act: 'Act: Work Health and Safety Act 2011 (ACT)',
         regulation: 'Regulation: Work Health and Safety Regulation 2011 (ACT)',
@@ -46,7 +51,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
         codes: 'Codes: ACT Codes of Practice',
       },
     },
-   
+
     {
       states: 'QLD',
       juridiction: {
@@ -61,8 +66,10 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     {
       states: 'NT',
       juridiction: {
-        act: 'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
-        regulation: 'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
+        act:
+          'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
+        regulation:
+          'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
       },
       safetyLegislation: {
         regulator: 'Regulator: NT WorkSafe',
@@ -106,7 +113,8 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       states: 'VIC',
       juridiction: {
         act: 'Act: Occupational Health and Safety Act 2004 (Vic) ',
-        regulation: 'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
+        regulation:
+          'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
       },
       safetyLegislation: {
         regulator: 'Regulator: WorkSafe Victoria',
@@ -117,7 +125,8 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       states: 'WA',
       juridiction: {
         act: 'Act: Occupational Safety and Health Act 1984 (WA)',
-        regulation: 'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
+        regulation:
+          'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
       },
       safetyLegislation: {
         regulator: 'Regulator: WorkSafe WA',
@@ -277,6 +286,8 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   ppeArr = [];
   licenceArr = [];
   jobTaskData = [];
+  jobTaskSelected = [];
+  projectMang = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
@@ -287,84 +298,27 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   ) {
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
-      chemicalsActivitie: [''],
-      assessHazards: [''],
-      CableInstallation: [''],
-      CableSupport: [''],
-      CameraInstallation: [''],
-      conduitCeilingWalls: [''],
-      ConduitTrench: [''],
-      conduitPour: [''],
-      ControlPanelInstallation: [''],
-      HeatShrinkingJoints: [''],
-      HotWorks: [''],
-      InstallationCables: [''],
-      LeavingSite: [''],
-      MaualHandling: [''],
-      SiteEstablishment: [''],
-      fibreOpticCables: [''],
-      ElevatedWorkPlatform: [''],
-      EWP: [''],
-      UseLadders: [''],
-      PlantAndEquipment: [''],
-      plantequipment: [''],
-      falseCeilings: [''],
-      WorkingCommunication: [''],
-      WorkingNearPedistrian: [''],
-      WorkingNearAsbestos: [''],
-      LeadContainingMaterials: [''],
-      WorkingOutdoor: [''],
-      WorkingHandPowertools: [''],
-      trenchesShaftsDeeper: [''],
-      nearConfinedSpace: [''],
-      areaFlammableAtmosphere: [''],
-      mobilePlant: [''],
-      nearAsbestos: [''],
-      hazardousSubstances: [''],
-      tiltUpPrecastConcrete: [''],
-      RiskFallsHigher: [''],
-      adjacentRoadRail: [''],
-      telecommunicationTower: [''],
-      pressuredGasLinesPipes: [''],
-      WorkNearExplosives: [''],
-      areasArtificialTemperature: [''],
-      liquidRiskDrowning: [''],
-      demolitionStructure: [''],
-      divingWork: [''],
-      disposableDustMask: [''],
-      dustMask: [''],
-      faceShield: [''],
-      EvacuationPlans: [''],
-      faceRespirator: [''],
-      Gttors: [''],
-      halfFaceRespirator: [''],
-      hardHat: [''],
-      hearingProtection: [''],
-      highVisClothing: [''],
-      lockTags: [''],
-      longSleevePants: [''],
-      outServiceTags: [''],
-      protectiveGloves: [''],
-      rescueKit: [''],
-      safetyBoots: [''],
-      SafetyGlasses: [''],
-      sunScreen: [''],
-      torch: [''],
-      wideBrimHat: [''],
-      cableLicence: [''],
-      whiteCard: [''],
-      EWPLicence: [''],
-      workingHeights: [''],
-      asbestosAwarness: [''],
-      confinedSpace: [''],
-      Torch: [''],
-      securityLicence: [''],
+
+      jobNumber: [''],
+      // jobNumberDupl: [''],
+      siteName: [''],
+      customerName: [''],
+      streetNo: [''],
+      streetAddr: [''],
+      subUrb: [''],
+      custConct: [''],
+      custConctPh: [''],
+      custEmail: [''],
       Employee1: [''],
       dateTime: [''],
       statesSWMS: [''],
       jurisdiction: [''],
       safetyLeg: [''],
       regulator: [''],
+      CodeOfPract: [''],
+      SDSRegister: this.fb.array([]),
+      riskLevel: this.fb.array([]),
+      residualRisk: this.fb.array([]),
     });
   }
 
@@ -373,64 +327,176 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     this.getAllPPE();
     this.getAllHighRisk();
     this.getAllLicence();
+    this.getAllProjectMang();
+    this.addActionSDSRegister();
+    this.getAllJobNumber();
+
     this.setTitle.setTitle('WHS-Risk Assesment Form');
-this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res)=>{
-if(res){
-  
-console.log(res);
+    // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
+    //   if (res) {
+    //     console.log('jobNumberres', res);
+    //     this.allJobNumbers.forEach((item) => {
+    //       if (res === item._id) {
+    //         console.log('Id found', item);
+    //         this.riskAssessmentFb.patchValue({
+    //           siteName: item.siteName,
+    //           customerName: item.customerName,
+    //           streetNo: item.streetNumber,
+    //           streetAddr: item.streetAddress,
+    //           subUrb: item.suburb,
+    //           statesSWMS: item.state,
+    //           custConct: item.customerContact,
+    //           custConctPh: item.customerContactPhone,
+    //           custEmail: item.customerEmail,
+    //           jobNumberDupl: this.riskAssessmentFb.get('jobNumber').value,
+    //         });
+    //       }
+    //     });
+    //   }
+    //  // this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
+    // });
+    
+    this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
+      if (res) {
+        console.log(res);
 
-  switch (res) {
-    case 'NSW':
-      this.riskAssessmentFb.get('jurisdiction').setValue('NSW');
-      this.riskAssessmentFb.get('safetyLeg').setValue('NSW_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_NSW');
-      break;
-    case 'ACT':
-      this.riskAssessmentFb.get('jurisdiction').setValue('ACT');
-      this.riskAssessmentFb.get('safetyLeg').setValue('ACT_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_ACT');
-      break;
-    case 'QLD':
-      this.riskAssessmentFb.get('jurisdiction').setValue('QLD');
-      this.riskAssessmentFb.get('safetyLeg').setValue('QLD_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_QLD');
-      break;
-    case 'NT':
-      this.riskAssessmentFb.get('jurisdiction').setValue('NT');
-      this.riskAssessmentFb.get('safetyLeg').setValue('NT_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_NT');
-      break;
-    case 'SA':
-      this.riskAssessmentFb.get('jurisdiction').setValue('SA');
-      this.riskAssessmentFb.get('safetyLeg').setValue('SA_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_SA');
-      break;
-    case 'NZ':
-      this.riskAssessmentFb.get('jurisdiction').setValue('NZ');
-      this.riskAssessmentFb.get('safetyLeg').setValue('NZ_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_NZ');
-      break;
-    case 'TAS':
-      this.riskAssessmentFb.get('jurisdiction').setValue('TAS');
-      this.riskAssessmentFb.get('safetyLeg').setValue('TAS_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_TAS');
-      break;
-    case 'VIC':
-      this.riskAssessmentFb.get('jurisdiction').setValue('VIC');
-      this.riskAssessmentFb.get('safetyLeg').setValue('VIC_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_VIC');
-      break;
-    case 'WA':
-      this.riskAssessmentFb.get('jurisdiction').setValue('WA');
-      this.riskAssessmentFb.get('safetyLeg').setValue('WA_Act');
-      this.riskAssessmentFb.get('regulator').setValue('Reg_WA');
-      break; 
- 
-  }
-}
-});
-  }
+        switch (res) {
+          case 'NSW':
+            this.riskAssessmentFb.get('jurisdiction').setValue('NSW');
+            this.riskAssessmentFb.get('safetyLeg').setValue('NSW_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_NSW');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NSW');
+            break;
+          case 'ACT':
+            this.riskAssessmentFb.get('jurisdiction').setValue('ACT');
+            this.riskAssessmentFb.get('safetyLeg').setValue('ACT_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_ACT');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_ACT');
 
+            break;
+          case 'QLD':
+            this.riskAssessmentFb.get('jurisdiction').setValue('QLD');
+            this.riskAssessmentFb.get('safetyLeg').setValue('QLD_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_QLD');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_QLD');
+
+            break;
+          case 'NT':
+            this.riskAssessmentFb.get('jurisdiction').setValue('NT');
+            this.riskAssessmentFb.get('safetyLeg').setValue('NT_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_NT');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NT');
+
+            break;
+          case 'SA':
+            this.riskAssessmentFb.get('jurisdiction').setValue('SA');
+            this.riskAssessmentFb.get('safetyLeg').setValue('SA_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_SA');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_SA');
+
+            break;
+          case 'NZ':
+            this.riskAssessmentFb.get('jurisdiction').setValue('NZ');
+            this.riskAssessmentFb.get('safetyLeg').setValue('NZ_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_NZ');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NZ');
+
+            break;
+          case 'TAS':
+            this.riskAssessmentFb.get('jurisdiction').setValue('TAS');
+            this.riskAssessmentFb.get('safetyLeg').setValue('TAS_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_TAS');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_TAS');
+
+            break;
+          case 'VIC':
+            this.riskAssessmentFb.get('jurisdiction').setValue('VIC');
+            this.riskAssessmentFb.get('safetyLeg').setValue('VIC_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_VIC');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_VIC');
+
+            break;
+          case 'WA':
+            this.riskAssessmentFb.get('jurisdiction').setValue('WA');
+            this.riskAssessmentFb.get('safetyLeg').setValue('WA_Act');
+            this.riskAssessmentFb.get('regulator').setValue('Reg_WA');
+            this.riskAssessmentFb.get('CodeOfPract').setValue('code_WA');
+
+            break;
+        }
+      }
+    });
+  }
+  jobNoSel(){
+    this.allJobNumbers.forEach((item) => {
+      if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
+        console.log('Id found', item);
+        this.riskAssessmentFb.patchValue({
+          siteName: item.siteName,
+          customerName: item.customerName,
+          streetNo: item.streetNumber,
+          streetAddr: item.streetAddress,
+          subUrb: item.suburb,
+          statesSWMS: item.state,
+          custConct: item.customerContact,
+          custConctPh: item.customerContactPhone,
+          custEmail: item.customerEmail,
+          jobNumber: this.riskAssessmentFb.get('jobNumber').value,
+        });
+      }
+    });
+         this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
+
+  }
+  addActionRiskLevel() {
+    {
+      this.riskLevelFA().push(this.riskLevelFG());
+    }
+  }
+  addActionResiRiskLevel() {
+    {
+      this.residlRiskLevelFA().push(this.residlRiskLevelFG());
+    }
+  }
+  addActionSDSRegister() {
+    {
+      this.sdsRegisterFA().push(this.sdsRegisterFG());
+    }
+  }
+  riskLevelFA(): FormArray {
+    return this.riskAssessmentFb.get('riskLevel') as FormArray;
+  }
+  residlRiskLevelFA(): FormArray {
+    return this.riskAssessmentFb.get('residualRisk') as FormArray;
+  }
+  sdsRegisterFA(): FormArray {
+    return this.riskAssessmentFb.get('SDSRegister') as FormArray;
+  }
+  riskLevelFG(): FormGroup {
+    return this.fb.group({
+      riskLevel: [''],
+    });
+  }
+  residlRiskLevelFG(): FormGroup {
+    return this.fb.group({
+      resiRiskLevel: [''],
+    });
+  }
+  sdsRegisterFG(): FormGroup {
+    return this.fb.group({
+      chemicalName: [''],
+      location: [''],
+      hazardous: [''],
+      quantity: [''],
+      expDate: [''],
+    });
+  }
+  removeSDSRegister(i) {
+    const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
+    if (item.length > 1) {
+      item.removeAt(i);
+    }
+  }
   showsite() {
     this.RiskAssessment = true;
     this.SWMSShow = false;
@@ -494,17 +560,7 @@ console.log(res);
       console.log('jobTaskDetails=>', this.jobTaskData);
     });
   }
-  // getJobTaskById() {
-  //   let mode = 'JOBTask';
-  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-  //     console.log('jobTaskDetails=>', res);
-  //     // this.jobTaskData = res.data[0].subComponents;
-  //    this.jobTask = res.data[0].subComponents;
 
-  //     //  this.task = res.data.subComponents;
-  //   });
-
-  // }
   getAllPPE() {
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
       console.log('PPE=>', res);
@@ -514,16 +570,12 @@ console.log(res);
       }
     });
   }
-  // getPPEById() {
-  //   let mode = 'PPE';
-  //   this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
-  //     this.PPEselection = res.data[0].subComponents;
-  //     console.log('this.PPEselection=>', this.PPEselection);
-  //     for (let i = 0; i < this.PPEselection.length; i++) {
-  //       this.ppeArr[i] = 0;
-  //     }
-  //   });
-  // }
+  getAllProjectMang() {
+    this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
+      this.projectMang = res.data;
+      console.log('getAllProjectMang=>', this.projectMang);
+    });
+  }
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
       console.log('Risk=>', res);
@@ -555,15 +607,19 @@ console.log(res);
       }
     });
   }
-  onJobtaskSelect(e) {
-    console.log('event', e);
+  onJobtaskSelect(e, jobTaskRecd) {
+    // this.jobTaskSelected=[];
+
+    console.log('event', e.target.value, jobTaskRecd);
     let item = e.target.value;
     if (e.target.checked) {
       this.checkArray.push(item);
+      this.jobTaskSelected.push(jobTaskRecd);
     } else {
       this.checkArray.forEach((item, j) => {
         if (item == e.target.value) {
           this.checkArray.splice(j, 1);
+          this.jobTaskSelected.splice(j, 1);
           return;
         }
       });
@@ -577,27 +633,28 @@ console.log(res);
     for (let k = 0; k < this.licenceArr.length; k++) {
       this.licenceArr[k] = 0;
     }
-    console.log(this.checkArray);
+    // console.log(this.checkArray);
     this.checkArray.forEach((id) => {
       this.jobTaskData.forEach((element) => {
         if (id === element._id) {
           element.risk.forEach((riskItem) => {
             this.highRiskConstruction.forEach((highRisk, riskIndex) => {
-              if (highRisk._id === riskItem.riskId) {
+
+              if (highRisk._id === riskItem) {
                 this.riskArr[riskIndex] = 1;
               }
             });
           });
           element.PPE.forEach((riskItem) => {
             this.PPEselection.forEach((highRisk, index) => {
-              if (highRisk._id === riskItem.PPEId) {
+              if (highRisk._id === riskItem) {
                 this.ppeArr[index] = 1;
               }
             });
           });
           element.licence.forEach((riskItem) => {
             this.licenseAndQualification.forEach((highRisk, index) => {
-              if (highRisk._id === riskItem.licenceId) {
+              if (highRisk.licenceCategoryId._id === riskItem) {
                 this.licenceArr[index] = 1;
               }
             });
@@ -605,5 +662,52 @@ console.log(res);
         }
       });
     });
+
+    while (this.riskLevelFA().length) {
+      this.riskLevelFA().removeAt(0);
+    }
+    while (this.residlRiskLevelFA().length) {
+      this.residlRiskLevelFA().removeAt(0);
+    }
+    this.jobTaskSelected.forEach((data, i) => {
+      this.addActionRiskLevel();
+      this.addActionResiRiskLevel();
+      this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
+      this.residlRiskLevelFA()
+        .controls[i].get('resiRiskLevel')
+        .setValue(data.residualRisk);
+    });
+
+    console.log('jobTaskSelected', this.jobTaskSelected);
+    console.log(this.residlRiskLevelFA().value);
+  }
+  getAllJobNumber() {
+    this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
+      console.log(res);
+      console.log('getAllJobNumber', res.data);
+      this.allJobNumbers = res.data;
+    });
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.jobTaskSelected,
+      event.previousIndex,
+      event.currentIndex
+    );
+    while (this.riskLevelFA().length) {
+      this.riskLevelFA().removeAt(0);
+    }
+    while (this.residlRiskLevelFA().length) {
+      this.residlRiskLevelFA().removeAt(0);
+    }
+    this.jobTaskSelected.forEach((data, i) => {
+      this.addActionRiskLevel();
+      this.addActionResiRiskLevel();
+      this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
+      this.residlRiskLevelFA()
+        .controls[i].get('resiRiskLevel')
+        .setValue(data.residualRisk);
+    });
+    console.log(this.residlRiskLevelFA().value);
   }
 }

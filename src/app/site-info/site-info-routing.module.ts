@@ -3,7 +3,6 @@ import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.c
 import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
 import { IdentifyHazardsComponent } from './identify-hazards/identify-hazards.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
-import { UploadBulkDataComponent } from './upload-bulk-data/upload-bulk-data.component';
 import { EditCOPComponent } from './code-of-pract/edit-cop/edit-cop.component';
 import { AddCOPComponent } from './code-of-pract/add-cop/add-cop.component';
 import { CodeOfPractComponent } from './code-of-pract/code-of-pract.component';
@@ -50,12 +49,13 @@ const routes: Routes = [
   { path: 'codeOfpract', component: CodeOfPractComponent },
   { path: 'addCOP', component: AddCOPComponent },
   { path: 'editCOP', component: EditCOPComponent },
-  { path: 'uploadData', component: UploadBulkDataComponent },
+  // { path: 'uploadData', component: UploadBulkDataComponent },
   { path: 'projMang', component: ProjectManagerComponent },
   { path: 'hazards', component: IdentifyHazardsComponent },
   { path: 'addHazards', component: AddHazardComponent },
   { path: 'contrlActReq', component: ContrAndActReqComponent },
   { path: 'addContrlActReq', component: AddContrActComponent },
+  // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 
 @NgModule({

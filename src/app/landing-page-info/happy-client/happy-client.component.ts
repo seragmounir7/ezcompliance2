@@ -61,7 +61,7 @@ export class HappyClientComponent implements OnInit {
     this.isEdit = true;
     this.mode = 'HappyClient';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      Swal.fire('Deleted Successfully')
+
       console.log('HappyClient=>', data);
       this.happyClientData = data.data[0];
       console.log('', this.happyClientData);

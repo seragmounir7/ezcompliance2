@@ -35,4 +35,8 @@ label:not(.form-check-label):not(.custom-file-label) {
     margin-left: 2px;
     margin-bottom: 14px;
   }
-  
+  .dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

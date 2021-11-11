@@ -1,1 +1,146 @@
-<p>create-job-no works!</p>
+<section [formGroup]="addJobNumberForm" class="content">
+  <div class="container px-4 py-4 bg-white">
+    <h1>Create Job Number</h1>
+  
+    <div class="row">
+  
+      <div class="my-3 col-6">
+        <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
+        <select
+          type="text"
+          class="form-control"
+          formControlName="siteName"
+          id="siteName"
+        >
+          <option [value]="item|json" *ngFor="let item of allSites ">{{item.siteName}}</option>
+        </select>
+      </div>
+    
+    </div>
+  
+    
+    <div class="row">
+      <div class="my-3 col-2">
+        <p for="exampleFormControlInput1" class="form-Label">Street Number</p>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="streetNumber"
+          id="siteName"
+        />
+      </div>
+      <div class="my-3 col-4">
+        <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="streetAddress"
+          id="siteName"
+        />
+      </div>
+      <div class="my-3 col-2">
+        <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="suburb"
+          id="siteName"
+        />
+      </div>
+      <div class="my-3 col-4">
+          <p for="exampleFormControlInput1" class="form-label"
+          >State</p
+        >
+
+          <select
+        class="form-select form-control col"
+        aria-label="Default select example"
+        formControlName="state"
+      >
+        <option selected hidden>Select</option>
+              <option value="NSW">NSW</option>
+              <option value="ACT">ACT</option>
+              <option value="QLD">QLD</option>
+              <option value="NT">NT</option>
+              <option value="SA">SA</option>
+              <option value="NZ">NZ</option>
+              <option value="TAS">TAS</option>
+              <option value="VIC">VIC</option>
+              <option value="WA">WA</option>
+      </select>
+    
+      </div>
+    </div>
+    <div class="row">
+      <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
+        <select
+          type="text"
+          class="form-control"
+          formControlName="customerName"
+          id="siteName"
+        >
+          <option [value]="item|json" *ngFor="let item of allCustomers ">{{item.customerName}}</option>
+        </select>
+      </div>
+      <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">Customer Contact</p>
+        <input
+          type="text"
+          class="form-control"
+          id="siteName"
+          formControlName="customerContact"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">Customer Contact Phone</p>
+        <input
+          type="text"
+          class="form-control"
+          id="siteName"
+          formControlName="customerContactPhone"
+        />
+      </div>
+      <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">Customer Email</p>
+        <input
+          type="text"
+          class="form-control"
+          id="siteName"
+          formControlName="customerEmail"
+        />
+      </div>
+    </div> 
+  <div >
+    <button class="btn btn-primary" (click)="onSubmit()">
+      Create
+    </button>
+  </div>
+    <!-- <div class="row">
+      <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">
+          Customer Contact Phone
+        </p>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="customerContactPhone"
+          id="siteName"
+        />
+      </div>
+      <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">Project Manager</p>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="projectManager"
+          id="siteName"
+        />
+      </div>
+    </div> -->
+  </div>
+  </section>
+  
+ 

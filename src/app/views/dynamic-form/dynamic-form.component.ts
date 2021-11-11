@@ -104,7 +104,7 @@ export class DynamicFormComponent implements OnInit {
     {
       type: 'externalLink',
       icon: 'fa-link',
-      label: 'Click here',
+      label: 'Add link',
       linkAddr: '',
     },
     {
@@ -750,27 +750,38 @@ export class DynamicFormComponent implements OnInit {
     this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
-
-
     if (this.type == 'add') {
+      console.log('add', this.model);
+let tempModel=[];
+this.model.forEach(element => {
+  if(element.attributes.length){
+    tempModel.push(element)
+  }
+});
+console.log(tempModel);
+
       let data = {
         title: this.formNameRecieved,
         frequency: sessionStorage.getItem('frequency'),
-        htmlObject: this.model,
+        htmlObject:tempModel 
       };
-      console.log('add', data);
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
         Swal.fire('Form added successfully');
-        this.router.navigate(['/admin/forms']);
+        this.router.navigate(['/admin/dynamicFormsList']);
       });
     }
     if (this.type == 'edit') {
       console.log('edit');
-
+      let tempModel=[];
+      this.model.forEach(element => {
+        if(element.attributes.length){
+          tempModel.push(element)
+        }
+      });
       let data = {
         title: this.formNameRecieved,
-        htmlObject: this.model,
+        htmlObject: tempModel,
         enable: this.enableForm,
         frequency: this.frequency
       };
@@ -779,7 +790,7 @@ export class DynamicFormComponent implements OnInit {
         .editForm(data, this.formIdRec)
         .subscribe((res) => {
           Swal.fire('Form edited successfully');
-          this.router.navigate(['/admin/forms']);
+          this.router.navigate(['/admin/dynamicFormsList']);
         });
     }
   }

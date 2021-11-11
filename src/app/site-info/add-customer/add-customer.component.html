@@ -1,51 +1,55 @@
 
  
 
-<h2>Customer List</h2>
-<div class="col ml-2 mb-2">
+<h2>
+  Customer List
+  <button (click)="openDialog('abcd')" _ngcontent-hqi-c400="" type="button" class="btn btn-outline-primary mt-1 mr-2 float-right"><i _ngcontent-hqi-c400="" class="fas fa-plus"></i> Add </button>
+
+</h2>
+<!-- <div class="col ml-2 mb-2">
   
   <div class="col-sm-9" style="display: flex; justify-content: flex-end">
     <span class="material-icons" (click)="openDialog('abcd')" style="cursor: pointer">
         control_point
     </span>
 </div>
-</div>
+</div> -->
 <div class="mat-elevation-z8 ml-2">
   <table mat-table [dataSource]="dataSource">
 
     <!-- Position Column -->
     <ng-container matColumnDef="index">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element">{{element.index}}</td>
+      <td mat-cell *matCellDef="let element,let i = index">{{i+1}}</td>
     </ng-container>
 
     <!-- Name Column -->
    
 <!-- Name Column -->
-<ng-container matColumnDef="siteName">
-  <th mat-header-cell *matHeaderCellDef> Site Name </th>
-  <td mat-cell *matCellDef="let element"> {{element.siteName}} </td>
+<ng-container matColumnDef="customerName">
+  <th mat-header-cell *matHeaderCellDef> Name </th>
+  <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
 </ng-container>
 
-<ng-container matColumnDef="siteForemen">
-  <th mat-header-cell *matHeaderCellDef> Site Foremen </th>
-  <td mat-cell *matCellDef="let element"> {{element.siteForemen}} </td>
+<ng-container matColumnDef="customerContact">
+  <th mat-header-cell *matHeaderCellDef> Contact </th>
+  <td mat-cell *matCellDef="let element"> {{element.customerContact}} </td>
 </ng-container>
 
-<ng-container matColumnDef="streetAddress">
-  <th mat-header-cell *matHeaderCellDef> Street Address </th>
-  <td mat-cell *matCellDef="let element"> {{element.streetAddress}} </td>
+<ng-container matColumnDef="customerContactPhone">
+  <th mat-header-cell *matHeaderCellDef> Contact Phone </th>
+  <td mat-cell *matCellDef="let element"> {{element.customerContactPhone}} </td>
 </ng-container>
 
-<ng-container matColumnDef="Suburb">
-  <th mat-header-cell *matHeaderCellDef> Suburb </th>
-  <td mat-cell *matCellDef="let element"> {{element.Suburb}} </td>
+<ng-container matColumnDef="customerEmail">
+  <th mat-header-cell *matHeaderCellDef> Email </th>
+  <td mat-cell *matCellDef="let element"> {{element.customerEmail}} </td>
 </ng-container>
 
-<ng-container matColumnDef="State">
+<!-- <ng-container matColumnDef="State">
   <th mat-header-cell *matHeaderCellDef> State </th>
   <td mat-cell *matCellDef="let element"> {{element.State}} </td>
-</ng-container>
+</ng-container> -->
 
 <ng-container matColumnDef="edit">
   <th mat-header-cell *matHeaderCellDef> Edit </th>

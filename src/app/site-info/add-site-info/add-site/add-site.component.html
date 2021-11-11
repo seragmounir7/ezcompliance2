@@ -1,8 +1,8 @@
-<section class="content">
+<section  [formGroup]="addSitesForm" class="content">
     <div class="container px-4 py-4 bg-white">
       <h1>Site Information</h1>
     
-      <div class="row">
+      <div class="row" [formGroup]="addSitesForm">
         <!-- <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">Job Number</p>
           <input
@@ -21,7 +21,7 @@
             id="siteName"
           />
         </div>
-        <div class="my-3 col-6">
+        <!-- <div class="my-3 col-6">
           <p for="exampleFormControlInput1" class="form-Label">Site Foremen</p>
           <input
             type="text"
@@ -29,7 +29,7 @@
             formControlName="siteName"
             id="siteName"
           />
-        </div>
+        </div> -->
       </div>
       <!-- <div class="row">
         <div class="my-3 col">
@@ -80,21 +80,26 @@
           />
         </div>
         <div class="my-3 col-4">
-            <label for="exampleFormControlInput1" class="form-label"
-            >State</label
-          >
-  
-            <select
+            <p for="exampleFormControlInput1" class="form-label"
+            >State</p
+          >  
+          <select
           class="form-select form-control col"
+          id="siteName"
           aria-label="Default select example"
+          formControlName="state"
+
         >
           <option selected hidden>Select</option>
-          <option value="1">New South Wales</option>
-          <option value="2">Queensland</option>
-          <option value="3">South Australia</option>
-          <option value="4">Tasmania</option>
-          <option value="5">Victoria</option>
-          <option value="5">Western Australia</option>
+          <option value="NSW">NSW</option>
+          <option value="ACT">ACT</option>
+          <option value="QLD">QLD</option>
+          <option value="NT">NT</option>
+          <option value="SA">SA</option>
+          <option value="NZ">NZ</option>
+          <option value="TAS">TAS</option>
+          <option value="VIC">VIC</option>
+          <option value="WA">WA</option>
         </select>
           <!-- <p for="exampleFormControlInput1" class="form-Label">State</p>
           <input
@@ -105,8 +110,10 @@
           /> -->
         </div>
       </div>
-    <div class="btn btn-primary">
-    Submit
+    <div >
+      <button class="btn btn-primary" (click)="onSubmit()">
+        Submit
+      </button>
     </div>
       <!-- <div class="row">
         <div class="my-3 col">

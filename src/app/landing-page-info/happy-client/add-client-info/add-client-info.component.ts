@@ -76,4 +76,7 @@ export class AddClientInfoComponent implements OnInit {
         this.clientDetail.reset();
       });
   }
+  close() {
+    this.dialogRef.close();
+}
 }

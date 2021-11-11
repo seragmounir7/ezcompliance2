@@ -228,3 +228,8 @@ select {
 .bt-style {
   border-radius: 20px;
 }
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

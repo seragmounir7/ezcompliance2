@@ -37,9 +37,9 @@ import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.com
 import { EditHazardComponent } from './identify-hazards/edit-hazard/edit-hazard.component';
 import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
 import { EditContActComponent } from './contr-and-act-req/edit-cont-act/edit-cont-act.component';
-import { UploadBulkDataComponent } from './upload-bulk-data/upload-bulk-data.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/add-edit-proj-mang.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/a
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent, IdentifyHazardsComponent, ContrAndActReqComponent, AddHazardComponent, EditHazardComponent, AddContrActComponent, EditContActComponent, UploadBulkDataComponent, ProjectManagerComponent, AddEditProjMangComponent
+    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent, IdentifyHazardsComponent, ContrAndActReqComponent, AddHazardComponent, EditHazardComponent, AddContrActComponent, EditContActComponent, ProjectManagerComponent, AddEditProjMangComponent
   ],
 
   imports: [
@@ -60,6 +60,8 @@ import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/a
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    MatStepperModule
+    
   ],
 })
 export class SiteInfoModule {}

@@ -121,7 +121,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
           EditData: this.ServiceData._id,
         },
         width: '800px',
-        height: '500px',
+        height: '600px',
       });
       dialogRef.afterClosed().subscribe((result) => {
         console.log('openDialog->result', result);

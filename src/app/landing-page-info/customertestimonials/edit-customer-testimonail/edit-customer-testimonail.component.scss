@@ -51,4 +51,8 @@ abel:not(.form-check-label):not(.custom-file-label) {
     border: 2px solid #2e69ff40;
     border-radius: 10px;
   }
-  
+  .dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

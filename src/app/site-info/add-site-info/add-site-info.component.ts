@@ -1,3 +1,6 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,19 +19,34 @@ export class AddSiteInfoComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'siteName','siteForemen','streetAddress','Suburb','State', 'edit', 'delete'];
+  displayedColumns: string[] = ['index', 'siteName',/* 'siteForemen', */'streetNo','streetAddress','Suburb','State', 'edit', 'delete'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  allSites: any[]=[];
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
   /////////////mat table end////////////////
 
-  constructor( private dialog: MatDialog, private setTitle: SetTitleService) { }
+  constructor( 
+    private dialog: MatDialog, 
+    private setTitle: SetTitleService,
+    private logicalFormInfoService: LogicalFormInfoService,
+    private spinner: NgxSpinnerService
+    ) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Add Site Info');
+    this.getAllSites()
+  }
+  getAllSites(){
+    this.logicalFormInfoService.getAllSite().subscribe((res:any)=> {
+      console.log(res)
+   this.dataSource.data = res.data
+   this.dataSource.paginator = this.paginator;
+
+   })
   }
 
   getAllJobTask() {
@@ -57,6 +75,9 @@ export class AddSiteInfoComponent implements OnInit {
 			},
 		});
 		dialogRef.afterClosed().subscribe((result) => {
+      if(result == 'ok'){
+        this.getAllSites()
+      }
 			console.log("CustomerInfoComponent -> openDialog -> result", result);
 			
 			console.log("The dialog was closed");
@@ -65,39 +86,36 @@ export class AddSiteInfoComponent implements OnInit {
   edit(element) {
     const dialogRef = this.dialog.open(EditSiteComponent, {
       width: "550px",
+      height:'80%',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "true")) {
-        this.getAllJobTask();
+      if ((result == "ok")) {
+        this.getAllSites()
       }
       console.log("The dialog was closed");
     });
   }
   delete(item) {
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: `Do you want to delete "${item.title}"?`,
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#00B96F',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Yes, Delete!',
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.logicalFormInfo
-    //       .deleteJobTask(item._id)
-    //       .subscribe((res) => {
-    //         Swal.fire({
-    //           title: 'Parameter Deleted successfully',
-    //           showConfirmButton: false,
-    //           timer: 1200,
-    //         }); console.log('deleted res', res);
-    //         this.getAllJobTask();
-
-    //       });
-    //   }
-    // });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.siteName}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        console.log(result)
+        // this.model.attributes.splice(i,1);
+        this.spinner.show()
+        this.logicalFormInfoService.deleteSite(item._id).subscribe((res => {
+        this.getAllSites()
+        this.spinner.hide()
+        }))
+      }
+    });
   }
 
 }

@@ -196,4 +196,7 @@ export class AddHappyClientComponent implements OnInit {
         });
     }
   }
+  close() {
+    this.dialogRef.close();
+}
 }

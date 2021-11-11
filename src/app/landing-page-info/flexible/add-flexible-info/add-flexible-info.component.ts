@@ -75,4 +75,7 @@ export class AddFlexibleInfoComponent implements OnInit {
         this.flexibleDetail.reset();
       });
   }
+  close() {
+    this.dialogRef.close();
+}
 }
