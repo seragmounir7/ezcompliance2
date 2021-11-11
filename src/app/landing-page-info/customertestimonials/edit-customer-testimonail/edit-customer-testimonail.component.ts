@@ -232,4 +232,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
           });
       }
     }
+    close() {
+      this.dialogRef.close();
+  }
 }

@@ -1,8 +1,16 @@
 <div class="container px-4 py-4 card">
     <form [formGroup]="flexibleDetail">
+      <div mat-dialog-title class="dialog-title">
       <h1 class="text-center pt-3">
         <p style="text-align: center">Flexible complience Info</p>
       </h1>
+      <button type="button" class="close" 
+      style="font-size: 40px;"
+    
+    (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+      </div>
       <hr />
       <div>
         <div class="row">
@@ -27,7 +35,7 @@
             ></textarea>
           </div>
           <div class="col-sm-6">
-            <p for="exampleFormControlInput1" class="form-Label">UploadImage</p>
+            <p for="exampleFormControlInput1" class="form-Label">Upload Image</p>
             <img
               [src]="selectedImage[0]"
               onerror=" this.src='../../../assets/img/uploadImg.png' "

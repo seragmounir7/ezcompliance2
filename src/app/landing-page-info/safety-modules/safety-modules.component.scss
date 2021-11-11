@@ -35,3 +35,8 @@ label {
   margin-left: 2px;
   margin-bottom: 14px;
 }
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

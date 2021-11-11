@@ -75,7 +75,7 @@ export class SafetyModulesComponent implements OnInit {
         },
 
         width: '800px',
-        height: '600px',
+        height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
         console.log('-> openDialog -> result', result);
@@ -93,7 +93,7 @@ export class SafetyModulesComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      Swal.fire('Deleted Successfully')
+      
       this.safetyData = data.data[0];
       console.log('ssss', this.safetyData);
       let dialogRef = this.dialog.open(AddModulesInfoComponent, {
@@ -104,7 +104,7 @@ export class SafetyModulesComponent implements OnInit {
         },
 
         width: '800px',
-        height: '600px',
+        height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
         console.log('openDialog->result', result);

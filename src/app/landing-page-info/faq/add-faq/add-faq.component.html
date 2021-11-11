@@ -4,8 +4,15 @@
   </div>
   <div class="container px-4 py-4 bg-white">
     <form [formGroup]="portalDetails" (ngSubmit)="onFormSubmit()">
+      <div mat-dialog-title class="dialog-title">
       <h2 class="text-center">Add PORTAL</h2>
-
+      <button type="button" class="close" 
+      style="font-size: 40px;"
+    
+    (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+</div>
       <br />
       <hr />
       <div class="row">
@@ -23,56 +30,7 @@
       </div>
       <br>
       <hr>
-      <!-- <br>
-      <hr>
-      <strong class="text-center">Frequently Asked Question</strong>
-      <br>
-      <hr> -->
-      <!-- <ng-container formArrayName="faq">
-        <ng-container
-          *ngFor="let control of add().controls; let i = index"
-          [formGroupName]="i"
-        >
-          <div class="row justify-content-center">
-            <div class="mr-1 mt-2">
-              <span 
-                >{{i+1}}.
-              </span>
-            </div>
-            <div class="col-4">
-                <p for="exampleFormControlInput1" class="form-Label">Question</p>
-              <input
-                type="text"
-                formControlName="question"
-                class="form-control sign"
-                id="question"
-              />
-            </div>
-            <div class="col-4">
-                <p for="exampleFormControlInput1" class="form-Label">Answer</p>
-                <input
-                  type="text"
-                  formControlName="answer"
-                  class="form-control sign"
-                  id="answer"
-                />
-              </div>
-            <div class="col-1 mt-2">
-              <span class="material-icons" (click)="addAction()"
-                >add_circle_outline
-              </span>
-            </div>
-            <div class="col-1 mt-2">
-              <span class="material-icons" (click)="removeSafetyModule(i)">
-                remove_circle_outline
-              </span>
-            </div>
-          </div>
-  
-          <hr />
-        </ng-container>
-      </ng-container> -->
-      <!-- <br /> -->
+     
   
       <div class="col-md-2">
         <button type="submit" class="btn btn-primary">Add</button>

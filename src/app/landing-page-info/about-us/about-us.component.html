@@ -1,217 +1,4 @@
-<!-- <div
-  class="container px-4 py-4 card"
-  [formGroup]="companyDetail"
-  (ngSubmit)="onFormSubmit()"
->
-  <h1 class="text-center pt-3">
-    <p>About-Us</p>
-  </h1>
-  <hr />
 
-  <div>
-    <strong> <p class="text-center">Section-1</p></strong>
-    <div class="row">
-      <div class="my-3 col-3">
-        <img
-          [src]="Image1"
-          onerror="this.src='../../../assets/img/uploadImg.png'"
-          class="imgStyle"
-          alt=""
-          width="150"
-          height="100"
-        />
-        <input
-          type="file"
-          #contactImage
-          class="custom-file-input img1 form-control"
-          (change)="uploadImage($event)"
-          id="inputGroupFile01"
-          name="avatar"
-          style="display: none"
-        />
-        <span
-          class="material-icons material-file"
-          (click)="contactImage.click()"
-          class="btn border bg-white z-index mb-1"
-          style="
-            position: absolute;
-            top: 90px;
-            left: 0;
-            font-size: 1rem !important;
-          "
-        >
-          <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
-        </span>
-      </div>
-
-      <div class="col-sm-6">
-        <p for="exampleFormControlInput1" class="form-Label">Description</p>
-        <textarea
-          rows="3"
-          type="text"
-          formControlName="description"
-          class="form-control sign"
-        ></textarea>
-      </div>
-    </div>
-    <br />
-    <hr />
-    <strong> <p class="text-center">Section-2</p></strong>
-    <div class="row">
-      <div class="my-3 col-2">
-        <img
-          [src]="Image"
-          onerror="this.src='../../../assets/img/uploadImg.png'"
-          class="imgStyle"
-          alt=""
-          width="150"
-          height="100"
-        />
-        <input
-          type="file"
-          #file
-          class="custom-file-input img1 form-control"
-          (change)="image($event)"
-          id="file"
-          name="avatar"
-          style="display: none"
-        />
-        <span
-          class="material-icons material-file"
-          (click)="file.click()"
-          class="btn border bg-white z-index mb-1"
-          style="
-            position: absolute;
-            top: 90px;
-            left: 0;
-            font-size: 1rem !important;
-          "
-        >
-          <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
-        </span>
-      </div>
-
-      <div class="col-sm-2">
-        <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-        <input
-          type="text"
-          formControlName="title"
-          class="form-control sign"
-          id="heading"
-        />
-      </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-sm-5">
-        <p for="exampleFormControlInput1" class="form-Label">Description</p>
-        <textarea
-          rows="4"
-          type="text"
-          formControlName="desc"
-          class="form-control sign"
-        ></textarea>
-      </div>
-    </div>
-
-    <br />
-    <hr />
-    <strong><p class="text-center">TEAMS DETAILS</p></strong>
-    <div class="row">
-      <div class="col-sm-6">
-        <p for="exampleFormControlInput1" class="form-Label">Title</p>
-        <input
-          type="text"
-          formControlName="subTitle"
-          class="form-control sign"
-          id="subTitle"
-        />
-      </div>
-    </div>
-    <ng-container formArrayName="arrObj">
-      <ng-container
-        *ngFor="let control of add().controls; let i = index"
-        [formGroupName]="i"
-      >
-        <div>
-          <div class="row">
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label">
-                UploadImage
-              </p>
-              <img
-                [src]="selectedImage[i]"
-                onerror="this.src='../../../assets/img/uploadImg.png'"
-                alt=""
-                width="150"
-                height="100"
-                class="imgStyle"
-              />
-              <input
-                type="file"
-                class="d-none"
-                #file
-                id="file"
-                class="custom-file-input img1 form-control"
-                name="avatar"
-                (change)="browser($event, i)"
-              />
-              <span
-                class="material-icons material-file"
-                (click)="file.click()"
-                class="btn border bg-white z-index mb-1"
-                style="
-                  position: absolute;
-                  top: 120px;
-                  left: 0;
-                  font-size: 1rem !important;
-                "
-              >
-                <i
-                  class="fa fa-upload"
-                  aria-hidden="true"
-                  style="margin: 0px"
-                ></i>
-              </span>
-            </div>
-            <div class="my-3 col-4" style="height: 50px">
-              <p for="exampleFormControlInput1" class="form-Label">Name</p>
-              <input
-                type="text"
-                formControlName="title"
-                style="width: 250px"
-                class="form-control sign"
-                id="name"
-              />
-            </div>
-            <div class="col-1 mt-5">
-              <span class="material-icons" (click)="addAction()"
-                >add_circle_outline
-              </span>
-            </div>
-            <div class="col-1 mt-5">
-              <span class="material-icons" (click)="removeSafetyModule(i)">
-                remove_circle_outline
-              </span>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </ng-container>
-    </ng-container>
-    <br />
-
-    <div class="col-md-2">
-      <button
-        type="submit"
-        class="btn btn-primary btn-block"
-        (click)="onFormSubmit()"
-      >
-        Submit
-      </button>
-    </div>
-  </div>
-</div>  -->
 <div class="text-center">
   <h1 class="card">Our Team List</h1>
 </div>
@@ -253,10 +40,10 @@
                   <td></td>
                   <td>
                     <button
-                      class="btn btn-info btn-sm mr-2"
+                    class="btn editBtn  mr-2"
                       (click)="editForm(teamData._id, false)"
                     >
-                      <i class="fas fa-pencil-alt mr-2"></i> Edit
+                      <i class="fas fa-pencil-alt mr-2" title="edit"></i>
                     </button>
                   </td>
                 </tr>
@@ -273,9 +60,9 @@
   <div class="col ml-2 mb-2">
     <button
       (click)="addForm('')"
-      class="btn btn-outline-primary mt-1 mr-2 float-left"
+      class="btn btn-outline-primary mt-1 mr-2 float-right"
     >
-      <i class="fas fa-folder-plus mr-2"></i>Add Team
+      <i class="fas fa-plus mr-2"></i>Add Team
     </button>
   </div>
 </div>
@@ -289,6 +76,7 @@
             <table class="table table-hover text-wrap">
               <thead>
                 <tr>
+                  <th style="width:10%">Index</th>
                   <th style="width: 40%">Photos</th>
                   <th style="width: 40%">Name</th>
                   <th style="width: 10%">Edit</th>
@@ -297,6 +85,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of teamData.team; let i = index">
+                  <td>{{i+1}}</td>
                   <td>
                     <img
                       src="{{ data.imageUrl }}"
@@ -310,18 +99,18 @@
                   <td>
                     <button
                       (click)="editForm(data._id, true, i)"
-                      class="btn btn-info btn-sm mr-2"
+                      class="btn editBtn mr-2"
                     >
                       <i class="fas fa-pencil-alt mr-2"></i>
                     </button>
                   </td>
                   <td>
-                    <button
-                      class="btn btn-danger btn-sm mr-2"
+                    <span
+                   
                       (click)="deleteopen(deletemodal, data._id)"
                     >
-                      <i class="fas fa-trash mr-2"></i>
-                    </button>
+                      <i class="fas fa-trash " aria-hidden="true"></i>
+                  </span>
                   </td>
                 </tr>
               </tbody>

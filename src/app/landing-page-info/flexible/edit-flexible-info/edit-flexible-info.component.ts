@@ -217,4 +217,7 @@ export class EditFlexibleInfoComponent implements OnInit {
         });
     }
   }
+  close() {
+    this.dialogRef.close();
+}
 }

@@ -91,7 +91,7 @@ export class AboutUsComponent implements OnInit {
         },
 
         width: '900px',
-        height: '600px',
+        height: '700px',
       });
       dialogRef.afterClosed().subscribe((result) => {
         console.log('-> openDialog -> result', result);
