@@ -364,7 +364,7 @@ export interface ArrObj {
   siteName:             string;
   streetNumber:         number;
   streetAddress:        string;
-  subrub:               string;
+  suburb:               string;
   state:                string;
   customerName:         string;
   customerContact:      number;

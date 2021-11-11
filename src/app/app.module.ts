@@ -40,7 +40,6 @@ import { TutorialsDetailsComponent } from './components/tutorials-details/tutori
 import { TutorialsEditComponent } from './components/tutorials-edit/tutorials-edit.component';
 import { DndModule } from 'ngx-drag-drop';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
-import { DxButtonModule } from 'devextreme-angular';
 import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
@@ -49,7 +48,6 @@ import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 import { AddEditCategoryComponent } from './views/dynamic-form/categories/add-edit-category/add-edit-category.component';
 import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
 import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 registerLocaleData(localeEn, 'en-EN');

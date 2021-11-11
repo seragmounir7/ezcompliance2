@@ -53,7 +53,9 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
       customerEmail: [{ value: '', disabled: true }],
     })
     this.logicalFormInfoService.getAllSite().subscribe((res: any) => {
-      this.allSites = res.data
+      this.allSites = res.data;
+      console.log(res.data);
+      
     })
     this.logicalFormInfoService.getAllCustomer().subscribe((res: any) => {
       this.allCustomers = res.data
@@ -75,13 +77,13 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
         state:this.f.state.value,
         streetAddress:this.f.streetAddress.value,
         streetNumber:this.f.streetNumber.value,
-        subrub:this.f.suburb.value,
+        suburb:this.f.suburb.value,
       }]
     }
     console.log(data)
     this.logicalFormInfoService.addJobNumber(data).subscribe((res:any)=>{
       console.log(res)
-      this.dialogRef.close('ok')
+      this.dialogRef.close('success')
     })
   }
   setSite(item) {

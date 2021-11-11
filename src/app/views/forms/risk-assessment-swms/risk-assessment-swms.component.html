@@ -59,25 +59,28 @@
                 <label for="exampleFormControlInput1" class="form-label"
                   >Site Name</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="siteName"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="siteName">
               </div>
               <div class="my-3 col">
                 <label for="exampleFormControlInput1" class="form-label"
                   >Customer Name</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="CustomerName"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="customerName">
+
               </div>
             </div>
             <div class="row">
@@ -85,49 +88,63 @@
                 <label for="exampleFormControlInput1" class="form-label"
                   >Street Number</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="StreetNumber"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="streetNo">
+
               </div>
               <div class="my-3 col-4">
                 <label for="exampleFormControlInput1" class="form-label"
                   >Street Address</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="StreetAddress"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="streetAddr">
               </div>
               <div class="my-3 col-4">
                 <label for="exampleFormControlInput1" class="form-label"
                   >Suburb</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="Suburb"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="subUrb">
               </div>
               <div class="my-3 col-2">
                 <label for="exampleFormControlInput1" class="form-label"
                   >State</label
                 >
                 <select
-                  class="form-select form-control col"
-                  id="State"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select>
+                class="form-select form-control col"
+                id="siteName"
+                aria-label="Default select example"
+                formControlName="statesSWMS"
+              >
+                <option selected hidden>Select</option>
+                <option value="NSW">NSW</option>
+                <option value="ACT">ACT</option>
+                <option value="QLD">QLD</option>
+                <option value="NT">NT</option>
+                <option value="SA">SA</option>
+                <option value="NZ">NZ</option>
+                <option value="TAS">TAS</option>
+                <option value="VIC">VIC</option>
+                <option value="WA">WA</option>
+              </select>
               </div>
             </div>
     
@@ -136,25 +153,29 @@
                 <label for="exampleFormControlInput1" class="form-label"
                   >Customer Contact</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="CustomerContact"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="custConct">
+
               </div>
               <div class="my-3 col">
                 <label for="exampleFormControlInput1" class="form-label"
                   >Customer Contact Phone</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="CustomerContactPhone"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="custConctPh">
+
               </div>
             </div>
             <div class="row">
@@ -162,29 +183,31 @@
                 <label for="exampleFormControlInput1" class="form-label"
                   >Customer Email</label
                 >
-                <select
+                <!-- <select
                   class="form-select form-control col"
                   id="CustomerEmail"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
-                </select>
+                </select> -->
+                <input type="text" class="form-control col" formControlName="custEmail">
+
               </div>
               <div class="my-3 col-2">
                 <label for="exampleFormControlInput1" class="form-label"
                   >Job Number</label
-                >
-    
+                >    
                 <select
-                  class="form-select form-control col"
-                  id="JobNumbe"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                  <option value="1">1000</option>
-                  <option value="2">1001</option>
-                  <option value="3">1002</option>
-                </select>
+                class="form-select form-control col"
+                id="ProjectManager"
+                aria-label="Default select example"
+                formControlName="jobNumber"
+                (change)="jobNoSel()"
+              >
+                <option selected hidden>Select</option>
+                <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+              
+              </select>
               </div>
               <div class="my-3 col-6">
                 <label for="exampleFormControlInput1" class="form-label"
@@ -469,6 +492,7 @@
                 class="form-control"
                 id="exampleInputFullname"
                 aria-describedby="emailHelp"
+                formControlName="siteName"
               />
             </div>
           </div>
@@ -482,6 +506,7 @@
                 class="form-control"
                 id="exampleInputSurname"
                 aria-describedby="emailHelp"
+                formControlName="customerName"
               />
             </div>
           </div>
@@ -495,6 +520,7 @@
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
+                formControlName="streetNo"
               />
             </div>
           </div>
@@ -508,6 +534,7 @@
                 class="form-control"
                 id="exampleInputPhone"
                 aria-describedby="emailHelp"
+                formControlName="streetAddr"
               />
             </div>
           </div>
@@ -521,6 +548,7 @@
                 class="form-control"
                 id="exampleInputDepartment"
                 aria-describedby="emailHelp"
+                formControlName="subUrb"
               />
             </div>
           </div>
@@ -556,6 +584,7 @@
                 class="form-control"
                 id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
+                formControlName="custConct"
               />
             </div>
           </div>
@@ -569,7 +598,8 @@
                 class="form-control"
                 id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
-              />
+                formControlName="custConctPh">
+              
             </div>
           </div>
           <div class="col-md-6">
@@ -582,6 +612,7 @@
                 class="form-control"
                 id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
+                formControlName="custEmail"
               />
             </div>
           </div>
@@ -590,12 +621,16 @@
               <label for="exampleInputProjectNumber" class="form-label"
                 >Job Number</label
               >
-              <input
-                type="number"
-                class="form-control"
-                id="exampleInputProjectNumber"
-                aria-describedby="emailHelp"
-              />
+              <select
+              class="form-select form-control col"
+              id="ProjectManager"
+              aria-label="Default select example"
+              formControlName="jobNumber"
+              (change)="jobNoSel()"
+            >
+              <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+            
+            </select>
             </div>
           </div>
           <div class="col-md-3">
@@ -973,7 +1008,7 @@
             cdkDrag
           >
             <div>
-              <h2>{{ item.title }}</h2>
+              <h2>Step:{{i+1}} {{ item.title }}</h2>
             </div>
 
             <div class="row">
