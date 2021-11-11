@@ -1,4 +1,4 @@
-<section class="content" [formGroup]="JobTaskDetail">
+<!-- <section class="content" [formGroup]="JobTaskDetail">
     <div class="container-fluid">
       <div class="text-center">
         <h1 > Job Task List</h1>
@@ -19,7 +19,6 @@
                     <th style="width: 15%">Risk</th>
                     <th style="width: 15%">Control Action Required</th>
                     <th style="width: 15%">Residule Risk</th>
-                    <!-- <th style="width: 15%">Code Of Practice</th> -->
                     <th style="width: 15%">Action</th>
   
                   </tr>
@@ -107,7 +106,7 @@
                                 More than one selected
                               </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of allHazards" [value]="parameter">{{parameter.title}}
+                            <mat-option *ngFor="let parameter of allHazards" ngValue="parameter">{{parameter.title}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -166,27 +165,7 @@
                     </ng-container>
                  
                  
-                  <!-- <ng-container formArrayName="codeOfPract">
-                    <td [formGroupName]="i">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Code Of Practice
-                        </mat-label>
-                        <mat-select formControlName="copArr" multiple >
-                          <mat-select-trigger>
-                            {{codeOfPract.value ? codeOfPract.value[0] : ''}}
-                            <span *ngIf="codeOfPract.value?.length > 1" class="example-additional-selection">
-                              (+{{codeOfPract.value.length - 1}} {{codeOfPract.value?.length === 2 ? 'other' : 'others'}})
-                            </span>
-                          </mat-select-trigger>
-                          <mat-option *ngFor="let parameter of codeOfPract.subComponents" [value]="parameter._id">
-                            {{parameter.title}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </td>
-                  </ng-container> -->
-                 
-                    <!-- <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td> -->
-                    <td *ngIf="!task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Set</button></td>
+                 <td *ngIf="!task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Set</button></td>
                     <td *ngIf="task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Update</button></td>
                   </tr>
                 </tbody>
@@ -196,4 +175,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
