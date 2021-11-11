@@ -9,6 +9,7 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { ViewContactComponent } from './view-contact/view-contact.component';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-contact-us',
@@ -27,7 +28,7 @@ export class ContactUsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-//
+  //
   mode: any;
   myId: string;
   dataContact: any = [];
@@ -42,53 +43,22 @@ export class ContactUsComponent implements OnInit {
     public upload: UploadFileServiceService,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    private setTitle: SetTitleService
+    private setTitle: SetTitleService,
+    private spinner: NgxSpinnerService
   ) {
-
-    this.ContactUsDetail = this.fb.group({
-      fullName: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      query: ['', Validators.required],
-
-    });
 
   }
 
   ngOnInit(): void {
     this.getContact();
     this.setTitle.setTitle('WHS-Contact Us');
- }
-
-
-
-  removeSafetyModule(i) {
-    const item = <FormArray>this.ContactUsDetail.controls['arrObj'];
-    if (item.length > 1) {
-      item.removeAt(i);
-      this.selectedImage.splice(i, 1);
-    }
   }
-
-  openDialog(id): void {
-    const dialogRef = this.dialog.open(AddContactComponent, {
-      // width: '800px',
-      data: {
-        action: "new",
-        userId: id
-      },
-    });
-  }
-
-  view(id) {
-    console.log("dataView", this.dataContact)
+  view(data) {
+    console.log("dataView", data)
     let dialogRef = this.dialog.open(ViewContactComponent, {
       width: '800px',
-      data: {
-        action: "view",
-        headerData: this.dataContact,
-        headerId: id
-      },
+      data: data
+
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -102,32 +72,41 @@ export class ContactUsComponent implements OnInit {
 
 
   getContact() {
-
-    this.url.getContact().subscribe((res) => {
+     this.url.getContact().subscribe((res) => {
       console.log('mode=>', res);
-
-      let dataContact = res.data;
+        let dataContact = res.data;
       dataContact.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
-
-      this.ELEMENT_DATA = dataContact;
+        this.ELEMENT_DATA = dataContact;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-
-
-    });
+     });
   }
 
-  delete(id) {
-    console.log(id);
-    this.Is_id = id;
-    this.url.deleteContactUs(this.Is_id).subscribe((res) => {
+  delete(item) {
+    console.log(item)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.fullName}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        console.log(result)
+         this.spinner.show()
+      this.url.deleteContactUs(item._id).subscribe((res) => {
       Swal.fire('Deleted Successfully')
       console.log('deleted res', res);
+      this.getContact();
       this.ngOnInit();
-    });
+      this.spinner.hide()
+    })
   }
-
+});
+}
 
 }
