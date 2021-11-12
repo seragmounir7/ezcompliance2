@@ -1,4 +1,4 @@
-<section class="content" [formGroup]="JobTaskDetail">
+<!-- <section class="content" [formGroup]="JobTaskDetail">
     <div class="container-fluid">
       <div class="text-center">
         <h1 > Job Task List</h1>
@@ -19,7 +19,6 @@
                     <th style="width: 15%">Risk</th>
                     <th style="width: 15%">Control Action Required</th>
                     <th style="width: 15%">Residule Risk</th>
-                    <!-- <th style="width: 15%">Code Of Practice</th> -->
                     <th style="width: 15%">Action</th>
   
                   </tr>
@@ -107,7 +106,7 @@
                                 More than one selected
                               </span>
                             </mat-select-trigger>
-                            <mat-option *ngFor="let parameter of allHazards" [value]="parameter">{{parameter.title}}
+                            <mat-option *ngFor="let parameter of allHazards" ngValue="parameter">{{parameter.title}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -166,27 +165,7 @@
                     </ng-container>
                  
                  
-                  <!-- <ng-container formArrayName="codeOfPract">
-                    <td [formGroupName]="i">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Code Of Practice
-                        </mat-label>
-                        <mat-select formControlName="copArr" multiple >
-                          <mat-select-trigger>
-                            {{codeOfPract.value ? codeOfPract.value[0] : ''}}
-                            <span *ngIf="codeOfPract.value?.length > 1" class="example-additional-selection">
-                              (+{{codeOfPract.value.length - 1}} {{codeOfPract.value?.length === 2 ? 'other' : 'others'}})
-                            </span>
-                          </mat-select-trigger>
-                          <mat-option *ngFor="let parameter of codeOfPract.subComponents" [value]="parameter._id">
-                            {{parameter.title}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </td>
-                  </ng-container> -->
-                 
-                    <!-- <td><button class="btn btn-primary" (click)="setRelation(risk.value,ppeSel.value,codOfPractice.value,task.title,task._id)">Set</button></td> -->
-                    <td *ngIf="!task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Set</button></td>
+                 <td *ngIf="!task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Set</button></td>
                     <td *ngIf="task.set"><button class="btn btn-primary" (click)="setRelation(task.title,task._id,i)">Update</button></td>
                   </tr>
                 </tbody>
@@ -196,4 +175,52 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
+
+  <!-- stepper logic -->
+  
+<h2 class="ml-2"> Set Relation</h2>
+<!-- <div class="col ml-2 mb-2">
+  
+  <button  class="btn btn-outline-primary mt-1 mr-2 float-right"[routerLink]="['/admin/siteInfo/addJobTask']">
+    <i class="fas fa-folder-plus mr-2"></i>Add Job Task 
+  </button>
+</div> -->
+<div class="mat-elevation-z8 ml-2">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element">{{element.index}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+   
+<!-- Name Column -->
+<ng-container matColumnDef="title">
+  <th mat-header-cell *matHeaderCellDef> Name </th>
+  <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+</ng-container>
+
+<ng-container matColumnDef="edit">
+  <th mat-header-cell *matHeaderCellDef> Set </th>
+  <td  mat-cell *matCellDef="let element"(click)="setRelation_2(element._id)"> <button *ngIf="!element.set" mat-stroked-button color="primary">Set</button> <button  *ngIf="element.set" mat-stroked-button color="primary">Update</button>
+  </td>
+</ng-container>
+<!-- <ng-container matColumnDef="delete">
+  <th mat-header-cell *matHeaderCellDef> Delete </th>
+  <td mat-cell *matCellDef="let element"(click)="delete(element)"> <i class="fas fa-trash "></i> 
+  </td>
+</ng-container> -->
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons 
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
