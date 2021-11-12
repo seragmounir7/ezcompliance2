@@ -73,6 +73,8 @@ const routes: Routes = [
       { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule) },
       { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule) },
       { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule) },
+      { path: 'stateRel', loadChildren: () => import('./views/state-rel/state-rel.module').then(m => m.StateRelModule) },
+
 
     ],
   },

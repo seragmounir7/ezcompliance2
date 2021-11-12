@@ -1,3 +1,4 @@
+import { SetRelationComponent } from './set-logic/set-relation/set-relation.component';
 import { JobNumberComponent } from './job-number/job-number.component';
 import { SetLogicComponent } from './set-logic/set-logic.component';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ const routes: Routes = [
   { path: '', component: ConfiLogiComponent },
   { path: 'setLogic', component: SetLogicComponent },
   { path: 'setJobNumber', component: JobNumberComponent },
+  { path: 'setRelation', component: SetRelationComponent },
 ];
 
 @NgModule({

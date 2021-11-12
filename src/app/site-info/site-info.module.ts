@@ -39,7 +39,9 @@ import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-cont
 import { EditContActComponent } from './contr-and-act-req/edit-cont-act/edit-cont-act.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/add-edit-proj-mang.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { StaffComponent } from './staff/staff.component';
+import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,33 @@ import {MatStepperModule} from '@angular/material/stepper';
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent, IdentifyHazardsComponent, ContrAndActReqComponent, AddHazardComponent, EditHazardComponent, AddContrActComponent, EditContActComponent, ProjectManagerComponent, AddEditProjMangComponent
+    EditHighRiskConstructionComponent,
+    AddJobTaskComponent,
+    AddPPEComponent,
+    EditTaskComponent,
+    EditPPEComponent,
+    EditLicenceComponent,
+    AddLicenceComponent,
+    LicenceCatComponent,
+    AddLicenceCatComponent,
+    EditLicenceCatComponent,
+    CodeOfPractComponent,
+    AddCOPComponent,
+    EditCOPComponent,
+    AddSiteComponent,
+    EditSiteComponent,
+    AddingCustComponent,
+    EditCustComponent,
+    IdentifyHazardsComponent,
+    ContrAndActReqComponent,
+    AddHazardComponent,
+    EditHazardComponent,
+    AddContrActComponent,
+    EditContActComponent,
+    ProjectManagerComponent,
+    AddEditProjMangComponent,
+    StaffComponent,
+    AddEditStaffComponent,
   ],
 
   imports: [
@@ -60,9 +88,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    MatStepperModule
-    
+    MatStepperModule,
   ],
 })
 export class SiteInfoModule {}
-
