@@ -16,18 +16,16 @@ export class SetRelationComponent implements OnInit {
   allHazards: [];
   allContrlActReq: [];
   licenceCatAll: [];
+  resiRiskLevelData: [];
+  riskLevelData: [];
+  staff: [];
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+ 
+
   constructor(private route: ActivatedRoute,    private fb: FormBuilder,  private logicalFormInfo: LogicalFormInfoService,) { }
 
   ngOnInit(): void {
-    this.firstFormGroup = this.fb.group({
-      firstCtrl: [''],
-    });
-    this.secondFormGroup = this.fb.group({
-      secondCtrl: [''],
-    });
+ 
     this.route
     .queryParams
     .subscribe((id)=>{
@@ -44,7 +42,9 @@ export class SetRelationComponent implements OnInit {
       identifyHazrds: [''],
       contrActReq: [''],
       riskLevel: [''],
-      residualRisk: ['']
+      residualRiskL: [''],
+      personResp: [''],
+      chemicalTask:['']
     });
     this.getAllHighRisk();
     this.getAllLicence();
