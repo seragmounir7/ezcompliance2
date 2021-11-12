@@ -1,0 +1,122 @@
+<div class="ml-2">
+  <h2 >Job Task :&nbsp;{{ jobTask?.title }}</h2>
+</div>
+<mat-horizontal-stepper [formGroup]="JobTaskDetail">
+  <!-- <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>  -->
+
+  <mat-step>
+    <ng-template matStepLabel>HighRisk Construction</ng-template>
+<h3 class="text-center"> HighRisk Construction</h3>
+<mat-form-field  class="container" appearance="fill">
+    <mat-label  class="text-center">HighRiskConstruction</mat-label>
+    <mat-select formControlName="highRiskConstr" multiple >
+      <mat-select-trigger>
+        <span *ngIf="JobTaskDetail.get('highRiskConstr').value?.length" class="example-additional-selection">
+        </span>
+        <span *ngIf="JobTaskDetail.get('highRiskConstr').value?.length == 1" class="example-additional-selection">
+          One Item selected
+        </span>
+        <span *ngIf="JobTaskDetail.get('highRiskConstr').value?.length > 1" class="example-additional-selection">
+          More than one selected
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let parameter of highRiskConstructionData" [value]="parameter._id">
+        {{parameter.title}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+    <div class="text-center">
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>PPE</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Licence Category</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Identify Hazards</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Risk Level</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Control Action Required</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Residule Risk</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Person Responsible</ng-template>
+
+    <div class="text-center">
+      <button mat-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+
+
+</mat-horizontal-stepper>
