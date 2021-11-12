@@ -32,6 +32,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   siteInfoVal = false;
   static = false;
   confiLogic = false;
+  stateRel = false;
   menuOpen(key) {
     if (key != 'dynamic') this.dynamic = false;
 
@@ -43,6 +44,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 
     if (key != 'static') this.static = false;
     if (key != 'confiLogic') this.confiLogic = false;
+    if (key != 'stateRel') this.confiLogic = false;
 
     if (key === 'dynamic') this.dynamic = !this.dynamic;
     else if (key === 'subscription') this.subscription = !this.subscription;
@@ -51,6 +53,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
       this.landingPageVal = !this.landingPageVal;
     else if (key === 'static') this.static = !this.static;
     else if (key === 'confiLogic') this.confiLogic = !this.confiLogic;
+    else if (key === 'stateRel') this.stateRel = !this.stateRel;
   }
   resetAll(){
     this.dynamic = false;
@@ -59,6 +62,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     this.siteInfoVal = false;
     this.static = false; 
     this.confiLogic = false; 
+    this.stateRel = false; 
   }
 
 }
