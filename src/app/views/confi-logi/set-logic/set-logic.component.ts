@@ -143,7 +143,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Set Relation');
-
+ 
     this.JobTaskDetail = this.fb.group({
       highRiskConstr: this.fb.array([]),
       PPE: this.fb.array([]),
