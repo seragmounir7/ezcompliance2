@@ -42,6 +42,9 @@ import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/a
 import { MatStepperModule } from '@angular/material/stepper';
 import { StaffComponent } from './staff/staff.component';
 import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.component';
+import { RiskLevelComponent } from './risk-level/risk-level.component';
+import { ResidualRiskLevelComponent } from './residual-risk-level/residual-risk-level.component';
+import { ChemicalComponent } from './chemical/chemical.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,9 @@ import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.com
     AddEditProjMangComponent,
     StaffComponent,
     AddEditStaffComponent,
+    RiskLevelComponent,
+    ResidualRiskLevelComponent,
+    ChemicalComponent,
   ],
 
   imports: [
