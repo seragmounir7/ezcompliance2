@@ -45,6 +45,12 @@ import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.com
 import { RiskLevelComponent } from './risk-level/risk-level.component';
 import { ResidualRiskLevelComponent } from './residual-risk-level/residual-risk-level.component';
 import { ChemicalComponent } from './chemical/chemical.component';
+import { AddChemicalComponent } from './chemical/add-chemical/add-chemical.component';
+import { EditChemicalComponent } from './chemical/edit-chemical/edit-chemical.component';
+import { AddRiskLevelComponent } from './risk-level/add-risk-level/add-risk-level.component';
+import { EditRiskLevelComponent } from './risk-level/edit-risk-level/edit-risk-level.component';
+import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residual-risk-level/add-residual-risk-level.component';
+import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-residual-risk-level/edit-residual-risk-level.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +92,12 @@ import { ChemicalComponent } from './chemical/chemical.component';
     RiskLevelComponent,
     ResidualRiskLevelComponent,
     ChemicalComponent,
+    AddChemicalComponent,
+    EditChemicalComponent,
+    AddRiskLevelComponent,
+    EditRiskLevelComponent,
+    AddResidualRiskLevelComponent,
+    EditResidualRiskLevelComponent,
   ],
 
   imports: [

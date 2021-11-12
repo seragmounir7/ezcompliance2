@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class LogicalFormInfoService {
   apiUrl = environment.apiUrl;
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) { }
   getJobTaskListById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
       map((res: any) => {
@@ -62,7 +62,7 @@ export class LogicalFormInfoService {
     );
   }
   //licence api///
-  getAllLicence(){
+  getAllLicence() {
     return this.https.get(this.apiUrl + 'licence/getAll').pipe(
       map((res: any) => {
         return res;
@@ -97,7 +97,7 @@ export class LogicalFormInfoService {
       })
     );
   }
-  deleteLicence(id){
+  deleteLicence(id) {
     return this.https.delete(this.apiUrl + 'licence/delete/' + id).pipe(
       map((res: any) => {
         return res;
@@ -105,252 +105,322 @@ export class LogicalFormInfoService {
     );
   }
   ///licence category crud///
-addLicenceCat(data){
-  return this.https.post(this.apiUrl + 'licenceCategory/add', data).pipe(
-    map((res: any) => {
-      return res;
-    })
-  );
-}
-getAllLicenceCat(){
-  return this.https.get(this.apiUrl + 'licenceCategory/getAll').pipe(
-    map((res: any) => {
-      return res;
-    })
-  );
-}
-updateLicenceCat(data,id){
-  return this.https.put(this.apiUrl + 'licenceCategory/update/' + id, data).pipe(
-    map((res: any) => {
-      return res;
-    })
-  );
+  addLicenceCat(data) {
+    return this.https.post(this.apiUrl + 'licenceCategory/add', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllLicenceCat() {
+    return this.https.get(this.apiUrl + 'licenceCategory/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  updateLicenceCat(data, id) {
+    return this.https.put(this.apiUrl + 'licenceCategory/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
 
-}
-deleteLicenceCat(id){
-  return this.https.delete(this.apiUrl + 'licenceCategory/delete/' + id).pipe(
-    map((res: any) => {
-      return res;
-    })
-  );
-}
+  }
+  deleteLicenceCat(id) {
+    return this.https.delete(this.apiUrl + 'licenceCategory/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
   ///licence category end crud///
 
   //risk crud///
-  addRisk(data){
+  addRisk(data) {
     return this.https.post(this.apiUrl + 'risk/add', data);
   }
-  addMultipleRisk(data){
+  addMultipleRisk(data) {
     return this.https.post(this.apiUrl + 'risk/add/multiple', data);
   }
-  updateRisk(data,id){
-    return this.https.put(this.apiUrl + 'risk/update/' + id, data);      
+  updateRisk(data, id) {
+    return this.https.put(this.apiUrl + 'risk/update/' + id, data);
   }
-  deleteRisk(id){
+  deleteRisk(id) {
     return this.https.delete(this.apiUrl + 'risk/delete/' + id)
   }
-  getAllRisk(){
+  getAllRisk() {
     return this.https.get(this.apiUrl + 'risk/getAll')
   }
-  getRiskById(id){
+  getRiskById(id) {
     return this.https.get(this.apiUrl + 'risk/get/' + id)
   }
   //add risk end
 
   //add job task
-  addJobTask(data){
+  addJobTask(data) {
     return this.https.post(this.apiUrl + 'jobTask/add', data);
   }
-  addMultipleJobTask(data){
+  addMultipleJobTask(data) {
     return this.https.post(this.apiUrl + 'jobTask/add/multiple', data);
   }
-  updateJobTask(data,id){
-    return this.https.put(this.apiUrl + 'jobTask/update/' + id, data);      
+  updateJobTask(data, id) {
+    return this.https.put(this.apiUrl + 'jobTask/update/' + id, data);
   }
-  deleteJobTask(id){
+  deleteJobTask(id) {
     return this.https.delete(this.apiUrl + 'jobTask/delete/' + id)
   }
-  getAllJobtask(){
+  getAllJobtask() {
     return this.https.get(this.apiUrl + 'jobTask/getAll')
   }
-  getJobtaskById(id){
+  getJobtaskById(id) {
     return this.https.get(this.apiUrl + 'jobTask/get/' + id)
   }
   //add job task end
 
   //add ppe
-  addPPE(data){
+  addPPE(data) {
     return this.https.post(this.apiUrl + 'ppe/add', data);
   }
-  addMultiplePPE(data){
+  addMultiplePPE(data) {
     return this.https.post(this.apiUrl + 'ppe/add/multiple', data);
   }
-  updatePPE(data,id){
-    return this.https.put(this.apiUrl + 'ppe/update/' + id, data);      
+  updatePPE(data, id) {
+    return this.https.put(this.apiUrl + 'ppe/update/' + id, data);
   }
-  deletePPE(id){
+  deletePPE(id) {
     return this.https.delete(this.apiUrl + 'ppe/delete/' + id)
   }
-  getAllPPE(){
+  getAllPPE() {
     return this.https.get(this.apiUrl + 'ppe/getAll')
   }
-  getPPEById(id){
+  getPPEById(id) {
     return this.https.get(this.apiUrl + 'ppe/get/' + id)
   }
   //add ppe end
 
   //add Identify Hazards
-  addHazards(data){
+  addHazards(data) {
     return this.https.post(this.apiUrl + 'identifyHazard/add', data);
   }
-  addMultipleHazards(data){
+  addMultipleHazards(data) {
     return this.https.post(this.apiUrl + 'identifyHazard/add/multiple', data);
   }
-  updateHazards(data,id){
-    return this.https.put(this.apiUrl + 'identifyHazard/update/' + id, data);      
+  updateHazards(data, id) {
+    return this.https.put(this.apiUrl + 'identifyHazard/update/' + id, data);
   }
-  deleteHazards(id){
+  deleteHazards(id) {
     return this.https.delete(this.apiUrl + 'identifyHazard/delete/' + id)
   }
-  getAllHazards(){
+  getAllHazards() {
     return this.https.get(this.apiUrl + 'identifyHazard/getAll')
   }
-  getHazardsById(id){
+  getHazardsById(id) {
     return this.https.get(this.apiUrl + 'identifyHazard/get/' + id)
   }
   //add Identify Hazards end
 
 
   ///add control ation required///
-  addContrlActReq(data){
+  addContrlActReq(data) {
     return this.https.post(this.apiUrl + 'controlActionRequired/add', data);
   }
-  addMultipleContrlActReq(data){
+  addMultipleContrlActReq(data) {
     return this.https.post(this.apiUrl + 'controlActionRequired/add/multiple', data);
   }
-  updateContrlActReq(data,id){
-    return this.https.put(this.apiUrl + 'controlActionRequired/update/' + id, data);      
+  updateContrlActReq(data, id) {
+    return this.https.put(this.apiUrl + 'controlActionRequired/update/' + id, data);
   }
-  deleteContrlActReq(id){
+  deleteContrlActReq(id) {
     return this.https.delete(this.apiUrl + 'controlActionRequired/delete/' + id)
   }
-  getAllContrlActReq(){
+  getAllContrlActReq() {
     return this.https.get(this.apiUrl + 'controlActionRequired/getAll')
   }
-  getContrlActReqById(id){
+  getContrlActReqById(id) {
     return this.https.get(this.apiUrl + 'controlActionRequired/get/' + id)
   }
   ///add control ation required end///
 
-////code of practice///
-addCOP(data){
+  ////code of practice///
+  addCOP(data) {
     return this.https.post(this.apiUrl + 'cop/add', data);
   }
-  addMultipleCOP(data){
+  addMultipleCOP(data) {
     return this.https.post(this.apiUrl + 'cop/add/multiple', data);
   }
-  updateCOP(data,id){
-    return this.https.put(this.apiUrl + 'cop/update/' + id, data);      
+  updateCOP(data, id) {
+    return this.https.put(this.apiUrl + 'cop/update/' + id, data);
   }
-  deleteCOP(id){
+  deleteCOP(id) {
     return this.https.delete(this.apiUrl + 'cop/delete/' + id)
   }
-  getAllCOP(){
+  getAllCOP() {
     return this.https.get(this.apiUrl + 'cop/getAll')
   }
-  getCOPById(id){
+  getCOPById(id) {
     return this.https.get(this.apiUrl + 'cop/get/' + id)
   }
-////code of practice end///
+  ////code of practice end///
   ///project manager/////
-  addProjectMang(data){
+  addProjectMang(data) {
     return this.https.post(this.apiUrl + 'projectManager/add', data);
   }
-  addMultipleProjectManager(data){
+  addMultipleProjectManager(data) {
     return this.https.post(this.apiUrl + 'projectManager/add/multiple', data);
   }
-  updateProjectMang(data,id){
-    return this.https.put(this.apiUrl + 'projectManager/update/' + id, data);      
+  updateProjectMang(data, id) {
+    return this.https.put(this.apiUrl + 'projectManager/update/' + id, data);
   }
-  deleteProjectMang(id){
+  deleteProjectMang(id) {
     return this.https.delete(this.apiUrl + 'projectManager/delete/' + id)
   }
-  getAllProjectMang(){
+  getAllProjectMang() {
     return this.https.get(this.apiUrl + 'projectManager/getAll')
   }
-  getProjectMangById(id){
+  getProjectMangById(id) {
     return this.https.get(this.apiUrl + 'projectManager/get/' + id)
   }
   ///project manager end/////
   ///job no/////
-  getAllSite(){
+  getAllSite() {
     return this.https.get(this.apiUrl + 'site/getAll')
   }
   ///job no end/////
 
   ///site start/////
   // 
-  addSite(data:Site){
-    return this.https.post(this.apiUrl + 'site/add',data)
+  addSite(data: Site) {
+    return this.https.post(this.apiUrl + 'site/add', data)
   }
-  updateSite(id,data:Site){
-    return this.https.put(this.apiUrl + 'site/update/' + id,data)
+  updateSite(id, data: Site) {
+    return this.https.put(this.apiUrl + 'site/update/' + id, data)
   }
-  deleteSite(id){
+  deleteSite(id) {
     return this.https.delete(this.apiUrl + 'site/delete/' + id)
   }
   ///site end/////
 
   ///customer strat/////
-  getAllCustomer(){
+  getAllCustomer() {
     return this.https.get(this.apiUrl + 'customer/getAll')
   }
-  addCustomer(data:Customer){
-    return this.https.post(this.apiUrl + 'customer/add',data)
+  addCustomer(data: Customer) {
+    return this.https.post(this.apiUrl + 'customer/add', data)
   }
-  updateCustomer(id,data:Customer){
-    return this.https.put(this.apiUrl + 'customer/update/' + id,data)
+  updateCustomer(id, data: Customer) {
+    return this.https.put(this.apiUrl + 'customer/update/' + id, data)
   }
-  deleteCustomer(id){
+  deleteCustomer(id) {
     return this.https.delete(this.apiUrl + 'customer/delete/' + id)
   }
   ///site end/////
 
   ///job number start/////
-  getAllJobNumber(){
+  getAllJobNumber() {
     return this.https.get(this.apiUrl + 'jobNumber/getAll')
   }
-  addJobNumber(data:JobNumber){
-    return this.https.post(this.apiUrl + 'jobNumber/add',data)
+  addJobNumber(data: JobNumber) {
+    return this.https.post(this.apiUrl + 'jobNumber/add', data)
   }
-  updateJobNumber(id,data:JobNumber){
-    return this.https.put(this.apiUrl + 'jobTask/update/' + id,data)
+  updateJobNumber(id, data: JobNumber) {
+    return this.https.put(this.apiUrl + 'jobTask/update/' + id, data)
   }
-  deleteJobNumber(id){
+  deleteJobNumber(id) {
     return this.https.delete(this.apiUrl + 'jobNumber/delete/' + id)
   }
   ///job number end/////
+  ////////////////// Start  Chemical Info///////////
+  getAllChemical() {
+    return this.https.get(this.apiUrl + 'chemical/getAll')
+  }
+  addChemical(data) {
+    return this.https.post(this.apiUrl + 'chemical/add', data)
+  }
+  addMultipleChemical(data) {
+    return this.https.post(this.apiUrl + 'chemical/add/multiple', data)
+  }
+  updateChemical(id, data) {
+    return this.https.put(this.apiUrl + 'chemical/update/' + id, data)
+  }
+  deleteChemical(id) {
+    return this.https.delete(this.apiUrl + 'chemical/delete/' + id)
+  }
+  /////////////////// Chemical Info End /////////
 
+  //////////////// START RISK LEVEL INFO//////////////////
+  getAllRiskLevel() {
+    return this.https.get(this.apiUrl + 'riskLevel/getAll')
+  }
+  addRiskLevel(data) {
+    return this.https.post(this.apiUrl + 'riskLevel/add', data)
+  }
+  addMultipleRiskLevel(data) {
+    return this.https.post(this.apiUrl + 'riskLevel/add/multiple', data)
+  }
+  updateRiskLevel(id, data) {
+    return this.https.put(this.apiUrl + 'riskLevel/update/' + id, data)
+  }
+  deleteRiskLevel(id) {
+    return this.https.delete(this.apiUrl + 'riskLevel/delete/' + id)
+  }
+  ///////////////////End RISK LEVEL INFO /////////
+
+  //////////////////STArT RESIDUAL LEVEL INFO/////////////////////
+  getAllResidual() {
+    return this.https.get(this.apiUrl + 'residualRisk/getAll')
+  }
+  addResidual(data) {
+    return this.https.post(this.apiUrl + 'residualRisk/add', data)
+  }
+  addMultipleResidual(data) {
+    return this.https.post(this.apiUrl + 'residualRisk/add/multiple', data)
+  }
+  updateResidual(id, data) {
+    return this.https.put(this.apiUrl + 'residualRisk/update/' + id, data)
+  }
+  deleteResidual(id) {
+    return this.https.delete(this.apiUrl + 'residualRisk/delete/' + id)
+  }
+  /////////////////// End RESIDUAL INFO /////////
+
+  ///////////////// START STAFF INFO//////////////
+  getAllStaff() {
+    return this.https.get(this.apiUrl + 'staff/getAll')
+  }
+  addStaff(data) {
+    return this.https.post(this.apiUrl + 'staff/add', data)
+  }
+  addMultipleStaff(data) {
+    return this.https.post(this.apiUrl + 'staff/add/multiple', data)
+  }
+  updateStaff(id, data) {
+    return this.https.put(this.apiUrl + 'staff/update/' + id, data)
+  }
+  deleteStaff(id) {
+    return this.https.delete(this.apiUrl + 'staff/delete/' + id)
+  }
+  /////////////////// Chemical Info End /////////
 
 }
 
 // Generated by https://quicktype.io
 
 export interface Site {
-  siteName:      string;
-  streetNumber:  number;
+  siteName: string;
+  streetNumber: number;
   streetAddress: string;
-  suburb:        string;
-  state:         string;
+  suburb: string;
+  state: string;
 }
 
 // Generated by https://quicktype.io
 
 export interface Customer {
-  customerName:         string;
-  customerContact:      number;
+  customerName: string;
+  customerContact: number;
   customerContactPhone: number;
-  customerEmail:        string;
+  customerEmail: string;
 }
 
 // Generated by https://quicktype.io
@@ -361,14 +431,14 @@ export interface JobNumber {
 }
 
 export interface ArrObj {
-  siteName:             string;
-  streetNumber:         number;
-  streetAddress:        string;
-  suburb:               string;
-  state:                string;
-  customerName:         string;
-  customerContact:      number;
+  siteName: string;
+  streetNumber: number;
+  streetAddress: string;
+  suburb: string;
+  state: string;
+  customerName: string;
+  customerContact: number;
   customerContactPhone: number;
-  customerEmail:        string;
+  customerEmail: string;
 }
 
