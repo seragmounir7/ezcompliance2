@@ -15,7 +15,7 @@ import { EditCustComponent } from './edit-cust/edit-cust.component';
 })
 export class AddCustomerComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'customerName','customerContact','customerContactPhone','customerEmail', 'edit', 'delete'];
+  displayedColumns: string[] = ['index', 'customerName','customerContact','customerContactPhone','customerEmail', 'Action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -94,7 +94,7 @@ export class AddCustomerComponent implements OnInit {
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item.title}"?`,
+      text: `Do you want to delete "${item.customerName}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',

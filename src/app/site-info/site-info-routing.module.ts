@@ -33,7 +33,9 @@ import { StaffComponent } from './staff/staff.component';
 import { AddChemicalComponent } from './chemical/add-chemical/add-chemical.component';
 import { AddRiskLevelComponent } from './risk-level/add-risk-level/add-risk-level.component';
 import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residual-risk-level/add-residual-risk-level.component';
-import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.component';
+import { AddStaffComponent } from './staff/add-staff/add-staff.component';
+import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
+
 
 const routes: Routes = [
   {
@@ -72,7 +74,9 @@ const routes: Routes = [
   { path: 'residual', component: ResidualRiskLevelComponent },
   { path: 'addResidual', component: AddResidualRiskLevelComponent },
   { path: 'staff', component: StaffComponent },
-  { path: 'addStaff', component: AddEditStaffComponent }
+  { path: 'addStaff', component: AddStaffComponent },
+  { path: 'editStaff', component: EditStaffComponent }
+
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 
