@@ -18,9 +18,9 @@
                   <th style="width: 30% text-center">Image</th>
                   <th style="width: 40% text-center">Title</th>
                   <th style="width: 40% text-center">Subtitle</th>
-                  <th style="width: 35% text-center">Description</th>
-                  <th></th>
-                  <th style="width: 30%">Action</th>
+                  <th style="width: 40% text-center">Description</th>
+                 
+                  <th style="width: 10%">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -28,8 +28,8 @@
                   <td>
                     <img
                       src="{{ teamData.fileUrl }}"
-                      height="150px"
-                      width="150px"
+                      height="80px"
+                      width="80px"
                     />
                   </td>
 
@@ -38,13 +38,13 @@
                   <!-- <td>{{ teamData.fileUrl }}</td> -->
                   <td>{{ teamData.subTitle }}</td>
                   <td>{{ teamData.desc }}</td>
-                  <td></td>
+                  
                   <td>
                     <button
-                    class="btn editBtn  mr-2"
+                    class="btn editBtn "
                       (click)="editForm(teamData._id, false)"
                     >
-                      <i class="fas fa-pencil-alt mr-2" title="edit"></i>
+                      <i class="fas fa-pencil-alt " title="edit"></i>
                     </button>
                   </td>
                 </tr>
@@ -90,8 +90,8 @@
                   <td>
                     <img
                       src="{{ data.imageUrl }}"
-                      height="100px"
-                      width="100px"
+                      height="80px"
+                      width="80px"
                     />
                   </td>
                   <td>

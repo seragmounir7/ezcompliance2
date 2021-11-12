@@ -1,10 +1,10 @@
 <div class="container card px-4 py-4">
   <div mat-dialog-title class="dialog-title">
-    <h2 class="text-center pt-3">
+    <h2 class="text-center pt-2">
       <p> Edit Header Information</p>
     </h2>
     <button type="button" class="close" 
-    style="font-size: 40px;"
+    style="font-size: 30px;"
   
   (click)="close()" aria-label="Close">
     <span aria-hidden="true">×</span>
@@ -46,16 +46,17 @@
           </div>
         </div>
       </div>
-      <div class="row mt-2" style="height: 30px">
+      <br>
+      <div class="row mt-2" >
         <label for="formFile" class="form-Label">Upload Image</label>
       </div>
-      <div class="col-sm-3 mt-3">
+      <div class="col-sm-3 mt-2">
         <img
           [src]="selectedImage"
           onerror="this.src='../../../assets/img/uploadImg.png'"
           class="imageStud"
           alt=""
-          width="130"
+          width="150"
           height="130"
         />
         <input
@@ -68,11 +69,22 @@
           style="display: none"
         />
         <span
-          class="material-icons material-file outline"
-          (click)="contactImage.click()"
-        >
-          <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
-        </span>
+        class="material-icons material-file"
+        (click)="contactImage.click()"
+        class="btn border bg-white"
+        style="
+          position: absolute;
+          top: 95px;
+          font-size: 1rem !important;
+        "
+      >
+        <i
+          class="fa fa-upload"
+          aria-hidden="true"
+          style="margin: 0px"
+        ></i>
+      </span>
+       
       </div>
       <hr>
       <div class="row">

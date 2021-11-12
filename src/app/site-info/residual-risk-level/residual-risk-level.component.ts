@@ -16,7 +16,7 @@ import { EditResidualRiskLevelComponent } from './edit-residual-risk-level/edit-
 export class ResidualRiskLevelComponent implements OnInit {
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title', 'edit', 'delete'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   allResidualRiskLevel: any[]=[];
