@@ -62,7 +62,7 @@ export class AddCustomerComponent implements OnInit {
 
   openDialog(id) {
 		let dialogRef = this.dialog.open(AddingCustComponent, {
-      height:'80%',
+      height:'50%',
 			data: {
 				action: "new",
 				userId: id,
@@ -81,7 +81,7 @@ export class AddCustomerComponent implements OnInit {
     console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
       width: "550px",
-      height:"80%",
+      height:"50%",
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
