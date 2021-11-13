@@ -26,17 +26,29 @@ import { SiteInfoComponent } from './site-info.component';
 import { AddLicenceCatComponent } from './licence-and-qual/licence-cat/add-licence-cat/add-licence-cat.component';
 import { AddSiteComponent } from './add-site-info/add-site/add-site.component';
 import { EditSiteComponent } from './add-site-info/edit-site/edit-site.component';
+import { ChemicalComponent } from './chemical/chemical.component';
+import { RiskLevelComponent } from './risk-level/risk-level.component';
+import { ResidualRiskLevelComponent } from './residual-risk-level/residual-risk-level.component';
+import { StaffComponent } from './staff/staff.component';
+import { AddChemicalComponent } from './chemical/add-chemical/add-chemical.component';
+import { AddRiskLevelComponent } from './risk-level/add-risk-level/add-risk-level.component';
+import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residual-risk-level/add-residual-risk-level.component';
+import { AddStaffComponent } from './staff/add-staff/add-staff.component';
+import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
+
 
 const routes: Routes = [
-  { path: 'addSite', component: AddSiteInfoComponent, children:[
-    { path: 'addSite1', component: AddSiteComponent},
-    { path: 'editSite', component: EditSiteComponent}
-  ] },
+  {
+    path: 'addSite', component: AddSiteInfoComponent, children: [
+      { path: 'addSite1', component: AddSiteComponent },
+      { path: 'editSite', component: EditSiteComponent }
+    ]
+  },
   { path: 'addCustomer', component: AddCustomerComponent },
-  { path: 'jobTask', component: JobTaskComponent},
-  {path:'addJobTask',component:AddJobTaskComponent},
-  {path:'addHighRisk',component:AddHighRiskConstructionComponent},
-  {path:'addPPE',component:AddPPEComponent},
+  { path: 'jobTask', component: JobTaskComponent },
+  { path: 'addJobTask', component: AddJobTaskComponent },
+  { path: 'addHighRisk', component: AddHighRiskConstructionComponent },
+  { path: 'addPPE', component: AddPPEComponent },
 
   { path: 'highRisk', component: HighRiskConComponent },
   { path: 'licenceAndQual', component: LicenceAndQualComponent },
@@ -55,6 +67,16 @@ const routes: Routes = [
   { path: 'addHazards', component: AddHazardComponent },
   { path: 'contrlActReq', component: ContrAndActReqComponent },
   { path: 'addContrlActReq', component: AddContrActComponent },
+  { path: 'chemical', component: ChemicalComponent },
+  { path: 'addChemical', component: AddChemicalComponent },
+  { path: 'riskLevel', component: RiskLevelComponent },
+  { path: 'addRisk', component: AddRiskLevelComponent },
+  { path: 'residual', component: ResidualRiskLevelComponent },
+  { path: 'addResidual', component: AddResidualRiskLevelComponent },
+  { path: 'staff', component: StaffComponent },
+  { path: 'addStaff', component: AddStaffComponent },
+  { path: 'editStaff', component: EditStaffComponent }
+
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 

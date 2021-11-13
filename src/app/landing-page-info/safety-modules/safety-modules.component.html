@@ -15,7 +15,7 @@
             
                   <th style="width: 30%">Heading</th>
                   <th style="width: 40%">Description</th>
-                  <th style="width: 30%">Edit</th>
+                  <th style="width: 30%">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -64,8 +64,8 @@
                   <th style="width: 25%">Images</th>
                   <th style="width: 25%">Title</th>
 
-                  <th style="width: 25%">Edit</th>
-                  <th style="width: 25%">Delete</th>
+                  <th style="width: 25%">Action</th>
+                 
                 </tr>
               </thead>
               <tbody>
@@ -74,8 +74,8 @@
                   <td>
                     <img
                       src="{{ data.fileUrl }}"
-                      height="150px"
-                      width="150px"
+                      height="100px"
+                      width="100px"
                     />
                   </td>
                   <td>{{ data.title }}</td>
@@ -87,16 +87,15 @@
                     >
                       <i class="fas fa-pencil-alt mr-2"  aria-hidden="true" title="Edit"></i>
                     </button>
-                  </td>
-                  <td>
                     <span
                      
-                      (click)="deleteopen(deletemodal, data._id)"
-                    >
-                      <i class="fas fa-trash "  aria-hidden="true" title="Delete"></i>
-                      
-                  </span>
+                    (click)="deleteopen(deletemodal, data._id)"
+                  >
+                    <i class="fas fa-trash "  aria-hidden="true" title="Delete"></i>
+                    
+                </span>
                   </td>
+                 
                 </tr>
               </tbody>
             </table>
