@@ -16,7 +16,7 @@ export class CodeOfPractComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
+  displayedColumns: string[] = ['index', 'title' ,'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
 

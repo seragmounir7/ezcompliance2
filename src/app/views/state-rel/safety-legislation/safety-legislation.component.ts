@@ -16,7 +16,7 @@ export class SafetyLegislationComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'act', 'regulation' , 'edit','delete'];
+  displayedColumns: string[] = ['index', 'act', 'regulation' ,'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
 

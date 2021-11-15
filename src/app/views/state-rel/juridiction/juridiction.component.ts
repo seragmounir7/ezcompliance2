@@ -16,7 +16,7 @@ export class JuridictionComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
+  displayedColumns: string[] = ['index', 'title' ,'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
 
@@ -30,9 +30,10 @@ export class JuridictionComponent implements OnInit {
   constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
 
   ngOnInit(): void {
+    this.getAllJurisdiction();
   }
 
-  getAllRegulator() {
+  getAllJurisdiction() {
     this.logicalFormInfo.getAllJurisdiction().subscribe((res) => {
       console.log('getAllJurisdiction=>', res);
       // this.jobTaskData = res.data[0].subComponents;
@@ -57,7 +58,7 @@ export class JuridictionComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getAllRegulator();
+        this.getAllJurisdiction();
       }
       console.log("The dialog was closed");
     });
@@ -83,7 +84,7 @@ export class JuridictionComponent implements OnInit {
             timer: 1200,
           });
           console.log('deleted res', res);
-          this.getAllRegulator();
+          this.getAllJurisdiction();
             
         });
       }
