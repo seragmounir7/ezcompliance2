@@ -1,1 +1,43 @@
-<p>regulator works!</p>
+<div class="col ml-2 pt-1">
+    <h1> Regulator List</h1>
+    </div>
+    <div class="col ml-2 mb-2">
+      
+      <button  class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="edit('')">
+        <i class="fas fa-folder-plus mr-2"></i>Add Regulator 
+      </button>
+    </div>
+    <div class="">
+      <table mat-table [dataSource]="dataSource">
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element">{{element.index}}</td>
+        </ng-container>
+    
+        <!-- Name Column -->
+       
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">  <i class="fas fa-pencil-alt mr-2" (click)="edit(element)" title="edit"></i>  <i  class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i>
+      </td>
+    </ng-container>
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons 
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+    
