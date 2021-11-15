@@ -19,7 +19,7 @@ export class IdentifyHazardsComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','edit','delete'];
+  displayedColumns: string[] = ['index', 'title','action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

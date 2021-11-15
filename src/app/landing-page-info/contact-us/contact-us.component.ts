@@ -24,7 +24,7 @@ export class ContactUsComponent implements OnInit {
   selectedImage: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'fullName', 'phoneNumber', 'Email', 'query', 'view', 'delete'];
+  displayedColumns: string[] = ['index', 'fullName', 'phoneNumber', 'Email', 'query', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

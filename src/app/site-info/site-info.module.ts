@@ -41,7 +41,17 @@ import { ProjectManagerComponent } from './project-manager/project-manager.compo
 import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/add-edit-proj-mang.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { StaffComponent } from './staff/staff.component';
-import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.component';
+import { RiskLevelComponent } from './risk-level/risk-level.component';
+import { ResidualRiskLevelComponent } from './residual-risk-level/residual-risk-level.component';
+import { ChemicalComponent } from './chemical/chemical.component';
+import { AddChemicalComponent } from './chemical/add-chemical/add-chemical.component';
+import { EditChemicalComponent } from './chemical/edit-chemical/edit-chemical.component';
+import { AddRiskLevelComponent } from './risk-level/add-risk-level/add-risk-level.component';
+import { EditRiskLevelComponent } from './risk-level/edit-risk-level/edit-risk-level.component';
+import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residual-risk-level/add-residual-risk-level.component';
+import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-residual-risk-level/edit-residual-risk-level.component';
+import { AddStaffComponent } from './staff/add-staff/add-staff.component';
+import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +89,18 @@ import { AddEditStaffComponent } from './staff/add-edit-staff/add-edit-staff.com
     ProjectManagerComponent,
     AddEditProjMangComponent,
     StaffComponent,
-    AddEditStaffComponent,
+    
+    RiskLevelComponent,
+    ResidualRiskLevelComponent,
+    ChemicalComponent,
+    AddChemicalComponent,
+    EditChemicalComponent,
+    AddRiskLevelComponent,
+    EditRiskLevelComponent,
+    AddResidualRiskLevelComponent,
+    EditResidualRiskLevelComponent,
+    AddStaffComponent,
+    EditStaffComponent,
   ],
 
   imports: [
