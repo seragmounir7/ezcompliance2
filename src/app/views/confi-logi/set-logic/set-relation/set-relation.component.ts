@@ -52,6 +52,30 @@ export class SetRelationComponent implements OnInit {
     this.getAllPPE();
     this.getAllHazard();
     this.getAllContrActReq();
+    this.getAllStaff();
+    this.getAllResidualRiskLevel();
+    this.getAllRiskLevel();
+  }
+
+  getAllResidualRiskLevel(){
+    this.logicalFormInfo.getAllResidual().subscribe((res:any)=> {
+      console.log("this.resiRiskLevelData",res.data)
+      this.resiRiskLevelData = res.data;
+    
+   })
+  }
+  getAllRiskLevel(){
+    this.logicalFormInfo.getAllRiskLevel().subscribe((res:any)=> {
+      console.log("this.riskLevelData",res.data)
+      this.riskLevelData = res.data;
+   
+   })
+  }
+  getAllStaff(){
+    this.logicalFormInfo.getAllStaff().subscribe((res:any)=> {
+      console.log(res)
+ this.staff=res.data
+   })
   }
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {

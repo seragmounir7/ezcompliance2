@@ -1,0 +1,18 @@
+<form [formGroup]="editTitle" >
+    <h3 *ngIf="!dataRec">Add Code Of Practice</h3>
+    <h3 *ngIf="dataRec">Edit Code Of Practice</h3>
+    <mat-form-field appearance="legacy"
+    class="example-full-width" style="width: 498px;">
+   
+    <input matInput  formControlName="title" style="text-transform: capitalize !important;">
+    </mat-form-field>
+    <div class="row">
+        <div class="col-sm-2 offset-8 ">
+            <button mat-raised-button (click)="closeDialog()">Close</button>
+        </div>
+        <div class="col-sm-2  ">
+            <button mat-raised-button *ngIf="dataRec" [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
+            <button mat-raised-button  *ngIf="!dataRec"  [disabled]="!editTitle.valid"(click)="addForm()">Add</button>
+        </div>
+    </div>
+</form>
