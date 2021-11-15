@@ -331,6 +331,134 @@ addCOP(data){
   }
   ///job number end/////
 
+  ///Jurisdiction start/////
+  addJurisdiction(data){
+    return this.https.post(this.apiUrl + 'jurisdiction/add', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllJurisdiction(){
+    return this.https.get(this.apiUrl + 'jurisdiction/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  updateJurisdiction(data,id){
+    return this.https.put(this.apiUrl + 'jurisdiction/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  
+  }
+  deleteJurisdiction(id){
+    return this.https.delete(this.apiUrl + 'jurisdiction/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  ///Jurisdiction end/////
+
+   ///Regulator start/////
+   addRegulator(data){
+    return this.https.post(this.apiUrl + 'regulator/add', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllRegulator(){
+    return this.https.get(this.apiUrl + 'regulator/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  updateRegulator(data,id){
+    return this.https.put(this.apiUrl + 'regulator/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  
+  }
+  deleteRegulator(id){
+    return this.https.delete(this.apiUrl + 'regulator/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  ///Regulator end/////
+
+   ///Code Of Practice start/////
+   addCode(data){
+    return this.https.post(this.apiUrl + 'cop/add', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllCode(){
+    return this.https.get(this.apiUrl + 'cop/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  updateCode(data,id){
+    return this.https.put(this.apiUrl + 'cop/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  
+  }
+  deleteCode(id){
+    return this.https.delete(this.apiUrl + 'cop/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  ///Code Of Practice end/////
+
+  ///Safety Legislation start/////
+  addSafety(data){
+    return this.https.post(this.apiUrl + 'safetyLegislation/add', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllSafety(){
+    return this.https.get(this.apiUrl + 'safetyLegislation/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  updateSafety(data,id){
+    return this.https.put(this.apiUrl + 'safetyLegislation/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  
+  }
+  deleteSafety(id){
+    return this.https.delete(this.apiUrl + 'safetyLegislation/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  ///Safety Legislation end/////
+
 
 }
 
