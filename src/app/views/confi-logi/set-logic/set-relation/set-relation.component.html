@@ -1,3 +1,6 @@
+<div class="btn btn-outline-primary" [routerLink]="['/admin/confiLogi/setLogic']">
+  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
 <div class="ml-2">
   <h2>Job Task :&nbsp;{{ jobTask?.title }}</h2>
 </div>
@@ -220,7 +223,7 @@
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-7">
-            <mat-form-field class="container" appearance="fill">
+            <!-- <mat-form-field class="container" appearance="fill">
                 <mat-label>Risk Level</mat-label>
                 <mat-select formControlName="riskLevel" multiple>
                   <mat-select-trigger>
@@ -248,8 +251,16 @@
                     >{{ parameter.title }}
                   </mat-option>
                 </mat-select>
+              </mat-form-field> -->
+              <mat-form-field class="container" appearance="fill">
+                <mat-label>Risk Level</mat-label>
+                <mat-select formControlName="riskLevel">
+                  <mat-option *ngFor="let parameter of riskLevelData" [value]="parameter._id">
+                    {{parameter.title}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
-        </div>
+            </div>
         <div class="col-1 my-auto">
             <button class="btn" matStepperNext><i class="fas fa-arrow-right"></i></button>
         </div>
@@ -310,7 +321,7 @@
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-7">
-            <mat-form-field class="container" appearance="fill">
+            <!-- <mat-form-field class="container" appearance="fill">
                 <mat-label>Residule Risk Level</mat-label>
                 <mat-select formControlName="residualRiskL" multiple>
                   <mat-select-trigger>
@@ -338,6 +349,14 @@
                     >{{ parameter.title }}
                   </mat-option>
                 </mat-select>
+              </mat-form-field> -->
+              <mat-form-field class="container" appearance="fill">
+                <mat-label>Residule Risk Level</mat-label>
+                <mat-select formControlName="residualRiskL">
+                  <mat-option *ngFor="let parameter of resiRiskLevelData" [value]="parameter._id">
+                    {{parameter.title}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
         </div>
         <div class="col-1 my-auto">
@@ -349,7 +368,7 @@
   </mat-step>
   <mat-step >
     <ng-template matStepLabel>Chemical related Task</ng-template>
-    <h3 class="text-center mt-3">Is This Task Chemical related ?</h3>
+    <h3 class="text-center mt-3">Is this Job Task includes Chemicals?</h3>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
@@ -374,48 +393,36 @@
 
   <mat-step >
     <ng-template matStepLabel>Person Responsible</ng-template>
-    <h3 class="text-center mt-3">Person Responsible</h3>
-    <div class="row justify-content-center">
+    <!-- <h3 class="text-center mt-3">Person Responsible</h3> -->
+    <div class="row justify-content-center mt-3">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
-        <div class="col-7">
+        <div class="col-6">
+           <!-- <select
+              class="form-select form-control mb-4 my-auto"
+              aria-label="Default select example"
+              formControlName="personResp"
+            >
+              <option value="" hidden selected >Person Responsible</option>
+              <option *ngFor="let person of staff" [value]="person._id">{{person.title}}</option>
+          
+            </select> -->
             <mat-form-field class="container" appearance="fill">
-                <mat-label class="text-center">Person Responsible</mat-label>
-                <mat-select formControlName="personResp" multiple>
-                  <mat-select-trigger>
-                    <span
-                      *ngIf="!JobTaskDetail.get('personResp').value?.length"
-                      class="example-additional-selection"
-                    >
-                    </span>
-                    <span
-                      *ngIf="JobTaskDetail.get('personResp').value?.length == 1"
-                      class="example-additional-selection"
-                    >
-                      One Item selected
-                    </span>
-                    <span
-                      *ngIf="JobTaskDetail.get('personResp').value?.length > 1"
-                      class="example-additional-selection"
-                    >
-                      More than one selected
-                    </span>
-                  </mat-select-trigger>
-                  <mat-option
-                    *ngFor="let parameter of staff"
-                    [value]="parameter._id"
-                    >{{ parameter.title }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+              <mat-label>Person Responsible</mat-label>
+              <mat-select formControlName="personResp">
+                <mat-option *ngFor="let person of staff" [value]="person._id">
+                  {{person.title}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
         </div>
         <div class="col-1 my-auto">
             <!-- <button class="btn" matStepperNext><i class="fas fa-arrow-right"></i></button> -->
         </div>
     </div>
 
-    <div class="text-center">
+    <div class="text-center mt-3">
       <button *ngIf="!jobTask?.set" class="btn btn-primary">Set</button>
       <button *ngIf="jobTask?.set" class="btn btn-primary">Update</button>
     </div>

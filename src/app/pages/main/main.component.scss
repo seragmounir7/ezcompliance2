@@ -6,6 +6,7 @@
 .content-wrapper {
   min-height: calc(100vh - 114px);
   height: 100%;
+  padding: 1rem;
 }
 
 ::ng-deep .cdk-overlay-container {

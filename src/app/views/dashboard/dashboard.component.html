@@ -98,130 +98,70 @@
   <!-- Main row -->
 </section>
 <!-- /.content -->
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-7">
-        <div class="row">
-          <div
-            class="container"
-            style="display: block; height: 200px; width: 400px"
-          >
-            <canvas
-              baseChart
-              [data]="doughnutChartData"
-              [labels]="doughnutChartLabels"
-              [chartType]="doughnutChartType"
-              [colors]="doughnutChartColor"
-              [options]="chartOptions"
-            >
-            </canvas>
-          </div>
-        </div>
-        <div class="row mb-4">
-          <div class="col-3">
-            <div style="display: block; height: 100px; width: 200px">
-              <p class="text-center m-0">Low</p>
-              <canvas
-                baseChart
-                [data]="doughnutChartData1"
-                [labels]="doughnutChartLabels1"
-                [chartType]="doughnutChartType"
-                [colors]="doughnutChartColor"
-              >
-              </canvas>
-            </div>
-          </div>
-          <div class="col-3">
-            <div style="display: block; height: 100px; width: 200px">
-              <p class="text-center m-0">Medium</p>
-              <canvas
-                baseChart
-                [data]="doughnutChartData2"
-                [labels]="doughnutChartLabels1"
-                [chartType]="doughnutChartType"
-                [colors]="doughnutChartColor"
-              >
-              </canvas>
-            </div>
-          </div>
-          <div class="col-3">
-            <div style="display: block; height: 100px; width: 200px">
-              <p class="text-center m-0">High</p>
 
-              <canvas
-                baseChart
-                [data]="doughnutChartData3"
-                [labels]="doughnutChartLabels1"
-                [chartType]="doughnutChartType"
-                [colors]="doughnutChartColor"
-              >
-              </canvas>
-            </div>
-          </div>
-          <div class="col-3">
-            <div style="display: block; height: 100px; width: 200px">
-              <p class="text-center m-0">Critical</p>
-
-              <canvas
-                baseChart
-                [data]="doughnutChartData4"
-                [labels]="doughnutChartLabels1"
-                [chartType]="doughnutChartType"
-                [colors]="doughnutChartColor"
-              >
-              </canvas>
-            </div>
-          </div>
-        </div>
-        <div class="mt-4" style="margin-top: 20px">
-          <div style="display: block">
-            <canvas
-              baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [plugins]="barChartPlugins"
-              [legend]="barChartLegend"
-              [chartType]="barChartType"
-              [colors]="barChartColor"
-            >
+<!--Canvas Sections-->
+<section class="geaphicalSectionContainer">
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<div class="firstCanvasBlk setSecty">
+					<div class="shadowBxSet" style="display: block;">
+						<canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColor" [options]="chartOptions">
+						</canvas>
+					</div>
+				</div>
+				
+				<div class="secndCanvasBlk setSecty">
+					<div class="shadowBxSet">
+						<ul class="setCanvasList">
+							<li>
+								<p class="text-center m-0">Low</p>
+								<canvas baseChart [data]="doughnutChartData1" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+								</canvas>
+							</li>
+							<li>
+								<p class="text-center m-0">Medium</p>
+								<canvas baseChart [data]="doughnutChartData2" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+								</canvas>
+							</li>
+							<li>
+								<p class="text-center m-0">High</p>
+								<canvas baseChart [data]="doughnutChartData3" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+								</canvas>
+							</li>
+							<li>
+								<p class="text-center m-0">Critical</p>
+								<canvas baseChart [data]="doughnutChartData4" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+								</canvas>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="setSecty thrdCanvasBlk">
+					<div class="shadowBxSet">
+						<canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
+						</canvas>
+					</div>
+				</div>
+			
+			</div>
+			<div class="col-6">
+				<div class="setSecty forthCanvasBlk">
+					<div class="shadowBxSet">
+						<canvas baseChart [datasets]="barChartDataH" [labels]="barChartLabelsH" [options]="barChartOptions" [legend]="barChartLegendH" [chartType]="barChartTypeH" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="horiztChartColor">
             </canvas>
-          </div>
-        </div>
-      </div>
-      <!-- horizontal bar chart and map -->
-      <div class="col-5">
-        <!-- chart -->
-        <div class="row">
-          <div class="col-md-12">
-            <div style="display: block">
-              <canvas
-                baseChart
-                [datasets]="barChartDataH"
-                [labels]="barChartLabelsH"
-                [options]="barChartOptions"
-                [legend]="barChartLegendH"
-                [chartType]="barChartTypeH"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"
-                [colors]="horiztChartColor"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-        <!-- map -->
-        <div class="row" style="margin-top: 120px; margin-left: 20px">
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker
-              *ngFor="let m of markers; let i = index"
-              [latitude]="m.lat"
-              [longitude]="m.lng"
-            >
-            </agm-marker>
-          </agm-map>
-        </div>
-      </div>
-    </div>
-  </div>
+					</div>
+				</div>
+				<div class="setSecty fifthCanvasBlk">
+					<div class="shadowBxSet">
+						<agm-map [latitude]="lat" [longitude]="lng">
+							<agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng">
+							</agm-marker>
+						</agm-map>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
