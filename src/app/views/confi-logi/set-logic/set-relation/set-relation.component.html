@@ -375,11 +375,11 @@
         </div>
         <div class="col-7 text-center">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <input class="form-check-input" type="radio" value="YES" formControlName="chemical">
                 <label class="form-check-label" for="inlineRadio1">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <input class="form-check-input" type="radio"  value="NO" formControlName="chemical">
                 <label class="form-check-label" for="inlineRadio2">No</label>
               </div>
         </div>
@@ -423,8 +423,8 @@
     </div>
 
     <div class="text-center mt-3">
-      <button *ngIf="!jobTask?.set" class="btn btn-primary">Set</button>
-      <button *ngIf="jobTask?.set" class="btn btn-primary">Update</button>
+      <button *ngIf="!jobTask?.set" class="btn btn-primary"(click)="setRelation()">Set</button>
+      <button *ngIf="jobTask?.set" class="btn btn-primary"(click)="setRelation()">Update</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

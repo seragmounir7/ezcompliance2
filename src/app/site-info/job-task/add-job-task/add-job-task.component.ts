@@ -19,6 +19,7 @@ export class AddJobTaskComponent implements OnInit {
 
   jobTaskDetails!: FormGroup;
   formData: any;;
+  licenceCatAll=[];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -32,6 +33,13 @@ export class AddJobTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.addAction();
+    this.getAllCategories();
+  }
+  getAllCategories() {
+    this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
+      console.log('getAllLicenceCat=>', res);
+      this.licenceCatAll = res.data;
+    });
   }
   addAction() {
     {
@@ -44,6 +52,7 @@ export class AddJobTaskComponent implements OnInit {
   newAction(): FormGroup {
     return this.fb.group({     
       title: ['', Validators.required],
+      tradeCategoryId: ['', Validators.required],      
     });
   }
   
