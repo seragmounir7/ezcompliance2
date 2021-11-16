@@ -5,6 +5,7 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ParamMap } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 import {
   MatDialog,
   MatDialogRef,
@@ -43,8 +44,7 @@ export class AddHappyClientComponent implements OnInit {
       title: ['', Validators.required],
       mode: 'HappyClient',
     });
-    console.log('data action=>', this.data.action);
-    console.log('!', data);
+    
   }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class AddHappyClientComponent implements OnInit {
     }
     if (this.data.action == 'edit') {
       this.Update = true;
-      console.log('data to patch=>', this.data);
+     
       this.clientDetail.patchValue({
         mode: 'HappyClient',
         title: this.data.EditData.title,
@@ -73,12 +73,11 @@ export class AddHappyClientComponent implements OnInit {
     let index = this.data.index;
     this.subId = this.data.EditData.subModules[index]._id;
 
-    console.log('aaaaaaa', this.subId);
+
   }
   onFormSubmit() {
     let value = this.selectedImage[0];
-    console.log('vvvvvv', value);
-    console.log(this.clientDetail.value);
+  
     let arrlength = this.clientArr().length;
     for (let i = 0; i < arrlength; i++) {
       this.clientArr()
@@ -86,11 +85,11 @@ export class AddHappyClientComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    console.log(this.clientDetail.value);
+  
   }
   addHappyClient() {
     this.clientArr().push(this.clientForm());
-    console.log(this.clientDetail.value);
+  
   }
   clientArr(): FormArray {
     return this.clientDetail.get('arrObj') as FormArray;
@@ -112,28 +111,25 @@ export class AddHappyClientComponent implements OnInit {
   }
 
   browser(event, i) {
-    console.log(event, i);
+
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage;
-    console.log('vvvvvv', value);
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
 
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+     
         this.happyClientData.patchValue({
           filePath: res.filePath,
         });
         this.selectedImage.push(res.files[0]);
 
-        console.log('browse -> this.selectedImage', this.selectedImage);
       });
     }
   }
@@ -143,13 +139,12 @@ export class AddHappyClientComponent implements OnInit {
         title: this.clientDetail.controls.title.value,
         mode: 'HappyClient',
       };
-      console.log('asdfgh', ServiceData);
-      console.log('this.EditData', this.data.EditData._id);
+
+
       this.landingPageInfo
         .editModule(ServiceData, this.data.EditData._id)
         .subscribe((resData) => {
-          console.log('resData', resData);
-
+          Swal.fire('Edited Successfully')
           this.dialogRef.close('true');
           this.clientDetail.reset();
         });
@@ -160,11 +155,11 @@ export class AddHappyClientComponent implements OnInit {
         title: this.clientDetail.controls.title.value,
         arrObj: this.fb.array([]),
       };
-      console.log(data);
+    
       this.landingPageInfo
         .addAppService(this.clientDetail.value)
         .subscribe((data) => {
-          console.log('data=>', data);
+
           this.happyClientData = data;
         });
     }
@@ -178,6 +173,9 @@ export class AddHappyClientComponent implements OnInit {
       this.landingPageInfo
         .editsubModule(submodulesData, this.subId)
         .subscribe((resData) => {
+          Swal.fire('Edited Successfully')
+
+
           this.dialogRef.close('true');
           this.clientDetail.reset();
         });

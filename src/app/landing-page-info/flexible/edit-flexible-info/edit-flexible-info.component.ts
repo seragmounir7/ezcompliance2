@@ -5,6 +5,7 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ParamMap } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 import {
   MatDialog,
   MatDialogRef,
@@ -45,8 +46,7 @@ export class EditFlexibleInfoComponent implements OnInit {
   ) {
     this.Is_Mod = data.moduleName;
     this.Is_subMod = data.modulename;
-    console.log('this.Is_Mod', this.Is_Mod);
-    console.log('this.Is_subMod', this.Is_subMod);
+    
     this.flexibleDetail = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -55,7 +55,7 @@ export class EditFlexibleInfoComponent implements OnInit {
       arrObj: this.fb.array([]),
     });
 
-    console.log('data action=>', this.data.action);
+   
   }
 
   ngOnInit(): void {
@@ -68,10 +68,10 @@ export class EditFlexibleInfoComponent implements OnInit {
       this.module = true;
       this.subModule = false;
     }
-    console.log('data action=>', this.data.action);
+    
     if (this.data.action == 'edit') {
       this.Update = true;
-      console.log('data to patch=>', this.data);
+
       this.flexibleDetail.patchValue({
         mode: 'Flexible',
         title: this.data.EditData.title,
@@ -90,7 +90,7 @@ export class EditFlexibleInfoComponent implements OnInit {
     let index = this.data.index;
     this.subId = this.data.EditData.subModules[index]._id;
 
-    console.log('aaaaaaa', this.subId);
+    
   }
 
   addAction() {
@@ -113,14 +113,13 @@ export class EditFlexibleInfoComponent implements OnInit {
     this.add().removeAt(i);
   }
   onFormSubmit() {
-    console.log('data action=>', this.data.action);
+
 
     this.editModule();
     this.editSubModule();
     let value = this.selectedImage;
-    console.log('value', value);
 
-    console.log(this.flexibleDetail.value);
+
     let arrlength = this.add().length;
     for (let i = 0; i < arrlength; i++) {
       this.add()
@@ -128,35 +127,34 @@ export class EditFlexibleInfoComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    console.log(this.flexibleDetail.value);
+    
 
     let serviceData = {};
 
-    console.log('file: ~ onFormSubmit ~ data', serviceData);
+    
   }
   browser(event, i) {
-    console.log(event, i);
+
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage;
-    console.log('vvvvvv', value);
+   
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
-
+      
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+        
         this.flexibleDetail.patchValue({
           filePath: res.filePath,
         });
         this.selectedImage.push(res.files[0]);
 
-        console.log('browse -> this.selectedImage', this.selectedImage);
+
       });
     }
   }
@@ -168,11 +166,11 @@ export class EditFlexibleInfoComponent implements OnInit {
         description: this.flexibleDetail.controls.description.value,
         mode: 'Flexible',
       };
-      console.log('flexibleData=>', flexibleData);
-      console.log('this.EditData', this.data.EditData._id);
+  
       this.landingPageInfo
         .editModule(flexibleData, this.data.EditData._id)
         .subscribe((resData) => {
+          Swal.fire('Edited Successfully')
           console.log('editModule', resData);
 
           this.dialogRef.close('true');
@@ -188,14 +186,13 @@ export class EditFlexibleInfoComponent implements OnInit {
         fileUrl: this.selectedImage,
         subTitle: this.add().at(0).get('subTitle')?.value,
       };
-      console.log('wqwertyuytrewsdfg', submodulesData);
-      console.log('selectedImage', this.selectedImage);
+   
 
-      console.log('this.EditData', this.data.EditData._id);
       this.landingPageInfo
         .editsubModule(submodulesData, this.subId)
         .subscribe((resData) => {
-          console.log('submodulesData', resData);
+          Swal.fire('Edited Successfully')
+          
 
           this.dialogRef.close('true');
           this.flexibleDetail.reset();
@@ -208,11 +205,11 @@ export class EditFlexibleInfoComponent implements OnInit {
         description: this.flexibleDetail.controls.description.value,
         arrObj: this.fb.array([]),
       };
-      console.log(data);
+   
       this.landingPageInfo
         .addAppService(this.flexibleDetail.value)
         .subscribe((data) => {
-          console.log('data=>', data);
+      
           this.flexibleData = data;
         });
     }

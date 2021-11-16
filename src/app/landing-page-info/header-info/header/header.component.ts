@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service'; 
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service'; 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -61,6 +61,7 @@ export class HeaderComponent implements OnInit {
     };
     console.log(this.HeaderInformation.value);
     this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
+      
       console.log('AddProductComponent -> browser -> res', res);
       // this.studDetail.patchValue({
       //   filePath: res.filePath,
@@ -108,6 +109,7 @@ export class HeaderComponent implements OnInit {
         
         this.isEdit = true;
         this.url.editHeader(this.myId,this.HeaderInformation.value).subscribe((res) => {
+          Swal.fire(' Edited Successfully')
           console.log('Data Set response' + res);
           this.data = res.data;
           console.log('new response' + this.data);
@@ -135,8 +137,5 @@ export class HeaderComponent implements OnInit {
   }
  
 }
-  function data(id: any, data: any) {
-    throw new Error('Function not implemented.');
-  }
-
+ 
 

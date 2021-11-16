@@ -38,7 +38,7 @@ label {
 .sign {
   padding: 10px;
   border: 1px solid rgba(46, 105, 255, 0.5);
-  width: 500px;
+
   border-radius: 5px;
 }
 .sign:hover {
@@ -50,4 +50,50 @@ label {
 .imgStyle {
   border: 2px solid #2e69ff40;
   border-radius: 10px;
+}
+table {
+  width: 100%;
+}
+.mat-column-index {
+  width: 16px;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-images {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-title {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-subTitle {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-action {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-heading {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-description {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-actions {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
 }

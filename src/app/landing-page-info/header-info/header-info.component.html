@@ -1,27 +1,64 @@
 
     
+<div class=" col ml-2 pt-3">
+  <h2> Header Info </h2>
+  </div>
+  <div class=" ">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element,let i = index">{{i+1}}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+     
+  <!-- Name Column -->
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef> Image </th>
+    <td mat-cell *matCellDef="let element"><img src ="{{ element.fileUrl }}" height="120px" width="120px"> </td>
+  </ng-container>
+  <ng-container matColumnDef="heading">
+    <th mat-header-cell *matHeaderCellDef>Heading </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+ 
+  
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element"  (click)="openDialogEdit(element)"> <i class="fas fa-pencil-alt mr-2 " ></i>
+    </td>
+  </ng-container>
 
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+   
+  </div>
+  
+<!-- 
   <section class="content" [formGroup]="serviceDetail">
     <div class="container-fluid">
-      <!-- <div class="row">
-        <div class="col text-center">
-          <h1>Header Format</h1>
-        </div>
-      </div> -->
+    
       <div class="row">
         <div class="col pt-3">
           <h2>Header Format</h2>
         </div>
-        <!-- <div class="col pt-2">
-          <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="openDialog($event)">Add
-            Form</button>
-        </div> -->
+      
       </div>
       <div class="row">
         <div class="col-12">
-          <!-- Default box -->
+   
           <div class="card">
-            <!-- /.card-header -->
+
             <div class="card-body p-0">
               <table class="table table-hover text-wrap" >
                 <thead>
@@ -29,8 +66,7 @@
                     <th style="width: 20%">Images</th>
                     <th style="width: 20%">Heading</th>
                     <th style="width: 40%"> Description</th>
-                    <!-- <th style="width: 20%">Title</th>
-                    <th style="width: 20%">SubTitle</th> -->
+                 
                   
                     <th style="width: 10%">Action</th>
                     
@@ -39,8 +75,7 @@
                 <tbody>
                   <tr>
                     <td><img src ="{{ infoData?.fileUrl }}" height="120px" width="120px"></td>
-                    <!-- <td>{{ data.title }}</td>
-                    <td>{{ data.description }}</td> -->
+                    
                     <td>{{ infoData?.title }}</td>
                     <td>{{ infoData?.description }}</td>
                   
@@ -59,39 +94,10 @@
                 </tbody>
               </table>
             </div>
-            <!-- /.card-body -->
-  
-            <!-- <div class="card-footer clearfix">
-              <div class="row"> -->
-                <!-- <div class="col-6">
-                  <div class="form-group">
-                    <select
-                      class="form-control custom-select"
-                      style="width: auto"
-                      [(ngModel)]="pageSize"
-                      (ngModelChange)="refreshList()"
-                    >
-                      <option *ngFor="let size of [10, 20, 30]" [ngValue]="size">
-                        {{ size }} Items
-                      </option>
-                    </select>
-                  </div>
-                </div> -->
-                <!-- <div class="col-6">
-                  <ngb-pagination
-                    [(page)]="page"
-                    [pageSize]="pageSize"
-                    [collectionSize]="collectionSize"
-                    (pageChange)="refreshList()"
-                    class="pagination"
-                    [maxSize]="5"
-                  ></ngb-pagination>
-                </div> -->
-              <!-- </div>
-            </div> -->
+          
           </div>
         </div>
       </div>
     </div>
   </section>
- 
+  -->
