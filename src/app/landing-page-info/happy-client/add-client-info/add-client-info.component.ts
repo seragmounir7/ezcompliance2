@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
-
+import Swal from 'sweetalert2';
 import {
   MatDialog,
   MatDialogRef,
@@ -41,7 +41,7 @@ export class AddClientInfoComponent implements OnInit {
       description: ['', Validators.required],
       fileUrl: ['', Validators.required],
     });
-    console.log('', data);
+    
   }
 
   ngOnInit(): void {}
@@ -49,29 +49,23 @@ export class AddClientInfoComponent implements OnInit {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-    console.log(files);
+
 
     this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
+
       this.selectedImage.push(res.files[0]);
-      console.log(
-        'AddProductComponent -> browse -> this.selectedImage',
-        this.selectedImage
-      );
+      
     });
   }
   onSubmit() {
     this.clientDetail
       .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
-    console.log(this.clientDetail.value);
-
-    console.log(this.clientDetail.value);
-    this.landingPageInfo
+       this.landingPageInfo
       .addSubModule(this.clientDetail.value)
       .subscribe((data) => {
-        console.log('data=>', data);
-        this.happyClientData = data;
+        Swal.fire('Client Added Successfully')
+       this.happyClientData = data;
         this.dialogRef.close('true');
         this.clientDetail.reset();
       });
