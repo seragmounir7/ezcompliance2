@@ -13,49 +13,48 @@ export class TestLogicComponent implements OnInit {
 
   ngOnInit(): void {
   }
+ 
   stepperList=[
     {
-      name:'Personal information',
+      name:'HighRisk Construction',
       i:1,
-      tag:`<mat-step >
-      <ng-template matStepLabel>Person Responsible</ng-template>
-      <h2 class="text-center mt-3">Person Responsible<span class="material-icons ml-3"(click)="addItem('perResbl')" >add_circle_outline</span></h2>
-      <div class="row justify-content-center mt-3">
-          <div class="col-1 my-auto"> 
-              <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
-          </div>
-          <div class="col-6">
-            
-              <mat-form-field class="container" appearance="fill">
-                <mat-label>Person Responsible</mat-label>
-                <mat-select formControlName="personResp">
-                  <mat-option *ngFor="let person of staff" [value]="person._id">
-                    {{person.title}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div>
-          <div class="col-1 my-auto">
-              <!-- <button class="btn" matStepperNext><i class="fas fa-arrow-right"></i></button> -->
-          </div>
-      </div>
-  
-      <div class="text-center mt-3">
-        <button *ngIf="!jobTask?.set" class="btn btn-primary"(click)="setRelation()">Set</button>
-        <button *ngIf="jobTask?.set" class="btn btn-primary"(click)="setRelation()">Update</button>
-      </div>
-    </mat-step>`
+      ref:'test'
     },
     {
-      name:'Bookings',
+      name:'PPE',
+      i:0,
+      ref:'test2'
+    },
+    {
+      name:'Licence',
       i:0,
     },
     {
-      name:'Reviews',
+      name:'Identify Hazards',
       i:0,
     },
     {
-      name:'Confirm booking',
+      name:'Risk Level',
+      i:0,
+    },
+    {
+      name:'Control Action Required',
+      i:0,
+    },
+    {
+      name:'Code of Practice',
+      i:0,
+    },
+    {
+      name:'Residule Risk Level',
+      i:0,
+    },
+    {
+      name:'Chemical related Task',
+      i:0,
+    },
+    {
+      name:'Person Responsible',
       i:0,
     }
   ]
@@ -89,4 +88,5 @@ export class TestLogicComponent implements OnInit {
     this.stepperList[this.count].i = 1
   }
 
+ctx = {estimate: 'this.totalEstimate'};
 }

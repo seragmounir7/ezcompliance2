@@ -11,6 +11,15 @@
 
 @import '~ngx-toastr/toastr';
 
+
+.mat-cell {
+    text-align: center!important;
+}
+
+.mat-header-row > .mat-header-cell {
+  text-align: center!important;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
