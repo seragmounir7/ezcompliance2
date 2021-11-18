@@ -30,7 +30,7 @@
 
 <ng-container matColumnDef="action">
   <th mat-header-cell *matHeaderCellDef> Action </th>
-  <td mat-cell *matCellDef="let element"> <i class="fas fa-pencil-alt mr-2 "(click)="edit(element)"></i> <i class="fas fa-trash ml-2  " (click)="delete(element)"></i>  
+  <td mat-cell *matCellDef="let element"> <i class="fas fa-pencil-alt mr-2 " aria-hidden="true" title="Edit"(click)="edit(element)"></i> <i class="fas fa-trash ml-2  " aria-hidden="true" title="Delete" (click)="delete(element)"></i>  
   </td>
 </ng-container>
 <!-- <ng-container matColumnDef="delete">

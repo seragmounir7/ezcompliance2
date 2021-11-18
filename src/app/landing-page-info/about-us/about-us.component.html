@@ -44,7 +44,7 @@
                     class="btn editBtn "
                       (click)="editForm(teamData._id, false)"
                     >
-                      <i class="fas fa-pencil-alt " title="edit"></i>
+                      <i class="fas fa-pencil-alt " aria-hidden="true" title="Edit"></i>
                     </button>
                   </td>
                 </tr>
@@ -102,13 +102,13 @@
                       (click)="editForm(data._id, true, i)"
                       class="btn editBtn mr-2"
                     >
-                      <i class="fas fa-pencil-alt mr-2"></i>
+                      <i class="fas fa-pencil-alt mr-2" aria-hidden="true" title="Edit"></i>
                     </button>
                     <span
                    
                     (click)="deleteopen(deletemodal, data._id)"
                   >
-                    <i class="fas fa-trash " aria-hidden="true"></i>
+                    <i class="fas fa-trash " aria-hidden="true" title="Delete"></i>
                 </span>
                   </td>
                  
