@@ -63,6 +63,7 @@ export class LicenceAndQualComponent implements OnInit {
       width: "550px",
       data: element,
     });
+    console.log(element)
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
         this.getAllLicence();

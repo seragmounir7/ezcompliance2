@@ -43,7 +43,7 @@ export class AddSiteComponent implements OnInit {
         console.log(res);
         this.dialogRef.close('true');
         Swal.fire({
-          title: 'Site Edited successfully',
+          title: 'Site Added successfully',
           showConfirmButton: false,
           timer: 1200,
         });

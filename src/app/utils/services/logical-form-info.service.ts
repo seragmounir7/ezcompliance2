@@ -92,7 +92,7 @@ export class LogicalFormInfoService {
       })
     );
   }
-  updateLicence(data, id) {
+  updateLicence(id,data) {
     return this.https.put(this.apiUrl + 'licence/update/' + id, data).pipe(
       map((res: any) => {
         return res;
