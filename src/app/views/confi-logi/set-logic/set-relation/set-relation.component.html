@@ -4,44 +4,11 @@
 <div class="ml-2">
   <h2>Job Task :&nbsp;{{ jobTask?.title }}</h2>
 </div>
-<mat-horizontal-stepper [formGroup]="JobTaskDetail">
-  <!-- <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>  -->
-
+<mat-horizontal-stepper [formGroup]="JobTaskDetail" style="height: 500px;">
+  
   <mat-step >
     <ng-template matStepLabel>HighRisk Construction</ng-template>
-    <h3 class="text-center mt-3">HighRisk Construction</h3>
+    <h2 class="text-center mt-3">HighRisk Construction<span class="material-icons ml-3"(click)="addItem('highRisk')" >add_circle_outline</span></h2> 
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <!-- <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button> -->
@@ -87,7 +54,7 @@
   </mat-step>
   <mat-step >
     <ng-template matStepLabel>PPE</ng-template>
-    <h3 class="text-center mt-3">PPE</h3>
+    <h2 class="text-center mt-3">PPE<span class="material-icons ml-3"(click)="addItem('ppe')" >add_circle_outline</span></h2>
     <div class="row justify-content-center">
       <div class="col-1 my-auto"><button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button></div>
       <div class="col-7">
@@ -127,14 +94,14 @@
   </mat-step>
   <mat-step >
     <ng-template matStepLabel>Licence Category</ng-template>
-    <h3 class="text-center mt-3">Licence Category</h3>
+    <h2 class="text-center mt-3">Licence <span class="material-icons ml-3"(click)="addItem('licence')" >add_circle_outline</span> </h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-7">
             <mat-form-field class="container" appearance="fill">
-                <mat-label>Licence Category</mat-label>
+                <mat-label>Licences</mat-label>
                 
                 <mat-select formControlName="LicenceCat" multiple>
                   <mat-select-trigger>
@@ -174,7 +141,7 @@
 
   <mat-step >
     <ng-template matStepLabel>Identify Hazards</ng-template>
-    <h3 class="text-center mt-3">Identify Hazards</h3>
+    <h2 class="text-center mt-3">Identify Hazards<span class="material-icons ml-3"(click)="addItem('identifyHazards')" >add_circle_outline</span></h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
@@ -217,41 +184,12 @@
   </mat-step>
   <mat-step > 
     <ng-template matStepLabel>Risk Level</ng-template>
-    <h3 class="text-center mt-3">Risk Level</h3>
+    <h2 class="text-center mt-3">Risk Level<span class="material-icons ml-3"(click)="addItem('riskLevel')" >add_circle_outline</span></h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-7">
-            <!-- <mat-form-field class="container" appearance="fill">
-                <mat-label>Risk Level</mat-label>
-                <mat-select formControlName="riskLevel" multiple>
-                  <mat-select-trigger>
-                    <span
-                      *ngIf="!JobTaskDetail.get('riskLevel').value?.length"
-                      class="example-additional-selection"
-                    >
-                    </span>
-                    <span
-                      *ngIf="JobTaskDetail.get('riskLevel').value?.length == 1"
-                      class="example-additional-selection"
-                    >
-                      One Item selected
-                    </span>
-                    <span
-                      *ngIf="JobTaskDetail.get('riskLevel').value?.length > 1"
-                      class="example-additional-selection"
-                    >
-                      More than one selected
-                    </span>
-                  </mat-select-trigger>
-                  <mat-option
-                    *ngFor="let parameter of riskLevelData"
-                    [value]="parameter._id"
-                    >{{ parameter.title }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field> -->
               <mat-form-field class="container" appearance="fill">
                 <mat-label>Risk Level</mat-label>
                 <mat-select formControlName="riskLevel">
@@ -270,7 +208,7 @@
   </mat-step>
   <mat-step >
     <ng-template matStepLabel>Control Action Required</ng-template>
-    <h3 class="text-center mt-3">Control Action Required</h3>
+    <h2 class="text-center mt-3">Control Action Required<span class="material-icons ml-3"(click)="addItem('ctrlActreq')" >add_circle_outline</span></h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
@@ -315,42 +253,13 @@
   </mat-step>
   <mat-step >
     <ng-template matStepLabel>Residule Risk Level</ng-template>
-    <h3 class="text-center mt-3">Residule Risk Level</h3>
+    <h2 class="text-center mt-3">Residule Risk Level<span class="material-icons ml-3"(click)="addItem('resRiskLevel')" >add_circle_outline</span></h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-7">
-            <!-- <mat-form-field class="container" appearance="fill">
-                <mat-label>Residule Risk Level</mat-label>
-                <mat-select formControlName="residualRiskL" multiple>
-                  <mat-select-trigger>
-                    <span
-                      *ngIf="!JobTaskDetail.get('residualRiskL').value?.length"
-                      class="example-additional-selection"
-                    >
-                    </span>
-                    <span
-                      *ngIf="JobTaskDetail.get('residualRiskL').value?.length == 1"
-                      class="example-additional-selection"
-                    >
-                      One Item selected
-                    </span>
-                    <span
-                      *ngIf="JobTaskDetail.get('residualRiskL').value?.length > 1"
-                      class="example-additional-selection"
-                    >
-                      More than one selected
-                    </span>
-                  </mat-select-trigger>
-                  <mat-option
-                    *ngFor="let parameter of resiRiskLevelData"
-                    [value]="parameter._id"
-                    >{{ parameter.title }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field> -->
-              <mat-form-field class="container" appearance="fill">
+             <mat-form-field class="container" appearance="fill">
                 <mat-label>Residule Risk Level</mat-label>
                 <mat-select formControlName="residualRiskL">
                   <mat-option *ngFor="let parameter of resiRiskLevelData" [value]="parameter._id">
@@ -368,7 +277,7 @@
   </mat-step>
   <mat-step >
     <ng-template matStepLabel>Chemical related Task</ng-template>
-    <h3 class="text-center mt-3">Is this Job Task includes Chemicals?</h3>
+    <h2 class="text-center mt-3">Is this Job Task includes Chemicals?</h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
@@ -393,21 +302,13 @@
 
   <mat-step >
     <ng-template matStepLabel>Person Responsible</ng-template>
-    <!-- <h3 class="text-center mt-3">Person Responsible</h3> -->
+    <h2 class="text-center mt-3">Person Responsible<span class="material-icons ml-3"(click)="addItem('perResbl')" >add_circle_outline</span></h2>
     <div class="row justify-content-center mt-3">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-6">
-           <!-- <select
-              class="form-select form-control mb-4 my-auto"
-              aria-label="Default select example"
-              formControlName="personResp"
-            >
-              <option value="" hidden selected >Person Responsible</option>
-              <option *ngFor="let person of staff" [value]="person._id">{{person.title}}</option>
           
-            </select> -->
             <mat-form-field class="container" appearance="fill">
               <mat-label>Person Responsible</mat-label>
               <mat-select formControlName="personResp">

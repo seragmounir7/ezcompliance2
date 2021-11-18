@@ -121,6 +121,13 @@ export class LogicalFormInfoService {
       })
     );
   }
+  getLicenceByTradeCat(id) {
+    return this.https.get(this.apiUrl + 'tradeCategory/getAll/'+id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
   updateLicenceCat(data, id) {
     return this.https.put(this.apiUrl + 'tradeCategory/update/' + id, data).pipe(
       map((res: any) => {

@@ -664,11 +664,13 @@ allContrlActReq= [];
       this.checkArray.forEach((item, j) => {
         if (item == e.target.value) {
           this.checkArray.splice(j, 1);
-          this.jobTaskSelected.splice(j, 1);
-          return;
+          this.jobTaskSelected.splice(j, 1);          
+          return;          
         }
       });
+
     }
+
     for (let k = 0; k < this.riskArr.length; k++) {
       this.riskArr[k] = 0;
     }
@@ -705,11 +707,20 @@ allContrlActReq= [];
           });
           // element.tradeCategoryId.forEach((riskItem) => {
           //   this.licenseAndQualification.forEach((highRisk, index) => {
-          //     if (highRisk.licenceCategoryId._id === riskItem) {
+          //     if (highRisk.tradeCategoryId._id === riskItem) {
           //       this.licenceArr[index] = 1;
           //     }
           //   });
           // });
+          this.licenseAndQualification.forEach((highRisk, index) => {
+            console.log("highRisk.tradeCategoryId._id",highRisk.tradeCategoryId._id);
+            console.log("element.tradeCategoryId._id",element.tradeCategoryId._id);
+            
+            if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
+              this.licenceArr[index] = 1;
+            }
+          });
+          
         }
       });
     });
@@ -729,9 +740,7 @@ allContrlActReq= [];
       this.addActionPersonRes();
      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
-      this.residlRiskLevelFA()
-        .controls[i].get('resiRiskLevel')
-        .setValue(data.residualRisk);
+      this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
     });
 
     console.log('jobTaskSelected', this.jobTaskSelected);
