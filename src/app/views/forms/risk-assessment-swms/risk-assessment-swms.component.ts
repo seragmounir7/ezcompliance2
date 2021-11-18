@@ -19,13 +19,19 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   SWMSTab!: FormArray;
   RiskAssessment = true;
   SWMSShow = false;
+  chemicalTask=false;
   //checkboxes array
   jobTask = [];
+  staff = [];
+  resiRiskLevel=[];
+riskLevel=[];
   highRiskConstruction = [];
   PPEselection = [];
   licenseAndQualification = [];
   checkArray = [];
   allJobNumbers = [];
+  allHazards= [];
+allContrlActReq= [];
   // riskLevel = [];
   // resdRiskLevel = [];
   statesData = [
@@ -288,6 +294,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   jobTaskData = [];
   jobTaskSelected = [];
   projectMang = [];
+  allChemicals = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
@@ -319,6 +326,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       SDSRegister: this.fb.array([]),
       riskLevel: this.fb.array([]),
       residualRisk: this.fb.array([]),
+      persResp: this.fb.array([]),
     });
   }
 
@@ -330,7 +338,17 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     this.getAllProjectMang();
     this.addActionSDSRegister();
     this.getAllJobNumber();
+    this.getAllResidualRiskLevel();
+    this.getAllStaff();
+    this.getAllRiskLevel();
+    this.getAllChemical();
+    this.getAllHazard();
+    this.getAllContrActReq();
 
+    
+
+    
+    
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
@@ -458,6 +476,11 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       this.residlRiskLevelFA().push(this.residlRiskLevelFG());
     }
   }
+  addActionPersonRes() {
+    {
+      this.personResFA().push(this.personResFG());
+    }
+  }
   addActionSDSRegister() {
     {
       this.sdsRegisterFA().push(this.sdsRegisterFG());
@@ -472,6 +495,9 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   sdsRegisterFA(): FormArray {
     return this.riskAssessmentFb.get('SDSRegister') as FormArray;
   }
+  personResFA(): FormArray {
+    return this.riskAssessmentFb.get('persResp') as FormArray;
+  }
   riskLevelFG(): FormGroup {
     return this.fb.group({
       riskLevel: [''],
@@ -480,6 +506,11 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   residlRiskLevelFG(): FormGroup {
     return this.fb.group({
       resiRiskLevel: [''],
+    });
+  }
+  personResFG(): FormGroup {
+    return this.fb.group({
+      personRes: [''],
     });
   }
   sdsRegisterFG(): FormGroup {
@@ -607,6 +638,18 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       }
     });
   }
+  getAllHazard() {
+    this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
+      console.log('getAllHazards=>', res);
+      this.allHazards = res.data;
+    });
+  }
+  getAllContrActReq()  {
+    this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
+      console.log('getAllHazards=>', res);
+      this.allContrlActReq = res.data;
+    });
+  }
   onJobtaskSelect(e, jobTaskRecd) {
     // this.jobTaskSelected=[];
 
@@ -614,16 +657,20 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     let item = e.target.value;
     if (e.target.checked) {
       this.checkArray.push(item);
+      console.log("jobTaskRecd",jobTaskRecd);
+   
       this.jobTaskSelected.push(jobTaskRecd);
     } else {
       this.checkArray.forEach((item, j) => {
         if (item == e.target.value) {
           this.checkArray.splice(j, 1);
-          this.jobTaskSelected.splice(j, 1);
-          return;
+          this.jobTaskSelected.splice(j, 1);          
+          return;          
         }
       });
+
     }
+
     for (let k = 0; k < this.riskArr.length; k++) {
       this.riskArr[k] = 0;
     }
@@ -633,9 +680,15 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     for (let k = 0; k < this.licenceArr.length; k++) {
       this.licenceArr[k] = 0;
     }
+    this.chemicalTask=false;
     // console.log(this.checkArray);
-    this.checkArray.forEach((id) => {
+    this.checkArray.forEach((id) => {      
+    
       this.jobTaskData.forEach((element) => {
+        //looking for chemical task
+        if(element.chemical == "YES"){
+          this.chemicalTask=true;
+        }
         if (id === element._id) {
           element.risk.forEach((riskItem) => {
             this.highRiskConstruction.forEach((highRisk, riskIndex) => {
@@ -652,13 +705,22 @@ export class RiskAssessmentSWMSComponent implements OnInit {
               }
             });
           });
-          element.licence.forEach((riskItem) => {
-            this.licenseAndQualification.forEach((highRisk, index) => {
-              if (highRisk.licenceCategoryId._id === riskItem) {
-                this.licenceArr[index] = 1;
-              }
-            });
+          // element.tradeCategoryId.forEach((riskItem) => {
+          //   this.licenseAndQualification.forEach((highRisk, index) => {
+          //     if (highRisk.tradeCategoryId._id === riskItem) {
+          //       this.licenceArr[index] = 1;
+          //     }
+          //   });
+          // });
+          this.licenseAndQualification.forEach((highRisk, index) => {
+            console.log("highRisk.tradeCategoryId._id",highRisk.tradeCategoryId._id);
+            console.log("element.tradeCategoryId._id",element.tradeCategoryId._id);
+            
+            if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
+              this.licenceArr[index] = 1;
+            }
           });
+          
         }
       });
     });
@@ -669,13 +731,16 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     while (this.residlRiskLevelFA().length) {
       this.residlRiskLevelFA().removeAt(0);
     }
+    while (this.personResFA().length) {
+      this.personResFA().removeAt(0);
+    }
     this.jobTaskSelected.forEach((data, i) => {
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
+      this.addActionPersonRes();
+     this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
-      this.residlRiskLevelFA()
-        .controls[i].get('resiRiskLevel')
-        .setValue(data.residualRisk);
+      this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
     });
 
     console.log('jobTaskSelected', this.jobTaskSelected);
@@ -687,6 +752,32 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       console.log('getAllJobNumber', res.data);
       this.allJobNumbers = res.data;
     });
+  }
+  getAllStaff(){
+    this.logicalFormInfo.getAllStaff().subscribe((res:any)=> {
+      console.log(res)
+ this.staff=res.data
+   })
+  }
+  getAllResidualRiskLevel(){
+    this.logicalFormInfo.getAllResidual().subscribe((res:any)=> {
+      console.log("this.resiRiskLevelData",res.data)
+      this.resiRiskLevel = res.data;
+    
+   })
+  }
+  getAllRiskLevel(){
+    this.logicalFormInfo.getAllRiskLevel().subscribe((res:any)=> {
+      console.log("this.riskLevelData",res.data)
+      this.riskLevel = res.data;
+   
+   })
+  }
+  getAllChemical(){
+    this.logicalFormInfo.getAllChemical().subscribe((res:any)=> {
+      console.log(res)
+ this.allChemicals=res.data;
+   })
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
@@ -700,13 +791,16 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     while (this.residlRiskLevelFA().length) {
       this.residlRiskLevelFA().removeAt(0);
     }
+    while (this.personResFA().length) {
+      this.personResFA().removeAt(0);
+    }
     this.jobTaskSelected.forEach((data, i) => {
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
+      this.addActionPersonRes();
+      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
-      this.residlRiskLevelFA()
-        .controls[i].get('resiRiskLevel')
-        .setValue(data.residualRisk);
+      this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
     });
     console.log(this.residlRiskLevelFA().value);
   }

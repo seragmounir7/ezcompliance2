@@ -7,6 +7,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
@@ -21,11 +22,13 @@ export class SiteInspectionComponent implements OnInit {
   siteAction = false;
   itemvalue: any;
   item_values: any = ['In Progress', 'Completed', 'Closed'];
+  jobTaskData: any;
 
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
-    private setTitle:SetTitleService
+    private setTitle:SetTitleService,
+    private logicalFormInfo:LogicalFormInfoService
   ) {
     this.sidePreview = this.fb.group({
       Hazard: ['', Validators.required],
@@ -141,4 +144,12 @@ export class SiteInspectionComponent implements OnInit {
 
     //  console.log(this.sidePreview.controls[b[0]].value);
   }
+
+  getAllJobTask() {
+    this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
+      this.jobTaskData = res.data;
+      console.log('jobTaskDetails=>', this.jobTaskData);
+    });
+  }
+
 }

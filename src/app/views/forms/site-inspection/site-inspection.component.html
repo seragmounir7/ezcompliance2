@@ -5,7 +5,7 @@
     <p class="title">Site Inspection Preview</p>
   </h2>
 
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button
         [ngClass]="siteshow === true ? 'nav-link active' : 'nav-link outline'"
@@ -36,9 +36,10 @@
         Site Inspection Corrective Action
       </button>
     </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div
+  </ul> -->
+  <mat-tab-group>
+    <mat-tab label="Site Inspection"> 
+      <div
       class="tab-pane fade show active"
       id="siteInspection"
       role="tabpanel"
@@ -1519,15 +1520,16 @@
         </div>
       </div>
     </div>
-
-    <div
+    </mat-tab>
+    <mat-tab label="Site Inspection Corrective Action"> 
+      <div
       class="tab-pane fade show active"
       id="siteAction"
       role="tabpanel"
       *ngIf="siteAction"
       aria-labelledby="siteAction-tab"
     >
-      <div formArrayName="siteAction">
+      <div formArrayName="SiteControl">
         <div *ngFor="let row of add().controls; let filed = index">
           <div [formGroupName]="filed">
             <div class="row">
@@ -1606,5 +1608,11 @@
       <span class="material-icons"> keyboard_arrow_up </span>
       <span class="material-icons"> keyboard_arrow_down </span>
     </div>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
+  <!-- <div class="tab-content" id="myTabContent">
+    
+
+    
+  </div> -->
 </div>
