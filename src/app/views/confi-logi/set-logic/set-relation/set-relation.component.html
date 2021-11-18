@@ -16,7 +16,7 @@
         <div class="col-7">
             <mat-form-field class="container" appearance="fill">
                 <mat-label class="text-center ">HighRiskConstruction</mat-label>
-                <mat-select formControlName="highRiskConstr" multiple>
+                <mat-select formControlName="highRiskConstr" multiple >
                   <mat-select-trigger>
                     <span
                       *ngIf="!JobTaskDetail.get('highRiskConstr').value?.length"
@@ -93,16 +93,15 @@
    
   </mat-step>
   <mat-step >
-    <ng-template matStepLabel>Licence Category</ng-template>
-    <h2 class="text-center mt-3">Licence <span class="material-icons ml-3"(click)="addItem('licence')" >add_circle_outline</span> </h2>
+    <ng-template matStepLabel>Licence </ng-template>
+    <h2 class="text-center mt-3">Licences <span class="material-icons ml-3"(click)="addItem('licence')" >add_circle_outline</span> </h2>
     <div class="row justify-content-center">
         <div class="col-1 my-auto"> 
             <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         </div>
         <div class="col-7">
             <mat-form-field class="container" appearance="fill">
-                <mat-label>Licences</mat-label>
-                
+                <mat-label>Licences</mat-label>                
                 <mat-select formControlName="LicenceCat" multiple>
                   <mat-select-trigger>
                     <span
@@ -124,7 +123,7 @@
                     </span>
                   </mat-select-trigger>
                   <mat-option
-                    *ngFor="let parameter of licenceCatAll"
+                    *ngFor="let parameter of licenceByTradecat"
                     [value]="parameter._id"
                     >{{ parameter.title }}
                   </mat-option>
@@ -238,6 +237,51 @@
                   </mat-select-trigger>
                   <mat-option
                     *ngFor="let parameter of allContrlActReq"
+                    [value]="parameter._id"
+                    >{{ parameter.title }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="col-1 my-auto">
+            <button class="btn" matStepperNext><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+   
+
+  </mat-step>
+  <mat-step >
+    <ng-template matStepLabel>Code of Practice</ng-template>
+    <h2 class="text-center mt-3">Code of Practice<span class="material-icons ml-3"(click)="addItem('codeOfPract')" >add_circle_outline</span></h2>
+    <div class="row justify-content-center">
+        <div class="col-1 my-auto"> 
+            <button class="btn" matStepperPrevious><i class="fas fa-arrow-left"></i></button>
+        </div>
+        <div class="col-7">
+            <mat-form-field class="container" appearance="fill">
+                <mat-label>Code of Practice</mat-label>
+                <mat-select formControlName="codeOfPract" multiple>
+                  <mat-select-trigger>
+                    <span
+                      *ngIf="!JobTaskDetail.get('codeOfPract').value?.length"
+                      class="example-additional-selection"
+                    >
+                    </span>
+                    <span
+                      *ngIf="JobTaskDetail.get('codeOfPract').value?.length == 1"
+                      class="example-additional-selection"
+                    >
+                      One Item selected
+                    </span>
+                    <span
+                      *ngIf="JobTaskDetail.get('codeOfPract').value?.length > 1"
+                      class="example-additional-selection"
+                    >
+                      More than one selected
+                    </span>
+                  </mat-select-trigger>
+                  <mat-option
+                    *ngFor="let parameter of allCodeOfPract"
                     [value]="parameter._id"
                     >{{ parameter.title }}
                   </mat-option>

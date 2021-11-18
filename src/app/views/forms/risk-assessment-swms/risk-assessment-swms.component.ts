@@ -295,6 +295,7 @@ allContrlActReq= [];
   jobTaskSelected = [];
   projectMang = [];
   allChemicals = [];
+  allCOPSelected = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(

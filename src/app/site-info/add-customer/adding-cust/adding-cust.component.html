@@ -1,20 +1,20 @@
 <div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/addCustomer']">
   <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<div  class="container px-4 py-4 bg-white">
+
    
       
 <section class="content" style="height: 60%;">
     <div [formGroup]="addCustomerForm" class="container px-4 py-4 bg-white">
         <h2>Add Customer</h2>
-      
+        <hr>
         <div class="row">
           <div class="my-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
             <input
               type="text"
               class="form-control"
-              id="siteName"
+              id="customerName"
               formControlName="customerName"
             />
           </div>
@@ -23,7 +23,7 @@
             <input
               type="text"
               class="form-control"
-              id="siteName"
+              id="customerContact"
               formControlName="customerContact"
             />
           </div>
@@ -157,3 +157,4 @@
       </div>
    
      </div> 
+     </section>

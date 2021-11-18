@@ -28,6 +28,7 @@ export class EditCustComponent implements OnInit {
     })
   }
   onSubmit(){
+    
     this.logicalFormInfoService.updateCustomer(this.data._id,this.editCustomerForm.value).subscribe(res => {
       console.log(res);
       this.dialogRef.close('true');

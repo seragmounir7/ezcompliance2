@@ -1,9 +1,16 @@
 
 <section [formGroup]="editSubcriptionForm" class="content">
     <div class="container px-4 py-4 bg-white">
+      <div mat-dialog-title class="dialog-title">
         <h3 *ngIf="!dataRec">Add Subcription Rate</h3>
         <h3 *ngIf="dataRec">Edit Subcription Rate</h3>
-      
+        <button type="button" class="close" 
+      style="font-size: 25px;"
+        (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+    </div>
+    <hr>
         <div class="row">
           <div class="my-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Monthly Rate</p>

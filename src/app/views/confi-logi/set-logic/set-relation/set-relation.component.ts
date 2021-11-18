@@ -14,15 +14,16 @@ import { MatDialog } from '@angular/material/dialog';
 export class SetRelationComponent implements OnInit {
   JobTaskDetail!: FormGroup;
   jobTask = null;
-  highRiskConstructionData: [];
-  PPESelectionData: [];
-  licenseAndQual: [];
-  allHazards: [];
-  allContrlActReq: [];
-  licenceCatAll: [];
-  resiRiskLevelData: [];
-  riskLevelData: [];
-  staff: [];
+  highRiskConstructionData = [];
+  PPESelectionData = [];
+  licenseAndQual = [];
+  allHazards = [];
+  allContrlActReq = [];
+  licenceByTradecat = [];
+  resiRiskLevelData = [];
+  riskLevelData = [];
+  staff = [];
+  allCodeOfPract = [];
   isLinear = false;
   jobTaskId = null;
 
@@ -35,18 +36,36 @@ export class SetRelationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.JobTaskDetail = this.fb.group({
+      highRiskConstr: [''],
+      PPE: [''],
+      codeOfPract: [''],
+      LicenceCat: [''],
+      identifyHazrds: [''],
+      contrActReq: [''],
+      riskLevel: [''],
+      residualRiskL: [''],
+      personResp: [''],
+      chemical: [],
+    });
+
     this.route.queryParams.subscribe((id) => {
       console.log(id);
       this.jobTaskId = id.id;
       this.logicalFormInfo.getJobtaskById(id.id).subscribe((res: any) => {
-        console.log(res);
         this.jobTask = res.data;
+        console.log(
+          'this.jobTask ',
+          this.jobTask 
+        );
         this.getLicenceByTradeCat(this.jobTask.tradeCategoryId);
+
         if (this.jobTask.set == true) {
           this.JobTaskDetail.patchValue({
             highRiskConstr: this.jobTask.risk,
             PPE: this.jobTask.PPE,
-            // LicenceCat: this.jobTask
+            codeOfPract: this.jobTask.PPE,
+           LicenceCat: this.jobTask.licence,
             identifyHazrds: this.jobTask.identifyHazard,
             contrActReq: this.jobTask.controlActionRequired,
             riskLevel: this.jobTask.riskLevel,
@@ -60,25 +79,15 @@ export class SetRelationComponent implements OnInit {
         else this.JobTaskDetail.get('chemical').setValue('NO');
       });
     });
-    this.JobTaskDetail = this.fb.group({
-      highRiskConstr: [''],
-      PPE: [''],
-      LicenceCat: [''],
-      identifyHazrds: [''],
-      contrActReq: [''],
-      riskLevel: [''],
-      residualRiskL: [''],
-      personResp: [''],
-      chemical: [],
-    });
+
     this.getAllHighRisk();
-    this.getAllLicence();
     this.getAllPPE();
     this.getAllHazard();
     this.getAllContrActReq();
     this.getAllStaff();
     this.getAllResidualRiskLevel();
     this.getAllRiskLevel();
+    this.getAllCodeOfPractice();
   }
 
   getAllResidualRiskLevel() {
@@ -111,13 +120,15 @@ export class SetRelationComponent implements OnInit {
       this.PPESelectionData = res.data;
     });
   }
-
-  getAllLicence() {
-    this.logicalFormInfo.getAllLicence().subscribe((res) => {
-      console.log('Licence=>', res);
-      this.licenseAndQual = res.data;
+  getAllCodeOfPractice() {
+   
+    this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
+      console.log('codeOfPractice=>', res);
+   this.allCodeOfPract=res.data;
     });
+ 
   }
+
   getAllHazard() {
     this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
       console.log('getAllHazards=>', res);
@@ -135,16 +146,44 @@ export class SetRelationComponent implements OnInit {
 
     this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
-     // this.licenceCatAll = res.data;
+      this.licenceByTradecat = res.data.licenceData;
     });
   }
   setRelation() {
     console.log(this.JobTaskDetail.value);
+    let allContrlActReqTitle=[];
+    let temp1=this.JobTaskDetail.get('contrActReq').value;
+    this.allContrlActReq.forEach(element1 => {
+      temp1.forEach(element2 => {
+        if(element1._id===element2){
+          allContrlActReqTitle.push(element1.title)
+        }
+      });
+    });
+    let allHazardsTitle=[];
+    let temp2=this.JobTaskDetail.get('identifyHazrds').value;
+    this.allHazards.forEach(element1 => {
+      temp2.forEach(element2 => {
+        if(element1._id===element2){
+          allHazardsTitle.push(element1.title)
+        }
+      });
+    });
+    let allCOPTitle=[];
+    let temp3=this.JobTaskDetail.get('codeOfPract').value;
+    this.allCodeOfPract.forEach(element1 => {
+      temp3.forEach(element2 => {
+        if(element1._id===element2){
+          allCOPTitle.push(element1.title)
+        }
+      });
+    });
     let data = {
       title: this.jobTask.title,
       risk: this.JobTaskDetail.get('highRiskConstr').value,
       PPE: this.JobTaskDetail.get('PPE').value,
-      tradeCategoryId: this.JobTaskDetail.get('LicenceCat').value,
+      tradeCategoryId:this.jobTask.tradeCategoryId,
+      licence: this.JobTaskDetail.get('LicenceCat').value,
       identifyHazard: this.JobTaskDetail.get('identifyHazrds').value,
       controlActionRequired: this.JobTaskDetail.get('contrActReq').value,
       riskLevel: this.JobTaskDetail.get('riskLevel').value,
@@ -169,88 +208,124 @@ export class SetRelationComponent implements OnInit {
         this.router.navigate(['/admin/confiLogi/setLogic']);
       });
   }
-  openDialogBox(element) {
+  addItem(type) {
+    let temp = {
+      type: type,
+      tradeCategoryId: this.jobTask.tradeCategoryId,
+    };
+    if (type === 'licence') {
+      temp = {
+        type: type,
+        tradeCategoryId: this.jobTask.tradeCategoryId,
+      };
+    } else {
+      temp = {
+        type: type,
+        tradeCategoryId: '',
+      };
+    }
+
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
-      data: element,
+      data: temp,
     });
+
     dialogRef.afterClosed().subscribe((result) => {
       switch (result) {
         case 'highRisk': {
-          let data =this.JobTaskDetail.get('highRiskConstr').value;
+          let data = this.JobTaskDetail.get('highRiskConstr').value;
           this.getAllHighRisk();
-          this.JobTaskDetail.get('highRiskConstr').patchValue(data)
+          this.JobTaskDetail.get('highRiskConstr').patchValue(data);
           break;
         }
-        // case 'ppe': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-        // case 'licence': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-        // case 'identifyHazards': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-        // case 'riskLevel': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-        // case 'ctrlActreq': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-        // case 'resRiskLevel': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-        // case 'perResbl': {
-        //   this.openDialogBox(type);
-        //   break;
-        // }
-      
+        case 'ppe': {
+          let data = this.JobTaskDetail.get('PPE').value;
+          this.getAllPPE();
+          this.JobTaskDetail.get('PPE').patchValue(data);
+          break;
+        }
+        case 'codeOfPract': {
+          let data = this.JobTaskDetail.get('codeOfPract').value;
+          this.getAllCodeOfPractice();
+          this.JobTaskDetail.get('codeOfPract').patchValue(data);
+          break;
+        }
+        case 'licence': {
+          let data = this.JobTaskDetail.get('LicenceCat').value;
+          this.getLicenceByTradeCat(this.jobTask.tradeCategoryId);
+          this.JobTaskDetail.get('LicenceCat').patchValue(data);
+          break;
+        }
+        case 'identifyHazards': {
+          let data = this.JobTaskDetail.get('identifyHazrds').value;
+          this.getAllHazard();
+          this.JobTaskDetail.get('identifyHazrds').patchValue(data);
+          break;
+        }
+        case 'riskLevel': {
+          let data = this.JobTaskDetail.get('riskLevel').value;
+          this.getAllRiskLevel();
+          this.JobTaskDetail.get('riskLevel').patchValue(data);
+          break;
+        }
+        case 'ctrlActreq': {
+          let data = this.JobTaskDetail.get('contrActReq').value;
+          this.getAllContrActReq();
+          this.JobTaskDetail.get('contrActReq').patchValue(data);
+          break;
+        }
+        case 'resRiskLevel': {
+          let data = this.JobTaskDetail.get('residualRiskL').value;
+          this.getAllResidualRiskLevel();
+          this.JobTaskDetail.get('residualRiskL').patchValue(data);
+          break;
+        }
+        case 'perResbl': {
+          let data = this.JobTaskDetail.get('personResp').value;
+          this.getAllStaff();
+          this.JobTaskDetail.get('personResp').patchValue(data);
+          break;
+        }
       }
       console.log('The dialog was closed');
     });
   }
-  addItem(type) {
-    switch (type) {
-      case 'highRisk': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'ppe': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'licence': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'identifyHazards': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'riskLevel': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'ctrlActreq': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'resRiskLevel': {
-        this.openDialogBox(type);
-        break;
-      }
-      case 'perResbl': {
-        this.openDialogBox(type);
-        break;
-      }
-    
-    }
-  }
+  // addItem(type) {
+  //   switch (type) {
+  //     case 'highRisk': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'ppe': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'licence': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'identifyHazards': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'riskLevel': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'ctrlActreq': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'resRiskLevel': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+  //     case 'perResbl': {
+  //       this.openDialogBox(type);
+  //       break;
+  //     }
+
+  //   }
+  // }
 }
