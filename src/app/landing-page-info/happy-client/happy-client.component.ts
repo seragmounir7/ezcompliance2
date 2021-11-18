@@ -133,7 +133,7 @@ export class HappyClientComponent implements OnInit {
   
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item.fileUrl}"?`,
+      text: `Do you want to delete "this Client"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',

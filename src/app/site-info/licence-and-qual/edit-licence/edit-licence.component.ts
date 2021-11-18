@@ -29,15 +29,16 @@ export class EditLicenceComponent implements OnInit {
     
     this.editTitle = this.fb.group({
       title: [this.dataRec.title, Validators.required],
-      categoryId: [this.dataRec.licenceCategoryId.title, Validators.required],
+      tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],
     });
+    console.log(this.editTitle.value)
     this.getAllLicenceCat();
   }
   getAllLicenceCat() {
     this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
       this.categories = res.data;
- 
+      console.log('categories=>', res.data);
     });
  
   }
@@ -45,12 +46,14 @@ export class EditLicenceComponent implements OnInit {
 
     let data={
       title :this.editTitle.get('title').value,
-      licenceCategoryId:this.editTitle.get('categoryId').value,
+      tradeCategoryId:this.editTitle.get('tradeCategoryId').value,
     }
+    console.log('tradeCategoryId',data);
+    
     this.logicalFormInfo
-      .updateLicence(data, this.dataRec._id)
+      .updateLicence(this.dataRec._id,data)
       .subscribe((resData) => {
-        console.log('submodulesData', resData);
+        console.log('updateLicence', resData);
 
         this.dialogRef.close('true');
         Swal.fire('Parameter Edited successfully');
