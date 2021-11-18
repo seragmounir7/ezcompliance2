@@ -37,7 +37,7 @@ export class AddCustomerComponent implements OnInit {
   getAllCustomers(){
     this.logicalFormInfoService.getAllCustomer().subscribe((res:any) => {
       console.log(res)
-      this.dataSource.data = res.data
+      this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator
     })
   }
@@ -62,7 +62,9 @@ export class AddCustomerComponent implements OnInit {
 
   openDialog(id) {
 		let dialogRef = this.dialog.open(AddingCustComponent, {
-      height:'50%',
+      height:'600px',
+      width:'700px',
+    
 			data: {
 				action: "new",
 				userId: id,
@@ -80,8 +82,10 @@ export class AddCustomerComponent implements OnInit {
   edit(element) {
     console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
-      width: "550px",
-      height:"50%",
+      height:'500px',
+      width:'650px',
+  
+            // height:'400px',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {

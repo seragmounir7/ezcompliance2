@@ -9,7 +9,7 @@
 </div>
 <div class="col ml-2 mb-2">
   
-  <button (click)="openDialog('abcd')" _ngcontent-hqi-c400="" type="button" class="btn btn-outline-primary mt-1 mr-2 float-right"><i _ngcontent-hqi-c400="" class="fas fa-plus"></i> Add </button>
+  <button [routerLink]="['/admin/siteInfo/addingCustomer']"  type="button" class="btn btn-outline-primary mt-1 mr-2 float-right"><i  class="fas fa-plus"></i> Add </button>
 </div>
 <div class="">
   <table mat-table [dataSource]="dataSource">

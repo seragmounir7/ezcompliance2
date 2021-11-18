@@ -2,6 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
+import {MatSort} from '@angular/material/sort';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,14 +22,15 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   /////////////mat table end////////////////
 
   constructor(
-
+   
     private logicalFormInfo: LogicalFormInfoService,
     private dialog:MatDialog,
     private setTitle:SetTitleService
@@ -37,7 +39,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
   ngOnInit(): void {
     this.getAllPPEs();
     this.setTitle.setTitle('WHS-PPE List');
-
+    
   }
 
   getAllPPEs() {
@@ -91,7 +93,12 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
           this.getAllPPEs();
             
         });
+      
       }
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -6,6 +6,7 @@ import {
   FormArray,
   FormControl,
 } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
@@ -40,7 +41,7 @@ export class AddFlexibleInfoComponent implements OnInit {
       subTitle: ['', Validators.required],
       fileUrl: ['', Validators.required],
     });
-    console.log('', data);
+ 
   }
 
   ngOnInit(): void {}
@@ -48,28 +49,24 @@ export class AddFlexibleInfoComponent implements OnInit {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-    console.log(files);
+   
 
     this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
+    
       this.selectedImage.push(res.files[0]);
-      console.log(
-        'AddProductComponent -> browse -> this.selectedImage',
-        this.selectedImage
-      );
+      
     });
   }
   onSubmit() {
     this.flexibleDetail
       .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
-    console.log(this.flexibleDetail.value);
-
-    console.log(this.flexibleDetail.value);
+  
     this.landingPageInfo
       .addSubModule(this.flexibleDetail.value)
       .subscribe((data) => {
-        console.log('data=>', data);
+        Swal.fire('Added Successfully')
+       
         this.flexibleData = data;
         this.dialogRef.close('true');
         this.flexibleDetail.reset();

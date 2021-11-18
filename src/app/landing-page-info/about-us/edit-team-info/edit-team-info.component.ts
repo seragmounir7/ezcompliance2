@@ -6,6 +6,7 @@ import {
   FormArray,
   FormControl,
 } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -138,17 +139,13 @@ export class EditTeamInfoComponent implements OnInit {
     });
   }
   onFormSubmit() {
-    console.log('data action=>', this.data.action);
+    
     this.editModule();
     this.editSubModule();
     this.companyDetail.get('fileUrl')?.setValue(this.Image);
-    console.log(this.companyDetail.value);
+   
     let value = this.selectedImage[0];
-    console.log('vvvvvv', value);
-    // let value1= this.Image[0];
-    // console.log('vvvvvv', value1);
-    // let value2 = this.Image1[0];
-    // console.log('vvvvvv', value2);
+  
 
     let arrlength = this.add().length;
     for (let i = 0; i < arrlength; i++) {
@@ -157,7 +154,7 @@ export class EditTeamInfoComponent implements OnInit {
         .get('imageUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    console.log(this.companyDetail.value);
+    
   }
 
   removeSafetyModule(i) {
@@ -169,28 +166,28 @@ export class EditTeamInfoComponent implements OnInit {
   }
 
   browser(event, i) {
-    console.log(event, i);
+    
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage;
-    console.log('vvvvvv', value);
+  
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+       
 
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+  
         this.companyDetail.patchValue({
           filePath: res.filePath,
         });
         this.selectedImage.push(res.files[0]);
 
-        console.log('browse -> this.selectedImage', this.selectedImage);
+
       });
     }
   }
@@ -198,28 +195,27 @@ export class EditTeamInfoComponent implements OnInit {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-    console.log(files);
 
     this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
+ 
 
       this.Image = res.files[0];
 
-      console.log('AddProductComponent -> browse -> this.Image', this.Image);
+   
     });
   }
   uploadImage(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-    console.log(files);
+  
 
     this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
+      
 
       this.Image1 = res.files[0];
 
-      console.log('AddProductComponent -> browse -> this.Image', this.Image);
+  
     });
   }
   editModule() {
@@ -232,12 +228,12 @@ export class EditTeamInfoComponent implements OnInit {
         fileUrl: this.Image,
         subTitle: this.companyDetail.controls.subTitle.value,
       };
-      console.log('asdfgh', AboutUsData);
-      console.log('this.EditData', this.data.EditData._id);
+    
       this.landingPageInfo
         .editAboutUs(AboutUsData, this.data.EditData._id)
         .subscribe((resData) => {
-          console.log('editAboutUs=>', resData);
+          Swal.fire('Detial Edited Successfully')
+
 
           this.dialogRef.close('true');
           this.companyDetail.reset();
@@ -252,13 +248,12 @@ export class EditTeamInfoComponent implements OnInit {
         imageUrl: this.selectedImage,
         title: this.add().at(0).get('title')?.value,
       };
-      console.log('wqwertyuytrewsdfg', teamData);
-      console.log('selectedImage', this.selectedImage);
-      console.log('this.EditData', this.data.EditData._id);
+    
       this.landingPageInfo
         .editTeam(teamData, this.subId)
         .subscribe((resData) => {
-          console.log('teamData', resData);
+          Swal.fire('Team Edited Successfully')
+         
 
           this.dialogRef.close('true');
           this.companyDetail.reset();

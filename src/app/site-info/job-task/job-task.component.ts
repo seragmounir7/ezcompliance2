@@ -18,7 +18,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title', 'action'];
+  displayedColumns: string[] = ['index', 'title','tradeCategoryId', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -88,5 +88,9 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
           });
       }
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

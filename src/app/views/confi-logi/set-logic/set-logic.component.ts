@@ -1,12 +1,10 @@
-import { element } from 'protractor';
-import { MatSelect } from '@angular/material/select';
+
 import {
   Component,
   OnInit,
   QueryList,
   ViewChildren,
   AfterViewInit,
-  AfterViewChecked,
 } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2';

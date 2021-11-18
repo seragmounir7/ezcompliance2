@@ -69,3 +69,20 @@ select.w-set {
   overflow: unset !important;
   position: fixed;
 }
+
+.shadowBxSet {
+  box-shadow: rgb(17 17 26 / 5%) 0px 1px 0px, rgb(17 17 26 / 10%) 0px 0px 8px;
+  margin: 15px 2px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+ul.setCanvasList {
+  padding: 0;
+
+  li {
+    list-style: none;
+    display: inline-block;
+    width: 25%;
+  }
+}

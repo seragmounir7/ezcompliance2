@@ -5,6 +5,7 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ParamMap } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-safety-module',
@@ -63,7 +64,7 @@ export class AddSafetyModuleComponent implements OnInit {
     this.addSafetyModule();
     if (this.data.action == "edit") {
       this.Update = true;
-      console.log("data to patch=>", this.data)
+     
       this.safetyDetail.patchValue({
         "mode": 'Safety',
      
@@ -80,13 +81,11 @@ export class AddSafetyModuleComponent implements OnInit {
   let index = this.data.index
   this.subId = this.data.EditData.subModules[index]._id;
 
-  console.log("aaaaaaa", this.subId);
+ 
   }
   onFormSubmit() {
 
     let value = this.selectedImage[0];
-    console.log('value', value);
-    console.log(this.safetyDetail.value);
     let arrlength = this.safetyImgArr().length;
     for (let i = 0; i < arrlength; i++) {
       this.safetyImgArr()
@@ -94,25 +93,11 @@ export class AddSafetyModuleComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    console.log(this.safetyDetail.value);
-    let safetyData = {
-      //  "title": this.safetyDetail.get('title').value,
-      // "description": this.safetyDetail.get('description').value,
-      // "arrObj": ({ })
-    };
-
-    console.log('file: ~ onFormSubmit ~ data', safetyData);
-
-    // this.landingPageInfo
-    //   .addAppService(this.safetyDetail.value)
-    //   .subscribe((data) => {
-    //     console.log('data=>', data);
-    //     this.safetyData = data;
-    //   });
+  
   }
   addSafetyModule() {
     this.safetyImgArr().push(this.safetyForm());
-    console.log(this.safetyDetail.value);
+  
   }
   safetyImgArr(): FormArray {
     return this.safetyDetail.get('arrObj') as FormArray;
@@ -133,28 +118,28 @@ export class AddSafetyModuleComponent implements OnInit {
   }
 
   browser(event, i) {
-    console.log(event, i);
+   
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage[0];
-    console.log('vvvvvv', value);
+  
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+      
 
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+
         this.safetyDetail.patchValue({
           filePath: res.filePath,
         });
         this.selectedImage.push(res.files[0]);
 
-        console.log('browse -> this.selectedImage', this.selectedImage);
+       
       });
     }
   }
@@ -168,10 +153,10 @@ export class AddSafetyModuleComponent implements OnInit {
         "description": this.safetyDetail.controls.description.value,
         "mode": "Safety",
         }
-      console.log("asdfgh", SafetyData);
-      console.log("this.EditData", this.data.EditData._id);
+      
       this.landingPageInfo.editModule(SafetyData,this.data.EditData._id).subscribe((resData) => {
-        console.log("editModule", resData)
+        Swal.fire('Module Edited Successfully')
+
   
         this.dialogRef.close("true");
         this.safetyDetail.reset();
@@ -187,11 +172,11 @@ export class AddSafetyModuleComponent implements OnInit {
           arrObj: this.fb.array([]),
   
         }
-        console.log(data);
+       
         this.landingPageInfo
           .addAppService(this.safetyDetail.value)
           .subscribe((data) => {
-            console.log('data=>', data);
+          
             this.safetyData = data;
           });
   
@@ -201,8 +186,7 @@ export class AddSafetyModuleComponent implements OnInit {
    
   }
   editSubModule(){
-      console.log("index",this.data.index)
-      console.log("",this.safetyDetail.value)
+     
     if (this.data.action == "edit" ) {
       let submodulesData = {
         "moduleId": this.data.EditData._id,
@@ -211,13 +195,11 @@ export class AddSafetyModuleComponent implements OnInit {
        // "description": this.safetyImgArr().at(this.data.index).get('description')?.value,
         
       }
-      console.log("wqwertyuytrewsdfg", submodulesData);
-      console.log("selectedImage", this.selectedImage)
+      
   
-  
-      console.log("this.EditData", this.data.EditData._id);
       this.landingPageInfo.editsubModule(submodulesData,this.subId).subscribe((resData) => {
-        console.log("submodulesData", resData)
+        Swal.fire('Module Edited Successfully')
+    
   
         this.dialogRef.close("true");
 
@@ -232,11 +214,11 @@ export class AddSafetyModuleComponent implements OnInit {
         arrObj: this.fb.array([]),
   
       }
-      console.log(data);
+
       this.landingPageInfo
         .addAppService(this.safetyDetail.value)
         .subscribe((data) => {
-          console.log('data=>', data);
+         
           this.safetyData = data;
         });
   

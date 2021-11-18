@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
-
+import Swal from 'sweetalert2';
 import {
   MatDialog,
   MatDialogRef,
@@ -67,6 +67,7 @@ export class AddCustomerTestimonailComponent implements OnInit {
     this.landingPageInfo
       .addSubModule(this.testiomnial.value)
       .subscribe((data) => {
+        Swal.fire('Customer Added Successfully')
         console.log('data=>', data);
         this.testimonailData = data;
         this.dialogRef.close('true');
