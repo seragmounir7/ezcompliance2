@@ -1,14 +1,21 @@
 <section [formGroup]="editCustomerForm" class="content">
     <div class="container px-4 py-4 bg-white">
-        <h2>Add Customer</h2>
+      <div mat-dialog-title class="dialog-title">
+        <h2>Edit Customer</h2>
+        <button type="button"  class="close" 
+        style="font-size: 30px;"
       
+      (click)="close()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+        </div>
         <div class="row">
           <div class="my-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
             <input
               type="text"
               class="form-control"
-              id="siteName"
+              id="customerName"
               formControlName="customerName"
             />
           </div>
@@ -17,7 +24,7 @@
             <input
               type="text"
               class="form-control"
-              id="siteName"
+              id="customerContact"
               formControlName="customerContact"
             />
           </div>
@@ -28,7 +35,7 @@
             <input
               type="text"
               class="form-control"
-              id="siteName"
+              id="customerContactPhone"
               formControlName="customerContactPhone"
             />
           </div>
@@ -37,16 +44,15 @@
             <input
               type="text"
               class="form-control"
-              id="siteName"
+              id="customerEmail"
               formControlName="customerEmail"
             />
           </div>
         </div> 
-      
+      <hr>
       <div >
         <button class="btn btn-primary" (click)="onSubmit()">
-          Submit
-        </button>
+         Update        </button>
       </div>
         <!-- <div class="row">
           <div class="my-3 col">

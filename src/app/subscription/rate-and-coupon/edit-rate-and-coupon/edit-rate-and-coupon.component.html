@@ -1,0 +1,58 @@
+
+<section [formGroup]="editSubcriptionForm" class="content">
+    <div class="container px-4 py-4 bg-white">
+        <h3 *ngIf="!dataRec">Add Subcription Rate</h3>
+        <h3 *ngIf="dataRec">Edit Subcription Rate</h3>
+      
+        <div class="row">
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">Monthly Rate</p>
+            <input
+              type="text"
+              class="form-control"
+              id="monthly"
+              formControlName="monthly"
+            />
+          </div>
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label"> Default Monthly Rate</p>
+            <input
+              type="text"
+              class="form-control"
+              id="defaultMonthly"
+              formControlName="defaultMonthly"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">Default Emp</p>
+            <input
+              type="text"
+              class="form-control"
+              id="defaultEmp"
+              formControlName="defaultEmp"
+            />
+          </div>
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label"> Yearly Discount</p>
+            <input
+              type="text"
+              class="form-control"
+              id="yearlyDiscount"
+              formControlName="yearlyDiscount"
+            />
+          </div>
+        </div> 
+      <hr>
+      <div >
+        <button class="btn btn-primary"   *ngIf="dataRec"  (click)="onSubmit()">
+          Update
+        </button>
+        <button class="btn btn-primary" *ngIf="!dataRec" (click)="addForm()">
+            Add
+          </button>
+      </div>
+       
+      </div>
+    </section>

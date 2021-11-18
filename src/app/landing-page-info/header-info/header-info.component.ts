@@ -8,9 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
-
-import Swal from 'sweetalert2';
-import { MatTableDataSource } from '@angular/material/table';
+import { data } from 'jquery';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-header-info',
@@ -36,10 +34,7 @@ export class HeaderInfoComponent implements OnInit {
   mode: any;
   collectionSize = 10;
   allHeaderData: any;
-  ELEMENT_DATA = [];
-  /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'image','heading', 'description',  'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   infoData: any;
   constructor(
@@ -62,45 +57,61 @@ export class HeaderInfoComponent implements OnInit {
     this.getHeaderById();
     this.setTitle.setTitle('WHS-Header Info');
   }
-  
+  Added() {
+    if (this.Edit == true) {
+      this.Edit = false;
+      this.Add = true;
+    } else {
+      this.Add = true;
+    }
+  }
 
-  // browser(event, i) {
-  //   console.log(event, i);
-  //   const files = event.target.files[0];
-  //   const formData = new FormData();
-  //   formData.append('', files);
-  //   let value = this.selectedImage[0];
-  //   console.log('vvvvvv', value);
+  Eddit() {
+    if (this.Add == true) {
+      this.Add = false;
+      this.Edit = true;
+    } else {
+      this.Edit = true;
+    }
+  }
 
-  //   if (value) {
-  //     this.upload.upload(formData).subscribe((res) => {
-  //       console.log(' browser -> res', res);
+  browser(event, i) {
+    console.log(event, i);
+    const files = event.target.files[0];
+    const formData = new FormData();
+    formData.append('', files);
+    let value = this.selectedImage[0];
+    console.log('vvvvvv', value);
 
-  //       this.selectedImage[i] = res.files[0];
-  //     });
-  //   } else {
-  //     this.upload.upload(formData).subscribe((res) => {
-  //       console.log(' browser -> res', res);
-  //       this.serviceDetail.patchValue({
-  //         filePath: res.filePath,
-  //       });
-  //       this.selectedImage.push(res.files[0]);
+    if (value) {
+      this.upload.upload(formData).subscribe((res) => {
+        console.log(' browser -> res', res);
 
-  //       console.log('browse -> this.selectedImage', this.selectedImage);
-  //     });
-  //   }
-  // }
+        this.selectedImage[i] = res.files[0];
+      });
+    } else {
+      this.upload.upload(formData).subscribe((res) => {
+        console.log(' browser -> res', res);
+        this.serviceDetail.patchValue({
+          filePath: res.filePath,
+        });
+        this.selectedImage.push(res.files[0]);
 
-  // editService(id) {
-  //   console.log(id);
-  //   this.myId = id;
-  //   this.isEdit = true;
-  //   this.url.editHeader(id, data).subscribe((res) => {
-  //     console.log('Data Set response' + res);
-  //     this.data = res.data;
-  //     console.log('new response' + this.data);
-  //   });
-  // }
+        console.log('browse -> this.selectedImage', this.selectedImage);
+      });
+    }
+  }
+
+  editService(id) {
+    console.log(id);
+    this.myId = id;
+    this.isEdit = true;
+    this.url.editHeader(id, data).subscribe((res) => {
+      console.log('Data Set response' + res);
+      this.data = res.data;
+      console.log('new response' + this.data);
+    });
+  }
   openDialog(id): void {
     const dialogRef = this.dialog.open(HeaderComponent, {
       width: '800px',
@@ -115,8 +126,7 @@ export class HeaderInfoComponent implements OnInit {
     });
   }
 
-  openDialogEdit(element) {
-    console.log(element)
+  openDialogEdit(serviceDetail) {
     let dialogRef = this.dialog.open(HeaderComponent, {
       data: {
         action: 'edit',
@@ -135,15 +145,15 @@ export class HeaderInfoComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
- 
-
+  refreshList(): void {
+    this.retrieveTutorials({ page: this.page, pageSize: this.pageSize });
+  }
+  retrieveTutorials(params: any): void {}
+  service: any;
   getHeaderById() {
-    this.url.getHeaderBYId().subscribe((res) => {
-     
-      this.dataSource.data = res.data
-      console.log('mode=>', res.data);
-    //  this.dataSource.paginator = this.paginator
-     // this.infoData = data.data;
+    this.url.getHeaderBYId().subscribe((data) => {
+      console.log('mode=>', data);
+      this.infoData = data.data;
     });
   }
 }
