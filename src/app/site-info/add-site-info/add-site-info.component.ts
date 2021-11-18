@@ -75,6 +75,7 @@ export class AddSiteInfoComponent implements OnInit {
 				action: "new",
 				userId: id,
 			},
+      width: "630px",
 		});
 		dialogRef.afterClosed().subscribe((result) => {
       if(result == 'ok'){
@@ -87,6 +88,7 @@ export class AddSiteInfoComponent implements OnInit {
 	}
   edit(element) {
     const dialogRef = this.dialog.open(EditSiteComponent, {
+      width: "600px",
       // width: "550px",
       height:'500px',
       data: element,

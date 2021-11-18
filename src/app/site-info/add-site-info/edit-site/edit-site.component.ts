@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-site',
   templateUrl: './edit-site.component.html',
@@ -31,8 +31,16 @@ export class EditSiteComponent implements OnInit {
     console.log(this.editSitesForm.value)
     this.logicalFormInfoService.updateSite(this.data._id,this.editSitesForm.value).subscribe(res => {
       console.log(res);
-      this.dialogRef.close('ok')
-    })
+      this.dialogRef.close('true');
+      Swal.fire({
+        title: 'Site Edited successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+      this.ngOnInit();
+    });
   }
-
+  close() {
+    this.dialogRef.close();
+}
 }

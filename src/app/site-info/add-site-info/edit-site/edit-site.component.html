@@ -1,7 +1,14 @@
 <section [formGroup]="editSitesForm" class="content">
     <div class="container px-4 py-4 bg-white">
-      <h1>Update Site Information</h1>
-    
+      <div mat-dialog-title class="dialog-title">
+      <h2> Update Site Information</h2>
+      <button type="button" class="close" 
+      style="font-size: 30px;"
+        (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+    </div>
+    <hr>
       <div class="row">
       <div class="my-3 col-6">
           <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
@@ -20,7 +27,7 @@
             type="text"
             class="form-control"
             formControlName="streetNumber"
-            id="siteName"
+            id="streetNumber"
           />
         </div>
         <div class="my-3 col-3">
@@ -29,7 +36,7 @@
             type="text"
             class="form-control"
             formControlName="streetAddress"
-            id="siteName"
+            id="streetAddress"
           />
         </div>
         <div class="my-3 col-2">
@@ -38,7 +45,7 @@
             type="text"
             class="form-control"
             formControlName="suburb"
-            id="siteName"
+            id="suburb"
           />
         </div>
         <div class="my-3 col-4">
@@ -64,11 +71,15 @@
      
         </div>
       </div>
+      <hr>
     <div >
     <button class="btn btn-primary" (click)="onSubmit()">
-      Submit
+      Update
     </button>
     </div>
-   </div>
+ 
+      
+    </div>
+   
     </section>
     

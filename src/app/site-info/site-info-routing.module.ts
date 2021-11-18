@@ -35,6 +35,7 @@ import { AddRiskLevelComponent } from './risk-level/add-risk-level/add-risk-leve
 import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residual-risk-level/add-residual-risk-level.component';
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
+import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
     ]
   },
   { path: 'addCustomer', component: AddCustomerComponent },
+  { path: 'addingCustomer', component: AddingCustComponent },
   { path: 'jobTask', component: JobTaskComponent },
   { path: 'addJobTask', component: AddJobTaskComponent },
   { path: 'addHighRisk', component: AddHighRiskConstructionComponent },

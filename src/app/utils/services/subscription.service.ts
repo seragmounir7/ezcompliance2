@@ -18,6 +18,14 @@ export class SubscriptionService {
       })
     );
   }
+  getAllPlan() {
+    return this.https.get(this.apiUrl + 'plan/getAll'  ).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
 
   editPlan(id, data){
     return this.https.put(this.apiUrl + 'plan/update/' + id, data).pipe(
@@ -30,6 +38,48 @@ export class SubscriptionService {
 
   addPlan(data) {
     return this.https.post(this.apiUrl + 'plan/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getCoupon(id: any) {
+    return this.https.get(this.apiUrl + 'coupon/get/' + id ).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getAllCoupon() {
+    return this.https.get(this.apiUrl + 'coupon/getAll'  ).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+
+  editCoupon(id, data){
+    return this.https.put(this.apiUrl + 'coupon/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+
+  addCoupon(data) {
+    return this.https.post(this.apiUrl + 'coupon/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deleteCoupon(id) {
+    return this.https.delete(this.apiUrl + 'coupon/delete/' + id ).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
