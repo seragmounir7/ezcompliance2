@@ -62,13 +62,9 @@ export class AddCustomerComponent implements OnInit {
 
   openDialog(id) {
 		let dialogRef = this.dialog.open(AddingCustComponent, {
-<<<<<<< HEAD
       height:'600px',
       width:'700px',
-=======
-      // height:'40%',
-      width:'50%',
->>>>>>> 1841de289fcde3054adcefe78db4365acb6e0061
+    
 			data: {
 				action: "new",
 				userId: id,
@@ -86,13 +82,10 @@ export class AddCustomerComponent implements OnInit {
   edit(element) {
     console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
-<<<<<<< HEAD
       height:'500px',
       width:'650px',
-=======
-      width:'50%',
+  
             // height:'400px',
->>>>>>> 1841de289fcde3054adcefe78db4365acb6e0061
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
