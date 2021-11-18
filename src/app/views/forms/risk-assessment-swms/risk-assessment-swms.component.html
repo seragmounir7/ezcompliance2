@@ -752,7 +752,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <div class="my-3">
               <label for="exampleInputProjectNumber" class="form-label"
                 >Code Of Practice</label
@@ -775,6 +775,13 @@
                 <option value="code_WA">Codes: WA Codes of Practice</option>
               </select>
             </div>
+          </div> -->
+        </div>
+        <hr />
+        <h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
+        <div class="row">
+          <div class="col-4">
+            <!-- {{allCOPSelected}} -->
           </div>
         </div>
         <hr />
@@ -912,88 +919,99 @@
           </div>
         </div>
         <hr />
-        <h2>SDS Registor</h2>
-        <ng-container formArrayName="SDSRegister">
-          <div class="row" *ngFor="let controls of sdsRegisterFA().controls;let i=index" [formGroupName]="i">
-            <div class="col-md-3">
-              <div class="my-3">
-                <label for="exampleInputProjectNumber" class="form-label"
-                  >Name of Chemical</label
-                >
-                <input
-                  type="Projectnumber"
+        <ng-container *ngIf="chemicalTask">
+          <h2>SDS Registor</h2>
+          <ng-container formArrayName="SDSRegister">
+            <div class="row" *ngFor="let controls of sdsRegisterFA().controls;let i=index" [formGroupName]="i">
+              <div class="col-md-3">
+                <div class="my-3">
+                  <label for="exampleInputProjectNumber" class="form-label"
+                    >Name of Chemical</label
+                  >
+                  <select                  
                   class="form-control"
-                  id="exampleInputProjectNumber"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="my-3">
-                <label for="exampleInputProjectNumber" class="form-label"
-                  >Location</label
+                  id="sel2"
+                  name="sellist2"
                 >
-                <input
-                  type="tel"
-                  class="form-control"
-                  id="exampleInputProjectNumber"
-                  aria-describedby="emailHelp"
-                />
+                <option value=""selected hidden>Select</option>
+
+                  <option *ngFor="let item of allChemicals">
+                    {{ item.title }}
+                  </option>
+                </select>
+                </div>
               </div>
-            </div>
-            <div class="col-md-2">
-              <div class="my-3">
-                <label for="exampleInputProjectNumber" class="form-label"
-                  >Hazardous</label
+              <div class="col-md-3">
+                <div class="my-3">
+                  <label for="exampleInputProjectNumber" class="form-label"
+                    >Location</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="exampleInputProjectNumber"
+                    aria-describedby="emailHelp"
+                  />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="my-3">
+                  <label for="exampleInputProjectNumber" class="form-label"
+                    >Hazardous</label
+                  >
+                  <select                  
+                  class="form-control"
+                  id="sel2"
+                  name="sellist2"
                 >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleInputProjectNumber"
-                  aria-describedby="emailHelp"
-                />
+                  <option value=""selected hidden>Select</option>
+                  <option value="YES">Yes</option>
+                  <option value="NO">No</option>
+                </select>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="my-3">
+                  <label for="exampleInputProjectNumber" class="form-label"
+                    >Qty</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="exampleInputProjectNumber"
+                    aria-describedby="emailHelp"
+                  />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="my-3">
+                  <label for="exampleInputProjectNumber" class="form-label"
+                    >Expiry Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="exampleInputProjectNumber"
+                    aria-describedby="emailHelp"
+                  />
+                </div>
+              </div>
+              <div class="col-md-10">
+                <div class="my-3">
+                  <label for="formFile" class="form-label">Attach SDS Sheet</label>
+                  <input class="form-control" type="file" id="formFile" />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <span class="material-icons" style="margin-top: 30%" (click)="addActionSDSRegister()"
+                  >add_circle_outline
+                </span>
+                <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
               </div>
             </div>
-            <div class="col-md-2">
-              <div class="my-3">
-                <label for="exampleInputProjectNumber" class="form-label"
-                  >Qty</label
-                >
-                <input
-                  type="number"
-                  class="form-control"
-                  id="exampleInputProjectNumber"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="my-3">
-                <label for="exampleInputProjectNumber" class="form-label"
-                  >Expiry Date</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="exampleInputProjectNumber"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="my-3">
-                <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                <input class="form-control" type="file" id="formFile" />
-              </div>
-            </div>
-            <div class="col-md-2">
-              <span class="material-icons" style="margin-top: 30%" (click)="addActionSDSRegister()"
-                >add_circle_outline
-              </span>
-              <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
-            </div>
-          </div>
+          </ng-container>
         </ng-container>
+  
      
         <hr />
         <div
@@ -1029,19 +1047,15 @@
               </div>
 
               <ng-container formArrayName="riskLevel">
-                <div class="col-md-1" [formGroupName]="i">
-                  <label for="sel1">Residual Risk</label>
+                <div class="col-md-1 my-3" [formGroupName]="i">
+                  <label for="sel1">Risk</label>
                   <select
                     class="form-control"
                     id="sel1"
                     name="sellist1"
                     formControlName="riskLevel"
                   >
-                    <option value="L1">L1</option>
-                    <option value="L2">L2</option>
-                    <option value="L3">L3</option>
-                    <option value="L4">L4</option>
-                    <option value="L5">L5</option>
+                    <option *ngFor="let item of riskLevel" [value]="item._id">{{item.title}}</option>           
                   </select>
                 </div>
               </ng-container>
@@ -1064,7 +1078,7 @@
               </div>
 
               <ng-container formArrayName="residualRisk">
-                <div class="col-md-1" [formGroupName]="i">
+                <div class="col-md-1 " [formGroupName]="i">
                   <label for="sel1">Residual Risk</label>
                   <select
                     class="form-control"
@@ -1072,21 +1086,32 @@
                     name="sellist1"
                     formControlName="resiRiskLevel"
                   >
-                    <option value="L1">L1</option>
-                    <option value="L2">L2</option>
-                    <option value="L3">L3</option>
-                    <option value="L4">L4</option>
-                    <option value="L5">L5</option>
+                  <option *ngFor="let item of resiRiskLevel" [value]="item._id">{{item.title}}</option>           
+                
+                  </select>
+                </div>
+              </ng-container>
+              <ng-container formArrayName="persResp">
+                <div class="col-md-2 my-3" [formGroupName]="i">
+                  <label for="sel1">Person Responsible</label>
+                  <select
+                    class="form-control"
+                    id="sel1"
+                    name="sellist1"
+                    formControlName="personRes"
+                  >
+                  <option *ngFor="let item of staff" [value]="item._id">{{item.title}}</option>           
+                
                   </select>
                 </div>
               </ng-container>
 
-              <div class="col-md-2 my-3">
+              <!-- <div class="col-md-2 my-3">
                 <label for="sel1">Person Responsible</label>
-                <select class="form-control" id="sel1" name="sellist1">
-                  <option>Project Manager</option>
+                <select class="form-control" id="sel1" name="sellist1" formControlName="personRes">
+                  <option *ngFor="let item of staff" [value]="item._id">{{item.title}}</option>           
                 </select>
-              </div>
+              </div> -->
             </div>
             <hr />
           </div>

@@ -37,7 +37,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   componentId = '';
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'edit','delete'];
+  displayedColumns: string[] = ['index', 'title' ,'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -225,5 +225,9 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
         });
       }
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

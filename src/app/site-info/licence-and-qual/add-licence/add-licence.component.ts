@@ -45,7 +45,7 @@ export class AddLicenceComponent implements OnInit {
   newAction(): FormGroup {
     return this.fb.group({     
       title: ['', Validators.required],
-      licenceCategoryId: ['', Validators.required],
+      tradeCategoryId: ['', Validators.required],
     });
   }
   

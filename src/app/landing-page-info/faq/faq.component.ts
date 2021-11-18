@@ -22,7 +22,7 @@ export class FAQComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title', 'edit', 'delete'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   data: any = [];
   myId: any;

@@ -4,7 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-site',
   templateUrl: './add-site.component.html',
@@ -41,7 +41,15 @@ export class AddSiteComponent implements OnInit {
       console.log(this.addSitesForm.value)
       this.logicalFormInfoService.addSite(this.addSitesForm.value).subscribe(res => {
         console.log(res);
-        this.dialogRef.close('ok')
-      })
+        this.dialogRef.close('true');
+        Swal.fire({
+          title: 'Site Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
     }
+    close() {
+      this.dialogRef.close();
+  }
 }

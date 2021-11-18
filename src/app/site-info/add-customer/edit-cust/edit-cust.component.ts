@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-cust',
   templateUrl: './edit-cust.component.html',
@@ -28,10 +28,18 @@ export class EditCustComponent implements OnInit {
     })
   }
   onSubmit(){
+    
     this.logicalFormInfoService.updateCustomer(this.data._id,this.editCustomerForm.value).subscribe(res => {
       console.log(res);
-      this.dialogRef.close('ok')
-    })
+      this.dialogRef.close('true');
+      Swal.fire({
+        title: 'Customer Edited successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+    });
   }
-
+  close() {
+    this.dialogRef.close();
+}
 }

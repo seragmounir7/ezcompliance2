@@ -1,21 +1,18 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
   styleUrls: ['./add-form.component.scss'],
 })
 export class AddFormComponent implements OnInit {
-  categories = [
-    { value: 'Category1', viewValue: 'Category1' },
-    { value: 'Category2', viewValue: 'Category2' },
-    { value: 'Category3', viewValue: 'Category3' },
-    { value: 'Category4', viewValue: 'Category4' },
-    { value: 'Category5', viewValue: 'Category5' },
-    { value: 'Category6', viewValue: 'Category6' },
-  ];
+  addForm: FormGroup;
   constructor(
+    public router: Router,
     public dialogRef: MatDialogRef<AddFormComponent>,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -24,5 +21,21 @@ export class AddFormComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log('data', this.data);
+    this.addForm = this.fb.group({
+      formName: ['', Validators.required],
+      frequency: ['', Validators.required],
+    });
+  }
+  createForm() {
+    sessionStorage.setItem('type', 'add');
+    sessionStorage.setItem('formTitle', this.addForm.get('formName').value);
+    sessionStorage.setItem('frequency', this.addForm.get('frequency').value);
+    // this.dialogRef.close(this.addForm.get('formName').value,this.addForm.get('frequency').value);
+    this.router.navigate(['/admin/dynamicForm']);
+    this.dialogRef.close();
+
+  }
+  closeDialog() {
+    this.dialogRef.close('false');
   }
 }

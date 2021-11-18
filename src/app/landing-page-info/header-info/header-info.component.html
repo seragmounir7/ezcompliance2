@@ -1,108 +1,54 @@
 
+  
     
-
-  <section class="content" [formGroup]="serviceDetail">
-    <div class="container-fluid">
-      <!-- <div class="row">
-        <div class="col text-center">
-          <h1>Header Format</h1>
-        </div>
-      </div> -->
       <div class="row">
         <div class="col pt-3">
-          <h1>Header Format</h1>
+          <h2>Header Format</h2>
         </div>
-        <!-- <div class="col pt-2">
-          <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="openDialog($event)">Add
-            Form</button>
-        </div> -->
+      
       </div>
       <div class="row">
         <div class="col-12">
-          <!-- Default box -->
+   
           <div class="card">
-            <!-- /.card-header -->
+
             <div class="card-body p-0">
               <table class="table table-hover text-wrap" >
                 <thead>
                   <tr>
                     <th style="width: 20%">Images</th>
                     <th style="width: 20%">Heading</th>
-                    <th style="width: 25%"> Description</th>
-                    <!-- <th style="width: 20%">Title</th>
-                    <th style="width: 20%">SubTitle</th> -->
+                    <th style="width: 40%"> Description</th>
+                 
                   
-                    <th style="width: 30%">Action</th>
-                    <th></th>
+                    <th style="width: 10%">Action</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><img src ="{{ infoData?.fileUrl }}" height="80px" width="80p"></td>
-                    <!-- <td>{{ data.title }}</td>
-                    <td>{{ data.description }}</td> -->
+                    <td><img src ="{{ infoData?.fileUrl }}" height="120px" width="120px"></td>
+                    
                     <td>{{ infoData?.title }}</td>
                     <td>{{ infoData?.description }}</td>
                   
                   
                     <td>
                       <button
-                        class="btn editBtn mr-2"
+                        class="btn editBtn "
                         (click)="openDialogEdit(serviceDetail)"
                       >
-                        <i class="fas fa-pencil-alt mr-2" title="Edit"></i>
+                        <i class="fas fa-pencil-alt " title="Edit"></i>
                       </button>
   
-                      <!-- <button
-                        class="btn btn-primary btn-sm mr-2"
-                       
-                      >
-                        <i class="fas fa-folder mr-2"></i>View
-                      </button>
-                      <button
-                        class="btn btn-danger btn-sm mr-2"
-                       
-                      >
-                        <i class="fas fa-trash mr-2"></i>Delete
-                      </button> -->
+                   
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <!-- /.card-body -->
-  
-            <!-- <div class="card-footer clearfix">
-              <div class="row"> -->
-                <!-- <div class="col-6">
-                  <div class="form-group">
-                    <select
-                      class="form-control custom-select"
-                      style="width: auto"
-                      [(ngModel)]="pageSize"
-                      (ngModelChange)="refreshList()"
-                    >
-                      <option *ngFor="let size of [10, 20, 30]" [ngValue]="size">
-                        {{ size }} Items
-                      </option>
-                    </select>
-                  </div>
-                </div> -->
-                <!-- <div class="col-6">
-                  <ngb-pagination
-                    [(page)]="page"
-                    [pageSize]="pageSize"
-                    [collectionSize]="collectionSize"
-                    (pageChange)="refreshList()"
-                    class="pagination"
-                    [maxSize]="5"
-                  ></ngb-pagination>
-                </div> -->
-              <!-- </div>
-            </div> -->
+          
           </div>
         </div>
       </div>
-    </div>
-  </section>
- 
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
   selector: 'app-customertestimonials',
@@ -35,6 +37,13 @@ export class CustomertestimonialsComponent implements OnInit {
   collectionSize = 10;
   hide = false;
   closeResult: string;
+  ELEMENT_DATA = [];
+  displayedColumns: string[] = ['heading', 'description', 'actions'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  ELEMENTS_DATA = [];
+  displayedColumnss: string[] = ['index', 'images', 'subTitle', 'descrip', 'action'];
+  dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -48,7 +57,6 @@ export class CustomertestimonialsComponent implements OnInit {
     this.testiomnial = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      // uploadImage: ['', Validators.required],
       mode: 'Testimonial',
       arrObj: this.fb.array([]),
     });
@@ -60,21 +68,30 @@ export class CustomertestimonialsComponent implements OnInit {
   }
   getTestimonal() {
     this.mode = 'Testimonial';
-    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('getTestimonal=>', data);
-      this.testimonialData = data.data[0];
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+      let testimonialData = res.data[0].subModules;
+      testimonialData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENTS_DATA = testimonialData;
+      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+      this.dataSources.paginator = this.paginator;
+
+
     });
   }
-  editForm(id, name: boolean, i?: any) {
+  editForm(element, name: boolean, i?: any) {
     this.spinner.show();
-    console.log('sakshi', id);
-    this.myId = id;
+
+    this.myId = element._id;
     this.isEdit = true;
     this.mode = 'Testimonial';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('Testimonial=>', data);
+
       this.testimonialData = data.data[0];
-      console.log('testimonialData', this.testimonialData);
+
 
       let dialogRef = this.dialog.open(EditCustomerTestimonailComponent, {
         data: {
@@ -89,12 +106,11 @@ export class CustomertestimonialsComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('-> openDialog -> result', result);
 
         if ((result = 'true')) {
           this.getTestimonal();
         }
-        console.log('The dialog was closed');
+
       });
       this.spinner.hide();
     });
@@ -103,9 +119,9 @@ export class CustomertestimonialsComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('Testimonial=>', data);
+
       this.testimonialData = data.data[0];
-      console.log('', this.testimonialData);
+
       let dialogRef = this.dialog.open(AddCustomerTestimonailComponent, {
         data: {
           action: 'new',
@@ -116,7 +132,7 @@ export class CustomertestimonialsComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('openDialog->result', result);
+
         if ((result = 'true')) {
           this.getTestimonal();
         }
@@ -127,33 +143,11 @@ export class CustomertestimonialsComponent implements OnInit {
   close() {
     this.hide = false;
   }
-
-  deleteopen(content, id) {
-    console.log('deleteopen close id=>', id);
-    this.Is_id = id;
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-          console.log('deleting');
-          this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-
-            Swal.fire('Deleted Successfully')
-            console.log('deleted res', res);
-            this.getTestimonal();
-          });
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          console.log('dismissed');
-        }
-      );
-  }
   delete(item) {
+
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item}"?`,
+      text: `Do you want to delete "${item.subTitle}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',
@@ -161,17 +155,15 @@ export class CustomertestimonialsComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        // this.model.attributes.splice(i,1);
+        this.spinner.show()
+        this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
+          Swal.fire('Deleted Successfully')
+           this.getTestimonal();
+          this.ngOnInit();
+          this.spinner.hide()
+        })
       }
     });
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
+
 }

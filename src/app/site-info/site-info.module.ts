@@ -39,7 +39,19 @@ import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-cont
 import { EditContActComponent } from './contr-and-act-req/edit-cont-act/edit-cont-act.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/add-edit-proj-mang.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { StaffComponent } from './staff/staff.component';
+import { RiskLevelComponent } from './risk-level/risk-level.component';
+import { ResidualRiskLevelComponent } from './residual-risk-level/residual-risk-level.component';
+import { ChemicalComponent } from './chemical/chemical.component';
+import { AddChemicalComponent } from './chemical/add-chemical/add-chemical.component';
+import { EditChemicalComponent } from './chemical/edit-chemical/edit-chemical.component';
+import { AddRiskLevelComponent } from './risk-level/add-risk-level/add-risk-level.component';
+import { EditRiskLevelComponent } from './risk-level/edit-risk-level/edit-risk-level.component';
+import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residual-risk-level/add-residual-risk-level.component';
+import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-residual-risk-level/edit-residual-risk-level.component';
+import { AddStaffComponent } from './staff/add-staff/add-staff.component';
+import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +63,44 @@ import {MatStepperModule} from '@angular/material/stepper';
     LicenceAndQualComponent,
     AddCustomerComponent,
     AddHighRiskConstructionComponent,
-    EditHighRiskConstructionComponent,AddJobTaskComponent, AddPPEComponent, EditTaskComponent, EditPPEComponent, EditLicenceComponent, AddLicenceComponent, LicenceCatComponent, AddLicenceCatComponent, EditLicenceCatComponent, CodeOfPractComponent, AddCOPComponent, EditCOPComponent, AddSiteComponent, EditSiteComponent, AddingCustComponent, EditCustComponent, IdentifyHazardsComponent, ContrAndActReqComponent, AddHazardComponent, EditHazardComponent, AddContrActComponent, EditContActComponent, ProjectManagerComponent, AddEditProjMangComponent
+    EditHighRiskConstructionComponent,
+    AddJobTaskComponent,
+    AddPPEComponent,
+    EditTaskComponent,
+    EditPPEComponent,
+    EditLicenceComponent,
+    AddLicenceComponent,
+    LicenceCatComponent,
+    AddLicenceCatComponent,
+    EditLicenceCatComponent,
+    CodeOfPractComponent,
+    AddCOPComponent,
+    EditCOPComponent,
+    AddSiteComponent,
+    EditSiteComponent,
+    AddingCustComponent,
+    EditCustComponent,
+    IdentifyHazardsComponent,
+    ContrAndActReqComponent,
+    AddHazardComponent,
+    EditHazardComponent,
+    AddContrActComponent,
+    EditContActComponent,
+    ProjectManagerComponent,
+    AddEditProjMangComponent,
+    StaffComponent,
+    
+    RiskLevelComponent,
+    ResidualRiskLevelComponent,
+    ChemicalComponent,
+    AddChemicalComponent,
+    EditChemicalComponent,
+    AddRiskLevelComponent,
+    EditRiskLevelComponent,
+    AddResidualRiskLevelComponent,
+    EditResidualRiskLevelComponent,
+    AddStaffComponent,
+    EditStaffComponent,
   ],
 
   imports: [
@@ -60,9 +109,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    MatStepperModule
-    
+    MatStepperModule,
   ],
 })
 export class SiteInfoModule {}
-

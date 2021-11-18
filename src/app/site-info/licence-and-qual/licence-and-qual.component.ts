@@ -22,7 +22,7 @@ export class LicenceAndQualComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','category' ,'edit','delete'];
+  displayedColumns: string[] = ['index', 'title','action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
 
@@ -63,6 +63,7 @@ export class LicenceAndQualComponent implements OnInit {
       width: "550px",
       data: element,
     });
+    console.log(element)
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
         this.getAllLicence();

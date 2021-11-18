@@ -22,7 +22,7 @@ export class QuesAnsComponent implements OnInit {
   allData:any=[]
   portalId:any=[];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index','question','answer' , 'edit','delete'];
+  displayedColumns: string[] = ['index','question','answer' , 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   portal=new FormControl();
 

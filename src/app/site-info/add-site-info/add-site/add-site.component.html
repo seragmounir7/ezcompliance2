@@ -1,18 +1,16 @@
 <section  [formGroup]="addSitesForm" class="content">
     <div class="container px-4 py-4 bg-white">
-      <h1>Site Information</h1>
-    
+      <div mat-dialog-title class="dialog-title">
+      <h2> Add Site Information</h2>
+      <button type="button" class="close" 
+      style="font-size: 30px;"
+      (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+    </div>
+    <hr>
       <div class="row" [formGroup]="addSitesForm">
-        <!-- <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Job Number</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="jobNumber"
-            id="siteName"
-          />
-        </div> -->
-        <div class="my-3 col-6">
+      <div class="my-3 col-6">
           <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
           <input
             type="text"
@@ -21,44 +19,15 @@
             id="siteName"
           />
         </div>
-        <!-- <div class="my-3 col-6">
-          <p for="exampleFormControlInput1" class="form-Label">Site Foremen</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="siteName"
-            id="siteName"
-          />
-        </div> -->
-      </div>
-      <!-- <div class="row">
-        <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="customerName"
-            id="siteName"
-          />
-        </div>
-        <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Customer Contact</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="customerContact"
-            id="siteName"
-          />
-        </div>
-      </div> -->
-      <div class="row">
+     </div>
+     <div class="row">
         <div class="my-3 col-2">
-          <p for="exampleFormControlInput1" class="form-Label">Street Number</p>
+          <p for="exampleFormControlInput1" class="form-Label">Street No.</p>
           <input
             type="text"
             class="form-control"
             formControlName="streetNumber"
-            id="siteName"
+            id="streetNumber"
           />
         </div>
         <div class="my-3 col-4">
@@ -67,7 +36,7 @@
             type="text"
             class="form-control"
             formControlName="streetAddress"
-            id="siteName"
+            id="streetAddress"
           />
         </div>
         <div class="my-3 col-2">
@@ -76,7 +45,7 @@
             type="text"
             class="form-control"
             formControlName="suburb"
-            id="siteName"
+            id="suburb"
           />
         </div>
         <div class="my-3 col-4">
@@ -85,7 +54,7 @@
           >  
           <select
           class="form-select form-control col"
-          id="siteName"
+          id="state"
           aria-label="Default select example"
           formControlName="state"
 
@@ -101,42 +70,15 @@
           <option value="VIC">VIC</option>
           <option value="WA">WA</option>
         </select>
-          <!-- <p for="exampleFormControlInput1" class="form-Label">State</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="state"
-            id="siteName"
-          /> -->
+       
         </div>
       </div>
+      <hr>
     <div >
       <button class="btn btn-primary" (click)="onSubmit()">
-        Submit
+        Add
       </button>
     </div>
-      <!-- <div class="row">
-        <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">
-            Customer Contact Phone
-          </p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="customerContactPhone"
-            id="siteName"
-          />
-        </div>
-        <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Project Manager</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="projectManager"
-            id="siteName"
-          />
-        </div>
-      </div> -->
-    </div>
+  </div>
     </section>
     

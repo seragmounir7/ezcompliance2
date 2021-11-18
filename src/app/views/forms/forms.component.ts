@@ -2,8 +2,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';

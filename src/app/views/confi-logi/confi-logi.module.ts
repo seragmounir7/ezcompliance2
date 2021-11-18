@@ -1,3 +1,5 @@
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -8,14 +10,20 @@ import { ConfiLogiComponent } from './confi-logi.component';
 import { SetLogicComponent } from './set-logic/set-logic.component';
 import { JobNumberComponent } from './job-number/job-number.component';
 import { CreateJobNoComponent } from './job-number/create-job-no/create-job-no.component';
+import { SetRelationComponent } from './set-logic/set-relation/set-relation.component';
 
+import {MatStepperModule} from '@angular/material/stepper';
+import { AddItemComponent } from './set-logic/set-relation/add-item/add-item.component';
+import { TestLogicComponent } from './set-logic/test-logic/test-logic.component';
 
 @NgModule({
-  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent],
+  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent, SetRelationComponent, AddItemComponent, TestLogicComponent],
   imports: [
     CommonModule,
     ConfiLogiRoutingModule,SharedModule,FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,MatStepperModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class ConfiLogiModule { }

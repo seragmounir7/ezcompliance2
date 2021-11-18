@@ -1,8 +1,8 @@
 <form class="container px-4 py-4 card" [formGroup]="companyDetail">
   <div mat-dialog-title class="dialog-title">
-  <h1 class="text-center pt-3">
-    <p>About-Us Info</p>
-  </h1>
+  <h2 class="text-center pt-2">
+    <p> Edit About-Us Info</p>
+  </h2>
   <button type="button" class="close" 
   style="font-size: 40px;"
 
@@ -50,7 +50,7 @@
       <div class="col-sm-12">
         <p for="exampleFormControlInput1" class="form-Label">Top Description</p>
         <textarea
-          rows="3"
+          rows="5"
           type="text"
           formControlName="description"
           class="form-control sign"
@@ -62,6 +62,10 @@
 
     <div class="row" *ngIf="module">
       <div class="my-3 mt-2 col-3">
+        <p for="exampleFormControlInput1" class="form-Label">
+          Upload Image
+        </p>
+
         <img
           [src]="Image"
           onerror="this.src='../../../assets/img/uploadImg.png'"
@@ -119,7 +123,7 @@
     <br />
 
     <div class="row" *ngIf="module">
-      <div class="col-sm-6">
+      <div class="col-6">
         <p for="exampleFormControlInput1" class="form-Label">Title</p>
         <input
           type="text"

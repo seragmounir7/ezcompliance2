@@ -4,6 +4,7 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ParamMap } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import {
   MatDialog,
@@ -43,15 +44,14 @@ export class EditCustomerTestimonailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.Is_Mod = data.moduleName;
       this.Is_subMod = data.modulename;
-      console.log('this.Is_Mod', this.Is_Mod);
-      console.log('this.Is_subMod', this.Is_subMod);
+     
       this.testiomnial = fb.group({
         arrObj: this.fb.array([]),
         title: ['', Validators.required],
         description: ['', Validators.required],
         mode: 'Testimonial',
       });
-      console.log('data action=>', this.data.action);
+     
      }
 
      ngOnInit(): void {
@@ -67,10 +67,10 @@ export class EditCustomerTestimonailComponent implements OnInit {
       this.module = true;
       this.subModule = false;
     }
-    console.log('data action=>', this.data.action);
+    
     if (this.data.action == 'edit') {
       this.Update = true;
-      console.log('data to patch=>', this.data);
+      
       this.testiomnial.patchValue({
         mode: 'Testimonial',
         title: this.data.EditData.title,
@@ -89,7 +89,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
     let index = this.data.index;
     this.subId = this.data.EditData.subModules[index]._id;
 
-    console.log('aaaaaaa', this.subId);
+    
   }
   Added() {
     if (this.Edit == true) {
@@ -114,7 +114,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
     this.editModule();
     this.editSubModule();
     let value = this.selectedImage;
-    console.log('value', value);
+    
 
     console.log(this.testiomnial.value);
     let arrlength = this.add().length;
@@ -124,11 +124,9 @@ export class EditCustomerTestimonailComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    console.log(this.testiomnial.value);
+    
 
-    let serviceData = {};
-
-    console.log('file: ~ onFormSubmit ~ data', serviceData);
+   
   }
     addAction() {
       {
@@ -155,7 +153,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
       const formData = new FormData();
       formData.append('', files);
       let value = this.selectedImage;
-      console.log('vvvvvv', value);
+      
   
       if (value) {
         this.upload.upload(formData).subscribe((res) => {
@@ -171,7 +169,6 @@ export class EditCustomerTestimonailComponent implements OnInit {
           });
           this.selectedImage.push(res.files[0]);
   
-          console.log('browse -> this.selectedImage', this.selectedImage);
         });
       }
     }
@@ -188,6 +185,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
         this.landingPageInfo
           .editModule(ServiceData, this.data.EditData._id)
           .subscribe((resData) => {
+            Swal.fire('Edited Successfully')
             console.log('editModule', resData);
   
             this.dialogRef.close('true');
@@ -203,13 +201,12 @@ export class EditCustomerTestimonailComponent implements OnInit {
           fileUrl: this.selectedImage,
           description: this.add().at(0).get('description')?.value,
         };
-        console.log('wqwertyuytrewsdfg', submodulesData);
-        console.log('selectedImage', this.selectedImage);
-  
-        console.log('this.EditData', this.data.EditData._id);
+    
+    
         this.landingPageInfo
           .editsubModule(submodulesData, this.subId)
           .subscribe((resData) => {
+            Swal.fire('Edited Successfully')
             console.log('submodulesData', resData);
   
             this.dialogRef.close('true');
@@ -223,7 +220,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
           description: this.testiomnial.controls.description.value,
           arrObj: this.fb.array([]),
         };
-        console.log(data);
+      
         this.landingPageInfo
           .addAppService(this.testiomnial.value)
           .subscribe((data) => {

@@ -5,6 +5,9 @@
 
   position: fixed;
 }
+.brand-image {
+  float: none!important
+}
 .m-t-20 {
   margin-top: 20px;
 }
@@ -18,4 +21,7 @@
 }
 .sidebar{
   overflow: scroll;
+}
+.myColor{
+  color:#007bff !important; 
 }

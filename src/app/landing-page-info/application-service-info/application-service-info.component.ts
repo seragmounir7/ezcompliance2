@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from './../../utils/services/upload-file-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { AddApplicationServiceInfoComponent } from './add-application-service-info/add-application-service-info.component';
 import { AddServiceInfoComponent } from './add-service-info/add-service-info.component';
 import Swal from 'sweetalert2';
@@ -35,12 +36,19 @@ export class ApplicationServiceInfoComponent implements OnInit {
   collectionSize = 10;
   hide = false;
   closeResult: string;
+  ELEMENT_DATA = [];
+  displayedColumns: string[] = ['heading', 'description', 'actions'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  ELEMENTS_DATA = [];
+  displayedColumnss: string[] = ['index', 'images', 'title', 'descrip', 'action'];
+  dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
     public upload: UploadFileServiceService,
-    private modalService: NgbModal,
+
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router,
@@ -62,26 +70,31 @@ export class ApplicationServiceInfoComponent implements OnInit {
   service: any;
   getServiceData() {
     this.mode = 'Service';
-    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('ApplicationServiceData=>', data);
-
-      this.ServiceData = data.data[0];
-
-      console.log('sakshiiiii', this.Service);
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+      let ServiceData = res.data[0].subModules;
+      ServiceData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENTS_DATA = ServiceData;
+      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+      this.dataSources.paginator = this.paginator;
     });
+  
+
   }
 
-  editForm(id, name: boolean, i?: any) {
+  editForm(element, name: boolean, i?: any) {
     this.spinner.show();
-    console.log('sakshi', id);
-    this.myId = id;
+    
+    this.myId = element._id;
     this.isEdit = true;
     this.mode = 'Service';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('serviceData=>', data);
+     
       this.ServiceData = data.data[0];
-      console.log('', this.ServiceData);
-
+     
       let dialogRef = this.dialog.open(AddApplicationServiceInfoComponent, {
         data: {
           action: 'edit',
@@ -95,14 +108,14 @@ export class ApplicationServiceInfoComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('-> openDialog -> result', result);
+      
 
         if ((result = 'true')) {
           this.getServiceData();
         }
-        console.log('The dialog was closed');
+        
       });
-      
+
       this.spinner.hide();
     });
   }
@@ -111,9 +124,9 @@ export class ApplicationServiceInfoComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('serviceData=>', data);
+   
       this.ServiceData = data.data[0];
-      console.log('', this.ServiceData);
+
       let dialogRef = this.dialog.open(AddServiceInfoComponent, {
         data: {
           action: 'new',
@@ -124,47 +137,23 @@ export class ApplicationServiceInfoComponent implements OnInit {
         height: '600px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('openDialog->result', result);
+      
         if ((result = 'true')) {
           this.getServiceData();
         }
       });
-      
+
       this.spinner.hide();
     });
   }
   close() {
     this.hide = false;
   }
-
-  deleteopen(content, id) {
-    console.log("deleteopen close id=>",id);
-    this.Is_id = id;
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-           console.log("deleting")
-          this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-            Swal.fire('Deleted Successfully')
-            console.log('deleted res', res);
-            this.getServiceData();
-          });
-        },
-        (reason) => {
-
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          console.log('dismissed');
-        }
-      );
-    
-  }
-
   delete(item) {
+  
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item}"?`,
+      text: `Do you want to delete "${item.title}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',
@@ -172,17 +161,65 @@ export class ApplicationServiceInfoComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        // this.model.attributes.splice(i,1);
+       
+        this.spinner.show()
+        this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
+          Swal.fire('Deleted Successfully')
+        
+          this.getServiceData();
+          this.ngOnInit();
+          this.spinner.hide()
+        })
       }
     });
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
+
+  // deleteopen(content, id) {
+  //   console.log("deleteopen close id=>",id);
+  //   this.Is_id = id;
+  //   this.modalService
+  //     .open(content, { ariaLabelledBy: 'modal-basic-title' })
+  //     .result.then(
+  //       (result) => {
+  //         this.closeResult = `Closed with: ${result}`;
+  //          console.log("deleting")
+  //         this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
+  //           Swal.fire('Deleted Successfully')
+  //           console.log('deleted res', res);
+  //           this.getServiceData();
+  //         });
+  //       },
+  //       (reason) => {
+
+  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //         console.log('dismissed');
+  //       }
+  //     );
+
+  // }
+
+  // delete(item) {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: `Do you want to delete "${item}"?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#00B96F',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, Delete!',
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       // this.model.attributes.splice(i,1);
+  //     }
+  //   });
+  // }
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return `with: ${reason}`;
+  //   }
+  // }
 }

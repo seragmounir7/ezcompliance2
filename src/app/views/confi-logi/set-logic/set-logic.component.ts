@@ -1,17 +1,20 @@
-import { element } from 'protractor';
-import { MatSelect } from '@angular/material/select';
+
 import {
   Component,
   OnInit,
   QueryList,
   ViewChildren,
   AfterViewInit,
-  AfterViewChecked,
 } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { ViewChild } from '@angular/core';
+
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-set-logic',
   templateUrl: './set-logic.component.html',
@@ -117,18 +120,28 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
+  ELEMENT_DATA = [];
+  /////////////mat table////////////////
+  displayedColumns: string[] = ['index', 'title', 'edit'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   // @ViewChild('risk') risk: any;
   @ViewChildren('risk') Risk: QueryList<any>;
 
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
-    private setTitle: SetTitleService
+    private setTitle: SetTitleService,
+    public router: Router,
   ) {}
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Set Relation');
-
+ 
     this.JobTaskDetail = this.fb.group({
       highRiskConstr: this.fb.array([]),
       PPE: this.fb.array([]),
@@ -137,20 +150,18 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       contrActReq: this.fb.array([]),
       riskLevel: this.fb.array([]),
       residualRisk: this.fb.array([]),
-    //  codeOfPract: this.fb.array([]),
     });
 
     this.getJobTask();
-    this.getAllHighRisk();
-    this.getAllLicence();
-    this.getAllCategories();
-    this.getAllPPE();
-    this.getAllHazard();
-    this.getAllContrActReq();
-    //  this.getCodOfCond();
+    // this.getAllHighRisk();
+    // this.getAllLicence();
+    // this.getAllCategories();
+    // this.getAllPPE();
+    // this.getAllHazard();
+    // this.getAllContrActReq();
   }
 
-  ngAfterViewInit() {}
+  
 
   addActionHighRisk() {
     {
@@ -265,28 +276,31 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
-      this.jobTaskData.forEach((item,i) => {
-        this.addActionHighRisk();
-        this.addActionPPE();
-        this.addActionLicnCat();
-        this.addActionContrActReq();
-        this.addActionIdentifyHazrds(); 
-        this.addActionRiskLevel(); 
-        this.addActionResiRiskLevel();   
-        this.highRiskFA().controls[i].get('highRiskArr').setValue(item.risk);
-        this.PPE_FA().controls[i].get('ppeArr').setValue(item.PPE);
-        this.licenceCatFA().controls[i].get('licenceArr').setValue(item.licence);
-        // console.log("item.identifyHazard",item.identifyHazard+"i",i);
-        // console.log("item.controlActionRequired",item.controlActionRequired+"i",i);
-        
-        
-        this.identifyHazrdsFA().controls[i].get('hazardsArr').setValue(item.identifyHazard);
-        this.contrActReqFA().controls[i].get('contrActReqArr').setValue(item.controlActionRequired);
-        this.riskLevelFA().controls[i].get('riskLevel').setValue(item.riskLevel);
-        this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(item.residualRisk);
+      
+      this.jobTaskData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
 
-        });
-console.log("this.identifyHazrdsFA()", this.identifyHazrdsFA().value);
+      this.ELEMENT_DATA =  this.jobTaskData;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+      // this.jobTaskData.forEach((item,i) => {
+      //   this.addActionHighRisk();
+      //   this.addActionPPE();
+      //   this.addActionLicnCat();
+      //   this.addActionContrActReq();
+      //   this.addActionIdentifyHazrds(); 
+      //   this.addActionRiskLevel(); 
+      //   this.addActionResiRiskLevel();   
+      //   this.highRiskFA().controls[i].get('highRiskArr').setValue(item.risk);
+      //   this.PPE_FA().controls[i].get('ppeArr').setValue(item.PPE);
+      //   this.licenceCatFA().controls[i].get('licenceArr').setValue(item.licence);  
+      //   this.identifyHazrdsFA().controls[i].get('hazardsArr').setValue(item.identifyHazard);
+      //   this.contrActReqFA().controls[i].get('contrActReqArr').setValue(item.controlActionRequired);
+      //   this.riskLevelFA().controls[i].get('riskLevel').setValue(item.riskLevel);
+      //   this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(item.residualRisk);
+
+      //   });
 
     });
   }
@@ -302,13 +316,7 @@ console.log("this.identifyHazrdsFA()", this.identifyHazrdsFA().value);
       this.PPESelectionData = res.data;
     });
   }
-  // getCodOfCond() {
-  //   this.mode = 'codeOfPractice';
-  //   this.logicalFormInfo.getFormDataById(this.mode).subscribe((data) => {
-  //     console.log('codeOfPractice=>', data);
-  //     this.codeOfPract = data.data[0];
-  //   });
-  // }
+
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       console.log('Licence=>', res);
@@ -333,14 +341,13 @@ console.log("this.identifyHazrdsFA()", this.identifyHazrdsFA().value);
       this.licenceCatAll = res.data;
     });
   }
+  setRelation_2(id){
+   this.router.navigate(['/admin/confiLogi/setRelation'],
 
-  // setRelation(riskIds, ppeIDs, codOfPractIds, title, id) {
+      {queryParams: { id:id}});
+  }
   setRelation(title, id,i) {
-    // console.log('risk', riskIds);
 
-    // console.log('ppe', ppeIDs);
-    /// console.log('licence', licenceIds);
-    // console.log('codOfPract', codOfPractIds);
     console.log('index', title);
     console.log('id', id);
     console.log('id', i);
