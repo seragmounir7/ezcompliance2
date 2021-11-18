@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,10 +13,12 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
 import { EditTeamInfoComponent } from './edit-team-info/edit-team-info.component';
 import { AddServiceInfoComponent } from '../application-service-info/add-service-info/add-service-info.component';
 import { AddTeamInfoComponent } from './add-team-info/add-team-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
@@ -35,6 +37,13 @@ export class AboutUsComponent implements OnInit {
   mode: any;
   myId:any;
   Id:any
+  ELEMENT_DATA = [];
+  displayedColumns: string[] = ['image','heading', 'subTitle','actions'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  ELEMENTS_DATA = [];
+  displayedColumnss: string[] = ['index', 'images', 'title', 'action'];
+  dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
@@ -64,10 +73,19 @@ export class AboutUsComponent implements OnInit {
   /////////////////////// 61767ab18031f2102a69ef71 it is aboutusId and it never  be change so plz do not remove from this //////////////////
   getTeam() {
    this.Id ='61767ab18031f2102a69ef71'
-    this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
-      console.log('teamData=>', data);
-      this.teamData = data.data[0];
-      console.log('teammm', this.teamData);
+    this.landingPageInfo.getAboutUsById(this.Id).subscribe((res) => {
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+      let teamData = res.data[0].team;
+      teamData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENTS_DATA = teamData;
+      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+      this.dataSources.paginator = this.paginator;
+      
+      // this.teamData = data.data[0];
+      
     });
   }
 
@@ -77,11 +95,8 @@ export class AboutUsComponent implements OnInit {
     this.isEdit = true;
     this.Id ='61767ab18031f2102a69ef71'
     this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
-      console.log('teamData=>', data);
-      this.teamData = data.data[0];
-      console.log('', this.teamData);
-
-      let dialogRef = this.dialog.open(EditTeamInfoComponent, {
+         this.teamData = data.data[0];
+       let dialogRef = this.dialog.open(EditTeamInfoComponent, {
         data: {
           action: 'edit',
       
@@ -129,32 +144,11 @@ export class AboutUsComponent implements OnInit {
   close() {
     this.hide = false;
   }
-  deleteopen(content, id) {
-    console.log("deleteopen close id=>",id);
-    this.Is_id = id;
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-console.log("deleting")
-          this.landingPageInfo.deleteTeam(this.Is_id).subscribe((res) => {
-            console.log('deleted res', res);
-            this.getTeam();
-          });
-        },
-        (reason) => {
-
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          console.log('dismissed');
-        }
-      );
-    
-  }
   delete(item) {
+  
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item}"?`,
+      text: `Do you want to delete "${item.title}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',
@@ -162,18 +156,63 @@ console.log("deleting")
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        // this.model.attributes.splice(i,1);
+       
+        this.spinner.show()
+        this.landingPageInfo.deleteTeam(item._id).subscribe((res) => {
+          Swal.fire('Deleted Successfully')
+        
+          this.getTeam();
+          this.ngOnInit();
+          this.spinner.hide()
+        })
       }
     });
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
+  // deleteopen(content, id) {
+  //   console.log("deleteopen close id=>",id);
+  //   this.Is_id = id;
+  //   this.modalService
+  //     .open(content, { ariaLabelledBy: 'modal-basic-title' })
+  //     .result.then(
+  //       (result) => {
+  //         this.closeResult = `Closed with: ${result}`;
+
+  //         this.landingPageInfo.deleteTeam(this.Is_id).subscribe((res) => {
+  //           console.log('deleted res', res);
+  //           this.getTeam();
+  //         });
+  //       },
+  //       (reason) => {
+
+  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //         console.log('dismissed');
+  //       }
+  //     );
+    
+  // }
+  // delete(item) {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: `Do you want to delete "${item}"?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#00B96F',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, Delete!',
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       // this.model.attributes.splice(i,1);
+  //     }
+  //   });
+  // }
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return `with: ${reason}`;
+  //   }
+  // }
 
 }

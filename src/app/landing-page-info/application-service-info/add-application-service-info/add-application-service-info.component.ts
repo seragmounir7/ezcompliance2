@@ -4,6 +4,7 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ParamMap } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import {
   MatDialog,
@@ -46,26 +47,15 @@ export class AddApplicationServiceInfoComponent implements OnInit {
   ) {
     this.Is_Mod = data.moduleName;
     this.Is_subMod = data.modulename;
-    console.log('this.Is_Mod', this.Is_Mod);
-    console.log('this.Is_subMod', this.Is_subMod);
+
     this.serviceDetail = fb.group({
       arrObj: this.fb.array([]),
       title: ['', Validators.required],
       description: ['', Validators.required],
       mode: 'Service',
     });
-    console.log('data action=>', this.data.action);
-    // if(this.data.action == "edit")
-    // {			 this.Update = true;
-    //   console.log("data to patch=>",this.data)
-    //   this.serviceDetail.patchValue({
-    //     "mode": 'Service',
-    //     "title":this.data.EditData.title,
-    //     "description":this.data.EditData.description,
 
-    //   })
-    // }
-    console.log('', data);
+
   }
 
   ngOnInit(): void {
@@ -83,10 +73,9 @@ export class AddApplicationServiceInfoComponent implements OnInit {
       this.subModule = false;
     }
 
-    console.log('data action=>', this.data.action);
     if (this.data.action == 'edit') {
       this.Update = true;
-      console.log('data to patch=>', this.data);
+
       this.serviceDetail.patchValue({
         mode: 'Service',
         title: this.data.EditData.title,
@@ -105,7 +94,6 @@ export class AddApplicationServiceInfoComponent implements OnInit {
     let index = this.data.index;
     this.subId = this.data.EditData.subModules[index]._id;
 
-    console.log('aaaaaaa', this.subId);
   }
 
   Added() {
@@ -127,14 +115,14 @@ export class AddApplicationServiceInfoComponent implements OnInit {
   }
 
   onFormSubmit() {
-    console.log('data action=>', this.data.action);
+
 
     this.editModule();
     this.editSubModule();
     let value = this.selectedImage;
-    console.log('value', value);
 
-    console.log(this.serviceDetail.value);
+
+
     let arrlength = this.appService().length;
     for (let i = 0; i < arrlength; i++) {
       this.appService()
@@ -142,16 +130,14 @@ export class AddApplicationServiceInfoComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    console.log(this.serviceDetail.value);
 
-    let serviceData = {};
 
-    console.log('file: ~ onFormSubmit ~ data', serviceData);
+
   }
 
   addAppService() {
     this.appService().push(this.serviceForm());
-    console.log(this.serviceDetail.value);
+
   }
   appService(): FormArray {
     return this.serviceDetail.get('arrObj') as FormArray;
@@ -173,28 +159,27 @@ export class AddApplicationServiceInfoComponent implements OnInit {
   }
 
   browser(event, i) {
-    console.log(event, i);
+
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage;
-    console.log('vvvvvv', value);
+
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+
 
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-        console.log(' browser -> res', res);
+
         this.serviceDetail.patchValue({
           filePath: res.filePath,
         });
         this.selectedImage.push(res.files[0]);
 
-        console.log('browse -> this.selectedImage', this.selectedImage);
       });
     }
   }
@@ -206,12 +191,12 @@ export class AddApplicationServiceInfoComponent implements OnInit {
         description: this.serviceDetail.controls.description.value,
         mode: 'Service',
       };
-      console.log('asdfgh', ServiceData);
-      console.log('this.EditData', this.data.EditData._id);
+
       this.landingPageInfo
         .editModule(ServiceData, this.data.EditData._id)
         .subscribe((resData) => {
-          console.log('editModule', resData);
+          Swal.fire('Edited Successfully')
+
 
           this.dialogRef.close('true');
           this.serviceDetail.reset();
@@ -226,15 +211,10 @@ export class AddApplicationServiceInfoComponent implements OnInit {
         fileUrl: this.selectedImage,
         description: this.appService().at(0).get('description')?.value,
       };
-      console.log('wqwertyuytrewsdfg', submodulesData);
-      console.log('selectedImage', this.selectedImage);
-
-      console.log('this.EditData', this.data.EditData._id);
       this.landingPageInfo
         .editsubModule(submodulesData, this.subId)
         .subscribe((resData) => {
-          console.log('submodulesData', resData);
-
+          Swal.fire('Edited Successfully')
           this.dialogRef.close('true');
           this.serviceDetail.reset();
         });
@@ -246,16 +226,16 @@ export class AddApplicationServiceInfoComponent implements OnInit {
         description: this.serviceDetail.controls.description.value,
         arrObj: this.fb.array([]),
       };
-      console.log(data);
+
       this.landingPageInfo
         .addAppService(this.serviceDetail.value)
         .subscribe((data) => {
-          console.log('data=>', data);
+
           this.serviceData = data;
         });
     }
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
@@ -7,6 +7,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { AddHappyClientComponent } from './add-happy-client/add-happy-client.component';
 import { AddClientInfoComponent } from './add-client-info/add-client-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -25,6 +27,13 @@ export class HappyClientComponent implements OnInit {
   hide = false;
   Is_id: any;
   closeResult: string;
+  ELEMENT_DATA = [];
+  displayedColumns: string[] = ['heading', 'actions'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  ELEMENTS_DATA = [];
+  displayedColumnss: string[] = ['index', 'images','action'];
+  dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -47,29 +56,33 @@ export class HappyClientComponent implements OnInit {
   }
   getHappyClient() {
     this.mode = 'HappyClient';
-    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      console.log('happyClientData=>', data);
-      this.happyClientData = data.data[0];
-      console.log('happy', this.happyClientData);
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+      let happyClientData = res.data[0].subModules;
+      happyClientData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENTS_DATA = happyClientData;
+      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+      this.dataSources.paginator = this.paginator;
+  
+      // this.happyClientData = data.data[0];
+     
     });
   }
 
   editForm(id, name: boolean, i?: any) {
     this.spinner.show();
-    console.log('sakshi', id);
+    
     this.myId = id;
     this.isEdit = true;
     this.mode = 'HappyClient';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-
-      console.log('HappyClient=>', data);
       this.happyClientData = data.data[0];
-      console.log('', this.happyClientData);
-
-      let dialogRef = this.dialog.open(AddHappyClientComponent, {
+    let dialogRef = this.dialog.open(AddHappyClientComponent, {
         data: {
           action: 'edit',
-
           EditData: this.happyClientData,
           index: i,
           moduleName: name,
@@ -79,12 +92,11 @@ export class HappyClientComponent implements OnInit {
         height: '600px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('-> openDialog -> result', result);
-
+      
         if ((result = 'true')) {
           this.ngOnInit();
         }
-        console.log('The dialog was closed');
+       
       });
       this.spinner.hide();
     });
@@ -117,32 +129,11 @@ export class HappyClientComponent implements OnInit {
   close() {
     this.hide = false;
   }
-  deleteopen(content, id) {
-    console.log("deleteopen close id=>",id);
-    this.Is_id = id;
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-console.log("deleting")
-          this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-            console.log('deleted res', res);
-            this.getHappyClient();
-          });
-        },
-        (reason) => {
-
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          console.log('dismissed');
-        }
-      );
-    
-  }
   delete(item) {
+  
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item}"?`,
+      text: `Do you want to delete "${item.fileUrl}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',
@@ -150,17 +141,16 @@ console.log("deleting")
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        // this.model.attributes.splice(i,1);
+       
+        this.spinner.show()
+        this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
+          Swal.fire('Deleted Successfully')
+        
+          this.getHappyClient();
+          this.ngOnInit();
+          this.spinner.hide()
+        })
       }
     });
-  }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 }

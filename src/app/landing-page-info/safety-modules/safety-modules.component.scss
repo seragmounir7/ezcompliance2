@@ -40,3 +40,24 @@ label {
   justify-content: space-between;
   align-items: center;
 }
+table {
+  width: 100%;
+}
+.mat-column-description {
+  width: 32px;
+ 
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-actions {
+  width: 32px;
+ 
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-heading {
+  width: 32px;
+
+  padding-right: 24px;
+  text-align: center;
+}

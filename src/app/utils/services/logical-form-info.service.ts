@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
 export class LogicalFormInfoService {
   apiUrl = environment.apiUrl;
+  
   constructor(private https: HttpClient) { }
   getJobTaskListById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
@@ -106,21 +108,28 @@ export class LogicalFormInfoService {
   }
   ///licence category crud///
   addLicenceCat(data) {
-    return this.https.post(this.apiUrl + 'licenceCategory/add', data).pipe(
+    return this.https.post(this.apiUrl + 'tradeCategory/add', data).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
   getAllLicenceCat() {
-    return this.https.get(this.apiUrl + 'licenceCategory/getAll').pipe(
+    return this.https.get(this.apiUrl + 'tradeCategory/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getLicenceByTradeCat(id) {
+    return this.https.get(this.apiUrl + 'tradeCategory/getAll/'+id).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
   updateLicenceCat(data, id) {
-    return this.https.put(this.apiUrl + 'licenceCategory/update/' + id, data).pipe(
+    return this.https.put(this.apiUrl + 'tradeCategory/update/' + id, data).pipe(
       map((res: any) => {
         return res;
       })
@@ -128,10 +137,11 @@ export class LogicalFormInfoService {
 
   }
   deleteLicenceCat(id) {
-    return this.https.delete(this.apiUrl + 'licenceCategory/delete/' + id).pipe(
+    return this.https.delete(this.apiUrl + 'tradeCategory/delete/' + id).pipe(
       map((res: any) => {
         return res;
-      })
+      }),
+
     );
   }
   ///licence category end crud///
