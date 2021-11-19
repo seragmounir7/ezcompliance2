@@ -64,7 +64,7 @@ export class SetRelationComponent implements OnInit {
           this.JobTaskDetail.patchValue({
             highRiskConstr: this.jobTask.risk,
             PPE: this.jobTask.PPE,
-            codeOfPract: this.jobTask.PPE,
+            codeOfPract: this.jobTask.codeOfPractice,
            LicenceCat: this.jobTask.licence,
             identifyHazrds: this.jobTask.identifyHazard,
             contrActReq: this.jobTask.controlActionRequired,
@@ -92,13 +92,13 @@ export class SetRelationComponent implements OnInit {
 
   getAllResidualRiskLevel() {
     this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
-      console.log('this.resiRiskLevelData', res.data);
+    //  console.log('this.resiRiskLevelData', res.data);
       this.resiRiskLevelData = res.data;
     });
   }
   getAllRiskLevel() {
     this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
-      console.log('this.riskLevelData', res.data);
+//console.log('this.riskLevelData', res.data);
       this.riskLevelData = res.data;
     });
   }
@@ -110,20 +110,20 @@ export class SetRelationComponent implements OnInit {
   }
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-      console.log('Risk=>', res);
+//console.log('Risk=>', res);
       this.highRiskConstructionData = res.data;
     });
   }
   getAllPPE() {
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-      console.log('PPE=>', res);
+    //  console.log('PPE=>', res);
       this.PPESelectionData = res.data;
     });
   }
   getAllCodeOfPractice() {
    
     this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
-      console.log('codeOfPractice=>', res);
+      //console.log('codeOfPractice=>', res);
    this.allCodeOfPract=res.data;
     });
  
@@ -131,13 +131,13 @@ export class SetRelationComponent implements OnInit {
 
   getAllHazard() {
     this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
-      console.log('getAllHazards=>', res);
+   //   console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
   getAllContrActReq() {
     this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
-      console.log('getAllHazards=>', res);
+    //  console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
     });
   }
@@ -145,7 +145,7 @@ export class SetRelationComponent implements OnInit {
     console.log('getLicenceByTradeCat', id);
 
     this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
-      console.log('getAllLicenceCat=>', res);
+   //   console.log('getAllLicenceCat=>', res);
       this.licenceByTradecat = res.data.licenceData;
     });
   }
@@ -181,6 +181,7 @@ export class SetRelationComponent implements OnInit {
     let data = {
       title: this.jobTask.title,
       risk: this.JobTaskDetail.get('highRiskConstr').value,
+      codeOfPractice: this.JobTaskDetail.get('codeOfPract').value,
       PPE: this.JobTaskDetail.get('PPE').value,
       tradeCategoryId:this.jobTask.tradeCategoryId,
       licence: this.JobTaskDetail.get('LicenceCat').value,
@@ -190,6 +191,9 @@ export class SetRelationComponent implements OnInit {
       residualRisk: this.JobTaskDetail.get('residualRiskL').value,
       staffId: this.JobTaskDetail.get('personResp').value,
       chemical: this.JobTaskDetail.get('chemical').value,
+      allHazardsTitle:allHazardsTitle,
+      allContrlActReqTitle:allContrlActReqTitle,
+      allCOPTitle:allCOPTitle,
       set: true,
     };
 
