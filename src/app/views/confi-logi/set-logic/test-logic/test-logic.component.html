@@ -1,0 +1,463 @@
+<section class="">
+  <div class="">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Tabs nav -->
+        <div
+          class="nav flex-column nav-pills nav-pills-custom"
+          id="v-pills-tab"
+          role="tablist"
+          aria-orientation="vertical"
+        >
+          <p
+            *ngFor="let item of stepperList; let i = index"
+            (click)="handleClick(i)"
+            class="nav-link mb-3 p-3 shadow"
+            [class.active]="stepperList[i].i"
+            id="v-pills-home-tab"
+            data-toggle="pill"
+            role="tab"
+            aria-controls="v-pills-home"
+            aria-selected="true"
+          >
+            <i class="fa fa-user-circle-o mr-2"></i>
+            <span class="font-weight-bold small text-uppercase">{{
+              item.name
+            }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <!-- Tabs content -->
+        <div class="tab-content" id="v-pills-tabContent">
+          <div
+            *ngFor="let item of stepperList; let i = index"
+            class="tab-pane fade shadow rounded bg-white p-5"
+            [class.active]="stepperList[i].i"
+            [class.show]="stepperList[i].i"
+            id="v-pills-home"
+            role="tabpanel"
+            aria-labelledby="v-pills-home-tab"
+          >
+            <h4 class="font-italic mb-4">{{ item.name }}</h4>
+            <p class="font-italic text-muted mb-2">
+              <ng-container
+                *ngTemplateOutlet="test; context: { name: item.name }"
+              ></ng-container>
+            </p>
+            <div>
+              <!-- <div class="buttons">
+                                <button mat-icon-button (click)="prev(1)"><i  style="font-size: 25px;" class="fas fa-arrow-left"></i></button> <button mat-icon-button (click)="next(1)"><i style="font-size: 25px;" class="fas fa-arrow-right"></i></button>
+                            </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="buttons">
+                            <button mat-icon-button (click)="prev(1)"><i  style="font-size: 25px;" class="fas fa-arrow-left"></i></button> <button mat-icon-button (click)="next(1)"><i style="font-size: 25px;" class="fas fa-arrow-right"></i></button>
+                        </div> -->
+  </div>
+</section>
+
+<ng-template
+  [formGroup]="JobTaskDetail"
+  let
+  #test
+  let-name="name"
+  class="my-auto"
+>
+  <ng-container
+    *ngIf="name.toLowerCase() == 'HighRisk Construction'.toLowerCase()"
+  >
+    <div class="row justify-content-center" style="margin-top: auto">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label class="text-center">HighRiskConstruction</mat-label>
+          <mat-select formControlName="highRiskConstr" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('highRiskConstr').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('highRiskConstr').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('highRiskConstr').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of highRiskConstructionData"
+              [value]="parameter._id"
+            >
+              {{ parameter.title }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="name.toLowerCase() == 'PPE'.toLowerCase()">
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>PPE selection</mat-label>
+          <mat-select formControlName="PPE" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('PPE').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('PPE').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('PPE').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of PPESelectionData"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="name.toLowerCase() == 'Licence'.toLowerCase()">
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Licences</mat-label>
+          <mat-select formControlName="LicenceCat" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('LicenceCat').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('LicenceCat').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('LicenceCat').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of licenceByTradecat"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="name.toLowerCase() == 'Identify Hazards'.toLowerCase()">
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Identify Hazards</mat-label>
+          <mat-select formControlName="identifyHazrds" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('identifyHazrds').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('identifyHazrds').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('identifyHazrds').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of allHazards"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="name.toLowerCase() == 'Risk Level'.toLowerCase()">
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Risk Level</mat-label>
+          <mat-select formControlName="riskLevel">
+            <mat-option
+              *ngFor="let parameter of riskLevelData"
+              [value]="parameter._id"
+            >
+              {{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container
+    *ngIf="name.toLowerCase() == 'Control Action Required'.toLowerCase()"
+  >
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Control Action Required</mat-label>
+          <mat-select formControlName="contrActReq" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('contrActReq').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('contrActReq').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('contrActReq').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of allContrlActReq"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="name.toLowerCase() == 'Code of Practice'.toLowerCase()">
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Code of Practice</mat-label>
+          <mat-select formControlName="codeOfPract" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('codeOfPract').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('codeOfPract').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('codeOfPract').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of allCodeOfPract"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container
+    *ngIf="name.toLowerCase() == 'Residule Risk Level'.toLowerCase()"
+  >
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Residule Risk Level</mat-label>
+          <mat-select formControlName="residualRiskL">
+            <mat-option
+              *ngFor="let parameter of resiRiskLevelData"
+              [value]="parameter._id"
+            >
+              {{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="name.toLowerCase() == 'Code of Practice'.toLowerCase()">
+    <ng-template matStepLabel>Code of Practice</ng-template>
+    <h2 class="text-center mt-3">
+      Code of Practice<span
+        class="material-icons ml-3"
+        (click)="addItem('codeOfPract')"
+        >add_circle_outline</span
+      >
+    </h2>
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto">
+        <button class="btn" matStepperPrevious>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+      <div class="col-7">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Code of Practice</mat-label>
+          <mat-select formControlName="codeOfPract" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('codeOfPract').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('codeOfPract').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('codeOfPract').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of allCodeOfPract"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto">
+        <button class="btn" matStepperNext>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container
+    *ngIf="name.toLowerCase() == 'Chemical related Task'.toLowerCase()"
+  >
+    <div class="row justify-content-center">
+      <div class="col-1 my-auto"></div>
+      <div class="col-7 text-center">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="YES"
+            formControlName="chemical"
+          />
+          <label class="form-check-label" for="inlineRadio1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="NO"
+            formControlName="chemical"
+          />
+          <label class="form-check-label" for="inlineRadio2">No</label>
+        </div>
+      </div>
+      <div class="col-1 my-auto"></div>
+    </div>
+  </ng-container>
+  <ng-container
+    *ngIf="name.toLowerCase() == 'Person Responsible'.toLowerCase()"
+  >
+    <div class="row justify-content-center mt-3">
+      <div class="col-1 my-auto"></div>
+      <div class="col-6">
+        <mat-form-field class="container" appearance="fill">
+          <mat-label>Person Responsible</mat-label>
+          <mat-select formControlName="personResp">
+            <mat-option *ngFor="let person of staff" [value]="person._id">
+              {{ person.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-1 my-auto">
+        <!--  -->
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <button
+        *ngIf="!jobTask?.set"
+        class="btn btn-primary"
+        (click)="setRelation()"
+      >
+        Set
+      </button>
+      <button
+        *ngIf="jobTask?.set"
+        class="btn btn-primary"
+        (click)="setRelation()"
+      >
+        Update
+      </button>
+    </div>
+  </ng-container>
+  <div class="buttons">
+    <button mat-icon-button (click)="prev(1)">
+      <i style="font-size: 25px" class="fas fa-arrow-left"></i>
+    </button>
+    <button mat-icon-button (click)="next(1)">
+      <i style="font-size: 25px" class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+</ng-template>

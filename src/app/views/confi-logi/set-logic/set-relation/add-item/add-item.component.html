@@ -1,12 +1,13 @@
 <form [formGroup]="addItem" >
-    <h2 *ngIf="dataRec==='highRisk'"> Add High Risk Construction parameter</h2>
-    <h2 *ngIf="dataRec==='ppe'"> Add PPE</h2>
-    <h2 *ngIf="dataRec==='licence'"> Add Licence </h2>
-    <h2 *ngIf="dataRec==='identifyHazards'"> Add Identify Hazards </h2>
-    <h2 *ngIf="dataRec==='riskLevel'"> Add Risk Level</h2>
-    <h2 *ngIf="dataRec==='ctrlActreq'"> Add Control Action Required</h2>
-    <h2 *ngIf="dataRec==='resRiskLevel'"> Add Residual Risk</h2>
-    <h2 *ngIf="dataRec==='perResbl'"> Add Person Responsible </h2>
+    <h2 *ngIf="dataRec.type==='highRisk'"> Add High Risk Construction parameter</h2>
+    <h2 *ngIf="dataRec.type==='ppe'"> Add PPE</h2>
+    <h2 *ngIf="dataRec.type==='licence'"> Add Licence </h2>
+    <h2 *ngIf="dataRec.type==='identifyHazards'"> Add Identify Hazards </h2>
+    <h2 *ngIf="dataRec.type==='riskLevel'"> Add Risk Level</h2>
+    <h2 *ngIf="dataRec.type==='ctrlActreq'"> Add Control Action Required</h2>
+    <h2 *ngIf="dataRec.type==='resRiskLevel'"> Add Residual Risk</h2>
+    <h2 *ngIf="dataRec.type==='perResbl'"> Add Person Responsible </h2>
+    <h2 *ngIf="dataRec.type==='codeOfPract'"> Add Code of Practice </h2>
     <mat-form-field appearance="legacy"
     class="example-full-width" style="width: 498px;">
     <input matInput  formControlName="title" style="text-transform: capitalize !important;">

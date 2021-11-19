@@ -67,7 +67,7 @@ export class SafetyLegislationComponent implements OnInit {
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item.title}"?`,
+      text: `Do you want to delete "${item.act}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',

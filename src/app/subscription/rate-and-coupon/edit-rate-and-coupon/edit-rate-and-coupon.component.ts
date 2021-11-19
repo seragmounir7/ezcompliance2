@@ -65,6 +65,9 @@ export class EditRateAndCouponComponent implements OnInit {
 
     });
   }
+  close() {
+    this.dialogRef.close();
+}
 }
 
 

@@ -8,6 +8,8 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AddItemComponent } from './add-item/add-item.component'; 
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -295,9 +297,11 @@ allContrlActReq= [];
   jobTaskSelected = [];
   projectMang = [];
   allChemicals = [];
+  allCOPSelected = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
+    private dialog: MatDialog,
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
@@ -376,7 +380,7 @@ allContrlActReq= [];
     
     this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
       if (res) {
-        console.log(res);
+        // console.log(res);
 
         switch (res) {
           case 'NSW':
@@ -594,7 +598,7 @@ allContrlActReq= [];
 
   getAllPPE() {
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-      console.log('PPE=>', res);
+      // console.log('PPE=>', res);
       this.PPEselection = res.data;
       for (let i = 0; i < this.PPEselection.length; i++) {
         this.ppeArr[i] = 0;
@@ -604,12 +608,12 @@ allContrlActReq= [];
   getAllProjectMang() {
     this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
       this.projectMang = res.data;
-      console.log('getAllProjectMang=>', this.projectMang);
+      // console.log('getAllProjectMang=>', this.projectMang);
     });
   }
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-      console.log('Risk=>', res);
+      // console.log('Risk=>', res);
       this.highRiskConstruction = res.data;
       for (let i = 0; i < this.highRiskConstruction.length; i++) {
         this.riskArr[i] = 0;
@@ -620,7 +624,7 @@ allContrlActReq= [];
     let mode = 'Risk';
     this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
       this.highRiskConstruction = res.data[0].subComponents;
-      console.log(' this.highRiskConstruction=>', this.highRiskConstruction);
+      // console.log(' this.highRiskConstruction=>', this.highRiskConstruction);
       for (let i = 0; i < this.highRiskConstruction.length; i++) {
         this.riskArr[i] = 0;
       }
@@ -629,10 +633,10 @@ allContrlActReq= [];
   getAllLicence() {
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       this.licenseAndQualification = res.data;
-      console.log(
-        'this.licenseAndQualification=>',
-        this.licenseAndQualification
-      );
+      // console.log(
+      //   'this.licenseAndQualification=>',
+      //   this.licenseAndQualification
+      // );
       for (let i = 0; i < this.licenseAndQualification.length; i++) {
         this.licenceArr[i] = 0;
       }
@@ -640,13 +644,13 @@ allContrlActReq= [];
   }
   getAllHazard() {
     this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
-      console.log('getAllHazards=>', res);
+      // console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
   getAllContrActReq()  {
     this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
-      console.log('getAllHazards=>', res);
+      // console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
     });
   }
@@ -713,8 +717,6 @@ allContrlActReq= [];
           //   });
           // });
           this.licenseAndQualification.forEach((highRisk, index) => {
-            console.log("highRisk.tradeCategoryId._id",highRisk.tradeCategoryId._id);
-            console.log("element.tradeCategoryId._id",element.tradeCategoryId._id);
             
             if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
               this.licenceArr[index] = 1;
@@ -734,48 +736,54 @@ allContrlActReq= [];
     while (this.personResFA().length) {
       this.personResFA().removeAt(0);
     }
+    this.allCOPSelected=[];
     this.jobTaskSelected.forEach((data, i) => {
+
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
       this.addActionPersonRes();
      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
+
+      data.allCOPTitle.forEach(element => {        
+        this.allCOPSelected.push(element)
+      });
     });
 
-    console.log('jobTaskSelected', this.jobTaskSelected);
-    console.log(this.residlRiskLevelFA().value);
+    // console.log('allCOPSelected', this.allCOPSelected);
+    // console.log(this.residlRiskLevelFA().value);
   }
   getAllJobNumber() {
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-      console.log(res);
-      console.log('getAllJobNumber', res.data);
+      // console.log(res);
+      // console.log('getAllJobNumber', res.data);
       this.allJobNumbers = res.data;
     });
   }
   getAllStaff(){
     this.logicalFormInfo.getAllStaff().subscribe((res:any)=> {
-      console.log(res)
+      // console.log(res)
  this.staff=res.data
    })
   }
   getAllResidualRiskLevel(){
     this.logicalFormInfo.getAllResidual().subscribe((res:any)=> {
-      console.log("this.resiRiskLevelData",res.data)
+      // console.log("this.resiRiskLevelData",res.data)
       this.resiRiskLevel = res.data;
     
    })
   }
   getAllRiskLevel(){
     this.logicalFormInfo.getAllRiskLevel().subscribe((res:any)=> {
-      console.log("this.riskLevelData",res.data)
+     // console.log("this.riskLevelData",res.data)
       this.riskLevel = res.data;
    
    })
   }
   getAllChemical(){
     this.logicalFormInfo.getAllChemical().subscribe((res:any)=> {
-      console.log(res)
+      //console.log(res)
  this.allChemicals=res.data;
    })
   }
@@ -794,6 +802,7 @@ allContrlActReq= [];
     while (this.personResFA().length) {
       this.personResFA().removeAt(0);
     }
+    this.allCOPSelected=[];
     this.jobTaskSelected.forEach((data, i) => {
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
@@ -801,7 +810,53 @@ allContrlActReq= [];
       this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
+console.log("data",data);
+
+      data.allCOPTitle.forEach(element => {        
+        this.allCOPSelected.push(element)
+      });
+     
     });
-    console.log(this.residlRiskLevelFA().value);
+    console.log("allCOPSelected", this.allCOPSelected);
+  }
+  addItem(type,i){
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: '550px',
+      // height:'50%',
+      data: type,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+      if(type==='identifyHazards'){
+        this.jobTaskSelected[i].allHazardsTitle.push(result);
+      }
+      if(type==='ctrlActreq'){
+        this.jobTaskSelected[i].allContrlActReqTitle.push(result);
+      }
+
+      console.log('The dialog was closed');
+    });
+  }
+  addChemical(){
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: '550px',
+      // height:'50%',
+      data: 'chemical',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+    if(result !='false' && result){
+    let data={
+        title:result
+      }
+      this.logicalFormInfo.addChemical(data).subscribe((res:any)=> {
+        this.getAllChemical();
+     })
+    }
+
+      console.log('The dialog was closed');
+    });
   }
 }

@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ConfiLogiComponent } from './confi-logi.component';
+import { TestLogicComponent } from './set-logic/test-logic/test-logic.component';
 
 const routes: Routes = [
   { path: '', component: ConfiLogiComponent },
   { path: 'setLogic', component: SetLogicComponent },
   { path: 'setJobNumber', component: JobNumberComponent },
+  // { path: 'setRelation', component: TestLogicComponent },
   { path: 'setRelation', component: SetRelationComponent },
 ];
 
