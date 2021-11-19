@@ -23,14 +23,25 @@ export class SiteInspectionComponent implements OnInit {
   itemvalue: any;
   item_values: any = ['In Progress', 'Completed', 'Closed'];
   jobTaskData: any;
-
+  allJobNumbers = [];
+  projectMang = [];
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
-    private setTitle:SetTitleService,
-    private logicalFormInfo:LogicalFormInfoService
+    private setTitle: SetTitleService,
+    private logicalFormInfo: LogicalFormInfoService
   ) {
     this.sidePreview = this.fb.group({
+
+      jobNumber: [''],
+      siteName: [''],
+      customerName: [''],
+      streetNo: [''],
+      streetAddr: [''],
+      subUrb: [''],
+      custConct: [''],
+      custConctPh: [''],
+      custEmail: [''],
       Hazard: ['', Validators.required],
       documentation: ['', Validators.required],
       workeronsite: ['', Validators.required],
@@ -94,6 +105,26 @@ export class SiteInspectionComponent implements OnInit {
   ngOnInit(): void {
     this.dynamicFormsService.homebarTitle.next('Site Inspection Form');
     this.setTitle.setTitle('WHS-Site Inspection Form');
+    this.getAllJobNumber();
+    this.getAllProjectMang();
+  }
+  jobNoSel() {
+    this.allJobNumbers.forEach((item) => {
+      if (this.sidePreview.get('jobNumber').value === item._id) {
+        console.log('Id found', item);
+        this.sidePreview.patchValue({
+          siteName: item.siteName,
+          customerName: item.customerName,
+          streetAddr: item.streetAddress,
+          custConct: item.customerContact,
+          custConctPh: item.customerContactPhone,
+          custEmail: item.customerEmail,
+          jobNumber: this.sidePreview.get('jobNumber').value,
+        });
+      }
+    });
+    this.sidePreview.get('jobNumber').updateValueAndValidity();
+
   }
   addAction() {
     {
@@ -151,5 +182,16 @@ export class SiteInspectionComponent implements OnInit {
       console.log('jobTaskDetails=>', this.jobTaskData);
     });
   }
-
+  getAllProjectMang() {
+    this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
+      this.projectMang = res.data;
+     
+    });
+  }
+  getAllJobNumber() {
+    this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
+     
+      this.allJobNumbers = res.data;
+    });
+  }
 }
