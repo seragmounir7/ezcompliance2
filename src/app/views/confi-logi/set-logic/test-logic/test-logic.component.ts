@@ -62,6 +62,10 @@ export class TestLogicComponent implements OnInit {
       i:0,
     },
     {
+      name:'Code of Practice',
+      i:0,
+    },
+    {
       name:'Chemical related Task',
       i:0,
     },

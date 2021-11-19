@@ -781,7 +781,7 @@
         <h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
         <div class="row">
           <div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
-            {{item}}
+          <label for=""> {{i+1}}. {{item}}</label>
           </div>
         </div>
         <hr />
@@ -926,7 +926,8 @@
               <div class="col-md-3">
                 <div class="my-3">
                   <label for="exampleInputProjectNumber" class="form-label"
-                    >Name of Chemical</label
+                    >Name of Chemical<span  class="material-icons ml-3"
+                    style="font-size: 19px;"  (click)="addChemical()" >add_circle_outline</span></label
                   >
                   <select                  
                   class="form-control"
@@ -1032,15 +1033,15 @@
             <div class="row">
               <div class="col-md-4 my-3">
                 <div class="">
-                  <label for="sel2">Identity Hazards</label>
+                  <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
                   <select
                     multiple
                     class="form-control"
                     id="sel2"
                     name="sellist2"
                   >
-                    <option *ngFor="let hazard of item.identifyHazard">
-                      {{ hazard.title }}
+                    <option *ngFor="let hazard of item.allHazardsTitle">
+                      {{ hazard }}
                     </option>
                   </select>
                 </div>
@@ -1061,7 +1062,7 @@
               </ng-container>
               <div class="col-md-4 my-3">
                 <div class="">
-                  <label for="sel2">Control and Action Required</label>
+                  <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
                   <select
                     multiple
                     class="form-control"
@@ -1069,9 +1070,9 @@
                     name="sellist2"
                   >
                     <option
-                      *ngFor="let contrlActReq of item.controlActionRequired"
+                      *ngFor="let contrlActReq of item.allContrlActReqTitle"
                     >
-                      {{ contrlActReq.title }}
+                      {{ contrlActReq }}
                     </option>
                   </select>
                 </div>

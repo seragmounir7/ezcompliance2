@@ -8,6 +8,8 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AddItemComponent } from './add-item/add-item.component'; 
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -299,6 +301,7 @@ allContrlActReq= [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
+    private dialog: MatDialog,
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
@@ -377,7 +380,7 @@ allContrlActReq= [];
     
     this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
       if (res) {
-        console.log(res);
+        // console.log(res);
 
         switch (res) {
           case 'NSW':
@@ -733,8 +736,8 @@ allContrlActReq= [];
     while (this.personResFA().length) {
       this.personResFA().removeAt(0);
     }
+    this.allCOPSelected=[];
     this.jobTaskSelected.forEach((data, i) => {
-      this.allCOPSelected=[];
 
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
@@ -742,11 +745,13 @@ allContrlActReq= [];
      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
-      this.allCOPSelected.push(data.allCOPTitle)
 
+      data.allCOPTitle.forEach(element => {        
+        this.allCOPSelected.push(element)
+      });
     });
 
-    console.log('jobTaskSelected', this.jobTaskSelected);
+    // console.log('allCOPSelected', this.allCOPSelected);
     // console.log(this.residlRiskLevelFA().value);
   }
   getAllJobNumber() {
@@ -805,8 +810,53 @@ allContrlActReq= [];
       this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
-      this.allCOPSelected.push(data.allCOPTitle)
+console.log("data",data);
+
+      data.allCOPTitle.forEach(element => {        
+        this.allCOPSelected.push(element)
+      });
+     
     });
     console.log("allCOPSelected", this.allCOPSelected);
+  }
+  addItem(type,i){
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: '550px',
+      // height:'50%',
+      data: type,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+      if(type==='identifyHazards'){
+        this.jobTaskSelected[i].allHazardsTitle.push(result);
+      }
+      if(type==='ctrlActreq'){
+        this.jobTaskSelected[i].allContrlActReqTitle.push(result);
+      }
+
+      console.log('The dialog was closed');
+    });
+  }
+  addChemical(){
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: '550px',
+      // height:'50%',
+      data: 'chemical',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+    if(result !='false' && result){
+    let data={
+        title:result
+      }
+      this.logicalFormInfo.addChemical(data).subscribe((res:any)=> {
+        this.getAllChemical();
+     })
+    }
+
+      console.log('The dialog was closed');
+    });
   }
 }

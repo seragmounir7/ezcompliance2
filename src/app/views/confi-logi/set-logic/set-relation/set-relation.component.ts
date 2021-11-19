@@ -26,6 +26,66 @@ export class SetRelationComponent implements OnInit {
   allCodeOfPract = [];
   isLinear = false;
   jobTaskId = null;
+  stepperList:any[]=[
+    {
+      name:'HighRisk Construction',
+      i:1,
+      code:'highRisk'
+
+    },
+    {
+      name:'PPE',
+      i:0,
+      code:'ppe'
+    },
+    {
+      name:'Licence',
+      i:0,
+       code:'licence'
+    },
+    {
+      name:'Identify Hazards',
+      i:0,
+       code:'identifyHazards'
+    },
+    {
+      name:'Risk Level',
+      i:0,
+       code:'riskLevel'
+    },
+    {
+      name:'Control Action Required',
+      i:0,
+       code:'ctrlActreq'
+    },
+    {
+      name:'Code of Practice',
+      i:0,
+       code:'codeOfPract'
+    },
+    {
+      name:'Residule Risk Level',
+      i:0,
+       code:'resRiskLevel'
+    },
+    // {
+    //   name:'Code of Practice',
+    //   i:0,
+    //    code:'codeOfPract'
+    // },
+    {
+      name:'Chemical related Task',
+      i:0,
+       code:''
+    },
+    {
+      name:'Person Responsible',
+      i:0,
+       code:'perResbl'
+    }
+  ]
+
+  count:number=0
 
   constructor(
     private route: ActivatedRoute,
@@ -37,15 +97,15 @@ export class SetRelationComponent implements OnInit {
 
   ngOnInit(): void {
     this.JobTaskDetail = this.fb.group({
-      highRiskConstr: [''],
-      PPE: [''],
-      codeOfPract: [''],
-      LicenceCat: [''],
-      identifyHazrds: [''],
-      contrActReq: [''],
-      riskLevel: [''],
-      residualRiskL: [''],
-      personResp: [''],
+      highRiskConstr: [],
+      PPE: [],
+      codeOfPract: [],
+      LicenceCat: [],
+      identifyHazrds: [],
+      contrActReq: [],
+      riskLevel: [],
+      residualRiskL: [],
+      personResp: [],
       chemical: [],
     });
 
@@ -153,40 +213,51 @@ export class SetRelationComponent implements OnInit {
     console.log(this.JobTaskDetail.value);
     let allContrlActReqTitle=[];
     let temp1=this.JobTaskDetail.get('contrActReq').value;
-    this.allContrlActReq.forEach(element1 => {
-      temp1.forEach(element2 => {
-        if(element1._id===element2){
-          allContrlActReqTitle.push(element1.title)
-        }
+    if(temp1!=null){
+      this.allContrlActReq.forEach(element1 => {
+        temp1.forEach(element2 => {
+          if(element1._id===element2){
+            allContrlActReqTitle.push(element1.title)
+          }
+        });
       });
-    });
+    }
+  
+ 
+   
     let allHazardsTitle=[];
     let temp2=this.JobTaskDetail.get('identifyHazrds').value;
-    this.allHazards.forEach(element1 => {
-      temp2.forEach(element2 => {
-        if(element1._id===element2){
-          allHazardsTitle.push(element1.title)
-        }
+    if(temp2!=null){
+      this.allHazards.forEach(element1 => {
+        temp2.forEach(element2 => {
+          if(element1._id===element2){
+            allHazardsTitle.push(element1.title)
+          }
+        });
       });
-    });
+    }
+  
     let allCOPTitle=[];
     let temp3=this.JobTaskDetail.get('codeOfPract').value;
-    this.allCodeOfPract.forEach(element1 => {
-      temp3.forEach(element2 => {
-        if(element1._id===element2){
-          allCOPTitle.push(element1.title)
-        }
-      });
-    });
+    if(temp3!=null){
+      this.allCodeOfPract.forEach(element1 => {
+        temp3.forEach(element2 => {
+          if(element1._id===element2){
+            allCOPTitle.push(element1.title)
+          }
+        });
+      })
+    }
+  ;
     let data = {
       title: this.jobTask.title,
-      risk: this.JobTaskDetail.get('highRiskConstr').value,
-      codeOfPractice: this.JobTaskDetail.get('codeOfPract').value,
-      PPE: this.JobTaskDetail.get('PPE').value,
+      risk: this.JobTaskDetail.get('highRiskConstr').value||[],
+      codeOfPractice: this.JobTaskDetail.get('codeOfPract').value||[],
+      PPE: this.JobTaskDetail.get('PPE').value||[],
       tradeCategoryId:this.jobTask.tradeCategoryId,
-      licence: this.JobTaskDetail.get('LicenceCat').value,
-      identifyHazard: this.JobTaskDetail.get('identifyHazrds').value,
-      controlActionRequired: this.JobTaskDetail.get('contrActReq').value,
+      licence: this.JobTaskDetail.get('LicenceCat').value||[],
+      identifyHazard: this.JobTaskDetail.get('identifyHazrds').value||[],
+      controlActionRequired: this.JobTaskDetail.get('contrActReq').value||[],
       riskLevel: this.JobTaskDetail.get('riskLevel').value,
       residualRisk: this.JobTaskDetail.get('residualRiskL').value,
       staffId: this.JobTaskDetail.get('personResp').value,
@@ -294,6 +365,35 @@ export class SetRelationComponent implements OnInit {
       }
       console.log('The dialog was closed');
     });
+  }
+  prev(){
+    
+    if(this.count != this.stepperList.length+1 && this.count !=0){
+      this.count--
+      this.stepperList.map(x => {
+        x.i = 0
+      }) 
+      this.stepperList[this.count].i = 1
+      
+    }
+  }
+  next(){
+    if(this.count != this.stepperList.length-1){
+      this.count++
+      this.stepperList.map(x => {
+        x.i = 0
+      }) 
+      this.stepperList[this.count].i = 1
+      
+    }
+  }
+  handleClick(index){
+    console.log(index)
+    this.count = index
+    this.stepperList.map(x => {
+      x.i = 0
+    }) 
+    this.stepperList[this.count].i = 1
   }
   // addItem(type) {
   //   switch (type) {

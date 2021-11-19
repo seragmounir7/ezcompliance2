@@ -11,6 +11,7 @@ import { RiskAssessmentSWMSComponent } from './risk-assessment-swms/risk-assessm
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     HazardReportComponent,
     IncidentReportComponent,
     RiskAssessmentSWMSComponent,
+    AddItemComponent,
   ],
   imports: [
     CommonModule,
