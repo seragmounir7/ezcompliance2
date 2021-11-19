@@ -26,6 +26,66 @@ export class SetRelationComponent implements OnInit {
   allCodeOfPract = [];
   isLinear = false;
   jobTaskId = null;
+  stepperList:any[]=[
+    {
+      name:'HighRisk Construction',
+      i:1,
+      code:'highRisk'
+
+    },
+    {
+      name:'PPE',
+      i:0,
+      code:'ppe'
+    },
+    {
+      name:'Licence',
+      i:0,
+       code:'licence'
+    },
+    {
+      name:'Identify Hazards',
+      i:0,
+       code:'identifyHazards'
+    },
+    {
+      name:'Risk Level',
+      i:0,
+       code:'riskLevel'
+    },
+    {
+      name:'Control Action Required',
+      i:0,
+       code:'ctrlActreq'
+    },
+    {
+      name:'Code of Practice',
+      i:0,
+       code:'codeOfPract'
+    },
+    {
+      name:'Residule Risk Level',
+      i:0,
+       code:'resRiskLevel'
+    },
+    // {
+    //   name:'Code of Practice',
+    //   i:0,
+    //    code:'codeOfPract'
+    // },
+    {
+      name:'Chemical related Task',
+      i:0,
+       code:''
+    },
+    {
+      name:'Person Responsible',
+      i:0,
+       code:'perResbl'
+    }
+  ]
+
+  count:number=0
 
   constructor(
     private route: ActivatedRoute,
@@ -37,15 +97,15 @@ export class SetRelationComponent implements OnInit {
 
   ngOnInit(): void {
     this.JobTaskDetail = this.fb.group({
-      highRiskConstr: [''],
-      PPE: [''],
-      codeOfPract: [''],
-      LicenceCat: [''],
-      identifyHazrds: [''],
-      contrActReq: [''],
-      riskLevel: [''],
-      residualRiskL: [''],
-      personResp: [''],
+      highRiskConstr: [],
+      PPE: [],
+      codeOfPract: [],
+      LicenceCat: [],
+      identifyHazrds: [],
+      contrActReq: [],
+      riskLevel: [],
+      residualRiskL: [],
+      personResp: [],
       chemical: [],
     });
 
@@ -64,7 +124,7 @@ export class SetRelationComponent implements OnInit {
           this.JobTaskDetail.patchValue({
             highRiskConstr: this.jobTask.risk,
             PPE: this.jobTask.PPE,
-            codeOfPract: this.jobTask.PPE,
+            codeOfPract: this.jobTask.codeOfPractice,
            LicenceCat: this.jobTask.licence,
             identifyHazrds: this.jobTask.identifyHazard,
             contrActReq: this.jobTask.controlActionRequired,
@@ -92,13 +152,13 @@ export class SetRelationComponent implements OnInit {
 
   getAllResidualRiskLevel() {
     this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
-      console.log('this.resiRiskLevelData', res.data);
+    //  console.log('this.resiRiskLevelData', res.data);
       this.resiRiskLevelData = res.data;
     });
   }
   getAllRiskLevel() {
     this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
-      console.log('this.riskLevelData', res.data);
+//console.log('this.riskLevelData', res.data);
       this.riskLevelData = res.data;
     });
   }
@@ -110,20 +170,20 @@ export class SetRelationComponent implements OnInit {
   }
   getAllHighRisk() {
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-      console.log('Risk=>', res);
+//console.log('Risk=>', res);
       this.highRiskConstructionData = res.data;
     });
   }
   getAllPPE() {
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-      console.log('PPE=>', res);
+    //  console.log('PPE=>', res);
       this.PPESelectionData = res.data;
     });
   }
   getAllCodeOfPractice() {
    
     this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
-      console.log('codeOfPractice=>', res);
+      //console.log('codeOfPractice=>', res);
    this.allCodeOfPract=res.data;
     });
  
@@ -131,13 +191,13 @@ export class SetRelationComponent implements OnInit {
 
   getAllHazard() {
     this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
-      console.log('getAllHazards=>', res);
+   //   console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
   getAllContrActReq() {
     this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
-      console.log('getAllHazards=>', res);
+    //  console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
     });
   }
@@ -145,7 +205,7 @@ export class SetRelationComponent implements OnInit {
     console.log('getLicenceByTradeCat', id);
 
     this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
-      console.log('getAllLicenceCat=>', res);
+   //   console.log('getAllLicenceCat=>', res);
       this.licenceByTradecat = res.data.licenceData;
     });
   }
@@ -153,43 +213,58 @@ export class SetRelationComponent implements OnInit {
     console.log(this.JobTaskDetail.value);
     let allContrlActReqTitle=[];
     let temp1=this.JobTaskDetail.get('contrActReq').value;
-    this.allContrlActReq.forEach(element1 => {
-      temp1.forEach(element2 => {
-        if(element1._id===element2){
-          allContrlActReqTitle.push(element1.title)
-        }
+    if(temp1!=null){
+      this.allContrlActReq.forEach(element1 => {
+        temp1.forEach(element2 => {
+          if(element1._id===element2){
+            allContrlActReqTitle.push(element1.title)
+          }
+        });
       });
-    });
+    }
+  
+ 
+   
     let allHazardsTitle=[];
     let temp2=this.JobTaskDetail.get('identifyHazrds').value;
-    this.allHazards.forEach(element1 => {
-      temp2.forEach(element2 => {
-        if(element1._id===element2){
-          allHazardsTitle.push(element1.title)
-        }
+    if(temp2!=null){
+      this.allHazards.forEach(element1 => {
+        temp2.forEach(element2 => {
+          if(element1._id===element2){
+            allHazardsTitle.push(element1.title)
+          }
+        });
       });
-    });
+    }
+  
     let allCOPTitle=[];
     let temp3=this.JobTaskDetail.get('codeOfPract').value;
-    this.allCodeOfPract.forEach(element1 => {
-      temp3.forEach(element2 => {
-        if(element1._id===element2){
-          allCOPTitle.push(element1.title)
-        }
-      });
-    });
+    if(temp3!=null){
+      this.allCodeOfPract.forEach(element1 => {
+        temp3.forEach(element2 => {
+          if(element1._id===element2){
+            allCOPTitle.push(element1.title)
+          }
+        });
+      })
+    }
+  ;
     let data = {
       title: this.jobTask.title,
-      risk: this.JobTaskDetail.get('highRiskConstr').value,
-      PPE: this.JobTaskDetail.get('PPE').value,
+      risk: this.JobTaskDetail.get('highRiskConstr').value||[],
+      codeOfPractice: this.JobTaskDetail.get('codeOfPract').value||[],
+      PPE: this.JobTaskDetail.get('PPE').value||[],
       tradeCategoryId:this.jobTask.tradeCategoryId,
-      licence: this.JobTaskDetail.get('LicenceCat').value,
-      identifyHazard: this.JobTaskDetail.get('identifyHazrds').value,
-      controlActionRequired: this.JobTaskDetail.get('contrActReq').value,
+      licence: this.JobTaskDetail.get('LicenceCat').value||[],
+      identifyHazard: this.JobTaskDetail.get('identifyHazrds').value||[],
+      controlActionRequired: this.JobTaskDetail.get('contrActReq').value||[],
       riskLevel: this.JobTaskDetail.get('riskLevel').value,
       residualRisk: this.JobTaskDetail.get('residualRiskL').value,
       staffId: this.JobTaskDetail.get('personResp').value,
       chemical: this.JobTaskDetail.get('chemical').value,
+      allHazardsTitle:allHazardsTitle,
+      allContrlActReqTitle:allContrlActReqTitle,
+      allCOPTitle:allCOPTitle,
       set: true,
     };
 
@@ -290,6 +365,35 @@ export class SetRelationComponent implements OnInit {
       }
       console.log('The dialog was closed');
     });
+  }
+  prev(){
+    
+    if(this.count != this.stepperList.length+1 && this.count !=0){
+      this.count--
+      this.stepperList.map(x => {
+        x.i = 0
+      }) 
+      this.stepperList[this.count].i = 1
+      
+    }
+  }
+  next(){
+    if(this.count != this.stepperList.length-1){
+      this.count++
+      this.stepperList.map(x => {
+        x.i = 0
+      }) 
+      this.stepperList[this.count].i = 1
+      
+    }
+  }
+  handleClick(index){
+    console.log(index)
+    this.count = index
+    this.stepperList.map(x => {
+      x.i = 0
+    }) 
+    this.stepperList[this.count].i = 1
   }
   // addItem(type) {
   //   switch (type) {

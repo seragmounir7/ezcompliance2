@@ -1,11 +1,57 @@
-.example-additional-selection {
-    opacity: 0.75;
-    font-size: 0.75em;
-  }
-  .mat-stepper-horizontal {
-    margin-top: 8px;
-  }
+// .example-additional-selection {
+//     opacity: 0.75;
+//     font-size: 0.75em;
+//   }
+//   .mat-stepper-horizontal {
+//     margin-top: 8px;
+//   }
   
-  .mat-form-field {
-    margin-top: 16px;
-  }
+//   .mat-form-field {
+//     margin-top: 16px;
+//   }
+@import 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css';
+@import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+.nav-pills-custom .nav-link {
+    color: #aaa;
+    background: #fff;
+    position: relative;
+}
+
+.nav-pills-custom .nav-link.active {
+    color: #45b649;
+    background: #fff;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* Add indicator arrow for the active tab */
+@media (min-width: 992px) {
+    .nav-pills-custom .nav-link::before {
+        content: '';
+        display: block;
+        border-top: 8px solid transparent;
+        border-left: 10px solid #fff;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
+
+.nav-pills-custom .nav-link.active::before {
+    opacity: 1;
+}
+
+
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(to left, #dce35b, #45b649);
+}

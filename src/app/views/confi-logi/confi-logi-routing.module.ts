@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: '', component: ConfiLogiComponent },
   { path: 'setLogic', component: SetLogicComponent },
   { path: 'setJobNumber', component: JobNumberComponent },
+  // { path: 'setRelation', component: TestLogicComponent },
   { path: 'setRelation', component: SetRelationComponent },
-  { path: 'testRelation', component: TestLogicComponent },
 ];
 
 @NgModule({
