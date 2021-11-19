@@ -34,13 +34,16 @@
                   
                   
                     <td>
-                      <button
+                      <!-- <button
                         class="btn editBtn "
-                        (click)="openDialogEdit(serviceDetail)"
+                       
                       >
-                        <i class="fas fa-pencil-alt " title="Edit"></i>
+                        <i class="fas fa-pencil-alt " aria-hidden="true" title="Edit"></i>
+                      </button> -->
+                      <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon">
+                        <mat-icon  (click)="openDialogEdit(serviceDetail)">edit</mat-icon>
                       </button>
-  
+                      
                    
                     </td>
                   </tr>
