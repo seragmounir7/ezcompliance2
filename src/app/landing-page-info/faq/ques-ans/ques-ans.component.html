@@ -44,8 +44,15 @@
 
 <ng-container matColumnDef="action">
   <th mat-header-cell *matHeaderCellDef> Action </th>
-  <td mat-cell *matCellDef="let element"> <i class="fas fa-pencil-alt mr-2" (click)="edit(element)" title="edit"></i> <i class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i> 
-  </td>
+  <td mat-cell *matCellDef="let element">
+     <!-- <i class="fas fa-pencil-alt mr-2" (click)="edit(element)" title="edit"></i> <i class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i>  -->
+     <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon">
+      <mat-icon (click)="edit(element)" title="edit">edit</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Example icon button with a delete icon">
+      <mat-icon (click)="delete(element)">delete</mat-icon>
+    </button>
+    </td>
 </ng-container>
 <!-- <ng-container matColumnDef="delete">
   <th mat-header-cell *matHeaderCellDef> Delete </th>
