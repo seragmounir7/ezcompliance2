@@ -78,7 +78,7 @@ export class AddSiteInfoComponent implements OnInit {
       width: "630px",
 		});
 		dialogRef.afterClosed().subscribe((result) => {
-      if(result == 'ok'){
+      if(result == 'true'){
         this.getAllSites()
       }
 			console.log("CustomerInfoComponent -> openDialog -> result", result);
@@ -94,7 +94,7 @@ export class AddSiteInfoComponent implements OnInit {
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "ok")) {
+      if ((result == "true")) {
         this.getAllSites()
       }
       console.log("The dialog was closed");
