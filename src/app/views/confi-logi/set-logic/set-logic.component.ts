@@ -17,6 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddItemComponent } from './set-relation/add-item/add-item.component';
+import { AddJobTaskComponent } from './add-job-task/add-job-task.component';
 @Component({
   selector: 'app-set-logic',
   templateUrl: './set-logic.component.html',
@@ -425,5 +426,23 @@ controlActionRequired=[];
     );
   }
 
+  openDialog(id) {
+		let dialogRef = this.dialog.open(AddJobTaskComponent, {
+     
+			data: {
+				action: "new",
+				userId: id,
+			},
+      width: "500px",
+		});
+		dialogRef.afterClosed().subscribe((result) => {
+      if(result == 'true'){
+        this.getJobTask()
+      }
+			console.log("CustomerInfoComponent -> openDialog -> result", result);
+			
+			console.log("The dialog was closed");
+		});
+	}
 
 }

@@ -180,12 +180,12 @@
   <!-- stepper logic -->
   
 <h2 class="ml-2"> Set Relation</h2>
-<!-- <div class="col ml-2 mb-2">
+<div class="col ml-2 mb-2">
   
-  <button  class="btn btn-outline-primary mt-1 mr-2 float-right"[routerLink]="['/admin/siteInfo/addJobTask']">
+  <button  class="btn btn-outline-primary mt-1 mr-2 float-right"  (click)="openDialog('id')" >
     <i class="fas fa-folder-plus mr-2"></i>Add Job Task 
   </button>
-</div> -->
+</div>
 <div class="">
   <table mat-table [dataSource]="dataSource">
 

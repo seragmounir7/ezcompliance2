@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ConfiLogiComponent } from './confi-logi.component';
 import { TestLogicComponent } from './set-logic/test-logic/test-logic.component';
+import { AddJobTaskComponent } from './set-logic/add-job-task/add-job-task.component';
 
 const routes: Routes = [
   { path: '', component: ConfiLogiComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'setJobNumber', component: JobNumberComponent },
   // { path: 'setRelation', component: TestLogicComponent },
   { path: 'setRelation', component: SetRelationComponent },
+  {path:'addTask',component:AddJobTaskComponent},
 ];
 
 @NgModule({
