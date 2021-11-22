@@ -1,0 +1,36 @@
+
+  <div class="container px-4 py-4 bg-white">
+    <form [formGroup]="jobTaskDetails" (ngSubmit)="onFormSubmit()">
+      <h2>Add Job Task</h2>
+      <br />
+     
+     
+          <div class="row ">
+            
+            <div class="col-6">
+              <input
+                type="text"
+                formControlName="title"
+                class="form-control sign"
+                id="title"
+              />
+            </div>
+            <div class="col-6">
+              <select class="form-select form-control" aria-label="Default select example" formControlName="tradeCategoryId">
+                <option value="" selected hidden>Select category</option>
+                <option *ngFor="let tradeCat of licenceCatAll" [value]="tradeCat._id">{{tradeCat.title}}</option>
+           
+              </select>
+            </div>
+          
+          </div>
+  
+        
+      
+      <br />
+  
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary"[disabled]="jobTaskDetails.invalid">Add</button>
+      </div>
+    </form>
+  </div>
