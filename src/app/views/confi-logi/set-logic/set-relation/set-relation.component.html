@@ -747,12 +747,41 @@
       <div class="col-6">
         <mat-form-field class="container" appearance="fill">
           <mat-label>Person Responsible</mat-label>
+          <mat-select formControlName="personResp" multiple>
+            <mat-select-trigger>
+              <span
+                *ngIf="!JobTaskDetail.get('personResp').value?.length"
+                class="example-additional-selection"
+              >
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('personResp').value?.length == 1"
+                class="example-additional-selection"
+              >
+                One Item selected
+              </span>
+              <span
+                *ngIf="JobTaskDetail.get('personResp').value?.length > 1"
+                class="example-additional-selection"
+              >
+                More than one selected
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let parameter of staff"
+              [value]="parameter._id"
+              >{{ parameter.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field class="container" appearance="fill">
+          <mat-label>Person Responsible</mat-label>
           <mat-select formControlName="personResp">
             <mat-option *ngFor="let person of staff" [value]="person._id">
               {{ person.title }}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
       <div class="col-1 my-auto">
         <!--  -->

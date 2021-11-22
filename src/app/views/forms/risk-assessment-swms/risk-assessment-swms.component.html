@@ -1039,14 +1039,14 @@
               <div class="col-md-4 my-3">
                 <div class="">
                   <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
-                  <select
-                    multiple
-                    class="form-control"
+                  <select                    
+                    class="form-control form-select"
                     id="sel2"
                     name="sellist2"
+                    multiple
                   >
                     <option *ngFor="let hazard of item.allHazardsTitle">
-                      {{ hazard }}
+                      {{ hazard }}                  
                     </option>
                   </select>
                 </div>
