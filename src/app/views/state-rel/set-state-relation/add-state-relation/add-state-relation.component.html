@@ -114,7 +114,7 @@
      <div class="row" [formGroup]="SetState">
        
           <div class="col-4">
-            <select class="form-select form-control" aria-label="Default select example" formControlName="jurisdiction" >
+            <select class="form-select form-control" aria-label="Default select example" formControlName="jurisdictionId" >
                <option value="" selected hidden> Select Jurisdiction</option>
               <option  *ngFor="let parameter of JurisdictionData"
               [value]="parameter._id">{{ parameter.title }}</option>
@@ -122,7 +122,7 @@
             </select>
             </div>
             <div class="col-4">
-              <select class="form-select form-control" aria-label="Default select example" formControlName="safetyLegislation"  >
+              <select class="form-select form-control" aria-label="Default select example" formControlName="safetyLegislationId"  >
                  <option value="" selected hidden> Select Safety Legislation</option>
                 <option *ngFor="let parameter of safety"
                 [value]="parameter._id">{{ parameter.act }}{{ parameter.regulation }}</option>
@@ -130,7 +130,7 @@
               </select>
               </div>
               <div class="col-4 ">
-                <select class="form-select form-control" aria-label="Default select example" formControlName="regulator" >
+                <select class="form-select form-control" aria-label="Default select example" formControlName="regulatorId" >
                    <option value="" selected hidden> Select Regulator</option>
                   <option *ngFor="let parameter of regulatorData"
                   [value]="parameter._id">{{ parameter.title }}</option>

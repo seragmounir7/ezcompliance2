@@ -9,7 +9,18 @@
       class="btn btn-outline-primary  mr-2 float-right"><i  class="fas fa-plus"></i> Add Chemical
     </button>
   </div>
+  <div class="col-6">
+    <mat-form-field>
+      <input
+        matInput
+        #input
+        placeholder="Search"
+        (keyup)="applyFilter($event)"
+      />
+    </mat-form-field>
+  </div>
   <div >
+
     <table mat-table [dataSource]="dataSource">
   
       <!-- Position Column -->
@@ -54,6 +65,9 @@
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Data Not  Found  "{{input.value}}"</td>
+      </tr>
     </table>
   
     <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">

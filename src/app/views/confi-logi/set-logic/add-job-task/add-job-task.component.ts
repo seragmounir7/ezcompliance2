@@ -17,10 +17,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-job-task.component.scss']
 })
 export class AddJobTaskComponent implements OnInit {
-
+  dataRec: any;
   jobTaskDetails!: FormGroup;
-  formData: any;;
+  addjob!:FormGroup;
+  formData: any;
+  Edit=false;
+  Add=true;
   licenceCatAll=[];
+  Id:any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -28,14 +32,53 @@ export class AddJobTaskComponent implements OnInit {
     private dialogRef: MatDialogRef<AddJobTaskComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
   ) { 
-    this.jobTaskDetails=this.fb.group({
+    this.dataRec = data;
+    this.Id=data._id;
+    console.log("datarec",this.dataRec)
+    this.addjob=this.fb.group({
       title:['',Validators.required],
       tradeCategoryId: ['', Validators.required],      
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.jobTaskDetails=this.fb.group({
+
+      title:[this.dataRec.title,Validators.required],
+      tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],      
+    });
     this.getAllCategories();
+    if (this.Id != "") {
+      this.Eddit();
+    }
+    else {
+      this.Added();
+
+
+    }
+  }
+  
+  Added() {
+    if (this.Edit == true) {
+      this.Edit = false;
+      this.Add = true;
+    
+
+    }
+    else {
+      this.Add = true;
+    }
+  }
+
+  Eddit() {
+    if (this.Add == true) {
+      this.Add = false;
+      this.Edit = true;
+
+    }
+    else {
+      this.Edit = true;
+    }
   }
   getAllCategories() {
     this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
@@ -45,8 +88,32 @@ export class AddJobTaskComponent implements OnInit {
   }
   onFormSubmit() {
     console.log(this.jobTaskDetails.get('title').value);
-   
-    this.logicalFormInfo.addJobTask(this.jobTaskDetails.value).subscribe((data) => {
+    let data = {
+      title: this.jobTaskDetails.get('title').value,
+      tradeCategoryId:  this.jobTaskDetails.get('tradeCategoryId').value
+    };
+    console.log("edit",data)
+    this.logicalFormInfo.updateJobTask(data, this.dataRec._id).subscribe((data) => {
+      console.log('JOBTask=>', data);
+      this.dialogRef.close('true');
+      Swal.fire({
+        title: 'JobTask Updated successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      }); 
+          
+    },(err)=>{console.error(err);} 
+  
+    );
+    
+  }
+  addForm() {
+    // let data = {
+    //   title: this.addjob.get('title').value,
+    //   tradeCategoryId:this.addjob.get('tradeCategoryId').value
+    // };
+    console.log("addForm",this.addjob.value)
+    this.logicalFormInfo.addJobTask(this.addjob.value).subscribe((data) => {
       console.log('JOBTask=>', data);
       this.dialogRef.close('true');
       Swal.fire({
@@ -58,6 +125,8 @@ export class AddJobTaskComponent implements OnInit {
     },(err)=>{console.error(err);} 
   
     );
-    
   }
+  close() {
+    this.dialogRef.close();
+}
 }
