@@ -847,10 +847,10 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (type === 'identifyHazards') {
+      if (type === 'identifyHazards' && result !='false') {
         this.jobTaskSelected[i].allHazardsTitle.push(result);
       }
-      if (type === 'ctrlActreq') {
+      if (type === 'ctrlActreq'  && result !='false') {
         this.jobTaskSelected[i].allContrlActReqTitle.push(result);
       }
 

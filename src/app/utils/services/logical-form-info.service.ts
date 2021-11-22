@@ -592,7 +592,7 @@ export class LogicalFormInfoService {
 
 export interface Site {
   siteName: string;
-  streetNumber: number;
+  streetNumber: string;
   streetAddress: string;
   suburb: string;
   state: string;
@@ -602,8 +602,8 @@ export interface Site {
 
 export interface Customer {
   customerName: string;
-  customerContact: number;
-  customerContactPhone: number;
+  customerContact: string ;
+  customerContactPhone: string;
   customerEmail: string;
 }
 
@@ -616,13 +616,13 @@ export interface JobNumber {
 
 export interface ArrObj {
   siteName: string;
-  streetNumber: number;
+  streetNumber: string;
   streetAddress: string;
   suburb: string;
   state: string;
   customerName: string;
-  customerContact: number;
-  customerContactPhone: number;
+  customerContact: string;
+  customerContactPhone: string;
   customerEmail: string;
 }
 
