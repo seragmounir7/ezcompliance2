@@ -17,10 +17,14 @@ import { AddAndEditJuriComponent } from './juridiction/add-and-edit-juri/add-and
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddAndEditCodeComponent } from './code-of-pract/add-and-edit-code/add-and-edit-code.component';
 import { AddAndEditSafetyComponent } from './safety-legislation/add-and-edit-safety/add-and-edit-safety.component';
+import { StatesComponent } from './states/states.component';
+import { AddAndEditStatesComponent } from './states/add-and-edit-states/add-and-edit-states.component';
+import { SetStateRelationComponent } from './set-state-relation/set-state-relation.component';
+import { AddStateRelationComponent } from './set-state-relation/add-state-relation/add-state-relation.component';
 
 
 @NgModule({
-  declarations: [StateRelComponent, JuridictionComponent, SafetyLegislationComponent, RegulatorComponent, CodeOfPractComponent, AddAndEditRegComponent, AddAndEditJuriComponent, AddAndEditCodeComponent, AddAndEditSafetyComponent],
+  declarations: [StateRelComponent, JuridictionComponent, SafetyLegislationComponent, RegulatorComponent, CodeOfPractComponent, AddAndEditRegComponent, AddAndEditJuriComponent, AddAndEditCodeComponent, AddAndEditSafetyComponent, StatesComponent, AddAndEditStatesComponent, SetStateRelationComponent, AddStateRelationComponent],
   imports: [
     CommonModule,
     StateRelRoutingModule,
