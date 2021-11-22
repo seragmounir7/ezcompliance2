@@ -857,13 +857,11 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
-      if (type === 'identifyHazards') {
-        this.jobTaskSelected[i].allHazardsTitle.splice(0,0,result);
+      if (type === 'identifyHazards' && result !='false') {
+        this.jobTaskSelected[i].allHazardsTitle.push(result);
       }
-      if (type === 'ctrlActreq') {
-        this.jobTaskSelected[i].allContrlActReqTitle.splice(0,0,result);
-        
+      if (type === 'ctrlActreq'  && result !='false') {
+        this.jobTaskSelected[i].allContrlActReqTitle.push(result);
       }
 
       console.log('The dialog was closed');

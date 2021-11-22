@@ -786,7 +786,7 @@
         <h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
         <div class="row">
           <div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
-          <label for=""> {{i+1}}. {{item}}</label>
+          <label for=""><i class="fas fa-circle mr-1"></i><div>{{item}}</div> </label>
           </div>
         </div>
         <hr />
