@@ -14,13 +14,6 @@ export class AddStateRelationComponent implements OnInit {
   SetState!: FormGroup;
   states = null;
   stateId = null;
-  // PPESelectionData: [];
-  // licenseAndQual: [];
-  // allHazards: [];
-  // allContrlActReq: [];
-  // licenceCatAll: [];
-
-
   JurisdictionData: [];
   safety: [];
   codeData: [];
@@ -33,39 +26,36 @@ export class AddStateRelationComponent implements OnInit {
 
   ngOnInit(): void {
     this.SetState = this.fb.group({
-      jurisdiction: ['',Validators.required],
-      safetyLegislation: ['',Validators.required],
-     
-      regulator: ['',Validators.required],
-   
+      jurisdictionId: ['', Validators.required],
+      safetyLegislationId: ['', Validators.required],
+      regulatorId: ['', Validators.required],
+
     });
     this.route
       .queryParams
       .subscribe((id) => {
         console.log(id);
         this.stateId = id.id;
-        
-       this.logicalFormInfo.getstatesById(this.stateId).subscribe((res: any) => {
-          console.log("getstatesById=>",res);
+        this.logicalFormInfo.getstatesById(this.stateId).subscribe((res: any) => {
+          console.log("getstatesById=>", res);
           this.states = res.data;
-          console.log( "states",this.states);
+          console.log("states", this.states);
           if (this.states.set == true) {
             this.SetState.patchValue({
-              jurisdiction: this.states.jurisdiction,
-              safetyLegislation: this.states.safetyLegislation,
-           
-              regulator: this.states.regulator,
-            
+              jurisdictionId: this.states.jurisdictionId,
+              safetyLegislationId: this.states.safetyLegislationId,
+              regulatorId: this.states.regulatorId,
+
             });
           }
         })
       });
-  
+
 
     this.getAllJurisdiction();
     this.getAllSafe();
     this.getAllRegulator();
-  
+
   }
 
   getAllRegulator() {
@@ -75,7 +65,7 @@ export class AddStateRelationComponent implements OnInit {
 
     })
   }
- 
+
   getAllSafe() {
     this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
       console.log("this.safety", res)
@@ -88,27 +78,27 @@ export class AddStateRelationComponent implements OnInit {
       this.JurisdictionData = res.data;
     });
   }
- 
-setRelation(){
-  let data ={
-    set:true,
-    title:this.states.title,
-    jurisdiction: this.SetState.get('jurisdiction').value,
-    safetyLegislation: this.SetState.get('safetyLegislation').value,
-     regulator:  this.SetState.get('regulator').value,
-  }
-  console.log("data=>",data)
-  console.log("stateId=>",this.stateId)
-  this.logicalFormInfo.updateStates(data,this.stateId).subscribe((res: any) => {
-    console.log('updateStates=>', res);
-  
-    Swal.fire({
-      title: 'Updated successfully',
-      showConfirmButton: false,
-      timer: 1200,
+
+  setRelation() {
+    let data = {
+      set: true,
+      title: this.states.title,
+      jurisdictionId: this.SetState.get('jurisdictionId').value,
+      safetyLegislationId: this.SetState.get('safetyLegislationId').value,
+      regulatorId: this.SetState.get('regulatorId').value,
+    }
+    console.log("data=>", data)
+    console.log("stateId=>", this.stateId)
+    this.logicalFormInfo.updateStates(data, this.stateId).subscribe((res: any) => {
+      console.log('updateStates=>', res);
+
+      Swal.fire({
+        title: 'Updated successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+      this.router.navigate(['/admin/stateRel/setState'])
     });
-    this.router.navigate(['/admin/stateRel/setState'])
-  });
- 
-}
+
+  }
 }
