@@ -130,7 +130,7 @@ export class SetRelationComponent implements OnInit {
             contrActReq: this.jobTask.controlActionRequired,
             riskLevel: this.jobTask.riskLevel,
             residualRiskL: this.jobTask.residualRisk,
-            personResp: this.jobTask.staffId,
+            personResp: this.jobTask.staff,
             chemical: this.jobTask.chemical,
           });
         }
@@ -217,7 +217,11 @@ export class SetRelationComponent implements OnInit {
       this.allContrlActReq.forEach(element1 => {
         temp1.forEach(element2 => {
           if(element1._id===element2){
-            allContrlActReqTitle.push(element1.title)
+            let data={
+              title:element1.title,
+              id:element1._id
+            }
+            allContrlActReqTitle.push(data)
           }
         });
       });
@@ -231,7 +235,11 @@ export class SetRelationComponent implements OnInit {
       this.allHazards.forEach(element1 => {
         temp2.forEach(element2 => {
           if(element1._id===element2){
-            allHazardsTitle.push(element1.title)
+            let data={
+              title:element1.title,
+              id:element1._id
+            }
+            allHazardsTitle.push(data)
           }
         });
       });
@@ -243,7 +251,28 @@ export class SetRelationComponent implements OnInit {
       this.allCodeOfPract.forEach(element1 => {
         temp3.forEach(element2 => {
           if(element1._id===element2){
-            allCOPTitle.push(element1.title)
+            let data={
+              title:element1.title,
+              id:element1._id
+            }
+            allCOPTitle.push(data)
+          }
+        });
+      })
+    }
+    let staffTitle=[];
+    let temp4=this.JobTaskDetail.get('personResp').value;
+    if(temp4!=null){
+      console.log(temp4);
+      
+      this.staff.forEach(element1 => {
+        temp4.forEach(element2 => {
+          if(element1._id===element2){
+            let data={
+              title:element1.title,
+              id:element1._id
+            }
+            staffTitle.push(data)
           }
         });
       })
@@ -260,11 +289,12 @@ export class SetRelationComponent implements OnInit {
       controlActionRequired: this.JobTaskDetail.get('contrActReq').value||[],
       riskLevel: this.JobTaskDetail.get('riskLevel').value,
       residualRisk: this.JobTaskDetail.get('residualRiskL').value,
-      staffId: this.JobTaskDetail.get('personResp').value,
+      staff: this.JobTaskDetail.get('personResp').value,
       chemical: this.JobTaskDetail.get('chemical').value,
       allHazardsTitle:allHazardsTitle,
       allContrlActReqTitle:allContrlActReqTitle,
       allCOPTitle:allCOPTitle,
+      staffTitle:staffTitle,
       set: true,
     };
 

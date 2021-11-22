@@ -26,6 +26,10 @@ export class AddItemComponent implements OnInit {
     this.addItem = this.fb.group({
       title: ['', Validators.required],
     });
+
+    if(this.dataRec.type==='editIdentifyHazards'||this.dataRec.type==='editCtrlActreq'){
+      this.addItem.get('title').setValue(this.dataRec.title);
+    }
   }
   closeDialog(){
     this.dialogRef.close('false');
@@ -33,10 +37,19 @@ export class AddItemComponent implements OnInit {
   }
 onSubmit(){
   this.dialogRef.close(this.addItem.get('title').value);
-  Swal.fire({
-    title: 'Item  Added successfully',
-    showConfirmButton: false,
-    timer: 1200,
-  }); 
+  if(this.dataRec.type==='editIdentifyHazards'||this.dataRec.type==='editCtrlActreq'){
+    Swal.fire({
+      title: 'Item  updated successfully',
+      showConfirmButton: false,
+      timer: 1200,
+    }); 
+    }else{
+      Swal.fire({
+        title: 'Item  Added successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      }); 
+    }
+
 }
 }

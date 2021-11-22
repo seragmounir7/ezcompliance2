@@ -659,6 +659,16 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       this.allContrlActReq = res.data;
     });
   }
+
+ 
+  deleteHazrds(type,i){
+    if (type === 'identifyHazards') {
+      this.jobTaskSelected[i].allHazardsTitle.splice(i,1);
+    }
+    if (type === 'ctrlActreq') {
+      this.jobTaskSelected[i].allContrlActReqTitle.splice(i,1);
+    }
+  }
   onJobtaskSelect(e, jobTaskRecd) {
     // this.jobTaskSelected=[];
 
@@ -853,15 +863,49 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
-      data: type,
+      data:{
+        type:type,
+        title:''
+      } ,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      let data={
+        title:result,
+        id:''
+      }
       if (type === 'identifyHazards' && result !='false') {
-        this.jobTaskSelected[i].allHazardsTitle.push(result);
+
+        this.jobTaskSelected[i].allHazardsTitle.splice(0,0,data);
       }
       if (type === 'ctrlActreq'  && result !='false') {
-        this.jobTaskSelected[i].allContrlActReqTitle.push(result);
+        this.jobTaskSelected[i].allContrlActReqTitle.splice(0,0,data);
+      }
+
+      console.log('The dialog was closed');
+    });
+  }
+  editHazrds(type,title, i) {
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: '550px',
+      // height:'50%',
+      data:{
+        type:type,
+        title:title
+      } ,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      let data={
+        title:result,
+        id:''
+      }
+      if (type === 'editIdentifyHazards' && result !='false') {
+
+        this.jobTaskSelected[i].allHazardsTitle[i]=data;
+      }
+      if (type === 'editCtrlActreq'  && result !='false') {
+        this.jobTaskSelected[i].allContrlActReqTitle[i]=data;
       }
 
       console.log('The dialog was closed');
@@ -871,7 +915,11 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
-      data: 'chemical',
+      data:{
+        type:'chemical',
+        title:''
+      } ,
+
     });
 
     dialogRef.afterClosed().subscribe((result) => {
