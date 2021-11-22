@@ -8,7 +8,7 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AddItemComponent } from './add-item/add-item.component'; 
+import { AddItemComponent } from './add-item/add-item.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -21,19 +21,19 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   SWMSTab!: FormArray;
   RiskAssessment = true;
   SWMSShow = false;
-  chemicalTask=false;
+  chemicalTask = false;
   //checkboxes array
   jobTask = [];
   staff = [];
-  resiRiskLevel=[];
-riskLevel=[];
+  resiRiskLevel = [];
+  riskLevel = [];
   highRiskConstruction = [];
   PPEselection = [];
   licenseAndQualification = [];
   checkArray = [];
   allJobNumbers = [];
-  allHazards= [];
-allContrlActReq= [];
+  allHazards = [];
+  allContrlActReq = [];
   // riskLevel = [];
   // resdRiskLevel = [];
   statesData = [
@@ -300,6 +300,10 @@ allContrlActReq= [];
   allCOPSelected = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
+  regulatorData: any=[];
+  safety: any=[];
+  JurisdictionData: any=[];
+  states: any=[];
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
@@ -348,11 +352,14 @@ allContrlActReq= [];
     this.getAllChemical();
     this.getAllHazard();
     this.getAllContrActReq();
+    this.getAllRegulator();
+    this.getAllSafe();
+    this.getAllState();
+    this.getAllJurisdiction();
 
-    
 
-    
-    
+
+
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
@@ -377,7 +384,7 @@ allContrlActReq= [];
     //   }
     //  // this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
     // });
-    
+
     this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
       if (res) {
         // console.log(res);
@@ -449,7 +456,7 @@ allContrlActReq= [];
       }
     });
   }
-  jobNoSel(){
+  jobNoSel() {
     this.allJobNumbers.forEach((item) => {
       if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
         console.log('Id found', item);
@@ -467,7 +474,7 @@ allContrlActReq= [];
         });
       }
     });
-         this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
+    this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
 
   }
   addActionRiskLevel() {
@@ -643,13 +650,13 @@ allContrlActReq= [];
     });
   }
   getAllHazard() {
-    this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
+    this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
       // console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
-  getAllContrActReq()  {
-    this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
+  getAllContrActReq() {
+    this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
       // console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
     });
@@ -661,15 +668,15 @@ allContrlActReq= [];
     let item = e.target.value;
     if (e.target.checked) {
       this.checkArray.push(item);
-      console.log("jobTaskRecd",jobTaskRecd);
-   
+      console.log("jobTaskRecd", jobTaskRecd);
+
       this.jobTaskSelected.push(jobTaskRecd);
     } else {
       this.checkArray.forEach((item, j) => {
         if (item == e.target.value) {
           this.checkArray.splice(j, 1);
-          this.jobTaskSelected.splice(j, 1);          
-          return;          
+          this.jobTaskSelected.splice(j, 1);
+          return;
         }
       });
 
@@ -684,14 +691,14 @@ allContrlActReq= [];
     for (let k = 0; k < this.licenceArr.length; k++) {
       this.licenceArr[k] = 0;
     }
-    this.chemicalTask=false;
+    this.chemicalTask = false;
     // console.log(this.checkArray);
-    this.checkArray.forEach((id) => {      
-    
+    this.checkArray.forEach((id) => {
+
       this.jobTaskData.forEach((element) => {
         //looking for chemical task
-        if(element.chemical == "YES"){
-          this.chemicalTask=true;
+        if (element.chemical == "YES") {
+          this.chemicalTask = true;
         }
         if (id === element._id) {
           element.risk.forEach((riskItem) => {
@@ -717,12 +724,12 @@ allContrlActReq= [];
           //   });
           // });
           this.licenseAndQualification.forEach((highRisk, index) => {
-            
+
             if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
               this.licenceArr[index] = 1;
             }
           });
-          
+
         }
       });
     });
@@ -736,17 +743,17 @@ allContrlActReq= [];
     while (this.personResFA().length) {
       this.personResFA().removeAt(0);
     }
-    this.allCOPSelected=[];
+    this.allCOPSelected = [];
     this.jobTaskSelected.forEach((data, i) => {
 
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
       this.addActionPersonRes();
-     this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
+      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
 
-      data.allCOPTitle.forEach(element => {        
+      data.allCOPTitle.forEach(element => {
         this.allCOPSelected.push(element)
       });
     });
@@ -761,31 +768,31 @@ allContrlActReq= [];
       this.allJobNumbers = res.data;
     });
   }
-  getAllStaff(){
-    this.logicalFormInfo.getAllStaff().subscribe((res:any)=> {
+  getAllStaff() {
+    this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
       // console.log(res)
- this.staff=res.data
-   })
+      this.staff = res.data
+    })
   }
-  getAllResidualRiskLevel(){
-    this.logicalFormInfo.getAllResidual().subscribe((res:any)=> {
+  getAllResidualRiskLevel() {
+    this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
       // console.log("this.resiRiskLevelData",res.data)
       this.resiRiskLevel = res.data;
-    
-   })
+
+    })
   }
-  getAllRiskLevel(){
-    this.logicalFormInfo.getAllRiskLevel().subscribe((res:any)=> {
-     // console.log("this.riskLevelData",res.data)
+  getAllRiskLevel() {
+    this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
+      // console.log("this.riskLevelData",res.data)
       this.riskLevel = res.data;
-   
-   })
+
+    })
   }
-  getAllChemical(){
-    this.logicalFormInfo.getAllChemical().subscribe((res:any)=> {
+  getAllChemical() {
+    this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
       //console.log(res)
- this.allChemicals=res.data;
-   })
+      this.allChemicals = res.data;
+    })
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
@@ -802,7 +809,7 @@ allContrlActReq= [];
     while (this.personResFA().length) {
       this.personResFA().removeAt(0);
     }
-    this.allCOPSelected=[];
+    this.allCOPSelected = [];
     this.jobTaskSelected.forEach((data, i) => {
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
@@ -810,16 +817,16 @@ allContrlActReq= [];
       this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
-console.log("data",data);
+      console.log("data", data);
 
-      data.allCOPTitle.forEach(element => {        
+      data.allCOPTitle.forEach(element => {
         this.allCOPSelected.push(element)
       });
-     
+
     });
     console.log("allCOPSelected", this.allCOPSelected);
   }
-  addItem(type,i){
+  addItem(type, i) {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
@@ -828,17 +835,18 @@ console.log("data",data);
 
     dialogRef.afterClosed().subscribe((result) => {
 
-      if(type==='identifyHazards'){
-        this.jobTaskSelected[i].allHazardsTitle.push(result);
+      if (type === 'identifyHazards') {
+        this.jobTaskSelected[i].allHazardsTitle.splice(0,0,result);
       }
-      if(type==='ctrlActreq'){
-        this.jobTaskSelected[i].allContrlActReqTitle.push(result);
+      if (type === 'ctrlActreq') {
+        this.jobTaskSelected[i].allContrlActReqTitle.splice(0,0,result);
+        
       }
 
       console.log('The dialog was closed');
     });
   }
-  addChemical(){
+  addChemical() {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
@@ -847,16 +855,42 @@ console.log("data",data);
 
     dialogRef.afterClosed().subscribe((result) => {
 
-    if(result !='false' && result){
-    let data={
-        title:result
+      if (result != 'false' && result) {
+        let data = {
+          title: result
+        }
+        this.logicalFormInfo.addChemical(data).subscribe((res: any) => {
+          this.getAllChemical();
+        })
       }
-      this.logicalFormInfo.addChemical(data).subscribe((res:any)=> {
-        this.getAllChemical();
-     })
-    }
 
       console.log('The dialog was closed');
+    });
+  }
+  getAllRegulator() {
+    this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
+      console.log("this.regulatorData", res.data)
+      this.regulatorData = res.data;
+
+    })
+  }
+
+  getAllSafe() {
+    this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
+      console.log("this.safety", res)
+      this.safety = res.data
+    })
+  }
+  getAllJurisdiction() {
+    this.logicalFormInfo.getAllJurisdiction().subscribe((res: any) => {
+      console.log('JurisdictionData=>', res);
+      this.JurisdictionData = res.data;
+    });
+  }
+  getAllState() {
+    this.logicalFormInfo.getAllStates().subscribe((res: any) => {
+      console.log('JurisdictionData=>', res);
+      this.states = res.data;
     });
   }
 }
