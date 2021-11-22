@@ -130,20 +130,22 @@
                 >
                 <select
                 class="form-select form-control col"
-                id="siteName"
+                id="statesSWMS"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
               >
-                <option selected hidden>Select</option>
+              <option selected hidden>Select</option>
+              <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
+                <!-- <option selected hidden>Select</option>
                 <option value="NSW">NSW</option>
                 <option value="ACT">ACT</option>
                 <option value="QLD">QLD</option>
                 <option value="NT">NT</option>
                 <option value="SA">SA</option>
                 <option value="NZ">NZ</option>
-                <option value="TAS">TAS</option>
+                <option value="TAS">TAS</option>s
                 <option value="VIC">VIC</option>
-                <option value="WA">WA</option>
+                <option value="WA">WA</option> -->
               </select>
               </div>
             </div>
@@ -557,12 +559,13 @@
               <label for="exampleInputPosition" class="form-label">State</label>
               <select
                 class="form-select form-control col"
-                id="siteName"
+                id="statesSWMS"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
               >
                 <option selected hidden>Select</option>
-                <option value="NSW">NSW</option>
+                <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
+                <!-- <option value="NSW">NSW</option>
                 <option value="ACT">ACT</option>
                 <option value="QLD">QLD</option>
                 <option value="NT">NT</option>
@@ -570,7 +573,7 @@
                 <option value="NZ">NZ</option>
                 <option value="TAS">TAS</option>
                 <option value="VIC">VIC</option>
-                <option value="WA">WA</option>
+                <option value="WA">WA</option> -->
               </select>
             </div>
           </div>
@@ -663,7 +666,8 @@
                 formControlName="jurisdiction"
               >
                 <option selected hidden>Select</option>
-                <option value="NSW">NSW</option>
+                <option [value]="jurisdiction._id" *ngFor="let jurisdiction of JurisdictionData">{{jurisdiction.title}}</option>
+                <!-- <option value="NSW">NSW</option>
                 <option value="ACT">ACT</option>
                 <option value="QLD">QLD</option>
                 <option value="NT">NT</option>
@@ -671,7 +675,7 @@
                 <option value="NZ">NZ</option>
                 <option value="TAS">TAS</option>
                 <option value="VIC">VIC</option>
-                <option value="WA">WA</option>
+                <option value="WA">WA</option> -->
               </select>
             </div>
           </div>
@@ -685,11 +689,11 @@
                 formControlName="safetyLeg"
               >
                 <option value="" selected hidden>Select</option>
-                <option value="NSW_Act">
-                  Act: Work Health and Safety Act 2011 (NSW)&nbsp; Regulation:
-                  Work Health and Safety Regulation 2017 (NSW)
+                <option [value]="safetyLegislation._id" *ngFor="let safetyLegislation of safety">
+                
+                  Act:  {{safetyLegislation.act}}&nbsp; Regulation:{{safetyLegislation.regulation}}
                 </option>
-                <option value="ACT_Act">
+                <!-- <option value="ACT_Act">
                   Act: Work Health and Safety Act 2011 (ACT)&nbsp; Regulation:
                   Work Health and Safety Regulation 2011 (ACT)
                 </option>
@@ -722,7 +726,7 @@
                 <option value="WA_Act">
                   Act: Occupational Safety and Health Act 1984 (WA) Regulation:
                   Occupational Safety and Health Regulations 1996 (WA)
-                </option>
+                </option> -->
               </select>
             </div>
           </div>
@@ -738,7 +742,8 @@
                 formControlName="regulator"
               >
                 <option selected hidden>Select</option>
-                <option value="Reg_NSW">Regulator: SafeWork NSW</option>
+                <option [value]="regulator._id" *ngFor="let regulator of regulatorData">{{regulator.title}}</option>
+                <!-- <option value="Reg_NSW">Regulator: SafeWork NSW</option>
                 <option value="Reg_ACT">Regulator: WorkSafe ACT</option>
                 <option value="Reg_QLD">
                   Regulator: Workplace Health and Safety Queensland
@@ -748,7 +753,7 @@
                 <option value="Reg_TAS">Regulator: WorkSafe Tasmania</option>
                 <option value="Reg_NZ">Regulator: WorkSafe New Zealand</option>
                 <option value="Reg_VIC">Regulator: WorkSafe Victoria</option>
-                <option value="Reg_WA">Regulator: WorkSafe WA</option>
+                <option value="Reg_WA">Regulator: WorkSafe WA</option> -->
               </select>
             </div>
           </div>

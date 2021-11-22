@@ -300,6 +300,10 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   allCOPSelected = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
+  regulatorData: any=[];
+  safety: any=[];
+  JurisdictionData: any=[];
+  states: any=[];
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
@@ -348,6 +352,12 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     this.getAllChemical();
     this.getAllHazard();
     this.getAllContrActReq();
+    this.getAllRegulator();
+    this.getAllSafe();
+    this.getAllState();
+    this.getAllJurisdiction();
+
+
 
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
@@ -875,6 +885,32 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       }
 
       console.log('The dialog was closed');
+    });
+  }
+  getAllRegulator() {
+    this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
+      console.log("this.regulatorData", res.data)
+      this.regulatorData = res.data;
+
+    })
+  }
+
+  getAllSafe() {
+    this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
+      console.log("this.safety", res)
+      this.safety = res.data
+    })
+  }
+  getAllJurisdiction() {
+    this.logicalFormInfo.getAllJurisdiction().subscribe((res: any) => {
+      console.log('JurisdictionData=>', res);
+      this.JurisdictionData = res.data;
+    });
+  }
+  getAllState() {
+    this.logicalFormInfo.getAllStates().subscribe((res: any) => {
+      console.log('JurisdictionData=>', res);
+      this.states = res.data;
     });
   }
 }
