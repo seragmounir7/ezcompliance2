@@ -359,7 +359,6 @@ export class RiskAssessmentSWMSComponent implements OnInit {
 
 
 
-
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
@@ -475,7 +474,6 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       }
     });
     this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
-
   }
   addActionRiskLevel() {
     {
@@ -668,7 +666,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     let item = e.target.value;
     if (e.target.checked) {
       this.checkArray.push(item);
-      console.log("jobTaskRecd", jobTaskRecd);
+      console.log('jobTaskRecd', jobTaskRecd);
 
       this.jobTaskSelected.push(jobTaskRecd);
     } else {
@@ -679,7 +677,6 @@ export class RiskAssessmentSWMSComponent implements OnInit {
           return;
         }
       });
-
     }
 
     for (let k = 0; k < this.riskArr.length; k++) {
@@ -692,47 +689,78 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       this.licenceArr[k] = 0;
     }
     this.chemicalTask = false;
-    // console.log(this.checkArray);
-    this.checkArray.forEach((id) => {
+    console.log('jobTaskSelected', this.jobTaskSelected);
 
-      this.jobTaskData.forEach((element) => {
-        //looking for chemical task
-        if (element.chemical == "YES") {
-          this.chemicalTask = true;
-        }
-        if (id === element._id) {
-          element.risk.forEach((riskItem) => {
-            this.highRiskConstruction.forEach((highRisk, riskIndex) => {
+    this.jobTaskSelected.forEach((element) => {
+      //looking for chemical task
 
-              if (highRisk._id === riskItem) {
-                this.riskArr[riskIndex] = 1;
-              }
-            });
-          });
-          element.PPE.forEach((riskItem) => {
-            this.PPEselection.forEach((highRisk, index) => {
-              if (highRisk._id === riskItem) {
-                this.ppeArr[index] = 1;
-              }
-            });
-          });
-          // element.tradeCategoryId.forEach((riskItem) => {
-          //   this.licenseAndQualification.forEach((highRisk, index) => {
-          //     if (highRisk.tradeCategoryId._id === riskItem) {
-          //       this.licenceArr[index] = 1;
-          //     }
-          //   });
-          // });
-          this.licenseAndQualification.forEach((highRisk, index) => {
+      if (element.chemical == 'YES') {
+        this.chemicalTask = true;
+      }
 
-            if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
-              this.licenceArr[index] = 1;
-            }
-          });
+      element.risk.forEach((item) => {
+        this.highRiskConstruction.forEach((highRisk, index) => {
+          if (highRisk._id === item) {
+            this.riskArr[index] = 1;
+          }
+        });
+      });
+      element.PPE.forEach((item) => {
+        this.PPEselection.forEach((ppeItem, index) => {
+          if (ppeItem._id === item) {
+            this.ppeArr[index] = 1;
+          }
+        });
+      });
 
+      this.licenseAndQualification.forEach((item, index) => {
+        if (item.tradeCategoryId._id === element.tradeCategoryId._id) {
+          this.licenceArr[index] = 1;
         }
       });
     });
+
+    // this.checkArray.forEach((id) => {
+
+    //   this.jobTaskData.forEach((element) => {
+    //     //looking for chemical task
+
+    //     if(id === element._id && element.chemical == "YES"){
+    //       this.chemicalTask=true;
+    //     }
+    //     if (id === element._id) {
+    //       element.risk.forEach((riskItem) => {
+    //         this.highRiskConstruction.forEach((highRisk, riskIndex) => {
+
+    //           if (highRisk._id === riskItem) {
+    //             this.riskArr[riskIndex] = 1;
+    //           }
+    //         });
+    //       });
+    //       element.PPE.forEach((riskItem) => {
+    //         this.PPEselection.forEach((highRisk, index) => {
+    //           if (highRisk._id === riskItem) {
+    //             this.ppeArr[index] = 1;
+    //           }
+    //         });
+    //       });
+    //       // element.tradeCategoryId.forEach((riskItem) => {
+    //       //   this.licenseAndQualification.forEach((highRisk, index) => {
+    //       //     if (highRisk.tradeCategoryId._id === riskItem) {
+    //       //       this.licenceArr[index] = 1;
+    //       //     }
+    //       //   });
+    //       // });
+    //       this.licenseAndQualification.forEach((highRisk, index) => {
+
+    //         if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
+    //           this.licenceArr[index] = 1;
+    //         }
+    //       });
+
+    //     }
+    //   });
+    // });
 
     while (this.riskLevelFA().length) {
       this.riskLevelFA().removeAt(0);
@@ -745,54 +773,46 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     }
     this.allCOPSelected = [];
     this.jobTaskSelected.forEach((data, i) => {
-
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
       this.addActionPersonRes();
-      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
+      this.personResFA()
+        .controls[i].get('personRes')
+        .setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
-      this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
+      this.residlRiskLevelFA()
+        .controls[i].get('resiRiskLevel')
+        .setValue(data.residualRisk);
 
-      data.allCOPTitle.forEach(element => {
-        this.allCOPSelected.push(element)
+      data.allCOPTitle.forEach((element) => {
+        this.allCOPSelected.push(element);
       });
     });
-
-    // console.log('allCOPSelected', this.allCOPSelected);
-    // console.log(this.residlRiskLevelFA().value);
   }
   getAllJobNumber() {
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-      // console.log(res);
-      // console.log('getAllJobNumber', res.data);
       this.allJobNumbers = res.data;
     });
   }
   getAllStaff() {
     this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
-      // console.log(res)
-      this.staff = res.data
-    })
+      this.staff = res.data;
+    });
   }
   getAllResidualRiskLevel() {
     this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
-      // console.log("this.resiRiskLevelData",res.data)
       this.resiRiskLevel = res.data;
-
-    })
+    });
   }
   getAllRiskLevel() {
     this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
-      // console.log("this.riskLevelData",res.data)
       this.riskLevel = res.data;
-
-    })
+    });
   }
   getAllChemical() {
     this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
-      //console.log(res)
       this.allChemicals = res.data;
-    })
+    });
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
@@ -814,17 +834,20 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       this.addActionRiskLevel();
       this.addActionResiRiskLevel();
       this.addActionPersonRes();
-      this.personResFA().controls[i].get('personRes').setValue(data?.staffId?._id);
+      this.personResFA()
+        .controls[i].get('personRes')
+        .setValue(data?.staffId?._id);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
-      this.residlRiskLevelFA().controls[i].get('resiRiskLevel').setValue(data.residualRisk);
-      console.log("data", data);
+      this.residlRiskLevelFA()
+        .controls[i].get('resiRiskLevel')
+        .setValue(data.residualRisk);
+      console.log('data', data);
 
-      data.allCOPTitle.forEach(element => {
-        this.allCOPSelected.push(element)
+      data.allCOPTitle.forEach((element) => {
+        this.allCOPSelected.push(element);
       });
-
     });
-    console.log("allCOPSelected", this.allCOPSelected);
+    console.log('allCOPSelected', this.allCOPSelected);
   }
   addItem(type, i) {
     const dialogRef = this.dialog.open(AddItemComponent, {
@@ -854,14 +877,13 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
       if (result != 'false' && result) {
         let data = {
-          title: result
-        }
+          title: result,
+        };
         this.logicalFormInfo.addChemical(data).subscribe((res: any) => {
           this.getAllChemical();
-        })
+        });
       }
 
       console.log('The dialog was closed');
