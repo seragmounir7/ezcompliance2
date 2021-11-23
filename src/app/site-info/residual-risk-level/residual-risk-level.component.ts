@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditResidualRiskLevelComponent } from './edit-residual-risk-level/edit-residual-risk-level.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-residual-risk-level',
@@ -19,6 +20,7 @@ export class ResidualRiskLevelComponent implements OnInit {
   displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   allResidualRiskLevel: any[]=[];
   
   ngAfterViewInit() {
@@ -45,6 +47,7 @@ export class ResidualRiskLevelComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
    })
   }

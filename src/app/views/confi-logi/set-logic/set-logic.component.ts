@@ -18,12 +18,14 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddItemComponent } from './set-relation/add-item/add-item.component';
 import { AddJobTaskComponent } from './add-job-task/add-job-task.component';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-set-logic',
   templateUrl: './set-logic.component.html',
   styleUrls: ['./set-logic.component.scss'],
 })
 export class SetLogicComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatSort) sort: MatSort;
   JobTaskDetail!: FormGroup;
   allHazards=[];
   allContrlActReq=[];
@@ -287,6 +289,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       this.ELEMENT_DATA =  this.jobTaskData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       // this.jobTaskData.forEach((item,i) => {
       //   this.addActionHighRisk();
       //   this.addActionPPE();

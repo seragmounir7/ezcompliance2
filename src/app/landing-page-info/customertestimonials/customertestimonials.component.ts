@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-customertestimonials',
   templateUrl: './customertestimonials.component.html',
@@ -44,6 +45,7 @@ export class CustomertestimonialsComponent implements OnInit {
   displayedColumnss: string[] = ['index', 'images', 'subTitle', 'descrip', 'action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -78,8 +80,7 @@ export class CustomertestimonialsComponent implements OnInit {
       this.ELEMENTS_DATA = testimonialData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-
-
+      this.dataSources.sort=this.sort;
     });
   }
   editForm(element, name: boolean, i?: any) {

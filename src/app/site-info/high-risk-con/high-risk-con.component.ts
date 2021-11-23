@@ -17,6 +17,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-high-risk-con',
   templateUrl: './high-risk-con.component.html',
@@ -40,7 +41,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['index', 'title' ,'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private logicalFormInfo: LogicalFormInfoService,
     public dialog: MatDialog,
@@ -183,7 +184,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-
+      this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
  

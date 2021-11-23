@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditRateAndCouponComponent } from './edit-rate-and-coupon/edit-rate-and-coupon.component';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-rate-and-coupon',
   templateUrl: './rate-and-coupon.component.html',
@@ -19,6 +20,7 @@ export class RateAndCouponComponent implements OnInit {
   ELEMENT_DATA = [];
   displayedColumns: string[] = ['index', 'monthly','defaultMonthly','defaultEmp','yearlyDiscount', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  @ViewChild(MatSort) sort: MatSort;
   addPlan=false;
   constructor(
     private subscript: SubscriptionService,
@@ -51,6 +53,7 @@ export class RateAndCouponComponent implements OnInit {
           this.addPlan=false;
           this.ELEMENT_DATA = dataPlan;
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+          this.dataSource.sort = this.sort;
         }
     
      
