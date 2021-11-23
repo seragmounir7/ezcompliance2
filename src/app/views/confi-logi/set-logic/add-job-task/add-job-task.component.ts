@@ -33,20 +33,17 @@ export class AddJobTaskComponent implements OnInit {
 		@Inject(MAT_DIALOG_DATA) public data: any,
   ) { 
     this.dataRec = data;
-    this.Id=data._id;
+    
     console.log("datarec",this.dataRec)
     this.addjob=this.fb.group({
       title:['',Validators.required],
-      tradeCategoryId: ['', Validators.required],      
+      tradeCategory: ['', Validators.required],      
     });
   }
 
   ngOnInit(): void { 
-    this.jobTaskDetails=this.fb.group({
-
-      title:[this.dataRec.title,Validators.required],
-      tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],      
-    });
+   
+ 
     this.getAllCategories();
     if (this.Id != "") {
       this.Eddit();
@@ -62,7 +59,10 @@ export class AddJobTaskComponent implements OnInit {
     if (this.Edit == true) {
       this.Edit = false;
       this.Add = true;
-    
+      this.addjob=this.fb.group({
+        title:['',Validators.required],
+        tradeCategory: ['', Validators.required],      
+      });
 
     }
     else {
@@ -74,7 +74,11 @@ export class AddJobTaskComponent implements OnInit {
     if (this.Add == true) {
       this.Add = false;
       this.Edit = true;
+      this.jobTaskDetails=this.fb.group({
 
+        title:[this.dataRec.title,Validators.required],
+        tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],      
+      });
     }
     else {
       this.Edit = true;
