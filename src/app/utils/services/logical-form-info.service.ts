@@ -324,7 +324,7 @@ export class LogicalFormInfoService {
   deleteCustomer(id) {
     return this.https.delete(this.apiUrl + 'customer/delete/' + id)
   }
-  ///site end/////
+  ///customer end/////
 
   ///job number start/////
   getAllJobNumber() {
