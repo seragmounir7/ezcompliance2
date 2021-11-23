@@ -37,10 +37,10 @@ export class EditTaskComponent implements OnInit {
      
     let data={
       title :this.editTitle.get('title').value,
-      PPE:this.dataRec.PPE,
-      codeOfPractice:this.dataRec.codeOfPractice,
-      licence:this.dataRec.licence,
-      risk:this.dataRec.risk,
+      // PPE:this.dataRec.PPE,
+      // codeOfPractice:this.dataRec.codeOfPractice,
+      // licence:this.dataRec.licence,
+      // risk:this.dataRec.risk,
     }
     this.logicalFormInfo
       .updateJobTask(data, this.dataRec._id)
