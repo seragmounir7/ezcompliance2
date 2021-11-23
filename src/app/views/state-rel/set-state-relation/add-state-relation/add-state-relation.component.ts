@@ -37,6 +37,8 @@ export class AddStateRelationComponent implements OnInit {
         this.logicalFormInfo.getstatesById(id.id).subscribe((res: any) => {
           console.log(res);
           this.states = res.data;
+          console.log("state=>",res.data);
+          
         })
       });
     this.SetState = this.fb.group({
@@ -88,6 +90,8 @@ export class AddStateRelationComponent implements OnInit {
       this.JurisdictionData = res.data;
     });
   }
- 
+ setRelation(){
+
+ }
 
 }
