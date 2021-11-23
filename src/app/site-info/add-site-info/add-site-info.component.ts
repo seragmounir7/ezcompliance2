@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddSiteComponent } from './add-site/add-site.component';
 import { EditSiteComponent } from './edit-site/edit-site.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-add-site-info',
@@ -22,6 +23,7 @@ export class AddSiteInfoComponent implements OnInit {
   displayedColumns: string[] = ['index', 'siteName',/* 'siteForemen', */'streetNo','streetAddress','Suburb','State', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   allSites: any[]=[];
 
   ngAfterViewInit() {
@@ -45,7 +47,7 @@ export class AddSiteInfoComponent implements OnInit {
       console.log(res)
    this.dataSource.data = res.data
    this.dataSource.paginator = this.paginator;
-
+   this.dataSource.sort = this.sort;
    })
   }
 

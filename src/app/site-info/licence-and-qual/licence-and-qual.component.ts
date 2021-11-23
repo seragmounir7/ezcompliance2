@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup } from '@angular/forms';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-licence-and-qual',
   templateUrl: './licence-and-qual.component.html',
@@ -27,7 +28,7 @@ export class LicenceAndQualComponent implements OnInit {
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -53,7 +54,7 @@ export class LicenceAndQualComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-
+      this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
  

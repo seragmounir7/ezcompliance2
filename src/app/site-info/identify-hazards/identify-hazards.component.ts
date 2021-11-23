@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditHazardComponent } from './edit-hazard/edit-hazard.component';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-identify-hazards',
   templateUrl: './identify-hazards.component.html',
@@ -23,7 +24,7 @@ export class IdentifyHazardsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -53,6 +54,7 @@ export class IdentifyHazardsComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;

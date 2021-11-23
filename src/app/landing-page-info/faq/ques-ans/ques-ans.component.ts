@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { title } from 'process';
 import { FormControl } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-ques-ans',
@@ -25,8 +26,8 @@ export class QuesAnsComponent implements OnInit {
   displayedColumns: string[] = ['index','question','answer' , 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   portal=new FormControl();
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   Id: any;
 
   ngAfterViewInit() {
@@ -87,6 +88,7 @@ export class QuesAnsComponent implements OnInit {
          this.ELEMENT_DATA = allData[0].faq;
          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
          this.dataSource.paginator = this.paginator;
+         this.dataSource.sort=this.sort;
     });
   }
   edit(element){

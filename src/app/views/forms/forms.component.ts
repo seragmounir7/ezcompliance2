@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-forms',
@@ -16,7 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class FormsComponent implements OnInit {
 
-
+  @ViewChild(MatSort) sort: MatSort;
   closeResult: string;
   page = 1;
   pageSize = 10;
@@ -37,6 +38,7 @@ export class FormsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; 
   }
 
   constructor(
@@ -50,7 +52,6 @@ export class FormsComponent implements OnInit {
   ngOnInit(): void {
 
     this.setTitle.setTitle('WHS-All Form');
-
   }
 
 

@@ -12,6 +12,7 @@ import { AddApplicationServiceInfoComponent } from './add-application-service-in
 import { AddServiceInfoComponent } from './add-service-info/add-service-info.component';
 import Swal from 'sweetalert2';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-application-service-info',
   templateUrl: './application-service-info.component.html',
@@ -43,7 +44,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
   displayedColumnss: string[] = ['index', 'images', 'title', 'descrip', 'action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -80,6 +81,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
       this.ELEMENTS_DATA = ServiceData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
+      this.dataSources.sort=this.sort;
     });
   
 

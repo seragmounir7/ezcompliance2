@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditContActComponent } from './edit-cont-act/edit-cont-act.component';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-contr-and-act-req',
   templateUrl: './contr-and-act-req.component.html',
@@ -22,7 +23,7 @@ export class ContrAndActReqComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -52,6 +53,7 @@ export class ContrAndActReqComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;
