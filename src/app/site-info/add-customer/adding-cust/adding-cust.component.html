@@ -42,7 +42,7 @@
             <p for="exampleFormControlInput1" class="form-Label">State</p>
             <select class="form-select form-control" aria-label="Default select example" formControlName="customerState" >
               <option value="" selected hidden> Select State</option>
-             <option *ngFor="let state of states" [value]="state._id">{{state.name}}</option>
+             <option *ngFor="let state of StatesData" [value]="state._id">{{state.title}}</option>
            
            </select>
             <!-- <input
@@ -151,7 +151,7 @@
           </ng-container>
         </ng-container>
       <div >
-        <button (click)="onSubmit()" class="btn btn-primary">
+        <button (click)="onSubmit()" class="btn btn-primary" [disabled]="addCustomerForm.invalid && addCustomerForm.get('arrObj').invalid">
           Submit
         </button>
       </div>

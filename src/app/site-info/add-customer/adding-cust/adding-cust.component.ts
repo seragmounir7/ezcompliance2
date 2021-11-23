@@ -1,5 +1,5 @@
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./adding-cust.component.scss']
 })
 export class AddingCustComponent implements OnInit {
-
+  StatesData:any=[''];
   addCustomerForm: FormGroup
   constructor(
     private fb: FormBuilder,
@@ -19,17 +19,18 @@ export class AddingCustComponent implements OnInit {
 
   ngOnInit(): void {
     this.addCustomerForm = this.fb.group({
-      customerName: [''],
-      customerContact: [''],
-      customerStreetAddress: [''],
-      customerState: [''],
-      customerPostCode: [''],
-      businessName: [''],
+      customerName: ['',Validators.required],
+      customerContact: ['',Validators.required],
+      customerStreetAddress: ['',Validators.required],
+      customerState: ['',Validators.required],
+      customerPostCode: ['',Validators.required],
+      businessName: ['',Validators.required],
       arrObj: this.fb.array([]),
       // customerContactPhone:[''],
       // customerEmail:[''],
     })
     this.addCustomerDetails();
+    this.getAllStates();
   }
   addCustomerDetails() {
     this.customerArr().push(this.customerForm());
@@ -40,9 +41,9 @@ export class AddingCustComponent implements OnInit {
   }
   customerForm(): FormGroup {
     return this.fb.group({
-      email: [],
-      phone: [],
-      position: []
+      email: ['',Validators.required],
+      phone: ['',Validators.required],
+      position: ['',Validators.required]
 
     });
   }
@@ -58,25 +59,18 @@ export class AddingCustComponent implements OnInit {
 
     this.logicalFormInfoService.addCustomer(this.addCustomerForm.value).subscribe(res => {
       console.log("addCustomerForm=>", res)
-      // this.dialogRef.close('ok')
+      //this.dialogRef.close('ok')
       this.router.navigate(['/admin/siteInfo/addCustomer']);
     }, (err) => {
       console.error(err);
     });
   }
-  states = [
-    {
-      value: "NSW", name: "NSW"
-    },
-    { value: "ACT", name: "ACT" },
-    { value: "QLD", name: "QLD" },
-    { value: "NT", name: "NT" },
-    { value: "SA", name: "SA" },
-    { value: "NZ", name: "NZ" },
-    { value: "TAS", name: "TAS" },
-    { value: "VIC", name: "VIC" },
-    { value: "WA", name: "WA" },
-
-  ]
+  
+  getAllStates() {
+    this.logicalFormInfoService.getAllStates().subscribe((res: any) => {
+      console.log('setStatesDetails=>', res);
+      this.StatesData = res.data;
+    });
+  }
   
 }

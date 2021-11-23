@@ -89,7 +89,7 @@ export class AddCustomerComponent implements OnInit {
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "ok")) {
+      if ((result == "true")) {
         this.getAllCustomers();
       }
       console.log("The dialog was closed");
@@ -119,5 +119,9 @@ export class AddCustomerComponent implements OnInit {
           });
       }
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

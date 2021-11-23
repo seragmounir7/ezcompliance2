@@ -53,13 +53,13 @@
         <div class="row">
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
-            <input type="text" class="form-control outline" id="siteName" />
+            <input type="text" class="form-control outline" id="siteName" formControlName="siteName" />
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Name
             </p>
-            <input type="text" class="form-control outline" />
+            <input type="text" class="form-control outline" formControlName="customerName" />
           </div>
         </div>
         <div class="row">
@@ -67,13 +67,13 @@
             <p for="exampleFormControlInput1" class="form-Label">
               Site Address
             </p>
-            <input type="text" class="form-control outline" />
+            <input type="text" class="form-control outline"formControlName="streetAddr"   />
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact
             </p>
-            <input type="text" class="form-control outline" />
+            <input type="text" class="form-control outline"   formControlName="custConct" />
           </div>
         </div>
 
@@ -82,13 +82,13 @@
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact Phone
             </p>
-            <input type="text" class="form-control outline" />
+            <input type="text" class="form-control outline" formControlName="custConctPh"/>
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact Email
             </p>
-            <input type="text" class="form-control outline" />
+            <input type="text" class="form-control outline"  formControlName="custEmail" />
           </div>
         </div>
         <div class="row">
@@ -98,11 +98,14 @@
             <select
               class="form-select form-control col outline form-dropdown"
               aria-label="Default select example"
+              formControlName="jobNumber"
+              (change)="jobNoSel()"
             >
               <option selected hidden>Select</option>
-              <option value="1">1000</option>
+              <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+              <!-- <option value="1">1000</option>
               <option value="2">1001</option>
-              <option value="3">1002</option>
+              <option value="3">1002</option> -->
             </select>
           </div>
           <div class="mb-3 col">
@@ -112,11 +115,13 @@
             <select
               class="form-select form-control col outline form-dropdown"
               aria-label="Default select example"
+              id="ProjectManager"
             >
               <option selected hidden>Select</option>
-              <option value="1">John</option>
+              <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
+              <!-- <option value="1">John</option>
               <option value="2">Akash</option>
-              <option value="3">Rahul</option>
+              <option value="3">Rahul</option> -->
             </select>
           </div>
         </div>

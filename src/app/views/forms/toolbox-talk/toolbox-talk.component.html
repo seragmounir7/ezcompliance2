@@ -11,23 +11,23 @@
       <div class="row">
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
-          <input type="text" class="form-control" id="siteName" />
+          <input type="text" class="form-control" id="siteName"  formControlName="siteName" />
         </div>
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control"  formControlName="customerName" />
         </div>
       </div>
       <div class="row">
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">Site Address</p>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control"  formControlName="streetAddr" />
         </div>
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">
             Customer Contact
           </p>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control"  formControlName="custConct" />
         </div>
       </div>
 
@@ -36,13 +36,13 @@
           <p for="exampleFormControlInput1" class="form-Label">
             Customer Contact Phone
           </p>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control"  formControlName="custConctPh" />
         </div>
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">
             Customer Contact Email
           </p>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control"  formControlName="custEmail"/>
         </div>
       </div>
       <div class="row">
@@ -52,11 +52,14 @@
           <select
             class="form-select form-control col form-dropdown"
             aria-label="Default select example"
+            formControlName="jobNumber"
+            (change)="jobNoSel()"
           >
             <option selected hidden>Select</option>
-            <option value="1">1000</option>
+            <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+            <!-- <option value="1">1000</option>
             <option value="2">1001</option>
-            <option value="3">1002</option>
+            <option value="3">1002</option> -->
           </select>
         </div>
 

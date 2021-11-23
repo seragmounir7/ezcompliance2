@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-state-relation',
@@ -12,13 +13,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class AddStateRelationComponent implements OnInit {
   SetState!: FormGroup;
   states = null;
-  // PPESelectionData: [];
-  // licenseAndQual: [];
-  // allHazards: [];
-  // allContrlActReq: [];
-  // licenceCatAll: [];
-
-
+  stateId = null;
   JurisdictionData: [];
   safety: [];
   codeData: [];
@@ -26,42 +21,41 @@ export class AddStateRelationComponent implements OnInit {
   isLinear = false;
 
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private logicalFormInfo: LogicalFormInfoService,) { }
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,) { }
 
   ngOnInit(): void {
+    this.SetState = this.fb.group({
+      jurisdictionId: ['', Validators.required],
+      safetyLegislationId: ['', Validators.required],
+      regulatorId: ['', Validators.required],
 
+    });
     this.route
       .queryParams
       .subscribe((id) => {
         console.log(id);
-        this.logicalFormInfo.getstatesById(id.id).subscribe((res: any) => {
-          console.log(res);
+        this.stateId = id.id;
+        this.logicalFormInfo.getstatesById(this.stateId).subscribe((res: any) => {
+          console.log("getstatesById=>", res);
           this.states = res.data;
-          console.log("state=>",res.data);
-          
+          console.log("states", this.states);
+          if (this.states.set == true) {
+            this.SetState.patchValue({
+              jurisdictionId: this.states.jurisdictionId,
+              safetyLegislationId: this.states.safetyLegislationId,
+              regulatorId: this.states.regulatorId,
+
+            });
+          }
         })
       });
-    this.SetState = this.fb.group({
-      jurisdiction: [''],
-      safe: [''],
-      COP: [''],
-      regulator: [''],
-      // contrActReq: [''],
-      // riskLevel: [''],
-      // residualRiskL: [''],
-      // personResp: [''],
-      // chemicalTask:['']
-    });
-    // this.getAllHighRisk();
-    // this.getAllLicence();
-    // this.getAllCategories();
-    // this.getAllPPE();
-    // this.getAllHazard();
+
 
     this.getAllJurisdiction();
     this.getAllSafe();
     this.getAllRegulator();
-    this.getAllCOP();
+
   }
 
   getAllRegulator() {
@@ -71,13 +65,7 @@ export class AddStateRelationComponent implements OnInit {
 
     })
   }
-  getAllCOP() {
-    this.logicalFormInfo.getAllCode().subscribe((res: any) => {
-      console.log("this.codeData", res.data)
-      this.codeData = res.data;
 
-    })
-  }
   getAllSafe() {
     this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
       console.log("this.safety", res)
@@ -90,8 +78,27 @@ export class AddStateRelationComponent implements OnInit {
       this.JurisdictionData = res.data;
     });
   }
- setRelation(){
 
- }
+  setRelation() {
+    let data = {
+      set: true,
+      title: this.states.title,
+      jurisdictionId: this.SetState.get('jurisdictionId').value,
+      safetyLegislationId: this.SetState.get('safetyLegislationId').value,
+      regulatorId: this.SetState.get('regulatorId').value,
+    }
+    console.log("data=>", data)
+    console.log("stateId=>", this.stateId)
+    this.logicalFormInfo.updateStates(data, this.stateId).subscribe((res: any) => {
+      console.log('updateStates=>', res);
 
+      Swal.fire({
+        title: 'Updated successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+      this.router.navigate(['/admin/stateRel/setState'])
+    });
+
+  }
 }

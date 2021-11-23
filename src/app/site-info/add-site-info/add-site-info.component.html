@@ -9,6 +9,16 @@
     class="btn btn-outline-primary mt-1 mr-2 float-right"><i _ngcontent-hqi-c400="" class="fas fa-plus"></i> Add Site
   </button>
 </div>
+<div class="col-6">
+  <mat-form-field>
+    <input
+      matInput
+      #input
+      placeholder="Search"
+      (keyup)="applyFilter($event)"
+    />
+  </mat-form-field>
+</div>
 <div class="">
   <table mat-table [dataSource]="dataSource">
 
@@ -75,8 +85,11 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4"> Data Not  Found  "{{input.value}}"</td>
+    </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>
