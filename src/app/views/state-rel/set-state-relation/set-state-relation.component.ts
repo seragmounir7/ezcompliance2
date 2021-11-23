@@ -2,11 +2,11 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatSort, Sort} from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-set-state-relation',
   templateUrl: './set-state-relation.component.html',
@@ -118,7 +118,7 @@ export class SetStateRelationComponent implements OnInit {
   displayedColumns: string[] = ['index', 'title', 'edit'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -274,12 +274,11 @@ export class SetStateRelationComponent implements OnInit {
       this.StatesData.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
-
-      this.ELEMENT_DATA = this.StatesData.sort((a, b) => a.title.localeCompare(b.title));
+  
+      this.ELEMENT_DATA = this.StatesData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-     
-
+      this.dataSource.sort = this.sort;
     });
   }
   getJurisdiction() {

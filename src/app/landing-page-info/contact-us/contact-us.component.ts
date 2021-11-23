@@ -11,6 +11,7 @@ import { ViewContactComponent } from './view-contact/view-contact.component';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
@@ -28,6 +29,7 @@ export class ContactUsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   //
   mode: any;
   myId: string;
@@ -81,6 +83,7 @@ export class ContactUsComponent implements OnInit {
         this.ELEMENT_DATA = dataContact;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort=this.sort;
      });
   }
 

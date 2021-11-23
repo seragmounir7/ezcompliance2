@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddEditCouponComponent } from './add-edit-coupon/add-edit-coupon.component';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-coupon',
   templateUrl: './coupon.component.html',
@@ -18,6 +19,7 @@ export class CouponComponent implements OnInit {
   displayedColumns: string[] = ['index', 'couponName','discount', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -44,6 +46,7 @@ getAllCoupon(){
     this.ELEMENT_DATA = couponData;
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   });
 }
 edit(element) {

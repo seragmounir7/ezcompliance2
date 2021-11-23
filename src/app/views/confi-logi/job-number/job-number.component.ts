@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AddSiteComponent } from 'src/app/site-info/add-site-info/add-site/add-site.component';
 import { EditSiteComponent } from 'src/app/site-info/add-site-info/edit-site/edit-site.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-job-number',
@@ -15,6 +16,7 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
   styleUrls: ['./job-number.component.scss'],
 })
 export class JobNumberComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
   mode: any;
   jobTaskData: any = [];
   ELEMENT_DATA = [];
@@ -54,10 +56,10 @@ export class JobNumberComponent implements OnInit {
   getAllJobNumber() {
     this.logicalFormInfoService.getAllJobNumber().subscribe((res: any) => {
       console.log(res);
-      this.dataSource.data = res.data;
-      console.log("getAllJobNumber",res.data);
-      
+      this.dataSource = res.data;
+      console.log("getAllJobNumber",this.dataSource);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 

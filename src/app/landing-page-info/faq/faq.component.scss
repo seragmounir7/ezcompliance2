@@ -8,4 +8,6 @@ table {
   word-break: break-word;
   font-family: Inter, sans-serif;
 }
-
+::ng-deep .mat-sort-header-container {
+  margin-left: 47% !important;
+}

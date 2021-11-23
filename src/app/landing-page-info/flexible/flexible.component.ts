@@ -18,6 +18,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AddFlexibleInfoComponent } from './add-flexible-info/add-flexible-info.component';
 import { EditFlexibleInfoComponent } from './edit-flexible-info/edit-flexible-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-flexible',
   templateUrl: './flexible.component.html',
@@ -46,6 +47,7 @@ export class FlexibleComponent implements OnInit {
   displayedColumnss: string[] = ['index', 'images', 'title', 'subTitle', 'action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private fb: FormBuilder,
     private upload: UploadFileServiceService,
@@ -82,7 +84,7 @@ export class FlexibleComponent implements OnInit {
       this.ELEMENTS_DATA = testimonialData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-
+      this.dataSources.sort=this.sort;
       // this.flexibleData = data.data[0];
       // this.flexible = this.flexibleData.subModules[0].title;
       

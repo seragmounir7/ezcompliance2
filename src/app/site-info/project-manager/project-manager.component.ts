@@ -7,6 +7,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table'
 import { AddEditProjMangComponent } from './add-edit-proj-mang/add-edit-proj-mang.component';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-project-manager',
   templateUrl: './project-manager.component.html',
@@ -20,10 +21,8 @@ export class ProjectManagerComponent implements OnInit {
   /////////////mat table////////////////
   displayedColumns: string[] = ['index', 'title' ,'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -47,6 +46,7 @@ export class ProjectManagerComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
       //  this.task = res.data.subComponents;
     });

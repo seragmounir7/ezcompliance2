@@ -2,6 +2,9 @@
     color: #007bff;
     font-size: 21px !important;
 }
+::ng-deep .mat-sort-header-container {
+  margin-left: 47% !important;
+}
 table {
     width: 100%;
   }
