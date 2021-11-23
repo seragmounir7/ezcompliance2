@@ -10,6 +10,7 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddItemComponent } from './add-item/add-item.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -661,13 +662,27 @@ export class RiskAssessmentSWMSComponent implements OnInit {
   }
 
  
-  deleteHazrds(type,i){
-    if (type === 'identifyHazards') {
-      this.jobTaskSelected[i].allHazardsTitle.splice(i,1);
-    }
-    if (type === 'ctrlActreq') {
-      this.jobTaskSelected[i].allContrlActReqTitle.splice(i,1);
-    }
+  deleteHazrds(type,title,i){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${title}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        if (type === 'identifyHazards') {
+          this.jobTaskSelected[i].allHazardsTitle.splice(i,1);
+        }
+        if (type === 'ctrlActreq') {
+          this.jobTaskSelected[i].allContrlActReqTitle.splice(i,1);
+        }
+      }
+    });
+
+  
   }
   onJobtaskSelect(e, jobTaskRecd) {
     // this.jobTaskSelected=[];

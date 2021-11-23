@@ -275,7 +275,7 @@ export class SetStateRelationComponent implements OnInit {
         element.index = index + 1; //adding index
       });
 
-      this.ELEMENT_DATA =  this.StatesData;
+      this.ELEMENT_DATA = this.StatesData.sort((a, b) => a.title.localeCompare(b.title));
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
      
