@@ -22,10 +22,10 @@ export class AddingCustComponent implements OnInit {
       customerName: ['',Validators.required],
       customerContact: ['',Validators.required],
       customerStreetAddress: ['',Validators.required],
-      customerState: ['',Validators.required],
+      stateId: ['',Validators.required],
       customerPostCode: ['',Validators.required],
-      businessName: ['',Validators.required],
-      arrObj: this.fb.array([]),
+      ABN: ['',Validators.required],
+      contacts: this.fb.array([]),
       // customerContactPhone:[''],
       // customerEmail:[''],
     })
@@ -37,7 +37,7 @@ export class AddingCustComponent implements OnInit {
 
   }
   customerArr(): FormArray {
-    return this.addCustomerForm.get('arrObj') as FormArray;
+    return this.addCustomerForm.get('contacts') as FormArray;
   }
   customerForm(): FormGroup {
     return this.fb.group({
@@ -48,7 +48,7 @@ export class AddingCustComponent implements OnInit {
     });
   }
   removeCustomerDetails(i) {
-    const item = <FormArray>this.addCustomerForm.controls['arrObj'];
+    const item = <FormArray>this.addCustomerForm.controls['contacts'];
     if (item.length > 1) {
       item.removeAt(i);
 

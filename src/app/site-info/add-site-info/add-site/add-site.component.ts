@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-site.component.scss']
 })
 export class AddSiteComponent implements OnInit {
-
+allState:any=[];
   addSitesForm
   constructor( 
     private dialogRef: MatDialogRef<AddSiteComponent>,
@@ -21,22 +21,23 @@ export class AddSiteComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getAllStates();
     this.addSitesForm = this.fb.group({
       siteName:[''],
       streetNumber:[''],
       streetAddress:[''],
       suburb:[''],
-      state:[''],
+      state:[],
     })
   }
-  state = [
-      { label: 'New South Wales', value: '' },
-      { label: 'Queensland', value: '' },
-      { label: 'South Australia', value: '' },
-      { label: 'Tasmania', value: '' },
-      { label: 'Victoria', value: '' },
-      { label: 'Western Australia', value: '' },
-    ];
+  getAllStates() {
+    this.logicalFormInfoService.getAllStates().subscribe((res) => {
+      console.log('getAllStates=>', res);
+  this.allState=res.data;
+    });
+ 
+  }
+
     onSubmit(){
       console.log(this.addSitesForm.value)
       this.logicalFormInfoService.addSite(this.addSitesForm.value).subscribe(res => {

@@ -33,6 +33,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.title}}</td>
     </ng-container>
+<<<<<<< HEAD
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Action </th>
       <td mat-cell *matCellDef="let element">
@@ -42,13 +43,21 @@
     </div> -->
     <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon">
       <mat-icon (click)="edit(element)">edit</mat-icon>
+=======
+  
+<ng-container matColumnDef="action">
+  <th mat-header-cell *matHeaderCellDef> Action </th>
+  <td mat-cell *matCellDef="let element"> 
+    <!-- <i class="fas fa-pencil-alt mr-2 " (click)="edit(element)" title="edit"></i>  <i  class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i>  -->
+    <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon" (click)="edit(element)">
+      <mat-icon >edit</mat-icon>
+>>>>>>> abfc779cc044b41d1ff6ef32606647f63a1c3c7d
     </button>
-    <button mat-icon-button aria-label="Example icon button with a delete icon">
-      <mat-icon (click)="delete(element)">delete</mat-icon>
+    <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
+      <mat-icon >delete</mat-icon>
     </button>
-    
-      </td>
-    </ng-container>
+  </td>
+</ng-container>
     <!-- <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit </th>
         <td mat-cell *matCellDef="let element"(click)="edit(element)"> <i class="fas fa-pencil-alt "></i> 

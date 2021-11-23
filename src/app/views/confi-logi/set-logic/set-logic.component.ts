@@ -127,7 +127,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   ];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title', 'edit','action'];
+  displayedColumns: string[] = ['index', 'title', 'edit'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -430,44 +430,44 @@ controlActionRequired=[];
   }
 
  
-  openDialog(element) {
+  // openDialog(element) {
   
-    const dialogRef = this.dialog.open(AddJobTaskComponent, {
-      width: "800px",
-      data: element,
-    });
-    console.log(element)
-    dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "true")) {
-        this.getJobTask();
-      }
-      console.log("The dialog was closed");
-    });
-  }
-  delete(item) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.title}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-        this.logicalFormInfo
-          .deleteJobTask(item._id)
-          .subscribe((res) => {
-            Swal.fire({
-              title: 'Parameter Deleted successfully',
-              showConfirmButton: false,
-              timer: 1200,
-            }); console.log('deleted res', res);
-            this.getJobTask();
+  //   const dialogRef = this.dialog.open(AddJobTaskComponent, {
+  //     width: "800px",
+  //     data: element,
+  //   });
+  //   console.log(element)
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if ((result == "true")) {
+  //       this.getJobTask();
+  //     }
+  //     console.log("The dialog was closed");
+  //   });
+  // }
+  // delete(item) {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: `Do you want to delete "${item.title}"?`,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#00B96F',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, Delete!',
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       this.logicalFormInfo
+  //         .deleteJobTask(item._id)
+  //         .subscribe((res) => {
+  //           Swal.fire({
+  //             title: 'Parameter Deleted successfully',
+  //             showConfirmButton: false,
+  //             timer: 1200,
+  //           }); console.log('deleted res', res);
+  //           this.getJobTask();
 
-          });
-      }
-    });
-  }
+  //         });
+  //     }
+  //   });
+  // }
 
 }
