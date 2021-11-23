@@ -10,10 +10,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogicalFormInfoService", function() { return LogicalFormInfoService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "8Y7J");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../environments/environment */ "AytR");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "IheW");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 
 
 
@@ -409,6 +409,31 @@ class LogicalFormInfoService {
         }));
     }
     ///Safety Legislation end/////
+    //////////////// States start//////////////////
+    addStates(data) {
+        return this.https.post(this.apiUrl + 'state/add', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
+            return res;
+        }));
+    }
+    getAllStates() {
+        return this.https.get(this.apiUrl + 'state/getAll').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
+            return res;
+        }));
+    }
+    updateStates(data, id) {
+        return this.https.put(this.apiUrl + 'state/update/' + id, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
+            return res;
+        }));
+    }
+    deleteStates(id) {
+        return this.https.delete(this.apiUrl + 'state/delete/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
+            return res;
+        }));
+    }
+    getstatesById(id) {
+        return this.https.get(this.apiUrl + 'state/get/' + id);
+    }
+    ///////////////////End States /////////
     //////////////// START RISK LEVEL INFO//////////////////
     getAllRiskLevel() {
         return this.https.get(this.apiUrl + 'riskLevel/getAll');

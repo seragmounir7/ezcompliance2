@@ -22,7 +22,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
@@ -40,7 +40,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "IheW");
+      "tk/3");
 
       var LogicalFormInfoService = /*#__PURE__*/function () {
         function LogicalFormInfoService(https) {
@@ -618,6 +618,41 @@
               return res;
             }));
           } ///Safety Legislation end/////
+          //////////////// States start//////////////////
+
+        }, {
+          key: "addStates",
+          value: function addStates(data) {
+            return this.https.post(this.apiUrl + 'state/add', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+              return res;
+            }));
+          }
+        }, {
+          key: "getAllStates",
+          value: function getAllStates() {
+            return this.https.get(this.apiUrl + 'state/getAll').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+              return res;
+            }));
+          }
+        }, {
+          key: "updateStates",
+          value: function updateStates(data, id) {
+            return this.https.put(this.apiUrl + 'state/update/' + id, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+              return res;
+            }));
+          }
+        }, {
+          key: "deleteStates",
+          value: function deleteStates(id) {
+            return this.https["delete"](this.apiUrl + 'state/delete/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+              return res;
+            }));
+          }
+        }, {
+          key: "getstatesById",
+          value: function getstatesById(id) {
+            return this.https.get(this.apiUrl + 'state/get/' + id);
+          } ///////////////////End States /////////
           //////////////// START RISK LEVEL INFO//////////////////
 
         }, {
