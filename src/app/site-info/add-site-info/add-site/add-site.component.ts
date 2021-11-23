@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-site.component.scss']
 })
 export class AddSiteComponent implements OnInit {
-allState=[];
+allState:any=[];
   addSitesForm
   constructor( 
     private dialogRef: MatDialogRef<AddSiteComponent>,
