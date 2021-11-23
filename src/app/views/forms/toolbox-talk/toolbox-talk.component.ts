@@ -4,7 +4,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 @Component({
   selector: 'app-toolbox-talk',
   templateUrl: './toolbox-talk.component.html',
@@ -12,15 +12,24 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 })
 export class ToolboxTalkComponent implements OnInit {
   toolBox: FormGroup;
+  allJobNumbers = [];
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
 
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
-    private setTitle:SetTitleService
+    private setTitle:SetTitleService,
+    private logicalFormInfo: LogicalFormInfoService,
   ) {
     this.toolBox = this.fb.group({
+      siteName: [''],
+      customerName: [''],
+      streetAddr:[''],
+      custConct: [''],
+      custConctPh: [''],
+      custEmail: [''],
+      jobNumber: [''],
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),
       attendees: this.fb.array([]),
@@ -31,8 +40,33 @@ export class ToolboxTalkComponent implements OnInit {
     this.addIssues();
     this.addCorrectAct();
     this.addAttendee();
+    this.getAllJobNumber();
     this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
     this.setTitle.setTitle('WHS-ToolBox Talk Form');
+  }
+  getAllJobNumber() {
+    this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
+    
+      this.allJobNumbers = res.data;
+    });
+  }
+  jobNoSel(){
+    this.allJobNumbers.forEach((item) => {
+      if (this.toolBox.get('jobNumber').value === item._id) {
+        console.log('Id found', item);
+        this.toolBox.patchValue({
+          siteName: item.siteName,
+          customerName: item.customerName,
+          streetAddr: item.streetAddress,
+           custConct: item.customerContact,
+          custConctPh: item.customerContactPhone,
+          custEmail: item.customerEmail,
+          jobNumber: this.toolBox.get('jobNumber').value,
+        });
+      }
+    });
+         this.toolBox.get('jobNumber').updateValueAndValidity();
+
   }
   addIssues() {
     this.issues().push(this.issuesForm());

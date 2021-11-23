@@ -15,9 +15,10 @@ import { SetRelationComponent } from './set-logic/set-relation/set-relation.comp
 import {MatStepperModule} from '@angular/material/stepper';
 import { AddItemComponent } from './set-logic/set-relation/add-item/add-item.component';
 import { TestLogicComponent } from './set-logic/test-logic/test-logic.component';
+import { AddJobTaskComponent } from './set-logic/add-job-task/add-job-task.component';
 
 @NgModule({
-  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent, SetRelationComponent, AddItemComponent, TestLogicComponent],
+  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent, SetRelationComponent, AddItemComponent, TestLogicComponent, AddJobTaskComponent],
   imports: [
     CommonModule,
     ConfiLogiRoutingModule,SharedModule,FormsModule,

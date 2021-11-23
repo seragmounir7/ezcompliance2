@@ -31,7 +31,7 @@ export class JobNumberComponent implements OnInit {
     //'customerContactPhone',
    // 'customerEmail',
     /* 'edit', */
-    'delete',
+    'action',
   ];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;

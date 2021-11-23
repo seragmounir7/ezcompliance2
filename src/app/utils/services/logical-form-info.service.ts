@@ -486,6 +486,43 @@ export class LogicalFormInfoService {
   }
   ///Safety Legislation end/////
 
+  //////////////// States start//////////////////
+  addStates(data){
+    return this.https.post(this.apiUrl + 'state/add', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllStates(){
+    return this.https.get(this.apiUrl + 'state/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  updateStates(data,id){
+    return this.https.put(this.apiUrl + 'state/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  
+  }
+  deleteStates(id){
+    return this.https.delete(this.apiUrl + 'state/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getstatesById(id) {
+    return this.https.get(this.apiUrl + 'state/get/' + id)
+  }
+
+ 
+  ///////////////////End States /////////
+
   //////////////// START RISK LEVEL INFO//////////////////
   getAllRiskLevel() {
     return this.https.get(this.apiUrl + 'riskLevel/getAll')
@@ -555,7 +592,7 @@ export class LogicalFormInfoService {
 
 export interface Site {
   siteName: string;
-  streetNumber: number;
+  streetNumber: string;
   streetAddress: string;
   suburb: string;
   state: string;
@@ -565,8 +602,8 @@ export interface Site {
 
 export interface Customer {
   customerName: string;
-  customerContact: number;
-  customerContactPhone: number;
+  customerContact: string ;
+  customerContactPhone: string;
   customerEmail: string;
 }
 
@@ -579,13 +616,13 @@ export interface JobNumber {
 
 export interface ArrObj {
   siteName: string;
-  streetNumber: number;
+  streetNumber: string;
   streetAddress: string;
   suburb: string;
   state: string;
   customerName: string;
-  customerContact: number;
-  customerContactPhone: number;
+  customerContact: string;
+  customerContactPhone: string;
   customerEmail: string;
 }
 
