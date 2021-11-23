@@ -21,9 +21,9 @@ export class AddingCustComponent implements OnInit {
     this.addCustomerForm = this.fb.group({
       customerName: ['',Validators.required],
       customerContact: ['',Validators.required],
-      customerStreetAddress: ['',Validators.required],
+      streetAddress: ['',Validators.required],
       stateId: ['',Validators.required],
-      customerPostCode: ['',Validators.required],
+      postCode: ['',Validators.required],
       ABN: ['',Validators.required],
       contacts: this.fb.array([]),
       // customerContactPhone:[''],
