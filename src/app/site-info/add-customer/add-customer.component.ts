@@ -15,7 +15,7 @@ import { EditCustComponent } from './edit-cust/edit-cust.component';
 })
 export class AddCustomerComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'customerName','customerContact','customerStreetAddress','customerState','customerPostCode','ABN', 'action'];
+  displayedColumns: string[] = ['index', 'customerName','customerContact','customerContactPhone','customerEmail', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
