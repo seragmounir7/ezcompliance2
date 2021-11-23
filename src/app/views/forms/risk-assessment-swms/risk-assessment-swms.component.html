@@ -1016,7 +1016,11 @@
                 <div class="">
                   <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
                   <ul class="identifyHaz">
-                    <li *ngFor="let hazard of item.allHazardsTitle;let i=index"  [matTooltip]="hazard.title">{{i+1}}.{{ hazard.title.length >30 ? hazard.title.slice(0,30)+'...': hazard.title }} <mat-icon *ngIf="!hazard.id" class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)">edit</mat-icon>  <mat-icon *ngIf="!hazard.id" class="mr-1" style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i)">delete</mat-icon>                  
+                    <li *ngFor="let hazard of item.allHazardsTitle;let i=index"  >
+                      <div class="row">
+                         <div class="col-9" [matTooltip]="hazard.title"> {{i+1}}.{{ hazard.title?.length >30 ? hazard.title.slice(0,30)+'...': hazard.title }}</div>
+                         <div class="col-3"*ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" matTooltip="Edit">edit</mat-icon>  <mat-icon  class="mr-1" style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i)" matTooltip="Delete">delete</mat-icon>  </div>
+                  </div>   
                     </li>  
                   </ul>                  
   
@@ -1050,7 +1054,11 @@
                 <div class="">
                   <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
                   <ul class="identifyHaz">
-                    <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let i=index"  [matTooltip]="contrlActReq.title"> {{i+1}}.{{ contrlActReq.title.length >30 ? contrlActReq.title.slice(0,30)+'...': contrlActReq.title }} <mat-icon *ngIf="!contrlActReq.id" class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon *ngIf="!contrlActReq.id" class="mr-1" style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i)">delete</mat-icon>                  
+                    <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let i=index"  > 
+                      <div class="row">
+                        <div class="col-9" [matTooltip]="contrlActReq.title">{{i+1}}.{{ contrlActReq.title?.length >30 ? contrlActReq.title.slice(0,30)+'...': contrlActReq.title }}</div>
+                    <div *ngIf="!contrlActReq.id" class="col-3"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)"matTooltip="Edit">edit</mat-icon>  <mat-icon  class="mr-1" style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i)"matTooltip="delete">delete</mat-icon>                  </div>
+                  </div> 
                     </li>  
                   </ul>  
                   <!-- <select
