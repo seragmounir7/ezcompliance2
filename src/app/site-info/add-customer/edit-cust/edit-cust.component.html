@@ -30,6 +30,128 @@
         </div>
         <div class="row">
           <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
+            <input
+              type="text"
+              class="form-control"
+              id="streetAddress"
+              formControlName="streetAddress"
+            />
+          </div>
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">State</p>
+            <select class="form-select form-control" aria-label="Default select example" formControlName="stateId" >
+              <option value="" selected hidden> Select State</option>
+             <option *ngFor="let state of StatesData" [value]="state._id">{{state.title}}</option>
+           
+           </select>
+            <!-- <input
+              type="text"
+              class="form-control"
+              id="customerState"
+              formControlName="customerState"
+            /> -->
+          </div>
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">PostCode</p>
+            <input
+              type="text"
+              class="form-control"
+              id="postCode"
+              formControlName="postCode"
+            />
+          </div>
+        </div>
+        <div class="row">
+        <div class="my-3 col">
+          <p for="exampleFormControlInput1" class="form-Label">Australian Business Name (ABN)</p>
+          <input
+            type="text"
+            class="form-control"
+            id="ABN"
+            formControlName="ABN"
+          />
+        </div>
+        </div>
+        <ng-container formArrayName="contacts">
+          <ng-container
+            *ngFor="let control of customerArr().controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div>
+            <h1> Contact {{i+1}}</h1>
+              <div class="row">
+
+                <div class="my-3 col-3">
+                  <p for="exampleFormControlInput1" class="form-Label"> Position</p>
+                  <input
+                    type="text"
+                    formControlName="position"
+                   
+                    class="form-control"
+                    id="position"
+                  />
+                </div>
+                <div class="my-3 col-3">
+                  <p for="exampleFormControlInput1" class="form-Label">
+                   Email
+                  </p>
+                  <input
+                  type="text"
+                  formControlName="email"
+             
+                  class="form-control"
+                  id="email"
+                />
+                </div>
+                <div class="my-3 col-3">
+                  <p for="exampleFormControlInput1" class="form-Label">  Phone Number</p>
+                  <input
+                    type="text"
+                    formControlName="phone"
+                  
+                    class="form-control"
+                    id="phone"
+                  />
+                </div>
+              
+                <!-- <div class=" my-3 col-1 my-auto">
+                  <span class="material-icons"  style="margin-top: 35%"   (click)="addCustomerDetails()"
+                    >add_circle_outline
+                  </span>
+                </div>
+                <div class="my-3 col-1 my-auto">
+                  <span class="material-icons"  style="margin-top: 35%"  (click)="removeCustomerDetails(i)">
+                    remove_circle_outline
+                  </span>
+                </div> -->
+              </div>
+            </div>
+            <hr />
+          </ng-container>
+        </ng-container>
+        <!-- <div class="row">
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
+            <input
+              type="text"
+              class="form-control"
+              id="customerName"
+              formControlName="customerName"
+            />
+          </div>
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label">Customer Contact</p>
+            <input
+              type="text"
+              class="form-control"
+              id="customerContact"
+              formControlName="customerContact"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Customer Contact Phone</p>
             <input
               type="text"
@@ -47,12 +169,11 @@
               formControlName="customerEmail"
             />
           </div>
-        </div> 
-      <hr>
+        </div>  -->
+    
       <div >
         <button class="btn btn-primary" (click)="onSubmit()">
          Update        </button>
       </div>
    </div>
     </section>
-      

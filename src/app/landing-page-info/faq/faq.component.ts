@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { EditFaqComponent } from './edit-faq/edit-faq.component';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class FAQComponent implements OnInit {
   myId: any;
   Id: any
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -51,7 +52,7 @@ export class FAQComponent implements OnInit {
       this.ELEMENT_DATA = faqData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-
+      this.dataSource.sort=this.sort;
     });
 
   }

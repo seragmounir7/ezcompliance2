@@ -58,3 +58,6 @@ label {
 table {
   width: 100%;
 }
+::ng-deep .mat-sort-header-container {
+  margin-left: 47% !important;
+}

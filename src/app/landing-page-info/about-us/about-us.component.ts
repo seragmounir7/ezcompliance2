@@ -19,6 +19,7 @@ import { AddServiceInfoComponent } from '../application-service-info/add-service
 import { AddTeamInfoComponent } from './add-team-info/add-team-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
@@ -44,6 +45,7 @@ export class AboutUsComponent implements OnInit {
   displayedColumnss: string[] = ['index', 'images', 'title', 'action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
@@ -83,7 +85,7 @@ export class AboutUsComponent implements OnInit {
       this.ELEMENTS_DATA = teamData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-      
+      this.dataSources.sort=this.sort;
       // this.teamData = data.data[0];
       
     });

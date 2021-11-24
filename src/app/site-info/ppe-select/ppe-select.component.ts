@@ -25,7 +25,6 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
   @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
   /////////////mat table end////////////////
 
@@ -53,6 +52,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;

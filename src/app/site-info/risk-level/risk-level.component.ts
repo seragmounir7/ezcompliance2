@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditRiskLevelComponent } from './edit-risk-level/edit-risk-level.component';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class RiskLevelComponent implements OnInit {
   displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   allRiskLevel: any[]=[];
 
   ngAfterViewInit() {
@@ -47,6 +49,7 @@ export class RiskLevelComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
    })
   }

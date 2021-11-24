@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { AddHappyClientComponent } from './add-happy-client/add-happy-client.component';
 import { AddClientInfoComponent } from './add-client-info/add-client-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-happy-client',
   templateUrl: './happy-client.component.html',
@@ -34,6 +35,7 @@ export class HappyClientComponent implements OnInit {
   displayedColumnss: string[] = ['index', 'images','action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -66,7 +68,7 @@ export class HappyClientComponent implements OnInit {
       this.ELEMENTS_DATA = happyClientData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-  
+      this.dataSources.sort=this.sort;
       // this.happyClientData = data.data[0];
      
     });
