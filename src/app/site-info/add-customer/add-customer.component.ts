@@ -44,23 +44,23 @@ export class AddCustomerComponent implements OnInit {
     })
   }
 
-  getAllJobTask() {
-    // this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
-    //   console.log('jobTaskDetails=>', res);
-    //   // this.jobTaskData = res.data[0].subComponents;
-    //   let data = res.data
-    //   data.forEach((element, index) => {
-    //     element.index = index + 1; //adding index
-    //   });
+  // getAllJobTask() {
+  //   // this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
+  //   //   console.log('jobTaskDetails=>', res);
+  //   //   // this.jobTaskData = res.data[0].subComponents;
+  //   //   let data = res.data
+  //   //   data.forEach((element, index) => {
+  //   //     element.index = index + 1; //adding index
+  //   //   });
 
-    //   this.ELEMENT_DATA = data;
-    //   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    //   this.dataSource.paginator = this.paginator;
+  //   //   this.ELEMENT_DATA = data;
+  //   //   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  //   //   this.dataSource.paginator = this.paginator;
 
-    //   //  this.task = res.data.subComponents;
-    // });
+  //   //   //  this.task = res.data.subComponents;
+  //   // });
 
-  }
+  // }
 
   openDialog(id) {
 		let dialogRef = this.dialog.open(AddingCustComponent, {
