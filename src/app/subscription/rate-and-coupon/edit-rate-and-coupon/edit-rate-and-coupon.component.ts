@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import Swal from 'sweetalert2';
@@ -25,10 +25,10 @@ export class EditRateAndCouponComponent implements OnInit {
     console.log(this.data);
 
     this.editSubcriptionForm = this.fb.group({
-      monthly: [this.dataRec.monthly],
-      defaultMonthly: [this.dataRec.defaultMonthly],
-      defaultEmp: [this.dataRec.defaultEmp],
-      yearlyDiscount: [this.dataRec.yearlyDiscount],
+      monthly: [this.dataRec.monthly,Validators.required],
+      defaultMonthly: [this.dataRec.defaultMonthly,Validators.required],
+      defaultEmp: [this.dataRec.defaultEmp,Validators.required],
+      yearlyDiscount: [this.dataRec.yearlyDiscount,Validators.required],
     });
   }
   onSubmit() {

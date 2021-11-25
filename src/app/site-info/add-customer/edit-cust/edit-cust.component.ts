@@ -11,33 +11,34 @@ import Swal from 'sweetalert2';
 export class EditCustComponent implements OnInit {
   editCustomerForm:FormGroup;
   StatesData:any=[''];
+  formData:any;
   constructor(
     private dialogRef: MatDialogRef<EditCustComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
     private fb : FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService
-    ) { }
+    ) {this.formData=data ;
+    console.log("fdata",this.formData)}
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log(this.formData);
     
     this.editCustomerForm = this.fb.group({
-      customerName:[this.data.customerName],
-      customerContact:[this.data.customerContact],
-     // customerContactPhone:[this.data.customerContactPhone],
-      //customerEmail:[this.data.customerEmail],
-      streetAddress:[this.data.streetAddress],
-      stateId:[this.data.stateId._id],
-      postCode:[this.data.postCode],
-      ABN:[this.data.ABN],
-     contacts: this.fb.array([]),
-      position:[this.data.contacts.position],
-    email:[this.data.contacts.email],
-    phone:[this.data.contacts.phone]
+      customerName:[this.formData.customerName],
+      customerContact:[this.formData.customerContact],
+       streetAddress:[this.formData.streetAddress],
+      stateId:[this.formData.stateId._id],
+      postCode:[this.formData.postCode],
+      ABN:[this.formData.ABN],
+      contacts: this.fb.array([]),
 
-
+   
     })
-    this.addCustomerDetails();
+  
+    this.formData.contacts.forEach(element => {
+       this.addCustomerDetails(element.position,element.email,element.phone );
+    });
+  //  this.addCustomerDetails();
     this.getAllStates();
   }
 
@@ -56,20 +57,21 @@ export class EditCustComponent implements OnInit {
   close() {
     this.dialogRef.close();
 }
-addCustomerDetails() {
-  this.customerArr().push(this.customerForm());
+addCustomerDetails(position,email,phone) {
+  this.customerArr().push(this.customerForm(position,email,phone));
 
 }
 customerArr(): FormArray {
   return this.editCustomerForm.get('contacts') as FormArray;
 }
-customerForm(): FormGroup {
+customerForm(position,email,phone): FormGroup {
   return this.fb.group({
-    // position:[this.data.contacts.position],
-    // email:[this.data.contacts.email],
-    // phone:[this.data.contacts.phone]
+    position:[position],
+    email:[email],
+    phone:[phone]
 
   });
+
 }
 removeCustomerDetails(i) {
   const item = <FormArray>this.editCustomerForm.controls['contacts'];

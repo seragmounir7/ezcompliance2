@@ -10,26 +10,27 @@ import Swal from 'sweetalert2';
 })
 export class EditSiteComponent implements OnInit {
   editSitesForm: FormGroup;
-
+  allState: any = [];
   constructor(
     private dialogRef: MatDialogRef<EditSiteComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any,
-    private fb:FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.editSitesForm = this.fb.group({
-      siteName:[this.data.siteName],
-      streetNumber:[this.data.streetNumber],
-      streetAddress:[this.data.streetAddress],
-      suburb:[this.data.suburb],
-      state:[this.data.state],
+      siteName: [this.data.siteName],
+      streetNumber: [this.data.streetNumber],
+      streetAddress: [this.data.streetAddress],
+      suburb: [this.data.suburb],
+      stateId: [this.data.stateId._id],
     })
+    this.getAllStates();
   }
-  onSubmit(){
+  onSubmit() {
     console.log(this.editSitesForm.value)
-    this.logicalFormInfoService.updateSite(this.data._id,this.editSitesForm.value).subscribe(res => {
+    this.logicalFormInfoService.updateSite(this.data._id, this.editSitesForm.value).subscribe(res => {
       console.log(res);
       this.dialogRef.close('true');
       Swal.fire({
@@ -42,5 +43,12 @@ export class EditSiteComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
+  getAllStates() {
+    this.logicalFormInfoService.getAllStates().subscribe((res) => {
+      console.log('getAllStates=>', res);
+      this.allState = res.data;
+    });
+
+  }
 }

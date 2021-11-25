@@ -1,5 +1,5 @@
-<section [formGroup]="couponDetails" class="content">
-  <div class="container px-4 py-4 bg-white">
+<section [formGroup]="couponDetails">
+  <div >
     <div mat-dialog-title class="dialog-title">
     <h3 *ngIf="!dataRec">Add Coupon Details</h3>
     <h3 *ngIf="dataRec">Edit Coupon Details </h3>
@@ -23,10 +23,10 @@
 
     <hr>
     <div>
-      <button class="btn btn-primary" *ngIf="dataRec" (click)="onSubmit()">
+      <button class="btn btn-primary" *ngIf="dataRec"    (click)="onSubmit()">
         Update
       </button>
-      <button class="btn btn-primary" *ngIf="!dataRec" (click)="addForm()">
+      <button class="btn btn-primary" *ngIf="!dataRec" [disabled]="couponDetails.invalid " (click)="addForm()">
         Add
       </button>
     </div>
