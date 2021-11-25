@@ -1,7 +1,13 @@
-<section [formGroup]="addJobNumberForm" class="content">
-  <div class="container px-4 py-4 bg-white">
+<section [formGroup]="addJobNumberForm" >
+  <div>
+    <div mat-dialog-title class="dialog-title">
     <h1>Create Job Number</h1>
-  
+    <button type="button" class="close" 
+    style="font-size: 25px;"
+      (click)="close()" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+  </div>
     <div class="row">
   
       <div class="my-3 col-6">
@@ -57,7 +63,9 @@
         aria-label="Default select example"
         formControlName="state"
       >
-        <option selected hidden>Select</option>
+      <option selected hidden>Select</option>
+      <option *ngFor ="let item of allState" [value]="item._id">{{item.title}}</option>
+        <!-- <option selected hidden>Select</option>
               <option value="NSW">NSW</option>
               <option value="ACT">ACT</option>
               <option value="QLD">QLD</option>
@@ -66,7 +74,7 @@
               <option value="NZ">NZ</option>
               <option value="TAS">TAS</option>
               <option value="VIC">VIC</option>
-              <option value="WA">WA</option>
+              <option value="WA">WA</option> -->
       </select>
     
       </div>
@@ -95,6 +103,15 @@
     </div>
     <div class="row">
       <div class="my-3 col">
+        <p for="exampleFormControlInput1" class="form-Label">ABN</p>
+        <input
+          type="text"
+          class="form-control"
+          id="customerEmail"
+          formControlName="customerEmail"
+        />
+      </div>
+      <!-- <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Customer Contact Phone</p>
         <input
           type="text"
@@ -111,10 +128,10 @@
           id="siteName"
           formControlName="customerEmail"
         />
-      </div>
+      </div> -->
     </div> 
   <div >
-    <button class="btn btn-primary" (click)="onSubmit()">
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="addJobNumberForm.invalid " >
       Create
     </button>
   </div>

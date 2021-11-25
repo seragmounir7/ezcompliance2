@@ -1,6 +1,6 @@
 import { value } from './../../../views/dynamic-form/global.model';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -23,11 +23,11 @@ allState:any=[];
   ngOnInit(): void {
     this.getAllStates();
     this.addSitesForm = this.fb.group({
-      siteName:[''],
-      streetNumber:[''],
-      streetAddress:[''],
-      suburb:[''],
-      state:[],
+      siteName:['',Validators.required],
+      streetNumber:['',Validators.required],
+      streetAddress:['',Validators.required],
+      suburb:['',Validators.required],
+      stateId:['',Validators.required],
     })
   }
   getAllStates() {

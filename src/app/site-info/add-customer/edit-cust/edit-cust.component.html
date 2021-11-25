@@ -1,5 +1,5 @@
-<section [formGroup]="editCustomerForm" class="content" style="height: 100%;">
-    <div class="container px-4 py-4 bg-white">
+<section [formGroup]="editCustomerForm">
+    <div >
       <div mat-dialog-title class="dialog-title">
         <h2>Update Customer</h2>
         <button type="button"  class="close" 
@@ -82,7 +82,7 @@
             <h1> Contact {{i+1}}</h1>
               <div class="row">
 
-                <div class="my-3 col-3">
+                <div class="my-3 col-4">
                   <p for="exampleFormControlInput1" class="form-Label"> Position</p>
                   <input
                     type="text"
@@ -92,7 +92,7 @@
                     id="position"
                   />
                 </div>
-                <div class="my-3 col-3">
+                <div class="my-3 col-4">
                   <p for="exampleFormControlInput1" class="form-Label">
                    Email
                   </p>
@@ -104,7 +104,7 @@
                   id="email"
                 />
                 </div>
-                <div class="my-3 col-3">
+                <div class="my-3 col-4">
                   <p for="exampleFormControlInput1" class="form-Label">  Phone Number</p>
                   <input
                     type="text"
@@ -115,16 +115,16 @@
                   />
                 </div>
               
-                <!-- <div class=" my-3 col-1 my-auto">
-                  <span class="material-icons"  style="margin-top: 35%"   (click)="addCustomerDetails()"
-                    >add_circle_outline
+                <div >
+                  <span (click)="addCustomerDetails('','','')"
+                    >
                   </span>
                 </div>
-                <div class="my-3 col-1 my-auto">
-                  <span class="material-icons"  style="margin-top: 35%"  (click)="removeCustomerDetails(i)">
-                    remove_circle_outline
+                <div>
+                  <span   (click)="removeCustomerDetails(i)">
+                 
                   </span>
-                </div> -->
+                </div>
               </div>
             </div>
             <hr />

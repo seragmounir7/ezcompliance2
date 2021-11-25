@@ -84,8 +84,8 @@ export class AddCustomerComponent implements OnInit {
   edit(element) {
     console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
-      height:'500px',
-      width:'650px',
+      height:'700px',
+      width:'750px',
   
             // height:'400px',
       data: element,

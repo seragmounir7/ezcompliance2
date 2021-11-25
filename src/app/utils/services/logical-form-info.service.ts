@@ -619,7 +619,7 @@ export interface ArrObj {
   streetNumber: string;
   streetAddress: string;
   suburb: string;
-  state: string;
+  stateId: string;
   customerName: string;
   customerContact: string;
   customerContactPhone: string;

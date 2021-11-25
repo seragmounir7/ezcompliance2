@@ -52,7 +52,7 @@ getAllCoupon(){
 edit(element) {
   const dialogRef = this.dialog.open(AddEditCouponComponent, {
     width: "550px",
-   height:"400px",
+   height:"300px",
     data: element,
   });
   dialogRef.afterClosed().subscribe((result) => {
