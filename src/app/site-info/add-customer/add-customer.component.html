@@ -45,12 +45,12 @@
 
 <ng-container matColumnDef="customerContactPhone">
   <th mat-header-cell *matHeaderCellDef> Contact Phone </th>
-  <td mat-cell *matCellDef="let element"> {{element.contacts.phone}} </td>
+  <td mat-cell *matCellDef="let element"> {{element.contacts[0]?.phone}} </td>
 </ng-container>
 
 <ng-container matColumnDef="customerEmail">
   <th mat-header-cell *matHeaderCellDef> Email </th>
-  <td mat-cell *matCellDef="let element"> {{element.contacts.email}} </td>
+  <td mat-cell *matCellDef="let element"> {{element.contacts[0]?.email}} </td>
 </ng-container>
 
 <!-- <ng-container matColumnDef="State">
