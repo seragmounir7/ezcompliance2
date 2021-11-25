@@ -36,9 +36,9 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
       // console.log(JSON.parse(res))
       res = JSON.parse(res)
       this.addJobNumberForm.get('customerContact').setValue(res.customerContact)
-      // this.addJobNumberForm.get('customerContactPhone').setValue(res.contacts[0]?.phone)
-      // this.addJobNumberForm.get('customerEmail').setValue(res.contacts[0]?.email)
-      this.addJobNumberForm.get('customerEmail').setValue(res.ABN)
+      this.addJobNumberForm.get('customerContactPhone').setValue(res.contacts[0]?.phone)
+      this.addJobNumberForm.get('customerEmail').setValue(res.contacts[0]?.email)
+      // this.addJobNumberForm.get('customerEmail').setValue(res.ABN)
     })
   }
 
@@ -98,10 +98,10 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
   }
   setCustomer(item) {
     this.addJobNumberForm.get('customerContact').setValue(item.customerContact)
-    // this.addJobNumberForm.get('customerContactPhone').setValue(item.contacts[0]?.phone)
-    // this.addJobNumberForm.get('customerEmail').setValue(item.contacts[0]?.email)
-    this.addJobNumberForm.get('customerEmail').setValue(item.ABN)
-  }
+    this.addJobNumberForm.get('customerContactPhone').setValue(item.contacts[0]?.phone)
+    this.addJobNumberForm.get('customerEmail').setValue(item.contacts[0]?.email)
+  //   this.addJobNumberForm.get('customerEmail').setValue(item.ABN)
+   }
   close() {
     this.dialogRef.close();
 }
