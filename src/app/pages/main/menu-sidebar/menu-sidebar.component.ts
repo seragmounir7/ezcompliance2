@@ -8,6 +8,7 @@ import {
   ViewChild,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import { AppService } from 'src/app/utils/services/app.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -20,9 +21,12 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 export class MenuSidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('mainSidebar', { static: false }) mainSidebar;
   @Output() mainSidebarHeight: EventEmitter<any> = new EventEmitter<any>();
+  @Input() logoUrl
   constructor(public appService: AppService, private setTitle: SetTitleService,private router:Router) {}
 
   ngOnInit() {
+    console.log("logo=>", this.logoUrl);
+    
     console.log(this.router.url);
     let rLink =this.router.url;
     if(rLink ==='/admin/dynamicFormsList'){
