@@ -212,7 +212,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
           streetNo: item.streetNumber,
           streetAddr: item.streetAddress,
           subUrb: item.suburb,
-          statesSWMS: item.state,
+          statesSWMS: item.stateId._id,
           custConct: item.customerContact,
           custConctPh: item.customerContactPhone,
           custEmail: item.customerEmail,
