@@ -34,6 +34,7 @@ import { EditFaqComponent } from './faq/edit-faq/edit-faq.component';
 import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
 import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
 import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
+import { OurWorkComponent } from './our-work/our-work.component';
 
 @NgModule({
 
@@ -58,7 +59,7 @@ import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-questio
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
     FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
-    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent
+    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent
 
   ],
   imports: [

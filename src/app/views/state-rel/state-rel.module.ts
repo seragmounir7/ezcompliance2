@@ -21,11 +21,12 @@ import { StatesComponent } from './states/states.component';
 import { AddAndEditStatesComponent } from './states/add-and-edit-states/add-and-edit-states.component';
 import { SetStateRelationComponent } from './set-state-relation/set-state-relation.component';
 import { AddStateRelationComponent } from './set-state-relation/add-state-relation/add-state-relation.component';
-
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [StateRelComponent, JuridictionComponent, SafetyLegislationComponent, RegulatorComponent, CodeOfPractComponent, AddAndEditRegComponent, AddAndEditJuriComponent, AddAndEditCodeComponent, AddAndEditSafetyComponent, StatesComponent, AddAndEditStatesComponent, SetStateRelationComponent, AddStateRelationComponent],
   imports: [
+    MatSortModule,
     CommonModule,
     StateRelRoutingModule,
     FormsModule,

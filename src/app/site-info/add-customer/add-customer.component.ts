@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddingCustComponent } from './adding-cust/adding-cust.component';
 import { EditCustComponent } from './edit-cust/edit-cust.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-add-customer',
@@ -18,7 +19,7 @@ export class AddCustomerComponent implements OnInit {
   displayedColumns: string[] = ['index', 'customerName','customerContact','customerContactPhone','customerEmail', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   constructor( 
     private setTitle: SetTitleService, 
     private dialog: MatDialog,
@@ -38,27 +39,28 @@ export class AddCustomerComponent implements OnInit {
     this.logicalFormInfoService.getAllCustomer().subscribe((res:any) => {
       console.log(res)
       this.dataSource.data = res.data;
-      this.dataSource.paginator = this.paginator
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
 
-  getAllJobTask() {
-    // this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
-    //   console.log('jobTaskDetails=>', res);
-    //   // this.jobTaskData = res.data[0].subComponents;
-    //   let data = res.data
-    //   data.forEach((element, index) => {
-    //     element.index = index + 1; //adding index
-    //   });
+  // getAllJobTask() {
+  //   // this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
+  //   //   console.log('jobTaskDetails=>', res);
+  //   //   // this.jobTaskData = res.data[0].subComponents;
+  //   //   let data = res.data
+  //   //   data.forEach((element, index) => {
+  //   //     element.index = index + 1; //adding index
+  //   //   });
 
-    //   this.ELEMENT_DATA = data;
-    //   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    //   this.dataSource.paginator = this.paginator;
+  //   //   this.ELEMENT_DATA = data;
+  //   //   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  //   //   this.dataSource.paginator = this.paginator;
 
-    //   //  this.task = res.data.subComponents;
-    // });
+  //   //   //  this.task = res.data.subComponents;
+  //   // });
 
-  }
+  // }
 
   openDialog(id) {
 		let dialogRef = this.dialog.open(AddingCustComponent, {
@@ -82,8 +84,8 @@ export class AddCustomerComponent implements OnInit {
   edit(element) {
     console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
-      height:'500px',
-      width:'650px',
+      height:'700px',
+      width:'750px',
   
             // height:'400px',
       data: element,

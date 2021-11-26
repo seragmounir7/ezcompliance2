@@ -13,6 +13,7 @@ import { AfterViewInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 export interface PeriodicElement {
   categories: string;
   position: number;
@@ -36,7 +37,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
     'edit',
   ];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -102,6 +103,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort; 
 
       this.spinner.hide();
     });

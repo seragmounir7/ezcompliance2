@@ -12,6 +12,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AddSafetyModuleComponent } from './add-safety-module/add-safety-module.component';
 import { AddModulesInfoComponent } from './add-modules-info/add-modules-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-safety-modules',
   templateUrl: './safety-modules.component.html',
@@ -36,6 +37,7 @@ export class SafetyModulesComponent implements OnInit {
   displayedColumnss: string[] = ['index', 'images', 'title', 'action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -70,6 +72,7 @@ export class SafetyModulesComponent implements OnInit {
     this.ELEMENTS_DATA = safetyData;
     this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
     this.dataSources.paginator = this.paginator;
+    this.dataSources.sort=this.sort;
     });
   }
   editForm(id, name: boolean, i?: any) {

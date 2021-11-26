@@ -2,12 +2,15 @@
     color: #007bff;
     font-size: 21px !important;
 }
+::ng-deep .mat-sort-header-container {
+  margin-left: 47% !important;
+}
 table {
     width: 100%;
   }
-  // .select{
-  //     width:100%!important;
-  // }
+.select{
+    width:100%!important;
+}
   .pt-3 {
     display: inline-block;
     font-size: 32px;

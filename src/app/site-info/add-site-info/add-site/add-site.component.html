@@ -1,5 +1,5 @@
-<section  [formGroup]="addSitesForm" class="content">
-    <div class="container px-4 py-4 bg-white">
+<section  [formGroup]="addSitesForm" >
+    <div >
       <div mat-dialog-title class="dialog-title">
       <h2> Add Site Information</h2>
       <button type="button" class="close" 
@@ -39,7 +39,7 @@
             id="streetAddress"
           />
         </div>
-        <div class="my-3 col-2">
+        <div class="my-3 col-3">
           <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
           <input
             type="text"
@@ -48,34 +48,26 @@
             id="suburb"
           />
         </div>
-        <div class="my-3 col-4">
+        <div class="my-3 col-3">
             <p for="exampleFormControlInput1" class="form-label"
             >State</p
           >  
           <select
           class="form-select form-control col"
-          id="state"
+          id="stateId"
           aria-label="Default select example"
-          formControlName="state"
+          formControlName="stateId"
 
         >
           <option selected hidden>Select</option>
-          <option value="NSW">NSW</option>
-          <option value="ACT">ACT</option>
-          <option value="QLD">QLD</option>
-          <option value="NT">NT</option>
-          <option value="SA">SA</option>
-          <option value="NZ">NZ</option>
-          <option value="TAS">TAS</option>
-          <option value="VIC">VIC</option>
-          <option value="WA">WA</option>
+          <option *ngFor ="let item of allState" [value]="item._id">{{item.title}}</option>
         </select>
        
         </div>
       </div>
       <hr>
     <div >
-      <button class="btn btn-primary" (click)="onSubmit()">
+      <button class="btn btn-primary" (click)="onSubmit()"  [disabled]="addSitesForm.invalid" >
         Add
       </button>
     </div>

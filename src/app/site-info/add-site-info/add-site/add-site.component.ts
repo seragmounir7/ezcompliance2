@@ -1,6 +1,6 @@
 import { value } from './../../../views/dynamic-form/global.model';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-site.component.scss']
 })
 export class AddSiteComponent implements OnInit {
-
+allState:any=[];
   addSitesForm
   constructor( 
     private dialogRef: MatDialogRef<AddSiteComponent>,
@@ -21,22 +21,23 @@ export class AddSiteComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getAllStates();
     this.addSitesForm = this.fb.group({
-      siteName:[''],
-      streetNumber:[''],
-      streetAddress:[''],
-      suburb:[''],
-      state:[''],
+      siteName:['',Validators.required],
+      streetNumber:['',Validators.required],
+      streetAddress:['',Validators.required],
+      suburb:['',Validators.required],
+      stateId:['',Validators.required],
     })
   }
-  state = [
-      { label: 'New South Wales', value: '' },
-      { label: 'Queensland', value: '' },
-      { label: 'South Australia', value: '' },
-      { label: 'Tasmania', value: '' },
-      { label: 'Victoria', value: '' },
-      { label: 'Western Australia', value: '' },
-    ];
+  getAllStates() {
+    this.logicalFormInfoService.getAllStates().subscribe((res) => {
+      console.log('getAllStates=>', res);
+  this.allState=res.data;
+    });
+ 
+  }
+
     onSubmit(){
       console.log(this.addSitesForm.value)
       this.logicalFormInfoService.addSite(this.addSitesForm.value).subscribe(res => {

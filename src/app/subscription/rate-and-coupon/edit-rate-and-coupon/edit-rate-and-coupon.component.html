@@ -1,6 +1,6 @@
 
-<section [formGroup]="editSubcriptionForm" class="content">
-    <div class="container px-4 py-4 bg-white">
+<section [formGroup]="editSubcriptionForm" >
+    <div >
       <div mat-dialog-title class="dialog-title">
         <h3 *ngIf="!dataRec">Add Subcription Rate</h3>
         <h3 *ngIf="dataRec">Edit Subcription Rate</h3>
@@ -56,7 +56,7 @@
         <button class="btn btn-primary"   *ngIf="dataRec"  (click)="onSubmit()">
           Update
         </button>
-        <button class="btn btn-primary" *ngIf="!dataRec" (click)="addForm()">
+        <button class="btn btn-primary" *ngIf="!dataRec" (click)="addForm()" [disabled]="editSubcriptionForm.invalid "  >
             Add
           </button>
       </div>

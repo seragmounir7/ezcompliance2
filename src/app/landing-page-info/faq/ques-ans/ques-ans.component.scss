@@ -1,6 +1,9 @@
 table {
     width: 100%;
   }
+  ::ng-deep .mat-sort-header-container {
+    margin-left: 47% !important;
+  }
   .pt-3 {
     display: inline-block;
     font-size: 32px;

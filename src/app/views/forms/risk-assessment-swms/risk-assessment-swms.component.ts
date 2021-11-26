@@ -1,7 +1,6 @@
-import { value } from './../../dynamic-form/global.model';
-import { element } from 'protractor';
+
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
@@ -17,7 +16,8 @@ import Swal from 'sweetalert2';
   templateUrl: './risk-assessment-swms.component.html',
   styleUrls: ['./risk-assessment-swms.component.scss'],
 })
-export class RiskAssessmentSWMSComponent implements OnInit {
+export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
+  @ViewChild('projectManager') projectManager: ElementRef;
   riskAssessmentFb!: FormGroup;
   SWMSTab!: FormArray;
   RiskAssessment = true;
@@ -292,6 +292,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
     { label: 'Wide Brim Hat', value: '' },
   ];
   riskArr = [];
+  COPArr = [];
   ppeArr = [];
   licenceArr = [];
   jobTaskData = [];
@@ -328,6 +329,7 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       Employee1: [''],
       dateTime: [''],
       statesSWMS: [''],
+      projectManagerSWMS: [''],
       jurisdiction: [''],
       safetyLeg: [''],
       regulator: [''],
@@ -975,5 +977,10 @@ export class RiskAssessmentSWMSComponent implements OnInit {
       console.log('JurisdictionData=>', res);
       this.states = res.data;
     });
+  }
+
+  setProjectManager(e){
+    console.log('setProjectManager==>',this.projectManager)
+    this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
   }
 }
