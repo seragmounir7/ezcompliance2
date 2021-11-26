@@ -611,6 +611,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
 
  
   deleteHazrds(type,title,i){
+    console.log('type=>',type,title,i);
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${title}"?`,
@@ -839,10 +840,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       }
       if (type === 'identifyHazards' && result !='false') {
 
-        this.jobTaskSelected[i].allHazardsTitle.splice(0,0,data);
+        this.jobTaskSelected[i].allHazardsTitle.push(data);
       }
       if (type === 'ctrlActreq'  && result !='false') {
-        this.jobTaskSelected[i].allContrlActReqTitle.splice(0,0,data);
+        this.jobTaskSelected[i].allContrlActReqTitle.push(data);
       }
 
       console.log('The dialog was closed');
