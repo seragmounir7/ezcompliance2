@@ -254,4 +254,63 @@ getAllFaqbasedOnPortal(id){
     })
   );
 }
+addWork(data) {
+  return this.https.post(this.apiUrl + 'ourWork/add', data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+editWorK(id, data){
+  return this.https.put(this.apiUrl + 'ourWork/update/' + id, data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+
+
+getWorkById(id) {
+  return this.https.get(this.apiUrl + 'ourWork/get/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+addSubWork(data) {
+  return this.https.post(this.apiUrl + 'subWork/add', data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+editSubWorK(id, data){
+  return this.https.put(this.apiUrl + 'subWork/update/' + id, data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+deleteSubWorK(id){
+  return this.https.delete(this.apiUrl + 'subWork/delete/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+getSubWorkById(id) {
+  return this.https.get(this.apiUrl + 'subWork/get/data/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+
 }
