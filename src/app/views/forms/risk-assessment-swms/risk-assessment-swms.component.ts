@@ -35,208 +35,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   allJobNumbers = [];
   allHazards = [];
   allContrlActReq = [];
-  // riskLevel = [];
-  // resdRiskLevel = [];
-  // statesData = [
-  //   {
-  //     states: 'NSW',
-  //     juridiction: {
-  //       act: 'Act: Work Health and Safety Act 2011 (NSW)',
-  //       regulation: 'Regulation: Work Health and Safety Regulation 2017 (NSW)',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: SafeWork NSW',
-  //       codes: 'Codes: NSW Codes of Practice',
-  //     },
-  //   },
-  //   {
-  //     states: 'ACT',
-  //     juridiction: {
-  //       act: 'Act: Work Health and Safety Act 2011 (ACT)',
-  //       regulation: 'Regulation: Work Health and Safety Regulation 2011 (ACT)',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: WorkSafe ACT',
-  //       codes: 'Codes: ACT Codes of Practice',
-  //     },
-  //   },
-
-  //   {
-  //     states: 'QLD',
-  //     juridiction: {
-  //       act: 'Act: Work Health and Safety Act 2011 (Qld)',
-  //       regulation: 'Regulation: Work Health and Safety Regulation 2011 (Qld)',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: Workplace Health and Safety Queensland',
-  //       codes: 'Codes: Qld Codes of Practice ',
-  //     },
-  //   },
-  //   {
-  //     states: 'NT',
-  //     juridiction: {
-  //       act:
-  //         'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
-  //       regulation:
-  //         'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: NT WorkSafe',
-  //       codes: 'Codes: NT Codes of Practice',
-  //     },
-  //   },
-  //   {
-  //     states: 'SA',
-  //     juridiction: {
-  //       act: 'Act: Work Health and Safety Act 2012 (SA)',
-  //       regulation: 'Regulation: Work Health and Safety Regulation 2012 (SA) ',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: SafeWork SA',
-  //       codes: 'Codes: SA Codes of Practice',
-  //     },
-  //   },
-  //   {
-  //     states: 'TAS',
-  //     juridiction: {
-  //       act: 'Act: Work Health and Safety Act 2012 (Tas) ',
-  //       regulation: 'Regulation: Work Health and Safety Regulation 2012 (Tas) ',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: WorkSafe Tasmania',
-  //       codes: 'Codes: Tas Codes of Practice',
-  //     },
-  //   },
-  //   {
-  //     states: 'NZ',
-  //     juridiction: {
-  //       act: 'Act: Health and Safety at Work Act 2015 (NZ)',
-  //       regulation: '',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: WorkSafe New Zealand',
-  //       codes: 'Codes: NZ Codes of Practice',
-  //     },
-  //   },
-  //   {
-  //     states: 'VIC',
-  //     juridiction: {
-  //       act: 'Act: Occupational Health and Safety Act 2004 (Vic) ',
-  //       regulation:
-  //         'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: WorkSafe Victoria',
-  //       codes: 'Codes: Vic Compliance Codes',
-  //     },
-  //   },
-  //   {
-  //     states: 'WA',
-  //     juridiction: {
-  //       act: 'Act: Occupational Safety and Health Act 1984 (WA)',
-  //       regulation:
-  //         'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
-  //     },
-  //     safetyLegislation: {
-  //       regulator: 'Regulator: WorkSafe WA',
-  //       codes: 'Codes: WA Codes of Practice',
-  //     },
-  //   },
-  // ];
-  // jobTask = [
-  //   { label: 'Activities Involving chemicals', value: '' },
-  //   { label: 'Assess Hazards', value: '' },
-  //   { label: 'Cable installation into cables tray', value: '' },
-  //   { label: 'Cable Support installation', value: '' },
-  //   { label: 'Camera Installation', value: '' },
-  //   { label: 'conduit Installation in ceiling or walls', value: '' },
-  //   { label: 'Conduit installation in trench', value: '' },
-  //   { label: 'conduit installation prior to concreate Pour', value: '' },
-  //   { label: 'Control Panel Installation', value: '' },
-  //   { label: 'Heat Shrinking cable joints', value: '' },
-  //   { label: 'Hot Works', value: '' },
-  //   { label: 'Installation of cables', value: '' },
-  //   { label: 'Leaving Site', value: '' },
-  //   { label: 'Maual Handling', value: '' },
-  //   { label: 'Site establishment', value: '' },
-  //   { label: 'Terminination of fibre optic cables', value: '' },
-  //   { label: 'Use of Elevated Work Platform', value: '' },
-  //   { label: 'Use of EWP', value: '' },
-  //   { label: 'Use of Ladders', value: '' },
-  //   { label: 'Use of Plant & Equipment', value: '' },
-  //   { label: 'Use of plant Equipment', value: '' },
-  //   { label: 'Working false ceilings', value: '' },
-  //   { label: 'Working in communication pits less than 1.5m deep', value: '' },
-  //   { label: 'Working near around Pedistrians', value: '' },
-  //   { label: 'Working near Asbestos', value: '' },
-  //   { label: 'Working near Lead containing materials', value: '' },
-  //   { label: 'Working outdoors', value: '' },
-  //   { label: 'Working with hand and power tools', value: '' },
-  // ];
-
-  // highRiskConstruction = [
-  //   {
-  //     label: 'Working in or near trenches or shafts deeper than 1.5metres',
-  //     value: '',
-  //   },
-  //   { label: 'Work in or near a confined space', value: '' },
-  //   {
-  //     label:
-  //       'Work in an area that may have a contaminated or flammable atmosphere',
-  //     value: '',
-  //   },
-  //   { label: 'Working around or near mobile plant', value: '' },
-  //   { label: 'Work with near or near asbestos', value: '' },
-  //   { label: 'Working with hazardous substances', value: '' },
-  //   { label: 'Working with or near tilt-up/precast concrete', value: '' },
-  //   { label: 'Risk of falls higher than 2 metres', value: '' },
-  //   {
-  //     label: 'Working near on or adjacent to a road or rail corridor',
-  //     value: '',
-  //   },
-  //   { label: 'Working on or near telecommunication tower', value: '' },
-  //   { label: 'Working on or near telecommunication tower', value: '' },
-  //   { label: 'Work near explosives', value: '' },
-  //   {
-  //     label:
-  //       'Work in or near water or other liquid that involves a risk of drowning',
-  //     value: '',
-  //   },
-  //   { label: 'Demolition of load-bearing structure', value: '' },
-  //   { label: 'Diving work', value: '' },
-  // ];
-
-  // PPEselection = [
-  //   { label: 'Disposable dust mask', value: '' },
-  //   { label: 'Dust Mas', value: '' },
-  //   { label: 'Face shield', value: '' },
-  //   { label: 'Full face respirator', value: '' },
-  //   { label: 'Gttors', value: '' },
-  //   { label: 'Half face respirator', value: '' },
-  //   { label: 'Hard Hat', value: '' },
-  //   { label: 'Hearing protection', value: '' },
-  //   { label: 'High-Vis Clothing', value: '' },
-  //   { label: 'Lock Out Tags', value: '' },
-  //   { label: 'Long sleeve/Long pants', value: '' },
-  //   { label: 'Out of Service Tags', value: '' },
-  //   { label: 'Protective gloves', value: '' },
-  //   { label: 'Rescue kit', value: '' },
-  //   { label: 'Safety boots', value: '' },
-  //   { label: 'Safety glasses', value: '' },
-  //   { label: 'Sun Screen', value: '' },
-  //   { label: 'torch', value: '' },
-  //   { label: 'Wide Brim Hat', value: '' },
-  // ];
-
-  // licenseAndQualification = [
-  //   { label: 'Open Cable Licence', value: '' },
-  //   { label: 'White Card', value: '' },
-  //   { label: 'EWP Licence', value: '' },
-  //   { label: 'Working At Heights', value: '' },
-  //   { label: 'Security Licence', value: '' },
-  //   { label: 'Asbestos Awarness', value: '' },
-  //   { label: 'Working In Confined Space', value: '' },
-  // ];
 
   highRiskConstruction2 = [
     {
@@ -610,8 +408,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   }
 
  
-  deleteHazrds(type,title,i){
+  deleteHazrds(type,title,i,j){
     console.log('type=>',type,title,i);
+    console.log(this.jobTaskSelected[i]);
+    
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${title}"?`,
@@ -623,10 +423,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     }).then((result) => {
       if (result.value) {
         if (type === 'identifyHazards') {
-          this.jobTaskSelected[i].allHazardsTitle.splice(i,1);
+          this.jobTaskSelected[i].allHazardsTitle.splice(j,1);
         }
         if (type === 'ctrlActreq') {
-          this.jobTaskSelected[i].allContrlActReqTitle.splice(i,1);
+          this.jobTaskSelected[i].allContrlActReqTitle.splice(j,1);
         }
       }
     });
