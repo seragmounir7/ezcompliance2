@@ -219,6 +219,7 @@
                   class="form-select form-control col"
                   id="ProjectManager"
                   aria-label="Default select example"
+                  (change)="setProjectManager($event)"
                 >
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
@@ -645,6 +646,7 @@
                   class="form-select form-control col"
                   id="ProjectManager"
                   aria-label="Default select example"
+                  formControlName="projectManagerSWMS"
                 >
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
@@ -761,8 +763,22 @@
         <hr />
         <h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
         <div class="row">
-          <div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
-          <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
+          <!--<div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
+           <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
+          </div> -->
+          <div
+            *ngFor="let item of allCOPSelected; let i = index"
+            class="mt-2 col-4"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              value="Working in or near trenches or shafts deeper than 1.5metres"
+              [checked]="true"
+            />
+            <label class="form-check-label label_2" for="inlineCheckbox1">{{
+              item.title
+            }}</label>
           </div>
         </div>
         <hr />

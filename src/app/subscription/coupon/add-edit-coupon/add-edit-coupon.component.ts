@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import Swal from 'sweetalert2';
@@ -24,8 +24,8 @@ export class AddEditCouponComponent implements OnInit {
 
   ngOnInit(): void {
     this.couponDetails=this.fb.group({
-      couponName:[this.dataRec.couponName],
-      discount:[this.dataRec.discount],
+      couponName:[this.dataRec.couponName,Validators.required],
+      discount:[this.dataRec.discount,Validators.required],
     })
   }
   onSubmit(){
