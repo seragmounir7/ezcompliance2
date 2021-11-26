@@ -37,112 +37,112 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   allContrlActReq = [];
   // riskLevel = [];
   // resdRiskLevel = [];
-  statesData = [
-    {
-      states: 'NSW',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2011 (NSW)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2017 (NSW)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: SafeWork NSW',
-        codes: 'Codes: NSW Codes of Practice',
-      },
-    },
-    {
-      states: 'ACT',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2011 (ACT)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2011 (ACT)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe ACT',
-        codes: 'Codes: ACT Codes of Practice',
-      },
-    },
+  // statesData = [
+  //   {
+  //     states: 'NSW',
+  //     juridiction: {
+  //       act: 'Act: Work Health and Safety Act 2011 (NSW)',
+  //       regulation: 'Regulation: Work Health and Safety Regulation 2017 (NSW)',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: SafeWork NSW',
+  //       codes: 'Codes: NSW Codes of Practice',
+  //     },
+  //   },
+  //   {
+  //     states: 'ACT',
+  //     juridiction: {
+  //       act: 'Act: Work Health and Safety Act 2011 (ACT)',
+  //       regulation: 'Regulation: Work Health and Safety Regulation 2011 (ACT)',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: WorkSafe ACT',
+  //       codes: 'Codes: ACT Codes of Practice',
+  //     },
+  //   },
 
-    {
-      states: 'QLD',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2011 (Qld)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2011 (Qld)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: Workplace Health and Safety Queensland',
-        codes: 'Codes: Qld Codes of Practice ',
-      },
-    },
-    {
-      states: 'NT',
-      juridiction: {
-        act:
-          'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
-        regulation:
-          'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: NT WorkSafe',
-        codes: 'Codes: NT Codes of Practice',
-      },
-    },
-    {
-      states: 'SA',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2012 (SA)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2012 (SA) ',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: SafeWork SA',
-        codes: 'Codes: SA Codes of Practice',
-      },
-    },
-    {
-      states: 'TAS',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2012 (Tas) ',
-        regulation: 'Regulation: Work Health and Safety Regulation 2012 (Tas) ',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe Tasmania',
-        codes: 'Codes: Tas Codes of Practice',
-      },
-    },
-    {
-      states: 'NZ',
-      juridiction: {
-        act: 'Act: Health and Safety at Work Act 2015 (NZ)',
-        regulation: '',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe New Zealand',
-        codes: 'Codes: NZ Codes of Practice',
-      },
-    },
-    {
-      states: 'VIC',
-      juridiction: {
-        act: 'Act: Occupational Health and Safety Act 2004 (Vic) ',
-        regulation:
-          'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe Victoria',
-        codes: 'Codes: Vic Compliance Codes',
-      },
-    },
-    {
-      states: 'WA',
-      juridiction: {
-        act: 'Act: Occupational Safety and Health Act 1984 (WA)',
-        regulation:
-          'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe WA',
-        codes: 'Codes: WA Codes of Practice',
-      },
-    },
-  ];
+  //   {
+  //     states: 'QLD',
+  //     juridiction: {
+  //       act: 'Act: Work Health and Safety Act 2011 (Qld)',
+  //       regulation: 'Regulation: Work Health and Safety Regulation 2011 (Qld)',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: Workplace Health and Safety Queensland',
+  //       codes: 'Codes: Qld Codes of Practice ',
+  //     },
+  //   },
+  //   {
+  //     states: 'NT',
+  //     juridiction: {
+  //       act:
+  //         'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
+  //       regulation:
+  //         'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: NT WorkSafe',
+  //       codes: 'Codes: NT Codes of Practice',
+  //     },
+  //   },
+  //   {
+  //     states: 'SA',
+  //     juridiction: {
+  //       act: 'Act: Work Health and Safety Act 2012 (SA)',
+  //       regulation: 'Regulation: Work Health and Safety Regulation 2012 (SA) ',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: SafeWork SA',
+  //       codes: 'Codes: SA Codes of Practice',
+  //     },
+  //   },
+  //   {
+  //     states: 'TAS',
+  //     juridiction: {
+  //       act: 'Act: Work Health and Safety Act 2012 (Tas) ',
+  //       regulation: 'Regulation: Work Health and Safety Regulation 2012 (Tas) ',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: WorkSafe Tasmania',
+  //       codes: 'Codes: Tas Codes of Practice',
+  //     },
+  //   },
+  //   {
+  //     states: 'NZ',
+  //     juridiction: {
+  //       act: 'Act: Health and Safety at Work Act 2015 (NZ)',
+  //       regulation: '',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: WorkSafe New Zealand',
+  //       codes: 'Codes: NZ Codes of Practice',
+  //     },
+  //   },
+  //   {
+  //     states: 'VIC',
+  //     juridiction: {
+  //       act: 'Act: Occupational Health and Safety Act 2004 (Vic) ',
+  //       regulation:
+  //         'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: WorkSafe Victoria',
+  //       codes: 'Codes: Vic Compliance Codes',
+  //     },
+  //   },
+  //   {
+  //     states: 'WA',
+  //     juridiction: {
+  //       act: 'Act: Occupational Safety and Health Act 1984 (WA)',
+  //       regulation:
+  //         'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
+  //     },
+  //     safetyLegislation: {
+  //       regulator: 'Regulator: WorkSafe WA',
+  //       codes: 'Codes: WA Codes of Practice',
+  //     },
+  //   },
+  // ];
   // jobTask = [
   //   { label: 'Activities Involving chemicals', value: '' },
   //   { label: 'Assess Hazards', value: '' },
@@ -309,7 +309,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
     private setTitle: SetTitleService
   ) {
@@ -317,7 +316,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       SWMSTab: this.fb.array([]),
 
       jobNumber: [''],
-      // jobNumberDupl: [''],
       siteName: [''],
       customerName: [''],
       streetNo: [''],
@@ -389,72 +387,20 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
 
     this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
       if (res) {
-        // console.log(res);
-
-        switch (res) {
-          case 'NSW':
-            this.riskAssessmentFb.get('jurisdiction').setValue('NSW');
-            this.riskAssessmentFb.get('safetyLeg').setValue('NSW_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_NSW');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NSW');
-            break;
-          case 'ACT':
-            this.riskAssessmentFb.get('jurisdiction').setValue('ACT');
-            this.riskAssessmentFb.get('safetyLeg').setValue('ACT_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_ACT');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_ACT');
-
-            break;
-          case 'QLD':
-            this.riskAssessmentFb.get('jurisdiction').setValue('QLD');
-            this.riskAssessmentFb.get('safetyLeg').setValue('QLD_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_QLD');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_QLD');
-
-            break;
-          case 'NT':
-            this.riskAssessmentFb.get('jurisdiction').setValue('NT');
-            this.riskAssessmentFb.get('safetyLeg').setValue('NT_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_NT');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NT');
-
-            break;
-          case 'SA':
-            this.riskAssessmentFb.get('jurisdiction').setValue('SA');
-            this.riskAssessmentFb.get('safetyLeg').setValue('SA_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_SA');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_SA');
-
-            break;
-          case 'NZ':
-            this.riskAssessmentFb.get('jurisdiction').setValue('NZ');
-            this.riskAssessmentFb.get('safetyLeg').setValue('NZ_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_NZ');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NZ');
-
-            break;
-          case 'TAS':
-            this.riskAssessmentFb.get('jurisdiction').setValue('TAS');
-            this.riskAssessmentFb.get('safetyLeg').setValue('TAS_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_TAS');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_TAS');
-
-            break;
-          case 'VIC':
-            this.riskAssessmentFb.get('jurisdiction').setValue('VIC');
-            this.riskAssessmentFb.get('safetyLeg').setValue('VIC_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_VIC');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_VIC');
-
-            break;
-          case 'WA':
-            this.riskAssessmentFb.get('jurisdiction').setValue('WA');
-            this.riskAssessmentFb.get('safetyLeg').setValue('WA_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_WA');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_WA');
-
-            break;
+        console.log(res);
+        
+      for(let i=0;i<this.states.length;i++){
+        if(res===this.states[i]._id){
+          console.log("id found");        
+          
+          this.riskAssessmentFb.get('jurisdiction').setValue(this.states[i].jurisdictionId._id);
+          this.riskAssessmentFb.get('safetyLeg').setValue(this.states[i].safetyLegislationId._id);
+          this.riskAssessmentFb.get('regulator').setValue(this.states[i].regulatorId._id);
+          break;
         }
+      }
+
+        
       }
     });
   }
@@ -974,7 +920,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   }
   getAllState() {
     this.logicalFormInfo.getAllStates().subscribe((res: any) => {
-      console.log('JurisdictionData=>', res);
+      console.log('getAllStates=>', res);
       this.states = res.data;
     });
   }
