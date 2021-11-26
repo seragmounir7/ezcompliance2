@@ -9,26 +9,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { AuthGuard } from './utils/guards/auth.guard';
 import { NonAuthGuard } from './utils/guards/non-auth.guard';
-import { ProjectsComponent } from './project/projects/projects.component';
-import { ProjectAddComponent } from './project/project-add/project-add.component';
-import { ProjectEditComponent } from './project/project-edit/project-edit.component';
-import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
-
-import { TutorialsAddComponent } from './components/tutorials-add/tutorials-add.component';
-import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
-import { TutorialsDetailsComponent } from './components/tutorials-details/tutorials-details.component';
-import { TutorialsEditComponent } from './components/tutorials-edit/tutorials-edit.component';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
-import { CategoriesComponent } from './views/dynamic-form/categories/categories.component';
 import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
-  // {
-  //   path: 'landing',
-  //   loadChildren: () =>
-  //     import('./front/front.module').then((m) => m.FrontModule),
-  // },
+
 
   {
     path: 'admin',
@@ -40,16 +26,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'dynamicForm', component: DynamicFormComponent },
-      { path: 'blank', component: BlankComponent },
-      { path: 'examples/projects', component: ProjectsComponent },
-      { path: 'examples/project/add', component: ProjectAddComponent },
-      { path: 'examples/project/edit', component: ProjectEditComponent },
-      { path: 'examples/project/detail', component: ProjectDetailComponent },
-      { path: 'tutorials/add', component: TutorialsAddComponent },
-      { path: 'tutorials', component: TutorialsListComponent },
-      { path: 'tutorials/details/:id', component: TutorialsDetailsComponent },
-      { path: 'tutorials/edit/:id', component: TutorialsEditComponent },
-      { path: 'categories', component: CategoriesComponent },
+      { path: 'blank', component: BlankComponent },      
       { path: 'dynamicFormsList', component: FormsComponent },
       {
         path: 'forms',

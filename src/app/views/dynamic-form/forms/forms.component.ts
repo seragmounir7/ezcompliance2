@@ -3,10 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddFormComponent } from './add-form/add-form.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TutorialService } from 'src/app/services/tutorial.service';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router,  } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AfterViewInit } from '@angular/core';
 

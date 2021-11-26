@@ -8,9 +8,8 @@
     "dev:test": "ng test",
     "dev:lint": "ng lint",
     "dev:e2e": "ng e2e",
-    "postinstall": "ngcc",
-    "generate": "node ./server/generate.js > ./server/database.json",
-    "server": "json-server --watch ./server/database.json"
+    "postinstall": "ngcc"
+  
   },
   "private": true,
   "dependencies": {
