@@ -1,5 +1,4 @@
-import { value } from './../../dynamic-form/global.model';
-import { element } from 'protractor';
+
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
