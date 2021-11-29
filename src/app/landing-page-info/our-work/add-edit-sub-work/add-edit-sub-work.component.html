@@ -1,7 +1,7 @@
 <div
   class="container px-4 py-4 card"
   [formGroup]="SubWorkDetail"
-  (ngSubmit)="onFormSubmit()"
+ 
 >
 <div mat-dialog-title class="dialog-title">
     <h2 class="text-center pt-2">
@@ -22,15 +22,15 @@
         <p for="exampleFormControlInput1" class="form-Label">Heading</p>
         <input
           type="text"
-          formControlName="subTitle"
+          formControlName="title"
           class="form-control sign"
-          id="subTitle"
+          id="title"
         />
       </div>
 
     </div>
     <div *ngIf="subModule">
-    <ng-container formArrayName="content">
+    <ng-container formArrayName="arrObj">
       <ng-container
         *ngFor="let control of add().controls; let i = index"
         [formGroupName]="i"
@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col-5 my-3">
               <p for="exampleFormControlInput1" class="form-Label">
-                Sub Heading
+                Title
               </p>
               <input
                 type="text"
@@ -107,7 +107,7 @@
     </ng-container>
     </div>
    <br>
-   <hr>
+  
     <div class="col-md-2">
         <button
           type="submit"
