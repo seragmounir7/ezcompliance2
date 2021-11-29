@@ -37,6 +37,9 @@ import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-questio
 import { OurWorkComponent } from './our-work/our-work.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
 import { AddAndEditSocialMediaComponent } from './social-media/add-and-edit-social-media/add-and-edit-social-media.component';
+import { EditWorkComponent } from './our-work/edit-work/edit-work.component';
+import { AddEditSubWorkComponent } from './our-work/add-edit-sub-work/add-edit-sub-work.component';
+import { AddSubWorkComponent } from './our-work/add-sub-work/add-sub-work.component';
 
 @NgModule({
 
@@ -60,8 +63,12 @@ import { AddAndEditSocialMediaComponent } from './social-media/add-and-edit-soci
     AddCustomerTestimonailComponent,
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
-    FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
-    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, SocialMediaComponent, AddAndEditSocialMediaComponent
+    FlexibleComponent, ContactUsComponent, ViewContactComponent, AddContactComponent,
+    EditTeamInfoComponent, AddTeamInfoComponent, FAQComponent,
+    AddFaqComponent, EditFaqComponent, QuesAnsComponent,
+    AddQuestionComponent, EditQuestionComponent, OurWorkComponent,
+    SocialMediaComponent, AddAndEditSocialMediaComponent,
+    EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent
 
   ],
   imports: [
@@ -72,4 +79,4 @@ import { AddAndEditSocialMediaComponent } from './social-media/add-and-edit-soci
     SharedModule
   ],
 })
-export class LandingPageInfoModule {}
+export class LandingPageInfoModule { }

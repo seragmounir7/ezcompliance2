@@ -11,7 +11,11 @@
 
 @import '~ngx-toastr/toastr';
 
-
+.flex-start {
+  display: flex;
+  justify-content: start;
+  padding-left: 30%;
+}
 .mat-cell {
     text-align: center!important;
 }
@@ -94,4 +98,8 @@ ul.setCanvasList {
     display: inline-block;
     width: 25%;
   }
+}
+
+button:focus {
+  outline: none !important;
 }

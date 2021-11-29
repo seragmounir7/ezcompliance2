@@ -16,6 +16,10 @@ import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
 import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
 import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
+import { OurWorkComponent } from './our-work/our-work.component';
+import { EditWorkComponent } from './our-work/edit-work/edit-work.component';
+import { AddEditSubWorkComponent } from './our-work/add-edit-sub-work/add-edit-sub-work.component';
+import { AddSubWorkComponent } from './our-work/add-sub-work/add-sub-work.component';
 
 const routes: Routes = [
   { path: '', component: HeaderInfoComponent },
@@ -34,7 +38,11 @@ const routes: Routes = [
   { path: 'QA', component: QuesAnsComponent },
   { path: 'addQA', component: AddQuestionComponent },
   { path: 'editQA', component: EditQuestionComponent },
-  { path: 'socialMedia', component: SocialMediaComponent}
+  { path: 'socialMedia', component: SocialMediaComponent},
+  { path: 'ourWork', component: OurWorkComponent },
+  {path:'editWork', component:EditWorkComponent},
+  {path:'editSubWork',component:AddEditSubWorkComponent},
+  {path:'addSubWork',component:AddSubWorkComponent}
 ];
 
 @NgModule({

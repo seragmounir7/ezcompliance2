@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
@@ -31,7 +32,7 @@ export class IdentifyHazardsComponent implements OnInit {
   /////////////mat table end////////////////
 
   constructor(
-
+    private snack: SnackbarService,
     private logicalFormInfo: LogicalFormInfoService,
     private dialog:MatDialog,
     private setTitle:SetTitleService
@@ -101,5 +102,9 @@ export class IdentifyHazardsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  copySuccess(){
+    console.log('copy successfull')
+    this.snack.openSnackBar('Copied to clipboard');
   }
 }

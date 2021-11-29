@@ -53,24 +53,10 @@ export class HeaderComponent implements OnInit {
     this.HeaderInformation.get('fileUrl')?.setValue(
       this.selectedImage
     );
-    console.log(this.HeaderInformation.value);
-    let data = {
-      // "title": this.HeaderInformation.get("heading").value,
-      // "description":  this.HeaderInformation.get("description").value,
-      // "fileUrl":this.HeaderInformation.get("uploadImage").value,
-    };
-    console.log(this.HeaderInformation.value);
+    
     this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
+     console.log('HeaderInformation -> browser -> res', res);
       
-      console.log('AddProductComponent -> browser -> res', res);
-      // this.studDetail.patchValue({
-      //   filePath: res.filePath,
-      // // });
-      // this.selectedImage = res.file[0];
-      // console.log(
-      //   "AddProductComponent -> browse -> this.selectedImage",
-      //   this.selectedImage
-      //);
     });
   }
   browser(event) {
@@ -81,12 +67,9 @@ export class HeaderComponent implements OnInit {
     
         this.upload.upload(formdata).subscribe((res) => {
           console.log('AddProductComponent -> browser -> res', res);
-          // this.HeaderInformation.get("uploadImage").value
-          // this.studDetail.patchValue({
-          //   filePath: res.filePath,
-          // });
+        
           this.selectedImage=res.files[0];
-          // this.HeaderInformation.get("uploadImage").patchValue(this.selectedImage)
+ 
           console.log(
             'AddProductComponent -> browse -> this.selectedImage',
             this.selectedImage

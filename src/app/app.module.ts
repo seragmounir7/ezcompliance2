@@ -26,28 +26,16 @@ import { BlankComponent } from './views/blank/blank.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AppButtonComponent } from './components/app-button/app-button.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ProjectsComponent } from './project/projects/projects.component';
-import { ProjectAddComponent } from './project/project-add/project-add.component';
-import { ProjectEditComponent } from './project/project-edit/project-edit.component';
-import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
-import { SortableDirective } from './project/sortable.directive';
 
-import { TutorialsAddComponent } from './components/tutorials-add/tutorials-add.component';
-import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
-import { TutorialsDetailsComponent } from './components/tutorials-details/tutorials-details.component';
-import { TutorialsEditComponent } from './components/tutorials-edit/tutorials-edit.component';
 import { DndModule } from 'ngx-drag-drop';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
-import { CategoriesComponent } from './views/dynamic-form/categories/categories.component';
 import { FormsComponent } from './views/dynamic-form/forms/forms.component';
-import { AddEditCategoryComponent } from './views/dynamic-form/categories/add-edit-category/add-edit-category.component';
 import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
-import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
+// import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 registerLocaleData(localeEn, 'en-EN');
@@ -66,23 +54,11 @@ registerLocaleData(localeEn, 'en-EN');
     DashboardComponent,
     MessagesDropdownMenuComponent,
     NotificationsDropdownMenuComponent,
-    AppButtonComponent,
-    UserDropdownMenuComponent,
-    ProjectsComponent,
-    ProjectAddComponent,
-    ProjectEditComponent,
-    ProjectDetailComponent,
-    TutorialsAddComponent,
-    TutorialsListComponent,
-    TutorialsDetailsComponent,
-    TutorialsEditComponent,
-    SortableDirective,
+    UserDropdownMenuComponent,   
     DynamicFormComponent,
-    CategoriesComponent,
     FormsComponent,
-    AddEditCategoryComponent,
     AddFormComponent,
-    ViewFormsComponent,
+    // ViewFormsComponent,
     NotFoundPageComponent,
   ],
   imports: [

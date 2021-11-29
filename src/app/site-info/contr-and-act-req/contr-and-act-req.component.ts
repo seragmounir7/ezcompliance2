@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditContActComponent } from './edit-cont-act/edit-cont-act.component';
+import { SnackbarService } from '../../services/snackbar.service';
 import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-contr-and-act-req',
@@ -30,7 +31,7 @@ export class ContrAndActReqComponent implements OnInit {
   /////////////mat table end////////////////
 
   constructor(
-
+    private snack: SnackbarService,
     private logicalFormInfo: LogicalFormInfoService,
     private dialog:MatDialog,
     private setTitle:SetTitleService
@@ -100,5 +101,9 @@ export class ContrAndActReqComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  copySuccess(){
+    console.log('copy successfull')
+    this.snack.openSnackBar('Copied to clipboard');
   }
 }
