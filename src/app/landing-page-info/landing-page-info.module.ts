@@ -35,6 +35,8 @@ import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
 import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
 import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
 import { OurWorkComponent } from './our-work/our-work.component';
+import { SocialMediaComponent } from './social-media/social-media.component';
+import { AddAndEditSocialMediaComponent } from './social-media/add-and-edit-social-media/add-and-edit-social-media.component';
 import { EditWorkComponent } from './our-work/edit-work/edit-work.component';
 import { AddEditSubWorkComponent } from './our-work/add-edit-sub-work/add-edit-sub-work.component';
 import { AddSubWorkComponent } from './our-work/add-sub-work/add-sub-work.component';
@@ -68,7 +70,11 @@ import { EditDifferentWorkComponent } from './different-module/edit-different-wo
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
     FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
-    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent, ScreenShotModuleComponent, DifferentModuleComponent, AddScreenShotComponent, EditScreenShotComponent, AddDifferentWorkComponent, EditDifferentWorkComponent
+    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent, ScreenShotModuleComponent, DifferentModuleComponent, AddScreenShotComponent, EditScreenShotComponent, AddDifferentWorkComponent, EditDifferentWorkComponent,
+    SocialMediaComponent,AddAndEditSocialMediaComponent
+
+
+ 
 
   ],
   imports: [
@@ -79,4 +85,4 @@ import { EditDifferentWorkComponent } from './different-module/edit-different-wo
     SharedModule
   ],
 })
-export class LandingPageInfoModule {}
+export class LandingPageInfoModule { }
