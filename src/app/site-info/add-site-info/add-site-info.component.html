@@ -33,7 +33,8 @@
     <!-- Name Column -->
     <ng-container matColumnDef="siteName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.siteName}} </td>
+          <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
+      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.siteName}}</span>  </td>
     </ng-container>
 
     <!-- <ng-container matColumnDef="siteForemen">
@@ -47,7 +48,7 @@
     </ng-container>
     <ng-container matColumnDef="streetAddress">
       <th mat-header-cell *matHeaderCellDef> Street Address </th>
-      <td mat-cell *matCellDef="let element"> {{element.streetAddress}} </td>
+      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.streetAddress}} </span></td>
     </ng-container>
 
     <ng-container matColumnDef="Suburb">
