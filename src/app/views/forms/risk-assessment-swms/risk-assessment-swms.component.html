@@ -242,20 +242,23 @@
             </div>
     
             <div class="row">
-              <div
-                *ngFor="let item of jobTaskData; let i = index"
-                class="mt-2 col-4"
-              >
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  [value]="item._id"
-                  (change)="onJobtaskSelect($event, item)"
-                />
-                <label class="form-check-label label_2" for="inlineCheckbox1">{{
-                  item.title
-                }}</label>
-              </div>
+              <ng-container  *ngFor="let item of jobTaskData; let i = index" >
+
+                <div
+                 *ngIf="item.set"
+                  class="mt-2 col-4"
+                >
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [value]="item._id"
+                    (change)="onJobtaskSelect($event, item)"
+                  />
+                  <label class="form-check-label label_2" for="inlineCheckbox1">{{
+                    item.title
+                  }}</label>
+                </div>
+              </ng-container>
             </div>
     
             <hr />
@@ -446,7 +449,7 @@
               <label for="exampleFormControlInput1" class="form-label"
                 >Signature</label
               >
-              <div class="sign">
+              <div class="sign" #signaturePad1Div>
                 <signature-pad
                   [options]="signaturePadOptions1"
                   (onBeginEvent)="drawStart1()"
@@ -976,7 +979,7 @@
                     <li *ngFor="let hazard of item.allHazardsTitle;let j=index"  >
                       <div class="row">
                          <div class="col-9 stepItem"> {{i+1}}.{{ hazard.title }}</div>
-                         <div class="col-3"*ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
+                         <div class="col-3"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
                   </div>   
                     </li>  
                   </ul>                  
@@ -1005,7 +1008,7 @@
                     <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index"  > 
                       <div class="row">
                         <div class="col-9 stepItem">{{i+1}}.{{contrlActReq.title }}</div>
-                    <div *ngIf="!contrlActReq.id" class="col-3"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i,j)">delete</mat-icon>                  </div>
+                    <div  class="col-3"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i,j)">delete</mat-icon>                  </div>
                   </div> 
                     </li>  
                   </ul>  
