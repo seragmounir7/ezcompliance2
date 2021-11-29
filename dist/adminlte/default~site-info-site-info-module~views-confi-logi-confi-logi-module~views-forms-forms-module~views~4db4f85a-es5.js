@@ -22,7 +22,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
@@ -40,7 +40,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "tk/3");
+      "IheW");
 
       var LogicalFormInfoService = /*#__PURE__*/function () {
         function LogicalFormInfoService(https) {

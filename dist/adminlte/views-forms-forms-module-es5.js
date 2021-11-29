@@ -22,13 +22,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -46,13 +46,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "ofXK");
+      "SVse");
       /* harmony import */
 
 
@@ -1920,13 +1920,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -1950,7 +1950,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
 
       var _c0 = function _c0() {
         return ["/admin/forms"];
@@ -3711,13 +3711,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -3733,7 +3733,7 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "0IaG");
+      "iELJ");
       /* harmony import */
 
 
@@ -3745,25 +3745,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "ofXK");
+      "SVse");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "kmnG");
+      "Q2Ze");
       /* harmony import */
 
 
       var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
-      "qFsG");
+      "e6WT");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "bTqV");
+      "Dxy4");
 
       function AddItemComponent_h2_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -4061,13 +4061,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -4091,13 +4091,13 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
-      "ofXK");
+      "SVse");
       /* harmony import */
 
 
@@ -5119,13 +5119,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "ofXK");
+      "SVse");
       /* harmony import */
 
 
@@ -5173,7 +5173,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -5245,13 +5245,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
       /* harmony import */
 
 
@@ -5364,13 +5364,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -5394,19 +5394,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
       /* harmony import */
 
 
       var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/tabs */
-      "wZkO");
+      "M9ds");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/common */
-      "ofXK");
+      "SVse");
 
       function SiteInspectionComponent_div_8_option_39_Template(rf, ctx) {
         if (rf & 1) {
@@ -8387,43 +8387,43 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "M9IT");
+      "5QHs");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/table */
-      "+0xr");
+      "OaSA");
       /* harmony import */
 
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/sort */
-      "Dh3D");
+      "LUZP");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "0IaG");
+      "iELJ");
       /* harmony import */
 
 
       var ngx_spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-spinner */
-      "JqCM");
+      "7g+E");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
       /* harmony import */
 
 
@@ -8435,25 +8435,25 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
       var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/slide-toggle */
-      "1jcm");
+      "jMqV");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/material/button */
-      "bTqV");
+      "Dxy4");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/material/icon */
-      "NFeN");
+      "Tj54");
 
       function FormsComponent_th_6_Template(rf, ctx) {
         if (rf & 1) {
@@ -8866,13 +8866,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
       var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
-      "5+WD");
+      "ltgo");
       /* harmony import */
 
 
@@ -8894,13 +8894,13 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "0IaG");
+      "iELJ");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "3Pt+");
+      "s7LF");
       /* harmony import */
 
 
@@ -8918,19 +8918,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb");
+      "iInd");
       /* harmony import */
 
 
       var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/tabs */
-      "wZkO");
+      "M9ds");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/common */
-      "ofXK");
+      "SVse");
       /* harmony import */
 
 
@@ -8942,7 +8942,7 @@
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/material/icon */
-      "NFeN");
+      "Tj54");
 
       var _c0 = ["projectManager"];
       var _c1 = ["signaturePad1Div"];
@@ -9634,15 +9634,21 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 135);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "strong");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 55);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon", 136);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_12_Template_mat_icon_click_5_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 55);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-icon", 136);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_12_Template_mat_icon_click_7_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r70);
 
             var hazard_r66 = ctx.$implicit;
@@ -9654,13 +9660,13 @@
             return ctx_r68.editHazrds("editIdentifyHazards", hazard_r66.title, i_r60);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "edit");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "edit");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-icon", 137);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "mat-icon", 137);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_12_Template_mat_icon_click_7_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_12_Template_mat_icon_click_9_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r70);
 
             var hazard_r66 = ctx.$implicit;
@@ -9673,7 +9679,7 @@
             return ctx_r71.deleteHazrds("identifyHazards", hazard_r66.title, i_r60, j_r67);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "delete");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "delete");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9686,12 +9692,15 @@
 
         if (rf & 2) {
           var hazard_r66 = ctx.$implicit;
+          var j_r67 = ctx.index;
 
-          var i_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", j_r67 + 1, "");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", i_r60 + 1, ".", hazard_r66.title, "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](".", hazard_r66.title, "");
         }
       }
 
@@ -9705,19 +9714,19 @@
         }
 
         if (rf & 2) {
-          var item_r74 = ctx.$implicit;
+          var item_r73 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", item_r74._id);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", item_r73._id);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](item_r74.title);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](item_r73.title);
         }
       }
 
       function RiskAssessmentSWMSComponent_div_515_li_26_Template(rf, ctx) {
         if (rf & 1) {
-          var _r79 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r78 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li");
 
@@ -9725,46 +9734,52 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 135);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "strong");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 55);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-icon", 136);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_26_Template_mat_icon_click_5_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r79);
-
-            var contrlActReq_r75 = ctx.$implicit;
-
-            var i_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
-
-            var ctx_r77 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r77.editHazrds("editCtrlActreq", contrlActReq_r75.title, i_r60);
-          });
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "edit");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-icon", 137);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 55);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-icon", 136);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_26_Template_mat_icon_click_7_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r79);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r78);
 
-            var contrlActReq_r75 = ctx.$implicit;
-            var j_r76 = ctx.index;
+            var contrlActReq_r74 = ctx.$implicit;
 
             var i_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
 
-            var ctx_r80 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r76 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r80.deleteHazrds("ctrlActreq", contrlActReq_r75.title, i_r60, j_r76);
+            return ctx_r76.editHazrds("editCtrlActreq", contrlActReq_r74.title, i_r60);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "delete");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "edit");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "mat-icon", 137);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_li_26_Template_mat_icon_click_9_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r78);
+
+            var contrlActReq_r74 = ctx.$implicit;
+            var j_r75 = ctx.index;
+
+            var i_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
+
+            var ctx_r79 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            return ctx_r79.deleteHazrds("ctrlActreq", contrlActReq_r74.title, i_r60, j_r75);
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "delete");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9776,13 +9791,16 @@
         }
 
         if (rf & 2) {
-          var contrlActReq_r75 = ctx.$implicit;
+          var contrlActReq_r74 = ctx.$implicit;
+          var j_r75 = ctx.index;
 
-          var i_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](j_r75 + 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", i_r60 + 1, ".", contrlActReq_r75.title, "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](".", contrlActReq_r74.title, "");
         }
       }
 
@@ -9796,13 +9814,13 @@
         }
 
         if (rf & 2) {
-          var item_r83 = ctx.$implicit;
+          var item_r81 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", item_r83._id);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", item_r81._id);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](item_r83.title);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](item_r81.title);
         }
       }
 
@@ -9816,17 +9834,17 @@
         }
 
         if (rf & 2) {
-          var item_r84 = ctx.$implicit;
+          var item_r82 = ctx.$implicit;
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", item_r84.title, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", item_r82.title, " ");
         }
       }
 
       function RiskAssessmentSWMSComponent_div_515_Template(rf, ctx) {
         if (rf & 1) {
-          var _r86 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r84 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 121);
 
@@ -9853,13 +9871,13 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "span", 124);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_Template_span_click_9_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r86);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r84);
 
             var i_r60 = ctx.index;
 
-            var ctx_r85 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r83 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r85.addItem("identifyHazards", i_r60);
+            return ctx_r83.addItem("identifyHazards", i_r60);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "add_circle_outline");
@@ -9870,7 +9888,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "ul", 125);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, RiskAssessmentSWMSComponent_div_515_li_12_Template, 9, 2, "li", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, RiskAssessmentSWMSComponent_div_515_li_12_Template, 11, 2, "li", 29);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9909,13 +9927,13 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "span", 124);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RiskAssessmentSWMSComponent_div_515_Template_span_click_23_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r86);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r84);
 
             var i_r60 = ctx.index;
 
-            var ctx_r87 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r85 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r87.addItem("ctrlActreq", i_r60);
+            return ctx_r85.addItem("ctrlActreq", i_r60);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "add_circle_outline");
@@ -9926,7 +9944,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "ul", 125);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](26, RiskAssessmentSWMSComponent_div_515_li_26_Template, 9, 2, "li", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](26, RiskAssessmentSWMSComponent_div_515_li_26_Template, 11, 2, "li", 29);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -10979,7 +10997,7 @@
         },
         decls: 541,
         vars: 24,
-        consts: [[1, "btn", "btn-outline-primary", 3, "routerLink"], ["aria-hidden", "true", 1, "fa", "fa-arrow-left"], [1, "container", "card", "px-4", "py-4", 3, "formGroup"], [1, "text-center", "pt-3"], [1, "title"], ["label", "Risk Assessment"], ["id", "myTabContent", 1, "tab-content"], ["id", "RISKAssessment", "role", "tabpanel", "aria-labelledby", "RISKAssessment-tab", 1, "tab-pane", "fade", "show", "active", "px-4", "py-4"], [1, "row"], [1, "my-3", "col"], ["for", "exampleFormControlInput1", 1, "form-label"], ["type", "text", "formControlName", "siteName", 1, "form-control", "col"], ["type", "text", "formControlName", "customerName", 1, "form-control", "col"], [1, "my-3", "col-2"], ["type", "text", "formControlName", "streetNo", 1, "form-control", "col"], [1, "my-3", "col-4"], ["type", "text", "formControlName", "streetAddr", 1, "form-control", "col"], ["type", "text", "formControlName", "subUrb", 1, "form-control", "col"], ["id", "statesSWMS", "aria-label", "Default select example", "formControlName", "statesSWMS", 1, "form-select", "form-control", "col"], ["selected", "", "hidden", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "formControlName", "custConct", 1, "form-control", "col"], ["type", "text", "formControlName", "custConctPh", 1, "form-control", "col"], ["type", "text", "formControlName", "custEmail", 1, "form-control", "col"], ["id", "ProjectManager", "aria-label", "Default select example", "formControlName", "jobNumber", 1, "form-select", "form-control", "col", 3, "change"], [1, "my-3", "col-6"], ["id", "ProjectManager", "aria-label", "Default select example", "formControlName", "projectManager", 1, "form-select", "form-control", "col", 3, "change"], ["type", "date", "id", "date", 1, "form-control"], [1, "mt-4"], [4, "ngFor", "ngForOf"], [1, "row", "mt-4"], [1, "table", "table-bordered", "text-center"], ["colspan", "7", 1, "L_1"], ["colspan", "8", 1, "L_1"], ["colspan", "2", "rowspan", "2"], ["colspan", "5"], ["colspan", "4", "rowspan", "2"], [1, "like_2"], ["rowspan", "5"], [1, "like_1"], [1, "M_1"], [1, "H_1"], ["colspan", "2"], [1, "space_1"], [1, "L_1"], ["scope", "col"], ["colspan", "2", 1, "mr-2", "ml-2"], ["class", "mt-2 col-4", 4, "ngFor", "ngForOf"], [1, "col-4"], ["type", "input", "value", "", "formControlName", "Employee1", 1, "mr-1", "form-control"], [1, "sign"], ["signaturePad1Div", ""], [3, "options", "onBeginEvent", "onEndEvent"], ["Signature1", ""], [1, "btn", "btn-outline-primary", "mt-1", 3, "click"], [1, "col-3"], ["type", "date", "value", "", "formControlName", "dateTime", 1, "mr-1", "form-control"], ["label", "SWMS"], ["id", "SWSS", "role", "tabpanel", "aria-labelledby", "SWSS-tab", 1, "tab-pane", "fade", "show", "active"], [1, "container", "content-center"], [1, "px-4", "py-4"], [1, "col-md-6"], [1, "my-3"], ["for", "exampleInputFullname", 1, "form-label"], ["type", "fullname", "id", "exampleInputFullname", "aria-describedby", "emailHelp", "formControlName", "siteName", 1, "form-control"], ["for", "exampleInputSurname", 1, "form-label"], ["type", "surname", "id", "exampleInputSurname", "aria-describedby", "emailHelp", "formControlName", "customerName", 1, "form-control"], [1, "col-md-2"], ["for", "exampleInputEmail1", 1, "form-label"], ["type", "number", "id", "exampleInputEmail1", "aria-describedby", "emailHelp", "formControlName", "streetNo", 1, "form-control"], [1, "col-md-4"], ["for", "exampleInputPhone", 1, "form-label"], ["type", "email", "id", "exampleInputPhone", "aria-describedby", "emailHelp", "formControlName", "streetAddr", 1, "form-control"], ["for", "exampleInputDepartment", 1, "form-label"], ["type", "department", "id", "exampleInputDepartment", "aria-describedby", "emailHelp", "formControlName", "subUrb", 1, "form-control"], ["for", "exampleInputPosition", 1, "form-label"], ["for", "exampleInputProjectNumber", 1, "form-label"], ["type", "Projectnumber", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", "formControlName", "custConct", 1, "form-control"], ["type", "tel", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", "formControlName", "custConctPh", 1, "form-control"], ["type", "email", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", "formControlName", "custEmail", 1, "form-control"], [1, "col-md-3"], ["id", "ProjectManager", "aria-label", "Default select example", "formControlName", "projectManagerSWMS", 1, "form-select", "form-control", "col", 3, "change"], ["aria-label", "Default select example", "formControlName", "jurisdiction", 1, "form-select", "form-control", "col"], [1, "col-md-5"], ["for", "sel2"], ["id", "sel2", "name", "sellist2", "formControlName", "safetyLeg", 1, "form-control"], ["value", "", "selected", "", "hidden", ""], ["id", "siteName", "aria-label", "Default select example", "formControlName", "regulator", 1, "form-select", "form-control", "col"], [4, "ngIf"], ["cdkDropList", "", 1, "example-list", 3, "cdkDropListDropped"], ["class", "example-box setBoxMart", "cdkDrag", "", 4, "ngFor", "ngForOf"], [1, "row", "mb-2"], [1, "form-control"], [1, "col-md-7"], ["type", "text", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], [1, "form-floating"], ["Signature2", ""], [3, "value"], ["class", "mt-2 col-4", 4, "ngIf"], [1, "mt-2", "col-4"], ["type", "checkbox", 1, "form-check-input", 3, "value", "change"], ["for", "inlineCheckbox1", 1, "form-check-label", "label_2"], ["type", "checkbox", "value", "Working in or near trenches or shafts deeper than 1.5metres", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "value", "Disposable dust mask", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "value", "Open Cable Licence", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "value", "Working in or near trenches or shafts deeper than 1.5metres", "disabled", "", 1, "form-check-input", 3, "checked"], ["formArrayName", "SDSRegister"], ["class", "row", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "row", 3, "formGroupName"], [1, "material-icons", "ml-3", 2, "font-size", "19px", 3, "click"], ["id", "sel2", "name", "sellist2", 1, "form-control"], ["type", "tel", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], ["value", "YES"], ["value", "NO"], ["type", "number", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], ["type", "date", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], [1, "col-md-10"], ["for", "formFile", 1, "form-label"], ["type", "file", "id", "formFile", 1, "form-control"], [1, "material-icons", 2, "margin-top", "30%", 3, "click"], [1, "material-icons", 3, "click"], ["cdkDrag", "", 1, "example-box", "setBoxMart"], [1, "col-md-4", "my-3"], [1, ""], [1, "material-icons", "ml-3", "my-auto", "p-0", 2, "font-size", "19px", 3, "click"], [1, "identifyHaz"], ["formArrayName", "riskLevel"], [1, "col-md-1", "my-3", 3, "formGroupName"], ["for", "sel1"], ["id", "sel1", "name", "sellist1", "formControlName", "riskLevel", 1, "form-control"], ["formArrayName", "residualRisk"], [1, "col-md-1", 3, "formGroupName"], ["id", "sel1", "name", "sellist1", "formControlName", "resiRiskLevel", 1, "form-control"], [1, "col-md-2", "my-3"], ["multiple", "", "id", "sel2", "name", "sellist2", 1, "form-control"], [1, "col-9", "stepItem"], [1, "mr-1", 2, "font-size", "18px", 3, "click"], [2, "font-size", "18px", 3, "click"]],
+        consts: [[1, "btn", "btn-outline-primary", 3, "routerLink"], ["aria-hidden", "true", 1, "fa", "fa-arrow-left"], [1, "container", "card", "px-4", "py-4", 3, "formGroup"], [1, "text-center", "pt-3"], [1, "title"], ["label", "Risk Assessment"], ["id", "myTabContent", 1, "tab-content"], ["id", "RISKAssessment", "role", "tabpanel", "aria-labelledby", "RISKAssessment-tab", 1, "tab-pane", "fade", "show", "active", "px-4", "py-4"], [1, "row"], [1, "my-3", "col"], ["for", "exampleFormControlInput1", 1, "form-label"], ["type", "text", "formControlName", "siteName", 1, "form-control", "col"], ["type", "text", "formControlName", "customerName", 1, "form-control", "col"], [1, "my-3", "col-2"], ["type", "text", "formControlName", "streetNo", 1, "form-control", "col"], [1, "my-3", "col-4"], ["type", "text", "formControlName", "streetAddr", 1, "form-control", "col"], ["type", "text", "formControlName", "subUrb", 1, "form-control", "col"], ["id", "statesSWMS", "aria-label", "Default select example", "formControlName", "statesSWMS", 1, "form-select", "form-control", "col"], ["selected", "", "hidden", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "formControlName", "custConct", 1, "form-control", "col"], ["type", "text", "formControlName", "custConctPh", 1, "form-control", "col"], ["type", "text", "formControlName", "custEmail", 1, "form-control", "col"], ["id", "ProjectManager", "aria-label", "Default select example", "formControlName", "jobNumber", 1, "form-select", "form-control", "col", 3, "change"], [1, "my-3", "col-6"], ["id", "ProjectManager", "aria-label", "Default select example", "formControlName", "projectManager", 1, "form-select", "form-control", "col", 3, "change"], ["type", "date", "id", "date", 1, "form-control"], [1, "mt-4"], [4, "ngFor", "ngForOf"], [1, "row", "mt-4"], [1, "table", "table-bordered", "text-center"], ["colspan", "7", 1, "L_1"], ["colspan", "8", 1, "L_1"], ["colspan", "2", "rowspan", "2"], ["colspan", "5"], ["colspan", "4", "rowspan", "2"], [1, "like_2"], ["rowspan", "5"], [1, "like_1"], [1, "M_1"], [1, "H_1"], ["colspan", "2"], [1, "space_1"], [1, "L_1"], ["scope", "col"], ["colspan", "2", 1, "mr-2", "ml-2"], ["class", "mt-2 col-4", 4, "ngFor", "ngForOf"], [1, "col-4"], ["type", "input", "value", "", "formControlName", "Employee1", 1, "mr-1", "form-control"], [1, "sign"], ["signaturePad1Div", ""], [3, "options", "onBeginEvent", "onEndEvent"], ["Signature1", ""], [1, "btn", "btn-outline-primary", "mt-1", 3, "click"], [1, "col-3"], ["type", "date", "value", "", "formControlName", "dateTime", 1, "mr-1", "form-control"], ["label", "SWMS"], ["id", "SWSS", "role", "tabpanel", "aria-labelledby", "SWSS-tab", 1, "tab-pane", "fade", "show", "active"], [1, "container", "content-center"], [1, "px-4", "py-4"], [1, "col-md-6"], [1, "my-3"], ["for", "exampleInputFullname", 1, "form-label"], ["type", "fullname", "id", "exampleInputFullname", "aria-describedby", "emailHelp", "formControlName", "siteName", 1, "form-control"], ["for", "exampleInputSurname", 1, "form-label"], ["type", "surname", "id", "exampleInputSurname", "aria-describedby", "emailHelp", "formControlName", "customerName", 1, "form-control"], [1, "col-md-2"], ["for", "exampleInputEmail1", 1, "form-label"], ["type", "number", "id", "exampleInputEmail1", "aria-describedby", "emailHelp", "formControlName", "streetNo", 1, "form-control"], [1, "col-md-4"], ["for", "exampleInputPhone", 1, "form-label"], ["type", "email", "id", "exampleInputPhone", "aria-describedby", "emailHelp", "formControlName", "streetAddr", 1, "form-control"], ["for", "exampleInputDepartment", 1, "form-label"], ["type", "department", "id", "exampleInputDepartment", "aria-describedby", "emailHelp", "formControlName", "subUrb", 1, "form-control"], ["for", "exampleInputPosition", 1, "form-label"], ["for", "exampleInputProjectNumber", 1, "form-label"], ["type", "Projectnumber", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", "formControlName", "custConct", 1, "form-control"], ["type", "tel", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", "formControlName", "custConctPh", 1, "form-control"], ["type", "email", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", "formControlName", "custEmail", 1, "form-control"], [1, "col-md-3"], ["id", "ProjectManager", "aria-label", "Default select example", "formControlName", "projectManagerSWMS", 1, "form-select", "form-control", "col", 3, "change"], ["aria-label", "Default select example", "formControlName", "jurisdiction", 1, "form-select", "form-control", "col"], [1, "col-md-5"], ["for", "sel2"], ["id", "sel2", "name", "sellist2", "formControlName", "safetyLeg", 1, "form-control"], ["value", "", "selected", "", "hidden", ""], ["id", "siteName", "aria-label", "Default select example", "formControlName", "regulator", 1, "form-select", "form-control", "col"], [4, "ngIf"], ["cdkDropList", "", 1, "example-list", 3, "cdkDropListDropped"], ["class", "example-box setBoxMart", "cdkDrag", "", 4, "ngFor", "ngForOf"], [1, "row", "mb-2"], [1, "form-control"], [1, "col-md-7"], ["type", "text", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], [1, "form-floating"], ["Signature2", ""], [3, "value"], ["class", "mt-2 col-4", 4, "ngIf"], [1, "mt-2", "col-4"], ["type", "checkbox", 1, "form-check-input", 3, "value", "change"], ["for", "inlineCheckbox1", 1, "form-check-label", "label_2"], ["type", "checkbox", "value", "Working in or near trenches or shafts deeper than 1.5metres", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "value", "Disposable dust mask", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "value", "Open Cable Licence", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "value", "Working in or near trenches or shafts deeper than 1.5metres", "disabled", "", 1, "form-check-input", 3, "checked"], ["formArrayName", "SDSRegister"], ["class", "row", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "row", 3, "formGroupName"], [1, "material-icons", "ml-3", 2, "font-size", "19px", 3, "click"], ["id", "sel2", "name", "sellist2", 1, "form-control"], ["type", "tel", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], ["value", "YES"], ["value", "NO"], ["type", "number", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], ["type", "date", "id", "exampleInputProjectNumber", "aria-describedby", "emailHelp", 1, "form-control"], [1, "col-md-10"], ["for", "formFile", 1, "form-label"], ["type", "file", "id", "formFile", 1, "form-control"], [1, "material-icons", 2, "margin-top", "30%", 3, "click"], [1, "material-icons", 3, "click"], ["cdkDrag", "", 1, "example-box", "setBoxMart"], [1, "col-md-4", "my-3"], [1, ""], [1, "material-icons", "ml-3", "my-auto", "p-0", 2, "font-size", "19px", 3, "click"], [1, "identifyHaz"], ["formArrayName", "riskLevel"], [1, "col-md-1", "my-3", 3, "formGroupName"], ["for", "sel1"], ["id", "sel1", "name", "sellist1", "formControlName", "riskLevel", 1, "form-control"], ["formArrayName", "residualRisk"], [1, "col-md-1", 3, "formGroupName"], ["id", "sel1", "name", "sellist1", "formControlName", "resiRiskLevel", 1, "form-control"], [1, "col-md-2", "my-3"], ["multiple", "", "id", "sel2", "name", "sellist2", 1, "form-control"], [1, "col-9", "stepItem", "p-1"], [1, "mr-1", 2, "font-size", "18px", 3, "click"], [2, "font-size", "18px", 3, "click"]],
         template: function RiskAssessmentSWMSComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
