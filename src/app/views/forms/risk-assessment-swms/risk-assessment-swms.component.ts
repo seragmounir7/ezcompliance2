@@ -761,6 +761,19 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       data.allCOPTitle.forEach((element) => {
         this.allCOPSelected.push(element);
       });
+      console.log('allCOPSelected', this.allCOPSelected);
+     let myMap = new Map()
+     this.allCOPSelected.forEach((item)=>{
+       if(myMap.has(item)){
+         myMap.set(item,myMap.get(item)+1);
+       }else{
+         myMap.set(item,1);
+       }
+     })
+     this.allCOPSelected = Array.from(new Set(this.allCOPSelected.map(x => JSON.stringify(x)))).map(y => JSON.parse(y));
+     console.log('allCOPSelected', this.allCOPSelected,myMap);
+
+
     });
   }
   getAllJobNumber() {

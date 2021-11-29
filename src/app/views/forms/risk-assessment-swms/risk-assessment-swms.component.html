@@ -714,6 +714,7 @@
               class="form-check-input"
               value="Working in or near trenches or shafts deeper than 1.5metres"
               [checked]="true"
+              disabled
             />
             <label class="form-check-label label_2" for="inlineCheckbox1">{{
               item.title
@@ -1057,7 +1058,8 @@
             Worker consultation, instruction, training, toolbox talks, review,
             acceptance record:
           </h2>
-          <br /><br />
+          
+          <!-- <br /><br />
           <h3 class="txt_1">
             Only persons who have completed the singoff are authorised to work
             on the relevent tasks covered by this document. <br />
@@ -1082,7 +1084,13 @@
             of others not directly employed, SWMS will make references to how
             they will coordinate the work activity and where applicable<br />
             communicate to the other parties.<br /><br />
-          </h3>
+          </h3> -->
+        </div>
+        <div class="row mb-2">
+          <textarea class="form-control" ></textarea>
+        </div>
+        <div class="row">
+          <textarea class="form-control" ></textarea>
         </div>
         <hr />
         <h3>Name of worker (Print and Sign)</h3>
