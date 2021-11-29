@@ -1,4 +1,4 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,64 +17,42 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 @Component({
-  selector: 'app-add-sub-work',
-  templateUrl: './add-sub-work.component.html',
-  styleUrls: ['./add-sub-work.component.scss']
+  selector: 'app-add-different-work',
+  templateUrl: './add-different-work.component.html',
+  styleUrls: ['./add-different-work.component.scss']
 })
-export class AddSubWorkComponent implements OnInit {
+export class AddDifferentWorkComponent implements OnInit {
   selectedImage: any = [];
   addWork!: FormGroup;
   addWorkData: any;
   ID: any;
   hide: boolean = true;
-  constructor(
-    private landingPageInfo: LandingPageInfoServiceService,
+  constructor( private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
     public upload: UploadFileServiceService,
-    public dialogRef: MatDialogRef<AddSubWorkComponent>,
+    public dialogRef: MatDialogRef<AddDifferentWorkComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addWork = this.fb.group({
         moduleId: this.data.EditData,
       title: ['', Validators.required],
       description: ['', Validators.required],
-      fileUrl: ['', Validators.required],
+      fileUrl: '',
      
     });
     console.log('data', data);
   }
 
-
   ngOnInit(): void {
- 
   }
-  browser(event) {
-    const files = event.target.files[0];
-    const formdata = new FormData();
-    formdata.append('', files);
 
-
-    this.upload.upload(formdata).subscribe((res) => {
-      this.selectedImage.push(res.files[0]);
-
-    });
-  }
   onSubmit() {
-    console.log("this.addWork.value",this.addWork.value)
-    this.addWork
-      .get('fileUrl')
-      ?.setValue(this.selectedImage[0].toString());
-
-    this.landingPageInfo
+     this.landingPageInfo
       .addSubModule(this.addWork.value)
       .subscribe((data) => {
         Swal.fire('Added Successfully')
         this.addWorkData = data;
         this.dialogRef.close('true');
-     
-
-
-
       });
   }
  

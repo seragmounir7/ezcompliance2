@@ -1,4 +1,4 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,11 +17,11 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 @Component({
-  selector: 'app-add-sub-work',
-  templateUrl: './add-sub-work.component.html',
-  styleUrls: ['./add-sub-work.component.scss']
+  selector: 'app-add-screen-shot',
+  templateUrl: './add-screen-shot.component.html',
+  styleUrls: ['./add-screen-shot.component.scss']
 })
-export class AddSubWorkComponent implements OnInit {
+export class AddScreenShotComponent implements OnInit {
   selectedImage: any = [];
   addWork!: FormGroup;
   addWorkData: any;
@@ -31,7 +31,7 @@ export class AddSubWorkComponent implements OnInit {
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
     public upload: UploadFileServiceService,
-    public dialogRef: MatDialogRef<AddSubWorkComponent>,
+    public dialogRef: MatDialogRef<AddScreenShotComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addWork = this.fb.group({
@@ -43,10 +43,9 @@ export class AddSubWorkComponent implements OnInit {
     });
     console.log('data', data);
   }
-
+  
 
   ngOnInit(): void {
- 
   }
   browser(event) {
     const files = event.target.files[0];
@@ -71,11 +70,7 @@ export class AddSubWorkComponent implements OnInit {
         Swal.fire('Added Successfully')
         this.addWorkData = data;
         this.dialogRef.close('true');
-     
-
-
-
-      });
+ });
   }
  
   close() {

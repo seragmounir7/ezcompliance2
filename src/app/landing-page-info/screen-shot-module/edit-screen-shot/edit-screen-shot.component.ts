@@ -8,12 +8,13 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-add-edit-sub-work',
-  templateUrl: './add-edit-sub-work.component.html',
-  styleUrls: ['./add-edit-sub-work.component.scss']
+  selector: 'app-edit-screen-shot',
+  templateUrl: './edit-screen-shot.component.html',
+  styleUrls: ['./edit-screen-shot.component.scss']
 })
-export class AddEditSubWorkComponent implements OnInit {
+export class EditScreenShotComponent implements OnInit {
   SubWorkDetail!: FormGroup;
   selectedImage: any = [];
   myId: boolean;
@@ -35,7 +36,7 @@ export class AddEditSubWorkComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private upload: UploadFileServiceService,
     private url: LandingPageInfoServiceService,
-    public dialogRef: MatDialogRef<AddEditSubWorkComponent>,
+    public dialogRef: MatDialogRef<EditScreenShotComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       console.log(data)
       this.Is_Mod = data.moduleName;
@@ -45,14 +46,12 @@ export class AddEditSubWorkComponent implements OnInit {
     
     this.SubWorkDetail = this.fb.group({
       title: ['', Validators.required],
-      mode: 'System',
+      mode: 'Screenshot',
       arrObj: this.fb.array([]),
-      // mode:'SCREENSHOT',
-      //  mode:'DIFFERENT'
+    
     });
   }
 
- 
   ngOnInit(): void {
     this.addAction();
     this.Eddit();
@@ -71,7 +70,7 @@ export class AddEditSubWorkComponent implements OnInit {
     this.Update = true;
     console.log(" subTitle",this.data)
     this.SubWorkDetail.patchValue({
-    mode: 'System',
+    mode: 'Screenshot',
     title: this.data.EditData.title,
    });
   
@@ -189,7 +188,7 @@ Eddit() {
     if (this.data.action == 'edit') {
       let ServiceData = {
         title: this.SubWorkDetail.controls.title.value,
-        mode: 'System',
+        mode: 'Screenshot',
       };
       console.log('asdfgh', ServiceData);
       console.log('this.EditData', this.data.EditData._id);
@@ -231,5 +230,3 @@ Eddit() {
    this.dialogRef.close();
   }
 }
-
-
