@@ -99,3 +99,7 @@ ul.setCanvasList {
     width: 25%;
   }
 }
+
+button:focus {
+  outline: none !important;
+}
