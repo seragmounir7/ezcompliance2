@@ -15,6 +15,7 @@ import { EditFaqComponent } from './faq/edit-faq/edit-faq.component';
 import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
 import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
 import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
+import { SocialMediaComponent } from './social-media/social-media.component';
 
 const routes: Routes = [
   { path: '', component: HeaderInfoComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'editFaq', component: EditFaqComponent },
   { path: 'QA', component: QuesAnsComponent },
   { path: 'addQA', component: AddQuestionComponent },
-  { path: 'editQA', component: EditQuestionComponent }
+  { path: 'editQA', component: EditQuestionComponent },
+  { path: 'socialMedia', component: SocialMediaComponent}
 ];
 
 @NgModule({

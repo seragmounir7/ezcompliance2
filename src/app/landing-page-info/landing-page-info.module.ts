@@ -35,6 +35,8 @@ import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
 import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
 import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
 import { OurWorkComponent } from './our-work/our-work.component';
+import { SocialMediaComponent } from './social-media/social-media.component';
+import { AddAndEditSocialMediaComponent } from './social-media/add-and-edit-social-media/add-and-edit-social-media.component';
 
 @NgModule({
 
@@ -59,7 +61,7 @@ import { OurWorkComponent } from './our-work/our-work.component';
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
     FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
-    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent
+    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, SocialMediaComponent, AddAndEditSocialMediaComponent
 
   ],
   imports: [

@@ -254,4 +254,38 @@ getAllFaqbasedOnPortal(id){
     })
   );
 }
+
+//---------social media--------//
+getAllSocialMedia(){
+  return this.https.get(this.apiUrl + 'socialMedia/getAll').pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
+addSocialMedia(data){
+  return this.https.post(this.apiUrl + 'socialMedia/add', data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+ }
+ editSocialMedia(data,id){
+  return this.https.put(this.apiUrl + 'socialMedia/update/' + id, data).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+ }
+deleteSocialMedia(id){
+  return this.https.delete(this.apiUrl + 'socialMedia/delete/' + id).pipe(
+    map((res: any) => {
+      console.log('res.data=>', res.data);
+      return res;
+    })
+  );
+}
 }
