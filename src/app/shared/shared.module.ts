@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -50,6 +51,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 @NgModule({
   declarations: [],
   imports: [
+    ClipboardModule,
     CommonModule,
     A11yModule,
     CdkStepperModule,
@@ -98,6 +100,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
   //  MatTableDataSource
   ],
   exports: [
+    ClipboardModule,
     A11yModule,
     CdkStepperModule,
     CdkTableModule,

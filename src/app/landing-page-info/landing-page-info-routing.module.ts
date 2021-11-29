@@ -15,6 +15,17 @@ import { EditFaqComponent } from './faq/edit-faq/edit-faq.component';
 import { QuesAnsComponent } from './faq/ques-ans/ques-ans.component';
 import { AddQuestionComponent } from './faq/ques-ans/add-question/add-question.component';
 import { EditQuestionComponent } from './faq/ques-ans/edit-question/edit-question.component';
+import { SocialMediaComponent } from './social-media/social-media.component';
+import { OurWorkComponent } from './our-work/our-work.component';
+import { EditWorkComponent } from './our-work/edit-work/edit-work.component';
+import { AddEditSubWorkComponent } from './our-work/add-edit-sub-work/add-edit-sub-work.component';
+import { AddSubWorkComponent } from './our-work/add-sub-work/add-sub-work.component';
+import { ScreenShotModuleComponent } from './screen-shot-module/screen-shot-module.component';
+import { AddScreenShotComponent } from './screen-shot-module/add-screen-shot/add-screen-shot.component';
+import { EditScreenShotComponent } from './screen-shot-module/edit-screen-shot/edit-screen-shot.component';
+import { DifferentModuleComponent } from './different-module/different-module.component';
+import { AddDifferentWorkComponent } from './different-module/add-different-work/add-different-work.component';
+import { EditDifferentWorkComponent } from './different-module/edit-different-work/edit-different-work.component';
 
 const routes: Routes = [
   { path: '', component: HeaderInfoComponent },
@@ -32,7 +43,18 @@ const routes: Routes = [
   { path: 'editFaq', component: EditFaqComponent },
   { path: 'QA', component: QuesAnsComponent },
   { path: 'addQA', component: AddQuestionComponent },
-  { path: 'editQA', component: EditQuestionComponent }
+  { path: 'editQA', component: EditQuestionComponent },
+  { path: 'socialMedia', component: SocialMediaComponent},
+  { path: 'ourWork', component: OurWorkComponent },
+  { path: 'editWork', component: EditWorkComponent },
+  { path: 'editSubWork', component: AddEditSubWorkComponent },
+  { path: 'addSubWork', component: AddSubWorkComponent },
+  { path: 'screenShot', component: ScreenShotModuleComponent },
+  { path: 'add-ScreenShot', component: AddScreenShotComponent },
+  { path: 'edit-ScreenShot', component: EditScreenShotComponent },
+  { path: 'different', component: DifferentModuleComponent },
+  { path: 'add-Different', component: AddDifferentWorkComponent },
+  { path: 'edit-Different', component: EditDifferentWorkComponent }
 ];
 
 @NgModule({

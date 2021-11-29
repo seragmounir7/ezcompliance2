@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class LandingPageInfoServiceService {
   apiUrl = environment.apiUrl;
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) { }
   getAppServiceById(id: any) {
     return this.https.get(this.apiUrl + 'module/get/data/' + id).pipe(
       map((res: any) => {
@@ -16,7 +16,7 @@ export class LandingPageInfoServiceService {
       })
     );
   }
- 
+
 
   addAppService(data) {
     return this.https.post(this.apiUrl + 'module/multiple', data).pipe(
@@ -147,7 +147,7 @@ export class LandingPageInfoServiceService {
       })
     );
   }
-  editContactUs(id, data){
+  editContactUs(id, data) {
     return this.https.put(this.apiUrl + 'contactUs/update/' + id, data).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
@@ -165,7 +165,7 @@ export class LandingPageInfoServiceService {
   }
 
   getContact() {
-    return this.https.get(this.apiUrl + 'contactUs/getAll' ).pipe(
+    return this.https.get(this.apiUrl + 'contactUs/getAll').pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
@@ -181,77 +181,175 @@ export class LandingPageInfoServiceService {
       })
     );
   }
- getAllPortal(){
-  return this.https.get(this.apiUrl + 'portal/getAll').pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
-  
- }
- addPortal(data){
-  return this.https.post(this.apiUrl + 'portal/add', data).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
- }
- editportal(data,id){
-  return this.https.put(this.apiUrl + 'portal/update/' + id, data).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
- }
-deletePortal(id){
-  return this.https.delete(this.apiUrl + 'portal/delete/' + id).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
-}
-getAllFaq(){
-  return this.https.get(this.apiUrl + 'faq/getAll').pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
-}
-addFAQ(data){
-  return this.https.post(this.apiUrl + 'faq/add', data).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
- }
- editFAQ(data,id){
-  return this.https.put(this.apiUrl + 'faq/update/' + id, data).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
- }
-deleteFaq(id){
-  return this.https.delete(this.apiUrl + 'faq/delete/' + id).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
-}
-getAllFaqbasedOnPortal(id){
-  return this.https.get(this.apiUrl + 'portal/getAll/' + id).pipe(
-    map((res: any) => {
-      console.log('res.data=>', res.data);
-      return res;
-    })
-  );
-}
+  getAllPortal() {
+    return this.https.get(this.apiUrl + 'portal/getAll').pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+
+  }
+  addPortal(data) {
+    return this.https.post(this.apiUrl + 'portal/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editportal(data, id) {
+    return this.https.put(this.apiUrl + 'portal/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deletePortal(id) {
+    return this.https.delete(this.apiUrl + 'portal/delete/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getAllFaq() {
+    return this.https.get(this.apiUrl + 'faq/getAll').pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  addFAQ(data) {
+    return this.https.post(this.apiUrl + 'faq/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editFAQ(data, id) {
+    return this.https.put(this.apiUrl + 'faq/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deleteFaq(id) {
+    return this.https.delete(this.apiUrl + 'faq/delete/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getAllFaqbasedOnPortal(id) {
+    return this.https.get(this.apiUrl + 'portal/getAll/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+
+  //---------social media--------//
+  getAllSocialMedia() {
+    return this.https.get(this.apiUrl + 'socialMedia/getAll').pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  addSocialMedia(data) {
+    return this.https.post(this.apiUrl + 'socialMedia/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editSocialMedia(data, id) {
+    return this.https.put(this.apiUrl + 'socialMedia/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deleteSocialMedia(id) {
+    return this.https.delete(this.apiUrl + 'socialMedia/delete/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  //---------social media------end--//
+
+  //---------Our Work--------//
+  addWork(data) {
+    return this.https.post(this.apiUrl + 'ourWork/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editWorK(id, data) {
+    return this.https.put(this.apiUrl + 'ourWork/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getWorkById(id) {
+    return this.https.get(this.apiUrl + 'ourWork/get/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+
+  //---------Our Work------end--//
+
+  //---------Sub Work--------//
+  addSubWork(data) {
+    return this.https.post(this.apiUrl + 'subWork/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  editSubWorK(id, data) {
+    return this.https.put(this.apiUrl + 'subWork/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deleteSubWorK(id) {
+    return this.https.delete(this.apiUrl + 'subWork/delete/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getSubWorkById(id) {
+    return this.https.get(this.apiUrl + 'subWork/get/data/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  //---------Sub Work------end--//
 }

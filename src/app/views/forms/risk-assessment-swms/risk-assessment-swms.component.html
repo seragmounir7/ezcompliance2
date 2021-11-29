@@ -219,7 +219,8 @@
                   class="form-select form-control col"
                   id="ProjectManager"
                   aria-label="Default select example"
-                  (change)="setProjectManager($event)"
+                  formControlName="projectManager"
+                  (change)="setProjectManager('projectManager',$event)"
                 >
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
@@ -241,20 +242,23 @@
             </div>
     
             <div class="row">
-              <div
-                *ngFor="let item of jobTaskData; let i = index"
-                class="mt-2 col-4"
-              >
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  [value]="item._id"
-                  (change)="onJobtaskSelect($event, item)"
-                />
-                <label class="form-check-label label_2" for="inlineCheckbox1">{{
-                  item.title
-                }}</label>
-              </div>
+              <ng-container  *ngFor="let item of jobTaskData; let i = index" >
+
+                <div
+                 *ngIf="item.set"
+                  class="mt-2 col-4"
+                >
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [value]="item._id"
+                    (change)="onJobtaskSelect($event, item)"
+                  />
+                  <label class="form-check-label label_2" for="inlineCheckbox1">{{
+                    item.title
+                  }}</label>
+                </div>
+              </ng-container>
             </div>
     
             <hr />
@@ -445,7 +449,7 @@
               <label for="exampleFormControlInput1" class="form-label"
                 >Signature</label
               >
-              <div class="sign">
+              <div class="sign" #signaturePad1Div>
                 <signature-pad
                   [options]="signaturePadOptions1"
                   (onBeginEvent)="drawStart1()"
@@ -566,15 +570,7 @@
               >
                 <option selected hidden>Select</option>
                 <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
-                <!-- <option value="NSW">NSW</option>
-                <option value="ACT">ACT</option>
-                <option value="QLD">QLD</option>
-                <option value="NT">NT</option>
-                <option value="SA">SA</option>
-                <option value="NZ">NZ</option>
-                <option value="TAS">TAS</option>
-                <option value="VIC">VIC</option>
-                <option value="WA">WA</option> -->
+             
               </select>
             </div>
           </div>
@@ -647,6 +643,7 @@
                   id="ProjectManager"
                   aria-label="Default select example"
                   formControlName="projectManagerSWMS"
+                  (change)="setProjectManager('projectManagerSWMS',$event)"
                 >
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
@@ -669,15 +666,7 @@
               >
                 <option selected hidden>Select</option>
                 <option [value]="jurisdiction._id" *ngFor="let jurisdiction of JurisdictionData">{{jurisdiction.title}}</option>
-                <!-- <option value="NSW">NSW</option>
-                <option value="ACT">ACT</option>
-                <option value="QLD">QLD</option>
-                <option value="NT">NT</option>
-                <option value="SA">SA</option>
-                <option value="NZ">NZ</option>
-                <option value="TAS">TAS</option>
-                <option value="VIC">VIC</option>
-                <option value="WA">WA</option> -->
+              
               </select>
             </div>
           </div>
@@ -695,40 +684,6 @@
                 
                   Act:  {{safetyLegislation.act}}&nbsp; Regulation:{{safetyLegislation.regulation}}
                 </option>
-                <!-- <option value="ACT_Act">
-                  Act: Work Health and Safety Act 2011 (ACT)&nbsp; Regulation:
-                  Work Health and Safety Regulation 2011 (ACT)
-                </option>
-                <option value="QLD_Act">
-                  Act: Work Health and Safety Act 2011 (Qld)&nbsp; Regulation:
-                  Work Health and Safety Regulation 2011 (Qld)
-                </option>
-                <option value="NT_Act">
-                  Act: Work Health and Safety (National Uniform Legislation) Act
-                  2011 (NT) &nbsp; Regulation: Work Health and Safety (National
-                  Uniform Legislation) Regulations (NT)
-                </option>
-                <option value="SA_Act">
-                  Act: Work Health and Safety Act 2012 (SA)&nbsp; Regulation:
-                  Work Health and Safety Regulation 2012 (SA)
-                </option>
-                <option value="TAS_Act">
-                  Act: Work Health and Safety Act 2012 (Tas) &nbsp; Regulation:
-                  Work Health and Safety Regulation 2012 (Tas)
-                </option>
-                <option value="NZ_Act">
-                  Act: Health and Safety at Work Act 2015 (NZ) &nbsp;
-                  Regulation:
-                </option>
-                <option value="VIC_Act">
-                  Act: Occupational Health and Safety Act 2004 (Vic) &nbsp;
-                  Regulation: Occupational Health and Safety Regulations 2017
-                  (Vic)
-                </option>
-                <option value="WA_Act">
-                  Act: Occupational Safety and Health Act 1984 (WA) Regulation:
-                  Occupational Safety and Health Regulations 1996 (WA)
-                </option> -->
               </select>
             </div>
           </div>
@@ -745,17 +700,6 @@
               >
                 <option selected hidden>Select</option>
                 <option [value]="regulator._id" *ngFor="let regulator of regulatorData">{{regulator.title}}</option>
-                <!-- <option value="Reg_NSW">Regulator: SafeWork NSW</option>
-                <option value="Reg_ACT">Regulator: WorkSafe ACT</option>
-                <option value="Reg_QLD">
-                  Regulator: Workplace Health and Safety Queensland
-                </option>
-                <option value="Reg_NT">Regulator: NT WorkSafe</option>
-                <option value="Reg_SA">Regulator: SafeWork SA</option>
-                <option value="Reg_TAS">Regulator: WorkSafe Tasmania</option>
-                <option value="Reg_NZ">Regulator: WorkSafe New Zealand</option>
-                <option value="Reg_VIC">Regulator: WorkSafe Victoria</option>
-                <option value="Reg_WA">Regulator: WorkSafe WA</option> -->
               </select>
             </div>
           </div>
@@ -775,6 +719,7 @@
               class="form-check-input"
               value="Working in or near trenches or shafts deeper than 1.5metres"
               [checked]="true"
+              disabled
             />
             <label class="form-check-label label_2" for="inlineCheckbox1">{{
               item.title
@@ -1031,10 +976,10 @@
                 <div class="">
                   <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
                   <ul class="identifyHaz">
-                    <li *ngFor="let hazard of item.allHazardsTitle;let i=index"  >
+                    <li *ngFor="let hazard of item.allHazardsTitle;let j=index"  >
                       <div class="row">
-                         <div class="col-9" [matTooltip]="hazard.title"> {{i+1}}.{{ hazard.title?.length >30 ? hazard.title.slice(0,30)+'...': hazard.title }}</div>
-                         <div class="col-3"*ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" matTooltip="Edit">edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i)" matTooltip="Delete">delete</mat-icon>  </div>
+                         <div class="col-9 stepItem"> {{i+1}}.{{ hazard.title }}</div>
+                         <div class="col-3"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
                   </div>   
                     </li>  
                   </ul>                  
@@ -1060,10 +1005,10 @@
                 <div class="">
                   <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
                   <ul class="identifyHaz">
-                    <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let i=index"  > 
+                    <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index"  > 
                       <div class="row">
-                        <div class="col-9" [matTooltip]="contrlActReq.title">{{i+1}}.{{ contrlActReq.title?.length >30 ? contrlActReq.title.slice(0,30)+'...': contrlActReq.title }}</div>
-                    <div *ngIf="!contrlActReq.id" class="col-3"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)"matTooltip="Edit">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i)"matTooltip="delete">delete</mat-icon>                  </div>
+                        <div class="col-9 stepItem">{{i+1}}.{{contrlActReq.title }}</div>
+                    <div  class="col-3"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i,j)">delete</mat-icon>                  </div>
                   </div> 
                     </li>  
                   </ul>  
@@ -1118,7 +1063,8 @@
             Worker consultation, instruction, training, toolbox talks, review,
             acceptance record:
           </h2>
-          <br /><br />
+          
+          <!-- <br /><br />
           <h3 class="txt_1">
             Only persons who have completed the singoff are authorised to work
             on the relevent tasks covered by this document. <br />
@@ -1143,7 +1089,13 @@
             of others not directly employed, SWMS will make references to how
             they will coordinate the work activity and where applicable<br />
             communicate to the other parties.<br /><br />
-          </h3>
+          </h3> -->
+        </div>
+        <div class="row mb-2">
+          <textarea class="form-control" ></textarea>
+        </div>
+        <div class="row">
+          <textarea class="form-control" ></textarea>
         </div>
         <hr />
         <h3>Name of worker (Print and Sign)</h3>

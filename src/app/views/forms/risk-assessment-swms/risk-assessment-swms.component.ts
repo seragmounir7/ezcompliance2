@@ -18,6 +18,8 @@ import Swal from 'sweetalert2';
 })
 export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   @ViewChild('projectManager') projectManager: ElementRef;
+  @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
+  
   riskAssessmentFb!: FormGroup;
   SWMSTab!: FormArray;
   RiskAssessment = true;
@@ -35,208 +37,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   allJobNumbers = [];
   allHazards = [];
   allContrlActReq = [];
-  // riskLevel = [];
-  // resdRiskLevel = [];
-  statesData = [
-    {
-      states: 'NSW',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2011 (NSW)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2017 (NSW)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: SafeWork NSW',
-        codes: 'Codes: NSW Codes of Practice',
-      },
-    },
-    {
-      states: 'ACT',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2011 (ACT)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2011 (ACT)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe ACT',
-        codes: 'Codes: ACT Codes of Practice',
-      },
-    },
-
-    {
-      states: 'QLD',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2011 (Qld)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2011 (Qld)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: Workplace Health and Safety Queensland',
-        codes: 'Codes: Qld Codes of Practice ',
-      },
-    },
-    {
-      states: 'NT',
-      juridiction: {
-        act:
-          'Act: Work Health and Safety (National Uniform Legislation) Act 2011 (NT) ',
-        regulation:
-          'Regulation: Work Health and Safety (National Uniform Legislation) Regulations (NT)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: NT WorkSafe',
-        codes: 'Codes: NT Codes of Practice',
-      },
-    },
-    {
-      states: 'SA',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2012 (SA)',
-        regulation: 'Regulation: Work Health and Safety Regulation 2012 (SA) ',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: SafeWork SA',
-        codes: 'Codes: SA Codes of Practice',
-      },
-    },
-    {
-      states: 'TAS',
-      juridiction: {
-        act: 'Act: Work Health and Safety Act 2012 (Tas) ',
-        regulation: 'Regulation: Work Health and Safety Regulation 2012 (Tas) ',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe Tasmania',
-        codes: 'Codes: Tas Codes of Practice',
-      },
-    },
-    {
-      states: 'NZ',
-      juridiction: {
-        act: 'Act: Health and Safety at Work Act 2015 (NZ)',
-        regulation: '',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe New Zealand',
-        codes: 'Codes: NZ Codes of Practice',
-      },
-    },
-    {
-      states: 'VIC',
-      juridiction: {
-        act: 'Act: Occupational Health and Safety Act 2004 (Vic) ',
-        regulation:
-          'Regulation: Occupational Health and Safety Regulations 2017 (Vic)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe Victoria',
-        codes: 'Codes: Vic Compliance Codes',
-      },
-    },
-    {
-      states: 'WA',
-      juridiction: {
-        act: 'Act: Occupational Safety and Health Act 1984 (WA)',
-        regulation:
-          'Regulation: Occupational Safety and Health Regulations 1996 (WA)',
-      },
-      safetyLegislation: {
-        regulator: 'Regulator: WorkSafe WA',
-        codes: 'Codes: WA Codes of Practice',
-      },
-    },
-  ];
-  // jobTask = [
-  //   { label: 'Activities Involving chemicals', value: '' },
-  //   { label: 'Assess Hazards', value: '' },
-  //   { label: 'Cable installation into cables tray', value: '' },
-  //   { label: 'Cable Support installation', value: '' },
-  //   { label: 'Camera Installation', value: '' },
-  //   { label: 'conduit Installation in ceiling or walls', value: '' },
-  //   { label: 'Conduit installation in trench', value: '' },
-  //   { label: 'conduit installation prior to concreate Pour', value: '' },
-  //   { label: 'Control Panel Installation', value: '' },
-  //   { label: 'Heat Shrinking cable joints', value: '' },
-  //   { label: 'Hot Works', value: '' },
-  //   { label: 'Installation of cables', value: '' },
-  //   { label: 'Leaving Site', value: '' },
-  //   { label: 'Maual Handling', value: '' },
-  //   { label: 'Site establishment', value: '' },
-  //   { label: 'Terminination of fibre optic cables', value: '' },
-  //   { label: 'Use of Elevated Work Platform', value: '' },
-  //   { label: 'Use of EWP', value: '' },
-  //   { label: 'Use of Ladders', value: '' },
-  //   { label: 'Use of Plant & Equipment', value: '' },
-  //   { label: 'Use of plant Equipment', value: '' },
-  //   { label: 'Working false ceilings', value: '' },
-  //   { label: 'Working in communication pits less than 1.5m deep', value: '' },
-  //   { label: 'Working near around Pedistrians', value: '' },
-  //   { label: 'Working near Asbestos', value: '' },
-  //   { label: 'Working near Lead containing materials', value: '' },
-  //   { label: 'Working outdoors', value: '' },
-  //   { label: 'Working with hand and power tools', value: '' },
-  // ];
-
-  // highRiskConstruction = [
-  //   {
-  //     label: 'Working in or near trenches or shafts deeper than 1.5metres',
-  //     value: '',
-  //   },
-  //   { label: 'Work in or near a confined space', value: '' },
-  //   {
-  //     label:
-  //       'Work in an area that may have a contaminated or flammable atmosphere',
-  //     value: '',
-  //   },
-  //   { label: 'Working around or near mobile plant', value: '' },
-  //   { label: 'Work with near or near asbestos', value: '' },
-  //   { label: 'Working with hazardous substances', value: '' },
-  //   { label: 'Working with or near tilt-up/precast concrete', value: '' },
-  //   { label: 'Risk of falls higher than 2 metres', value: '' },
-  //   {
-  //     label: 'Working near on or adjacent to a road or rail corridor',
-  //     value: '',
-  //   },
-  //   { label: 'Working on or near telecommunication tower', value: '' },
-  //   { label: 'Working on or near telecommunication tower', value: '' },
-  //   { label: 'Work near explosives', value: '' },
-  //   {
-  //     label:
-  //       'Work in or near water or other liquid that involves a risk of drowning',
-  //     value: '',
-  //   },
-  //   { label: 'Demolition of load-bearing structure', value: '' },
-  //   { label: 'Diving work', value: '' },
-  // ];
-
-  // PPEselection = [
-  //   { label: 'Disposable dust mask', value: '' },
-  //   { label: 'Dust Mas', value: '' },
-  //   { label: 'Face shield', value: '' },
-  //   { label: 'Full face respirator', value: '' },
-  //   { label: 'Gttors', value: '' },
-  //   { label: 'Half face respirator', value: '' },
-  //   { label: 'Hard Hat', value: '' },
-  //   { label: 'Hearing protection', value: '' },
-  //   { label: 'High-Vis Clothing', value: '' },
-  //   { label: 'Lock Out Tags', value: '' },
-  //   { label: 'Long sleeve/Long pants', value: '' },
-  //   { label: 'Out of Service Tags', value: '' },
-  //   { label: 'Protective gloves', value: '' },
-  //   { label: 'Rescue kit', value: '' },
-  //   { label: 'Safety boots', value: '' },
-  //   { label: 'Safety glasses', value: '' },
-  //   { label: 'Sun Screen', value: '' },
-  //   { label: 'torch', value: '' },
-  //   { label: 'Wide Brim Hat', value: '' },
-  // ];
-
-  // licenseAndQualification = [
-  //   { label: 'Open Cable Licence', value: '' },
-  //   { label: 'White Card', value: '' },
-  //   { label: 'EWP Licence', value: '' },
-  //   { label: 'Working At Heights', value: '' },
-  //   { label: 'Security Licence', value: '' },
-  //   { label: 'Asbestos Awarness', value: '' },
-  //   { label: 'Working In Confined Space', value: '' },
-  // ];
 
   highRiskConstruction2 = [
     {
@@ -309,7 +109,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
     private setTitle: SetTitleService
   ) {
@@ -317,7 +116,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       SWMSTab: this.fb.array([]),
 
       jobNumber: [''],
-      // jobNumberDupl: [''],
       siteName: [''],
       customerName: [''],
       streetNo: [''],
@@ -329,6 +127,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       Employee1: [''],
       dateTime: [''],
       statesSWMS: [''],
+      projectManager: [''],
       projectManagerSWMS: [''],
       jurisdiction: [''],
       safetyLeg: [''],
@@ -389,72 +188,20 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
 
     this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
       if (res) {
-        // console.log(res);
-
-        switch (res) {
-          case 'NSW':
-            this.riskAssessmentFb.get('jurisdiction').setValue('NSW');
-            this.riskAssessmentFb.get('safetyLeg').setValue('NSW_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_NSW');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NSW');
-            break;
-          case 'ACT':
-            this.riskAssessmentFb.get('jurisdiction').setValue('ACT');
-            this.riskAssessmentFb.get('safetyLeg').setValue('ACT_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_ACT');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_ACT');
-
-            break;
-          case 'QLD':
-            this.riskAssessmentFb.get('jurisdiction').setValue('QLD');
-            this.riskAssessmentFb.get('safetyLeg').setValue('QLD_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_QLD');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_QLD');
-
-            break;
-          case 'NT':
-            this.riskAssessmentFb.get('jurisdiction').setValue('NT');
-            this.riskAssessmentFb.get('safetyLeg').setValue('NT_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_NT');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NT');
-
-            break;
-          case 'SA':
-            this.riskAssessmentFb.get('jurisdiction').setValue('SA');
-            this.riskAssessmentFb.get('safetyLeg').setValue('SA_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_SA');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_SA');
-
-            break;
-          case 'NZ':
-            this.riskAssessmentFb.get('jurisdiction').setValue('NZ');
-            this.riskAssessmentFb.get('safetyLeg').setValue('NZ_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_NZ');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_NZ');
-
-            break;
-          case 'TAS':
-            this.riskAssessmentFb.get('jurisdiction').setValue('TAS');
-            this.riskAssessmentFb.get('safetyLeg').setValue('TAS_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_TAS');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_TAS');
-
-            break;
-          case 'VIC':
-            this.riskAssessmentFb.get('jurisdiction').setValue('VIC');
-            this.riskAssessmentFb.get('safetyLeg').setValue('VIC_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_VIC');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_VIC');
-
-            break;
-          case 'WA':
-            this.riskAssessmentFb.get('jurisdiction').setValue('WA');
-            this.riskAssessmentFb.get('safetyLeg').setValue('WA_Act');
-            this.riskAssessmentFb.get('regulator').setValue('Reg_WA');
-            this.riskAssessmentFb.get('CodeOfPract').setValue('code_WA');
-
-            break;
+        console.log(res);
+        
+      for(let i=0;i<this.states.length;i++){
+        if(res===this.states[i]._id){
+          console.log("id found");        
+          
+          this.riskAssessmentFb.get('jurisdiction').setValue(this.states[i].jurisdictionId._id);
+          this.riskAssessmentFb.get('safetyLeg').setValue(this.states[i].safetyLegislationId._id);
+          this.riskAssessmentFb.get('regulator').setValue(this.states[i].regulatorId._id);
+          break;
         }
+      }
+
+        
       }
     });
   }
@@ -468,7 +215,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
           streetNo: item.streetNumber,
           streetAddr: item.streetAddress,
           subUrb: item.suburb,
-          statesSWMS: item.state,
+          statesSWMS: item.stateId._id,
           custConct: item.customerContact,
           custConctPh: item.customerContactPhone,
           custEmail: item.customerEmail,
@@ -568,6 +315,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     //this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
     // this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
     console.log('clear1 &2');
+    console.log(this.signaturePad1Div)
   }
 
   drawComplete1() {
@@ -664,7 +412,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   }
 
  
-  deleteHazrds(type,title,i){
+  deleteHazrds(type,title,i,j){
+    console.log('type=>',type,title,i);
+    console.log(this.jobTaskSelected[i]);
+    
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${title}"?`,
@@ -676,10 +427,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     }).then((result) => {
       if (result.value) {
         if (type === 'identifyHazards') {
-          this.jobTaskSelected[i].allHazardsTitle.splice(i,1);
+          this.jobTaskSelected[i].allHazardsTitle.splice(j,1);
         }
         if (type === 'ctrlActreq') {
-          this.jobTaskSelected[i].allContrlActReqTitle.splice(i,1);
+          this.jobTaskSelected[i].allContrlActReqTitle.splice(j,1);
         }
       }
     });
@@ -814,6 +565,19 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       data.allCOPTitle.forEach((element) => {
         this.allCOPSelected.push(element);
       });
+      console.log('allCOPSelected', this.allCOPSelected);
+     let myMap = new Map()
+     this.allCOPSelected.forEach((item)=>{
+       if(myMap.has(item)){
+         myMap.set(item,myMap.get(item)+1);
+       }else{
+         myMap.set(item,1);
+       }
+     })
+     this.allCOPSelected = Array.from(new Set(this.allCOPSelected.map(x => JSON.stringify(x)))).map(y => JSON.parse(y));
+     console.log('allCOPSelected', this.allCOPSelected,myMap);
+
+
     });
   }
   getAllJobNumber() {
@@ -893,10 +657,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       }
       if (type === 'identifyHazards' && result !='false') {
 
-        this.jobTaskSelected[i].allHazardsTitle.splice(0,0,data);
+        this.jobTaskSelected[i].allHazardsTitle.push(data);
       }
       if (type === 'ctrlActreq'  && result !='false') {
-        this.jobTaskSelected[i].allContrlActReqTitle.splice(0,0,data);
+        this.jobTaskSelected[i].allContrlActReqTitle.push(data);
       }
 
       console.log('The dialog was closed');
@@ -974,13 +738,18 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   }
   getAllState() {
     this.logicalFormInfo.getAllStates().subscribe((res: any) => {
-      console.log('JurisdictionData=>', res);
+      console.log('getAllStates=>', res);
       this.states = res.data;
     });
   }
 
-  setProjectManager(e){
-    console.log('setProjectManager==>',this.projectManager)
-    this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
+  setProjectManager(value,e){
+    if(value === 'projectManagerSWMS'){
+      this.riskAssessmentFb.get('projectManager').setValue(e.target.value);
+    }
+    if(value === 'projectManager'){
+      console.log('setProjectManager==>',this.projectManager)
+      this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
+    }
   }
 }
