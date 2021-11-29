@@ -125,6 +125,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       Employee1: [''],
       dateTime: [''],
       statesSWMS: [''],
+      projectManager: [''],
       projectManagerSWMS: [''],
       jurisdiction: [''],
       safetyLeg: [''],
@@ -212,7 +213,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
           streetNo: item.streetNumber,
           streetAddr: item.streetAddress,
           subUrb: item.suburb,
-          statesSWMS: item.state,
+          statesSWMS: item.stateId._id,
           custConct: item.customerContact,
           custConctPh: item.customerContactPhone,
           custEmail: item.customerEmail,
@@ -739,8 +740,13 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     });
   }
 
-  setProjectManager(e){
-    console.log('setProjectManager==>',this.projectManager)
-    this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
+  setProjectManager(value,e){
+    if(value === 'projectManagerSWMS'){
+      this.riskAssessmentFb.get('projectManager').setValue(e.target.value);
+    }
+    if(value === 'projectManager'){
+      console.log('setProjectManager==>',this.projectManager)
+      this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
+    }
   }
 }

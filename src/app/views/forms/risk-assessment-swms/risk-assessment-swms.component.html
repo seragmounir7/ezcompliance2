@@ -219,7 +219,8 @@
                   class="form-select form-control col"
                   id="ProjectManager"
                   aria-label="Default select example"
-                  (change)="setProjectManager($event)"
+                  formControlName="projectManager"
+                  (change)="setProjectManager('projectManager',$event)"
                 >
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
@@ -639,6 +640,7 @@
                   id="ProjectManager"
                   aria-label="Default select example"
                   formControlName="projectManagerSWMS"
+                  (change)="setProjectManager('projectManagerSWMS',$event)"
                 >
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
