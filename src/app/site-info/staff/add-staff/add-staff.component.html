@@ -19,7 +19,9 @@
               </span>
             </div>
             <div class="col-8">
-              <textarea
+              <textarea  autosize
+              (keyup)=" calcHeight($event.target.value)"
+              [rows]="numberOfLineBreaks"
                 type="text"
                 formControlName="title"
                 class="form-control sign"

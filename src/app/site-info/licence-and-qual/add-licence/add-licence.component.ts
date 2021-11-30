@@ -19,6 +19,7 @@ export class AddLicenceComponent implements OnInit {
   addLicenceFG!: FormGroup;
   formData: any;
   categories=[];
+  numberOfLineBreaks: any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -81,6 +82,9 @@ export class AddLicenceComponent implements OnInit {
     );
     
   }
- 
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+  }
 
 }
