@@ -37,6 +37,7 @@ import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
 // import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { TextareaAutoresizeDirective } from './Directives/textarea-autoresize.directive';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -60,6 +61,7 @@ registerLocaleData(localeEn, 'en-EN');
     AddFormComponent,
     // ViewFormsComponent,
     NotFoundPageComponent,
+    TextareaAutoresizeDirective,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,7 @@ registerLocaleData(localeEn, 'en-EN');
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [TextareaAutoresizeDirective],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,6 +10,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddItemComponent } from './add-item/add-item.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 @Component({
   selector: 'app-risk-assessment-swms',
@@ -19,7 +21,9 @@ import Swal from 'sweetalert2';
 export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   @ViewChild('projectManager') projectManager: ElementRef;
   @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
-  
+
+  public Editor = ClassicEditor;
+
   riskAssessmentFb!: FormGroup;
   SWMSTab!: FormArray;
   RiskAssessment = true;
@@ -91,6 +95,32 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
+  secondEditor = `<br /><br />
+  <h3 class='txt_1'>
+    Only persons who have completed the singoff are authorised to work
+    on the relevent tasks covered by this document. <br />
+    Note: Work must be performed in accordance with this SWMS, any Risk
+    Assessment prepared in relation to this work and any <br />
+    relevent Safe WorkProcedures.<br />
+    This SWMS must be accessible for inspection untill the energised
+    electrical work to which this SWMS relates is completed. If the
+    <br />
+    SWMS is revised, all version should be kept.<br />
+    If a Notifiable incident occurs in relation to the high-risk
+    construction work in this SWMS, the SWMS must be kept for at least 2
+    years<br />
+    from the date of the Notifiable incident.<br /><br />
+    If Changes are made to the work practice and the content of the SWMS
+    workers will need sign to confirm that they haverecieved an<br />
+    updated briefing, undestand the content and will comply with the
+    requirements.<br /><br />
+    Where there are other parties working adjascent to the contractor
+    and the work activity that could impact upon the safety and
+    welfare<br />
+    of others not directly employed, SWMS will make references to how
+    they will coordinate the work activity and where applicable<br />
+    communicate to the other parties.<br /><br />
+  </h3>`
   riskArr = [];
   COPArr = [];
   ppeArr = [];
