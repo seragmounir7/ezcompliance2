@@ -18,6 +18,8 @@ import Swal from 'sweetalert2';
 })
 export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   @ViewChild('projectManager') projectManager: ElementRef;
+  @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
+  
   riskAssessmentFb!: FormGroup;
   SWMSTab!: FormArray;
   RiskAssessment = true;
@@ -313,6 +315,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     //this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
     // this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
     console.log('clear1 &2');
+    console.log(this.signaturePad1Div)
   }
 
   drawComplete1() {
