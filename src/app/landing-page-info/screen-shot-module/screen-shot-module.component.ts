@@ -11,18 +11,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
-import { EditWorkComponent } from './edit-work/edit-work.component';
-import { AddEditSubWorkComponent } from './add-edit-sub-work/add-edit-sub-work.component';
-import { AddSubWorkComponent } from './add-sub-work/add-sub-work.component';
-@Component({
-  selector: 'app-our-work',
-  templateUrl: './our-work.component.html',
-  styleUrls: ['./our-work.component.scss']
-})
-export class OurWorkComponent implements OnInit {
+import { EditScreenShotComponent } from './edit-screen-shot/edit-screen-shot.component';
+import { AddScreenShotComponent } from './add-screen-shot/add-screen-shot.component';
 
+@Component({
+  selector: 'app-screen-shot-module',
+  templateUrl: './screen-shot-module.component.html',
+  styleUrls: ['./screen-shot-module.component.scss']
+})
+export class ScreenShotModuleComponent implements OnInit {
   workData: any = [''];
-  SystemData:any=[''];
+  ScreenData:any=[''];
   selectedImage: any=[];
   mode: any;
   myId: any;
@@ -37,70 +36,35 @@ export class OurWorkComponent implements OnInit {
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(
-    private fb: FormBuilder,
+  constructor(  private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
     public upload: UploadFileServiceService,
     private modalService: NgbModal,
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router,
-    private setTitle: SetTitleService
-  ) { }
+    private setTitle: SetTitleService) { }
 
   ngOnInit(): void {
-    this.getWork();
     this.setTitle.setTitle('WHS-OurWork');
-    this.getSystemWork();
+    this.getScreenWork();
   }
-  getWork() {
-  this.myId="61a20b0cdba3f562225fba01"
-    this.landingPageInfo.getWorkById(this.myId).subscribe((res) => {
-      console.log("sakshi",res.data)
-      this.workData = res.data;
-    });
-  }
-
-  editWork(id) {
-    console.log("work",id)
-    this.spinner.show();
-     this.myId = id;
-    this.isEdit = true;
-   let dialogRef = this.dialog.open(EditWorkComponent, {
-        data: {
-          action: 'edit',
-          EditData: this.workData,
-         },
-
-        width: '800px',
-        height: '600px',
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-      
-        if ((result = 'true')) {
-          this.ngOnInit();
-        }
-       
-      });
-      this.spinner.hide();
-    
-  }
-
- getSystemWork(){
-   this.mode='System'
-  this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-    console.log("System",res.data)
-    this.dataSource.data = res.data
-   // this.SystemData = res.data;
-    let SystemData = res.data[0].subModules;
-    SystemData.forEach((element, index) => {
-      element.index = index + 1; 
-    });
-    this.ELEMENTS_DATA = SystemData;
-    this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   
-  });
- }
+  getScreenWork(){
+  this.mode='Screenshot'
+ this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
+   console.log("Screenshot",res.data)
+   this.dataSource.data = res.data
+  // this.ScreenData = res.data;
+   let ScreenData = res.data[0].subModules;
+   ScreenData.forEach((element, index) => {
+     element.index = index + 1; 
+   });
+   this.ELEMENTS_DATA = ScreenData;
+   this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+ 
+ });
+}
   close() {
     this.hide = false;
   }
@@ -108,13 +72,13 @@ export class OurWorkComponent implements OnInit {
     this.spinner.show();
    this.myId = id;
     this.isEdit = true;
-    this.mode = 'System';
+    this.mode = 'Screenshot';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      this.SystemData = data.data[0];
-     let dialogRef = this.dialog.open(AddEditSubWorkComponent, {
+      this.ScreenData = data.data[0];
+     let dialogRef = this.dialog.open(EditScreenShotComponent, {
         data: {
           action: 'edit',
-           EditData: this.SystemData,
+           EditData: this.ScreenData,
           index: i,
           moduleName: name,
          },
@@ -127,7 +91,7 @@ export class OurWorkComponent implements OnInit {
        
 
         if ((result = 'true')) {
-         this.getSystemWork()
+         this.getScreenWork()
         }
       });
       this.spinner.hide();
@@ -137,15 +101,15 @@ export class OurWorkComponent implements OnInit {
 
   addForm(id) {
     this.spinner.show();
-    this.mode = 'System';
+    this.mode = 'Screenshot';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      this.SystemData = data.data[0];
-      console.log(this.SystemData)
-      let dialogRef = this.dialog.open(AddSubWorkComponent, {
+      this.ScreenData = data.data[0];
+      console.log(this.ScreenData)
+      let dialogRef = this.dialog.open(AddScreenShotComponent, {
         data: {
           action: 'new',
           ID: id,
-          EditData: this.SystemData._id,
+          EditData: this.ScreenData._id,
         },
         width: '800px',
         height: '500px',
@@ -153,7 +117,7 @@ export class OurWorkComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
 
         if ((result = 'true')) {
-          this.getSystemWork();
+          this.getScreenWork();
         }
       });
       this.spinner.hide();
@@ -175,7 +139,7 @@ export class OurWorkComponent implements OnInit {
         this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-           this.getSystemWork();
+           this.getScreenWork();
           this.ngOnInit();
           this.spinner.hide()
         })
@@ -183,3 +147,4 @@ export class OurWorkComponent implements OnInit {
     });
   }
 }
+
