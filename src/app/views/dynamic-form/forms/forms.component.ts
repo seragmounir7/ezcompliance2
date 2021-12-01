@@ -124,7 +124,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
       } 
       else {
         Swal.fire({
-          title: 'Form Enabled successfully',
+          title: 'Form Disable successfully',
           showConfirmButton: false,
           timer: 1200,
         });
