@@ -12,7 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class AddSiteComponent implements OnInit {
 allState:any=[];
-  addSitesForm
+  addSitesForm;
+  numberOfLineBreaks:any;
   constructor( 
     private dialogRef: MatDialogRef<AddSiteComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,4 +54,8 @@ allState:any=[];
     close() {
       this.dialogRef.close();
   }
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+ }
 }

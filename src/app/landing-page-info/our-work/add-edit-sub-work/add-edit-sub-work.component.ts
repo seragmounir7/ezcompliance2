@@ -44,9 +44,9 @@ export class AddEditSubWorkComponent implements OnInit {
        console.log( this.Is_Mod)
     
     this.SubWorkDetail = this.fb.group({
-      subTitle: ['', Validators.required],
-      mode: 'SYSTEM',
-      content: this.fb.array([]),
+      title: ['', Validators.required],
+      mode: 'System',
+      arrObj: this.fb.array([]),
       // mode:'SCREENSHOT',
       //  mode:'DIFFERENT'
     });
@@ -71,27 +71,27 @@ export class AddEditSubWorkComponent implements OnInit {
     this.Update = true;
     console.log(" subTitle",this.data)
     this.SubWorkDetail.patchValue({
-    mode: 'SYSTEM',
-    subTitle: this.data.EditData[0].subTitle,
+    mode: 'System',
+    title: this.data.EditData.title,
    });
   
     this.add().at(0).patchValue({
       
-     title: this.data.EditData[0].content[this.data.index].title,
+     title: this.data.EditData.subModules[this.data.index].title,
 
-      description: this.data.EditData[0].content[this.data.index].description,
+      description: this.data.EditData.subModules[this.data.index].description,
     });
     
-    (this.selectedImage = this.data.EditData[0].content[
+    (this.selectedImage = this.data.EditData.subModules[
       this.data.index
-    ].image),
+    ].fileUrl),
       console.log('img', this.selectedImage);
      
   }
   
   let index = this.data.index;
   console.log(index,"index")
-  this.subId = this.data.EditData[0].content[index]._id;
+  this.subId = this.data.EditData.subModules[index]._id;
   console.log(this.subId,"subId")
 
   
@@ -119,17 +119,17 @@ Eddit() {
     }
   }
   add(): FormArray {
-    return this.SubWorkDetail.get('content') as FormArray;
+    return this.SubWorkDetail.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
     return this.fb.group({
-       image: ['', Validators.required],
+      fileUrl: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
  removeSafetyModule(i) {
-    const item = <FormArray>this.SubWorkDetail.controls['content'];
+    const item = <FormArray>this.SubWorkDetail.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
       this.selectedImage.splice(i, 1);
@@ -171,7 +171,7 @@ Eddit() {
     for (let i = 0; i < arrlength; i++) {
       this.add()
         .at(i)
-        .get('image')
+        .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
     console.log(this.SubWorkDetail.value);
@@ -188,13 +188,13 @@ Eddit() {
   editModule() {
     if (this.data.action == 'edit') {
       let ServiceData = {
-        subTitle: this.SubWorkDetail.controls.subTitle.value,
-       //  mode: 'SYSTEM',
+        title: this.SubWorkDetail.controls.title.value,
+        mode: 'System',
       };
       console.log('asdfgh', ServiceData);
-      console.log('this.EditData', this.data.EditData[0]._id);
+      console.log('this.EditData', this.data.EditData._id);
       this.url
-        .editSubWorK(this.data.EditData[0]._id,ServiceData)
+        .editModule(ServiceData,this.data.EditData._id)
         .subscribe((resData) => {
           Swal.fire('Edited Successfully')
           console.log('editModule', resData);
@@ -208,15 +208,15 @@ Eddit() {
     if (this.data.action == 'edit') {
       let submodulesData = {
         // subTitle: this.SubWorkDetail.controls.subTitle.value,
-        mode: 'SYSTEM',
+        moduleId: this.data.EditData._id,
         title: this.add().at(0).get('title')?.value,
-        image: this.selectedImage,
+        fileUrl: this.selectedImage,
         description: this.add().at(0).get('description')?.value,
       };
   console.log(" submodulesData", submodulesData)
   
       this.url
-        .editSubWorK(this.subId,submodulesData)
+        .editsubModule(submodulesData,this.subId)
         .subscribe((resData) => {
           Swal.fire('Edited Successfully')
           console.log('submodulesData', resData);

@@ -35,10 +35,10 @@ export class AddSubWorkComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addWork = this.fb.group({
-       
-      // subTitle: ['', Validators.required],
-      mode: 'SYSTEM',
-      content: this.fb.array([]),
+        moduleId: this.data.EditData,
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      fileUrl: ['', Validators.required],
      
     });
     console.log('data', data);
@@ -46,7 +46,7 @@ export class AddSubWorkComponent implements OnInit {
 
 
   ngOnInit(): void {
- this.addAction();
+ 
   }
   browser(event) {
     const files = event.target.files[0];
@@ -62,41 +62,22 @@ export class AddSubWorkComponent implements OnInit {
   onSubmit() {
     console.log("this.addWork.value",this.addWork.value)
     this.addWork
-      .get('image')
+      .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
 
     this.landingPageInfo
-      .addSubWork(this.addWork.value)
+      .addSubModule(this.addWork.value)
       .subscribe((data) => {
         Swal.fire('Added Successfully')
-
+        this.addWorkData = data;
+        this.dialogRef.close('true');
+     
 
 
 
       });
   }
-  addAction() {
-    {
-      this.add().push(this.newAction());
-    }
-  }
-  add(): FormArray {
-    return this.addWork.get('content') as FormArray;
-  }
-  newAction(): FormGroup {
-    return this.fb.group({
-       image: ['', Validators.required],
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-    });
-  }
- removeSafetyModule(i) {
-    const item = <FormArray>this.addWork.controls['content'];
-    if (item.length > 1) {
-      item.removeAt(i);
-      this.selectedImage.splice(i, 1);
-    }
-  }
+ 
   close() {
     this.dialogRef.close();
 }

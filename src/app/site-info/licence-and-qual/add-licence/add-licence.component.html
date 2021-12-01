@@ -20,13 +20,15 @@
               </span>
             </div>
             <div class="col-4">
-              <input
+              <textarea  autosize
+              (keyup)=" calcHeight($event.target.value)"
+              [rows]="numberOfLineBreaks"
                 type="text"
                 formControlName="title"
                 class="form-control sign"
                 id="name"
                 placeholder="Licence Name"
-              />
+              ></textarea>
               
             </div>
             <div class="col-4">            

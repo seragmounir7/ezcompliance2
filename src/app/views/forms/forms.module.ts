@@ -1,3 +1,4 @@
+import { TextareaAutoresizeDirective } from './../../Directives/textarea-autoresize.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +14,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.component';
 import { DisplayTableComponent } from './display-table/display-table.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -32,6 +33,8 @@ import { DisplayTableComponent } from './display-table/display-table.component';
     SignaturePadModule,
     SharedModule,
     FormsModule,
+    CKEditorModule
   ],
+  providers:[TextareaAutoresizeDirective]
 })
 export class FormsModule1 {}

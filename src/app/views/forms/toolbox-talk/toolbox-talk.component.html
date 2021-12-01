@@ -52,11 +52,10 @@
           <select
             class="form-select form-control col form-dropdown"
             aria-label="Default select example"
-            formControlName="JobNumberId"
+            formControlName="jobNumberId"
             (change)="jobNoSel()"
           >
-            <option selected hidden>Select</option>
-            <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+            <option [value]="jobNo?._id" *ngFor="let jobNo of allJobNumbers">{{jobNo?.jobNumber}}</option>
             <!-- <option value="1">1000</option>
             <option value="2">1001</option>
             <option value="3">1002</option> -->
@@ -65,7 +64,7 @@
 
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">Date</p>
-          <input type="date" class="form-control" />
+          <input formControlName="date" type="date" class="form-control" />
         </div>
       </div>
       <div class="row">
@@ -74,13 +73,10 @@
             Meeting Conducted By
           </p>
           <select
+          formControlName="meetingBy"
             class="form-select form-control col form-dropdown"
-            aria-label="Default select example"
-          >
-            <option selected hidden>Select</option>
-            <option value="1">John</option>
-            <option value="2">Akash</option>
-            <option value="3">Rahul</option>
+            aria-label="Default select example">
+            <option *ngFor="let p of staff" [value]="p?._id">{{p.title}}</option>
           </select>
         </div>
         <div class="my-3 col">
@@ -188,8 +184,7 @@
               formControlName="personRes"
             >
               <option selected hidden>Select</option>
-              <option value="John">John</option>
-              <option value="Micheal">Micheal</option>
+              <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
             </select>
           </div>
           <div class="my-3 col-2">
@@ -253,7 +248,7 @@
                 #sign
               ></signature-pad>
             </div>
-            <button class="btn btn-outline-primary mt-1" (click)="clear2()">
+            <button class="btn btn-outline-primary mt-1" (click)="sign.clear()">
               Clear
             </button>
           </div>

@@ -56,7 +56,7 @@
           <div>
             <div class="row">
               <div class="my-3 col">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Site Name</label
                 >
                 <!-- <select
@@ -69,7 +69,7 @@
                 <input type="text" class="form-control col" formControlName="siteName">
               </div>
               <div class="my-3 col">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Customer Name</label
                 >
                 <!-- <select
@@ -85,7 +85,7 @@
             </div>
             <div class="row">
               <div class="my-3 col-2">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Street Number</label
                 >
                 <!-- <select
@@ -99,7 +99,7 @@
 
               </div>
               <div class="my-3 col-4">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Street Address</label
                 >
                 <!-- <select
@@ -112,7 +112,7 @@
                 <input type="text" class="form-control col" formControlName="streetAddr">
               </div>
               <div class="my-3 col-4">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Suburb</label
                 >
                 <!-- <select
@@ -125,12 +125,11 @@
                 <input type="text" class="form-control col" formControlName="subUrb">
               </div>
               <div class="my-3 col-2">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >State</label
                 >
                 <select
                 class="form-select form-control col"
-                id="statesSWMS"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
               >
@@ -152,7 +151,7 @@
     
             <div class="row">
               <div class="my-3 col">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Customer Contact</label
                 >
                 <!-- <select
@@ -166,7 +165,7 @@
 
               </div>
               <div class="my-3 col">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Customer Contact Phone</label
                 >
                 <!-- <select
@@ -182,7 +181,7 @@
             </div>
             <div class="row">
               <div class="my-3 col-4">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Customer Email</label
                 >
                 <!-- <select
@@ -196,12 +195,11 @@
 
               </div>
               <div class="my-3 col-2">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Job Number</label
                 >    
                 <select
                 class="form-select form-control col"
-                id="ProjectManager"
                 aria-label="Default select example"
                 formControlName="jobNumber"
                 (change)="jobNoSel()"
@@ -212,12 +210,11 @@
               </select>
               </div>
               <div class="my-3 col-6">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Project Manager</label
                 >
                 <select
                   class="form-select form-control col"
-                  id="ProjectManager"
                   aria-label="Default select example"
                   formControlName="projectManager"
                   (change)="setProjectManager('projectManager',$event)"
@@ -230,10 +227,10 @@
             </div>
             <div class="row">
               <div class="my-3 col-4">
-                <label for="exampleFormControlInput1" class="form-label"
+                <label class="form-label"
                   >Date</label
                 >
-                <input type="date" class="form-control" id="date" />
+                <input type="date" class="form-control"  />
               </div>
             </div>
             <hr />
@@ -242,20 +239,24 @@
             </div>
     
             <div class="row">
-              <div
-                *ngFor="let item of jobTaskData; let i = index"
-                class="mt-2 col-4"
-              >
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  [value]="item._id"
-                  (change)="onJobtaskSelect($event, item)"
-                />
-                <label class="form-check-label label_2" for="inlineCheckbox1">{{
-                  item.title
-                }}</label>
-              </div>
+              <ng-container  *ngFor="let item of jobTaskData; let i = index" >
+
+                <div
+                 *ngIf="item.set"
+                  class="mt-2 col-4"
+                >
+                  <input
+                    type="checkbox"
+                    [id]="i+'jt'"
+                    class="form-check-input"
+                    [value]="item._id"
+                    (change)="onJobtaskSelect($event, item)"
+                  />
+                  <label [for]="i+'jt'" class="form-check-label label_2">{{
+                    item.title
+                  }}</label>
+                </div>
+              </ng-container>
             </div>
     
             <hr />
@@ -368,11 +369,12 @@
               >
                 <input
                   type="checkbox"
+                  [id]="i+'hrc'"
                   class="form-check-input"
                   value="Working in or near trenches or shafts deeper than 1.5metres"
                   [checked]="riskArr[i]"
                 />
-                <label class="form-check-label label_2" for="inlineCheckbox1">{{
+                <label  [for]="i+'hrc'" class="form-check-label label_2">{{
                   item.title
                 }}</label>
               </div>
@@ -390,11 +392,12 @@
             >
               <input
                 type="checkbox"
+                [id]="i+'ppes'"
                 class="form-check-input"
                 value="Disposable dust mask"
                 [checked]="ppeArr[i]"
               />
-              <label class="form-check-label label_2" for="inlineCheckbox1">{{
+              <label class="form-check-label label_2"  [for]="i+'ppes'">{{
                 item.title
               }}</label>
             </div>
@@ -413,11 +416,12 @@
             >
               <input
                 type="checkbox"
+                [id]="i+'l&q'"
                 class="form-check-input"
                 value="Open Cable Licence"
                 [checked]="licenceArr[i]"
               />
-              <label class="form-check-label label_2" for="inlineCheckbox1">{{
+              <label class="form-check-label label_2"  [for]="i+'l&q'">{{
                 item.title
               }}</label>
             </div>
@@ -430,7 +434,7 @@
     
           <div class="row">
             <div class="col-4">
-              <label for="exampleFormControlInput1" class="form-label"
+              <label class="form-label"
                 >Employee 1</label
               >
               <p>
@@ -443,10 +447,10 @@
               </p>
             </div>
             <div class="col-4">
-              <label for="exampleFormControlInput1" class="form-label"
+              <label class="form-label"
                 >Signature</label
               >
-              <div class="sign">
+              <div class="sign" #signaturePad1Div>
                 <signature-pad
                   [options]="signaturePadOptions1"
                   (onBeginEvent)="drawStart1()"
@@ -459,7 +463,7 @@
               </button>
             </div>
             <div class="col-3">
-              <label for="exampleFormControlInput1" class="form-label"
+              <label class="form-label"
                 >Date/Time</label
               >
               <p>
@@ -488,13 +492,12 @@
         <div class="row">
           <div class="col-md-6">
             <div class="my-3">
-              <label for="exampleInputFullname" class="form-label"
+              <label class="form-label"
                 >Site Name</label
               >
               <input
                 type="fullname"
                 class="form-control"
-                id="exampleInputFullname"
                 aria-describedby="emailHelp"
                 formControlName="siteName"
               />
@@ -502,13 +505,12 @@
           </div>
           <div class="col-md-6">
             <div class="my-3">
-              <label for="exampleInputSurname" class="form-label"
+              <label class="form-label"
                 >Customer Name</label
               >
               <input
                 type="surname"
                 class="form-control"
-                id="exampleInputSurname"
                 aria-describedby="emailHelp"
                 formControlName="customerName"
               />
@@ -516,13 +518,12 @@
           </div>
           <div class="col-md-2">
             <div class="my-3">
-              <label for="exampleInputEmail1" class="form-label"
+              <label class="form-label"
                 >Street Number</label
               >
               <input
                 type="number"
                 class="form-control"
-                id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 formControlName="streetNo"
               />
@@ -530,13 +531,12 @@
           </div>
           <div class="col-md-4">
             <div class="my-3">
-              <label for="exampleInputPhone" class="form-label"
+              <label class="form-label"
                 >Street Name</label
               >
               <input
                 type="email"
                 class="form-control"
-                id="exampleInputPhone"
                 aria-describedby="emailHelp"
                 formControlName="streetAddr"
               />
@@ -544,13 +544,12 @@
           </div>
           <div class="col-md-4">
             <div class="my-3">
-              <label for="exampleInputDepartment" class="form-label"
+              <label class="form-label"
                 >Town/City</label
               >
               <input
                 type="department"
                 class="form-control"
-                id="exampleInputDepartment"
                 aria-describedby="emailHelp"
                 formControlName="subUrb"
               />
@@ -558,10 +557,9 @@
           </div>
           <div class="col-md-2">
             <div class="my-3">
-              <label for="exampleInputPosition" class="form-label">State</label>
+              <label class="form-label">State</label>
               <select
                 class="form-select form-control col"
-                id="statesSWMS"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
               >
@@ -573,13 +571,12 @@
           </div>
           <div class="col-md-6">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
+              <label class="form-label"
                 >Customer Contact</label
               >
               <input
                 type="Projectnumber"
                 class="form-control"
-                id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
                 formControlName="custConct"
               />
@@ -587,13 +584,12 @@
           </div>
           <div class="col-md-6">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
+              <label class="form-label"
                 >Customer Contact Phone</label
               >
               <input
                 type="tel"
                 class="form-control"
-                id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
                 formControlName="custConctPh">
               
@@ -601,13 +597,12 @@
           </div>
           <div class="col-md-6">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
+              <label class="form-label"
                 >Customer Contact Email</label
               >
               <input
                 type="email"
                 class="form-control"
-                id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
                 formControlName="custEmail"
               />
@@ -615,12 +610,11 @@
           </div>
           <div class="col-md-3">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
+              <label class="form-label"
                 >Job Number</label
               >
               <select
               class="form-select form-control col"
-              id="ProjectManager"
               aria-label="Default select example"
               formControlName="jobNumber"
               (change)="jobNoSel()"
@@ -632,12 +626,11 @@
           </div>
           <div class="col-md-3">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
+              <label class="form-label"
                 >Project Manager</label
               >
               <select
                   class="form-select form-control col"
-                  id="ProjectManager"
                   aria-label="Default select example"
                   formControlName="projectManagerSWMS"
                   (change)="setProjectManager('projectManagerSWMS',$event)"
@@ -669,10 +662,9 @@
           </div>
           <div class="col-md-5">
             <div class="my-3">
-              <label for="sel2">Safety Legislation</label>
+              <label >Safety Legislation</label>
               <select
                 class="form-control"
-                id="sel2"
                 name="sellist2"
                 formControlName="safetyLeg"
               >
@@ -686,7 +678,7 @@
           </div>
           <div class="col-md-5">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label"
+              <label class="form-label"
                 >Regulator & other Legislation</label
               >
               <select
@@ -713,12 +705,13 @@
           >
             <input
               type="checkbox"
+              [id]="i+'cop'"
               class="form-check-input"
               value="Working in or near trenches or shafts deeper than 1.5metres"
               [checked]="true"
               disabled
             />
-            <label class="form-check-label label_2" for="inlineCheckbox1">{{
+            <label [for]="i+'cop'" class="form-check-label label_2">{{
               item.title
             }}</label>
           </div>
@@ -733,11 +726,12 @@
           >
             <input
               type="checkbox"
+              [id]="i+'hr'"
               class="form-check-input"
               value="Working in or near trenches or shafts deeper than 1.5metres"
               [checked]="riskArr[i]"
             />
-            <label class="form-check-label label_2" for="inlineCheckbox1">{{
+            <label [for]="i+'hr'" class="form-check-label label_2" >{{
               item.title
             }}</label>
           </div>
@@ -848,11 +842,12 @@
           >
             <input
               type="checkbox"
+              [id]="i+'ppe'"
               class="form-check-input"
               value="Disposable dust mask"
               [checked]="ppeArr[i]"
             />
-            <label class="form-check-label label_2" for="inlineCheckbox1">{{
+            <label [for]="i+'ppe'" class="form-check-label label_2" for="inlineCheckbox1">{{
               item.title
             }}</label>
           </div>
@@ -864,7 +859,7 @@
             <div class="row" *ngFor="let controls of sdsRegisterFA().controls;let i=index" [formGroupName]="i">
               <div class="col-md-3">
                 <div class="my-3">
-                  <label for="exampleInputProjectNumber" class="form-label"
+                  <label for="sel2" class="form-label"
                     >Name of Chemical<span  class="material-icons ml-3"
                     style="font-size: 19px;"  (click)="addChemical()" >add_circle_outline</span></label
                   >
@@ -969,24 +964,24 @@
             </div>
 
             <div class="row">
-              <div class="col-md-4 my-3">
-                <div class="">
+              <div class="col-10">
+                <div class="col">
                   <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
-                  <ul class="identifyHaz">
+                  <ol class="identifyHaz">
                     <li *ngFor="let hazard of item.allHazardsTitle;let j=index"  >
                       <div class="row">
-                         <div class="col-9 stepItem"> {{i+1}}.{{ hazard.title }}</div>
-                         <div class="col-3"*ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
+                         <div class="col-9 stepItem p-1" >{{ hazard.title }}</div>
+                         <div class="col-3" *ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
                   </div>   
                     </li>  
-                  </ul>                  
+                  </ol>                  
   
                
                 </div>
               </div>
 
-              <ng-container formArrayName="riskLevel">
-                <div class="col-md-1 my-3" [formGroupName]="i">
+              <ng-container  formArrayName="riskLevel">
+                <div class="col-md-2 my-3" [formGroupName]="i">
                   <label for="sel1">Risk</label>
                   <select
                     class="form-control"
@@ -998,23 +993,23 @@
                   </select>
                 </div>
               </ng-container>
-              <div class="col-md-4 my-3">
-                <div class="">
+              <div class="col-md-10 my-3">
+                <div class="row">
                   <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
-                  <ul class="identifyHaz">
+                  <ol class="identifyHaz">
                     <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index"  > 
                       <div class="row">
-                        <div class="col-9 stepItem">{{i+1}}.{{contrlActReq.title }}</div>
-                    <div *ngIf="!contrlActReq.id" class="col-3"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i,j)">delete</mat-icon>                  </div>
+                        <div class="col-9 stepItem p-1">{{contrlActReq.title }}</div>
+                    <div  class="col-3"  *ngIf="!contrlActReq.id"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i,j)">delete</mat-icon>                  </div>
                   </div> 
                     </li>  
-                  </ul>  
+                  </ol>  
                  
                 </div>
               </div>
 
               <ng-container formArrayName="residualRisk">
-                <div class="col-md-1 " [formGroupName]="i">
+                <div class="col-md-2 my-3" [formGroupName]="i">
                   <label for="sel1">Residual Risk</label>
                   <select
                     class="form-control"
@@ -1056,10 +1051,7 @@
         </div>
 
         <div class="row">
-          <h2>
-            Worker consultation, instruction, training, toolbox talks, review,
-            acceptance record:
-          </h2>
+          
           
           <!-- <br /><br />
           <h3 class="txt_1">
@@ -1088,11 +1080,20 @@
             communicate to the other parties.<br /><br />
           </h3> -->
         </div>
-        <div class="row mb-2">
-          <textarea class="form-control" ></textarea>
+        
+        <div  class="row mb-2">
+          <ckeditor style="width: 100%;" [editor]="Editor" data="<h1 class='form-control' >
+            <strong>Worker consultation, instruction, training, toolbox talks, review,
+            acceptance record:</strong>
+          </h1>"></ckeditor>
+          
+
+          
         </div>
         <div class="row">
-          <textarea class="form-control" ></textarea>
+          <ckeditor style="width: 100%;" [editor]="Editor" [data]="secondEditor"></ckeditor>
+
+          
         </div>
         <hr />
         <h3>Name of worker (Print and Sign)</h3>

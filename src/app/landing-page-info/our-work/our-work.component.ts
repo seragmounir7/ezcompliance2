@@ -51,7 +51,7 @@ export class OurWorkComponent implements OnInit {
   ngOnInit(): void {
     this.getWork();
     this.setTitle.setTitle('WHS-OurWork');
-    this.getSubWork();
+    this.getSystemWork();
   }
   getWork() {
   this.myId="61a20b0cdba3f562225fba01"
@@ -61,7 +61,7 @@ export class OurWorkComponent implements OnInit {
     });
   }
 
-  editForm(id) {
+  editWork(id) {
     console.log("work",id)
     this.spinner.show();
      this.myId = id;
@@ -86,13 +86,13 @@ export class OurWorkComponent implements OnInit {
     
   }
 
- getSubWork(){
-   this.mode="SYSTEM"
-  this.landingPageInfo.getSubWorkById( this.mode).subscribe((res) => {
-    console.log("SYSTEM",res.data)
+ getSystemWork(){
+   this.mode='System'
+  this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
+    console.log("System",res.data)
     this.dataSource.data = res.data
    // this.SystemData = res.data;
-    let SystemData = res.data[0].content;
+    let SystemData = res.data[0].subModules;
     SystemData.forEach((element, index) => {
       element.index = index + 1; 
     });
@@ -108,9 +108,9 @@ export class OurWorkComponent implements OnInit {
     this.spinner.show();
    this.myId = id;
     this.isEdit = true;
-    this.mode = 'SYSTEM';
-    this.landingPageInfo.getSubWorkById(this.mode).subscribe((data) => {
-      this.SystemData = data.data;
+    this.mode = 'System';
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      this.SystemData = data.data[0];
      let dialogRef = this.dialog.open(AddEditSubWorkComponent, {
         data: {
           action: 'edit',
@@ -127,57 +127,25 @@ export class OurWorkComponent implements OnInit {
        
 
         if ((result = 'true')) {
-          this.ngOnInit();
+         this.getSystemWork()
         }
       });
       this.spinner.hide();
     });
   }
-  editWork(id) {
-    this.spinner.show();
-  
-    this.myId = id;
-    this.isEdit = true;
-    this.mode = 'SYSTEM';
-    this.landingPageInfo.getSubWorkById(this.mode).subscribe((data) => {
-    
-      this.SystemData = data.data;
-      
 
-      let dialogRef = this.dialog.open(AddEditSubWorkComponent, {
-        data: {
-          action: 'edit',
-
-          EditData: this.SystemData,
-      
-        
-        },
-
-        width: '500px',
-        height: '500px',
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-       
-
-        if ((result = 'true')) {
-          this.ngOnInit();
-        }
-      });
-      this.spinner.hide();
-    });
-  }
 
   addForm(id) {
     this.spinner.show();
-    this.mode = 'SYSTEM';
-    this.landingPageInfo.getSubWorkById(this.mode).subscribe((data) => {
-      this.SystemData = data.data[0]._id;
+    this.mode = 'System';
+    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+      this.SystemData = data.data[0];
       console.log(this.SystemData)
       let dialogRef = this.dialog.open(AddSubWorkComponent, {
         data: {
           action: 'new',
           ID: id,
-          EditData: this.SystemData,
+          EditData: this.SystemData._id,
         },
         width: '800px',
         height: '500px',
@@ -185,7 +153,7 @@ export class OurWorkComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
 
         if ((result = 'true')) {
-          this.ngOnInit();
+          this.getSystemWork();
         }
       });
       this.spinner.hide();
@@ -205,9 +173,9 @@ export class OurWorkComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.spinner.show()
-        this.landingPageInfo.deleteSubWorK(item._id).subscribe((res) => {
+        this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-           this.getSubWork();
+           this.getSystemWork();
           this.ngOnInit();
           this.spinner.hide()
         })

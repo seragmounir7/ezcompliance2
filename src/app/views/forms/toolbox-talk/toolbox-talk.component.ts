@@ -15,10 +15,11 @@ export class ToolboxTalkComponent implements OnInit {
   toolBox: FormGroup;
   allJobNumbers = [];
   sign=[];
+  staff:any;
   id:any;
+  signature:SignaturePad;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
-
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -34,9 +35,10 @@ export class ToolboxTalkComponent implements OnInit {
       custConct: [''],
       custConctPh: [''],
       custEmail: [''],
-      JobNumberId: [''],
+      jobNumberId: [''],
       signaturePad1:[''],
-      // date:[''],
+      date:[''],
+      meetingBy:[''],
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),
       attendees: this.fb.array([])
@@ -46,6 +48,7 @@ export class ToolboxTalkComponent implements OnInit {
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params.id;
     this.getAllJobNumber();
+    this.getAllStaff();
     this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
     this.setTitle.setTitle('WHS-ToolBox Talk Form');
     if(this.id!=='null')
@@ -74,8 +77,11 @@ export class ToolboxTalkComponent implements OnInit {
         custConct: res.data.custConct,
         custConctPh: res.data.custConctPh,
         custEmail: res.data.custEmail,
-        jobNumber: res.data.JobNumberId
+        jobNumberId: res.data.jobNumberId,
+        meetingBy:res.data.meetingBy,
+        date:res.data.date
       })
+      this.signaturePad1.fromDataURL(res.data.signaturePad1);
     })
   }
   getAllJobNumber() {
@@ -86,7 +92,7 @@ export class ToolboxTalkComponent implements OnInit {
   }
   jobNoSel(){
     this.allJobNumbers.forEach((item) => {
-      if (this.toolBox.get('JobNumberId').value === item._id) {
+      if (this.toolBox.get('jobNumberId').value === item._id) {
         console.log('Id found', item);
         this.toolBox.patchValue({
           siteName: item.siteName,
@@ -95,11 +101,11 @@ export class ToolboxTalkComponent implements OnInit {
            custConct: item.customerContact,
           custConctPh: item.customerContactPhone,
           custEmail: item.customerEmail,
-          jobNumber: this.toolBox.get('JobNumberId').value,
+          jobNumber: this.toolBox.get('jobNumberId').value,
         });
       }
     });
-         this.toolBox.get('JobNumberId').updateValueAndValidity();
+         this.toolBox.get('jobNumberId').updateValueAndValidity();
 
   }
   addIssues() {
@@ -227,14 +233,11 @@ export class ToolboxTalkComponent implements OnInit {
     console.log('begin drawing');
   }
   drawComplete2(index,sign) {
-
   this.attendee().controls[index].get('signature').setValue(sign.toDataURL());
     // will be notified of szimek/signature_pad's onEnd event
-    console.log("signature value at index no."+index,this.attendee().controls[index].get('signature').value); 
   }
-  clear2() {
-    console.log('ggg');
-
+  clear2(i) {
+   
     this.signaturePad2.clear();
   }
   drawStart2() {
@@ -267,5 +270,11 @@ export class ToolboxTalkComponent implements OnInit {
        })
     }
     this.toolBox.reset();
+  }
+  getAllStaff(){
+    this.logicalFormInfo.getAllStaff().subscribe((res:any)=> {
+      this.staff=res.data;
+      console.log("res",this.staff);
+   })
   }
 }

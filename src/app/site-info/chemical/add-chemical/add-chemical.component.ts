@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddChemicalComponent implements OnInit {
   addChemicalForm: FormGroup;
+  numberOfLineBreaks:any;
   constructor( 
     private fb:FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
@@ -47,6 +48,8 @@ export class AddChemicalComponent implements OnInit {
       }
     }
     onFormSubmit() {
+     
+      
       console.log(this.addChemicalForm.value);
       let data={
         arrObj:this.addChemicalForm.get('arrObj').value
@@ -59,4 +62,8 @@ export class AddChemicalComponent implements OnInit {
       );
       
     }
+    calcHeight(value) {
+      this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+      console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+   }
   }

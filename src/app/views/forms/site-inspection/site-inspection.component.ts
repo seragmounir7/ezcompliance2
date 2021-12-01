@@ -194,4 +194,13 @@ export class SiteInspectionComponent implements OnInit {
       this.allJobNumbers = res.data;
     });
   }
+  tabClick(eve)
+  {
+    console.log("tab changed",eve);
+    if(eve.index==1)
+    {
+      this.sidePreview.updateValueAndValidity();
+      this.showAction();
+    }
+  }
 }

@@ -11,10 +11,7 @@ import {
 export class SnackbarService {
   constructor(private snackbar: MatSnackBar) {}
 
-  openSnackBar(
-    msg: string,
-    action = 'close'
-  ): MatSnackBarRef<TextOnlySnackBar> {
+  openSnackBar(msg: string,action = 'close'): MatSnackBarRef<TextOnlySnackBar> {
     return this.snackbar.open(msg, action, {
       duration: 3000,
       horizontalPosition: 'right',

@@ -14,8 +14,6 @@
         <div>
           <label
             class="cols"
-            for="project Number"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Project Number</label
           >
@@ -23,7 +21,6 @@
             type="number"
             class="form-control"
             formControlName="projectNumber"
-            id="projectNumber"
           />
         </div>
       </div>
@@ -31,8 +28,6 @@
         <div>
           <label
             class="cols"
-            for="project name"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Project Name</label
           >
@@ -40,7 +35,6 @@
             type="text"
             formControlName="projectName"
             class="form-control"
-            id="projectName"
           />
         </div>
       </div>
@@ -50,8 +44,6 @@
         <div>
           <label
             class="cols"
-            for="site Name"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Site Name</label
           >
@@ -59,7 +51,6 @@
             type="text"
             class="form-control"
             formControlName="siteName"
-            id="siteName"
           />
         </div>
       </div>
@@ -67,8 +58,6 @@
         <div>
           <label
             class="cols"
-            for="customerName"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Customer Name</label
           >
@@ -76,7 +65,6 @@
             type="text"
             class="form-control"
             formControlName="customerName"
-            id="customerName"
           />
         </div>
       </div>
@@ -86,8 +74,6 @@
         <div>
           <label
             class="cols"
-            for="siteAddress"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Site Address</label
           >
@@ -95,7 +81,6 @@
             type="text"
             class="form-control"
             formControlName="siteAddress"
-            id="siteAddress"
           />
         </div>
       </div>
@@ -103,8 +88,6 @@
         <div>
           <label
             class="cols"
-            for="customerContact"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Customer Contact</label
           >
@@ -113,7 +96,6 @@
             type="text"
             class="form-control"
             formControlName="customerContact"
-            id="customerContact"
           />
         </div>
       </div>
@@ -123,8 +105,6 @@
         <div>
           <label
             class="cols"
-            for="projectManager"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Project Manager</label
           >
@@ -132,7 +112,6 @@
             type="text"
             class="form-control"
             formControlName="projectManager"
-            id="projectManager"
           />
         </div>
       </div>
@@ -141,8 +120,6 @@
         <div>
           <label
             class="cols"
-            for="personCompletingForm"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Person Completing Form
           </label>
@@ -150,7 +127,6 @@
             type="text"
             class="form-control"
             formControlName="personCompletingForm"
-            id="personCompletingForm"
           />
         </div>
       </div>
@@ -160,8 +136,6 @@
         <div>
           <label
             class="cols"
-            for="customerContactPhone"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Customer Contact Phone</label
           >
@@ -170,7 +144,6 @@
             type="text"
             class="form-control"
             formControlName="customerContactPhone"
-            id="customerContactPhone"
           />
         </div>
       </div>
@@ -179,8 +152,6 @@
         <div>
           <label
             class="cols"
-            for="customerContactEmail"
-            for="exampleFormControlInput1"
             class="form-Label"
             >Customer Contact Email</label
           >
@@ -189,21 +160,19 @@
             type="text"
             class="form-control"
             formControlName="customerContactEmail"
-            id="customerContactEmail"
           />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <label class="cols" for="dateOfFormCompletion" class="form-Label"
+        <label class="cols" class="form-Label"
           >Date of Form Completion</label
         >
         <input
           type="date"
           class="form-control"
           formControlName="dateOfFormCompletion"
-          id="dateOfFormCompletion"
         />
       </div>
     </div>
@@ -213,18 +182,19 @@
     <p class="title">Type of Incident</p>
   </div>
   <div class="row">
-    <div class="mt-2 col-4" *ngFor="let incident of incidents">
+    <div class="mt-2 col-4" *ngFor="let incident of incidents; let i=index">
       <div class="checkrdobtn">
         <input
           class="rdovstchk"
+          [id]="i+'typeOf'"
           class="mr-1"
           type="checkbox"
           [value]="incident.value"
           (change)="onChangeIncident($event)"
         />
-        <span class="txtdefault fs-16 weight500 text-center">{{
+        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'typeOf'">{{
           incident.name
-        }}</span>
+        }}</label>
       </div>
     </div>
   </div>
@@ -250,26 +220,24 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" for="name" class="form-Label">Name</label>
+        <label class="cols" class="form-Label">Name</label>
         <input
           type="text"
           class="form-control"
           formControlName="name"
           id
-          id="name"
         />
       </div>
     </div>
     <div class="col-md-6">
       <div>
-        <label class="cols" for="department" class="form-Label"
+        <label class="cols" class="form-Label"
           >Department</label
         >
         <input
           type="text"
           class="form-control"
           formControlName="department"
-          id="department"
         />
       </div>
     </div>
@@ -277,12 +245,11 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" for="position" class="form-Label">position</label>
+        <label class="cols" class="form-Label">position</label>
         <input
           type="text"
           class="form-control"
           formControlName="position"
-          id="position"
         />
       </div>
     </div>
@@ -292,18 +259,19 @@
     <p class="title">Nature of Incident</p>
   </div>
   <div class="box" class="row">
-    <div class="mt-3 col-4" *ngFor="let nature of natureOFIncidents">
+    <div class="mt-3 col-4" *ngFor="let nature of natureOFIncidents; let i=index">
       <div class="checkrdobtn">
         <input
           class="rdovstchk"
+          [id]="i+'natureOfInc'"
           type="checkbox"
           class="mr-1"
           [value]="nature.value"
           (change)="onNatureOFIncidents($event)"
         />
-        <span class="txtdefault fs-16 weight500 text-center">{{
+        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'natureOfInc'">{{
           nature.name
-        }}</span>
+        }}</label>
       </div>
     </div>
   </div>
@@ -311,40 +279,37 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" for="locationOfTheIncident" class="form-Label"
+        <label class="cols" class="form-Label"
           >Location of the incident</label
         >
         <input
           type="text"
           class="form-control"
           formControlName="locationOfTheIncident"
-          id="locationOfTheIncident"
         />
       </div>
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" for="dateOfTheIncident" class="form-Label"
+        <label class="cols" class="form-Label"
           >Date of the incident</label
         >
         <input
           type="date"
           class="form-control"
           formControlName="dateOfTheIncident"
-          id="dateOfTheIncident"
         />
       </div>
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" for="timeOfTheIncident" class="form-Label"
+        <label class="cols"  class="form-Label"
           >Time of the incident</label
         >
         <input
           type="number"
           class="form-control"
           formControlName="timeOfTheIncident"
-          id="timeOfTheIncident"
         />
       </div>
     </div>
@@ -356,7 +321,7 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label">
+        <label class="cols" class="form-Label">
           Name of Witness</label
         >
 
@@ -374,7 +339,7 @@
 
     <div class="col-md-6">
       <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
+        <label class="cols" class="form-Label"
           >Witness Statement</label
         >
 
@@ -393,12 +358,11 @@
   <div class="box" class="row">
     <div class="col-md-12">
       <div>
-        <label for="formFile" class="form-Label">Attachments </label>
+        <label class="form-Label">Attachments </label>
         <input
           class="form-control"
           formControlName="file"
           type="file"
-          id="formFile"
         />
       </div>
     </div>
@@ -409,18 +373,19 @@
     <p class="title">What PPE was in Use ?</p>
   </div>
   <div class="box" class="row">
-    <div class="mt-3 col-3" *ngFor="let PPES of PPE">
+    <div class="mt-3 col-3" *ngFor="let PPES of PPE; let i=index">
       <div class="checkrdobtn">
         <input
           class="rdovstchk"
+          [id]="i+'whatPPE'"
           type="checkbox"
           class="mr-1"
           [value]="PPES.value"
           (change)="onPPE($event)"
         />
-        <span class="txtdefault fs-16 weight500 text-center">{{
+        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'whatPPE'">{{
           PPES.name
-        }}</span>
+        }}</label>
       </div>
     </div>
   </div>
@@ -430,18 +395,19 @@
     <p class="title">What was the rootcause of incident happen?</p>
   </div>
   <div class="box" class="row">
-    <div class="mt-3 col-3" *ngFor="let rootCause of rootCauseIncident">
+    <div class="mt-3 col-3" *ngFor="let rootCause of rootCauseIncident; let i=index">
       <div class="checkrdobtn">
         <input
           class="rdovstchk"
+          [id]="i+'incident'"
           type="checkbox"
           class="mr-1"
           [value]="rootCause.value"
           (change)="onRootCauseIncident($event)"
         />
-        <span class="txtdefault fs-16 weight500 text-center">{{
+        <label class="txtdefault fs-16 weight500 text-center" [for]="i+'incident'">{{
           rootCause.name
-        }}</span>
+        }}</label>
       </div>
     </div>
   </div>
@@ -452,7 +418,6 @@
       <div>
         <label
           class="cols"
-          for="whyDidtheUnsafeConditonExist"
           class="form-Label"
           >Why did the unsafe conditon exist</label
         >
@@ -461,7 +426,6 @@
           type="text"
           formControlName="whyDidtheUnsafeConditonExist"
           class="form-control"
-          id="whyDidtheUnsafeConditonExist"
         >
         </textarea>
       </div>
@@ -506,18 +470,19 @@
     <p class="title">What changes can be made ?</p>
   </div>
   <div class="row">
-    <div class="mt-2 col-4 mb-0" *ngFor="let change of changes">
+    <div class="mt-2 col-4 mb-0" *ngFor="let change of changes; let i=index">
       <div class="checkrdobtn">
         <input
           class="rdovstchk"
+          [id]="i+'changes'"
           type="checkbox"
           class="mr-1"
           [value]="change.value"
           (change)="onChanges($event)"
         />
-        <span class="txtdefault fs-16 weight500 text-center">{{
+        <label class="txtdefault fs-16 weight500 text-center" [for]="i+'changes'">{{
           change.name
-        }}</span>
+        }}</label>
       </div>
     </div>
   </div>
@@ -525,7 +490,7 @@
   <div class="box" class="row">
     <div class="col-6 mb-4">
       <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
+        <label class="cols"  class="form-Label"
           >CorrectiveAction</label
         >
 
@@ -543,7 +508,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
+        <label class="cols"  class="form-Label"
           >Person Responsible</label
         >
 
@@ -563,7 +528,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
+        <label class="cols" class="form-Label"
           >Complete</label
         >
 
@@ -586,11 +551,10 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="name" class="form-Label">Name</label>
+          <label class="cols" class="form-Label">Name</label>
           <input
             type="text"
             class="form-control"
-            id="CompletedName"
             formControlName="CompletedName"
           />
         </div>
@@ -598,14 +562,13 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" for="position" class="form-Label"
+          <label class="cols" class="form-Label"
             >Position
           </label>
           <input
             type="text"
             class="form-control"
             formControlName="CompletedPosition"
-            id="CompletedPosition"
           />
         </div>
       </div>
@@ -613,26 +576,24 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="department" class="form-Label"
+          <label class="cols" class="form-Label"
             >Department</label
           >
           <input
             type="text"
             class="form-control"
             formControlName="CompletedDepartment"
-            id="CompletedDepartment"
           />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label class="cols" for="date" class="form-Label">Date </label>
+          <label class="cols" class="form-Label">Date </label>
           <input
             type="date"
             class="form-control"
             formControlName="CompletedDate"
-            id="CompletedDate"
           />
         </div>
       </div>
@@ -640,7 +601,7 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="exampleFormControlInput1" class="form-Label"
+          <label class="cols" class="form-Label"
             >Signature</label
           >
           <div class="sign">
@@ -665,11 +626,10 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="Name" class="form-Label">Name</label>
+          <label class="cols" class="form-Label">Name</label>
           <input
             type="text"
             class="form-control"
-            id="reviewedName"
             formControlName="reviewedName"
           />
         </div>
@@ -677,14 +637,13 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" for="position" class="form-Label"
+          <label class="cols" class="form-Label"
             >Position
           </label>
           <input
             type="text"
             class="form-control"
             formControlName="reviewedPosition"
-            id="reviewedPosition"
           />
         </div>
       </div>
@@ -692,26 +651,24 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="department" class="form-Label"
+          <label class="cols" class="form-Label"
             >Department</label
           >
           <input
             type="text"
             class="form-control"
             formControlName="reviewedDepartment"
-            id="reviewedDepartment"
           />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label class="cols" for="date" class="form-Label">Date </label>
+          <label class="cols" class="form-Label">Date </label>
           <input
             type="date"
             class="form-control"
             formControlName="reviewedDate"
-            id="reviewedDate"
           />
         </div>
       </div>
@@ -719,7 +676,7 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" for="exampleFormControlInput1" class="form-Label"
+          <label class="cols" class="form-Label"
             >Signature</label
           >
           <div class="sign">
