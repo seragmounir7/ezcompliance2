@@ -18,7 +18,8 @@ import Swal from 'sweetalert2';
 export class AddContrActComponent implements OnInit {
 
   contrlAndActFG!: FormGroup;
-  formData: any;;
+  formData: any;numberOfLineBreaks: any;
+;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -73,4 +74,8 @@ export class AddContrActComponent implements OnInit {
     );
     
   }
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+ }
 }

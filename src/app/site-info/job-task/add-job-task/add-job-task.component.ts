@@ -18,7 +18,8 @@ import { Router } from '@angular/router';
 export class AddJobTaskComponent implements OnInit {
 
   jobTaskDetails!: FormGroup;
-  formData: any;;
+  formData: any;numberOfLineBreaks: any;
+;
   licenceCatAll=[];
   constructor(
     private fb: FormBuilder,
@@ -80,6 +81,10 @@ export class AddJobTaskComponent implements OnInit {
   
     );
     
+  }
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
   }
  
 }

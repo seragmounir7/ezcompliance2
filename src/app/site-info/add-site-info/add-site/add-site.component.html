@@ -32,7 +32,9 @@
         </div>
         <div class="my-3 col-4">
           <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
-          <textarea
+          <textarea autosize
+          (keyup)=" calcHeight($event.target.value)"
+          [rows]="numberOfLineBreaks"
             type="text"
             class="form-control"
             formControlName="streetAddress"

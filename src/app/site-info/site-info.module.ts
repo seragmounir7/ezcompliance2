@@ -52,6 +52,7 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-residual-risk-level/edit-residual-risk-level.component';
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
     EditResidualRiskLevelComponent,
     AddStaffComponent,
     EditStaffComponent,
+   
   ],
 
   imports: [
@@ -110,6 +112,7 @@ import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
     ReactiveFormsModule,
     SharedModule,
     MatStepperModule,
+    AutosizeModule
   ],
 })
 export class SiteInfoModule {}

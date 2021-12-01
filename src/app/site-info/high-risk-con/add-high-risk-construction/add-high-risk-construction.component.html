@@ -51,7 +51,9 @@
           </div>
           <div class="col-8">
             <!-- <p for="exampleFormControlInput1" class="form-Label">Job Task Type</p> -->
-            <textarea
+            <textarea autosize
+            (keyup)="calcHeight($event.target.value)"
+            [rows]="numberOfLineBreaks"
               type="text"
               formControlName="title"
               class="form-control sign"

@@ -18,7 +18,8 @@ import { Router } from '@angular/router';
 export class AddCOPComponent implements OnInit {
 
   codeOfPractFG!: FormGroup;
-  formData: any;;
+  formData: any;numberOfLineBreaks: any;
+;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -68,4 +69,8 @@ export class AddCOPComponent implements OnInit {
     );
     
   }
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+ }
 }

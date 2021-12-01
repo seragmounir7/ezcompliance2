@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AddStaffComponent implements OnInit {
   addStaffForm:FormGroup;
+  numberOfLineBreaks: any;
   constructor( 
     private fb:FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
@@ -60,5 +61,9 @@ export class AddStaffComponent implements OnInit {
       );
       
     }
+      calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+  }
 
 }
