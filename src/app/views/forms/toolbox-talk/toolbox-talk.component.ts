@@ -5,6 +5,7 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-toolbox-talk',
   templateUrl: './toolbox-talk.component.html',
@@ -13,6 +14,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class ToolboxTalkComponent implements OnInit {
   toolBox: FormGroup;
   allJobNumbers = [];
+  sign=[];
+  id:any;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
 
@@ -21,6 +24,8 @@ export class ToolboxTalkComponent implements OnInit {
     private dynamicFormsService: DynamicFormsService,
     private setTitle:SetTitleService,
     private logicalFormInfo: LogicalFormInfoService,
+    private activatedRoute: ActivatedRoute,
+    public router: Router
   ) {
     this.toolBox = this.fb.group({
       siteName: [''],
@@ -29,20 +34,49 @@ export class ToolboxTalkComponent implements OnInit {
       custConct: [''],
       custConctPh: [''],
       custEmail: [''],
-      jobNumber: [''],
+      JobNumberId: [''],
+      signaturePad1:[''],
+      // date:[''],
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),
-      attendees: this.fb.array([]),
+      attendees: this.fb.array([])
     });
   }
 
   ngOnInit(): void {
-    this.addIssues();
-    this.addCorrectAct();
-    this.addAttendee();
+    this.id=this.activatedRoute.snapshot.params.id;
     this.getAllJobNumber();
     this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
     this.setTitle.setTitle('WHS-ToolBox Talk Form');
+    if(this.id!=='null')
+    {
+      console.log("id",this.id);
+      this.getToolboxByid(this.id);
+    }
+    else
+    {
+      this.addIssues();
+      this.addCorrectAct();
+      this.addAttendee();
+    }
+  }
+  getToolboxByid(id)
+  {
+    this.logicalFormInfo.getToolboxById(id).subscribe((res:any)=>{
+      console.log(res);
+      this.pushissues(res.data.issues);
+      this.pushCorrective(res.data.corrAction);
+      this.pushattendee(res.data.attendees);
+      this.toolBox.patchValue({
+        siteName:res.data.siteName,
+        customerName: res.data.customerName,
+        streetAddr:res.data.streetAddr,
+        custConct: res.data.custConct,
+        custConctPh: res.data.custConctPh,
+        custEmail: res.data.custEmail,
+        jobNumber: res.data.JobNumberId
+      })
+    })
   }
   getAllJobNumber() {
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
@@ -52,7 +86,7 @@ export class ToolboxTalkComponent implements OnInit {
   }
   jobNoSel(){
     this.allJobNumbers.forEach((item) => {
-      if (this.toolBox.get('jobNumber').value === item._id) {
+      if (this.toolBox.get('JobNumberId').value === item._id) {
         console.log('Id found', item);
         this.toolBox.patchValue({
           siteName: item.siteName,
@@ -61,15 +95,53 @@ export class ToolboxTalkComponent implements OnInit {
            custConct: item.customerContact,
           custConctPh: item.customerContactPhone,
           custEmail: item.customerEmail,
-          jobNumber: this.toolBox.get('jobNumber').value,
+          jobNumber: this.toolBox.get('JobNumberId').value,
         });
       }
     });
-         this.toolBox.get('jobNumber').updateValueAndValidity();
+         this.toolBox.get('JobNumberId').updateValueAndValidity();
 
   }
   addIssues() {
     this.issues().push(this.issuesForm());
+  }
+  getissues(D): FormGroup {
+    return this.fb.group({
+      index: D.index,
+      topicDisc: D.topicDisc,
+      topicRes: D.topicRes,
+    });
+  }
+  pushissues(D) {
+    console.log("D",D);
+    D.forEach((element) => {
+     this.issues().push(this.getissues(element));
+    });
+  }
+  getCorrective(D): FormGroup {
+    return this.fb.group({
+      action: D.action,
+      personRes: D.personRes,
+      complete: D.complete,
+    });
+  }
+  pushCorrective(D) {
+    console.log("D",D);
+    D.forEach((element) => {
+     this.correctAct().push(this.getCorrective(element));
+    });
+  }
+  getattendee(D): FormGroup {
+    return this.fb.group({
+      employee: D.employee,
+      signature:D.signature,
+    });
+  }
+  pushattendee(D) {
+    console.log("D",D);
+    D.forEach((element) => {
+     this.attendee().push(this.getattendee(element));
+    });
   }
   issues(): FormArray {
     return this.toolBox.get('issues') as FormArray;
@@ -111,7 +183,7 @@ export class ToolboxTalkComponent implements OnInit {
   attendeeForm(): FormGroup {
     return this.fb.group({
       employee: [],
-      signature: [],
+      signature:[],
     });
   }
   removeAttendee(i) {
@@ -141,18 +213,24 @@ export class ToolboxTalkComponent implements OnInit {
 
   drawComplete1() {
     // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad1.toDataURL());
+    console.log("signnn",this.signaturePad1);
+    this.toolBox.controls['signaturePad1'].setValue(this.signaturePad1.toDataURL());
+    console.log("signaturePad1 control",this.toolBox.controls['signaturePad1'].value);
+
   }
   clear1() {
     this.signaturePad1.clear();
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
+    this.signaturePad2=null;
     console.log('begin drawing');
   }
-  drawComplete2() {
+  drawComplete2(index,sign) {
+
+  this.attendee().controls[index].get('signature').setValue(sign.toDataURL());
     // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad2.toDataURL());
+    console.log("signature value at index no."+index,this.attendee().controls[index].get('signature').value); 
   }
   clear2() {
     console.log('ggg');
@@ -162,5 +240,32 @@ export class ToolboxTalkComponent implements OnInit {
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+  }
+  onSave()
+  {
+    console.log("form data",this.toolBox.value);
+    if(this.id!=='null')
+    {
+      const data={
+        ...this.toolBox.value
+      }
+       this.logicalFormInfo.editToolBox(this.id,data).subscribe((res)=>
+       {
+         console.log("res",res);
+         this.router.navigate(["/admin/forms/tableData"]);
+       })
+    }
+    else
+    {
+      const data={
+        ...this.toolBox.value
+      }
+       this.logicalFormInfo.addtoolBox(data).subscribe((res)=>
+       {
+         console.log("res",res);
+         this.router.navigate(["/admin/forms/tableData"]);
+       })
+    }
+    this.toolBox.reset();
   }
 }
