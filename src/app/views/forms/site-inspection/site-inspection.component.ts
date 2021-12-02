@@ -25,6 +25,20 @@ export class SiteInspectionComponent implements OnInit {
   jobTaskData: any;
   allJobNumbers = [];
   projectMang = [];
+  keyArr = [
+    "jobNumber",
+    "siteName",
+    "customerName",
+    "streetNo",
+    "streetAddr",
+    "subUrb",
+    "custConct",
+    "custConctPh",
+    "custEmail",
+    "datetooboxtalk",
+    "date",
+    "projectManager",
+  ]
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -42,6 +56,9 @@ export class SiteInspectionComponent implements OnInit {
       custConct: [''],
       custConctPh: [''],
       custEmail: [''],
+      date:[''],
+      projectManager:[''],
+      datetooboxtalk: [''],
       Hazard: ['', Validators.required],
       documentation: ['', Validators.required],
       workeronsite: ['', Validators.required],
@@ -152,13 +169,16 @@ export class SiteInspectionComponent implements OnInit {
     this.siteshow = false;
     this.add().clear();
     let key = Object.keys(this.sidePreview.value);
+    console.log("this.keyArr.find((ele) => key.includes(ele))", this.keyArr.find((ele) => key.includes(ele)));
     for (let i = 0; i < key.length - 2; i++) {
-      let tempValue = this.sidePreview.controls[key[i]].value;
-      if (tempValue != '') {
-        if (tempValue != 'yes') {
-          let index = this.add().length;
-          this.addAction();
-          this.add().controls[index].get('item').setValue(tempValue);
+      if (!this.keyArr.find((ele) => key[i].includes(ele))) {
+        let tempValue = this.sidePreview.controls[key[i]].value;
+        if (tempValue != '') {
+          if (tempValue != 'yes') {
+            let index = this.add().length;
+            this.addAction();
+            this.add().controls[index].get('item').setValue(tempValue);
+          }
         }
       }
     }
@@ -169,6 +189,7 @@ export class SiteInspectionComponent implements OnInit {
   }
   addAcionTab(event) {
     let b = Object.keys(this.sidePreview.value);
+    console.log("event", event);
     //   let index =this.add().length
     //   this.addAction()
     // this.add().controls[index].get("item").setValue(event.target.value)
@@ -185,20 +206,21 @@ export class SiteInspectionComponent implements OnInit {
   getAllProjectMang() {
     this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
       this.projectMang = res.data;
-     
+
     });
   }
   getAllJobNumber() {
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-     
+
       this.allJobNumbers = res.data;
     });
   }
-  tabClick(eve)
-  {
-    console.log("tab changed",eve);
-    if(eve.index==1)
-    {
+  tabClick(eve) {
+    console.log("tab changed", eve);
+    if (eve.index == 0) {
+      this.showsite()
+    }
+    if (eve.index == 1) {
       this.sidePreview.updateValueAndValidity();
       this.showAction();
     }

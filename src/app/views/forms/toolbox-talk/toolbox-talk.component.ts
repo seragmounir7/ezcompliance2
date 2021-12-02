@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -23,13 +23,13 @@ export class ToolboxTalkComponent implements OnInit {
     private logicalFormInfo: LogicalFormInfoService,
   ) {
     this.toolBox = this.fb.group({
-      siteName: [''],
-      customerName: [''],
-      streetAddr:[''],
-      custConct: [''],
-      custConctPh: [''],
-      custEmail: [''],
-      jobNumber: [''],
+      siteName: ['',Validators.required],
+      customerName: ['',Validators.required],
+      streetAddr:['',Validators.required],
+      custConct: ['',Validators.required],
+      custConctPh: ['',Validators.required],
+      custEmail: ['',Validators.required],
+      jobNumber: ['',Validators.required],
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),
       attendees: this.fb.array([]),
@@ -76,9 +76,9 @@ export class ToolboxTalkComponent implements OnInit {
   }
   issuesForm(): FormGroup {
     return this.fb.group({
-      index: [],
-      topicDisc: [],
-      topicRes: [],
+      index: ['',Validators.required],
+      topicDisc: ['',Validators.required],
+      topicRes: ['',Validators.required],
     });
   }
   removeIssues(i) {
@@ -93,9 +93,9 @@ export class ToolboxTalkComponent implements OnInit {
   }
   correctActForm(): FormGroup {
     return this.fb.group({
-      action: [],
-      personRes: [],
-      complete: [],
+      action: ['',Validators.required],
+      personRes: ['',Validators.required],
+      complete: ['',Validators.required],
     });
   }
   removeCorrectAct(i) {
@@ -110,8 +110,8 @@ export class ToolboxTalkComponent implements OnInit {
   }
   attendeeForm(): FormGroup {
     return this.fb.group({
-      employee: [],
-      signature: [],
+      employee: ['',Validators.required],
+      signature: ['',Validators.required],
     });
   }
   removeAttendee(i) {
