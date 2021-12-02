@@ -584,7 +584,24 @@ export class LogicalFormInfoService {
   addPlan(data) {
     return this.https.post(this.apiUrl + 'plan/add', data)
   }
-
+  addtoolBox(data) {
+    return this.https.post(this.apiUrl + 'toolbox/add', data)
+  }
+  editToolBox(id,data) {
+    return this.https.put(this.apiUrl + 'toolbox/update/'+id, data)
+  }
+  gettoolBox()
+  {
+    return this.https.get(this.apiUrl + 'toolbox/getAll')
+  }
+  getToolboxById(id)
+  {
+    return this.https.get(this.apiUrl + 'toolbox/get/' + id)
+  }
+  deleteToolBox(id)
+  {
+    return this.https.delete(this.apiUrl+'toolbox/delete/'+id)
+  }
   /////////////////// Subscription End /////////
 }
 

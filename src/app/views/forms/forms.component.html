@@ -39,11 +39,24 @@
 
  <ng-container matColumnDef="edit">
   <th mat-header-cell *matHeaderCellDef> Action </th>
-  <td mat-cell *matCellDef="let element"  [routerLink]="element.link" > 
+  <td mat-cell *matCellDef="let element" > 
     <!-- <i class="fa fa-eye "aria-hidden="true" title="view"></i> -->
-    <button mat-icon-button aria-label="Example icon button with a delete icon">
+    <!-- <a [routerLink]="element.link" mat-icon-button aria-label="Example icon button with a delete icon">
       <mat-icon>visibility</mat-icon>
-    </button>
+    </a>
+    <a (click)="goTo(element.title)">
+      <span style="cursor: pointer !important;">
+          <mat-icon >launch</mat-icon>
+      </span>
+  </a> -->
+  <div style="display: flex; justify-content: space-around;">
+    <span class="material-icons"  [routerLink]="element.link" style="cursor: pointer !important;">
+      visibility
+    </span>
+    <span class="material-icons" (click)="goTo(element.title)"  style="cursor: pointer !important;">
+      launch
+    </span>
+    </div>
   </td>
 </ng-container>
 

@@ -17,10 +17,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="postionRep"
-              formControlName="employeeFulltime"
+              
+              formControlName="employeeParttime"
               id="inlineCheckbox5"
-              value="option2"
+              value="option4"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox5"
               >Fulltime Employee</label
@@ -30,10 +30,10 @@
             <input
               class="form-check-input checkbox-lg"
               type="radio"
-              name="postionRep"
+             
               formControlName="employeeParttime"
               id="inlineCheckbox6"
-              value="option2"
+              value="option5"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox6"
               >Part-time Employee</label
@@ -43,10 +43,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="postionRep"
+             
               formControlName="employeeParttime"
               id="inlineCheckbox7"
-              value="option2"
+              value="option6"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox7"
               >Casual</label
@@ -56,10 +56,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="postionRep"
+ 
               formControlName="employeeParttime"
               id="inlineCheckbox8"
-              value="option2"
+              value="option7"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox8"
               >Contractor</label
@@ -192,7 +192,7 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label for="exampleInputProjectNumber" class="form-label"
-            >WHS Manager</label
+            > Manager</label
           >
           <input
             type="Projectnumber"
@@ -236,7 +236,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Reported</label>
           <input
-            type="text"
+            type="date"
             class="form-control"
             formControlName="dateHazardReport"
             id="exampleInputProjectNumber"
@@ -260,7 +260,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Identified</label>
           <input
-            type="text"
+            type="date"
             class="form-control"
             formControlName="dateHazardIdentify"
             id="exampleInputProjectNumber"
@@ -272,7 +272,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Job Number</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             formControlName="jobNumber"
             id="exampleInputProjectNumber"
@@ -383,15 +383,18 @@
         >
 
         <select
-          class="form-select form-control col"
+        formControlName="Consequence"
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
+
         >
           <option selected hidden>Select</option>
-          <option value="1">1-Insignificant</option>
+          <option *ngFor="let consequence of Consequences" >{{consequence.name}}</option>
+          <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
           <option value="4">4-Major</option>
-          <option value="5">5-Catastrophic</option>
+          <option value="5">5-Catastrophic</option> -->
         </select>
       </div>
       <div class="mb-3 col">
@@ -399,15 +402,18 @@
           >Likelihood</label
         >
         <select
-          class="form-select form-control col"
+        formControlName="likelihood"
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
-          <option value="1">1-Insignificant</option>
+          <option *ngFor="let likelihood of Likelihood"  >{{likelihood.name}}</option>
+
+          <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
           <option value="4">4-Major</option>
-          <option value="5">5-Catastrophic</option>
+          <option value="5">5-Catastrophic</option> -->
         </select>
       </div>
       <div class="mb-3 col">
@@ -415,13 +421,15 @@
           >Risk Rating</label
         >
         <select
-          class="form-select form-control col"
+        formControlName="riskRating"
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
-          <option value="1">Low</option>
+          <option *ngFor="let rating of RiskRating">{{rating.name}}</option>
+          <!-- <option value="1">Low</option>
           <option value="2">Medium</option>
-          <option value="3">High</option>
+          <option value="3">High</option> -->
         </select>
       </div>
     </div>
@@ -432,7 +440,7 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            formControlName="action"
             id="inlineCheckbox1"
             value="option1"
           />
@@ -444,7 +452,7 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            formControlName="action"
             id="inlineCheckbox2"
             value="option2"
           />
@@ -456,9 +464,9 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            formControlName="action"
             id="inlineCheckbox3"
-            value="option2"
+            value="option3"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox3"
             >This week</label
@@ -468,9 +476,10 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            
+            formControlName="action"
             id="inlineCheckbox4"
-            value="option2"
+            value="option4"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox4"
             >This Month</label
@@ -483,336 +492,348 @@
     <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can you eliminate the hazard</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="eliminateHazard"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="complete"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="eliminateCorrect"
-            id="exampleInputSurname"
+   
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="elliminateAction"
-            id="exampleInputEmail1"
+       
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="eliminateWhen"
-            id="exampleInputPhone"
+   
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can you substitute a safe process</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="substitute"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="complete"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="substituteCorrect"
-            id="exampleInputSurname"
+
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="substituteAction"
-            id="exampleInputEmail1"
+            
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+          <label  class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="substituteWhen"
-            id="exampleInputPhone"
+      
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label  class="form-label"
             >Can the hazard be isolated</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="isolated"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="complete"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="isolatedCorrect"
-            id="exampleInputSurname"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="isolatedAction"
-            id="exampleInputEmail1"
+      
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="isolatedWhen"
-            id="exampleInputPhone"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can a solution be engreed</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="solution"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="complete"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="solutionCorrect"
-            id="exampleInputSurname"
+         
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="solutionAction"
-            id="exampleInputEmail1"
+   
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="solutionWhen"
-            id="exampleInputPhone"
+         
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can procedures remove or reduce the risk</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="procedureRemove"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+                  class="form-select form-control col outline form-dropdown"
+                  aria-label="Default select example"
+                  formControlName="complete"
+                >
+                  <option selected hidden>Select</option>
+                  <option class="mr-1" value="yes">Yes</option>
+                  <option class="mr-1" value="no">No</option>
+                </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="procedureRemoveCorrect"
-            id="exampleInputSurname"
+     
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+          <label  class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="procedureRemoveAction"
-            id="exampleInputEmail1"
+           
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="procedureRemoveWhen"
-            id="exampleInputPhone"
+           
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can the use PPE reduce the risk</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="PPE"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="complete"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+          <label  class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="PPEcorrect"
-            id="exampleInputSurname"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="PPEaction"
-            id="exampleInputEmail1"
+            
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="PPEwhen"
-            id="exampleInputPhone"
+        
             aria-describedby="emailHelp"
           />
         </div>
@@ -823,36 +844,36 @@
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label">Name</label>
+          <label class="form-label">Name</label>
           <input
             type="fullname"
             class="form-control"
             formControlName="name"
-            id="exampleInputFullname"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label">Position</label>
+          <label class="form-label">Position</label>
           <input
             type="surname"
             class="form-control"
             formControlName="compilePosition"
-            id="exampleInputSurname"
+    
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label">Department</label>
+          <label  class="form-label">Department</label>
           <input
             type="surname"
             class="form-control"
             formControlName="compileDepartment"
-            id="exampleInputSurname"
+           
             aria-describedby="emailHelp"
           />
         </div>
@@ -879,7 +900,7 @@
             value=""
             class="form-control"
             formControlName="date"
-            id="exampleInputSurname"
+          
             aria-describedby="emailHelp"
           />
         </div>
@@ -900,4 +921,10 @@
       </div>
     </div>
   </form>
+  <hr />
+
+  <br />
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { registerLocaleData, CommonModule } from '@angular/common';
+import { registerLocaleData, CommonModule ,HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
@@ -27,7 +27,6 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
 import { DndModule } from 'ngx-drag-drop';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { ChartsModule } from 'ng2-charts';
@@ -55,7 +54,7 @@ registerLocaleData(localeEn, 'en-EN');
     DashboardComponent,
     MessagesDropdownMenuComponent,
     NotificationsDropdownMenuComponent,
-    UserDropdownMenuComponent,   
+    UserDropdownMenuComponent,
     DynamicFormComponent,
     FormsComponent,
     AddFormComponent,
@@ -81,14 +80,14 @@ registerLocaleData(localeEn, 'en-EN');
     NgbModule,
     HttpClientModule,
     DndModule,
- //   DxButtonModule,
+    //   DxButtonModule,
     ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM',
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [TextareaAutoresizeDirective],
+  providers: [TextareaAutoresizeDirective, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

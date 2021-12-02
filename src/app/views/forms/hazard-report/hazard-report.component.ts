@@ -13,12 +13,14 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 export class HazardReportComponent implements OnInit {
   title = 'hazardReport';
   hazardReport: FormGroup;
+
+
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
-    private setTitle:SetTitleService
+    private setTitle: SetTitleService
   ) {
     this.hazardReport = this.fb.group({
       siteAction: this.fb.array([]),
@@ -42,10 +44,11 @@ export class HazardReportComponent implements OnInit {
       locationHazard: ['', Validators.required],
       dateHazardIdentify: ['', Validators.required],
       jobNumber: ['', Validators.required],
-      actionimmediate: ['', Validators.required],
-      actionToday: ['', Validators.required],
-      actionweek: ['', Validators.required],
-      actionMonth: ['', Validators.required],
+      action: ['', Validators.required],
+      // actionimmediate: ['', Validators.required],
+      // actionToday: ['', Validators.required],
+      // actionweek: ['', Validators.required],
+      // actionMonth: ['', Validators.required],
       eliminateHazard: ['', Validators.required],
       eliminateCorrect: ['', Validators.required],
       elliminateAction: ['', Validators.required],
@@ -76,11 +79,69 @@ export class HazardReportComponent implements OnInit {
       fileUpload: ['', Validators.required],
       date: ['', Validators.required],
       signature: ['', Validators.required],
+      complete: ['', Validators.required],
+      Consequence: [''],
+      riskRating: [''],
+      likelihood: ['']
     });
   }
   ngOnInit() {
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
     this.setTitle.setTitle('WHS-Hazard Report Form');
+    this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
+      if (res) {
+        console.log(res);
+
+        if (res == '1-Insignificant') {
+            this.hazardReport.get('riskRating').setValue('Low');
+            this.hazardReport.get('action').setValue('option4');
+        }
+        if (res == '2-Moderate') {
+          this.hazardReport.get('riskRating').setValue('Medium');
+          this.hazardReport.get('action').setValue('option3');
+      }
+        if (res == '4-Minor') {
+          this.hazardReport.get('riskRating').setValue('Low');
+          this.hazardReport.get('action').setValue('option4');
+        }
+        if (res == '3-Major') {
+          this.hazardReport.get('riskRating').setValue('High');
+          this.hazardReport.get('action').setValue('option1');
+       }
+        if (res == '5-Catastrophic') {
+          this.hazardReport.get('riskRating').setValue('High');
+          this.hazardReport.get('action').setValue('option1');
+         }
+       }
+    });
+    this.hazardReport.get('likelihood').valueChanges.subscribe((res) => {
+      if (res) {
+        console.log(res);
+        if (res == '1-Insignificant') {
+          this.hazardReport.get('riskRating').setValue('Low');
+ 
+        }
+        if (res == '3-Moderate') {
+          this.hazardReport.get('riskRating').setValue('Medium');
+      
+        }
+        if (res == '2-Minor') {
+          this.hazardReport.get('riskRating').setValue('Low');
+        
+        }
+        if (res == '4-Major') {
+          this.hazardReport.get('riskRating').setValue('High');
+
+        }
+        if (res == '5-Catastrophic') {
+          this.hazardReport.get('riskRating').setValue('High');
+
+        }
+      }
+    });
+
+ 
+
   }
 
   public signaturePadOptions: Object = {
@@ -108,4 +169,31 @@ export class HazardReportComponent implements OnInit {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
   }
+  Consequences: Array<any> = [
+    { name: '1-Insignificant' },
+    { name: '2-Moderate' },
+    { name: '4-Minor' },
+    { name: '3-Major' },
+    { name: '5-Catastrophic' },
+  ];
+
+
+  Likelihood: Array<any> = [
+    { name: '1-Insignificant' },
+    { name: '3-Moderate' },
+    { name: '2-Minor' },
+    { name: '4-Major' },
+    { name: '5-Catastrophic' }
+  ];
+  RiskRating: Array<any> = [
+
+    { name: 'Low' },
+    { name: 'Medium' },
+    { name: 'Low' },
+    { name: 'High' },
+    { name: 'High' }
+
+  ];
+
+
 }
