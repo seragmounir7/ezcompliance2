@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class AddingCustComponent implements OnInit {
   StatesData:any=[''];
-  addCustomerForm: FormGroup
+  addCustomerForm: FormGroup;
+  numberOfLineBreaks:any;
   constructor(
     private fb: FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService,
@@ -72,5 +73,8 @@ export class AddingCustComponent implements OnInit {
       this.StatesData = res.data;
     });
   }
-  
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
+    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+ }
 }

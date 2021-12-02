@@ -25,10 +25,10 @@
           </table>
        </div>
        <div class="row">
-        <div class="col ml-2 mb-2">
-          <button (click)="addForm('')" class="btn btn-outline-primary mt-1 mr-2 float-right">
+        <div class="col ml-2 mb-2 mt-3">
+          <!-- <button class="btn btn-outline-primary mt-1 mr-2 float-right">
             <i class="fas fa-plus mr-2"></i>Add SubWork
-          </button>
+          </button> -->
         </div>
       </div>
       <div class=" ">
@@ -56,9 +56,9 @@
           <button mat-icon-button (click)="editSubWork(element._id,true,i)" class="mr-2" aria-label="Example icon button with a delete icon">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="delete(element)" aria-label="Example icon button with a delete icon">
+          <!-- <button mat-icon-button (click)="delete(element)" aria-label="Example icon button with a delete icon">
             <mat-icon>delete</mat-icon>
-          </button>
+          </button> -->
         </td>
       </ng-container>
          <tr mat-header-row *matHeaderRowDef="displayedColumnss"></tr>
