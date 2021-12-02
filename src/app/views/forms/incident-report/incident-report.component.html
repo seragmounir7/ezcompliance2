@@ -10,7 +10,22 @@
 
   <div class="box">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 ">
+        <label class="form-label mb-3"
+          >Project Number</label
+        >    
+        <select
+        class="form-select form-control"
+        aria-label="Default select example"
+        formControlName="jobNumber"
+        (change)="jobNoSel()"
+      >
+        <option selected hidden>Select</option>
+        <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+      
+      </select>
+      </div>
+      <!-- <div class="col-md-6">
         <div>
           <label
             class="cols"
@@ -21,9 +36,10 @@
             type="number"
             class="form-control"
             formControlName="projectNumber"
+            (change)="jobNoSel()"
           />
         </div>
-      </div>
+      </div> -->
       <div class="col-md-6">
         <div>
           <label
@@ -80,7 +96,7 @@
           <input
             type="text"
             class="form-control"
-            formControlName="siteAddress"
+            formControlName="streetAddress"
           />
         </div>
       </div>
@@ -102,6 +118,22 @@
     </div>
     <div class="row">
       <div class="col-md-6">
+         <!-- <p for="exampleFormControlInput1" class="form-Label">Project Manager</p> -->
+        <label class="form-label mb-3"
+          >Project Manager</label
+        >
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+          formControlName="projectManager"
+         
+        >
+          <option selected hidden>Select</option>
+          <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
+        
+        </select>
+      </div>
+      <!-- <div class="col-md-6">
         <div>
           <label
             class="cols"
@@ -114,7 +146,7 @@
             formControlName="projectManager"
           />
         </div>
-      </div>
+      </div> -->
 
       <div class="col-md-6">
         <div>
@@ -159,13 +191,14 @@
             placeholder="ex: email@yahoo.com"
             type="text"
             class="form-control"
-            formControlName="customerContactEmail"
+            formControlName="customerEmail"
           />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
+       
         <label class="cols" class="form-Label"
           >Date of Form Completion</label
         >
@@ -192,7 +225,7 @@
           [value]="incident.value"
           (change)="onChangeIncident($event)"
         />
-        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'typeOf'">{{
+        <label class="txtdefault fs-16 weight500 text-center label_2"  [for]="i+'typeOf'">{{
           incident.name
         }}</label>
       </div>
@@ -269,7 +302,7 @@
           [value]="nature.value"
           (change)="onNatureOFIncidents($event)"
         />
-        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'natureOfInc'">{{
+        <label class="txtdefault fs-16 weight500 text-center label_2"  [for]="i+'natureOfInc'">{{
           nature.name
         }}</label>
       </div>
@@ -279,7 +312,7 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label"
+        <label class="form-Label"
           >Location of the incident</label
         >
         <input
@@ -291,7 +324,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" class="form-Label"
+        <label class="form-Label  mt-2"
           >Date of the incident</label
         >
         <input
@@ -303,7 +336,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols"  class="form-Label"
+        <label  class="form-Label mt-2"
           >Time of the incident</label
         >
         <input
@@ -383,7 +416,7 @@
           [value]="PPES.value"
           (change)="onPPE($event)"
         />
-        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'whatPPE'">{{
+        <label class="txtdefault fs-16 weight500 text-center label_2"  [for]="i+'whatPPE'">{{
           PPES.name
         }}</label>
       </div>
@@ -395,7 +428,7 @@
     <p class="title">What was the rootcause of incident happen?</p>
   </div>
   <div class="box" class="row">
-    <div class="mt-3 col-3" *ngFor="let rootCause of rootCauseIncident; let i=index">
+    <div class="mt-3 col-4" *ngFor="let rootCause of rootCauseIncident; let i=index">
       <div class="checkrdobtn">
         <input
           class="rdovstchk"
@@ -405,7 +438,7 @@
           [value]="rootCause.value"
           (change)="onRootCauseIncident($event)"
         />
-        <label class="txtdefault fs-16 weight500 text-center" [for]="i+'incident'">{{
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'incident'">{{
           rootCause.name
         }}</label>
       </div>
@@ -419,7 +452,7 @@
         <label
           class="cols"
           class="form-Label"
-          >Why did the unsafe conditon exist</label
+          >Why did the unsafe condition exist</label
         >
 
         <textarea
@@ -480,7 +513,7 @@
           [value]="change.value"
           (change)="onChanges($event)"
         />
-        <label class="txtdefault fs-16 weight500 text-center" [for]="i+'changes'">{{
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'changes'">{{
           change.name
         }}</label>
       </div>
@@ -488,10 +521,15 @@
   </div>
   <hr />
   <div class="box" class="row">
-    <div class="col-6 mb-4">
+    <ng-container formArrayName="arrObj">
+      <ng-container
+        *ngFor="let control of add().controls; let i = index"
+        [formGroupName]="i"
+      >
+    <div class="col-4 mb-4">
       <div>
-        <label class="cols"  class="form-Label"
-          >CorrectiveAction</label
+        <label class="cols"  class="form-Label" formControlName="correctAction"
+          >Corrective Action</label
         >
 
         <select
@@ -508,13 +546,13 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols"  class="form-Label"
+        <label class="cols"  class="form-Label mt-2"
           >Person Responsible</label
         >
 
         <select
           class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
+          aria-label="Default select example" formControlName="personResp"
         >
           <option selected hidden>Select...</option>
           <option value="ProjectManager">Project Manager</option>
@@ -528,13 +566,13 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" class="form-Label"
+        <label class="cols" class="form-Label mt-2"
           >Complete</label
         >
 
         <select
           class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
+          aria-label="Default select example" formControlName="complete"
         >
           <option selected hidden>Select</option>
           <option value="yes">yes</option>
@@ -542,6 +580,18 @@
         </select>
       </div>
     </div>
+    <div class="col-1 mt-5">
+      <span class="material-icons" (click)="addAction()"
+        >add_circle_outline
+      </span>
+    </div>
+    <div class="col-1 mt-5">
+      <span class="material-icons" (click)="removeIncident(i)">
+        remove_circle_outline
+      </span>
+    </div>
+  </ng-container>
+</ng-container>
   </div>
   <hr />
   <div class="col-12">
