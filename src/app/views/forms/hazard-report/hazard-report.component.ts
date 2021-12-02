@@ -112,11 +112,7 @@ export class HazardReportComponent implements OnInit {
           this.hazardReport.get('riskRating').setValue('High');
           this.hazardReport.get('action').setValue('option1');
          }
-
-
-
-
-      }
+       }
     });
     this.hazardReport.get('likelihood').valueChanges.subscribe((res) => {
       if (res) {
@@ -143,33 +139,7 @@ export class HazardReportComponent implements OnInit {
         }
       }
     });
-  //   this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
-  //     if (res) {
-  //       console.log(res);
-       
-  //       if (res == '5-Catastrophic' ) {
-  //         this.hazardReport.get('action').setValue('option1');
-       
-  //       }
-        
-  //       if (res == '4-Major') {
-  //         this.hazardReport.get('action').setValue('option1');
 
-  //       }
-  //       if (res == '2-Moderate') {
-  //         this.hazardReport.get('action').setValue('option2');
-
-  //       }
-  //       if (res == '4-Minor') {
-  //         this.hazardReport.get('action').setValue('option3');
-
-  //       }
-  //       if (res == '1-Insignificant') {
-  //         this.hazardReport.get('action').setValue('option4');
-
-  //       }
-  //    }
-  //  });
  
 
   }
