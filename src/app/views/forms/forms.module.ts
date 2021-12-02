@@ -13,9 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.component';
+import { DisplayTableComponent } from './display-table/display-table.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
-
 @NgModule({
   declarations: [
     FormsComponent,
@@ -25,7 +24,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     IncidentReportComponent,
     RiskAssessmentSWMSComponent,
     AddItemComponent,
-    
+    DisplayTableComponent,
   ],
   imports: [
     CommonModule,
