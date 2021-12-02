@@ -22,25 +22,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -68,19 +68,19 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function StatesComponent_th_10_Template(rf, ctx) {
         if (rf & 1) {
@@ -465,25 +465,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -511,19 +511,19 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function RegulatorComponent_th_10_Template(rf, ctx) {
         if (rf & 1) {
@@ -908,19 +908,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -942,25 +942,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "Q2Ze");
+      "kmnG");
       /* harmony import */
 
 
       var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
-      "e6WT");
+      "qFsG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
 
       function AddAndEditCodeComponent_h2_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -1233,19 +1233,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -1267,25 +1267,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "Q2Ze");
+      "kmnG");
       /* harmony import */
 
 
       var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
-      "e6WT");
+      "qFsG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
 
       function AddAndEditStatesComponent_h2_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -1576,13 +1576,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
-      "iInd");
+      "tyNb");
       /* harmony import */
 
 
@@ -1692,19 +1692,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -1726,25 +1726,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "Q2Ze");
+      "kmnG");
       /* harmony import */
 
 
       var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
-      "e6WT");
+      "qFsG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
 
       function AddAndEditJuriComponent_h2_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -2017,25 +2017,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -2063,19 +2063,19 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function JuridictionComponent_th_10_Template(rf, ctx) {
         if (rf & 1) {
@@ -2460,19 +2460,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -2494,25 +2494,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "Q2Ze");
+      "kmnG");
       /* harmony import */
 
 
       var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
-      "e6WT");
+      "qFsG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
 
       function AddAndEditSafetyComponent_h2_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -2794,25 +2794,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
@@ -2828,7 +2828,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
@@ -2846,19 +2846,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/router */
-      "iInd");
+      "tyNb");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
 
       var _c0 = ["risk"];
 
@@ -3558,13 +3558,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "iInd");
+      "tyNb");
 
       var StateRelComponent = /*#__PURE__*/function () {
         function StateRelComponent() {
@@ -3630,13 +3630,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
@@ -3684,25 +3684,25 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "Q2Ze");
+      "kmnG");
       /* harmony import */
 
 
@@ -3756,7 +3756,7 @@
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
 
       var StateRelModule = function StateRelModule() {
         _classCallCheck(this, StateRelModule);
@@ -3810,25 +3810,25 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -3856,19 +3856,19 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function SafetyLegislationComponent_th_10_Template(rf, ctx) {
         if (rf & 1) {
@@ -4289,19 +4289,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -4329,19 +4329,19 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function CodeOfPractComponent_th_10_Template(rf, ctx) {
         if (rf & 1) {
@@ -4718,19 +4718,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -4752,25 +4752,25 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
-      "Q2Ze");
+      "kmnG");
       /* harmony import */
 
 
       var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
-      "e6WT");
+      "qFsG");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
 
       function AddAndEditRegComponent_h2_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -5043,13 +5043,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
@@ -5065,7 +5065,7 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
-      "iInd");
+      "tyNb");
       /* harmony import */
 
 
@@ -5077,7 +5077,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
 
       function AddStateRelationComponent_option_10_Template(rf, ctx) {
         if (rf & 1) {

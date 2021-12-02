@@ -22,7 +22,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
@@ -40,7 +40,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "IheW");
+      "tk/3");
 
       var LogicalFormInfoService = /*#__PURE__*/function () {
         function LogicalFormInfoService(https) {
@@ -746,6 +746,31 @@
           key: "addPlan",
           value: function addPlan(data) {
             return this.https.post(this.apiUrl + 'plan/add', data);
+          }
+        }, {
+          key: "addtoolBox",
+          value: function addtoolBox(data) {
+            return this.https.post(this.apiUrl + 'toolbox/add', data);
+          }
+        }, {
+          key: "editToolBox",
+          value: function editToolBox(id, data) {
+            return this.https.put(this.apiUrl + 'toolbox/update/' + id, data);
+          }
+        }, {
+          key: "gettoolBox",
+          value: function gettoolBox() {
+            return this.https.get(this.apiUrl + 'toolbox/getAll');
+          }
+        }, {
+          key: "getToolboxById",
+          value: function getToolboxById(id) {
+            return this.https.get(this.apiUrl + 'toolbox/get/' + id);
+          }
+        }, {
+          key: "deleteToolBox",
+          value: function deleteToolBox(id) {
+            return this.https["delete"](this.apiUrl + 'toolbox/delete/' + id);
           }
         }]);
 

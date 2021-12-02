@@ -10,10 +10,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogicalFormInfoService", function() { return LogicalFormInfoService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "8Y7J");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../environments/environment */ "AytR");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "IheW");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 
 
 
@@ -492,6 +492,21 @@ class LogicalFormInfoService {
     }
     addPlan(data) {
         return this.https.post(this.apiUrl + 'plan/add', data);
+    }
+    addtoolBox(data) {
+        return this.https.post(this.apiUrl + 'toolbox/add', data);
+    }
+    editToolBox(id, data) {
+        return this.https.put(this.apiUrl + 'toolbox/update/' + id, data);
+    }
+    gettoolBox() {
+        return this.https.get(this.apiUrl + 'toolbox/getAll');
+    }
+    getToolboxById(id) {
+        return this.https.get(this.apiUrl + 'toolbox/get/' + id);
+    }
+    deleteToolBox(id) {
+        return this.https.delete(this.apiUrl + 'toolbox/delete/' + id);
     }
 }
 LogicalFormInfoService.ɵfac = function LogicalFormInfoService_Factory(t) { return new (t || LogicalFormInfoService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };

@@ -22,7 +22,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
@@ -95,19 +95,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -119,7 +119,7 @@
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
@@ -137,25 +137,25 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function RateAndCouponComponent_button_4_Template(rf, ctx) {
         if (rf & 1) {
@@ -630,13 +630,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_material_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/material/table */
-      "OaSA");
+      "+0xr");
       /* harmony import */
 
 
@@ -652,7 +652,7 @@
 
       var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/material/paginator */
-      "5QHs");
+      "M9IT");
       /* harmony import */
 
 
@@ -664,7 +664,7 @@
 
       var _angular_material_sort__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/material/sort */
-      "LUZP");
+      "Dh3D");
       /* harmony import */
 
 
@@ -676,7 +676,7 @@
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
@@ -688,25 +688,25 @@
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
       var ngx_spinner__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ngx-spinner */
-      "7g+E");
+      "JqCM");
       /* harmony import */
 
 
       var _angular_material_button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/material/button */
-      "Dxy4");
+      "bTqV");
       /* harmony import */
 
 
       var _angular_material_icon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/material/icon */
-      "Tj54");
+      "NFeN");
 
       function CouponComponent_th_10_Template(rf, ctx) {
         if (rf & 1) {
@@ -782,7 +782,11 @@
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 15);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span", 17);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
@@ -790,15 +794,15 @@
         if (rf & 2) {
           var element_r13 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r13.discount, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](element_r13.discount);
         }
       }
 
       function CouponComponent_th_19_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Action ");
 
@@ -812,7 +816,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 15);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CouponComponent_td_20_Template_button_click_1_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
@@ -832,7 +836,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 20);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CouponComponent_td_20_Template_button_click_4_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
@@ -858,13 +862,13 @@
 
       function CouponComponent_tr_21_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 21);
         }
       }
 
       function CouponComponent_tr_22_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 22);
         }
       }
 
@@ -987,7 +991,7 @@
         },
         decls: 24,
         vars: 5,
-        consts: [[1, "col", "ml-2", "pt-1"], ["type", "button", 1, "btn", "btn-outline-primary", "mr-2", "float-right", 3, "click"], [1, "fas", "fa-plus"], ["mat-table", "", "matSort", "", 3, "dataSource"], ["matColumnDef", "index"], ["mat-header-cell", "", "mat-sort-header", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "couponName"], ["matColumnDef", "discount"], ["matColumnDef", "action"], ["mat-header-cell", "", 4, "matHeaderCellDef"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["showFirstLastButtons", "", "aria-label", "Select page of periodic elements", 3, "pageSizeOptions"], ["mat-header-cell", "", "mat-sort-header", ""], ["mat-cell", ""], [1, "flex-start"], ["mat-header-cell", ""], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 1, "mr-2", 3, "click"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 3, "click"], ["mat-header-row", ""], ["mat-row", ""]],
+        consts: [[1, "col", "ml-2", "pt-1"], ["type", "button", 1, "btn", "btn-outline-primary", "mr-2", "float-right", 3, "click"], [1, "fas", "fa-plus"], ["mat-table", "", "matSort", "", 3, "dataSource"], ["matColumnDef", "index"], ["mat-header-cell", "", "mat-sort-header", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "couponName"], ["matColumnDef", "discount"], ["matColumnDef", "action"], ["mat-header-cell", "", 4, "matHeaderCellDef"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["showFirstLastButtons", "", "aria-label", "Select page of periodic elements", 3, "pageSizeOptions"], ["mat-header-cell", "", "mat-sort-header", ""], ["mat-cell", ""], [1, "flex-start"], [1, "flex"], ["mat-header-cell", ""], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 1, "mr-2", 3, "click"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 3, "click"], ["mat-header-row", ""], ["mat-row", ""]],
         template: function CouponComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -1040,7 +1044,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, CouponComponent_th_16_Template, 2, 0, "th", 5);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, CouponComponent_td_17_Template, 2, 1, "td", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, CouponComponent_td_17_Template, 3, 1, "td", 6);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 
@@ -1137,19 +1141,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -1171,7 +1175,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
 
       function AddEditCouponComponent_h3_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -1458,19 +1462,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
@@ -1566,13 +1570,13 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
-      "iInd");
+      "tyNb");
       /* harmony import */
 
 
@@ -1656,7 +1660,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
@@ -1674,7 +1678,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "IheW");
+      "tk/3");
 
       var SubscriptionService = /*#__PURE__*/function () {
         function SubscriptionService(https) {
@@ -1804,19 +1808,19 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "8Y7J");
+      "fXoL");
       /* harmony import */
 
 
       var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/forms */
-      "s7LF");
+      "3Pt+");
       /* harmony import */
 
 
       var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/material/dialog */
-      "iELJ");
+      "0IaG");
       /* harmony import */
 
 
@@ -1838,7 +1842,7 @@
 
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
-      "SVse");
+      "ofXK");
 
       function EditRateAndCouponComponent_h3_3_Template(rf, ctx) {
         if (rf & 1) {
