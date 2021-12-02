@@ -13,7 +13,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class DisplayTableComponent implements OnInit {
   displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
   showDatas: any;
-  tempArray: any;
+  tempArray: MatTableDataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
@@ -38,6 +38,8 @@ export class DisplayTableComponent implements OnInit {
     {
       this.showDatas= res.data;
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
+      this.tempArray.paginator = this.paginator;
+      this.tempArray.sort = this.sort; 
       console.log("get res",this.showDatas);
     })
   }

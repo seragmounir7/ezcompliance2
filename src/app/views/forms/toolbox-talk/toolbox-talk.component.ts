@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './toolbox-talk.component.html',
   styleUrls: ['./toolbox-talk.component.scss'],
 })
-export class ToolboxTalkComponent implements OnInit {
+export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   toolBox: FormGroup;
   allJobNumbers = [];
   sign=[];
@@ -19,7 +19,8 @@ export class ToolboxTalkComponent implements OnInit {
   id:any;
   signature:SignaturePad;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
-  @ViewChild('Signature2') signaturePad2: SignaturePad;
+  dataUrl: any;
+  // @ViewChild('Signature2') signaturePad2: SignaturePad;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -81,7 +82,12 @@ export class ToolboxTalkComponent implements OnInit {
         meetingBy:res.data.meetingBy,
         date:res.data.date
       })
-      this.signaturePad1.fromDataURL(res.data.signaturePad1);
+      this.dataUrl = res.data.signaturePad1;
+      let check =async () => { this.signaturePad1 != null }
+      check().then(() => {
+
+        this.signaturePad1.fromDataURL(res.data.signaturePad1)
+      })
     })
   }
   getAllJobNumber() {
@@ -211,10 +217,13 @@ export class ToolboxTalkComponent implements OnInit {
 
   ngAfterViewInit() {
     // this.signaturePad is now available
+    console.log(this.signaturePad1,this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
-    this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
+    
+    this.signaturePad1.fromDataURL(this.dataUrl);
+    // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    // this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
+    // this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
   }
 
   drawComplete1() {
@@ -229,7 +238,7 @@ export class ToolboxTalkComponent implements OnInit {
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
-    this.signaturePad2=null;
+    // this.signaturePad2=null;
     console.log('begin drawing');
   }
   drawComplete2(index,sign) {
@@ -238,7 +247,7 @@ export class ToolboxTalkComponent implements OnInit {
   }
   clear2(i) {
    
-    this.signaturePad2.clear();
+    // this.signaturePad2.clear();
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
