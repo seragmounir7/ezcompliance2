@@ -36,6 +36,12 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
+import { ManagerComponent } from './manager/manager.component';
+import { WHSManagerComponent } from './whs-manager/whs-manager.component';
+import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-manager.component';
+import { AddManagerComponent } from './manager/add-manager/add-manager.component';
+import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
+import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
 
 
 const routes: Routes = [
@@ -77,7 +83,13 @@ const routes: Routes = [
   { path: 'addResidual', component: AddResidualRiskLevelComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'addStaff', component: AddStaffComponent },
-  { path: 'editStaff', component: EditStaffComponent }
+  { path: 'editStaff', component: EditStaffComponent },
+  { path: 'manager', component: ManagerComponent },
+  { path: 'addManager', component: AddManagerComponent },
+  { path: 'editManager', component: EditManagerComponent },
+  { path: 'WHS-Manager', component: WHSManagerComponent },
+  { path: 'addWHSManager', component: AddWhsManagerComponent },
+  { path: 'editWHSManager', component: EditWhsManagerComponent }
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

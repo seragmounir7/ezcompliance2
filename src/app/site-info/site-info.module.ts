@@ -53,6 +53,12 @@ import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-resid
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import {AutosizeModule} from 'ngx-autosize';
+import { ManagerComponent } from './manager/manager.component';
+import { WHSManagerComponent } from './whs-manager/whs-manager.component';
+import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
+import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-manager.component';
+import { AddManagerComponent } from './manager/add-manager/add-manager.component';
+import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +108,12 @@ import {AutosizeModule} from 'ngx-autosize';
     EditResidualRiskLevelComponent,
     AddStaffComponent,
     EditStaffComponent,
+    ManagerComponent,
+    WHSManagerComponent,
+    EditWhsManagerComponent,
+    AddWhsManagerComponent,
+    AddManagerComponent,
+    EditManagerComponent,
    
   ],
 

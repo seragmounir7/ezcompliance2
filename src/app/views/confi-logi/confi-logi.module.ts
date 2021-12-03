@@ -11,7 +11,7 @@ import { SetLogicComponent } from './set-logic/set-logic.component';
 import { JobNumberComponent } from './job-number/job-number.component';
 import { CreateJobNoComponent } from './job-number/create-job-no/create-job-no.component';
 import { SetRelationComponent } from './set-logic/set-relation/set-relation.component';
-
+import {AutosizeModule} from 'ngx-autosize';
 import {MatStepperModule} from '@angular/material/stepper';
 import { AddItemComponent } from './set-logic/set-relation/add-item/add-item.component';
 import { TestLogicComponent } from './set-logic/test-logic/test-logic.component';
@@ -24,7 +24,8 @@ import { AddJobTaskComponent } from './set-logic/add-job-task/add-job-task.compo
     ConfiLogiRoutingModule,SharedModule,FormsModule,
     ReactiveFormsModule,MatStepperModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    AutosizeModule
   ]
 })
 export class ConfiLogiModule { }
