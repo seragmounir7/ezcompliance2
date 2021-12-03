@@ -13,7 +13,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class DisplayTableComponent implements OnInit {
   displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
   showDatas: any;
-  tempArray: MatTableDataSource<any> ;
+  tempArray: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
