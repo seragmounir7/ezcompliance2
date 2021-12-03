@@ -103,3 +103,7 @@ ul.setCanvasList {
 button:focus {
   outline: none !important;
 }
+.disableDiv{
+  pointer-events:none;
+  opacity: 0.5;
+}
