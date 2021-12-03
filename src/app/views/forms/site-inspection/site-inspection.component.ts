@@ -6,6 +6,7 @@ import {
   FormArray,
   FormControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -39,11 +40,13 @@ export class SiteInspectionComponent implements OnInit {
     "date",
     "projectManager",
   ]
+  id: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private setTitle: SetTitleService,
-    private logicalFormInfo: LogicalFormInfoService
+    private logicalFormInfo: LogicalFormInfoService,
+    public router: Router
   ) {
     this.sidePreview = this.fb.group({
 
@@ -67,38 +70,38 @@ export class SiteInspectionComponent implements OnInit {
       WHSManual: ['', Validators.required],
       IncidentReport: ['', Validators.required],
       HazardReport: ['', Validators.required],
-      EmergrncyEvacuation: ['', Validators.required],
+      emergrncyEvacuation: ['', Validators.required],
       TrainingRecords: ['', Validators.required],
       WHSPolicy: ['', Validators.required],
       ReturnToWork: ['', Validators.required],
-      DisplayHazardReport: ['', Validators.required],
-      DisplayEmergrncyEvacuation: ['', Validators.required],
+      displayHazardReport: ['', Validators.required],
+      displayEmergrncyEvacuation: ['', Validators.required],
       NoSmoking: ['', Validators.required],
       PPESignage: ['', Validators.required],
       ReportHazardsigns: ['', Validators.required],
       ManualHandlingSigns: ['', Validators.required],
       NoticeBoard: ['', Validators.required],
-      AccessEgrassHazards: ['', Validators.required],
+      accessEgrassHazards: ['', Validators.required],
       Walkways: ['', Validators.required],
       Walkwaysfree: ['', Validators.required],
       StairsConditionGood: ['', Validators.required],
       HoardingsFenceGates: ['', Validators.required],
       LosseMatrialSecure: ['', Validators.required],
-      BinsSkipsLocated: ['', Validators.required],
-      BinsSkipsOverflowing: ['', Validators.required],
-      ElectricalMainboardLock: ['', Validators.required],
+      binsSkipsLocated: ['', Validators.required],
+      binsSkipsOverflowing: ['', Validators.required],
+      electricalMainboardLock: ['', Validators.required],
       PowerleadsTested: ['', Validators.required],
       EquipmentGiards: ['', Validators.required],
       EquipmentCondition: ['', Validators.required],
       LeadsSafety: ['', Validators.required],
       SDSavailable: ['', Validators.required],
-      ChemicalsStoredSDS: ['', Validators.required],
+      chemicalsStoredSDS: ['', Validators.required],
       SDSRegisterAvailables: ['', Validators.required],
-      CorrectPPHand: ['', Validators.required],
+      correctPPHand: ['', Validators.required],
       FirstAidavailable: ['', Validators.required],
       FirstKitContentsList: ['', Validators.required],
       KitAccessableWorkers: ['', Validators.required],
-      AwarefirstKitLocation: ['', Validators.required],
+      awarefirstKitLocation: ['', Validators.required],
       Extinguishers: ['', Validators.required],
       ExtinguishersClearlyMaked: ['', Validators.required],
       ExtinguishersSevicedUpdate: ['', Validators.required],
@@ -107,14 +110,14 @@ export class SiteInspectionComponent implements OnInit {
       ExitDoorsOpened: ['', Validators.required],
       FireAlarmTested: ['', Validators.required],
       EvacuationPlans: ['', Validators.required],
-      EmergencyDrillConduct: ['', Validators.required],
+      emergencyDrillConduct: ['', Validators.required],
       RiskAssessmentSWMS: ['', Validators.required],
       PlantValidService: ['', Validators.required],
       OpertionProceduresSOPs: ['', Validators.required],
       PPEAvailable: ['', Validators.required],
-      EmergencyPlan: ['', Validators.required],
+      emergencyPlan: ['', Validators.required],
       PlantGoodCondition: ['', Validators.required],
-      AppropriateGuards: ['', Validators.required],
+      appropriateGuards: ['', Validators.required],
       siteAction: this.fb.array([]),
     });
   }
@@ -224,5 +227,31 @@ export class SiteInspectionComponent implements OnInit {
       this.sidePreview.updateValueAndValidity();
       this.showAction();
     }
+  }
+  onSave(){
+    console.log("form data",this.sidePreview.value);
+    if(this.id=='a')
+    {
+      const data={
+        ...this.sidePreview.value
+      }
+       this.logicalFormInfo.updateSiteInspection(this.id,data).subscribe((res)=>
+       {
+         console.log("res",res);
+        // this.router.navigate(["/admin/forms/tableData"]);
+       })
+    }
+    else
+    {
+      const data={
+        ...this.sidePreview.value
+      }
+       this.logicalFormInfo.addSiteInspection(data).subscribe((res)=>
+       {
+         console.log("res",res);
+        // this.router.navigate(["/admin/forms/tableData"]);
+       })
+    }
+    this.sidePreview.reset();
   }
 }

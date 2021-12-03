@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DisplayTableComponent } from './display-table/display-table.component';
 
 import { FormsComponent } from './forms.component';
 import { HazardReportComponent } from './hazard-report/hazard-report.component';
@@ -12,10 +13,11 @@ const routes: Routes = [
   { path: '', component: FormsComponent },
   { path: 'forms', component: FormsComponent },
   { path: 'siteInspect', component: SiteInspectionComponent },
-  { path: 'toolboxTalk', component: ToolboxTalkComponent },
+  { path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
   { path: 'hazardRep', component: HazardReportComponent },
   { path: 'incidentRep', component: IncidentReportComponent },
   { path: 'riskAssessSWMS', component: RiskAssessmentSWMSComponent },
+  { path: 'tableData', component: DisplayTableComponent}
 ];
 
 @NgModule({
