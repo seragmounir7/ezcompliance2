@@ -36,6 +36,14 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
+import { NatureOfIncidentComponent } from './nature-of-incident/nature-of-incident.component';
+import { AddAndEditNatureIncidentComponent } from './nature-of-incident/add-and-edit-nature-incident/add-and-edit-nature-incident.component';
+import { ChangesMadeComponent } from './changes-made/changes-made.component';
+import { AddChangesMadeComponent } from './changes-made/add-changes-made/add-changes-made.component';
+import { RootCauseOfIncidentComponent } from './root-cause-of-incident/root-cause-of-incident.component';
+import { TypeOfIncidentComponent } from './type-of-incident/type-of-incident.component';
+import { AddRootCauseOfIncidentComponent } from './root-cause-of-incident/add-root-cause-of-incident/add-root-cause-of-incident.component';
+import { AddTypeOfIncidentComponent } from './type-of-incident/add-type-of-incident/add-type-of-incident.component';
 
 
 const routes: Routes = [
@@ -77,8 +85,15 @@ const routes: Routes = [
   { path: 'addResidual', component: AddResidualRiskLevelComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'addStaff', component: AddStaffComponent },
-  { path: 'editStaff', component: EditStaffComponent }
-
+  { path: 'editStaff', component: EditStaffComponent },
+  { path: 'natureOfIncident', component: NatureOfIncidentComponent},
+  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent},
+  { path: 'changesMade', component: ChangesMadeComponent},
+  { path: 'addChangesMade', component: AddChangesMadeComponent},
+  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent},
+  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent},
+  { path: 'typeOfIncident', component: TypeOfIncidentComponent},
+  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent}
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 

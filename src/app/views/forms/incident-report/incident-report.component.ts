@@ -13,6 +13,7 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+
 @Component({
   selector: 'app-incident-report',
   templateUrl: './incident-report.component.html',
@@ -24,12 +25,29 @@ export class IncidentReportComponent implements OnInit {
   fileArr = [];
   imgArr = [];
   fileObj = [];
+  PPEselection = [];
+  ppeArr = [];
+  changesArr = [];
+  natureOfIncArr = [];
+  incidentsArr = [];
+  rootArr = [];
   allJobNumbers = [];
   @ViewChild('signature1') signaturePad: SignaturePad;
   @ViewChild('signature2') signaturePad1: SignaturePad;
   projMan: any;
   projectMang: any;
-
+  typeOfInc: [];
+  root: any;
+  PPE= [];
+  changes = [];
+  rootCauseIncident = [];
+  natureOFIncidents= [];
+  incidents = [];
+  ppeSelectedArr=[];
+  changesSelectedArr=[];
+  natureOfIncSelectedArr=[];
+  typeOfIncidentsSelectedArr=[];
+  rootSelectedArr=[];
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -64,26 +82,37 @@ export class IncidentReportComponent implements OnInit {
       dateOfTheIncident: ['', Validators.required],
       timeOfTheIncident: ['', Validators.required],
       whyDidtheUnsafeConditonExist: ['', Validators.required],
-      CompletedName: ['', Validators.required],
-      CompletedPosition: ['', Validators.required],
-      CompletedDepartment: ['', Validators.required],
-      CompletedDate: ['', Validators.required],
+      completedName: ['', Validators.required],
+      completedPosition: ['', Validators.required],
+      completedDepartment: ['', Validators.required],
+      completedDate: ['', Validators.required],
       reviewedName: ['', Validators.required],
       reviewedPosition: ['', Validators.required],
       reviewedDepartment: ['', Validators.required],
       reviewedDate: ['', Validators.required],
       typeofIncident: ['', Validators.required],
+      priorIncident: ['', Validators.required],
+      similarIncident:['', Validators.required],
+      witnessStatement:['', Validators.required],
+      nameOfWitness:['', Validators.required],
       file: ['', Validators.required],
     });
    
   }
 
   ngOnInit(): void {
+    console.log("SiteIncident",this.SiteIncident);
+    
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
-    this.setTitle.setTitle('WHS-Hazard Report Form');
+    this.setTitle.setTitle('WHS-Incident Report Form');
     this.addAction();
     this.getAllJobNumber();
     this.getAllProjectMang();
+    this.getAllChanges();
+    this.getAllPPE();
+    this.getAllTypeOfInc();
+    this.getAllRoot();
+    this. getAllNatureOfInc();
   }
 
   addAction() {
@@ -132,14 +161,65 @@ export class IncidentReportComponent implements OnInit {
   getAllJobNumber() {
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
       this.allJobNumbers = res.data;
+      console.log("this.allJobNumbers",this.allJobNumbers);
+      
     });
   }
   getAllProjectMang() {
     this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
       this.projectMang = res.data;
-      // console.log('getAllProjectMang=>', this.projectMang);
+      console.log('this.projectMang=>', this.projectMang);
+
     });
   }
+  getAllPPE() {
+    this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
+      console.log('PPE=>', res);
+      this.PPE = res.data;
+      for (let i = 0; i < this.PPE.length; i++) {
+        this.ppeArr[i] = 0;
+      }
+    });
+  }
+  getAllTypeOfInc() {
+    this.logicalFormInfo.getAllTypeOfIncident().subscribe((res:any) => {
+      console.log('typeOfIncident=>', res);
+      this.incidents = res.data;
+      for (let i = 0; i < this.incidents.length; i++) {
+        this.incidentsArr[i] = 0;
+      }
+    });
+  }
+  getAllRoot() {
+    this.logicalFormInfo.getAllRootCause().subscribe((res:any) => {
+      console.log('root=>', res);
+      this.rootCauseIncident = res.data;
+      for (let i = 0; i < this.rootCauseIncident.length; i++) {
+        this.rootArr[i] = 0;
+      }
+     
+    });
+  }
+  getAllNatureOfInc() {
+    this.logicalFormInfo.getAllNatOfInc().subscribe((res:any) => {
+      console.log('NatOfIncAll=>', res);
+      this.natureOFIncidents = res.data;
+      for (let i = 0; i < this.natureOFIncidents.length; i++) {
+        this.natureOfIncArr[i] = 0;
+      }
+    });
+  }
+  getAllChanges() {
+    this.logicalFormInfo.getAllChangesMade().subscribe((res:any) => {
+      console.log('Changes=>', res);
+      this.changes = res.data;
+      this.changesArr = [];
+      for (let i = 0; i < this.changes.length; i++) {
+        this.changesArr[i] = 0;
+      }
+    });
+  }
+ 
   selectFile(event: any) {
     this.fileData = event.target.files[0];
 
@@ -202,15 +282,7 @@ export class IncidentReportComponent implements OnInit {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
   }
-  incidents: Array<any> = [
-    { name: 'Near Miss', value: 'nearMiss' },
-    { name: 'Loss Injuiry', value: 'lossInjuiry' },
-    { name: 'Property Damage', value: 'propertyDamage' },
-    { name: 'First Aid Treatment', value: 'firstAidTreatment' },
-    { name: 'Medical Treatment', value: 'medicalTreatment' },
-    { name: 'Abestos Detection', value: 'abestosDetection' },
-    { name: 'Death', value: 'death' },
-  ];
+ 
 
   onChangeIncident(e: any) {
     const checkArray: FormArray = this.SiteIncident.get(
@@ -229,19 +301,7 @@ export class IncidentReportComponent implements OnInit {
       });
     }
   }
-  natureOFIncidents: Array<any> = [
-    { name: 'Abrasion', value: 'abrasion' },
-    { name: 'Bruise', value: 'bruise' },
-    { name: 'Cuts', value: 'cuts' },
-    { name: 'Illness', value: 'illness' },
-    { name: 'Amputation', value: 'amputation' },
-    { name: 'Burn', value: 'burn' },
-    { name: 'Hernia', value: 'Hernia' },
-    { name: 'Broken Bone', value: 'brokenBone' },
-    { name: 'Other', value: 'other' },
-    { name: 'Crushing Injuiry', value: 'crushingInjuiry' },
-    { name: 'Head Injury', value: 'headinjury' },
-  ];
+ 
   onNatureOFIncidents(e: any) {
     const NatureArray: FormArray = this.SiteIncident.get(
       'natureOFIncidents'
@@ -260,26 +320,7 @@ export class IncidentReportComponent implements OnInit {
     }
   }
 
-  PPE: Array<any> = [
-    { name: 'Disposal Dust Mask', value: 'disposalDustMask' },
-    { name: 'Half Face Respirator', value: 'halfFaceRespirator' },
-    { name: 'Longs leeve/Long pants', value: 'longSLeeve' },
-    { name: 'Safety Glasses', value: 'safetyGlasses' },
-    { name: 'Dust Mask', value: 'dustMask' },
-    { name: 'Hard Hat', value: 'hardHat' },
-    { name: 'Out Of Service', value: 'outOfService' },
-    { name: 'Sun Screen', value: 'sun' },
-    { name: 'Face Shield', value: 'faceShield' },
-    { name: 'Hearing Protection', value: 'hearing' },
-    { name: 'Protective Gloves', value: 'protectiveGloves' },
-    { name: 'Torch', value: 'torch' },
-    { name: 'Full Face Respirator', value: 'fullFaceRespirator' },
-    { name: 'High Vis Clothing', value: 'highVisClothing' },
-    { name: 'Rescue Kit', value: 'rescueKit' },
-    { name: 'Gattors', value: 'gattors' },
-    { name: 'Lock Out Tags', value: 'lockOutTags' },
-    { name: 'Safety Boots', value: 'safetyBoots' },
-  ];
+  
   onPPE(e: any) {
     const PPEArray: FormArray = this.SiteIncident.get('PPE') as FormArray;
     let item = e.target.value;
@@ -295,23 +336,7 @@ export class IncidentReportComponent implements OnInit {
       });
     }
   }
-  rootCauseIncident: Array<any> = [
-    { name: 'Insufficent Guard', value: 'insufficentGuard' },
-    { name: 'Fualty PPE', value: 'fualtyPPE' },
-    { name: 'Defective Safety', value: 'defectiveSafety' },
-    { name: 'Not Wearing Correct PPE', value: 'notWearingCorrectPPE' },
-    { name: 'Poor Lifting Technic', value: 'poorLiftingtechnic' },
-    { name: 'Defective Equipment', value: 'defectiveEquipment' },
-    { name: 'Incorrect Tools', value: 'incorrectTools' },
-    { name: 'Horse Play', value: 'horsePlay' },
-    { name: 'Poor Lighting', value: 'poorLighting' },
-    { name: 'Lack Of Training', value: 'lackOfTraining' },
-    { name: 'Other', value: 'rootCauseOther' },
-    { name: 'Lack Of Ventilation', value: 'lack' },
-    { name: 'Unauthorised operation', value: 'unauthorisedOperation' },
-    // { name: 'IncorrectOperationOfPlantorEqiupment', value: 'incorrectOperation' },
-    { name: 'Incorrect Operation Plant or Eqiupment', value: 'incorrectOperation' },
-  ];
+ 
   onRootCauseIncident(e: any) {
     const IncidentArray: FormArray = this.SiteIncident.get(
       'rootCauseIncident'
@@ -330,18 +355,7 @@ export class IncidentReportComponent implements OnInit {
     }
   }
 
-  changes: Array<any> = [
-    { name: 'Stop The Activity', value: 'stopTheActivity' },
-    { name: 'Write The New SOP or Process', value: 'SOP' },
-    { name: 'Supervisor Training', value: 'supervisorTraining' },
-    { name: 'Enforce Current Policy', value: 'enforceCurrentPolicy' },
-    { name: 'Wear PPE', value: 'wearPPE' },
-    { name: 'Changes Other', value: 'changesOther' },
-    { name: 'Reassess The Tasks', value: 'reassessTheTasks' },
-    { name: 'Employee Training', value: 'employeeTraining' },
-    { name: 'Lack Of Ventilation', value: 'lack' },
-    { name: 'Lack Of Ventilation', value: 'lack' },
-  ];
+ 
   onChanges(e: any) {
     const ChangeArray: FormArray = this.SiteIncident.get(
       'changes'
@@ -358,6 +372,84 @@ export class IncidentReportComponent implements OnInit {
         }
       });
     }
+  }
+  ppeSelected(e){
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.ppeSelectedArr.push(item);
+    } else {
+      this.ppeSelectedArr.forEach((item, j) => {
+        if (item == e.target.value) {
+          this.ppeSelectedArr.splice(j, 1);
+          return;
+        }
+      });
+    }
+    console.log("ppeSelectedArr",this.ppeSelectedArr);
+    
+  }
+  changesSelected(e){
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.changesSelectedArr.push(item);
+    } else {
+      this.changesSelectedArr.forEach((item, j) => {
+        if (item == e.target.value) {
+          this.changesSelectedArr.splice(j, 1);
+          return;
+        }
+      });
+    }
+    console.log("changesSelected",this.changesSelectedArr);
+    
+  }
+
+  natureOfIncSelected(e){
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.natureOfIncSelectedArr.push(item);
+    } else {
+      this.natureOfIncSelectedArr.forEach((item, j) => {
+        if (item == e.target.value) {
+          this.natureOfIncSelectedArr.splice(j, 1);
+          return;
+        }
+      });
+    }
+    console.log("natureOfIncSelectedArr",this.natureOfIncSelectedArr);
+    
+  }
+
+  typeOfIncidentsSelected(e){
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.typeOfIncidentsSelectedArr.push(item);
+    } else {
+      this.typeOfIncidentsSelectedArr.forEach((item, j) => {
+        if (item == e.target.value) {
+          this.typeOfIncidentsSelectedArr.splice(j, 1);
+          return;
+        }
+      });
+    }
+    console.log("natureOfIncSelectedArr",this.typeOfIncidentsSelectedArr);
+    
+  }
+
+  rootSelected(e){
+    let item = e.target.value;
+    if (e.target.checked) {
+      this.rootSelectedArr.push(item);
+    } else {
+      this.rootSelectedArr.forEach((item, j) => {
+        if (item == e.target.value) {
+          this.rootSelectedArr.splice(j, 1);
+          return;
+        }
+      });
+    }
+    console.log("natureOfIncSelectedArr",this.rootSelectedArr);
+    
   }
   // upload(e) {
   //   const fileListAsArray = Array.from(e);
