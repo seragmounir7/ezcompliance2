@@ -44,6 +44,12 @@ import { RootCauseOfIncidentComponent } from './root-cause-of-incident/root-caus
 import { TypeOfIncidentComponent } from './type-of-incident/type-of-incident.component';
 import { AddRootCauseOfIncidentComponent } from './root-cause-of-incident/add-root-cause-of-incident/add-root-cause-of-incident.component';
 import { AddTypeOfIncidentComponent } from './type-of-incident/add-type-of-incident/add-type-of-incident.component';
+import { ManagerComponent } from './manager/manager.component';
+import { WHSManagerComponent } from './whs-manager/whs-manager.component';
+import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-manager.component';
+import { AddManagerComponent } from './manager/add-manager/add-manager.component';
+import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
+import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
 
 
 const routes: Routes = [
@@ -93,7 +99,14 @@ const routes: Routes = [
   { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent},
   { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent},
   { path: 'typeOfIncident', component: TypeOfIncidentComponent},
-  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent}
+  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent},
+  { path: 'manager', component: ManagerComponent },
+  { path: 'addManager', component: AddManagerComponent },
+  { path: 'editManager', component: EditManagerComponent },
+  { path: 'WHS-Manager', component: WHSManagerComponent },
+  { path: 'addWHSManager', component: AddWhsManagerComponent },
+  { path: 'editWHSManager', component: EditWhsManagerComponent }
+
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 

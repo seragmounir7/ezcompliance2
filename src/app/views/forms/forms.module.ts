@@ -16,6 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.component';
 import { DisplayTableComponent } from './display-table/display-table.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import {AutosizeModule} from 'ngx-autosize';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -35,6 +36,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     SharedModule,
     FormsModule,
     CKEditorModule,
+    AutosizeModule
   ],
   providers:[TextareaAutoresizeDirective]
 })

@@ -65,6 +65,12 @@ import { AddTypeOfIncidentComponent } from './type-of-incident/add-type-of-incid
 import { EditTypeOfIncidentComponent } from './type-of-incident/edit-type-of-incident/edit-type-of-incident.component';
 import { AddRootCauseOfIncidentComponent } from './root-cause-of-incident/add-root-cause-of-incident/add-root-cause-of-incident.component';
 import { EditRootCauseOfIncidentComponent } from './root-cause-of-incident/edit-root-cause-of-incident/edit-root-cause-of-incident.component';
+import { ManagerComponent } from './manager/manager.component';
+import { WHSManagerComponent } from './whs-manager/whs-manager.component';
+import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
+import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-manager.component';
+import { AddManagerComponent } from './manager/add-manager/add-manager.component';
+import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +132,12 @@ import { EditRootCauseOfIncidentComponent } from './root-cause-of-incident/edit-
     EditTypeOfIncidentComponent,
     AddRootCauseOfIncidentComponent,
     EditRootCauseOfIncidentComponent,
+    ManagerComponent,
+    WHSManagerComponent,
+    EditWhsManagerComponent,
+    AddWhsManagerComponent,
+    AddManagerComponent,
+    EditManagerComponent,
    
   ],
 

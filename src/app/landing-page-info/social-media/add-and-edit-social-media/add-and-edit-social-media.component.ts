@@ -24,6 +24,7 @@ export class AddAndEditSocialMediaComponent implements OnInit {
       facebook: ['', Validators.required],
       twitter: ['', Validators.required],
       youtube: ['', Validators.required],
+      instagram:['',Validators.required]
     });this.data1=data;
     if(data._id){
       console.log("dataId",data._id);
@@ -31,6 +32,7 @@ export class AddAndEditSocialMediaComponent implements OnInit {
         facebook: this.data1.facebook,
         twitter: this.data1.twitter,
         youtube: this.data1.youtube,
+        instagram:this.data1.instagram
       })
     }
   }
