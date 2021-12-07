@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {AutosizeModule} from 'ngx-autosize';
 import { LandingPageInfoRoutingModule } from './landing-page-info-routing.module';
 import { LandingPageInfoComponent } from './landing-page-info.component';
 import { HeaderInfoComponent } from './header-info/header-info.component';
@@ -46,6 +47,9 @@ import { AddScreenShotComponent } from './screen-shot-module/add-screen-shot/add
 import { EditScreenShotComponent } from './screen-shot-module/edit-screen-shot/edit-screen-shot.component';
 import { AddDifferentWorkComponent } from './different-module/add-different-work/add-different-work.component';
 import { EditDifferentWorkComponent } from './different-module/edit-different-work/edit-different-work.component';
+import { TermsAndCondtionsComponent } from './terms-and-condtions/terms-and-condtions.component';
+import { AddTermsAndCondtionsComponent } from './terms-and-condtions/add-terms-and-condtions/add-terms-and-condtions.component';
+import { EditTermsAndCondtionsComponent } from './terms-and-condtions/edit-terms-and-condtions/edit-terms-and-condtions.component';
 
 @NgModule({
 
@@ -71,7 +75,7 @@ import { EditDifferentWorkComponent } from './different-module/edit-different-wo
     CustomertestimonialsComponent,
     FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
     EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent, ScreenShotModuleComponent, DifferentModuleComponent, AddScreenShotComponent, EditScreenShotComponent, AddDifferentWorkComponent, EditDifferentWorkComponent,
-    SocialMediaComponent,AddAndEditSocialMediaComponent
+    SocialMediaComponent,AddAndEditSocialMediaComponent, TermsAndCondtionsComponent, AddTermsAndCondtionsComponent, EditTermsAndCondtionsComponent
 
 
  
@@ -82,7 +86,8 @@ import { EditDifferentWorkComponent } from './different-module/edit-different-wo
     FormsModule,
     ReactiveFormsModule,
     LandingPageInfoRoutingModule,
-    SharedModule
+    SharedModule,
+    AutosizeModule
   ],
 })
 export class LandingPageInfoModule { }

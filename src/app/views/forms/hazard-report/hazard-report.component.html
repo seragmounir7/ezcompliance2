@@ -194,13 +194,25 @@
           <label for="exampleInputProjectNumber" class="form-label"
             >WHS Manager</label
           >
-          <input
-            type="Projectnumber"
+    
+            <input 
             class="form-control"
-            formControlName="whsManager"
-            id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
-          />
+                    type="text" 
+                 
+                    placeholder="Enter Name" 
+                    [formControl]="myControl"
+                    matInput
+                    (change)="change()" 
+                    [matAutocomplete]="auto">
+             <mat-autocomplete #auto="matAutocomplete">
+                 <mat-option           
+                     *ngFor="let option of filteredOptions | async" 
+                     [value]="option.name">
+                   {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+      
+     
         </div>
       </div>
       <div class="col-md-6">
@@ -212,7 +224,9 @@
             formControlName="whsManagerEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
+           
           />
+        
         </div>
       </div>
     </div>

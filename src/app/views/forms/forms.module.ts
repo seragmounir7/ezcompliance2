@@ -1,7 +1,7 @@
 import { TextareaAutoresizeDirective } from './../../Directives/textarea-autoresize.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsRoutingModule } from './forms-routing.module';
 import { FormsComponent } from './forms.component';
 import { SiteInspectionComponent } from './site-inspection/site-inspection.component';
@@ -16,6 +16,7 @@ import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.compo
 import { DisplayTableComponent } from './display-table/display-table.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {AutosizeModule} from 'ngx-autosize';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -35,7 +36,10 @@ import {AutosizeModule} from 'ngx-autosize';
     SharedModule,
     FormsModule,
     CKEditorModule,
-    AutosizeModule
+    AutosizeModule,
+    MatAutocompleteModule ,
+    MatInputModule
+    
   ],
   providers:[TextareaAutoresizeDirective]
 })
