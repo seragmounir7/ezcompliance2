@@ -1,4 +1,5 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
 
 <div class="container card px-4 py-4" [formGroup]="SiteIncident">
   <h2 class="text-center pt-3">
@@ -10,7 +11,16 @@
 
   <div class="box">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 ">
+        <label class="form-label mb-3">Project Number</label>
+        <select class="form-select form-control" aria-label="Default select example" formControlName="jobNumber"
+          (change)="jobNoSel()">
+          <option selected hidden>Select</option>
+          <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+
+        </select>
+      </div>
+      <!-- <div class="col-md-6">
         <div>
           <label
             class="cols"
@@ -21,87 +31,57 @@
             type="number"
             class="form-control"
             formControlName="projectNumber"
+            (change)="jobNoSel()"
           />
         </div>
-      </div>
+      </div> -->
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Project Name</label
-          >
-          <input
-            type="text"
-            formControlName="projectName"
-            class="form-control"
-          />
+          <label class="cols" class="form-Label">Project Name</label>
+          <input type="text" formControlName="projectName" class="form-control" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Site Name</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="siteName"
-          />
+          <label class="cols" class="form-Label">Site Name</label>
+          <input type="text" class="form-control" formControlName="siteName" />
         </div>
       </div>
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Customer Name</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="customerName"
-          />
+          <label class="cols" class="form-Label">Customer Name</label>
+          <input type="text" class="form-control" formControlName="customerName" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Site Address</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="siteAddress"
-          />
+          <label class="cols" class="form-Label">Site Address</label>
+          <input type="text" class="form-control" formControlName="streetAddress" />
         </div>
       </div>
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Customer Contact</label
-          >
-          <input
-            placeholder="(000) 000-0000"
-            type="text"
-            class="form-control"
-            formControlName="customerContact"
-          />
+          <label class="cols" class="form-Label">Customer Contact</label>
+          <input placeholder="(000) 000-0000" type="text" class="form-control" formControlName="customerContact" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
+        <!-- <p for="exampleFormControlInput1" class="form-Label">Project Manager</p> -->
+        <label class="form-label mb-3">Project Manager</label>
+        <select class="form-select form-control col" aria-label="Default select example"
+          formControlName="projectManager">
+          <option selected hidden>Select</option>
+          <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
+
+        </select>
+      </div>
+      <!-- <div class="col-md-6">
         <div>
           <label
             class="cols"
@@ -114,66 +94,36 @@
             formControlName="projectManager"
           />
         </div>
-      </div>
+      </div> -->
 
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Person Completing Form
+          <label class="cols" class="form-Label">Person Completing Form
           </label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="personCompletingForm"
-          />
+          <input type="text" class="form-control" formControlName="personCompletingForm" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Customer Contact Phone</label
-          >
-          <input
-            placeholder="(000) 000-0000"
-            type="text"
-            class="form-control"
-            formControlName="customerContactPhone"
-          />
+          <label class="cols" class="form-Label">Customer Contact Phone</label>
+          <input placeholder="(000) 000-0000" type="text" class="form-control" formControlName="customerContactPhone" />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label
-            class="cols"
-            class="form-Label"
-            >Customer Contact Email</label
-          >
-          <input
-            placeholder="ex: email@yahoo.com"
-            type="text"
-            class="form-control"
-            formControlName="customerContactEmail"
-          />
+          <label class="cols" class="form-Label">Customer Contact Email</label>
+          <input placeholder="ex: email@yahoo.com" type="text" class="form-control" formControlName="customerEmail" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <label class="cols" class="form-Label"
-          >Date of Form Completion</label
-        >
-        <input
-          type="date"
-          class="form-control"
-          formControlName="dateOfFormCompletion"
-        />
+
+        <label class="cols" class="form-Label">Date of Form Completion</label>
+        <input type="date" class="form-control" formControlName="dateOfFormCompletion" />
       </div>
     </div>
   </div>
@@ -184,16 +134,10 @@
   <div class="row">
     <div class="mt-2 col-4" *ngFor="let incident of incidents; let i=index">
       <div class="checkrdobtn">
-        <input
-          class="rdovstchk"
-          [id]="i+'typeOf'"
-          class="mr-1"
-          type="checkbox"
-          [value]="incident.value"
-          (change)="onChangeIncident($event)"
-        />
-        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'typeOf'">{{
-          incident.name
+        <input class="rdovstchk" [id]="i+'typeOf'" class="mr-1" type="checkbox" [value]="incident._id"
+          (change)="typeOfIncidentsSelected($event)" />
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'typeOf'">{{
+          incident.title
         }}</label>
       </div>
     </div>
@@ -201,15 +145,15 @@
 
   <hr />
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
       <p class="title">Instructions</p>
-    </div>
-    <div class="mt-3 text-center">
-      <p class="form-Label">
-        Complete this form as soon as possible after an incident that results in
-        serious inquiry or illness or death. Use to investigate a minor injuiry
+
+      <div class="mt-3 text-center">
+        <textarea type="text" class="form-control">
+        Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injury
         or near-miss that could have resulted in a serious injury or illness.
-      </p>
+      </textarea>
+      </div>
     </div>
   </div>
   <br />
@@ -221,24 +165,13 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="name"
-          id
-        />
+        <input type="text" class="form-control" formControlName="name" id />
       </div>
     </div>
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label"
-          >Department</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          formControlName="department"
-        />
+        <label class="cols" class="form-Label">Department</label>
+        <input type="text" class="form-control" formControlName="department" />
       </div>
     </div>
   </div>
@@ -246,11 +179,7 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">position</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="position"
-        />
+        <input type="text" class="form-control" formControlName="position" />
       </div>
     </div>
   </div>
@@ -261,16 +190,10 @@
   <div class="box" class="row">
     <div class="mt-3 col-4" *ngFor="let nature of natureOFIncidents; let i=index">
       <div class="checkrdobtn">
-        <input
-          class="rdovstchk"
-          [id]="i+'natureOfInc'"
-          type="checkbox"
-          class="mr-1"
-          [value]="nature.value"
-          (change)="onNatureOFIncidents($event)"
-        />
-        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'natureOfInc'">{{
-          nature.name
+        <input class="rdovstchk" [id]="i+'natureOfInc'" type="checkbox" class="mr-1" [value]="nature._id"
+          (change)="natureOfIncSelected($event)" />
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'natureOfInc'">{{
+          nature.title
         }}</label>
       </div>
     </div>
@@ -279,33 +202,30 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label"
-          >Location of the incident</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          formControlName="locationOfTheIncident"
-        />
+        <label class="form-Label">Location of the incident</label>
+        <input type="text" class="form-control" formControlName="locationOfTheIncident" />
       </div>
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" class="form-Label"
-          >Date of the incident</label
-        >
-        <input
-          type="date"
-          class="form-control"
-          formControlName="dateOfTheIncident"
-        />
+        <label class="form-Label  mt-2">Date of the incident</label>
+        <!-- <mat-form-field>
+          <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
+             [min]="minDate" [max]="maxDate" [disabled]="disabled">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+             [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+             [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+             [disableMinute]="disableMinute" [hideTime]="hideTime">
+          </ngx-mat-datetime-picker>
+       </mat-form-field> -->
+        <input type="date" class="form-control" formControlName="dateOfTheIncident" />
       </div>
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols"  class="form-Label"
-          >Time of the incident</label
-        >
+        <label class="form-Label mt-2">Time of the incident</label>
+        
         <input
           type="number"
           class="form-control"
@@ -322,36 +242,27 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">
-          Name of Witness</label
-        >
-
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
+          Name of Witness</label>
+        <input type="text" class="form-control" formControlName="nameOfWitness" />
+        <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example">
           <option selected hidden>Select</option>
           <option value="1">Option1</option>
           <option value="2">Option2</option>
           <option value="3">Option3</option>
-        </select>
+        </select> -->
       </div>
     </div>
 
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label"
-          >Witness Statement</label
-        >
-
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
+        <label class="cols" class="form-Label">Witness Statement</label>
+        <input type="text" class="form-control" formControlName="witnessStatement" />
+        <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example">
           <option selected hidden>Select</option>
           <option value="1">Option1</option>
           <option value="2">Option2</option>
           <option value="3">Option3</option>
-        </select>
+        </select> -->
       </div>
     </div>
   </div>
@@ -359,11 +270,7 @@
     <div class="col-md-12">
       <div>
         <label class="form-Label">Attachments </label>
-        <input
-          class="form-control"
-          formControlName="file"
-          type="file"
-        />
+        <input class="form-control" formControlName="file" type="file" />
       </div>
     </div>
   </div>
@@ -373,18 +280,12 @@
     <p class="title">What PPE was in Use ?</p>
   </div>
   <div class="box" class="row">
-    <div class="mt-3 col-3" *ngFor="let PPES of PPE; let i=index">
+    <div class="mt-2 col-4" *ngFor="let PPES of PPE; let i=index">
       <div class="checkrdobtn">
-        <input
-          class="rdovstchk"
-          [id]="i+'whatPPE'"
-          type="checkbox"
-          class="mr-1"
-          [value]="PPES.value"
-          (change)="onPPE($event)"
-        />
-        <label class="txtdefault fs-16 weight500 text-center"  [for]="i+'whatPPE'">{{
-          PPES.name
+        <input class="rdovstchk" [id]="i+'whatPPE'" type="checkbox" class="mr-1" [value]="PPES._id"
+          (change)="ppeSelected($event)" />
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'whatPPE'">{{
+          PPES.title
         }}</label>
       </div>
     </div>
@@ -395,18 +296,12 @@
     <p class="title">What was the rootcause of incident happen?</p>
   </div>
   <div class="box" class="row">
-    <div class="mt-3 col-3" *ngFor="let rootCause of rootCauseIncident; let i=index">
+    <div class="mt-2 col-4" *ngFor="let rootCause of rootCauseIncident; let i=index">
       <div class="checkrdobtn">
-        <input
-          class="rdovstchk"
-          [id]="i+'incident'"
-          type="checkbox"
-          class="mr-1"
-          [value]="rootCause.value"
-          (change)="onRootCauseIncident($event)"
-        />
-        <label class="txtdefault fs-16 weight500 text-center" [for]="i+'incident'">{{
-          rootCause.name
+        <input class="rdovstchk" [id]="i+'incident'" type="checkbox" class="mr-1" [value]="rootCause._id"
+          (change)="rootSelected($event)" />
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'incident'">{{
+          rootCause.title
         }}</label>
       </div>
     </div>
@@ -416,51 +311,42 @@
   <div class="row">
     <div class="col-md-12">
       <div>
-        <label
-          class="cols"
-          class="form-Label"
-          >Why did the unsafe conditon exist</label
-        >
+        <label class="cols" class="form-Label">Why did the unsafe condition exist</label>
 
-        <textarea
-          type="text"
-          formControlName="whyDidtheUnsafeConditonExist"
-          class="form-control"
-        >
+        <textarea type="text" formControlName="whyDidtheUnsafeConditonExist" class="form-control">
         </textarea>
       </div>
     </div>
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
-          >Was the unsafe act or hazard reported prior to the incident?</label
-        >
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <label class="cols" for="exampleFormControlInput1" class="form-Label">Was the unsafe act or hazard reported
+          prior to the incident?</label>
 
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
+        <select class="form-select form-control col form-dropdown" formControlName="priorIncident"  aria-label="Default select example">
           <option selected hidden>Select</option>
-          <option value="yes">yes</option>
+          <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
+        
       </div>
     </div>
-    <div class="col-md-6">
-      <div>
-        <label class="cols" for="exampleFormControlInput1" class="form-Label"
-          >Has a similar incident Occured</label
-        >
+    <div class="col-md-12">
+      <textarea *ngIf="SiteIncident.get('priorIncident').value=='no'" name="" class="col mt-2 form-control" id="" ></textarea>
+    </div>
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <label class="cols" for="exampleFormControlInput1" class="form-Label">Has a similar incident Occured</label>
 
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
+        <select class="form-select form-control col form-dropdown" formControlName="similarIncident" aria-label="Default select example">
           <option selected hidden>Select</option>
-          <option value="yes">yes</option>
+          <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
+       
       </div>
+    </div>
+    <div class="col-md-12">
+      <textarea *ngIf="SiteIncident.get('similarIncident').value=='no'"  name="" class="col mt-2 form-control" id="" ></textarea>
     </div>
   </div>
 
@@ -472,76 +358,70 @@
   <div class="row">
     <div class="mt-2 col-4 mb-0" *ngFor="let change of changes; let i=index">
       <div class="checkrdobtn">
-        <input
-          class="rdovstchk"
-          [id]="i+'changes'"
-          type="checkbox"
-          class="mr-1"
-          [value]="change.value"
-          (change)="onChanges($event)"
-        />
-        <label class="txtdefault fs-16 weight500 text-center" [for]="i+'changes'">{{
-          change.name
+        <input class="rdovstchk" [id]="i+'changes'" type="checkbox" class="mr-1" [value]="change._id"
+          (change)="changesSelected($event)" />
+        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'changes'">{{
+          change.title
         }}</label>
       </div>
     </div>
   </div>
   <hr />
   <div class="box" class="row">
-    <div class="col-6 mb-4">
-      <div>
-        <label class="cols"  class="form-Label"
-          >CorrectiveAction</label
-        >
+    <ng-container formArrayName="arrObj">
+      <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
+        <div class="col-4 mb-4">
+          <div>
+            <label class="cols" class="form-Label" formControlName="correctAction">Corrective Action</label>
 
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
-          <option selected hidden>Select....</option>
-          <option>Update Hazaord Signage</option>
-          <option>Update Site Documentation</option>
-          <option>Induct Workers</option>
-          <option>Induct Workers into SWWS</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div>
-        <label class="cols"  class="form-Label"
-          >Person Responsible</label
-        >
+            <select class="form-select form-control col form-dropdown" aria-label="Default select example">
+              <option selected hidden>Select....</option>
+              <option>Update Hazaord Signage</option>
+              <option>Update Site Documentation</option>
+              <option>Induct Workers</option>
+              <option>Induct Workers into SWWS</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div>
+            <label class="cols" class="form-Label mt-2">Person Responsible</label>
 
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
-          <option selected hidden>Select...</option>
-          <option value="ProjectManager">Project Manager</option>
-          <option value="SiteSupervisor">Site Supervisor</option>
-          <option value="WHSManager">WHS Manager</option>
-          <option value="WorkGroup">Work Group</option>
-          <option value="ComplianceManager">Compliance Manager</option>
-          <option value="OperatonsManager">Operatons Manager</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div>
-        <label class="cols" class="form-Label"
-          >Complete</label
-        >
+            <select class="form-select form-control col form-dropdown" aria-label="Default select example"
+              formControlName="personResp">
+              <option selected hidden>Select...</option>
+              <option value="ProjectManager">Project Manager</option>
+              <option value="SiteSupervisor">Site Supervisor</option>
+              <option value="WHSManager">WHS Manager</option>
+              <option value="WorkGroup">Work Group</option>
+              <option value="ComplianceManager">Compliance Manager</option>
+              <option value="OperatonsManager">Operatons Manager</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div>
+            <label class="cols" class="form-Label mt-2">Complete</label>
 
-        <select
-          class="form-select form-control col form-dropdown"
-          aria-label="Default select example"
-        >
-          <option selected hidden>Select</option>
-          <option value="yes">yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-    </div>
+            <select class="form-select form-control col form-dropdown" aria-label="Default select example"
+              formControlName="complete">
+              <option selected hidden>Select</option>
+              <option value="yes">yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-1 mt-5">
+          <span class="material-icons" (click)="addAction()">add_circle_outline
+          </span>
+        </div>
+        <div class="col-1 mt-5">
+          <span class="material-icons" (click)="removeIncident(i)">
+            remove_circle_outline
+          </span>
+        </div>
+      </ng-container>
+    </ng-container>
   </div>
   <hr />
   <div class="col-12">
@@ -552,65 +432,40 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="CompletedName"
-          />
+          <input type="text" class="form-control" formControlName="completedName" />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label"
-            >Position
+          <label class="cols" class="form-Label">Position
           </label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="CompletedPosition"
-          />
+          <input type="text" class="form-control" formControlName="completedPosition" />
         </div>
       </div>
     </div>
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label"
-            >Department</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="CompletedDepartment"
-          />
+          <label class="cols" class="form-Label">Department</label>
+          <input type="text" class="form-control" formControlName="completedDepartment" />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Date </label>
-          <input
-            type="date"
-            class="form-control"
-            formControlName="CompletedDate"
-          />
+          <input type="date" class="form-control" formControlName="completedDate" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label"
-            >Signature</label
-          >
+          <label class="cols" class="form-Label">Signature</label>
           <div class="sign">
-            <signature-pad
-              [options]="signaturePadOptions"
-              (onBeginEvent)="drawStart()"
-              (onEndEvent)="drawComplete()"
-              #signature1
-            >
+            <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"
+              #signature1>
             </signature-pad>
           </div>
           <button class="btn btn-outline-primary mt-1" (click)="clear()">
@@ -627,65 +482,40 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="reviewedName"
-          />
+          <input type="text" class="form-control" formControlName="reviewedName" />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label"
-            >Position
+          <label class="cols" class="form-Label">Position
           </label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="reviewedPosition"
-          />
+          <input type="text" class="form-control" formControlName="reviewedPosition" />
         </div>
       </div>
     </div>
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label"
-            >Department</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="reviewedDepartment"
-          />
+          <label class="cols" class="form-Label">Department</label>
+          <input type="text" class="form-control" formControlName="reviewedDepartment" />
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Date </label>
-          <input
-            type="date"
-            class="form-control"
-            formControlName="reviewedDate"
-          />
+          <input type="date" class="form-control" formControlName="reviewedDate" />
         </div>
       </div>
     </div>
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label"
-            >Signature</label
-          >
+          <label class="cols" class="form-Label">Signature</label>
           <div class="sign">
-            <signature-pad
-              [options]="signaturePadOptions1"
-              (onBeginEvent)="drawStart1()"
-              (onEndEvent)="drawComplete1()"
-              #signature2
-            ></signature-pad>
+            <signature-pad [options]="signaturePadOptions1" (onBeginEvent)="drawStart1()" (onEndEvent)="drawComplete1()"
+              #signature2></signature-pad>
           </div>
           <button class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear

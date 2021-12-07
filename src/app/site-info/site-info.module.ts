@@ -53,6 +53,18 @@ import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-resid
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import {AutosizeModule} from 'ngx-autosize';
+import { NatureOfIncidentComponent } from './nature-of-incident/nature-of-incident.component';
+import { AddAndEditNatureIncidentComponent } from './nature-of-incident/add-and-edit-nature-incident/add-and-edit-nature-incident.component';
+import { EditNatureIncidentComponent } from './nature-of-incident/edit-nature-incident/edit-nature-incident.component';
+import { ChangesMadeComponent } from './changes-made/changes-made.component';
+import { AddChangesMadeComponent } from './changes-made/add-changes-made/add-changes-made.component';
+import { EditChangesMadeComponent } from './changes-made/edit-changes-made/edit-changes-made.component';
+import { RootCauseOfIncidentComponent } from './root-cause-of-incident/root-cause-of-incident.component';
+import { TypeOfIncidentComponent } from './type-of-incident/type-of-incident.component';
+import { AddTypeOfIncidentComponent } from './type-of-incident/add-type-of-incident/add-type-of-incident.component';
+import { EditTypeOfIncidentComponent } from './type-of-incident/edit-type-of-incident/edit-type-of-incident.component';
+import { AddRootCauseOfIncidentComponent } from './root-cause-of-incident/add-root-cause-of-incident/add-root-cause-of-incident.component';
+import { EditRootCauseOfIncidentComponent } from './root-cause-of-incident/edit-root-cause-of-incident/edit-root-cause-of-incident.component';
 import { ManagerComponent } from './manager/manager.component';
 import { WHSManagerComponent } from './whs-manager/whs-manager.component';
 import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
@@ -108,6 +120,18 @@ import { EditManagerComponent } from './manager/edit-manager/edit-manager.compon
     EditResidualRiskLevelComponent,
     AddStaffComponent,
     EditStaffComponent,
+    NatureOfIncidentComponent,
+    AddAndEditNatureIncidentComponent,
+    EditNatureIncidentComponent,
+    ChangesMadeComponent,
+    AddChangesMadeComponent,
+    EditChangesMadeComponent,
+    RootCauseOfIncidentComponent,
+    TypeOfIncidentComponent,
+    AddTypeOfIncidentComponent,
+    EditTypeOfIncidentComponent,
+    AddRootCauseOfIncidentComponent,
+    EditRootCauseOfIncidentComponent,
     ManagerComponent,
     WHSManagerComponent,
     EditWhsManagerComponent,

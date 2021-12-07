@@ -965,7 +965,6 @@
 
             <div class="row">
               <div class="col-10">
-                <div class="col">
                   <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
                   <ol class="identifyHaz">
                     <li *ngFor="let hazard of item.allHazardsTitle;let j=index"  >
@@ -976,12 +975,11 @@
                     </li>  
                   </ol>                  
   
-               
-                </div>
+                 
+                
               </div>
-
               <ng-container  formArrayName="riskLevel">
-                <div class="col-md-2 my-3" [formGroupName]="i">
+                <div class="col-2" [formGroupName]="i">
                   <label for="sel1">Risk</label>
                   <select
                     class="form-control"
@@ -993,8 +991,9 @@
                   </select>
                 </div>
               </ng-container>
-              <div class="col-md-10 my-3">
-                <div class="row">
+             
+              <div class="col-10 my-3">
+                
                   <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
                   <ol class="identifyHaz">
                     <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index"  > 
@@ -1005,11 +1004,11 @@
                     </li>  
                   </ol>  
                  
-                </div>
+                
               </div>
 
               <ng-container formArrayName="residualRisk">
-                <div class="col-md-2 my-3" [formGroupName]="i">
+                <div class="col-2 my-3" [formGroupName]="i">
                   <label for="sel1">Residual Risk</label>
                   <select
                     class="form-control"
@@ -1020,30 +1019,22 @@
                   <option *ngFor="let item of resiRiskLevel" [value]="item._id">{{item.title}}</option>           
                 
                   </select>
+                  <label for="sel1" class="pt-2">Person Responsible</label>
+                  <select
+                     multiple
+                     class="form-control"
+                     id="sel2" [size]="item.staffTitle.length"
+                     name="sellist2"
+                   >
+                     <option
+                       *ngFor="let item of item.staffTitle"
+                     >
+                       {{ item.title }}
+                     </option>
+                   </select>
                 </div>
               </ng-container>
-              <ng-container >
-                <div class="col-md-2 my-3" >
-                  <label for="sel1">Person Responsible</label>
-                 <select
-                    multiple
-                    class="form-control"
-                    id="sel2"
-                    name="sellist2"
-                  >
-                    <option
-                      *ngFor="let item of item.staffTitle"
-                    >
-                      {{ item.title }}
-                    </option>
-                  </select>
-               
-               
              
-
-                </div>
-              </ng-container>
-
         
             </div>
             <hr />
