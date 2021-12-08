@@ -1,0 +1,88 @@
+<div
+  class="btn btn-outline-primary"
+  [routerLink]="['/admin/siteInfo/siteinspectioncategory/']"
+>
+  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div class="col ml-2 pt-3">
+  <h1>Topic List</h1>
+</div>
+<div class="col ml-2 mb-2">
+  <button
+    [routerLink]="['/admin/siteInfo/addsiteinspectiontopic/' + id]"
+    type="button"
+    class="btn btn-outline-primary mt-1 mr-2 float-right"
+  >
+    <i class="fas fa-plus"></i> Add Topic
+  </button>
+</div>
+<div class="col-6">
+  <mat-form-field>
+    <input matInput #input placeholder="Search" (keyup)="applyFilter($event)" />
+  </mat-form-field>
+</div>
+<div class="">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Position Column -->
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="topic">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Topic</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="flex-start">{{ element.topic }}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Item</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="flex-start">{{ element.item }}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="getaction">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Get Action</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="flex-start">{{ element.action }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          class="mr-2"
+          aria-label="Example icon button with a delete icon"
+          (click)="edit(element)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          aria-label="Example icon button with a delete icon"
+          (click)="delete(element)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found "{{ input.value }}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

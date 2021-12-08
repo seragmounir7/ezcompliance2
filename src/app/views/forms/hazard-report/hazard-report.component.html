@@ -1,6 +1,6 @@
 <div class="btn btn-outline-primary " [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="container card px-4 py-4 content-center">
-  <form class="px-4 py-4" [formGroup]="hazardReport">
+  <form class="px-4 py-4" [formGroup]="hazardReport" (ngSubmit)="onFormSubmit()">
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form Preview</p>
     </div>
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="mb-3">
           <label for="exampleInputFullname" class="form-label">Full Name</label>
           <input
@@ -81,7 +81,8 @@
           />
         </div>
       </div>
-      <div class="col-md-6">
+      </div>
+      <!-- <div class="col-md-6">
         <div class="mb-3">
           <label for="exampleInputSurname" class="form-label">Surname</label>
           <input
@@ -92,7 +93,8 @@
             aria-describedby="emailHelp"
           />
         </div>
-      </div>
+      </div> -->
+      <div class="row">
       <div class="col-md-6">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
@@ -169,12 +171,29 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label class="form-label">Manager/Supervisor</label>
-          <input
+           <input
             type="text"
             class="form-control"
             formControlName="managerSupervisor"
             aria-describedby="emailHelp"
           />
+          <!-- <input 
+          class="form-control"
+                  type="text" 
+               
+                  placeholder="Enter Name" 
+                  formControlName="myControlManager"
+                  matInput
+     
+                  [matAutocomplete]="auto2">
+           <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="changeName($event)" >
+               <mat-option           
+                   *ngFor="let manager of filteredManager | async" 
+                   [value]="manager">
+                 {{manager.name}}
+              </mat-option>
+          </mat-autocomplete>
+         -->
         </div>
       </div>
       <div class="col-md-6">
@@ -186,7 +205,8 @@
             formControlName="managerSupervisorEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+          /> 
+        
         </div>
       </div>
       <div class="col-md-6">
@@ -194,25 +214,40 @@
           <label for="exampleInputProjectNumber" class="form-label"
             >WHS Manager</label
           >
-          <input
-            type="Projectnumber"
+    
+            <input 
             class="form-control"
-            formControlName="whsManager"
-            id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
-          />
+                    type="text" 
+                 
+                    placeholder="Enter Name" 
+                    formControlName="myControl"
+                    matInput
+       
+                    [matAutocomplete]="auto">
+             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="change($event)" >
+                 <mat-option           
+                     *ngFor="let option of filteredOptions | async" 
+                     [value]="option">
+                   {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+      
+     
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
-          <input
+           <input
             type="email"
             class="form-control"
             formControlName="whsManagerEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
+           
           />
+          
+         
         </div>
       </div>
     </div>
@@ -389,7 +424,7 @@
 
         >
           <option selected hidden>Select</option>
-          <option *ngFor="let consequence of Consequences" >{{consequence.name}}</option>
+          <option *ngFor="let consequence of Consequences"  >{{consequence.name}}</option>
           <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
@@ -498,7 +533,7 @@
           <select
           class="form-select form-control col outline form-dropdown"
           aria-label="Default select example"
-          formControlName="complete"
+          formControlName="eliminateHazard"
         >
           <option selected hidden>Select</option>
           <option class="mr-1" value="yes">Yes</option>
@@ -506,8 +541,8 @@
         </select>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="mb-3">
+      <div class="col-md-4"  >
+        <div class="mb-3"  *ngIf="hazardReport.get('eliminateHazard').value=='yes'">
           <label class="form-label"
             >Corrective Action</label
           >
@@ -520,8 +555,8 @@
           />
         </div>
       </div>
-      <div class="col-md-2">
-        <div class="mb-3">
+      <div class="col-md-2" >
+        <div class="mb-3"  *ngIf="hazardReport.get('eliminateHazard').value=='yes'" >
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -535,7 +570,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  *ngIf="hazardReport.get('eliminateHazard').value=='yes'">
           <label class="form-label label_1"
             >By when</label
           >
@@ -548,6 +583,8 @@
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
           <label class="form-label"
@@ -556,7 +593,7 @@
           <select
           class="form-select form-control col outline form-dropdown"
           aria-label="Default select example"
-          formControlName="complete"
+          formControlName="process"
         >
           <option selected hidden>Select</option>
           <option class="mr-1" value="yes">Yes</option>
@@ -565,7 +602,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label class="form-label"
             >Corrective Action</label
           >
@@ -606,6 +643,8 @@
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
           <label  class="form-label"
@@ -614,7 +653,7 @@
           <select
           class="form-select form-control col outline form-dropdown"
           aria-label="Default select example"
-          formControlName="complete"
+          formControlName="isolatedHazard"
         >
           <option selected hidden>Select</option>
           <option class="mr-1" value="yes">Yes</option>
@@ -664,6 +703,8 @@
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
           <label class="form-label"
@@ -681,7 +722,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label class="form-label"
             >Corrective Action</label
           >
@@ -695,7 +736,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -722,6 +763,8 @@
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
           <label class="form-label"
@@ -730,7 +773,7 @@
           <select
                   class="form-select form-control col outline form-dropdown"
                   aria-label="Default select example"
-                  formControlName="complete"
+                  formControlName="procedures"
                 >
                   <option selected hidden>Select</option>
                   <option class="mr-1" value="yes">Yes</option>
@@ -753,7 +796,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label  class="form-label label_1"
             >Actioned by</label
           >
@@ -780,6 +823,8 @@
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
           <label class="form-label"
@@ -788,7 +833,7 @@
           <select
           class="form-select form-control col outline form-dropdown"
           aria-label="Default select example"
-          formControlName="complete"
+          formControlName="reduceRisk"
         >
           <option selected hidden>Select</option>
           <option class="mr-1" value="yes">Yes</option>
@@ -811,7 +856,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -825,7 +870,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label class="form-label label_1"
             >By when</label
           >
@@ -925,6 +970,6 @@
 
   <br />
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
   </div>
 </div>

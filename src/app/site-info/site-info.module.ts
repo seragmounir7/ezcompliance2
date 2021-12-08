@@ -53,6 +53,12 @@ import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-resid
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import {AutosizeModule} from 'ngx-autosize';
+import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component';
+import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
+import { EditSiteInspectionCategoryComponent } from './site-inspection-category/edit-site-inspection-category/edit-site-inspection-category.component';
+import { SiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/site-inspection-topic.component';
+import { AddSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
+import { EditSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/edit-site-inspection-topic/edit-site-inspection-topic.component';
 import { NatureOfIncidentComponent } from './nature-of-incident/nature-of-incident.component';
 import { AddAndEditNatureIncidentComponent } from './nature-of-incident/add-and-edit-nature-incident/add-and-edit-nature-incident.component';
 import { EditNatureIncidentComponent } from './nature-of-incident/edit-nature-incident/edit-nature-incident.component';
@@ -120,6 +126,12 @@ import { EditManagerComponent } from './manager/edit-manager/edit-manager.compon
     EditResidualRiskLevelComponent,
     AddStaffComponent,
     EditStaffComponent,
+    SiteInspectionCategoryComponent,
+    AddSiteInspectionCategoryComponent,
+    EditSiteInspectionCategoryComponent,
+    SiteInspectionTopicComponent,
+    AddSiteInspectionTopicComponent,
+    EditSiteInspectionTopicComponent,
     NatureOfIncidentComponent,
     AddAndEditNatureIncidentComponent,
     EditNatureIncidentComponent,

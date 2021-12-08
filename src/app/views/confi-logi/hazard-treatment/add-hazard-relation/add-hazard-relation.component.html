@@ -1,0 +1,41 @@
+<div class="btn btn-outline-primary" [routerLink]="['/admin/confiLogi/setHazard']">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  </div>
+  <div class="ml-2">
+    <h2>Hazrad Treatment Relation :&nbsp;{{ hazard?.title }}</h2>
+  </div>
+ 
+  <div class="row" [formGroup]="setHazard">
+       
+    <!-- <div class="col-3">
+      <select class="form-select form-control" aria-label="Default select example" formControlName="Consequence" >
+         <option value="" selected hidden> Select consequence</option>
+         <option *ngFor="let consequence of Consequences"  [value]="consequence._id"  >{{consequence.name}}</option>
+      
+      </select>
+      </div>
+      <div class="col-3">
+        <select class="form-select form-control" aria-label="Default select example" formControlName="Likelihood"  >
+           <option value="" selected hidden> Select  Likelihood</option>
+           <option *ngFor="let likelihood of Likelihood"  [value]="likelihood._id" >{{likelihood.name}}</option>
+        
+        </select>
+        </div> -->
+        <div class="col-6">
+          <select class="form-select form-control" aria-label="Default select example" formControlName="riskRating" >
+             <option value="" selected hidden> Select Rating</option>
+             <option *ngFor="let rating of RiskRating"  [value]="rating.name">{{rating.name}}</option>
+          </select>
+          </div>
+          <div class="col-6">
+            <select class="form-select form-control" aria-label="Default select example" formControlName="actionRequired" >
+               <option value="" selected hidden> Action Required</option>
+               <option *ngFor="let action of ActionRequired"  [value]="action.name">{{action.name}}</option>
+            </select>
+            </div>
+          
+          <div class="ml-3 mt-3">
+            <button *ngIf="!hazard?.set"  class="btn btn-primary" (click)="setRelation()" >Set</button>
+            <button *ngIf="hazard?.set" class="btn btn-primary"(click)=" setRelation() ">Update</button>
+          </div>
+</div>

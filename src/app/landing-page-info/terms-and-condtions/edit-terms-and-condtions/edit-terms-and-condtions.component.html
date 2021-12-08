@@ -1,0 +1,101 @@
+
+<div
+class="container px-4 py-4 card"
+[formGroup]="termsDetail"
+
+>
+<div mat-dialog-title class="dialog-title">
+<h2 class="text-center pt-2">
+  <p> Edit Terms & Conditions  Info</p>
+</h2>
+<button type="button" class="close" 
+  style="font-size: 40px;"
+
+(click)="close()" aria-label="Close">
+  <span aria-hidden="true">×</span>
+</button>
+</div>
+<hr />
+
+<div>
+  <div class="row" *ngIf="module" >
+    <div class="col-12">
+      <p for="exampleFormControlInput1" class="form-Label">Heading</p>
+      <input
+        type="text"
+        formControlName="title"
+      
+        class="form-control"
+        id="heading"
+      />
+    </div>
+</div>
+<div class="row" *ngIf="module" >
+    <div class="col-12">
+      <p for="exampleFormControlInput1" class="form-Label">Description</p>
+      <textarea autosize
+    
+        type="text"
+        style="width: 700px"
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+    </div>
+  </div>
+ 
+  <ng-container formArrayName="arrObj"  *ngIf="subModule">
+    <ng-container
+      *ngFor="let control of safetyImgArr().controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div>
+        <div class="row">
+         
+          <div class="col-12">
+            <p for="exampleFormControlInput1" class="form-Label">Name</p>
+            <input
+              type="text"
+              formControlName="title"
+         
+              class="form-control"
+              id="name"
+            />
+          </div>
+          </div>
+          <div class="row">
+         
+          <div class=" col-12">
+            <p for="exampleFormControlInput1" class="form-Label">Name</p>
+            <textarea autosize
+              type="text"
+              formControlName="description"
+              style="width: 700px"
+              class="form-control"
+              id="description"
+            ></textarea>
+          </div>
+      
+        </div>
+      </div>
+      <hr />
+    </ng-container>
+  </ng-container>
+ <br>
+  <div class="col-md-2">
+    <button
+      type="submit"
+      *ngIf="module" (click)="editModule()" 
+      class="btn btn-primary btn-block"
+    >
+    Update
+    </button>
+    <button
+      type="submit"
+      *ngIf="subModule" (click)="editSubModule()" 
+      class="btn btn-primary btn-block"
+    >
+    Update
+    </button>
+  </div>
+</div>
+</div>

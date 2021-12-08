@@ -1,6 +1,7 @@
 import { TextareaAutoresizeDirective } from './../../Directives/textarea-autoresize.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import { FormsRoutingModule } from './forms-routing.module';
@@ -16,7 +17,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.component';
 import { DisplayTableComponent } from './display-table/display-table.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SiteInspectionTableComponent } from './site-inspection-table/site-inspection-table.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from 'src/app/interceptor/spinner.interceptor';
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import {AutosizeModule} from 'ngx-autosize';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -27,6 +33,7 @@ import {AutosizeModule} from 'ngx-autosize';
     RiskAssessmentSWMSComponent,
     AddItemComponent,
     DisplayTableComponent,
+    SiteInspectionTableComponent,
   ],
   imports: [
     CommonModule,
@@ -36,8 +43,19 @@ import {AutosizeModule} from 'ngx-autosize';
     SharedModule,
     FormsModule,
     CKEditorModule,
-    AutosizeModule
+    NgxMatTimepickerModule,
+    AutosizeModule,
+    MatAutocompleteModule ,
+    MatInputModule
+    
   ],
-  providers:[TextareaAutoresizeDirective]
+  providers:[
+    TextareaAutoresizeDirective,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:SpinnerInterceptor,
+      multi:true
+    }
+  ]
 })
 export class FormsModule1 {}

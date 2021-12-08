@@ -124,3 +124,7 @@ select {
   background-size: 0.925em;
   background-repeat: no-repeat;
 }
+.disableDiv {
+  pointer-events: none;
+  opacity: 0.5;
+}
