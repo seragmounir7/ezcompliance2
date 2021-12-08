@@ -36,7 +36,10 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
-
+import {SiteInspectionCategoryComponent} from './site-inspection-category/site-inspection-category.component'
+import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
+import { SiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/site-inspection-topic.component';
+import { AddSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
 
 const routes: Routes = [
   {
@@ -77,7 +80,11 @@ const routes: Routes = [
   { path: 'addResidual', component: AddResidualRiskLevelComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'addStaff', component: AddStaffComponent },
-  { path: 'editStaff', component: EditStaffComponent }
+  { path: 'editStaff', component: EditStaffComponent },
+  { path: 'siteinspectioncategory', component:SiteInspectionCategoryComponent},
+  { path: 'addsiteinspection', component:AddSiteInspectionCategoryComponent},
+  { path: 'siteinspectiontopic/:id', component:SiteInspectionTopicComponent},
+  { path: 'addsiteinspectiontopic/:id', component:AddSiteInspectionTopicComponent}
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

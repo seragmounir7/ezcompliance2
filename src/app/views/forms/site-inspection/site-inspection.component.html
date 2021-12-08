@@ -53,13 +53,17 @@
         <div class="row">
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
-            <input type="text" class="form-control outline" id="siteName" formControlName="siteName" />
+            <input type="text" class="form-control outline" id="siteName" formControlName="siteName" [class.is-invalid]="sidePreview.get('siteName')?.hasError('required') && (sidePreview.get('siteName').dirty || sidePreview.get('siteName').touched) " />
+            <span *ngIf=" sidePreview.get('siteName')?.hasError('required') && (sidePreview.get('siteName').dirty  || sidePreview.get('siteName').touched) " class="invalid-feedback" >
+        This Field is Required</span>
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Name
             </p>
-            <input type="text" class="form-control outline" formControlName="customerName" />
+            <input type="text" class="form-control outline" formControlName="customerName" [class.is-invalid]="sidePreview.get('customerName')?.hasError('required') && (sidePreview.get('customerName').dirty || sidePreview.get('customerName').touched) "/>
+            <span *ngIf=" sidePreview.get('customerName')?.hasError('required') && (sidePreview.get('customerName').dirty  || sidePreview.get('customerName').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
         </div>
         <div class="row">
@@ -67,13 +71,17 @@
             <p for="exampleFormControlInput1" class="form-Label">
               Site Address
             </p>
-            <input type="text" class="form-control outline"formControlName="streetAddr"   />
+            <input type="text" class="form-control outline"formControlName="streetAddr"  [class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) " />
+            <span *ngIf=" sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty  || sidePreview.get('streetAddr').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact
             </p>
-            <input type="text" class="form-control outline"   formControlName="custConct" />
+            <input type="text" class="form-control outline"   formControlName="custConct" [class.is-invalid]="sidePreview.get('custConct')?.hasError('required') && (sidePreview.get('custConct').dirty || sidePreview.get('custConct').touched) " />
+            <span *ngIf=" sidePreview.get('custConct')?.hasError('required') && (sidePreview.get('custConct').dirty  || sidePreview.get('custConct').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
         </div>
 
@@ -82,13 +90,17 @@
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact Phone
             </p>
-            <input type="text" class="form-control outline" formControlName="custConctPh"/>
+            <input type="text" class="form-control outline" formControlName="custConctPh" [class.is-invalid]="sidePreview.get('custConctPh')?.hasError('required') && (sidePreview.get('custConctPh').dirty || sidePreview.get('custConctPh').touched) "/>
+            <span *ngIf=" sidePreview.get('custConctPh')?.hasError('required') && (sidePreview.get('custConctPh').dirty  || sidePreview.get('custConctPh').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact Email
             </p>
-            <input type="text" class="form-control outline"  formControlName="custEmail" />
+            <input type="text" class="form-control outline"  formControlName="custEmail"  [class.is-invalid]="sidePreview.get('custEmail')?.hasError('required') && (sidePreview.get('custEmail').dirty || sidePreview.get('custEmail').touched) "/>
+            <span *ngIf=" sidePreview.get('custEmail')?.hasError('required') && (sidePreview.get('custEmail').dirty  || sidePreview.get('custEmail').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
         </div>
         <div class="row">
@@ -100,6 +112,7 @@
               aria-label="Default select example"
               formControlName="jobNumber"
               (change)="jobNoSel()"
+              [class.is-invalid]="sidePreview.get('jobNumber')?.hasError('required') && (sidePreview.get('jobNumber').dirty || sidePreview.get('jobNumber').touched) "
             >
               <option selected hidden>Select</option>
               <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
@@ -107,6 +120,8 @@
               <option value="2">1001</option>
               <option value="3">1002</option> -->
             </select>
+            <span *ngIf=" sidePreview.get('jobNumber')?.hasError('required') && (sidePreview.get('jobNumber').dirty  || sidePreview.get('jobNumber').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
           <div class="mb-3 col">
             <p for="exampleFormControlInput1" class="form-Label">
@@ -115,8 +130,8 @@
             <select
               class="form-select form-control col outline form-dropdown"
               aria-label="Default select example"
-              id="ProjectManager"
               formControlName="projectManager"
+              [class.is-invalid]="sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty || sidePreview.get('projectManager').touched) "
             >
               <option selected hidden>Select</option>
               <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
@@ -124,12 +139,16 @@
               <option value="2">Akash</option>
               <option value="3">Rahul</option> -->
             </select>
+            <span *ngIf=" sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty  || sidePreview.get('projectManager').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
         </div>
         <div class="row">
           <div class="mb-3 col-6">
             <p for="exampleFormControlInput1" class="form-Label">Date</p>
-            <input type="date" class="form-control outline"  formControlName="date"/>
+            <input type="date" class="form-control outline"  formControlName="date" [class.is-invalid]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "/>
+            <span *ngIf=" sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty  || sidePreview.get('date').touched) " class="invalid-feedback" >
+              This Field is Required</span>
           </div>
 
           <!-- <div class="mb-3 col">
@@ -140,7 +159,48 @@
           </div> -->
         </div>
       </div>
+      <!-- /////////////////////////////////////////////////// -->
+      <div formArrayName="siteCategorytTopic">
+        <div *ngFor="let category of allcategory; let index = index">
+        <div class="mt-4" *ngIf="categorychecked(index) ">
+          <p class="subtitel">{{allcategory[index].category}}</p>
+        </div>
+        <div class="row" >
+        <div *ngFor="let row of add2().controls; let filed = index">
+          <div [formGroupName]="filed">
+            
+            
+              <div class="mt-2 col" *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
+                <p  class="" *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
+                 {{allTopic[filed].topic}}
+                </p>
+                <p *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
+                  <input
+                    type="radio"
+                    class="form-radio mr-1"
+                    formControlName="{{allTopic[filed]._id}}"
+                    value="yes"
+                  />Yes
+                </p>
+                <p *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
+                  <input
+                    type="radio"
+                    class="mr-1"
+                    (change)="addAcionTab($event)"
+                    formControlName="{{allTopic[filed]._id}}"
+                    [value]="allTopic[filed]._id"
+                  />No
+                </p>
+              
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
 
+<!-- /////////////////////////////////////////////////////////////// -->
+      <div *ngIf="false">
       <div class="mt-4">
         <p class="subtitel">Site Control</p>
       </div>
@@ -627,7 +687,7 @@
               class="mr-1"
               value="oil, grease or other slip hazard"
               (change)="addAcionTab($event)"
-              formControlName="accessEgrassHazardss"
+              formControlName="accessEgrassHazards"
             />No
           </p>
         </div>
@@ -1526,6 +1586,7 @@
         </div>
       </div>
     </div>
+    </div>
     </mat-tab>
     <mat-tab label="Site Inspection Corrective Action"> 
       <div
@@ -1538,8 +1599,8 @@
       <div formArrayName="siteAction">
         <div *ngFor="let row of add().controls; let filed = index">
           <div [formGroupName]="filed">
-            <div class="row" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
-              <div class="mb-3 col-3">
+            <div class="row" >
+              <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Item
                 </p>
@@ -1556,7 +1617,7 @@
                 <!-- <input type="text"  class="form-select form-control col" aria-label="Default select example" formControlName="item"> -->
               </div>
 
-              <div class="mb-3 col-3">
+              <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Action
                 </p>
@@ -1565,13 +1626,24 @@
                   aria-label="Default select example"
                   formControlName="action"
                 >
-                  <option selected hidden>Select</option>
-                  <option class="mr-1" value="yes">Yes</option>
-                  <option class="mr-1" value="no">No</option>
+                  <option  class="mr-1" value="{{ this.add().controls[filed].get('action').value }}"> {{ this.add().controls[filed].get('action').value }}</option>
                 </select>
               </div>
 
-              <div class="mb-3 col-3">
+              <div class="my-3 col-2"  [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
+                <p for="exampleFormControlInput1" class="form-Label">
+                  Person Responsible
+                </p>
+                <select
+                  class="form-select form-control col form-dropdown"
+                  aria-label="Default select example"
+                  formControlName="PersonResponsible"
+                >
+                  <option selected hidden>Select</option>
+                  <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
+                </select>
+              </div>
+              <!-- <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Person Responsible
                 </p>
@@ -1584,8 +1656,7 @@
                   <option class="mr-1" value="yes">Yes</option>
                   <option class="mr-1" value="no">No</option>
                 </select>
-              </div>
-
+              </div> -->
               <div class="mb-3 col-2">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Complete
@@ -1618,7 +1689,7 @@
   </mat-tab-group>
   <!-- <div class="tab-content" id="myTabContent"> 
   </div> -->
-  <button class="btn btn-outline-primary mt-1" type="submit" (click)="onSave()" style="width: 10rem;
+  <button class="btn btn-outline-primary mt-1"  type="submit" (click)="onSave()"  style="width: 10rem;
   align-self: center;">
     Submit
   </button>

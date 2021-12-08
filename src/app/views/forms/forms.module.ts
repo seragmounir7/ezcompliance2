@@ -15,6 +15,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddItemComponent } from './risk-assessment-swms/add-item/add-item.component';
 import { DisplayTableComponent } from './display-table/display-table.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SiteInspectionTableComponent } from './site-inspection-table/site-inspection-table.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from 'src/app/interceptor/spinner.interceptor';
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -25,6 +29,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     RiskAssessmentSWMSComponent,
     AddItemComponent,
     DisplayTableComponent,
+    SiteInspectionTableComponent,
   ],
   imports: [
     CommonModule,
@@ -33,8 +38,16 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     SignaturePadModule,
     SharedModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxMatTimepickerModule
   ],
-  providers:[TextareaAutoresizeDirective]
+  providers:[
+    TextareaAutoresizeDirective,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:SpinnerInterceptor,
+      multi:true
+    }
+  ]
 })
 export class FormsModule1 {}

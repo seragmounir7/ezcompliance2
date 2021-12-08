@@ -15,7 +15,7 @@ export class EditTaskComponent implements OnInit {
   editTitle: FormGroup;
   dataRec: any;
 
-
+  categories=[];
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +31,9 @@ export class EditTaskComponent implements OnInit {
     
     this.editTitle = this.fb.group({
       title: [this.dataRec.title, Validators.required],
+      tradeCategoryId:[this.dataRec.tradeCategoryId._id, Validators.required],
     });
+    this.getAllLicenceCat() 
   }
   onFormSubmit() {
      
@@ -41,6 +43,7 @@ export class EditTaskComponent implements OnInit {
       // codeOfPractice:this.dataRec.codeOfPractice,
       // licence:this.dataRec.licence,
       // risk:this.dataRec.risk,
+      tradeCategoryId:this.editTitle.get('tradeCategoryId').value,
     }
     this.logicalFormInfo
       .updateJobTask(data, this.dataRec._id)
@@ -58,5 +61,13 @@ export class EditTaskComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close('false');
 
+  }
+  getAllLicenceCat() {
+    this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
+      console.log('getAllLicenceCat=>', res);
+      this.categories = res.data;
+      console.log('categories=>', res.data);
+    });
+ 
   }
 }

@@ -306,11 +306,13 @@
         <label class="cols"  class="form-Label"
           >Time of the incident</label
         >
-        <input
+        <input [ngxMatTimepicker]="picker"  class="form-control" formControlName="timeOfTheIncident">
+          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+        <!-- <input
           type="number"
           class="form-control"
           formControlName="timeOfTheIncident"
-        />
+        /> -->
       </div>
     </div>
   </div>
