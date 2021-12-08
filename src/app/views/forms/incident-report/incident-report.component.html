@@ -224,13 +224,16 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="form-Label mt-2">Time of the incident</label>
-        
-        <input
+        <label class="cols"  class="form-Label"
+          >Time of the incident</label
+        >
+        <input [ngxMatTimepicker]="picker"  class="form-control" formControlName="timeOfTheIncident">
+          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+        <!-- <input
           type="number"
           class="form-control"
           formControlName="timeOfTheIncident"
-        />
+        /> -->
       </div>
     </div>
   </div>
