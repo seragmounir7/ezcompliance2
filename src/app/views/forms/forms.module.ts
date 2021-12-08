@@ -1,6 +1,8 @@
 import { TextareaAutoresizeDirective } from './../../Directives/textarea-autoresize.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 import { FormsRoutingModule } from './forms-routing.module';
 import { FormsComponent } from './forms.component';
@@ -19,6 +21,8 @@ import { SiteInspectionTableComponent } from './site-inspection-table/site-inspe
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from 'src/app/interceptor/spinner.interceptor';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import {AutosizeModule} from 'ngx-autosize';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -39,7 +43,11 @@ import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
     SharedModule,
     FormsModule,
     CKEditorModule,
-    NgxMatTimepickerModule
+    NgxMatTimepickerModule,
+    AutosizeModule,
+    MatAutocompleteModule ,
+    MatInputModule
+    
   ],
   providers:[
     TextareaAutoresizeDirective,

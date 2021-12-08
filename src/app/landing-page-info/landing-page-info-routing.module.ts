@@ -26,6 +26,9 @@ import { EditScreenShotComponent } from './screen-shot-module/edit-screen-shot/e
 import { DifferentModuleComponent } from './different-module/different-module.component';
 import { AddDifferentWorkComponent } from './different-module/add-different-work/add-different-work.component';
 import { EditDifferentWorkComponent } from './different-module/edit-different-work/edit-different-work.component';
+import { TermsAndCondtionsComponent } from './terms-and-condtions/terms-and-condtions.component';
+import { AddTermsAndCondtionsComponent } from './terms-and-condtions/add-terms-and-condtions/add-terms-and-condtions.component';
+import { EditTermsAndCondtionsComponent } from './terms-and-condtions/edit-terms-and-condtions/edit-terms-and-condtions.component';
 
 const routes: Routes = [
   { path: '', component: HeaderInfoComponent },
@@ -54,7 +57,10 @@ const routes: Routes = [
   { path: 'edit-ScreenShot', component: EditScreenShotComponent },
   { path: 'different', component: DifferentModuleComponent },
   { path: 'add-Different', component: AddDifferentWorkComponent },
-  { path: 'edit-Different', component: EditDifferentWorkComponent }
+  { path: 'edit-Different', component: EditDifferentWorkComponent },
+  {path:'term',component:TermsAndCondtionsComponent},
+  {path:'addTerm',component:AddTermsAndCondtionsComponent},
+  {path:'editTerm',component:EditTermsAndCondtionsComponent}
 ];
 
 @NgModule({

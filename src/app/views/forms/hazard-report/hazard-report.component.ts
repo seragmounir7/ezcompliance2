@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { Observable } from 'rxjs';
+import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+
 
 @Component({
   selector: 'app-hazard-report',
@@ -13,17 +17,32 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 export class HazardReportComponent implements OnInit {
   title = 'hazardReport';
   hazardReport: FormGroup;
-
-
+  myControl = new FormControl();
+  options: string[] = [''];
+  filteredOptions: Observable<any>;
+  filteredManager: Observable<any>;
+  filteredName: Observable<any>;
+  filteredEmail: Observable<any>;
+  whsData: any = ['']
+  myControlEmail = new FormControl();
+  myControlManagerEmail = new FormControl();
+  myControlManager = new FormControl();
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
-    private setTitle: SetTitleService
+    private setTitle: SetTitleService,
+    private url: LogicalFormInfoService
   ) {
+
+
+
     this.hazardReport = this.fb.group({
       siteAction: this.fb.array([]),
+      myControl : [''],
+      myControlManager:[''],
+    
       employeeFulltime: ['', Validators.required],
       employeeParttime: ['', Validators.required],
       employeeCasual: ['', Validators.required],
@@ -82,10 +101,37 @@ export class HazardReportComponent implements OnInit {
       complete: ['', Validators.required],
       Consequence: [''],
       riskRating: [''],
-      likelihood: ['']
+      likelihood: [''],
+      managerName: [''],
+      reduceRisk:[''],
+      procedures:[''],
+      process:[''],
+      isolatedHazard:[''],
+      eliminateHazardAction:['']
+      
     });
   }
   ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(val => {
+
+        return this.filter(val || '')
+      })
+     )
+    //  this.filteredManager= this.myControlManager.valueChanges.pipe(
+    //   startWith(''),
+    //   debounceTime(400),
+    //   distinctUntilChanged(),
+    //   switchMap(val => {
+
+    //     return this.filter(val || '')
+    //   })
+    //  )
+  
+   this.getall();
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
     this.setTitle.setTitle('WHS-Hazard Report Form');
     this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
@@ -93,13 +139,13 @@ export class HazardReportComponent implements OnInit {
         console.log(res);
 
         if (res == '1-Insignificant') {
-            this.hazardReport.get('riskRating').setValue('Low');
-            this.hazardReport.get('action').setValue('option4');
+          this.hazardReport.get('riskRating').setValue('Low');
+          this.hazardReport.get('action').setValue('option4');
         }
         if (res == '2-Moderate') {
           this.hazardReport.get('riskRating').setValue('Medium');
           this.hazardReport.get('action').setValue('option3');
-      }
+        }
         if (res == '4-Minor') {
           this.hazardReport.get('riskRating').setValue('Low');
           this.hazardReport.get('action').setValue('option4');
@@ -107,27 +153,27 @@ export class HazardReportComponent implements OnInit {
         if (res == '3-Major') {
           this.hazardReport.get('riskRating').setValue('High');
           this.hazardReport.get('action').setValue('option1');
-       }
+        }
         if (res == '5-Catastrophic') {
           this.hazardReport.get('riskRating').setValue('High');
           this.hazardReport.get('action').setValue('option1');
-         }
-       }
+        }
+      }
     });
     this.hazardReport.get('likelihood').valueChanges.subscribe((res) => {
       if (res) {
         console.log(res);
         if (res == '1-Insignificant') {
           this.hazardReport.get('riskRating').setValue('Low');
- 
+
         }
         if (res == '3-Moderate') {
           this.hazardReport.get('riskRating').setValue('Medium');
-      
+
         }
         if (res == '2-Minor') {
           this.hazardReport.get('riskRating').setValue('Low');
-        
+
         }
         if (res == '4-Major') {
           this.hazardReport.get('riskRating').setValue('High');
@@ -140,9 +186,9 @@ export class HazardReportComponent implements OnInit {
       }
     });
 
- 
-
   }
+
+
 
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
@@ -158,6 +204,8 @@ export class HazardReportComponent implements OnInit {
     this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
   }
 
+
+
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad.toDataURL());
@@ -170,30 +218,81 @@ export class HazardReportComponent implements OnInit {
     console.log('begin drawing');
   }
   Consequences: Array<any> = [
-    { name: '1-Insignificant' },
-    { name: '2-Moderate' },
-    { name: '4-Minor' },
-    { name: '3-Major' },
-    { name: '5-Catastrophic' },
+    { name: '1-Insignificant',value:1 },
+    { name: '2-Moderate',value:2 },
+    { name: '4-Minor',value:4},
+    { name: '3-Major',value:3 },
+    { name: '5-Catastrophic',value:5 },
   ];
 
 
   Likelihood: Array<any> = [
-    { name: '1-Insignificant' },
-    { name: '3-Moderate' },
-    { name: '2-Minor' },
-    { name: '4-Major' },
-    { name: '5-Catastrophic' }
+    { name: '1-Insignificant',value:1 },
+    { name: '3-Moderate',value:3},
+    { name: '2-Minor',value:2 },
+    { name: '4-Major',value:4 },
+    { name: '5-Catastrophic',value:5 }
   ];
   RiskRating: Array<any> = [
 
     { name: 'Low' },
     { name: 'Medium' },
-    { name: 'Low' },
     { name: 'High' },
-    { name: 'High' }
+  
 
   ];
 
 
+  filter(val: string): Observable<any> {
+     return this.url.getAllWHSManager()
+      .pipe(
+        map((response: any) => {
+          response.data = response.data.filter(option => {
+            return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+           })
+          return response.data;
+        })
+      )
+      }
+  
+  
+      filterEvent(val: string): Observable<any> {
+        return this.url.getAllManager()
+         .pipe(
+           map((response: any) => {
+             response.data = response.data.filter(manager => {
+               return manager.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+              })
+             return response.data;
+           })
+         )
+         }
+    
+  change(event) {
+    console.log("evebt",event)
+   this.hazardReport.get('myControl').setValue(event.option.value.name || '')
+    this.hazardReport.get('whsManagerEmail').setValue(event.option.value.email || '')
+
+
+
+  }
+  changeName(event) {
+    console.log("changeName",event)
+   this.hazardReport.get('myControlManager').setValue(event.option.value.name || '')
+    this.hazardReport.get('managerSupervisorEmail').setValue(event.option.value.email || '')
+
+
+
+  }
+
+ 
+  onFormSubmit(){
+    console.log(this.hazardReport.value)
+  }
+  getall(){
+    this.url.getAllManager().subscribe((res:any)=> {
+      console.log(res)
+      this.whsData=res.data;
+    })
+  }
 }

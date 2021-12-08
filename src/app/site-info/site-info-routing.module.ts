@@ -40,6 +40,21 @@ import {SiteInspectionCategoryComponent} from './site-inspection-category/site-i
 import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
 import { SiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/site-inspection-topic.component';
 import { AddSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
+import { NatureOfIncidentComponent } from './nature-of-incident/nature-of-incident.component';
+import { AddAndEditNatureIncidentComponent } from './nature-of-incident/add-and-edit-nature-incident/add-and-edit-nature-incident.component';
+import { ChangesMadeComponent } from './changes-made/changes-made.component';
+import { AddChangesMadeComponent } from './changes-made/add-changes-made/add-changes-made.component';
+import { RootCauseOfIncidentComponent } from './root-cause-of-incident/root-cause-of-incident.component';
+import { TypeOfIncidentComponent } from './type-of-incident/type-of-incident.component';
+import { AddRootCauseOfIncidentComponent } from './root-cause-of-incident/add-root-cause-of-incident/add-root-cause-of-incident.component';
+import { AddTypeOfIncidentComponent } from './type-of-incident/add-type-of-incident/add-type-of-incident.component';
+import { ManagerComponent } from './manager/manager.component';
+import { WHSManagerComponent } from './whs-manager/whs-manager.component';
+import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-manager.component';
+import { AddManagerComponent } from './manager/add-manager/add-manager.component';
+import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
+import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
+
 
 const routes: Routes = [
   {
@@ -84,7 +99,21 @@ const routes: Routes = [
   { path: 'siteinspectioncategory', component:SiteInspectionCategoryComponent},
   { path: 'addsiteinspection', component:AddSiteInspectionCategoryComponent},
   { path: 'siteinspectiontopic/:id', component:SiteInspectionTopicComponent},
-  { path: 'addsiteinspectiontopic/:id', component:AddSiteInspectionTopicComponent}
+  { path: 'addsiteinspectiontopic/:id', component:AddSiteInspectionTopicComponent},
+  { path: 'natureOfIncident', component: NatureOfIncidentComponent},
+  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent},
+  { path: 'changesMade', component: ChangesMadeComponent},
+  { path: 'addChangesMade', component: AddChangesMadeComponent},
+  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent},
+  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent},
+  { path: 'typeOfIncident', component: TypeOfIncidentComponent},
+  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent},
+  { path: 'manager', component: ManagerComponent },
+  { path: 'addManager', component: AddManagerComponent },
+  { path: 'editManager', component: EditManagerComponent },
+  { path: 'WHS-Manager', component: WHSManagerComponent },
+  { path: 'addWHSManager', component: AddWhsManagerComponent },
+  { path: 'editWHSManager', component: EditWhsManagerComponent }
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

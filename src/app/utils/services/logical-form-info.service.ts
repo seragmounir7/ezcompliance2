@@ -575,7 +575,80 @@ export class LogicalFormInfoService {
   deleteStaff(id) {
     return this.https.delete(this.apiUrl + 'staff/delete/' + id)
   }
-  /////////////////// Chemical Info End /////////
+  ///////////////////  STAFF INFO End /////////
+
+   ///////////////// START Nature Of Incident//////////////
+   getAllNatOfInc() {
+    return this.https.get(this.apiUrl + 'natureOfIncident/getAll')
+  }
+  addNatOfInc(data) {
+    return this.https.post(this.apiUrl + 'natureOfIncident/add', data)
+  }
+  addMultipleNatOfInc(data) {
+    return this.https.post(this.apiUrl + 'natureOfIncident/add/multiple', data)
+  }
+  updateNatOfInc(data, id) {
+    return this.https.put(this.apiUrl + 'natureOfIncident/update/' + id, data)
+  }
+  deleteNatOfInc(id) {
+    return this.https.delete(this.apiUrl + 'natureOfIncident/delete/' + id)
+  }
+  ///////////////////  Nature Of Incident End /////////
+
+     ///////////////// START Changes Made//////////////
+     getAllChangesMade() {
+      return this.https.get(this.apiUrl + 'changesMade/getAll')
+    }
+    addChangesMade(data) {
+      return this.https.post(this.apiUrl + 'changesMade/add', data)
+    }
+    addMultipleChangesMade(data) {
+      return this.https.post(this.apiUrl + 'changesMade/add/multiple', data)
+    }
+    updateChangesMade(data, id) {
+      return this.https.put(this.apiUrl + 'changesMade/update/' + id, data)
+    }
+    deleteChangesMade(id) {
+      return this.https.delete(this.apiUrl + 'changesMade/delete/' + id)
+    }
+    ///////////////////  Changes Made End /////////
+
+     ///////////////// Root Cause Of Incident Made//////////////
+     getAllRootCause() {
+      return this.https.get(this.apiUrl + 'rootcauseOfIncident/getAll')
+    }
+    addRootCause(data) {
+      return this.https.post(this.apiUrl + 'rootcauseOfIncident/add', data)
+    }
+    addMultipleRootCause(data) {
+      return this.https.post(this.apiUrl + 'rootcauseOfIncident/add/multiple', data)
+    }
+    updateRootCause(data, id) {
+      return this.https.put(this.apiUrl + 'rootcauseOfIncident/update/' + id, data)
+    }
+    deleteRootCause(id) {
+      return this.https.delete(this.apiUrl + 'rootcauseOfIncident/delete/' + id)
+    }
+    ///////////////////  Root Cause Of Incident End /////////
+
+         ///////////////// Type Of Incident Made//////////////
+         getAllTypeOfIncident() {
+          return this.https.get(this.apiUrl + 'typeOfIncident/getAll')
+        }
+        addTypeOfIncident(data) {
+          return this.https.post(this.apiUrl + 'typeOfIncident/add', data)
+        }
+        addMultipleTypeOfIncident(data) {
+          return this.https.post(this.apiUrl + 'typeOfIncident/add/multiple', data)
+        }
+        updateTypeOfIncident(data, id) {
+          return this.https.put(this.apiUrl + 'typeOfIncident/update/' + id, data)
+        }
+        deleteTypeOfIncident(id) {
+          return this.https.delete(this.apiUrl + 'typeOfIncident/delete/' + id)
+        }
+        ///////////////////  Type Of Incident End /////////
+
   /////////////////// Subscription Start /////////
   // /plan/getAll
   getAllPlan() {
@@ -602,7 +675,53 @@ export class LogicalFormInfoService {
   {
     return this.https.delete(this.apiUrl+'toolbox/delete/'+id)
   }
+
   /////////////////// Subscription End /////////
+///////////////////////// Manager Start /////////
+addManager(data) {
+  return this.https.post(this.apiUrl + 'manager/add', data)
+}
+editManager(id,data) {
+  return this.https.put(this.apiUrl + 'manager/update/'+id, data)
+}
+getAllManager()
+{
+  return this.https.get(this.apiUrl + 'manager/getAll')
+}
+getManagerById(id)
+{
+  return this.https.get(this.apiUrl + 'manager/get/' + id)
+}
+deleteManager(id)
+{
+  return this.https.delete(this.apiUrl+'manager/delete/'+id)
+}
+addMultipleManager(data) {
+  return this.https.post(this.apiUrl + 'manager/add/multiple', data)
+}
+/////////////////////// ManagerEnd//////////
+//////////////////// WHS Manager///////////
+addWHSManager(data) {
+  return this.https.post(this.apiUrl + 'WHSManager/add', data)
+}
+editWHSManager(id,data) {
+  return this.https.put(this.apiUrl + 'WHSManager/update/'+id, data)
+}
+getAllWHSManager()
+{
+  return this.https.get(this.apiUrl + 'WHSManager/getAll')
+}
+getWHSManagerById(id)
+{
+  return this.https.get(this.apiUrl + 'WHSManager/get/' + id)
+}
+deleteWHSManager(id)
+{
+  return this.https.delete(this.apiUrl+'WHSManager/delete/'+id)
+}
+addMultipleWHSManager(data) {
+  return this.https.post(this.apiUrl + 'WHSManager/add/multiple', data)
+}
 
   ////////////////// Start Site Inspection ///////////
 
