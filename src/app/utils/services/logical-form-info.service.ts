@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class LogicalFormInfoService {
   apiUrl = environment.apiUrl;
-  
+
   constructor(private https: HttpClient) { }
   getJobTaskListById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
@@ -92,7 +92,7 @@ export class LogicalFormInfoService {
       })
     );
   }
-  updateLicence(id,data) {
+  updateLicence(id, data) {
     return this.https.put(this.apiUrl + 'licence/update/' + id, data).pipe(
       map((res: any) => {
         return res;
@@ -122,7 +122,7 @@ export class LogicalFormInfoService {
     );
   }
   getLicenceByTradeCat(id) {
-    return this.https.get(this.apiUrl + 'tradeCategory/getAll/'+id).pipe(
+    return this.https.get(this.apiUrl + 'tradeCategory/getAll/' + id).pipe(
       map((res: any) => {
         return res;
       })
@@ -359,29 +359,29 @@ export class LogicalFormInfoService {
   /////////////////// Chemical Info End /////////
 
   ///Jurisdiction start/////
-  addJurisdiction(data){
+  addJurisdiction(data) {
     return this.https.post(this.apiUrl + 'jurisdiction/add', data).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  getAllJurisdiction(){
+  getAllJurisdiction() {
     return this.https.get(this.apiUrl + 'jurisdiction/getAll').pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  updateJurisdiction(data,id){
+  updateJurisdiction(data, id) {
     return this.https.put(this.apiUrl + 'jurisdiction/update/' + id, data).pipe(
       map((res: any) => {
         return res;
       })
     );
-  
+
   }
-  deleteJurisdiction(id){
+  deleteJurisdiction(id) {
     return this.https.delete(this.apiUrl + 'jurisdiction/delete/' + id).pipe(
       map((res: any) => {
         return res;
@@ -390,30 +390,30 @@ export class LogicalFormInfoService {
   }
   ///Jurisdiction end/////
 
-   ///Regulator start/////
-   addRegulator(data){
+  ///Regulator start/////
+  addRegulator(data) {
     return this.https.post(this.apiUrl + 'regulator/add', data).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  getAllRegulator(){
+  getAllRegulator() {
     return this.https.get(this.apiUrl + 'regulator/getAll').pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  updateRegulator(data,id){
+  updateRegulator(data, id) {
     return this.https.put(this.apiUrl + 'regulator/update/' + id, data).pipe(
       map((res: any) => {
         return res;
       })
     );
-  
+
   }
-  deleteRegulator(id){
+  deleteRegulator(id) {
     return this.https.delete(this.apiUrl + 'regulator/delete/' + id).pipe(
       map((res: any) => {
         return res;
@@ -422,30 +422,30 @@ export class LogicalFormInfoService {
   }
   ///Regulator end/////
 
-   ///Code Of Practice start/////
-   addCode(data){
+  ///Code Of Practice start/////
+  addCode(data) {
     return this.https.post(this.apiUrl + 'cop/add', data).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  getAllCode(){
+  getAllCode() {
     return this.https.get(this.apiUrl + 'cop/getAll').pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  updateCode(data,id){
+  updateCode(data, id) {
     return this.https.put(this.apiUrl + 'cop/update/' + id, data).pipe(
       map((res: any) => {
         return res;
       })
     );
-  
+
   }
-  deleteCode(id){
+  deleteCode(id) {
     return this.https.delete(this.apiUrl + 'cop/delete/' + id).pipe(
       map((res: any) => {
         return res;
@@ -455,29 +455,29 @@ export class LogicalFormInfoService {
   ///Code Of Practice end/////
 
   ///Safety Legislation start/////
-  addSafety(data){
+  addSafety(data) {
     return this.https.post(this.apiUrl + 'safetyLegislation/add', data).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  getAllSafety(){
+  getAllSafety() {
     return this.https.get(this.apiUrl + 'safetyLegislation/getAll').pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  updateSafety(data,id){
+  updateSafety(data, id) {
     return this.https.put(this.apiUrl + 'safetyLegislation/update/' + id, data).pipe(
       map((res: any) => {
         return res;
       })
     );
-  
+
   }
-  deleteSafety(id){
+  deleteSafety(id) {
     return this.https.delete(this.apiUrl + 'safetyLegislation/delete/' + id).pipe(
       map((res: any) => {
         return res;
@@ -487,29 +487,29 @@ export class LogicalFormInfoService {
   ///Safety Legislation end/////
 
   //////////////// States start//////////////////
-  addStates(data){
+  addStates(data) {
     return this.https.post(this.apiUrl + 'state/add', data).pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  getAllStates(){
+  getAllStates() {
     return this.https.get(this.apiUrl + 'state/getAll').pipe(
       map((res: any) => {
         return res;
       })
     );
   }
-  updateStates(data,id){
+  updateStates(data, id) {
     return this.https.put(this.apiUrl + 'state/update/' + id, data).pipe(
       map((res: any) => {
         return res;
       })
     );
-  
+
   }
-  deleteStates(id){
+  deleteStates(id) {
     return this.https.delete(this.apiUrl + 'state/delete/' + id).pipe(
       map((res: any) => {
         return res;
@@ -520,7 +520,7 @@ export class LogicalFormInfoService {
     return this.https.get(this.apiUrl + 'state/get/' + id)
   }
 
- 
+
   ///////////////////End States /////////
 
   //////////////// START RISK LEVEL INFO//////////////////
@@ -577,8 +577,8 @@ export class LogicalFormInfoService {
   }
   ///////////////////  STAFF INFO End /////////
 
-   ///////////////// START Nature Of Incident//////////////
-   getAllNatOfInc() {
+  ///////////////// START Nature Of Incident//////////////
+  getAllNatOfInc() {
     return this.https.get(this.apiUrl + 'natureOfIncident/getAll')
   }
   addNatOfInc(data) {
@@ -595,59 +595,77 @@ export class LogicalFormInfoService {
   }
   ///////////////////  Nature Of Incident End /////////
 
-     ///////////////// START Changes Made//////////////
-     getAllChangesMade() {
-      return this.https.get(this.apiUrl + 'changesMade/getAll')
-    }
-    addChangesMade(data) {
-      return this.https.post(this.apiUrl + 'changesMade/add', data)
-    }
-    addMultipleChangesMade(data) {
-      return this.https.post(this.apiUrl + 'changesMade/add/multiple', data)
-    }
-    updateChangesMade(data, id) {
-      return this.https.put(this.apiUrl + 'changesMade/update/' + id, data)
-    }
-    deleteChangesMade(id) {
-      return this.https.delete(this.apiUrl + 'changesMade/delete/' + id)
-    }
-    ///////////////////  Changes Made End /////////
+  ///////////////// START Changes Made//////////////
+  getAllChangesMade() {
+    return this.https.get(this.apiUrl + 'changesMade/getAll')
+  }
+  addChangesMade(data) {
+    return this.https.post(this.apiUrl + 'changesMade/add', data)
+  }
+  addMultipleChangesMade(data) {
+    return this.https.post(this.apiUrl + 'changesMade/add/multiple', data)
+  }
+  updateChangesMade(data, id) {
+    return this.https.put(this.apiUrl + 'changesMade/update/' + id, data)
+  }
+  deleteChangesMade(id) {
+    return this.https.delete(this.apiUrl + 'changesMade/delete/' + id)
+  }
+  ///////////////////  Changes Made End /////////
 
-     ///////////////// Root Cause Of Incident Made//////////////
-     getAllRootCause() {
-      return this.https.get(this.apiUrl + 'rootcauseOfIncident/getAll')
-    }
-    addRootCause(data) {
-      return this.https.post(this.apiUrl + 'rootcauseOfIncident/add', data)
-    }
-    addMultipleRootCause(data) {
-      return this.https.post(this.apiUrl + 'rootcauseOfIncident/add/multiple', data)
-    }
-    updateRootCause(data, id) {
-      return this.https.put(this.apiUrl + 'rootcauseOfIncident/update/' + id, data)
-    }
-    deleteRootCause(id) {
-      return this.https.delete(this.apiUrl + 'rootcauseOfIncident/delete/' + id)
-    }
-    ///////////////////  Root Cause Of Incident End /////////
+  ///////////////// Root Cause Of Incident Made//////////////
+  getAllRootCause() {
+    return this.https.get(this.apiUrl + 'rootcauseOfIncident/getAll')
+  }
+  addRootCause(data) {
+    return this.https.post(this.apiUrl + 'rootcauseOfIncident/add', data)
+  }
+  addMultipleRootCause(data) {
+    return this.https.post(this.apiUrl + 'rootcauseOfIncident/add/multiple', data)
+  }
+  updateRootCause(data, id) {
+    return this.https.put(this.apiUrl + 'rootcauseOfIncident/update/' + id, data)
+  }
+  deleteRootCause(id) {
+    return this.https.delete(this.apiUrl + 'rootcauseOfIncident/delete/' + id)
+  }
+  ///////////////////  Root Cause Of Incident End /////////
 
-         ///////////////// Type Of Incident Made//////////////
-         getAllTypeOfIncident() {
-          return this.https.get(this.apiUrl + 'typeOfIncident/getAll')
-        }
-        addTypeOfIncident(data) {
-          return this.https.post(this.apiUrl + 'typeOfIncident/add', data)
-        }
-        addMultipleTypeOfIncident(data) {
-          return this.https.post(this.apiUrl + 'typeOfIncident/add/multiple', data)
-        }
-        updateTypeOfIncident(data, id) {
-          return this.https.put(this.apiUrl + 'typeOfIncident/update/' + id, data)
-        }
-        deleteTypeOfIncident(id) {
-          return this.https.delete(this.apiUrl + 'typeOfIncident/delete/' + id)
-        }
-        ///////////////////  Type Of Incident End /////////
+  ///////////////// Type Of Incident Made//////////////
+  getAllTypeOfIncident() {
+    return this.https.get(this.apiUrl + 'typeOfIncident/getAll')
+  }
+  addTypeOfIncident(data) {
+    return this.https.post(this.apiUrl + 'typeOfIncident/add', data)
+  }
+  addMultipleTypeOfIncident(data) {
+    return this.https.post(this.apiUrl + 'typeOfIncident/add/multiple', data)
+  }
+  updateTypeOfIncident(data, id) {
+    return this.https.put(this.apiUrl + 'typeOfIncident/update/' + id, data)
+  }
+  deleteTypeOfIncident(id) {
+    return this.https.delete(this.apiUrl + 'typeOfIncident/delete/' + id)
+  }
+  ///////////////////  Type Of Incident End /////////
+
+   ///////////////// Incident Report Form//////////////
+   getAllIncidentReport() {
+    return this.https.get(this.apiUrl + 'incidentForm/getAll')
+  }
+  addIncidentReport(data) {
+    return this.https.post(this.apiUrl + 'incidentForm/add', data)
+  }
+  addMultipleIncidentReport(data) {
+    return this.https.post(this.apiUrl + 'incidentForm/add/multiple', data)
+  }
+  updateIncidentReport(data, id) {
+    return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data)
+  }
+  deleteIncidentReport(id) {
+    return this.https.delete(this.apiUrl + 'incidentForm/delete/' + id)
+  }
+  ///////////////////  Incident Report Form End /////////
 
   /////////////////// Subscription Start /////////
   // /plan/getAll
@@ -660,68 +678,59 @@ export class LogicalFormInfoService {
   addtoolBox(data) {
     return this.https.post(this.apiUrl + 'toolbox/add', data)
   }
-  editToolBox(id,data) {
-    return this.https.put(this.apiUrl + 'toolbox/update/'+id, data)
+  editToolBox(id, data) {
+    return this.https.put(this.apiUrl + 'toolbox/update/' + id, data)
   }
-  gettoolBox()
-  {
+  gettoolBox() {
     return this.https.get(this.apiUrl + 'toolbox/getAll')
   }
-  getToolboxById(id)
-  {
+  getToolboxById(id) {
     return this.https.get(this.apiUrl + 'toolbox/get/' + id)
   }
-  deleteToolBox(id)
-  {
-    return this.https.delete(this.apiUrl+'toolbox/delete/'+id)
+  deleteToolBox(id) {
+    return this.https.delete(this.apiUrl + 'toolbox/delete/' + id)
   }
 
   /////////////////// Subscription End /////////
-///////////////////////// Manager Start /////////
-addManager(data) {
-  return this.https.post(this.apiUrl + 'manager/add', data)
-}
-editManager(id,data) {
-  return this.https.put(this.apiUrl + 'manager/update/'+id, data)
-}
-getAllManager()
-{
-  return this.https.get(this.apiUrl + 'manager/getAll')
-}
-getManagerById(id)
-{
-  return this.https.get(this.apiUrl + 'manager/get/' + id)
-}
-deleteManager(id)
-{
-  return this.https.delete(this.apiUrl+'manager/delete/'+id)
-}
-addMultipleManager(data) {
-  return this.https.post(this.apiUrl + 'manager/add/multiple', data)
-}
-/////////////////////// ManagerEnd//////////
-//////////////////// WHS Manager///////////
-addWHSManager(data) {
-  return this.https.post(this.apiUrl + 'WHSManager/add', data)
-}
-editWHSManager(id,data) {
-  return this.https.put(this.apiUrl + 'WHSManager/update/'+id, data)
-}
-getAllWHSManager()
-{
-  return this.https.get(this.apiUrl + 'WHSManager/getAll')
-}
-getWHSManagerById(id)
-{
-  return this.https.get(this.apiUrl + 'WHSManager/get/' + id)
-}
-deleteWHSManager(id)
-{
-  return this.https.delete(this.apiUrl+'WHSManager/delete/'+id)
-}
-addMultipleWHSManager(data) {
-  return this.https.post(this.apiUrl + 'WHSManager/add/multiple', data)
-}
+  ///////////////////////// Manager Start /////////
+  addManager(data) {
+    return this.https.post(this.apiUrl + 'manager/add', data)
+  }
+  editManager(id, data) {
+    return this.https.put(this.apiUrl + 'manager/update/' + id, data)
+  }
+  getAllManager() {
+    return this.https.get(this.apiUrl + 'manager/getAll')
+  }
+  getManagerById(id) {
+    return this.https.get(this.apiUrl + 'manager/get/' + id)
+  }
+  deleteManager(id) {
+    return this.https.delete(this.apiUrl + 'manager/delete/' + id)
+  }
+  addMultipleManager(data) {
+    return this.https.post(this.apiUrl + 'manager/add/multiple', data)
+  }
+  /////////////////////// ManagerEnd//////////
+  //////////////////// WHS Manager///////////
+  addWHSManager(data) {
+    return this.https.post(this.apiUrl + 'WHSManager/add', data)
+  }
+  editWHSManager(id, data) {
+    return this.https.put(this.apiUrl + 'WHSManager/update/' + id, data)
+  }
+  getAllWHSManager() {
+    return this.https.get(this.apiUrl + 'WHSManager/getAll')
+  }
+  getWHSManagerById(id) {
+    return this.https.get(this.apiUrl + 'WHSManager/get/' + id)
+  }
+  deleteWHSManager(id) {
+    return this.https.delete(this.apiUrl + 'WHSManager/delete/' + id)
+  }
+  addMultipleWHSManager(data) {
+    return this.https.post(this.apiUrl + 'WHSManager/add/multiple', data)
+  }
 
   ////////////////// Start Site Inspection ///////////
 
@@ -732,13 +741,13 @@ addMultipleWHSManager(data) {
     return this.https.post(this.apiUrl + 'siteInspection/add', data)
   }
   getSiteInspection(id) {
-    return this.https.get(this.apiUrl + 'siteInspection/get/'+ id)
+    return this.https.get(this.apiUrl + 'siteInspection/get/' + id)
   }
   updateSiteInspection(id, data) {
-    return this.https.put(this.apiUrl + 'siteInspection/update/'+ id, data)
+    return this.https.put(this.apiUrl + 'siteInspection/update/' + id, data)
   }
   deleteSiteInspection(id) {
-    return this.https.delete(this.apiUrl + 'siteInspection/delete/'+ id)
+    return this.https.delete(this.apiUrl + 'siteInspection/delete/' + id)
   }
 
   ////////////////// End Site Inspection ////////////
@@ -758,7 +767,7 @@ export interface Site {
 
 export interface Customer {
   customerName: string;
-  customerContact: string ;
+  customerContact: string;
   customerContactPhone: string;
   customerEmail: string;
 }

@@ -317,7 +317,7 @@
         </textarea>
       </div>
     </div>
-    <div class="col-md-12">
+   
       <div class="col-md-6">
         <label class="cols" for="exampleFormControlInput1" class="form-Label">Was the unsafe act or hazard reported
           prior to the incident?</label>
@@ -327,13 +327,9 @@
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
-        
+        <textarea *ngIf="SiteIncident.get('priorIncident').value=='yes'" name="" class="col mt-2 form-control" id="" ></textarea>
       </div>
-    </div>
-    <div class="col-md-12">
-      <textarea *ngIf="SiteIncident.get('priorIncident').value=='no'" name="" class="col mt-2 form-control" id="" ></textarea>
-    </div>
-    <div class="col-md-12">
+   
       <div class="col-md-6">
         <label class="cols" for="exampleFormControlInput1" class="form-Label">Has a similar incident Occured</label>
 
@@ -342,12 +338,10 @@
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
-       
+        <textarea *ngIf="SiteIncident.get('similarIncident').value=='yes'"  name="" class="col mt-2 form-control" id="" ></textarea>
       </div>
-    </div>
-    <div class="col-md-12">
-      <textarea *ngIf="SiteIncident.get('similarIncident').value=='no'"  name="" class="col mt-2 form-control" id="" ></textarea>
-    </div>
+    
+  
   </div>
 
   <hr />
@@ -370,38 +364,28 @@
   <div class="box" class="row">
     <ng-container formArrayName="arrObj">
       <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
-        <div class="col-4 mb-4">
+        <div class="col-md-3">
           <div>
-            <label class="cols" class="form-Label" formControlName="correctAction">Corrective Action</label>
+            <label class="cols" class="form-Label" >Corrective Action</label>
 
-            <select class="form-select form-control col form-dropdown" aria-label="Default select example">
-              <option selected hidden>Select....</option>
-              <option>Update Hazaord Signage</option>
-              <option>Update Site Documentation</option>
-              <option>Induct Workers</option>
-              <option>Induct Workers into SWWS</option>
-            </select>
+            <input type="text" formControlName="correctAction" class="form-control" />
           </div>
         </div>
         <div class="col-md-3">
           <div>
-            <label class="cols" class="form-Label mt-2">Person Responsible</label>
+            <label class="cols" class="form-Label">Person Responsible</label>
 
             <select class="form-select form-control col form-dropdown" aria-label="Default select example"
-              formControlName="personResp">
+              formControlName="personRes" >
               <option selected hidden>Select...</option>
-              <option value="ProjectManager">Project Manager</option>
-              <option value="SiteSupervisor">Site Supervisor</option>
-              <option value="WHSManager">WHS Manager</option>
-              <option value="WorkGroup">Work Group</option>
-              <option value="ComplianceManager">Compliance Manager</option>
-              <option value="OperatonsManager">Operatons Manager</option>
+              <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
+             
             </select>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div>
-            <label class="cols" class="form-Label mt-2">Complete</label>
+            <label class="cols" class="form-Label">Complete</label>
 
             <select class="form-select form-control col form-dropdown" aria-label="Default select example"
               formControlName="complete">
@@ -410,6 +394,11 @@
               <option value="no">No</option>
             </select>
           </div>
+        </div>
+        <div class="col-md-2">
+
+          <label class="cols" class="form-Label">Date </label>
+          <input type="date" class="form-control" formControlName="date" />
         </div>
         <div class="col-1 mt-5">
           <span class="material-icons" (click)="addAction()">add_circle_outline
@@ -529,6 +518,6 @@
   <br />
 
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()">Submit</button>
   </div>
 </div>

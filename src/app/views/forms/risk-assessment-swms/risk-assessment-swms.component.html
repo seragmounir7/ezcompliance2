@@ -122,7 +122,7 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="subUrb">
+                <input type="text" class="form-control col" formControlName="suburb">
               </div>
               <div class="my-3 col-2">
                 <label class="form-label"
@@ -230,7 +230,7 @@
                 <label class="form-label"
                   >Date</label
                 >
-                <input type="date" class="form-control"  />
+                <input type="date" class="form-control" formControlName="date" />
               </div>
             </div>
             <hr />
@@ -846,6 +846,7 @@
               class="form-check-input"
               value="Disposable dust mask"
               [checked]="ppeArr[i]"
+              formArrayName="ppeSelection"
             />
             <label [for]="i+'ppe'" class="form-check-label label_2" for="inlineCheckbox1">{{
               item.title
@@ -882,10 +883,11 @@
                     >Location</label
                   >
                   <input
-                    type="tel"
+                    type="text"
                     class="form-control"
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
+                    formControlName="location"
                   />
                 </div>
               </div>
@@ -898,6 +900,7 @@
                   class="form-control"
                   id="sel2"
                   name="sellist2"
+                  formArrayName="hazardous"
                 >
                   <option value=""selected hidden>Select</option>
                   <option value="YES">Yes</option>
@@ -915,6 +918,7 @@
                     class="form-control"
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
+                    formControlName="qty"
                   />
                 </div>
               </div>
@@ -928,13 +932,14 @@
                     class="form-control"
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
+                    formControlName="expiryDate"
                   />
                 </div>
               </div>
               <div class="col-md-10">
                 <div class="my-3">
                   <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                  <input class="form-control" type="file" id="formFile" />
+                  <input class="form-control" type="file" id="formFile" formArrayName="file"/>
                 </div>
               </div>
               <div class="col-md-2">
@@ -1119,9 +1124,14 @@
             </button>
           </div>
         </div>
+        <div>
+          <button type="submit" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+        </div>
       </div>
     </div>
+    
   </div>
+ 
     </mat-tab>
   </mat-tab-group>
   
