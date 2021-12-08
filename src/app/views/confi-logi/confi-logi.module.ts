@@ -17,9 +17,10 @@ import { AddItemComponent } from './set-logic/set-relation/add-item/add-item.com
 import { TestLogicComponent } from './set-logic/test-logic/test-logic.component';
 import { AddJobTaskComponent } from './set-logic/add-job-task/add-job-task.component';
 import { HazardTreatmentComponent } from './hazard-treatment/hazard-treatment.component';
+import { AddHazardRelationComponent } from './hazard-treatment/add-hazard-relation/add-hazard-relation.component';
 
 @NgModule({
-  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent, SetRelationComponent, AddItemComponent, TestLogicComponent, AddJobTaskComponent, HazardTreatmentComponent],
+  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent, SetRelationComponent, AddItemComponent, TestLogicComponent, AddJobTaskComponent, HazardTreatmentComponent, AddHazardRelationComponent],
   imports: [
     CommonModule,
     ConfiLogiRoutingModule,SharedModule,FormsModule,
