@@ -20,9 +20,13 @@ export class HazardReportComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [''];
   filteredOptions: Observable<any>;
+  filteredManager: Observable<any>;
+  filteredName: Observable<any>;
+  filteredEmail: Observable<any>;
   whsData: any = ['']
-
-
+  myControlEmail = new FormControl();
+  myControlManagerEmail = new FormControl();
+  myControlManager = new FormControl();
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
   constructor(
@@ -36,7 +40,9 @@ export class HazardReportComponent implements OnInit {
 
     this.hazardReport = this.fb.group({
       siteAction: this.fb.array([]),
-      myControl : new FormControl(),
+      myControl : [''],
+      myControlManager:[''],
+    
       employeeFulltime: ['', Validators.required],
       employeeParttime: ['', Validators.required],
       employeeCasual: ['', Validators.required],
@@ -97,7 +103,12 @@ export class HazardReportComponent implements OnInit {
       riskRating: [''],
       likelihood: [''],
       managerName: [''],
-    
+      reduceRisk:[''],
+      procedures:[''],
+      process:[''],
+      isolatedHazard:[''],
+      eliminateHazardAction:['']
+      
     });
   }
   ngOnInit() {
@@ -109,9 +120,18 @@ export class HazardReportComponent implements OnInit {
 
         return this.filter(val || '')
       })
+     )
+    //  this.filteredManager= this.myControlManager.valueChanges.pipe(
+    //   startWith(''),
+    //   debounceTime(400),
+    //   distinctUntilChanged(),
+    //   switchMap(val => {
 
-    )
-    this.getAllManager();
+    //     return this.filter(val || '')
+    //   })
+    //  )
+  
+   this.getall();
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
     this.setTitle.setTitle('WHS-Hazard Report Form');
     this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
@@ -198,67 +218,81 @@ export class HazardReportComponent implements OnInit {
     console.log('begin drawing');
   }
   Consequences: Array<any> = [
-    { name: '1-Insignificant' },
-    { name: '2-Moderate' },
-    { name: '4-Minor' },
-    { name: '3-Major' },
-    { name: '5-Catastrophic' },
+    { name: '1-Insignificant',value:1 },
+    { name: '2-Moderate',value:2 },
+    { name: '4-Minor',value:4},
+    { name: '3-Major',value:3 },
+    { name: '5-Catastrophic',value:5 },
   ];
 
 
   Likelihood: Array<any> = [
-    { name: '1-Insignificant' },
-    { name: '3-Moderate' },
-    { name: '2-Minor' },
-    { name: '4-Major' },
-    { name: '5-Catastrophic' }
+    { name: '1-Insignificant',value:1 },
+    { name: '3-Moderate',value:3},
+    { name: '2-Minor',value:2 },
+    { name: '4-Major',value:4 },
+    { name: '5-Catastrophic',value:5 }
   ];
   RiskRating: Array<any> = [
 
     { name: 'Low' },
     { name: 'Medium' },
-    { name: 'Low' },
     { name: 'High' },
-    { name: 'High' }
+  
 
   ];
 
 
   filter(val: string): Observable<any> {
-
-    return this.url.getAllWHSManager()
+     return this.url.getAllWHSManager()
       .pipe(
         map((response: any) => {
           response.data = response.data.filter(option => {
             return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
-
-          })
+           })
           return response.data;
-        }
-
-        )
+        })
       )
-  }
-  change() {
-  
-    this.whsData.forEach((item) => {
-      console.log("item",item)
-      if (this.hazardReport.get('myControl').value === item._id) {
-        console.log('Id', item._id);
-        this.hazardReport.setValue({
-          whsManagerEmail: item.email,
-
-
-        });
       }
-    });
+  
+  
+      filterEvent(val: string): Observable<any> {
+        return this.url.getAllManager()
+         .pipe(
+           map((response: any) => {
+             response.data = response.data.filter(manager => {
+               return manager.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+              })
+             return response.data;
+           })
+         )
+         }
+    
+  change(event) {
+    console.log("evebt",event)
+   this.hazardReport.get('myControl').setValue(event.option.value.name || '')
+    this.hazardReport.get('whsManagerEmail').setValue(event.option.value.email || '')
+
+
+
   }
-  getAllManager() {
-    this.url.getAllWHSManager().subscribe((res: any) => {
-      console.log('getAllProjectMang=>', res);
-      this.whsData = res.data
-      console.log('whsData=>', this.whsData);
-    });
+  changeName(event) {
+    console.log("changeName",event)
+   this.hazardReport.get('myControlManager').setValue(event.option.value.name || '')
+    this.hazardReport.get('managerSupervisorEmail').setValue(event.option.value.email || '')
+
+
+
   }
 
+ 
+  onFormSubmit(){
+    console.log(this.hazardReport.value)
+  }
+  getall(){
+    this.url.getAllManager().subscribe((res:any)=> {
+      console.log(res)
+      this.whsData=res.data;
+    })
+  }
 }
