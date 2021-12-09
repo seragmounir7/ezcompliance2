@@ -9,6 +9,7 @@ import { TestLogicComponent } from './set-logic/test-logic/test-logic.component'
 import { AddJobTaskComponent } from './set-logic/add-job-task/add-job-task.component';
 import { HazardReportComponent } from '../forms/hazard-report/hazard-report.component';
 import { HazardTreatmentComponent } from './hazard-treatment/hazard-treatment.component';
+import { AddHazardRelationComponent } from './hazard-treatment/add-hazard-relation/add-hazard-relation.component';
 
 const routes: Routes = [
   { path: '', component: ConfiLogiComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   // { path: 'setRelation', component: TestLogicComponent },
   { path: 'setRelation', component: SetRelationComponent },
   {path:'addTask',component:AddJobTaskComponent},
-  {path:'setHazard',component:HazardTreatmentComponent}
+  {path:'setHazard',component:HazardTreatmentComponent},
+  {path:'setHazardRelation',component:AddHazardRelationComponent}
 ];
 
 @NgModule({
