@@ -23,6 +23,7 @@ import { SpinnerInterceptor } from 'src/app/interceptor/spinner.interceptor';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import {AutosizeModule} from 'ngx-autosize';
 import { MatInputModule } from '@angular/material/input';
+import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -34,6 +35,7 @@ import { MatInputModule } from '@angular/material/input';
     AddItemComponent,
     DisplayTableComponent,
     SiteInspectionTableComponent,
+    IncidentsTableComponent,
   ],
   imports: [
     CommonModule,

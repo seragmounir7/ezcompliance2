@@ -662,6 +662,9 @@ export class LogicalFormInfoService {
   updateIncidentReport(data, id) {
     return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data)
   }
+  getIncidentReportById(id) {
+    return this.https.get(this.apiUrl + 'incidentForm/get/' + id)
+  }
   deleteIncidentReport(id) {
     return this.https.delete(this.apiUrl + 'incidentForm/delete/' + id)
   }
