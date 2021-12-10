@@ -33,12 +33,7 @@ export class CheckboxComponent implements OnInit {
   }
   
 
-  doCheckboxCheck(index: number): void {
-   // this.roles[index].checked = !this.roles[index].checked;
-  }
-  applyFilter($event){
-
-  } 
+  
   ngOnChanges(changes: any): void {
 
     
