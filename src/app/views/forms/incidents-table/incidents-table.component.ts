@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-incidents-table',
@@ -27,10 +28,31 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
   }
   delete(id)
   {
-    this.logicalFormInfo.deleteIncidentReport(id).subscribe((res)=>{
-      console.log("deleted",res);
-      this.getIncidentReport();
-    })
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete `,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        this.logicalFormInfo.deleteIncidentReport(id).subscribe((res)=>{
+          console.log("deleted",res);
+          
+            Swal.fire({
+              title: 'Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getIncidentReport();
+          });
+      }
+    });
+    
+   
   }
   getIncidentReport()
   {

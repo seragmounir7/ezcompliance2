@@ -54,7 +54,7 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     this.getAllStaff();
     this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
     this.setTitle.setTitle('WHS-ToolBox Talk Form');
-    if(this.id!=='null')
+    if(this.id!=='form')
     {
       console.log("id",this.id);
       this.getToolboxByid(this.id);
@@ -286,7 +286,7 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     this.singRequired = this.toolBox.controls['signaturePad1'].invalid
 
     console.log("form data",this.toolBox.value);
-    if(this.id!=='null')
+    if(this.id!=='form')
     {
       const data={
         ...this.toolBox.value

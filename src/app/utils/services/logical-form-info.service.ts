@@ -659,7 +659,7 @@ export class LogicalFormInfoService {
   addMultipleIncidentReport(data) {
     return this.https.post(this.apiUrl + 'incidentForm/add/multiple', data)
   }
-  updateIncidentReport(data, id) {
+  updateIncidentReport(id,data) {
     return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data)
   }
   getIncidentReportById(id) {
