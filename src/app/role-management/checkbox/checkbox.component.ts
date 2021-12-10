@@ -23,7 +23,7 @@ export class CheckboxComponent implements OnInit {
     { value: "Admin", name:"Admin",Dynamicform:false,Logicalforms:false,FormConfigure:false,SubscriptionRates:false,LogicalFormData:false,CMS:false,StateRelation:false },
     { value: "Employee", name:"Employee",Logicalforms:false,FormConfigure:false,SubscriptionRates:false,LogicalFormData:false,CMS:false,StateRelation:false },
     { value: "Adminstration",name:"Adminstration",Logicalforms:false,FormConfigure:false,SubscriptionRates:false,LogicalFormData:false,CMS:false,StateRelation:false },
-   
+    { value: "Worker",name:"Worker",Logicalforms:false,FormConfigure:false,SubscriptionRates:false,LogicalFormData:false,CMS:false,StateRelation:false },
   ];
 
   ngOnInit(): void {
@@ -31,7 +31,9 @@ export class CheckboxComponent implements OnInit {
       this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort; 
   }
-  
+  ngAfterViewInit() {
+    this.tempArray.paginator = this.paginator;
+  }
 
   doCheckboxCheck(index: number): void {
    // this.roles[index].checked = !this.roles[index].checked;
