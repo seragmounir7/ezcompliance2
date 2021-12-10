@@ -27,8 +27,8 @@ export class FormsComponent implements OnInit {
    
    
     { index: 2, title: 'Notifiable Incidents', link: ['/admin/forms/incidentRep/'+'Form'] },
-    { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'null'] },
-    { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'null'] },
+    { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'form'] },
+    { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'form'] },
     { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS'] }
   ];
   formName = '';
@@ -63,11 +63,12 @@ goTo(title)
   if(title==="Hazards Reported")
   {
     this.router.navigate(["/admin/forms/hazardTable"]);
-  if(title==="Notifiable Incidents")
+  
+}
+if(title==="Notifiable Incidents")
   {
     this.router.navigate(["/admin/forms/incidentsTable"]);
   }
-}
 }
 
   ngOnInit(): void {

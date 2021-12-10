@@ -95,7 +95,13 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     { label: 'torch', value: '' },
     { label: 'Wide Brim Hat', value: '' },
   ];
-  secondEditor = `<br /><br />
+  secondEditor = `
+  <h1 class='form-control' >
+  <strong>Worker consultation, instruction, training, toolbox talks, review,
+  acceptance record:</strong>
+  </h1>
+  <br /><br />
+  
   <h3 class='txt_1'>
     Only persons who have completed the singoff are authorised to work
     on the relevent tasks covered by this document. <br />

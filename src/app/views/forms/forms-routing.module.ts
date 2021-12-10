@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'siteInspect/:id', component: SiteInspectionComponent },
   { path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
   { path: 'hazardRep/:id', component: HazardReportComponent },
-  { path: 'incidentRep', component: IncidentReportComponent },
+  { path: 'incidentRep/:id', component: IncidentReportComponent },
   { path: 'riskAssessSWMS', component: RiskAssessmentSWMSComponent },
   { path: 'tableData', component: DisplayTableComponent},
   { path:'siteinspectiontable', component:SiteInspectionTableComponent},
