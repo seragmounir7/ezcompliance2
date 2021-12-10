@@ -236,7 +236,7 @@
     /***/
     1: function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! F:\Projects\Work\accel growth\whs_work\ajinkyaAdmin011121\node_modules\@angular-devkit\build-angular\src\webpack\es5-polyfills.js */
+      /*! F:\WHSadmin\WHS-Adminportal\node_modules\@angular-devkit\build-angular\src\webpack\es5-polyfills.js */
       "voQr");
 
       __webpack_require__(
@@ -244,7 +244,7 @@
       "R0gw");
 
       module.exports = __webpack_require__(
-      /*! F:\Projects\Work\accel growth\whs_work\ajinkyaAdmin011121\src\polyfills.ts */
+      /*! F:\WHSadmin\WHS-Adminportal\src\polyfills.ts */
       "hN/g");
       /***/
     },

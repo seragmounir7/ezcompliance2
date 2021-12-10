@@ -10,10 +10,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogicalFormInfoService", function() { return LogicalFormInfoService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "8Y7J");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../environments/environment */ "AytR");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "IheW");
 
 
 
@@ -484,7 +484,95 @@ class LogicalFormInfoService {
     deleteStaff(id) {
         return this.https.delete(this.apiUrl + 'staff/delete/' + id);
     }
-    /////////////////// Chemical Info End /////////
+    ///////////////////  STAFF INFO End /////////
+    ///////////////// START Nature Of Incident//////////////
+    getAllNatOfInc() {
+        return this.https.get(this.apiUrl + 'natureOfIncident/getAll');
+    }
+    addNatOfInc(data) {
+        return this.https.post(this.apiUrl + 'natureOfIncident/add', data);
+    }
+    addMultipleNatOfInc(data) {
+        return this.https.post(this.apiUrl + 'natureOfIncident/add/multiple', data);
+    }
+    updateNatOfInc(data, id) {
+        return this.https.put(this.apiUrl + 'natureOfIncident/update/' + id, data);
+    }
+    deleteNatOfInc(id) {
+        return this.https.delete(this.apiUrl + 'natureOfIncident/delete/' + id);
+    }
+    ///////////////////  Nature Of Incident End /////////
+    ///////////////// START Changes Made//////////////
+    getAllChangesMade() {
+        return this.https.get(this.apiUrl + 'changesMade/getAll');
+    }
+    addChangesMade(data) {
+        return this.https.post(this.apiUrl + 'changesMade/add', data);
+    }
+    addMultipleChangesMade(data) {
+        return this.https.post(this.apiUrl + 'changesMade/add/multiple', data);
+    }
+    updateChangesMade(data, id) {
+        return this.https.put(this.apiUrl + 'changesMade/update/' + id, data);
+    }
+    deleteChangesMade(id) {
+        return this.https.delete(this.apiUrl + 'changesMade/delete/' + id);
+    }
+    ///////////////////  Changes Made End /////////
+    ///////////////// Root Cause Of Incident Made//////////////
+    getAllRootCause() {
+        return this.https.get(this.apiUrl + 'rootcauseOfIncident/getAll');
+    }
+    addRootCause(data) {
+        return this.https.post(this.apiUrl + 'rootcauseOfIncident/add', data);
+    }
+    addMultipleRootCause(data) {
+        return this.https.post(this.apiUrl + 'rootcauseOfIncident/add/multiple', data);
+    }
+    updateRootCause(data, id) {
+        return this.https.put(this.apiUrl + 'rootcauseOfIncident/update/' + id, data);
+    }
+    deleteRootCause(id) {
+        return this.https.delete(this.apiUrl + 'rootcauseOfIncident/delete/' + id);
+    }
+    ///////////////////  Root Cause Of Incident End /////////
+    ///////////////// Type Of Incident Made//////////////
+    getAllTypeOfIncident() {
+        return this.https.get(this.apiUrl + 'typeOfIncident/getAll');
+    }
+    addTypeOfIncident(data) {
+        return this.https.post(this.apiUrl + 'typeOfIncident/add', data);
+    }
+    addMultipleTypeOfIncident(data) {
+        return this.https.post(this.apiUrl + 'typeOfIncident/add/multiple', data);
+    }
+    updateTypeOfIncident(data, id) {
+        return this.https.put(this.apiUrl + 'typeOfIncident/update/' + id, data);
+    }
+    deleteTypeOfIncident(id) {
+        return this.https.delete(this.apiUrl + 'typeOfIncident/delete/' + id);
+    }
+    ///////////////////  Type Of Incident End /////////
+    ///////////////// Incident Report Form//////////////
+    getAllIncidentReport() {
+        return this.https.get(this.apiUrl + 'incidentForm/getAll');
+    }
+    addIncidentReport(data) {
+        return this.https.post(this.apiUrl + 'incidentForm/add', data);
+    }
+    addMultipleIncidentReport(data) {
+        return this.https.post(this.apiUrl + 'incidentForm/add/multiple', data);
+    }
+    updateIncidentReport(id, data) {
+        return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data);
+    }
+    getIncidentReportById(id) {
+        return this.https.get(this.apiUrl + 'incidentForm/get/' + id);
+    }
+    deleteIncidentReport(id) {
+        return this.https.delete(this.apiUrl + 'incidentForm/delete/' + id);
+    }
+    ///////////////////  Incident Report Form End /////////
     /////////////////// Subscription Start /////////
     // /plan/getAll
     getAllPlan() {
@@ -507,6 +595,128 @@ class LogicalFormInfoService {
     }
     deleteToolBox(id) {
         return this.https.delete(this.apiUrl + 'toolbox/delete/' + id);
+    }
+    /////////////////// Subscription End /////////
+    ///////////////////////// Manager Start /////////
+    addManager(data) {
+        return this.https.post(this.apiUrl + 'manager/add', data);
+    }
+    editManager(id, data) {
+        return this.https.put(this.apiUrl + 'manager/update/' + id, data);
+    }
+    getAllManager() {
+        return this.https.get(this.apiUrl + 'manager/getAll');
+    }
+    getManagerById(id) {
+        return this.https.get(this.apiUrl + 'manager/get/' + id);
+    }
+    deleteManager(id) {
+        return this.https.delete(this.apiUrl + 'manager/delete/' + id);
+    }
+    addMultipleManager(data) {
+        return this.https.post(this.apiUrl + 'manager/add/multiple', data);
+    }
+    /////////////////////// ManagerEnd//////////
+    //////////////////// WHS Manager///////////
+    addWHSManager(data) {
+        return this.https.post(this.apiUrl + 'WHSManager/add', data);
+    }
+    editWHSManager(id, data) {
+        return this.https.put(this.apiUrl + 'WHSManager/update/' + id, data);
+    }
+    getAllWHSManager() {
+        return this.https.get(this.apiUrl + 'WHSManager/getAll');
+    }
+    getWHSManagerById(id) {
+        return this.https.get(this.apiUrl + 'WHSManager/get/' + id);
+    }
+    deleteWHSManager(id) {
+        return this.https.delete(this.apiUrl + 'WHSManager/delete/' + id);
+    }
+    addMultipleWHSManager(data) {
+        return this.https.post(this.apiUrl + 'WHSManager/add/multiple', data);
+    }
+    ////////////////// Start Site Inspection ///////////
+    getAllSiteInspection() {
+        return this.https.get(this.apiUrl + 'siteInspection/getAll');
+    }
+    addSiteInspection(data) {
+        return this.https.post(this.apiUrl + 'siteInspection/add', data);
+    }
+    getSiteInspection(id) {
+        return this.https.get(this.apiUrl + 'siteInspection/get/' + id);
+    }
+    updateSiteInspection(id, data) {
+        return this.https.put(this.apiUrl + 'siteInspection/update/' + id, data);
+    }
+    deleteSiteInspection(id) {
+        return this.https.delete(this.apiUrl + 'siteInspection/delete/' + id);
+    }
+    ////////////////// End Site Inspection ////////////
+    ////////////////////// Start Hzaard ///////
+    getAllHazardFormData() {
+        return this.https.get(this.apiUrl + 'hazard/getAll');
+    }
+    addHazardFormData(data) {
+        return this.https.post(this.apiUrl + 'hazard/add', data);
+    }
+    getHazardFormDataById(id) {
+        return this.https.get(this.apiUrl + 'hazard/get/' + id);
+    }
+    updateHazardFormData(id, data) {
+        return this.https.put(this.apiUrl + 'hazard/update/' + id, data);
+    }
+    deleteHazardFormData(id) {
+        return this.https.delete(this.apiUrl + 'hazard/delete/' + id);
+    }
+    //////////////End Hazard///////////
+    getAllHazardTreatmentRelation() {
+        return this.https.get(this.apiUrl + 'hazardTreatmentRelation/getAll');
+    }
+    getHazardTreatmentById(id) {
+        return this.https.get(this.apiUrl + 'hazardTreatmentRelation/get/' + id);
+    }
+    updateHazardTreatmentRelation(id, data) {
+        return this.https.put(this.apiUrl + 'hazardTreatmentRelation/update/' + id, data);
+    }
+    ////////////////// Start Site Inspection category ///////////
+    getAllSiteInspectionCategory() {
+        return this.https.get(this.apiUrl + 'siteInspectionCategory/getAll');
+    }
+    getSiteInspectionCategory(id) {
+        return this.https.get(this.apiUrl + 'siteInspectionCategory/get/' + id);
+    }
+    getTopicByCategoryID(id) {
+        return this.https.get(this.apiUrl + 'siteInspectionCategory/getAllTopics/' + id);
+    }
+    addSiteInspectionCategory(data) {
+        return this.https.post(this.apiUrl + 'siteInspectionCategory/add', data);
+    }
+    updateSiteInspectionCategory(id, data) {
+        return this.https.put(this.apiUrl + 'siteInspectionCategory/update/' + id, data);
+    }
+    deleteSiteInspectionCategory(id) {
+        return this.https.delete(this.apiUrl + 'siteInspectionCategory/delete/' + id);
+    }
+    ////////////////// End Site Inspection category ////////////
+    ////////////////// Start Site Inspection Topic ///////////
+    getAllSiteInspectionTopic() {
+        return this.https.get(this.apiUrl + 'siteInspectionTopic/getAll');
+    }
+    getSiteInspectionTopic(id) {
+        return this.https.get(this.apiUrl + 'siteInspectionTopic/get/' + id);
+    }
+    addMultipleSiteInspectionTopic(data) {
+        return this.https.post(this.apiUrl + 'siteInspectionTopic/add/multiple', data);
+    }
+    addSiteInspectionTopic(data) {
+        return this.https.post(this.apiUrl + 'siteInspectionTopic/add', data);
+    }
+    updateSiteInspectionTopic(id, data) {
+        return this.https.put(this.apiUrl + 'siteInspectionTopic/update/' + id, data);
+    }
+    deleteSiteInspectionTopic(id) {
+        return this.https.delete(this.apiUrl + 'siteInspectionTopic/delete/' + id);
     }
 }
 LogicalFormInfoService.ɵfac = function LogicalFormInfoService_Factory(t) { return new (t || LogicalFormInfoService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };

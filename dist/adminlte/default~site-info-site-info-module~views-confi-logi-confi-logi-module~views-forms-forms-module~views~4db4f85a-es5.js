@@ -22,7 +22,7 @@
 
       var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
-      "fXoL");
+      "8Y7J");
       /* harmony import */
 
 
@@ -40,7 +40,7 @@
 
       var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/common/http */
-      "tk/3");
+      "IheW");
 
       var LogicalFormInfoService = /*#__PURE__*/function () {
         function LogicalFormInfoService(https) {
@@ -733,7 +733,147 @@
           key: "deleteStaff",
           value: function deleteStaff(id) {
             return this.https["delete"](this.apiUrl + 'staff/delete/' + id);
-          } /////////////////// Chemical Info End /////////
+          } ///////////////////  STAFF INFO End /////////
+          ///////////////// START Nature Of Incident//////////////
+
+        }, {
+          key: "getAllNatOfInc",
+          value: function getAllNatOfInc() {
+            return this.https.get(this.apiUrl + 'natureOfIncident/getAll');
+          }
+        }, {
+          key: "addNatOfInc",
+          value: function addNatOfInc(data) {
+            return this.https.post(this.apiUrl + 'natureOfIncident/add', data);
+          }
+        }, {
+          key: "addMultipleNatOfInc",
+          value: function addMultipleNatOfInc(data) {
+            return this.https.post(this.apiUrl + 'natureOfIncident/add/multiple', data);
+          }
+        }, {
+          key: "updateNatOfInc",
+          value: function updateNatOfInc(data, id) {
+            return this.https.put(this.apiUrl + 'natureOfIncident/update/' + id, data);
+          }
+        }, {
+          key: "deleteNatOfInc",
+          value: function deleteNatOfInc(id) {
+            return this.https["delete"](this.apiUrl + 'natureOfIncident/delete/' + id);
+          } ///////////////////  Nature Of Incident End /////////
+          ///////////////// START Changes Made//////////////
+
+        }, {
+          key: "getAllChangesMade",
+          value: function getAllChangesMade() {
+            return this.https.get(this.apiUrl + 'changesMade/getAll');
+          }
+        }, {
+          key: "addChangesMade",
+          value: function addChangesMade(data) {
+            return this.https.post(this.apiUrl + 'changesMade/add', data);
+          }
+        }, {
+          key: "addMultipleChangesMade",
+          value: function addMultipleChangesMade(data) {
+            return this.https.post(this.apiUrl + 'changesMade/add/multiple', data);
+          }
+        }, {
+          key: "updateChangesMade",
+          value: function updateChangesMade(data, id) {
+            return this.https.put(this.apiUrl + 'changesMade/update/' + id, data);
+          }
+        }, {
+          key: "deleteChangesMade",
+          value: function deleteChangesMade(id) {
+            return this.https["delete"](this.apiUrl + 'changesMade/delete/' + id);
+          } ///////////////////  Changes Made End /////////
+          ///////////////// Root Cause Of Incident Made//////////////
+
+        }, {
+          key: "getAllRootCause",
+          value: function getAllRootCause() {
+            return this.https.get(this.apiUrl + 'rootcauseOfIncident/getAll');
+          }
+        }, {
+          key: "addRootCause",
+          value: function addRootCause(data) {
+            return this.https.post(this.apiUrl + 'rootcauseOfIncident/add', data);
+          }
+        }, {
+          key: "addMultipleRootCause",
+          value: function addMultipleRootCause(data) {
+            return this.https.post(this.apiUrl + 'rootcauseOfIncident/add/multiple', data);
+          }
+        }, {
+          key: "updateRootCause",
+          value: function updateRootCause(data, id) {
+            return this.https.put(this.apiUrl + 'rootcauseOfIncident/update/' + id, data);
+          }
+        }, {
+          key: "deleteRootCause",
+          value: function deleteRootCause(id) {
+            return this.https["delete"](this.apiUrl + 'rootcauseOfIncident/delete/' + id);
+          } ///////////////////  Root Cause Of Incident End /////////
+          ///////////////// Type Of Incident Made//////////////
+
+        }, {
+          key: "getAllTypeOfIncident",
+          value: function getAllTypeOfIncident() {
+            return this.https.get(this.apiUrl + 'typeOfIncident/getAll');
+          }
+        }, {
+          key: "addTypeOfIncident",
+          value: function addTypeOfIncident(data) {
+            return this.https.post(this.apiUrl + 'typeOfIncident/add', data);
+          }
+        }, {
+          key: "addMultipleTypeOfIncident",
+          value: function addMultipleTypeOfIncident(data) {
+            return this.https.post(this.apiUrl + 'typeOfIncident/add/multiple', data);
+          }
+        }, {
+          key: "updateTypeOfIncident",
+          value: function updateTypeOfIncident(data, id) {
+            return this.https.put(this.apiUrl + 'typeOfIncident/update/' + id, data);
+          }
+        }, {
+          key: "deleteTypeOfIncident",
+          value: function deleteTypeOfIncident(id) {
+            return this.https["delete"](this.apiUrl + 'typeOfIncident/delete/' + id);
+          } ///////////////////  Type Of Incident End /////////
+          ///////////////// Incident Report Form//////////////
+
+        }, {
+          key: "getAllIncidentReport",
+          value: function getAllIncidentReport() {
+            return this.https.get(this.apiUrl + 'incidentForm/getAll');
+          }
+        }, {
+          key: "addIncidentReport",
+          value: function addIncidentReport(data) {
+            return this.https.post(this.apiUrl + 'incidentForm/add', data);
+          }
+        }, {
+          key: "addMultipleIncidentReport",
+          value: function addMultipleIncidentReport(data) {
+            return this.https.post(this.apiUrl + 'incidentForm/add/multiple', data);
+          }
+        }, {
+          key: "updateIncidentReport",
+          value: function updateIncidentReport(id, data) {
+            return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data);
+          }
+        }, {
+          key: "getIncidentReportById",
+          value: function getIncidentReportById(id) {
+            return this.https.get(this.apiUrl + 'incidentForm/get/' + id);
+          }
+        }, {
+          key: "deleteIncidentReport",
+          value: function deleteIncidentReport(id) {
+            return this.https["delete"](this.apiUrl + 'incidentForm/delete/' + id);
+          } ///////////////////  Incident Report Form End /////////
           /////////////////// Subscription Start /////////
           // /plan/getAll
 
@@ -771,6 +911,202 @@
           key: "deleteToolBox",
           value: function deleteToolBox(id) {
             return this.https["delete"](this.apiUrl + 'toolbox/delete/' + id);
+          } /////////////////// Subscription End /////////
+          ///////////////////////// Manager Start /////////
+
+        }, {
+          key: "addManager",
+          value: function addManager(data) {
+            return this.https.post(this.apiUrl + 'manager/add', data);
+          }
+        }, {
+          key: "editManager",
+          value: function editManager(id, data) {
+            return this.https.put(this.apiUrl + 'manager/update/' + id, data);
+          }
+        }, {
+          key: "getAllManager",
+          value: function getAllManager() {
+            return this.https.get(this.apiUrl + 'manager/getAll');
+          }
+        }, {
+          key: "getManagerById",
+          value: function getManagerById(id) {
+            return this.https.get(this.apiUrl + 'manager/get/' + id);
+          }
+        }, {
+          key: "deleteManager",
+          value: function deleteManager(id) {
+            return this.https["delete"](this.apiUrl + 'manager/delete/' + id);
+          }
+        }, {
+          key: "addMultipleManager",
+          value: function addMultipleManager(data) {
+            return this.https.post(this.apiUrl + 'manager/add/multiple', data);
+          } /////////////////////// ManagerEnd//////////
+          //////////////////// WHS Manager///////////
+
+        }, {
+          key: "addWHSManager",
+          value: function addWHSManager(data) {
+            return this.https.post(this.apiUrl + 'WHSManager/add', data);
+          }
+        }, {
+          key: "editWHSManager",
+          value: function editWHSManager(id, data) {
+            return this.https.put(this.apiUrl + 'WHSManager/update/' + id, data);
+          }
+        }, {
+          key: "getAllWHSManager",
+          value: function getAllWHSManager() {
+            return this.https.get(this.apiUrl + 'WHSManager/getAll');
+          }
+        }, {
+          key: "getWHSManagerById",
+          value: function getWHSManagerById(id) {
+            return this.https.get(this.apiUrl + 'WHSManager/get/' + id);
+          }
+        }, {
+          key: "deleteWHSManager",
+          value: function deleteWHSManager(id) {
+            return this.https["delete"](this.apiUrl + 'WHSManager/delete/' + id);
+          }
+        }, {
+          key: "addMultipleWHSManager",
+          value: function addMultipleWHSManager(data) {
+            return this.https.post(this.apiUrl + 'WHSManager/add/multiple', data);
+          } ////////////////// Start Site Inspection ///////////
+
+        }, {
+          key: "getAllSiteInspection",
+          value: function getAllSiteInspection() {
+            return this.https.get(this.apiUrl + 'siteInspection/getAll');
+          }
+        }, {
+          key: "addSiteInspection",
+          value: function addSiteInspection(data) {
+            return this.https.post(this.apiUrl + 'siteInspection/add', data);
+          }
+        }, {
+          key: "getSiteInspection",
+          value: function getSiteInspection(id) {
+            return this.https.get(this.apiUrl + 'siteInspection/get/' + id);
+          }
+        }, {
+          key: "updateSiteInspection",
+          value: function updateSiteInspection(id, data) {
+            return this.https.put(this.apiUrl + 'siteInspection/update/' + id, data);
+          }
+        }, {
+          key: "deleteSiteInspection",
+          value: function deleteSiteInspection(id) {
+            return this.https["delete"](this.apiUrl + 'siteInspection/delete/' + id);
+          } ////////////////// End Site Inspection ////////////
+          ////////////////////// Start Hzaard ///////
+
+        }, {
+          key: "getAllHazardFormData",
+          value: function getAllHazardFormData() {
+            return this.https.get(this.apiUrl + 'hazard/getAll');
+          }
+        }, {
+          key: "addHazardFormData",
+          value: function addHazardFormData(data) {
+            return this.https.post(this.apiUrl + 'hazard/add', data);
+          }
+        }, {
+          key: "getHazardFormDataById",
+          value: function getHazardFormDataById(id) {
+            return this.https.get(this.apiUrl + 'hazard/get/' + id);
+          }
+        }, {
+          key: "updateHazardFormData",
+          value: function updateHazardFormData(id, data) {
+            return this.https.put(this.apiUrl + 'hazard/update/' + id, data);
+          }
+        }, {
+          key: "deleteHazardFormData",
+          value: function deleteHazardFormData(id) {
+            return this.https["delete"](this.apiUrl + 'hazard/delete/' + id);
+          } //////////////End Hazard///////////
+
+        }, {
+          key: "getAllHazardTreatmentRelation",
+          value: function getAllHazardTreatmentRelation() {
+            return this.https.get(this.apiUrl + 'hazardTreatmentRelation/getAll');
+          }
+        }, {
+          key: "getHazardTreatmentById",
+          value: function getHazardTreatmentById(id) {
+            return this.https.get(this.apiUrl + 'hazardTreatmentRelation/get/' + id);
+          }
+        }, {
+          key: "updateHazardTreatmentRelation",
+          value: function updateHazardTreatmentRelation(id, data) {
+            return this.https.put(this.apiUrl + 'hazardTreatmentRelation/update/' + id, data);
+          } ////////////////// Start Site Inspection category ///////////
+
+        }, {
+          key: "getAllSiteInspectionCategory",
+          value: function getAllSiteInspectionCategory() {
+            return this.https.get(this.apiUrl + 'siteInspectionCategory/getAll');
+          }
+        }, {
+          key: "getSiteInspectionCategory",
+          value: function getSiteInspectionCategory(id) {
+            return this.https.get(this.apiUrl + 'siteInspectionCategory/get/' + id);
+          }
+        }, {
+          key: "getTopicByCategoryID",
+          value: function getTopicByCategoryID(id) {
+            return this.https.get(this.apiUrl + 'siteInspectionCategory/getAllTopics/' + id);
+          }
+        }, {
+          key: "addSiteInspectionCategory",
+          value: function addSiteInspectionCategory(data) {
+            return this.https.post(this.apiUrl + 'siteInspectionCategory/add', data);
+          }
+        }, {
+          key: "updateSiteInspectionCategory",
+          value: function updateSiteInspectionCategory(id, data) {
+            return this.https.put(this.apiUrl + 'siteInspectionCategory/update/' + id, data);
+          }
+        }, {
+          key: "deleteSiteInspectionCategory",
+          value: function deleteSiteInspectionCategory(id) {
+            return this.https["delete"](this.apiUrl + 'siteInspectionCategory/delete/' + id);
+          } ////////////////// End Site Inspection category ////////////
+          ////////////////// Start Site Inspection Topic ///////////
+
+        }, {
+          key: "getAllSiteInspectionTopic",
+          value: function getAllSiteInspectionTopic() {
+            return this.https.get(this.apiUrl + 'siteInspectionTopic/getAll');
+          }
+        }, {
+          key: "getSiteInspectionTopic",
+          value: function getSiteInspectionTopic(id) {
+            return this.https.get(this.apiUrl + 'siteInspectionTopic/get/' + id);
+          }
+        }, {
+          key: "addMultipleSiteInspectionTopic",
+          value: function addMultipleSiteInspectionTopic(data) {
+            return this.https.post(this.apiUrl + 'siteInspectionTopic/add/multiple', data);
+          }
+        }, {
+          key: "addSiteInspectionTopic",
+          value: function addSiteInspectionTopic(data) {
+            return this.https.post(this.apiUrl + 'siteInspectionTopic/add', data);
+          }
+        }, {
+          key: "updateSiteInspectionTopic",
+          value: function updateSiteInspectionTopic(id, data) {
+            return this.https.put(this.apiUrl + 'siteInspectionTopic/update/' + id, data);
+          }
+        }, {
+          key: "deleteSiteInspectionTopic",
+          value: function deleteSiteInspectionTopic(id) {
+            return this.https["delete"](this.apiUrl + 'siteInspectionTopic/delete/' + id);
           }
         }]);
 
