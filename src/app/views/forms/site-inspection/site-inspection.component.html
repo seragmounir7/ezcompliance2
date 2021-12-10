@@ -148,7 +148,7 @@
             <p for="exampleFormControlInput1" class="form-Label">Date</p>
             <input type="date" class="form-control outline"  formControlName="date" [class.is-invalid]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "/>
             <span *ngIf=" sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty  || sidePreview.get('date').touched) " class="invalid-feedback" >
-              This Field is Required</span>
+              Date is Required</span>
           </div>
 
           <!-- <div class="mb-3 col">
@@ -166,11 +166,12 @@
           <p class="subtitel">{{allcategory[index].category}}</p>
         </div>
         <div class="row" >
-        <div *ngFor="let row of add2().controls; let filed = index">
-          <div [formGroupName]="filed">
+        <ng-container
+         *ngFor="let row of add2().controls; let filed = index">
+          <ng-container [formGroupName]="filed">
             
             
-              <div class="mt-2 col" *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
+              <div class="mt-2 col-4" *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
                 <p  class="" *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
                  {{allTopic[filed].topic}}
                 </p>
@@ -193,8 +194,8 @@
                 </p>
               
           </div>
-          </div>
-        </div>
+          </ng-container>
+        </ng-container>
       </div>
       </div>
       </div>
@@ -1604,7 +1605,11 @@
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Item
                 </p>
-                <select
+                <input type="text" class="form-control outline"  formControlName="item" [class.is-invalid]=" add().controls[filed].get('item')?.hasError('required') && (add().controls[filed].get('item').dirty || add().controls[filed].get('item').touched) " />
+                <span *ngIf=" add().controls[filed].get('item')?.hasError('required') && (add().controls[filed].get('item').dirty  || add().controls[filed].get('item').touched) " class="invalid-feedback" >
+                  This Field is Required</span>
+          
+                <!-- <select
                   class="form-select form-control col outline form-dropdown"
                   aria-label="Default select example"
                   formControlName="item"
@@ -1613,21 +1618,24 @@
                     {{ this.add().controls[filed].get('item').value }}
                   </option>
                   <option *ngFor="let item of item_values">{{ item }}</option>
-                </select>
+                </select> -->
                 <!-- <input type="text"  class="form-select form-control col" aria-label="Default select example" formControlName="item"> -->
-              </div>
+              </div> 
 
               <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Action
                 </p>
-                <select
+                <input type="text" class="form-control outline"  formControlName="action" [class.is-invalid]=" add().controls[filed].get('action')?.hasError('required') && (add().controls[filed].get('action').dirty || add().controls[filed].get('action').touched) " />
+                <span *ngIf=" add().controls[filed].get('action')?.hasError('required') && (add().controls[filed].get('action').dirty  || add().controls[filed].get('action').touched) " class="invalid-feedback" >
+                  This Field is Required</span>
+                <!-- <select
                   class="form-select form-control col outline form-dropdown"
                   aria-label="Default select example"
                   formControlName="action"
                 >
                   <option  class="mr-1" value="{{ this.add().controls[filed].get('action').value }}"> {{ this.add().controls[filed].get('action').value }}</option>
-                </select>
+                </select> -->
               </div>
 
               <div class="my-3 col-2"  [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
@@ -1638,10 +1646,13 @@
                   class="form-select form-control col form-dropdown"
                   aria-label="Default select example"
                   formControlName="PersonResponsible"
+                  [class.is-invalid]=" add().controls[filed].get('PersonResponsible')?.hasError('required') && (add().controls[filed].get('PersonResponsible').dirty || add().controls[filed].get('PersonResponsible').touched) "
                 >
                   <option selected hidden>Select</option>
                   <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
                 </select>
+                <span *ngIf=" add().controls[filed].get('PersonResponsible')?.hasError('required') && (add().controls[filed].get('PersonResponsible').dirty  || add().controls[filed].get('PersonResponsible').touched) " class="invalid-feedback" >
+                  This Field is Required</span>
               </div>
               <!-- <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
@@ -1665,11 +1676,14 @@
                   class="form-select form-control col outline form-dropdown"
                   aria-label="Default select example"
                   formControlName="complete"
+                  [class.is-invalid]=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty || add().controls[filed].get('complete').touched) "
                 >
                   <option selected hidden>Select</option>
                   <option class="mr-1" value="yes">Yes</option>
                   <option class="mr-1" value="no">No</option>
                 </select>
+                <span *ngIf=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty  || add().controls[filed].get('complete').touched) " class="invalid-feedback" >
+                  This Field is Required</span>
               </div>
             </div>
           </div>
@@ -1689,7 +1703,7 @@
   </mat-tab-group>
   <!-- <div class="tab-content" id="myTabContent"> 
   </div> -->
-  <button class="btn btn-outline-primary mt-1"  type="submit" (click)="onSave()"  style="width: 10rem;
+  <button class="btn btn-outline-primary mt-1"  type="submit" [disabled]="!sidePreview.valid" (click)="onSave()"  style="width: 10rem;
   align-self: center;">
     Submit
   </button>
