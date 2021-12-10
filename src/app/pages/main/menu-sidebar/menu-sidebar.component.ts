@@ -29,14 +29,17 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     
     console.log(this.router.url);
     let rLink =this.router.url;
-    if(rLink ==='/admin/dynamicFormsList'){
+    if(rLink ==='/admin/roleMangement'){
       this.menuOpen(0) ;
    }
-   else if(rLink==='/admin/forms'){
+   else if(rLink==='/admin/dynamicFormsList'){
     this.menuOpen(1) ;
     }
-   else if(rLink==='/admin/confiLogi/setLogic' ||rLink==='/admin/confiLogi/setJobNumber'){
+   else if(rLink==='/admin/forms'){
     this.menuOpen(2) ;
+    }
+   else if(rLink==='/admin/confiLogi/setLogic' ||rLink==='/admin/confiLogi/setJobNumber'){
+    this.menuOpen(3) ;
     }
     else if(rLink==='/admin/siteInfo/addSite'||rLink==='/admin/siteInfo/addCustomer'||rLink==='/admin/siteInfo/jobTask'||rLink==='/admin/siteInfo/highRisk'||rLink==='/admin/siteInfo/licenceAndQual'||rLink==='/admin/siteInfo/licenceCat'||rLink==='/admin/siteInfo/ppeSel'||rLink==='/admin/siteInfo/hazards'||rLink==='/admin/siteInfo/contrlActReq'||rLink==='/admin/siteInfo/chemical'||rLink==='/admin/siteInfo/riskLevel'||rLink==='/admin/siteInfo/riskLevel'||rLink==='/admin/siteInfo/staff'){
       this.menuOpen(4) ;
