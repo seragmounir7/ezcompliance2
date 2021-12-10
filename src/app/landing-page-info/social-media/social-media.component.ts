@@ -19,7 +19,7 @@ import { AddAndEditSocialMediaComponent } from './add-and-edit-social-media/add-
 export class SocialMediaComponent implements OnInit {
   ELEMENT_DATA = [];
   socialMediaDetails!:FormGroup;
-  displayedColumns: string[] = ['facebook', 'twitter', 'youtube',  'action'];
+  displayedColumns: string[] = ['facebook', 'twitter', 'youtube', 'instagram', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

@@ -1,0 +1,23 @@
+
+<form [formGroup]="editTitle" >
+    <h2>Edit WHS Manager</h2>
+    <mat-form-field appearance="legacy"
+    class="example-full-width" style="width: 498px;">
+
+    <input matInput  formControlName="name" >
+    </mat-form-field>
+    <mat-form-field appearance="legacy"
+    class="example-full-width" style="width: 498px;">
+ 
+    <input matInput   formControlName="email" >
+    </mat-form-field>
+
+    <div class="row">
+        <div class="col-sm-2 offset-8 ">
+            <button mat-raised-button (click)="closeDialog()">Close</button>
+        </div>
+        <div class="col-sm-2  ">
+            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
+        </div>
+    </div>
+</form>   

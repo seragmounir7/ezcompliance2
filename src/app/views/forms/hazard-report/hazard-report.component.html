@@ -1,6 +1,6 @@
 <div class="btn btn-outline-primary " [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="container card px-4 py-4 content-center">
-  <form class="px-4 py-4" [formGroup]="hazardReport">
+  <form class="px-4 py-4" [formGroup]="hazardReport" (ngSubmit)="onFormSubmit()">
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form Preview</p>
     </div>
@@ -17,10 +17,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="postionRep"
-              formControlName="employeeFulltime"
+              
+              formControlName="employeeParttime"
               id="inlineCheckbox5"
-              value="option2"
+              value="option4"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox5"
               >Fulltime Employee</label
@@ -30,10 +30,10 @@
             <input
               class="form-check-input checkbox-lg"
               type="radio"
-              name="postionRep"
+             
               formControlName="employeeParttime"
               id="inlineCheckbox6"
-              value="option2"
+              value="option5"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox6"
               >Part-time Employee</label
@@ -43,10 +43,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="postionRep"
+             
               formControlName="employeeParttime"
               id="inlineCheckbox7"
-              value="option2"
+              value="option6"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox7"
               >Casual</label
@@ -56,10 +56,10 @@
             <input
               class="form-check-input"
               type="radio"
-              name="postionRep"
+ 
               formControlName="employeeParttime"
               id="inlineCheckbox8"
-              value="option2"
+              value="option7"
             />
             <label class="form-check-label ml-1" for="inlineCheckbox8"
               >Contractor</label
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="mb-3">
           <label for="exampleInputFullname" class="form-label">Full Name</label>
           <input
@@ -78,10 +78,21 @@
             formControlName="fullName"
             id="exampleInputFullname"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
+            && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) "
+            />
+          <span
+            *ngIf="
+            hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
+            || hazardReport.get('fullName').touched) "
+            class="invalid-feedback"
+          >
+          Full Name is Required</span
+          >
         </div>
       </div>
-      <div class="col-md-6">
+      </div>
+      <!-- <div class="col-md-6">
         <div class="mb-3">
           <label for="exampleInputSurname" class="form-label">Surname</label>
           <input
@@ -92,7 +103,8 @@
             aria-describedby="emailHelp"
           />
         </div>
-      </div>
+      </div> -->
+      <div class="row">
       <div class="col-md-6">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
@@ -104,7 +116,17 @@
             formControlName="email"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('email')?.hasError('required') 
+            && (hazardReport.get('email').dirty || hazardReport.get('email').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('email')?.hasError('required') && (hazardReport.get('email').dirty 
+            || hazardReport.get('email').touched) "
+            class="invalid-feedback"
+          >
+          Email is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -116,7 +138,17 @@
             formControlName="phone"
             id="exampleInputPhone"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('phone')?.hasError('required') 
+            && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('phone')?.hasError('required') && (hazardReport.get('phone').dirty 
+            || hazardReport.get('phone').touched) "
+            class="invalid-feedback"
+          >
+          Phone Number is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -130,7 +162,17 @@
             formControlName="department"
             id="exampleInputDepartment"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            || hazardReport.get('department').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -142,7 +184,17 @@
             formControlName="position"
             id="exampleInputPosition"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            || hazardReport.get('department').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -156,7 +208,18 @@
             formControlName="projectName"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            
+            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            || hazardReport.get('department').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
     </div>
@@ -169,24 +232,62 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label class="form-label">Manager/Supervisor</label>
-          <input
+          <select
+          formControlName="managerSupervisor"
+            class="form-select form-control col form-dropdown"
+            aria-label="Default select example"
+      
+          >
+            <option selected hidden>Select</option>
+            <option *ngFor="let manager of whsData"  [value]="manager._id" >{{manager.name}}</option>
+          
+          </select>
+           <!-- <input
             type="text"
             class="form-control"
             formControlName="managerSupervisor"
             aria-describedby="emailHelp"
-          />
+          /> -->
+          <!-- <input 
+          class="form-control"
+                  type="text" 
+               
+                  placeholder="Enter Name" 
+                  formControlName="myControlManager"
+                  matInput
+     
+                  [matAutocomplete]="auto2">
+           <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="changeName($event)" >
+               <mat-option           
+                   *ngFor="let manager of filteredManager | async" 
+                   [value]="manager">
+                 {{manager.name}}
+              </mat-option>
+          </mat-autocomplete> -->
+         
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
-          <input
+          <select
+          formControlName="managerSupervisorEmail"
+            class="form-select form-control col form-dropdown"
+            aria-label="Default select example"
+           
+          >
+            <option selected hidden>Select</option>
+            <option *ngFor="let manager of whsData"  [value]="manager.email" >{{manager.email}}</option>
+          
+          </select>
+          <!-- <input
             type="email"
             class="form-control"
             formControlName="managerSupervisorEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+          />  -->
+        
         </div>
       </div>
       <div class="col-md-6">
@@ -194,25 +295,40 @@
           <label for="exampleInputProjectNumber" class="form-label"
             >WHS Manager</label
           >
-          <input
-            type="Projectnumber"
+    
+            <input 
             class="form-control"
-            formControlName="whsManager"
-            id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
-          />
+                    type="text" 
+                 
+                    placeholder="Enter Name" 
+                    formControlName="myControl"
+                    matInput
+       
+                    [matAutocomplete]="auto">
+             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="change($event)" >
+                 <mat-option           
+                     *ngFor="let option of filteredOptions | async" 
+                     [value]="option">
+                   {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+      
+     
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
-          <input
+           <input
             type="email"
             class="form-control"
             formControlName="whsManagerEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
+           
           />
+          
+         
         </div>
       </div>
     </div>
@@ -229,19 +345,40 @@
             placeholder="Leave a comment here"
             id="floatingTextarea2"
             style="height: 120px"
+            aria-describedby="emailHelp"
+            [class.is-invalid]="hazardReport.get('describeHazard')?.hasError('required') 
+            && (hazardReport.get('describeHazard').dirty || hazardReport.get('describeHazard').touched) "
           ></textarea>
+          <span
+          *ngIf="
+          hazardReport.get('describeHazard')?.hasError('required') && (hazardReport.get('describeHazard').dirty 
+          || hazardReport.get('describeHazard').touched) "
+          class="invalid-feedback"
+        >
+        Description is Required</span
+        >
         </div>
       </div>
       <div class="col-md-3">
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Reported</label>
           <input
-            type="text"
+            type="date"
             class="form-control"
             formControlName="dateHazardReport"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('dateHazardReport')?.hasError('required') 
+            && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
+            || hazardReport.get('dateHazardReport').touched) "
+            class="invalid-feedback"
+          >
+          Date is Required</span
+          >
         </div>
       </div>
       <div class="col-md-3">
@@ -253,31 +390,61 @@
             formControlName="locationHazard"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('locationHazard')?.hasError('required') 
+            && (hazardReport.get('locationHazard').dirty || hazardReport.get('locationHazard').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('locationHazard')?.hasError('required') && (hazardReport.get('locationHazard').dirty 
+            || hazardReport.get('locationHazard').touched) "
+            class="invalid-feedback"
+          >
+          Location is Required</span
+          >
         </div>
       </div>
       <div class="col-md-3">
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Identified</label>
           <input
-            type="text"
+            type="date"
             class="form-control"
             formControlName="dateHazardIdentify"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
+            && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
+            || hazardReport.get('dateHazardIdentify').touched) "
+            class="invalid-feedback"
+          >
+          Date is Required</span
+          >
         </div>
       </div>
       <div class="col-md-3">
         <div class="mb-3">
           <label for="email" class="form-label">Job Number</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
-            formControlName="jobNumber"
+            formControlName="projectName"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required') 
+            && (hazardReport.get('projectName').dirty || hazardReport.get('projectName').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty 
+            || hazardReport.get('projectName').touched) "
+            class="invalid-feedback"
+          >
+          Job Number is Required</span
+          >
         </div>
       </div>
     </div>
@@ -383,15 +550,18 @@
         >
 
         <select
-          class="form-select form-control col"
+        formControlName="consequence"
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
+           (change)="getHazardNo()"
         >
           <option selected hidden>Select</option>
-          <option value="1">1-Insignificant</option>
+          <option *ngFor="let consequence of Consequences"  [value]="consequence.value" >{{consequence.name}}</option>
+          <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
           <option value="4">4-Major</option>
-          <option value="5">5-Catastrophic</option>
+          <option value="5">5-Catastrophic</option> -->
         </select>
       </div>
       <div class="mb-3 col">
@@ -399,15 +569,19 @@
           >Likelihood</label
         >
         <select
-          class="form-select form-control col"
+        formControlName="likelihood"
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
+          (change)="getHazardNo()"
         >
           <option selected hidden>Select</option>
-          <option value="1">1-Insignificant</option>
+          <option *ngFor="let likelihood of Likelihood" [value]="likelihood.value" >{{likelihood.name}}</option>
+
+          <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
           <option value="4">4-Major</option>
-          <option value="5">5-Catastrophic</option>
+          <option value="5">5-Catastrophic</option> -->
         </select>
       </div>
       <div class="mb-3 col">
@@ -415,26 +589,30 @@
           >Risk Rating</label
         >
         <select
-          class="form-select form-control col"
+        formControlName="riskRating"
+          class="form-select form-control col form-dropdown"
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
-          <option value="1">Low</option>
+          <option *ngFor="let rating of RiskRating" [value]="rating.value">{{rating.name}}</option>
+          <!-- <option value="1">Low</option>
           <option value="2">Medium</option>
-          <option value="3">High</option>
+          <option value="3">High</option> -->
         </select>
       </div>
+     
+     
     </div>
-    <div class="row py-4">
+   <div class="row py-4">
       <div class="col-md">
         <h2>Action Required</h2>
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            formControlName="actionRequired"
             id="inlineCheckbox1"
-            value="option1"
+            value="immediately"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox1"
             >Immediately</label
@@ -444,9 +622,9 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            formControlName="actionRequired"
             id="inlineCheckbox2"
-            value="option2"
+            value="today"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox2"
             >Today</label
@@ -456,9 +634,9 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            formControlName="actionRequired"
             id="inlineCheckbox3"
-            value="option2"
+            value="thisWeek"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox3"
             >This week</label
@@ -468,351 +646,375 @@
           <input
             class="form-check-input"
             type="radio"
-            name="action"
+            
+            formControlName="actionRequired"
             id="inlineCheckbox4"
-            value="option2"
+            value="this.Month"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox4"
             >This Month</label
           >
-        </div>
+        </div> 
       </div>
-    </div>
+    </div>  
     <h2 class="mt-3">Corrective Action</h2>
 
     <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can you eliminate the hazard</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="eliminateHazard"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="eliminateHazard"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+      <div class="col-md-4"  >
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="eliminateCorrect"
-            id="exampleInputSurname"
+   
             aria-describedby="emailHelp"
           />
         </div>
       </div>
-      <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+      <div class="col-md-2" >
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'" >
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="elliminateAction"
-            id="exampleInputEmail1"
+       
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="eliminateWhen"
-            id="exampleInputPhone"
+   
             aria-describedby="emailHelp"
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can you substitute a safe process</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="substitute"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="process"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('process').value  == 'no'">
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="substituteCorrect"
-            id="exampleInputSurname"
+
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('process').value  == 'no'">
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="substituteAction"
-            id="exampleInputEmail1"
+            
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('process').value  == 'no'">
+          <label  class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="substituteWhen"
-            id="exampleInputPhone"
+      
             aria-describedby="emailHelp"
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+        <div class="mb-3" >
+          <label  class="form-label"
             >Can the hazard be isolated</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="isolated"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="isolatedHazard"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="isolatedCorrect"
-            id="exampleInputSurname"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="isolatedAction"
-            id="exampleInputEmail1"
+      
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="isolatedWhen"
-            id="exampleInputPhone"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+        <div class="mb-3" >
+          <label class="form-label"
             >Can a solution be engreed</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="solution"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="complete"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('complete').value  == 'no'" >
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="solutionCorrect"
-            id="exampleInputSurname"
+         
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
+          <label class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="solutionAction"
-            id="exampleInputEmail1"
+   
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
             formControlName="solutionWhen"
-            id="exampleInputPhone"
+         
             aria-describedby="emailHelp"
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can procedures remove or reduce the risk</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="procedureRemove"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+                  class="form-select form-control col outline form-dropdown"
+                  aria-label="Default select example"
+                  formControlName="procedures"
+                >
+                  <option selected hidden>Select</option>
+                  <option class="mr-1" value="yes">Yes</option>
+                  <option class="mr-1" value="no">No</option>
+                </select>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
+          <label class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
             formControlName="procedureRemoveCorrect"
-            id="exampleInputSurname"
+     
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'" >
+          <label  class="form-label label_1"
             >Actioned by</label
           >
           <input
             type="email"
             class="form-control"
             formControlName="procedureRemoveAction"
-            id="exampleInputEmail1"
+           
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
-            formControlName="procedureRemoveWhen"
-            id="exampleInputPhone"
+            formControlName="procedureRemove"
+           
             aria-describedby="emailHelp"
           />
         </div>
       </div>
+      </div>
+      <div class="row">
       <div class="col-md-4">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label"
+          <label class="form-label"
             >Can the use PPE reduce the risk</label
           >
-          <input
-            type="fullname"
-            class="form-control"
-            formControlName="PPE"
-            id="exampleInputFullname"
-            aria-describedby="emailHelp"
-          />
+          <select
+          class="form-select form-control col outline form-dropdown"
+          aria-label="Default select example"
+          formControlName="reduceRisk"
+        >
+          <option selected hidden>Select</option>
+          <option class="mr-1" value="yes">Yes</option>
+          <option class="mr-1" value="no">No</option>
+        </select>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label"
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
+          <label  class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
-            formControlName="PPEcorrect"
-            id="exampleInputSurname"
+            formControlName="PPECorrect"
+          
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label label_1"
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'" >
+          <label class="form-label label_1"
             >Actioned by</label
           >
+
           <input
             type="email"
             class="form-control"
-            formControlName="PPEaction"
-            id="exampleInputEmail1"
+            formControlName="PPEAction"
+            
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label label_1"
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'" >
+          <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
-            formControlName="PPEwhen"
-            id="exampleInputPhone"
+            formControlName="PPEWhen"
+        
             aria-describedby="emailHelp"
           />
         </div>
@@ -823,48 +1025,123 @@
     <div class="row">
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label">Name</label>
+          <label class="form-label">Name</label>
           <input
             type="fullname"
             class="form-control"
             formControlName="name"
-            id="exampleInputFullname"
+          
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('name')?.hasError('required') 
+            && (hazardReport.get('name').dirty || hazardReport.get('name').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty 
+            || hazardReport.get('name').touched) "
+            class="invalid-feedback"
+          >
+          Name is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label">Position</label>
+          <label class="form-label">Position</label>
           <input
             type="surname"
             class="form-control"
             formControlName="compilePosition"
-            id="exampleInputSurname"
+    
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required') 
+            && (hazardReport.get('compilePosition').dirty || hazardReport.get('compilePosition').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('compilePosition')?.hasError('required') && (hazardReport.get('compilePosition').dirty 
+            || hazardReport.get('compilePosition').touched) "
+            class="invalid-feedback"
+          >
+          Position is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label">Department</label>
+          <label  class="form-label">Department</label>
           <input
             type="surname"
             class="form-control"
             formControlName="compileDepartment"
-            id="exampleInputSurname"
+           
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('compileDepartment')?.hasError('required') 
+            && (hazardReport.get('compileDepartment').dirty || hazardReport.get('compileDepartment').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('compileDepartment')?.hasError('required') && (hazardReport.get('compileDepartment').dirty 
+            || hazardReport.get('compileDepartment').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
       <div class="mb-3 col-md-6">
         <label class="form-label">File Upload</label>
-        <input
+      
+        <!-- <img
+        [src]="selectedImage"
+        onerror="this.src='../../../assets/img/uploadImg.png'"
+        class="imageStud"
+        alt=""
+        width="100"
+        height="100"
+      />
+      <input
+        type="file"
+        #contactImage
+        class="custom-file-input img1 form-control"
+        (change)="browser($event)"
+        id="inputGroupFile01"
+        name="avatar"
+        style="display: none"
+      />
+      <span
+      class="material-icons material-file"
+      (click)="contactImage.click()"
+      class="btn border bg-white"
+      style="
+        position: absolute;
+        top: 95px;
+        font-size: 1rem !important;
+      "
+    >
+      <i
+        class="fa fa-upload"
+        aria-hidden="true"
+        style="margin: 0px"
+      ></i>
+    </span> -->
+        <!-- <input
           class="form-control"
           formControlName="fileUpload"
           type="file"
           id="formFile"
-        />
+        /> -->
+
+      <input
+        type="file"
+      
+        class="form-control"
+        (change)="browser($event)"
+       #file
+        id="file"
+       
+      />
+      <!-- <img   [src]="selectedImage"alt="Site Logo" width="50" height="50"> -->
       </div>
       <div class="col-md-6">
         <!-- <mat-form-field appearance="outline">
@@ -879,9 +1156,19 @@
             value=""
             class="form-control"
             formControlName="date"
-            id="exampleInputSurname"
+          
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
+            && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 
+            || hazardReport.get('date').touched) "
+            class="invalid-feedback"
+          >
+          Date is Required</span
+          >
         </div>
       </div>
       <div class="col-md-12">
@@ -891,7 +1178,16 @@
             [options]="signaturePadOptions"
             (onBeginEvent)="drawStart()"
             (onEndEvent)="drawComplete()"
+            #Signature1
+            [class.is-invalid]="singRequired"
           ></signature-pad>
+          <span
+          *ngIf="singRequired"
+          class="invalid-feedback"
+        >
+        This Field is Required</span
+        
+        >
         </div>
         <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
         <button class="btn btn-outline-primary my-3" (click)="clear()">
@@ -899,5 +1195,12 @@
         </button>
       </div>
     </div>
-  </form>
+ 
+  <hr />
+
+  <br />
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </div>
+</form>
 </div>

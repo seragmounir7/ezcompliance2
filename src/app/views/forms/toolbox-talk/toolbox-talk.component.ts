@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -20,7 +20,9 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   signature:SignaturePad;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;
-  // @ViewChild('Signature2') signaturePad2: SignaturePad;
+  singRequired: any;
+  sing2Required=[]
+ @ViewChildren('Signature2') signaturePad2: QueryList<SignaturePad>;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -30,16 +32,16 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     public router: Router
   ) {
     this.toolBox = this.fb.group({
-      siteName: [''],
-      customerName: [''],
-      streetAddr:[''],
-      custConct: [''],
-      custConctPh: [''],
-      custEmail: [''],
-      jobNumberId: [''],
-      signaturePad1:[''],
-      date:[''],
-      meetingBy:[''],
+      siteName: ['',Validators.required],
+      customerName: ['',Validators.required],
+      streetAddr:['',Validators.required],
+      custConct: ['',Validators.required],
+      custConctPh: ['',Validators.required],
+      custEmail: ['',Validators.required],
+      jobNumberId: ['',Validators.required],
+      meetingBy:['',Validators.required],
+      date:['',Validators.required],
+      signaturePad1:['',Validators.required],
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),
       attendees: this.fb.array([])
@@ -52,7 +54,7 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     this.getAllStaff();
     this.dynamicFormsService.homebarTitle.next('ToolBox Talk Form');
     this.setTitle.setTitle('WHS-ToolBox Talk Form');
-    if(this.id!=='null')
+    if(this.id!=='form')
     {
       console.log("id",this.id);
       this.getToolboxByid(this.id);
@@ -63,7 +65,10 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
       this.addCorrectAct();
       this.addAttendee();
     }
+    
+    
   }
+ 
   getToolboxByid(id)
   {
     this.logicalFormInfo.getToolboxById(id).subscribe((res:any)=>{
@@ -87,6 +92,16 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
       check().then(() => {
 
         this.signaturePad1.fromDataURL(res.data.signaturePad1)
+      })
+      let check2 =async () => { this.signaturePad2 != null }
+      check2().then(() => {
+        console.log( this.signaturePad2);
+        setTimeout(() => {
+          let signaturePadArr=this.signaturePad2.toArray()
+          res.data.attendees.forEach((x,i) => {
+            signaturePadArr[i].fromDataURL(x.signature)
+          });
+        }, 2000); 
       })
     })
   }
@@ -160,9 +175,9 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   }
   issuesForm(): FormGroup {
     return this.fb.group({
-      index: [],
-      topicDisc: [],
-      topicRes: [],
+      index: ['',Validators.required],
+      topicDisc: ['',Validators.required],
+      topicRes: ['',Validators.required],
     });
   }
   removeIssues(i) {
@@ -177,9 +192,9 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   }
   correctActForm(): FormGroup {
     return this.fb.group({
-      action: [],
-      personRes: [],
-      complete: [],
+      action: ['',Validators.required],
+      personRes: ['',Validators.required],
+      complete: ['',Validators.required],
     });
   }
   removeCorrectAct(i) {
@@ -194,8 +209,8 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   }
   attendeeForm(): FormGroup {
     return this.fb.group({
-      employee: [],
-      signature:[],
+      employee: ['',Validators.required],
+      signature: ['',Validators.required],
     });
   }
   removeAttendee(i) {
@@ -235,28 +250,43 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   }
   clear1() {
     this.signaturePad1.clear();
+    this.toolBox.controls['signaturePad1'].setValue("");
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     // this.signaturePad2=null;
     console.log('begin drawing');
+    this.singRequired = this.toolBox.controls['signaturePad1'].invalid
   }
   drawComplete2(index,sign) {
+    console.log("sign",sign);
+    
+    //this.sing2Required[index]=this.attendee().controls[index].get('signature').invalid
   this.attendee().controls[index].get('signature').setValue(sign.toDataURL());
     // will be notified of szimek/signature_pad's onEnd event
   }
   clear2(i) {
-   
+    this.attendee().controls[i].get('signature').setValue("");
     // this.signaturePad2.clear();
   }
-  drawStart2() {
+  drawStart2(index) {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    this.sing2Required[index]=this.attendee().controls[index].get('signature').invalid
+    console.log(" this.sing2Required", this.sing2Required[index]);
+    
   }
   onSave()
   {
+    for (let index = 0; index <  this.attendee().length; index++) {
+      this.sing2Required[index]=this.attendee().controls[index].get('signature').invalid
+      
+    }
+   
+    this.singRequired = this.toolBox.controls['signaturePad1'].invalid
+
     console.log("form data",this.toolBox.value);
-    if(this.id!=='null')
+    if(this.id!=='form')
     {
       const data={
         ...this.toolBox.value

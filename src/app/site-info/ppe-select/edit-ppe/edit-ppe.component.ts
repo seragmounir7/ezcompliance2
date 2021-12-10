@@ -11,6 +11,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class EditPPEComponent implements OnInit {
   editTitle!: FormGroup;
   dataRec: any;
+
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,

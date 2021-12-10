@@ -1,7 +1,7 @@
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { registerLocaleData, CommonModule ,HashLocationStrategy, LocationStrategy} from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData, CommonModule ,HashLocationStrategy, LocationStrategy, DatePipe} from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -37,6 +37,8 @@ import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.c
 // import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { TextareaAutoresizeDirective } from './Directives/textarea-autoresize.directive';
+import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -78,6 +80,7 @@ registerLocaleData(localeEn, 'en-EN');
       preventDuplicates: true,
     }),
     NgbModule,
+    NgxMatTimepickerModule,
     HttpClientModule,
     DndModule,
     //   DxButtonModule,
@@ -87,7 +90,17 @@ registerLocaleData(localeEn, 'en-EN');
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [TextareaAutoresizeDirective, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [
+    TextareaAutoresizeDirective,
+     { provide: LocationStrategy, 
+      useClass: HashLocationStrategy },
+      {
+        provide:HTTP_INTERCEPTORS,
+        useClass:SpinnerInterceptor,
+        multi:true
+      },
+      DatePipe
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

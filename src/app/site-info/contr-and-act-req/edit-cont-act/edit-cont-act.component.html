@@ -1,10 +1,8 @@
 <form [formGroup]="editTitle" >
     <h2>Edit Control And Action</h2>
-    <mat-form-field appearance="legacy"
-    class="example-full-width" style="width: 498px;">
-    <!-- <mat-label>Edit Job Task</mat-label> -->
-    <input matInput   formControlName="title">
-    </mat-form-field>
+    <textarea   autosize 
+    class="form-control sign"   formControlName="title" ></textarea>
+    <br>
     <div class="row">
         <div class="col-sm-2 offset-8 ">
             <button mat-raised-button (click)="closeDialog()">Close</button>
