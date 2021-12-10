@@ -63,11 +63,12 @@ goTo(title)
   if(title==="Hazards Reported")
   {
     this.router.navigate(["/admin/forms/hazardTable"]);
-  if(title==="Notifiable Incidents")
+  
+}
+if(title==="Notifiable Incidents")
   {
     this.router.navigate(["/admin/forms/incidentsTable"]);
   }
-}
 }
 
   ngOnInit(): void {
