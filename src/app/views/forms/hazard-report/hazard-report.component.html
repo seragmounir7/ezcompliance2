@@ -78,7 +78,17 @@
             formControlName="fullName"
             id="exampleInputFullname"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
+            && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) "
+            />
+          <span
+            *ngIf="
+            hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
+            || hazardReport.get('fullName').touched) "
+            class="invalid-feedback"
+          >
+          Full Name is Required</span
+          >
         </div>
       </div>
       </div>
@@ -106,7 +116,17 @@
             formControlName="email"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('email')?.hasError('required') 
+            && (hazardReport.get('email').dirty || hazardReport.get('email').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('email')?.hasError('required') && (hazardReport.get('email').dirty 
+            || hazardReport.get('email').touched) "
+            class="invalid-feedback"
+          >
+          Email is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -118,7 +138,17 @@
             formControlName="phone"
             id="exampleInputPhone"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('phone')?.hasError('required') 
+            && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('phone')?.hasError('required') && (hazardReport.get('phone').dirty 
+            || hazardReport.get('phone').touched) "
+            class="invalid-feedback"
+          >
+          Phone Number is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -132,7 +162,17 @@
             formControlName="department"
             id="exampleInputDepartment"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            || hazardReport.get('department').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -144,7 +184,17 @@
             formControlName="position"
             id="exampleInputPosition"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            || hazardReport.get('department').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -158,7 +208,18 @@
             formControlName="projectName"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            
+            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            || hazardReport.get('department').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
     </div>
@@ -171,12 +232,22 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label class="form-label">Manager/Supervisor</label>
-           <input
+          <select
+          formControlName="managerSupervisor"
+            class="form-select form-control col form-dropdown"
+            aria-label="Default select example"
+      
+          >
+            <option selected hidden>Select</option>
+            <option *ngFor="let manager of whsData"  [value]="manager._id" >{{manager.name}}</option>
+          
+          </select>
+           <!-- <input
             type="text"
             class="form-control"
             formControlName="managerSupervisor"
             aria-describedby="emailHelp"
-          />
+          /> -->
           <!-- <input 
           class="form-control"
                   type="text" 
@@ -192,20 +263,30 @@
                    [value]="manager">
                  {{manager.name}}
               </mat-option>
-          </mat-autocomplete>
-         -->
+          </mat-autocomplete> -->
+         
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
-          <input
+          <select
+          formControlName="managerSupervisorEmail"
+            class="form-select form-control col form-dropdown"
+            aria-label="Default select example"
+           
+          >
+            <option selected hidden>Select</option>
+            <option *ngFor="let manager of whsData"  [value]="manager.email" >{{manager.email}}</option>
+          
+          </select>
+          <!-- <input
             type="email"
             class="form-control"
             formControlName="managerSupervisorEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          /> 
+          />  -->
         
         </div>
       </div>
@@ -264,7 +345,18 @@
             placeholder="Leave a comment here"
             id="floatingTextarea2"
             style="height: 120px"
+            aria-describedby="emailHelp"
+            [class.is-invalid]="hazardReport.get('describeHazard')?.hasError('required') 
+            && (hazardReport.get('describeHazard').dirty || hazardReport.get('describeHazard').touched) "
           ></textarea>
+          <span
+          *ngIf="
+          hazardReport.get('describeHazard')?.hasError('required') && (hazardReport.get('describeHazard').dirty 
+          || hazardReport.get('describeHazard').touched) "
+          class="invalid-feedback"
+        >
+        Description is Required</span
+        >
         </div>
       </div>
       <div class="col-md-3">
@@ -276,7 +368,17 @@
             formControlName="dateHazardReport"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('dateHazardReport')?.hasError('required') 
+            && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
+            || hazardReport.get('dateHazardReport').touched) "
+            class="invalid-feedback"
+          >
+          Date is Required</span
+          >
         </div>
       </div>
       <div class="col-md-3">
@@ -288,7 +390,17 @@
             formControlName="locationHazard"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('locationHazard')?.hasError('required') 
+            && (hazardReport.get('locationHazard').dirty || hazardReport.get('locationHazard').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('locationHazard')?.hasError('required') && (hazardReport.get('locationHazard').dirty 
+            || hazardReport.get('locationHazard').touched) "
+            class="invalid-feedback"
+          >
+          Location is Required</span
+          >
         </div>
       </div>
       <div class="col-md-3">
@@ -300,7 +412,17 @@
             formControlName="dateHazardIdentify"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
+            && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
+            || hazardReport.get('dateHazardIdentify').touched) "
+            class="invalid-feedback"
+          >
+          Date is Required</span
+          >
         </div>
       </div>
       <div class="col-md-3">
@@ -309,10 +431,20 @@
           <input
             type="text"
             class="form-control"
-            formControlName="jobNumber"
+            formControlName="projectName"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required') 
+            && (hazardReport.get('projectName').dirty || hazardReport.get('projectName').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty 
+            || hazardReport.get('projectName').touched) "
+            class="invalid-feedback"
+          >
+          Job Number is Required</span
+          >
         </div>
       </div>
     </div>
@@ -418,13 +550,13 @@
         >
 
         <select
-        formControlName="Consequence"
+        formControlName="consequence"
           class="form-select form-control col form-dropdown"
           aria-label="Default select example"
-
+           (change)="getHazardNo()"
         >
           <option selected hidden>Select</option>
-          <option *ngFor="let consequence of Consequences"  >{{consequence.name}}</option>
+          <option *ngFor="let consequence of Consequences"  [value]="consequence.value" >{{consequence.name}}</option>
           <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
@@ -440,9 +572,10 @@
         formControlName="likelihood"
           class="form-select form-control col form-dropdown"
           aria-label="Default select example"
+          (change)="getHazardNo()"
         >
           <option selected hidden>Select</option>
-          <option *ngFor="let likelihood of Likelihood"  >{{likelihood.name}}</option>
+          <option *ngFor="let likelihood of Likelihood" [value]="likelihood.value" >{{likelihood.name}}</option>
 
           <!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
@@ -461,23 +594,25 @@
           aria-label="Default select example"
         >
           <option selected hidden>Select</option>
-          <option *ngFor="let rating of RiskRating">{{rating.name}}</option>
+          <option *ngFor="let rating of RiskRating" [value]="rating.value">{{rating.name}}</option>
           <!-- <option value="1">Low</option>
           <option value="2">Medium</option>
           <option value="3">High</option> -->
         </select>
       </div>
+     
+     
     </div>
-    <div class="row py-4">
+   <div class="row py-4">
       <div class="col-md">
         <h2>Action Required</h2>
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
             type="radio"
-            formControlName="action"
+            formControlName="actionRequired"
             id="inlineCheckbox1"
-            value="option1"
+            value="immediately"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox1"
             >Immediately</label
@@ -487,9 +622,9 @@
           <input
             class="form-check-input"
             type="radio"
-            formControlName="action"
+            formControlName="actionRequired"
             id="inlineCheckbox2"
-            value="option2"
+            value="today"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox2"
             >Today</label
@@ -499,9 +634,9 @@
           <input
             class="form-check-input"
             type="radio"
-            formControlName="action"
+            formControlName="actionRequired"
             id="inlineCheckbox3"
-            value="option3"
+            value="thisWeek"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox3"
             >This week</label
@@ -512,16 +647,16 @@
             class="form-check-input"
             type="radio"
             
-            formControlName="action"
+            formControlName="actionRequired"
             id="inlineCheckbox4"
-            value="option4"
+            value="this.Month"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox4"
             >This Month</label
           >
-        </div>
+        </div> 
       </div>
-    </div>
+    </div>  
     <h2 class="mt-3">Corrective Action</h2>
 
     <div class="row">
@@ -542,7 +677,7 @@
         </div>
       </div>
       <div class="col-md-4"  >
-        <div class="mb-3"  *ngIf="hazardReport.get('eliminateHazard').value=='yes'">
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
           <label class="form-label"
             >Corrective Action</label
           >
@@ -556,7 +691,7 @@
         </div>
       </div>
       <div class="col-md-2" >
-        <div class="mb-3"  *ngIf="hazardReport.get('eliminateHazard').value=='yes'" >
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'" >
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -570,7 +705,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3"  *ngIf="hazardReport.get('eliminateHazard').value=='yes'">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
           <label class="form-label label_1"
             >By when</label
           >
@@ -602,7 +737,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3" >
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('process').value  == 'no'">
           <label class="form-label"
             >Corrective Action</label
           >
@@ -616,7 +751,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('process').value  == 'no'">
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -630,7 +765,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('process').value  == 'no'">
           <label  class="form-label label_1"
             >By when</label
           >
@@ -646,7 +781,7 @@
       </div>
       <div class="row">
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label  class="form-label"
             >Can the hazard be isolated</label
           >
@@ -662,7 +797,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
           <label class="form-label"
             >Corrective Action</label
           >
@@ -676,7 +811,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -690,7 +825,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
           <label class="form-label label_1"
             >By when</label
           >
@@ -706,7 +841,7 @@
       </div>
       <div class="row">
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3" >
           <label class="form-label"
             >Can a solution be engreed</label
           >
@@ -722,7 +857,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3" >
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('complete').value  == 'no'" >
           <label class="form-label"
             >Corrective Action</label
           >
@@ -736,7 +871,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3" >
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
           <label class="form-label label_1"
             >Actioned by</label
           >
@@ -750,7 +885,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
           <label class="form-label label_1"
             >By when</label
           >
@@ -782,7 +917,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
           <label class="form-label"
             >Corrective Action</label
           >
@@ -796,7 +931,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3" >
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'" >
           <label  class="form-label label_1"
             >Actioned by</label
           >
@@ -810,14 +945,14 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
           <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
-            formControlName="procedureRemoveWhen"
+            formControlName="procedureRemove"
            
             aria-describedby="emailHelp"
           />
@@ -842,42 +977,43 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mb-3">
+        <div class="mb-3"  [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
           <label  class="form-label"
             >Corrective Action</label
           >
           <input
             type="surname"
             class="form-control"
-            formControlName="PPEcorrect"
+            formControlName="PPECorrect"
           
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3" >
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'" >
           <label class="form-label label_1"
             >Actioned by</label
           >
+
           <input
             type="email"
             class="form-control"
-            formControlName="PPEaction"
+            formControlName="PPEAction"
             
             aria-describedby="emailHelp"
           />
         </div>
       </div>
       <div class="col-md-2">
-        <div class="mb-3" >
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'" >
           <label class="form-label label_1"
             >By when</label
           >
           <input
             type="date"
             class="form-control"
-            formControlName="PPEwhen"
+            formControlName="PPEWhen"
         
             aria-describedby="emailHelp"
           />
@@ -896,7 +1032,17 @@
             formControlName="name"
           
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('name')?.hasError('required') 
+            && (hazardReport.get('name').dirty || hazardReport.get('name').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty 
+            || hazardReport.get('name').touched) "
+            class="invalid-feedback"
+          >
+          Name is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -908,7 +1054,17 @@
             formControlName="compilePosition"
     
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required') 
+            && (hazardReport.get('compilePosition').dirty || hazardReport.get('compilePosition').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('compilePosition')?.hasError('required') && (hazardReport.get('compilePosition').dirty 
+            || hazardReport.get('compilePosition').touched) "
+            class="invalid-feedback"
+          >
+          Position is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
@@ -920,17 +1076,72 @@
             formControlName="compileDepartment"
            
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('compileDepartment')?.hasError('required') 
+            && (hazardReport.get('compileDepartment').dirty || hazardReport.get('compileDepartment').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('compileDepartment')?.hasError('required') && (hazardReport.get('compileDepartment').dirty 
+            || hazardReport.get('compileDepartment').touched) "
+            class="invalid-feedback"
+          >
+          Department is Required</span
+          >
         </div>
       </div>
       <div class="mb-3 col-md-6">
         <label class="form-label">File Upload</label>
-        <input
+      
+        <!-- <img
+        [src]="selectedImage"
+        onerror="this.src='../../../assets/img/uploadImg.png'"
+        class="imageStud"
+        alt=""
+        width="100"
+        height="100"
+      />
+      <input
+        type="file"
+        #contactImage
+        class="custom-file-input img1 form-control"
+        (change)="browser($event)"
+        id="inputGroupFile01"
+        name="avatar"
+        style="display: none"
+      />
+      <span
+      class="material-icons material-file"
+      (click)="contactImage.click()"
+      class="btn border bg-white"
+      style="
+        position: absolute;
+        top: 95px;
+        font-size: 1rem !important;
+      "
+    >
+      <i
+        class="fa fa-upload"
+        aria-hidden="true"
+        style="margin: 0px"
+      ></i>
+    </span> -->
+        <!-- <input
           class="form-control"
           formControlName="fileUpload"
           type="file"
           id="formFile"
-        />
+        /> -->
+
+      <input
+        type="file"
+      
+        class="form-control"
+        (change)="browser($event)"
+       #file
+        id="file"
+       
+      />
+      <!-- <img   [src]="selectedImage"alt="Site Logo" width="50" height="50"> -->
       </div>
       <div class="col-md-6">
         <!-- <mat-form-field appearance="outline">
@@ -947,7 +1158,17 @@
             formControlName="date"
           
             aria-describedby="emailHelp"
-          />
+            [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
+            && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "
+            />
+            <span
+            *ngIf="
+            hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 
+            || hazardReport.get('date').touched) "
+            class="invalid-feedback"
+          >
+          Date is Required</span
+          >
         </div>
       </div>
       <div class="col-md-12">
@@ -957,7 +1178,16 @@
             [options]="signaturePadOptions"
             (onBeginEvent)="drawStart()"
             (onEndEvent)="drawComplete()"
+            #Signature1
+            [class.is-invalid]="singRequired"
           ></signature-pad>
+          <span
+          *ngIf="singRequired"
+          class="invalid-feedback"
+        >
+        This Field is Required</span
+        
+        >
         </div>
         <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
         <button class="btn btn-outline-primary my-3" (click)="clear()">
@@ -965,11 +1195,12 @@
         </button>
       </div>
     </div>
-  </form>
+ 
   <hr />
 
   <br />
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
   </div>
+</form>
 </div>

@@ -124,7 +124,6 @@ select {
   background-size: 0.925em;
   background-repeat: no-repeat;
 }
-.disableDiv {
-  pointer-events: none;
-  opacity: 0.5;
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
 }

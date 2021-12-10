@@ -755,6 +755,24 @@ export class LogicalFormInfoService {
 
 
   ////////////////// End Site Inspection ////////////
+  ////////////////////// Start Hzaard ///////
+  
+  getAllHazardFormData() {
+    return this.https.get(this.apiUrl + 'hazard/getAll')
+  }
+  addHazardFormData(data) {
+    return this.https.post(this.apiUrl + 'hazard/add', data)
+  }
+  getHazardFormDataById(id) {
+    return this.https.get(this.apiUrl + 'hazard/get/'+ id)
+  }
+  updateHazardFormData(id, data) {
+    return this.https.put(this.apiUrl + 'hazard/update/'+ id, data)
+  }
+  deleteHazardFormData(id) {
+    return this.https.delete(this.apiUrl + 'hazard/delete/'+ id)
+  }
+  //////////////End Hazard///////////
   getAllHazardTreatmentRelation() {
     return this.https.get(this.apiUrl + 'hazardTreatmentRelation/getAll')
   }

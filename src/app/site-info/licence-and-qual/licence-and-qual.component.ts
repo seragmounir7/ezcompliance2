@@ -23,7 +23,7 @@ export class LicenceAndQualComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title','category','action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
 
