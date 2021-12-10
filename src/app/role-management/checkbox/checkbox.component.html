@@ -7,11 +7,11 @@
   <div class="col ml-2 pt-3">
     <h1>Role Management List</h1>
   </div>
-  <div class="col-6">
+  <!-- <div class="col-6">
     <mat-form-field>
       <input matInput #input placeholder="Search" (keyup)="applyFilter($event)" />
     </mat-form-field>
-  </div>
+  </div> -->
   <div class="">
     <table mat-table [dataSource]="tempArray" matSort>
       <!-- Position Column -->
@@ -108,9 +108,9 @@
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      <tr class="mat-row" *matNoDataRow>
+      <!-- <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">Data Not Found "{{ input.value }}"</td>
-      </tr>
+      </tr> -->
     </table>
   
     <mat-paginator
@@ -119,5 +119,13 @@
       aria-label="Select page of periodic elements"
     >
     </mat-paginator>
+    <div class="row">
+      <div class="col mt-2 mb-2">
+          <button  _ngcontent-hqi-c400="" type="button"
+              class="btn btn-primary mt-1 mr-2 "> Submit
+            </button>
+          </div> 
+      </div>
   </div>
+ 
   
