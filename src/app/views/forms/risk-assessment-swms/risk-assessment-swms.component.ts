@@ -150,7 +150,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       customerName: [''],
       streetNo: [''],
       streetAddr: [''],
-      subUrb: [''],
+      suburb: [''],
       custConct: [''],
       custConctPh: [''],
       custEmail: [''],
@@ -158,11 +158,18 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       dateTime: [''],
       statesSWMS: [''],
       projectManager: [''],
+      date: [''],
       projectManagerSWMS: [''],
       jurisdiction: [''],
       safetyLeg: [''],
       regulator: [''],
       CodeOfPract: [''],
+      location: [''],
+      qty: [],
+      expiryDate: [''],
+      hazardous: this.fb.array([]),
+      ppeSelection: this.fb.array([]),
+      file: this.fb.array([]),
       SDSRegister: this.fb.array([]),
       riskLevel: this.fb.array([]),
       residualRisk: this.fb.array([]),
@@ -781,5 +788,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       console.log('setProjectManager==>',this.projectManager)
       this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
     }
+  }
+
+  onSubmit(){
+    console.log("this.riskAssessmentFb",this.riskAssessmentFb);
+    
   }
 }

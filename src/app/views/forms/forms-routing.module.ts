@@ -10,6 +10,7 @@ import { SiteInspectionComponent } from './site-inspection/site-inspection.compo
 import { ToolboxTalkComponent } from './toolbox-talk/toolbox-talk.component';
 import {SiteInspectionTableComponent} from './site-inspection-table/site-inspection-table.component'
 import { HazardFormTableDetailsComponent } from './hazard-form-table-details/hazard-form-table-details.component';
+import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
 const routes: Routes = [
   { path: '', component: FormsComponent },
   { path: 'forms', component: FormsComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'riskAssessSWMS', component: RiskAssessmentSWMSComponent },
   { path: 'tableData', component: DisplayTableComponent},
   { path:'siteinspectiontable', component:SiteInspectionTableComponent},
-  {path:'hazardTable',component:HazardFormTableDetailsComponent}
+  {path:'hazardTable',component:HazardFormTableDetailsComponent},
+  { path: 'incidentsTable', component:IncidentsTableComponent}
 ];
 
 @NgModule({

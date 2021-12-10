@@ -12,6 +12,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class IncidentReportComponent implements OnInit {
   SiteIncident: FormGroup;
   fileData: any;
+  data:any;
+  staff:any;
   fileArr = [];
   imgArr = [];
   fileObj = [];
@@ -48,10 +51,13 @@ export class IncidentReportComponent implements OnInit {
   natureOfIncSelectedArr=[];
   typeOfIncidentsSelectedArr=[];
   rootSelectedArr=[];
+  id: string;
+  dataUrl: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
+    private activatedRoute: ActivatedRoute,
     private setTitle:SetTitleService
   ) {
     this.SiteIncident = this.fb.group({
@@ -62,8 +68,8 @@ export class IncidentReportComponent implements OnInit {
       changes: this.fb.array([]),
       arrObj: this.fb.array([]),
       correctAction: ['', Validators.required],
-      personResp: ['', Validators.required],
       complete: ['', Validators.required],
+      date: ['', Validators.required],
       jobNumber: ['', Validators.required],
       projectName: ['', Validators.required],
       siteName: ['', Validators.required],
@@ -97,22 +103,42 @@ export class IncidentReportComponent implements OnInit {
       nameOfWitness:['', Validators.required],
       file: ['', Validators.required],
     });
-   
+    // this.SiteIncident = this.data;
+    // this.SiteIncident.patchValue({
+    //   incidents:this.data.incidents,
+    //   PPE:this.data.PPE,
+    //   natureOFIncidents:this.data.natureOFIncidents,
+    //   rootCauseIncident:this.data.rootCauseIncident,
+    //   changes:this.data.changes,
+    //   arrObj:this.data.arrObj,
+    //   correctAction:this.data.correctAction,
+    // })
   }
 
   ngOnInit(): void {
+    this.id=this.activatedRoute.snapshot.params.id;
     console.log("SiteIncident",this.SiteIncident);
     
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
     this.setTitle.setTitle('WHS-Incident Report Form');
-    this.addAction();
     this.getAllJobNumber();
     this.getAllProjectMang();
     this.getAllChanges();
     this.getAllPPE();
     this.getAllTypeOfInc();
     this.getAllRoot();
-    this. getAllNatureOfInc();
+    this.getAllNatureOfInc();
+    this.getAllStaff();
+    if(this.id!=='Form')
+    {
+      console.log("id",this.id);
+      this.getIncidentsByid(this.id);
+    }
+    else
+    {
+      this.addAction();
+     
+    }
   }
 
   addAction() {
@@ -120,17 +146,18 @@ export class IncidentReportComponent implements OnInit {
       this.add().push(this.newAction());
     }
   }
+ 
   add(): FormArray {
     return this.SiteIncident.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
     return this.fb.group({
       correctAction: [],
-      personResp: [],
+      personRes: ['', Validators.required],
       complete: [],
+      date: [],
     });
   }
-  
   removeIncident(i) {
     const item = <FormArray>this.SiteIncident.controls['arrObj'];
     if (item.length > 1) {
@@ -138,6 +165,48 @@ export class IncidentReportComponent implements OnInit {
     
     }
   }
+  changeAdd(): FormArray {
+    return this.SiteIncident.get('changes') as FormArray;
+  }
+  changeAction(): FormGroup {
+    return this.fb.group({
+      id:[],
+    });
+  }
+  incidentsAdd(): FormArray {
+    return this.SiteIncident.get('incidents') as FormArray;
+  }
+  incidentsAction(): FormGroup {
+    return this.fb.group({
+      id:[],
+    });
+  }
+  natureAdd(): FormArray {
+    return this.SiteIncident.get('natureOFIncidents') as FormArray;
+  }
+  natureAction(): FormGroup {
+    return this.fb.group({
+      id:[],
+    });
+  }
+  ppeAdd(): FormArray {
+    return this.SiteIncident.get('PPE') as FormArray;
+  }
+  ppeAction(): FormGroup {
+    return this.fb.group({
+      id:[],
+    });
+  }
+  rootCauseIncidentAdd(): FormArray {
+    return this.SiteIncident.get('rootCauseIncident') as FormArray;
+  }
+  rootCauseIncidentAction(): FormGroup {
+    return this.fb.group({
+      id:[],
+    });
+  }
+  
+ 
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
       if (this.SiteIncident.get('jobNumber').value === item._id) {
@@ -284,95 +353,94 @@ export class IncidentReportComponent implements OnInit {
   }
  
 
-  onChangeIncident(e: any) {
-    const checkArray: FormArray = this.SiteIncident.get(
-      'incidents'
-    ) as FormArray;
-    let item = e.target.value;
-    if (e.target.checked) {
-      checkArray.push(new FormControl(item));
-      console.log(item);
-    } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          checkArray.removeAt(i);
-        }
-      });
-    }
-  }
+  // onChangeIncident(e: any) {
+  //   const checkArray: FormArray = this.SiteIncident.get(
+  //     'incidents'
+  //   ) as FormArray;
+  //   let item = e.target.value;
+  //   if (e.target.checked) {
+  //     checkArray.push(new FormControl(item));
+  //     console.log(item);
+  //   } else {
+  //     let i: number = 0;
+  //     checkArray.controls.forEach((item) => {
+  //       if (item.value == e.target.value) {
+  //         checkArray.removeAt(i);
+  //       }
+  //     });
+  //   }
+  // }
  
-  onNatureOFIncidents(e: any) {
-    const NatureArray: FormArray = this.SiteIncident.get(
-      'natureOFIncidents'
-    ) as FormArray;
-    let item = e.target.value;
-    if (e.target.checked) {
-      NatureArray.push(new FormControl(item));
-      console.log(item);
-    } else {
-      let i: number = 0;
-      NatureArray.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          NatureArray.removeAt(i);
-        }
-      });
-    }
-  }
+  // onNatureOFIncidents(e: any) {
+  //   const NatureArray: FormArray = this.SiteIncident.get(
+  //     'natureOFIncidents'
+  //   ) as FormArray;
+  //   let item = e.target.value;
+  //   if (e.target.checked) {
+  //     NatureArray.push(new FormControl(item));
+  //     console.log(item);
+  //   } else {
+  //     let i: number = 0;
+  //     NatureArray.controls.forEach((item) => {
+  //       if (item.value == e.target.value) {
+  //         NatureArray.removeAt(i);
+  //       }
+  //     });
+  //   }
+  // }
 
   
-  onPPE(e: any) {
-    const PPEArray: FormArray = this.SiteIncident.get('PPE') as FormArray;
-    let item = e.target.value;
-    if (e.target.checked) {
-      PPEArray.push(new FormControl(item));
-      console.log(item);
-    } else {
-      let i: number = 0;
-      PPEArray.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          PPEArray.removeAt(i);
-        }
-      });
-    }
-  }
+  // onPPE(e: any) {
+    
+  //   let item = e.target.value;
+  //   if (e.target.checked) {
+  //     this.ppeArr.push(item);
+  //     console.log(item);
+  //   } else {
+  //     this.ppeArr.forEach((item,i) => {
+  //       if (item.value == e.target.value) {
+  //         this.ppeArr.splice(i,1);
+  //       }
+  //     });
+  //   }
+  // }
  
-  onRootCauseIncident(e: any) {
-    const IncidentArray: FormArray = this.SiteIncident.get(
-      'rootCauseIncident'
-    ) as FormArray;
-    let item = e.target.value;
-    if (e.target.checked) {
-      IncidentArray.push(new FormControl(item));
-      console.log(item);
-    } else {
-      let i: number = 0;
-      IncidentArray.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          IncidentArray.removeAt(i);
-        }
-      });
-    }
-  }
+  // onRootCauseIncident(e: any) {
+  //   const IncidentArray: FormArray = this.SiteIncident.get(
+  //     'rootCauseIncident'
+  //   ) as FormArray;
+  //   let item = e.target.value;
+  //   if (e.target.checked) {
+  //     IncidentArray.push(new FormControl(item));
+  //     console.log(item);
+  //   } else {
+  //     let i: number = 0;
+  //     IncidentArray.controls.forEach((item) => {
+  //       if (item.value == e.target.value) {
+  //         IncidentArray.removeAt(i);
+  //       }
+  //     });
+  //   }
+  // }
 
  
-  onChanges(e: any) {
-    const ChangeArray: FormArray = this.SiteIncident.get(
-      'changes'
-    ) as FormArray;
-    let item = e.target.value;
-    if (e.target.checked) {
-      ChangeArray.push(new FormControl(item));
-      console.log(item);
-    } else {
-      let i: number = 0;
-      ChangeArray.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          ChangeArray.removeAt(i);
-        }
-      });
-    }
-  }
+  // onChanges(e: any) {
+  //   const ChangeArray: FormArray = this.SiteIncident.get(
+  //     'changes'
+  //   ) as FormArray;
+  //   let item = e.target.value;
+  //   if (e.target.checked) {
+  //     ChangeArray.push(new FormControl(item));
+  //     console.log(item);
+  //   } else {
+  //     let i: number = 0;
+  //     ChangeArray.controls.forEach((item) => {
+  //       if (item.value == e.target.value) {
+  //         ChangeArray.removeAt(i);
+  //       }
+  //     });
+  //   }
+  // }
   ppeSelected(e){
     let item = e.target.value;
     if (e.target.checked) {
@@ -451,6 +519,179 @@ export class IncidentReportComponent implements OnInit {
     console.log("natureOfIncSelectedArr",this.rootSelectedArr);
     
   }
+  getAllStaff(){
+    this.logicalFormInfo.getAllStaff().subscribe((res:any)=> {
+      this.staff=res.data;
+      console.log("res",this.staff);
+   })
+  }
+
+  getIncidentsByid(id)
+  {
+    this.logicalFormInfo.getIncidentReportById(id).subscribe((res:any)=>{
+      console.log("getById",res);
+     
+      this.SiteIncident.patchValue({
+        projectName:res.data.projectName,
+        siteName:res.data.siteName,
+        customerName: res.data.customerName,
+        streetAddress:res.data.streetAddress,
+        customerContact: res.data.customerContact,
+        projectManager: res.data.projectManager,
+        personCompletingForm: res.data.personCompletingForm,
+        customerContactPhone: res.data.customerContactPhone,
+        customerEmail: res.data.customerEmail,
+        jobNumber: res.data.jobNumber,
+        dateOfFormCompletion:res.data.dateOfFormCompletion,
+        name:res.data.name,
+        department:res.data.department,
+        position:res.data.position,
+        locationOfTheIncident:res.data.locationOfTheIncident,
+        dateOfTheIncident:res.data.dateOfTheIncident,
+        timeOfTheIncident:res.data.timeOfTheIncident,
+        nameOfWitness:res.data.nameOfWitness,
+        witnessStatement:res.data.witnessStatement,
+        // file:res.data.file,
+        whyDidtheUnsafeConditonExist:res.data.whyDidtheUnsafeConditonExist,
+        priorIncident:res.data.priorIncident,
+        similarIncident:res.data.similarIncident,
+        completedName:res.data.completedName,
+        completedPosition:res.data.completedPosition,
+        completedDepartment:res.data.completedDepartment,
+        completedDate:res.data.completedDate,
+        reviewedName:res.data.reviewedName,
+        reviewedPosition:res.data.reviewedPosition,
+        reviewedDepartment:res.data.reviewedDepartment,
+        reviewedDate:res.data.reviewedDate,
+      })
+      for (let index = 0; index < res.data.changes.length; index++) {
+        console.log("res.data.changes.length",res.data.changes.length);
+        
+        let changeIndex = this.changeAdd().length
+        console.log("changeIndex",changeIndex);
+        
+        this.changeAdd().push(this.changeAction());
+        this.changeAdd().at(changeIndex).get("id").setValue(res.data.changes[index])
+      }
+      
+      // for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
+      //   console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
+        
+      //   let typeOfIncidentsIndex = this.incidentsAdd().length
+      //   console.log("typeOfIncidentsIndex",typeOfIncidentsIndex);
+        
+      //   this.incidentsAdd().push(this.incidentsAction());
+      //   this.incidentsAdd().at(typeOfIncidentsIndex).get("id").setValue(this.typeOfIncidentsSelectedArr[index])
+      // }
+      // for (let index = 0; index < this.natureOfIncSelectedArr.length; index++) {
+      //   console.log("this.natureOfIncSelectedArr.length",this.natureOfIncSelectedArr.length);
+        
+      //   let natureOfIncIndex = this.natureAdd().length
+      //   console.log("typeOfIncidentsIndex",natureOfIncIndex);
+        
+      //   this.natureAdd().push(this.incidentsAction());
+      //   this.natureAdd().at(natureOfIncIndex).get("id").setValue(this.natureOfIncSelectedArr[index])
+      // }
+      // for (let index = 0; index < this.ppeSelectedArr.length; index++) {
+      //   console.log("this.ppeSelectedArr.length",this.ppeSelectedArr.length);
+        
+      //   let ppeIndex = this.ppeAdd().length
+      //   console.log("ppeIndex",ppeIndex);
+        
+      //   this.ppeAdd().push(this.ppeAction());
+      //   this.ppeAdd().at(ppeIndex).get("id").setValue(this.ppeSelectedArr[index])
+      // }
+      // for (let index = 0; index < this.rootSelectedArr.length; index++) {
+      //   console.log("this.rootSelectedArr.length",this.rootSelectedArr.length);
+        
+      //   let rootIndex = this.rootCauseIncidentAdd().length
+      //   console.log("rootIndex",rootIndex);
+        
+      //   this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction());
+      //   this.rootCauseIncidentAdd().at(rootIndex).get("id").setValue(this.rootSelectedArr[index])
+      // }
+      // this.add(res.data.arrObj);
+      // this.changeAdd(res.data.changes);
+      // this.incidentsAdd(res.data.attendees);
+      // this.natureAdd(res.data.attendees);
+      // this.ppeAdd(res.data.attendees);
+      // this.rootCauseIncidentAdd(res.data.attendees);
+      this.dataUrl = res.data.signaturePad1;
+      let check =async () => { this.signaturePad1 != null }
+      check().then(() => {
+
+        this.signaturePad1.fromDataURL(res.data.signaturePad1)
+      })
+      let check2 =async () => { this.signaturePad != null }
+      check2().then(() => {
+        console.log( this.signaturePad);
+        this.signaturePad.fromDataURL(res.data.signaturePad)
+        // setTimeout(() => {
+        //   let signaturePadArr=this.signaturePad2.toArray()
+        //   res.data.attendees.forEach((x,i) => {
+        //     signaturePadArr[i].fromDataURL(x.signature)
+        //   });
+        // }, 2000); 
+      })
+    })
+  }
+  onSubmit() {
+   
+    console.log("this.ppeSelectedArr",this.ppeSelectedArr);
+    for (let index = 0; index < this.changesSelectedArr.length; index++) {
+      console.log("this.changesSelectedArr.length",this.changesSelectedArr.length);
+      
+      let changeIndex = this.changeAdd().length
+      console.log("changeIndex",changeIndex);
+      
+      this.changeAdd().push(this.changeAction());
+      this.changeAdd().at(changeIndex).get("id").setValue(this.changesSelectedArr[index])
+    }
+    
+    for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
+      console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
+      
+      let typeOfIncidentsIndex = this.incidentsAdd().length
+      console.log("typeOfIncidentsIndex",typeOfIncidentsIndex);
+      
+      this.incidentsAdd().push(this.incidentsAction());
+      this.incidentsAdd().at(typeOfIncidentsIndex).get("id").setValue(this.typeOfIncidentsSelectedArr[index])
+    }
+    for (let index = 0; index < this.natureOfIncSelectedArr.length; index++) {
+      console.log("this.natureOfIncSelectedArr.length",this.natureOfIncSelectedArr.length);
+      
+      let natureOfIncIndex = this.natureAdd().length
+      console.log("typeOfIncidentsIndex",natureOfIncIndex);
+      
+      this.natureAdd().push(this.incidentsAction());
+      this.natureAdd().at(natureOfIncIndex).get("id").setValue(this.natureOfIncSelectedArr[index])
+    }
+    for (let index = 0; index < this.ppeSelectedArr.length; index++) {
+      console.log("this.ppeSelectedArr.length",this.ppeSelectedArr.length);
+      
+      let ppeIndex = this.ppeAdd().length
+      console.log("ppeIndex",ppeIndex);
+      
+      this.ppeAdd().push(this.ppeAction());
+      this.ppeAdd().at(ppeIndex).get("id").setValue(this.ppeSelectedArr[index])
+    }
+    for (let index = 0; index < this.rootSelectedArr.length; index++) {
+      console.log("this.rootSelectedArr.length",this.rootSelectedArr.length);
+      
+      let rootIndex = this.rootCauseIncidentAdd().length
+      console.log("rootIndex",rootIndex);
+      
+      this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction());
+      this.rootCauseIncidentAdd().at(rootIndex).get("id").setValue(this.rootSelectedArr[index])
+    }
+    console.log(this.SiteIncident.value);
+    // this.logicalFormInfo.addIncidentReport(this.SiteIncident.value).subscribe(res => {
+    //   console.log("addCustomerForm=>", res)
+      
+    // }, (err) => {
+    //   console.error(err);
+    // });
+  }
   // upload(e) {
   //   const fileListAsArray = Array.from(e);
   //   fileListAsArray.forEach((item, i) => {
@@ -471,4 +712,5 @@ export class IncidentReportComponent implements OnInit {
 
   //   this.SiteIncident.get('avatar').updateValueAndValidity()
   // }
+
 }

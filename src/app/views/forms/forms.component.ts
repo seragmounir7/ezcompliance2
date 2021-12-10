@@ -24,7 +24,9 @@ export class FormsComponent implements OnInit {
   collectionSize = 10;
   ELEMENT_DATA = [
     { index: 1, title: 'Hazards Reported', link: ['/admin/forms/hazardRep/'+'form'] },
-    { index: 2, title: 'Notifiable Incidents', link: ['/admin/forms/incidentRep'] },
+   
+   
+    { index: 2, title: 'Notifiable Incidents', link: ['/admin/forms/incidentRep/'+'Form'] },
     { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'null'] },
     { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'null'] },
     { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS'] }
@@ -61,8 +63,11 @@ goTo(title)
   if(title==="Hazards Reported")
   {
     this.router.navigate(["/admin/forms/hazardTable"]);
+  if(title==="Notifiable Incidents")
+  {
+    this.router.navigate(["/admin/forms/incidentsTable"]);
   }
- 
+}
 }
 
   ngOnInit(): void {
