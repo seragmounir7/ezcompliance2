@@ -37,8 +37,8 @@ export class IncidentReportComponent implements OnInit {
   incidentsArr = [];
   rootArr = [];
   allJobNumbers = [];
-  @ViewChild('signature1') signaturePad: SignaturePad;
-  @ViewChild('signature2') signaturePad1: SignaturePad;
+  @ViewChild('signature') signaturePad: SignaturePad;
+  @ViewChild('signature1') signaturePad1: SignaturePad;
   projMan: any;
   projectMang: any;
   typeOfInc: [];
@@ -57,6 +57,7 @@ export class IncidentReportComponent implements OnInit {
   dataUrl: any;
   selectedImage: string;
   singRequired: any;
+  singRequired1: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -111,8 +112,8 @@ export class IncidentReportComponent implements OnInit {
       similarIncidentText:[''],
       priorIncidentText:[''],
       instructions:['Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injuryor near-miss that could have resulted in a serious injury or illness.'],
-      signaturePad:[''],
-      signaturePad1:['']
+      signaturePad:['',Validators.required],
+      signaturePad1:['',Validators.required]
     });
     // this.IncidentReport = this.data;
     // this.IncidentReport.patchValue({
@@ -351,7 +352,6 @@ export class IncidentReportComponent implements OnInit {
     
     this.IncidentReport.controls['signaturePad'].setValue(this.signaturePad.toDataURL());
     
-    this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
 
   }
   drawComplete1() {
@@ -364,21 +364,26 @@ export class IncidentReportComponent implements OnInit {
   }
   clear() {
     this.signaturePad.clear();
+    this.singRequired = this.IncidentReport.controls['signaturePad1'].untouched
   }
   clear1() {
     console.log('cl1');
 
     this.signaturePad1.clear();
+    this.singRequired1 = this.IncidentReport.controls['signaturePad1'].untouched
+    
   }
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
-    console.log("signaturePad control",this.IncidentReport.controls['signaturePad'].invalid);
+    console.log("signaturePad control",this.IncidentReport.controls['signaturePad'].touched);
     this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    this.singRequired1 = this.IncidentReport.controls['signaturePad1'].invalid
+    console.log('begin drawing',this.singRequired1);
   }
  
 
@@ -715,6 +720,11 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
         //   });
         // }, 2000); 
       })
+      this.IncidentReport.patchValue({
+        signaturePad:this.signaturePad,
+        signaturePad1:this.signaturePad1
+
+      })
     })
   }
   onSubmit() {
@@ -726,34 +736,34 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
       const data={
         ...this.IncidentReport.value
       }
-      //  this.logicalFormInfo.updateIncidentReport(this.id,this.IncidentReport.value).subscribe((res)=>
-      //  {
-      //    console.log("res",res);
-      //     Swal.fire({
-      //       title: 'Update successfully',
-      //       showConfirmButton: false,
-      //       timer: 1200,
-      //     });
-      //    this.router.navigate(["/admin/forms/incidentsTable"]);
-      //  })
+       this.logicalFormInfo.updateIncidentReport(this.id,this.IncidentReport.value).subscribe((res)=>
+       {
+         console.log("res",res);
+          Swal.fire({
+            title: 'Update successfully',
+            showConfirmButton: false,
+            timer: 1200,
+          });
+         this.router.navigate(["/admin/forms/incidentsTable"]);
+       })
     }
     else
     {
       const data={
         ...this.IncidentReport.value
       }
-      // this.logicalFormInfo.addIncidentReport(data).subscribe(res => {
-      //   console.log("addCustomerForm=>", res)
-      //   this.IncidentReport.reset();
-      //   Swal.fire({
-      //     title: 'Submit successfully',
-      //     showConfirmButton: false,
-      //     timer: 1200,
-      //   });
-      //   this.router.navigate(["/admin/forms"]);
-      // }, (err) => {
-      //   console.error(err);
-      // });
+      this.logicalFormInfo.addIncidentReport(data).subscribe(res => {
+        console.log("addCustomerForm=>", res)
+       // this.IncidentReport.reset();
+        Swal.fire({
+          title: 'Submit successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        this.router.navigate(["/admin/forms"]);
+      }, (err) => {
+        console.error(err);
+      });
        
     }
   

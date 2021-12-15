@@ -828,7 +828,21 @@ export class LogicalFormInfoService {
     deleteSiteInspectionTopic(id) {
       return this.https.delete(this.apiUrl + 'siteInspectionTopic/delete/'+ id)
     }
-  
+    getAllassessmet() {
+      return this.https.get(this.apiUrl + 'riskAssessment/getAll')
+    }
+    getAssessmentbyId(id) {
+      return this.https.get(this.apiUrl + 'riskAssessment/get/'+ id)
+    }
+    addAssessment(data) {
+      return this.https.post(this.apiUrl + 'riskAssessment/add', data)
+    }
+     updateAssessment(id, data) {
+      return this.https.put(this.apiUrl + 'riskAssessment/update/'+ id, data)
+    }
+    deleteAssessment(id) {
+      return this.https.delete(this.apiUrl + 'riskAssessment/delete/'+ id)
+    }
     ////////////////// End Site Inspection topic ////////////
 }
 

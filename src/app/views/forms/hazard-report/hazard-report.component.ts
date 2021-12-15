@@ -51,7 +51,7 @@ export class HazardReportComponent implements OnInit {
     
       fullName: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       department: ['', Validators.required],
       position: ['', Validators.required],
       projectName: ['', Validators.required],
@@ -331,11 +331,11 @@ export class HazardReportComponent implements OnInit {
 
 
   Likelihood: Array<any> = [
-    { name: '1-Insignificant',value:1 },
+    { name: '1-Rare',value:1 },
     { name: '3-Moderate',value:3},
-    { name: '2-Minor',value:2 },
-    { name: '4-Major',value:4 },
-    { name: '5-Catastrophic',value:5 }
+    { name: '2-Unlikely',value:2 },
+    { name: '4-Likely',value:4 },
+    { name: '5-Almost Certain',value:5 }
   ];
   // RiskRating: Array<any> = [
 

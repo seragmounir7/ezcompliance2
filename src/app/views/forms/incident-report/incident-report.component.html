@@ -203,7 +203,7 @@
         <label class="cols" class="form-Label">Department</label>
         <input type="text" class="form-control" formControlName="department" [class.is-invalid]="IncidentReport.get('department')?.hasError('required') && (IncidentReport.get('department').dirty || IncidentReport.get('department').touched) "/>
         <span *ngIf=" IncidentReport.get('department')?.hasError('required') && (IncidentReport.get('department').dirty  || IncidentReport.get('department').touched) " class="invalid-feedback" >
-      This Filed is Required</span>
+      This Field is Required</span>
       </div>
     </div>
   </div>
@@ -213,7 +213,7 @@
         <label class="cols" class="form-Label">position</label>
         <input type="text" class="form-control" formControlName="position" [class.is-invalid]="IncidentReport.get('position')?.hasError('required') && (IncidentReport.get('position').dirty || IncidentReport.get('position').touched) "/>
         <span *ngIf=" IncidentReport.get('position')?.hasError('required') && (IncidentReport.get('position').dirty  || IncidentReport.get('position').touched) " class="invalid-feedback" >
-      This Filed is Required</span>
+      This Field is Required</span>
       </div>
     </div>
   </div>
@@ -308,7 +308,7 @@
         <label class="cols" class="form-Label">Witness Statement</label>
         <input type="text" class="form-control" formControlName="witnessStatement" [class.is-invalid]="IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty || IncidentReport.get('witnessStatement').touched) "/>
         <span *ngIf=" IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty  || IncidentReport.get('witnessStatement').touched) " class="invalid-feedback" >
-         This Filed is Required</span>
+         This Field is Required</span>
         <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example">
           <option selected hidden>Select</option>
           <option value="1">Option1</option>
@@ -534,14 +534,15 @@
           <label class="cols" class="form-Label">Signature</label>
           <div class="sign">
             <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"
-              #signature1>
+              #signature
+              [class.is-invalid]="singRequired">
             </signature-pad>
-            <!-- <span
+            <span
             *ngIf="singRequired"
             class="invalid-feedback"
           >
           This Field is Required</span
-          > -->
+          >
           </div>
           <button class="btn btn-outline-primary mt-1" (click)="clear()">
             Clear
@@ -599,7 +600,14 @@
           <label class="cols" class="form-Label">Signature</label>
           <div class="sign">
             <signature-pad [options]="signaturePadOptions1" (onBeginEvent)="drawStart1()" (onEndEvent)="drawComplete1()"
-              #signature2></signature-pad>
+              #signature1
+              [class.is-invalid]="singRequired1"></signature-pad>
+              <span
+              *ngIf="singRequired1"
+              class="invalid-feedback"
+            >
+            This Field is Required</span
+            >
           </div>
           <button class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear
@@ -613,6 +621,6 @@
   <br />
 
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block"  [disabled]="!IncidentReport.valid || singRequired || singRequired1" (click)="onSubmit()">Submit</button>
   </div>
 </div>

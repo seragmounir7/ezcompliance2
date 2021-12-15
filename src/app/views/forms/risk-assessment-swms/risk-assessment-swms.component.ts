@@ -11,6 +11,9 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ActivatedRoute, Router } from '@angular/router';
+import { data } from 'jquery';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -41,7 +44,12 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   allJobNumbers = [];
   allHazards = [];
   allContrlActReq = [];
-
+  id:any;
+  isSelected=[];
+  isHazardous=[];
+  hasJuridiction=false;
+  hasLegist=false;
+  hasRegulation=false;
   highRiskConstruction2 = [
     {
       label: 'Working in or near trenches or shafts deeper than 1.5metres',
@@ -130,9 +138,11 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   riskArr = [];
   COPArr = [];
   ppeArr = [];
+  taskArr=[];
   licenceArr = [];
   jobTaskData = [];
   jobTaskSelected = [];
+  hazard=[];
   projectMang = [];
   allChemicals = [];
   allCOPSelected = [];
@@ -143,24 +153,29 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   JurisdictionData: any=[];
   states: any=[];
   constructor(
+    public router: Router,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
+    private activatedRoute: ActivatedRoute,
     private setTitle: SetTitleService
   ) {
+    this.id=this.activatedRoute.snapshot.params.id;
+    console.log("id",this.id)
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
-
       jobNumber: [''],
       siteName: [''],
       customerName: [''],
       streetNo: [''],
       streetAddr: [''],
       suburb: [''],
+      town:[''],
       custConct: [''],
       custConctPh: [''],
       custEmail: [''],
-      Employee1: [''],
+      employee1: [''],
+      employee2: [''],
       dateTime: [''],
       statesSWMS: [''],
       projectManager: [''],
@@ -169,7 +184,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       jurisdiction: [''],
       safetyLeg: [''],
       regulator: [''],
-      CodeOfPract: [''],
       location: [''],
       qty: [],
       expiryDate: [''],
@@ -180,9 +194,17 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       riskLevel: this.fb.array([]),
       residualRisk: this.fb.array([]),
       persResp: this.fb.array([]),
+      jobTask:this.fb.array([]),
+      riskConstruction:this.fb.array([]),
+      riskConstruction2:this.fb.array([]),
+      PPEselection:this.fb.array([]),
+      PPESelection2:this.fb.array([]),
+      licence:this.fb.array([]),
+      editor:[""],
+      signature1:[""],
+      signature2:[""]
     });
   }
-
   ngOnInit(): void {
     this.getAllJobTask();
     this.getAllPPE();
@@ -201,9 +223,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     this.getAllSafe();
     this.getAllState();
     this.getAllJurisdiction();
-
-
-
+    if(this.id!="form")
+    {
+      this.getAssessmentByid(this.id);
+    }
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
@@ -248,6 +271,157 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       }
     });
   }
+  getAssessmentByid(id)
+  {
+    console.log("iddd",id);
+    this.logicalFormInfo.getAssessmentbyId(id).subscribe((res:any)=>
+    {
+      this.allCOPSelected=[];
+      console.log("assesment by id",res.data);
+      let check =async () => { this.signaturePad1 != null }
+      check().then(() => {
+
+        this.signaturePad1.fromDataURL(res.data.signature1)
+      })
+      let check1 =async () => { this.signaturePad2 != null }
+      check1().then(() => {
+
+        this.signaturePad2.fromDataURL(res.data.signature2)
+      })
+     if( res?.data.jurisdiction!="")
+     {
+       this.hasJuridiction=true;
+     }
+     if( res?.data.safetyLeg!="")
+     {
+       this.hasLegist=true;
+     }
+     if( res?.data.regulator!="")
+     {
+       this.hasRegulation=true;
+     }
+      this.riskAssessmentFb.patchValue({
+        ...res.data
+      })
+      const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
+      while(item.length>0)
+      {
+        item.removeAt(0);
+      }
+      res?.data?.SDSRegister.forEach((element,index) => {
+        this.chemicalTask=true;
+        if(element?.chemicalName!="")
+        {
+          this.isSelected[index]=true;
+        }
+        if(element?.hazardous!="")
+        {
+          this.isHazardous[index]=true;
+        }
+        this.PushActionSDSRegister(element)
+      });
+      res.data.riskLevel.forEach(element => {
+        console.log("riskLevel",element.riskLevel);
+        this.PushActionRiskLevel(element);
+      });
+      res.data.residualRisk.forEach(element => {
+       this.PushActionResiRiskLevel(element);
+      });
+      res.data.riskLevel.forEach(element => {
+       this.PushActionPersonRes(element);
+      });
+     res.data.codeOfPract.forEach(element => {
+       console.log("eleee",element);
+       this.allCOPSelected.push(element);
+     });
+     res.data.identifyHazards.forEach((element,index) => {
+       console.log("eleeeme",element);
+       this.checkHazards(element,index);
+      //  element.allHazardsTitle.forEach(ele => { 
+      //   this.checkHazards(ele,index);
+      //  });
+     });
+      res.data.jobTask.forEach((element,index) => {
+        this.checkJobtask(element,index);
+        // this.checkCOP(element,index);
+      });
+      res.data.PPEselection.forEach((element,index) => {
+        this.checkPPE(element,index);
+      });
+      res.data.PPESelection2.forEach((element,index) => {
+        this.checkPPE(element,index);
+      });
+      res.data.riskConstruction.forEach((element,index) => {
+        this.checkRisk(element,index);
+      });
+      res.data.licence.forEach((element,index) => {
+        this.checkLicense(element,index);
+      });
+    })
+  }
+  checkHazards(data,i)
+  {
+    for(let j=0;j<this.jobTaskData.length;j++)
+    {
+        if(this.jobTaskData[j]._id==data._id)
+        {
+          this.jobTaskData[j].allHazardsTitle=[];
+          this.jobTaskData[j].allContrlActReqTitle=[];
+          this.jobTaskData[j].allHazardsTitle=data.allHazardsTitle;
+          this.jobTaskData[j].allContrlActReqTitle=data.allContrlActReqTitle;
+          console.log("allHazardsTitle",this.jobTaskData[j].allHazardsTitle);
+          console.log("allHazardsTitle",this.jobTaskData[j].allContrlActReqTitle);
+          
+        }
+    }
+  }
+checkJobtask(element,index)
+{
+  let z=this.jobTaskData[index]._id;
+  console.log("z",z);
+  console.log("ele",element[z]);
+  let c= this.riskAssessmentFb.controls['jobTask'] as FormArray
+  let d=c.controls[index] as FormGroup
+  if(element[z])
+  {
+    d.controls[z].setValue(element[z]);
+    this.jobTaskSelected.push(this.jobTaskData[index])
+    console.log("job selected",this.jobTaskSelected);
+  }
+}
+checkRisk(element,index)
+{
+  let z=this.highRiskConstruction[index]._id;
+  console.log("ele",element[z]);
+  let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+  let d=c.controls[index] as FormGroup
+  if(element[z])
+  {
+    d.controls[z].setValue(element[z]);
+  }
+}
+checkPPE(element,index)
+{
+  let z=this.PPEselection[index]._id;
+  console.log("ele",element[z]);
+  let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
+  let d=c.controls[index] as FormGroup
+  if(element[z])
+  {
+    d.controls[z].setValue(element[z]);
+  }
+}
+checkLicense(element,index)
+{
+  let z=this.licenseAndQualification[index]._id;
+  console.log("ele",element[z]);
+  let c= this.riskAssessmentFb.controls['licence'] as FormArray
+  let d=c.controls[index] as FormGroup
+  if(element[z])
+  {
+    d.controls[z].setValue(element[z]);
+  }
+}
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
       if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
@@ -268,9 +442,15 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     });
     this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
   }
+
   addActionRiskLevel() {
     {
       this.riskLevelFA().push(this.riskLevelFG());
+    }
+  }
+  PushActionRiskLevel(data) {
+    {
+      this.riskLevelFA().push(this.GetriskLevelFG(data));
     }
   }
   addActionResiRiskLevel() {
@@ -278,15 +458,51 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       this.residlRiskLevelFA().push(this.residlRiskLevelFG());
     }
   }
+  PushActionResiRiskLevel(data) {
+    {
+      this.residlRiskLevelFA().push(this.GetresidlRiskLevelFG(data));
+    }
+  }
   addActionPersonRes() {
     {
       this.personResFA().push(this.personResFG());
+    }
+  }
+  PushActionPersonRes(data) {
+    {
+      this.personResFA().push(this.GetpersonResFG(data));
     }
   }
   addActionSDSRegister() {
     {
       this.sdsRegisterFA().push(this.sdsRegisterFG());
     }
+  }
+  PushActionSDSRegister(data) {
+    {
+      this.sdsRegisterFA().push(this.GetsdsRegisterFG(data));
+    }
+  }
+  jobtask(): FormArray {
+    return this.riskAssessmentFb.get('jobTask') as FormArray;
+  }
+  COP(): FormArray {
+    return this.riskAssessmentFb.get('CodeOfPract') as FormArray;
+  }
+  riskConstruct(): FormArray {
+    return this.riskAssessmentFb.get('riskConstruction') as FormArray;
+  }
+  riskConstruct2(): FormArray {
+    return this.riskAssessmentFb.get('riskConstruction2') as FormArray;
+  }
+  ppe(): FormArray {
+    return this.riskAssessmentFb.get('PPEselection') as FormArray;
+  }
+  ppe2(): FormArray {
+    return this.riskAssessmentFb.get('PPESelection2') as FormArray;
+  }
+  Licence(): FormArray {
+    return this.riskAssessmentFb.get('licence') as FormArray;
   }
   riskLevelFA(): FormArray {
     return this.riskAssessmentFb.get('riskLevel') as FormArray;
@@ -305,9 +521,19 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       riskLevel: [''],
     });
   }
+  GetriskLevelFG(data): FormGroup {
+    return this.fb.group({
+      riskLevel:data.riskLevel
+    });
+  }
   residlRiskLevelFG(): FormGroup {
     return this.fb.group({
       resiRiskLevel: [''],
+    });
+  }
+  GetresidlRiskLevelFG(data): FormGroup {
+    return this.fb.group({
+      resiRiskLevel:data.resiRiskLevel
     });
   }
   personResFG(): FormGroup {
@@ -315,6 +541,37 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       personRes: [''],
     });
   }
+  GetpersonResFG(data): FormGroup {
+    return this.fb.group({
+      personRes: [''],
+    });
+  }
+  jobtaskk(index): FormGroup {
+    return this.fb.group({
+      [this.jobTaskData[index]._id]: ['']
+    });
+  }
+  codeOfPrac(index): FormGroup {
+    return this.fb.group({
+     cop:['']
+    });
+  }
+  riskCons(index): FormGroup {
+    return this.fb.group({
+      [this.highRiskConstruction[index]._id]: ['']
+    });
+  }
+  ppeSelect(index): FormGroup {
+    return this.fb.group({
+      [this.PPEselection[index]._id]: ['']
+    });
+  }
+  license(index): FormGroup {
+    return this.fb.group({
+      [this.licenseAndQualification[index]._id]: ['']
+    });
+  }
+
   sdsRegisterFG(): FormGroup {
     return this.fb.group({
       chemicalName: [''],
@@ -322,6 +579,17 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       hazardous: [''],
       quantity: [''],
       expDate: [''],
+      file:['']
+    });
+  }
+  GetsdsRegisterFG(data): FormGroup {
+    return this.fb.group({
+      chemicalName:data.chemicalName,
+      location: data.location,
+      hazardous:data.hazardous ,
+      quantity:data.quantity ,
+      expDate: data.expDate,
+      file:data.file
     });
   }
   removeSDSRegister(i) {
@@ -364,10 +632,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   drawComplete1() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad1.toDataURL());
+    this.riskAssessmentFb.controls["signature1"].setValue(this.signaturePad1.toDataURL());
   }
   clear1() {
     console.log('clear1');
-
     this.signaturePad1.clear();
   }
   drawStart1() {
@@ -377,10 +645,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   drawComplete2() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad2.toDataURL());
+    this.riskAssessmentFb.controls["signature2"].setValue(this.signaturePad2.toDataURL());
   }
   clear2() {
     console.log('clear2');
-
     this.signaturePad2.clear();
   }
   drawStart2() {
@@ -392,6 +660,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       this.jobTaskData = res.data;
       console.log('jobTaskDetails=>', this.jobTaskData);
+      for (let i = 0; i < this.jobTaskData.length; i++) {
+        // this.taskArr[i] = 0;
+        this.jobtask().push(this.jobtaskk(i));
+      }
     });
   }
 
@@ -401,6 +673,8 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       this.PPEselection = res.data;
       for (let i = 0; i < this.PPEselection.length; i++) {
         this.ppeArr[i] = 0;
+        this.ppe().push(this.ppeSelect(i));
+        this.ppe2().push(this.ppeSelect(i));
       }
     });
   }
@@ -416,6 +690,8 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       this.highRiskConstruction = res.data;
       for (let i = 0; i < this.highRiskConstruction.length; i++) {
         this.riskArr[i] = 0;
+        this.riskConstruct().push(this.riskCons(i))
+        this.riskConstruct2().push(this.riskCons(i))
       }
     });
   }
@@ -438,6 +714,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       // );
       for (let i = 0; i < this.licenseAndQualification.length; i++) {
         this.licenceArr[i] = 0;
+        this.Licence().push(this.license(i))
       }
     });
   }
@@ -477,12 +754,80 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
         }
       }
     });
-
-  
+  }
+  onLicenseChange(e,license,i)
+  {
+     console.log("e",e.target.checked);
+     let c= this.riskAssessmentFb.controls['licence'] as FormArray
+     let d=c.controls[i] as FormGroup
+    if(e.target.checked)
+    {
+      d.controls[license].setValue("Open Cable Licence")
+    }
+    else
+    {
+      d.controls[license].reset()
+    }
+  }
+  onRiskChange(e,risk,i)
+  {
+     console.log("e",e.target.checked);
+     let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+      let d=c.controls[i] as FormGroup
+    if(e.target.checked)
+    {
+      d.controls[risk].setValue("Working in or near trenches or shafts deeper than 1.5metres")
+    }
+    else
+    {
+      d.controls[risk].reset()
+    }
+  }
+  onPPEChange(e,ppe,i)
+  {
+     console.log("e",e.target.checked);
+     let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
+     let d=c.controls[i] as FormGroup
+    if(e.target.checked)
+    {
+      d.controls[ppe].setValue("Disposable dust mask")
+    }
+    else
+    {
+      d.controls[ppe].reset()
+    }
+  }
+  onRiskChange2(e,risk,i)
+  {
+     console.log("e",e.target.checked);
+     let c= this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
+      let d=c.controls[i] as FormGroup
+    if(e.target.checked)
+    {
+      d.controls[risk].setValue("Working in or near trenches or shafts deeper than 1.5metres")
+    }
+    else
+    {
+      d.controls[risk].reset()
+    }
+  }
+  onPPEChange2(e,ppe,i)
+  {
+     console.log("e",e.target.checked);
+     let c= this.riskAssessmentFb.controls['PPESelection2'] as FormArray
+     let d=c.controls[i] as FormGroup
+    if(e.target.checked)
+    {
+      d.controls[ppe].setValue("Disposable dust mask")
+    }
+    else
+    {
+      d.controls[ppe].reset()
+    }
   }
   onJobtaskSelect(e, jobTaskRecd) {
     // this.jobTaskSelected=[];
-
+  
     console.log('event', e.target.value, jobTaskRecd);
     let item = e.target.value;
     if (e.target.checked) {
@@ -502,12 +847,27 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
 
     for (let k = 0; k < this.riskArr.length; k++) {
       this.riskArr[k] = 0;
+      let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+      let c1= this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
+      let d=c.controls[k] as FormGroup
+      let d1=c1.controls[k] as FormGroup
+      d.controls[this.highRiskConstruction[k]._id].reset();
+      d1.controls[this.highRiskConstruction[k]._id].reset();
     }
     for (let k = 0; k < this.ppeArr.length; k++) {
       this.ppeArr[k] = 0;
+      let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
+      let d=c.controls[k] as FormGroup
+      d.controls[this.PPEselection[k]._id].reset();
+      let c1= this.riskAssessmentFb.controls['PPESelection2'] as FormArray
+      let d1=c1.controls[k] as FormGroup
+      d1.controls[this.PPEselection[k]._id].reset();
     }
     for (let k = 0; k < this.licenceArr.length; k++) {
       this.licenceArr[k] = 0;
+      let c= this.riskAssessmentFb.controls['licence'] as FormArray
+      let d=c.controls[k] as FormGroup
+      d.controls[this.licenseAndQualification[k]._id].reset();
     }
     this.chemicalTask = false;
     console.log('jobTaskSelected', this.jobTaskSelected);
@@ -523,6 +883,14 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
         this.highRiskConstruction.forEach((highRisk, index) => {
           if (highRisk._id === item) {
             this.riskArr[index] = 1;
+           let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+           let d=c.controls[index] as FormGroup
+           d.controls[this.highRiskConstruction[index]._id].setValue("Working in or near trenches or shafts deeper than 1.5metres")
+           let c1= this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
+           let d1=c1.controls[index] as FormGroup
+           d1.controls[this.highRiskConstruction[index]._id].setValue("Working in or near trenches or shafts deeper than 1.5metres")
+          // //  c.controls[highRisk._id].value
+          console.log("x",d.controls[this.highRiskConstruction[index]._id].value);
           }
         });
       });
@@ -530,17 +898,28 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
         this.PPEselection.forEach((ppeItem, index) => {
           if (ppeItem._id === item) {
             this.ppeArr[index] = 1;
+            let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
+            let d=c.controls[index] as FormGroup
+            d.controls[this.PPEselection[index]._id].setValue("Disposable dust mask");
+            let c1= this.riskAssessmentFb.controls['PPESelection2'] as FormArray
+            let d1=c1.controls[index] as FormGroup
+            d1.controls[this.PPEselection[index]._id].setValue("Disposable dust mask");
           }
         });
       });
-
-      this.licenseAndQualification.forEach((item, index) => {
-        if (item.tradeCategoryId._id === element.tradeCategoryId._id) {
-          this.licenceArr[index] = 1;
-        }
-      });
+element.licence.forEach(ele => {
+  this.licenseAndQualification.forEach((item, index) => {
+    if (item._id === ele) {
+      console.log("item",item);
+    console.log("ele",ele);
+      this.licenceArr[index] = 1;
+      let c= this.riskAssessmentFb.controls['licence'] as FormArray
+      let d=c.controls[index] as FormGroup
+      d.controls[this.licenseAndQualification[index]._id].setValue("Open Cable Licence");
+    }
+  });
+});
     });
-
     // this.checkArray.forEach((id) => {
 
     //   this.jobTaskData.forEach((element) => {
@@ -599,15 +978,17 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       this.addActionPersonRes();
       this.personResFA()
         .controls[i].get('personRes')
-        .setValue(data?.staffId?._id);
+        .setValue(data?.staff);
       this.riskLevelFA().controls[i].get('riskLevel').setValue(data.riskLevel);
       this.residlRiskLevelFA()
         .controls[i].get('resiRiskLevel')
         .setValue(data.residualRisk);
-
-      data.allCOPTitle.forEach((element) => {
+     console.log("data",data);
+      data.allCOPTitle.forEach((element,index) => {
         this.allCOPSelected.push(element);
+        // this.COP().push(this.codeOfPrac(index));
       });
+      
       console.log('allCOPSelected', this.allCOPSelected);
      let myMap = new Map()
      this.allCOPSelected.forEach((item)=>{
@@ -619,8 +1000,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
      })
      this.allCOPSelected = Array.from(new Set(this.allCOPSelected.map(x => JSON.stringify(x)))).map(y => JSON.parse(y));
      console.log('allCOPSelected', this.allCOPSelected,myMap);
-
-
     });
   }
   getAllJobNumber() {
@@ -726,13 +1105,14 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       }
       if (type === 'editIdentifyHazards' && result !='false') {
 
-        this.jobTaskSelected[i].allHazardsTitle[i]=data;
+        this.jobTaskSelected[i].allHazardsTitle[i]=data;  
       }
       if (type === 'editCtrlActreq'  && result !='false') {
         this.jobTaskSelected[i].allContrlActReqTitle[i]=data;
       }
 
       console.log('The dialog was closed');
+
     });
   }
   addChemical() {
@@ -755,7 +1135,6 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
           this.getAllChemical();
         });
       }
-
       console.log('The dialog was closed');
     });
   }
@@ -797,7 +1176,31 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   }
 
   onSubmit(){
-    console.log("this.riskAssessmentFb",this.riskAssessmentFb);
-    
+    const data={
+      ...this.riskAssessmentFb.value,
+      codeOfPract:this.allCOPSelected,
+      identifyHazards:this.jobTaskSelected
+    }
+    console.log("data",data);
+    if(this.id!=='form')
+    {
+      this.logicalFormInfo.updateAssessment(this.id,data).subscribe((res)=>{
+        console.log("this.riskAssessmentFb updated",res);
+        this.router.navigate(["/admin/forms/riskAssessTable"]);
+      })
+
+    }
+    else
+    {
+      this.logicalFormInfo.addAssessment(data).subscribe((res)=>{
+        this.router.navigate(["/admin/forms/riskAssessTable"]);
+        console.log("this.riskAssessmentFb posted",res);
+      })
+    }
+    this.riskAssessmentFb.reset();
+    this.allCOPSelected=[];
+    this.jobTaskSelected=[];
+    this.signaturePad1.clear();
+    this.signaturePad2.clear();
   }
 }
