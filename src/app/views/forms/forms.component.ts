@@ -29,7 +29,7 @@ export class FormsComponent implements OnInit {
     { index: 2, title: 'Notifiable Incidents', link: ['/admin/forms/incidentRep/'+'Form'] },
     { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'form'] },
     { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'form'] },
-    { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS'] }
+    { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS/'+'form'] }
   ];
   formName = '';
   addForm: FormGroup;
@@ -68,6 +68,10 @@ goTo(title)
 if(title==="Notifiable Incidents")
   {
     this.router.navigate(["/admin/forms/incidentsTable"]);
+  }
+  if(title==="Risk Assessment")
+  {
+    this.router.navigate(["/admin/forms/riskAssessTable"]);
   }
 }
 
