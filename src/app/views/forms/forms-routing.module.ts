@@ -11,6 +11,7 @@ import { ToolboxTalkComponent } from './toolbox-talk/toolbox-talk.component';
 import {SiteInspectionTableComponent} from './site-inspection-table/site-inspection-table.component'
 import { HazardFormTableDetailsComponent } from './hazard-form-table-details/hazard-form-table-details.component';
 import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
+import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesment-table.component';
 const routes: Routes = [
   { path: '', component: FormsComponent },
   { path: 'forms', component: FormsComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
   { path: 'hazardRep/:id', component: HazardReportComponent },
   { path: 'incidentRep/:id', component: IncidentReportComponent },
-  { path: 'riskAssessSWMS', component: RiskAssessmentSWMSComponent },
+  { path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent },
+  { path: 'riskAssessTable', component: RiskAssesmentTableComponent },
   { path: 'tableData', component: DisplayTableComponent},
   { path:'siteinspectiontable', component:SiteInspectionTableComponent},
   {path:'hazardTable',component:HazardFormTableDetailsComponent},
