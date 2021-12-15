@@ -159,19 +159,19 @@
 
       function RateAndCouponComponent_button_4_Template(rf, ctx) {
         if (rf & 1) {
-          var _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 15);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RateAndCouponComponent_button_4_Template_button_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18);
 
-            var ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r15.edit("");
+            return ctx_r17.edit("");
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "i", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "i", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Add Coupon ");
 
@@ -181,7 +181,7 @@
 
       function RateAndCouponComponent_th_8_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " No. ");
 
@@ -191,7 +191,7 @@
 
       function RateAndCouponComponent_td_9_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -199,17 +199,17 @@
         }
 
         if (rf & 2) {
-          var i_r18 = ctx.index;
+          var i_r20 = ctx.index;
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](i_r18 + 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](i_r20 + 1);
         }
       }
 
       function RateAndCouponComponent_th_11_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Monthly Rate ");
 
@@ -219,63 +219,7 @@
 
       function RateAndCouponComponent_td_12_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 17);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var element_r19 = ctx.$implicit;
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r19.monthly, " ");
-        }
-      }
-
-      function RateAndCouponComponent_th_14_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 18);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Default Monthly Rate ");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-      }
-
-      function RateAndCouponComponent_td_15_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 17);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-
-        if (rf & 2) {
-          var element_r20 = ctx.$implicit;
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r20.defaultMonthly, " ");
-        }
-      }
-
-      function RateAndCouponComponent_th_17_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 18);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " DefaultEmp Rate ");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        }
-      }
-
-      function RateAndCouponComponent_td_18_Template(rf, ctx) {
-        if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -287,23 +231,23 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r21.defaultEmp, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r21.monthly, " ");
         }
       }
 
-      function RateAndCouponComponent_th_20_Template(rf, ctx) {
+      function RateAndCouponComponent_th_14_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Yearly Discount ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Default Monthly Rate ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
       }
 
-      function RateAndCouponComponent_td_21_Template(rf, ctx) {
+      function RateAndCouponComponent_td_15_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -315,13 +259,115 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r22.yearlyDiscount, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r22.defaultMonthly, " ");
+        }
+      }
+
+      function RateAndCouponComponent_th_17_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 19);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " DefaultEmp Rate ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function RateAndCouponComponent_td_18_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var element_r23 = ctx.$implicit;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r23.defaultEmp, " ");
+        }
+      }
+
+      function RateAndCouponComponent_th_20_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 17);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Yearly Discount % ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function RateAndCouponComponent_td_21_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var element_r24 = ctx.$implicit;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r24.yearlyDiscount, " ");
         }
       }
 
       function RateAndCouponComponent_th_23_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 17);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Coupon% ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function RateAndCouponComponent_td_24_div_1_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var item_r27 = ctx.$implicit;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", item_r27.couponName + " " + item_r27.discount + "%", " ");
+        }
+      }
+
+      function RateAndCouponComponent_td_24_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, RateAndCouponComponent_td_24_div_1_Template, 2, 1, "div", 20);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var element_r25 = ctx.$implicit;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", element_r25.coupons);
+        }
+      }
+
+      function RateAndCouponComponent_th_26_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 19);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Action ");
 
@@ -329,22 +375,22 @@
         }
       }
 
-      function RateAndCouponComponent_td_24_Template(rf, ctx) {
+      function RateAndCouponComponent_td_27_Template(rf, ctx) {
         if (rf & 1) {
-          var _r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td", 18);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RateAndCouponComponent_td_24_Template_button_click_1_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r25);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RateAndCouponComponent_td_27_Template_button_click_1_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
 
-            var element_r23 = ctx.$implicit;
+            var element_r28 = ctx.$implicit;
 
-            var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r24.edit(element_r23);
+            return ctx_r29.edit(element_r28);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-icon");
@@ -359,15 +405,15 @@
         }
       }
 
-      function RateAndCouponComponent_tr_25_Template(rf, ctx) {
+      function RateAndCouponComponent_tr_28_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 22);
         }
       }
 
-      function RateAndCouponComponent_tr_26_Template(rf, ctx) {
+      function RateAndCouponComponent_tr_29_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 23);
         }
       }
 
@@ -382,7 +428,7 @@
           this.dataPlan = [''];
           this.isValid = false;
           this.ELEMENT_DATA = [];
-          this.displayedColumns = ['index', 'monthly', 'defaultMonthly', 'defaultEmp', 'yearlyDiscount', 'action'];
+          this.displayedColumns = ['index', 'monthly', 'defaultMonthly', 'defaultEmp', 'yearlyDiscount', 'coupon', 'action'];
           this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](this.ELEMENT_DATA);
           this.addPlan = false;
           this.rateAndCoupon = this.fb.group({
@@ -395,6 +441,7 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             this.getPlan();
+            this.getPlanById();
             this.setTitle.setTitle('WHS-Subscription Details');
           }
         }, {
@@ -446,7 +493,7 @@
 
             var dialogRef = this.dialog.open(_edit_rate_and_coupon_edit_rate_and_coupon_component__WEBPACK_IMPORTED_MODULE_3__["EditRateAndCouponComponent"], {
               width: "550px",
-              height: "400px",
+              height: "440px",
               data: element
             });
             dialogRef.afterClosed().subscribe(function (result) {
@@ -455,6 +502,19 @@
               }
 
               console.log("The dialog was closed");
+            });
+          }
+        }, {
+          key: "getPlanById",
+          value: function getPlanById() {
+            var _this3 = this;
+
+            var id = '61b739367f7aba4a9f8684e1';
+            this.subscript.getPlan(id).subscribe(function (res) {
+              console.log("getId", res);
+              _this3.coupon = res.data; // this.coupon.forEach((element, index) => {
+              //   element.index = index + 1; //adding index
+              // });
             });
           }
         }]);
@@ -480,9 +540,9 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.sort = _t.first);
           }
         },
-        decls: 27,
+        decls: 30,
         vars: 4,
-        consts: [[1, "col", "ml-2", "pt-1"], ["type", "button", "class", "btn btn-outline-primary  mr-2 float-right", 3, "click", 4, "ngIf"], ["mat-table", "", "matSort", "", 3, "dataSource"], ["matColumnDef", "index"], ["mat-header-cell", "", "mat-sort-header", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "monthly"], ["matColumnDef", "defaultMonthly"], ["mat-header-cell", "", 4, "matHeaderCellDef"], ["matColumnDef", "defaultEmp"], ["matColumnDef", "yearlyDiscount"], ["matColumnDef", "action"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["type", "button", 1, "btn", "btn-outline-primary", "mr-2", "float-right", 3, "click"], [1, "fas", "fa-plus"], ["mat-header-cell", "", "mat-sort-header", ""], ["mat-cell", ""], ["mat-header-cell", ""], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 1, "mr-2", 3, "click"], ["mat-header-row", ""], ["mat-row", ""]],
+        consts: [[1, "col", "ml-2", "pt-1"], ["type", "button", "class", "btn btn-outline-primary  mr-2 float-right", 3, "click", 4, "ngIf"], ["mat-table", "", "matSort", "", 3, "dataSource"], ["matColumnDef", "index"], ["mat-header-cell", "", "mat-sort-header", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "monthly"], ["matColumnDef", "defaultMonthly"], ["mat-header-cell", "", 4, "matHeaderCellDef"], ["matColumnDef", "defaultEmp"], ["matColumnDef", "yearlyDiscount"], ["matColumnDef", "coupon"], ["matColumnDef", "action"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["type", "button", 1, "btn", "btn-outline-primary", "mr-2", "float-right", 3, "click"], [1, "fas", "fa-plus"], ["mat-header-cell", "", "mat-sort-header", ""], ["mat-cell", ""], ["mat-header-cell", ""], [4, "ngFor", "ngForOf"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 1, "mr-2", 3, "click"], ["mat-header-row", ""], ["mat-row", ""]],
         template: function RateAndCouponComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -547,15 +607,23 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](22, 11);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, RateAndCouponComponent_th_23_Template, 2, 0, "th", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, RateAndCouponComponent_th_23_Template, 2, 0, "th", 4);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](24, RateAndCouponComponent_td_24_Template, 4, 0, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](24, RateAndCouponComponent_td_24_Template, 2, 1, "td", 5);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](25, RateAndCouponComponent_tr_25_Template, 1, 0, "tr", 12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](25, 12);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](26, RateAndCouponComponent_tr_26_Template, 1, 0, "tr", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](26, RateAndCouponComponent_th_26_Template, 2, 0, "th", 8);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](27, RateAndCouponComponent_td_27_Template, 4, 0, "td", 5);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](28, RateAndCouponComponent_tr_28_Template, 1, 0, "tr", 13);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](29, RateAndCouponComponent_tr_29_Template, 1, 0, "tr", 14);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -571,7 +639,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("dataSource", ctx.dataSource);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](19);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](22);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
 
@@ -580,7 +648,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatTable"], _angular_material_sort__WEBPACK_IMPORTED_MODULE_4__["MatSort"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatColumnDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderCell"], _angular_material_sort__WEBPACK_IMPORTED_MODULE_4__["MatSortHeader"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatCell"], _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButton"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__["MatIcon"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderRow"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatRow"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatTable"], _angular_material_sort__WEBPACK_IMPORTED_MODULE_4__["MatSort"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatColumnDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatCellDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatRowDef"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderCell"], _angular_material_sort__WEBPACK_IMPORTED_MODULE_4__["MatSortHeader"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatCell"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButton"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__["MatIcon"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatHeaderRow"], _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatRow"]],
         styles: ["table[_ngcontent-%COMP%] {\n  width: 100%;\n}\n\n  .mat-sort-header-container {\n  margin-left: 47% !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxyYXRlLWFuZC1jb3Vwb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxXQUFBO0FBQ0o7O0FBQ0U7RUFDRSwyQkFBQTtBQUVKIiwiZmlsZSI6InJhdGUtYW5kLWNvdXBvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gIH1cclxuICA6Om5nLWRlZXAgLm1hdC1zb3J0LWhlYWRlci1jb250YWluZXIge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDQ3JSAhaW1wb3J0YW50O1xyXG4gIH0iXX0= */"]
       });
       /*@__PURE__*/
@@ -904,7 +972,7 @@
         }, {
           key: "getAllCoupon",
           value: function getAllCoupon() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.subscript.getAllCoupon().subscribe(function (res) {
               console.log(res);
@@ -912,16 +980,16 @@
               couponData.forEach(function (element, index) {
                 element.index = index + 1; //adding index
               });
-              _this3.ELEMENT_DATA = couponData;
-              _this3.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](_this3.ELEMENT_DATA);
-              _this3.dataSource.paginator = _this3.paginator;
-              _this3.dataSource.sort = _this3.sort;
+              _this4.ELEMENT_DATA = couponData;
+              _this4.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](_this4.ELEMENT_DATA);
+              _this4.dataSource.paginator = _this4.paginator;
+              _this4.dataSource.sort = _this4.sort;
             });
           }
         }, {
           key: "edit",
           value: function edit(element) {
-            var _this4 = this;
+            var _this5 = this;
 
             var dialogRef = this.dialog.open(_add_edit_coupon_add_edit_coupon_component__WEBPACK_IMPORTED_MODULE_4__["AddEditCouponComponent"], {
               width: "550px",
@@ -930,7 +998,7 @@
             });
             dialogRef.afterClosed().subscribe(function (result) {
               if (result == "true") {
-                _this4.getAllCoupon();
+                _this5.getAllCoupon();
               }
 
               console.log("The dialog was closed");
@@ -939,7 +1007,7 @@
         }, {
           key: "delete",
           value: function _delete(item) {
-            var _this5 = this;
+            var _this6 = this;
 
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default.a.fire({
               title: 'Are you sure?',
@@ -953,12 +1021,12 @@
               if (result.value) {
                 console.log(result); // this.model.attributes.splice(i,1);
 
-                _this5.spinner.show();
+                _this6.spinner.show();
 
-                _this5.subscript.deleteCoupon(item._id).subscribe(function (res) {
-                  _this5.getAllCoupon();
+                _this6.subscript.deleteCoupon(item._id).subscribe(function (res) {
+                  _this6.getAllCoupon();
 
-                  _this5.spinner.hide();
+                  _this6.spinner.hide();
                 });
               }
             });
@@ -1265,14 +1333,14 @@
         }, {
           key: "onSubmit",
           value: function onSubmit() {
-            var _this6 = this;
+            var _this7 = this;
 
             var data = {
               couponName: this.couponDetails.get('couponName').value,
               discount: this.couponDetails.get('discount').value
             };
             this.Subscription.editCoupon(this.dataRec._id, data).subscribe(function (res) {
-              _this6.dialogRef.close('true');
+              _this7.dialogRef.close('true');
 
               sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
                 title: ' Updated successfully',
@@ -1280,18 +1348,18 @@
                 timer: 1200
               });
 
-              _this6.ngOnInit();
+              _this7.ngOnInit();
             });
           }
         }, {
           key: "addForm",
           value: function addForm() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.Subscription.addCoupon(this.couponDetails.value).subscribe(function (resData) {
               console.log('addCoupon', resData);
 
-              _this7.dialogRef.close('true');
+              _this8.dialogRef.close('true');
 
               sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
                 title: ' Added successfully',
@@ -1843,6 +1911,24 @@
       var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
       "SVse");
+      /* harmony import */
+
+
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @angular/material/form-field */
+      "Q2Ze");
+      /* harmony import */
+
+
+      var _angular_material_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/material/select */
+      "ZTz/");
+      /* harmony import */
+
+
+      var _angular_material_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @angular/material/core */
+      "UhP/");
 
       function EditRateAndCouponComponent_h3_3_Template(rf, ctx) {
         if (rf & 1) {
@@ -1864,18 +1950,38 @@
         }
       }
 
-      function EditRateAndCouponComponent_button_29_Template(rf, ctx) {
+      function EditRateAndCouponComponent_mat_option_32_Template(rf, ctx) {
         if (rf & 1) {
-          var _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 17);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EditRateAndCouponComponent_button_29_Template_button_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
 
-            var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+        if (rf & 2) {
+          var coupon_r5 = ctx.$implicit;
 
-            return ctx_r4.onSubmit();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", coupon_r5._id);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", coupon_r5.couponName, "\xA0 ", coupon_r5.discount + "%", "");
+        }
+      }
+
+      function EditRateAndCouponComponent_button_35_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 18);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EditRateAndCouponComponent_button_35_Template_button_click_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
+
+            var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            return ctx_r6.onSubmit();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Update ");
@@ -1884,18 +1990,18 @@
         }
       }
 
-      function EditRateAndCouponComponent_button_30_Template(rf, ctx) {
+      function EditRateAndCouponComponent_button_36_Template(rf, ctx) {
         if (rf & 1) {
-          var _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EditRateAndCouponComponent_button_30_Template_button_click_0_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EditRateAndCouponComponent_button_36_Template_button_click_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9);
 
-            var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r6.addForm();
+            return ctx_r8.addForm();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Add ");
@@ -1904,9 +2010,9 @@
         }
 
         if (rf & 2) {
-          var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r3.editSubcriptionForm.invalid);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r4.editSubcriptionForm.invalid);
         }
       }
 
@@ -1918,35 +2024,45 @@
           this.data = data;
           this.fb = fb;
           this.Subscription = Subscription;
+          this.couponsId = [];
           this.dataRec = data;
         }
 
         _createClass(EditRateAndCouponComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            var _this9 = this;
+
             console.log(this.data);
+            this.getAllCoupon();
+            this.dataRec.coupons.forEach(function (element) {
+              _this9.couponsId.push(element._id);
+            });
+            console.log("this.couponsId", this.couponsId);
             this.editSubcriptionForm = this.fb.group({
               monthly: [this.dataRec.monthly, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
               defaultMonthly: [this.dataRec.defaultMonthly, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
               defaultEmp: [this.dataRec.defaultEmp, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-              yearlyDiscount: [this.dataRec.yearlyDiscount, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
+              yearlyDiscount: [this.dataRec.yearlyDiscount, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+              coupons: [this.couponsId, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
             });
           }
         }, {
           key: "onSubmit",
           value: function onSubmit() {
-            var _this8 = this;
+            var _this10 = this;
 
             var data = {
               monthly: this.editSubcriptionForm.get('monthly').value,
               defaultMonthly: this.editSubcriptionForm.get('defaultMonthly').value,
               defaultEmp: this.editSubcriptionForm.get('defaultEmp').value,
-              yearlyDiscount: this.editSubcriptionForm.get('yearlyDiscount').value
+              yearlyDiscount: this.editSubcriptionForm.get('yearlyDiscount').value,
+              coupons: this.editSubcriptionForm.get('coupons').value
             };
             this.Subscription.editPlan(this.dataRec._id, data).subscribe(function (res) {
               console.log(res);
 
-              _this8.dialogRef.close('true');
+              _this10.dialogRef.close('true');
 
               sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
                 title: ' Updated successfully',
@@ -1954,18 +2070,18 @@
                 timer: 1200
               });
 
-              _this8.ngOnInit();
+              _this10.ngOnInit();
             });
           }
         }, {
           key: "addForm",
           value: function addForm() {
-            var _this9 = this;
+            var _this11 = this;
 
             this.Subscription.addPlan(this.editSubcriptionForm.value).subscribe(function (resData) {
               console.log('addPlan', resData);
 
-              _this9.dialogRef.close('true');
+              _this11.dialogRef.close('true');
 
               sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
                 title: ' Added successfully',
@@ -1979,6 +2095,18 @@
           value: function close() {
             this.dialogRef.close();
           }
+        }, {
+          key: "getAllCoupon",
+          value: function getAllCoupon() {
+            var _this12 = this;
+
+            this.Subscription.getAllCoupon().subscribe(function (res) {
+              console.log(res);
+              _this12.couponData = res.data; // couponData.forEach((element, index) => {
+              //   element.index = index + 1; //adding index
+              // });
+            });
+          }
         }]);
 
         return EditRateAndCouponComponent;
@@ -1991,9 +2119,9 @@
       EditRateAndCouponComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: EditRateAndCouponComponent,
         selectors: [["app-edit-rate-and-coupon"]],
-        decls: 31,
-        vars: 5,
-        consts: [[3, "formGroup"], ["mat-dialog-title", "", 1, "dialog-title"], [4, "ngIf"], ["type", "button", "aria-label", "Close", 1, "close", 2, "font-size", "25px", 3, "click"], ["aria-hidden", "true"], [1, "row"], [1, "my-3", "col"], ["for", "exampleFormControlInput1", 1, "form-Label"], ["type", "text", "id", "monthly", "formControlName", "monthly", 1, "form-control"], ["type", "text", "id", "defaultMonthly", "formControlName", "defaultMonthly", 1, "form-control"], ["type", "text", "id", "defaultEmp", "formControlName", "defaultEmp", 1, "form-control"], ["type", "text", "id", "yearlyDiscount", "formControlName", "yearlyDiscount", 1, "form-control"], ["class", "btn btn-primary", 3, "click", 4, "ngIf"], ["class", "btn btn-primary", 3, "disabled", "click", 4, "ngIf"], [1, "btn", "btn-primary", 3, "click"], [1, "btn", "btn-primary", 3, "disabled", "click"]],
+        decls: 37,
+        vars: 6,
+        consts: [[3, "formGroup"], ["mat-dialog-title", "", 1, "dialog-title"], [4, "ngIf"], ["type", "button", "aria-label", "Close", 1, "close", 2, "font-size", "25px", 3, "click"], ["aria-hidden", "true"], [1, "row"], [1, "my-3", "col"], ["for", "exampleFormControlInput1", 1, "form-Label"], ["type", "text", "id", "monthly", "formControlName", "monthly", 1, "form-control"], ["type", "text", "id", "defaultMonthly", "formControlName", "defaultMonthly", 1, "form-control"], ["type", "text", "id", "defaultEmp", "formControlName", "defaultEmp", 1, "form-control"], ["type", "text", "id", "yearlyDiscount", "formControlName", "yearlyDiscount", 1, "form-control"], ["appearance", "outline"], ["formControlName", "coupons", "multiple", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "btn btn-primary", 3, "click", 4, "ngIf"], ["class", "btn btn-primary", 3, "disabled", "click", 4, "ngIf"], [3, "value"], [1, "btn", "btn-primary", 3, "click"], [1, "btn", "btn-primary", 3, "disabled", "click"]],
         template: function EditRateAndCouponComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
@@ -2070,7 +2198,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "p", 7);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, " Yearly Discount");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, " Yearly Discount %");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2078,15 +2206,35 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "div", 6);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "p", 7);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, " Coupon");
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](27, "hr");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "mat-form-field", 12);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "mat-select", 13);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](29, EditRateAndCouponComponent_button_29_Template, 2, 0, "button", 12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](32, EditRateAndCouponComponent_mat_option_32_Template, 2, 3, "mat-option", 14);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](30, EditRateAndCouponComponent_button_30_Template, 2, 1, "button", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](33, "hr");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "div");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](35, EditRateAndCouponComponent_button_35_Template, 2, 0, "button", 15);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](36, EditRateAndCouponComponent_button_36_Template, 2, 1, "button", 16);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -2106,7 +2254,11 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.dataRec);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](25);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](28);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.couponData);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.dataRec);
 
@@ -2115,8 +2267,8 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.dataRec);
           }
         },
-        directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogTitle"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"]],
-        styles: [".dialog-title[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcZWRpdC1yYXRlLWFuZC1jb3Vwb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0VBQ0EsOEJBQUE7RUFDQSxtQkFBQTtBQUNKIiwiZmlsZSI6ImVkaXQtcmF0ZS1hbmQtY291cG9uLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmRpYWxvZy10aXRsZSB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICB9Il19 */"]
+        directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogTitle"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__["MatFormField"], _angular_material_select__WEBPACK_IMPORTED_MODULE_7__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_8__["MatOption"]],
+        styles: [".dialog-title[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n  .mat-form-field-appearance-outline .mat-form-field-infix {\n  padding: 0em 0 0.8em 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcZWRpdC1yYXRlLWFuZC1jb3Vwb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0VBQ0EsOEJBQUE7RUFDQSxtQkFBQTtBQUNKOztBQUNFO0VBQ0Usc0JBQUE7QUFFSiIsImZpbGUiOiJlZGl0LXJhdGUtYW5kLWNvdXBvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaWFsb2ctdGl0bGUge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgfVxyXG4gIDo6bmctZGVlcCAubWF0LWZvcm0tZmllbGQtYXBwZWFyYW5jZS1vdXRsaW5lIC5tYXQtZm9ybS1maWVsZC1pbmZpeCAge1xyXG4gICAgcGFkZGluZzogMGVtIDAgMC44ZW0gMDtcclxuICB9Il19 */"]
       });
       /*@__PURE__*/
 

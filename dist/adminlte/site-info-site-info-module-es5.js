@@ -499,7 +499,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddHazardComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -821,7 +821,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddHighRiskConstructionComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -1964,7 +1964,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -2571,7 +2571,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -2715,7 +2715,13 @@
 
       var _manager_edit_manager_edit_manager_component__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(
       /*! ./manager/edit-manager/edit-manager.component */
-      "/FEF"); // import { AddLicenceAndQualificationComponent } from './licence-and-qual/add-licence-and-qualification/add-licence-and-qualification.component';
+      "/FEF");
+      /* harmony import */
+
+
+      var _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(
+      /*! @ckeditor/ckeditor5-angular */
+      "zioG"); // import { AddLicenceAndQualificationComponent } from './licence-and-qual/add-licence-and-qualification/add-licence-and-qualification.component';
       // import { AddPPEselectComponent } from './ppe-select/add-ppeselect/add-ppeselect.component';
 
 
@@ -2730,13 +2736,13 @@
         factory: function SiteInfoModule_Factory(t) {
           return new (t || SiteInfoModule)();
         },
-        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _site_info_routing_module__WEBPACK_IMPORTED_MODULE_3__["SiteInfoRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_38__["MatStepperModule"], ngx_autosize__WEBPACK_IMPORTED_MODULE_51__["AutosizeModule"]]]
+        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _site_info_routing_module__WEBPACK_IMPORTED_MODULE_3__["SiteInfoRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_38__["MatStepperModule"], ngx_autosize__WEBPACK_IMPORTED_MODULE_51__["AutosizeModule"], _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_76__["CKEditorModule"]]]
       });
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](SiteInfoModule, {
           declarations: [_site_info_component__WEBPACK_IMPORTED_MODULE_4__["SiteInfoComponent"], _add_site_info_add_site_info_component__WEBPACK_IMPORTED_MODULE_5__["AddSiteInfoComponent"], _job_task_job_task_component__WEBPACK_IMPORTED_MODULE_6__["JobTaskComponent"], _high_risk_con_high_risk_con_component__WEBPACK_IMPORTED_MODULE_7__["HighRiskConComponent"], _ppe_select_ppe_select_component__WEBPACK_IMPORTED_MODULE_8__["PpeSelectComponent"], _licence_and_qual_licence_and_qual_component__WEBPACK_IMPORTED_MODULE_9__["LicenceAndQualComponent"], _add_customer_add_customer_component__WEBPACK_IMPORTED_MODULE_11__["AddCustomerComponent"], _high_risk_con_add_high_risk_construction_add_high_risk_construction_component__WEBPACK_IMPORTED_MODULE_12__["AddHighRiskConstructionComponent"], _high_risk_con_edit_high_risk_construction_edit_high_risk_construction_component__WEBPACK_IMPORTED_MODULE_13__["EditHighRiskConstructionComponent"], _job_task_add_job_task_add_job_task_component__WEBPACK_IMPORTED_MODULE_14__["AddJobTaskComponent"], _ppe_select_add_ppe_add_ppe_component__WEBPACK_IMPORTED_MODULE_15__["AddPPEComponent"], _job_task_edit_task_edit_task_component__WEBPACK_IMPORTED_MODULE_16__["EditTaskComponent"], _ppe_select_edit_ppe_edit_ppe_component__WEBPACK_IMPORTED_MODULE_17__["EditPPEComponent"], _licence_and_qual_edit_licence_edit_licence_component__WEBPACK_IMPORTED_MODULE_18__["EditLicenceComponent"], _licence_and_qual_add_licence_add_licence_component__WEBPACK_IMPORTED_MODULE_19__["AddLicenceComponent"], _licence_and_qual_licence_cat_licence_cat_component__WEBPACK_IMPORTED_MODULE_20__["LicenceCatComponent"], _licence_and_qual_licence_cat_add_licence_cat_add_licence_cat_component__WEBPACK_IMPORTED_MODULE_21__["AddLicenceCatComponent"], _licence_and_qual_licence_cat_edit_licence_cat_edit_licence_cat_component__WEBPACK_IMPORTED_MODULE_22__["EditLicenceCatComponent"], _code_of_pract_code_of_pract_component__WEBPACK_IMPORTED_MODULE_23__["CodeOfPractComponent"], _code_of_pract_add_cop_add_cop_component__WEBPACK_IMPORTED_MODULE_24__["AddCOPComponent"], _code_of_pract_edit_cop_edit_cop_component__WEBPACK_IMPORTED_MODULE_25__["EditCOPComponent"], _add_site_info_add_site_add_site_component__WEBPACK_IMPORTED_MODULE_26__["AddSiteComponent"], _add_site_info_edit_site_edit_site_component__WEBPACK_IMPORTED_MODULE_27__["EditSiteComponent"], _add_customer_adding_cust_adding_cust_component__WEBPACK_IMPORTED_MODULE_28__["AddingCustComponent"], _add_customer_edit_cust_edit_cust_component__WEBPACK_IMPORTED_MODULE_29__["EditCustComponent"], _identify_hazards_identify_hazards_component__WEBPACK_IMPORTED_MODULE_30__["IdentifyHazardsComponent"], _contr_and_act_req_contr_and_act_req_component__WEBPACK_IMPORTED_MODULE_31__["ContrAndActReqComponent"], _identify_hazards_add_hazard_add_hazard_component__WEBPACK_IMPORTED_MODULE_32__["AddHazardComponent"], _identify_hazards_edit_hazard_edit_hazard_component__WEBPACK_IMPORTED_MODULE_33__["EditHazardComponent"], _contr_and_act_req_add_contr_act_add_contr_act_component__WEBPACK_IMPORTED_MODULE_34__["AddContrActComponent"], _contr_and_act_req_edit_cont_act_edit_cont_act_component__WEBPACK_IMPORTED_MODULE_35__["EditContActComponent"], _project_manager_project_manager_component__WEBPACK_IMPORTED_MODULE_36__["ProjectManagerComponent"], _project_manager_add_edit_proj_mang_add_edit_proj_mang_component__WEBPACK_IMPORTED_MODULE_37__["AddEditProjMangComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_39__["StaffComponent"], _risk_level_risk_level_component__WEBPACK_IMPORTED_MODULE_40__["RiskLevelComponent"], _residual_risk_level_residual_risk_level_component__WEBPACK_IMPORTED_MODULE_41__["ResidualRiskLevelComponent"], _chemical_chemical_component__WEBPACK_IMPORTED_MODULE_42__["ChemicalComponent"], _chemical_add_chemical_add_chemical_component__WEBPACK_IMPORTED_MODULE_43__["AddChemicalComponent"], _chemical_edit_chemical_edit_chemical_component__WEBPACK_IMPORTED_MODULE_44__["EditChemicalComponent"], _risk_level_add_risk_level_add_risk_level_component__WEBPACK_IMPORTED_MODULE_45__["AddRiskLevelComponent"], _risk_level_edit_risk_level_edit_risk_level_component__WEBPACK_IMPORTED_MODULE_46__["EditRiskLevelComponent"], _residual_risk_level_add_residual_risk_level_add_residual_risk_level_component__WEBPACK_IMPORTED_MODULE_47__["AddResidualRiskLevelComponent"], _residual_risk_level_edit_residual_risk_level_edit_residual_risk_level_component__WEBPACK_IMPORTED_MODULE_48__["EditResidualRiskLevelComponent"], _staff_add_staff_add_staff_component__WEBPACK_IMPORTED_MODULE_49__["AddStaffComponent"], _staff_edit_staff_edit_staff_component__WEBPACK_IMPORTED_MODULE_50__["EditStaffComponent"], _site_inspection_category_site_inspection_category_component__WEBPACK_IMPORTED_MODULE_52__["SiteInspectionCategoryComponent"], _site_inspection_category_add_site_inspection_category_add_site_inspection_category_component__WEBPACK_IMPORTED_MODULE_53__["AddSiteInspectionCategoryComponent"], _site_inspection_category_edit_site_inspection_category_edit_site_inspection_category_component__WEBPACK_IMPORTED_MODULE_54__["EditSiteInspectionCategoryComponent"], _site_inspection_category_site_inspection_topic_site_inspection_topic_component__WEBPACK_IMPORTED_MODULE_55__["SiteInspectionTopicComponent"], _site_inspection_category_site_inspection_topic_add_site_inspection_topic_add_site_inspection_topic_component__WEBPACK_IMPORTED_MODULE_56__["AddSiteInspectionTopicComponent"], _site_inspection_category_site_inspection_topic_edit_site_inspection_topic_edit_site_inspection_topic_component__WEBPACK_IMPORTED_MODULE_57__["EditSiteInspectionTopicComponent"], _nature_of_incident_nature_of_incident_component__WEBPACK_IMPORTED_MODULE_58__["NatureOfIncidentComponent"], _nature_of_incident_add_and_edit_nature_incident_add_and_edit_nature_incident_component__WEBPACK_IMPORTED_MODULE_59__["AddAndEditNatureIncidentComponent"], _nature_of_incident_edit_nature_incident_edit_nature_incident_component__WEBPACK_IMPORTED_MODULE_60__["EditNatureIncidentComponent"], _changes_made_changes_made_component__WEBPACK_IMPORTED_MODULE_61__["ChangesMadeComponent"], _changes_made_add_changes_made_add_changes_made_component__WEBPACK_IMPORTED_MODULE_62__["AddChangesMadeComponent"], _changes_made_edit_changes_made_edit_changes_made_component__WEBPACK_IMPORTED_MODULE_63__["EditChangesMadeComponent"], _root_cause_of_incident_root_cause_of_incident_component__WEBPACK_IMPORTED_MODULE_64__["RootCauseOfIncidentComponent"], _type_of_incident_type_of_incident_component__WEBPACK_IMPORTED_MODULE_65__["TypeOfIncidentComponent"], _type_of_incident_add_type_of_incident_add_type_of_incident_component__WEBPACK_IMPORTED_MODULE_66__["AddTypeOfIncidentComponent"], _type_of_incident_edit_type_of_incident_edit_type_of_incident_component__WEBPACK_IMPORTED_MODULE_67__["EditTypeOfIncidentComponent"], _root_cause_of_incident_add_root_cause_of_incident_add_root_cause_of_incident_component__WEBPACK_IMPORTED_MODULE_68__["AddRootCauseOfIncidentComponent"], _root_cause_of_incident_edit_root_cause_of_incident_edit_root_cause_of_incident_component__WEBPACK_IMPORTED_MODULE_69__["EditRootCauseOfIncidentComponent"], _manager_manager_component__WEBPACK_IMPORTED_MODULE_70__["ManagerComponent"], _whs_manager_whs_manager_component__WEBPACK_IMPORTED_MODULE_71__["WHSManagerComponent"], _whs_manager_edit_whs_manager_edit_whs_manager_component__WEBPACK_IMPORTED_MODULE_72__["EditWhsManagerComponent"], _whs_manager_add_whs_manager_add_whs_manager_component__WEBPACK_IMPORTED_MODULE_73__["AddWhsManagerComponent"], _manager_add_manager_add_manager_component__WEBPACK_IMPORTED_MODULE_74__["AddManagerComponent"], _manager_edit_manager_edit_manager_component__WEBPACK_IMPORTED_MODULE_75__["EditManagerComponent"]],
-          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _site_info_routing_module__WEBPACK_IMPORTED_MODULE_3__["SiteInfoRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_38__["MatStepperModule"], ngx_autosize__WEBPACK_IMPORTED_MODULE_51__["AutosizeModule"]]
+          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _site_info_routing_module__WEBPACK_IMPORTED_MODULE_3__["SiteInfoRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_38__["MatStepperModule"], ngx_autosize__WEBPACK_IMPORTED_MODULE_51__["AutosizeModule"], _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_76__["CKEditorModule"]]
         });
       })();
       /*@__PURE__*/
@@ -2747,7 +2753,7 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
           args: [{
             declarations: [_site_info_component__WEBPACK_IMPORTED_MODULE_4__["SiteInfoComponent"], _add_site_info_add_site_info_component__WEBPACK_IMPORTED_MODULE_5__["AddSiteInfoComponent"], _job_task_job_task_component__WEBPACK_IMPORTED_MODULE_6__["JobTaskComponent"], _high_risk_con_high_risk_con_component__WEBPACK_IMPORTED_MODULE_7__["HighRiskConComponent"], _ppe_select_ppe_select_component__WEBPACK_IMPORTED_MODULE_8__["PpeSelectComponent"], _licence_and_qual_licence_and_qual_component__WEBPACK_IMPORTED_MODULE_9__["LicenceAndQualComponent"], _add_customer_add_customer_component__WEBPACK_IMPORTED_MODULE_11__["AddCustomerComponent"], _high_risk_con_add_high_risk_construction_add_high_risk_construction_component__WEBPACK_IMPORTED_MODULE_12__["AddHighRiskConstructionComponent"], _high_risk_con_edit_high_risk_construction_edit_high_risk_construction_component__WEBPACK_IMPORTED_MODULE_13__["EditHighRiskConstructionComponent"], _job_task_add_job_task_add_job_task_component__WEBPACK_IMPORTED_MODULE_14__["AddJobTaskComponent"], _ppe_select_add_ppe_add_ppe_component__WEBPACK_IMPORTED_MODULE_15__["AddPPEComponent"], _job_task_edit_task_edit_task_component__WEBPACK_IMPORTED_MODULE_16__["EditTaskComponent"], _ppe_select_edit_ppe_edit_ppe_component__WEBPACK_IMPORTED_MODULE_17__["EditPPEComponent"], _licence_and_qual_edit_licence_edit_licence_component__WEBPACK_IMPORTED_MODULE_18__["EditLicenceComponent"], _licence_and_qual_add_licence_add_licence_component__WEBPACK_IMPORTED_MODULE_19__["AddLicenceComponent"], _licence_and_qual_licence_cat_licence_cat_component__WEBPACK_IMPORTED_MODULE_20__["LicenceCatComponent"], _licence_and_qual_licence_cat_add_licence_cat_add_licence_cat_component__WEBPACK_IMPORTED_MODULE_21__["AddLicenceCatComponent"], _licence_and_qual_licence_cat_edit_licence_cat_edit_licence_cat_component__WEBPACK_IMPORTED_MODULE_22__["EditLicenceCatComponent"], _code_of_pract_code_of_pract_component__WEBPACK_IMPORTED_MODULE_23__["CodeOfPractComponent"], _code_of_pract_add_cop_add_cop_component__WEBPACK_IMPORTED_MODULE_24__["AddCOPComponent"], _code_of_pract_edit_cop_edit_cop_component__WEBPACK_IMPORTED_MODULE_25__["EditCOPComponent"], _add_site_info_add_site_add_site_component__WEBPACK_IMPORTED_MODULE_26__["AddSiteComponent"], _add_site_info_edit_site_edit_site_component__WEBPACK_IMPORTED_MODULE_27__["EditSiteComponent"], _add_customer_adding_cust_adding_cust_component__WEBPACK_IMPORTED_MODULE_28__["AddingCustComponent"], _add_customer_edit_cust_edit_cust_component__WEBPACK_IMPORTED_MODULE_29__["EditCustComponent"], _identify_hazards_identify_hazards_component__WEBPACK_IMPORTED_MODULE_30__["IdentifyHazardsComponent"], _contr_and_act_req_contr_and_act_req_component__WEBPACK_IMPORTED_MODULE_31__["ContrAndActReqComponent"], _identify_hazards_add_hazard_add_hazard_component__WEBPACK_IMPORTED_MODULE_32__["AddHazardComponent"], _identify_hazards_edit_hazard_edit_hazard_component__WEBPACK_IMPORTED_MODULE_33__["EditHazardComponent"], _contr_and_act_req_add_contr_act_add_contr_act_component__WEBPACK_IMPORTED_MODULE_34__["AddContrActComponent"], _contr_and_act_req_edit_cont_act_edit_cont_act_component__WEBPACK_IMPORTED_MODULE_35__["EditContActComponent"], _project_manager_project_manager_component__WEBPACK_IMPORTED_MODULE_36__["ProjectManagerComponent"], _project_manager_add_edit_proj_mang_add_edit_proj_mang_component__WEBPACK_IMPORTED_MODULE_37__["AddEditProjMangComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_39__["StaffComponent"], _risk_level_risk_level_component__WEBPACK_IMPORTED_MODULE_40__["RiskLevelComponent"], _residual_risk_level_residual_risk_level_component__WEBPACK_IMPORTED_MODULE_41__["ResidualRiskLevelComponent"], _chemical_chemical_component__WEBPACK_IMPORTED_MODULE_42__["ChemicalComponent"], _chemical_add_chemical_add_chemical_component__WEBPACK_IMPORTED_MODULE_43__["AddChemicalComponent"], _chemical_edit_chemical_edit_chemical_component__WEBPACK_IMPORTED_MODULE_44__["EditChemicalComponent"], _risk_level_add_risk_level_add_risk_level_component__WEBPACK_IMPORTED_MODULE_45__["AddRiskLevelComponent"], _risk_level_edit_risk_level_edit_risk_level_component__WEBPACK_IMPORTED_MODULE_46__["EditRiskLevelComponent"], _residual_risk_level_add_residual_risk_level_add_residual_risk_level_component__WEBPACK_IMPORTED_MODULE_47__["AddResidualRiskLevelComponent"], _residual_risk_level_edit_residual_risk_level_edit_residual_risk_level_component__WEBPACK_IMPORTED_MODULE_48__["EditResidualRiskLevelComponent"], _staff_add_staff_add_staff_component__WEBPACK_IMPORTED_MODULE_49__["AddStaffComponent"], _staff_edit_staff_edit_staff_component__WEBPACK_IMPORTED_MODULE_50__["EditStaffComponent"], _site_inspection_category_site_inspection_category_component__WEBPACK_IMPORTED_MODULE_52__["SiteInspectionCategoryComponent"], _site_inspection_category_add_site_inspection_category_add_site_inspection_category_component__WEBPACK_IMPORTED_MODULE_53__["AddSiteInspectionCategoryComponent"], _site_inspection_category_edit_site_inspection_category_edit_site_inspection_category_component__WEBPACK_IMPORTED_MODULE_54__["EditSiteInspectionCategoryComponent"], _site_inspection_category_site_inspection_topic_site_inspection_topic_component__WEBPACK_IMPORTED_MODULE_55__["SiteInspectionTopicComponent"], _site_inspection_category_site_inspection_topic_add_site_inspection_topic_add_site_inspection_topic_component__WEBPACK_IMPORTED_MODULE_56__["AddSiteInspectionTopicComponent"], _site_inspection_category_site_inspection_topic_edit_site_inspection_topic_edit_site_inspection_topic_component__WEBPACK_IMPORTED_MODULE_57__["EditSiteInspectionTopicComponent"], _nature_of_incident_nature_of_incident_component__WEBPACK_IMPORTED_MODULE_58__["NatureOfIncidentComponent"], _nature_of_incident_add_and_edit_nature_incident_add_and_edit_nature_incident_component__WEBPACK_IMPORTED_MODULE_59__["AddAndEditNatureIncidentComponent"], _nature_of_incident_edit_nature_incident_edit_nature_incident_component__WEBPACK_IMPORTED_MODULE_60__["EditNatureIncidentComponent"], _changes_made_changes_made_component__WEBPACK_IMPORTED_MODULE_61__["ChangesMadeComponent"], _changes_made_add_changes_made_add_changes_made_component__WEBPACK_IMPORTED_MODULE_62__["AddChangesMadeComponent"], _changes_made_edit_changes_made_edit_changes_made_component__WEBPACK_IMPORTED_MODULE_63__["EditChangesMadeComponent"], _root_cause_of_incident_root_cause_of_incident_component__WEBPACK_IMPORTED_MODULE_64__["RootCauseOfIncidentComponent"], _type_of_incident_type_of_incident_component__WEBPACK_IMPORTED_MODULE_65__["TypeOfIncidentComponent"], _type_of_incident_add_type_of_incident_add_type_of_incident_component__WEBPACK_IMPORTED_MODULE_66__["AddTypeOfIncidentComponent"], _type_of_incident_edit_type_of_incident_edit_type_of_incident_component__WEBPACK_IMPORTED_MODULE_67__["EditTypeOfIncidentComponent"], _root_cause_of_incident_add_root_cause_of_incident_add_root_cause_of_incident_component__WEBPACK_IMPORTED_MODULE_68__["AddRootCauseOfIncidentComponent"], _root_cause_of_incident_edit_root_cause_of_incident_edit_root_cause_of_incident_component__WEBPACK_IMPORTED_MODULE_69__["EditRootCauseOfIncidentComponent"], _manager_manager_component__WEBPACK_IMPORTED_MODULE_70__["ManagerComponent"], _whs_manager_whs_manager_component__WEBPACK_IMPORTED_MODULE_71__["WHSManagerComponent"], _whs_manager_edit_whs_manager_edit_whs_manager_component__WEBPACK_IMPORTED_MODULE_72__["EditWhsManagerComponent"], _whs_manager_add_whs_manager_add_whs_manager_component__WEBPACK_IMPORTED_MODULE_73__["AddWhsManagerComponent"], _manager_add_manager_add_manager_component__WEBPACK_IMPORTED_MODULE_74__["AddManagerComponent"], _manager_edit_manager_edit_manager_component__WEBPACK_IMPORTED_MODULE_75__["EditManagerComponent"]],
-            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _site_info_routing_module__WEBPACK_IMPORTED_MODULE_3__["SiteInfoRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_38__["MatStepperModule"], ngx_autosize__WEBPACK_IMPORTED_MODULE_51__["AutosizeModule"]]
+            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _site_info_routing_module__WEBPACK_IMPORTED_MODULE_3__["SiteInfoRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_38__["MatStepperModule"], ngx_autosize__WEBPACK_IMPORTED_MODULE_51__["AutosizeModule"], _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_76__["CKEditorModule"]]
           }]
         }], null, null);
       })();
@@ -5453,7 +5459,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddRootCauseOfIncidentComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -6420,7 +6426,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("cdkCopyToClipboard", element_r11.title.toString())("matTooltip", element_r11.title);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("innerHtml", element_r11.title, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeHtml"]);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r11.title.length > 90 ? element_r11.title.slice(0, 90) + "..." : element_r11.title, "");
         }
@@ -6660,7 +6670,7 @@
         },
         decls: 26,
         vars: 7,
-        consts: [[1, "col", "ml-2", "pt-3"], [1, "col", "ml-2", "mb-2"], [1, "btn", "btn-outline-primary", "mt-1", "mr-2", "float-right", 3, "routerLink"], [1, "fas", "fa-folder-plus", "mr-2"], [1, "col-6"], ["matInput", "", "placeholder", "Search", 3, "keyup"], ["input", ""], [1, ""], ["mat-table", "", "matSort", "", 3, "dataSource"], ["matColumnDef", "index"], ["mat-header-cell", "", "mat-sort-header", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "title"], ["mat-cell", "", 3, "cdkCopyToClipboard", "matTooltip", "cdkCopyToClipboardCopied", 4, "matCellDef"], ["matColumnDef", "action"], ["mat-header-cell", "", "style", "width: 10%;", 4, "matHeaderCellDef"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["class", "mat-row", 4, "matNoDataRow"], ["showFirstLastButtons", "", "aria-label", "Select page of periodic elements", 3, "pageSizeOptions"], ["mat-header-cell", "", "mat-sort-header", ""], ["mat-cell", ""], ["mat-cell", "", 3, "cdkCopyToClipboard", "matTooltip", "cdkCopyToClipboardCopied"], [1, "flex-start"], ["mat-header-cell", "", 2, "width", "10%"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 1, "mr-2"], [3, "click"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon"], ["mat-header-row", ""], ["mat-row", ""], [1, "mat-row"], ["colspan", "4", 1, "mat-cell"]],
+        consts: [[1, "col", "ml-2", "pt-3"], [1, "col", "ml-2", "mb-2"], [1, "btn", "btn-outline-primary", "mt-1", "mr-2", "float-right", 3, "routerLink"], [1, "fas", "fa-folder-plus", "mr-2"], [1, "col-6"], ["matInput", "", "placeholder", "Search", 3, "keyup"], ["input", ""], [1, ""], ["mat-table", "", "matSort", "", 3, "dataSource"], ["matColumnDef", "index"], ["mat-header-cell", "", "mat-sort-header", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "title"], ["mat-cell", "", 3, "cdkCopyToClipboard", "matTooltip", "cdkCopyToClipboardCopied", 4, "matCellDef"], ["matColumnDef", "action"], ["mat-header-cell", "", "style", "width: 10%;", 4, "matHeaderCellDef"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["class", "mat-row", 4, "matNoDataRow"], ["showFirstLastButtons", "", "aria-label", "Select page of periodic elements", 3, "pageSizeOptions"], ["mat-header-cell", "", "mat-sort-header", ""], ["mat-cell", ""], ["mat-cell", "", 3, "cdkCopyToClipboard", "matTooltip", "cdkCopyToClipboardCopied"], [3, "innerHtml"], ["mat-header-cell", "", 2, "width", "10%"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon", 1, "mr-2"], [3, "click"], ["mat-icon-button", "", "aria-label", "Example icon button with a delete icon"], ["mat-header-row", ""], ["mat-row", ""], [1, "mat-row"], ["colspan", "4", 1, "mat-cell"]],
         template: function IdentifyHazardsComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -6717,7 +6727,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, IdentifyHazardsComponent_th_17_Template, 2, 0, "th", 10);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](18, IdentifyHazardsComponent_td_18_Template, 3, 3, "td", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](18, IdentifyHazardsComponent_td_18_Template, 3, 4, "td", 13);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 
@@ -7177,7 +7187,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -8464,7 +8474,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddChemicalComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -8771,7 +8781,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddCOPComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -10176,7 +10186,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddChangesMadeComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -10504,7 +10514,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -12641,7 +12651,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -13647,7 +13657,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -13859,7 +13869,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddJobTaskComponent_ng_container_9_option_11_Template(rf, ctx) {
         if (rf & 1) {
@@ -14227,7 +14237,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddAndEditNatureIncidentComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -15652,7 +15662,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddResidualRiskLevelComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -17055,7 +17065,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddLicenceComponent_ng_container_9_option_11_Template(rf, ctx) {
         if (rf & 1) {
@@ -18162,7 +18172,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -19155,7 +19165,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddPPEComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -19459,19 +19469,29 @@
       /* harmony import */
 
 
-      var src_app_utils_services_logical_form_info_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @ckeditor/ckeditor5-build-classic */
+      "+z1p");
+      /* harmony import */
+
+
+      var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4__);
+      /* harmony import */
+
+
+      var src_app_utils_services_logical_form_info_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! src/app/utils/services/logical-form-info.service */
       "wbBK");
       /* harmony import */
 
 
-      var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ngx-autosize */
-      "5eqV");
+      var _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @ckeditor/ckeditor5-angular */
+      "zioG");
       /* harmony import */
 
 
-      var _angular_material_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/button */
       "Dxy4");
 
@@ -19483,6 +19503,7 @@
           this.logicalFormInfo = logicalFormInfo;
           this.dialogRef = dialogRef;
           this.data = data;
+          this.Editor = _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4__;
           this.dataRec = data;
         }
 
@@ -19524,15 +19545,15 @@
       }();
 
       EditHazardComponent.ɵfac = function EditHazardComponent_Factory(t) {
-        return new (t || EditHazardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_utils_services_logical_form_info_service__WEBPACK_IMPORTED_MODULE_4__["LogicalFormInfoService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"]));
+        return new (t || EditHazardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_utils_services_logical_form_info_service__WEBPACK_IMPORTED_MODULE_5__["LogicalFormInfoService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"]));
       };
 
       EditHazardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: EditHazardComponent,
         selectors: [["app-edit-hazard"]],
         decls: 12,
-        vars: 2,
-        consts: [[3, "formGroup"], ["autosize", "", "formControlName", "title", 1, "form-control", "sign"], [1, "row"], [1, "col-sm-2", "offset-8"], ["mat-raised-button", "", 3, "click"], [1, "col-sm-2"], ["mat-raised-button", "", 3, "disabled", "click"]],
+        vars: 3,
+        consts: [[3, "formGroup"], ["formControlName", "title", 3, "editor"], [1, "row"], [1, "col-sm-2", "offset-8"], ["mat-raised-button", "", 3, "click"], [1, "col-sm-2"], ["mat-raised-button", "", 3, "disabled", "click"]],
         template: function EditHazardComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form", 0);
@@ -19543,7 +19564,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "textarea", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "ckeditor", 1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "br");
 
@@ -19585,12 +19606,16 @@
           if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx.editTitle);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("editor", ctx.Editor);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.editTitle.valid);
           }
         },
-        directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], ngx_autosize__WEBPACK_IMPORTED_MODULE_5__["AutosizeDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButton"]],
+        directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_6__["CKEditorComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButton"]],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJlZGl0LWhhemFyZC5jb21wb25lbnQuc2NzcyJ9 */"]
       });
       /*@__PURE__*/
@@ -19607,7 +19632,7 @@
           return [{
             type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]
           }, {
-            type: src_app_utils_services_logical_form_info_service__WEBPACK_IMPORTED_MODULE_4__["LogicalFormInfoService"]
+            type: src_app_utils_services_logical_form_info_service__WEBPACK_IMPORTED_MODULE_5__["LogicalFormInfoService"]
           }, {
             type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"]
           }, {
@@ -19889,7 +19914,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
       /* harmony import */
 
 
@@ -22094,7 +22119,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddTypeOfIncidentComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -22980,7 +23005,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddRiskLevelComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -23313,7 +23338,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddContrActComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {
@@ -25336,7 +25361,7 @@
 
       var ngx_autosize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ngx-autosize */
-      "5eqV");
+      "6bhV");
 
       function AddStaffComponent_ng_container_9_Template(rf, ctx) {
         if (rf & 1) {

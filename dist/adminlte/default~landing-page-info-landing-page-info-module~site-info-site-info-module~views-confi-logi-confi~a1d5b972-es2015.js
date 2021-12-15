@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~landing-page-info-landing-page-info-module~site-info-site-info-module~views-confi-logi-confi~a1d5b972"],{
 
-/***/ "5eqV":
-/*!*************************************************************************!*\
-  !*** ./node_modules/ngx-autosize/__ivy_ngcc__/fesm2015/ngx-autosize.js ***!
-  \*************************************************************************/
+/***/ "6bhV":
+/*!************************************************************!*\
+  !*** ./node_modules/ngx-autosize/fesm2015/ngx-autosize.js ***!
+  \************************************************************/
 /*! exports provided: AutosizeDirective, AutosizeModule, ɵa */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

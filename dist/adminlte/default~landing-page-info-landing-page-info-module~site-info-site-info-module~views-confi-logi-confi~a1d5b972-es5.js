@@ -7,7 +7,7 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~landing-page-info-landing-page-info-module~site-info-site-info-module~views-confi-logi-confi~a1d5b972"], {
     /***/
-    "5eqV": function eqV(module, __webpack_exports__, __webpack_require__) {
+    "6bhV": function bhV(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
