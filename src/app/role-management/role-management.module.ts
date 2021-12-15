@@ -6,11 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RoleManagementRoutingModule } from './role-management-routing.module';
 import { RoleManagementComponent } from './role-management.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { AddRoleComponent } from './add-role/add-role.component';
 
 
 
 @NgModule({
-  declarations: [RoleManagementComponent, CheckboxComponent],
+  declarations: [RoleManagementComponent, CheckboxComponent, AddRoleComponent],
   imports: [
     CommonModule,
     RoleManagementRoutingModule,

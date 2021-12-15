@@ -1,6 +1,6 @@
 <div class="btn btn-outline-primary " [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="container card px-4 py-4 content-center">
-  <form class="px-4 py-4" [formGroup]="hazardReport" (ngSubmit)="onFormSubmit()">
+  <form class="px-4 py-4" [formGroup]="hazardReport">
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form Preview</p>
     </div>
@@ -133,13 +133,13 @@
         <div class="mb-3">
           <label for="exampleInputPhone" class="form-label">Phone</label>
           <input
-            type="email"
+            maxlength="10"
             class="form-control"
             formControlName="phone"
             id="exampleInputPhone"
             aria-describedby="emailHelp"
             [class.is-invalid]="hazardReport.get('phone')?.hasError('required') 
-            && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) "
+            && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) || hazardReport.get('phone')?.hasError('pattern') "
             />
             <span
             *ngIf="
@@ -149,6 +149,12 @@
           >
           Phone Number is Required</span
           >
+          <span
+          *ngIf="hazardReport.get('phone')?.hasError('pattern')"
+          class="invalid-feedback"
+        >
+        Phone Number Should be 10 digits</span
+        >
         </div>
       </div>
       <div class="col-md-6">
@@ -184,16 +190,16 @@
             formControlName="position"
             id="exampleInputPosition"
             aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
-            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            [class.is-invalid]="hazardReport.get('position')?.hasError('required') 
+            && (hazardReport.get('position').dirty || hazardReport.get('position').touched) "
             />
             <span
             *ngIf="
-            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
-            || hazardReport.get('department').touched) "
+            hazardReport.get('position')?.hasError('required') && (hazardReport.get('position').dirty 
+            || hazardReport.get('position').touched) "
             class="invalid-feedback"
           >
-          Department is Required</span
+          Position is Required</span
           >
         </div>
       </div>
@@ -209,16 +215,16 @@
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
             
-            [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
-            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required') 
+            && (hazardReport.get('projectName').dirty || hazardReport.get('projectName').touched) "
             />
             <span
             *ngIf="
-            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
-            || hazardReport.get('department').touched) "
+            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty 
+            || hazardReport.get('projectName').touched) "
             class="invalid-feedback"
           >
-          Department is Required</span
+          Project Number is Required</span
           >
         </div>
       </div>
@@ -1200,7 +1206,7 @@
 
   <br />
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block" (click)="onFormSubmit()">Submit</button>
   </div>
 </form>
 </div>
