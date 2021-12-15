@@ -42,13 +42,32 @@
             />
           </div>
           <div class="my-3 col">
-            <p for="exampleFormControlInput1" class="form-Label"> Yearly Discount</p>
+            <p for="exampleFormControlInput1" class="form-Label"> Yearly Discount %</p>
             <input
               type="text"
               class="form-control"
               id="yearlyDiscount"
               formControlName="yearlyDiscount"
             />
+          </div>
+          <div class="my-3 col">
+            <p for="exampleFormControlInput1" class="form-Label"> Coupon</p>
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="coupons"  multiple>
+                  <mat-option *ngFor="let coupon of couponData" [value]="coupon._id">{{coupon.couponName}}&nbsp; {{coupon.discount+'%'}}</mat-option>
+              </mat-select>
+             </mat-form-field>
+            <!-- <select                  
+            class="form-control"
+            id="coupon"
+            name="coupon"
+            formArrayName="coupon"
+          >
+            <option value=""selected hidden>Select</option>
+            <option [value]="coupon._id" *ngFor="let coupon of couponData">{{coupon.couponName}}&nbsp; %{{coupon.discount}}</option>
+            
+          </select> -->
+           
           </div>
         </div> 
       <hr>

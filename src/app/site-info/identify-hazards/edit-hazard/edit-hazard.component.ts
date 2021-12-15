@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-edit-hazard',
   templateUrl: './edit-hazard.component.html',
@@ -12,6 +13,7 @@ export class EditHazardComponent implements OnInit {
 
   editTitle!: FormGroup;
   dataRec: any;
+  public Editor = ClassicEditor;
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
