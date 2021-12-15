@@ -23,11 +23,13 @@ export class FormsComponent implements OnInit {
   pageSize = 10;
   collectionSize = 10;
   ELEMENT_DATA = [
-    { index: 1, title: 'Hazards Reported', link: ['/admin/forms/hazardRep'] },
+    { index: 1, title: 'Hazards Reported', link: ['/admin/forms/hazardRep/'+'form'] },
+   
+   
     { index: 2, title: 'Notifiable Incidents', link: ['/admin/forms/incidentRep/'+'Form'] },
-    { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'null'] },
-    { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'null'] },
-    { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS'] }
+    { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'form'] },
+    { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'form'] },
+    { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS/'+'form'] }
   ];
   formName = '';
   addForm: FormGroup;
@@ -58,11 +60,19 @@ goTo(title)
   {
     this.router.navigate(["/admin/forms/siteinspectiontable"]);
   }
-  if(title==="Notifiable Incidents")
+  if(title==="Hazards Reported")
+  {
+    this.router.navigate(["/admin/forms/hazardTable"]);
+  
+}
+if(title==="Notifiable Incidents")
   {
     this.router.navigate(["/admin/forms/incidentsTable"]);
   }
- 
+  if(title==="Risk Assessment")
+  {
+    this.router.navigate(["/admin/forms/riskAssessTable"]);
+  }
 }
 
   ngOnInit(): void {

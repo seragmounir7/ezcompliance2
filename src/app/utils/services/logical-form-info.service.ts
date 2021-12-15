@@ -659,7 +659,7 @@ export class LogicalFormInfoService {
   addMultipleIncidentReport(data) {
     return this.https.post(this.apiUrl + 'incidentForm/add/multiple', data)
   }
-  updateIncidentReport(data, id) {
+  updateIncidentReport(id,data) {
     return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data)
   }
   getIncidentReportById(id) {
@@ -755,6 +755,24 @@ export class LogicalFormInfoService {
 
 
   ////////////////// End Site Inspection ////////////
+  ////////////////////// Start Hzaard ///////
+  
+  getAllHazardFormData() {
+    return this.https.get(this.apiUrl + 'hazard/getAll')
+  }
+  addHazardFormData(data) {
+    return this.https.post(this.apiUrl + 'hazard/add', data)
+  }
+  getHazardFormDataById(id) {
+    return this.https.get(this.apiUrl + 'hazard/get/'+ id)
+  }
+  updateHazardFormData(id, data) {
+    return this.https.put(this.apiUrl + 'hazard/update/'+ id, data)
+  }
+  deleteHazardFormData(id) {
+    return this.https.delete(this.apiUrl + 'hazard/delete/'+ id)
+  }
+  //////////////End Hazard///////////
   getAllHazardTreatmentRelation() {
     return this.https.get(this.apiUrl + 'hazardTreatmentRelation/getAll')
   }
@@ -810,7 +828,21 @@ export class LogicalFormInfoService {
     deleteSiteInspectionTopic(id) {
       return this.https.delete(this.apiUrl + 'siteInspectionTopic/delete/'+ id)
     }
-  
+    getAllassessmet() {
+      return this.https.get(this.apiUrl + 'riskAssessment/getAll')
+    }
+    getAssessmentbyId(id) {
+      return this.https.get(this.apiUrl + 'riskAssessment/get/'+ id)
+    }
+    addAssessment(data) {
+      return this.https.post(this.apiUrl + 'riskAssessment/add', data)
+    }
+     updateAssessment(id, data) {
+      return this.https.put(this.apiUrl + 'riskAssessment/update/'+ id, data)
+    }
+    deleteAssessment(id) {
+      return this.https.delete(this.apiUrl + 'riskAssessment/delete/'+ id)
+    }
     ////////////////// End Site Inspection topic ////////////
 }
 

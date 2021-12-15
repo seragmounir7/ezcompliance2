@@ -1,30 +1,27 @@
+import Swal from 'sweetalert2';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-incidents-table',
-  templateUrl: './incidents-table.component.html',
-  styleUrls: ['./incidents-table.component.scss']
+  selector: 'app-hazard-form-table-details',
+  templateUrl: './hazard-form-table-details.component.html',
+  styleUrls: ['./hazard-form-table-details.component.scss']
 })
-export class IncidentsTableComponent implements OnInit {
-displayedColumns: string[] = ['position','projectName',"customerName","Email","Site",'Action'];
+export class HazardFormTableDetailsComponent implements OnInit {
+  displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
   showDatas: any;
-  tempArray: MatTableDataSource <any>;
+  dataSource: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
 
+
   ngOnInit(): void {
-    this.getIncidentReport();
-  }
-  ngAfterViewInit() {
-    this.tempArray.paginator = this.paginator;
-    this.tempArray.sort = this.sort; 
+    this.getAllHazardFormData();
   }
   delete(id)
   {
@@ -38,35 +35,35 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        this.logicalFormInfo.deleteIncidentReport(id).subscribe((res)=>{
-          console.log("deleted",res);
-          
+        this.logicalFormInfo.deleteHazardFormData(id).subscribe((res) => {
             Swal.fire({
               title: 'Deleted successfully',
               showConfirmButton: false,
               timer: 1200,
             });
             console.log('deleted res', res);
-            this.getIncidentReport();
+            this.getAllHazardFormData();
           });
       }
     });
-    
    
   }
-  getIncidentReport()
+  getAllHazardFormData()
   {
-    this.logicalFormInfo.getAllIncidentReport().subscribe((res:any)=>
+    this.logicalFormInfo.getAllHazardFormData().subscribe((res:any)=>
     {
-      this.showDatas= res.data;
-      this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort; 
+      console.log("res",res.data);
+      
+      this.showDatas= res.data
+  
+      this.dataSource = new MatTableDataSource<any>(this.showDatas);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort; 
       console.log("get res",this.showDatas);
     })
   }
   edit(id)
   {
-    this.router.navigate(["/admin/forms/incidentRep/"+id]);
+    this.router.navigate(["/admin/forms/hazardRep/"+id]);
   }
 }

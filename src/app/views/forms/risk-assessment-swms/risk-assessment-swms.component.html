@@ -238,22 +238,22 @@
               <h2>Job Tasks</h2>
             </div>
     
-            <div class="row">
-              <ng-container  *ngFor="let item of jobTaskData; let i = index" >
-
+            <div class="row" formArrayName="jobTask">
+              <ng-container  *ngFor="let control of jobtask().controls; let i = index" [formGroupName]="i">
                 <div
-                 *ngIf="item.set"
+                 
                   class="mt-2 col-4"
                 >
                   <input
                     type="checkbox"
                     [id]="i+'jt'"
                     class="form-check-input"
-                    [value]="item._id"
-                    (change)="onJobtaskSelect($event, item)"
+                    [value]="jobTaskData[i]._id"
+                    (change)="onJobtaskSelect($event, jobTaskData[i])"
+                    formControlName="{{jobTaskData[i]._id}}"
                   />
                   <label [for]="i+'jt'" class="form-check-label label_2">{{
-                    item.title
+                    jobTaskData[i].title
                   }}</label>
                 </div>
               </ng-container>
@@ -362,20 +362,22 @@
               <h2>High Risk Construction</h2>
             </div>
     
-            <div class="row">
+            <div class="row" formArrayName="riskConstruction">
               <div
-                *ngFor="let item of highRiskConstruction; let i = index"
+                *ngFor="let control of riskConstruct().controls; let i = index" [formGroupName]="i"
                 class="mt-2 col-4"
               >
                 <input
-                  type="checkbox"
+                  type="checkbox" 
                   [id]="i+'hrc'"
                   class="form-check-input"
+                  formControlName="{{highRiskConstruction[i]._id}}"
+                  (change)="onRiskChange($event,highRiskConstruction[i]._id,i)"
                   value="Working in or near trenches or shafts deeper than 1.5metres"
                   [checked]="riskArr[i]"
                 />
                 <label  [for]="i+'hrc'" class="form-check-label label_2">{{
-                  item.title
+                  highRiskConstruction[i].title
                 }}</label>
               </div>
             </div>
@@ -385,9 +387,9 @@
             <h2>PPE Selection</h2>
           </div>
     
-          <div class="row">
+          <div class="row" formArrayName="PPEselection">
             <div
-              *ngFor="let item of PPEselection; let i = index"
+            *ngFor="let control of ppe().controls; let i = index" [formGroupName]="i"
               class="mt-2 col-4"
             >
               <input
@@ -395,10 +397,12 @@
                 [id]="i+'ppes'"
                 class="form-check-input"
                 value="Disposable dust mask"
+                (change)="onPPEChange($event,PPEselection[i]._id,i)"
+                formControlName="{{PPEselection[i]._id}}"
                 [checked]="ppeArr[i]"
               />
               <label class="form-check-label label_2"  [for]="i+'ppes'">{{
-                item.title
+                PPEselection[i].title
               }}</label>
             </div>
           </div>
@@ -409,9 +413,9 @@
             <h2>Licence and Qualifications</h2>
           </div>
     
-          <div class="row">
+          <div class="row" formArrayName="licence">
             <div
-              *ngFor="let item of licenseAndQualification; let i = index"
+            *ngFor="let control of Licence().controls; let i = index" [formGroupName]="i"
               class="mt-2 col-4"
             >
               <input
@@ -419,10 +423,12 @@
                 [id]="i+'l&q'"
                 class="form-check-input"
                 value="Open Cable Licence"
+                (change)="onLicenseChange($event,licenseAndQualification[i]._id,i)"
+                formControlName="{{licenseAndQualification[i]._id}}"
                 [checked]="licenceArr[i]"
               />
               <label class="form-check-label label_2"  [for]="i+'l&q'">{{
-                item.title
+                licenseAndQualification[i].title
               }}</label>
             </div>
           </div>
@@ -442,7 +448,7 @@
                   type="input"
                   class="mr-1 form-control"
                   value=""
-                  formControlName="Employee1"
+                  formControlName="employee1"
                 />
               </p>
             </div>
@@ -471,8 +477,7 @@
                   type="date"
                   class="mr-1 form-control"
                   value=""
-                  formControlName="dateTime"
-                />
+                  formControlName="dateTime"/>
               </p>
             </div>
           </div>
@@ -544,14 +549,12 @@
           </div>
           <div class="col-md-4">
             <div class="my-3">
-              <label class="form-label"
-                >Town/City</label
-              >
+              <label class="form-label">Town/City</label>
               <input
                 type="department"
                 class="form-control"
                 aria-describedby="emailHelp"
-                formControlName="subUrb"
+                formControlName="town"
               />
             </div>
           </div>
@@ -561,11 +564,9 @@
               <select
                 class="form-select form-control col"
                 aria-label="Default select example"
-                formControlName="statesSWMS"
-              >
+                formControlName="statesSWMS">
                 <option selected hidden>Select</option>
                 <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
-             
               </select>
             </div>
           </div>
@@ -654,7 +655,7 @@
                 aria-label="Default select example"
                 formControlName="jurisdiction"
               >
-                <option selected hidden>Select</option>
+                <option *ngIf="!hasJuridiction" value="" selected hidden>Select</option>
                 <option [value]="jurisdiction._id" *ngFor="let jurisdiction of JurisdictionData">{{jurisdiction.title}}</option>
               
               </select>
@@ -668,7 +669,7 @@
                 name="sellist2"
                 formControlName="safetyLeg"
               >
-                <option value="" selected hidden>Select</option>
+                <option *ngIf="!hasLegist" value="" selected hidden>Select</option>
                 <option [value]="safetyLegislation._id" *ngFor="let safetyLegislation of safety">
                 
                   Act:  {{safetyLegislation.act}}&nbsp; Regulation:{{safetyLegislation.regulation}}
@@ -687,7 +688,7 @@
                 aria-label="Default select example"
                 formControlName="regulator"
               >
-                <option selected hidden>Select</option>
+                <option *ngIf="!hasRegulation" value="" selected hidden>Select</option>
                 <option [value]="regulator._id" *ngFor="let regulator of regulatorData">{{regulator.title}}</option>
               </select>
             </div>
@@ -717,22 +718,23 @@
           </div>
         </div>
         <hr />
-
         <h2>High Risk Construction</h2>
-        <div class="row">
+        <div class="row" formArrayName="riskConstruction2">
           <div
-            *ngFor="let item of highRiskConstruction; let i = index"
+            *ngFor="let control of riskConstruct2().controls; let i = index" [formGroupName]="i"
             class="mt-2 col-4"
           >
             <input
-              type="checkbox"
-              [id]="i+'hr'"
+              type="checkbox" 
+              [id]="i+'hrc'"
               class="form-check-input"
+              formControlName="{{highRiskConstruction[i]._id}}"
+              (change)="onRiskChange2($event,highRiskConstruction[i]._id,i)"
               value="Working in or near trenches or shafts deeper than 1.5metres"
               [checked]="riskArr[i]"
             />
-            <label [for]="i+'hr'" class="form-check-label label_2" >{{
-              item.title
+            <label  [for]="i+'hrc'" class="form-check-label label_2">{{
+              highRiskConstruction[i].title
             }}</label>
           </div>
         </div>
@@ -835,21 +837,22 @@
         </div>
         <hr />
         <h2>PPE Selection</h2>
-        <div class="row">
+        <div class="row" formArrayName="PPESelection2">
           <div
-            *ngFor="let item of PPEselection; let i = index"
+          *ngFor="let control of ppe2().controls; let i = index" [formGroupName]="i"
             class="mt-2 col-4"
           >
             <input
               type="checkbox"
-              [id]="i+'ppe'"
+              [id]="i+'ppes'"
               class="form-check-input"
               value="Disposable dust mask"
+              formControlName="{{PPEselection[i]._id}}"
+              (change)="onPPEChange2($event,PPEselection[i]._id,i)"
               [checked]="ppeArr[i]"
-              formArrayName="ppeSelection"
             />
-            <label [for]="i+'ppe'" class="form-check-label label_2" for="inlineCheckbox1">{{
-              item.title
+            <label class="form-check-label label_2"  [for]="i+'ppes'">{{
+              PPEselection[i].title
             }}</label>
           </div>
         </div>
@@ -868,8 +871,9 @@
                   class="form-control"
                   id="sel2"
                   name="sellist2"
+                  formControlName="chemicalName"
                 >
-                <option value=""selected hidden>Select</option>
+                <option *ngIf="!isSelected[i]" value="" hidden>Select</option>
 
                   <option *ngFor="let item of allChemicals">
                     {{ item.title }}
@@ -900,9 +904,9 @@
                   class="form-control"
                   id="sel2"
                   name="sellist2"
-                  formArrayName="hazardous"
+                  formControlName="hazardous"
                 >
-                  <option value=""selected hidden>Select</option>
+                  <option *ngIf="!isHazardous[i]" value="" selected hidden>Select</option>
                   <option value="YES">Yes</option>
                   <option value="NO">No</option>
                 </select>
@@ -918,7 +922,7 @@
                     class="form-control"
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
-                    formControlName="qty"
+                    formControlName="quantity"
                   />
                 </div>
               </div>
@@ -932,14 +936,14 @@
                     class="form-control"
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
-                    formControlName="expiryDate"
+                    formControlName="expDate"
                   />
                 </div>
               </div>
               <div class="col-md-10">
                 <div class="my-3">
                   <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                  <input class="form-control" type="file" id="formFile" formArrayName="file"/>
+                  <input class="form-control" type="file" id="formFile" formControlName="file"/>
                 </div>
               </div>
               <div class="col-md-2">
@@ -978,10 +982,7 @@
                          <div class="" *ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
                   </div>   
                     </li>  
-                  </ol>                  
-  
-                 
-                
+                  </ol>         
               </div>
               <ng-container  formArrayName="riskLevel">
                 <div class="col-2" [formGroupName]="i">
@@ -1012,8 +1013,9 @@
                 
               </div>
 
-              <ng-container formArrayName="residualRisk">
-                <div class="col-2 my-3" [formGroupName]="i">
+             <div> 
+               <ng-container formArrayName="residualRisk">
+                <div class=" my-3" [formGroupName]="i">
                   <label for="sel1">Residual Risk</label>
                   <select
                     class="form-control"
@@ -1024,10 +1026,14 @@
                   <option *ngFor="let item of resiRiskLevel" [value]="item._id">{{item.title}}</option>           
                 
                   </select>
-                  <label for="sel1" class="pt-2">Person Responsible</label>
-                  <select
+                  </div>
+                </ng-container>
+                 <ng-container formArrayName="persResp"><label for="sel1" class="pt-2">Person Responsible</label>
+                  <div [formGroupName]="i">
+                    <select
                      multiple
                      class="form-control"
+                     formControlName="personRes"
                      id="sel2" [size]="item.staffTitle.length"
                      name="sellist2"
                    >
@@ -1037,15 +1043,13 @@
                        {{ item.title }}
                      </option>
                    </select>
-                </div>
-              </ng-container>
-             
-        
+                  </div> 
+                   </ng-container>
+                   </div>
             </div>
             <hr />
           </div>
         </div>
-
         <div class="row">
           
           
@@ -1077,19 +1081,18 @@
           </h3> -->
         </div>
         
-        <div  class="row mb-2">
+        <!-- <div  class="row mb-2">
           <ckeditor style="width: 100%;" [editor]="Editor" data="<h1 class='form-control' >
             <strong>Worker consultation, instruction, training, toolbox talks, review,
             acceptance record:</strong>
-          </h1>"></ckeditor>
-          
+          </h1>"></ckeditor>   
 
           
-        </div>
+        </div> -->
+
+
         <div class="row">
-          <ckeditor style="width: 100%;" [editor]="Editor" [data]="secondEditor"></ckeditor>
-
-          
+          <ckeditor formControlName="editor" style="width: 100%;" [editor]="Editor" [data]="secondEditor"></ckeditor>  
         </div>
         <hr />
         <h3>Name of worker (Print and Sign)</h3>
@@ -1097,9 +1100,10 @@
           <div class="col-md-7">
             <div class="my-3">
               <label for="exampleInputProjectNumber" class="form-label"
-                >Employee 1</label
+                >Employee 2</label
               >
               <input
+                formControlName="employee2"
                 type="text"
                 class="form-control"
                 id="exampleInputProjectNumber"

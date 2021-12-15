@@ -12,7 +12,9 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -21,7 +23,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./incident-report.component.scss'],
 })
 export class IncidentReportComponent implements OnInit {
-  SiteIncident: FormGroup;
+  IncidentReport: FormGroup;
   fileData: any;
   data:any;
   staff:any;
@@ -35,8 +37,8 @@ export class IncidentReportComponent implements OnInit {
   incidentsArr = [];
   rootArr = [];
   allJobNumbers = [];
-  @ViewChild('signature1') signaturePad: SignaturePad;
-  @ViewChild('signature2') signaturePad1: SignaturePad;
+  @ViewChild('signature') signaturePad: SignaturePad;
+  @ViewChild('signature1') signaturePad1: SignaturePad;
   projMan: any;
   projectMang: any;
   typeOfInc: [];
@@ -53,23 +55,28 @@ export class IncidentReportComponent implements OnInit {
   rootSelectedArr=[];
   id: string;
   dataUrl: any;
+  selectedImage: string;
+  singRequired: any;
+  singRequired1: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute,
-    private setTitle:SetTitleService
+    private setTitle:SetTitleService,
+    public upload: UploadFileServiceService,
+    private router: Router
   ) {
-    this.SiteIncident = this.fb.group({
+    this.IncidentReport = this.fb.group({
       incidents: this.fb.array([]),
       natureOFIncidents: this.fb.array([]),
       PPE: this.fb.array([]),
       rootCauseIncident: this.fb.array([]),
       changes: this.fb.array([]),
       arrObj: this.fb.array([]),
-      correctAction: ['', Validators.required],
-      complete: ['', Validators.required],
-      date: ['', Validators.required],
+      //correctAction: ['', Validators.required],
+     // complete: ['', Validators.required],
+     // date: ['', Validators.required],
       jobNumber: ['', Validators.required],
       projectName: ['', Validators.required],
       siteName: ['', Validators.required],
@@ -87,7 +94,7 @@ export class IncidentReportComponent implements OnInit {
       locationOfTheIncident: ['', Validators.required],
       dateOfTheIncident: ['', Validators.required],
       timeOfTheIncident: ['', Validators.required],
-      whyDidtheUnsafeConditonExist: ['', Validators.required],
+      whyDidtheUnsafeConditonExist: ['',],
       completedName: ['', Validators.required],
       completedPosition: ['', Validators.required],
       completedDepartment: ['', Validators.required],
@@ -96,15 +103,20 @@ export class IncidentReportComponent implements OnInit {
       reviewedPosition: ['', Validators.required],
       reviewedDepartment: ['', Validators.required],
       reviewedDate: ['', Validators.required],
-      typeofIncident: ['', Validators.required],
-      priorIncident: ['', Validators.required],
-      similarIncident:['', Validators.required],
+     // typeofIncident: ['', Validators.required],
+      priorIncident: [''],
+      similarIncident:[''],
       witnessStatement:['', Validators.required],
       nameOfWitness:['', Validators.required],
-      file: ['', Validators.required],
+      file: [''],
+      similarIncidentText:[''],
+      priorIncidentText:[''],
+      instructions:['Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injuryor near-miss that could have resulted in a serious injury or illness.'],
+      signaturePad:['',Validators.required],
+      signaturePad1:['',Validators.required]
     });
-    // this.SiteIncident = this.data;
-    // this.SiteIncident.patchValue({
+    // this.IncidentReport = this.data;
+    // this.IncidentReport.patchValue({
     //   incidents:this.data.incidents,
     //   PPE:this.data.PPE,
     //   natureOFIncidents:this.data.natureOFIncidents,
@@ -117,7 +129,7 @@ export class IncidentReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params.id;
-    console.log("SiteIncident",this.SiteIncident);
+    console.log("IncidentReport",this.IncidentReport);
     
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
     this.setTitle.setTitle('WHS-Incident Report Form');
@@ -148,71 +160,71 @@ export class IncidentReportComponent implements OnInit {
   }
  
   add(): FormArray {
-    return this.SiteIncident.get('arrObj') as FormArray;
+    return this.IncidentReport.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
     return this.fb.group({
-      correctAction: [],
+      correctAction: ["",Validators.required],
       personRes: ['', Validators.required],
-      complete: [],
-      date: [],
+      complete: ["",Validators.required],
+      date: ["",Validators.required],
     });
   }
   removeIncident(i) {
-    const item = <FormArray>this.SiteIncident.controls['arrObj'];
+    const item = <FormArray>this.IncidentReport.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
     
     }
   }
   changeAdd(): FormArray {
-    return this.SiteIncident.get('changes') as FormArray;
+    return this.IncidentReport.get('changes') as FormArray;
   }
-  changeAction(): FormGroup {
+  changeAction(index): FormGroup {
     return this.fb.group({
-      id:[],
+      [this.changes[index]._id]: ['',],
     });
   }
   incidentsAdd(): FormArray {
-    return this.SiteIncident.get('incidents') as FormArray;
+    return this.IncidentReport.get('incidents') as FormArray;
   }
-  incidentsAction(): FormGroup {
+  incidentsAction(index): FormGroup {
     return this.fb.group({
-      id:[],
+      [this.incidents[index]._id]: ['',],
     });
   }
   natureAdd(): FormArray {
-    return this.SiteIncident.get('natureOFIncidents') as FormArray;
+    return this.IncidentReport.get('natureOFIncidents') as FormArray;
   }
-  natureAction(): FormGroup {
+  natureAction(index): FormGroup {
     return this.fb.group({
-      id:[],
+      [this.natureOFIncidents[index]._id]: ['',],
     });
   }
   ppeAdd(): FormArray {
-    return this.SiteIncident.get('PPE') as FormArray;
+    return this.IncidentReport.get('PPE') as FormArray;
   }
-  ppeAction(): FormGroup {
+  ppeAction(index): FormGroup {
     return this.fb.group({
-      id:[],
+      [this.PPE[index]._id]: ['',],
     });
   }
   rootCauseIncidentAdd(): FormArray {
-    return this.SiteIncident.get('rootCauseIncident') as FormArray;
+    return this.IncidentReport.get('rootCauseIncident') as FormArray;
   }
-  rootCauseIncidentAction(): FormGroup {
+  rootCauseIncidentAction(index): FormGroup {
     return this.fb.group({
-      id:[],
+      [this.rootCauseIncident[index]._id]: ['',],
     });
   }
   
  
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
-      if (this.SiteIncident.get('jobNumber').value === item._id) {
+      if (this.IncidentReport.get('jobNumber').value === item._id) {
         console.log('Id found', item);
-        this.SiteIncident.patchValue({
-          jobNumber: this.SiteIncident.get('jobNumber').value,
+        this.IncidentReport.patchValue({
+          jobNumber: this.IncidentReport.get('jobNumber').value,
           projectName: item.projectName,
           siteName: item.siteName,
           customerName: item.customerName,
@@ -225,7 +237,7 @@ export class IncidentReportComponent implements OnInit {
         });
       }
     });
-    this.SiteIncident.get('jobNumber').updateValueAndValidity();
+    this.IncidentReport.get('jobNumber').updateValueAndValidity();
   }
   getAllJobNumber() {
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
@@ -247,6 +259,7 @@ export class IncidentReportComponent implements OnInit {
       this.PPE = res.data;
       for (let i = 0; i < this.PPE.length; i++) {
         this.ppeArr[i] = 0;
+        this.ppeAdd().push(this.ppeAction(i))
       }
     });
   }
@@ -256,6 +269,7 @@ export class IncidentReportComponent implements OnInit {
       this.incidents = res.data;
       for (let i = 0; i < this.incidents.length; i++) {
         this.incidentsArr[i] = 0;
+        this.incidentsAdd().push(this.incidentsAction(i))
       }
     });
   }
@@ -265,6 +279,7 @@ export class IncidentReportComponent implements OnInit {
       this.rootCauseIncident = res.data;
       for (let i = 0; i < this.rootCauseIncident.length; i++) {
         this.rootArr[i] = 0;
+        this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction(i))
       }
      
     });
@@ -275,6 +290,8 @@ export class IncidentReportComponent implements OnInit {
       this.natureOFIncidents = res.data;
       for (let i = 0; i < this.natureOFIncidents.length; i++) {
         this.natureOfIncArr[i] = 0;
+        this.natureAdd().push(this.natureAction(i))
+       
       }
     });
   }
@@ -285,6 +302,7 @@ export class IncidentReportComponent implements OnInit {
       this.changesArr = [];
       for (let i = 0; i < this.changes.length; i++) {
         this.changesArr[i] = 0;
+        this.changeAdd().push(this.changeAction(i))
       }
     });
   }
@@ -303,7 +321,7 @@ export class IncidentReportComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.SiteIncident.value);
+    console.log(this.IncidentReport.value);
   }
 
   public signaturePadOptions: Object = {
@@ -330,31 +348,47 @@ export class IncidentReportComponent implements OnInit {
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad.toDataURL());
+    console.log("signnn",this.signaturePad);
+    
+    this.IncidentReport.controls['signaturePad'].setValue(this.signaturePad.toDataURL());
+    
+
   }
   drawComplete1() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad1.toDataURL());
+    console.log("signnn",this.signaturePad1);
+    this.IncidentReport.controls['signaturePad1'].setValue(this.signaturePad1.toDataURL());
+    console.log("signaturePad1 control",this.IncidentReport.controls['signaturePad1'].value);
+
   }
   clear() {
     this.signaturePad.clear();
+    this.singRequired = this.IncidentReport.controls['signaturePad1'].untouched
   }
   clear1() {
     console.log('cl1');
 
     this.signaturePad1.clear();
+    this.singRequired1 = this.IncidentReport.controls['signaturePad1'].untouched
+    
   }
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    console.log("signaturePad control",this.IncidentReport.controls['signaturePad'].touched);
+    this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    this.singRequired1 = this.IncidentReport.controls['signaturePad1'].invalid
+    console.log('begin drawing',this.singRequired1);
   }
  
 
   // onChangeIncident(e: any) {
-  //   const checkArray: FormArray = this.SiteIncident.get(
+  //   const checkArray: FormArray = this.IncidentReport.get(
   //     'incidents'
   //   ) as FormArray;
   //   let item = e.target.value;
@@ -372,7 +406,7 @@ export class IncidentReportComponent implements OnInit {
   // }
  
   // onNatureOFIncidents(e: any) {
-  //   const NatureArray: FormArray = this.SiteIncident.get(
+  //   const NatureArray: FormArray = this.IncidentReport.get(
   //     'natureOFIncidents'
   //   ) as FormArray;
   //   let item = e.target.value;
@@ -406,7 +440,7 @@ export class IncidentReportComponent implements OnInit {
   // }
  
   // onRootCauseIncident(e: any) {
-  //   const IncidentArray: FormArray = this.SiteIncident.get(
+  //   const IncidentArray: FormArray = this.IncidentReport.get(
   //     'rootCauseIncident'
   //   ) as FormArray;
   //   let item = e.target.value;
@@ -425,7 +459,7 @@ export class IncidentReportComponent implements OnInit {
 
  
   // onChanges(e: any) {
-  //   const ChangeArray: FormArray = this.SiteIncident.get(
+  //   const ChangeArray: FormArray = this.IncidentReport.get(
   //     'changes'
   //   ) as FormArray;
   //   let item = e.target.value;
@@ -531,7 +565,7 @@ export class IncidentReportComponent implements OnInit {
     this.logicalFormInfo.getIncidentReportById(id).subscribe((res:any)=>{
       console.log("getById",res);
      
-      this.SiteIncident.patchValue({
+      this.IncidentReport.patchValue({
         projectName:res.data.projectName,
         siteName:res.data.siteName,
         customerName: res.data.customerName,
@@ -551,7 +585,7 @@ export class IncidentReportComponent implements OnInit {
         timeOfTheIncident:res.data.timeOfTheIncident,
         nameOfWitness:res.data.nameOfWitness,
         witnessStatement:res.data.witnessStatement,
-        // file:res.data.file,
+        //file:res.data.file,
         whyDidtheUnsafeConditonExist:res.data.whyDidtheUnsafeConditonExist,
         priorIncident:res.data.priorIncident,
         similarIncident:res.data.similarIncident,
@@ -563,17 +597,70 @@ export class IncidentReportComponent implements OnInit {
         reviewedPosition:res.data.reviewedPosition,
         reviewedDepartment:res.data.reviewedDepartment,
         reviewedDate:res.data.reviewedDate,
+        similarIncidentText:res.data.similarIncidentText,
+        priorIncidentText:res.data.priorIncidentText,
       })
+     this.selectedImage=res.data.file
+     for (let index = 0; index < res.data.arrObj.length; index++) {
+console.log("res.data.arrObj.length",res.data.arrObj.length);
+
+      let key
+      key=Object.keys( res.data.arrObj[index]);
+      
+      let changeIndex = this.changeAdd().length
+      this.addAction();
+     this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
+     this.add().controls[index].get("correctAction").setValue(res.data.arrObj[index].correctAction)
+     this.add().controls[index].get("date").setValue(res.data.arrObj[index].date)
+     this.add().controls[index].get("personRes").setValue(res.data.arrObj[index].personRes)
+    }
       for (let index = 0; index < res.data.changes.length; index++) {
-        console.log("res.data.changes.length",res.data.changes.length);
+
+        let key
+        key=Object.keys( res.data.changes[index]);
         
         let changeIndex = this.changeAdd().length
-        console.log("changeIndex",changeIndex);
+
+       this.changeAdd().controls[index].get(key).setValue(res.data.changes[index][key])
+      }
+      for (let index = 0; index < res.data.PPE.length; index++) {
+
+        let key
+        key=Object.keys( res.data.PPE[index]);
         
-        this.changeAdd().push(this.changeAction());
-        this.changeAdd().at(changeIndex).get("id").setValue(res.data.changes[index])
+        let changeIndex = this.changeAdd().length
+
+       this.ppeAdd().controls[index].get(key).setValue(res.data.PPE[index][key])
+      }
+      for (let index = 0; index < res.data.incidents.length; index++) {
+
+        let key
+        key=Object.keys( res.data.incidents[index]);
+        
+        let changeIndex = this.changeAdd().length
+;
+       this.incidentsAdd().controls[index].get(key).setValue(res.data.incidents[index][key])
       }
       
+      for (let index = 0; index < res.data.natureOFIncidents.length; index++) {
+
+        let key
+        key=Object.keys( res.data.natureOFIncidents[index]);
+        
+        let changeIndex = this.changeAdd().length
+
+       this.natureAdd().controls[index].get(key).setValue(res.data.natureOFIncidents[index][key])
+      }
+      for (let index = 0; index < res.data.rootCauseIncident.length; index++) {
+      
+        let key
+        key=Object.keys( res.data.rootCauseIncident[index]);
+        
+        let changeIndex = this.changeAdd().length
+
+       this.rootCauseIncidentAdd().controls[index].get(key).setValue(res.data.rootCauseIncident[index][key])
+      }
+
       // for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
       //   console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
         
@@ -633,64 +720,102 @@ export class IncidentReportComponent implements OnInit {
         //   });
         // }, 2000); 
       })
+      this.IncidentReport.patchValue({
+        signaturePad:this.signaturePad,
+        signaturePad1:this.signaturePad1
+
+      })
     })
   }
   onSubmit() {
-   
-    console.log("this.ppeSelectedArr",this.ppeSelectedArr);
-    for (let index = 0; index < this.changesSelectedArr.length; index++) {
-      console.log("this.changesSelectedArr.length",this.changesSelectedArr.length);
-      
-      let changeIndex = this.changeAdd().length
-      console.log("changeIndex",changeIndex);
-      
-      this.changeAdd().push(this.changeAction());
-      this.changeAdd().at(changeIndex).get("id").setValue(this.changesSelectedArr[index])
+    console.log(this.IncidentReport.value);
+    this.IncidentReport.get("file")?.patchValue(this.selectedImage)
+    console.log(this.IncidentReport.value);
+    if(this.id!=='Form')
+    {
+      const data={
+        ...this.IncidentReport.value
+      }
+       this.logicalFormInfo.updateIncidentReport(this.id,this.IncidentReport.value).subscribe((res)=>
+       {
+         console.log("res",res);
+          Swal.fire({
+            title: 'Update successfully',
+            showConfirmButton: false,
+            timer: 1200,
+          });
+         this.router.navigate(["/admin/forms/incidentsTable"]);
+       })
     }
+    else
+    {
+      const data={
+        ...this.IncidentReport.value
+      }
+      this.logicalFormInfo.addIncidentReport(data).subscribe(res => {
+        console.log("addCustomerForm=>", res)
+       // this.IncidentReport.reset();
+        Swal.fire({
+          title: 'Submit successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        this.router.navigate(["/admin/forms"]);
+      }, (err) => {
+        console.error(err);
+      });
+       
+    }
+  
+    // // for (let index = 0; index < this.changesSelectedArr.length; index++) {
+    // //   console.log("this.changesSelectedArr.length",this.changesSelectedArr.length);
+      
+    // //   let changeIndex = this.changeAdd().length
+    // //   console.log("changeIndex",changeIndex);
+      
+    // //  // this.changeAdd().push(this.changeAction(index));
+    // //  this.changeAdd().get("61a9ba8bdee47f7c86631bf5").setValue("ssssssss")
+    // // }
     
-    for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
-      console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
+    // for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
+    //   console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
       
-      let typeOfIncidentsIndex = this.incidentsAdd().length
-      console.log("typeOfIncidentsIndex",typeOfIncidentsIndex);
+    //   let typeOfIncidentsIndex = this.incidentsAdd().length
+    //   console.log("typeOfIncidentsIndex",typeOfIncidentsIndex);
       
-      this.incidentsAdd().push(this.incidentsAction());
-      this.incidentsAdd().at(typeOfIncidentsIndex).get("id").setValue(this.typeOfIncidentsSelectedArr[index])
-    }
-    for (let index = 0; index < this.natureOfIncSelectedArr.length; index++) {
-      console.log("this.natureOfIncSelectedArr.length",this.natureOfIncSelectedArr.length);
+    //   this.incidentsAdd().push(this.incidentsAction());
+    //   this.incidentsAdd().at(typeOfIncidentsIndex).get("id").setValue(this.typeOfIncidentsSelectedArr[index])
+    // }
+    // for (let index = 0; index < this.natureOfIncSelectedArr.length; index++) {
+    //   console.log("this.natureOfIncSelectedArr.length",this.natureOfIncSelectedArr.length);
       
-      let natureOfIncIndex = this.natureAdd().length
-      console.log("typeOfIncidentsIndex",natureOfIncIndex);
+    //   let natureOfIncIndex = this.natureAdd().length
+    //   console.log("typeOfIncidentsIndex",natureOfIncIndex);
       
-      this.natureAdd().push(this.incidentsAction());
-      this.natureAdd().at(natureOfIncIndex).get("id").setValue(this.natureOfIncSelectedArr[index])
-    }
-    for (let index = 0; index < this.ppeSelectedArr.length; index++) {
-      console.log("this.ppeSelectedArr.length",this.ppeSelectedArr.length);
+    //   this.natureAdd().push(this.incidentsAction());
+    //   this.natureAdd().at(natureOfIncIndex).get("id").setValue(this.natureOfIncSelectedArr[index])
+    // }
+    // for (let index = 0; index < this.ppeSelectedArr.length; index++) {
+    //   console.log("this.ppeSelectedArr.length",this.ppeSelectedArr.length);
       
-      let ppeIndex = this.ppeAdd().length
-      console.log("ppeIndex",ppeIndex);
+    //   let ppeIndex = this.ppeAdd().length
+    //   console.log("ppeIndex",ppeIndex);
       
-      this.ppeAdd().push(this.ppeAction());
-      this.ppeAdd().at(ppeIndex).get("id").setValue(this.ppeSelectedArr[index])
-    }
-    for (let index = 0; index < this.rootSelectedArr.length; index++) {
-      console.log("this.rootSelectedArr.length",this.rootSelectedArr.length);
+    //   this.ppeAdd().push(this.ppeAction());
+    //   this.ppeAdd().at(ppeIndex).get("id").setValue(this.ppeSelectedArr[index])
+    // }
+    // for (let index = 0; index < this.rootSelectedArr.length; index++) {
+    //   console.log("this.rootSelectedArr.length",this.rootSelectedArr.length);
       
-      let rootIndex = this.rootCauseIncidentAdd().length
-      console.log("rootIndex",rootIndex);
+    //   let rootIndex = this.rootCauseIncidentAdd().length
+    //   console.log("rootIndex",rootIndex);
       
-      this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction());
-      this.rootCauseIncidentAdd().at(rootIndex).get("id").setValue(this.rootSelectedArr[index])
-    }
-    console.log(this.SiteIncident.value);
-    // this.logicalFormInfo.addIncidentReport(this.SiteIncident.value).subscribe(res => {
-    //   console.log("addCustomerForm=>", res)
-      
-    // }, (err) => {
-    //   console.error(err);
-    // });
+    //   this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction());
+    //   this.rootCauseIncidentAdd().at(rootIndex).get("id").setValue(this.rootSelectedArr[index])
+    // }
+
+   
+   
   }
   // upload(e) {
   //   const fileListAsArray = Array.from(e);
@@ -706,11 +831,29 @@ export class IncidentReportComponent implements OnInit {
   //   })
 
   //   // Set files form control
-  //   this.SiteIncident.patchValue({
+  //   this.IncidentReport.patchValue({
   //     avatar: this.fileObj
   //   })
 
-  //   this.SiteIncident.get('avatar').updateValueAndValidity()
+  //   this.IncidentReport.get('avatar').updateValueAndValidity()
   // }
+  
+  browser(event) {
+    const files = event.target.files[0];
+    const formdata = new FormData();
+    formdata.append('', files);
+    console.log(files);
+
+    this.upload.upload(formdata).subscribe((res) => {
+      console.log('AddProductComponent -> browser -> res', res);
+    
+     this.selectedImage=res.files[0];
+
+      console.log(
+        'AddProductComponent -> browse -> this.selectedImage',
+         this.selectedImage
+      );
+    });
+  }
 
 }

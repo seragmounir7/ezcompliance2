@@ -140,7 +140,7 @@ export class SiteInspectionComponent implements OnInit {
     this.getAllCategory();
     this.getAllTopic();
     this.getAllStaff();
-    if (this.id != 'null') {
+    if (this.id != 'form') {
       this.logicalFormInfo.getSiteInspection(this.id).subscribe((res: any) => {
         console.log('res', res.data);
 
@@ -168,19 +168,19 @@ export class SiteInspectionComponent implements OnInit {
 
           if (this.add2().controls) {
             let key;
-            for (
-              let i = 0;
-              i < this.showDatas.sitePreview[0].siteCategorytTopic.length;
-              i++
-            ) {
-              key = Object.keys(
-                this.showDatas.sitePreview[0].siteCategorytTopic[i]
-              );
-              this.add2()
+            for ( let i = 0;i < this.allTopic.length;i++) {
+            
+                for (let index = 0; index <this.showDatas.sitePreview[0].siteCategorytTopic.length; index++) {
+                  key = Object.keys(
+                    this.showDatas.sitePreview[0].siteCategorytTopic[index]
+                  );
+                  this.add2()
                 .controls[i].get(key)
-                .setValue(
-                  this.showDatas.sitePreview[0].siteCategorytTopic[i][key]
+                ?.setValue(
+                  this.showDatas.sitePreview[0].siteCategorytTopic[index][key]
                 );
+                }
+              
             }
           }
         }, 500);
@@ -218,11 +218,11 @@ export class SiteInspectionComponent implements OnInit {
   }
   newAction(): FormGroup {
     return this.fb.group({
-      item: [''],
-      action: [''],
-      PersonResponsible: [''],
-      complete: [''],
-      topicId: [''],
+      item: ['',Validators.required],
+      action: ['',Validators.required],
+      PersonResponsible: ['',Validators.required],
+      complete: ['',Validators.required],
+      topicId: ['',Validators.required],
     });
   }
   showsite() {
@@ -234,7 +234,7 @@ export class SiteInspectionComponent implements OnInit {
     this.siteAction = true;
     this.siteshow = false;
     this.add().clear();
-    if (this.id != 'null') {
+    if (this.id != 'form') {
       for (
         let index = 0;
         index < this.showDatas.sitePreview[0].siteAction.length;
@@ -336,7 +336,7 @@ export class SiteInspectionComponent implements OnInit {
   }
   onSave() {
     console.log('form data', this.sidePreview.value);
-    if (this.id != 'null') {
+    if (this.id != 'form') {
       const data = {
         sitePreview: [
           {
@@ -401,7 +401,7 @@ export class SiteInspectionComponent implements OnInit {
   }
   newAction2(index): FormGroup {
     return this.fb.group({
-      [this.allTopic[index]._id]: ['', Validators.required],
+      [this.allTopic[index]._id]: ['',],
     });
   }
   getAllTopic() {

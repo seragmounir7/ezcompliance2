@@ -400,13 +400,13 @@
               type="text"
               class="form-control"
               formControlName="employee"
-              [class.is-invalid]="attendee().at(i).get('employee')?.hasError('required') 
-              && (attendee().at(i).get('employee').dirty || attendee().at(i).get('employee').touched) "
+              [class.is-invalid]="attendee().controls[i].get('employee')?.hasError('required') 
+              && (attendee().controls[i].get('employee').dirty || attendee().controls[i].get('employee').touched) "
             />
             <span
               *ngIf="
-              attendee().at(i).get('employee')?.hasError('required') && (attendee().at(i).get('employee').dirty 
-              ||attendee().at(i).get('employee').touched) "
+              attendee().controls[i].get('employee')?.hasError('required') && (attendee().controls[i].get('employee').dirty 
+              ||attendee().controls[i].get('employee').touched) "
               class="invalid-feedback"
             >
             This Field is Required</span
@@ -452,7 +452,7 @@
       </ng-container>
     </div>
   </div>
-  <button class="btn btn-outline-primary mt-1" type="submit" [disabled]="!toolBox.valid" (click)="onSave()" style="width: 10rem;
+  <button class="btn btn-outline-primary mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
   align-self: center;">
     Submit
   </button>

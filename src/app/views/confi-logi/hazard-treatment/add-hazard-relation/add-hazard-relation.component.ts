@@ -73,18 +73,18 @@ export class AddHazardRelationComponent implements OnInit {
     ];
     RiskRating: Array<any> = [
   
-      { name: 'Low' },
-      { name: 'Medium' },
-      { name: 'High' },
+      { name: 'Low',value:'low'  },
+      { name: 'Medium',value: 'medium'},
+      { name: 'High',value:'high' },
     
   
     ];
     ActionRequired: Array<any> = [
   
-      { name: 'Immediately' },
-      { name: 'Today' },
-      { name: 'This week' },
-      { name: 'This Month' },
+      { name: 'Immediately',value:'immediately'  },
+      { name: 'Today',value:'today'  },
+      { name: 'This week',value:'thisWeek' },
+      { name: 'This Month',value:'thisMonth'  },
   
     ];
   
