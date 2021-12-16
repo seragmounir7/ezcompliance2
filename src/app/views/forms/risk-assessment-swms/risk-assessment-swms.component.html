@@ -66,8 +66,19 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="siteName">
-              </div>
+                <input type="text" class="form-control col" formControlName="siteName"
+                
+            [class.is-invalid]="riskAssessmentFb.get('siteName')?.hasError('required') 
+            && (riskAssessmentFb.get('siteName').dirty || riskAssessmentFb.get('siteName').touched) " >
+            <span
+            *ngIf="
+            riskAssessmentFb.get('siteName')?.hasError('required') && (riskAssessmentFb.get('siteName').dirty 
+            || riskAssessmentFb.get('siteName').touched) "
+            
+          >
+         Site  Name is Required</span
+          >    
+          </div>
               <div class="my-3 col">
                 <label class="form-label"
                   >Customer Name</label
@@ -79,8 +90,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="customerName">
-
+                <input type="text" class="form-control col" formControlName="customerName"
+                [class.is-invalid]="riskAssessmentFb.get('customerName')?.hasError('required') 
+                && (riskAssessmentFb.get('customerName').dirty || riskAssessmentFb.get('customerName').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('customerName')?.hasError('required') && (riskAssessmentFb.get('customerName').dirty 
+                || riskAssessmentFb.get('customerName').touched) ">
+                customer Name is Required 
+              </span> 
               </div>
             </div>
             <div class="row">
@@ -95,8 +113,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="streetNo">
-
+                <input type="text" class="form-control col" formControlName="streetNo"
+                [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required') 
+                && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('streetNo')?.hasError('required') && (riskAssessmentFb.get('streetNo').dirty 
+                || riskAssessmentFb.get('streetNo').touched) ">
+                street Number is Required 
+              </span> 
               </div>
               <div class="my-3 col-4">
                 <label class="form-label"
@@ -109,7 +134,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="streetAddr">
+                <input type="text" class="form-control col" formControlName="streetAddr"
+                [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
+                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty 
+                || riskAssessmentFb.get('streetAddr').touched) ">
+                Street Address is Required 
+              </span> 
               </div>
               <div class="my-3 col-4">
                 <label class="form-label"
@@ -122,7 +155,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="suburb">
+                <input type="text" class="form-control col" formControlName="suburb"
+                [class.is-invalid]="riskAssessmentFb.get('suburb')?.hasError('required') 
+                && (riskAssessmentFb.get('suburb').dirty || riskAssessmentFb.get('suburb').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('suburb')?.hasError('required') && (riskAssessmentFb.get('suburb').dirty 
+                || riskAssessmentFb.get('suburb').touched) ">
+                Suburb  is Required 
+              </span> 
               </div>
               <div class="my-3 col-2">
                 <label class="form-label"
@@ -132,7 +173,9 @@
                 class="form-select form-control col"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
-              >
+                [class.is-invalid]="riskAssessmentFb.get('statesSWMS')?.hasError('required') 
+                && (riskAssessmentFb.get('statesSWMS').dirty || riskAssessmentFb.get('statesSWMS').touched) " >
+               
               <option selected hidden>Select</option>
               <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
                 <!-- <option selected hidden>Select</option>
@@ -146,6 +189,12 @@
                 <option value="VIC">VIC</option>
                 <option value="WA">WA</option> -->
               </select>
+              <span
+              *ngIf="
+              riskAssessmentFb.get('statesSWMS')?.hasError('required') && (riskAssessmentFb.get('statesSWMS').dirty 
+              || riskAssessmentFb.get('statesSWMS').touched) ">
+              Suburb  is Required 
+            </span> 
               </div>
             </div>
     
@@ -161,7 +210,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="custConct">
+                <input type="text" class="form-control col" formControlName="custConct"
+                [class.is-invalid]="riskAssessmentFb.get('custConct')?.hasError('required') 
+                && (riskAssessmentFb.get('custConct').dirty || riskAssessmentFb.get('custConct').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('custConct')?.hasError('required') && (riskAssessmentFb.get('custConct').dirty 
+                || riskAssessmentFb.get('custConct').touched) ">
+                Customer Contact Number is Required 
+              </span> 
 
               </div>
               <div class="my-3 col">
@@ -175,8 +232,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="custConctPh">
-
+                <input type="text" class="form-control col" formControlName="custConctPh"
+                [class.is-invalid]="riskAssessmentFb.get('custConctPh')?.hasError('required') 
+                && (riskAssessmentFb.get('custConctPh').dirty || riskAssessmentFb.get('custConctPh').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('custConctPh')?.hasError('required') && (riskAssessmentFb.get('custConctPh').dirty 
+                || riskAssessmentFb.get('custConctPh').touched) ">
+                Customer Contact Number is Required 
+              </span> 
               </div>
             </div>
             <div class="row">
@@ -191,7 +255,15 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="custEmail">
+                <input type="text" class="form-control col" formControlName="custEmail"
+                [class.is-invalid]="riskAssessmentFb.get('custEmail')?.hasError('required') 
+                && (riskAssessmentFb.get('custEmail').dirty || riskAssessmentFb.get('custEmail').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('custEmail')?.hasError('required') && (riskAssessmentFb.get('custEmail').dirty 
+                || riskAssessmentFb.get('custEmail').touched) ">
+                Email is Required 
+              </span> 
 
               </div>
               <div class="my-3 col-2">
@@ -203,11 +275,19 @@
                 aria-label="Default select example"
                 formControlName="jobNumber"
                 (change)="jobNoSel()"
-              >
+                [class.is-invalid]="riskAssessmentFb.get('jobNumber')?.hasError('required') 
+                && (riskAssessmentFb.get('jobNumber').dirty || riskAssessmentFb.get('jobNumber').touched) " >
+               
                 <option selected hidden>Select</option>
                 <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
               
               </select>
+              <span
+              *ngIf="
+              riskAssessmentFb.get('jobNumber')?.hasError('required') && (riskAssessmentFb.get('jobNumber').dirty 
+              || riskAssessmentFb.get('jobNumber').touched) ">
+              Job Number  is Required 
+            </span> 
               </div>
               <div class="my-3 col-6">
                 <label class="form-label"
@@ -218,11 +298,19 @@
                   aria-label="Default select example"
                   formControlName="projectManager"
                   (change)="setProjectManager('projectManager',$event)"
-                >
+                  [class.is-invalid]="riskAssessmentFb.get('projectManager')?.hasError('required') 
+                  && (riskAssessmentFb.get('projectManager').dirty || riskAssessmentFb.get('projectManager').touched) " >
+                 
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
                 
                 </select>
+                <span
+                *ngIf="
+                riskAssessmentFb.get('projectManager')?.hasError('required') && (riskAssessmentFb.get('projectManager').dirty 
+                || riskAssessmentFb.get('projectManager').touched) ">
+                Project Manager  is Required 
+              </span> 
               </div>
             </div>
             <div class="row">
@@ -250,11 +338,12 @@
                     class="form-check-input"
                     [value]="jobTaskData[i]._id"
                     (change)="onJobtaskSelect($event, jobTaskData[i])"
-                    formControlName="{{jobTaskData[i]._id}}"
-                  />
+                    formControlName="{{jobTaskData[i]._id}}">
+                   
                   <label [for]="i+'jt'" class="form-check-label label_2">{{
                     jobTaskData[i].title
                   }}</label>
+                 
                 </div>
               </ng-container>
             </div>
@@ -462,7 +551,14 @@
                   (onBeginEvent)="drawStart1()"
                   (onEndEvent)="drawComplete1()"
                   #Signature1
+                  [class.is-invalid]="singRequired"
                 ></signature-pad>
+                <span
+                *ngIf="singRequired"
+                class="invalid-feedback"
+              >
+              This Field is Required</span
+              >
               </div>
               <button class="btn btn-outline-primary mt-1" (click)="clear1()">
                 Clear
@@ -505,7 +601,16 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="siteName"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('siteName')?.hasError('required') 
+                && (riskAssessmentFb.get('siteName').dirty || riskAssessmentFb.get('siteName').touched) " />
+                <span
+                *ngIf="
+                riskAssessmentFb.get('siteName')?.hasError('required') && (riskAssessmentFb.get('siteName').dirty 
+                || riskAssessmentFb.get('siteName').touched) "
+                
+              >
+             Site  Name is Required</span
+              > 
             </div>
           </div>
           <div class="col-md-6">
@@ -518,7 +623,14 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="customerName"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('customerName')?.hasError('required') 
+                && (riskAssessmentFb.get('customerName').dirty || riskAssessmentFb.get('customerName').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('customerName')?.hasError('required') && (riskAssessmentFb.get('customerName').dirty 
+                || riskAssessmentFb.get('customerName').touched) ">
+                customer Name is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-2">
@@ -531,7 +643,14 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="streetNo"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required') 
+                && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('streetNo')?.hasError('required') && (riskAssessmentFb.get('streetNo').dirty 
+                || riskAssessmentFb.get('streetNo').touched) ">
+                street Number is Required 
+              </span> 
             </div>
           </div>
           <div class="col-md-4">
@@ -544,7 +663,14 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="streetAddr"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
+                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty 
+                || riskAssessmentFb.get('streetAddr').touched) ">
+                Street Name is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-4">
@@ -555,7 +681,14 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="town"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('town')?.hasError('required') 
+                && (riskAssessmentFb.get('town').dirty || riskAssessmentFb.get('town').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('town')?.hasError('required') && (riskAssessmentFb.get('town').dirty 
+                || riskAssessmentFb.get('town').touched) ">
+                Town/City is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-2">
@@ -564,10 +697,19 @@
               <select
                 class="form-select form-control col"
                 aria-label="Default select example"
-                formControlName="statesSWMS">
+                formControlName="statesSWMS"
+                [class.is-invalid]="riskAssessmentFb.get('statesSWMS')?.hasError('required') 
+                && (riskAssessmentFb.get('statesSWMS').dirty || riskAssessmentFb.get('statesSWMS').touched) " >
+               
                 <option selected hidden>Select</option>
                 <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
               </select>
+              <span
+              *ngIf="
+              riskAssessmentFb.get('statesSWMS')?.hasError('required') && (riskAssessmentFb.get('statesSWMS').dirty 
+              || riskAssessmentFb.get('statesSWMS').touched) ">
+              State is Required 
+            </span>
             </div>
           </div>
           <div class="col-md-6">
@@ -580,7 +722,14 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="custConct"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('custConct')?.hasError('required') 
+                && (riskAssessmentFb.get('custConct').dirty || riskAssessmentFb.get('custConct').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('custConct')?.hasError('required') && (riskAssessmentFb.get('custConct').dirty 
+                || riskAssessmentFb.get('custConct').touched) ">
+                Customer Contact is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-6">
@@ -592,8 +741,15 @@
                 type="tel"
                 class="form-control"
                 aria-describedby="emailHelp"
-                formControlName="custConctPh">
-              
+                formControlName="custConctPh"
+                [class.is-invalid]="riskAssessmentFb.get('custConctPh')?.hasError('required') 
+                && (riskAssessmentFb.get('custConctPh').dirty || riskAssessmentFb.get('custConctPh').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('custConctPh')?.hasError('required') && (riskAssessmentFb.get('custConctPh').dirty 
+                || riskAssessmentFb.get('custConctPh').touched) ">
+                Customer Contact is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-6">
@@ -606,7 +762,15 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="custEmail"
-              />
+              
+                [class.is-invalid]="riskAssessmentFb.get('custEmail')?.hasError('required') 
+                && (riskAssessmentFb.get('custEmail').dirty || riskAssessmentFb.get('custEmail').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('custEmail')?.hasError('required') && (riskAssessmentFb.get('custEmail').dirty 
+                || riskAssessmentFb.get('custEmail').touched) ">
+                Customer Email is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-3">
@@ -619,10 +783,18 @@
               aria-label="Default select example"
               formControlName="jobNumber"
               (change)="jobNoSel()"
-            >
+              [class.is-invalid]="riskAssessmentFb.get('jobNumber')?.hasError('required') 
+              && (riskAssessmentFb.get('jobNumber').dirty || riskAssessmentFb.get('jobNumber').touched) " >
+ 
               <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
             
             </select>
+            <span
+            *ngIf="
+            riskAssessmentFb.get('jobNumber')?.hasError('required') && (riskAssessmentFb.get('jobNumber').dirty 
+            || riskAssessmentFb.get('jobNumber').touched) ">
+            Job Number  is Required 
+          </span> 
             </div>
           </div>
           <div class="col-md-3">
@@ -635,11 +807,19 @@
                   aria-label="Default select example"
                   formControlName="projectManagerSWMS"
                   (change)="setProjectManager('projectManagerSWMS',$event)"
-                >
+                  [class.is-invalid]="riskAssessmentFb.get('projectManagerSWMS')?.hasError('required') 
+                  && (riskAssessmentFb.get('projectManagerSWMS').dirty || riskAssessmentFb.get('projectManagerSWMS').touched) " >
+                
                   <option selected hidden>Select</option>
                   <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
                 
                 </select>
+                <span
+            *ngIf="
+            riskAssessmentFb.get('projectManagerSWMS')?.hasError('required') && (riskAssessmentFb.get('projectManagerSWMS').dirty 
+            || riskAssessmentFb.get('projectManagerSWMS').touched) ">
+            project ManagerSWMS  is Required 
+          </span> 
             </div>
           </div>
         </div>
@@ -654,11 +834,19 @@
                 class="form-select form-control col"
                 aria-label="Default select example"
                 formControlName="jurisdiction"
-              >
+                [class.is-invalid]="riskAssessmentFb.get('jurisdiction')?.hasError('required') 
+                && (riskAssessmentFb.get('jurisdiction').dirty || riskAssessmentFb.get('jurisdiction').touched) " >
+                
                 <option *ngIf="!hasJuridiction" value="" selected hidden>Select</option>
                 <option [value]="jurisdiction._id" *ngFor="let jurisdiction of JurisdictionData">{{jurisdiction.title}}</option>
               
               </select>
+              <span
+                *ngIf="
+                riskAssessmentFb.get('jurisdiction')?.hasError('required') && (riskAssessmentFb.get('jurisdiction').dirty 
+                || riskAssessmentFb.get('jurisdiction').touched) ">
+               Jurisdiction is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-5">
@@ -668,13 +856,21 @@
                 class="form-control"
                 name="sellist2"
                 formControlName="safetyLeg"
-              >
+                [class.is-invalid]="riskAssessmentFb.get('safetyLeg')?.hasError('required') 
+                && (riskAssessmentFb.get('safetyLeg').dirty || riskAssessmentFb.get('safetyLeg').touched) " >
+                
                 <option *ngIf="!hasLegist" value="" selected hidden>Select</option>
                 <option [value]="safetyLegislation._id" *ngFor="let safetyLegislation of safety">
                 
                   Act:  {{safetyLegislation.act}}&nbsp; Regulation:{{safetyLegislation.regulation}}
                 </option>
               </select>
+              <span
+                *ngIf="
+                riskAssessmentFb.get('safetyLeg')?.hasError('required') && (riskAssessmentFb.get('safetyLeg').dirty 
+                || riskAssessmentFb.get('safetyLeg').touched) ">
+                safety Legislation is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-5">
@@ -687,10 +883,18 @@
                 id="siteName"
                 aria-label="Default select example"
                 formControlName="regulator"
-              >
+                [class.is-invalid]="riskAssessmentFb.get('regulator')?.hasError('required') 
+                && (riskAssessmentFb.get('regulator').dirty || riskAssessmentFb.get('regulator').touched) " >
+              
                 <option *ngIf="!hasRegulation" value="" selected hidden>Select</option>
                 <option [value]="regulator._id" *ngFor="let regulator of regulatorData">{{regulator.title}}</option>
               </select>
+              <span
+                *ngIf="
+                riskAssessmentFb.get('regulator')?.hasError('required') && (riskAssessmentFb.get('regulator').dirty 
+                || riskAssessmentFb.get('regulator').touched) ">
+                safety Legislation is Required 
+              </span>
             </div>
           </div>
     </div>
@@ -905,11 +1109,12 @@
                   id="sel2"
                   name="sellist2"
                   formControlName="hazardous"
-                >
+                  >
                   <option *ngIf="!isHazardous[i]" value="" selected hidden>Select</option>
                   <option value="YES">Yes</option>
                   <option value="NO">No</option>
                 </select>
+               
                 </div>
               </div>
               <div class="col-md-2">
@@ -937,7 +1142,14 @@
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
                     formControlName="expDate"
-                  />
+                    [class.is-invalid]="riskAssessmentFb.get('expDate')?.hasError('required') 
+                && (riskAssessmentFb.get('expDate').dirty || riskAssessmentFb.get('expDate').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('expDate')?.hasError('required') && (riskAssessmentFb.get('expDate').dirty 
+                || riskAssessmentFb.get('expDate').touched) ">
+                Expiry Date is Required 
+              </span>
                 </div>
               </div>
               <div class="col-md-10">
@@ -1108,7 +1320,14 @@
                 class="form-control"
                 id="exampleInputProjectNumber"
                 aria-describedby="emailHelp"
-              />
+                [class.is-invalid]="riskAssessmentFb.get('employee2')?.hasError('required') 
+                && (riskAssessmentFb.get('employee2').dirty || riskAssessmentFb.get('employee2').touched) " >
+                <span
+                *ngIf="
+                riskAssessmentFb.get('employee2')?.hasError('required') && (riskAssessmentFb.get('employee2').dirty 
+                || riskAssessmentFb.get('employee2').touched) ">
+                Employee Name is Required 
+              </span>
             </div>
           </div>
           <div class="col-md-5">
@@ -1120,7 +1339,15 @@
                   (onBeginEvent)="drawStart2()"
                   (onEndEvent)="drawComplete2()"
                   #Signature2
-                ></signature-pad>
+                  [class.is-invalid]="signRequired"
+                  ></signature-pad>
+                  <span
+                  *ngIf="signRequired"
+                  class="invalid-feedback"
+                >
+                This Field is Required</span
+                >
+               
               </div>
             </div>
             <button class="btn btn-outline-primary mt-1" (click)="clear2()">
