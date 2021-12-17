@@ -538,7 +538,14 @@
                   class="mr-1 form-control"
                   value=""
                   formControlName="employee1"
-                />
+                  [class.is-invalid]="riskAssessmentFb.get('employee1')?.hasError('required') 
+                  && (riskAssessmentFb.get('employee1').dirty || riskAssessmentFb.get('employee1').touched) " >
+                  <span
+                  *ngIf="
+                  riskAssessmentFb.get('employee1')?.hasError('required') && (riskAssessmentFb.get('employee1').dirty 
+                  || riskAssessmentFb.get('employee1').touched) ">
+                  Employee Name is Required 
+                </span>
               </p>
             </div>
             <div class="col-4">
@@ -1076,13 +1083,21 @@
                   id="sel2"
                   name="sellist2"
                   formControlName="chemicalName"
-                >
+                  [class.is-invalid]=" sdsRegisterFA().controls[i].get('chemicalName')?.hasError('required') 
+                  && (sdsRegisterFA().controls[i].get('chemicalName').dirty 
+                  || sdsRegisterFA().controls[i].get('chemicalName').touched) " >
                 <option *ngIf="!isSelected[i]" value="" hidden>Select</option>
 
                   <option *ngFor="let item of allChemicals">
                     {{ item.title }}
                   </option>
                 </select>
+                <span
+                *ngIf="sdsRegisterFA().controls[i].get('chemicalName')?.hasError('required') 
+                && (sdsRegisterFA().controls[i].get('chemicalName').dirty 
+                || sdsRegisterFA().controls[i].get('chemicalName').touched) ">
+                Chemical Name is Required 
+              </span>
                 </div>
               </div>
               <div class="col-md-3">
@@ -1096,7 +1111,16 @@
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
                     formControlName="location"
-                  />
+                   
+                  [class.is-invalid]=" sdsRegisterFA().controls[i].get('location')?.hasError('required') 
+                  && (sdsRegisterFA().controls[i].get('location').dirty 
+                  || sdsRegisterFA().controls[i].get('location').touched) "  />
+                    <span
+                *ngIf="sdsRegisterFA().controls[i].get('location')?.hasError('required') 
+                && (sdsRegisterFA().controls[i].get('location').dirty 
+                || sdsRegisterFA().controls[i].get('location').touched) ">
+                Location is Required 
+              </span>
                 </div>
               </div>
               <div class="col-md-2">
@@ -1109,12 +1133,20 @@
                   id="sel2"
                   name="sellist2"
                   formControlName="hazardous"
-                  >
+                     
+                  [class.is-invalid]=" sdsRegisterFA().controls[i].get('hazardous')?.hasError('required') 
+                  && (sdsRegisterFA().controls[i].get('hazardous').dirty 
+                  || sdsRegisterFA().controls[i].get('hazardous').touched) " >
                   <option *ngIf="!isHazardous[i]" value="" selected hidden>Select</option>
                   <option value="YES">Yes</option>
                   <option value="NO">No</option>
                 </select>
-               
+                <span
+                *ngIf="sdsRegisterFA().controls[i].get('hazardous')?.hasError('required') 
+                && (sdsRegisterFA().controls[i].get('hazardous').dirty 
+                || sdsRegisterFA().controls[i].get('hazardous').touched) ">
+                Hazardous is Required 
+              </span>
                 </div>
               </div>
               <div class="col-md-2">
@@ -1128,7 +1160,15 @@
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
                     formControlName="quantity"
-                  />
+                    [class.is-invalid]="sdsRegisterFA().controls[i].get('quantity')?.hasError('required') 
+                    && (sdsRegisterFA().controls[i].get('quantity').dirty 
+                    || sdsRegisterFA().controls[i].get('quantity').touched)" />
+                    <span
+                *ngIf="sdsRegisterFA().controls[i].get('quantity')?.hasError('required') 
+                && (sdsRegisterFA().controls[i].get('quantity').dirty 
+                || sdsRegisterFA().controls[i].get('quantity').touched) ">
+                Quantity is Required 
+              </span>
                 </div>
               </div>
               <div class="col-md-2">
@@ -1142,12 +1182,13 @@
                     id="exampleInputProjectNumber"
                     aria-describedby="emailHelp"
                     formControlName="expDate"
-                    [class.is-invalid]="riskAssessmentFb.get('expDate')?.hasError('required') 
-                && (riskAssessmentFb.get('expDate').dirty || riskAssessmentFb.get('expDate').touched) " >
+                    [class.is-invalid]="sdsRegisterFA().controls[i].get('expDate')?.hasError('required') 
+                    && (sdsRegisterFA().controls[i].get('expDate').dirty 
+                    || sdsRegisterFA().controls[i].get('expDate').touched)" >
                 <span
-                *ngIf="
-                riskAssessmentFb.get('expDate')?.hasError('required') && (riskAssessmentFb.get('expDate').dirty 
-                || riskAssessmentFb.get('expDate').touched) ">
+                *ngIf="sdsRegisterFA().controls[i].get('expDate')?.hasError('required') 
+                && (sdsRegisterFA().controls[i].get('expDate').dirty 
+                || sdsRegisterFA().controls[i].get('expDate').touched) ">
                 Expiry Date is Required 
               </span>
                 </div>
@@ -1155,7 +1196,17 @@
               <div class="col-md-10">
                 <div class="my-3">
                   <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                  <input class="form-control" type="file" id="formFile" formControlName="file"/>
+                  <input class="form-control" type="file" id="formFile" formControlName="file"
+                  
+                  [class.is-invalid]="sdsRegisterFA().controls[i].get('file')?.hasError('required') 
+                  && (sdsRegisterFA().controls[i].get('file').dirty 
+                  || sdsRegisterFA().controls[i].get('file').touched)" />
+                  <span
+                  *ngIf="sdsRegisterFA().controls[i].get('file')?.hasError('required') 
+                  && (sdsRegisterFA().controls[i].get('file').dirty 
+                  || sdsRegisterFA().controls[i].get('file').touched) ">
+               File is Required 
+                </span>
                 </div>
               </div>
               <div class="col-md-2">

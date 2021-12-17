@@ -573,15 +573,17 @@ checkLicense(element,index)
       [this.licenseAndQualification[index]._id]: ['']
     });
   }
-
+  // add(): FormArray {
+  //   return this.riskAssessmentFb.get('arrObj') as FormArray;
+  // }
   sdsRegisterFG(): FormGroup {
     return this.fb.group({
-      chemicalName: [''],
-      location: [''],
-      hazardous: [''],
-      quantity: [''],
-      expDate: [''],
-      file:['']
+      chemicalName: ['',Validators.required],
+      location: ['',Validators.required],
+      hazardous: ['',Validators.required],
+      quantity: ['',Validators.required],
+      expDate: ['',Validators.required],
+      file:['',Validators.required]
     });
   }
   GetsdsRegisterFG(data): FormGroup {
@@ -592,7 +594,14 @@ checkLicense(element,index)
       quantity:data.quantity ,
       expDate: data.expDate,
       file:data.file
-    });
+   
+    
+    // this.add().controls[index].get("chemicalName").setValue(res.data.arrObj[index].chemicalName)
+    // this.add().controls[index].get("location").setValue(res.data.arrObj[index].location)
+    // this.add().controls[index].get("hazardous").setValue(res.data.arrObj[index].hazardous)
+    // this.add().controls[index].get("quantity").setValue(res.data.arrObj[index].quantity)
+   
+  });
   }
   removeSDSRegister(i) {
     const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
@@ -1035,7 +1044,8 @@ element.licence.forEach(ele => {
   getAllChemical() {
     this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
       this.allChemicals = res.data;
-    });
+    
+  });
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {
@@ -15,6 +15,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import Swal from 'sweetalert2';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -33,12 +35,15 @@ export class IncidentReportComponent implements OnInit {
   PPEselection = [];
   ppeArr = [];
   changesArr = [];
+  // isChanges=false;
   natureOfIncArr = [];
   incidentsArr = [];
   rootArr = [];
   allJobNumbers = [];
   @ViewChild('signature') signaturePad: SignaturePad;
   @ViewChild('signature1') signaturePad1: SignaturePad;
+  
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   projMan: any;
   projectMang: any;
   typeOfInc: [];
@@ -65,7 +70,8 @@ export class IncidentReportComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private setTitle:SetTitleService,
     public upload: UploadFileServiceService,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone,
   ) {
     this.IncidentReport = this.fb.group({
       incidents: this.fb.array([]),
@@ -126,7 +132,11 @@ export class IncidentReportComponent implements OnInit {
     //   correctAction:this.data.correctAction,
     // })
   }
-
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this.ngZone.onStable.pipe(take(1))
+        .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params.id;
     console.log("IncidentReport",this.IncidentReport);
@@ -503,6 +513,7 @@ export class IncidentReportComponent implements OnInit {
       });
     }
     console.log("changesSelected",this.changesSelectedArr);
+    console.log("checkChanges::",e.target.checked);
     
   }
 

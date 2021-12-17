@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { Observable } from 'rxjs';
-import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
+import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter, take } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service'; 
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 @Component({
   selector: 'app-hazard-report',
   templateUrl: './hazard-report.component.html',
@@ -26,6 +27,7 @@ export class HazardReportComponent implements OnInit {
   singRequired: any;
   selectedImage:any;
 
+  allJobNumbers = [];
   whsData: any = [''];
   hazardData:any=['']
   myControlEmail = new FormControl();
@@ -34,6 +36,7 @@ export class HazardReportComponent implements OnInit {
   signature:SignaturePad;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +46,7 @@ export class HazardReportComponent implements OnInit {
     public router: Router,
     public upload: UploadFileServiceService,
     private activatedRoute: ActivatedRoute,
+    private ngZone: NgZone,
   ) {
 
 
@@ -107,6 +111,11 @@ export class HazardReportComponent implements OnInit {
       
     });
   }
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this.ngZone.onStable.pipe(take(1))
+        .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -128,6 +137,7 @@ export class HazardReportComponent implements OnInit {
       })
      )
   this.getAllHazardTreatmentRelation();
+  this.getAllJobNumber();
    this.getall();
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
     this.setTitle.setTitle('WHS-Hazard Report Form');
@@ -385,7 +395,33 @@ export class HazardReportComponent implements OnInit {
     
    }
 
- 
+   jobNoSel() {
+    this.allJobNumbers.forEach((item) => {
+      if (this.hazardReport.get('jobNumber').value === item._id) {
+        console.log('Id found', item);
+        this.hazardReport.patchValue({
+          jobNumber: this.hazardReport.get('jobNumber').value,
+          projectName: item.projectName,
+          siteName: item.siteName,
+          customerName: item.customerName,
+          streetAddress: item.streetAddress,
+          projectManager: item.projectManager,
+          customerContact: item.customerContact,
+          personCompletingForm: item.personCompletingForm,
+          customerContactPhone: item.customerContactPhone,
+          customerEmail: item.customerEmail,
+        });
+      }
+    });
+    this.hazardReport.get('jobNumber').updateValueAndValidity();
+  }
+  getAllJobNumber() {
+    this.url.getAllJobNumber().subscribe((res: any) => {
+      this.allJobNumbers = res.data;
+      console.log("this.allJobNumbers",this.allJobNumbers);
+      
+    });
+  }
   
   getall(){
     this.url.getAllManager().subscribe((res:any)=> {

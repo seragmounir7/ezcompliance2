@@ -306,7 +306,15 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">Witness Statement</label>
-        <input type="text" class="form-control" formControlName="witnessStatement" [class.is-invalid]="IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty || IncidentReport.get('witnessStatement').touched) "/>
+        <textarea type="text"
+         class="form-control txt-auto"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1.5"
+        cdkAutosizeMaxRows="5"
+        formControlName="witnessStatement"
+         [class.is-invalid]="IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty || IncidentReport.get('witnessStatement').touched) ">
+         </textarea>
         <span *ngIf=" IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty  || IncidentReport.get('witnessStatement').touched) " class="invalid-feedback" >
          This Field is Required</span>
         <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example">
@@ -387,7 +395,10 @@
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
-        <textarea *ngIf="IncidentReport.get('priorIncident').value=='yes'" name="" class="col mt-2 form-control" id="" formControlName="priorIncidentText"></textarea>
+        <div  *ngIf="IncidentReport.get('priorIncident').value=='yes'"  >
+          <label class="mb-2"> Please Describe </label>
+         <textarea name="" class="col form-control" id="" formControlName="priorIncidentText"></textarea>
+      </div>
       </div>
    
       <div class="col-md-6">
@@ -398,7 +409,10 @@
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
-        <textarea *ngIf="IncidentReport.get('similarIncident').value=='yes'"  name="" class="col mt-2 form-control" id="" formControlName="similarIncidentText"></textarea>
+        <div  *ngIf="IncidentReport.get('similarIncident').value=='yes'">
+        <label class="mb-2"> Please Describe </label>
+        <textarea   name="" class="col form-control" id="" formControlName="similarIncidentText"></textarea>
+        </div>
       </div>
     
   
@@ -416,12 +430,20 @@
       <div class="checkrdobtn">
         <input class="rdovstchk" [id]="i+'changes'" type="checkbox" class="mr-1" 
           (change)="changesSelected($event)" formControlName="{{changes[i]._id}}" />
-        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'changes'">{{
+         
+         <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'changes'">{{
           changes[i].title
         }}</label>
+        
       </div>
     </div>
   </ng-container>
+  <div class="col-12"  *ngIf = "changeAdd().controls['Other']">
+     <h3 class="mb-1 " style="color: black; font-weight: 500;"> Changes can be made</h3>
+        <textarea 
+        (change)="changesSelected($event)" formControlName="{{changes}}">
+      </textarea>
+    </div>
   </ng-container>
   </div>
   <hr />
