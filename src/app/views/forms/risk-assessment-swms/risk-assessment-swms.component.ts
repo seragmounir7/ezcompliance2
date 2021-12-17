@@ -1,7 +1,7 @@
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -146,6 +146,8 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   projectMang = [];
   allChemicals = [];
   allCOPSelected = [];
+  singRequired: any;
+  signRequired: any;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   regulatorData: any=[];
@@ -164,29 +166,29 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     console.log("id",this.id)
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
-      jobNumber: [''],
-      siteName: [''],
-      customerName: [''],
-      streetNo: [''],
-      streetAddr: [''],
-      suburb: [''],
-      town:[''],
-      custConct: [''],
-      custConctPh: [''],
-      custEmail: [''],
-      employee1: [''],
-      employee2: [''],
-      dateTime: [''],
-      statesSWMS: [''],
-      projectManager: [''],
-      date: [''],
-      projectManagerSWMS: [''],
-      jurisdiction: [''],
-      safetyLeg: [''],
-      regulator: [''],
-      location: [''],
+      jobNumber: ['',Validators.required],
+      siteName: ['', Validators.required],
+      customerName: ['',Validators.required],
+      streetNo: ['',Validators.required],
+      streetAddr: ['',Validators.required],
+      suburb: ['',Validators.required],
+      town:['',Validators.required],
+      custConct: ['',Validators.required],
+      custConctPh: ['',Validators.required],
+      custEmail: ['',Validators.required],
+      employee1: ['',Validators.required],
+      employee2: ['',Validators.required],
+      dateTime: ['',Validators.required],
+      statesSWMS: ['',Validators.required],
+      projectManager: ['',Validators.required],
+      date: ['',Validators.required],
+      projectManagerSWMS: ['',Validators.required],
+      jurisdiction: ['',Validators.required],
+      safetyLeg: ['',Validators.required],
+      regulator: ['',Validators.required],
+      location: ['',Validators.required],
       qty: [],
-      expiryDate: [''],
+      expiryDate: ['',Validators.required],
       hazardous: this.fb.array([]),
       ppeSelection: this.fb.array([]),
       file: this.fb.array([]),
@@ -200,9 +202,9 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       PPEselection:this.fb.array([]),
       PPESelection2:this.fb.array([]),
       licence:this.fb.array([]),
-      editor:[""],
-      signature1:[""],
-      signature2:[""]
+      editor:["",Validators.required],
+      signaturePad1:["",Validators.required],
+      signaturePad2:["",Validators.required]
     });
   }
   ngOnInit(): void {
@@ -281,12 +283,12 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       let check =async () => { this.signaturePad1 != null }
       check().then(() => {
 
-        this.signaturePad1.fromDataURL(res.data.signature1)
+        this.signaturePad1.fromDataURL(res.data.signaturePad1)
       })
       let check1 =async () => { this.signaturePad2 != null }
       check1().then(() => {
 
-        this.signaturePad2.fromDataURL(res.data.signature2)
+        this.signaturePad2.fromDataURL(res.data.signaturePad2)
       })
      if( res?.data.jurisdiction!="")
      {
@@ -571,15 +573,17 @@ checkLicense(element,index)
       [this.licenseAndQualification[index]._id]: ['']
     });
   }
-
+  // add(): FormArray {
+  //   return this.riskAssessmentFb.get('arrObj') as FormArray;
+  // }
   sdsRegisterFG(): FormGroup {
     return this.fb.group({
-      chemicalName: [''],
-      location: [''],
-      hazardous: [''],
-      quantity: [''],
-      expDate: [''],
-      file:['']
+      chemicalName: ['',Validators.required],
+      location: ['',Validators.required],
+      hazardous: ['',Validators.required],
+      quantity: ['',Validators.required],
+      expDate: ['',Validators.required],
+      file:['',Validators.required]
     });
   }
   GetsdsRegisterFG(data): FormGroup {
@@ -590,7 +594,14 @@ checkLicense(element,index)
       quantity:data.quantity ,
       expDate: data.expDate,
       file:data.file
-    });
+   
+    
+    // this.add().controls[index].get("chemicalName").setValue(res.data.arrObj[index].chemicalName)
+    // this.add().controls[index].get("location").setValue(res.data.arrObj[index].location)
+    // this.add().controls[index].get("hazardous").setValue(res.data.arrObj[index].hazardous)
+    // this.add().controls[index].get("quantity").setValue(res.data.arrObj[index].quantity)
+   
+  });
   }
   removeSDSRegister(i) {
     const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
@@ -632,28 +643,36 @@ checkLicense(element,index)
   drawComplete1() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad1.toDataURL());
-    this.riskAssessmentFb.controls["signature1"].setValue(this.signaturePad1.toDataURL());
+    this.riskAssessmentFb.controls["signaturePad1"].setValue(this.signaturePad1.toDataURL());
   }
   clear1() {
     console.log('clear1');
     this.signaturePad1.clear();
+    
+    this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].untouched
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    
+    this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].invalid
   }
   drawComplete2() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad2.toDataURL());
-    this.riskAssessmentFb.controls["signature2"].setValue(this.signaturePad2.toDataURL());
+    this.riskAssessmentFb.controls["signaturePad2"].setValue(this.signaturePad2.toDataURL());
   }
   clear2() {
     console.log('clear2');
     this.signaturePad2.clear();
+    
+    this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].untouched
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    
+    this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
   }
 
   getAllJobTask() {
@@ -1025,7 +1044,8 @@ element.licence.forEach(ele => {
   getAllChemical() {
     this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
       this.allChemicals = res.data;
-    });
+    
+  });
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(

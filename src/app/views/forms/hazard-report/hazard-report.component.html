@@ -203,7 +203,7 @@
           >
         </div>
       </div>
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
         <div class="mb-3">
           <label for="exampleInputProjectNumber" class="form-label"
             >Project Number</label
@@ -227,7 +227,7 @@
           Project Number is Required</span
           >
         </div>
-      </div>
+      </div> -->
     </div>
 
     <hr />
@@ -433,20 +433,21 @@
       </div>
       <div class="col-md-3">
         <div class="mb-3">
-          <label for="email" class="form-label">Job Number</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="projectName"
-            id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required') 
-            && (hazardReport.get('projectName').dirty || hazardReport.get('projectName').touched) "
-            />
+          <label class="form-label">Job Number</label>
+          <select
+            class="form-control form-select"
+            formControlName="jobNumber"
+            [class.is-invalid]="hazardReport.get('jobNumber')?.hasError('required') 
+            && (hazardReport.get('jobNumber').dirty || hazardReport.get('jobNumber').touched) "
+            >
+            <option selected hidden>Select</option>
+          <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+
+          </select>
             <span
             *ngIf="
-            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty 
-            || hazardReport.get('projectName').touched) "
+            hazardReport.get('jobNumber')?.hasError('required') && (hazardReport.get('jobNumber').dirty 
+            || hazardReport.get('jobNumber').touched) "
             class="invalid-feedback"
           >
           Job Number is Required</span
@@ -655,7 +656,7 @@
             
             formControlName="actionRequired"
             id="inlineCheckbox4"
-            value="this.Month"
+            value="thisMonth"
           />
           <label class="form-check-label ml-1" for="inlineCheckbox4"
             >This Month</label
@@ -687,13 +688,16 @@
           <label class="form-label"
             >Corrective Action</label
           >
-          <input
+          <textarea
             type="surname"
             class="form-control"
             formControlName="eliminateCorrect"
-   
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1.6"
+            cdkAutosizeMaxRows="5"
             aria-describedby="emailHelp"
-          />
+          ></textarea>
         </div>
       </div>
       <div class="col-md-2" >
@@ -747,13 +751,17 @@
           <label class="form-label"
             >Corrective Action</label
           >
-          <input
+          <textarea
             type="surname"
-            class="form-control"
+            class="form-control textarea-autosize"
             formControlName="substituteCorrect"
 
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1.6"
+            cdkAutosizeMaxRows="5"
             aria-describedby="emailHelp"
-          />
+          ></textarea>
         </div>
       </div>
       <div class="col-md-2">
@@ -807,13 +815,17 @@
           <label class="form-label"
             >Corrective Action</label
           >
-          <input
+          <textarea
             type="surname"
             class="form-control"
             formControlName="isolatedCorrect"
           
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1.6"
+            cdkAutosizeMaxRows="5"
             aria-describedby="emailHelp"
-          />
+          ></textarea>
         </div>
       </div>
       <div class="col-md-2">
@@ -867,13 +879,16 @@
           <label class="form-label"
             >Corrective Action</label
           >
-          <input
+          <textarea
             type="surname"
             class="form-control"
             formControlName="solutionCorrect"
-         
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1.6"
+            cdkAutosizeMaxRows="5"
             aria-describedby="emailHelp"
-          />
+          ></textarea>
         </div>
       </div>
       <div class="col-md-2">
@@ -927,13 +942,16 @@
           <label class="form-label"
             >Corrective Action</label
           >
-          <input
+          <textarea
             type="surname"
             class="form-control"
             formControlName="procedureRemoveCorrect"
-     
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1.6"
+            cdkAutosizeMaxRows="5"
             aria-describedby="emailHelp"
-          />
+          ></textarea>
         </div>
       </div>
       <div class="col-md-2">
@@ -987,13 +1005,16 @@
           <label  class="form-label"
             >Corrective Action</label
           >
-          <input
+          <textarea
             type="surname"
             class="form-control"
             formControlName="PPECorrect"
-          
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1.6"
+            cdkAutosizeMaxRows="5"
             aria-describedby="emailHelp"
-          />
+          ></textarea>
         </div>
       </div>
       <div class="col-md-2">
