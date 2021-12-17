@@ -35,7 +35,6 @@ export class IncidentReportComponent implements OnInit {
   PPEselection = [];
   ppeArr = [];
   changesArr = [];
-  // isChanges=false;
   natureOfIncArr = [];
   incidentsArr = [];
   rootArr = [];
@@ -513,7 +512,6 @@ export class IncidentReportComponent implements OnInit {
       });
     }
     console.log("changesSelected",this.changesSelectedArr);
-    console.log("checkChanges::",e.target.checked);
     
   }
 
