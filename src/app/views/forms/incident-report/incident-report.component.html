@@ -145,8 +145,17 @@
       <div class="col-md-6">
 
         <label class="cols" class="form-Label">Date of Form Completion</label>
-        <input type="date" class="form-control" formControlName="dateOfFormCompletion" [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "/>
-        <span *ngIf=" IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty  || IncidentReport.get('dateOfFormCompletion').touched) " class="invalid-feedback" >
+        <!-- <input type="date" class="form-control" formControlName="dateOfFormCompletion" [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "/> -->
+       <input  matInput  [matDatepicker]="datepicker" [max]="maxDate" [min]="minDate"
+       class="form-control"
+       formControlName="dateOfFormCompletion" 
+       [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "
+       placeholder="dd-mm-yyyy">
+       <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+       <mat-datepicker #datepicker ></mat-datepicker>
+        <!--  -->
+        <span *ngIf=" IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty  || IncidentReport.get('dateOfFormCompletion').touched) "
+         class="invalid-feedback date-valid" >
         Date is Required</span>
       </div>
     </div>
@@ -259,8 +268,20 @@
              [disableMinute]="disableMinute" [hideTime]="hideTime">
           </ngx-mat-datetime-picker>
        </mat-form-field> -->
-        <input type="date" class="form-control" formControlName="dateOfTheIncident" [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty || IncidentReport.get('dateOfTheIncident').touched) "/>
-        <span *ngIf=" IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty  || IncidentReport.get('dateOfTheIncident').touched) " class="invalid-feedback" >
+   
+       <!-- <input type="date" class="form-control" [max]="maxDate" formControlName="dateOfTheIncident" [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty || IncidentReport.get('dateOfTheIncident').touched) "/> -->
+        <!--  -->
+        <input  matInput  [matDatepicker]="picker" [max]="maxDate" 
+        class="form-control"  
+        placeholder="dd-mm-yyyy"
+        formControlName="dateOfTheIncident" 
+        [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') 
+        && (IncidentReport.get('dateOfTheIncident').dirty 
+        || IncidentReport.get('dateOfTheIncident').touched) ">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+<!--  -->
+        <span *ngIf=" IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty  || IncidentReport.get('dateOfTheIncident').touched) " class="invalid-feedback date-valid" >
           Date is Required</span>
       </div>
     </div>
@@ -269,9 +290,9 @@
         <label class="cols"  class="form-Label"
           >Time of the incident</label
         >
-        <input [ngxMatTimepicker]="picker"  class="form-control" formControlName="timeOfTheIncident" [class.is-invalid]="IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty || IncidentReport.get('timeOfTheIncident').touched) "/>
+        <input [ngxMatTimepicker]="timepicker"  class="form-control" formControlName="timeOfTheIncident" [class.is-invalid]="IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty || IncidentReport.get('timeOfTheIncident').touched) "/>
         
-          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+          <ngx-mat-timepicker #timepicker></ngx-mat-timepicker>
           <span *ngIf=" IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty  || IncidentReport.get('timeOfTheIncident').touched) " class="invalid-feedback" >
             Select Time is Required</span>
         <!-- <input

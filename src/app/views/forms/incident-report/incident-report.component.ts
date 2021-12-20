@@ -17,6 +17,7 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 import Swal from 'sweetalert2';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
+import moment from 'moment';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class IncidentReportComponent implements OnInit {
   allJobNumbers = [];
   @ViewChild('signature') signaturePad: SignaturePad;
   @ViewChild('signature1') signaturePad1: SignaturePad;
-  
+  maxDate = new Date();
+  minDate = new Date();
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   projMan: any;
   projectMang: any;
