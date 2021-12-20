@@ -22,7 +22,7 @@
   <div class="col-3 container mb-3" *ngIf="type == 'edit'">
     <input type="text" class="form-control" [(ngModel)]="formNameRecieved" />
   </div>
-  <div class="col-3 container mb-3" *ngIf="type == 'edit'">
+  <div class="col-3 container mb-3" *ngIf="type == 'edit'|| type == 'add'">
     <div class="form-check">
       <label class="form-check-label">Configure With Job Number</label>
       <input
@@ -30,10 +30,11 @@
       type="checkbox" 
       class="form-check-input"
       (change)="onChange2($event)"
+      [checked]="check"
     />
     </div>
   </div>
-<div *ngIf="isHidden" [formGroup]="riskAssessmentFb">
+<div class="container checkboxForm" *ngIf="isHidden" [formGroup]="riskAssessmentFb">
   <div class="row">
     <div class="my-3 col">
       <label class="form-label"
@@ -102,7 +103,7 @@
       >
         <option selected hidden>Select</option>
       </select> -->
-      <input type="text" class="form-control col" formControlName="suburb">
+      <input type="text" class="form-control col" formControlName="subUrb">
     </div>
     <div class="my-3 col-2">
       <label class="form-label"
@@ -886,6 +887,179 @@
           <p class="text-center mb-5" style="font-size: 30px">
             {{ formNameRecieved }}
           </p>
+        <div class="container" [formGroup]="previewform">
+          <div class="row">
+            <div class="my-3 col">
+              <label class="form-label"
+                >Site Name</label>
+              <!-- <select
+                class="form-select form-control col"
+                id="siteName"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="siteName">
+            </div>
+            <div class="my-3 col">
+              <label class="form-label"
+                >Customer Name</label
+              >
+              <!-- <select
+                class="form-select form-control col"
+                id="CustomerName"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="customerName">
+        
+            </div>
+          </div>
+          <div class="row">
+            <div class="my-3 col-2">
+              <label class="form-label"
+                >Street Number</label>
+              <!-- <select
+                class="form-select form-control col"
+                id="StreetNumber"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="streetNo">
+        
+            </div>
+            <div class="my-3 col-4">
+              <label class="form-label"
+                >Street Address</label
+              >
+              <!-- <select
+                class="form-select form-control col"
+                id="StreetAddress"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="streetAddr">
+            </div>
+            <div class="my-3 col-4">
+              <label class="form-label"
+                >Suburb</label
+              >
+              <!-- <select
+                class="form-select form-control col"
+                id="Suburb"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="subUrb">
+            </div>
+            <div class="my-3 col-2">
+              <label class="form-label"
+                >State</label
+              >
+              <select
+              readonly
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="statesSWMS"
+            >
+            <option selected hidden>Select</option>
+            <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
+              <!-- <option selected hidden>Select</option>
+              <option value="NSW">NSW</option>
+              <option value="ACT">ACT</option>
+              <option value="QLD">QLD</option>
+              <option value="NT">NT</option>
+              <option value="SA">SA</option>
+              <option value="NZ">NZ</option>
+              <option value="TAS">TAS</option>s
+              <option value="VIC">VIC</option>
+              <option value="WA">WA</option> -->
+            </select>
+            </div>
+          </div>
+        
+          <div class="row">
+            <div class="my-3 col">
+              <label class="form-label"
+                >Customer Contact</label
+              >
+              <!-- <select
+                class="form-select form-control col"
+                id="CustomerContact"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="custConct">
+        
+            </div>
+            <div class="my-3 col">
+              <label class="form-label"
+                >Customer Contact Phone</label
+              >
+              <!-- <select
+                class="form-select form-control col"
+                id="CustomerContactPhone"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="custConctPh">
+        
+            </div>
+          </div>
+          <div class="row">
+            <div class="my-3 col-4">
+              <label class="form-label"
+                >Customer Email</label
+              >
+              <!-- <select
+                class="form-select form-control col"
+                id="CustomerEmail"
+                aria-label="Default select example"
+              >
+                <option selected hidden>Select</option>
+              </select> -->
+              <input readonly type="text" class="form-control col" formControlName="custEmail">
+        
+            </div>
+            <div class="my-3 col-2">
+              <label class="form-label"
+                >Job Number</label
+              >    
+              <select
+              readonly
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="jobNumber"
+              (change)="jobNoSel()"
+            >
+              <option selected hidden>Select</option>
+              <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+            
+            </select>
+            </div>
+            <!-- <div class="my-3 col-6">
+              <label class="form-label"
+                >Project Manager</label
+              >
+              <select
+                class="form-select form-control col"
+                aria-label="Default select example"
+                formControlName="projectManager"
+                (change)="setProjectManager('projectManager',$event)"
+              >
+                <option selected hidden>Select</option>
+                <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
+              
+              </select>
+            </div> -->
+          </div>
+        </div>  
           <div *ngFor="let row of model; let i = index" class="form-group row">
            <ng-container *ngIf="row.attributes.length == 1;else elseBlock">
             <div

@@ -15,7 +15,7 @@
 // .H_1 {
 //   background-color: orangered;
 // }
-// .L_1 {
+// .L_1 {cvbnm,
 //   background-color: rgb(95, 223, 95);
 // }
 // div.space_1 {
@@ -111,6 +111,76 @@
 // }
 
 //////////////////
+@media print {
+.col-sm-2-print {
+  width: 16.66666667%;
+}
+.col-md-3-print {
+  width: 25%;
+}
+.col-sm-4-print {
+  width: 33.333333%;
+}
+.col-sm-5-print {
+  width: 41.666667%;
+}
+.col-sm-6-print {
+  width: 50%;
+}
+.col-sm-7-print {
+  width: 58.333333%;
+}
+.col-sm-10-print {
+  width: 83.333333%;
+}
+  td .L_1{
+  background-color: rgb(0 0 0) !important;
+      -webkit-print-color-adjust: exact;
+  }
+  td .M_1{
+     background-color: rgb(5 20 183) !important;
+      -webkit-print-color-adjust: exact;
+  }
+   .table > tbody > tr:nth-child(1n+1) > td.L_1 {
+    background-color: #5fdf5f!important;
+    -webkit-print-color-adjust: exact;
+  }
+  table > tbody > tr:nth-child(1n+1) > td.M_1{
+    background-color: yellow!important;
+    -webkit-print-color-adjust: exact;
+  }
+  table > tbody > tr:nth-child(1n+1) > td.H_1{
+    background-color: orangered!important;
+    -webkit-print-color-adjust: exact;
+  }
+   table > thead > tr > th:nth-child(1n+1){
+    background-color: #5fdf5f!important;
+    -webkit-print-color-adjust: exact;
+  }
+  .page {
+    page-break-after: always !important;
+  }
+}
+
+// @page {
+//   margin: 20mm
+// }
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid black; /* for demo */
+  background: yellow; /* for demo */
+}
+
+.page-header {
+  position: fixed;
+  top: 0mm;
+  width: 100%;
+  border-bottom: 1px solid black; /* for demo */
+  background: yellow; /* for demo */
+}
 .report_1 {
   background-color: aqua;
   border-left: 4px solid blue;
