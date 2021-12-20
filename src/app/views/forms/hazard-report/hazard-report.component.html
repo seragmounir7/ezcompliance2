@@ -368,15 +368,16 @@
       <div class="col-md-3">
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Reported</label>
-          <input
-            type="date"
+          <input  matInput  [matDatepicker]="datepicker" [max]="maxDate"
             class="form-control"
             formControlName="dateHazardReport"
             id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
             [class.is-invalid]="hazardReport.get('dateHazardReport')?.hasError('required') 
             && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
-            />
+            placeholder="dd-mm-yyyy">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker ></mat-datepicker>
+            <!--  -->
             <span
             *ngIf="
             hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
@@ -412,15 +413,16 @@
       <div class="col-md-3">
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Identified</label>
-          <input
-            type="date"
+          <input  matInput  [matDatepicker]="datepicker1" [max]="maxDate" 
             class="form-control"
             formControlName="dateHazardIdentify"
             id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
             [class.is-invalid]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
             && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
-            />
+            placeholder="dd-mm-yyyy">
+            <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker1 ></mat-datepicker>
+            
             <span
             *ngIf="
             hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
@@ -719,13 +721,19 @@
           <label class="form-label label_1"
             >By when</label
           >
-          <input
+          <!-- <input
             type="date"
             class="form-control"
             formControlName="eliminateWhen"
    
             aria-describedby="emailHelp"
-          />
+          /> -->
+          <input  matInput  [matDatepicker]="pickerd1"
+          class="form-control"
+          formControlName="eliminateWhen"
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd1"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd1 ></mat-datepicker>
         </div>
       </div>
       </div>
@@ -783,13 +791,19 @@
           <label  class="form-label label_1"
             >By when</label
           >
-          <input
+          <!-- <input
             type="date"
             class="form-control"
             formControlName="substituteWhen"
       
             aria-describedby="emailHelp"
-          />
+          /> -->
+          <input  matInput  [matDatepicker]="pickerd2"
+          class="form-control"
+          formControlName="substituteWhen"
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd2"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd2 ></mat-datepicker>
         </div>
       </div>
       </div>
@@ -847,13 +861,19 @@
           <label class="form-label label_1"
             >By when</label
           >
-          <input
+          <!-- <input
             type="date"
             class="form-control"
             formControlName="isolatedWhen"
           
             aria-describedby="emailHelp"
-          />
+          /> -->
+          <input  matInput  [matDatepicker]="pickerd3"
+          class="form-control"
+          formControlName="isolatedWhen"
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd3"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd3 ></mat-datepicker>
         </div>
       </div>
       </div>
@@ -910,13 +930,19 @@
           <label class="form-label label_1"
             >By when</label
           >
-          <input
+          <!-- <input
             type="date"
             class="form-control"
             formControlName="solutionWhen"
          
             aria-describedby="emailHelp"
-          />
+          /> -->
+          <input  matInput  [matDatepicker]="pickerd4"
+          class="form-control"
+          formControlName="solutionWhen"
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd4 ></mat-datepicker>
         </div>
       </div>
       </div>
@@ -973,13 +999,19 @@
           <label class="form-label label_1"
             >By when</label
           >
-          <input
+          <!-- <input
             type="date"
             class="form-control"
             formControlName="procedureRemove"
            
-            aria-describedby="emailHelp"
-          />
+            aria-describedby="emailHelp" 
+          /> -->
+          <input  matInput  [matDatepicker]="pickerd5"
+          class="form-control"
+          formControlName="procedureRemove"
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd5 ></mat-datepicker>
         </div>
       </div>
       </div>
@@ -1037,13 +1069,19 @@
           <label class="form-label label_1"
             >By when</label
           >
-          <input
+          <!-- <input
             type="date"
             class="form-control"
             formControlName="PPEWhen"
         
             aria-describedby="emailHelp"
-          />
+          /> -->
+          <input  matInput  [matDatepicker]="pickerd6"
+          class="form-control"
+          formControlName="PPEWhen"
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd6"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd6 ></mat-datepicker>
         </div>
       </div>
     </div>
@@ -1178,16 +1216,17 @@
         </mat-form-field>  -->
         <div class="mb-3">
           <label for="exampleInputSurname" class="form-label">Date</label>
-          <input
-            type="date"
-            value=""
+          <!-- <input type="date"value=""class="form-control" formControlName="date"   aria-describedby="emailHelp"
+            [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
+            && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "/> -->
+            <input  matInput  [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate"
             class="form-control"
             formControlName="date"
-          
-            aria-describedby="emailHelp"
             [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "
-            />
+            placeholder="dd-mm-yyyy">
+            <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker2 ></mat-datepicker>
             <span
             *ngIf="
             hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 

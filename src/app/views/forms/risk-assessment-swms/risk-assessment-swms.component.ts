@@ -51,6 +51,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   hasJuridiction=false;
   hasLegist=false;
   hasRegulation=false;
+  
   cardImageBase64:any;
   highRiskConstruction2 = [
     {
@@ -188,7 +189,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       dateTime: ['',Validators.required],
       statesSWMS: ['',Validators.required],
       projectManager: ['',Validators.required],
-      date: ['',Validators.required],
+      date: [new Date() ,Validators.required],
       projectManagerSWMS: ['',Validators.required],
       jurisdiction: ['',Validators.required],
       safetyLeg: ['',Validators.required],

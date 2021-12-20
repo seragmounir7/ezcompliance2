@@ -37,7 +37,8 @@ export class HazardReportComponent implements OnInit {
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
-
+  maxDate = new Date();
+  minDate = new Date();
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,

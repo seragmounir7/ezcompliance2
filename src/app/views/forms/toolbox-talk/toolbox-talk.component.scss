@@ -2,6 +2,14 @@ label:not(.form-check-label):not(.custom-file-label) {
   font-weight: 500;
 }
 
+mat-datepicker-toggle{ 
+  ::ng-deep .mat-icon-button{
+    display: block;
+    /* margin: -2.5rem 30.5rem; */
+    float: right;
+    top: -2.5rem;
+   }
+  }
 // label {
 //     margin-bottom: 4%;
 //     margin-top: 2%;

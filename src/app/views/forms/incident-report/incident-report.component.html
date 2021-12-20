@@ -506,7 +506,14 @@
         <div class="col-md-2">
 
           <label class="cols" class="form-Label">Date </label>
-          <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/>
+          <!-- <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/> -->
+          <input  matInput  [matDatepicker]="pickerd4" [min]="minDate"
+          class="form-control"
+          formControlName="date"
+          placeholder="dd-mm-yyyy"
+          [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) ">
+          <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd4 ></mat-datepicker>
           <span *ngIf=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty  || add().controls[i].get('date').touched) " class="invalid-feedback" >
             Date is Required</span>
         </div>
@@ -560,7 +567,14 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Date </label>
-          <input type="date" class="form-control" formControlName="completedDate" [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "/>
+          <!-- <input type="date" class="form-control" formControlName="completedDate" [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "/> -->
+          <input  matInput  [matDatepicker]="pickerd5" [max]="maxDate"
+          class="form-control"
+          formControlName="completedDate"
+          [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd5 ></mat-datepicker>
           <span *ngIf=" IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty  || IncidentReport.get('completedDate').touched) " class="invalid-feedback" >
           Date is Required</span>
         </div>
@@ -626,7 +640,14 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Date </label>
-          <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/>
+          <!-- <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/> -->
+          <input  matInput  [matDatepicker]="pickerd6"
+          class="form-control"
+          formControlName="reviewedDate"
+          [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd6"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd6 ></mat-datepicker>
           <span *ngIf=" IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty  || IncidentReport.get('reviewedDate').touched) " class="invalid-feedback" >
          Date is Required</span>
         </div>
