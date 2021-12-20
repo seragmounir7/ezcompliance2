@@ -1,6 +1,7 @@
-<div id='section-to-print' *ngIf="check!='print'" class="btn btn-outline-primary" [routerLink]="['/admin/forms']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
+<div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+
+
 <div id='section-to-print' *ngIf="check=='print'" class="page-header" style="text-align: center">
   I'm The Header
 </div>
@@ -1402,7 +1403,7 @@
           </div>
         </div>
         <div>
-          <button type="submit" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+          <button type="submit" [disabled]="!riskAssessmentFb.valid" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
         </div>
       </div>
     </div>
@@ -2492,7 +2493,7 @@
         </div>
       </div>
       <div>
-        <button *ngIf="check!='print'" type="submit" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+        <button *ngIf="check!='print'" type="submit" class="btn btn-outline-primary"  (click)="onSubmit()">Submit</button>
       </div>
     </div>
   </div>
