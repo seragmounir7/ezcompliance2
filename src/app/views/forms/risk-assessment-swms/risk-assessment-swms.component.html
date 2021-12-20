@@ -1,8 +1,13 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/forms']">
+<div id='section-to-print' *ngIf="check!='print'" class="btn btn-outline-primary" [routerLink]="['/admin/forms']">
   <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-
-<div class="container card px-4 py-4" [formGroup]="riskAssessmentFb">
+<div id='section-to-print' *ngIf="check=='print'" class="page-header" style="text-align: center">
+  I'm The Header
+</div>
+<div *ngIf="check=='print'" class="page-footer">
+  I'm The Footer
+</div>
+<div id='section-to-print' class="container card px-4 py-4" [formGroup]="riskAssessmentFb">
   <h2 class="text-center pt-3">
     <p class="title">Risk Assessment Preview</p>
   </h2>
@@ -43,7 +48,7 @@
       </button>
     </li>
   </ul> -->
-  <mat-tab-group>
+  <mat-tab-group *ngIf="check!='print'">
     <mat-tab label="Risk Assessment"> 
       <div class="tab-content" id="myTabContent">
         <div
@@ -358,7 +363,7 @@
             </div>
             <hr />
     
-            <div class="mt-4">
+            <div class="mt-4 page">
               <h2>High Risk Construction</h2>
             </div>
     
@@ -943,7 +948,7 @@
               <div class="col-md-10">
                 <div class="my-3">
                   <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                  <input class="form-control" type="file" id="formFile" formControlName="file"/>
+                  <input class="form-control" (change)="fileChangeEvent($event,i)" type="file" id="formFile" />
                 </div>
               </div>
               <div class="col-md-2">
@@ -973,7 +978,7 @@
             </div>
 
             <div class="row">
-              <div class="col-10">
+              <div class="col-10 col-sm-10-print">
                   <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
                   <ol class="identifyHaz">
                     <li *ngFor="let hazard of item.allHazardsTitle;let j=index"  >
@@ -998,7 +1003,7 @@
                 </div>
               </ng-container>
              
-              <div class="col-10 my-3">
+              <div class="col-10 col-sm-10-print my-3">
                 
                   <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
                   <ol class="identifyHaz">
@@ -1138,9 +1143,1100 @@
  
     </mat-tab>
   </mat-tab-group>
-  
-  
- 
+  <div class="tab-content" id="myTabContent" *ngIf="check=='print'">
+    <div
+      class="tab-pane fade show active px-4 py-4"
+      id="RISKAssessment"
+      role="tabpanel"
+      aria-labelledby="RISKAssessment-tab"
+    >
+      <h2>Site Information</h2>
+      <div>
+        <div class="row">
+          <div class="my-3 col">
+            <label class="form-label"
+              >Site Name</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="siteName"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="siteName">
+          </div>
+          <div class="my-3 col">
+            <label class="form-label"
+              >Customer Name</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="CustomerName"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="customerName">
 
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-2">
+            <label class="form-label"
+              >Street Number</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="StreetNumber"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="streetNo">
+
+          </div>
+          <div class="my-3 col-4">
+            <label class="form-label"
+              >Street Address</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="StreetAddress"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="streetAddr">
+          </div>
+          <div class="my-3 col-4">
+            <label class="form-label"
+              >Suburb</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="Suburb"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="suburb">
+          </div>
+          <div class="my-3 col-2">
+            <label class="form-label"
+              >State</label
+            >
+            <select
+            class="form-select form-control col"
+            aria-label="Default select example"
+            formControlName="statesSWMS"
+          >
+          <option selected hidden>Select</option>
+          <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
+            <!-- <option selected hidden>Select</option>
+            <option value="NSW">NSW</option>
+            <option value="ACT">ACT</option>
+            <option value="QLD">QLD</option>
+            <option value="NT">NT</option>
+            <option value="SA">SA</option>
+            <option value="NZ">NZ</option>
+            <option value="TAS">TAS</option>s
+            <option value="VIC">VIC</option>
+            <option value="WA">WA</option> -->
+          </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="my-3 col">
+            <label class="form-label"
+              >Customer Contact</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="CustomerContact"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="custConct">
+
+          </div>
+          <div class="my-3 col">
+            <label class="form-label"
+              >Customer Contact Phone</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="CustomerContactPhone"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="custConctPh">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-4">
+            <label class="form-label"
+              >Customer Email</label
+            >
+            <!-- <select
+              class="form-select form-control col"
+              id="CustomerEmail"
+              aria-label="Default select example"
+            >
+              <option selected hidden>Select</option>
+            </select> -->
+            <input type="text" class="form-control col" formControlName="custEmail">
+
+          </div>
+          <div class="my-3 col-2">
+            <label class="form-label"
+              >Job Number</label
+            >    
+            <select
+            class="form-select form-control col"
+            aria-label="Default select example"
+            formControlName="jobNumber"
+            (change)="jobNoSel()"
+          >
+            <option selected hidden>Select</option>
+            <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+          
+          </select>
+          </div>
+          <div class="my-3 col-6">
+            <label class="form-label"
+              >Project Manager</label
+            >
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="projectManager"
+              (change)="setProjectManager('projectManager',$event)"
+            >
+              <option selected hidden>Select</option>
+              <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
+            
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-4">
+            <label class="form-label"
+              >Date</label
+            >
+            <input type="date" class="form-control" formControlName="date" />
+          </div>
+        </div>
+        <hr />
+        <div class="mt-4">
+          <h2>Job Tasks</h2>
+        </div>
+
+        <div class="row" formArrayName="jobTask">
+          <ng-container  *ngFor="let control of jobtask().controls; let i = index" [formGroupName]="i">
+            <div
+             
+              class="mt-2 col-4"
+            >
+              <input
+                type="checkbox"
+                [id]="i+'jt'"
+                class="form-check-input"
+                [value]="jobTaskData[i]._id"
+                (change)="onJobtaskSelect($event, jobTaskData[i])"
+                formControlName="{{jobTaskData[i]._id}}"
+              />
+              <label [for]="i+'jt'" class="form-check-label label_2">{{
+                jobTaskData[i].title
+              }}</label>
+            </div>
+          </ng-container>
+        </div>
+
+        <hr />
+        <div class="row mt-4">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th colspan="7" class="L_1">Risk Level Matrix</th>
+                <th colspan="8" class="L_1">Risk Analysis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th colspan="2" rowspan="2"></th>
+                <td colspan="5">Consequence</td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Likelihood</div>
+                </td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Consequence</div>
+                </td>
+              </tr>
+              <tr>
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <th rowspan="5">
+                  <div class="like_1">Likelihood</div>
+                </th>
+                <td>5</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">
+                  <div class="space_1">1</div>
+                </td>
+                <td colspan="2">Rare</td>
+                <td colspan="2">
+                  <div class="space_1">1</div>
+                </td>
+                <td colspan="2">Insignificant</td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Unlikely</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Minor</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+              </tr>
+              <tr>
+                <th scope="col">2</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Likely</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Major</td>
+              </tr>
+              <tr>
+                <th scope="col">1</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td colspan="2" class="mr-2 ml-2">5</td>
+                <td colspan="2">Almost Certain</td>
+                <td colspan="2">5</td>
+                <td colspan="2">Catastrophic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+
+        <div class="mt-4">
+          <h2>High Risk Construction</h2>
+        </div>
+
+        <div class="row" formArrayName="riskConstruction">
+          <div
+            *ngFor="let control of riskConstruct().controls; let i = index" [formGroupName]="i"
+            class="mt-2 col-4"
+          >
+            <input
+              type="checkbox" 
+              [id]="i+'hrc'"
+              class="form-check-input"
+              formControlName="{{highRiskConstruction[i]._id}}"
+              (change)="onRiskChange($event,highRiskConstruction[i]._id,i)"
+              value="Working in or near trenches or shafts deeper than 1.5metres"
+              [checked]="riskArr[i]"
+            />
+            <label  [for]="i+'hrc'" class="form-check-label label_2">{{
+              highRiskConstruction[i].title
+            }}</label>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="mt-4">
+        <h2>PPE Selection</h2>
+      </div>
+
+      <div class="row" formArrayName="PPEselection">
+        <div
+        *ngFor="let control of ppe().controls; let i = index" [formGroupName]="i"
+          class="mt-2 col-4"
+        >
+          <input
+            type="checkbox"
+            [id]="i+'ppes'"
+            class="form-check-input"
+            value="Disposable dust mask"
+            (change)="onPPEChange($event,PPEselection[i]._id,i)"
+            formControlName="{{PPEselection[i]._id}}"
+            [checked]="ppeArr[i]"
+          />
+          <label class="form-check-label label_2"  [for]="i+'ppes'">{{
+            PPEselection[i].title
+          }}</label>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="mt-4">
+        <h2>Licence and Qualifications</h2>
+      </div>
+
+      <div class="row" formArrayName="licence">
+        <div
+        *ngFor="let control of Licence().controls; let i = index" [formGroupName]="i"
+          class="mt-2 col-4"
+        >
+          <input
+            type="checkbox"
+            [id]="i+'l&q'"
+            class="form-check-input"
+            value="Open Cable Licence"
+            (change)="onLicenseChange($event,licenseAndQualification[i]._id,i)"
+            formControlName="{{licenseAndQualification[i]._id}}"
+            [checked]="licenceArr[i]"
+          />
+          <label class="form-check-label label_2"  [for]="i+'l&q'">{{
+            licenseAndQualification[i].title
+          }}</label>
+        </div>
+      </div>
+
+      <hr />
+      <h2>
+        Toolbox this document with all workers and contractors on sit & sign off
+      </h2>
+
+      <div class="row">
+        <div class="col-4">
+          <label class="form-label"
+            >Employee 1</label
+          >
+          <p>
+            <input
+              type="input"
+              class="mr-1 form-control"
+              value=""
+              formControlName="employee1"
+            />
+          </p>
+        </div>
+        <div class="col-4">
+          <label class="form-label"
+            >Signature</label
+          >
+          <div class="sign" #signaturePad1Div>
+            <signature-pad
+              [options]="signaturePadOptions1"
+              (onBeginEvent)="drawStart1()"
+              (onEndEvent)="drawComplete1()"
+              #Signature1
+            ></signature-pad>
+          </div>
+          <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+            Clear
+          </button>
+        </div>
+        <div class="col-3">
+          <label class="form-label"
+            >Date/Time</label
+          >
+          <p>
+            <input
+              type="date"
+              class="mr-1 form-control"
+              value=""
+              formControlName="dateTime"/>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+  *ngIf="check=='print'"
+  id="SWSS"
+  role="tabpanel"
+>
+  <!--SWMS Forms-->
+  <div class="container content-center">
+    <div class="px-4 py-4">
+      <div class="row">
+        <div class="col-md-6 col-sm-6-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Site Name</label
+            >
+            <input
+              type="fullname"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="siteName"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Customer Name</label
+            >
+            <input
+              type="surname"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="customerName"
+            />
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-2-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Street Number</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="streetNo"
+            />
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Street Name</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="streetAddr"
+            />
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4-print ">
+          <div class="my-3">
+            <label class="form-label">Town/City</label>
+            <input
+              type="department"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="town"
+            />
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-2-print">
+          <div class="my-3">
+            <label class="form-label">State</label>
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="statesSWMS">
+              <option selected hidden>Select</option>
+              <option [value]="state._id" *ngFor="let state of states">{{state.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Customer Contact</label
+            >
+            <input
+              type="Projectnumber"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="custConct"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Customer Contact Phone</label
+            >
+            <input
+              type="tel"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="custConctPh">
+            
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Customer Contact Email</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              aria-describedby="emailHelp"
+              formControlName="custEmail"
+            />
+          </div>
+        </div>
+        <div class="col-md-3 col-md-3-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Job Number</label
+            >
+            <select
+            class="form-select form-control col"
+            aria-label="Default select example"
+            formControlName="jobNumber"
+            (change)="jobNoSel()"
+          >
+            <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
+          
+          </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-md-3-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Project Manager</label
+            >
+            <select
+                class="form-select form-control col"
+                aria-label="Default select example"
+                formControlName="projectManagerSWMS"
+                (change)="setProjectManager('projectManagerSWMS',$event)"
+              >
+                <option selected hidden>Select</option>
+                <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
+              
+              </select>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-2 col-sm-2-print">
+          <div class="my-3">
+            <label for="exampleInputProjectNumber" class="form-label"
+              >Jurisdiction</label
+            >
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="jurisdiction"
+            >
+              <option *ngIf="!hasJuridiction" value="" selected hidden>Select</option>
+              <option [value]="jurisdiction._id" *ngFor="let jurisdiction of JurisdictionData">{{jurisdiction.title}}</option>
+            
+            </select>
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-5-print">
+          <div class="my-3">
+            <label >Safety Legislation</label>
+            <select
+              class="form-control"
+              name="sellist2"
+              formControlName="safetyLeg"
+            >
+              <option *ngIf="!hasLegist" value="" selected hidden>Select</option>
+              <option [value]="safetyLegislation._id" *ngFor="let safetyLegislation of safety">
+              
+                Act:  {{safetyLegislation.act}}&nbsp; Regulation:{{safetyLegislation.regulation}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-5-print">
+          <div class="my-3">
+            <label class="form-label"
+              >Regulator & other Legislation</label
+            >
+            <select
+              class="form-select form-control col"
+              id="siteName"
+              aria-label="Default select example"
+              formControlName="regulator"
+            >
+              <option *ngIf="!hasRegulation" value="" selected hidden>Select</option>
+              <option [value]="regulator._id" *ngFor="let regulator of regulatorData">{{regulator.title}}</option>
+            </select>
+          </div>
+        </div>
+  </div>
+      <hr />
+      <h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
+      <div class="row">
+        <!--<div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
+         <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
+        </div> -->
+        <div
+          *ngFor="let item of allCOPSelected; let i = index"
+          class="mt-2 col-4"
+        >
+          <input
+            type="checkbox"
+            [id]="i+'cop'"
+            class="form-check-input"
+            value="Working in or near trenches or shafts deeper than 1.5metres"
+            [checked]="true"
+            disabled
+          />
+          <label [for]="i+'cop'" class="form-check-label label_2">{{
+            item.title
+          }}</label>
+        </div>
+      </div>
+      <hr />
+      <h2>High Risk Construction</h2>
+      <div class="row" formArrayName="riskConstruction2">
+        <div
+          *ngFor="let control of riskConstruct2().controls; let i = index" [formGroupName]="i"
+          class="mt-2 col-4 col-sm-4-print"
+        >
+          <input
+            type="checkbox" 
+            [id]="i+'hrc'"
+            class="form-check-input"
+            formControlName="{{highRiskConstruction[i]._id}}"
+            (change)="onRiskChange2($event,highRiskConstruction[i]._id,i)"
+            value="Working in or near trenches or shafts deeper than 1.5metres"
+            [checked]="riskArr[i]"
+          />
+          <label  [for]="i+'hrc'" class="form-check-label label_2">{{
+            highRiskConstruction[i].title
+          }}</label>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th colspan="7" class="L_1">Risk Level Matrix</th>
+              <th colspan="8" class="L_1">Risk Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th colspan="2" rowspan="2"></th>
+              <td colspan="5">Consequence</td>
+              <td colspan="4" rowspan="2">
+                <div class="like_2">Likelihood</div>
+              </td>
+              <td colspan="4" rowspan="2">
+                <div class="like_2">Consequence</div>
+              </td>
+            </tr>
+            <tr>
+              <th>1</th>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <th rowspan="5">
+                <div class="like_1">Likelihood</div>
+              </th>
+              <td>5</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">
+                <div class="space_1">1</div>
+              </td>
+              <td colspan="2">Rare</td>
+              <td colspan="2">
+                <div class="space_1">1</div>
+              </td>
+              <td colspan="2">Insignificant</td>
+            </tr>
+            <tr>
+              <th>4</th>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">2</td>
+              <td colspan="2">Unlikely</td>
+              <td colspan="2">2</td>
+              <td colspan="2">Minor</td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">3</td>
+              <td colspan="2">Moderate</td>
+              <td colspan="2">3</td>
+              <td colspan="2">Moderate</td>
+            </tr>
+            <tr>
+              <th scope="col">2</th>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td colspan="2">4</td>
+              <td colspan="2">Likely</td>
+              <td colspan="2">4</td>
+              <td colspan="2">Major</td>
+            </tr>
+            <tr>
+              <th scope="col">1</th>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td colspan="2" class="mr-2 ml-2">5</td>
+              <td colspan="2">Almost Certain</td>
+              <td colspan="2">5</td>
+              <td colspan="2">Catastrophic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr />
+      <h2>PPE Selection</h2>
+      <div class="row" formArrayName="PPESelection2">
+        <div
+        *ngFor="let control of ppe2().controls; let i = index" [formGroupName]="i"
+          class="mt-2 col-4 col-sm-4-print"
+        >
+          <input
+            type="checkbox"
+            [id]="i+'ppes'"
+            class="form-check-input"
+            value="Disposable dust mask"
+            formControlName="{{PPEselection[i]._id}}"
+            (change)="onPPEChange2($event,PPEselection[i]._id,i)"
+            [checked]="ppeArr[i]"
+          />
+          <label class="form-check-label label_2"  [for]="i+'ppes'">{{
+            PPEselection[i].title
+          }}</label>
+        </div>
+      </div>
+      <hr />
+      <ng-container *ngIf="chemicalTask">
+        <h2>SDS Registor</h2>
+        <ng-container formArrayName="SDSRegister">
+          <div class="row" *ngFor="let controls of sdsRegisterFA().controls;let i=index" [formGroupName]="i">
+            <div class="col-md-3 col-md-3-print">
+              <div class="my-3">
+                <label for="sel2" class="form-label"
+                  >Name of Chemical<span  class="material-icons ml-3"
+                  style="font-size: 19px;"  (click)="addChemical()" >add_circle_outline</span></label
+                >
+                <select                  
+                class="form-control"
+                id="sel2"
+                name="sellist2"
+                formControlName="chemicalName"
+              >
+              <option *ngIf="!isSelected[i]" value="" hidden>Select</option>
+
+                <option *ngFor="let item of allChemicals">
+                  {{ item.title }}
+                </option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-3 col-md-3-print">
+              <div class="my-3">
+                <label for="exampleInputProjectNumber" class="form-label"
+                  >Location</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputProjectNumber"
+                  aria-describedby="emailHelp"
+                  formControlName="location"
+                />
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2-print">
+              <div class="my-3">
+                <label for="exampleInputProjectNumber" class="form-label"
+                  >Hazardous</label
+                >
+                <select                  
+                class="form-control"
+                id="sel2"
+                name="sellist2"
+                formControlName="hazardous"
+              >
+                <option *ngIf="!isHazardous[i]" value="" selected hidden>Select</option>
+                <option value="YES">Yes</option>
+                <option value="NO">No</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2-print">
+              <div class="my-3">
+                <label for="exampleInputProjectNumber" class="form-label"
+                  >Qty</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="exampleInputProjectNumber"
+                  aria-describedby="emailHelp"
+                  formControlName="quantity"
+                />
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2-print">
+              <div class="my-3">
+                <label for="exampleInputProjectNumber" class="form-label"
+                  >Expiry Date</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="exampleInputProjectNumber"
+                  aria-describedby="emailHelp"
+                  formControlName="expDate"
+                />
+              </div>
+            </div>
+            <div class="col-md-10 col-sm-10-print">
+              <div class="my-3">
+                <label for="formFile" class="form-label">Attach SDS Sheet</label>
+                <input class="form-control" type="file" id="formFile" formControlName="file"/>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2-print">
+              <span class="material-icons" style="margin-top: 30%" (click)="addActionSDSRegister()"
+                >add_circle_outline
+              </span>
+              <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+   
+      <hr />
+      <div
+        cdkDropList
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box setBoxMart"
+          *ngFor="let item of jobTaskSelected; let i = index"
+          cdkDrag
+        >
+          <div>
+            <h2>Step:{{i+1}} {{ item.title }}</h2>
+          </div>
+
+          <div class="row">
+            <div class="col-10">
+                <label for="sel2">Identity Hazards<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('identifyHazards',i)" >add_circle_outline</span></label>
+                <ol class="identifyHaz">
+                  <li *ngFor="let hazard of item.allHazardsTitle;let j=index"  >
+                    <div class="d-flex">
+                       <div class=" stepItem p-1" >{{ hazard.title }}</div>
+                       <div class="" *ngIf="!hazard.id"><mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editIdentifyHazards',hazard.title,i)" >edit</mat-icon>  <mat-icon  style="font-size: 18px;"(click)="deleteHazrds('identifyHazards',hazard.title, i,j)" >delete</mat-icon>  </div>
+                </div>   
+                  </li>  
+                </ol>         
+            </div>
+            <ng-container  formArrayName="riskLevel">
+              <div class="col-2 col-sm-2-print" [formGroupName]="i">
+                <label for="sel1">Risk</label>
+                <select
+                  class="form-control"
+                  id="sel1"
+                  name="sellist1"
+                  formControlName="riskLevel"
+                >
+                  <option *ngFor="let item of riskLevel" [value]="item._id">{{item.title}}</option>           
+                </select>
+              </div>
+            </ng-container>
+           
+            <div class="col-10 my-3">
+              
+                <label for="sel2">Control and Action Required<span  class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"(click)="addItem('ctrlActreq',i)" >add_circle_outline</span></label>
+                <ol class="identifyHaz">
+                  <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index"  > 
+                    <div class="">
+                      <div class=" stepItem p-1">{{contrlActReq.title }}</div>
+                  <div  class="col-3"  *ngIf="!contrlActReq.id"> <mat-icon  class="mr-1" style="font-size: 18px;"(click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>  <mat-icon   style="font-size: 18px;"(click)="deleteHazrds('ctrlActreq', contrlActReq.title,i,j)">delete</mat-icon>                  </div>
+                </div> 
+                  </li>  
+                </ol>  
+               
+              
+            </div>
+
+           <div> 
+             <ng-container formArrayName="residualRisk">
+              <div class=" my-3" [formGroupName]="i">
+                <label for="sel1">Residual Risk</label>
+                <select
+                  class="form-control"
+                  id="sel1"
+                  name="sellist1"
+                  formControlName="resiRiskLevel"
+                >
+                <option *ngFor="let item of resiRiskLevel" [value]="item._id">{{item.title}}</option>           
+              
+                </select>
+                </div>
+              </ng-container>
+               <ng-container formArrayName="persResp"><label for="sel1" class="pt-2">Person Responsible</label>
+                <div [formGroupName]="i">
+                  <select
+                   multiple
+                   class="form-control"
+                   formControlName="personRes"
+                   id="sel2" [size]="item.staffTitle.length"
+                   name="sellist2"
+                 >
+                   <option
+                     *ngFor="let item of item.staffTitle"
+                   >
+                     {{ item.title }}
+                   </option>
+                 </select>
+                </div> 
+                 </ng-container>
+                 </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        
+        
+        <!-- <br /><br />
+        <h3 class="txt_1">
+          Only persons who have completed the singoff are authorised to work
+          on the relevent tasks covered by this document. <br />
+          Note: Work must be performed in accordance with this SWMS, any Risk
+          Assessment prepared in relation to this work and any <br />
+          relevent Safe WorkProcedures.<br />
+          This SWMS must be accessible for inspection untill the energised
+          electrical work to which this SWMS relates is completed. If the
+          <br />
+          SWMS is revised, all version should be kept.<br />
+          If a Notifiable incident occurs in relation to the high-risk
+          construction work in this SWMS, the SWMS must be kept for at least 2
+          years<br />
+          from the date of the Notifiable incident.<br /><br />
+          If Changes are made to the work practice and the content of the SWMS
+          workers will need sign to confirm that they haverecieved an<br />
+          updated briefing, undestand the content and will comply with the
+          requirements.<br /><br />
+          Where there are other parties working adjascent to the contractor
+          and the work activity that could impact upon the safety and
+          welfare<br />
+          of others not directly employed, SWMS will make references to how
+          they will coordinate the work activity and where applicable<br />
+          communicate to the other parties.<br /><br />
+        </h3> -->
+      </div>
+      
+      <!-- <div  class="row mb-2">
+        <ckeditor style="width: 100%;" [editor]="Editor" data="<h1 class='form-control' >
+          <strong>Worker consultation, instruction, training, toolbox talks, review,
+          acceptance record:</strong>
+        </h1>"></ckeditor>   
+
+        
+      </div> -->
+
+
+      <div class="row">
+        <ckeditor formControlName="editor" style="width: 100%;" [editor]="Editor" [data]="secondEditor"></ckeditor>  
+      </div>
+      <hr />
+      <h3>Name of worker (Print and Sign)</h3>
+      <div class="row">
+        <div class="col-md-7 col-sm-7-print">
+          <div class="my-3">
+            <label for="exampleInputProjectNumber" class="form-label"
+              >Employee 2</label
+            >
+            <input
+              formControlName="employee2"
+              type="text"
+              class="form-control"
+              id="exampleInputProjectNumber"
+              aria-describedby="emailHelp"
+            />
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-5-print">
+          <div class="form-floating">
+            <label>Signature*</label>
+            <div class="sign">
+              <signature-pad
+                [options]="signaturePadOptions2"
+                (onBeginEvent)="drawStart2()"
+                (onEndEvent)="drawComplete2()"
+                #Signature2
+              ></signature-pad>
+            </div>
+          </div>
+          <button  class="btn btn-outline-primary mt-1" (click)="clear2()">
+            Clear
+          </button>
+        </div>
+      </div>
+      <div>
+        <button *ngIf="check!='print'" type="submit" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
   
 </div>
+<br>
+<div *ngIf="check=='print'">
+  <span *ngFor="let img of selectedFile1">
+    <div >
+      <img  height="400" width="400" [src]="img">
+    </div>
+  </span>
+ </div> 
+</div>
+

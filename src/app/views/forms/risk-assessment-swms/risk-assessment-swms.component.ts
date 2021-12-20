@@ -14,6 +14,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { data } from 'jquery';
 import { ThrowStmt } from '@angular/compiler';
+import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 
 
 @Component({
@@ -50,6 +51,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   hasJuridiction=false;
   hasLegist=false;
   hasRegulation=false;
+  cardImageBase64:any;
   highRiskConstruction2 = [
     {
       label: 'Working in or near trenches or shafts deeper than 1.5metres',
@@ -152,14 +154,19 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   safety: any=[];
   JurisdictionData: any=[];
   states: any=[];
+  check:any;
+  selectedFile1=[];
   constructor(
     public router: Router,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute,
-    private setTitle: SetTitleService
+    private setTitle: SetTitleService,
+    public upload: UploadFileServiceService
   ) {
+    this.check = localStorage.getItem('key');
+    console.log("key check",this.check);
     this.id=this.activatedRoute.snapshot.params.id;
     console.log("id",this.id)
     this.riskAssessmentFb = this.fb.group({
@@ -205,6 +212,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       signature2:[""]
     });
   }
+  
   ngOnInit(): void {
     this.getAllJobTask();
     this.getAllPPE();
@@ -227,6 +235,14 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     {
       this.getAssessmentByid(this.id);
     }
+    // this.logicalFormInfo.printing$.subscribe((res)=>{
+    //   console.log(res);
+    //   if(res=='print')
+    //   {
+    //     console.log("print");
+    //     setTimeout( function() { window.print(); }, 3000);
+    //   }
+    // }) 
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
@@ -280,12 +296,10 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       console.log("assesment by id",res.data);
       let check =async () => { this.signaturePad1 != null }
       check().then(() => {
-
         this.signaturePad1.fromDataURL(res.data.signature1)
       })
       let check1 =async () => { this.signaturePad2 != null }
       check1().then(() => {
-
         this.signaturePad2.fromDataURL(res.data.signature2)
       })
      if( res?.data.jurisdiction!="")
@@ -310,6 +324,8 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       }
       res?.data?.SDSRegister.forEach((element,index) => {
         this.chemicalTask=true;
+        console.log("file name",element);
+        
         if(element?.chemicalName!="")
         {
           this.isSelected[index]=true;
@@ -319,6 +335,8 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
           this.isHazardous[index]=true;
         }
         this.PushActionSDSRegister(element)
+        this.selectedFile1.push(element.file);
+        console.log("selected",this.selectedFile1);
       });
       res.data.riskLevel.forEach(element => {
         console.log("riskLevel",element.riskLevel);
@@ -421,6 +439,7 @@ checkLicense(element,index)
   {
     d.controls[z].setValue(element[z]);
   }
+  
 }
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
@@ -431,7 +450,7 @@ checkLicense(element,index)
           customerName: item.customerName,
           streetNo: item.streetNumber,
           streetAddr: item.streetAddress,
-          subUrb: item.suburb,
+          suburb: item.suburb,
           statesSWMS: item.stateId._id,
           custConct: item.customerContact,
           custConctPh: item.customerContactPhone,
@@ -620,6 +639,11 @@ checkLicense(element,index)
   };
 
   ngAfterViewInit() {
+    if(this.check=='print')
+    {
+      setTimeout( function() { window.print(); }, 3000);
+      localStorage.setItem('key',' ');
+    }
     // this.signaturePad is now available
     //this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
     // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -1174,7 +1198,18 @@ element.licence.forEach(ele => {
       this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
     }
   }
+  fileChangeEvent(fileInput: any,i) {
+    const files = fileInput.target.files[0];
+    const formdata = new FormData();
+    formdata.append('', files);
+    console.log(files);
 
+    this.upload.upload(formdata).subscribe((res) => {
+      console.log('AddProductComponent -> browser -> res', res);
+    this.sdsRegisterFA().controls[i].get("file").setValue(res.files[0])
+    console.log("sdsRegister",this.riskAssessmentFb.get("SDSRegister").value);
+    });
+  }
   onSubmit(){
     const data={
       ...this.riskAssessmentFb.value,
