@@ -77,6 +77,7 @@ import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs
 import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-manager.component';
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,8 @@ import { EditManagerComponent } from './manager/edit-manager/edit-manager.compon
     ReactiveFormsModule,
     SharedModule,
     MatStepperModule,
-    AutosizeModule
+    AutosizeModule,
+    CKEditorModule
   ],
 })
 export class SiteInfoModule {}

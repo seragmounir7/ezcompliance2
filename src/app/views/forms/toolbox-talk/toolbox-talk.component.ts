@@ -73,9 +73,9 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   {
     this.logicalFormInfo.getToolboxById(id).subscribe((res:any)=>{
       console.log(res);
-      this.pushissues(res.data.issues);
-      this.pushCorrective(res.data.corrAction);
-      this.pushattendee(res.data.attendees);
+      //this.pushissues(res.data.issues);
+     // this.pushCorrective(res.data.corrAction);
+     // this.pushattendee(res.data.attendees);
       this.toolBox.patchValue({
         siteName:res.data.siteName,
         customerName: res.data.customerName,
@@ -93,6 +93,8 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
 
         this.signaturePad1.fromDataURL(res.data.signaturePad1)
       })
+      console.log("this.signaturePad1",this.signaturePad1);
+      
       let check2 =async () => { this.signaturePad2 != null }
       check2().then(() => {
         console.log( this.signaturePad2);
@@ -103,6 +105,26 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
           });
         }, 2000); 
       })
+      this.toolBox.patchValue({
+        signaturePad1: res.data.signaturePad1
+      })
+      for (let i = 0; i <  res.data.attendees.length; i++) {
+        this.addAttendee()
+        this.attendee().controls[i].get("employee").patchValue(res.data.attendees[i].employee)
+         this.attendee().controls[i].get("signature").patchValue(res.data.attendees[i].signature)
+        
+      }for (let x = 0; x < res.data.corrAction.length; x++) {
+       this. addCorrectAct()
+      this.correctAct().controls[x].get("action").patchValue( res.data.corrAction[x].action)
+      this.correctAct().controls[x].get("complete").patchValue( res.data.corrAction[x].complete)
+      this.correctAct().controls[x].get("personRes").patchValue( res.data.corrAction[x].personRes)
+      }
+      for (let i = 0; i < res.data.issues.length; i++) {
+        this.addIssues()
+        this.issues().controls[i].get("index").patchValue( res.data.issues[i].index)
+        this.issues().controls[i].get("topicDisc").patchValue( res.data.issues[i].topicDisc)
+        this.issues().controls[i].get("topicRes").patchValue( res.data.issues[i].topicRes)
+      }
     })
   }
   getAllJobNumber() {
@@ -132,44 +154,44 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   addIssues() {
     this.issues().push(this.issuesForm());
   }
-  getissues(D): FormGroup {
-    return this.fb.group({
-      index: D.index,
-      topicDisc: D.topicDisc,
-      topicRes: D.topicRes,
-    });
-  }
-  pushissues(D) {
-    console.log("D",D);
-    D.forEach((element) => {
-     this.issues().push(this.getissues(element));
-    });
-  }
-  getCorrective(D): FormGroup {
-    return this.fb.group({
-      action: D.action,
-      personRes: D.personRes,
-      complete: D.complete,
-    });
-  }
-  pushCorrective(D) {
-    console.log("D",D);
-    D.forEach((element) => {
-     this.correctAct().push(this.getCorrective(element));
-    });
-  }
-  getattendee(D): FormGroup {
-    return this.fb.group({
-      employee: D.employee,
-      signature:D.signature,
-    });
-  }
-  pushattendee(D) {
-    console.log("D",D);
-    D.forEach((element) => {
-     this.attendee().push(this.getattendee(element));
-    });
-  }
+  // getissues(D): FormGroup {
+  //   return this.fb.group({
+  //     index: D.index,
+  //     topicDisc: D.topicDisc,
+  //     topicRes: D.topicRes,
+  //   });
+  // }
+  // pushissues(D) {
+  //   console.log("D",D);
+  //   D.forEach((element) => {
+  //    this.issues().push(this.getissues(element));
+  //   });
+  // }
+  // getCorrective(D): FormGroup {
+  //   return this.fb.group({
+  //     action: D.action,
+  //     personRes: D.personRes,
+  //     complete: D.complete,
+  //   });
+  // }
+  // pushCorrective(D) {
+  //   console.log("D",D);
+  //   D.forEach((element) => {
+  //    this.correctAct().push(this.getCorrective(element));
+  //   });
+  // }
+  // getattendee(D): FormGroup {
+  //   return this.fb.group({
+  //     employee: D.employee,
+  //     signature:D.signature,
+  //   });
+  // }
+  // pushattendee(D) {
+  //   console.log("D",D);
+  //   D.forEach((element) => {
+  //    this.attendee().push(this.getattendee(element));
+  //   });
+  // }
   issues(): FormArray {
     return this.toolBox.get('issues') as FormArray;
   }
@@ -246,17 +268,19 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     console.log("signnn",this.signaturePad1);
     this.toolBox.controls['signaturePad1'].setValue(this.signaturePad1.toDataURL());
     console.log("signaturePad1 control",this.toolBox.controls['signaturePad1'].value);
+    this.singRequired = this.toolBox.controls['signaturePad1'].invalid
 
   }
   clear1() {
     this.signaturePad1.clear();
     this.toolBox.controls['signaturePad1'].setValue("");
+    this.singRequired = this.toolBox.controls['signaturePad1'].untouched
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     // this.signaturePad2=null;
     console.log('begin drawing');
-    this.singRequired = this.toolBox.controls['signaturePad1'].invalid
+    //this.singRequired = this.toolBox.controls['signaturePad1'].invalid
   }
   drawComplete2(index,sign) {
     console.log("sign",sign);
@@ -267,6 +291,9 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   }
   clear2(i) {
     this.attendee().controls[i].get('signature').setValue("");
+    this.sing2Required[i]=this.attendee().controls[i].get('signature').untouched
+
+   
     // this.signaturePad2.clear();
   }
   drawStart2(index) {

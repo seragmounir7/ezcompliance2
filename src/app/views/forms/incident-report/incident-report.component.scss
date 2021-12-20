@@ -43,6 +43,12 @@ input[type='file'] {
   height: 10%;
   padding: 0%;
 }
+.txt-auto{
+  padding-bottom: 5px;
+  padding-top: 4px;
+  margin-top: -1px;
+}
+
 .pt-3 {
   display: inline-block;
   font-size: 32px;
@@ -169,4 +175,11 @@ select {
   margin-left: 7px;
   margin-top: 5px;
   padding-right: 0.5rem;
+}
+.custError{
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import {RoleManagementService}from'../../utils/services/role-management.service';
 import {
   FormBuilder,
   FormGroup,
@@ -17,13 +18,13 @@ export class AddRoleComponent implements OnInit {
   addRole!: FormGroup;
   constructor(
     private fb: FormBuilder,
-
+    private roleService : RoleManagementService,
     public dialogRef: MatDialogRef<AddRoleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addRole = this.fb.group({
     
-      name: ['', Validators.required],
+      role: ['', Validators.required],
     
      
     });
@@ -32,12 +33,32 @@ export class AddRoleComponent implements OnInit {
   
 
   ngOnInit(): void {
-   
+   if(this.data.action==="edit"){
+    this.addRole.get("role").patchValue(this.data.role.role)
+   }
   }
   onSubmit() {
+    if(this.data.action==="new"){
     console.log(this.addRole.value)
-    Swal.fire('Added Successfully')
-    this.dialogRef.close();
+    
+      this.roleService.addRole(this.addRole.value).subscribe((res)=>{
+        console.log("res",res);
+        
+        Swal.fire('Added Successfully')
+        this.dialogRef.close();
+      })
+    } 
+     if(this.data.action==="edit"){
+      this.roleService.updateRole(this.data.role._id,this.addRole.value).subscribe((res)=>{
+        console.log("res",res);
+        
+        Swal.fire('Update Successfully')
+        this.dialogRef.close("true");
+      })
+    }
+  
+    // Swal.fire('Added Successfully')
+    // this.dialogRef.close();
   }
   close() {
     this.dialogRef.close();

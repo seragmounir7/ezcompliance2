@@ -18,10 +18,11 @@ export class RateAndCouponComponent implements OnInit {
   data: any;
   isValid:boolean = false;
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'monthly','defaultMonthly','defaultEmp','yearlyDiscount', 'action'];
+  displayedColumns: string[] = ['index', 'monthly','defaultMonthly','defaultEmp','yearlyDiscount','coupon', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
   addPlan=false;
+  coupon: any;
   constructor(
     private subscript: SubscriptionService,
     private fb: FormBuilder,
@@ -37,6 +38,7 @@ export class RateAndCouponComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlan();
+    this.getPlanById();
     this.setTitle.setTitle('WHS-Subscription Details');
     
   }
@@ -65,6 +67,7 @@ export class RateAndCouponComponent implements OnInit {
     });
   }
  
+  
   editPlan(){
     this.isValid= true;
   }
@@ -88,7 +91,7 @@ export class RateAndCouponComponent implements OnInit {
   edit(element) {
     const dialogRef = this.dialog.open(EditRateAndCouponComponent, {
       width: "550px",
-     height:"400px",
+     height:"440px",
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -99,5 +102,16 @@ export class RateAndCouponComponent implements OnInit {
     });
   }
 
+  getPlanById(){
+    let id ='61b739367f7aba4a9f8684e1';
+    this.subscript.getPlan(id).subscribe((res)=>{
+      console.log("getId",res)
+      this.coupon = res.data;
+      // this.coupon.forEach((element, index) => {
+      //   element.index = index + 1; //adding index
+      // });
+     
+    });
+  }
   }
 
