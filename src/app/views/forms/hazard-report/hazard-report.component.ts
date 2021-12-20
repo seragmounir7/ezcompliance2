@@ -58,7 +58,7 @@ export class HazardReportComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       department: ['', Validators.required],
       position: ['', Validators.required],
-      projectName: ['', Validators.required],
+     // projectName: ['', Validators.required],
       date: ['', Validators.required],
       signaturePad1: ['', Validators.required],
       describeHazard: ['', Validators.required],
@@ -318,18 +318,19 @@ export class HazardReportComponent implements OnInit {
     console.log("signnn",this.signaturePad1);
     this.hazardReport.controls['signaturePad1'].setValue(this.signaturePad1.toDataURL());
     console.log("signaturePad1 control",this.hazardReport.controls['signaturePad1'].value);
-
+    this.singRequired = this.hazardReport.controls['signaturePad1'].invalid
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad1.toDataURL());
   }
   clear() {
     this.signaturePad1.clear();
     this.hazardReport.controls['signaturePad1'].setValue("");
+    this.singRequired = this.hazardReport.controls['signaturePad1'].untouched
   }
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
-    this.singRequired = this.hazardReport.controls['signaturePad1'].invalid
+    //this.singRequired = this.hazardReport.controls['signaturePad1'].invalid
   }
   Consequences: Array<any> = [
     { name: '1-Insignificant',value:1 },

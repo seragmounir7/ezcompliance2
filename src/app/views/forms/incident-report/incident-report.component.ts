@@ -118,7 +118,9 @@ export class IncidentReportComponent implements OnInit {
       priorIncidentText:[''],
       instructions:['Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injuryor near-miss that could have resulted in a serious injury or illness.'],
       signaturePad:['',Validators.required],
-      signaturePad1:['',Validators.required]
+      signaturePad1:['',Validators.required],
+      changesMadeOther: [''],
+      changesMadeOtherText: ['',],
     });
     // this.IncidentReport = this.data;
     // this.IncidentReport.patchValue({
@@ -194,6 +196,8 @@ export class IncidentReportComponent implements OnInit {
       [this.changes[index]._id]: ['',],
     });
   }
+  
+
   incidentsAdd(): FormArray {
     return this.IncidentReport.get('incidents') as FormArray;
   }
@@ -313,6 +317,7 @@ export class IncidentReportComponent implements OnInit {
         this.changesArr[i] = 0;
         this.changeAdd().push(this.changeAction(i))
       }
+
     });
   }
  
@@ -360,6 +365,7 @@ export class IncidentReportComponent implements OnInit {
     console.log("signnn",this.signaturePad);
     
     this.IncidentReport.controls['signaturePad'].setValue(this.signaturePad.toDataURL());
+    this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
     
 
   }
@@ -369,6 +375,7 @@ export class IncidentReportComponent implements OnInit {
     console.log("signnn",this.signaturePad1);
     this.IncidentReport.controls['signaturePad1'].setValue(this.signaturePad1.toDataURL());
     console.log("signaturePad1 control",this.IncidentReport.controls['signaturePad1'].value);
+    this.singRequired1 = this.IncidentReport.controls['signaturePad1'].invalid
 
   }
   clear() {
@@ -386,12 +393,12 @@ export class IncidentReportComponent implements OnInit {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
     console.log("signaturePad control",this.IncidentReport.controls['signaturePad'].touched);
-    this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
+    //this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
-    this.singRequired1 = this.IncidentReport.controls['signaturePad1'].invalid
+    //this.singRequired1 = this.IncidentReport.controls['signaturePad1'].invalid
     console.log('begin drawing',this.singRequired1);
   }
  
@@ -499,7 +506,7 @@ export class IncidentReportComponent implements OnInit {
     console.log("ppeSelectedArr",this.ppeSelectedArr);
     
   }
-  changesSelected(e){
+  changesSelected(e,i){
     let item = e.target.value;
     if (e.target.checked) {
       this.changesSelectedArr.push(item);
@@ -511,7 +518,12 @@ export class IncidentReportComponent implements OnInit {
         }
       });
     }
+    if(!this.IncidentReport.get("changesMadeOther").value){
+      this.IncidentReport.get("changesMadeOtherText").setValue("")
+    }
     console.log("changesSelected",this.changesSelectedArr);
+ 
+    
     
   }
 
@@ -608,6 +620,9 @@ export class IncidentReportComponent implements OnInit {
         reviewedDate:res.data.reviewedDate,
         similarIncidentText:res.data.similarIncidentText,
         priorIncidentText:res.data.priorIncidentText,
+        changesMadeOther:res.data.changesMadeOther,
+      changesMadeOtherText:res.data.changesMadeOtherText
+
       })
      this.selectedImage=res.data.file
      for (let index = 0; index < res.data.arrObj.length; index++) {
@@ -730,8 +745,8 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
         // }, 2000); 
       })
       this.IncidentReport.patchValue({
-        signaturePad:this.signaturePad,
-        signaturePad1:this.signaturePad1
+        signaturePad:res.data.signaturePad,
+        signaturePad1:res.data.signaturePad1
 
       })
     })
@@ -742,10 +757,14 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
     console.log(this.IncidentReport.value);
     if(this.id!=='Form')
     {
+      console.log("update");
+      
       const data={
         ...this.IncidentReport.value
       }
-       this.logicalFormInfo.updateIncidentReport(this.id,this.IncidentReport.value).subscribe((res)=>
+       console.log("data",data);
+       
+       this.logicalFormInfo.updateIncidentReport(this.id,data).subscribe((res)=>
        {
          console.log("res",res);
           Swal.fire({
@@ -754,13 +773,17 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
             timer: 1200,
           });
          this.router.navigate(["/admin/forms/incidentsTable"]);
-       })
+       },(err) => {
+        console.error(err);
+      });
     }
     else
     {
       const data={
         ...this.IncidentReport.value
       }
+      console.log("data",data);
+      
       this.logicalFormInfo.addIncidentReport(data).subscribe(res => {
         console.log("addCustomerForm=>", res)
        // this.IncidentReport.reset();
