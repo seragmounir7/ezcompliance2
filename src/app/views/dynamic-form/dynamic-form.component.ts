@@ -19,6 +19,8 @@ export class DynamicFormComponent implements OnInit {
   @ViewChild('projectManager') projectManager: ElementRef;
   projectMang:any;
   isHidden=false;
+  check=false;
+  configData:any;
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
     minWidth: 1,
@@ -254,6 +256,7 @@ export class DynamicFormComponent implements OnInit {
   report = false;
   reports: any = [];
   riskAssessmentFb!: FormGroup;
+  previewform:FormGroup;
   allJobNumbers:any;
   formNameRecieved = '';
   states:any;
@@ -277,9 +280,22 @@ export class DynamicFormComponent implements OnInit {
       custEmail: [''],
       jobNumber: ['']
     });
+    this.previewform= this.fb.group({
+      siteName:[''],
+      customerName: [''],
+      streetNo: [''],
+      streetAddr: [''],
+      subUrb: [''],
+      statesSWMS: [''],
+      custConct: [''],
+      custConctPh:[''],
+      custEmail: [''],
+      jobNumber: ['']
+    });
    }
    onChange2(eve)
-   {
+   { 
+     console.log("check",this.check);
      this.isHidden=eve.target.checked;
      console.log("eve",eve.target.checked);
    }
@@ -320,7 +336,14 @@ export class DynamicFormComponent implements OnInit {
         this.model = [];
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
-        this.riskAssessmentFb.patchValue(res.data.configure);
+        if(res.data.configure[0])
+        {
+          console.log("config",res.data.configure[0]);
+          this.check=true;
+          this.isHidden=true;
+        }
+        this.configData=res.data.configure[0];
+        this.riskAssessmentFb.patchValue(res.data.configure[0]);
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -601,6 +624,11 @@ export class DynamicFormComponent implements OnInit {
 
   initReport() {
     //  console.log('model.attributes=>', this.model);
+    console.log("config",this.configData);
+    this.previewform.patchValue(this.configData);
+    this.type='edit';
+    this.check=true;
+    this.isHidden=false;
     this.report = true;
     this.formData = [];
     for (let j = 0; j < this.model[0].attributes.length; j++) {
@@ -609,6 +637,7 @@ export class DynamicFormComponent implements OnInit {
         temp.push(this.model[i].attributes[j]);
       }
       this.formData.push(temp);
+
     }
     // console.log('formData', this.formData);
 
