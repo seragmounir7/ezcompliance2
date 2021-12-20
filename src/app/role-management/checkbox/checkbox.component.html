@@ -22,7 +22,7 @@
     <table mat-table [dataSource]="tempArray" class="mat-elevation-z8" >
       <ng-container matColumnDef="role" sticky>
         <th [ngStyle]="{'display': 'none'}" mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Role </th>
-        <td mat-cell *matCellDef="let element"  ><p class="d-flex">{{element.role}} <span class="material-icons ml-2 col" matTooltip="Edit"  (click)="openDialog(element)" style="color: #272121b4;cursor: pointer !important;" >
+        <td mat-cell *matCellDef="let element"  ><p class="d-flex">{{element.role}} <span class="material-icons ml-2 col" matTooltip="Edit"  (click)="openDialog(element)"  >
         edit
       </span></p> </td>
       </ng-container>

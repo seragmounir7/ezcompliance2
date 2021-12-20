@@ -1,4 +1,5 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/siteinspectiontable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
 <div class="container card px-4 py-4" [formGroup]="sidePreview">
   <h2 class="text-center pt-3">
