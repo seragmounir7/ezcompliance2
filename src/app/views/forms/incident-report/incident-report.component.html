@@ -1,9 +1,10 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
+<div class="btn btn-outline-primary" *ngIf="id ==='Form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id!=='Form'" [routerLink]="['/admin/forms/incidentsTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+  
 
 <div class="container card px-4 py-4" [formGroup]="IncidentReport">
   <h2 class="text-center pt-3">
-    <p>Incident Report Form Preview</p>
+    <p>Incident Report Form</p>
   </h2>
   <hr />
 
@@ -11,17 +12,34 @@
 
   <div class="box">
     <div class="row">
-      <div class="col-md-6 ">
+      <div class="col-md-6">
         <label class="form-label mb-3">Project Number</label>
-        <select class="form-select form-control" aria-label="Default select example" formControlName="jobNumber"
-          (change)="jobNoSel()" [class.is-invalid]="IncidentReport.get('jobNumber')?.hasError('required') && (IncidentReport.get('jobNumber').dirty || IncidentReport.get('jobNumber').touched) ">
-          
+        <select
+          class="form-select form-control"
+          aria-label="Default select example"
+          formControlName="jobNumber"
+          (change)="jobNoSel()"
+          [class.is-invalid]="
+            IncidentReport.get('jobNumber')?.hasError('required') &&
+            (IncidentReport.get('jobNumber').dirty ||
+              IncidentReport.get('jobNumber').touched)
+          "
+        >
           <option selected hidden>Select</option>
-          <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
-
+          <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">
+            {{ jobNo.jobNumber }}
+          </option>
         </select>
-        <span *ngIf=" IncidentReport.get('jobNumber')?.hasError('required') && (IncidentReport.get('jobNumber').dirty  || IncidentReport.get('jobNumber').touched) " class="invalid-feedback" >
-          Project Number is Required</span>
+        <span
+          *ngIf="
+            IncidentReport.get('jobNumber')?.hasError('required') &&
+            (IncidentReport.get('jobNumber').dirty ||
+              IncidentReport.get('jobNumber').touched)
+          "
+          class="invalid-feedback"
+        >
+          Project Number is Required</span
+        >
       </div>
       <!-- <div class="col-md-6">
         <div>
@@ -41,9 +59,26 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Project Name</label>
-          <input type="text" formControlName="projectName" class="form-control"[class.is-invalid]="IncidentReport.get('projectName')?.hasError('required') && (IncidentReport.get('projectName').dirty || IncidentReport.get('projectName').touched) "/>
-          <span *ngIf=" IncidentReport.get('projectName')?.hasError('required') && (IncidentReport.get('projectName').dirty  || IncidentReport.get('projectName').touched) " class="invalid-feedback" >
-            Project Name is Required</span>
+          <input
+            type="text"
+            formControlName="projectName"
+            class="form-control"
+            [class.is-invalid]="
+              IncidentReport.get('projectName')?.hasError('required') &&
+              (IncidentReport.get('projectName').dirty ||
+                IncidentReport.get('projectName').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('projectName')?.hasError('required') &&
+              (IncidentReport.get('projectName').dirty ||
+                IncidentReport.get('projectName').touched)
+            "
+            class="invalid-feedback"
+          >
+            Project Name is Required</span
+          >
         </div>
       </div>
     </div>
@@ -51,17 +86,51 @@
       <div class="col-sm-6">
         <div>
           <label class="cols" class="form-Label">Site Name</label>
-          <input type="text" class="form-control" formControlName="siteName" [class.is-invalid]="IncidentReport.get('siteName')?.hasError('required') && (IncidentReport.get('siteName').dirty || IncidentReport.get('siteName').touched) "/>
-          <span *ngIf=" IncidentReport.get('siteName')?.hasError('required') && (IncidentReport.get('siteName').dirty  || IncidentReport.get('siteName').touched) " class="invalid-feedback" >
-            Site Name is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="siteName"
+            [class.is-invalid]="
+              IncidentReport.get('siteName')?.hasError('required') &&
+              (IncidentReport.get('siteName').dirty ||
+                IncidentReport.get('siteName').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('siteName')?.hasError('required') &&
+              (IncidentReport.get('siteName').dirty ||
+                IncidentReport.get('siteName').touched)
+            "
+            class="invalid-feedback"
+          >
+            Site Name is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Customer Name</label>
-          <input type="text" class="form-control" formControlName="customerName" [class.is-invalid]="IncidentReport.get('customerName')?.hasError('required') && (IncidentReport.get('customerName').dirty || IncidentReport.get('customerName').touched) "/>
-          <span *ngIf=" IncidentReport.get('customerName')?.hasError('required') && (IncidentReport.get('customerName').dirty  || IncidentReport.get('customerName').touched) " class="invalid-feedback" >
-            Customer Name is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="customerName"
+            [class.is-invalid]="
+              IncidentReport.get('customerName')?.hasError('required') &&
+              (IncidentReport.get('customerName').dirty ||
+                IncidentReport.get('customerName').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('customerName')?.hasError('required') &&
+              (IncidentReport.get('customerName').dirty ||
+                IncidentReport.get('customerName').touched)
+            "
+            class="invalid-feedback"
+          >
+            Customer Name is Required</span
+          >
         </div>
       </div>
     </div>
@@ -69,17 +138,52 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Site Address</label>
-          <input type="text" class="form-control" formControlName="streetAddress" [class.is-invalid]="IncidentReport.get('streetAddress')?.hasError('required') && (IncidentReport.get('streetAddress').dirty || IncidentReport.get('streetAddress').touched) "/>
-          <span *ngIf=" IncidentReport.get('streetAddress')?.hasError('required') && (IncidentReport.get('streetAddress').dirty  || IncidentReport.get('streetAddress').touched) " class="invalid-feedback" >
-            Site Address is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="streetAddress"
+            [class.is-invalid]="
+              IncidentReport.get('streetAddress')?.hasError('required') &&
+              (IncidentReport.get('streetAddress').dirty ||
+                IncidentReport.get('streetAddress').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('streetAddress')?.hasError('required') &&
+              (IncidentReport.get('streetAddress').dirty ||
+                IncidentReport.get('streetAddress').touched)
+            "
+            class="invalid-feedback"
+          >
+            Site Address is Required</span
+          >
         </div>
       </div>
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Customer Contact</label>
-          <input placeholder="" type="text" class="form-control" formControlName="customerContact" [class.is-invalid]="IncidentReport.get('customerContact')?.hasError('required') && (IncidentReport.get('customerContact').dirty || IncidentReport.get('customerContact').touched) "/>
-          <span *ngIf=" IncidentReport.get('customerContact')?.hasError('required') && (IncidentReport.get('customerContact').dirty  || IncidentReport.get('customerContact').touched) " class="invalid-feedback" >
-            Customer Contact is Required</span>
+          <input
+            placeholder=""
+            type="text"
+            class="form-control"
+            formControlName="customerContact"
+            [class.is-invalid]="
+              IncidentReport.get('customerContact')?.hasError('required') &&
+              (IncidentReport.get('customerContact').dirty ||
+                IncidentReport.get('customerContact').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('customerContact')?.hasError('required') &&
+              (IncidentReport.get('customerContact').dirty ||
+                IncidentReport.get('customerContact').touched)
+            "
+            class="invalid-feedback"
+          >
+            Customer Contact is Required</span
+          >
         </div>
       </div>
     </div>
@@ -87,15 +191,31 @@
       <div class="col-md-6">
         <!-- <p for="exampleFormControlInput1" class="form-Label">Project Manager</p> -->
         <label class="form-label mb-3">Project Manager</label>
-        <select class="form-select form-control col" aria-label="Default select example"
-          formControlName="projectManager"[class.is-invalid]="IncidentReport.get('projectManager')?.hasError('required') && (IncidentReport.get('projectManager').dirty || IncidentReport.get('projectManager').touched) ">
-          
+        <select
+          class="form-select form-control col"
+          aria-label="Default select example"
+          formControlName="projectManager"
+          [class.is-invalid]="
+            IncidentReport.get('projectManager')?.hasError('required') &&
+            (IncidentReport.get('projectManager').dirty ||
+              IncidentReport.get('projectManager').touched)
+          "
+        >
           <option selected hidden>Select</option>
-          <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
-
+          <option [value]="mang._id" *ngFor="let mang of projectMang">
+            {{ mang.title }}
+          </option>
         </select>
-        <span *ngIf=" IncidentReport.get('projectManager')?.hasError('required') && (IncidentReport.get('projectManager').dirty  || IncidentReport.get('projectManager').touched) " class="invalid-feedback" >
-          Project Manager is Required</span>
+        <span
+          *ngIf="
+            IncidentReport.get('projectManager')?.hasError('required') &&
+            (IncidentReport.get('projectManager').dirty ||
+              IncidentReport.get('projectManager').touched)
+          "
+          class="invalid-feedback"
+        >
+          Project Manager is Required</span
+        >
       </div>
       <!-- <div class="col-md-6">
         <div>
@@ -114,11 +234,31 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Person Completing Form
-          </label>
-          <input type="text" class="form-control" formControlName="personCompletingForm" [class.is-invalid]="IncidentReport.get('personCompletingForm')?.hasError('required') && (IncidentReport.get('personCompletingForm').dirty || IncidentReport.get('personCompletingForm').touched) "/>
-          <span *ngIf=" IncidentReport.get('personCompletingForm')?.hasError('required') && (IncidentReport.get('personCompletingForm').dirty  || IncidentReport.get('personCompletingForm').touched) " class="invalid-feedback" >
-            This Field is Required</span>
+          <label class="cols" class="form-Label">Person Completing Form </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="personCompletingForm"
+            [class.is-invalid]="
+              IncidentReport.get('personCompletingForm')?.hasError(
+                'required'
+              ) &&
+              (IncidentReport.get('personCompletingForm').dirty ||
+                IncidentReport.get('personCompletingForm').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('personCompletingForm')?.hasError(
+                'required'
+              ) &&
+              (IncidentReport.get('personCompletingForm').dirty ||
+                IncidentReport.get('personCompletingForm').touched)
+            "
+            class="invalid-feedback"
+          >
+            This Field is Required</span
+          >
         </div>
       </div>
     </div>
@@ -126,27 +266,75 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Customer Contact Phone</label>
-          <input placeholder="(000) 000-0000" type="text" class="form-control" formControlName="customerContactPhone" [class.is-invalid]="IncidentReport.get('customerContactPhone')?.hasError('required') && (IncidentReport.get('customerContactPhone').dirty || IncidentReport.get('customerContactPhone').touched) "/>
-          <span *ngIf=" IncidentReport.get('customerContactPhone')?.hasError('required') && (IncidentReport.get('customerContactPhone').dirty  || IncidentReport.get('customerContactPhone').touched) " class="invalid-feedback" >
-           Phone Number is Required</span>
+          <input
+            placeholder="(000) 000-0000"
+            type="text"
+            class="form-control"
+            formControlName="customerContactPhone"
+            [class.is-invalid]="
+              IncidentReport.get('customerContactPhone')?.hasError(
+                'required'
+              ) &&
+              (IncidentReport.get('customerContactPhone').dirty ||
+                IncidentReport.get('customerContactPhone').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('customerContactPhone')?.hasError(
+                'required'
+              ) &&
+              (IncidentReport.get('customerContactPhone').dirty ||
+                IncidentReport.get('customerContactPhone').touched)
+            "
+            class="invalid-feedback"
+          >
+            Phone Number is Required</span
+          >
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Customer Contact Email</label>
-          <input placeholder="ex: email@yahoo.com" type="text" class="form-control" formControlName="customerEmail"[class.is-invalid]="IncidentReport.get('customerEmail')?.hasError('required') && (IncidentReport.get('customerEmail').dirty || IncidentReport.get('customerEmail').touched) "/>
-          <span *ngIf=" IncidentReport.get('customerEmail')?.hasError('required') && (IncidentReport.get('customerEmail').dirty  || IncidentReport.get('customerEmail').touched) " class="invalid-feedback" >
-          Email is Required</span>
+          <input
+            placeholder="ex: email@yahoo.com"
+            type="text"
+            class="form-control"
+            formControlName="customerEmail"
+            [class.is-invalid]="
+              IncidentReport.get('customerEmail')?.hasError('required') &&
+              (IncidentReport.get('customerEmail').dirty ||
+                IncidentReport.get('customerEmail').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('customerEmail')?.hasError('required') &&
+              (IncidentReport.get('customerEmail').dirty ||
+                IncidentReport.get('customerEmail').touched)
+            "
+            class="invalid-feedback"
+          >
+            Email is Required</span
+          >
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-
         <label class="cols" class="form-Label">Date of Form Completion</label>
-        <input type="date" class="form-control" formControlName="dateOfFormCompletion" [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "/>
-        <span *ngIf=" IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty  || IncidentReport.get('dateOfFormCompletion').touched) " class="invalid-feedback" >
+        <!-- <input type="date" class="form-control" formControlName="dateOfFormCompletion" [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "/> -->
+       <input  matInput  [matDatepicker]="datepicker" [max]="maxDate" [min]="minDate"
+       class="form-control"
+       formControlName="dateOfFormCompletion" 
+       [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "
+       placeholder="dd-mm-yyyy">
+       <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+       <mat-datepicker #datepicker ></mat-datepicker>
+        <!--  -->
+        <span *ngIf=" IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty  || IncidentReport.get('dateOfFormCompletion').touched) "
+         class="invalid-feedback date-valid" >
         Date is Required</span>
       </div>
     </div>
@@ -157,16 +345,28 @@
   </div>
   <div class="row">
     <ng-container formArrayName="incidents">
-      <ng-container *ngFor="let control of incidentsAdd().controls; let i = index" [formGroupName]="i">
-    <div class="mt-2 col-4">
-      <div class="checkrdobtn">
-        <input class="rdovstchk" [id]="i+'typeOf'" class="mr-1" type="checkbox" [value]="incidents[i]._id"
-          (change)="typeOfIncidentsSelected($event)" formControlName="{{incidents[i]._id}}" />
-        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'typeOf'">{{
-          incidents[i].title
-        }}</label>
-      </div>
-    </div>
+      <ng-container
+        *ngFor="let control of incidentsAdd().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="mt-2 col-4">
+          <div class="checkrdobtn">
+            <input
+              class="rdovstchk"
+              [id]="i + 'typeOf'"
+              class="mr-1"
+              type="checkbox"
+              [value]="incidents[i]._id"
+              (change)="typeOfIncidentsSelected($event)"
+              formControlName="{{ incidents[i]._id }}"
+            />
+            <label
+              class="txtdefault fs-16 weight500 text-center label_2"
+              [for]="i + 'typeOf'"
+              >{{ incidents[i].title }}</label
+            >
+          </div>
+        </div>
       </ng-container>
     </ng-container>
   </div>
@@ -177,10 +377,15 @@
       <p class="title">Instructions</p>
 
       <div class="mt-3 text-center">
-        <textarea type="text" class="form-control" formControlName="instructions" >
+        <textarea
+          type="text"
+          class="form-control"
+          formControlName="instructions"
+        >
         Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injury
         or near-miss that could have resulted in a serious injury or illness.
-      </textarea>
+      </textarea
+        >
       </div>
     </div>
   </div>
@@ -193,17 +398,52 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">Name</label>
-        <input type="text" class="form-control" formControlName="name" id [class.is-invalid]="IncidentReport.get('name')?.hasError('required') && (IncidentReport.get('name').dirty || IncidentReport.get('name').touched) "/>
-        <span *ngIf=" IncidentReport.get('name')?.hasError('required') && (IncidentReport.get('name').dirty  || IncidentReport.get('name').touched) " class="invalid-feedback" >
-      Name is Required</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          id
+          [class.is-invalid]="
+            IncidentReport.get('name')?.hasError('required') &&
+            (IncidentReport.get('name').dirty ||
+              IncidentReport.get('name').touched)
+          "
+        />
+        <span
+          *ngIf="
+            IncidentReport.get('name')?.hasError('required') &&
+            (IncidentReport.get('name').dirty ||
+              IncidentReport.get('name').touched)
+          "
+          class="invalid-feedback"
+        >
+          Name is Required</span
+        >
       </div>
     </div>
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">Department</label>
-        <input type="text" class="form-control" formControlName="department" [class.is-invalid]="IncidentReport.get('department')?.hasError('required') && (IncidentReport.get('department').dirty || IncidentReport.get('department').touched) "/>
-        <span *ngIf=" IncidentReport.get('department')?.hasError('required') && (IncidentReport.get('department').dirty  || IncidentReport.get('department').touched) " class="invalid-feedback" >
-      This Field is Required</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="department"
+          [class.is-invalid]="
+            IncidentReport.get('department')?.hasError('required') &&
+            (IncidentReport.get('department').dirty ||
+              IncidentReport.get('department').touched)
+          "
+        />
+        <span
+          *ngIf="
+            IncidentReport.get('department')?.hasError('required') &&
+            (IncidentReport.get('department').dirty ||
+              IncidentReport.get('department').touched)
+          "
+          class="invalid-feedback"
+        >
+          This Field is Required</span
+        >
       </div>
     </div>
   </div>
@@ -211,9 +451,26 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">position</label>
-        <input type="text" class="form-control" formControlName="position" [class.is-invalid]="IncidentReport.get('position')?.hasError('required') && (IncidentReport.get('position').dirty || IncidentReport.get('position').touched) "/>
-        <span *ngIf=" IncidentReport.get('position')?.hasError('required') && (IncidentReport.get('position').dirty  || IncidentReport.get('position').touched) " class="invalid-feedback" >
-      This Field is Required</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="position"
+          [class.is-invalid]="
+            IncidentReport.get('position')?.hasError('required') &&
+            (IncidentReport.get('position').dirty ||
+              IncidentReport.get('position').touched)
+          "
+        />
+        <span
+          *ngIf="
+            IncidentReport.get('position')?.hasError('required') &&
+            (IncidentReport.get('position').dirty ||
+              IncidentReport.get('position').touched)
+          "
+          class="invalid-feedback"
+        >
+          This Field is Required</span
+        >
       </div>
     </div>
   </div>
@@ -223,32 +480,61 @@
   </div>
   <div class="box" class="row">
     <ng-container formArrayName="natureOFIncidents">
-      <ng-container *ngFor="let control of natureAdd().controls; let i = index" [formGroupName]="i">
-    <div class="mt-3 col-4">
-      <div class="checkrdobtn">
-        <input class="rdovstchk" [id]="i+'natureOfInc'" type="checkbox" class="mr-1" [value]="natureOFIncidents[i]._id"
-          (change)="natureOfIncSelected($event)" formControlName="{{natureOFIncidents[i]._id}}"/>
-        <label class="txtdefault fs-16 weight500 text-center label_2"  [for]="i+'natureOfInc'">{{
-          natureOFIncidents[i].title
-        }}</label>
-      </div>
-    </div>
+      <ng-container
+        *ngFor="let control of natureAdd().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="mt-3 col-4">
+          <div class="checkrdobtn">
+            <input
+              class="rdovstchk"
+              [id]="i + 'natureOfInc'"
+              type="checkbox"
+              class="mr-1"
+              [value]="natureOFIncidents[i]._id"
+              (change)="natureOfIncSelected($event)"
+              formControlName="{{ natureOFIncidents[i]._id }}"
+            />
+            <label
+              class="txtdefault fs-16 weight500 text-center label_2"
+              [for]="i + 'natureOfInc'"
+              >{{ natureOFIncidents[i].title }}</label
+            >
+          </div>
+        </div>
+      </ng-container>
     </ng-container>
-  </ng-container>
   </div>
   <hr />
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
         <label class="form-Label">Location of the incident</label>
-        <input type="text" class="form-control" formControlName="locationOfTheIncident" [class.is-invalid]="IncidentReport.get('locationOfTheIncident')?.hasError('required') && (IncidentReport.get('locationOfTheIncident').dirty || IncidentReport.get('locationOfTheIncident').touched) "/>
-        <span *ngIf=" IncidentReport.get('locationOfTheIncident')?.hasError('required') && (IncidentReport.get('locationOfTheIncident').dirty  || IncidentReport.get('locationOfTheIncident').touched) " class="invalid-feedback" >
-          Locationis Required</span>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="locationOfTheIncident"
+          [class.is-invalid]="
+            IncidentReport.get('locationOfTheIncident')?.hasError('required') &&
+            (IncidentReport.get('locationOfTheIncident').dirty ||
+              IncidentReport.get('locationOfTheIncident').touched)
+          "
+        />
+        <span
+          *ngIf="
+            IncidentReport.get('locationOfTheIncident')?.hasError('required') &&
+            (IncidentReport.get('locationOfTheIncident').dirty ||
+              IncidentReport.get('locationOfTheIncident').touched)
+          "
+          class="invalid-feedback"
+        >
+          Locationis Required</span
+        >
       </div>
     </div>
     <div class="col-md-3">
       <div>
-        <label class="form-Label  mt-2">Date of the incident</label>
+        <label class="form-Label mt-2">Date of the incident</label>
         <!-- <mat-form-field>
           <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
              [min]="minDate" [max]="maxDate" [disabled]="disabled">
@@ -259,19 +545,51 @@
              [disableMinute]="disableMinute" [hideTime]="hideTime">
           </ngx-mat-datetime-picker>
        </mat-form-field> -->
-        <input type="date" class="form-control" formControlName="dateOfTheIncident" [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty || IncidentReport.get('dateOfTheIncident').touched) "/>
-        <span *ngIf=" IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty  || IncidentReport.get('dateOfTheIncident').touched) " class="invalid-feedback" >
+   
+       <!-- <input type="date" class="form-control" [max]="maxDate" formControlName="dateOfTheIncident" [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty || IncidentReport.get('dateOfTheIncident').touched) "/> -->
+        <!--  -->
+        <input  matInput  [matDatepicker]="picker" [max]="maxDate" 
+        class="form-control"  
+        placeholder="dd-mm-yyyy"
+        formControlName="dateOfTheIncident" 
+        [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') 
+        && (IncidentReport.get('dateOfTheIncident').dirty 
+        || IncidentReport.get('dateOfTheIncident').touched) ">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+<!--  -->
+        <span *ngIf=" IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty  || IncidentReport.get('dateOfTheIncident').touched) " class="invalid-feedback date-valid" >
           Date is Required</span>
       </div>
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols"  class="form-Label"
-          >Time of the incident</label
+        <label class="cols" class="form-Label">Time of the incident</label>
+        <!-- <input
+          [ngxMatTimepicker]="picker"
+          class="form-control"
+          formControlName="timeOfTheIncident"
+          [class.is-invalid]="
+            IncidentReport.get('timeOfTheIncident')?.hasError('required') &&
+            (IncidentReport.get('timeOfTheIncident').dirty ||
+              IncidentReport.get('timeOfTheIncident').touched)
+          "
+        />
+
+        <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+        <span
+          *ngIf="
+            IncidentReport.get('timeOfTheIncident')?.hasError('required') &&
+            (IncidentReport.get('timeOfTheIncident').dirty ||
+              IncidentReport.get('timeOfTheIncident').touched)
+          "
+          class="invalid-feedback"
         >
-        <input [ngxMatTimepicker]="picker"  class="form-control" formControlName="timeOfTheIncident" [class.is-invalid]="IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty || IncidentReport.get('timeOfTheIncident').touched) "/>
+          Select Time is Required</span
+        > -->
+        <input [ngxMatTimepicker]="timepicker"  class="form-control" formControlName="timeOfTheIncident" [class.is-invalid]="IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty || IncidentReport.get('timeOfTheIncident').touched) "/>
         
-          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+          <ngx-mat-timepicker #timepicker></ngx-mat-timepicker>
           <span *ngIf=" IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty  || IncidentReport.get('timeOfTheIncident').touched) " class="invalid-feedback" >
             Select Time is Required</span>
         <!-- <input
@@ -289,11 +607,27 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label">
-          Name of Witness</label>
-        <input type="text" class="form-control" formControlName="nameOfWitness" [class.is-invalid]="IncidentReport.get('nameOfWitness')?.hasError('required') && (IncidentReport.get('nameOfWitness').dirty || IncidentReport.get('nameOfWitness').touched) "/>
-        <span *ngIf=" IncidentReport.get('nameOfWitness')?.hasError('required') && (IncidentReport.get('nameOfWitness').dirty  || IncidentReport.get('nameOfWitness').touched) " class="invalid-feedback" >
-          Name is Required</span>
+        <label class="cols" class="form-Label"> Name of Witness</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nameOfWitness"
+          [class.is-invalid]="
+            IncidentReport.get('nameOfWitness')?.hasError('required') &&
+            (IncidentReport.get('nameOfWitness').dirty ||
+              IncidentReport.get('nameOfWitness').touched)
+          "
+        />
+        <span
+          *ngIf="
+            IncidentReport.get('nameOfWitness')?.hasError('required') &&
+            (IncidentReport.get('nameOfWitness').dirty ||
+              IncidentReport.get('nameOfWitness').touched)
+          "
+          class="invalid-feedback"
+        >
+          Name is Required</span
+        >
         <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example">
           <option selected hidden>Select</option>
           <option value="1">Option1</option>
@@ -306,9 +640,31 @@
     <div class="col-md-6">
       <div>
         <label class="cols" class="form-Label">Witness Statement</label>
-        <input type="text" class="form-control" formControlName="witnessStatement" [class.is-invalid]="IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty || IncidentReport.get('witnessStatement').touched) "/>
-        <span *ngIf=" IncidentReport.get('witnessStatement')?.hasError('required') && (IncidentReport.get('witnessStatement').dirty  || IncidentReport.get('witnessStatement').touched) " class="invalid-feedback" >
-         This Field is Required</span>
+        <textarea
+          type="text"
+          class="form-control txt-auto"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1.5"
+          cdkAutosizeMaxRows="5"
+          formControlName="witnessStatement"
+          [class.is-invalid]="
+            IncidentReport.get('witnessStatement')?.hasError('required') &&
+            (IncidentReport.get('witnessStatement').dirty ||
+              IncidentReport.get('witnessStatement').touched)
+          "
+        >
+        </textarea>
+        <span
+          *ngIf="
+            IncidentReport.get('witnessStatement')?.hasError('required') &&
+            (IncidentReport.get('witnessStatement').dirty ||
+              IncidentReport.get('witnessStatement').touched)
+          "
+          class="invalid-feedback"
+        >
+          This Field is Required</span
+        >
         <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example">
           <option selected hidden>Select</option>
           <option value="1">Option1</option>
@@ -322,7 +678,7 @@
     <div class="col-md-12">
       <div>
         <label class="form-Label">Attachments </label>
-        <input class="form-control" type="file"   (change)="browser($event)"/>
+        <input class="form-control" type="file" (change)="browser($event)" />
       </div>
     </div>
   </div>
@@ -333,16 +689,28 @@
   </div>
   <div class="box" class="row">
     <ng-container formArrayName="PPE">
-      <ng-container *ngFor="let control of ppeAdd().controls; let i = index" [formGroupName]="i">
-    <div class="mt-2 col-4" >
-      <div class="checkrdobtn">
-        <input class="rdovstchk" [id]="i+'whatPPE'" type="checkbox" class="mr-1" [value]="PPE[i]._id"
-          (change)="ppeSelected($event)" formControlName="{{PPE[i]._id}}"/>
-        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'whatPPE'">{{
-          PPE[i].title
-        }}</label>
-      </div>
-    </div>
+      <ng-container
+        *ngFor="let control of ppeAdd().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="mt-2 col-4">
+          <div class="checkrdobtn">
+            <input
+              class="rdovstchk"
+              [id]="i + 'whatPPE'"
+              type="checkbox"
+              class="mr-1"
+              [value]="PPE[i]._id"
+              (change)="ppeSelected($event)"
+              formControlName="{{ PPE[i]._id }}"
+            />
+            <label
+              class="txtdefault fs-16 weight500 text-center label_2"
+              [for]="i + 'whatPPE'"
+              >{{ PPE[i].title }}</label
+            >
+          </div>
+        </div>
       </ng-container>
     </ng-container>
   </div>
@@ -353,16 +721,28 @@
   </div>
   <div class="box" class="row">
     <ng-container formArrayName="rootCauseIncident">
-      <ng-container *ngFor="let control of rootCauseIncidentAdd().controls; let i = index" [formGroupName]="i">
-    <div class="mt-2 col-4" >
-      <div class="checkrdobtn">
-        <input class="rdovstchk" [id]="i+'rootCauseIncident'" type="checkbox" class="mr-1" [value]="rootCauseIncident[i]._id"
-          (change)="rootSelected($event)" formControlName="{{rootCauseIncident[i]._id}}" />
-        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'rootCauseIncident'">{{
-          rootCauseIncident[i].title
-        }}</label>
-      </div>
-    </div>
+      <ng-container
+        *ngFor="let control of rootCauseIncidentAdd().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="mt-2 col-4">
+          <div class="checkrdobtn">
+            <input
+              class="rdovstchk"
+              [id]="i + 'rootCauseIncident'"
+              type="checkbox"
+              class="mr-1"
+              [value]="rootCauseIncident[i]._id"
+              (change)="rootSelected($event)"
+              formControlName="{{ rootCauseIncident[i]._id }}"
+            />
+            <label
+              class="txtdefault fs-16 weight500 text-center label_2"
+              [for]="i + 'rootCauseIncident'"
+              >{{ rootCauseIncident[i].title }}</label
+            >
+          </div>
+        </div>
       </ng-container>
     </ng-container>
   </div>
@@ -371,37 +751,68 @@
   <div class="row">
     <div class="col-md-12">
       <div>
-        <label class="cols" class="form-Label">Why did the unsafe condition exist</label>
+        <label class="cols" class="form-Label"
+          >Why did the unsafe condition exist</label
+        >
 
-        <textarea type="text" formControlName="whyDidtheUnsafeConditonExist" class="form-control">
+        <textarea
+          type="text"
+          formControlName="whyDidtheUnsafeConditonExist"
+          class="form-control"
+        >
         </textarea>
       </div>
     </div>
-   
-      <div class="col-md-6">
-        <label class="cols" for="exampleFormControlInput1" class="form-Label">Was the unsafe act or hazard reported
-          prior to the incident?</label>
 
-        <select class="form-select form-control col form-dropdown" formControlName="priorIncident"  aria-label="Default select example">
-          <option selected hidden>Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-        <textarea *ngIf="IncidentReport.get('priorIncident').value=='yes'" name="" class="col mt-2 form-control" id="" formControlName="priorIncidentText"></textarea>
-      </div>
-   
-      <div class="col-md-6">
-        <label class="cols" for="exampleFormControlInput1" class="form-Label">Has a similar incident Occured</label>
+    <div class="col-md-6">
+      <label class="cols" for="exampleFormControlInput1" class="form-Label"
+        >Was the unsafe act or hazard reported prior to the incident?</label
+      >
 
-        <select class="form-select form-control col form-dropdown" formControlName="similarIncident" aria-label="Default select example">
-          <option selected hidden>Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-        <textarea *ngIf="IncidentReport.get('similarIncident').value=='yes'"  name="" class="col mt-2 form-control" id="" formControlName="similarIncidentText"></textarea>
+      <select
+        class="form-select form-control col form-dropdown"
+        formControlName="priorIncident"
+        aria-label="Default select example"
+      >
+        <option selected hidden>Select</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div *ngIf="IncidentReport.get('priorIncident').value == 'yes'">
+        <label class="mb-2"> Please Describe </label>
+        <textarea
+          name=""
+          class="col form-control"
+          id=""
+          formControlName="priorIncidentText"
+        ></textarea>
       </div>
-    
-  
+    </div>
+
+    <div class="col-md-6">
+      <label class="cols" for="exampleFormControlInput1" class="form-Label"
+        >Has a similar incident Occured</label
+      >
+
+      <select
+        class="form-select form-control col form-dropdown"
+        formControlName="similarIncident"
+        aria-label="Default select example"
+      >
+        <option selected hidden>Select</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div *ngIf="IncidentReport.get('similarIncident').value == 'yes'">
+        <label class="mb-2"> Please Describe </label>
+        <textarea
+          name=""
+          class="col form-control"
+          id=""
+          formControlName="similarIncidentText"
+        ></textarea>
+      </div>
+    </div>
   </div>
 
   <hr />
@@ -411,69 +822,183 @@
   </div>
   <div class="row">
     <ng-container formArrayName="changes">
-      <ng-container *ngFor="let control of changeAdd().controls; let i = index" [formGroupName]="i">
-    <div class="mt-2 col-4 mb-0">
+      <ng-container
+        *ngFor="
+          let control of changeAdd().controls;
+          let i = index;
+        
+        "
+        [formGroupName]="i"
+      >
+        <div class="mt-2 col-4 mb-0">
+          <div class="checkrdobtn">
+            <ng-container >
+              <input
+                class="rdovstchk"
+                [id]="i + 'changes'"
+                type="checkbox"
+                class="mr-1"
+                (change)="changesSelected($event,i)"
+                formControlName="{{ changes[i]._id }}"
+              />
+
+              <label
+                class="txtdefault fs-16 weight500 text-center label_2"
+                [for]="i + 'changes'"
+                >{{ changes[i].title }}
+              </label>
+            </ng-container>
+           
+          </div>
+        </div>
+        <ng-container>
+        </ng-container>
+        
+      </ng-container>
+
+     
+    </ng-container>
+    <ng-container class="mt-2 col-4 mb-0">
       <div class="checkrdobtn">
-        <input class="rdovstchk" [id]="i+'changes'" type="checkbox" class="mr-1" 
-          (change)="changesSelected($event)" formControlName="{{changes[i]._id}}" />
-        <label class="txtdefault fs-16 weight500 text-center label_2" [for]="i+'changes'">{{
-          changes[i].title
-        }}</label>
+      <input
+        class="rdovstchk"
+        id="other"
+        type="checkbox"
+        class="mr-1"
+        (change)="changesSelected($event,'')"
+        formControlName="changesMadeOther"
+      />
+
+      <label
+        class="txtdefault fs-16 weight500 text-center label_2"
+        for="other"
+      >
+        Other
+      </label>
+      <textarea
+      *ngIf="IncidentReport.get('changesMadeOther').value"
+      type="text"
+      class="form-control txt-auto"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1.5"
+      cdkAutosizeMaxRows="5"
+      formControlName="changesMadeOtherText"
+    >
+    </textarea>
       </div>
-    </div>
-  </ng-container>
-  </ng-container>
+    </ng-container>
   </div>
   <hr />
   <div class="box" class="row">
     <ng-container formArrayName="arrObj">
-      <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
+      <ng-container
+        *ngFor="let control of add().controls; let i = index"
+        [formGroupName]="i"
+      >
         <div class="col-md-3">
           <div>
-            <label class="cols" class="form-Label" >Corrective Action</label>
+            <label class="cols" class="form-Label">Corrective Action</label>
 
-            <input type="text" formControlName="correctAction" class="form-control" [class.is-invalid]=" add().controls[i].get('correctAction')?.hasError('required') && (add().controls[i].get('correctAction').dirty || add().controls[i].get('correctAction').touched) " />
-            <span *ngIf=" add().controls[i].get('correctAction')?.hasError('required') && (add().controls[i].get('correctAction').dirty  || add().controls[i].get('correctAction').touched) " class="invalid-feedback" >
-              This Field is Required</span>
+            <input
+              type="text"
+              formControlName="correctAction"
+              class="form-control"
+              [class.is-invalid]="
+                add().controls[i].get('correctAction')?.hasError('required') &&
+                (add().controls[i].get('correctAction').dirty ||
+                  add().controls[i].get('correctAction').touched)
+              "
+            />
+            <span
+              *ngIf="
+                add().controls[i].get('correctAction')?.hasError('required') &&
+                (add().controls[i].get('correctAction').dirty ||
+                  add().controls[i].get('correctAction').touched)
+              "
+              class="invalid-feedback"
+            >
+              This Field is Required</span
+            >
           </div>
         </div>
         <div class="col-md-3">
           <div>
             <label class="cols" class="form-Label">Person Responsible</label>
 
-            <select class="form-select form-control col form-dropdown" aria-label="Default select example"
-              formControlName="personRes" [class.is-invalid]=" add().controls[i].get('personRes')?.hasError('required') && (add().controls[i].get('personRes').dirty || add().controls[i].get('personRes').touched) ">
+            <select
+              class="form-select form-control col form-dropdown"
+              aria-label="Default select example"
+              formControlName="personRes"
+              [class.is-invalid]="
+                add().controls[i].get('personRes')?.hasError('required') &&
+                (add().controls[i].get('personRes').dirty ||
+                  add().controls[i].get('personRes').touched)
+              "
+            >
               <option selected hidden>Select...</option>
-              <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
-             
+              <option *ngFor="let j of staff" [value]="j?._id">
+                {{ j?.title }}
+              </option>
             </select>
-            <span *ngIf=" add().controls[i].get('personRes')?.hasError('required') && (add().controls[i].get('personRes').dirty  || add().controls[i].get('personRes').touched) " class="invalid-feedback" >
-              This Field is Required</span>
+            <span
+              *ngIf="
+                add().controls[i].get('personRes')?.hasError('required') &&
+                (add().controls[i].get('personRes').dirty ||
+                  add().controls[i].get('personRes').touched)
+              "
+              class="invalid-feedback"
+            >
+              This Field is Required</span
+            >
           </div>
         </div>
         <div class="col-md-2">
           <div>
             <label class="cols" class="form-Label">Complete</label>
 
-            <select class="form-select form-control col form-dropdown" aria-label="Default select example" [class.is-invalid]=" add().controls[i].get('complete')?.hasError('required') && (add().controls[i].get('complete').dirty || add().controls[i].get('complete').touched) "
-              formControlName="complete">
+            <select
+              class="form-select form-control col form-dropdown"
+              aria-label="Default select example"
+              [class.is-invalid]="
+                add().controls[i].get('complete')?.hasError('required') &&
+                (add().controls[i].get('complete').dirty ||
+                  add().controls[i].get('complete').touched)
+              "
+              formControlName="complete"
+            >
               <option selected hidden>Select</option>
               <option value="yes">yes</option>
               <option value="no">No</option>
             </select>
-            <span *ngIf=" add().controls[i].get('complete')?.hasError('required') && (add().controls[i].get('complete').dirty  || add().controls[i].get('complete').touched) " class="invalid-feedback" >
-              This Field is Required</span>
+            <span
+              *ngIf="
+                add().controls[i].get('complete')?.hasError('required') &&
+                (add().controls[i].get('complete').dirty ||
+                  add().controls[i].get('complete').touched)
+              "
+              class="invalid-feedback"
+            >
+              This Field is Required</span
+            >
           </div>
         </div>
         <div class="col-md-2">
-
           <label class="cols" class="form-Label">Date </label>
-          <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/>
+          <!-- <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/> -->
+          <input  matInput  [matDatepicker]="pickerd4" [min]="minDate"
+          class="form-control"
+          formControlName="date"
+          placeholder="dd-mm-yyyy"
+          [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) ">
+          <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd4 ></mat-datepicker>
           <span *ngIf=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty  || add().controls[i].get('date').touched) " class="invalid-feedback" >
             Date is Required</span>
         </div>
         <div class="col-1 mt-5">
-          <span class="material-icons" (click)="addAction()">add_circle_outline
+          <span class="material-icons" (click)="addAction()"
+            >add_circle_outline
           </span>
         </div>
         <div class="col-1 mt-5">
@@ -493,19 +1018,52 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Name</label>
-          <input type="text" class="form-control" formControlName="completedName" [class.is-invalid]="IncidentReport.get('completedName')?.hasError('required') && (IncidentReport.get('completedName').dirty || IncidentReport.get('completedName').touched) "/>
-          <span *ngIf=" IncidentReport.get('completedName')?.hasError('required') && (IncidentReport.get('completedName').dirty  || IncidentReport.get('completedName').touched) " class="invalid-feedback" >
-          Name is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="completedName"
+            [class.is-invalid]="
+              IncidentReport.get('completedName')?.hasError('required') &&
+              (IncidentReport.get('completedName').dirty ||
+                IncidentReport.get('completedName').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('completedName')?.hasError('required') &&
+              (IncidentReport.get('completedName').dirty ||
+                IncidentReport.get('completedName').touched)
+            "
+            class="invalid-feedback"
+          >
+            Name is Required</span
+          >
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Position
-          </label>
-          <input type="text" class="form-control" formControlName="completedPosition"[class.is-invalid]="IncidentReport.get('completedPosition')?.hasError('required') && (IncidentReport.get('completedPosition').dirty || IncidentReport.get('completedPosition').touched) "/>
-          <span *ngIf=" IncidentReport.get('completedPosition')?.hasError('required') && (IncidentReport.get('completedPosition').dirty  || IncidentReport.get('completedPosition').touched) " class="invalid-feedback" >
-          This Field is Required</span>
+          <label class="cols" class="form-Label">Position </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="completedPosition"
+            [class.is-invalid]="
+              IncidentReport.get('completedPosition')?.hasError('required') &&
+              (IncidentReport.get('completedPosition').dirty ||
+                IncidentReport.get('completedPosition').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('completedPosition')?.hasError('required') &&
+              (IncidentReport.get('completedPosition').dirty ||
+                IncidentReport.get('completedPosition').touched)
+            "
+            class="invalid-feedback"
+          >
+            This Field is Required</span
+          >
         </div>
       </div>
     </div>
@@ -513,16 +1071,40 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Department</label>
-          <input type="text" class="form-control" formControlName="completedDepartment" [class.is-invalid]="IncidentReport.get('completedDepartment')?.hasError('required') && (IncidentReport.get('completedDepartment').dirty || IncidentReport.get('completedDepartment').touched) "/>
-          <span *ngIf=" IncidentReport.get('completedDepartment')?.hasError('required') && (IncidentReport.get('completedDepartment').dirty  || IncidentReport.get('completedDepartment').touched) " class="invalid-feedback" >
-         This Field is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="completedDepartment"
+            [class.is-invalid]="
+              IncidentReport.get('completedDepartment')?.hasError('required') &&
+              (IncidentReport.get('completedDepartment').dirty ||
+                IncidentReport.get('completedDepartment').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('completedDepartment')?.hasError('required') &&
+              (IncidentReport.get('completedDepartment').dirty ||
+                IncidentReport.get('completedDepartment').touched)
+            "
+            class="invalid-feedback"
+          >
+            This Field is Required</span
+          >
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Date </label>
-          <input type="date" class="form-control" formControlName="completedDate" [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "/>
+          <!-- <input type="date" class="form-control" formControlName="completedDate" [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "/> -->
+          <input  matInput  [matDatepicker]="pickerd5" [max]="maxDate"
+          class="form-control"
+          formControlName="completedDate"
+          [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd5 ></mat-datepicker>
           <span *ngIf=" IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty  || IncidentReport.get('completedDate').touched) " class="invalid-feedback" >
           Date is Required</span>
         </div>
@@ -533,16 +1115,17 @@
         <div>
           <label class="cols" class="form-Label">Signature</label>
           <div class="sign">
-            <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"
+            <signature-pad
+              [options]="signaturePadOptions"
+              (onBeginEvent)="drawStart()"
+              (onEndEvent)="drawComplete()"
               #signature
-              [class.is-invalid]="singRequired">
+              [class.is-invalid]="singRequired"
+            >
             </signature-pad>
-            <span
-            *ngIf="singRequired"
-            class="invalid-feedback"
-          >
-          This Field is Required</span
-          >
+            <span *ngIf="singRequired" class="invalid-feedback">
+              This Field is Required</span
+            >
           </div>
           <button class="btn btn-outline-primary mt-1" (click)="clear()">
             Clear
@@ -558,20 +1141,52 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Name</label>
-          <input type="text" class="form-control" formControlName="reviewedName" [class.is-invalid]="IncidentReport.get('reviewedName')?.hasError('required') && (IncidentReport.get('reviewedName').dirty || IncidentReport.get('reviewedName').touched) "/>
-          <span *ngIf=" IncidentReport.get('reviewedName')?.hasError('required') && (IncidentReport.get('reviewedName').dirty  || IncidentReport.get('reviewedName').touched) " class="invalid-feedback" >
-         Name is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="reviewedName"
+            [class.is-invalid]="
+              IncidentReport.get('reviewedName')?.hasError('required') &&
+              (IncidentReport.get('reviewedName').dirty ||
+                IncidentReport.get('reviewedName').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('reviewedName')?.hasError('required') &&
+              (IncidentReport.get('reviewedName').dirty ||
+                IncidentReport.get('reviewedName').touched)
+            "
+            class="invalid-feedback"
+          >
+            Name is Required</span
+          >
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Position
-          </label>
-          <input type="text" class="form-control" formControlName="reviewedPosition" [class.is-invalid]="IncidentReport.get('reviewedPosition')?.hasError('required') && (IncidentReport.get('reviewedPosition').dirty || IncidentReport.get('reviewedPosition').touched) "/>
-          <span *ngIf=" IncidentReport.get('reviewedPosition')?.hasError('required') && (IncidentReport.get('reviewedPosition').dirty  || IncidentReport.get('reviewedPosition').touched) " class="invalid-feedback" >
-         This Field is Required</span>
-          
+          <label class="cols" class="form-Label">Position </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="reviewedPosition"
+            [class.is-invalid]="
+              IncidentReport.get('reviewedPosition')?.hasError('required') &&
+              (IncidentReport.get('reviewedPosition').dirty ||
+                IncidentReport.get('reviewedPosition').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('reviewedPosition')?.hasError('required') &&
+              (IncidentReport.get('reviewedPosition').dirty ||
+                IncidentReport.get('reviewedPosition').touched)
+            "
+            class="invalid-feedback"
+          >
+            This Field is Required</span
+          >
         </div>
       </div>
     </div>
@@ -579,16 +1194,40 @@
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Department</label>
-          <input type="text" class="form-control" formControlName="reviewedDepartment" [class.is-invalid]="IncidentReport.get('reviewedDepartment')?.hasError('required') && (IncidentReport.get('reviewedDepartment').dirty || IncidentReport.get('reviewedDepartment').touched) "/>
-          <span *ngIf=" IncidentReport.get('reviewedDepartment')?.hasError('required') && (IncidentReport.get('reviewedDepartment').dirty  || IncidentReport.get('reviewedDepartment').touched) " class="invalid-feedback" >
-         This Field is Required</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="reviewedDepartment"
+            [class.is-invalid]="
+              IncidentReport.get('reviewedDepartment')?.hasError('required') &&
+              (IncidentReport.get('reviewedDepartment').dirty ||
+                IncidentReport.get('reviewedDepartment').touched)
+            "
+          />
+          <span
+            *ngIf="
+              IncidentReport.get('reviewedDepartment')?.hasError('required') &&
+              (IncidentReport.get('reviewedDepartment').dirty ||
+                IncidentReport.get('reviewedDepartment').touched)
+            "
+            class="invalid-feedback"
+          >
+            This Field is Required</span
+          >
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <label class="cols" class="form-Label">Date </label>
-          <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/>
+          <!-- <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/> -->
+          <input  matInput  [matDatepicker]="pickerd6" [max]="maxDate"
+          class="form-control"
+          formControlName="reviewedDate"
+          [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "
+          placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd6"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd6 ></mat-datepicker>
           <span *ngIf=" IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty  || IncidentReport.get('reviewedDate').touched) " class="invalid-feedback" >
          Date is Required</span>
         </div>
@@ -599,14 +1238,15 @@
         <div>
           <label class="cols" class="form-Label">Signature</label>
           <div class="sign">
-            <signature-pad [options]="signaturePadOptions1" (onBeginEvent)="drawStart1()" (onEndEvent)="drawComplete1()"
+            <signature-pad
+              [options]="signaturePadOptions1"
+              (onBeginEvent)="drawStart1()"
+              (onEndEvent)="drawComplete1()"
               #signature1
-              [class.is-invalid]="singRequired1"></signature-pad>
-              <span
-              *ngIf="singRequired1"
-              class="invalid-feedback"
-            >
-            This Field is Required</span
+              [class.is-invalid]="singRequired1"
+            ></signature-pad>
+            <span *ngIf="singRequired1" class="invalid-feedback">
+              This Field is Required</span
             >
           </div>
           <button class="btn btn-outline-primary mt-1" (click)="clear1()">
@@ -621,6 +1261,13 @@
   <br />
 
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary btn-block"  [disabled]="!IncidentReport.valid || singRequired || singRequired1" (click)="onSubmit()">Submit</button>
+    <button
+      type="submit"
+      class="btn btn-primary btn-block"
+      [disabled]="!IncidentReport.valid || singRequired || singRequired1"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
   </div>
 </div>

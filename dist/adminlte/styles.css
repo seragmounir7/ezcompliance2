@@ -7862,6 +7862,21 @@ button.toast-close-button {
     width: 25em;
   }
 }
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #section-to-print, #section-to-print * {
+    visibility: visible !important;
+  }
+
+  #section-to-print {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+}
 .flex-start {
   display: flex;
   justify-content: start;

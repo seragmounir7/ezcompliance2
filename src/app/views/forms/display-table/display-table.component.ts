@@ -22,8 +22,8 @@ export class DisplayTableComponent implements OnInit {
     this.getToolBox();
   }
   ngAfterViewInit() {
-    this.tempArray.paginator = this.paginator;
-    this.tempArray.sort = this.sort; 
+    // this.tempArray.paginator = this.paginator;
+    // this.tempArray.sort = this.sort; 
   }
   delete(id)
   {
@@ -37,6 +37,9 @@ export class DisplayTableComponent implements OnInit {
     this.logicalFormInfo.gettoolBox().subscribe((res:any)=>
     {
       this.showDatas= res.data;
+      this.showDatas.forEach((element,i) => {
+        return this.showDatas[i].index= i
+      });
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort; 

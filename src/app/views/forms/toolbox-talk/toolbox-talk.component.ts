@@ -17,6 +17,8 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   sign=[];
   staff:any;
   id:any;
+  maxDate = new Date();
+  minDate = new Date();
   signature:SignaturePad;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;
@@ -268,6 +270,7 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     console.log("signnn",this.signaturePad1);
     this.toolBox.controls['signaturePad1'].setValue(this.signaturePad1.toDataURL());
     console.log("signaturePad1 control",this.toolBox.controls['signaturePad1'].value);
+    this.singRequired = this.toolBox.controls['signaturePad1'].invalid
 
   }
   clear1() {
@@ -279,7 +282,7 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
     // will be notified of szimek/signature_pad's onBegin event
     // this.signaturePad2=null;
     console.log('begin drawing');
-    this.singRequired = this.toolBox.controls['signaturePad1'].invalid
+    //this.singRequired = this.toolBox.controls['signaturePad1'].invalid
   }
   drawComplete2(index,sign) {
     console.log("sign",sign);

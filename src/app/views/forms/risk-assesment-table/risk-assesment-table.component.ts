@@ -22,8 +22,8 @@ export class RiskAssesmentTableComponent implements OnInit {
     this.getToolBox();
   }
   ngAfterViewInit() {
-    this.tempArray.paginator = this.paginator;
-    this.tempArray.sort = this.sort; 
+    // this.tempArray.paginator = this.paginator;
+    // this.tempArray.sort = this.sort; 
   }
   delete(id)
   {
@@ -32,11 +32,26 @@ export class RiskAssesmentTableComponent implements OnInit {
       this.getToolBox();
     })
   }
+  printPage(id)
+  {
+    console.log("check");
+    // this.logicalFormInfo.printing.next('print');
+    localStorage.setItem("key","print");
+    $("<iframe>")                             // create a new iframe element
+        .hide()                               // make it invisible
+        .attr("src", "http://localhost:4200/#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
+        .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+
+  }
   getToolBox()
   {
     this.logicalFormInfo.getAllassessmet().subscribe((res:any)=>
     {
       this.showDatas= res.data;
+      this.showDatas.forEach((element,i) => {
+        return this.showDatas[i].index= i
+      });
+  
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort; 
@@ -45,6 +60,7 @@ export class RiskAssesmentTableComponent implements OnInit {
   }
   edit(id)
   {
+    localStorage.setItem('key',' ');
     this.router.navigate(["/admin/forms/riskAssessSWMS/"+id]);
   }
 }

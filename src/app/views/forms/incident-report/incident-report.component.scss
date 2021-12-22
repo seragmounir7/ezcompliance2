@@ -43,6 +43,22 @@ input[type='file'] {
   height: 10%;
   padding: 0%;
 }
+.txt-auto{
+  padding-bottom: 5px;
+  padding-top: 4px;
+  margin-top: -1px;
+}
+mat-datepicker-toggle{ 
+::ng-deep .mat-icon-button{
+  display: block;
+  /* margin: -2.5rem 30.5rem; */
+  float: right;
+  top: -2.5rem;
+ }
+}
+// .date-valid{
+//   margin-top: 2.6rem;
+// }
 .pt-3 {
   display: inline-block;
   font-size: 32px;

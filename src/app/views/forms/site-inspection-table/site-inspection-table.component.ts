@@ -64,6 +64,11 @@ export class SiteInspectionTableComponent implements OnInit {
     
     }
     })
+    console.log("res", this.showDatas);
+    this.showDatas.forEach((element,i) => {
+      return this.showDatas[i].index= i
+    });
+
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort; 

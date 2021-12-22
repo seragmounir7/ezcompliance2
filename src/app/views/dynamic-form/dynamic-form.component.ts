@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { error } from 'protractor';
+import { templateJitUrl } from '@angular/compiler';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -19,6 +21,8 @@ export class DynamicFormComponent implements OnInit {
   @ViewChild('projectManager') projectManager: ElementRef;
   projectMang:any;
   isHidden=false;
+  check=false;
+  configData:any;
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
     minWidth: 1,
@@ -254,6 +258,7 @@ export class DynamicFormComponent implements OnInit {
   report = false;
   reports: any = [];
   riskAssessmentFb!: FormGroup;
+  previewform:FormGroup;
   allJobNumbers:any;
   formNameRecieved = '';
   states:any;
@@ -277,9 +282,21 @@ export class DynamicFormComponent implements OnInit {
       custEmail: [''],
       jobNumber: ['']
     });
+    this.previewform= this.fb.group({
+      siteName:[''],
+      customerName: [''],
+      streetNo: [''],
+      streetAddr: [''],
+      subUrb: [''],
+      statesSWMS: [''],
+      custConct: [''],
+      custConctPh:[''],
+      custEmail: [''],
+      jobNumber: ['']
+    });
    }
    onChange2(eve)
-   {
+   { 
      this.isHidden=eve.target.checked;
      console.log("eve",eve.target.checked);
    }
@@ -304,6 +321,7 @@ export class DynamicFormComponent implements OnInit {
           attributes: modelFields,
         };
         this.model.push(modelRow);
+        console.log("model",this.model);
       }
     }
     if (sessionStorage.getItem('type') == 'edit') {
@@ -320,7 +338,9 @@ export class DynamicFormComponent implements OnInit {
         this.model = [];
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
-        this.riskAssessmentFb.patchValue(res.data.configure);
+        this.isHidden=res.data.check;
+        // this.configData=res.data.configure[0];
+        this.riskAssessmentFb.patchValue(res.data.configure[0]);
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -343,6 +363,10 @@ export class DynamicFormComponent implements OnInit {
         console.log('formView=>', res);
         this.formNameRecieved = res.data.title;
         this.model = res.data.htmlObject;
+        // this.riskAssessmentFb.patchValue(res.data.configure[0])
+        this.previewform.patchValue(res.data.configure[0])
+        this.isHidden=res.data.check;
+        console.log("is hidden",this.isHidden);
         this.spinner.hide();
       });
     }
@@ -567,6 +591,7 @@ export class DynamicFormComponent implements OnInit {
     this.allJobNumbers.forEach((item) => {
       if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
         console.log('Id found', item);
+        // this.configData=item;
         this.riskAssessmentFb.patchValue({
           siteName: item.siteName,
           customerName: item.customerName,
@@ -601,6 +626,46 @@ export class DynamicFormComponent implements OnInit {
 
   initReport() {
     //  console.log('model.attributes=>', this.model);
+    this.configData={...this.riskAssessmentFb.value}
+    console.log("config",this.configData);
+    console.log("hidden",this.isHidden);
+    if(this.configData && this.isHidden)
+    {
+      console.log("check hidden",this.isHidden);
+      
+      if(this.type=='add')
+      {
+        this.previewform.patchValue({
+          siteName: this.configData.siteName,
+          customerName: this.configData.customerName,
+          streetNo: this.configData.streetNo,
+          streetAddr: this.configData.streetAddr,
+          subUrb: this.configData.subUrb,
+          statesSWMS: this.configData.statesSWMS,
+          custConct: this.configData.custConct,
+          custConctPh: this.configData.custConctPh,
+          custEmail: this.configData.custEmail,
+          jobNumber: this.configData.jobNumber
+        });
+      }
+      else
+      {
+        this.previewform.patchValue({
+          siteName: this.configData.siteName,
+          customerName: this.configData.customerName,
+          streetNo: this.configData.streetNo,
+          streetAddr: this.configData.streetAddr,
+          subUrb: this.configData.subUrb,
+          statesSWMS: this.configData.statesSWMS,
+          custConct: this.configData.custConct,
+          custConctPh: this.configData.custConctPh,
+          custEmail: this.configData.custEmail,
+          jobNumber: this.configData.jobNumber
+        });
+      }
+    }
+    this.check=true;
+    // this.isHidden=true;
     this.report = true;
     this.formData = [];
     for (let j = 0; j < this.model[0].attributes.length; j++) {
@@ -609,6 +674,7 @@ export class DynamicFormComponent implements OnInit {
         temp.push(this.model[i].attributes[j]);
       }
       this.formData.push(temp);
+
     }
     // console.log('formData', this.formData);
 
@@ -824,6 +890,14 @@ export class DynamicFormComponent implements OnInit {
     this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
+    console.log("model",this.model);
+    
+    if(!this.isHidden)
+     {
+       console.log("isHidden",this.isHidden);
+       
+       this.riskAssessmentFb.reset();
+     }
     if (this.type == 'add') {
       console.log('add', this.model);
 let tempModel=[];
@@ -833,6 +907,8 @@ this.model.forEach(element => {
   }
 });
 console.log(tempModel);
+if(tempModel.length)
+{
        const d=[];
        d.push(this.riskAssessmentFb.value);
        console.log("d",d);
@@ -841,14 +917,21 @@ console.log(tempModel);
         title: this.formNameRecieved,
         frequency: sessionStorage.getItem('frequency'),
         htmlObject:tempModel ,
-        configure:d
+        configure:d,
+        check:this.isHidden
       };
     console.log("data",data);
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
         Swal.fire('Form added successfully');
         this.router.navigate(['/admin/dynamicFormsList']);
-      });
+        this.riskAssessmentFb.reset();
+      })
+    }
+    else
+    {
+      Swal.fire('Please Add Atleast One Field');
+    }
     }
     if (this.type == 'edit') {
       console.log('edit');
@@ -858,6 +941,9 @@ console.log(tempModel);
           tempModel.push(element)
         }
       });
+      console.log(tempModel);
+      if(tempModel.length)
+      {
       const d=[];
       d.push(this.riskAssessmentFb.value);
       console.log("d",d);
@@ -866,7 +952,8 @@ console.log(tempModel);
         htmlObject: tempModel,
         enable: this.enableForm,
         frequency: this.frequency,
-        configure:d
+        configure:d,
+        check:this.isHidden
       };
 
       this.dynamicFormsService
@@ -874,9 +961,14 @@ console.log(tempModel);
         .subscribe((res) => {
           Swal.fire('Form edited successfully');
           this.router.navigate(['/admin/dynamicFormsList']);
+          this.riskAssessmentFb.reset();
         });
-        this.riskAssessmentFb.reset();
     }
+    else
+    {
+      Swal.fire('Please Add Atleast One Field');
+    }
+  }
   }
   duplicate(i, j) {
     console.log('duplicate', i, j, this.model[i].attributes);

@@ -33,9 +33,12 @@ export class AddRoleComponent implements OnInit {
   
 
   ngOnInit(): void {
-   
+   if(this.data.action==="edit"){
+    this.addRole.get("role").patchValue(this.data.role.role)
+   }
   }
   onSubmit() {
+    if(this.data.action==="new"){
     console.log(this.addRole.value)
     
       this.roleService.addRole(this.addRole.value).subscribe((res)=>{
@@ -44,6 +47,15 @@ export class AddRoleComponent implements OnInit {
         Swal.fire('Added Successfully')
         this.dialogRef.close();
       })
+    } 
+     if(this.data.action==="edit"){
+      this.roleService.updateRole(this.data.role._id,this.addRole.value).subscribe((res)=>{
+        console.log("res",res);
+        
+        Swal.fire('Update Successfully')
+        this.dialogRef.close("true");
+      })
+    }
   
     // Swal.fire('Added Successfully')
     // this.dialogRef.close();
