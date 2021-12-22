@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HazardFormTableDetailsComponent } from './hazard-form-table-details/hazard-form-table-details.component';
 import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
 import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesment-table.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -52,7 +53,8 @@ import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesme
     NgxMatTimepickerModule,
     AutosizeModule,
     MatAutocompleteModule ,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
     
   ],
   providers:[

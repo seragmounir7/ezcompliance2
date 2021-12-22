@@ -17,6 +17,8 @@ export class ToolboxTalkComponent implements OnInit,AfterViewInit {
   sign=[];
   staff:any;
   id:any;
+  maxDate = new Date();
+  minDate = new Date();
   signature:SignaturePad;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;

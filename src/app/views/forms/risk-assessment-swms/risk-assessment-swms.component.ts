@@ -51,6 +51,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   hasJuridiction=false;
   hasLegist=false;
   hasRegulation=false;
+  
   cardImageBase64:any;
   highRiskConstruction2 = [
     {
@@ -188,7 +189,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       dateTime: ['',Validators.required],
       statesSWMS: ['',Validators.required],
       projectManager: ['',Validators.required],
-      date: ['',Validators.required],
+      date: [new Date() ,Validators.required],
       projectManagerSWMS: ['',Validators.required],
       jurisdiction: ['',Validators.required],
       safetyLeg: ['',Validators.required],
@@ -210,8 +211,8 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       PPESelection2:this.fb.array([]),
       licence:this.fb.array([]),
       editor:["",Validators.required],
-      signaturePad1:["",Validators.required],
-      signaturePad2:["",Validators.required]
+      signature1:["",Validators.required],
+      signature2:["",Validators.required]
     });
   }
   
@@ -667,36 +668,38 @@ checkLicense(element,index)
   drawComplete1() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad1.toDataURL());
-    this.riskAssessmentFb.controls["signaturePad1"].setValue(this.signaturePad1.toDataURL());
+    this.riskAssessmentFb.controls["signature1"].setValue(this.signaturePad1.toDataURL());
+    this.singRequired = this.riskAssessmentFb.controls['signature1'].invalid
   }
   clear1() {
     console.log('clear1');
     this.signaturePad1.clear();
     
-    this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].untouched
+    this.singRequired = this.riskAssessmentFb.controls['signature1'].untouched
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
     
-    this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].invalid
+    //this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].invalid
   }
   drawComplete2() {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad2.toDataURL());
-    this.riskAssessmentFb.controls["signaturePad2"].setValue(this.signaturePad2.toDataURL());
+    this.riskAssessmentFb.controls["signature2"].setValue(this.signaturePad2.toDataURL());
+    this.signRequired = this.riskAssessmentFb.controls['signature2'].invalid
   }
   clear2() {
     console.log('clear2');
     this.signaturePad2.clear();
     
-    this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].untouched
+    this.signRequired = this.riskAssessmentFb.controls['signature2'].untouched
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
     
-    this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
+    //this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
   }
 
   getAllJobTask() {

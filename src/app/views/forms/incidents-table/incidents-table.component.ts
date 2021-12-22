@@ -23,9 +23,9 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
     this.getIncidentReport();
   }
   ngAfterViewInit() {
-    this.tempArray.paginator = this.paginator;
-    this.tempArray.sort = this.sort; 
-  }
+  //   this.tempArray.paginator = this.paginator;
+  //   this.tempArray.sort = this.sort; 
+   }
   delete(id)
   {
     Swal.fire({
@@ -59,6 +59,9 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
     this.logicalFormInfo.getAllIncidentReport().subscribe((res:any)=>
     {
       this.showDatas= res.data;
+      this.showDatas.forEach((element,i) => {
+        return this.showDatas[i].index= i
+      });
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort; 

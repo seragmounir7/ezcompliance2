@@ -55,6 +55,10 @@ export class HazardFormTableDetailsComponent implements OnInit {
       console.log("res",res.data);
       
       this.showDatas= res.data
+      this.showDatas.forEach((element,i) => {
+    return this.showDatas[i].index= i
+  });
+  console.log("this.showDatas",this.showDatas);
   
       this.dataSource = new MatTableDataSource<any>(this.showDatas);
       this.dataSource.paginator = this.paginator;
