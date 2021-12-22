@@ -30,11 +30,11 @@
       type="checkbox" 
       class="form-check-input"
       (change)="onChange2($event)"
-      [checked]="check"
+      [checked]="isHidden"
     />
     </div>
   </div>
-<div class="container checkboxForm" *ngIf="isHidden" [formGroup]="riskAssessmentFb">
+<div class="container bg-white checkboxForm" *ngIf="isHidden" [formGroup]="riskAssessmentFb">
   <div class="row">
     <div class="my-3 col">
       <label class="form-label"
@@ -887,7 +887,7 @@
           <p class="text-center mb-5" style="font-size: 30px">
             {{ formNameRecieved }}
           </p>
-        <div class="container" [formGroup]="previewform">
+        <div *ngIf="isHidden" class="container" [formGroup]="previewform">
           <div class="row">
             <div class="my-3 col">
               <label class="form-label"
@@ -962,6 +962,7 @@
               >
               <select
               readonly
+              disabled
               class="form-select form-control col"
               aria-label="Default select example"
               formControlName="statesSWMS"
@@ -1032,7 +1033,7 @@
                 >Job Number</label
               >    
               <select
-              readonly
+              disabled
               class="form-select form-control col"
               aria-label="Default select example"
               formControlName="jobNumber"

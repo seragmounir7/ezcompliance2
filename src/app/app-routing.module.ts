@@ -1,3 +1,5 @@
+import { LogicalFormAccessGuard } from './RouteGuard/logical-form-access.guard';
+import { DynamicFormAccessGuard } from './RouteGuard/dynamic-form-access.guard';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -25,13 +27,14 @@ const routes: Routes = [
       // { path: '', component: LoginComponent },
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'dynamicForm', component: DynamicFormComponent },
-      { path: 'blank', component: BlankComponent },      
-      { path: 'dynamicFormsList', component: FormsComponent },
+      { path: 'dynamicForm', component: DynamicFormComponent, canActivate: [DynamicFormAccessGuard] },
+      { path: 'blank', component: BlankComponent },
+      { path: 'dynamicFormsList', component: FormsComponent, canActivate: [DynamicFormAccessGuard] },
       {
         path: 'forms',
         loadChildren: () =>
           import('./views/forms/forms.module').then((m) => m.FormsModule1),
+        canActivate: [LogicalFormAccessGuard]
       },
       {
         path: 'registration',
@@ -47,11 +50,11 @@ const routes: Routes = [
             (m) => m.LandingPageInfoModule
           ),
       },
-      { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule) },
-      { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule) },
-      { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule) },
-      { path: 'stateRel', loadChildren: () => import('./views/state-rel/state-rel.module').then(m => m.StateRelModule) },
-      { path: 'roleMangement', loadChildren: () => import('./role-management/role-management.module').then(m => m.RoleManagementModule) },
+      { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule),canActivate:[DynamicFormAccessGuard] },
+      { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule),canActivate:[DynamicFormAccessGuard] },
+      { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule),canActivate:[DynamicFormAccessGuard] },
+      { path: 'stateRel', loadChildren: () => import('./views/state-rel/state-rel.module').then(m => m.StateRelModule),canActivate:[DynamicFormAccessGuard] },
+      { path: 'roleMangement', loadChildren: () => import('./role-management/role-management.module').then(m => m.RoleManagementModule),canActivate:[DynamicFormAccessGuard] },
 
     ],
   },
@@ -62,11 +65,11 @@ const routes: Routes = [
     canActivate: [NonAuthGuard],
   },
 
-  { path: '**',  redirectTo: 'admin', pathMatch: 'full' },
+  { path: '**', redirectTo: 'admin', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' , useHash: true})],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy', useHash: true })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
