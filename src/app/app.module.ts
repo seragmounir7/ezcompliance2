@@ -39,6 +39,8 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { TextareaAutoresizeDirective } from './Directives/textarea-autoresize.directive';
 import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -68,6 +70,10 @@ registerLocaleData(localeEn, 'en-EN');
     BrowserModule,
     SharedModule,
     AppRoutingModule,
+    AngularSvgIconModule.forRoot(),
+    AngularSvgIconPreloaderModule.forRoot({
+      configUrl: './assets/json/svg.json',
+    }),
     FormsModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
