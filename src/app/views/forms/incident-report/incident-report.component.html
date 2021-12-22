@@ -565,7 +565,7 @@
     <div class="col-md-3">
       <div>
         <label class="cols" class="form-Label">Time of the incident</label>
-        <input
+        <!-- <input
           [ngxMatTimepicker]="picker"
           class="form-control"
           formControlName="timeOfTheIncident"
@@ -586,7 +586,7 @@
           class="invalid-feedback"
         >
           Select Time is Required</span
-        >
+        > -->
         <input [ngxMatTimepicker]="timepicker"  class="form-control" formControlName="timeOfTheIncident" [class.is-invalid]="IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty || IncidentReport.get('timeOfTheIncident').touched) "/>
         
           <ngx-mat-timepicker #timepicker></ngx-mat-timepicker>
@@ -1221,7 +1221,7 @@
         <div>
           <label class="cols" class="form-Label">Date </label>
           <!-- <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/> -->
-          <input  matInput  [matDatepicker]="pickerd6"
+          <input  matInput  [matDatepicker]="pickerd6" [max]="maxDate"
           class="form-control"
           formControlName="reviewedDate"
           [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "
