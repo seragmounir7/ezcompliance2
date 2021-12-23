@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogicalFormInfoService {
   apiUrl = environment.apiUrl;
+
   constructor(private https: HttpClient) { }
   getJobTaskListById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
@@ -64,8 +64,8 @@ export class LogicalFormInfoService {
     );
   }
   //licence api///
-  getAllLicence() {
-    return this.https.get(this.apiUrl + 'licence/getAll').pipe(
+  getAllLicence(field="",value="") {
+    return this.https.get(this.apiUrl + `licence/getAll?field=${field}&value=${value}`).pipe(
       map((res: any) => {
         return res;
       })
@@ -114,8 +114,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllLicenceCat() {
-    return this.https.get(this.apiUrl + 'tradeCategory/getAll').pipe(
+  getAllLicenceCat(field="",value="") {
+    return this.https.get(this.apiUrl + `tradeCategory/getAll?field=${field}&value=${value}`).pipe(
       map((res: any) => {
         return res;
       })
@@ -159,8 +159,8 @@ export class LogicalFormInfoService {
   deleteRisk(id) {
     return this.https.delete(this.apiUrl + 'risk/delete/' + id)
   }
-  getAllRisk() {
-    return this.https.get(this.apiUrl + 'risk/getAll')
+  getAllRisk(field="",value="") {
+    return this.https.get(this.apiUrl + `risk/getAll?field=${field}&value=${value}`)
   }
   getRiskById(id) {
     return this.https.get(this.apiUrl + 'risk/get/' + id)
@@ -180,8 +180,8 @@ export class LogicalFormInfoService {
   deleteJobTask(id) {
     return this.https.delete(this.apiUrl + 'jobTask/delete/' + id)
   }
-  getAllJobtask() {
-    return this.https.get(this.apiUrl + 'jobTask/getAll')
+  getAllJobtask(field="",value="") {
+    return this.https.get(this.apiUrl + `jobTask/getAll?field=${field}&value=${value}`)
   }
   getJobtaskById(id) {
     return this.https.get(this.apiUrl + 'jobTask/get/' + id)
@@ -201,8 +201,8 @@ export class LogicalFormInfoService {
   deletePPE(id) {
     return this.https.delete(this.apiUrl + 'ppe/delete/' + id)
   }
-  getAllPPE() {
-    return this.https.get(this.apiUrl + 'ppe/getAll')
+  getAllPPE(field="",value="") {
+    return this.https.get(this.apiUrl + `ppe/getAll?field=${field}&value=${value}`)
   }
   getPPEById(id) {
     return this.https.get(this.apiUrl + 'ppe/get/' + id)
@@ -222,8 +222,8 @@ export class LogicalFormInfoService {
   deleteHazards(id) {
     return this.https.delete(this.apiUrl + 'identifyHazard/delete/' + id)
   }
-  getAllHazards() {
-    return this.https.get(this.apiUrl + 'identifyHazard/getAll')
+  getAllHazards(field="",value="") {
+    return this.https.get(this.apiUrl + `identifyHazard/getAll?field=${field}&value=${value}`)
   }
   getHazardsById(id) {
     return this.https.get(this.apiUrl + 'identifyHazard/get/' + id)
@@ -244,8 +244,8 @@ export class LogicalFormInfoService {
   deleteContrlActReq(id) {
     return this.https.delete(this.apiUrl + 'controlActionRequired/delete/' + id)
   }
-  getAllContrlActReq() {
-    return this.https.get(this.apiUrl + 'controlActionRequired/getAll')
+  getAllContrlActReq(field="",value="") {
+    return this.https.get(this.apiUrl + `controlActionRequired/getAll?field=${field}&value=${value}`)
   }
   getContrlActReqById(id) {
     return this.https.get(this.apiUrl + 'controlActionRequired/get/' + id)
@@ -265,8 +265,8 @@ export class LogicalFormInfoService {
   deleteCOP(id) {
     return this.https.delete(this.apiUrl + 'cop/delete/' + id)
   }
-  getAllCOP() {
-    return this.https.get(this.apiUrl + 'cop/getAll')
+  getAllCOP(field="",value="") {
+    return this.https.get(this.apiUrl + `cop/getAll?field=${field}&value=${value}`)
   }
   getCOPById(id) {
     return this.https.get(this.apiUrl + 'cop/get/' + id)
@@ -285,16 +285,16 @@ export class LogicalFormInfoService {
   deleteProjectMang(id) {
     return this.https.delete(this.apiUrl + 'projectManager/delete/' + id)
   }
-  getAllProjectMang() {
-    return this.https.get(this.apiUrl + 'projectManager/getAll')
+  getAllProjectMang(field="",value="") {
+    return this.https.get(this.apiUrl + `projectManager/getAll?field=${field}&value=${value}`)
   }
   getProjectMangById(id) {
     return this.https.get(this.apiUrl + 'projectManager/get/' + id)
   }
   ///project manager end/////
   ///job no/////
-  getAllSite() {
-    return this.https.get(this.apiUrl + 'site/getAll')
+  getAllSite(field="",value="") {
+    return this.https.get(this.apiUrl + `site/getAll?field=${field}&value=${value}`)
   }
   ///job no end/////
 
@@ -312,8 +312,8 @@ export class LogicalFormInfoService {
   ///site end/////
 
   ///customer strat/////
-  getAllCustomer() {
-    return this.https.get(this.apiUrl + 'customer/getAll')
+  getAllCustomer(field="",value="") {
+    return this.https.get(this.apiUrl + `customer/getAll?field=${field}&value=${value}`)
   }
   addCustomer(data: Customer) {
     return this.https.post(this.apiUrl + 'customer/add', data)
@@ -341,8 +341,8 @@ export class LogicalFormInfoService {
   }
   ///job number end/////
   ////////////////// Start  Chemical Info///////////
-  getAllChemical() {
-    return this.https.get(this.apiUrl + 'chemical/getAll')
+  getAllChemical(field="",value="") {
+    return this.https.get(this.apiUrl + `chemical/getAll?field=${field}&value=${value}`)
   }
   addChemical(data) {
     return this.https.post(this.apiUrl + 'chemical/add', data)
@@ -524,8 +524,8 @@ export class LogicalFormInfoService {
   ///////////////////End States /////////
 
   //////////////// START RISK LEVEL INFO//////////////////
-  getAllRiskLevel() {
-    return this.https.get(this.apiUrl + 'riskLevel/getAll')
+  getAllRiskLevel(field="",value="") {
+    return this.https.get(this.apiUrl + `riskLevel/getAll?field=${field}&value=${value}`)
   }
   addRiskLevel(data) {
     return this.https.post(this.apiUrl + 'riskLevel/add', data)
@@ -542,8 +542,8 @@ export class LogicalFormInfoService {
   ///////////////////End RISK LEVEL INFO /////////
 
   //////////////////STArT RESIDUAL LEVEL INFO/////////////////////
-  getAllResidual() {
-    return this.https.get(this.apiUrl + 'residualRisk/getAll')
+  getAllResidual(field="",value="") {
+    return this.https.get(this.apiUrl + `residualRisk/getAll?field=${field}&value=${value}`)
   }
   addResidual(data) {
     return this.https.post(this.apiUrl + 'residualRisk/add', data)
@@ -560,8 +560,8 @@ export class LogicalFormInfoService {
   /////////////////// End RESIDUAL INFO /////////
 
   ///////////////// START STAFF INFO//////////////
-  getAllStaff() {
-    return this.https.get(this.apiUrl + 'staff/getAll')
+  getAllStaff(field="",value="") {
+    return this.https.get(this.apiUrl + `staff/getAll?field=${field}&value=${value}`)
   }
   addStaff(data) {
     return this.https.post(this.apiUrl + 'staff/add', data)
@@ -578,8 +578,8 @@ export class LogicalFormInfoService {
   ///////////////////  STAFF INFO End /////////
 
   ///////////////// START Nature Of Incident//////////////
-  getAllNatOfInc() {
-    return this.https.get(this.apiUrl + 'natureOfIncident/getAll')
+  getAllNatOfInc(field="",value="") {
+    return this.https.get(this.apiUrl + `natureOfIncident/getAll?field=${field}&value=${value}`)
   }
   addNatOfInc(data) {
     return this.https.post(this.apiUrl + 'natureOfIncident/add', data)
@@ -596,8 +596,8 @@ export class LogicalFormInfoService {
   ///////////////////  Nature Of Incident End /////////
 
   ///////////////// START Changes Made//////////////
-  getAllChangesMade() {
-    return this.https.get(this.apiUrl + 'changesMade/getAll')
+  getAllChangesMade(field="",value="") {
+    return this.https.get(this.apiUrl + `changesMade/getAll?field=${field}&value=${value}`)
   }
   addChangesMade(data) {
     return this.https.post(this.apiUrl + 'changesMade/add', data)
@@ -614,8 +614,8 @@ export class LogicalFormInfoService {
   ///////////////////  Changes Made End /////////
 
   ///////////////// Root Cause Of Incident Made//////////////
-  getAllRootCause() {
-    return this.https.get(this.apiUrl + 'rootcauseOfIncident/getAll')
+  getAllRootCause(field="",value="") {
+    return this.https.get(this.apiUrl + `rootcauseOfIncident/getAll?field=${field}&value=${value}`)
   }
   addRootCause(data) {
     return this.https.post(this.apiUrl + 'rootcauseOfIncident/add', data)
@@ -632,8 +632,8 @@ export class LogicalFormInfoService {
   ///////////////////  Root Cause Of Incident End /////////
 
   ///////////////// Type Of Incident Made//////////////
-  getAllTypeOfIncident() {
-    return this.https.get(this.apiUrl + 'typeOfIncident/getAll')
+  getAllTypeOfIncident(field="",value="") {
+    return this.https.get(this.apiUrl + `typeOfIncident/getAll?field=${field}&value=${value}`)
   }
   addTypeOfIncident(data) {
     return this.https.post(this.apiUrl + 'typeOfIncident/add', data)
@@ -702,8 +702,8 @@ export class LogicalFormInfoService {
   editManager(id, data) {
     return this.https.put(this.apiUrl + 'manager/update/' + id, data)
   }
-  getAllManager() {
-    return this.https.get(this.apiUrl + 'manager/getAll')
+  getAllManager(field="",value="") {
+    return this.https.get(this.apiUrl + `manager/getAll?field=${field}&value=${value}`)
   }
   getManagerById(id) {
     return this.https.get(this.apiUrl + 'manager/get/' + id)
@@ -722,8 +722,8 @@ export class LogicalFormInfoService {
   editWHSManager(id, data) {
     return this.https.put(this.apiUrl + 'WHSManager/update/' + id, data)
   }
-  getAllWHSManager() {
-    return this.https.get(this.apiUrl + 'WHSManager/getAll')
+  getAllWHSManager(field="",value="") {
+    return this.https.get(this.apiUrl + `WHSManager/getAll?field=${field}&value=${value}`)
   }
   getWHSManagerById(id) {
     return this.https.get(this.apiUrl + 'WHSManager/get/' + id)
@@ -788,8 +788,8 @@ export class LogicalFormInfoService {
 
    ////////////////// Start Site Inspection category ///////////
 
-   getAllSiteInspectionCategory() {
-    return this.https.get(this.apiUrl + 'siteInspectionCategory/getAll')
+   getAllSiteInspectionCategory(field="",value="") {
+    return this.https.get(this.apiUrl + `siteInspectionCategory/getAll?field=${field}&value=${value}`)
   }
   getSiteInspectionCategory(id) {
     return this.https.get(this.apiUrl + 'siteInspectionCategory/get/'+ id)
