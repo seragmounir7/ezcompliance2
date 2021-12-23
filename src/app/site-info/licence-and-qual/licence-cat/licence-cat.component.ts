@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table'
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-licence-cat',
   templateUrl: './licence-cat.component.html',
@@ -34,8 +34,8 @@ export class LicenceCatComponent implements OnInit {
     this.getAllLicenceCat();
   }
 
-  getAllLicenceCat() {
-    this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
+  getAllLicenceCat(field="",value="") {
+    this.logicalFormInfo.getAllLicenceCat(field,value).subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -95,4 +95,8 @@ export class LicenceCatComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllLicenceCat(sort.active,sort.direction)
+     }
 }
