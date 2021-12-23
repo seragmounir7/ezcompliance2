@@ -17,4 +17,34 @@ export class EmployeeRegistrationService {
       })
     );
   }
+  getAllEmployeeInfo() {
+    return this.https.get(this.apiUrl + 'employee/getAll').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getEmployeeInfoById(id) {
+    return this.https.get(this.apiUrl + 'employee/get/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+
+  updateEmployeeInfo(id, data) {
+    return this.https.put(this.apiUrl + 'employee/update/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  deleteEmployeeInfo(id) {
+    return this.https.delete(this.apiUrl + 'employee/delete/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
 }
