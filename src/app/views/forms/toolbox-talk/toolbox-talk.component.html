@@ -143,10 +143,14 @@
 
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">Date</p>
-          <input formControlName="date" type="date" class="form-control" 
-          [class.is-invalid]="toolBox.get('date')?.hasError('required') 
-            && (toolBox.get('date').dirty || toolBox.get('date').touched) "
-           />
+           <input  matInput  [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate"
+           class="form-control"
+           formControlName="date"
+           [class.is-invalid]="toolBox.get('date')?.hasError('required') 
+           && (toolBox.get('date').dirty || toolBox.get('date').touched) "
+           placeholder="dd-mm-yyyy">
+           <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+           <mat-datepicker #datepicker2 ></mat-datepicker>
            <span
           *ngIf=" toolBox.get('date')?.hasError('required') && (toolBox.get('date').dirty 
           || toolBox.get('date').touched) "

@@ -24,6 +24,9 @@ export class SiteInspectionComponent implements OnInit {
   siteshow = true;
   siteAction = false;
   itemvalue: any;
+  
+  maxDate = new Date();
+  minDate = new Date();
   item_values: any = ['In Progress', 'Completed', 'Closed'];
   jobTaskData: any;
   allJobNumbers = [];

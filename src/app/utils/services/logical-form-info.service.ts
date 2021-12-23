@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogicalFormInfoService {
   apiUrl = environment.apiUrl;
-
   constructor(private https: HttpClient) { }
   getJobTaskListById(id: any) {
     return this.https.get(this.apiUrl + 'component/get/data/' + id).pipe(
