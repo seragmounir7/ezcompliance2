@@ -134,3 +134,11 @@ select {
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+
+// .inp_padding{
+//     padding-right: 50px;
+// }
+
+::ng-deep  mat-datepicker-toggle  .mat-icon-button{
+  padding-right: 50px;
+}

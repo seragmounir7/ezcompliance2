@@ -72,14 +72,14 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="siteName"
+                <input type="text" class="form-control col" formControlName="siteName" [value]= "siteControls.siteName.value"
                 
             [class.is-invalid]="riskAssessmentFb.get('siteName')?.hasError('required') 
             && (riskAssessmentFb.get('siteName').dirty || riskAssessmentFb.get('siteName').touched) " >
             <span
             *ngIf="
             riskAssessmentFb.get('siteName')?.hasError('required') && (riskAssessmentFb.get('siteName').dirty 
-            || riskAssessmentFb.get('siteName').touched) "
+            || riskAssessmentFb.get('siteName').touched) "  class="invalid-feedback"
             
           >
          Site  Name is Required</span
@@ -96,13 +96,13 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="customerName"
+                <input type="text" class="form-control col" formControlName="customerName" [value]= "siteControls.customerName.value"
                 [class.is-invalid]="riskAssessmentFb.get('customerName')?.hasError('required') 
                 && (riskAssessmentFb.get('customerName').dirty || riskAssessmentFb.get('customerName').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('customerName')?.hasError('required') && (riskAssessmentFb.get('customerName').dirty 
-                || riskAssessmentFb.get('customerName').touched) ">
+                || riskAssessmentFb.get('customerName').touched) "  class="invalid-feedback">
                 customer Name is Required 
               </span> 
               </div>
@@ -119,13 +119,13 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="streetNo"
+                <input type="text" class="form-control col" formControlName="streetNo" [value]= "siteControls.streetNo.value"
                 [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required') 
                 && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('streetNo')?.hasError('required') && (riskAssessmentFb.get('streetNo').dirty 
-                || riskAssessmentFb.get('streetNo').touched) ">
+                || riskAssessmentFb.get('streetNo').touched) "  class="invalid-feedback">
                 street Number is Required 
               </span> 
               </div>
@@ -140,13 +140,13 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="streetAddr"
+                <input type="text" class="form-control col" formControlName="streetAddr" [value]= "siteControls.streetAddr.value"
                 [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
                 && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty 
-                || riskAssessmentFb.get('streetAddr').touched) ">
+                || riskAssessmentFb.get('streetAddr').touched) "  class="invalid-feedback">
                 Street Address is Required 
               </span> 
               </div>
@@ -167,7 +167,7 @@
                 <span
                 *ngIf="
                 riskAssessmentFb.get('suburb')?.hasError('required') && (riskAssessmentFb.get('suburb').dirty 
-                || riskAssessmentFb.get('suburb').touched) ">
+                || riskAssessmentFb.get('suburb').touched) "  class="invalid-feedback">
                 Suburb  is Required 
               </span> 
               </div>
@@ -179,6 +179,7 @@
                 class="form-select form-control col"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
+                [value]= "siteControls.statesSWMS.value"
                 [class.is-invalid]="riskAssessmentFb.get('statesSWMS')?.hasError('required') 
                 && (riskAssessmentFb.get('statesSWMS').dirty || riskAssessmentFb.get('statesSWMS').touched) " >
                
@@ -198,7 +199,7 @@
               <span
               *ngIf="
               riskAssessmentFb.get('statesSWMS')?.hasError('required') && (riskAssessmentFb.get('statesSWMS').dirty 
-              || riskAssessmentFb.get('statesSWMS').touched) ">
+              || riskAssessmentFb.get('statesSWMS').touched) "  class="invalid-feedback">
               Suburb  is Required 
             </span> 
               </div>
@@ -216,13 +217,13 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="custConct"
+                <input type="text" class="form-control col" formControlName="custConct" [value]= "siteControls.custConct.value"
                 [class.is-invalid]="riskAssessmentFb.get('custConct')?.hasError('required') 
                 && (riskAssessmentFb.get('custConct').dirty || riskAssessmentFb.get('custConct').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('custConct')?.hasError('required') && (riskAssessmentFb.get('custConct').dirty 
-                || riskAssessmentFb.get('custConct').touched) ">
+                || riskAssessmentFb.get('custConct').touched) " class="invalid-feedback">
                 Customer Contact Number is Required 
               </span> 
 
@@ -238,13 +239,13 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="custConctPh"
+                <input type="text" class="form-control col" formControlName="custConctPh" [value]= "siteControls.custConctPh.value"
                 [class.is-invalid]="riskAssessmentFb.get('custConctPh')?.hasError('required') 
                 && (riskAssessmentFb.get('custConctPh').dirty || riskAssessmentFb.get('custConctPh').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('custConctPh')?.hasError('required') && (riskAssessmentFb.get('custConctPh').dirty 
-                || riskAssessmentFb.get('custConctPh').touched) ">
+                || riskAssessmentFb.get('custConctPh').touched) "  class="invalid-feedback">
                 Customer Contact Number is Required 
               </span> 
               </div>
@@ -261,13 +262,13 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="custEmail"
+                <input type="text" class="form-control col" formControlName="custEmail" [value]= "siteControls.custEmail.value"
                 [class.is-invalid]="riskAssessmentFb.get('custEmail')?.hasError('required') 
                 && (riskAssessmentFb.get('custEmail').dirty || riskAssessmentFb.get('custEmail').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('custEmail')?.hasError('required') && (riskAssessmentFb.get('custEmail').dirty 
-                || riskAssessmentFb.get('custEmail').touched) ">
+                || riskAssessmentFb.get('custEmail').touched) "  class="invalid-feedback">
                 Email is Required 
               </span> 
 
@@ -291,7 +292,7 @@
               <span
               *ngIf="
               riskAssessmentFb.get('jobNumber')?.hasError('required') && (riskAssessmentFb.get('jobNumber').dirty 
-              || riskAssessmentFb.get('jobNumber').touched) ">
+              || riskAssessmentFb.get('jobNumber').touched) "  class="invalid-feedback">
               Job Number  is Required 
             </span> 
               </div>
@@ -314,7 +315,7 @@
                 <span
                 *ngIf="
                 riskAssessmentFb.get('projectManager')?.hasError('required') && (riskAssessmentFb.get('projectManager').dirty 
-                || riskAssessmentFb.get('projectManager').touched) ">
+                || riskAssessmentFb.get('projectManager').touched) "  class="invalid-feedback">
                 Project Manager  is Required 
               </span> 
               </div>
@@ -324,10 +325,14 @@
                 <label class="form-label"
                   >Date</label
                 >
-                <input type="date" class="form-control" formControlName="date" />
-      
-               
-               
+                <!-- <input type="date" class="form-control" formControlName="date" /> -->
+                <input  matInput  [matDatepicker]="datepicker2"
+            class="form-control"
+            formControlName="date"
+            [value]="maxDate"
+            placeholder="dd-mm-yyyy" readonly>
+            <mat-datepicker-toggle matSuffix [for]="datepicker2" [disabled]="true"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker2 ></mat-datepicker>
               </div>
             </div>
             <hr />
@@ -552,7 +557,7 @@
                   <span
                   *ngIf="
                   riskAssessmentFb.get('employee1')?.hasError('required') && (riskAssessmentFb.get('employee1').dirty 
-                  || riskAssessmentFb.get('employee1').touched) ">
+                  || riskAssessmentFb.get('employee1').touched) "  class="invalid-feedback">
                   Employee Name is Required 
                 </span>
               </p>
@@ -582,14 +587,39 @@
             </div>
             <div class="col-3">
               <label class="form-label"
-                >Date/Time</label
+                >Date</label
               >
               <p>
-                <input
+                <!-- <input
                   type="date"
                   class="mr-1 form-control"
                   value=""
-                  formControlName="dateTime"/>
+                  formControlName="dateTime"/> -->
+                  <input  matInput  [matDatepicker]="datepicker3" [max]="maxDate" 
+                  class="mr-1 form-control"
+                  formControlName="dateTime"
+                  (dateChange)="getDate( $event)"
+                  
+                  [class.is-invalid]="riskAssessmentFb.get('dateTime')?.hasError('required') 
+                  && (riskAssessmentFb.get('dateTime').dirty || riskAssessmentFb.get('dateTime').touched) "
+                  placeholder="dd-mm-yyyy">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker3 ></mat-datepicker>
+                  <span
+                  *ngIf="
+                  riskAssessmentFb.get('dateTime')?.hasError('required') && (riskAssessmentFb.get('dateTime').dirty 
+                  || riskAssessmentFb.get('dateTime').touched) "
+                  class="invalid-feedback"
+                >
+                Date is Required</span
+                >
+               
+                  <label class="form-label mt-1 mb-0"
+                >Time</label>
+                <input [ngxMatTimepicker]="timepicker" format="24" [value]="setTime" class="form-control" />
+          <ngx-mat-timepicker  #timepicker (timeSet)="getTime($event,timepicker)" ></ngx-mat-timepicker>
+          <!-- <span *ngIf=" IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty  || IncidentReport.get('timeOfTheIncident').touched) " class="invalid-feedback" >
+            Select Time is Required</span> -->
               </p>
             </div>
           </div>
@@ -616,13 +646,13 @@
                 type="fullname"
                 class="form-control"
                 aria-describedby="emailHelp"
-                formControlName="siteName"
+                formControlName="siteName"  [value]= "siteControls.siteName.value"
                 [class.is-invalid]="riskAssessmentFb.get('siteName')?.hasError('required') 
                 && (riskAssessmentFb.get('siteName').dirty || riskAssessmentFb.get('siteName').touched) " />
                 <span
                 *ngIf="
                 riskAssessmentFb.get('siteName')?.hasError('required') && (riskAssessmentFb.get('siteName').dirty 
-                || riskAssessmentFb.get('siteName').touched) "
+                || riskAssessmentFb.get('siteName').touched) "  class="invalid-feedback"
                 
               >
              Site  Name is Required</span
@@ -639,12 +669,13 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="customerName"
+                [value]= "siteControls.customerName.value"
                 [class.is-invalid]="riskAssessmentFb.get('customerName')?.hasError('required') 
                 && (riskAssessmentFb.get('customerName').dirty || riskAssessmentFb.get('customerName').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('customerName')?.hasError('required') && (riskAssessmentFb.get('customerName').dirty 
-                || riskAssessmentFb.get('customerName').touched) ">
+                || riskAssessmentFb.get('customerName').touched) "  class="invalid-feedback">
                 customer Name is Required 
               </span>
             </div>
@@ -659,12 +690,13 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="streetNo"
+                [value]= "siteControls.streetNo.value"
                 [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required') 
                 && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('streetNo')?.hasError('required') && (riskAssessmentFb.get('streetNo').dirty 
-                || riskAssessmentFb.get('streetNo').touched) ">
+                || riskAssessmentFb.get('streetNo').touched) "  class="invalid-feedback">
                 street Number is Required 
               </span> 
             </div>
@@ -679,12 +711,13 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="streetAddr"
+                [value]= "siteControls.streetAddr.value"
                 [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
                 && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty 
-                || riskAssessmentFb.get('streetAddr').touched) ">
+                || riskAssessmentFb.get('streetAddr').touched) "  class="invalid-feedback">
                 Street Name is Required 
               </span>
             </div>
@@ -702,7 +735,7 @@
                 <span
                 *ngIf="
                 riskAssessmentFb.get('town')?.hasError('required') && (riskAssessmentFb.get('town').dirty 
-                || riskAssessmentFb.get('town').touched) ">
+                || riskAssessmentFb.get('town').touched) "  class="invalid-feedback">
                 Town/City is Required 
               </span>
             </div>
@@ -714,6 +747,7 @@
                 class="form-select form-control col"
                 aria-label="Default select example"
                 formControlName="statesSWMS"
+                [value]= "siteControls.statesSWMS.value"
                 [class.is-invalid]="riskAssessmentFb.get('statesSWMS')?.hasError('required') 
                 && (riskAssessmentFb.get('statesSWMS').dirty || riskAssessmentFb.get('statesSWMS').touched) " >
                
@@ -723,7 +757,7 @@
               <span
               *ngIf="
               riskAssessmentFb.get('statesSWMS')?.hasError('required') && (riskAssessmentFb.get('statesSWMS').dirty 
-              || riskAssessmentFb.get('statesSWMS').touched) ">
+              || riskAssessmentFb.get('statesSWMS').touched) "  class="invalid-feedback">
               State is Required 
             </span>
             </div>
@@ -738,12 +772,13 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="custConct"
+                [value]= "siteControls.custConct.value"
                 [class.is-invalid]="riskAssessmentFb.get('custConct')?.hasError('required') 
                 && (riskAssessmentFb.get('custConct').dirty || riskAssessmentFb.get('custConct').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('custConct')?.hasError('required') && (riskAssessmentFb.get('custConct').dirty 
-                || riskAssessmentFb.get('custConct').touched) ">
+                || riskAssessmentFb.get('custConct').touched) "  class="invalid-feedback">
                 Customer Contact is Required 
               </span>
             </div>
@@ -758,12 +793,13 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="custConctPh"
+                [value]= "siteControls.custConctPh.value"
                 [class.is-invalid]="riskAssessmentFb.get('custConctPh')?.hasError('required') 
                 && (riskAssessmentFb.get('custConctPh').dirty || riskAssessmentFb.get('custConctPh').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('custConctPh')?.hasError('required') && (riskAssessmentFb.get('custConctPh').dirty 
-                || riskAssessmentFb.get('custConctPh').touched) ">
+                || riskAssessmentFb.get('custConctPh').touched) " class="invalid-feedback">
                 Customer Contact is Required 
               </span>
             </div>
@@ -778,13 +814,13 @@
                 class="form-control"
                 aria-describedby="emailHelp"
                 formControlName="custEmail"
-              
+                [value]= "siteControls.custEmail.value"
                 [class.is-invalid]="riskAssessmentFb.get('custEmail')?.hasError('required') 
                 && (riskAssessmentFb.get('custEmail').dirty || riskAssessmentFb.get('custEmail').touched) " >
                 <span
                 *ngIf="
                 riskAssessmentFb.get('custEmail')?.hasError('required') && (riskAssessmentFb.get('custEmail').dirty 
-                || riskAssessmentFb.get('custEmail').touched) ">
+                || riskAssessmentFb.get('custEmail').touched) "  class="invalid-feedback">
                 Customer Email is Required 
               </span>
             </div>
@@ -808,7 +844,7 @@
             <span
             *ngIf="
             riskAssessmentFb.get('jobNumber')?.hasError('required') && (riskAssessmentFb.get('jobNumber').dirty 
-            || riskAssessmentFb.get('jobNumber').touched) ">
+            || riskAssessmentFb.get('jobNumber').touched) "  class="invalid-feedback">
             Job Number  is Required 
           </span> 
             </div>
@@ -833,7 +869,7 @@
                 <span
             *ngIf="
             riskAssessmentFb.get('projectManagerSWMS')?.hasError('required') && (riskAssessmentFb.get('projectManagerSWMS').dirty 
-            || riskAssessmentFb.get('projectManagerSWMS').touched) ">
+            || riskAssessmentFb.get('projectManagerSWMS').touched) "  class="invalid-feedback">
             project ManagerSWMS  is Required 
           </span> 
             </div>
@@ -860,7 +896,7 @@
               <span
                 *ngIf="
                 riskAssessmentFb.get('jurisdiction')?.hasError('required') && (riskAssessmentFb.get('jurisdiction').dirty 
-                || riskAssessmentFb.get('jurisdiction').touched) ">
+                || riskAssessmentFb.get('jurisdiction').touched) "  class="invalid-feedback">
                Jurisdiction is Required 
               </span>
             </div>
@@ -884,7 +920,7 @@
               <span
                 *ngIf="
                 riskAssessmentFb.get('safetyLeg')?.hasError('required') && (riskAssessmentFb.get('safetyLeg').dirty 
-                || riskAssessmentFb.get('safetyLeg').touched) ">
+                || riskAssessmentFb.get('safetyLeg').touched) "  class="invalid-feedback">
                 safety Legislation is Required 
               </span>
             </div>
@@ -908,7 +944,7 @@
               <span
                 *ngIf="
                 riskAssessmentFb.get('regulator')?.hasError('required') && (riskAssessmentFb.get('regulator').dirty 
-                || riskAssessmentFb.get('regulator').touched) ">
+                || riskAssessmentFb.get('regulator').touched) "  class="invalid-feedback">
                 safety Legislation is Required 
               </span>
             </div>
@@ -1104,7 +1140,7 @@
                 <span
                 *ngIf="sdsRegisterFA().controls[i].get('chemicalName')?.hasError('required') 
                 && (sdsRegisterFA().controls[i].get('chemicalName').dirty 
-                || sdsRegisterFA().controls[i].get('chemicalName').touched) ">
+                || sdsRegisterFA().controls[i].get('chemicalName').touched) "  class="invalid-feedback">
                 Chemical Name is Required 
               </span>
                 </div>
@@ -1127,7 +1163,7 @@
                     <span
                 *ngIf="sdsRegisterFA().controls[i].get('location')?.hasError('required') 
                 && (sdsRegisterFA().controls[i].get('location').dirty 
-                || sdsRegisterFA().controls[i].get('location').touched) ">
+                || sdsRegisterFA().controls[i].get('location').touched) "  class="invalid-feedback">
                 Location is Required 
               </span>
                 </div>
@@ -1153,7 +1189,7 @@
                 <span
                 *ngIf="sdsRegisterFA().controls[i].get('hazardous')?.hasError('required') 
                 && (sdsRegisterFA().controls[i].get('hazardous').dirty 
-                || sdsRegisterFA().controls[i].get('hazardous').touched) ">
+                || sdsRegisterFA().controls[i].get('hazardous').touched) "  class="invalid-feedback">
                 Hazardous is Required 
               </span>
                 </div>
@@ -1175,7 +1211,7 @@
                     <span
                 *ngIf="sdsRegisterFA().controls[i].get('quantity')?.hasError('required') 
                 && (sdsRegisterFA().controls[i].get('quantity').dirty 
-                || sdsRegisterFA().controls[i].get('quantity').touched) ">
+                || sdsRegisterFA().controls[i].get('quantity').touched) " class="invalid-feedback">
                 Quantity is Required 
               </span>
                 </div>
@@ -1197,7 +1233,7 @@
                 <span
                 *ngIf="sdsRegisterFA().controls[i].get('expDate')?.hasError('required') 
                 && (sdsRegisterFA().controls[i].get('expDate').dirty 
-                || sdsRegisterFA().controls[i].get('expDate').touched) ">
+                || sdsRegisterFA().controls[i].get('expDate').touched) " class="invalid-feedback">
                 Expiry Date is Required 
               </span>
                 </div>
@@ -1375,7 +1411,7 @@
                 <span
                 *ngIf="
                 riskAssessmentFb.get('employee2')?.hasError('required') && (riskAssessmentFb.get('employee2').dirty 
-                || riskAssessmentFb.get('employee2').touched) ">
+                || riskAssessmentFb.get('employee2').touched) " class="invalid-feedback">
                 Employee Name is Required 
               </span>
             </div>
@@ -1600,7 +1636,14 @@
             <label class="form-label"
               >Date</label
             >
-            <input type="date" class="form-control" formControlName="date" />
+            <!-- <input type="date" class="form-control" formControlName="date" /> -->
+            <input  matInput  [matDatepicker]="datepicker2"
+            class="form-control"
+            formControlName="date"
+            [value]="maxDate"
+            placeholder="dd-mm-yyyy" readonly>
+            <mat-datepicker-toggle matSuffix [for]="datepicker2" [disabled]="true"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker2 ></mat-datepicker>
           </div>
         </div>
         <hr />
@@ -1840,14 +1883,37 @@
         </div>
         <div class="col-3">
           <label class="form-label"
-            >Date/Time</label
+            >Date</label
           >
           <p>
-            <input
+            <input  matInput  [matDatepicker]="datepicker3" [max]="maxDate" 
+                  class="mr-1 form-control"
+                  formControlName="dateTime"
+                  (dateChange)="getDate( $event)"
+                  
+                  [class.is-invalid]="riskAssessmentFb.get('dateTime')?.hasError('required') 
+                  && (riskAssessmentFb.get('dateTime').dirty || riskAssessmentFb.get('dateTime').touched) "
+                  placeholder="dd-mm-yyyy">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker3 ></mat-datepicker>
+                  <span
+                  *ngIf="
+                  riskAssessmentFb.get('dateTime')?.hasError('required') && (riskAssessmentFb.get('dateTime').dirty 
+                  || riskAssessmentFb.get('dateTime').touched) "
+                  class="invalid-feedback"
+                >
+                Date is Required</span
+                >
+               
+                  <label class="form-label mt-1 mb-0"
+                >Time</label>
+                <input [ngxMatTimepicker]="timepicker" format="24" [value]="setTime" class="form-control" />
+          <ngx-mat-timepicker  #timepicker (timeSet)="getTime($event,timepicker)" ></ngx-mat-timepicker>
+            <!-- <input
               type="date"
               class="mr-1 form-control"
               value=""
-              formControlName="dateTime"/>
+              formControlName="dateTime"/> -->
           </p>
         </div>
       </div>
@@ -2503,7 +2569,7 @@
   
 </div>
 <br>
-<div *ngIf="check=='print'">
+<div *ngIf="check=='print' && selectedFile1">
   <span *ngFor="let img of selectedFile1">
     <div >
       <img  height="400" width="400" [src]="img">

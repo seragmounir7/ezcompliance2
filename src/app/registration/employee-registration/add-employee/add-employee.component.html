@@ -1,0 +1,676 @@
+<div class="btn btn-outline-primary " [routerLink]="['/admin/registration/employeeRegistration']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+
+<div class="container card px-4 py-4">
+    <form [formGroup]="empDetails">
+      <h1 class="text-center mt-3 pt-3">
+        <p class="title">Employee Information Preview</p>
+      </h1>
+  
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            [ngClass]="profile === true ? 'nav-link active' : 'nav-link outline'"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            (click)="profileshow()"
+            aria-selected="true"
+          >
+            Profile
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            [ngClass]="
+              LicenceInfo === true ? 'nav-link active' : 'nav-link outline'
+            "
+            id="LicenceInfo-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#LicenceInfo"
+            type="button"
+            role="tab"
+            aria-controls="LicenceInfo"
+            (click)="LicenceInfoshow()"
+            aria-selected="false"
+          >
+            Licence And Quaifications
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            [ngClass]="
+              PPERegister === true ? 'nav-link active' : 'nav-link outline'
+            "
+            id="PPERegister-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#PPERegister"
+            type="button"
+            role="tab"
+            aria-controls="PPERegister"
+            (click)="PPERegisteshow()"
+            aria-selected="false"
+          >
+            PPE Register
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="profile"
+          role="tabpanel"
+          *ngIf="profile"
+          aria-labelledby="profile-tab"
+        >
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Title</label
+              >
+              <input
+                type="text"
+                formControlName="profTitie"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.profTitie.touched || submitted) && registerFormControl.profTitie.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.profTitie.touched || submitted) && registerFormControl.profTitie.errors?.required">
+              Title is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >First Name</label
+              >
+              <input
+                type="text"
+                formControlName="profFirst"
+                class="form-control"
+                [ngClass]="formData"
+                [class.is-invalid]="(registerFormControl.profFirst.touched || submitted) && registerFormControl.profFirst.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.profFirst.touched || submitted) && registerFormControl.profFirst.errors?.required">
+              First Name is required 
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                formControlName="porfListName"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfListName.touched || submitted) && registerFormControl.porfListName.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfListName.touched || submitted) && registerFormControl.porfListName.errors?.required">
+              Last Name is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Email</label
+              >
+              <input
+                type="text"
+                formControlName="porfEmail"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfEmail.touched || submitted) && registerFormControl.porfEmail.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfEmail.touched || submitted) && registerFormControl.porfEmail.errors?.required">
+              Email is required
+          </span>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Position</label
+              >
+              <input
+                type="text"
+                formControlName="porfPosition"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.porfPosition.touched || submitted) && registerFormControl.porfPosition.errors?.required "
+  
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfPosition.touched || submitted) && registerFormControl.porfPosition.errors?.required">
+              Position is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Department</label
+              >
+              <input
+                type="text"
+                formControlName="porfDepartment"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfDepartment.touched || submitted) && registerFormControl.porfDepartment.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfDepartment.touched || submitted) && registerFormControl.porfDepartment.errors?.required">
+              Department is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Phone</label
+              >
+              <input
+                type="text"
+                formControlName="porfPhone"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required">
+              Phone Number is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Mobile</label
+              >
+              <input
+                type="text"
+                formControlName="porfMobile"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfMobile.touched || submitted) && registerFormControl.porfMobile.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfMobile.touched || submitted) && registerFormControl.porfMobile.errors?.required">
+              Mobile Number is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label class="form-label mb-3">Role</label>
+              <select class="form-select form-control" aria-label="Default select example" formControlName="roleId"
+                 [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
+                
+                <option selected hidden>Select</option>
+                <option></option>
+      
+              </select>
+              <span *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required  " class="invalid-feedback" >
+                Role is Required</span>
+            </div>
+          </div>
+          
+          <!-- <div class="row text-center">
+            <div class="mt-2 col-2">
+              <input  [value]="roleId._id" *ngFor="let jobNo of allJobNumbers"{{jobNo.jobNumber}}
+                type="radio"
+                formControlName="porfEmployee"
+                name="porfEmployee"
+                class="form-check-input mr-1"
+                value="Employee"
+              />
+              <label for="exampleFormControlInput1" class="form-label label_2"
+                >Employee</label
+              >
+            </div>
+            <div class="mt-2 col-2">
+              <input
+                type="radio"
+                formControlName="porfEmployee"
+                name="porfEmployee"
+                class="form-check-input mr-1"
+                value="Manager"
+              />
+              <label for="exampleFormControlInput1" class="form-label label_2"
+                >Manager</label
+              >
+            </div>
+            <div class="mt-2 col-2">
+              <input
+                type="radio"
+                formControlName="porfEmployee"
+                name="porfEmployee"
+                class="form-check-input mr-1"
+                value="Administrater"
+              />
+              <label for="exampleFormControlInput1" class="form-label label_2"
+                >Administrater</label
+              >
+            </div>
+          </div> -->
+  
+          <div class="row">
+            <div class="mb-3 mt-3 col-5">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Street Address</label
+              >
+              <input
+                type="text"
+                formControlName="porfStreetAddress"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required">
+              Street Address is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >City/town</label
+              >
+              <input
+                type="text"
+                formControlName="porfCityTown"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfCityTown.touched || submitted) && registerFormControl.porfCityTown.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfCityTown.touched || submitted) && registerFormControl.porfCityTown.errors?.required">
+              City/town is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-2">
+              <label for="exampleFormControlInput1" class="form-label"
+                >State</label
+              >
+              <input
+                type="text"
+                formControlName="porfState"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfState.touched || submitted) && registerFormControl.porfState.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfState.touched || submitted) && registerFormControl.porfState.errors?.required">
+              State is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-2">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Postal Code</label
+              >
+              <input
+                type="text"
+                formControlName="porfPostalCode"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required">
+              Postal Code is required
+          </span>
+            </div>
+          </div>
+          <div class="row py-3">
+            <div class="offset-1 col-3 mt-2">
+              <img
+              [src]="file1"
+              onerror=" this.src='../../../assets/img/uploadImg.png' "
+                alt=""
+                width="130"
+                height="130"
+              />
+            </div>
+            <div class="col-5 ml-4">
+              <div class="my-3">
+                <label for="formFile" class="form-label">Upload Image</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  (change)="browser1($event)"
+                  [class.is-invalid]="(registerFormControl.porfUploadImage.touched || submitted) && registerFormControl.porfUploadImage.errors?.required "
+                />
+              </div>
+              <span class="text-danger"
+              *ngIf="(registerFormControl.porfUploadImage.touched || submitted) && registerFormControl.porfUploadImage.errors?.required">
+              Upload Image is required
+          </span>
+            </div>
+          </div>
+  
+          <div class="row mt-3">
+            <div class="col-12">
+              <p class="emergrncy_1">Emergency Contact Information</p>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >First Name</label
+              >
+              <input
+                type="text"
+                formControlName="EmpFirst"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.EmpFirst.touched || submitted) && registerFormControl.EmpFirst.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.EmpFirst.touched || submitted) && registerFormControl.EmpFirst.errors?.required">
+              First Name is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                formControlName="empLastName"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.empLastName.touched || submitted) && registerFormControl.empLastName.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.empLastName.touched || submitted) && registerFormControl.empLastName.errors?.required">
+              Last Name is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Relationship</label
+              >
+              <input
+                type="text"
+                formControlName="empRelationship"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.empRelationship.touched || submitted) && registerFormControl.empRelationship.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.empRelationship.touched || submitted) && registerFormControl.empRelationship.errors?.required">
+              Relationship is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Email
+              </label>
+              <input
+                type="text"
+                formControlName="empEmail"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.empEmail.touched || submitted) && registerFormControl.empEmail.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.empEmail.touched || submitted) && registerFormControl.empEmail.errors?.required">
+              Email is required
+          </span>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Phone</label
+              >
+              <input
+                type="text"
+                formControlName="empPhone"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.empPhone.touched || submitted) && registerFormControl.empPhone.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.empPhone.touched || submitted) && registerFormControl.empPhone.errors?.required">
+              Phone Number is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Mobile</label
+              >
+              <input
+                type="text"
+                formControlName="empMobile"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.empMobile.touched || submitted) && registerFormControl.empMobile.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.empMobile.touched || submitted) && registerFormControl.empMobile.errors?.required">
+              Mobile Number is required
+          </span>
+            </div>
+          </div>
+        </div>
+  
+        <div
+          class="tab-pane fade show active"
+          id="LicenceInfo"
+          role="tabpanel"
+          *ngIf="LicenceInfo"
+          aria-labelledby="LicenceInfo-tab"
+        >
+        <div formArrayName="UploadLicenceArr">
+          <div *ngFor="let row of addLicence().controls; let filed = index">
+            <div [formGroupName]="filed">
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Licence Name</label
+              >
+              <input
+                type="text"
+                formControlName="LicenceName"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.LicenceName.touched || submitted) && registerFormControl.LicenceName.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.LicenceName.touched || submitted) && registerFormControl.LicenceName.errors?.required">
+              Licence Name is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Licence Number</label
+              >
+              <input
+                type="text"
+                formControlName="LicenceNumber"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.LicenceNumber.touched || submitted) && registerFormControl.LicenceNumber.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.LicenceNumber.touched || submitted) && registerFormControl.LicenceNumber.errors?.required">
+              Licence Number is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Training Organisation</label
+              >
+              <input
+                type="text"
+                formControlName="TrainingQrginisation"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.TrainingQrginisation.touched || submitted) && registerFormControl.TrainingQrginisation.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.TrainingQrginisation.touched || submitted) && registerFormControl.TrainingQrginisation.errors?.required">
+              Training Organisation is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Expiry Date
+              </label>
+              <input
+                type="date"
+                formControlName="ExpiryDate"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.ExpiryDate.touched || submitted) && registerFormControl.ExpiryDate.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.ExpiryDate.touched || submitted) && registerFormControl.ExpiryDate.errors?.required">
+              Expiry Date is required
+          </span>
+            </div>
+          </div>
+         
+                <div class="row">
+                  <div class="col-10">
+                    <div class="my-3">
+                      <label for="formFile1" class="form-label"
+                        >Upload Licence</label
+                      >
+                      <input
+                        class="form-control"
+                        type="file"
+                        (change)="browser($event,filed)"
+                      />
+                      <!-- <span class="text-danger"
+              *ngIf="(addLicence(filed).file.touched || submitted) && addLicence(filed).file.errors?.required">
+              Upload Licence is required
+          </span> -->
+                    </div>
+                  </div>
+  
+                  <div class="col-1 mt-4">
+                    <div class="my-4">
+                      <span class="material-icons" (click)="addFiled()"
+                      >add_circle_outline
+                    </span>
+                    </div>
+                    
+                  </div>
+                  <div class="col-1 mt-4">
+                    <div class="my-4">
+                      <span class="material-icons" (click)="removeFiled(filed)">
+                        remove_circle_outline
+                      </span>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+          <!-- <div class="col-2 float-right" style="margin-top: -50px">
+            <button
+              (click)="addFiled()"
+              class="btn btn-outline-primary"
+              style="width: 100%"
+            >
+              Add
+            </button>
+          </div> -->
+        </div>
+  
+        <div
+          class="tab-pane fade show active"
+          id="PPERegister"
+          role="tabpanel"
+          *ngIf="PPERegister"
+          aria-labelledby="PPERegister-tab"
+        >
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >PPE Supplied</label
+              >
+              <input
+              type="text"
+              formControlName="PPESupplied"
+                class="form-control"
+                id="siteName"
+                [class.is-invalid]="(registerFormControl.PPESupplied.touched || submitted) && registerFormControl.PPESupplied.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.PPESupplied.touched || submitted) && registerFormControl.PPESupplied.errors?.required">
+              PPE Supplied is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Brand or Type</label
+              >
+              <input
+                type="text"
+                formControlName="BrandOrType"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.BrandOrType.touched || submitted) && registerFormControl.BrandOrType.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.BrandOrType.touched || submitted) && registerFormControl.BrandOrType.errors?.required">
+              Brand or Type is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Issue Date</label
+              >
+              <input
+                type="date"
+                formControlName="IssueDate"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.IssueDate.touched || submitted) && registerFormControl.IssueDate.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.IssueDate.touched || submitted) && registerFormControl.IssueDate.errors?.required">
+              Issue Date is required
+          </span>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Replacement Date
+              </label>
+              <input
+                type="date"
+                formControlName="ReplacementDate"
+                class="form-control"
+                [class.is-invalid]="(registerFormControl.ReplacementDate.touched || submitted) && registerFormControl.ReplacementDate.errors?.required "
+              />
+              <span class="text-danger"
+              *ngIf="(registerFormControl.ReplacementDate.touched || submitted) && registerFormControl.ReplacementDate.errors?.required">
+              Replacement Date is required
+          </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 mt-3 col-12">
+              <label>Signature</label>
+              <div class="sign">
+                <signature-pad
+                  value="Signature"
+                  [options]="signaturePadOptions"
+                  (onBeginEvent)="drawStart()"
+                  (onEndEvent)="drawComplete()"
+                ></signature-pad>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary btn_1" (click)="clear()">
+              Clear
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-primary btn_1"
+              *ngIf="!dataEmp"
+              (click)="onFormSubmit()"
+              
+            >
+              Submit
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-primary btn_1"
+              *ngIf="dataEmp"
+              (click)="onFormUpdate($event)"
+              
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div> 
+  

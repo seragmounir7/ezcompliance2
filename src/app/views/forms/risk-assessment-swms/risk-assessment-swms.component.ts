@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { data } from 'jquery';
 import { ThrowStmt } from '@angular/compiler';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 
 @Component({
@@ -22,10 +23,12 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
   templateUrl: './risk-assessment-swms.component.html',
   styleUrls: ['./risk-assessment-swms.component.scss'],
 })
-export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
+export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   @ViewChild('projectManager') projectManager: ElementRef;
   @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
-
+  @ViewChild('Signature1') signaturePad1: SignaturePad;
+  @ViewChild('Signature2') signaturePad2: SignaturePad;
+  @ViewChild('timepicker') timepicker: ElementRef;
   public Editor = ClassicEditor;
 
   riskAssessmentFb!: FormGroup;
@@ -45,14 +48,15 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   allJobNumbers = [];
   allHazards = [];
   allContrlActReq = [];
-  id:any;
-  isSelected=[];
-  isHazardous=[];
-  hasJuridiction=false;
-  hasLegist=false;
-  hasRegulation=false;
-  
-  cardImageBase64:any;
+  id: any;
+  isSelected = [];
+  isHazardous = [];
+  hasJuridiction = false;
+  hasLegist = false;
+  hasRegulation = false;
+  minDate = new Date();
+  maxDate = new Date();
+  cardImageBase64: any;
   highRiskConstruction2 = [
     {
       label: 'Working in or near trenches or shafts deeper than 1.5metres',
@@ -141,24 +145,26 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
   riskArr = [];
   COPArr = [];
   ppeArr = [];
-  taskArr=[];
+  taskArr = [];
   licenceArr = [];
   jobTaskData = [];
   jobTaskSelected = [];
-  hazard=[];
+  hazard = [];
   projectMang = [];
   allChemicals = [];
   allCOPSelected = [];
   singRequired: any;
   signRequired: any;
-  @ViewChild('Signature1') signaturePad1: SignaturePad;
-  @ViewChild('Signature2') signaturePad2: SignaturePad;
-  regulatorData: any=[];
-  safety: any=[];
-  JurisdictionData: any=[];
-  states: any=[];
-  check:any;
-  selectedFile1=[];
+
+
+  regulatorData: any = [];
+  safety: any = [];
+  JurisdictionData: any = [];
+  states: any = [];
+  check: any;
+  selectedFile1 = [];
+  dateGet: Date;
+  setTime:any
   constructor(
     public router: Router,
     private dialog: MatDialog,
@@ -169,34 +175,34 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     public upload: UploadFileServiceService
   ) {
     this.check = localStorage.getItem('key');
-    console.log("key check",this.check);
-    this.id=this.activatedRoute.snapshot.params.id;
-    console.log("id",this.id)
+    console.log("key check", this.check);
+    this.id = this.activatedRoute.snapshot.params.id;
+    console.log("id", this.id)
     this.riskAssessmentFb = this.fb.group({
       SWMSTab: this.fb.array([]),
-      jobNumber: ['',Validators.required],
+      jobNumber: ['', Validators.required],
       siteName: ['', Validators.required],
-      customerName: ['',Validators.required],
-      streetNo: ['',Validators.required],
-      streetAddr: ['',Validators.required],
-      suburb: ['',Validators.required],
-      town:['',Validators.required],
-      custConct: ['',Validators.required],
-      custConctPh: ['',Validators.required],
-      custEmail: ['',Validators.required],
-      employee1: ['',Validators.required],
-      employee2: ['',Validators.required],
-      dateTime: ['',Validators.required],
-      statesSWMS: ['',Validators.required],
-      projectManager: ['',Validators.required],
-      date: [new Date() ,Validators.required],
-      projectManagerSWMS: ['',Validators.required],
-      jurisdiction: ['',Validators.required],
-      safetyLeg: ['',Validators.required],
-      regulator: ['',Validators.required],
-      location: ['',Validators.required],
+      customerName: ['', Validators.required],
+      streetNo: ['', Validators.required],
+      streetAddr: ['', Validators.required],
+      suburb: ['', Validators.required],
+      town: ['', Validators.required],
+      custConct: ['', Validators.required],
+      custConctPh: ['', Validators.required],
+      custEmail: ['', Validators.required],
+      employee1: ['', Validators.required],
+      employee2: ['', Validators.required],
+      dateTime: ['', Validators.required],
+      statesSWMS: ['', Validators.required],
+      projectManager: ['', Validators.required],
+      date: [new Date()],
+      projectManagerSWMS: ['', Validators.required],
+      jurisdiction: ['', Validators.required],
+      safetyLeg: ['', Validators.required],
+      regulator: ['', Validators.required],
+      location: [''],
       qty: [],
-      expiryDate: ['',Validators.required],
+      //expiryDate: ['',Validators.required],
       hazardous: this.fb.array([]),
       ppeSelection: this.fb.array([]),
       file: this.fb.array([]),
@@ -204,18 +210,21 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
       riskLevel: this.fb.array([]),
       residualRisk: this.fb.array([]),
       persResp: this.fb.array([]),
-      jobTask:this.fb.array([]),
-      riskConstruction:this.fb.array([]),
-      riskConstruction2:this.fb.array([]),
-      PPEselection:this.fb.array([]),
-      PPESelection2:this.fb.array([]),
-      licence:this.fb.array([]),
-      editor:["",Validators.required],
-      signature1:["",Validators.required],
-      signature2:["",Validators.required]
+      jobTask: this.fb.array([]),
+      riskConstruction: this.fb.array([]),
+      riskConstruction2: this.fb.array([]),
+      PPEselection: this.fb.array([]),
+      PPESelection2: this.fb.array([]),
+      licence: this.fb.array([]),
+      editor: [""],
+      signature1: [""],
+      signature2: [""]
     });
   }
-  
+  get siteControls() {
+    return this.riskAssessmentFb.controls
+  }
+
   ngOnInit(): void {
     this.getAllJobTask();
     this.getAllPPE();
@@ -234,8 +243,7 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     this.getAllSafe();
     this.getAllState();
     this.getAllJurisdiction();
-    if(this.id!="form")
-    {
+    if (this.id != "form") {
       this.getAssessmentByid(this.id);
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
@@ -274,176 +282,189 @@ export class RiskAssessmentSWMSComponent implements OnInit,AfterViewInit {
     this.riskAssessmentFb.get('statesSWMS').valueChanges.subscribe((res) => {
       if (res) {
         console.log(res);
-        
-      for(let i=0;i<this.states.length;i++){
-        if(res===this.states[i]._id){
-          console.log("id found");        
-          
-          this.riskAssessmentFb.get('jurisdiction').setValue(this.states[i].jurisdictionId._id);
-          this.riskAssessmentFb.get('safetyLeg').setValue(this.states[i].safetyLegislationId._id);
-          this.riskAssessmentFb.get('regulator').setValue(this.states[i].regulatorId._id);
-          break;
-        }
-      }
 
-        
+        for (let i = 0; i < this.states.length; i++) {
+          if (res === this.states[i]._id) {
+            console.log("id found");
+
+            this.riskAssessmentFb.get('jurisdiction').setValue(this.states[i].jurisdictionId._id);
+            this.riskAssessmentFb.get('safetyLeg').setValue(this.states[i].safetyLegislationId._id);
+            this.riskAssessmentFb.get('regulator').setValue(this.states[i].regulatorId._id);
+            break;
+          }
+        }
+
+
       }
     });
   }
-  getAssessmentByid(id)
-  {
-    console.log("iddd",id);
-    this.logicalFormInfo.getAssessmentbyId(id).subscribe((res:any)=>
-    {
-      this.allCOPSelected=[];
-      console.log("assesment by id",res.data);
-      let check =async () => { this.signaturePad1 != null }
+  getAssessmentByid(id) {
+    console.log("iddd", id);
+    this.logicalFormInfo.getAssessmentbyId(id).subscribe((res: any) => {
+      this.allCOPSelected = [];
+      console.log("assesment by id", res.data);
+      let check = async () => { this.signaturePad1 != null }
       check().then(() => {
         this.signaturePad1.fromDataURL(res.data.signature1)
       })
-      let check1 =async () => { this.signaturePad2 != null }
+      // let time=res.data.dateTime
+      //  let newTime=time.split(/[-,T]/)
+      //  newTime=newTime.splice(3).toString()
+      //  newTime=newTime.split("")
+      //  newTime=newTime.splice(0,5).join('')
+      //  this.setTime=newTime.toString() 
+      //  console.log("date=================>>>>>>>>>.",res.data.dateTime);
+
+       let  dateTime=new  Date(res.data.dateTime) 
+       
+       let time=dateTime.toTimeString()
+       console.log("date1=================>>>>>>>>>.",time);
+       this.setTime=time.slice(0,5)
+       // console.log("date2=================>>>>>>>>>.",newTime);
+        //this.setTime=newTime.splice(0,5).join('')
+        // newTime=newTime.split("")
+       // let  newTime2=newTime.splice(5,3).join('')
+        // this.setTime=newTime.toString() 
+        console.log("date=================>>>>>>>>>.", this.setTime);
+
+       let date=res.data.dateTime
+     //let newDate=date.split(/[-,T]/)
+
+    //  newTime=newTime.splice(3).toString()
+      this.dateGet= new Date(date)
+    
+     
+      let check1 = async () => { this.signaturePad2 != null }
       check1().then(() => {
         this.signaturePad2.fromDataURL(res.data.signature2)
       })
-     if( res?.data.jurisdiction!="")
-     {
-       this.hasJuridiction=true;
-     }
-     if( res?.data.safetyLeg!="")
-     {
-       this.hasLegist=true;
-     }
-     if( res?.data.regulator!="")
-     {
-       this.hasRegulation=true;
-     }
+      if (res?.data.jurisdiction != "") {
+        this.hasJuridiction = true;
+      }
+      if (res?.data.safetyLeg != "") {
+        this.hasLegist = true;
+      }
+      if (res?.data.regulator != "") {
+        this.hasRegulation = true;
+      }
       this.riskAssessmentFb.patchValue({
         ...res.data
       })
       const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
-      while(item.length>0)
-      {
+      while (item.length > 0) {
         item.removeAt(0);
       }
-      res?.data?.SDSRegister.forEach((element,index) => {
-        this.chemicalTask=true;
-        console.log("file name",element);
-        
-        if(element?.chemicalName!="")
-        {
-          this.isSelected[index]=true;
+      res?.data?.SDSRegister.forEach((element, index) => {
+        this.chemicalTask = true;
+        console.log("file name", element);
+
+        if (element?.chemicalName != "") {
+          this.isSelected[index] = true;
         }
-        if(element?.hazardous!="")
-        {
-          this.isHazardous[index]=true;
+        if (element?.hazardous != "") {
+          this.isHazardous[index] = true;
         }
         this.PushActionSDSRegister(element)
-        this.selectedFile1.push(element.file);
-        console.log("selected",this.selectedFile1);
+        if(element.file){
+          this.selectedFile1.push(element.file);
+          console.log("selected", this.selectedFile1);
+        }
+        
       });
       res.data.riskLevel.forEach(element => {
-        console.log("riskLevel",element.riskLevel);
+        console.log("riskLevel", element.riskLevel);
         this.PushActionRiskLevel(element);
       });
       res.data.residualRisk.forEach(element => {
-       this.PushActionResiRiskLevel(element);
+        this.PushActionResiRiskLevel(element);
       });
       res.data.riskLevel.forEach(element => {
-       this.PushActionPersonRes(element);
+        this.PushActionPersonRes(element);
       });
-     res.data.codeOfPract.forEach(element => {
-       console.log("eleee",element);
-       this.allCOPSelected.push(element);
-     });
-     res.data.identifyHazards.forEach((element,index) => {
-       console.log("eleeeme",element);
-       this.checkHazards(element,index);
-      //  element.allHazardsTitle.forEach(ele => { 
-      //   this.checkHazards(ele,index);
-      //  });
-     });
-      res.data.jobTask.forEach((element,index) => {
-        this.checkJobtask(element,index);
+      res.data.codeOfPract.forEach(element => {
+        console.log("eleee", element);
+        this.allCOPSelected.push(element);
+      });
+      res.data.identifyHazards.forEach((element, index) => {
+        console.log("eleeeme", element);
+        this.checkHazards(element, index);
+        //  element.allHazardsTitle.forEach(ele => { 
+        //   this.checkHazards(ele,index);
+        //  });
+      });
+      res.data.jobTask.forEach((element, index) => {
+        this.checkJobtask(element, index);
         // this.checkCOP(element,index);
       });
-      res.data.PPEselection.forEach((element,index) => {
-        this.checkPPE(element,index);
+      res.data.PPEselection.forEach((element, index) => {
+        this.checkPPE(element, index);
       });
-      res.data.PPESelection2.forEach((element,index) => {
-        this.checkPPE(element,index);
+      res.data.PPESelection2.forEach((element, index) => {
+        this.checkPPE(element, index);
       });
-      res.data.riskConstruction.forEach((element,index) => {
-        this.checkRisk(element,index);
+      res.data.riskConstruction.forEach((element, index) => {
+        this.checkRisk(element, index);
       });
-      res.data.licence.forEach((element,index) => {
-        this.checkLicense(element,index);
+      res.data.licence.forEach((element, index) => {
+        this.checkLicense(element, index);
       });
     })
+     
+     
   }
-  checkHazards(data,i)
-  {
-    for(let j=0;j<this.jobTaskData.length;j++)
-    {
-        if(this.jobTaskData[j]._id==data._id)
-        {
-          this.jobTaskData[j].allHazardsTitle=[];
-          this.jobTaskData[j].allContrlActReqTitle=[];
-          this.jobTaskData[j].allHazardsTitle=data.allHazardsTitle;
-          this.jobTaskData[j].allContrlActReqTitle=data.allContrlActReqTitle;
-          console.log("allHazardsTitle",this.jobTaskData[j].allHazardsTitle);
-          console.log("allHazardsTitle",this.jobTaskData[j].allContrlActReqTitle);
-          
-        }
+  checkHazards(data, i) {
+    for (let j = 0; j < this.jobTaskData.length; j++) {
+      if (this.jobTaskData[j]._id == data._id) {
+        this.jobTaskData[j].allHazardsTitle = [];
+        this.jobTaskData[j].allContrlActReqTitle = [];
+        this.jobTaskData[j].allHazardsTitle = data.allHazardsTitle;
+        this.jobTaskData[j].allContrlActReqTitle = data.allContrlActReqTitle;
+        console.log("allHazardsTitle", this.jobTaskData[j].allHazardsTitle);
+        console.log("allHazardsTitle", this.jobTaskData[j].allContrlActReqTitle);
+
+      }
     }
   }
-checkJobtask(element,index)
-{
-  let z=this.jobTaskData[index]._id;
-  console.log("z",z);
-  console.log("ele",element[z]);
-  let c= this.riskAssessmentFb.controls['jobTask'] as FormArray
-  let d=c.controls[index] as FormGroup
-  if(element[z])
-  {
-    d.controls[z].setValue(element[z]);
-    this.jobTaskSelected.push(this.jobTaskData[index])
-    console.log("job selected",this.jobTaskSelected);
+  checkJobtask(element, index) {
+    let z = this.jobTaskData[index]._id;
+    console.log("z", z);
+    console.log("ele", element[z]);
+    let c = this.riskAssessmentFb.controls['jobTask'] as FormArray
+    let d = c.controls[index] as FormGroup
+    if (element[z]) {
+      d.controls[z].setValue(element[z]);
+      this.jobTaskSelected.push(this.jobTaskData[index])
+      console.log("job selected", this.jobTaskSelected);
+    }
   }
-}
-checkRisk(element,index)
-{
-  let z=this.highRiskConstruction[index]._id;
-  console.log("ele",element[z]);
-  let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
-  let d=c.controls[index] as FormGroup
-  if(element[z])
-  {
-    d.controls[z].setValue(element[z]);
+  checkRisk(element, index) {
+    let z = this.highRiskConstruction[index]._id;
+    console.log("ele", element[z]);
+    let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+    let d = c.controls[index] as FormGroup
+    if (element[z]) {
+      d.controls[z].setValue(element[z]);
+    }
   }
-}
-checkPPE(element,index)
-{
-  let z=this.PPEselection[index]._id;
-  console.log("ele",element[z]);
-  let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
-  let d=c.controls[index] as FormGroup
-  if(element[z])
-  {
-    d.controls[z].setValue(element[z]);
+  checkPPE(element, index) {
+    let z = this.PPEselection[index]._id;
+    console.log("ele", element[z]);
+    let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray
+    let d = c.controls[index] as FormGroup
+    if (element[z]) {
+      d.controls[z].setValue(element[z]);
+    }
   }
-}
-checkLicense(element,index)
-{
-  let z=this.licenseAndQualification[index]._id;
-  console.log("ele",element[z]);
-  let c= this.riskAssessmentFb.controls['licence'] as FormArray
-  let d=c.controls[index] as FormGroup
-  if(element[z])
-  {
-    d.controls[z].setValue(element[z]);
+  checkLicense(element, index) {
+    let z = this.licenseAndQualification[index]._id;
+    console.log("ele", element[z]);
+    let c = this.riskAssessmentFb.controls['licence'] as FormArray
+    let d = c.controls[index] as FormGroup
+    if (element[z]) {
+      d.controls[z].setValue(element[z]);
+    }
+
   }
-  
-}
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
       if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
@@ -545,7 +566,7 @@ checkLicense(element,index)
   }
   GetriskLevelFG(data): FormGroup {
     return this.fb.group({
-      riskLevel:data.riskLevel
+      riskLevel: data.riskLevel
     });
   }
   residlRiskLevelFG(): FormGroup {
@@ -555,7 +576,7 @@ checkLicense(element,index)
   }
   GetresidlRiskLevelFG(data): FormGroup {
     return this.fb.group({
-      resiRiskLevel:data.resiRiskLevel
+      resiRiskLevel: data.resiRiskLevel
     });
   }
   personResFG(): FormGroup {
@@ -575,7 +596,7 @@ checkLicense(element,index)
   }
   codeOfPrac(index): FormGroup {
     return this.fb.group({
-     cop:['']
+      cop: ['']
     });
   }
   riskCons(index): FormGroup {
@@ -598,30 +619,30 @@ checkLicense(element,index)
   // }
   sdsRegisterFG(): FormGroup {
     return this.fb.group({
-      chemicalName: ['',Validators.required],
-      location: ['',Validators.required],
-      hazardous: ['',Validators.required],
-      quantity: ['',Validators.required],
-      expDate: ['',Validators.required],
-      file:['',Validators.required]
+      chemicalName: [''],
+      location: [''],
+      hazardous: [''],
+      quantity: [''],
+      expDate: [''],
+      file: ['']
     });
   }
   GetsdsRegisterFG(data): FormGroup {
     return this.fb.group({
-      chemicalName:data.chemicalName,
+      chemicalName: data.chemicalName,
       location: data.location,
-      hazardous:data.hazardous ,
-      quantity:data.quantity ,
+      hazardous: data.hazardous,
+      quantity: data.quantity,
       expDate: data.expDate,
-      file:data.file
-   
-    
-    // this.add().controls[index].get("chemicalName").setValue(res.data.arrObj[index].chemicalName)
-    // this.add().controls[index].get("location").setValue(res.data.arrObj[index].location)
-    // this.add().controls[index].get("hazardous").setValue(res.data.arrObj[index].hazardous)
-    // this.add().controls[index].get("quantity").setValue(res.data.arrObj[index].quantity)
-   
-  });
+      file: data.file
+
+
+      // this.add().controls[index].get("chemicalName").setValue(res.data.arrObj[index].chemicalName)
+      // this.add().controls[index].get("location").setValue(res.data.arrObj[index].location)
+      // this.add().controls[index].get("hazardous").setValue(res.data.arrObj[index].hazardous)
+      // this.add().controls[index].get("quantity").setValue(res.data.arrObj[index].quantity)
+
+    });
   }
   removeSDSRegister(i) {
     const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
@@ -651,10 +672,9 @@ checkLicense(element,index)
   };
 
   ngAfterViewInit() {
-    if(this.check=='print')
-    {
-      setTimeout( function() { window.print(); }, 3000);
-      localStorage.setItem('key',' ');
+    if (this.check == 'print') {
+      setTimeout(function () { window.print(); }, 3000);
+      localStorage.setItem('key', ' ');
     }
     // this.signaturePad is now available
     //this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -674,13 +694,13 @@ checkLicense(element,index)
   clear1() {
     console.log('clear1');
     this.signaturePad1.clear();
-    
+
     this.singRequired = this.riskAssessmentFb.controls['signature1'].untouched
   }
   drawStart1() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
-    
+
     //this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].invalid
   }
   drawComplete2() {
@@ -692,13 +712,13 @@ checkLicense(element,index)
   clear2() {
     console.log('clear2');
     this.signaturePad2.clear();
-    
+
     this.signRequired = this.riskAssessmentFb.controls['signature2'].untouched
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
-    
+
     //this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
   }
 
@@ -777,11 +797,11 @@ checkLicense(element,index)
     });
   }
 
- 
-  deleteHazrds(type,title,i,j){
-    console.log('type=>',type,title,i);
+
+  deleteHazrds(type, title, i, j) {
+    console.log('type=>', type, title, i);
     console.log(this.jobTaskSelected[i]);
-    
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${title}"?`,
@@ -793,87 +813,72 @@ checkLicense(element,index)
     }).then((result) => {
       if (result.value) {
         if (type === 'identifyHazards') {
-          this.jobTaskSelected[i].allHazardsTitle.splice(j,1);
+          this.jobTaskSelected[i].allHazardsTitle.splice(j, 1);
         }
         if (type === 'ctrlActreq') {
-          this.jobTaskSelected[i].allContrlActReqTitle.splice(j,1);
+          this.jobTaskSelected[i].allContrlActReqTitle.splice(j, 1);
         }
       }
     });
   }
-  onLicenseChange(e,license,i)
-  {
-     console.log("e",e.target.checked);
-     let c= this.riskAssessmentFb.controls['licence'] as FormArray
-     let d=c.controls[i] as FormGroup
-    if(e.target.checked)
-    {
+  onLicenseChange(e, license, i) {
+    console.log("e", e.target.checked);
+    let c = this.riskAssessmentFb.controls['licence'] as FormArray
+    let d = c.controls[i] as FormGroup
+    if (e.target.checked) {
       d.controls[license].setValue("Open Cable Licence")
     }
-    else
-    {
+    else {
       d.controls[license].reset()
     }
   }
-  onRiskChange(e,risk,i)
-  {
-     console.log("e",e.target.checked);
-     let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
-      let d=c.controls[i] as FormGroup
-    if(e.target.checked)
-    {
+  onRiskChange(e, risk, i) {
+    console.log("e", e.target.checked);
+    let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+    let d = c.controls[i] as FormGroup
+    if (e.target.checked) {
       d.controls[risk].setValue("Working in or near trenches or shafts deeper than 1.5metres")
     }
-    else
-    {
+    else {
       d.controls[risk].reset()
     }
   }
-  onPPEChange(e,ppe,i)
-  {
-     console.log("e",e.target.checked);
-     let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
-     let d=c.controls[i] as FormGroup
-    if(e.target.checked)
-    {
+  onPPEChange(e, ppe, i) {
+    console.log("e", e.target.checked);
+    let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray
+    let d = c.controls[i] as FormGroup
+    if (e.target.checked) {
       d.controls[ppe].setValue("Disposable dust mask")
     }
-    else
-    {
+    else {
       d.controls[ppe].reset()
     }
   }
-  onRiskChange2(e,risk,i)
-  {
-     console.log("e",e.target.checked);
-     let c= this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
-      let d=c.controls[i] as FormGroup
-    if(e.target.checked)
-    {
+  onRiskChange2(e, risk, i) {
+    console.log("e", e.target.checked);
+    let c = this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
+    let d = c.controls[i] as FormGroup
+    if (e.target.checked) {
       d.controls[risk].setValue("Working in or near trenches or shafts deeper than 1.5metres")
     }
-    else
-    {
+    else {
       d.controls[risk].reset()
     }
   }
-  onPPEChange2(e,ppe,i)
-  {
-     console.log("e",e.target.checked);
-     let c= this.riskAssessmentFb.controls['PPESelection2'] as FormArray
-     let d=c.controls[i] as FormGroup
-    if(e.target.checked)
-    {
+  onPPEChange2(e, ppe, i) {
+    console.log("e", e.target.checked);
+    let c = this.riskAssessmentFb.controls['PPESelection2'] as FormArray
+    let d = c.controls[i] as FormGroup
+    if (e.target.checked) {
       d.controls[ppe].setValue("Disposable dust mask")
     }
-    else
-    {
+    else {
       d.controls[ppe].reset()
     }
   }
   onJobtaskSelect(e, jobTaskRecd) {
     // this.jobTaskSelected=[];
-  
+
     console.log('event', e.target.value, jobTaskRecd);
     let item = e.target.value;
     if (e.target.checked) {
@@ -893,26 +898,26 @@ checkLicense(element,index)
 
     for (let k = 0; k < this.riskArr.length; k++) {
       this.riskArr[k] = 0;
-      let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
-      let c1= this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
-      let d=c.controls[k] as FormGroup
-      let d1=c1.controls[k] as FormGroup
+      let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+      let c1 = this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
+      let d = c.controls[k] as FormGroup
+      let d1 = c1.controls[k] as FormGroup
       d.controls[this.highRiskConstruction[k]._id].reset();
       d1.controls[this.highRiskConstruction[k]._id].reset();
     }
     for (let k = 0; k < this.ppeArr.length; k++) {
       this.ppeArr[k] = 0;
-      let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
-      let d=c.controls[k] as FormGroup
+      let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray
+      let d = c.controls[k] as FormGroup
       d.controls[this.PPEselection[k]._id].reset();
-      let c1= this.riskAssessmentFb.controls['PPESelection2'] as FormArray
-      let d1=c1.controls[k] as FormGroup
+      let c1 = this.riskAssessmentFb.controls['PPESelection2'] as FormArray
+      let d1 = c1.controls[k] as FormGroup
       d1.controls[this.PPEselection[k]._id].reset();
     }
     for (let k = 0; k < this.licenceArr.length; k++) {
       this.licenceArr[k] = 0;
-      let c= this.riskAssessmentFb.controls['licence'] as FormArray
-      let d=c.controls[k] as FormGroup
+      let c = this.riskAssessmentFb.controls['licence'] as FormArray
+      let d = c.controls[k] as FormGroup
       d.controls[this.licenseAndQualification[k]._id].reset();
     }
     this.chemicalTask = false;
@@ -929,14 +934,14 @@ checkLicense(element,index)
         this.highRiskConstruction.forEach((highRisk, index) => {
           if (highRisk._id === item) {
             this.riskArr[index] = 1;
-           let c= this.riskAssessmentFb.controls['riskConstruction'] as FormArray
-           let d=c.controls[index] as FormGroup
-           d.controls[this.highRiskConstruction[index]._id].setValue("Working in or near trenches or shafts deeper than 1.5metres")
-           let c1= this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
-           let d1=c1.controls[index] as FormGroup
-           d1.controls[this.highRiskConstruction[index]._id].setValue("Working in or near trenches or shafts deeper than 1.5metres")
-          // //  c.controls[highRisk._id].value
-          console.log("x",d.controls[this.highRiskConstruction[index]._id].value);
+            let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray
+            let d = c.controls[index] as FormGroup
+            d.controls[this.highRiskConstruction[index]._id].setValue("Working in or near trenches or shafts deeper than 1.5metres")
+            let c1 = this.riskAssessmentFb.controls['riskConstruction2'] as FormArray
+            let d1 = c1.controls[index] as FormGroup
+            d1.controls[this.highRiskConstruction[index]._id].setValue("Working in or near trenches or shafts deeper than 1.5metres")
+            // //  c.controls[highRisk._id].value
+            console.log("x", d.controls[this.highRiskConstruction[index]._id].value);
           }
         });
       });
@@ -944,27 +949,27 @@ checkLicense(element,index)
         this.PPEselection.forEach((ppeItem, index) => {
           if (ppeItem._id === item) {
             this.ppeArr[index] = 1;
-            let c= this.riskAssessmentFb.controls['PPEselection'] as FormArray
-            let d=c.controls[index] as FormGroup
+            let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray
+            let d = c.controls[index] as FormGroup
             d.controls[this.PPEselection[index]._id].setValue("Disposable dust mask");
-            let c1= this.riskAssessmentFb.controls['PPESelection2'] as FormArray
-            let d1=c1.controls[index] as FormGroup
+            let c1 = this.riskAssessmentFb.controls['PPESelection2'] as FormArray
+            let d1 = c1.controls[index] as FormGroup
             d1.controls[this.PPEselection[index]._id].setValue("Disposable dust mask");
           }
         });
       });
-element.licence.forEach(ele => {
-  this.licenseAndQualification.forEach((item, index) => {
-    if (item._id === ele) {
-      console.log("item",item);
-    console.log("ele",ele);
-      this.licenceArr[index] = 1;
-      let c= this.riskAssessmentFb.controls['licence'] as FormArray
-      let d=c.controls[index] as FormGroup
-      d.controls[this.licenseAndQualification[index]._id].setValue("Open Cable Licence");
-    }
-  });
-});
+      element.licence.forEach(ele => {
+        this.licenseAndQualification.forEach((item, index) => {
+          if (item._id === ele) {
+            console.log("item", item);
+            console.log("ele", ele);
+            this.licenceArr[index] = 1;
+            let c = this.riskAssessmentFb.controls['licence'] as FormArray
+            let d = c.controls[index] as FormGroup
+            d.controls[this.licenseAndQualification[index]._id].setValue("Open Cable Licence");
+          }
+        });
+      });
     });
     // this.checkArray.forEach((id) => {
 
@@ -1029,23 +1034,23 @@ element.licence.forEach(ele => {
       this.residlRiskLevelFA()
         .controls[i].get('resiRiskLevel')
         .setValue(data.residualRisk);
-     console.log("data",data);
-      data.allCOPTitle.forEach((element,index) => {
+      console.log("data", data);
+      data.allCOPTitle.forEach((element, index) => {
         this.allCOPSelected.push(element);
         // this.COP().push(this.codeOfPrac(index));
       });
-      
+
       console.log('allCOPSelected', this.allCOPSelected);
-     let myMap = new Map()
-     this.allCOPSelected.forEach((item)=>{
-       if(myMap.has(item)){
-         myMap.set(item,myMap.get(item)+1);
-       }else{
-         myMap.set(item,1);
-       }
-     })
-     this.allCOPSelected = Array.from(new Set(this.allCOPSelected.map(x => JSON.stringify(x)))).map(y => JSON.parse(y));
-     console.log('allCOPSelected', this.allCOPSelected,myMap);
+      let myMap = new Map()
+      this.allCOPSelected.forEach((item) => {
+        if (myMap.has(item)) {
+          myMap.set(item, myMap.get(item) + 1);
+        } else {
+          myMap.set(item, 1);
+        }
+      })
+      this.allCOPSelected = Array.from(new Set(this.allCOPSelected.map(x => JSON.stringify(x)))).map(y => JSON.parse(y));
+      console.log('allCOPSelected', this.allCOPSelected, myMap);
     });
   }
   getAllJobNumber() {
@@ -1071,8 +1076,8 @@ element.licence.forEach(ele => {
   getAllChemical() {
     this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
       this.allChemicals = res.data;
-    
-  });
+
+    });
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
@@ -1113,49 +1118,49 @@ element.licence.forEach(ele => {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
-      data:{
-        type:type,
-        title:''
-      } ,
+      data: {
+        type: type,
+        title: ''
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      let data={
-        title:result,
-        id:''
+      let data = {
+        title: result,
+        id: ''
       }
-      if (type === 'identifyHazards' && result !='false') {
+      if (type === 'identifyHazards' && result != 'false') {
 
         this.jobTaskSelected[i].allHazardsTitle.push(data);
       }
-      if (type === 'ctrlActreq'  && result !='false') {
+      if (type === 'ctrlActreq' && result != 'false') {
         this.jobTaskSelected[i].allContrlActReqTitle.push(data);
       }
 
       console.log('The dialog was closed');
     });
   }
-  editHazrds(type,title, i) {
+  editHazrds(type, title, i) {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
-      data:{
-        type:type,
-        title:title
-      } ,
+      data: {
+        type: type,
+        title: title
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      let data={
-        title:result,
-        id:''
+      let data = {
+        title: result,
+        id: ''
       }
-      if (type === 'editIdentifyHazards' && result !='false') {
+      if (type === 'editIdentifyHazards' && result != 'false') {
 
-        this.jobTaskSelected[i].allHazardsTitle[i]=data;  
+        this.jobTaskSelected[i].allHazardsTitle[i] = data;
       }
-      if (type === 'editCtrlActreq'  && result !='false') {
-        this.jobTaskSelected[i].allContrlActReqTitle[i]=data;
+      if (type === 'editCtrlActreq' && result != 'false') {
+        this.jobTaskSelected[i].allContrlActReqTitle[i] = data;
       }
 
       console.log('The dialog was closed');
@@ -1166,10 +1171,10 @@ element.licence.forEach(ele => {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
       // height:'50%',
-      data:{
-        type:'chemical',
-        title:''
-      } ,
+      data: {
+        type: 'chemical',
+        title: ''
+      },
 
     });
 
@@ -1212,16 +1217,16 @@ element.licence.forEach(ele => {
     });
   }
 
-  setProjectManager(value,e){
-    if(value === 'projectManagerSWMS'){
+  setProjectManager(value, e) {
+    if (value === 'projectManagerSWMS') {
       this.riskAssessmentFb.get('projectManager').setValue(e.target.value);
     }
-    if(value === 'projectManager'){
-      console.log('setProjectManager==>',this.projectManager)
+    if (value === 'projectManager') {
+      console.log('setProjectManager==>', this.projectManager)
       this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
     }
   }
-  fileChangeEvent(fileInput: any,i) {
+  fileChangeEvent(fileInput: any, i) {
     const files = fileInput.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
@@ -1229,36 +1234,63 @@ element.licence.forEach(ele => {
 
     this.upload.upload(formdata).subscribe((res) => {
       console.log('AddProductComponent -> browser -> res', res);
-    this.sdsRegisterFA().controls[i].get("file").setValue(res.files[0])
-    console.log("sdsRegister",this.riskAssessmentFb.get("SDSRegister").value);
+      this.sdsRegisterFA().controls[i].get("file").setValue(res.files[0])
+      console.log("sdsRegister", this.riskAssessmentFb.get("SDSRegister").value);
     });
   }
-  onSubmit(){
-    const data={
+  onSubmit() {
+    const data = {
       ...this.riskAssessmentFb.value,
-      codeOfPract:this.allCOPSelected,
-      identifyHazards:this.jobTaskSelected
+      codeOfPract: this.allCOPSelected,
+      identifyHazards: this.jobTaskSelected
     }
-    console.log("data",data);
-    if(this.id!=='form')
-    {
-      this.logicalFormInfo.updateAssessment(this.id,data).subscribe((res)=>{
-        console.log("this.riskAssessmentFb updated",res);
+    console.log("data", data);
+    if (this.id !== 'form') {
+      this.logicalFormInfo.updateAssessment(this.id, data).subscribe((res) => {
+        console.log("this.riskAssessmentFb updated", res);
         this.router.navigate(["/admin/forms/riskAssessTable"]);
       })
 
     }
-    else
-    {
-      this.logicalFormInfo.addAssessment(data).subscribe((res)=>{
+    else {
+      this.logicalFormInfo.addAssessment(data).subscribe((res) => {
         this.router.navigate(["/admin/forms/riskAssessTable"]);
-        console.log("this.riskAssessmentFb posted",res);
+        console.log("this.riskAssessmentFb posted", res);
       })
     }
     this.riskAssessmentFb.reset();
-    this.allCOPSelected=[];
-    this.jobTaskSelected=[];
+    this.allCOPSelected = [];
+    this.jobTaskSelected = [];
     this.signaturePad1.clear();
     this.signaturePad2.clear();
+  }
+  getDate(event) {
+    console.log(" event.terget.value", event.value);
+    this.dateGet = event.value
+    console.log("timepicker", this.riskAssessmentFb.get("dateTime").value)
+    // d.setHours(12)
+    // d.setMinutes(30)
+    //  let a=[]
+    //     //a= d.split(" ");
+    //  // a= a.splice(0,4,'12:30:00')
+    //    console.log(" event.terget.valueeeeee",this.timepicker,d);
+  }
+  getTime(event,timePicker) {
+    console.log("this.dateGet",this.dateGet)
+    let time = event
+    console.log("time", timePicker)
+    let timeArr = []
+    timeArr = time.split(":");
+    this.dateGet.setHours(timeArr[0])
+    this.dateGet.setMinutes(timeArr[1])
+    console.log("timepicker", this.dateGet)
+  let a=new Date(this.dateGet).toUTCString()
+   console.log("UTC",a)
+let b=new Date(a).toISOString()
+console.log("toISOString",b)
+    this.riskAssessmentFb.get("dateTime").setValue(b)
+   
+
+
   }
 }

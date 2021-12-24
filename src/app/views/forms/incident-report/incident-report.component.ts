@@ -121,8 +121,8 @@ export class IncidentReportComponent implements OnInit {
       instructions:['Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injuryor near-miss that could have resulted in a serious injury or illness.'],
       signaturePad:['',Validators.required],
       signaturePad1:['',Validators.required],
-      changesMadeOther: [''],
-      changesMadeOtherText: ['',],
+      changesMadeOther: [false],
+      changesMadeOtherText: [''],
     });
     // this.IncidentReport = this.data;
     // this.IncidentReport.patchValue({

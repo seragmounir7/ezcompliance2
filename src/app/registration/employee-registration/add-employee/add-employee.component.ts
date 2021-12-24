@@ -1,0 +1,432 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SignaturePad } from 'angular2-signaturepad';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { UploadFileService } from 'src/app/utils/services/upload-file.service';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-add-employee',
+  templateUrl: './add-employee.component.html',
+  styleUrls: ['./add-employee.component.scss']
+})
+export class AddEmployeeComponent implements OnInit {
+  empDetails!: FormGroup;
+  PPERegister = false;
+  LicenceInfo = false;
+  dataEmp:any;
+  formData:any;
+  uploadImage1: any;
+  uploadlicense1: any;
+  submitted = false;
+  id:any;
+  profile = true;
+  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  sidePreview: any;
+  registerForm: any;
+  file1: any;
+  dialogRef: any;
+  dataUrl: any;
+ 
+  constructor(
+    private fb: FormBuilder,
+    private employee: EmployeeRegistrationService,
+    private upload: UploadFileService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.empDetails = this.fb.group({
+      profTitie: ['', Validators.required],
+      profFirst: ['', Validators.required],
+      porfListName: ['', Validators.required],
+      porfEmail: ['', Validators.required],
+      porfPosition: ['', Validators.required],
+      porfDepartment: ['', Validators.required],
+      porfPhone: ['', Validators.required],
+      porfMobile: ['', Validators.required],
+      porfEmployee: ['', Validators.required],
+      porfManager: ['', Validators.required],
+      porfAdministrater: ['', Validators.required],
+      file: ['', Validators.required],
+      roleId:[''],
+      porfStreetAddress: ['', Validators.required],
+      porfCityTown: ['', Validators.required],
+      porfState: ['', Validators.required],
+      porfPostalCode: ['', Validators.required],
+      porfUploadImage: ['', Validators.required],
+      EmpFirst: ['', Validators.required],
+      empLastName: ['', Validators.required],
+      empRelationship: ['', Validators.required],
+      empEmail: ['', Validators.required],
+      empPhone: ['', Validators.required],
+      empMobile: ['', Validators.required],
+      LicenceName: ['', Validators.required],
+      LicenceNumber: ['', Validators.required],
+      TrainingQrginisation: ['', Validators.required],
+      ExpiryDate: ['', Validators.required],
+      UploadLicenceArr: this.fb.array([]),
+      PPESupplied: ['', Validators.required],
+      BrandOrType: ['', Validators.required],
+      IssueDate: ['', Validators.required],
+      ReplacementDate: ['', Validators.required],
+      Sign: ['', Validators.required],
+    });
+  }
+
+  ngOnInit(): void {
+    
+    
+    this.id=this.activatedRoute.snapshot.params.id;
+    if(this.id!=="form"){
+    this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
+      console.log('data=>', data);
+      // this.signaturePad.toDataURL();
+   data.data.licence.forEach(element => {
+     element.uploadLicence.forEach(ele => {
+      this.addFiled1(ele);
+     });
+     
+   });
+  
+    this.empDetails.patchValue({
+      profTitie: data.data.title,
+      profFirst: data.data.firstName,
+      porfListName:data.data.lastName,
+      porfEmail: data.data.email,
+      porfPosition:data.data.position,
+      porfDepartment: data.data.department,
+      porfPhone: data.data.phone,
+      porfMobile: data.data.mobile,
+     
+      // file: data.data.,
+      roleId:[''],
+      porfStreetAddress: data.data.location.address,
+      porfCityTown: data.data.location.city,
+      porfState: data.data.location.state,
+      porfPostalCode: data.data.location.pincode,
+      porfUploadImage: data.data.uploadImage,
+      EmpFirst: data.data.emergencyContact.firstName,
+      empLastName: data.data.emergencyContact.lastName,
+      empRelationship: data.data.emergencyContact.relationship,
+      empEmail: data.data.emergencyContact.email,
+      empPhone: data.data.emergencyContact.phone,
+      empMobile: data.data.emergencyContact.mobile,
+      // LicenceName: data.data.lastName,
+      // LicenceNumber: data.data.lastName,
+      // TrainingQrginisation: data.data.lastName,
+      // ExpiryDate: data.data.lastName,
+      // UploadLicenceArr: this.fb.array([]),
+      PPESupplied: data.data.ppe.ppeSupplied,
+      BrandOrType: data.data.ppe.brand,
+      IssueDate: data.data.ppe.issueDate,
+      ReplacementDate: data.data.ppe.replacementDate,
+      Sign: data.data.ppe.signature,
+    });
+    // this.file1=data.data.fileUpload
+    // console.log(this.file1,"file1")
+    this.dataUrl = data.data.signaturePad;
+    let check =async () => { this.signaturePad != null }
+    check().then(() => {
+
+      this.signaturePad.fromDataURL(data.data.signaturePad)
+    })
+  });
+  }else{
+    this.addFiled();
+  }
+  }
+
+  public signaturePadOptions: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 500,
+    canvasHeight: 100,
+  };
+
+  drawComplete() {
+    // will be notified of szimek/signature_pad's onEnd event
+    console.log(this.signaturePad.toDataURL());
+  }
+
+  clear() {
+    this.signaturePad.clear();
+  }
+  drawStart() {
+    // will be notified of szimek/signature_pad's onBegin event
+    console.log('begin drawing');
+  }
+
+  browser(event,index) {
+    const files = event.target.files[0];
+    const formdata = new FormData();
+    formdata.append('', files);
+    console.log(files);
+
+    this.upload.upload(formdata).subscribe((res) => {
+      console.log('AddProductComponent -> browser -> res', res);
+
+      this.selectedImage = res.files;
+      this.addLicence().at(index).get("file").patchValue(this.selectedImage)
+      console.log(
+        'AddProductComponent -> browse -> this.selectedImage',
+        this.selectedImage
+      );
+    });
+  }
+
+  browser1(event) {
+    const files = event.target.files[0];
+    const formdata = new FormData();
+    formdata.append('', files);
+    console.log(files);
+
+    this.upload.upload(formdata).subscribe((res) => {
+      console.log('AddProductComponent -> browser -> res', res);
+
+      this.file1 = res.files[0];
+      console.log(
+        'file',
+        this.file1
+      );
+      this.empDetails.get("porfUploadImage").patchValue(this.file1)
+     
+    });
+  }
+  selectedImage(arg0: string, selectedImage: any) {
+    throw new Error('Method not implemented.');
+  }
+ 
+  onFormUpdate(id) {
+    const Sign = this.signaturePad.toDataURL();
+    const body = {
+      title: this.empDetails.get('profTitie').value,
+      email: this.empDetails.get('porfEmail').value,
+      position: this.empDetails.get('porfPosition').value,
+      mobile: this.empDetails.get('porfMobile').value,
+      // roleId: this.empDetails.get('roleId').value,
+      // designation: this.empDetails.get('porfEmployee').value,
+      // deviceToken: '',
+      department: this.empDetails.get('porfDepartment').value,
+      phone: this.empDetails.get('porfPhone').value,
+      firstName: this.empDetails.get('profFirst').value,
+      lastName: this.empDetails.get('porfListName').value,
+      uploadImage: this.empDetails.get('porfUploadImage').value,
+      emergencyContact: {
+        firstName: this.empDetails.get('EmpFirst').value,
+        lastName: this.empDetails.get('empLastName').value,
+        email: this.empDetails.get('empEmail').value,
+        phone: this.empDetails.get('empPhone').value,
+        mobile: this.empDetails.get('empMobile').value,
+        relationship: this.empDetails.get('empRelationship').value,
+      },
+      licence: {
+        licenceName: this.empDetails.get('LicenceName').value,
+        licenceNumber: this.empDetails.get('LicenceNumber').value,
+        trainingOrganisation: this.empDetails.get('TrainingQrginisation').value,
+        expiryDate: this.empDetails.get('ExpiryDate').value,
+        uploadLicence: this.empDetails.get('UploadLicenceArr').value,
+      },
+      ppe: {
+        ppeSupplied: this.empDetails.get('PPESupplied').value,
+        // licenceName: 'ghjhgjh',
+        brand: this.empDetails.get('BrandOrType').value,
+        issueDate: this.empDetails.get('IssueDate').value,
+        replacementDate: this.empDetails.get('ReplacementDate').value,
+        signature: Sign,
+      },
+      location: {
+        address: this.empDetails.get('porfStreetAddress').value,
+        landmark: 'Nagpur',
+        state: this.empDetails.get('porfState').value,
+        city: this.empDetails.get('porfCityTown').value,
+        pincode: this.empDetails.get('porfPostalCode').value,
+        country: 'India',
+      },
+    };
+    this.employee
+      .updateEmployeeInfo(this.dataEmp._id, body)
+      .subscribe((resData) => {
+        console.log('projectManager', resData);
+
+        this.dialogRef.close('true');
+        Swal.fire({
+          title: 'Employee Edited successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
+  }
+  onFormSubmit() {
+    this.submitted = true;
+    // if (!this.empDetails.controls.valid) {
+    //   this.formData='formfield'
+    // }
+    const Sign = this.signaturePad.toDataURL();
+    console.log('sign=>', this.signaturePad.toDataURL());
+
+    console.log('this.EmployeeInfo.value', this.empDetails.value);
+    const body = {
+      title: this.empDetails.get('profTitie').value,
+      email: this.empDetails.get('porfEmail').value,
+      position: this.empDetails.get('porfPosition').value,
+      mobile: this.empDetails.get('porfMobile').value,
+      // roleId: this.empDetails.get('roleId').value,
+      // designation: this.empDetails.get('porfEmployee').value,
+      // deviceToken: '',
+      department: this.empDetails.get('porfDepartment').value,
+      phone: this.empDetails.get('porfPhone').value,
+      firstName: this.empDetails.get('profFirst').value,
+      lastName: this.empDetails.get('porfListName').value,
+      uploadImage: this.empDetails.get('porfUploadImage').value,
+      emergencyContact: {
+        firstName: this.empDetails.get('EmpFirst').value,
+        lastName: this.empDetails.get('empLastName').value,
+        email: this.empDetails.get('empEmail').value,
+        phone: this.empDetails.get('empPhone').value,
+        mobile: this.empDetails.get('empMobile').value,
+        relationship: this.empDetails.get('empRelationship').value,
+      },
+      licence: {
+        licenceName: this.empDetails.get('LicenceName').value,
+        licenceNumber: this.empDetails.get('LicenceNumber').value,
+        trainingOrganisation: this.empDetails.get('TrainingQrginisation').value,
+        expiryDate: this.empDetails.get('ExpiryDate').value,
+        uploadLicence: this.empDetails.get('UploadLicenceArr').value,
+      },
+      ppe: {
+        ppeSupplied: this.empDetails.get('PPESupplied').value,
+        // licenceName: 'ghjhgjh',
+        brand: this.empDetails.get('BrandOrType').value,
+        issueDate: this.empDetails.get('IssueDate').value,
+        replacementDate: this.empDetails.get('ReplacementDate').value,
+        signature: Sign,
+      },
+      location: {
+        address: this.empDetails.get('porfStreetAddress').value,
+        landmark: 'Nagpur',
+        state: this.empDetails.get('porfState').value,
+        city: this.empDetails.get('porfCityTown').value,
+        pincode: this.empDetails.get('porfPostalCode').value,
+        country: 'India',
+      },
+    };
+    // let body ={
+    //   "email": "tkkkkg@gmail.com",
+    //   "position": "11111",
+    //   "mobileNumber": 7219090323,
+    //   "designation": "Employee",
+    //   "deviceToken": "qw",
+    //   "department": "ab",
+    //   "phone": 42424224,
+    //   "firstName": "Abhishekh",
+    //   "lastName": "kamble",
+    //   "avatar": "image",
+    //   "emergencyContact": {
+    //       "firstName": "linkedin",
+    //       "lastName": "ergdsf",
+    //       "email": "twitter",
+    //       "phone": "instagram",
+    //       "mobile": "instagram"
+    //   },
+    //   "licence": {
+    //       "licenceName": "linkedin",
+    //       "licenceNumber": 125250,
+    //       "trainingOrganisation": "twitter",
+    //       "expiryDate": "instagram",
+    //       "uploadLicence": "instagram"
+    //   },
+    //   "ppe": {
+    //       "ppeSupplied": "linkedin",
+    //       "licenceName": "sdfgdsfgdfb",
+    //       "brand": "twitter",
+    //       "issueDate": "instagram",
+    //       "replacementDate": "instagram",
+    //       "signature": "instagram"
+    //   },
+    //   "location": {
+    //       "address": "Nagpur",
+    //       "landmark": "Nagpur",
+    //       "state": "Nagpur",
+    //       "city": "Nagpur",
+    //       "pincode": 25252,
+    //       "country": "Nagpur"
+    //   }
+    // }
+    console.log('body=>', body);
+
+    this.employee.addEmployeeInfo(body).subscribe((data) => {
+      console.log('data=>', data);
+      this.signaturePad.toDataURL();
+    });
+  }
+  sign(sign: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  addAcionTab(event) {
+    let b = Object.keys(this.sidePreview.value);
+    //   let index =this.add().length
+    //   this.addAction()
+    // this.add().controls[index].get("item").setValue(event.target.value)
+
+    //  console.log(this.sidePreview.controls[b[0]].value);
+  }
+
+  profileshow() {
+    this.PPERegister = false;
+    this.LicenceInfo = false;
+    this.profile = true;
+  }
+  LicenceInfoshow() {
+    this.PPERegister = false;
+    this.LicenceInfo = true;
+    this.profile = false;
+  }
+  PPERegisteshow() {
+    this.PPERegister = true;
+    this.LicenceInfo = false;
+    this.profile = false;
+  }
+  addLicence() {
+    return this.empDetails.get('UploadLicenceArr') as FormArray;
+  }
+  newFiled(): FormGroup {
+    return this.fb.group({
+      file: ['', Validators.required],
+      LicenceName: ['', Validators.required],
+      LicenceNumber: ['', Validators.required],
+      TrainingQrginisation: ['', Validators.required],
+      ExpiryDate: ['', Validators.required],
+    });
+  }
+  newFiled1(data): FormGroup {
+    return this.fb.group({
+      file: [data.file],
+      LicenceName:[ data.LicenceName],
+      LicenceNumber: [data.LicenceNumber],
+      TrainingQrginisation: [data.TrainingQrginisation],
+      ExpiryDate: [data.ExpiryDate],
+    });
+  }
+  addFiled1(data) {
+    console.log("data",data);
+    this.addLicence().push(this.newFiled1(data));
+    console.log("addFiled1",this.empDetails.value);
+  }
+  addFiled() {
+    this.addLicence().push(this.newFiled());
+    console.log(this.empDetails.value);
+  }
+  removeFiled(i) {
+    const item = <FormArray>this.empDetails.controls['UploadLicenceArr'];
+    if (item.length > 1) {
+      item.removeAt(i);
+    
+    }
+  }
+
+  get registerFormControl() {
+    return this.empDetails.controls;
+  }
+
+}
