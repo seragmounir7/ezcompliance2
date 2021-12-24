@@ -193,3 +193,7 @@ select {
   font-size: 80%;
   color: #dc3545;
 }
+
+::ng-deep  mat-datepicker-toggle  .mat-icon-button{
+  padding-right: 50px;
+}

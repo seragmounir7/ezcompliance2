@@ -11,7 +11,7 @@
     <div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
+          <p for="exampleFormControlInput1" class="form-Label">Site Name<span class="text-danger ">*</span></p>
           <input type="text" class="form-control" id="siteName"  formControlName="siteName"
           [class.is-invalid]="toolBox.get('siteName')?.hasError('required') 
           && (toolBox.get('siteName').dirty || toolBox.get('siteName').touched) "
@@ -26,7 +26,7 @@
         >
         </div>
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
+          <p for="exampleFormControlInput1" class="form-Label">Customer Name<span class="text-danger ">*</span></p>
           <input type="text" class="form-control"  formControlName="customerName" 
           [class.is-invalid]="toolBox.get('customerName')?.hasError('required') 
           && (toolBox.get('customerName').dirty || toolBox.get('customerName').touched) "
@@ -43,7 +43,7 @@
       </div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Site Address</p>
+          <p for="exampleFormControlInput1" class="form-Label">Site Address<span class="text-danger ">*</span></p>
           <input type="text" class="form-control"  formControlName="streetAddr" 
           [class.is-invalid]="toolBox.get('streetAddr')?.hasError('required') 
           && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) "
@@ -59,7 +59,7 @@
         </div>
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">
-            Customer Contact
+            Customer Contact<span class="text-danger ">*</span>
           </p>
           <input type="text" class="form-control"  formControlName="custConct" 
           [class.is-invalid]="toolBox.get('custConct')?.hasError('required') 
@@ -79,7 +79,7 @@
       <div class="row">
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">
-            Customer Contact Phone
+            Customer Contact Phone<span class="text-danger ">*</span>
           </p>
           <input type="text" class="form-control"  formControlName="custConctPh" 
           [class.is-invalid]="toolBox.get('custConctPh')?.hasError('required') 
@@ -96,7 +96,7 @@
         </div>
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">
-            Customer Contact Email
+            Customer Contact Email<span class="text-danger ">*</span>
           </p>
           <input type="text" class="form-control"  formControlName="custEmail"
           [class.is-invalid]="toolBox.get('custEmail')?.hasError('required') 
@@ -114,7 +114,7 @@
       </div>
       <div class="row">
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Job Number</p>
+          <p for="exampleFormControlInput1" class="form-Label">Job Number<span class="text-danger ">*</span></p>
 
           <select
             class="form-select form-control col form-dropdown"
@@ -142,7 +142,7 @@
         </div>
 
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Date</p>
+          <p for="exampleFormControlInput1" class="form-Label">Date<span class="text-danger ">*</span></p>
            <input  matInput  [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate"
            class="form-control"
            formControlName="date"
@@ -164,7 +164,7 @@
       <div class="row">
         <div class="my-3 col">
           <p for="exampleFormControlInput1" class="form-Label">
-            Meeting Conducted By
+            Meeting Conducted By<span class="text-danger ">*</span>
           </p>
           <select
           formControlName="meetingBy"
@@ -183,7 +183,7 @@
         >
         </div>
         <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Signature*</p>
+          <p for="exampleFormControlInput1" class="form-Label">Signature<span class="text-danger ">*</span></p>
           <div class="sign" style="border: 1px solid rgb(149 162 173)">
             <signature-pad
               [options]="signaturePadOptions1"
@@ -216,7 +216,7 @@
         <div>
           <div class="row">
             <div class="my-3 col-2">
-              <p for="exampleFormControlInput1" class="form-Label">Issue</p>
+              <p for="exampleFormControlInput1" class="form-Label">Issue<span class="text-danger ">*</span></p>
               <input type="text" class="form-control" formControlName="index" 
               [class.is-invalid]=" issues().at(i).get('index')?.hasError('required') 
             && ( issues().at(i).get('index').dirty ||  issues().at(i).get('index').touched) "
@@ -232,7 +232,7 @@
             </div>
             <div class="my-3 col-6">
               <p for="exampleFormControlInput1" class="form-Label">
-                Topic of discussion
+                Topic of discussion<span class="text-danger ">*</span>
               </p>
               <textarea
                 type="text"
@@ -252,7 +252,7 @@
             </div>
             <div class="my-3 col-2">
               <p for="exampleFormControlInput1" class="form-Label">
-                Topic Resolution
+                Topic Resolution<span class="text-danger ">*</span>
               </p>
               <select
                 class="form-select form-control col form-dropdown"
@@ -304,7 +304,7 @@
       >
         <div class="row">
           <div class="my-3 col-6">
-            <p for="exampleFormControlInput1" class="form-Label">Action</p>
+            <p for="exampleFormControlInput1" class="form-Label">Action<span class="text-danger ">*</span></p>
             <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
@@ -327,7 +327,7 @@
           </div>
           <div class="my-3 col-2">
             <p for="exampleFormControlInput1" class="form-Label">
-              Person Responsible
+              Person Responsible<span class="text-danger ">*</span>
             </p>
             <select
               class="form-select form-control col form-dropdown"
@@ -349,7 +349,7 @@
             >
           </div>
           <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-Label">Complete</p>
+            <p for="exampleFormControlInput1" class="form-Label">Complete<span class="text-danger ">*</span></p>
             <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
@@ -399,7 +399,7 @@
         <div class="row">
           <div class="my-3 col-5">
             <p for="exampleFormControlInput1" class="form-Label">
-              Employee {{ i + 1 }}
+              Employee {{ i + 1 }} <span class="text-danger ">*</span>
             </p>
             <input
               type="text"
@@ -418,7 +418,7 @@
             >
           </div>
           <div class="my-3 col-5">
-            <p for="exampleFormControlInput1" class="form-Label">Signature</p>
+            <p for="exampleFormControlInput1" class="form-Label">Signature<span class="text-danger ">*</span></p>
 
             <div class="sign" style="border: 1px solid rgb(149 162 173)">
               <signature-pad
