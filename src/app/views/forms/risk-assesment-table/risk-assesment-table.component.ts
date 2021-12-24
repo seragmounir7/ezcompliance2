@@ -39,11 +39,15 @@ export class RiskAssesmentTableComponent implements OnInit {
     console.log("check");
     // this.logicalFormInfo.printing.next('print');
     localStorage.setItem("key","print");
-    $("<iframe>")                             // create a new iframe element
-        .hide()                               // make it invisible
-        .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
-        .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+    // $("<iframe>")                             // create a new iframe element
+    //     .hide()                               // make it invisible
+    //     .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
+    //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
 
+    let iframe=document.createElement("iframe")
+          iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
+          let body = document.getElementsByTagName("body")
+          body[0].appendChild(iframe)
   }
   getToolBox()
   {

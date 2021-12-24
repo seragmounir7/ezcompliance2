@@ -148,11 +148,7 @@ export class IncidentReportComponent implements OnInit {
     this.setTitle.setTitle('WHS-Incident Report Form');
     this.getAllJobNumber();
     this.getAllProjectMang();
-    this.getAllChanges();
-    this.getAllPPE();
-    this.getAllTypeOfInc();
-    this.getAllRoot();
-    this.getAllNatureOfInc();
+  
     this.getAllStaff();
     if(this.id!=='Form')
     {
@@ -162,7 +158,11 @@ export class IncidentReportComponent implements OnInit {
     else
     {
       this.addAction();
-     
+      this.getAllChanges();
+      this.getAllPPE();
+      this.getAllTypeOfInc();
+      this.getAllRoot();
+      this.getAllNatureOfInc();
     }
   }
 
@@ -587,7 +587,34 @@ export class IncidentReportComponent implements OnInit {
   {
     this.logicalFormInfo.getIncidentReportById(id).subscribe((res:any)=>{
       console.log("getById",res);
-     
+    
+        this.changes=res.data.changesArr
+        this.natureOFIncidents=res.data.natureOFIncidentsArr
+          this.incidents=res.data.incidentsArr  
+        this.PPE=res.data.ppeArr
+        this.rootCauseIncident=res.data. rootCauseIncidentArr
+
+        for (let i = 0; i < this.changes.length; i++) {
+          this.changesArr[i] = 0;
+          this.changeAdd().push(this.changeAction(i))
+        }
+        for (let i = 0; i < this.natureOFIncidents.length; i++) {
+          this.natureOfIncArr[i] = 0;
+          this.natureAdd().push(this.natureAction(i))
+         
+        }
+        for (let i = 0; i < this.rootCauseIncident.length; i++) {
+          this.rootArr[i] = 0;
+          this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction(i))
+        }
+        for (let i = 0; i < this.incidents.length; i++) {
+          this.incidentsArr[i] = 0;
+          this.incidentsAdd().push(this.incidentsAction(i))
+        }
+        for (let i = 0; i < this.PPE.length; i++) {
+          this.ppeArr[i] = 0;
+          this.ppeAdd().push(this.ppeAction(i))
+        }
       this.IncidentReport.patchValue({
         projectName:res.data.projectName,
         siteName:res.data.siteName,
@@ -762,7 +789,13 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
       console.log("update");
       
       const data={
-        ...this.IncidentReport.value
+        ...this.IncidentReport.value,
+        changesArr:this.changes,
+        natureOFIncidentsArr:this.natureOFIncidents,
+        incidentsArr:  this.incidents,    
+        ppeArr:this.PPE,
+        rootCauseIncidentArr: this.rootCauseIncident
+        
       }
        console.log("data",data);
        
@@ -782,7 +815,12 @@ console.log("res.data.arrObj.length",res.data.arrObj.length);
     else
     {
       const data={
-        ...this.IncidentReport.value
+        ...this.IncidentReport.value,
+        changesArr:this.changes,
+        natureOFIncidentsArr:this.natureOFIncidents,
+        incidentsArr:  this.incidents,    
+        ppeArr:this.PPE,
+        rootCauseIncidentArr: this.rootCauseIncident
       }
       console.log("data",data);
       
