@@ -41,7 +41,7 @@ export class AddLicenceComponent implements OnInit {
     }
   }
   add(): FormArray {
-    return this.addLicenceFG.get('arrObj') as FormArray;
+    return this.addLicenceFG.get('arrObj') as FormArray; 
   }
   newAction(): FormGroup {
     return this.fb.group({     
@@ -79,7 +79,7 @@ export class AddLicenceComponent implements OnInit {
       this.router.navigate(['/admin/siteInfo/licenceAndQual']);      
     },(err)=>{console.error(err);} 
   
-    );
+    ); 
     
   }
   calcHeight(value) {

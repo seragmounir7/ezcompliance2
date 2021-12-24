@@ -3,8 +3,6 @@
 <div class="col ml-2 pt-3">
 <h1>
   Customer List
-
-
 </h1>
 </div>
 <div class="col ml-2 mb-2">
@@ -22,7 +20,7 @@
   </mat-form-field>
 </div>
 <div class="">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
     <!-- Position Column -->
     <ng-container matColumnDef="index">

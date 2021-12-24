@@ -9,7 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup } from '@angular/forms';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-licence-and-qual',
   templateUrl: './licence-and-qual.component.html',
@@ -42,8 +42,8 @@ export class LicenceAndQualComponent implements OnInit {
     this.setTitle.setTitle('WHS-License and Qualification List');
   }
 
-  getAllLicence() {
-    this.logicalFormInfo.getAllLicence().subscribe((res) => {
+  getAllLicence(field="",value="") {
+    this.logicalFormInfo.getAllLicence(field,value).subscribe((res) => {
       console.log('getAllLicence=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -103,4 +103,8 @@ export class LicenceAndQualComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllLicence(sort.active,sort.direction)
+     }
 }

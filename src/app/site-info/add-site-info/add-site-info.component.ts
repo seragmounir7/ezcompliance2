@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddSiteComponent } from './add-site/add-site.component';
 import { EditSiteComponent } from './edit-site/edit-site.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-add-site-info',
@@ -42,8 +42,8 @@ export class AddSiteInfoComponent implements OnInit {
     this.setTitle.setTitle('WHS-Add Site Info');
     this.getAllSites()
   }
-  getAllSites(){
-    this.logicalFormInfoService.getAllSite().subscribe((res:any)=> {
+  getAllSites(field="",value=""){
+    this.logicalFormInfoService.getAllSite(field,value).subscribe((res:any)=> {
       console.log(res)
    this.dataSource.data = res.data
    this.dataSource.paginator = this.paginator;
@@ -123,8 +123,13 @@ export class AddSiteInfoComponent implements OnInit {
       }
     });
   }
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-}
+
+  sortData(sort:Sort) {
+    this.getAllSites(sort.active,sort.direction)
+     }
+ }
