@@ -7,7 +7,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table'
 import { AddEditProjMangComponent } from './add-edit-proj-mang/add-edit-proj-mang.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-project-manager',
   templateUrl: './project-manager.component.html',
@@ -34,8 +34,8 @@ export class ProjectManagerComponent implements OnInit {
     this.getAllProjectMang();
   }
 
-  getAllProjectMang() {
-    this.logicalFormInfo.getAllProjectMang().subscribe((res:any) => {
+  getAllProjectMang(field="",value="") {
+    this.logicalFormInfo.getAllProjectMang(field,value).subscribe((res:any) => {
       console.log('getAllProjectMang=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -96,4 +96,8 @@ export class ProjectManagerComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllProjectMang(sort.active,sort.direction)
+     }
 }

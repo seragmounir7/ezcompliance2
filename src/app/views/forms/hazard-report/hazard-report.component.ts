@@ -27,6 +27,9 @@ export class HazardReportComponent implements OnInit {
   singRequired: any;
   selectedImage:any;
 
+  hasError:false;
+  
+  pad:"inp_padding";
   allJobNumbers = [];
   whsData: any = [''];
   hazardData:any=['']

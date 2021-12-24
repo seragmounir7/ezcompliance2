@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-job-task',
@@ -37,8 +37,8 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
     this.setTitle.setTitle('WHS-Job Task List');
   }
  
-  getAllJobTask() {
-    this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
+  getAllJobTask(field="",value="") {
+    this.logicalFormInfo.getAllJobtask(field,value).subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data
@@ -95,4 +95,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  sortData(sort:Sort) {
+    this.getAllJobTask(sort.active,sort.direction)
+     }
 }

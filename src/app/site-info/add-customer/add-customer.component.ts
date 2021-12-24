@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddingCustComponent } from './adding-cust/adding-cust.component';
 import { EditCustComponent } from './edit-cust/edit-cust.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-add-customer',
@@ -35,8 +35,8 @@ export class AddCustomerComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllCustomers(){
-    this.logicalFormInfoService.getAllCustomer().subscribe((res:any) => {
+  getAllCustomers(field="",value=""){
+    this.logicalFormInfoService.getAllCustomer(field,value).subscribe((res:any) => {
       console.log(res)
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
@@ -126,4 +126,8 @@ export class AddCustomerComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllCustomers(sort.active,sort.direction)
+     }
 }

@@ -9,7 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditHazardComponent } from './edit-hazard/edit-hazard.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-identify-hazards',
   templateUrl: './identify-hazards.component.html',
@@ -44,8 +44,8 @@ export class IdentifyHazardsComponent implements OnInit {
 
   }
 
-  getAllHazards() {
-    this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
+  getAllHazards(field="",value="") {
+    this.logicalFormInfo.getAllHazards(field,value).subscribe((res:any) => {
       console.log('getAllHazards=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -107,4 +107,7 @@ export class IdentifyHazardsComponent implements OnInit {
     console.log('copy successfull')
     this.snack.openSnackBar('Copied to clipboard');
   }
+  sortData(sort:Sort) {
+    this.getAllHazards(sort.active,sort.direction)
+     }
 }
