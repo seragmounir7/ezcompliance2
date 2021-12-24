@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditRiskLevelComponent } from './edit-risk-level/edit-risk-level.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 
 @Component({
@@ -38,8 +38,8 @@ export class RiskLevelComponent implements OnInit {
     this.setTitle.setTitle('WHS-RiskLevel Info');
     this.getAllRiskLevel()
   }
-  getAllRiskLevel(){
-    this.logicalFormInfoService.getAllRiskLevel().subscribe((res:any)=> {
+  getAllRiskLevel(field="",value=""){
+    this.logicalFormInfoService.getAllRiskLevel(field,value).subscribe((res:any)=> {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -88,5 +88,8 @@ export class RiskLevelComponent implements OnInit {
       }
     });
   }
-
+  sortData(sort: Sort) {
+ 
+    this.getAllRiskLevel(sort.active,sort.direction)
+     }
 }

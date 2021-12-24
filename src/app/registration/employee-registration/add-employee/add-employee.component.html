@@ -640,10 +640,11 @@
               <label>Signature</label>
               <div class="sign">
                 <signature-pad
-                  value="Signature"
+                  #signature1
                   [options]="signaturePadOptions"
                   (onBeginEvent)="drawStart()"
                   (onEndEvent)="drawComplete()"
+                 
                 ></signature-pad>
               </div>
             </div>

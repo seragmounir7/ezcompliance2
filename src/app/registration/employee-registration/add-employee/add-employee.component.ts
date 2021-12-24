@@ -22,7 +22,7 @@ export class AddEmployeeComponent implements OnInit {
   submitted = false;
   id:any;
   profile = true;
-  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  @ViewChild('signature1') signaturePad: SignaturePad;
   sidePreview: any;
   registerForm: any;
   file1: any;
@@ -74,10 +74,22 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    
     this.id=this.activatedRoute.snapshot.params.id;
     if(this.id!=="form"){
+    this.patchData();
+  }else{
+    this.addFiled();
+  }
+  }
+
+//   ngAfterViewInit() {
+//     console.log(this.signaturePad,this.dataUrl)
+//     this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
+//     this.signaturePad.clear();
+//     this.signaturePad.fromDataURL(this.dataUrl);
+   
+//  }
+  patchData(){
     this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
@@ -124,18 +136,17 @@ export class AddEmployeeComponent implements OnInit {
     });
     // this.file1=data.data.fileUpload
     // console.log(this.file1,"file1")
-    this.dataUrl = data.data.signaturePad;
+    this.dataUrl = data.data.ppe.signature;
+    console.log("data.data.ppe.signature;",data.data.ppe.signature);
+    
     let check =async () => { this.signaturePad != null }
     check().then(() => {
 
-      this.signaturePad.fromDataURL(data.data.signaturePad)
+     
     })
+    this.signaturePad.fromDataURL(data.data.ppe.signature)
   });
-  }else{
-    this.addFiled();
   }
-  }
-
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
     minWidth: 1,
@@ -145,6 +156,7 @@ export class AddEmployeeComponent implements OnInit {
 
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
+    this.empDetails.controls["Sign"].setValue(this.signaturePad.toDataURL())
     console.log(this.signaturePad.toDataURL());
   }
 

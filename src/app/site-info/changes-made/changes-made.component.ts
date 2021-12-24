@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -40,8 +40,8 @@ export class ChangesMadeComponent implements OnInit {
     
   }
 
-  getAllChanges() {
-    this.logicalFormInfo.getAllChangesMade().subscribe((res:any) => {
+  getAllChanges(field="",value="") {
+    this.logicalFormInfo.getAllChangesMade(field,value).subscribe((res:any) => {
       console.log('Changes=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -102,5 +102,8 @@ export class ChangesMadeComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  sortData(sort: Sort) {
+ 
+    this.getAllChanges(sort.active,sort.direction)
+     }
 }
