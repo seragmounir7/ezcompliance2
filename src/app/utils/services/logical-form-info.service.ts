@@ -366,8 +366,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllJurisdiction() {
-    return this.https.get(this.apiUrl + 'jurisdiction/getAll').pipe(
+  getAllJurisdiction(field="",value="") {
+    return this.https.get(this.apiUrl + `jurisdiction/getAll?field=${field}&value=${value}`).pipe(
       map((res: any) => {
         return res;
       })
@@ -398,8 +398,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllRegulator() {
-    return this.https.get(this.apiUrl + 'regulator/getAll').pipe(
+  getAllRegulator(field="",value="") {
+    return this.https.get(this.apiUrl + `regulator/getAll?field=${field}&value=${value}`).pipe(
       map((res: any) => {
         return res;
       })
@@ -462,8 +462,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllSafety() {
-    return this.https.get(this.apiUrl + 'safetyLegislation/getAll').pipe(
+  getAllSafety(field="",value="") {
+    return this.https.get(this.apiUrl + `safetyLegislation/getAll?field=${field}&value=${value}`).pipe(
       map((res: any) => {
         return res;
       })
