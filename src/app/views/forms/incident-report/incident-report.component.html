@@ -13,7 +13,7 @@
   <div class="box">
     <div class="row">
       <div class="col-md-6">
-        <label class="form-label mb-3">Project Number</label>
+        <label class="form-label mb-3">Project Number<span class="text-danger ">*</span></label>
         <select
           class="form-select form-control"
           aria-label="Default select example"
@@ -25,7 +25,8 @@
               IncidentReport.get('jobNumber').touched)
           "
         >
-          <option selected hidden>Select</option>
+          <label class="cols" class="form-Label">Project Name</label>
+          <option selected hidden>Select<span class="text-danger ">*</span></option>
           <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">
             {{ jobNo.jobNumber }}
           </option>
@@ -58,7 +59,7 @@
       </div> -->
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Project Name</label>
+          <label class="cols" class="form-Label">Project Name<span class="text-danger ">*</span></label>
           <input
             type="text"
             formControlName="projectName"
@@ -85,7 +86,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div>
-          <label class="cols" class="form-Label">Site Name</label>
+          <label class="cols" class="form-Label">Site Name<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -110,7 +111,7 @@
       </div>
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Customer Name</label>
+          <label class="cols" class="form-Label">Customer Name<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -137,7 +138,7 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Site Address</label>
+          <label class="cols" class="form-Label">Site Address<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -162,7 +163,7 @@
       </div>
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Customer Contact</label>
+          <label class="cols" class="form-Label">Customer Contact<span class="text-danger ">*</span></label>
           <input
             placeholder=""
             type="text"
@@ -190,7 +191,7 @@
     <div class="row">
       <div class="col-md-6">
         <!-- <p for="exampleFormControlInput1" class="form-Label">Project Manager</p> -->
-        <label class="form-label mb-3">Project Manager</label>
+        <label class="form-label mb-3">Project Manager<span class="text-danger ">*</span></label>
         <select
           class="form-select form-control col"
           aria-label="Default select example"
@@ -201,7 +202,7 @@
               IncidentReport.get('projectManager').touched)
           "
         >
-          <option selected hidden>Select</option>
+          <option selected hidden>Select<span class="text-danger ">*</span></option>
           <option [value]="mang._id" *ngFor="let mang of projectMang">
             {{ mang.title }}
           </option>
@@ -234,7 +235,7 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Person Completing Form </label>
+          <label class="cols" class="form-Label">Person Completing Form <span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -265,7 +266,7 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Customer Contact Phone</label>
+          <label class="cols" class="form-Label">Customer Contact Phone<span class="text-danger ">*</span></label>
           <input
             placeholder="(000) 000-0000"
             type="text"
@@ -296,7 +297,7 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Customer Contact Email</label>
+          <label class="cols" class="form-Label">Customer Contact Email<span class="text-danger ">*</span></label>
           <input
             placeholder="ex: email@yahoo.com"
             type="text"
@@ -323,7 +324,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <label class="cols" class="form-Label">Date of Form Completion</label>
+        <label class="cols" class="form-Label">Date of Form Completion<span class="text-danger ">*</span></label>
         <!-- <input type="date" class="form-control" formControlName="dateOfFormCompletion" [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "/> -->
        <input  matInput  [matDatepicker]="datepicker" [max]="maxDate" [min]="minDate"
        class="form-control"
@@ -397,7 +398,7 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label">Name</label>
+        <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
         <input
           type="text"
           class="form-control"
@@ -423,7 +424,7 @@
     </div>
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label">Department</label>
+        <label class="cols" class="form-Label">Department<span class="text-danger ">*</span></label>
         <input
           type="text"
           class="form-control"
@@ -450,7 +451,7 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label">position</label>
+        <label class="cols" class="form-Label">position<span class="text-danger ">*</span></label>
         <input
           type="text"
           class="form-control"
@@ -509,7 +510,7 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="form-Label">Location of the incident</label>
+        <label class="form-Label">Location of the incident<span class="text-danger ">*</span></label>
         <input
           type="text"
           class="form-control"
@@ -534,7 +535,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="form-Label mt-2">Date of the incident</label>
+        <label class="form-Label mt-2">Date of the incident<span class="text-danger ">*</span></label>
         <!-- <mat-form-field>
           <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
              [min]="minDate" [max]="maxDate" [disabled]="disabled">
@@ -564,7 +565,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <label class="cols" class="form-Label">Time of the incident</label>
+        <label class="cols" class="form-Label">Time of the incident<span class="text-danger ">*</span></label>
         <!-- <input
           [ngxMatTimepicker]="picker"
           class="form-control"
@@ -607,7 +608,7 @@
   <div class="box" class="row">
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label"> Name of Witness</label>
+        <label class="cols" class="form-Label"> Name of Witness<span class="text-danger ">*</span></label>
         <input
           type="text"
           class="form-control"
@@ -639,7 +640,7 @@
 
     <div class="col-md-6">
       <div>
-        <label class="cols" class="form-Label">Witness Statement</label>
+        <label class="cols" class="form-Label">Witness Statement<span class="text-danger ">*</span></label>
         <textarea
           type="text"
           class="form-control txt-auto"
@@ -898,7 +899,7 @@
       >
         <div class="col-md-3">
           <div>
-            <label class="cols" class="form-Label">Corrective Action</label>
+            <label class="cols" class="form-Label">Corrective Action<span class="text-danger ">*</span></label>
 
             <input
               type="text"
@@ -924,7 +925,7 @@
         </div>
         <div class="col-md-3">
           <div>
-            <label class="cols" class="form-Label">Person Responsible</label>
+            <label class="cols" class="form-Label">Person Responsible<span class="text-danger ">*</span></label>
 
             <select
               class="form-select form-control col form-dropdown"
@@ -955,7 +956,7 @@
         </div>
         <div class="col-md-2">
           <div>
-            <label class="cols" class="form-Label">Complete</label>
+            <label class="cols" class="form-Label">Complete<span class="text-danger ">*</span></label>
 
             <select
               class="form-select form-control col form-dropdown"
@@ -984,7 +985,7 @@
           </div>
         </div>
         <div class="col-md-2">
-          <label class="cols" class="form-Label">Date </label>
+          <label class="cols" class="form-Label">Date<span class="text-danger ">*</span> </label>
           <!-- <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/> -->
           <input  matInput  [matDatepicker]="pickerd4" [min]="minDate"
           class="form-control"
@@ -1017,7 +1018,7 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Name</label>
+          <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -1043,7 +1044,7 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Position </label>
+          <label class="cols" class="form-Label">Position<span class="text-danger ">*</span> </label>
           <input
             type="text"
             class="form-control"
@@ -1070,7 +1071,7 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Department</label>
+          <label class="cols" class="form-Label">Department<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -1096,7 +1097,7 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Date </label>
+          <label class="cols" class="form-Label">Date <span class="text-danger ">*</span></label>
           <!-- <input type="date" class="form-control" formControlName="completedDate" [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "/> -->
           <input  matInput  [matDatepicker]="pickerd5" [max]="maxDate"
           class="form-control"
@@ -1113,7 +1114,7 @@
     <div class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Signature</label>
+          <label class="cols" class="form-Label">Signature<span class="text-danger ">*</span></label>
           <div class="sign">
             <signature-pad
               [options]="signaturePadOptions"
@@ -1140,7 +1141,7 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Name</label>
+          <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -1166,7 +1167,7 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Position </label>
+          <label class="cols" class="form-Label">Position <span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -1193,7 +1194,7 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Department</label>
+          <label class="cols" class="form-Label">Department<span class="text-danger ">*</span></label>
           <input
             type="text"
             class="form-control"
@@ -1219,7 +1220,7 @@
 
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Date </label>
+          <label class="cols" class="form-Label">Date <span class="text-danger ">*</span></label>
           <!-- <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/> -->
           <input  matInput  [matDatepicker]="pickerd6" [max]="maxDate"
           class="form-control"
@@ -1236,7 +1237,7 @@
     <div class="box" class="row">
       <div class="col-md-6">
         <div>
-          <label class="cols" class="form-Label">Signature</label>
+          <label class="cols" class="form-Label">Signature<span class="text-danger ">*</span></label>
           <div class="sign">
             <signature-pad
               [options]="signaturePadOptions1"
