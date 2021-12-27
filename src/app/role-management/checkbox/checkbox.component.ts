@@ -7,7 +7,7 @@ import { RoleManagementService } from '../../utils/services/role-management.serv
 import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRoleComponent } from '../add-role/add-role.component';
-
+import{RoleManagementSharedServiceService }from'../../utils/services/role-management-shared-service.service'
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
@@ -32,7 +32,13 @@ export class CheckboxComponent implements OnInit {
     private fb: FormBuilder,
     private roleService: RoleManagementService,
     private dialog: MatDialog,
+    private roleSharedService:RoleManagementSharedServiceService,
   ) {
+    this.roleSharedService.getRoleEvent().subscribe((res)=>{
+      if(res){
+        this.getAllRole()
+      }
+    })
     this.getAllRole()
     this.rolemanagment = this.fb.group({
 
@@ -50,7 +56,7 @@ export class CheckboxComponent implements OnInit {
     "StateRelation"
   ]
   displayedColumns: string[] = [
-    "role",
+    //"role",
 
     "dashboard.Access",
     "dashboard.View",
@@ -162,9 +168,22 @@ export class CheckboxComponent implements OnInit {
   }
   getAllRole() {
     this.roleService.getAllRole().subscribe((res: any) => {
-
       this.roleArr = res.data
-      console.log("res", this.roleArr);
+     this.roleArr= this.roleArr.map((x,i)=>{
+        console.log("i",i);
+      
+        if(i===0){
+          
+         x.i=1
+        
+        }else{
+    
+        x.i=0
+      
+      }
+        return x
+      })
+      console.log("res",this.roleArr );
       this.tempArray = new MatTableDataSource<any>(this.roleArr);
       this.tempArray.sort = this.sort;
 
@@ -303,4 +322,76 @@ export class CheckboxComponent implements OnInit {
 			console.log("The dialog was closed");
 		});
 	}
+
+
+  //////////////////////////////////////////////////
+
+  count:number=0
+
+  stepperList:any[]=[
+    {
+      name:'HighRisk Construction',
+      i:1,
+      code:'highRisk'
+
+    },
+    {
+      name:'PPE',
+      i:0,
+      code:'ppe'
+    },
+    {
+      name:'Licence',
+      i:0,
+       code:'licence'
+    },
+    {
+      name:'Identify Hazards',
+      i:0,
+       code:'identifyHazards'
+    },
+    {
+      name:'Risk Level',
+      i:0,
+       code:'riskLevel'
+    },
+    {
+      name:'Control Action Required',
+      i:0,
+       code:'ctrlActreq'
+    },
+    {
+      name:'Code of Practice',
+      i:0,
+       code:'codeOfPract'
+    },
+    {
+      name:'Residule Risk Level',
+      i:0,
+       code:'resRiskLevel'
+    },
+    // {
+    //   name:'Code of Practice',
+    //   i:0,
+    //    code:'codeOfPract'
+    // },
+    {
+      name:'Chemical related Task',
+      i:0,
+       code:''
+    },
+    {
+      name:'Person Responsible',
+      i:0,
+       code:'perResbl'
+    }
+  ]
+  handleClick(index){
+    console.log(index)
+    this.count = index
+    this.roleArr.map(x => {
+      x.i = 0
+    }) 
+    this.roleArr[this.count].i = 1
+  }
 }
