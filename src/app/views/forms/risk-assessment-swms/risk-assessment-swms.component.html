@@ -1432,10 +1432,10 @@
                   (onBeginEvent)="drawStart2()"
                   (onEndEvent)="drawComplete2()"
                   #Signature2
-                  [class.is-invalid]="signRequired"
+                  [class.is-invalid]="signRequired1"
                   ></signature-pad>
                   <span
-                  *ngIf="signRequired"
+                  *ngIf="signRequired1"
                   class="invalid-feedback"
                 >
                 This Field is Required</span
@@ -1449,7 +1449,7 @@
           </div>
         </div>
         <div>
-          <button type="submit" [disabled]="!riskAssessmentFb.valid" class="btn btn-primary " (click)="onSubmit()">Submit</button>
+          <button type="submit" [disabled]="!riskAssessmentFb.valid || singRequired || signRequired1" class="btn btn-primary " (click)="onSubmit()">Submit</button>
         </div>
       </div>
     </div>

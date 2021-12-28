@@ -154,7 +154,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   allChemicals = [];
   allCOPSelected = [];
   singRequired: any;
-  signRequired: any;
+  signRequired1: any;
 
 
   regulatorData: any = [];
@@ -736,7 +736,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   clear1() {
     console.log('clear1');
     this.signaturePad1.clear();
-
+    this.riskAssessmentFb.controls["signature1"].setValue("");
     this.singRequired = this.riskAssessmentFb.controls['signature1'].untouched
   }
   drawStart1() {
@@ -749,13 +749,13 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad2.toDataURL());
     this.riskAssessmentFb.controls["signature2"].setValue(this.signaturePad2.toDataURL());
-    this.signRequired = this.riskAssessmentFb.controls['signature2'].invalid
+    this.signRequired1 = this.riskAssessmentFb.controls['signature2'].invalid
   }
   clear2() {
     console.log('clear2');
     this.signaturePad2.clear();
-
-    this.signRequired = this.riskAssessmentFb.controls['signature2'].untouched
+    this.riskAssessmentFb.controls["signature2"].setValue("");
+    this.signRequired1 = this.riskAssessmentFb.controls['signature2'].untouched
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
@@ -1307,12 +1307,22 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     if (this.id !== 'form') {
       this.logicalFormInfo.updateAssessment(this.id, data).subscribe((res) => {
         console.log("this.riskAssessmentFb updated", res);
+        Swal.fire({
+          title: 'Update successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
         this.router.navigate(["/admin/forms/riskAssessTable"]);
       })
 
     }
     else {
       this.logicalFormInfo.addAssessment(data).subscribe((res) => {
+        Swal.fire({
+          title: 'Submit successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
         this.router.navigate(["/admin/forms/riskAssessTable"]);
         console.log("this.riskAssessmentFb posted", res);
       })
