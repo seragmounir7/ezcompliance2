@@ -150,12 +150,12 @@
             <input  matInput  [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate"
             class="form-control outline"
             formControlName="date"
-            [class.is-invalid]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "           
+            [class.is-invalid-date]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "           
             placeholder="dd-mm-yyyy">
             <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
             <mat-datepicker #datepicker2 ></mat-datepicker>
            
-            <span *ngIf=" sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty  || sidePreview.get('date').touched) " class="invalid-feedback" >
+            <span *ngIf=" sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty  || sidePreview.get('date').touched) " class="invalid-feedback1" >
               Date is Required</span>
           </div>
 
