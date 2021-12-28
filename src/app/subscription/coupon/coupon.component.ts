@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddEditCouponComponent } from './add-edit-coupon/add-edit-coupon.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-coupon',
   templateUrl: './coupon.component.html',
@@ -36,8 +36,8 @@ export class CouponComponent implements OnInit {
     this.setTitle.setTitle('WHS-Coupon');
     
   }
-getAllCoupon(){
-  this.subscript.getAllCoupon().subscribe((res)=>{
+getAllCoupon(field="",value=""){
+  this.subscript.getAllCoupon(field,value).subscribe((res)=>{
     console.log(res)
     let  couponData = res.data;
     couponData.forEach((element, index) => {
@@ -84,4 +84,9 @@ delete(item) {
     }
   });
 }
+
+sortData(sort: Sort) {
+ 
+  this.getAllCoupon(sort.active,sort.direction)
+   }
 }

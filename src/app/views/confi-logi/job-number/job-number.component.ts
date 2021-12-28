@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AddSiteComponent } from 'src/app/site-info/add-site-info/add-site/add-site.component';
 import { EditSiteComponent } from 'src/app/site-info/add-site-info/edit-site/edit-site.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-job-number',
@@ -53,8 +53,8 @@ export class JobNumberComponent implements OnInit {
     this.setTitle.setTitle('WHS-Add Site Info');
     this.getAllJobNumber();
   }
-  getAllJobNumber() {
-    this.logicalFormInfoService.getAllJobNumber().subscribe((res: any) => {
+  getAllJobNumber(field="",value="") {
+    this.logicalFormInfoService.getAllJobNumber(field,value).subscribe((res: any) => {
       console.log(res);
       this.dataSource = res.data;
       console.log("getAllJobNumber",this.dataSource);
@@ -137,4 +137,8 @@ export class JobNumberComponent implements OnInit {
       }
     });
   }
+  sortData(sort: Sort) {
+ 
+    this.getAllJobNumber(sort.active,sort.direction)
+     }
 }
