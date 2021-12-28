@@ -5,66 +5,9 @@
       <h1 class="text-center mt-3 pt-3">
         <p class="title">Employee Information Preview</p>
       </h1>
-  
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button
-            [ngClass]="profile === true ? 'nav-link active' : 'nav-link outline'"
-            id="profile-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#profile"
-            type="button"
-            role="tab"
-            aria-controls="profile"
-            (click)="profileshow()"
-            aria-selected="true"
-          >
-            Profile
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            [ngClass]="
-              LicenceInfo === true ? 'nav-link active' : 'nav-link outline'
-            "
-            id="LicenceInfo-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#LicenceInfo"
-            type="button"
-            role="tab"
-            aria-controls="LicenceInfo"
-            (click)="LicenceInfoshow()"
-            aria-selected="false"
-          >
-            Licence And Quaifications
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            [ngClass]="
-              PPERegister === true ? 'nav-link active' : 'nav-link outline'
-            "
-            id="PPERegister-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#PPERegister"
-            type="button"
-            role="tab"
-            aria-controls="PPERegister"
-            (click)="PPERegisteshow()"
-            aria-selected="false"
-          >
-            PPE Register
-          </button>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="profile"
-          role="tabpanel"
-          *ngIf="profile"
-          aria-labelledby="profile-tab"
-        >
+      <mat-tab-group>
+        <mat-tab label="Profile"  (click)="profileshow()"> 
+         
           <div class="row">
             <div class="mb-3 mt-3 col-3">
               <label for="exampleFormControlInput1" class="form-label"
@@ -439,15 +382,10 @@
           </span>
             </div>
           </div>
-        </div>
-  
-        <div
-          class="tab-pane fade show active"
-          id="LicenceInfo"
-          role="tabpanel"
-          *ngIf="LicenceInfo"
-          aria-labelledby="LicenceInfo-tab"
-        >
+       
+        </mat-tab>
+        <mat-tab label="Licence And Quaifications"  (click)="LicenceInfoshow()">
+       
         <div formArrayName="UploadLicenceArr">
           <div *ngFor="let row of addLicence().controls; let filed = index">
             <div [formGroupName]="filed">
@@ -563,15 +501,10 @@
               Add
             </button>
           </div> -->
-        </div>
-  
-        <div
-          class="tab-pane fade show active"
-          id="PPERegister"
-          role="tabpanel"
-          *ngIf="PPERegister"
-          aria-labelledby="PPERegister-tab"
-        >
+        
+          </mat-tab>
+        <mat-tab label="PPE Register"  (click)="PPERegisteshow()"> 
+         
           <div class="row">
             <div class="mb-3 mt-3 col-3">
               <label for="exampleFormControlInput1" class="form-label"
@@ -640,10 +573,11 @@
               <label>Signature</label>
               <div class="sign">
                 <signature-pad
-                  value="Signature"
+                  #signature1
                   [options]="signaturePadOptions"
                   (onBeginEvent)="drawStart()"
                   (onEndEvent)="drawComplete()"
+                 
                 ></signature-pad>
               </div>
             </div>
@@ -669,8 +603,74 @@
               Update
             </button>
           </div>
-        </div>
-      </div>
+        
+        </mat-tab>
+      </mat-tab-group>
+      <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            [ngClass]="profile === true ? 'nav-link active' : 'nav-link outline'"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            (click)="profileshow()"
+            aria-selected="true"
+          >
+            Profile
+          </button>
+           <div
+          class="tab-pane fade show active"
+          id="profile"
+          role="tabpanel"
+          *ngIf="profile"
+          aria-labelledby="profile-tab"
+        ></div>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            [ngClass]="
+              LicenceInfo === true ? 'nav-link active' : 'nav-link outline'
+            "
+            id="LicenceInfo-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#LicenceInfo"
+            type="button"
+            role="tab"
+            aria-controls="LicenceInfo"
+            (click)="LicenceInfoshow()"
+            aria-selected="false"
+          >
+            Licence And Quaifications
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            [ngClass]="
+              PPERegister === true ? 'nav-link active' : 'nav-link outline'
+            "
+            id="PPERegister-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#PPERegister"
+            type="button"
+            role="tab"
+            aria-controls="PPERegister"
+            (click)="PPERegisteshow()"
+            aria-selected="false"
+          >
+            PPE Register
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+       
+  
+       
+  
+        
+      </div> -->
     </form>
   </div> 
   

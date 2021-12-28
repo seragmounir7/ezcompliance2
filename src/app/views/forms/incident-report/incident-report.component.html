@@ -329,13 +329,13 @@
        <input  matInput  [matDatepicker]="datepicker" [max]="maxDate" [min]="minDate"
        class="form-control"
        formControlName="dateOfFormCompletion" 
-       [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "
+       [class.is-invalid-date]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "
        placeholder="dd-mm-yyyy">
        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
        <mat-datepicker #datepicker ></mat-datepicker>
         <!--  -->
         <span *ngIf=" IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty  || IncidentReport.get('dateOfFormCompletion').touched) "
-         class="invalid-feedback date-valid" >
+         class="invalid-feedback1 date-valid" >
         Date is Required</span>
       </div>
     </div>
@@ -553,13 +553,13 @@
         class="form-control"  
         placeholder="dd-mm-yyyy"
         formControlName="dateOfTheIncident" 
-        [class.is-invalid]="IncidentReport.get('dateOfTheIncident')?.hasError('required') 
+        [class.is-invalid-date]="IncidentReport.get('dateOfTheIncident')?.hasError('required') 
         && (IncidentReport.get('dateOfTheIncident').dirty 
         || IncidentReport.get('dateOfTheIncident').touched) ">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker ></mat-datepicker>
 <!--  -->
-        <span *ngIf=" IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty  || IncidentReport.get('dateOfTheIncident').touched) " class="invalid-feedback date-valid" >
+        <span *ngIf=" IncidentReport.get('dateOfTheIncident')?.hasError('required') && (IncidentReport.get('dateOfTheIncident').dirty  || IncidentReport.get('dateOfTheIncident').touched) " class="invalid-feedback1 date-valid" >
           Date is Required</span>
       </div>
     </div>
@@ -991,10 +991,10 @@
           class="form-control"
           formControlName="date"
           placeholder="dd-mm-yyyy"
-          [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) ">
+          [class.is-invalid-date]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) ">
           <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
           <mat-datepicker #pickerd4 ></mat-datepicker>
-          <span *ngIf=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty  || add().controls[i].get('date').touched) " class="invalid-feedback" >
+          <span *ngIf=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty  || add().controls[i].get('date').touched) " class="invalid-feedback1" >
             Date is Required</span>
         </div>
         <div class="col-1 mt-5">
@@ -1102,11 +1102,11 @@
           <input  matInput  [matDatepicker]="pickerd5" [max]="maxDate"
           class="form-control"
           formControlName="completedDate"
-          [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "
+          [class.is-invalid-date]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "
           placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
           <mat-datepicker #pickerd5 ></mat-datepicker>
-          <span *ngIf=" IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty  || IncidentReport.get('completedDate').touched) " class="invalid-feedback" >
+          <span *ngIf=" IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty  || IncidentReport.get('completedDate').touched) " class="invalid-feedback1" >
           Date is Required</span>
         </div>
       </div>
@@ -1225,11 +1225,11 @@
           <input  matInput  [matDatepicker]="pickerd6" [max]="maxDate"
           class="form-control"
           formControlName="reviewedDate"
-          [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "
+          [class.is-invalid-date]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "
           placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd6"></mat-datepicker-toggle>
           <mat-datepicker #pickerd6 ></mat-datepicker>
-          <span *ngIf=" IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty  || IncidentReport.get('reviewedDate').touched) " class="invalid-feedback" >
+          <span *ngIf=" IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty  || IncidentReport.get('reviewedDate').touched) " class="invalid-feedback1" >
          Date is Required</span>
         </div>
       </div>

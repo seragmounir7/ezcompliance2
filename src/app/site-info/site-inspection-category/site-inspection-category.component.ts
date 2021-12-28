@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddSiteInspectionCategoryComponent } from './add-site-inspection-category/add-site-inspection-category.component';
 import { EditSiteInspectionCategoryComponent } from './edit-site-inspection-category/edit-site-inspection-category.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { SiteInspectionTopicComponent } from './site-inspection-topic/site-inspection-topic.component';
 
 @Component({
@@ -35,9 +35,9 @@ export class SiteInspectionCategoryComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllCategory() {
+  getAllCategory(field="",value="") {
     this.logicalFormInfoService
-      .getAllSiteInspectionCategory()
+      .getAllSiteInspectionCategory(field,value)
       .subscribe((res: any) => {
         console.log(res);
         this.dataSource.data = res.data;
@@ -110,4 +110,8 @@ export class SiteInspectionCategoryComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  sortData(sort: Sort) {
+ 
+    this.getAllCategory(sort.active,sort.direction)
+     }
 }

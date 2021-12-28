@@ -127,7 +127,13 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
                 icon: "Roles",
                 route: "/admin/roleMangement",
                 hasAccess: true
-            }
+            },
+            {
+              displayedName: "Employee Details",
+              icon: "Employee_Details",
+              route: "/admin/registration/employeeRegistration",
+              hasAccess: true
+          }
         ],
         hasAccess: true
     },

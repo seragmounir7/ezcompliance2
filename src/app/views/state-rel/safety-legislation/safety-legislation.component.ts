@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
@@ -32,8 +32,8 @@ export class SafetyLegislationComponent implements OnInit {
     this.getAllSafetyReg()
   }
 
-  getAllSafetyReg() {
-    this.logicalFormInfo.getAllSafety().subscribe((res) => {
+  getAllSafetyReg(field="",value="") {
+    this.logicalFormInfo.getAllSafety(field,value).subscribe((res) => {
       console.log('getAllRegulator=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -89,5 +89,8 @@ export class SafetyLegislationComponent implements OnInit {
       }
     });
   }
-
+  sortData(sort: Sort) {
+ 
+    this.getAllSafetyReg(sort.active,sort.direction)
+     }
 }

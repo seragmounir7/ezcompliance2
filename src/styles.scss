@@ -127,3 +127,11 @@ button:focus {
   background-position: right calc(.75em + 1.75rem) center;
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
+
+.invalid-feedback1{
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}

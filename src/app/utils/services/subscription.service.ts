@@ -52,8 +52,11 @@ export class SubscriptionService {
       })
     );
   }
-  getAllCoupon() {
-    return this.https.get(this.apiUrl + 'coupon/getAll'  ).pipe(
+  getAllCoupon(field="",value="") {
+    if(value==''){
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `coupon/getAll?field=${field}&value=${value}`).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;

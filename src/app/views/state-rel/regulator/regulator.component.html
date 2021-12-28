@@ -8,7 +8,7 @@
       </button>
     </div>
     <div class="">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
     
         <!-- Position Column -->
         <ng-container matColumnDef="index">
