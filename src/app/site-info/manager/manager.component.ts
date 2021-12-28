@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { EditManagerComponent } from './edit-manager/edit-manager.component';
 
 
@@ -33,8 +33,8 @@ export class ManagerComponent implements OnInit {
     this.getAllManager();
       this.setTitle.setTitle('WHS-Manager');
   }
-  getAllManager() {
-    this.logicalFormInfo.getAllManager().subscribe((res: any) => {
+  getAllManager(field="",value="") {
+    this.logicalFormInfo.getAllManager(field,value).subscribe((res: any) => {
       console.log('getAllManager=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data
@@ -91,5 +91,8 @@ export class ManagerComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  sortData(sort: Sort) {
+ 
+    this.getAllManager(sort.active,sort.direction)
+     }
 }

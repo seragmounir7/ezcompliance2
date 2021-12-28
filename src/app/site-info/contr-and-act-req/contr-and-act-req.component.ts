@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditContActComponent } from './edit-cont-act/edit-cont-act.component';
 import { SnackbarService } from '../../services/snackbar.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-contr-and-act-req',
   templateUrl: './contr-and-act-req.component.html',
@@ -43,8 +43,8 @@ export class ContrAndActReqComponent implements OnInit {
 
   }
 
-  getAllContrlActReq() {
-    this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
+  getAllContrlActReq(field="",value="") {
+    this.logicalFormInfo.getAllContrlActReq(field,value).subscribe((res:any) => {
       console.log('PPEAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -106,4 +106,7 @@ export class ContrAndActReqComponent implements OnInit {
     console.log('copy successfull')
     this.snack.openSnackBar('Copied to clipboard');
   }
+  sortData(sort:Sort) {
+    this.getAllContrlActReq(sort.active,sort.direction)
+     }
 }

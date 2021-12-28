@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { EditWhsManagerComponent } from './edit-whs-manager/edit-whs-manager.component';
 @Component({
   selector: 'app-whs-manager',
@@ -31,8 +31,8 @@ export class WHSManagerComponent implements OnInit {
 this.getAllWHSManager();
       this.setTitle.setTitle('WHS-WHS-Manager');
     }
-    getAllWHSManager() {
-      this.logicalFormInfo.getAllWHSManager().subscribe((res: any) => {
+    getAllWHSManager(field="",value="") {
+      this.logicalFormInfo.getAllWHSManager(field,value).subscribe((res: any) => {
         console.log('getAllWHSManager=>', res);
         // this.jobTaskData = res.data[0].subComponents;
         let data = res.data
@@ -89,4 +89,8 @@ this.getAllWHSManager();
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
+    sortData(sort: Sort) {
+ 
+      this.getAllWHSManager(sort.active,sort.direction)
+       }
 }

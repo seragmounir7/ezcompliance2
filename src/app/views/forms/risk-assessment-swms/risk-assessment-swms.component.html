@@ -63,7 +63,7 @@
             <div class="row">
               <div class="my-3 col">
                 <label class="form-label"
-                  >Site Name</label
+                  >Site Name<span class="text-danger">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -87,7 +87,7 @@
           </div>
               <div class="my-3 col">
                 <label class="form-label"
-                  >Customer Name</label
+                  >Customer Name<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -110,7 +110,7 @@
             <div class="row">
               <div class="my-3 col-2">
                 <label class="form-label"
-                  >Street Number</label
+                  >Street Number<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -131,7 +131,7 @@
               </div>
               <div class="my-3 col-4">
                 <label class="form-label"
-                  >Street Address</label
+                  >Street Address<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -152,7 +152,7 @@
               </div>
               <div class="my-3 col-4">
                 <label class="form-label"
-                  >Suburb</label
+                  >Suburb<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -173,7 +173,7 @@
               </div>
               <div class="my-3 col-2">
                 <label class="form-label"
-                  >State</label
+                  >State<span class="text-danger ">*</span></label
                 >
                 <select
                 class="form-select form-control col"
@@ -208,7 +208,7 @@
             <div class="row">
               <div class="my-3 col">
                 <label class="form-label"
-                  >Customer Contact</label
+                  >Customer Contact<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -230,7 +230,7 @@
               </div>
               <div class="my-3 col">
                 <label class="form-label"
-                  >Customer Contact Phone</label
+                  >Customer Contact Phone<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -253,7 +253,7 @@
             <div class="row">
               <div class="my-3 col-4">
                 <label class="form-label"
-                  >Customer Email</label
+                  >Customer Email<span class="text-danger ">*</span></label
                 >
                 <!-- <select
                   class="form-select form-control col"
@@ -275,7 +275,7 @@
               </div>
               <div class="my-3 col-2">
                 <label class="form-label"
-                  >Job Number</label
+                  >Job Number<span class="text-danger ">*</span></label
                 >    
                 <select
                 class="form-select form-control col"
@@ -298,7 +298,7 @@
               </div>
               <div class="my-3 col-6">
                 <label class="form-label"
-                  >Project Manager</label
+                  >Project Manager<span class="text-danger ">*</span></label
                 >
                 <select
                   class="form-select form-control col"
@@ -328,11 +328,18 @@
                 <!-- <input type="date" class="form-control" formControlName="date" /> -->
                 <input  matInput  [matDatepicker]="datepicker2"
             class="form-control"
+            [max]="maxDate" [min]="minDate"
             formControlName="date"
-            [value]="maxDate"
-            placeholder="dd-mm-yyyy" readonly>
-            <mat-datepicker-toggle matSuffix [for]="datepicker2" [disabled]="true"></mat-datepicker-toggle>
+            placeholder="dd-mm-yyyy" [class.is-invalid]="riskAssessmentFb.get('date')?.hasError('required') 
+            && (riskAssessmentFb.get('date').dirty || riskAssessmentFb.get('date').touched) " >
+            <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
             <mat-datepicker #datepicker2 ></mat-datepicker>
+            <span
+                *ngIf="
+                riskAssessmentFb.get('date')?.hasError('required') && (riskAssessmentFb.get('date').dirty 
+                || riskAssessmentFb.get('date').touched) "  class="invalid-feedback">
+                Project Manager  is Required 
+              </span>
               </div>
             </div>
             <hr />
@@ -544,7 +551,7 @@
           <div class="row">
             <div class="col-4">
               <label class="form-label"
-                >Employee 1</label
+                >Employee 1<span class="text-danger">*</span></label
               >
               <p>
                 <input
@@ -564,7 +571,7 @@
             </div>
             <div class="col-4">
               <label class="form-label"
-                >Signature</label
+                >Signature<span class="text-danger">*</span></label
               >
               <div class="sign" #signaturePad1Div>
                 <signature-pad
@@ -587,7 +594,7 @@
             </div>
             <div class="col-3">
               <label class="form-label"
-                >Date</label
+                >Date<span class="text-danger">*</span></label
               >
               <p>
                 <!-- <input
@@ -600,7 +607,7 @@
                   formControlName="dateTime"
                   (dateChange)="getDate( $event)"
                   
-                  [class.is-invalid]="riskAssessmentFb.get('dateTime')?.hasError('required') 
+                  [class.is-invalid-date]="riskAssessmentFb.get('dateTime')?.hasError('required') 
                   && (riskAssessmentFb.get('dateTime').dirty || riskAssessmentFb.get('dateTime').touched) "
                   placeholder="dd-mm-yyyy">
                   <mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
@@ -609,7 +616,7 @@
                   *ngIf="
                   riskAssessmentFb.get('dateTime')?.hasError('required') && (riskAssessmentFb.get('dateTime').dirty 
                   || riskAssessmentFb.get('dateTime').touched) "
-                  class="invalid-feedback"
+                  class="invalid-feedback1"
                 >
                 Date is Required</span
                 >
@@ -640,7 +647,7 @@
           <div class="col-md-6">
             <div class="my-3">
               <label class="form-label"
-                >Site Name</label
+                >Site Name<span class="text-danger">*</span></label
               >
               <input
                 type="fullname"
@@ -662,7 +669,7 @@
           <div class="col-md-6">
             <div class="my-3">
               <label class="form-label"
-                >Customer Name</label
+                >Customer Name<span class="text-danger">*</span></label
               >
               <input
                 type="surname"
@@ -683,7 +690,7 @@
           <div class="col-md-2">
             <div class="my-3">
               <label class="form-label"
-                >Street Number</label
+                >Street Number<span class="text-danger">*</span></label
               >
               <input
                 type="number"
@@ -704,7 +711,7 @@
           <div class="col-md-4">
             <div class="my-3">
               <label class="form-label"
-                >Street Name</label
+                >Street Name<span class="text-danger">*</span></label
               >
               <input
                 type="email"
@@ -724,7 +731,7 @@
           </div>
           <div class="col-md-4">
             <div class="my-3">
-              <label class="form-label">Town/City</label>
+              <label class="form-label">Town/City<span class="text-danger">*</span></label>
               <input
                 type="department"
                 class="form-control"
@@ -742,7 +749,7 @@
           </div>
           <div class="col-md-2">
             <div class="my-3">
-              <label class="form-label">State</label>
+              <label class="form-label">State<span class="text-danger">*</span></label>
               <select
                 class="form-select form-control col"
                 aria-label="Default select example"
@@ -765,7 +772,7 @@
           <div class="col-md-6">
             <div class="my-3">
               <label class="form-label"
-                >Customer Contact</label
+                >Customer Contact<span class="text-danger">*</span></label
               >
               <input
                 type="Projectnumber"
@@ -786,7 +793,7 @@
           <div class="col-md-6">
             <div class="my-3">
               <label class="form-label"
-                >Customer Contact Phone</label
+                >Customer Contact Phone<span class="text-danger">*</span></label
               >
               <input
                 type="tel"
@@ -807,7 +814,7 @@
           <div class="col-md-6">
             <div class="my-3">
               <label class="form-label"
-                >Customer Contact Email</label
+                >Customer Contact Email<span class="text-danger">*</span></label
               >
               <input
                 type="email"
@@ -828,7 +835,7 @@
           <div class="col-md-3">
             <div class="my-3">
               <label class="form-label"
-                >Job Number</label
+                >Job Number<span class="text-danger">*</span></label
               >
               <select
               class="form-select form-control col"
@@ -852,7 +859,7 @@
           <div class="col-md-3">
             <div class="my-3">
               <label class="form-label"
-                >Project Manager</label
+                >Project Manager<span class="text-danger">*</span></label
               >
               <select
                   class="form-select form-control col"
@@ -880,7 +887,7 @@
           <div class="col-md-2">
             <div class="my-3">
               <label for="exampleInputProjectNumber" class="form-label"
-                >Jurisdiction</label
+                >Jurisdiction<span class="text-danger">*</span></label
               >
               <select
                 class="form-select form-control col"
@@ -903,7 +910,7 @@
           </div>
           <div class="col-md-5">
             <div class="my-3">
-              <label >Safety Legislation</label>
+              <label >Safety Legislation<span class="text-danger">*</span></label>
               <select
                 class="form-control"
                 name="sellist2"
@@ -928,7 +935,7 @@
           <div class="col-md-5">
             <div class="my-3">
               <label class="form-label"
-                >Regulator & other Legislation</label
+                >Regulator & other Legislation<span class="text-danger">*</span></label
               >
               <select
                 class="form-select form-control col"
@@ -1398,7 +1405,7 @@
           <div class="col-md-7">
             <div class="my-3">
               <label for="exampleInputProjectNumber" class="form-label"
-                >Employee 2</label
+                >Employee 2<span class="text-danger">*</span></label
               >
               <input
                 formControlName="employee2"
@@ -1418,17 +1425,17 @@
           </div>
           <div class="col-md-5">
             <div class="form-floating">
-              <label>Signature*</label>
+              <label>Signature<span class="text-danger">*</span></label>
               <div class="sign">
                 <signature-pad
                   [options]="signaturePadOptions2"
                   (onBeginEvent)="drawStart2()"
                   (onEndEvent)="drawComplete2()"
                   #Signature2
-                  [class.is-invalid]="signRequired"
+                  [class.is-invalid]="signRequired1"
                   ></signature-pad>
                   <span
-                  *ngIf="signRequired"
+                  *ngIf="signRequired1"
                   class="invalid-feedback"
                 >
                 This Field is Required</span
@@ -1442,7 +1449,7 @@
           </div>
         </div>
         <div>
-          <button type="submit" [disabled]="!riskAssessmentFb.valid" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+          <button type="submit" [disabled]="!riskAssessmentFb.valid || singRequired || signRequired1" class="btn btn-primary " (click)="onSubmit()">Submit</button>
         </div>
       </div>
     </div>
@@ -2562,7 +2569,7 @@
         </div>
       </div>
       <div>
-        <button *ngIf="check!='print'" type="submit" class="btn btn-outline-primary"  (click)="onSubmit()">Submit</button>
+        <button *ngIf="check!='print'" type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
       </div>
     </div>
   </div>

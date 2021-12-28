@@ -17,7 +17,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-high-risk-con',
   templateUrl: './high-risk-con.component.html',
@@ -172,8 +172,8 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //     return `with: ${reason}`;
   //   }
   // }
-  getAllHighRisk() {
-    this.logicalFormInfo.getAllRisk().subscribe((res:any) => {
+  getAllHighRisk(field="",value="") {
+    this.logicalFormInfo.getAllRisk(field,value).subscribe((res:any) => {
       console.log('Risk=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -231,4 +231,8 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllHighRisk(sort.active,sort.direction)
+     }
 }

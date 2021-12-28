@@ -7,7 +7,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-code-of-pract',
   templateUrl: './code-of-pract.component.html',
@@ -36,9 +36,9 @@ export class CodeOfPractComponent implements OnInit {
     this.setTitle.setTitle('WHS-Code of Practice');
   }
 
-  getAllCodeOfPractice() {
+  getAllCodeOfPractice(field="",value="") {
    
-    this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
+    this.logicalFormInfo.getAllCOP(field,value).subscribe((res:any) => {
       console.log('codeOfPractice=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -95,4 +95,8 @@ export class CodeOfPractComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllCodeOfPractice(sort.active,sort.direction)
+     }
 }

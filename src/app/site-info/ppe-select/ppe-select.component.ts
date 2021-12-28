@@ -2,7 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
-import {MatSort} from '@angular/material/sort';
+import {MatSort, Sort} from '@angular/material/sort';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -41,8 +41,8 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     
   }
 
-  getAllPPEs() {
-    this.logicalFormInfo.getAllPPE().subscribe((res:any) => {
+  getAllPPEs(field="",value="") {
+    this.logicalFormInfo.getAllPPE(field,value).subscribe((res:any) => {
       console.log('PPEAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -101,4 +101,8 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  sortData(sort:Sort) {
+    this.getAllPPEs(sort.active,sort.direction)
+     }
 }

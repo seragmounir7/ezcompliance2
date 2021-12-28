@@ -138,16 +138,26 @@ export class SiteInspectionComponent implements OnInit {
 
     this.dynamicFormsService.homebarTitle.next('Site Inspection Form');
     this.setTitle.setTitle('WHS-Site Inspection Form');
-    this.getAllJobNumber();
-    this.getAllProjectMang();
-    this.getAllCategory();
-    this.getAllTopic();
-    this.getAllStaff();
+   
     if (this.id != 'form') {
       this.logicalFormInfo.getSiteInspection(this.id).subscribe((res: any) => {
         console.log('res', res.data);
 
         this.showDatas = res.data;
+        this.allTopic= this.showDatas.sitePreview[0].allTopic
+        this.allcategory=this.showDatas.sitePreview[0].allcategory
+        this.allJobNumbers =this.showDatas.sitePreview[0].allJobNumbersArr;
+        this.projectMang =this.showDatas.sitePreview[0].projectMangArr;
+        this.staff =this.showDatas.sitePreview[0].staffArr;
+        this.maxDate = this.showDatas.sitePreview[0].date;
+       this.minDate = this.showDatas.sitePreview[0].date;
+        for (let index = 0; index < this.allTopic.length; index++) {
+          //this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
+  
+          this.add2().push(this.newAction2(index));
+          // console.log("index",index);
+        }
+        console.log(this.sidePreview.value);
         setTimeout(() => {
           let formatDate;
           if (this.showDatas.sitePreview[0].date) {
@@ -157,7 +167,7 @@ export class SiteInspectionComponent implements OnInit {
           } else {
             formatDate = '';
           }
-
+               
           this.sidePreview.patchValue({
             siteName: this.showDatas.sitePreview[0].siteName,
             customerName: this.showDatas.sitePreview[0].customerName,
@@ -188,7 +198,14 @@ export class SiteInspectionComponent implements OnInit {
           }
         }, 500);
       });
+    }else{
+      this.getAllCategory();
+      this.getAllTopic();
+      this.getAllJobNumber();
+      this.getAllProjectMang();
+      this.getAllStaff();
     }
+    
   }
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
@@ -338,12 +355,18 @@ export class SiteInspectionComponent implements OnInit {
     }
   }
   onSave() {
+    
     console.log('form data', this.sidePreview.value);
     if (this.id != 'form') {
       const data = {
         sitePreview: [
           {
             ...this.sidePreview.value,
+            allTopic:this.allTopic,
+            allcategory:this.allcategory,
+            allJobNumbersArr: this.allJobNumbers,
+            projectMangArr: this.projectMang,
+            staffArr: this.staff
           },
         ],
       };
@@ -365,6 +388,11 @@ export class SiteInspectionComponent implements OnInit {
         sitePreview: [
           {
             ...this.sidePreview.value,
+              allTopic:this.allTopic,
+              allcategory:this.allcategory,
+              allJobNumbersArr: this.allJobNumbers,
+              projectMangArr: this.projectMang,
+              staffArr: this.staff
           },
         ],
       };

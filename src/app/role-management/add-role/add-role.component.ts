@@ -9,6 +9,7 @@ import {
   Validators,
 
 } from '@angular/forms';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 @Component({
   selector: 'app-add-role',
   templateUrl: './add-role.component.html',
@@ -20,6 +21,7 @@ export class AddRoleComponent implements OnInit {
     private fb: FormBuilder,
     private roleService : RoleManagementService,
     public dialogRef: MatDialogRef<AddRoleComponent>,
+    private roleSharedService:RoleManagementSharedServiceService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addRole = this.fb.group({
@@ -43,7 +45,7 @@ export class AddRoleComponent implements OnInit {
     
       this.roleService.addRole(this.addRole.value).subscribe((res)=>{
         console.log("res",res);
-        
+        this.roleSharedService.sendRoleEvent("true")
         Swal.fire('Added Successfully')
         this.dialogRef.close();
       })
@@ -51,7 +53,7 @@ export class AddRoleComponent implements OnInit {
      if(this.data.action==="edit"){
       this.roleService.updateRole(this.data.role._id,this.addRole.value).subscribe((res)=>{
         console.log("res",res);
-        
+        this.roleSharedService.sendRoleEvent(true)
         Swal.fire('Update Successfully')
         this.dialogRef.close("true");
       })

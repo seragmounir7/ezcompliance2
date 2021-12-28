@@ -42,6 +42,8 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     }
     else if (rLink === '/admin/siteInfo/addSite' || rLink === '/admin/siteInfo/addCustomer' || rLink === '/admin/siteInfo/jobTask' || rLink === '/admin/siteInfo/highRisk' || rLink === '/admin/siteInfo/licenceAndQual' || rLink === '/admin/siteInfo/licenceCat' || rLink === '/admin/siteInfo/ppeSel' || rLink === '/admin/siteInfo/hazards' || rLink === '/admin/siteInfo/contrlActReq' || rLink === '/admin/siteInfo/chemical' || rLink === '/admin/siteInfo/riskLevel' || rLink === '/admin/siteInfo/riskLevel' || rLink === '/admin/siteInfo/staff') {
       this.menuOpen(5);
+    } else if (rLink === '/admin/savedForms') {
+      this.menuOpen(6);
     }
 
     this.setTitle.setTitle('WHS-Menu Sidebar');
@@ -125,12 +127,18 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
                 icon: "Roles",
                 route: "/admin/roleMangement",
                 hasAccess: true
-            }
+            },
+            {
+              displayedName: "Employee Details",
+              icon: "Employee_Details",
+              route: "/admin/registration/employeeRegistration",
+              hasAccess: true
+          }
         ],
         hasAccess: true
     },
     {
-        displayedName: "Dynamic form",
+        displayedName: "Dynamic Form",
         icon: "page",
         childItem: [
             {
@@ -143,7 +151,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
         hasAccess: true
     },
     {
-        displayedName: "Logical forms",
+        displayedName: "Logical Forms",
         icon: "page",
         childItem: [
             {
@@ -155,6 +163,19 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
         ],
         hasAccess: true
     },
+    {
+      displayedName: "Saved Forms",
+      icon: "page",
+      childItem: [
+          {
+              displayedName: "Forms",
+              icon: "page",
+              route: "/admin/savedForms",
+              hasAccess: false
+          }
+      ],
+      hasAccess: false
+  },
     {
         displayedName: "Form Configure",
         icon: "page",

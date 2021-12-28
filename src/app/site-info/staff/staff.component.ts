@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditStaffComponent } from './edit-staff/edit-staff.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-staff',
@@ -38,8 +38,8 @@ export class StaffComponent implements OnInit {
     this.setTitle.setTitle('WHS-Staff Info');
     this.getAllStaff()
   }
-  getAllStaff(){
-    this.logicalFormInfoService.getAllStaff().subscribe((res:any)=> {
+  getAllStaff(field="",value=""){
+    this.logicalFormInfoService.getAllStaff(field,value).subscribe((res:any)=> {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -88,6 +88,9 @@ export class StaffComponent implements OnInit {
       }
     });
   }
-
+  sortData(sort: Sort) {
+ 
+    this.getAllStaff(sort.active,sort.direction)
+     }
 }
 
