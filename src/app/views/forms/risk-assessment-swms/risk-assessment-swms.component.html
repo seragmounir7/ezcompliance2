@@ -328,11 +328,18 @@
                 <!-- <input type="date" class="form-control" formControlName="date" /> -->
                 <input  matInput  [matDatepicker]="datepicker2"
             class="form-control"
+            [max]="maxDate" [min]="minDate"
             formControlName="date"
-            [value]="maxDate"
-            placeholder="dd-mm-yyyy" readonly>
+            placeholder="dd-mm-yyyy" [class.is-invalid]="riskAssessmentFb.get('date')?.hasError('required') 
+            && (riskAssessmentFb.get('date').dirty || riskAssessmentFb.get('date').touched) " >
             <mat-datepicker-toggle matSuffix [for]="datepicker2" [disabled]="true"></mat-datepicker-toggle>
             <mat-datepicker #datepicker2 ></mat-datepicker>
+            <span
+                *ngIf="
+                riskAssessmentFb.get('date')?.hasError('required') && (riskAssessmentFb.get('date').dirty 
+                || riskAssessmentFb.get('date').touched) "  class="invalid-feedback">
+                Project Manager  is Required 
+              </span>
               </div>
             </div>
             <hr />
@@ -600,7 +607,7 @@
                   formControlName="dateTime"
                   (dateChange)="getDate( $event)"
                   
-                  [class.is-invalid]="riskAssessmentFb.get('dateTime')?.hasError('required') 
+                  [class.is-invalid-date]="riskAssessmentFb.get('dateTime')?.hasError('required') 
                   && (riskAssessmentFb.get('dateTime').dirty || riskAssessmentFb.get('dateTime').touched) "
                   placeholder="dd-mm-yyyy">
                   <mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
@@ -1425,10 +1432,10 @@
                   (onBeginEvent)="drawStart2()"
                   (onEndEvent)="drawComplete2()"
                   #Signature2
-                  [class.is-invalid]="signRequired"
+                  [class.is-invalid]="signRequired1"
                   ></signature-pad>
                   <span
-                  *ngIf="signRequired"
+                  *ngIf="signRequired1"
                   class="invalid-feedback"
                 >
                 This Field is Required</span
@@ -1442,7 +1449,7 @@
           </div>
         </div>
         <div>
-          <button type="submit" [disabled]="!riskAssessmentFb.valid" class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+          <button type="submit" [disabled]="!riskAssessmentFb.valid || singRequired || signRequired1" class="btn btn-primary " (click)="onSubmit()">Submit</button>
         </div>
       </div>
     </div>
@@ -2562,7 +2569,7 @@
         </div>
       </div>
       <div>
-        <button *ngIf="check!='print'" type="submit" class="btn btn-outline-primary"  (click)="onSubmit()">Submit</button>
+        <button *ngIf="check!='print'" type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
       </div>
     </div>
   </div>

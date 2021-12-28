@@ -50,3 +50,105 @@ button.link { background:none; border:none;
   }
 button.link:hover { color: #007bff;
 }
+////////@at-root
+@import 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css';
+@import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+.nav-pills-custom .nav-link {
+    color: #aaa;
+    background: #fff;
+    position: relative;
+}
+
+.nav-pills-custom .nav-link.active {
+    color: #45b649;
+    background: #fff;
+    border: solid 1px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* Add indicator arrow for the active tab */
+@media (min-width: 992px) {
+    .nav-pills-custom .nav-link::before {
+        content: '';
+        display: block;
+        border-top: 8px solid transparent;
+        border-left: 10px solid #45b649;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
+
+.nav-pills-custom .nav-link.active::before {
+    opacity: 1;
+}
+
+
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(to left, #dce35b, #45b649);
+}
+/////////////////////////////
+:host {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+:host ::ng-deep .mat-tab-labels {
+  flex-direction: column;
+}
+
+mat-tab-group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+:host ::ng-deep .mat-tab-body-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-tab-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep mat-ink-bar {
+  display: none;
+}
+:host ::ng-deep.mat-tab-label.mat-tab-label-active {
+  background-color: transparent;
+ 
+ 
+  border-right: 3px solid #45b649;
+}
+
+:host ::ng-deep.mat-tab-label {
+  background-color: transparent;
+
+}
+
+.example-large-box {
+  height: 300px;
+  width: 450px;
+}
+:host ::ng-deep.mat-tab-body-content {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}

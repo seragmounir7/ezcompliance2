@@ -154,7 +154,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   allChemicals = [];
   allCOPSelected = [];
   singRequired: any;
-  signRequired: any;
+  signRequired1: any;
 
 
   regulatorData: any = [];
@@ -226,25 +226,27 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getAllJobTask();
-    this.getAllPPE();
-    this.getAllHighRisk();
-    this.getAllLicence();
-    this.getAllProjectMang();
+    this.setTitle.setTitle('WHS-Risk Assesment Form');
     this.addActionSDSRegister();
-    this.getAllJobNumber();
-    this.getAllResidualRiskLevel();
-    this.getAllStaff();
-    this.getAllRiskLevel();
-    this.getAllChemical();
-    this.getAllHazard();
-    this.getAllContrActReq();
-    this.getAllRegulator();
-    this.getAllSafe();
-    this.getAllState();
-    this.getAllJurisdiction();
     if (this.id != "form") {
       this.getAssessmentByid(this.id);
+    }else{
+      this.getAllJobTask();
+      this.getAllPPE();
+      this.getAllHighRisk();
+      this.getAllLicence();
+      this.getAllProjectMang();
+      this.getAllJobNumber();
+      this.getAllResidualRiskLevel();
+      this.getAllStaff();
+      this.getAllRiskLevel();
+      this.getAllChemical();
+      this.getAllHazard();
+      this.getAllContrActReq();
+      this.getAllRegulator();
+      this.getAllSafe();
+      this.getAllState();
+      this.getAllJurisdiction();
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
     //   console.log(res);
@@ -254,7 +256,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     //     setTimeout( function() { window.print(); }, 3000);
     //   }
     // }) 
-    this.setTitle.setTitle('WHS-Risk Assesment Form');
+   
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
     //     console.log('jobNumberres', res);
@@ -294,7 +296,6 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
           }
         }
 
-
       }
     });
   }
@@ -303,6 +304,47 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     this.logicalFormInfo.getAssessmentbyId(id).subscribe((res: any) => {
       this.allCOPSelected = [];
       console.log("assesment by id", res.data);
+
+      this.jobTaskData=res.data.jobTaskDataArr;
+      this.PPEselection=res.data.PPEselectionArr;
+      this.highRiskConstruction=res.data.highRiskConstructionArr;
+      this.licenseAndQualification=res.data.licenseAndQualificationArr;
+      this.projectMang=res.data. projectMangArr;
+      this.allJobNumbers=res.data.allJobNumbersArr;
+      this.resiRiskLevel=res.data.resiRiskLevelArr;
+      this.staff=res.data.staffArr;
+      this.riskLevel=res.data.riskLevelArr;
+      this.allChemicals=res.data.allChemicalsArr;
+      this.allHazards=res.data.allHazardsArr;
+      this.allContrlActReq=res.data.allContrlActReqArr;
+      this.regulatorData=res.data.regulatorDataArr;
+      this.safety=res.data.safetyArr;
+      this.states=res.data.statesArr;
+      this.JurisdictionData=res.data.JurisdictionDataArr;
+      this.maxDate=res.data.date;
+      this.minDate=res.data.date;
+
+      for (let i = 0; i < this.jobTaskData.length; i++) {
+        // this.taskArr[i] = 0;
+        this.jobtask().push(this.jobtaskk(i));
+      }
+
+      for (let i = 0; i < this.PPEselection.length; i++) {
+        this.ppeArr[i] = 0;
+        this.ppe().push(this.ppeSelect(i));
+        this.ppe2().push(this.ppeSelect(i));
+      }
+
+      for (let i = 0; i < this.highRiskConstruction.length; i++) {
+        this.riskArr[i] = 0;
+        this.riskConstruct().push(this.riskCons(i))
+        this.riskConstruct2().push(this.riskCons(i))
+      }
+
+      for (let i = 0; i < this.licenseAndQualification.length; i++) {
+        this.licenceArr[i] = 0;
+        this.Licence().push(this.license(i))
+      }
       let check = async () => { this.signaturePad1 != null }
       check().then(() => {
         this.signaturePad1.fromDataURL(res.data.signature1)
@@ -694,7 +736,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   clear1() {
     console.log('clear1');
     this.signaturePad1.clear();
-
+    this.riskAssessmentFb.controls["signature1"].setValue("");
     this.singRequired = this.riskAssessmentFb.controls['signature1'].untouched
   }
   drawStart1() {
@@ -707,13 +749,13 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     // will be notified of szimek/signature_pad's onEnd event
     console.log(this.signaturePad2.toDataURL());
     this.riskAssessmentFb.controls["signature2"].setValue(this.signaturePad2.toDataURL());
-    this.signRequired = this.riskAssessmentFb.controls['signature2'].invalid
+    this.signRequired1 = this.riskAssessmentFb.controls['signature2'].invalid
   }
   clear2() {
     console.log('clear2');
     this.signaturePad2.clear();
-
-    this.signRequired = this.riskAssessmentFb.controls['signature2'].untouched
+    this.riskAssessmentFb.controls["signature2"].setValue("");
+    this.signRequired1 = this.riskAssessmentFb.controls['signature2'].untouched
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
@@ -1242,18 +1284,45 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     const data = {
       ...this.riskAssessmentFb.value,
       codeOfPract: this.allCOPSelected,
-      identifyHazards: this.jobTaskSelected
+      identifyHazards: this.jobTaskSelected,
+
+      jobTaskDataArr:this.jobTaskData,
+      PPEselectionArr:this.PPEselection,
+      highRiskConstructionArr:this.highRiskConstruction,
+      licenseAndQualificationArr:this.licenseAndQualification,
+      projectMangArr:this.projectMang,
+      allJobNumbersArr:this.allJobNumbers,
+      resiRiskLevelArr:this.resiRiskLevel,
+      staffArr:this.staff,
+      riskLevelArr:this.riskLevel,
+      allChemicalsArr:this.allChemicals,
+      allHazardsArr:this.allHazards,
+      allContrlActReqArr:this.allContrlActReq,
+      regulatorDataArr:this.regulatorData,
+      safetyArr:this.safety,
+      statesArr:this.states,
+      JurisdictionDataArr:this.JurisdictionData
     }
     console.log("data", data);
     if (this.id !== 'form') {
       this.logicalFormInfo.updateAssessment(this.id, data).subscribe((res) => {
         console.log("this.riskAssessmentFb updated", res);
+        Swal.fire({
+          title: 'Update successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
         this.router.navigate(["/admin/forms/riskAssessTable"]);
       })
 
     }
     else {
       this.logicalFormInfo.addAssessment(data).subscribe((res) => {
+        Swal.fire({
+          title: 'Submit successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
         this.router.navigate(["/admin/forms/riskAssessTable"]);
         console.log("this.riskAssessmentFb posted", res);
       })

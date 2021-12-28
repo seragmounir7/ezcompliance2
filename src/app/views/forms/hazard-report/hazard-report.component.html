@@ -291,15 +291,15 @@
       <div class="col-md-3">
         <div class="mb-3">
           <label class="form-label">Job Number<span class="text-danger ">*</span></label>
-          <select class="form-control form-select" formControlName="jobNumber" [class.is-invalid]="hazardReport.get('jobNumber')?.hasError('required') 
-            && (hazardReport.get('jobNumber').dirty || hazardReport.get('jobNumber').touched) ">
+          <select class="form-control form-select" formControlName="jobNumberId" [class.is-invalid]="hazardReport.get('jobNumberId')?.hasError('required') 
+            && (hazardReport.get('jobNumberId').dirty || hazardReport.get('jobNumberId').touched) ">
             <option selected hidden>Select</option>
             <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
 
           </select>
           <span *ngIf="
-            hazardReport.get('jobNumber')?.hasError('required') && (hazardReport.get('jobNumber').dirty 
-            || hazardReport.get('jobNumber').touched) " class="invalid-feedback">
+            hazardReport.get('jobNumberId')?.hasError('required') && (hazardReport.get('jobNumberId').dirty 
+            || hazardReport.get('jobNumberId').touched) " class="invalid-feedback">
             Job Number is Required</span>
         </div>
       </div>
@@ -511,7 +511,7 @@
    
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd1" class="form-control" formControlName="eliminateWhen"
+          <input matInput [matDatepicker]="pickerd1" class="form-control" [min]="minDate" formControlName="eliminateWhen"
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd1"></mat-datepicker-toggle>
           <mat-datepicker #pickerd1></mat-datepicker>
@@ -554,7 +554,7 @@
       
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd2" class="form-control" formControlName="substituteWhen"
+          <input matInput [matDatepicker]="pickerd2" class="form-control" [min]="minDate" formControlName="substituteWhen"
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd2"></mat-datepicker-toggle>
           <mat-datepicker #pickerd2></mat-datepicker>
@@ -597,7 +597,7 @@
           
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd3" class="form-control" formControlName="isolatedWhen"
+          <input matInput [matDatepicker]="pickerd3" class="form-control" [min]="minDate" formControlName="isolatedWhen"
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd3"></mat-datepicker-toggle>
           <mat-datepicker #pickerd3></mat-datepicker>
@@ -640,7 +640,7 @@
          
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd4" class="form-control" formControlName="solutionWhen"
+          <input matInput [matDatepicker]="pickerd4" class="form-control" [min]="minDate" formControlName="solutionWhen"
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
           <mat-datepicker #pickerd4></mat-datepicker>
@@ -684,7 +684,7 @@
            
             aria-describedby="emailHelp" 
           /> -->
-          <input matInput [matDatepicker]="pickerd5" class="form-control" formControlName="procedureRemove"
+          <input matInput [matDatepicker]="pickerd5" class="form-control" [min]="minDate" formControlName="procedureRemove"
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
           <mat-datepicker #pickerd5></mat-datepicker>
@@ -728,7 +728,7 @@
         
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd6" class="form-control" formControlName="PPEWhen"
+          <input matInput [matDatepicker]="pickerd6" class="form-control" [min]="minDate" formControlName="PPEWhen"
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd6"></mat-datepicker-toggle>
           <mat-datepicker #pickerd6></mat-datepicker>

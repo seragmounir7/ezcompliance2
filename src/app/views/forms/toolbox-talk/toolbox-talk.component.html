@@ -427,7 +427,7 @@
                 (onEndEvent)="drawComplete2(i,sign)"
                 #Signature2
                 [class.is-invalid]="sing2Required[i]"
-                sing2Required
+                
                 #sign
               ></signature-pad>
               <span
@@ -457,7 +457,7 @@
       </ng-container>
     </div>
   </div>
-  <button class="btn btn-outline-primary mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
+  <button class="btn btn-primary btn-block mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
   align-self: center;">
     Submit
   </button>
