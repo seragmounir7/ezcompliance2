@@ -248,7 +248,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Reported<span class="text-danger ">*</span></label>
           <input matInput [matDatepicker]="datepicker" [max]="maxDate" class="form-control"
-            formControlName="dateHazardReport" id="exampleInputProjectNumber" [class.is-invalid]="hazardReport.get('dateHazardReport')?.hasError('required') 
+            formControlName="dateHazardReport" id="exampleInputProjectNumber" [class.is-invalid-date]="hazardReport.get('dateHazardReport')?.hasError('required') 
             && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
@@ -256,7 +256,7 @@
           <!--  -->
           <span *ngIf="
             hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
-            || hazardReport.get('dateHazardReport').touched) " class="invalid-feedback ">
+            || hazardReport.get('dateHazardReport').touched) " class="invalid-feedback1 ">
             Date is Required</span>
         </div>
       </div>
@@ -276,7 +276,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Identified<span class="text-danger ">*</span></label>
           <input matInput [matDatepicker]="datepicker1" [max]="maxDate" class="form-control"
-            formControlName="dateHazardIdentify" id="exampleInputProjectNumber" [class.is-invalid]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
+            formControlName="dateHazardIdentify" id="exampleInputProjectNumber" [class.is-invalid-date]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
             && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
@@ -284,7 +284,7 @@
 
           <span *ngIf="
             hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
-            || hazardReport.get('dateHazardIdentify').touched) " class="invalid-feedback">
+            || hazardReport.get('dateHazardIdentify').touched) " class="invalid-feedback1">
             Date is Required</span>
         </div>
       </div>
@@ -832,13 +832,13 @@
             [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "/> -->
           <input matInput [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate" class="form-control"
-            formControlName="date" [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
+            formControlName="date" [class.is-invalid-date]="hazardReport.get('date')?.hasError('required') 
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) " placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
           <mat-datepicker #datepicker2></mat-datepicker>
           <span *ngIf="
             hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 
-            || hazardReport.get('date').touched) " class="invalid-feedback">
+            || hazardReport.get('date').touched) " class="invalid-feedback1">
             Date is Required</span>
         </div>
       </div>
