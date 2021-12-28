@@ -138,11 +138,7 @@ export class SiteInspectionComponent implements OnInit {
 
     this.dynamicFormsService.homebarTitle.next('Site Inspection Form');
     this.setTitle.setTitle('WHS-Site Inspection Form');
-    this.getAllJobNumber();
-    this.getAllProjectMang();
-   // this.getAllCategory();
-   // this.getAllTopic();
-    this.getAllStaff();
+   
     if (this.id != 'form') {
       this.logicalFormInfo.getSiteInspection(this.id).subscribe((res: any) => {
         console.log('res', res.data);
@@ -150,6 +146,11 @@ export class SiteInspectionComponent implements OnInit {
         this.showDatas = res.data;
         this.allTopic= this.showDatas.sitePreview[0].allTopic
         this.allcategory=this.showDatas.sitePreview[0].allcategory
+        this.allJobNumbers =this.showDatas.sitePreview[0].allJobNumbersArr;
+        this.projectMang =this.showDatas.sitePreview[0].projectMangArr;
+        this.staff =this.showDatas.sitePreview[0].staffArr;
+        this.maxDate = this.showDatas.sitePreview[0].date;
+       this.minDate = this.showDatas.sitePreview[0].date;
         for (let index = 0; index < this.allTopic.length; index++) {
           //this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
   
@@ -200,6 +201,9 @@ export class SiteInspectionComponent implements OnInit {
     }else{
       this.getAllCategory();
       this.getAllTopic();
+      this.getAllJobNumber();
+      this.getAllProjectMang();
+      this.getAllStaff();
     }
     
   }
@@ -360,6 +364,9 @@ export class SiteInspectionComponent implements OnInit {
             ...this.sidePreview.value,
             allTopic:this.allTopic,
             allcategory:this.allcategory,
+            allJobNumbersArr: this.allJobNumbers,
+            projectMangArr: this.projectMang,
+            staffArr: this.staff
           },
         ],
       };
@@ -383,6 +390,9 @@ export class SiteInspectionComponent implements OnInit {
             ...this.sidePreview.value,
               allTopic:this.allTopic,
               allcategory:this.allcategory,
+              allJobNumbersArr: this.allJobNumbers,
+              projectMangArr: this.projectMang,
+              staffArr: this.staff
           },
         ],
       };
