@@ -1,3 +1,4 @@
+import { SavedFormsModule } from './views/saved-forms/saved-forms.module';
 import { LogicalFormAccessGuard } from './RouteGuard/logical-form-access.guard';
 import { DynamicFormAccessGuard } from './RouteGuard/dynamic-form-access.guard';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
@@ -55,6 +56,12 @@ const routes: Routes = [
       { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule),canActivate:[DynamicFormAccessGuard] },
       { path: 'stateRel', loadChildren: () => import('./views/state-rel/state-rel.module').then(m => m.StateRelModule),canActivate:[DynamicFormAccessGuard] },
       { path: 'roleMangement', loadChildren: () => import('./role-management/role-management.module').then(m => m.RoleManagementModule),canActivate:[DynamicFormAccessGuard] },
+      {
+        path: 'savedForms',
+        loadChildren: () =>
+          import('./views/saved-forms/saved-forms.module').then((m) => m.SavedFormsModule),
+        canActivate: [LogicalFormAccessGuard]
+      },
 
     ],
   },
