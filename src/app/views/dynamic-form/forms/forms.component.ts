@@ -101,7 +101,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort; 
+      // this.dataSource.sort = this.sort; 
 
       this.spinner.hide();
     });

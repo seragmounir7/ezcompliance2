@@ -17,7 +17,7 @@ import { SiteInspectionTopicComponent } from './site-inspection-topic/site-inspe
 })
 export class SiteInspectionCategoryComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'Category', 'action'];
+  displayedColumns: string[] = ['index', 'category', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -42,7 +42,7 @@ export class SiteInspectionCategoryComponent implements OnInit {
         console.log(res);
         this.dataSource.data = res.data;
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        // this.dataSource.sort = this.sort;
       });
   }
 
