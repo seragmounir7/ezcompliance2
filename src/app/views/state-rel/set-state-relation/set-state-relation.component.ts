@@ -278,7 +278,7 @@ export class SetStateRelationComponent implements OnInit {
       this.ELEMENT_DATA = this.StatesData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
     });
   }
   getJurisdiction() {

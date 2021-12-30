@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddSiteInspectionTopicComponent } from '../site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
 import { EditSiteInspectionTopicComponent } from '../site-inspection-topic/edit-site-inspection-topic/edit-site-inspection-topic.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-site-inspection-topic',
@@ -43,14 +43,14 @@ export class SiteInspectionTopicComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllTopic() {
+  getAllTopic(field="",value="") {
     this.logicalFormInfoService
-      .getTopicByCategoryID(this.id)
+      .getTopicByCategoryID(this.id,field,value)
       .subscribe((res: any) => {
         console.log(res);
         this.dataSource.data = res.data[0].topic;
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        // this.dataSource.sort = this.sort;
       });
   }
   openDialog(id) {
@@ -120,4 +120,8 @@ export class SiteInspectionTopicComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  sortData(sort: Sort) {
+ 
+    this.getAllTopic(sort.active,sort.direction)
+     }
 }

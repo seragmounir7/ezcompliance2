@@ -150,3 +150,7 @@ select {
   background-position: right calc(.75em + .1875rem) center;
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
+datalist > option{
+  background-color: blue;
+  width:100%;
+}

@@ -872,8 +872,11 @@ export class LogicalFormInfoService {
   getSiteInspectionCategory(id) {
     return this.https.get(this.apiUrl + 'siteInspectionCategory/get/'+ id)
   }
-  getTopicByCategoryID(id) {
-    return this.https.get(this.apiUrl + 'siteInspectionCategory/getAllTopics/'+id)
+  getTopicByCategoryID(id,field="",value="") {
+    if(value==''){
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `siteInspectionCategory/getAllTopics/${id}?field=${field}&value=${value}`)
   }
   addSiteInspectionCategory(data) {
     return this.https.post(this.apiUrl + 'siteInspectionCategory/add', data)

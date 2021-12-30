@@ -48,7 +48,7 @@ export class ChemicalComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      //this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
    })
   }

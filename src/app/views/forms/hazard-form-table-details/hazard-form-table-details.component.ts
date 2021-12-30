@@ -62,7 +62,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
   
       this.dataSource = new MatTableDataSource<any>(this.showDatas);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort; 
+      // this.dataSource.sort = this.sort; 
       console.log("get res",this.showDatas);
     })
   }

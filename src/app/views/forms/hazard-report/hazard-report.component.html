@@ -46,13 +46,22 @@
       <div class="col-md-12">
         <div class="mb-3">
           <label for="exampleInputFullname" class="form-label">Full Name<span class="text-danger ">*</span></label>
-          <input type="fullname" class="form-control" formControlName="fullName" id="exampleInputFullname"
+          <input type="text" [matAutocomplete]="employee"  name="exampleInputFullname" class="form-control" formControlName="fullName" id="exampleInputFullname"  
             aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
             && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) " />
+            <!-- <datalist id="browsers" >
+              <option *ngFor="let option of empData ; let i = index " [value]="option.firstName">
+            </datalist> -->
+            <mat-autocomplete #employee="matAutocomplete" (optionSelected)="employeeData($event)">
+              <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option">
+                {{option.fullName}}
+              </mat-option>
+            </mat-autocomplete>
           <span *ngIf="
             hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
             || hazardReport.get('fullName').touched) " class="invalid-feedback">
             Full Name is Required</span>
+            
         </div>
       </div>
     </div>
