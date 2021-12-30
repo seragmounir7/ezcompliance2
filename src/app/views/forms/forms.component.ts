@@ -40,7 +40,7 @@ export class FormsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort; 
+    // this.dataSource.sort = this.sort; 
   }
 
   constructor(

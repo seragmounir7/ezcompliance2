@@ -59,7 +59,7 @@ export class JobNumberComponent implements OnInit {
       this.dataSource = res.data;
       console.log("getAllJobNumber",this.dataSource);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
     });
   }
 

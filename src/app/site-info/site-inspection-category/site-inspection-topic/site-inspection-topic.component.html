@@ -22,7 +22,7 @@
   </mat-form-field>
 </div>
 <div class="">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
     <!-- Position Column -->
     <ng-container matColumnDef="index">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
