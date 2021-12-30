@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 
 @Component({
   selector: 'app-site-inspection',
@@ -50,6 +51,7 @@ export class SiteInspectionComponent implements OnInit {
   allTopic: any;
   showDatas: any;
   staff: any;
+  type:any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -57,7 +59,8 @@ export class SiteInspectionComponent implements OnInit {
     private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public forms:SavedformsService
   ) {
     this.sidePreview = this.fb.group({
       jobNumber: ['', Validators.required],
@@ -134,6 +137,9 @@ export class SiteInspectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.type=params['formType'];  
+    });
     this.id = this.activatedRoute.snapshot.params.id;
 
     this.dynamicFormsService.homebarTitle.next('Site Inspection Form');

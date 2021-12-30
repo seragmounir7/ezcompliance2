@@ -1,7 +1,9 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left"
     aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/hazardTable']"><i
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Hazard'" [routerLink]="['/admin/forms/hazardTable']"><i
     class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Hazard'" [routerLink]="['/admin/savedForms']"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
 <div class="container card px-4 py-4 content-center">
   <form class="px-4 py-4" [formGroup]="hazardReport">
