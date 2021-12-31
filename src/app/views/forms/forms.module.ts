@@ -2,6 +2,7 @@ import { TextareaAutoresizeDirective } from './../../Directives/textarea-autores
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 import { FormsRoutingModule } from './forms-routing.module';
@@ -55,6 +56,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatAutocompleteModule ,
     MatInputModule,
     MatDatepickerModule,
+    PdfViewerModule
     
   ],
   providers:[

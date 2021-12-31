@@ -41,6 +41,7 @@ import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { PrintLayoutComponent } from './print-layout/print-layout.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -65,6 +66,7 @@ registerLocaleData(localeEn, 'en-EN');
     // ViewFormsComponent,
     NotFoundPageComponent,
     TextareaAutoresizeDirective,
+    PrintLayoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
@@ -16,6 +17,7 @@ import { data } from 'jquery';
 import { ThrowStmt } from '@angular/compiler';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -227,6 +229,31 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Risk Assesment Form');
+    let dataMap = map((res:any) => res.data)
+    let nameMap = map((res:any) => {res.data})
+    let allApiObs$ = [this.logicalFormInfo.getAllJobtask().pipe(dataMap),
+      this.logicalFormInfo.getAllPPE().pipe(dataMap),
+      this.logicalFormInfo.getAllRisk().pipe(dataMap),
+      this.logicalFormInfo.getAllLicence().pipe(dataMap),
+      this.logicalFormInfo.getAllProjectMang().pipe(dataMap),
+      this.logicalFormInfo.getAllJobNumber().pipe(dataMap),
+      this.logicalFormInfo.getAllResidual().pipe(dataMap),
+      this.logicalFormInfo.getAllStaff().pipe(dataMap),
+      this.logicalFormInfo.getAllRiskLevel().pipe(dataMap),
+       this.logicalFormInfo.getAllChemical().pipe(dataMap),
+      this.logicalFormInfo.getAllHazards().pipe(dataMap),
+      this.logicalFormInfo.getAllContrlActReq().pipe(dataMap),
+       this.logicalFormInfo.getAllRegulator().pipe(dataMap),
+      this.logicalFormInfo.getAllSafety().pipe(dataMap),
+      this.logicalFormInfo.getAllStates().pipe(dataMap),
+      this.logicalFormInfo.getAllJurisdiction().pipe(dataMap)]
+
+    let allApis =forkJoin(allApiObs$)
+      allApis.subscribe(res => {
+        console.log('forkjoin',res);
+        
+      })
+ 
     this.addActionSDSRegister();
     if (this.id != "form") {
       this.getAssessmentByid(this.id);
