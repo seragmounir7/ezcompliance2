@@ -138,11 +138,11 @@
             </div>
             <div class="mb-3 mt-3 col-3">
               <label class="form-label mb-3">Role</label>
-              <select class="form-select form-control" aria-label="Default select example" formControlName="roleId"
+              <select class="form-select form-control"  aria-label="Default select example" formControlName="roleId"
                  [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
                 
                 <option selected hidden>Select</option>
-                <option></option>
+                <option *ngFor="let item of roleData" [value]="item._id">{{item.role}}</option>
       
               </select>
               <span *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required  " class="invalid-feedback" >

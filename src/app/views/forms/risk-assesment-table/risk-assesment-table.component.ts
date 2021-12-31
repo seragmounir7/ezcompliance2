@@ -5,7 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-risk-assesment-table',
@@ -18,7 +19,9 @@ export class RiskAssesmentTableComponent implements OnInit {
   tempArray: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
+  constructor(private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getToolBox();
@@ -27,12 +30,29 @@ export class RiskAssesmentTableComponent implements OnInit {
     // this.tempArray.paginator = this.paginator;
     // this.tempArray.sort = this.sort; 
   }
-  delete(id)
+  delete(item)
   {
-    this.logicalFormInfo.deleteAssessment(id).subscribe((res)=>{
-      console.log("deleted",res);
-      this.getToolBox();
-    })
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.customerName}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        console.log(result)
+        // this.model.attributes.splice(i,1);
+        this.spinner.show()
+        this.logicalFormInfo.deleteAssessment(item._id).subscribe((res => {
+        this.getToolBox()
+        this.spinner.hide()
+        }))
+      }
+    });
+    
+   
   }
   printPage(id)
   {
