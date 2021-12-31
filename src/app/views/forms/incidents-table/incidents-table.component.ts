@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -54,9 +54,9 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
     
    
   }
-  getIncidentReport()
+  getIncidentReport(field="",value="")
   {
-    this.logicalFormInfo.getAllIncidentReport().subscribe((res:any)=>
+    this.logicalFormInfo.getAllIncidentReport(field,value).subscribe((res:any)=>
     {
       this.showDatas= res.data;
       this.showDatas.forEach((element,i) => {
@@ -72,4 +72,8 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
   {
     this.router.navigate(["/admin/forms/incidentRep/"+id]);
   }
+
+  sortData(sort:Sort) {
+    this.getIncidentReport(sort.active,sort.direction)
+     }
 }

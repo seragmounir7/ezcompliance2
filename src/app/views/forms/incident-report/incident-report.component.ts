@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import moment from 'moment';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 
 
 @Component({
@@ -64,6 +65,7 @@ export class IncidentReportComponent implements OnInit {
   selectedImage: string;
   singRequired: any;
   singRequired1: any;
+  type:any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -73,6 +75,7 @@ export class IncidentReportComponent implements OnInit {
     public upload: UploadFileServiceService,
     private router: Router,
     private ngZone: NgZone,
+    public forms:SavedformsService
   ) {
     this.IncidentReport = this.fb.group({
       incidents: this.fb.array([]),
@@ -141,6 +144,9 @@ export class IncidentReportComponent implements OnInit {
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.type=params['formType'];  
+    });
     this.id = this.activatedRoute.snapshot.params.id;
     console.log("IncidentReport", this.IncidentReport);
 
