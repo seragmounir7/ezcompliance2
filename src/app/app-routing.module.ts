@@ -18,13 +18,13 @@ import { FormsComponent } from './views/dynamic-form/forms/forms.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'print',
-    outlet: 'print',
-    component: PrintLayoutComponent,
-    children: [
-      { path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent }
-    ]
-  },
+  // { path: 'print',
+  //   outlet: 'print',
+  //   component: PrintLayoutComponent,
+  //   children: [
+  //     { path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent }
+  //   ]
+  // },
 
 
   {
