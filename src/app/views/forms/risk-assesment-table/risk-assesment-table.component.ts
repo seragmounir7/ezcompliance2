@@ -1,7 +1,7 @@
 import { environment } from './../../../../environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -13,7 +13,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./risk-assesment-table.component.scss']
 })
 export class RiskAssesmentTableComponent implements OnInit {
-  displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
+  displayedColumns: string[] = ['position','customerName',"phone","email","site",'action'];
   showDatas: any;
   tempArray: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,9 +49,9 @@ export class RiskAssesmentTableComponent implements OnInit {
           let body = document.getElementsByTagName("body")
           body[0].appendChild(iframe)
   }
-  getToolBox()
+  getToolBox(field="",value="")
   {
-    this.logicalFormInfo.getAllassessmet().subscribe((res:any)=>
+    this.logicalFormInfo.getAllassessmet(field,value).subscribe((res:any)=>
     {
       this.showDatas= res.data;
       this.showDatas.forEach((element,i) => {
@@ -68,5 +68,9 @@ export class RiskAssesmentTableComponent implements OnInit {
   {
     localStorage.setItem('key',' ');
     this.router.navigate(["/admin/forms/riskAssessSWMS/"+id]);
+  }
+
+  sortData(sort:Sort){
+    this.getToolBox(sort.active,sort.direction)
   }
 }

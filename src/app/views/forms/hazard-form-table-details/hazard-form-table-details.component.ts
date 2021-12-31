@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -12,7 +12,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./hazard-form-table-details.component.scss']
 })
 export class HazardFormTableDetailsComponent implements OnInit {
-  displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
+  displayedColumns: string[] = ['position','name',"phone","email","site",'action'];
   showDatas: any;
   dataSource: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -48,9 +48,9 @@ export class HazardFormTableDetailsComponent implements OnInit {
     });
    
   }
-  getAllHazardFormData()
+  getAllHazardFormData(field="",value="")
   {
-    this.logicalFormInfo.getAllHazardFormData().subscribe((res:any)=>
+    this.logicalFormInfo.getAllHazardFormData(field,value).subscribe((res:any)=>
     {
       console.log("res",res.data);
       
@@ -70,4 +70,8 @@ export class HazardFormTableDetailsComponent implements OnInit {
   {
     this.router.navigate(["/admin/forms/hazardRep/"+id]);
   }
+
+  sortData(sort:Sort) {
+    this.getAllHazardFormData(sort.active,sort.direction)
+     }
 }
