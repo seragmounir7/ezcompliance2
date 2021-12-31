@@ -1,5 +1,6 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/siteinspectiontable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Site Inspection'" [routerLink]="['/admin/forms/siteinspectiontable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Site Inspection'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
 <div class="container card px-4 py-4" [formGroup]="sidePreview">
   <h2 class="text-center pt-3">
@@ -150,12 +151,12 @@
             <input  matInput  [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate"
             class="form-control outline"
             formControlName="date"
-            [class.is-invalid]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "           
+            [class.is-invalid-date]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "           
             placeholder="dd-mm-yyyy">
             <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
             <mat-datepicker #datepicker2 ></mat-datepicker>
            
-            <span *ngIf=" sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty  || sidePreview.get('date').touched) " class="invalid-feedback" >
+            <span *ngIf=" sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty  || sidePreview.get('date').touched) " class="invalid-feedback1" >
               Date is Required</span>
           </div>
 

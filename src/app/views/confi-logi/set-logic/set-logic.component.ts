@@ -289,7 +289,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       this.ELEMENT_DATA =  this.jobTaskData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
       // this.jobTaskData.forEach((item,i) => {
       //   this.addActionHighRisk();
       //   this.addActionPPE();

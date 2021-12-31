@@ -1,11 +1,12 @@
 import { environment } from './../../../../environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-risk-assesment-table',
@@ -13,12 +14,14 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./risk-assesment-table.component.scss']
 })
 export class RiskAssesmentTableComponent implements OnInit {
-  displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
+  displayedColumns: string[] = ['position','customerName',"phone","email","site",'action'];
   showDatas: any;
   tempArray: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
+  constructor(private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getToolBox();
@@ -27,12 +30,34 @@ export class RiskAssesmentTableComponent implements OnInit {
     // this.tempArray.paginator = this.paginator;
     // this.tempArray.sort = this.sort; 
   }
-  delete(id)
+  delete(item)
   {
-    this.logicalFormInfo.deleteAssessment(id).subscribe((res)=>{
-      console.log("deleted",res);
-      this.getToolBox();
-    })
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.customerName}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        this.spinner.show()
+        this.logicalFormInfo
+        .deleteAssessment(item._id)
+        .subscribe((res => {
+          Swal.fire({
+            title: `"${item.customerName}"? Deleted successfully`,
+            showConfirmButton: false,
+            timer: 1200,
+          });
+        this.getToolBox()
+        this.spinner.hide()
+        }))
+      }
+    });
+    
+   
   }
   printPage(id)
   {
@@ -51,9 +76,9 @@ export class RiskAssesmentTableComponent implements OnInit {
           body[0].appendChild(iframe)
     // this.router.navigate(['/',{ outlets: {'print': ['print','riskAssessSWMS', id]}}])
   }
-  getToolBox()
+  getToolBox(field="",value="")
   {
-    this.logicalFormInfo.getAllassessmet().subscribe((res:any)=>
+    this.logicalFormInfo.getAllassessmet(field,value).subscribe((res:any)=>
     {
       this.showDatas= res.data;
       this.showDatas.forEach((element,i) => {
@@ -70,5 +95,9 @@ export class RiskAssesmentTableComponent implements OnInit {
   {
     localStorage.setItem('key',' ');
     this.router.navigate(["/admin/forms/riskAssessSWMS/"+id]);
+  }
+
+  sortData(sort:Sort){
+    this.getToolBox(sort.active,sort.direction)
   }
 }

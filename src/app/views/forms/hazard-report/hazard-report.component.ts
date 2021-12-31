@@ -11,6 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-hazard-report',
   templateUrl: './hazard-report.component.html',
@@ -20,10 +23,13 @@ export class HazardReportComponent implements OnInit {
   title = 'hazardReport';
   hazardReport: FormGroup;
   myControl = new FormControl();
+  empControl = new FormControl();
   options: string[] = [''];
   filteredOptions: Observable<any>;
+  filteredOptions2: Observable<any>;
   filteredManager: Observable<any>;
   id: any;
+  hazard:any;
   singRequired: any;
   selectedImage: any;
 
@@ -42,8 +48,11 @@ export class HazardReportComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   maxDate = new Date();
   minDate = new Date();
+  type:any;
+  empData: any;
   constructor(
     private fb: FormBuilder,
+    private employee: EmployeeRegistrationService,
     private dynamicFormsService: DynamicFormsService,
     private setTitle: SetTitleService,
     private url: LogicalFormInfoService,
@@ -51,6 +60,7 @@ export class HazardReportComponent implements OnInit {
     public upload: UploadFileServiceService,
     private activatedRoute: ActivatedRoute,
     private ngZone: NgZone,
+    public forms:SavedformsService
   ) {
 
 
@@ -121,6 +131,10 @@ export class HazardReportComponent implements OnInit {
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.type=params['formType'];  
+    });
+    this.getHazard();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -130,6 +144,20 @@ export class HazardReportComponent implements OnInit {
         return this.filter(val || '')
       })
     )
+    this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(val => {
+        console.log("myControl22..", val,this.filteredOptions2)
+        return this.filter2(val || '')
+      })
+    )
+    this.filteredOptions2.subscribe((res)=>{
+      console.log("item...",res);
+      
+    })
+    
 
     this.filteredManager = this.myControlManager.valueChanges.pipe(
       startWith(''),
@@ -143,6 +171,7 @@ export class HazardReportComponent implements OnInit {
     this.getAllHazardTreatmentRelation();
     this.getAllJobNumber();
     this.getall();
+  
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
     this.setTitle.setTitle('WHS-Hazard Report Form');
     this.hazardReport.get('managerSupervisor').valueChanges.subscribe((res) => {
@@ -171,7 +200,7 @@ export class HazardReportComponent implements OnInit {
       this.getHazardByid(this.id);
 
     }
-
+   
     // this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
     //   if (res) {
     //     console.log(res);
@@ -372,7 +401,32 @@ export class HazardReportComponent implements OnInit {
         })
       )
   }
-
+  filter2(val: string): Observable<any> {
+    return this.employee.getAllEmployeeInfo()
+      .pipe(map((res)=>{
+        res.data=res.data.map((item)=>{
+          item.fullName=`${item.firstName} ${item.lastName}`
+          return item
+        })
+        return res
+      }),
+        map((response: any) => {
+          response.data = response.data.filter(option => {
+            console.log("option>>",option);
+            return option.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0
+          })
+          console.log("response.data>>",response.data);
+          
+          return response.data;
+        })
+      )
+  }
+getHazard(){
+  this.employee.getAllEmployeeInfo().subscribe((res: any) => {
+    console.log("emp..",res.data);
+     this.empData = res.data;
+  })
+}
 
   filterEvent(val: string): Observable<any> {
     return this.url.getAllManager()
@@ -543,6 +597,18 @@ export class HazardReportComponent implements OnInit {
       );
     });
   }
-
+  employeeData(e:MatAutocompleteSelectedEvent){
+    const data = e.option.value;
+    this.hazardReport.patchValue({
+      fullName:data.fullName,
+      department:data.department,
+      email:data.email,
+      position:data.position,
+      phone:data.phone
+    })
+    console.log("e.option",e.option);
+    console.log("data...");
+    
+  }
 
 }

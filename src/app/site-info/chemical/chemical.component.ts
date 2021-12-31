@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditChemicalComponent } from './edit-chemical/edit-chemical.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-chemical',
@@ -37,8 +37,8 @@ export class ChemicalComponent implements OnInit {
     this.setTitle.setTitle('WHS-Chemical Info');
     this.getAllChemical()
   }
-  getAllChemical(){
-    this.logicalFormInfoService.getAllChemical().subscribe((res:any)=> {
+  getAllChemical(field="",value=""){
+    this.logicalFormInfoService.getAllChemical(field,value).subscribe((res:any)=> {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -48,7 +48,7 @@ export class ChemicalComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      //this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
    })
   }
@@ -91,4 +91,9 @@ export class ChemicalComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  sortData(sort: Sort) {
+ 
+    this.getAllChemical(sort.active,sort.direction)
+     }
+ 
 }

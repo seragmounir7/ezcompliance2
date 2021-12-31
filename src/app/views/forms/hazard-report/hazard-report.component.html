@@ -1,7 +1,9 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left"
     aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/hazardTable']"><i
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Hazard'" [routerLink]="['/admin/forms/hazardTable']"><i
     class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Hazard'" [routerLink]="['/admin/savedForms']"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
 <div class="container card px-4 py-4 content-center">
   <form class="px-4 py-4" [formGroup]="hazardReport">
@@ -44,13 +46,22 @@
       <div class="col-md-12">
         <div class="mb-3">
           <label for="exampleInputFullname" class="form-label">Full Name<span class="text-danger ">*</span></label>
-          <input type="fullname" class="form-control" formControlName="fullName" id="exampleInputFullname"
+          <input type="text" [matAutocomplete]="employee"  name="exampleInputFullname" class="form-control" formControlName="fullName" id="exampleInputFullname"  
             aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
             && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) " />
+            <!-- <datalist id="browsers" >
+              <option *ngFor="let option of empData ; let i = index " [value]="option.firstName">
+            </datalist> -->
+            <mat-autocomplete #employee="matAutocomplete" (optionSelected)="employeeData($event)">
+              <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option">
+                {{option.fullName}}
+              </mat-option>
+            </mat-autocomplete>
           <span *ngIf="
             hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
             || hazardReport.get('fullName').touched) " class="invalid-feedback">
             Full Name is Required</span>
+            
         </div>
       </div>
     </div>
@@ -248,7 +259,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Reported<span class="text-danger ">*</span></label>
           <input matInput [matDatepicker]="datepicker" [max]="maxDate" class="form-control"
-            formControlName="dateHazardReport" id="exampleInputProjectNumber" [class.is-invalid]="hazardReport.get('dateHazardReport')?.hasError('required') 
+            formControlName="dateHazardReport" id="exampleInputProjectNumber" [class.is-invalid-date]="hazardReport.get('dateHazardReport')?.hasError('required') 
             && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
@@ -256,7 +267,7 @@
           <!--  -->
           <span *ngIf="
             hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
-            || hazardReport.get('dateHazardReport').touched) " class="invalid-feedback ">
+            || hazardReport.get('dateHazardReport').touched) " class="invalid-feedback1 ">
             Date is Required</span>
         </div>
       </div>
@@ -276,7 +287,7 @@
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Identified<span class="text-danger ">*</span></label>
           <input matInput [matDatepicker]="datepicker1" [max]="maxDate" class="form-control"
-            formControlName="dateHazardIdentify" id="exampleInputProjectNumber" [class.is-invalid]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
+            formControlName="dateHazardIdentify" id="exampleInputProjectNumber" [class.is-invalid-date]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
             && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
             placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
@@ -284,7 +295,7 @@
 
           <span *ngIf="
             hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
-            || hazardReport.get('dateHazardIdentify').touched) " class="invalid-feedback">
+            || hazardReport.get('dateHazardIdentify').touched) " class="invalid-feedback1">
             Date is Required</span>
         </div>
       </div>
@@ -832,13 +843,13 @@
             [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "/> -->
           <input matInput [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate" class="form-control"
-            formControlName="date" [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
+            formControlName="date" [class.is-invalid-date]="hazardReport.get('date')?.hasError('required') 
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) " placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
           <mat-datepicker #datepicker2></mat-datepicker>
           <span *ngIf="
             hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 
-            || hazardReport.get('date').touched) " class="invalid-feedback">
+            || hazardReport.get('date').touched) " class="invalid-feedback1">
             Date is Required</span>
         </div>
       </div>

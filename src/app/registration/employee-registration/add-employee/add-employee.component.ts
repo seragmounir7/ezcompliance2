@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
@@ -15,25 +16,28 @@ export class AddEmployeeComponent implements OnInit {
   empDetails!: FormGroup;
   PPERegister = false;
   LicenceInfo = false;
-  dataEmp:any;
+  dataEmp:boolean;
   formData:any;
   uploadImage1: any;
   uploadlicense1: any;
   submitted = false;
   id:any;
   profile = true;
-  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  @ViewChild('signature1') signaturePad: any;
   sidePreview: any;
   registerForm: any;
   file1: any;
   dialogRef: any;
   dataUrl: any;
+  roleData: any=[''];
  
   constructor(
     private fb: FormBuilder,
+    private role: RoleManagementService,
     private employee: EmployeeRegistrationService,
     private upload: UploadFileService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public router: Router
   ) {
     this.empDetails = this.fb.group({
       profTitie: ['', Validators.required],
@@ -48,7 +52,7 @@ export class AddEmployeeComponent implements OnInit {
       porfManager: ['', Validators.required],
       porfAdministrater: ['', Validators.required],
       file: ['', Validators.required],
-      roleId:[''],
+      roleId:['', Validators.required],
       porfStreetAddress: ['', Validators.required],
       porfCityTown: ['', Validators.required],
       porfState: ['', Validators.required],
@@ -74,10 +78,34 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    
+    this.getAllRoles();
     this.id=this.activatedRoute.snapshot.params.id;
     if(this.id!=="form"){
+      this.dataEmp=true;
+    this.patchData();
+  }else{
+    this.dataEmp=false;
+    this.addFiled();
+  }
+  }
+
+  getAllRoles(){
+    this.role.getAllRole().subscribe((res:any)=>{
+      console.log("role..",res)
+        this.roleData = res.data;
+       
+    });
+  }
+//   ngAfterViewInit() {
+//     console.log("after..",this.signaturePad,this.dataUrl)
+//     // this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
+//     // this.signaturePad.clear();
+//     // this.signaturePad.fromDataURL(this.dataUrl);
+//    setTimeout(() => {
+//     console.log("after10s..",this.signaturePad,this.dataUrl)
+//    }, 10000);
+//  }
+  patchData(){
     this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
@@ -98,8 +126,7 @@ export class AddEmployeeComponent implements OnInit {
       porfPhone: data.data.phone,
       porfMobile: data.data.mobile,
      
-      // file: data.data.,
-      roleId:[''],
+      roleId: data.data.roleId,
       porfStreetAddress: data.data.location.address,
       porfCityTown: data.data.location.city,
       porfState: data.data.location.state,
@@ -111,31 +138,27 @@ export class AddEmployeeComponent implements OnInit {
       empEmail: data.data.emergencyContact.email,
       empPhone: data.data.emergencyContact.phone,
       empMobile: data.data.emergencyContact.mobile,
-      // LicenceName: data.data.lastName,
-      // LicenceNumber: data.data.lastName,
-      // TrainingQrginisation: data.data.lastName,
-      // ExpiryDate: data.data.lastName,
-      // UploadLicenceArr: this.fb.array([]),
+     
       PPESupplied: data.data.ppe.ppeSupplied,
       BrandOrType: data.data.ppe.brand,
       IssueDate: data.data.ppe.issueDate,
       ReplacementDate: data.data.ppe.replacementDate,
       Sign: data.data.ppe.signature,
     });
-    // this.file1=data.data.fileUpload
-    // console.log(this.file1,"file1")
-    this.dataUrl = data.data.signaturePad;
+   
+    this.dataUrl = data.data.ppe.signature;
+    console.log("data.data.ppe.signature;",data.data.ppe.signature);
+    
     let check =async () => { this.signaturePad != null }
-    check().then(() => {
+    check().then((res) => {
+      console.log("this.signaturePad",this.signaturePad,res);
+      
+      this.signaturePad.fromDataURL(data.data.ppe.signature)
 
-      this.signaturePad.fromDataURL(data.data.signaturePad)
     })
+    
   });
-  }else{
-    this.addFiled();
   }
-  }
-
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
     minWidth: 1,
@@ -145,6 +168,7 @@ export class AddEmployeeComponent implements OnInit {
 
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
+    this.empDetails.controls["Sign"].setValue(this.signaturePad.toDataURL())
     console.log(this.signaturePad.toDataURL());
   }
 
@@ -198,12 +222,12 @@ export class AddEmployeeComponent implements OnInit {
  
   onFormUpdate(id) {
     const Sign = this.signaturePad.toDataURL();
-    const body = {
+    const data = {
       title: this.empDetails.get('profTitie').value,
       email: this.empDetails.get('porfEmail').value,
       position: this.empDetails.get('porfPosition').value,
       mobile: this.empDetails.get('porfMobile').value,
-      // roleId: this.empDetails.get('roleId').value,
+      roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
       department: this.empDetails.get('porfDepartment').value,
@@ -243,17 +267,17 @@ export class AddEmployeeComponent implements OnInit {
         country: 'India',
       },
     };
+    
     this.employee
-      .updateEmployeeInfo(this.dataEmp._id, body)
+      .updateEmployeeInfo(this.id, data)
       .subscribe((resData) => {
-        console.log('projectManager', resData);
-
-        this.dialogRef.close('true');
+        console.log('updateData', resData);
         Swal.fire({
-          title: 'Employee Edited successfully',
+          title: 'Employee Updated successfully',
           showConfirmButton: false,
           timer: 1200,
         });
+        this.router.navigate(["/admin/registration/employeeRegistration"]);
       });
   }
   onFormSubmit() {
@@ -270,7 +294,7 @@ export class AddEmployeeComponent implements OnInit {
       email: this.empDetails.get('porfEmail').value,
       position: this.empDetails.get('porfPosition').value,
       mobile: this.empDetails.get('porfMobile').value,
-      // roleId: this.empDetails.get('roleId').value,
+      roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
       department: this.empDetails.get('porfDepartment').value,
@@ -310,53 +334,18 @@ export class AddEmployeeComponent implements OnInit {
         country: 'India',
       },
     };
-    // let body ={
-    //   "email": "tkkkkg@gmail.com",
-    //   "position": "11111",
-    //   "mobileNumber": 7219090323,
-    //   "designation": "Employee",
-    //   "deviceToken": "qw",
-    //   "department": "ab",
-    //   "phone": 42424224,
-    //   "firstName": "Abhishekh",
-    //   "lastName": "kamble",
-    //   "avatar": "image",
-    //   "emergencyContact": {
-    //       "firstName": "linkedin",
-    //       "lastName": "ergdsf",
-    //       "email": "twitter",
-    //       "phone": "instagram",
-    //       "mobile": "instagram"
-    //   },
-    //   "licence": {
-    //       "licenceName": "linkedin",
-    //       "licenceNumber": 125250,
-    //       "trainingOrganisation": "twitter",
-    //       "expiryDate": "instagram",
-    //       "uploadLicence": "instagram"
-    //   },
-    //   "ppe": {
-    //       "ppeSupplied": "linkedin",
-    //       "licenceName": "sdfgdsfgdfb",
-    //       "brand": "twitter",
-    //       "issueDate": "instagram",
-    //       "replacementDate": "instagram",
-    //       "signature": "instagram"
-    //   },
-    //   "location": {
-    //       "address": "Nagpur",
-    //       "landmark": "Nagpur",
-    //       "state": "Nagpur",
-    //       "city": "Nagpur",
-    //       "pincode": 25252,
-    //       "country": "Nagpur"
-    //   }
-    // }
+  
     console.log('body=>', body);
 
     this.employee.addEmployeeInfo(body).subscribe((data) => {
       console.log('data=>', data);
       this.signaturePad.toDataURL();
+      Swal.fire({
+        title: 'Employee Added successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+      this.router.navigate(["/admin/registration/employeeRegistration"]);
     });
   }
   sign(sign: any) {

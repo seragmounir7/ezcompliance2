@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditResidualRiskLevelComponent } from './edit-residual-risk-level/edit-residual-risk-level.component';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-residual-risk-level',
@@ -36,8 +36,8 @@ export class ResidualRiskLevelComponent implements OnInit {
     this.setTitle.setTitle('WHS-ResidualRiskLevel Info');
     this.getAllResidualRiskLevel()
   }
-  getAllResidualRiskLevel(){
-    this.logicalFormInfoService.getAllResidual().subscribe((res:any)=> {
+  getAllResidualRiskLevel(field="",value=""){
+    this.logicalFormInfoService.getAllResidual(field,value).subscribe((res:any)=> {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -47,7 +47,7 @@ export class ResidualRiskLevelComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
    })
   }
@@ -87,4 +87,8 @@ export class ResidualRiskLevelComponent implements OnInit {
     });
   }
 
+  sortData(sort: Sort) {
+ 
+    this.getAllResidualRiskLevel(sort.active,sort.direction)
+     }
 }

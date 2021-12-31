@@ -18,6 +18,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { forkJoin } from 'rxjs';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   minDate = new Date();
   maxDate = new Date();
   cardImageBase64: any;
+  type:any;
   highRiskConstruction2 = [
     {
       label: 'Working in or near trenches or shafts deeper than 1.5metres',
@@ -174,7 +176,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     private logicalFormInfo: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute,
     private setTitle: SetTitleService,
-    public upload: UploadFileServiceService
+    public upload: UploadFileServiceService,
+    public forms:SavedformsService
   ) {
     this.check = localStorage.getItem('key');
     console.log("key check", this.check);
@@ -228,6 +231,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.type=params['formType'];  
+    });
     this.setTitle.setTitle('WHS-Risk Assesment Form');
     let dataMap = map((res:any) => res.data)
     let nameMap = map((res:any) => {res.data})

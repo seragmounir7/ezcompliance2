@@ -287,7 +287,7 @@
             style="min-height: 100px; min-width: 100%"
           >
             <div
-              class="field col my-auto"
+              [ngClass]="item.type == 'checkbox' || item.type == 'file' ? 'field col-4 my-auto':'field col my-auto'" 
               *ngFor="let item of model[j].attributes; let i = index"
               (dndStart)="onDragStart($event)"
               (dndCanceled)="onDragCanceled($event)"
@@ -295,6 +295,7 @@
               [dndEffectAllowed]="'all'"
               [dndDraggable]="item"
             >
+            
               <!-- item -->
               <div class="row  form-group justify-content-center">
                 <div class="col-2">
@@ -1365,6 +1366,7 @@
             <div
             *ngFor="let item of row.attributes; let j = index"
             class="col my-auto form-group justify-content-between"
+            [ngClass]="item.type == 'checkbox' || item.type == 'file' ? 'col-4 my-auto form-group justify-content-between':'col my-auto form-group justify-content-between'"
           >
             <!--Each row  -->
             <div *ngIf="item.type == 'text'" class="col mr-1">

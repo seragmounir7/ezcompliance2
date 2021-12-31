@@ -139,9 +139,9 @@ select {
 //     padding-right: 50px;
 // }
 
-::ng-deep  mat-datepicker-toggle  .mat-icon-button{
-  padding-right: 50px;
-}
+// ::ng-deep  mat-datepicker-toggle  .mat-icon-button{
+//   padding-right: 50px;
+// }
 .form-control.is-invalid, .was-validated .form-control:invalid {
   border-color: #dc3545;
   padding-right: 2.25rem;
@@ -149,4 +149,8 @@ select {
   background-repeat: no-repeat;
   background-position: right calc(.75em + .1875rem) center;
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+datalist > option{
+  background-color: blue;
+  width:100%;
 }

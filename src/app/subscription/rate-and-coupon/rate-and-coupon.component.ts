@@ -55,7 +55,7 @@ export class RateAndCouponComponent implements OnInit {
           this.addPlan=false;
           this.ELEMENT_DATA = dataPlan;
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-          this.dataSource.sort = this.sort;
+          // this.dataSource.sort = this.sort;
         }
     
      
