@@ -14,6 +14,7 @@ import { AuthGuard } from './utils/guards/auth.guard';
 import { NonAuthGuard } from './utils/guards/non-auth.guard';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { FormsComponent } from './views/dynamic-form/forms/forms.component';
+import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'dynamicForm', component: DynamicFormComponent, canActivate: [DynamicFormAccessGuard] },
       { path: 'blank', component: BlankComponent },
       { path: 'dynamicFormsList', component: FormsComponent, canActivate: [DynamicFormAccessGuard] },
+      { path: 'savedDynamicForm', component: SavedDynamicFormDataComponent, canActivate: [DynamicFormAccessGuard] },
       {
         path: 'forms',
         loadChildren: () =>

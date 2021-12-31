@@ -41,6 +41,7 @@ import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -65,6 +66,7 @@ registerLocaleData(localeEn, 'en-EN');
     // ViewFormsComponent,
     NotFoundPageComponent,
     TextareaAutoresizeDirective,
+    SavedDynamicFormDataComponent,
   ],
   imports: [
     BrowserModule,

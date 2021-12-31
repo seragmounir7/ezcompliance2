@@ -9,8 +9,8 @@ export class SavedformsService {
 apiUrl=environment.apiUrl;
   constructor(private https:HttpClient) { }
 
-  getAllSavedForms() {
-    return this.https.get(this.apiUrl + 'savedForms/getAll');
+  getAllSavedForms(page=1,limit=10) {
+    return this.https.get(this.apiUrl +`savedForms/getAll?page=${page}&limit=${limit}`);
   }
 
 }

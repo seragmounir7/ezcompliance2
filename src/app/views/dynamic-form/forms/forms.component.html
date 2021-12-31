@@ -260,15 +260,22 @@
           title="Delete"
           (click)="delete(element)"
         ></i> -->
-        <button mat-icon-button class="mr-2"  aria-label="Example icon button with a delete icon" (click)="editForm(element)">
+        <button  matTooltip="Edit"mat-icon-button class="mr-2"  aria-label="Example icon button with a delete icon" (click)="editForm(element)">
           <mat-icon >edit</mat-icon>
         </button>
-        <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon" (click)="viewForm(element)">
+        <button  matTooltip="View"mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon" (click)="viewForm(element)">
           <mat-icon  >visibility</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Example icon button with a delete icon"  (click)="delete(element)">
+        <button  matTooltip="Delete"mat-icon-button aria-label="Example icon button with a delete icon"  (click)="delete(element)">
           <mat-icon >delete</mat-icon>
         </button>
+
+        <button  matTooltip="Fill The Form" mat-icon-button aria-label="Example icon button with a delete icon"  (click)="add(element)">
+           <svg-icon name="Fill_form"></svg-icon> 
+        </button>
+        <button  matTooltip="Edit The Form" mat-icon-button aria-label="Example icon button with a delete icon"  (click)="add(element)">
+          <svg-icon name="Edit_form"></svg-icon> 
+       </button>
         
       </td>
     </ng-container>

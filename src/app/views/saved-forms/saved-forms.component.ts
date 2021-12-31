@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
@@ -14,24 +14,26 @@ export class SavedFormsComponent implements OnInit {
   displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
   showDatas: any;
   tempArray: MatTableDataSource <any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+ // @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  totalCount:number
   constructor(public forms:SavedformsService,public router: Router) { }
 
   ngOnInit(): void {
    this.getSavedforms();
   }
   
-  getSavedforms()
+  getSavedforms(page=1,limit=5)
   {
-    this.forms.getAllSavedForms().subscribe((res:any)=>{
+    this.forms.getAllSavedForms(page,limit).subscribe((res:any)=>{
       this.showDatas= res.data;
+      this.totalCount=res.totalCount
       this.showDatas.forEach((element,i) => {
         return this.showDatas[i].index= i
       });
   
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
+     // this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort; 
       console.log("get res",this.showDatas);
     })
@@ -65,5 +67,8 @@ let navigationExtras: NavigationExtras = {
   {
     this.router.navigate(["/admin/forms/riskAssessSWMS/"+id],navigationExtras);
   }
+}
+paginator(event:PageEvent){
+ this.getSavedforms(event.pageIndex+1,event.pageSize)
 }
 }

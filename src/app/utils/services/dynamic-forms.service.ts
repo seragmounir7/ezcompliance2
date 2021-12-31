@@ -138,6 +138,10 @@ export class DynamicFormsService {
       })
     );
   }
+
+  savedFormPost(data){
+    return this.https.post(this.apiUrl + 'savedDynamicForm/add', data)
+  }
   formNameRecieved = '';
   categoryNameRecieved = '';
 

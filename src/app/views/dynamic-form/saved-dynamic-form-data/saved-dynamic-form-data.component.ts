@@ -1,22 +1,24 @@
-import { SetTitleService } from './../../utils/services/set-title.service';
+import { SetTitleService } from '../../../utils/services/set-title.service';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { field, value } from './global.model';
+import { field, value } from '../global.model';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 import { SignaturePad } from 'angular2-signaturepad';
 import Swal from 'sweetalert2';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { error } from 'protractor';
 import { templateJitUrl } from '@angular/compiler';
+
 @Component({
-  selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.scss'],
+  selector: 'app-saved-dynamic-form-data',
+  templateUrl: './saved-dynamic-form-data.component.html',
+  styleUrls: ['./saved-dynamic-form-data.component.scss']
 })
-export class DynamicFormComponent implements OnInit {
+export class SavedDynamicFormDataComponent implements OnInit {
+
   @ViewChildren('Signature') SignaturePad: QueryList<SignaturePad>;
   @ViewChild('projectManager') projectManager: ElementRef;
   projectMang:any;
@@ -262,13 +264,15 @@ export class DynamicFormComponent implements OnInit {
   allJobNumbers:any;
   formNameRecieved = '';
   states:any;
+  savedFormData:any
   constructor(
     public router: Router,
     private spinner: NgxSpinnerService,
     private logicalFormInfo: LogicalFormInfoService,
     private dynamicFormsService: DynamicFormsService,
     private setTitle: SetTitleService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private activatedRoute:ActivatedRoute
   ) {
     this.riskAssessmentFb = this.fb.group({
       siteName:[''],
@@ -301,6 +305,10 @@ export class DynamicFormComponent implements OnInit {
      console.log("eve",eve.target.checked);
    }
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params =>{
+      console.log("params",params)
+      this.savedFormData=params
+    })
     this.getAllProjectMang();
     this.getAllState();
     console.log(
@@ -310,7 +318,7 @@ export class DynamicFormComponent implements OnInit {
     this.setTitle.setTitle('WHS-Dynamic Forms');
     // this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
     this.getAllJobNumber();
-    if (sessionStorage.getItem('type') == 'add') {
+    if (this.savedFormData.type == 'add') {
       this.type = 'add';
       // if(this.dynamicFormsService.formType =='add'){
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
@@ -324,23 +332,23 @@ export class DynamicFormComponent implements OnInit {
         console.log("model",this.model);
       }
     }
-    if (sessionStorage.getItem('type') == 'edit') {
+    if (this.savedFormData.type == 'edit') {
       // if(this.dynamicFormsService.formType =='edit'){
-      this.formNameRecieved = sessionStorage.getItem('formTitle');
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.type = 'edit';
 
       // this.formIdRec=this.dynamicFormsService.formIdEdit;
-      this.formIdRec = sessionStorage.getItem('formId');
+      this.formIdRec = this.savedFormData.id;
       this.spinner.show();
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('form=>', res);
         this.model = [];
+        this.formNameRecieved =res.data.title
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
         this.isHidden=res.data.check;
         // this.configData=res.data.configure[0];
-        this.riskAssessmentFb.patchValue(res.data.configure[0]);
+        this.previewform.patchValue(res.data.configure[0]);
         res.data.htmlObject.forEach((item) => {
           this.model.push(item);
         });
@@ -350,14 +358,13 @@ export class DynamicFormComponent implements OnInit {
         this.spinner.hide();
       });
     }
-    if (sessionStorage.getItem('type') == 'view') {
+    if (this.savedFormData.type == 'view') {
       this.report = true;
       // if(this.dynamicFormsService.formType =='view'){
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
-      this.formNameRecieved = sessionStorage.getItem('formTitle');
       this.type = 'view';
       // this.formIdRec=this.dynamicFormsService.formIdEdit;
-      this.formIdRec = sessionStorage.getItem('formId');
+      this.formIdRec = this.savedFormData.id;
       this.spinner.show();
       this.dynamicFormsService.getFormById(this.formIdRec).subscribe((res) => {
         console.log('formView=>', res);
@@ -741,7 +748,7 @@ export class DynamicFormComponent implements OnInit {
     //  console.log("heading=>",t[0]);
 
     console.log('model', this.model);
-
+    console.log('thsi.riskAssessmentFb', this.riskAssessmentFb.value);
     this.regexErr = [];
 
     this.submitBtn = true;
@@ -922,9 +929,9 @@ export class DynamicFormComponent implements OnInit {
      {
        console.log("isHidden",this.isHidden);
        
-       this.riskAssessmentFb.reset();
+       this.previewform.reset();
      }
-    if (this.type == 'add') {
+    if (this.type == 'edit') {
       console.log('add', this.model);
 let tempModel=[];
 this.model.forEach(element => {
@@ -936,22 +943,31 @@ console.log(tempModel);
 if(tempModel.length)
 {
        const d=[];
-       d.push(this.riskAssessmentFb.value);
+       d.push(this.previewform.value);
        console.log("d",d);
        
       let data = {
         title: this.formNameRecieved,
-        frequency: sessionStorage.getItem('frequency'),
+        frequency:  this.frequency,
         htmlObject:tempModel ,
         configure:d,
-        check:this.isHidden
+        check:this.isHidden,
+        formId:this.formIdRec
+
+
+        // "formId": "61ce9d44fcd37d281059e302"
+        // "title": "dynamic form",
+        // "htmlObject": [],
+        // "configure": [],
+        // "frequency": "yearly"
+
       };
     console.log("data",data);
 
-      this.dynamicFormsService.addForm(data).subscribe((res) => {
-        Swal.fire('Form added successfully');
+      this.dynamicFormsService.savedFormPost(data).subscribe((res) => {
+        Swal.fire('Form Submit successfully');
         this.router.navigate(['/admin/dynamicFormsList']);
-        this.riskAssessmentFb.reset();
+        this.previewform.reset();
       })
     }
     else
@@ -959,44 +975,42 @@ if(tempModel.length)
       Swal.fire('Please Add Atleast One Field');
     }
     }
-    if (this.type == 'edit') {
-      console.log('edit');
-      let tempModel=[];
-      this.model.forEach((element,i) => {
-        console.log("element",element);
-         element.attributes[0].value=""
-        if(element.attributes.length){
-          tempModel.push(element)
-        }
-      });
-      console.log(tempModel);
-      if(tempModel.length)
-      {
-      const d=[];
-      d.push(this.riskAssessmentFb.value);
-      console.log("d",d);
-      let data = {
-        title: this.formNameRecieved,
-        htmlObject: tempModel,
-        enable: this.enableForm,
-        frequency: this.frequency,
-        configure:d,
-        check:this.isHidden
-      };
+  //   if (this.type == 'add') {
+  //     console.log('edit');
+  //     let tempModel=[];
+  //     this.model.forEach(element => {
+  //       if(element.attributes.length){
+  //         tempModel.push(element)
+  //       }
+  //     });
+  //     console.log(tempModel);
+  //     if(tempModel.length)
+  //     {
+  //     const d=[];
+  //     d.push(this.previewform.value);
+  //     console.log("d",d);
+  //     let data = {
+  //       title: this.formNameRecieved,
+  //       htmlObject: tempModel,
+  //       enable: this.enableForm,
+  //       frequency: this.frequency,
+  //       configure:d,
+  //       check:this.isHidden
+  //     };
 
-      this.dynamicFormsService
-        .editForm(data, this.formIdRec)
-        .subscribe((res) => {
-          Swal.fire('Form edited successfully');
-          this.router.navigate(['/admin/dynamicFormsList']);
-          this.riskAssessmentFb.reset();
-        });
-    }
-    else
-    {
-      Swal.fire('Please Add Atleast One Field');
-    }
-  }
+  //     this.dynamicFormsService
+  //       .editForm(data, this.formIdRec)
+  //       .subscribe((res) => {
+  //         Swal.fire('Form edited successfully');
+  //         this.router.navigate(['/admin/dynamicFormsList']);
+  //         this.previewform.reset();
+  //       });
+  //   }
+  //   else
+  //   {
+  //     Swal.fire('Please Add Atleast One Field');
+  //   }
+  // }
   }
   duplicate(i, j) {
     console.log('duplicate', i, j, this.model[i].attributes);
@@ -1046,7 +1060,3 @@ if(tempModel.length)
 
   }
 }
-
-
-
-
