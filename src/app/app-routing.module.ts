@@ -1,3 +1,5 @@
+import { RiskAssessmentSWMSComponent } from './views/forms/risk-assessment-swms/risk-assessment-swms.component';
+import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { SavedFormsModule } from './views/saved-forms/saved-forms.module';
 import { LogicalFormAccessGuard } from './RouteGuard/logical-form-access.guard';
 import { DynamicFormAccessGuard } from './RouteGuard/dynamic-form-access.guard';
@@ -18,6 +20,13 @@ import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynami
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
+  // { path: 'print',
+  //   outlet: 'print',
+  //   component: PrintLayoutComponent,
+  //   children: [
+  //     { path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent }
+  //   ]
+  // },
 
 
   {

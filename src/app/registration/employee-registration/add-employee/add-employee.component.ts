@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
@@ -28,9 +29,11 @@ export class AddEmployeeComponent implements OnInit {
   file1: any;
   dialogRef: any;
   dataUrl: any;
+  roleData: any=[''];
  
   constructor(
     private fb: FormBuilder,
+    private role: RoleManagementService,
     private employee: EmployeeRegistrationService,
     private upload: UploadFileService,
     private activatedRoute: ActivatedRoute,
@@ -49,7 +52,7 @@ export class AddEmployeeComponent implements OnInit {
       porfManager: ['', Validators.required],
       porfAdministrater: ['', Validators.required],
       file: ['', Validators.required],
-      roleId:[''],
+      roleId:['', Validators.required],
       porfStreetAddress: ['', Validators.required],
       porfCityTown: ['', Validators.required],
       porfState: ['', Validators.required],
@@ -75,6 +78,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllRoles();
     this.id=this.activatedRoute.snapshot.params.id;
     if(this.id!=="form"){
       this.dataEmp=true;
@@ -85,6 +89,13 @@ export class AddEmployeeComponent implements OnInit {
   }
   }
 
+  getAllRoles(){
+    this.role.getAllRole().subscribe((res:any)=>{
+      console.log("role..",res)
+        this.roleData = res.data;
+       
+    });
+  }
 //   ngAfterViewInit() {
 //     console.log("after..",this.signaturePad,this.dataUrl)
 //     // this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -115,8 +126,7 @@ export class AddEmployeeComponent implements OnInit {
       porfPhone: data.data.phone,
       porfMobile: data.data.mobile,
      
-      // file: data.data.,
-      roleId:[''],
+      roleId: data.data.roleId,
       porfStreetAddress: data.data.location.address,
       porfCityTown: data.data.location.city,
       porfState: data.data.location.state,
@@ -128,11 +138,7 @@ export class AddEmployeeComponent implements OnInit {
       empEmail: data.data.emergencyContact.email,
       empPhone: data.data.emergencyContact.phone,
       empMobile: data.data.emergencyContact.mobile,
-      // LicenceName: data.data.lastName,
-      // LicenceNumber: data.data.lastName,
-      // TrainingQrginisation: data.data.lastName,
-      // ExpiryDate: data.data.lastName,
-      // UploadLicenceArr: this.fb.array([]),
+     
       PPESupplied: data.data.ppe.ppeSupplied,
       BrandOrType: data.data.ppe.brand,
       IssueDate: data.data.ppe.issueDate,
@@ -221,7 +227,7 @@ export class AddEmployeeComponent implements OnInit {
       email: this.empDetails.get('porfEmail').value,
       position: this.empDetails.get('porfPosition').value,
       mobile: this.empDetails.get('porfMobile').value,
-      // roleId: this.empDetails.get('roleId').value,
+      roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
       department: this.empDetails.get('porfDepartment').value,
@@ -288,7 +294,7 @@ export class AddEmployeeComponent implements OnInit {
       email: this.empDetails.get('porfEmail').value,
       position: this.empDetails.get('porfPosition').value,
       mobile: this.empDetails.get('porfMobile').value,
-      // roleId: this.empDetails.get('roleId').value,
+      roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
       department: this.empDetails.get('porfDepartment').value,

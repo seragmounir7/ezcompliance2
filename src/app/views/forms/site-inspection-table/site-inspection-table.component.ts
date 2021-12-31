@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -12,7 +12,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./site-inspection-table.component.scss']
 })
 export class SiteInspectionTableComponent implements OnInit {
-  displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
+  displayedColumns: string[] = ['position','customerName',"phone","email","site",'action'];
   showDatas: any;
   tempArray: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -50,9 +50,9 @@ export class SiteInspectionTableComponent implements OnInit {
     });
    
   }
-  getsiteInspection()
+  getsiteInspection(field="",value="")
   {
-    this.logicalFormInfo.getAllSiteInspection().subscribe((res:any)=>
+    this.logicalFormInfo.getAllSiteInspection(field,value).subscribe((res:any)=>
     {
       console.log("res",res.data);
       
@@ -79,5 +79,11 @@ export class SiteInspectionTableComponent implements OnInit {
   {
     this.router.navigate(["/admin/forms/siteInspect/"+id]);
   }
+
+  sortData(sort:Sort){
+    this.getsiteInspection(sort.active,sort.direction)
+
+  }
+  
 }
 
