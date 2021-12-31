@@ -171,10 +171,10 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
               displayedName: "Forms",
               icon: "page",
               route: "/admin/savedForms",
-              hasAccess: false
+              hasAccess: true
           }
       ],
-      hasAccess: false
+      hasAccess: true
   },
     {
         displayedName: "Form Configure",

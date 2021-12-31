@@ -1,1 +1,62 @@
-<p>saved-forms works!</p>
+<div class="col ml-2 pt-3">
+    <h1> All Saved Forms Table</h1>
+    </div>
+    <div class=" ">
+      <table mat-table [dataSource]="tempArray" matSort>
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+          <td mat-cell *matCellDef="let element;let i=index">{{element.index+1}}</td>
+        </ng-container>
+    
+        <!-- Name Column -->
+       
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Form Name </th>
+      <td mat-cell *matCellDef="let element">Form Name</td>
+    </ng-container>
+    <ng-container matColumnDef="Phone">
+      <th mat-header-cell *matHeaderCellDef>Form Type</th>
+      <td mat-cell *matCellDef="let element">{{element.fileType}}</td>
+    </ng-container>
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef>Created Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt|date:'mediumDate'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Site">
+        <th mat-header-cell *matHeaderCellDef>Updated Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt|date:'mediumDate'}} </td>
+      </ng-container>
+     <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element" > 
+        <!-- <i class="fa fa-eye "aria-hidden="true" title="view"></i> -->
+        <!-- <button [routerLink]="element.link" mat-icon-button aria-label="Example icon button with a delete icon">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <a (click)="goTo(element.title)">
+          <span style="cursor: pointer !important;">
+              <mat-icon >launch</mat-icon>
+          </span>
+      </a> -->
+      <div style="display: flex; justify-content: space-around;">
+        <span class="material-icons" matTooltip="Edit" (click)="edit(element._id,element.fileType)">
+            edit
+        </span>
+        <!-- <span class="material-icons" matTooltip="Delete" (click)="delete(element._id)" >
+            delete
+        </span> -->
+        </div>
+      </td>
+    </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10]"
+                     showFirstLastButtons 
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+    

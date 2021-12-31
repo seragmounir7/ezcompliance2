@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 @Component({
@@ -47,6 +48,7 @@ export class HazardReportComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   maxDate = new Date();
   minDate = new Date();
+  type:any;
   empData: any;
   constructor(
     private fb: FormBuilder,
@@ -58,6 +60,7 @@ export class HazardReportComponent implements OnInit {
     public upload: UploadFileServiceService,
     private activatedRoute: ActivatedRoute,
     private ngZone: NgZone,
+    public forms:SavedformsService
   ) {
 
 
@@ -128,6 +131,9 @@ export class HazardReportComponent implements OnInit {
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.type=params['formType'];  
+    });
     this.getHazard();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
