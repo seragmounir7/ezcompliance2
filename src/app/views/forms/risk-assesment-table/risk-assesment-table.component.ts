@@ -42,10 +42,15 @@ export class RiskAssesmentTableComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        console.log(result)
-        // this.model.attributes.splice(i,1);
         this.spinner.show()
-        this.logicalFormInfo.deleteAssessment(item._id).subscribe((res => {
+        this.logicalFormInfo
+        .deleteAssessment(item._id)
+        .subscribe((res => {
+          Swal.fire({
+            title: `"${item.customerName}"? Deleted successfully`,
+            showConfirmButton: false,
+            timer: 1200,
+          });
         this.getToolBox()
         this.spinner.hide()
         }))
