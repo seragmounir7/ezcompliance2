@@ -4,6 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -89,7 +90,7 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
        
        let iframe=document.createElement("iframe")
        iframe.id = "printIframe"
-             iframe.src= "http://localhost:4200/#/admin/forms/incidentRep/"+id
+             iframe.src= environment.stagingUrl+"#/admin/forms/incidentRep/"+id
              iframe.style.display="none";
              let body = document.getElementsByTagName("body")
              body[0].appendChild(iframe)

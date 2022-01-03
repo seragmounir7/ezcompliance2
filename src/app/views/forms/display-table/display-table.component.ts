@@ -4,6 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-display-table',
@@ -67,7 +68,7 @@ export class DisplayTableComponent implements OnInit {
        
        let iframe=document.createElement("iframe")
        iframe.id = "printIframe"
-             iframe.src= "http://localhost:4200/#/admin/forms/toolboxTalk/"+id
+             iframe.src= environment.stagingUrl+"#/admin/forms/toolboxTalk/"+id
              iframe.style.display="none";
              let body = document.getElementsByTagName("body")
              body[0].appendChild(iframe)
