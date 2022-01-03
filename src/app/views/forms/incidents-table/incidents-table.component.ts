@@ -76,4 +76,21 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
   sortData(sort:Sort) {
     this.getIncidentReport(sort.active,sort.direction)
      }
+    
+     printPage(id)
+     {
+       console.log("check");
+       // this.logicalFormInfo.printing.next('print');
+       localStorage.setItem("key","print");
+       // $("<iframe>")                             // create a new iframe element
+       //     .hide()                               // make it invisible
+       //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
+       //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+       
+       let iframe=document.createElement("iframe")
+             iframe.src= "http://localhost:4200/#/admin/forms/incidentRep/"+id
+             iframe.style.display="none";
+             let body = document.getElementsByTagName("body")
+             body[0].appendChild(iframe)
+     }
 }

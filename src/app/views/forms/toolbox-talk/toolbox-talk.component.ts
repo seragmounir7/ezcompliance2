@@ -30,6 +30,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   type:any;
   previousUrl:any;
   @ViewChildren('Signature2') signaturePad2: QueryList<SignaturePad>;
+  check: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -39,6 +40,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
     public router: Router,
     public forms:SavedformsService
   ) {
+    this.check = localStorage.getItem('key');
     this.toolBox = this.fb.group({
       siteName: ['', Validators.required],
       customerName: ['', Validators.required],
@@ -271,6 +273,17 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   };
 
   ngAfterViewInit() {
+    console.log("check1...",this.check);
+    
+    if (this.check == 'print') {
+      setTimeout( () => { 
+        window.print();
+        console.log("printing....");
+      }, 3000);
+      localStorage.setItem('key', ' ');
+     
+      
+    }
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime

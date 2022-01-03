@@ -2,7 +2,7 @@
 <div class="btn btn-outline-primary" *ngIf="id!=='Form' && type!=='Incident'" [routerLink]="['/admin/forms/incidentsTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="type==='Incident'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
-<div class="container card px-4 py-4" [formGroup]="IncidentReport">
+<div id='section-to-print'  class="container card px-4 py-4" [formGroup]="IncidentReport">
   <h2 class="text-center pt-3">
     <p>Accident Report Form</p>
   </h2>

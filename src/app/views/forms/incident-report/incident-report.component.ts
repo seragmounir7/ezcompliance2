@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {
@@ -26,7 +26,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
   templateUrl: './incident-report.component.html',
   styleUrls: ['./incident-report.component.scss'],
 })
-export class IncidentReportComponent implements OnInit {
+export class IncidentReportComponent implements OnInit, AfterViewInit {
   IncidentReport: FormGroup;
   fileData: any;
   data: any;
@@ -66,6 +66,7 @@ export class IncidentReportComponent implements OnInit {
   singRequired: any;
   singRequired1: any;
   type:any;
+  check: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -77,6 +78,7 @@ export class IncidentReportComponent implements OnInit {
     private ngZone: NgZone,
     public forms:SavedformsService
   ) {
+    this.check = localStorage.getItem('key');
     this.IncidentReport = this.fb.group({
       incidents: this.fb.array([]),
       natureOFIncidents: this.fb.array([]),
@@ -358,6 +360,17 @@ export class IncidentReportComponent implements OnInit {
   };
 
   ngAfterViewInit() {
+    console.log("check1...",this.check);
+    
+    if (this.check == 'print') {
+      setTimeout( () => { 
+        window.print();
+        console.log("printing....");
+      }, 3000);
+      localStorage.setItem('key', ' ');
+     
+      
+    }
     // this.signaturePad is now available
     this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
     this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
@@ -940,4 +953,5 @@ export class IncidentReportComponent implements OnInit {
     });
   }
 
+  
 }
