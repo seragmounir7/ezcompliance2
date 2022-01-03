@@ -83,7 +83,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
     
     let iframe=document.createElement("iframe")
     iframe.id = "printIframe"
-          iframe.src= "http://localhost:4200/#/admin/forms/hazardRep/"+id
+          iframe.src= environment.stagingUrl+"#/admin/forms/hazardRep/"+id
           iframe.style.display="none";
           let body = document.getElementsByTagName("body")
           body[0].appendChild(iframe)
