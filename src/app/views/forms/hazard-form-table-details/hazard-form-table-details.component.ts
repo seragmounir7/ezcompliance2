@@ -82,6 +82,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
     //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
     
     let iframe=document.createElement("iframe")
+    iframe.id = "printIframe"
           iframe.src= "http://localhost:4200/#/admin/forms/hazardRep/"+id
           iframe.style.display="none";
           let body = document.getElementsByTagName("body")

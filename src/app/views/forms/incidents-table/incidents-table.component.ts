@@ -88,6 +88,7 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
        //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
        
        let iframe=document.createElement("iframe")
+       iframe.id = "printIframe"
              iframe.src= "http://localhost:4200/#/admin/forms/incidentRep/"+id
              iframe.style.display="none";
              let body = document.getElementsByTagName("body")

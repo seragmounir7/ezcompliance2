@@ -177,6 +177,7 @@ datalist > option{
   .col-sm-10-print {
     width: 83.333333%;
   }
+  .pagebreak-print { break-before: always; }
     td .L_1{
     background-color: rgb(0 0 0) !important;
         -webkit-print-color-adjust: exact;

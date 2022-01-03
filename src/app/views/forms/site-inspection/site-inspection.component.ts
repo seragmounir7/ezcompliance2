@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import {
   FormBuilder,
@@ -19,7 +19,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
   templateUrl: './site-inspection.component.html',
   styleUrls: ['./site-inspection.component.scss'],
 })
-export class SiteInspectionComponent implements OnInit {
+export class SiteInspectionComponent implements OnInit, AfterViewInit {
   sidePreview!: FormGroup;
   SiteControl!: FormArray;
   siteshow = true;
@@ -52,6 +52,7 @@ export class SiteInspectionComponent implements OnInit {
   showDatas: any;
   staff: any;
   type:any;
+  check: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -62,6 +63,7 @@ export class SiteInspectionComponent implements OnInit {
     private datePipe: DatePipe,
     public forms:SavedformsService
   ) {
+    this.check = localStorage.getItem('key');
     this.sidePreview = this.fb.group({
       jobNumber: ['', Validators.required],
       siteName: ['', Validators.required],
@@ -213,7 +215,19 @@ export class SiteInspectionComponent implements OnInit {
     }
     
   }
+  
   ngAfterViewInit(): void {
+    console.log("check1...",this.check);
+    
+    if (this.check == 'print') {
+      setTimeout( () => { 
+        window.print();
+        console.log("printing....");
+      }, 3000);
+      localStorage.setItem('key', ' ');
+     
+      
+    }
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
   }
