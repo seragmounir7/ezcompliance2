@@ -1,9 +1,11 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left"
     aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/hazardTable']"><i
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Hazard'" [routerLink]="['/admin/forms/hazardTable']"><i
     class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Hazard'" [routerLink]="['/admin/savedForms']"><i
+      class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
-<div class="container card px-4 py-4 content-center">
+<div id='section-to-print'  class="container card px-4 py-4 content-center">
   <form class="px-4 py-4" [formGroup]="hazardReport">
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form </p>
@@ -12,7 +14,7 @@
 
     <div class="row py-4">
       <div class="col-md-12">
-        <div style="padding: 0px" class="col-md-6">
+        <div style="padding: 0px" class="col-md-6 col-sm-6-print">
           <h3 class="mb-3 text_1">Part A - Form Details</h3>
           <h4 class="text_2">Position Reporting The Hazard</h4>
         </div>
@@ -63,7 +65,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col-md-6">
+    <!-- <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputSurname" class="form-label">Surname</label>
           <input
@@ -76,7 +78,7 @@
         </div>
       </div> -->
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address<span class="text-danger ">*</span></label>
           <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1"
@@ -88,7 +90,7 @@
             Email is Required</span>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputPhone" class="form-label">Phone<span class="text-danger ">*</span></label>
           <input maxlength="10" class="form-control" formControlName="phone" id="exampleInputPhone"
@@ -103,7 +105,7 @@
             Phone Number Should be 10 digits</span>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputDepartment" class="form-label">Department<span class="text-danger ">*</span></label>
           <input type="department" class="form-control" formControlName="department" id="exampleInputDepartment"
@@ -115,7 +117,7 @@
             Department is Required</span>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputPosition" class="form-label">Position<span class="text-danger ">*</span></label>
           <input type="position" class="form-control" formControlName="position" id="exampleInputPosition"
@@ -127,7 +129,7 @@
             Position is Required</span>
         </div>
       </div>
-      <!-- <div class="col-md-6">
+      <!-- <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputProjectNumber" class="form-label"
             >Project Number</label
@@ -159,7 +161,7 @@
       <div class="col-md-12 report_1">
         <h3 style="margin-top: 1.5%">Report to be sent to the following</h3>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label class="form-label">Manager/Supervisor</label>
           <select formControlName="managerSupervisor" class="form-select form-control col form-dropdown"
@@ -193,7 +195,7 @@
 
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
           <select formControlName="managerSupervisorEmail" class="form-select form-control col form-dropdown"
@@ -212,7 +214,7 @@
 
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputProjectNumber" class="form-label">WHS Manager</label>
 
@@ -227,7 +229,7 @@
 
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="email" class="form-label">Email Address</label>
           <input type="email" class="form-control" formControlName="whsManagerEmail" id="exampleInputProjectNumber"
@@ -253,7 +255,7 @@
             Description is Required</span>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-md-3-print">
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Reported<span class="text-danger ">*</span></label>
           <input matInput [matDatepicker]="datepicker" [max]="maxDate" class="form-control"
@@ -269,7 +271,7 @@
             Date is Required</span>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-md-3-print">
         <div class="mb-3">
           <label for="email" class="form-label">Location of Hazard<span class="text-danger ">*</span></label>
           <input type="text" class="form-control" formControlName="locationHazard" id="exampleInputProjectNumber"
@@ -281,7 +283,7 @@
             Location is Required</span>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-md-3-print">
         <div class="mb-3">
           <label for="email" class="form-label">Date Hazard Identified<span class="text-danger ">*</span></label>
           <input matInput [matDatepicker]="datepicker1" [max]="maxDate" class="form-control"
@@ -297,7 +299,7 @@
             Date is Required</span>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-md-3-print">
         <div class="mb-3">
           <label class="form-label">Job Number<span class="text-danger ">*</span></label>
           <select class="form-control form-select" formControlName="jobNumberId" [class.is-invalid]="hazardReport.get('jobNumberId')?.hasError('required') 
@@ -313,7 +315,7 @@
         </div>
       </div>
     </div>
-    <div class="row py-4">
+    <div class="row py-4 ">
       <div class="col-md-12">
         <h2>Hazard Treatment</h2>
       </div>
@@ -485,7 +487,7 @@
     <h2 class="mt-3">Corrective Action</h2>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
           <label class="form-label">Can you eliminate the hazard</label>
           <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
@@ -496,7 +498,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
           <label class="form-label">Corrective Action</label>
           <textarea type="surname" class="form-control" formControlName="eliminateCorrect" cdkTextareaAutosize
@@ -504,13 +506,13 @@
             aria-describedby="emailHelp"></textarea>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
           <label class="form-label label_1">Actioned by</label>
           <input type="email" class="form-control" formControlName="elliminateAction" aria-describedby="emailHelp" />
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
           <label class="form-label label_1">By when</label>
           <!-- <input
@@ -528,7 +530,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
           <label class="form-label">Can you substitute a safe process</label>
           <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
@@ -539,7 +541,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('process').value  == 'no'">
           <label class="form-label">Corrective Action</label>
           <textarea type="surname" class="form-control textarea-autosize" formControlName="substituteCorrect"
@@ -547,13 +549,13 @@
             aria-describedby="emailHelp"></textarea>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('process').value  == 'no'">
           <label class="form-label label_1">Actioned by</label>
           <input type="email" class="form-control" formControlName="substituteAction" aria-describedby="emailHelp" />
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('process').value  == 'no'">
           <label class="form-label label_1">By when</label>
           <!-- <input
@@ -571,7 +573,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
           <label class="form-label">Can the hazard be isolated</label>
           <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
@@ -582,7 +584,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
           <label class="form-label">Corrective Action</label>
           <textarea type="surname" class="form-control" formControlName="isolatedCorrect" cdkTextareaAutosize
@@ -590,13 +592,13 @@
             aria-describedby="emailHelp"></textarea>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
           <label class="form-label label_1">Actioned by</label>
           <input type="email" class="form-control" formControlName="isolatedAction" aria-describedby="emailHelp" />
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
           <label class="form-label label_1">By when</label>
           <!-- <input
@@ -614,7 +616,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
           <label class="form-label">Can a solution be engreed</label>
           <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
@@ -625,7 +627,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
           <label class="form-label">Corrective Action</label>
           <textarea type="surname" class="form-control" formControlName="solutionCorrect" cdkTextareaAutosize
@@ -633,13 +635,13 @@
             aria-describedby="emailHelp"></textarea>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
           <label class="form-label label_1">Actioned by</label>
           <input type="email" class="form-control" formControlName="solutionAction" aria-describedby="emailHelp" />
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
           <label class="form-label label_1">By when</label>
           <!-- <input
@@ -657,7 +659,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
           <label class="form-label">Can procedures remove or reduce the risk</label>
           <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
@@ -668,7 +670,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
           <label class="form-label">Corrective Action</label>
           <textarea type="surname" class="form-control" formControlName="procedureRemoveCorrect" cdkTextareaAutosize
@@ -676,14 +678,14 @@
             aria-describedby="emailHelp"></textarea>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
           <label class="form-label label_1">Actioned by</label>
           <input type="email" class="form-control" formControlName="procedureRemoveAction"
             aria-describedby="emailHelp" />
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
           <label class="form-label label_1">By when</label>
           <!-- <input
@@ -701,7 +703,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
           <label class="form-label">Can the use PPE reduce the risk</label>
           <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
@@ -712,7 +714,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
           <label class="form-label">Corrective Action</label>
           <textarea type="surname" class="form-control" formControlName="PPECorrect" cdkTextareaAutosize
@@ -720,14 +722,14 @@
             aria-describedby="emailHelp"></textarea>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
           <label class="form-label label_1">Actioned by</label>
 
           <input type="email" class="form-control" formControlName="PPEAction" aria-describedby="emailHelp" />
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2-print">
         <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
           <label class="form-label label_1">By when</label>
           <!-- <input
@@ -747,7 +749,7 @@
     <h2>The form was compiled by:</h2>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label class="form-label">Name<span class="text-danger ">*</span></label>
           <input type="fullname" class="form-control" formControlName="name" aria-describedby="emailHelp"
@@ -759,7 +761,7 @@
             Name is Required</span>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label class="form-label">Position<span class="text-danger ">*</span></label>
           <input type="surname" class="form-control" formControlName="compilePosition" aria-describedby="emailHelp"
@@ -771,7 +773,7 @@
             Position is Required</span>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label class="form-label">Department<span class="text-danger ">*</span></label>
           <input type="surname" class="form-control" formControlName="compileDepartment" aria-describedby="emailHelp"
@@ -783,7 +785,7 @@
             Department is Required</span>
         </div>
       </div>
-      <div class="mb-3 col-md-6">
+      <div class="mb-3 col-md-6 col-sm-6-print">
         <label class="form-label">File Upload</label>
 
         <!-- <img
@@ -829,7 +831,7 @@
         <input type="file" class="form-control" (change)="browser($event)" #file id="file" />
         <!-- <img   [src]="selectedImage"alt="Site Logo" width="50" height="50"> -->
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <!-- <mat-form-field appearance="outline">
           <input formControlName="date" class="date_1" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -860,7 +862,7 @@
             This Field is Required</span>
         </div>
         <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
-        <button class="btn btn-outline-primary my-3" (click)="clear()">
+        <button *ngIf="check!='print'" class="btn btn-outline-primary my-3" (click)="clear()">
           Clear
         </button>
       </div>
@@ -869,8 +871,8 @@
     <hr />
 
     <br />
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary btn-block" [disabled]="!hazardReport.valid"
+    <div class="col-md-2 col-sm-2-print">
+      <button type="submit" *ngIf="check!='print'" class="btn btn-primary btn-block" [disabled]="!hazardReport.valid"
         (click)="onFormSubmit()">Submit</button>
     </div>
   </form>

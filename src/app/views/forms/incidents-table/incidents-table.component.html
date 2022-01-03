@@ -3,7 +3,7 @@
     <h1> Accident Report List</h1>
     </div>
     <div class=" ">
-      <table mat-table [dataSource]="tempArray" matSort>
+      <table mat-table [dataSource]="tempArray" matSort (matSortChange)="sortData($event)">
     
         <!-- Position Column -->
         <ng-container matColumnDef="position">
@@ -46,6 +46,9 @@
         <span class="material-icons" matTooltip="Edit" (click)="edit(element._id)" >
             edit
         </span>
+        <span class="material-icons" matTooltip="print" (click)="printPage(element._id)" >
+          print
+      </span>
         <span class="material-icons" matTooltip="Delete" (click)="delete(element._id)"  >
             delete
         </span>

@@ -900,7 +900,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="siteName">
+              <input  type="text" class="form-control col" formControlName="siteName">
             </div>
             <div class="my-3 col">
               <label class="form-label"
@@ -913,7 +913,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="customerName">
+              <input  type="text" class="form-control col" formControlName="customerName">
         
             </div>
           </div>
@@ -928,7 +928,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="streetNo">
+              <input  type="text" class="form-control col" formControlName="streetNo">
         
             </div>
             <div class="my-3 col-4">
@@ -942,7 +942,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="streetAddr">
+              <input  type="text" class="form-control col" formControlName="streetAddr">
             </div>
             <div class="my-3 col-4">
               <label class="form-label"
@@ -955,15 +955,15 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="subUrb">
+              <input  type="text" class="form-control col" formControlName="subUrb">
             </div>
             <div class="my-3 col-2">
               <label class="form-label"
                 >State</label
               >
               <select
-              readonly
-              disabled
+              
+              
               class="form-select form-control col"
               aria-label="Default select example"
               formControlName="statesSWMS"
@@ -996,7 +996,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="custConct">
+              <input  type="text" class="form-control col" formControlName="custConct">
         
             </div>
             <div class="my-3 col">
@@ -1010,7 +1010,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="custConctPh">
+              <input  type="text" class="form-control col" formControlName="custConctPh">
         
             </div>
           </div>
@@ -1026,7 +1026,7 @@
               >
                 <option selected hidden>Select</option>
               </select> -->
-              <input readonly type="text" class="form-control col" formControlName="custEmail">
+              <input  type="text" class="form-control col" formControlName="custEmail">
         
             </div>
             <div class="my-3 col-2">
@@ -1034,11 +1034,11 @@
                 >Job Number</label
               >    
               <select
-              disabled
+              
               class="form-select form-control col"
               aria-label="Default select example"
               formControlName="jobNumber"
-              (change)="jobNoSel()"
+              (change)="jobNoSel1()"
             >
               <option selected hidden>Select</option>
               <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>

@@ -1,8 +1,8 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='Form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='Form'" [routerLink]="['/admin/forms/incidentsTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-  
+<div class="btn btn-outline-primary" *ngIf="id!=='Form' && type!=='Incident'" [routerLink]="['/admin/forms/incidentsTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Incident'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
-<div class="container card px-4 py-4" [formGroup]="IncidentReport">
+<div id='section-to-print'  class="container card px-4 py-4" [formGroup]="IncidentReport">
   <h2 class="text-center pt-3">
     <p>Accident Report Form</p>
   </h2>
@@ -12,7 +12,7 @@
 
   <div class="box">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <label class="form-label mb-3">Project Number<span class="text-danger ">*</span></label>
         <select
           class="form-select form-control"
@@ -42,7 +42,7 @@
           Project Number is Required</span
         >
       </div>
-      <!-- <div class="col-md-6">
+      <!-- <div class="col-md-6 col-sm-6-print">
         <div>
           <label
             class="cols"
@@ -57,7 +57,7 @@
           />
         </div>
       </div> -->
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Project Name<span class="text-danger ">*</span></label>
           <input
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Site Name<span class="text-danger ">*</span></label>
           <input
@@ -109,7 +109,7 @@
           >
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Customer Name<span class="text-danger ">*</span></label>
           <input
@@ -136,7 +136,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Site Address<span class="text-danger ">*</span></label>
           <input
@@ -161,7 +161,7 @@
           >
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Customer Contact<span class="text-danger ">*</span></label>
           <input
@@ -189,7 +189,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <!-- <p for="exampleFormControlInput1" class="form-Label">Project Manager</p> -->
         <label class="form-label mb-3">Project Manager<span class="text-danger ">*</span></label>
         <select
@@ -218,7 +218,7 @@
           Project Manager is Required</span
         >
       </div>
-      <!-- <div class="col-md-6">
+      <!-- <div class="col-md-6 col-sm-6-print">
         <div>
           <label
             class="cols"
@@ -233,7 +233,7 @@
         </div>
       </div> -->
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Person Completing Form <span class="text-danger ">*</span></label>
           <input
@@ -264,7 +264,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Customer Contact Phone<span class="text-danger ">*</span></label>
           <input
@@ -295,7 +295,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Customer Contact Email<span class="text-danger ">*</span></label>
           <input
@@ -323,7 +323,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <label class="cols" class="form-Label">Date of Form Completion<span class="text-danger ">*</span></label>
         <!-- <input type="date" class="form-control" formControlName="dateOfFormCompletion" [class.is-invalid]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "/> -->
        <input  matInput  [matDatepicker]="datepicker" [max]="maxDate" [min]="minDate"
@@ -396,7 +396,7 @@
     <p class="title">Injured or Affected Person</p>
   </div>
   <div class="box" class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <div>
         <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
         <input
@@ -422,7 +422,7 @@
         >
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <div>
         <label class="cols" class="form-Label">Department<span class="text-danger ">*</span></label>
         <input
@@ -449,7 +449,7 @@
     </div>
   </div>
   <div class="box" class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <div>
         <label class="cols" class="form-Label">position<span class="text-danger ">*</span></label>
         <input
@@ -508,7 +508,7 @@
   </div>
   <hr />
   <div class="box" class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <div>
         <label class="form-Label">Location of the incident<span class="text-danger ">*</span></label>
         <input
@@ -533,7 +533,7 @@
         >
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-md-3-print">
       <div>
         <label class="form-Label mt-2">Date of the incident<span class="text-danger ">*</span></label>
         <!-- <mat-form-field>
@@ -563,7 +563,7 @@
           Date is Required</span>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-md-3-print">
       <div>
         <label class="cols" class="form-Label">Time of the incident<span class="text-danger ">*</span></label>
         <!-- <input
@@ -606,7 +606,7 @@
     <p class="title">Incident Information</p>
   </div>
   <div class="box" class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <div>
         <label class="cols" class="form-Label"> Name of Witness<span class="text-danger ">*</span></label>
         <input
@@ -638,7 +638,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <div>
         <label class="cols" class="form-Label">Witness Statement<span class="text-danger ">*</span></label>
         <textarea
@@ -765,7 +765,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <label class="cols" for="exampleFormControlInput1" class="form-Label"
         >Was the unsafe act or hazard reported prior to the incident?</label
       >
@@ -790,7 +790,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6-print">
       <label class="cols" for="exampleFormControlInput1" class="form-Label"
         >Has a similar incident Occured</label
       >
@@ -897,7 +897,7 @@
         *ngFor="let control of add().controls; let i = index"
         [formGroupName]="i"
       >
-        <div class="col-md-3">
+        <div class="col-md-3 col-md-3-print">
           <div>
             <label class="cols" class="form-Label">Corrective Action<span class="text-danger ">*</span></label>
 
@@ -923,7 +923,7 @@
             >
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-md-3-print">
           <div>
             <label class="cols" class="form-Label">Person Responsible<span class="text-danger ">*</span></label>
 
@@ -954,7 +954,7 @@
             >
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-2-print">
           <div>
             <label class="cols" class="form-Label">Complete<span class="text-danger ">*</span></label>
 
@@ -984,7 +984,7 @@
             >
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-2-print">
           <label class="cols" class="form-Label">Date<span class="text-danger ">*</span> </label>
           <!-- <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/> -->
           <input  matInput  [matDatepicker]="pickerd4" [min]="minDate"
@@ -1016,7 +1016,7 @@
   </div>
   <div>
     <div class="box" class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
           <input
@@ -1042,7 +1042,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Position<span class="text-danger ">*</span> </label>
           <input
@@ -1069,7 +1069,7 @@
       </div>
     </div>
     <div class="box" class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Department<span class="text-danger ">*</span></label>
           <input
@@ -1095,7 +1095,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Date <span class="text-danger ">*</span></label>
           <!-- <input type="date" class="form-control" formControlName="completedDate" [class.is-invalid]="IncidentReport.get('completedDate')?.hasError('required') && (IncidentReport.get('completedDate').dirty || IncidentReport.get('completedDate').touched) "/> -->
@@ -1112,7 +1112,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Signature<span class="text-danger ">*</span></label>
           <div class="sign">
@@ -1128,7 +1128,7 @@
               This Field is Required</span
             >
           </div>
-          <button class="btn btn-outline-primary mt-1" (click)="clear()">
+          <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="clear()">
             Clear
           </button>
         </div>
@@ -1139,7 +1139,7 @@
   <p class="title">The Form was Reviewed by:</p>
   <div>
     <div class="box" class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
           <input
@@ -1165,7 +1165,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Position <span class="text-danger ">*</span></label>
           <input
@@ -1192,7 +1192,7 @@
       </div>
     </div>
     <div class="box" class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Department<span class="text-danger ">*</span></label>
           <input
@@ -1218,7 +1218,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Date <span class="text-danger ">*</span></label>
           <!-- <input type="date" class="form-control" formControlName="reviewedDate" [class.is-invalid]="IncidentReport.get('reviewedDate')?.hasError('required') && (IncidentReport.get('reviewedDate').dirty || IncidentReport.get('reviewedDate').touched) "/> -->
@@ -1235,7 +1235,7 @@
       </div>
     </div>
     <div class="box" class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Signature<span class="text-danger ">*</span></label>
           <div class="sign">
@@ -1250,7 +1250,7 @@
               This Field is Required</span
             >
           </div>
-          <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+          <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear
           </button>
         </div>
@@ -1261,8 +1261,9 @@
 
   <br />
 
-  <div class="col-md-2">
+  <div class="col-md-2 col-sm-2-print">
     <button
+    *ngIf="check!='print'"
       type="submit"
       class="btn btn-primary btn-block"
       [disabled]="!IncidentReport.valid || singRequired || singRequired1"

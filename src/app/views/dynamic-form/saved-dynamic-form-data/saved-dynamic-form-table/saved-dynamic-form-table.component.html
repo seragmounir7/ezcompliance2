@@ -1,6 +1,6 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" [routerLink]="['/admin/dynamicFormsList']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="col ml-2 pt-3">
-    <h1> ToolBox Talk List</h1>
+    <h1> Saved Dynamic Form Table</h1>
     </div>
     <div class=" ">
       <table mat-table [dataSource]="tempArray" matSort (matSortChange)="sortData($event)">
@@ -14,21 +14,21 @@
         <!-- Name Column -->
        
     <!-- Name Column -->
-    <ng-container matColumnDef="customerName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element">{{element.customerName}}</td>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Form Name </th>
+      <td mat-cell *matCellDef="let element">{{element.title}}</td>
     </ng-container>
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> Phone</th>
-      <td mat-cell *matCellDef="let element">{{element.custConct}}</td>
+    <ng-container matColumnDef="frequency">
+      <th mat-header-cell *matHeaderCellDef> Form Frequency</th>
+      <td mat-cell *matCellDef="let element">{{element.frequency}}</td>
     </ng-container>
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element"> {{element.custEmail}} </td>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Created Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt |date:'mediumDate'}} </td>
     </ng-container>
-    <ng-container matColumnDef="site">
-        <th mat-header-cell *matHeaderCellDef>Site Name</th>
-        <td mat-cell *matCellDef="let element"> {{element.siteName}} </td>
+    <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef>Updated Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt |date:'mediumDate'}} </td>
       </ng-container>
      <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
@@ -43,13 +43,14 @@
           </span>
       </a> -->
       <div style="display: flex; justify-content: space-around;">
-        <span class="material-icons" matTooltip="Edit" (click)="edit(element._id)" >
-            edit
-        </span>
-        <span class="material-icons" matTooltip="print" (click)="printPage(element._id)" >
-          print
-      </span>
-        <span class="material-icons" matTooltip="Delete" (click)="delete(element._id)"  >
+        <!-- <span class="material-icons" matTooltip="Edit The Form" (click)="edit(element._id)" >
+            <svg-icon name="Edit_form"></svg-icon>
+        </span> -->
+        <button  matTooltip="Edit The Form" mat-icon-button aria-label="Example icon button with a delete icon"  (click)="edit(element._id)">
+            <svg-icon name="Edit_form"></svg-icon> 
+         </button>
+
+        <span class="material-icons  mt-2"  matTooltip="Delete" (click)="delete(element)" >
             delete
         </span>
         </div>
@@ -57,6 +58,9 @@
     </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Data Not  Found  </td>
+          </tr>
       </table>
     
       <mat-paginator [pageSizeOptions]="[20]"

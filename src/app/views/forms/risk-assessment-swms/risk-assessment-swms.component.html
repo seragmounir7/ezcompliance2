@@ -1,7 +1,6 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-
-
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Risk Assessment'" [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Risk Assessment'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div id='section-to-print' *ngIf="check=='print'" class="page-header" style="text-align: center">
   I'm The Header
 </div>
@@ -2583,5 +2582,13 @@
     </div>
   </span>
  </div> 
+ <!-- <div *ngIf="check=='print'">
+  <pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'"
+  [render-text]="true"
+  [original-size]="false"
+  style="width: 400px; height: 500px"
+  [show-all]="true"
+></pdf-viewer>
+ </div> -->
 </div>
 

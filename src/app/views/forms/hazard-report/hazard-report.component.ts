@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 @Component({
@@ -18,7 +19,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   templateUrl: './hazard-report.component.html',
   styleUrls: ['./hazard-report.component.scss'],
 })
-export class HazardReportComponent implements OnInit {
+export class HazardReportComponent implements OnInit,  AfterViewInit {
   title = 'hazardReport';
   hazardReport: FormGroup;
   myControl = new FormControl();
@@ -47,7 +48,10 @@ export class HazardReportComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   maxDate = new Date();
   minDate = new Date();
+  type:any;
   empData: any;
+  check: any;
+  
   constructor(
     private fb: FormBuilder,
     private employee: EmployeeRegistrationService,
@@ -58,8 +62,9 @@ export class HazardReportComponent implements OnInit {
     public upload: UploadFileServiceService,
     private activatedRoute: ActivatedRoute,
     private ngZone: NgZone,
+    public forms:SavedformsService
   ) {
-
+    this.check = localStorage.getItem('key');
 
 
     this.hazardReport = this.fb.group({
@@ -128,6 +133,9 @@ export class HazardReportComponent implements OnInit {
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.type=params['formType'];  
+    });
     this.getHazard();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -249,6 +257,7 @@ export class HazardReportComponent implements OnInit {
 
   }
 
+ 
   getHazardByid(id) {
     this.url.getHazardFormDataById(id).subscribe((res: any) => {
       console.log(res);
@@ -328,6 +337,17 @@ export class HazardReportComponent implements OnInit {
   };
 
   ngAfterViewInit() {
+    console.log("check1...",this.check);
+    
+    if (this.check == 'print') {
+      setTimeout( () => { 
+        window.print();
+        console.log("printing....");
+      }, 3000);
+      localStorage.setItem('key', ' ');
+     
+      
+    }
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime

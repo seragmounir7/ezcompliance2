@@ -238,5 +238,14 @@ export class FormsComponent implements AfterViewInit, OnInit {
       this.getAllForms();
     });
   }
+  add(element){
+    console.log("element",element._id);
+    let data= {
+      id:element._id,
+      type:"add"
+    }
+    //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
+    this.router.navigate(['/admin/savedDynamicForm'],{queryParams:data});
+  }
 
 }

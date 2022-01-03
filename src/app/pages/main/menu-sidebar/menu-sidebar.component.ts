@@ -21,6 +21,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('mainSidebar', { static: false }) mainSidebar;
   @Output() mainSidebarHeight: EventEmitter<any> = new EventEmitter<any>();
   @Input() logoUrl
+  activeNavValue: string;
   constructor(public appService: AppService, private setTitle: SetTitleService, private router: Router) { }
 
   ngOnInit() {
@@ -28,34 +29,62 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 
     console.log(this.router.url);
     let rLink = this.router.url;
+    this.navItems.forEach(x => this.treeArr.push(false))
     if (rLink === '/admin/roleMangement') {
-      this.menuOpen(1);
+      this.menuOpen1(1);
     }
     else if (rLink === '/admin/dynamicFormsList') {
-      this.menuOpen(2);
+      this.menuOpen1(2);
     }
     else if (rLink === '/admin/forms') {
-      this.menuOpen(3);
+      this.menuOpen1(3);
     }
     else if (rLink === '/admin/confiLogi/setLogic' || rLink === '/admin/confiLogi/setJobNumber') {
-      this.menuOpen(4);
+      this.menuOpen1(4);
     }
     else if (rLink === '/admin/siteInfo/addSite' || rLink === '/admin/siteInfo/addCustomer' || rLink === '/admin/siteInfo/jobTask' || rLink === '/admin/siteInfo/highRisk' || rLink === '/admin/siteInfo/licenceAndQual' || rLink === '/admin/siteInfo/licenceCat' || rLink === '/admin/siteInfo/ppeSel' || rLink === '/admin/siteInfo/hazards' || rLink === '/admin/siteInfo/contrlActReq' || rLink === '/admin/siteInfo/chemical' || rLink === '/admin/siteInfo/riskLevel' || rLink === '/admin/siteInfo/riskLevel' || rLink === '/admin/siteInfo/staff') {
-      this.menuOpen(5);
+      this.menuOpen1(5);
     } else if (rLink === '/admin/savedForms') {
-      this.menuOpen(6);
+      this.menuOpen1(6);
     }
 
     this.setTitle.setTitle('WHS-Menu Sidebar');
-    // this.navItems.map((x:NavItem) => {
-    //   x.hasAccess = true
-    //   x.childItem?x.childItem.map((y:NavItem) => {
-    //     y.hasAccess = true
-    //     return y
-    //   }):''
-    //   return x
-    // })
-    // console.log(this.navItems)
+    this.navItems.map((x:NavItem) => {
+      // x.hasAccess = true
+      if(x.childItem){
+        x.menuOpen = false
+        x.childItem.map((y:NavItem) => {
+          console.log(y.childItem?true:false)
+          y.childItem? (y.menuOpen= false):''
+          return y
+        })
+      }
+
+      x.childItem?(x.menuOpen = false) && x.childItem.map((y:NavItem) => {
+        console.log(y.childItem?true:false)
+        y.childItem? (y.menuOpen= false):''
+        return y
+      }):''
+      return x
+    })
+    let Cobj,CCobj
+    let obj = this.navItems.find(o => {
+      if(o.childItem){
+         Cobj = o.childItem.find(item => {
+           if(item.childItem){
+             CCobj = item.childItem.find(citem => {
+              return citem.route === rLink
+             })
+           }
+           return item.route === rLink
+          })
+      }
+      return o.route === rLink ? o.route === rLink : Cobj? Cobj: CCobj
+    });
+
+    console.log(obj)
+    this.menuOpen(obj)
+    console.log(this.navItems)
   }
 
   ngAfterViewInit() {
@@ -68,8 +97,8 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
   static = false;
   confiLogic = false;
   stateRel = false;
-  treeArr = [false,false, false, false, false, false, false, false];
-  menuOpen(i) {
+  treeArr = [];
+  menuOpen1(i) {
     let temp = this.treeArr[i];
     this.resetAll();
     this.treeArr[i] = !temp;
@@ -85,7 +114,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     //   this.treeArr[i] =false;
     // }
   }
-  // menuOpen(key) {
+  // menuOpen1(key) {
   //   if (key != 'dynamic') this.dynamic = false;
   //   if (key != 'subscription') this.subscription = false;
   //   if (key != 'siteInfo') this.siteInfoVal = false;
@@ -171,10 +200,10 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
               displayedName: "Forms",
               icon: "page",
               route: "/admin/savedForms",
-              hasAccess: false
+              hasAccess: true
           }
       ],
-      hasAccess: false
+      hasAccess: true
   },
     {
         displayedName: "Form Configure",
@@ -355,12 +384,49 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
                 icon: "page",
                 route: "/admin/siteInfo/siteinspectioncategory",
                 hasAccess: true
-            }
+            },
+            {
+              displayedName: "State Relation",
+              icon: "page",
+              childItem: [
+                  {
+                      displayedName: "States",
+                      icon: "page",
+                      route: "/admin/stateRel/states",
+                      hasAccess: true
+                  },
+                  {
+                      displayedName: "Jurisdiction",
+                      icon: "page",
+                      route: "/admin/stateRel/juridiction",
+                      hasAccess: true
+                  },
+                  {
+                      displayedName: "Safety Legislation",
+                      icon: "page",
+                      route: "/admin/stateRel/safetyLegislation",
+                      hasAccess: true
+                  },
+                  {
+                      displayedName: "Regulator",
+                      icon: "page",
+                      route: "/admin/stateRel/regulator",
+                      hasAccess: true
+                  },
+                  {
+                      displayedName: "Set State Relation",
+                      icon: "page",
+                      route: "/admin/stateRel/setState",
+                      hasAccess: true
+                  }
+              ],
+              hasAccess: true
+          }
         ],
         hasAccess: true
     },
     {
-        displayedName: "CMS",
+        displayedName: "CMS", 
         icon: "page",
         childItem: [
             {
@@ -456,43 +522,43 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
         ],
         hasAccess: true
     },
-    {
-        displayedName: "State Relation",
-        icon: "page",
-        childItem: [
-            {
-                displayedName: "States",
-                icon: "page",
-                route: "/admin/stateRel/states",
-                hasAccess: true
-            },
-            {
-                displayedName: "Jurisdiction",
-                icon: "page",
-                route: "/admin/stateRel/juridiction",
-                hasAccess: true
-            },
-            {
-                displayedName: "Safety Legislation",
-                icon: "page",
-                route: "/admin/stateRel/safetyLegislation",
-                hasAccess: true
-            },
-            {
-                displayedName: "Regulator",
-                icon: "page",
-                route: "/admin/stateRel/regulator",
-                hasAccess: true
-            },
-            {
-                displayedName: "Set State Relation",
-                icon: "page",
-                route: "/admin/stateRel/setState",
-                hasAccess: true
-            }
-        ],
-        hasAccess: true
-    }
+    // {
+    //     displayedName: "State Relation",
+    //     icon: "page",
+    //     childItem: [
+    //         {
+    //             displayedName: "States",
+    //             icon: "page",
+    //             route: "/admin/stateRel/states",
+    //             hasAccess: true
+    //         },
+    //         {
+    //             displayedName: "Jurisdiction",
+    //             icon: "page",
+    //             route: "/admin/stateRel/juridiction",
+    //             hasAccess: true
+    //         },
+    //         {
+    //             displayedName: "Safety Legislation",
+    //             icon: "page",
+    //             route: "/admin/stateRel/safetyLegislation",
+    //             hasAccess: true
+    //         },
+    //         {
+    //             displayedName: "Regulator",
+    //             icon: "page",
+    //             route: "/admin/stateRel/regulator",
+    //             hasAccess: true
+    //         },
+    //         {
+    //             displayedName: "Set State Relation",
+    //             icon: "page",
+    //             route: "/admin/stateRel/setState",
+    //             hasAccess: true
+    //         }
+    //     ],
+    //     hasAccess: true
+    // }
 ]
   
   
@@ -685,7 +751,38 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
           displayedName:'Site Inspection Category',
           icon:'page',
           route:'/admin/siteInfo/siteinspectioncategory'
-        }
+        },
+        {
+          displayedName: 'State Relation',
+          icon:'page',
+          childItem :[
+            {
+              displayedName:'States',
+              icon:'page',
+              route:'/admin/stateRel/states'
+            },
+            {
+              displayedName:'Jurisdiction',
+              icon:'page',
+              route:'/admin/stateRel/juridiction'
+            },
+            {
+              displayedName:'Safety Legislation',
+              icon:'page',
+              route:'/admin/stateRel/safetyLegislation'
+            },
+            {
+              displayedName:'Regulator',
+              icon:'page',
+              route:'/admin/stateRel/regulator'
+            },
+            {
+              displayedName:'Set State Relation',
+              icon:'page',
+              route:'/admin/stateRel/setState'
+            }
+          ]
+        },
       ]
     },
     {
@@ -802,11 +899,92 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     },
   ]
 
+  menuOpen(item: NavItem){
+    if(item.menuOpen){
+      this.activeNavValue = item.displayedName
+      this.navItems.map((x:NavItem) => {
+       if( x.displayedName==item.displayedName){
+         console.log( x.displayedName,'==',item.displayedName, x.displayedName==item.displayedName,x.menuOpen)
+        x.menuOpen = false
+        console.log(x.menuOpen)
+       }
+        return x
+      })
+
+      this.activeNavValue = item.displayedName
+      this.navItems.map((x:NavItem) => {
+        x.childItem? x.childItem.map(y => {
+          if(y.displayedName == item.displayedName){
+            y.menuOpen = false
+          }
+          return y
+        }):''
+        return x
+      })
+      return
+    }
+    console.log(item)
+    this.navItems.map((x:NavItem) => {
+      // x.hasAccess = true
+      // console.log(item.displayedName ,'==', x.displayedName,item.displayedName == x.displayedName)
+      if(x.childItem && x.menuOpen == false && item.displayedName == x.displayedName){
+        x.menuOpen = true
+      }
+      x.childItem? x.childItem.map(y => {
+      console.log(item.displayedName ,'==', y.displayedName,item.displayedName == y.displayedName,y.childItem && y.menuOpen == false && item.displayedName == y.displayedName)
+
+        if(y.childItem && y.menuOpen == false && item.displayedName == y.displayedName){
+          y.menuOpen = true
+        }
+        return y
+      }):''
+      // x.childItem?(x.menuOpen = item.displayedName == x.displayedName) && x.childItem.map((y:NavItem) => {
+      //   y.childItem? x.menuOpen=true && (y.menuOpen= item.displayedName == y.displayedName):''
+      //   return y
+      // }):''
+      return x
+    })
+    
+
+    }
+    
+
+  isActiveRoute(item: NavItem): boolean {
+    console.log(item)
+    // if (!item.route) {
+    //   return false;
+    // }
+
+    // let routeIndex = this.router.url.indexOf("?"),
+    //   isExact = routeIndex > -1 ? false : true;
+
+    // if (item.route == "/web/manage-users/user" || item.route == "/web/client")
+    //   isExact = true;
+
+    // return this.router.isActive(item.route, isExact);
+
+    if(!item.route && item.childItem && item.childItem.length>0){
+      const childItem = item.childItem.find(x => {
+        console.log(x.route ,'==', this.router.url,x.route == this.router.url)
+       return x.route && x.route == this.router.url
+      });
+      console.log(childItem,childItem ? true : false)
+        return childItem ? true : false;
+    } else if(item.route){
+      console.log(item.route, '==', this.router.url,item.route == this.router.url)
+      return item.route == this.router.url ? true : false;
+    } else {
+      return false;
+    }
+
+  }
+
 }
 
 interface NavItem {
   displayedName: string,
   icon:string,
+  menuOpen?:boolean,
   route?:string,
   hasAccess?:boolean,
   childItem?:NavItem[]

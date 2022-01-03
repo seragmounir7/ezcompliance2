@@ -1,7 +1,8 @@
-<div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form'" [routerLink]="['/admin/forms/tableData']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id ==='form' && type!=='Tool Box'" [routerLink]="['/admin/forms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Tool Box'" [routerLink]="['/admin/forms/tableData']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="type==='Tool Box'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <form [formGroup]="toolBox">
-<div class="container px-4 py-4 card" >
+<div id='section-to-print' class="container px-4 py-4 card" > 
   <h1 class="text-center pt-3">
     <p>Toolbox Talk </p>
   </h1>
@@ -199,7 +200,7 @@
           This Field is Required</span
           >
           </div>
-          <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+          <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear
           </button>
         </div>
@@ -438,7 +439,7 @@
           >
 
             </div>
-            <button class="btn btn-outline-primary mt-1" (click)="sign.clear(); clear2(i)">
+            <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="sign.clear(); clear2(i)">
               Clear
             </button>
           </div>
@@ -457,7 +458,7 @@
       </ng-container>
     </div>
   </div>
-  <button class="btn btn-primary btn-block mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
+  <button *ngIf="check!='print'" class="btn btn-primary btn-block mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
   align-self: center;">
     Submit
   </button>

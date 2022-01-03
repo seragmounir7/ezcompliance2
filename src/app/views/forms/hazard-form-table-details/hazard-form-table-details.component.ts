@@ -1,10 +1,11 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hazard-form-table-details',
@@ -12,7 +13,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./hazard-form-table-details.component.scss']
 })
 export class HazardFormTableDetailsComponent implements OnInit {
-  displayedColumns: string[] = ['position','Name',"Phone","Email","Site",'Action'];
+  displayedColumns: string[] = ['position','name',"phone","email","site",'action'];
   showDatas: any;
   dataSource: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -48,9 +49,9 @@ export class HazardFormTableDetailsComponent implements OnInit {
     });
    
   }
-  getAllHazardFormData()
+  getAllHazardFormData(field="",value="")
   {
-    this.logicalFormInfo.getAllHazardFormData().subscribe((res:any)=>
+    this.logicalFormInfo.getAllHazardFormData(field,value).subscribe((res:any)=>
     {
       console.log("res",res.data);
       
@@ -70,4 +71,24 @@ export class HazardFormTableDetailsComponent implements OnInit {
   {
     this.router.navigate(["/admin/forms/hazardRep/"+id]);
   }
+  printPage(id)
+  {
+    console.log("check");
+    // this.logicalFormInfo.printing.next('print');
+    localStorage.setItem("key","print");
+    // $("<iframe>")                             // create a new iframe element
+    //     .hide()                               // make it invisible
+    //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
+    //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+    
+    let iframe=document.createElement("iframe")
+    iframe.id = "printIframe"
+          iframe.src= "http://localhost:4200/#/admin/forms/hazardRep/"+id
+          iframe.style.display="none";
+          let body = document.getElementsByTagName("body")
+          body[0].appendChild(iframe)
+  }
+  sortData(sort:Sort) {
+    this.getAllHazardFormData(sort.active,sort.direction)
+     }
 }

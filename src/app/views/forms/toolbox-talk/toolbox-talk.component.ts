@@ -5,8 +5,10 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { SavedformsService } from 'src/app/utils/services/savedforms.service';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-toolbox-talk',
   templateUrl: './toolbox-talk.component.html',
@@ -24,16 +26,21 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;
   singRequired: any;
-  sing2Required = []
+  sing2Required = [];
+  type:any;
+  previousUrl:any;
   @ViewChildren('Signature2') signaturePad2: QueryList<SignaturePad>;
+  check: any;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private setTitle: SetTitleService,
     private logicalFormInfo: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public forms:SavedformsService
   ) {
+    this.check = localStorage.getItem('key');
     this.toolBox = this.fb.group({
       siteName: ['', Validators.required],
       customerName: ['', Validators.required],
@@ -52,6 +59,17 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+    this.type=params['formType'];  
+  });
+    //  this.type=this.forms.formTypeObs$;
+
+    // this.router.events
+    // .pipe(filter(event => event instanceof NavigationEnd))
+    // .subscribe((event: NavigationEnd) => {
+    //   console.log('prev:', event.url);
+    //   this.previousUrl = event.url;
+    // });
     this.id = this.activatedRoute.snapshot.params.id;
     this.getAllJobNumber();
     this.getAllStaff();
@@ -255,6 +273,17 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   };
 
   ngAfterViewInit() {
+    console.log("check1...",this.check);
+    
+    if (this.check == 'print') {
+      setTimeout( () => { 
+        window.print();
+        console.log("printing....");
+      }, 3000);
+      localStorage.setItem('key', ' ');
+     
+      
+    }
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
