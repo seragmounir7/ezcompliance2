@@ -612,8 +612,8 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
       this.maxDate = res.data.dateOfFormCompletion;
       this.minDate = res.data.dateOfFormCompletion;
       this.selectedImage = res.data.file;
-      this.allJobNumbers = res.data.allJobNumbers;
-      this.projectMang = res.data.projectMang;
+      this.allJobNumbers = res.data.allJobNumbersArr;
+      this.projectMang = res.data.projectMangArr;
       this.staff = res.data.staff;
 
       for (let i = 0; i < this.changes.length; i++) {

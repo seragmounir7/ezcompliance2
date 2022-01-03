@@ -147,16 +147,16 @@ export class SiteInspectionComponent implements OnInit {
    
     if (this.id != 'form') {
       this.logicalFormInfo.getSiteInspection(this.id).subscribe((res: any) => {
-        console.log('res', res.data);
+        console.log('res', res);
 
         this.showDatas = res.data;
-        this.allTopic= this.showDatas.sitePreview[0].allTopic
-        this.allcategory=this.showDatas.sitePreview[0].allcategory
-        this.allJobNumbers =this.showDatas.sitePreview[0].allJobNumbersArr;
-        this.projectMang =this.showDatas.sitePreview[0].projectMangArr;
-        this.staff =this.showDatas.sitePreview[0].staffArr;
-        this.maxDate = this.showDatas.sitePreview[0].date;
-       this.minDate = this.showDatas.sitePreview[0].date;
+        this.allTopic= this.showDatas.allTopic
+        this.allcategory=this.showDatas.allcategory
+        this.allJobNumbers =this.showDatas.allJobNumbersArr;
+        this.projectMang =this.showDatas.projectMangArr;
+        this.staff =this.showDatas.staffArr;
+        this.maxDate = this.showDatas.date;
+       this.minDate = this.showDatas.date;
         for (let index = 0; index < this.allTopic.length; index++) {
           //this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
   
@@ -166,8 +166,8 @@ export class SiteInspectionComponent implements OnInit {
         console.log(this.sidePreview.value);
         setTimeout(() => {
           let formatDate;
-          if (this.showDatas.sitePreview[0].date) {
-            var date = new Date(this.showDatas.sitePreview[0].date);
+          if (this.showDatas.date) {
+            var date = new Date(this.showDatas.date);
             formatDate = this.datePipe.transform(date, 'yyyy-MM-dd');
             this.sidePreview.patchValue({ date: formatDate });
           } else {
@@ -175,28 +175,28 @@ export class SiteInspectionComponent implements OnInit {
           }
                
           this.sidePreview.patchValue({
-            siteName: this.showDatas.sitePreview[0].siteName,
-            customerName: this.showDatas.sitePreview[0].customerName,
-            streetAddr: this.showDatas.sitePreview[0].streetAddr,
-            custConct: this.showDatas.sitePreview[0].custConct,
-            custConctPh: this.showDatas.sitePreview[0].custConctPh,
-            custEmail: this.showDatas.sitePreview[0].custEmail,
-            jobNumber: this.showDatas.sitePreview[0].jobNumber,
-            projectManager: this.showDatas.sitePreview[0].projectManager,
+            siteName: this.showDatas.siteName,
+            customerName: this.showDatas.customerName,
+            streetAddr: this.showDatas.streetAddr,
+            custConct: this.showDatas.custConct,
+            custConctPh: this.showDatas.custConctPh,
+            custEmail: this.showDatas.custEmail,
+            jobNumber: this.showDatas.jobNumber,
+            projectManager: this.showDatas.projectManager,
           });
 
           if (this.add2().controls) {
             let key;
             for ( let i = 0;i < this.allTopic.length;i++) {
             
-                for (let index = 0; index <this.showDatas.sitePreview[0].siteCategorytTopic.length; index++) {
+                for (let index = 0; index <this.showDatas.siteCategorytTopic.length; index++) {
                   key = Object.keys(
-                    this.showDatas.sitePreview[0].siteCategorytTopic[index]
+                    this.showDatas.siteCategorytTopic[index]
                   );
                   this.add2()
                 .controls[i].get(key)
                 ?.setValue(
-                  this.showDatas.sitePreview[0].siteCategorytTopic[index][key]
+                  this.showDatas.siteCategorytTopic[index][key]
                 );
                 }
               
@@ -263,29 +263,29 @@ export class SiteInspectionComponent implements OnInit {
     if (this.id != 'form') {
       for (
         let index = 0;
-        index < this.showDatas.sitePreview[0].siteAction.length;
+        index < this.showDatas.siteAction.length;
         index++
       ) {
-        console.log(this.showDatas.sitePreview[0].siteAction[index].item);
+        console.log(this.showDatas.siteAction[index].item);
 
         this.addAction();
         this.add()
           .controls[index].get('item')
-          .setValue(this.showDatas.sitePreview[0].siteAction[index].item);
+          .setValue(this.showDatas.siteAction[index].item);
         this.add()
           .controls[index].get('action')
-          .setValue(this.showDatas.sitePreview[0].siteAction[index].action);
+          .setValue(this.showDatas.siteAction[index].action);
         this.add()
           .controls[index].get('topicId')
-          .setValue(this.showDatas.sitePreview[0].siteAction[index].topicId);
+          .setValue(this.showDatas.siteAction[index].topicId);
         this.add()
           .controls[index].get('PersonResponsible')
           .setValue(
-            this.showDatas.sitePreview[0].siteAction[index].PersonResponsible
+            this.showDatas.siteAction[index].PersonResponsible
           );
         this.add()
           .controls[index].get('complete')
-          .setValue(this.showDatas.sitePreview[0].siteAction[index].complete);
+          .setValue(this.showDatas.siteAction[index].complete);
       }
     } else {
       let key = [];
@@ -365,16 +365,14 @@ export class SiteInspectionComponent implements OnInit {
     console.log('form data', this.sidePreview.value);
     if (this.id != 'form') {
       const data = {
-        sitePreview: [
-          {
+    
             ...this.sidePreview.value,
             allTopic:this.allTopic,
             allcategory:this.allcategory,
             allJobNumbersArr: this.allJobNumbers,
             projectMangArr: this.projectMang,
             staffArr: this.staff
-          },
-        ],
+       
       };
       this.logicalFormInfo
         .updateSiteInspection(this.id, data)
@@ -391,16 +389,14 @@ export class SiteInspectionComponent implements OnInit {
         });
     } else {
       const data = {
-        sitePreview: [
-          {
+       
             ...this.sidePreview.value,
               allTopic:this.allTopic,
               allcategory:this.allcategory,
               allJobNumbersArr: this.allJobNumbers,
               projectMangArr: this.projectMang,
               staffArr: this.staff
-          },
-        ],
+      
       };
       this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
         console.log('res', res);
