@@ -273,9 +273,9 @@
         <button  matTooltip="Fill The Form" mat-icon-button aria-label="Example icon button with a delete icon"  (click)="add(element)">
            <svg-icon name="Fill_form"></svg-icon> 
         </button>
-        <button  matTooltip="Edit The Form" mat-icon-button aria-label="Example icon button with a delete icon"  (click)="add(element)">
-          <svg-icon name="Edit_form"></svg-icon> 
-       </button>
+       <button matTooltip="Saved Form List" mat-icon-button aria-label="Example icon button with a delete icon" [routerLink]="['/admin/savedDynamicFormTable/'+element._id]" >
+         <mat-icon >launch</mat-icon>
+      </button>
         
       </td>
     </ng-container>

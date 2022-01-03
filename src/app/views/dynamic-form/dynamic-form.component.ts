@@ -26,7 +26,7 @@ export class DynamicFormComponent implements OnInit {
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
     minWidth: 1,
-    canvasWidth: 500,
+    canvasWidth: 980,
     canvasHeight: 100,
   };
   value: value = {
@@ -204,6 +204,7 @@ export class DynamicFormComponent implements OnInit {
       label: 'Signature',
       // "className": "form-control",
       // "subtype": "file"
+      value: '',
     },
     {
       type: 'table',

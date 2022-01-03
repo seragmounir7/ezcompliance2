@@ -240,12 +240,12 @@ export class FormsComponent implements AfterViewInit, OnInit {
   }
   add(element){
     console.log("element",element._id);
-    let a= {
+    let data= {
       id:element._id,
-      type:"edit"
+      type:"add"
     }
     //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
-    this.router.navigate(['/admin/savedDynamicForm'],{queryParams:a});
+    this.router.navigate(['/admin/savedDynamicForm'],{queryParams:data});
   }
 
 }

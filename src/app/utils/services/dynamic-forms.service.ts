@@ -138,9 +138,27 @@ export class DynamicFormsService {
       })
     );
   }
-
+  savedFormGetAll(field="",value=""){
+    if(value==''){
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `savedDynamicForm/getAll?field=${field}&value=${value}`)
+  }
+  savedFormGetById(id){
+    return this.https.get(this.apiUrl + 'savedDynamicForm/get/'+id)
+  }
+  getsavedFormByFormId(id){
+    return this.https.get(this.apiUrl + 'savedDynamicForm/getBy/'+id)
+  }
+  
   savedFormPost(data){
     return this.https.post(this.apiUrl + 'savedDynamicForm/add', data)
+  }
+  savedFormPut(id,data){
+    return this.https.put(this.apiUrl + 'savedDynamicForm/update/'+id, data)
+  }
+  savedFormDelete(id){
+    return this.https.delete(this.apiUrl + 'savedDynamicForm/delete/'+id)
   }
   formNameRecieved = '';
   categoryNameRecieved = '';

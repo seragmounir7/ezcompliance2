@@ -57,9 +57,9 @@ export class SiteInspectionTableComponent implements OnInit {
       console.log("res",res.data);
       
       this.showDatas= res.data.map(x => {
-        console.log(x.sitePreview)
+        console.log(x)
     return {
-      ...x.sitePreview[0],
+      ...x,
       _id:x._id,
     
     }

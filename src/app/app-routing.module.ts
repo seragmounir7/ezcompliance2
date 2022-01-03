@@ -1,3 +1,4 @@
+import { SavedDynamicFormTableComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-table/saved-dynamic-form-table.component';
 import { RiskAssessmentSWMSComponent } from './views/forms/risk-assessment-swms/risk-assessment-swms.component';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { SavedFormsModule } from './views/saved-forms/saved-forms.module';
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: 'blank', component: BlankComponent },
       { path: 'dynamicFormsList', component: FormsComponent, canActivate: [DynamicFormAccessGuard] },
       { path: 'savedDynamicForm', component: SavedDynamicFormDataComponent, canActivate: [DynamicFormAccessGuard] },
+      { path: 'savedDynamicFormTable/:id', component: SavedDynamicFormTableComponent, canActivate: [DynamicFormAccessGuard] },
       {
         path: 'forms',
         loadChildren: () =>
