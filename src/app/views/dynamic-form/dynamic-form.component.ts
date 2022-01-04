@@ -951,7 +951,7 @@ if(tempModel.length)
 
       this.dynamicFormsService.addForm(data).subscribe((res) => {
         Swal.fire('Form added successfully');
-        this.router.navigate(['/admin/dynamicFormsList']);
+        this.router.navigate(['/admin/dynamic/dynamicFormsList']);
         this.riskAssessmentFb.reset();
       })
     }
@@ -989,7 +989,7 @@ if(tempModel.length)
         .editForm(data, this.formIdRec)
         .subscribe((res) => {
           Swal.fire('Form edited successfully');
-          this.router.navigate(['/admin/dynamicFormsList']);
+          this.router.navigate(['/admin/dynamic/dynamicFormsList']);
           this.riskAssessmentFb.reset();
         });
     }

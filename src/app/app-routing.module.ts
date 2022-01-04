@@ -1,4 +1,4 @@
-import { SavedDynamicFormTableComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-table/saved-dynamic-form-table.component';
+
 import { RiskAssessmentSWMSComponent } from './views/forms/risk-assessment-swms/risk-assessment-swms.component';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { SavedFormsModule } from './views/saved-forms/saved-forms.module';
@@ -15,9 +15,6 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { AuthGuard } from './utils/guards/auth.guard';
 import { NonAuthGuard } from './utils/guards/non-auth.guard';
-import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
-import { FormsComponent } from './views/dynamic-form/forms/forms.component';
-import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -39,15 +36,17 @@ const routes: Routes = [
       // { path: '', component: LoginComponent },
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'dynamicForm', component: DynamicFormComponent, canActivate: [DynamicFormAccessGuard] },
       { path: 'blank', component: BlankComponent },
-      { path: 'dynamicFormsList', component: FormsComponent, canActivate: [DynamicFormAccessGuard] },
-      { path: 'savedDynamicForm', component: SavedDynamicFormDataComponent, canActivate: [DynamicFormAccessGuard] },
-      { path: 'savedDynamicFormTable/:id', component: SavedDynamicFormTableComponent, canActivate: [DynamicFormAccessGuard] },
       {
         path: 'forms',
         loadChildren: () =>
           import('./views/forms/forms.module').then((m) => m.FormsModule1),
+        canActivate: [LogicalFormAccessGuard]
+      },
+      {
+        path: 'dynamic',
+        loadChildren: () =>
+          import('./views/dynamic-form/dynamic-form.module').then((m) => m.DynamicFormModule),
         canActivate: [LogicalFormAccessGuard]
       },
       {

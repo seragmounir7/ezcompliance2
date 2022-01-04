@@ -33,7 +33,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     if (rLink === '/admin/roleMangement') {
       this.menuOpen1(1);
     }
-    else if (rLink === '/admin/dynamicFormsList') {
+    else if (rLink === '/admin/dynamic/dynamicFormsList') {
       this.menuOpen1(2);
     }
     else if (rLink === '/admin/forms') {
@@ -47,6 +47,10 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     } else if (rLink === '/admin/savedForms') {
       this.menuOpen1(6);
     }
+    else if (rLink === '/admin/forms/fillConfigForm') {
+      this.menuOpen1(7);
+    }
+
 
     this.setTitle.setTitle('WHS-Menu Sidebar');
     this.navItems.map((x:NavItem) => {
@@ -173,7 +177,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
             {
                 displayedName: "Forms",
                 icon: "page",
-                route: "/admin/dynamicFormsList",
+                route: "/admin/dynamic/dynamicFormsList",
                 hasAccess: true
             }
         ],
@@ -192,6 +196,19 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
         ],
         hasAccess: true
     },
+    {
+      displayedName: "Fill Configured Forms",
+      icon: "page",
+      childItem: [
+          {
+              displayedName: "Forms",
+              icon: "page",
+              route: "/admin/forms/fillConfigForm",
+              hasAccess: true
+          }
+      ],
+      hasAccess: true
+  },
     {
       displayedName: "Saved Forms",
       icon: "page",

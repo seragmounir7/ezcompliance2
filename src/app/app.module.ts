@@ -28,12 +28,9 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DndModule } from 'ngx-drag-drop';
-import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { ChartsModule } from 'ng2-charts';
 import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
-import { FormsComponent } from './views/dynamic-form/forms/forms.component';
-import { AddFormComponent } from './views/dynamic-form/forms/add-form/add-form.component';
 // import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { TextareaAutoresizeDirective } from './Directives/textarea-autoresize.directive';
@@ -41,9 +38,7 @@ import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
-import { SavedDynamicFormTableComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-table/saved-dynamic-form-table.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -62,15 +57,14 @@ registerLocaleData(localeEn, 'en-EN');
     MessagesDropdownMenuComponent,
     NotificationsDropdownMenuComponent,
     UserDropdownMenuComponent,
-    DynamicFormComponent,
-    FormsComponent,
-    AddFormComponent,
+   
+    
     // ViewFormsComponent,
     NotFoundPageComponent,
     TextareaAutoresizeDirective,
-    SavedDynamicFormDataComponent,
+    
     PrintLayoutComponent,
-    SavedDynamicFormTableComponent,
+    
   ],
   imports: [
     BrowserModule,
