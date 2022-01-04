@@ -572,7 +572,7 @@ getHazard(){
             showConfirmButton: false,
             timer: 1200,
           });
-          this.router.navigate(['/admin/forms']);
+          this.router.navigate(['/admin/forms/hazardTable']);
         });
     } else {
       const data = {
@@ -587,7 +587,7 @@ getHazard(){
           timer: 1200,
         });
         // this.router.navigate(["/admin/forms/tableData"]);
-        this.router.navigate(['/admin/forms']);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
       });
       console.log('data', data);
     }

@@ -30,7 +30,9 @@ import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesme
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FillConfiguredFormComponent } from './fill-configured-form/fill-configured-form.component';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
-
+import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -62,6 +64,9 @@ import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
     MatDatepickerModule,
     DynamicFormModule,
     //PdfViewerModule
+    AngularSvgIconPreloaderModule,
+    AngularSvgIconModule,
+    MatTooltipModule
     
   ],
   providers:[

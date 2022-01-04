@@ -1060,7 +1060,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
           .savedFormPut(this.formIdRec, data)
           .subscribe((res) => {
             Swal.fire('Form Update successfully');
-            this.router.navigate(['/admin/dynamic/dynamicFormsList']);
+            this.router.navigate(['/admin/dynamic/savedDynamicFormTable/'+this.mainFormId]);
             this.previewform.reset();
           });
       }

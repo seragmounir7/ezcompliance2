@@ -176,7 +176,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
         {
           displayedName:'Forms',
           icon:'page',
-          route:'/admin/dynamicFormsList'
+          route:'/admin/dynamic/dynamicFormsList'
         }
       ]
     },

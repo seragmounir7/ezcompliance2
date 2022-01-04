@@ -857,7 +857,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
           showConfirmButton: false,
           timer: 1200,
         });
-        this.router.navigate(["/admin/forms"]);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
       }, (err) => {
         console.error(err);
       });

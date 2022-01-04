@@ -369,7 +369,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
           timer: 1200,
         });
 
-        this.router.navigate(["/admin/forms/tableData"]);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
       })
     }
     this.toolBox.reset();

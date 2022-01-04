@@ -34,7 +34,7 @@ export class NavItems {
                 {
                     displayedName: "Forms",
                     icon: "page",
-                    route: "/admin/dynamicFormsList",
+                    route: "/admin//dynamic/dynamicFormsList",
                     hasAccess: true
                 }
             ],
@@ -60,7 +60,7 @@ export class NavItems {
                 {
                     displayedName: "Forms",
                     icon: "page",
-                    route: "/admin/forms/fillConfigForm",
+                    route: "/admin/forms/fillConfigForm/"+0,
                     hasAccess: true
                 }
             ],
