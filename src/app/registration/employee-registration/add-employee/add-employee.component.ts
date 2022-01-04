@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
@@ -30,11 +34,13 @@ export class AddEmployeeComponent implements OnInit {
   dialogRef: any;
   dataUrl: any;
   roleData: any=[''];
- 
+  filteredOptions2: Observable<any>;
+  filteredOptions1: Observable<any>;
   constructor(
     private fb: FormBuilder,
     private role: RoleManagementService,
     private employee: EmployeeRegistrationService,
+    private licenceInfo: LogicalFormInfoService,
     private upload: UploadFileService,
     private activatedRoute: ActivatedRoute,
     public router: Router
@@ -64,16 +70,16 @@ export class AddEmployeeComponent implements OnInit {
       empEmail: ['', Validators.required],
       empPhone: ['', Validators.required],
       empMobile: ['', Validators.required],
-      LicenceName: ['', Validators.required],
-      LicenceNumber: ['', Validators.required],
-      TrainingQrginisation: ['', Validators.required],
-      ExpiryDate: ['', Validators.required],
+      LicenceName: [''],
+      LicenceNumber: [''],
+      TrainingQrginisation: [''],
+      ExpiryDate: [''],
       UploadLicenceArr: this.fb.array([]),
-      PPESupplied: ['', Validators.required],
-      BrandOrType: ['', Validators.required],
-      IssueDate: ['', Validators.required],
-      ReplacementDate: ['', Validators.required],
-      Sign: ['', Validators.required],
+      PPESupplied: [''],
+      BrandOrType: [''],
+      IssueDate: [''],
+      ReplacementDate: [''],
+      Sign: [''],
     });
   }
 
@@ -87,6 +93,24 @@ export class AddEmployeeComponent implements OnInit {
     this.dataEmp=false;
     this.addFiled();
   }
+  this.filteredOptions2 = this.empDetails.controls.LicenceName.valueChanges.pipe(
+    startWith(''),
+    debounceTime(800),
+    distinctUntilChanged(),
+    switchMap(val => {
+      console.log("myControl22..", val,this.filteredOptions2)
+      return this.filter2(val || '')
+    })
+  )
+  this.filteredOptions1 = this.empDetails.controls.PPESupplied.valueChanges.pipe(
+    startWith(''),
+    debounceTime(800),
+    distinctUntilChanged(),
+    switchMap(val => {
+      console.log("myControl..", val,this.filteredOptions1)
+      return this.filter1(val || '')
+    })
+  )
   }
 
   getAllRoles(){
@@ -379,6 +403,34 @@ export class AddEmployeeComponent implements OnInit {
   addLicence() {
     return this.empDetails.get('UploadLicenceArr') as FormArray;
   }
+  addPPE() {
+    return this.empDetails.get('PPEarr') as FormArray;
+  }
+  newFiled2(): FormGroup {
+    return this.fb.group({
+      PPESupplied: [''],
+      BrandOrType: [''],
+      IssueDate: [''],
+      ReplacementDate: [''],
+    });
+  }
+  addFiled2() {
+    this.addPPE().push(this.newFiled2());
+    console.log(this.empDetails.value);
+  }
+  newFiled3(data): FormGroup {
+    return this.fb.group({
+      PPESupplied: [data.PPESupplied],
+      BrandOrType:[ data.BrandOrType],
+      IssueDate: [data.IssueDate],
+      ReplacementDate: [data.ReplacementDate],
+    });
+  }
+  addFiled3(data) {
+    console.log("data",data);
+    this.addPPE().push(this.newFiled3(data));
+    console.log("addFiled1",this.empDetails.value);
+  }
   newFiled(): FormGroup {
     return this.fb.group({
       file: ['', Validators.required],
@@ -417,5 +469,53 @@ export class AddEmployeeComponent implements OnInit {
   get registerFormControl() {
     return this.empDetails.controls;
   }
-
+  filter2(val: string): Observable<any> {
+    return this.licenceInfo.getAllLicence()
+      .pipe(map((res)=>{
+        res.data=res.data.map((item)=>{
+          item.LicenceName=`${item.title}`
+          return item
+        })
+        return res
+      }),
+        map((response: any) => {
+          response.data = response.data.filter(option => {
+            console.log("11option>>",val);
+            return option.LicenceName.toLowerCase().indexOf(val.toLowerCase()) === 0
+          })
+          console.log("response.data>>",response.data);
+          
+          return response.data;
+        })
+      )
+  }
+  filter1(val: string): Observable<any> {
+    return this.licenceInfo.getAllPPE()
+      .pipe(map((res:any)=>{
+        res.data=res.data.map((item)=>{
+          item.PPESupplied=`${item.title}`
+          return item
+        })
+        return res
+      }),
+        map((response: any) => {
+          response.data = response.data.filter(option => {
+            console.log("11option>>",val);
+            return option.PPESupplied.toLowerCase().indexOf(val.toLowerCase()) === 0
+          })
+          console.log("response.data>>",response.data);
+          
+          return response.data;
+        })
+      )
+  }
+  // employeeData(e:MatAutocompleteSelectedEvent){
+  //   const data = e.option.value;
+  //   this.empDetails.patchValue({
+  //     LicenceName:[ data.title],
+  //   })
+  //   console.log("e.option",e.option);
+  //   console.log("data...");
+    
+  // }
 }
