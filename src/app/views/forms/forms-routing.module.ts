@@ -1,3 +1,4 @@
+import { FillConfiguredFormComponent } from './fill-configured-form/fill-configured-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DisplayTableComponent } from './display-table/display-table.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'tableData', component: DisplayTableComponent},
   { path:'siteinspectiontable', component:SiteInspectionTableComponent},
   {path:'hazardTable',component:HazardFormTableDetailsComponent},
-  { path: 'incidentsTable', component:IncidentsTableComponent}
+  { path: 'incidentsTable', component:IncidentsTableComponent},
+  { path: 'fillConfigForm', component:FillConfiguredFormComponent}
 ];
 
 @NgModule({

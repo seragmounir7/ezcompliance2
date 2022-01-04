@@ -20,7 +20,7 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: 'app-forms',
+  selector: 'app-dynamic-list',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss'],
 })
@@ -202,7 +202,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
     // this.dynamicFormServise.formIdEdit = form._id;
     // this.dynamicFormServise.formType = 'edit';
     // this.dynamicFormServise.formTitle = form.title;
-    this.router.navigate(['/admin/dynamicForm']);
+    this.router.navigate(['/admin/dynamic/dynamicForm']);
     //   this.router.navigate(['/admin/dynamicForm'],
 
     //   {queryParams: {  type:'edit',formId:form._id, formName: form.title}});
@@ -221,7 +221,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
     // this.dynamicFormServise.formTitle = form.title;
     // this.router.navigate(['/admin/dynamicForm'],
     // {queryParams: { type:'view',formId:form._id, formName: form.title}});
-    this.router.navigate(['/admin/dynamicForm']);
+    this.router.navigate(['/admin/dynamic/dynamicForm']);
   }
 
   frequencyChange(e, form) {
@@ -245,7 +245,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
       type:"add"
     }
     //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
-    this.router.navigate(['/admin/savedDynamicForm'],{queryParams:data});
+    this.router.navigate(['/admin/dynamic/savedDynamicForm'],{queryParams:data});
   }
 
 }

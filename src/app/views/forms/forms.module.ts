@@ -28,6 +28,9 @@ import { HazardFormTableDetailsComponent } from './hazard-form-table-details/haz
 import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
 import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesment-table.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FillConfiguredFormComponent } from './fill-configured-form/fill-configured-form.component';
+import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
+
 @NgModule({
   declarations: [
     FormsComponent,
@@ -42,6 +45,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     HazardFormTableDetailsComponent,
     IncidentsTableComponent,
     RiskAssesmentTableComponent,
+    FillConfiguredFormComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +60,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatAutocompleteModule ,
     MatInputModule,
     MatDatepickerModule,
+    DynamicFormModule,
     //PdfViewerModule
     
   ],

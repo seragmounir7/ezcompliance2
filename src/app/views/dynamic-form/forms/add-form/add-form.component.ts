@@ -31,7 +31,7 @@ export class AddFormComponent implements OnInit {
     sessionStorage.setItem('formTitle', this.addForm.get('formName').value);
     sessionStorage.setItem('frequency', this.addForm.get('frequency').value);
     // this.dialogRef.close(this.addForm.get('formName').value,this.addForm.get('frequency').value);
-    this.router.navigate(['/admin/dynamicForm']);
+    this.router.navigate(['/admin/dynamic/dynamicForm']);
     this.dialogRef.close();
 
   }

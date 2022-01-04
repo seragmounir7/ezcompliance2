@@ -89,7 +89,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
     type:"edit"
   }
   //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
-  this.router.navigate(['/admin/savedDynamicForm'],{queryParams:data});
+  this.router.navigate(['/admin/dynamic/savedDynamicForm'],{queryParams:data});
   }
 
   sortData(sort:Sort){

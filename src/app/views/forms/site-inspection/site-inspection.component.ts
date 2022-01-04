@@ -205,6 +205,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
             }
           }
         }, 500);
+        if(this.check=='print'){
+          this.showAction()
+        }
       });
     }else{
       this.getAllCategory();
