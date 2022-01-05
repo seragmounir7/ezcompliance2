@@ -26,7 +26,7 @@ const routes: Routes = [
   { path:'siteinspectiontable', component:SiteInspectionTableComponent},
   {path:'hazardTable',component:HazardFormTableDetailsComponent},
   { path: 'incidentsTable', component:IncidentsTableComponent},
-  { path: 'fillConfigForm', component:FillConfiguredFormComponent}
+  { path: 'fillConfigForm/:index', component:FillConfiguredFormComponent}
 ];
 
 @NgModule({

@@ -402,7 +402,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
             showConfirmButton: false,
             timer: 1200,
           });
-          this.router.navigate(['/admin/forms']);
+          this.router.navigate(['/admin/forms/tableData']);
         });
     } else {
       const data = {
@@ -423,7 +423,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
           timer: 1200,
         });
         // this.router.navigate(["/admin/forms/tableData"]);
-        this.router.navigate(['/admin/forms']);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
       });
       console.log('data', data);
     }

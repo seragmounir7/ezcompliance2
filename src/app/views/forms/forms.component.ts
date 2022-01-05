@@ -1,9 +1,9 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -34,9 +34,10 @@ export class FormsComponent implements OnInit {
   formName = '';
   addForm: FormGroup;
   // formName =[] ;
-  displayedColumns: string[] = ['index', 'formName', 'formFrequency', 'Disable/Enable', 'edit'];
+  @Input() displayedColumns: string[] = ['index', 'formName', 'formFrequency', 'Disable/Enable'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  url: any;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -47,7 +48,8 @@ export class FormsComponent implements OnInit {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router,
-    private setTitle: SetTitleService
+    private setTitle: SetTitleService,
+    private activatedRoute:ActivatedRoute
   ) { }
 goTo(title)
 {
@@ -76,7 +78,7 @@ if(title==="Notifiable Accident")
 }
 
   ngOnInit(): void {
-
+    this.url=this.activatedRoute.snapshot.url
     this.setTitle.setTitle('WHS-All Form');
   }
 

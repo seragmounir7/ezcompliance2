@@ -1356,7 +1356,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
           showConfirmButton: false,
           timer: 1200,
         });
-        this.router.navigate(["/admin/forms/riskAssessTable"]);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
         console.log("this.riskAssessmentFb posted", res);
       })
     }
