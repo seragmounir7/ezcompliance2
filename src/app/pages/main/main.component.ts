@@ -9,7 +9,7 @@ export class MainComponent implements OnInit {
   public sidebarMenuOpened = true;
   @ViewChild('contentWrapper', { static: false }) contentWrapper;
 
-  logoUrl:string='assets/img/whs-icon.svg';
+  logoUrl:string='logo';
   constructor(private renderer: Renderer2) {}
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
 
   toggleMenuSidebar() {
     if (this.sidebarMenuOpened) {
-      this.logoUrl='assets/img/23.svg'
+      this.logoUrl='sm-logo'
       this.renderer.removeClass(
         document.querySelector('app-root'),
         'sidebar-open'
@@ -41,7 +41,7 @@ export class MainComponent implements OnInit {
       );
       this.sidebarMenuOpened = false;
     } else {
-      this.logoUrl='assets/img/whs-icon.svg'
+      this.logoUrl='logo'
       this.renderer.removeClass(
         document.querySelector('app-root'),
         'sidebar-collapse'
