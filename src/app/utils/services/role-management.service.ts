@@ -21,9 +21,9 @@ export class RoleManagementService {
   updateRole(id,data) {
     return this.https.put(this.apiUrl + 'role/update/' + id, data);
   }
-  // deleteRisk(id) {
-  //   return this.https.delete(this.apiUrl + 'risk/delete/' + id)
-  // }
+  deleteRole(id) {
+    return this.https.delete(this.apiUrl + 'role/delete/' + id)
+  }
   getAllRole() {
     return this.https.get(this.apiUrl + 'role/getAll')
   }

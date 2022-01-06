@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {
@@ -19,14 +19,16 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import moment from 'moment';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
-
-
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { Observable } from 'rxjs';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-incident-report',
   templateUrl: './incident-report.component.html',
   styleUrls: ['./incident-report.component.scss'],
 })
-export class IncidentReportComponent implements OnInit, AfterViewInit {
+export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy {
+  public Editor = ClassicEditor;
   IncidentReport: FormGroup;
   fileData: any;
   data: any;
@@ -46,6 +48,15 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
   maxDate = new Date();
   minDate = new Date();
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  sub: any;
+  isPrint: Observable<any>;
+  @HostListener("window:afterprint",[]) 
+  function(){
+    console.log("Printing completed...");
+    this.router.navigateByUrl("/admin/forms/incidentsTable")
+    this.shared.printNext(false)
+   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+} 
   projMan: any;
   projectMang: any;
   typeOfInc: [];
@@ -76,7 +87,8 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
     public upload: UploadFileServiceService,
     private router: Router,
     private ngZone: NgZone,
-    public forms:SavedformsService
+    public forms:SavedformsService,
+    private shared:RoleManagementSharedServiceService,
   ) {
     this.check = localStorage.getItem('key');
     this.IncidentReport = this.fb.group({
@@ -123,7 +135,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
       file: [''],
       similarIncidentText: [''],
       priorIncidentText: [''],
-      instructions: ['Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injuryor near-miss that could have resulted in a serious injury or illness.'],
+      instructions: [''],
       signaturePad: ['', Validators.required],
       signaturePad1: ['', Validators.required],
       changesMadeOther: [false],
@@ -140,12 +152,17 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
     //   correctAction:this.data.correctAction,
     // })
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("incident destroy");
+  }
   triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
     this.ngZone.onStable.pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit(): void {
+    this.isPrint=(this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type=params['formType'];  
     });
@@ -361,8 +378,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log("check1...",this.check);
-    
-    if (this.check == 'print') {
+    this.sub= this.shared.printObs$.subscribe(res=> {
+      this.check=res
+    if (this.check) {
       setTimeout( () => { 
         window.print();
         console.log("printing....");
@@ -371,6 +389,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
      
       
     }
+  })
     // this.signaturePad is now available
     this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
     this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
@@ -672,7 +691,8 @@ export class IncidentReportComponent implements OnInit, AfterViewInit {
         similarIncidentText: res.data.similarIncidentText,
         priorIncidentText: res.data.priorIncidentText,
         changesMadeOther: res.data.changesMadeOther,
-        changesMadeOtherText: res.data.changesMadeOtherText
+        changesMadeOtherText: res.data.changesMadeOtherText,
+        instructions:res.data.instructions
 
       })
 

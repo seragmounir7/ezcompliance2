@@ -1,10 +1,10 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Risk Assessment'" [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="type==='Risk Assessment'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div id='section-to-print' *ngIf="check=='print'" class="page-header" style="text-align: center">
+<div id='section-to-print' *ngIf="(isPrint | async)===true" class="page-header" style="text-align: center">
   I'm The Header
 </div>
-<div *ngIf="check=='print'" class="page-footer">
+<div *ngIf="(isPrint | async)===true" class="page-footer">
   I'm The Footer
 </div>
 <div id='section-to-print' class="container card px-4 py-4" [formGroup]="riskAssessmentFb">
@@ -48,7 +48,7 @@
       </button>
     </li>
   </ul> -->
-  <mat-tab-group *ngIf="check!='print'">
+  <mat-tab-group *ngIf="(isPrint | async)===false">
     <mat-tab label="Risk Assessment"> 
       <div class="tab-content" id="myTabContent">
         <div
@@ -1457,7 +1457,7 @@
  
     </mat-tab>
   </mat-tab-group>
-  <div class="tab-content" id="myTabContent" *ngIf="check=='print'">
+  <div class="tab-content" id="myTabContent" *ngIf="(isPrint | async)===true">
     <div
       class="tab-pane fade show active px-4 py-4"
       id="RISKAssessment"
@@ -1926,7 +1926,7 @@
     </div>
   </div>
   <div
-  *ngIf="check=='print'"
+  *ngIf="(isPrint | async)===true"
   id="SWSS"
   role="tabpanel"
 >
@@ -2568,21 +2568,21 @@
         </div>
       </div>
       <div>
-        <button *ngIf="check!='print'" type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
+        <button *ngIf="(isPrint | async)===false" type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
       </div>
     </div>
   </div>
   
 </div>
 <br>
-<div *ngIf="check=='print' && selectedFile1">
+<div *ngIf="(isPrint | async)===true && selectedFile1">
   <span *ngFor="let img of selectedFile1">
     <div >
       <img  height="400" width="400" [src]="img">
     </div>
   </span>
  </div> 
- <!-- <div *ngIf="check=='print'">
+ <!-- <div *ngIf="(isPrint | async)===true">
   <pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'"
   [render-text]="true"
   [original-size]="false"

@@ -1,9 +1,6 @@
 <div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/addCustomer']">
   <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-
-   
-      
 <section class="content" style="height: 60%;">
     <div [formGroup]="addCustomerForm" class="container px-4 py-4 bg-white">
         <h2>Add Customer</h2>
@@ -152,7 +149,7 @@
           </ng-container>
         </ng-container>
       <div >
-        <button (click)="onSubmit()" class="btn btn-primary" [disabled]="addCustomerForm.invalid && addCustomerForm.get('contacts').invalid">
+        <button (click)="onSubmit()" class="btn btn-primary" [disabled]="addCustomerForm.invalid">
           Submit
         </button>
       </div>

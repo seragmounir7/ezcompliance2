@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, AfterViewInit, QueryList, ViewChildren, OnDestroy, HostListener } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
@@ -8,13 +8,23 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
-import { filter } from 'rxjs/operators';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-toolbox-talk',
   templateUrl: './toolbox-talk.component.html',
   styleUrls: ['./toolbox-talk.component.scss'],
 })
-export class ToolboxTalkComponent implements OnInit, AfterViewInit {
+export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
+  sub: any;
+  isPrint: Observable<any>;
+  @HostListener("window:afterprint",[]) 
+  function(){
+    console.log("Printing completed...");
+    this.router.navigateByUrl("/admin/forms/tableData")
+    this.shared.printNext(false)
+   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+} 
   toolBox: FormGroup;
   allJobNumbers = [];
   sign = [];
@@ -38,7 +48,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
     private logicalFormInfo: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
-    public forms:SavedformsService
+    public forms:SavedformsService,
+    public shared:RoleManagementSharedServiceService
   ) {
     this.check = localStorage.getItem('key');
     this.toolBox = this.fb.group({
@@ -57,8 +68,13 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
       attendees: this.fb.array([])
     });
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("toolbox destroy");
+  }
 
   ngOnInit(): void {
+    this.isPrint=(this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
     this.type=params['formType'];  
   });
@@ -273,17 +289,19 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   };
 
   ngAfterViewInit() {
-    console.log("check1...",this.check);
-    
-    if (this.check == 'print') {
+   
+    this.sub= this.shared.printObs$.subscribe(res=> {
+      this.check=res
+      console.log("check1...",this.check);
+    if (this.check) {
       setTimeout( () => { 
         window.print();
         console.log("printing....");
       }, 3000);
       localStorage.setItem('key', ' ');
-     
       
     }
+  })
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime

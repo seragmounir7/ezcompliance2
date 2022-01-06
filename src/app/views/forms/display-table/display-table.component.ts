@@ -5,7 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { environment } from 'src/environments/environment';
-
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-display-table',
   templateUrl: './display-table.component.html',
@@ -17,7 +18,12 @@ export class DisplayTableComponent implements OnInit {
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
+  constructor(
+    private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,
+    private shared:RoleManagementSharedServiceService,
+    private spinner: NgxSpinnerService,
+    ) { }
 
   ngOnInit(): void {
     this.getToolBox();
@@ -58,6 +64,7 @@ export class DisplayTableComponent implements OnInit {
 
      printPage(id)
      {
+      this.shared.printNext(true)
        console.log("check");
        // this.logicalFormInfo.printing.next('print');
        localStorage.setItem("key","print");
@@ -66,11 +73,13 @@ export class DisplayTableComponent implements OnInit {
        //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
        //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
        
-       let iframe=document.createElement("iframe")
-       iframe.id = "printIframe"
-             iframe.src= environment.stagingUrl+"#/admin/forms/toolboxTalk/"+id
-             iframe.style.display="none";
-             let body = document.getElementsByTagName("body")
-             body[0].appendChild(iframe)
+      //  let iframe=document.createElement("iframe")
+      //  iframe.id = "printIframe"
+      //        iframe.src= environment.stagingUrl+"#/admin/forms/toolboxTalk/"+id
+      //        iframe.style.display="none";
+      //        let body = document.getElementsByTagName("body")
+      //        body[0].appendChild(iframe)
+      this.spinner.show()
+     this.router.navigate(['/',{ outlets: {'print': ['print','toolboxTalk', id]}}])
      }
 }
