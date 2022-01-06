@@ -27,6 +27,8 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
   options: string[] = [''];
   filteredOptions: Observable<any>;
   filteredOptions2: Observable<any>;
+  filteredOptions3: Observable<any>;
+  filteredOptions4: Observable<any>;
   filteredManager: Observable<any>;
   id: any;
   hazard:any;
@@ -159,7 +161,37 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
       console.log("item...",res);
       
     })
+
+    // The form was compiled by:
+
+    this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(val => {
+        console.log("myControl22..", val,this.filteredOptions3)
+        return this.filter3(val || '')
+      })
+    )
+
+    this.filteredOptions3.subscribe((res)=>{
+      console.log("item...",res); 
+    })
     
+                   // Action By
+    this.filteredOptions4 = this.hazardReport.controls.elliminateAction.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(val => {
+        console.log("myControl22..", val,this.filteredOptions4)
+        return this.filter2(val || '')
+      })
+    )
+    this.filteredOptions4.subscribe((res)=>{
+      console.log("item...",res);
+      
+    })
 
     this.filteredManager = this.myControlManager.valueChanges.pipe(
       startWith(''),
@@ -435,6 +467,53 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
         })
       )
   }
+
+  filter3(val: string): Observable<any> {
+    return this.employee.getAllEmployeeInfo()
+      .pipe(map((res)=>{
+        res.data=res.data.map((item)=>{
+          item.name=`${item.firstName} ${item.lastName}`
+          return item
+        })
+        return res
+      }),
+        map((response: any) => {
+          response.data = response.data.filter(option => {
+            console.log("option>>",option);
+            return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+          })
+          console.log("response.data>>",response.data);
+          
+          return response.data;
+        })
+      )
+  }
+ 
+
+   // Action By
+   filter4(val: string): Observable<any> {
+    return this.employee.getAllEmployeeInfo()
+      .pipe(map((res)=>{
+        res.data=res.data.map((item)=>{
+          item.name=`${item.firstName} ${item.lastName}`
+          return item
+        })
+        return res
+      }),
+        map((response: any) => {
+          response.data = response.data.filter(option => {
+            console.log("option>>",option);
+            return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+          })
+          console.log("response.data>>",response.data);
+          
+          return response.data;
+        })
+      )
+  }
+  
+  
+
 getHazard(){
   this.employee.getAllEmployeeInfo().subscribe((res: any) => {
     console.log("emp..",res.data);
@@ -618,11 +697,28 @@ getHazard(){
       department:data.department,
       email:data.email,
       position:data.position,
-      phone:data.phone
+      phone:data.phone,
+      // compilePosition:data.position,
+      // compileDepartment:data.department,
+      
     })
     console.log("e.option",e.option);
     console.log("data...");
     
   }
 
+  // The form was compiled by:
+  
+  employeeData1(e:MatAutocompleteSelectedEvent){
+    const data = e.option.value;
+    this.hazardReport.patchValue({
+      name:data.name,
+      compileDepartment:data.department,
+      compilePosition:data.position,
+      // elliminateAction:data.name
+    })
+    console.log("e.option",e.option);
+    console.log("data...");
+    
+  }
 }
