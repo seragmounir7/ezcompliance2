@@ -8,6 +8,7 @@ import {
 } from '@angular/forms'
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +20,7 @@ export class AddContrActComponent implements OnInit {
 
   contrlAndActFG!: FormGroup;
   formData: any;numberOfLineBreaks: any;
-;
+  public Editor = ClassicEditor;
   constructor(
     private fb: FormBuilder,
     private router: Router,

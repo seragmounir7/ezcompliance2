@@ -6,7 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { environment } from 'src/environments/environment';
-
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-display-table',
   templateUrl: './display-table.component.html',
@@ -20,7 +21,13 @@ export class DisplayTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   id: any;
   isHistory: boolean;
-  constructor(private logicalFormInfo: LogicalFormInfoService, public router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,
+    private shared:RoleManagementSharedServiceService,
+    private spinner: NgxSpinnerService,
+    ) { }
 
   ngOnInit(): void {
     this.isHistory = this.router.url.includes('/tableData\/history')
@@ -81,20 +88,24 @@ export class DisplayTableComponent implements OnInit {
     this.getToolBox(sort.active, sort.direction)
   }
 
-  printPage(id) {
-    console.log("check");
-    // this.logicalFormInfo.printing.next('print');
-    localStorage.setItem("key", "print");
-    // $("<iframe>")                             // create a new iframe element
-    //     .hide()                               // make it invisible
-    //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
-    //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-
-    let iframe = document.createElement("iframe")
-    iframe.id = "printIframe"
-    iframe.src = environment.stagingUrl + "#/admin/forms/toolboxTalk/" + id
-    iframe.style.display = "none";
-    let body = document.getElementsByTagName("body")
-    body[0].appendChild(iframe)
-  }
+     printPage(id)
+     {
+      this.shared.printNext(true)
+       console.log("check");
+       // this.logicalFormInfo.printing.next('print');
+       localStorage.setItem("key","print");
+       // $("<iframe>")                             // create a new iframe element
+       //     .hide()                               // make it invisible
+       //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
+       //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+       
+      //  let iframe=document.createElement("iframe")
+      //  iframe.id = "printIframe"
+      //        iframe.src= environment.stagingUrl+"#/admin/forms/toolboxTalk/"+id
+      //        iframe.style.display="none";
+      //        let body = document.getElementsByTagName("body")
+      //        body[0].appendChild(iframe)
+      this.spinner.show()
+     this.router.navigate(['/',{ outlets: {'print': ['print','toolboxTalk', id]}}])
+     }
 }

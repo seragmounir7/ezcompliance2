@@ -1025,7 +1025,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 
         this.dynamicFormsService.savedFormPost(data).subscribe((res) => {
           Swal.fire('Form Submit successfully');
-          this.router.navigate(['/admin/dynamic/dynamicFormsList']);
+          this.router.navigate(['/admin/forms/fillConfigForm/'+1]);
           this.previewform.reset();
         })
       }

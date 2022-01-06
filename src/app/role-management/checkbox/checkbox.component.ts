@@ -7,7 +7,8 @@ import { RoleManagementService } from '../../utils/services/role-management.serv
 import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRoleComponent } from '../add-role/add-role.component';
-import{RoleManagementSharedServiceService }from'../../utils/services/role-management-shared-service.service'
+import{RoleManagementSharedServiceService }from'../../utils/services/role-management-shared-service.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
@@ -54,6 +55,16 @@ export class CheckboxComponent implements OnInit {
     "LogicalFormData",
     "CMS",
     "StateRelation"
+  ]
+  formNameArr2 = [
+    "Dashboard",
+    "Dynamic Form",
+    "Logical Forms",
+    "Form Configure",
+    "Subscription Rates",
+    "Logical FormData",
+    "CMS",
+    "State Relation"
   ]
   displayedColumns: string[] = [
     //"role",
@@ -393,5 +404,32 @@ export class CheckboxComponent implements OnInit {
       x.i = 0
     }) 
     this.roleArr[this.count].i = 1
+  }
+
+  deleteRole(id){
+    {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to delete `,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#00B96F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete!',
+      }).then((result) => {
+        if (result.value) {
+          this.roleService.deleteRole(id).subscribe((res) => {
+              Swal.fire({
+                title: 'Deleted successfully',
+                showConfirmButton: false,
+                timer: 1200,
+              });
+              console.log('deleted res', res);
+              this.getAllRole();
+            });
+        }
+      });
+     
+    }
   }
 }

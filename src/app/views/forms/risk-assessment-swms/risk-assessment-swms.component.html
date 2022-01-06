@@ -1,10 +1,10 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Risk Assessment'" [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="type==='Risk Assessment'" [routerLink]="['/admin/savedForms']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div id='section-to-print' *ngIf="check=='print'" class="page-header" style="text-align: center">
+<div id='section-to-print' *ngIf="(isPrint | async)===true" class="page-header" style="text-align: center">
   I'm The Header
 </div>
-<div *ngIf="check=='print'" class="page-footer">
+<div *ngIf="(isPrint | async)===true" class="page-footer">
   I'm The Footer
 </div>
 <div id='section-to-print' class="container card px-4 py-4" [formGroup]="riskAssessmentFb">
@@ -48,7 +48,7 @@
       </button>
     </li>
   </ul> -->
-  <mat-tab-group *ngIf="check!='print'">
+  <mat-tab-group *ngIf="(isPrint | async)===false">
     <mat-tab label="Risk Assessment"> 
       <div class="tab-content" id="myTabContent">
         <div
@@ -1001,103 +1001,7 @@
           </div>
         </div>
         <hr />
-        <div class="row">
-          <table class="table table-bordered text-center">
-            <thead>
-              <tr>
-                <th colspan="7" class="L_1">Risk Level Matrix</th>
-                <th colspan="8" class="L_1">Risk Analysis</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th colspan="2" rowspan="2"></th>
-                <td colspan="5">Consequence</td>
-                <td colspan="4" rowspan="2">
-                  <div class="like_2">Likelihood</div>
-                </td>
-                <td colspan="4" rowspan="2">
-                  <div class="like_2">Consequence</div>
-                </td>
-              </tr>
-              <tr>
-                <th>1</th>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <th rowspan="5">
-                  <div class="like_1">Likelihood</div>
-                </th>
-                <td>5</td>
-                <td class="M_1">M</td>
-                <td class="H_1">H</td>
-                <td class="H_1">H</td>
-                <td class="H_1">H</td>
-                <td class="H_1">H</td>
-                <td colspan="2">
-                  <div class="space_1">1</div>
-                </td>
-                <td colspan="2">Rare</td>
-                <td colspan="2">
-                  <div class="space_1">1</div>
-                </td>
-                <td colspan="2">Insignificant</td>
-              </tr>
-              <tr>
-                <th>4</th>
-                <td class="M_1">M</td>
-                <td class="M_1">M</td>
-                <td class="M_1">M</td>
-                <td class="H_1">H</td>
-                <td class="H_1">H</td>
-                <td colspan="2">2</td>
-                <td colspan="2">Unlikely</td>
-                <td colspan="2">2</td>
-                <td colspan="2">Minor</td>
-              </tr>
-              <tr>
-                <th>3</th>
-                <td class="L_1">L</td>
-                <td class="M_1">M</td>
-                <td class="M_1">M</td>
-                <td class="H_1">H</td>
-                <td class="H_1">H</td>
-                <td colspan="2">3</td>
-                <td colspan="2">Moderate</td>
-                <td colspan="2">3</td>
-                <td colspan="2">Moderate</td>
-              </tr>
-              <tr>
-                <th scope="col">2</th>
-                <td class="L_1">L</td>
-                <td class="L_1">L</td>
-                <td class="M_1">M</td>
-                <td class="M_1">M</td>
-                <td class="H_1">H</td>
-                <td colspan="2">4</td>
-                <td colspan="2">Likely</td>
-                <td colspan="2">4</td>
-                <td colspan="2">Major</td>
-              </tr>
-              <tr>
-                <th scope="col">1</th>
-                <td class="L_1">L</td>
-                <td class="L_1">L</td>
-                <td class="L_1">L</td>
-                <td class="M_1">M</td>
-                <td class="M_1">M</td>
-                <td colspan="2" class="mr-2 ml-2">5</td>
-                <td colspan="2">Almost Certain</td>
-                <td colspan="2">5</td>
-                <td colspan="2">Catastrophic</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <hr />
+      
         <h2>PPE Selection</h2>
         <div class="row" formArrayName="PPESelection2">
           <div
@@ -1259,8 +1163,103 @@
             </div>
           </ng-container>
         </ng-container>
-  
-     
+        <hr />
+        <div class="row">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th colspan="7" class="L_1">Risk Level Matrix</th>
+                <th colspan="8" class="L_1">Risk Analysis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th colspan="2" rowspan="2"></th>
+                <td colspan="5">Consequence</td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Likelihood</div>
+                </td>
+                <td colspan="4" rowspan="2">
+                  <div class="like_2">Consequence</div>
+                </td>
+              </tr>
+              <tr>
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <th rowspan="5">
+                  <div class="like_1">Likelihood</div>
+                </th>
+                <td>5</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">
+                  <div class="space_1">1</div>
+                </td>
+                <td colspan="2">Rare</td>
+                <td colspan="2">
+                  <div class="space_1">1</div>
+                </td>
+                <td colspan="2">Insignificant</td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Unlikely</td>
+                <td colspan="2">2</td>
+                <td colspan="2">Minor</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td class="H_1">H</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+                <td colspan="2">3</td>
+                <td colspan="2">Moderate</td>
+              </tr>
+              <tr>
+                <th scope="col">2</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td class="H_1">H</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Likely</td>
+                <td colspan="2">4</td>
+                <td colspan="2">Major</td>
+              </tr>
+              <tr>
+                <th scope="col">1</th>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="L_1">L</td>
+                <td class="M_1">M</td>
+                <td class="M_1">M</td>
+                <td colspan="2" class="mr-2 ml-2">5</td>
+                <td colspan="2">Almost Certain</td>
+                <td colspan="2">5</td>
+                <td colspan="2">Catastrophic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <hr />
         <div
           cdkDropList
@@ -1457,7 +1456,7 @@
  
     </mat-tab>
   </mat-tab-group>
-  <div class="tab-content" id="myTabContent" *ngIf="check=='print'">
+  <div class="tab-content" id="myTabContent" *ngIf="(isPrint | async)===true">
     <div
       class="tab-pane fade show active px-4 py-4"
       id="RISKAssessment"
@@ -1926,7 +1925,7 @@
     </div>
   </div>
   <div
-  *ngIf="check=='print'"
+  *ngIf="(isPrint | async)===true"
   id="SWSS"
   role="tabpanel"
 >
@@ -2178,103 +2177,7 @@
         </div>
       </div>
       <hr />
-      <div class="row">
-        <table class="table table-bordered text-center">
-          <thead>
-            <tr>
-              <th colspan="7" class="L_1">Risk Level Matrix</th>
-              <th colspan="8" class="L_1">Risk Analysis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th colspan="2" rowspan="2"></th>
-              <td colspan="5">Consequence</td>
-              <td colspan="4" rowspan="2">
-                <div class="like_2">Likelihood</div>
-              </td>
-              <td colspan="4" rowspan="2">
-                <div class="like_2">Consequence</div>
-              </td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <th rowspan="5">
-                <div class="like_1">Likelihood</div>
-              </th>
-              <td>5</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td colspan="2">
-                <div class="space_1">1</div>
-              </td>
-              <td colspan="2">Rare</td>
-              <td colspan="2">
-                <div class="space_1">1</div>
-              </td>
-              <td colspan="2">Insignificant</td>
-            </tr>
-            <tr>
-              <th>4</th>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td colspan="2">2</td>
-              <td colspan="2">Unlikely</td>
-              <td colspan="2">2</td>
-              <td colspan="2">Minor</td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td class="L_1">L</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td colspan="2">3</td>
-              <td colspan="2">Moderate</td>
-              <td colspan="2">3</td>
-              <td colspan="2">Moderate</td>
-            </tr>
-            <tr>
-              <th scope="col">2</th>
-              <td class="L_1">L</td>
-              <td class="L_1">L</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td colspan="2">4</td>
-              <td colspan="2">Likely</td>
-              <td colspan="2">4</td>
-              <td colspan="2">Major</td>
-            </tr>
-            <tr>
-              <th scope="col">1</th>
-              <td class="L_1">L</td>
-              <td class="L_1">L</td>
-              <td class="L_1">L</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td colspan="2" class="mr-2 ml-2">5</td>
-              <td colspan="2">Almost Certain</td>
-              <td colspan="2">5</td>
-              <td colspan="2">Catastrophic</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <hr />
+     
       <h2>PPE Selection</h2>
       <div class="row" formArrayName="PPESelection2">
         <div
@@ -2394,8 +2297,103 @@
           </div>
         </ng-container>
       </ng-container>
-
-   
+      <hr />
+      <div class="row">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th colspan="7" class="L_1">Risk Level Matrix</th>
+              <th colspan="8" class="L_1">Risk Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th colspan="2" rowspan="2"></th>
+              <td colspan="5">Consequence</td>
+              <td colspan="4" rowspan="2">
+                <div class="like_2">Likelihood</div>
+              </td>
+              <td colspan="4" rowspan="2">
+                <div class="like_2">Consequence</div>
+              </td>
+            </tr>
+            <tr>
+              <th>1</th>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <th rowspan="5">
+                <div class="like_1">Likelihood</div>
+              </th>
+              <td>5</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">
+                <div class="space_1">1</div>
+              </td>
+              <td colspan="2">Rare</td>
+              <td colspan="2">
+                <div class="space_1">1</div>
+              </td>
+              <td colspan="2">Insignificant</td>
+            </tr>
+            <tr>
+              <th>4</th>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">2</td>
+              <td colspan="2">Unlikely</td>
+              <td colspan="2">2</td>
+              <td colspan="2">Minor</td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td class="H_1">H</td>
+              <td colspan="2">3</td>
+              <td colspan="2">Moderate</td>
+              <td colspan="2">3</td>
+              <td colspan="2">Moderate</td>
+            </tr>
+            <tr>
+              <th scope="col">2</th>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td class="H_1">H</td>
+              <td colspan="2">4</td>
+              <td colspan="2">Likely</td>
+              <td colspan="2">4</td>
+              <td colspan="2">Major</td>
+            </tr>
+            <tr>
+              <th scope="col">1</th>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="L_1">L</td>
+              <td class="M_1">M</td>
+              <td class="M_1">M</td>
+              <td colspan="2" class="mr-2 ml-2">5</td>
+              <td colspan="2">Almost Certain</td>
+              <td colspan="2">5</td>
+              <td colspan="2">Catastrophic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <hr />
       <div
         cdkDropList
@@ -2568,21 +2566,21 @@
         </div>
       </div>
       <div>
-        <button *ngIf="check!='print'" type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
+        <button *ngIf="(isPrint | async)===false" type="submit" class="btn btn-primary btn-block"  (click)="onSubmit()">Submit</button>
       </div>
     </div>
   </div>
   
 </div>
 <br>
-<div *ngIf="check=='print' && selectedFile1">
+<div *ngIf="(isPrint | async)===true && selectedFile1">
   <span *ngFor="let img of selectedFile1">
     <div >
       <img  height="400" width="400" [src]="img">
     </div>
   </span>
  </div> 
- <!-- <div *ngIf="check=='print'">
+ <!-- <div *ngIf="(isPrint | async)===true">
   <pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'"
   [render-text]="true"
   [original-size]="false"

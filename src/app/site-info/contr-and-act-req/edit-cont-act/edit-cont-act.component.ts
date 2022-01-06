@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -12,7 +13,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class EditContActComponent implements OnInit {
   editTitle: FormGroup;
   dataRec: any;
-
+  public Editor = ClassicEditor;
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,

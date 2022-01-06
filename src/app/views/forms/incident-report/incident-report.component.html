@@ -378,15 +378,36 @@
       <p class="title">Instructions</p>
 
       <div class="mt-3 text-center">
-        <textarea
+        <!-- <textarea
           type="text"
           class="form-control"
           formControlName="instructions"
+          autosize
+          *ngIf="this.id === 'Form'"
         >
         Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injury
         or near-miss that could have resulted in a serious injury or illness.
       </textarea
         >
+        <textarea
+        #instructions
+        type="text"
+        class="form-control"
+        formControlName="instructions"
+        autosize
+        style="border: solid 3px #ef6c6c; min-height: 200px;"
+        *ngIf="this.id !== 'Form'"
+        readonly
+      >
+      Complete this form as soon as possible after an incident that results in serious inquiry or illness or death. Use to investigate a minor injury
+      or near-miss that could have resulted in a serious injury or illness.
+    </textarea
+      > -->
+
+      <ckeditor  class="toolbarborder" formControlName="instructions" style="width: 100%;" [editor]="Editor" *ngIf="this.id === 'Form'"  ></ckeditor>
+      <ckeditor class="toolbarhide"
+      *ngIf="this.id !== 'Form'"  formControlName="instructions" style="width: 100%;" [editor]="Editor" [config]="{ toolbar: [  ] }" ></ckeditor>
+
       </div>
     </div>
   </div>
@@ -954,7 +975,7 @@
             >
           </div>
         </div>
-        <div class="col-md-2 col-sm-2-print">
+        <!-- <div class="col-md-2 col-sm-2-print">
           <div>
             <label class="cols" class="form-Label">Complete<span class="text-danger ">*</span></label>
 
@@ -983,8 +1004,8 @@
               This Field is Required</span
             >
           </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
+        </div> -->
+        <div class="col-md-2 col-md-2-print">
           <label class="cols" class="form-Label">Date<span class="text-danger ">*</span> </label>
           <!-- <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/> -->
           <input  matInput  [matDatepicker]="pickerd4" [min]="minDate"
@@ -1012,7 +1033,7 @@
   </div>
   <hr />
   <div class="col-12">
-    <p class="title">The Form was Completed by:</p>
+    <p class="title">The form was completed by:</p>
   </div>
   <div>
     <div class="box" class="row">
@@ -1128,7 +1149,7 @@
               This Field is Required</span
             >
           </div>
-          <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="clear()">
+          <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1" (click)="clear()">
             Clear
           </button>
         </div>
@@ -1250,7 +1271,7 @@
               This Field is Required</span
             >
           </div>
-          <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="clear1()">
+          <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear
           </button>
         </div>
@@ -1263,7 +1284,7 @@
 
   <div class="col-md-2 col-sm-2-print">
     <button
-    *ngIf="check!='print'"
+    *ngIf="(isPrint | async)===false"
       type="submit"
       class="btn btn-primary btn-block"
       [disabled]="!IncidentReport.valid || singRequired || singRequired1"
