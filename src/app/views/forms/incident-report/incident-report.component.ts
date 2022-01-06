@@ -50,6 +50,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   sub: any;
   isPrint: Observable<any>;
+  editorDisable=false;
   @HostListener("window:afterprint",[]) 
   function(){
     console.log("Printing completed...");
@@ -90,6 +91,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     public forms:SavedformsService,
     private shared:RoleManagementSharedServiceService,
   ) {
+    this.id = this.activatedRoute.snapshot.params.id;
+    if (this.id !== 'Form') {
+    this.editorDisable=true;
+    }
     this.check = localStorage.getItem('key');
     this.IncidentReport = this.fb.group({
       incidents: this.fb.array([]),
@@ -135,11 +140,12 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       file: [''],
       similarIncidentText: [''],
       priorIncidentText: [''],
-      instructions: [''],
+      //instructions: [''],
       signaturePad: ['', Validators.required],
       signaturePad1: ['', Validators.required],
       changesMadeOther: [false],
       changesMadeOtherText: [''],
+      instructions: new FormControl({value: '', disabled: this.editorDisable}),
     });
     // this.IncidentReport = this.data;
     // this.IncidentReport.patchValue({
@@ -166,13 +172,14 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     this.activatedRoute.queryParams.subscribe(params => {
       this.type=params['formType'];  
     });
-    this.id = this.activatedRoute.snapshot.params.id;
+    
     console.log("IncidentReport", this.IncidentReport);
 
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
     this.setTitle.setTitle('WHS-Incident Report Form');
 
     if (this.id !== 'Form') {
+      
       console.log("id", this.id);
       this.getIncidentsByid(this.id);
     }
@@ -202,7 +209,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     return this.fb.group({
       correctAction: ["", Validators.required],
       personRes: ['', Validators.required],
-      complete: ["", Validators.required],
+     // complete: ["", Validators.required],
       date: ["", Validators.required],
     });
   }
@@ -695,6 +702,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
         instructions:res.data.instructions
 
       })
+     
 
       for (let index = 0; index < res.data.arrObj.length; index++) {
         console.log("res.data.arrObj.length", res.data.arrObj.length);
@@ -704,7 +712,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
 
         let changeIndex = this.changeAdd().length
         this.addAction();
-        this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
+       // this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
         this.add().controls[index].get("correctAction").setValue(res.data.arrObj[index].correctAction)
         this.add().controls[index].get("date").setValue(res.data.arrObj[index].date)
         this.add().controls[index].get("personRes").setValue(res.data.arrObj[index].personRes)
@@ -821,6 +829,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
 
       })
     })
+   
+    console.log(" this.editorDisable", this.editorDisable);
+    
   }
   onSubmit() {
     console.log(this.IncidentReport.value);

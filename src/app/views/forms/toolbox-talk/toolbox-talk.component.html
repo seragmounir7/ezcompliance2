@@ -306,7 +306,7 @@
         <div class="row">
           <div class="my-3 col-6">
             <p for="exampleFormControlInput1" class="form-Label">Action<span class="text-danger ">*</span></p>
-            <select
+            <!-- <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
               formControlName="action"
@@ -316,7 +316,14 @@
               <option selected hidden>Select</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
-            </select>
+            </select> -->
+            <input
+              type="text"
+              class="form-control"
+              formControlName="action"
+              [class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required') 
+              && ( correctAct().at(i).get('action').dirty ||  correctAct().at(i).get('action').touched) "
+            />
             <span
               *ngIf="
                correctAct().at(i).get('action')?.hasError('required') && ( correctAct().at(i).get('action').dirty 

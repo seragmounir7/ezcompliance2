@@ -56,6 +56,16 @@ export class CheckboxComponent implements OnInit {
     "CMS",
     "StateRelation"
   ]
+  formNameArr2 = [
+    "Dashboard",
+    "Dynamic Form",
+    "Logical Forms",
+    "Form Configure",
+    "Subscription Rates",
+    "Logical FormData",
+    "CMS",
+    "State Relation"
+  ]
   displayedColumns: string[] = [
     //"role",
 

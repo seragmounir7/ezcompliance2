@@ -406,7 +406,7 @@
 
       <ckeditor  class="toolbarborder" formControlName="instructions" style="width: 100%;" [editor]="Editor" *ngIf="this.id === 'Form'"  ></ckeditor>
       <ckeditor class="toolbarhide"
-      *ngIf="this.id !== 'Form'"  formControlName="instructions" style="width: 100%;" [editor]="Editor" [config]="{ toolbar: [  ] }" [disabled]="true"></ckeditor>
+      *ngIf="this.id !== 'Form'"  formControlName="instructions" style="width: 100%;" [editor]="Editor" [config]="{ toolbar: [  ] }" ></ckeditor>
 
       </div>
     </div>
@@ -975,7 +975,7 @@
             >
           </div>
         </div>
-        <div class="col-md-2 col-sm-2-print">
+        <!-- <div class="col-md-2 col-sm-2-print">
           <div>
             <label class="cols" class="form-Label">Complete<span class="text-danger ">*</span></label>
 
@@ -1004,8 +1004,8 @@
               This Field is Required</span
             >
           </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
+        </div> -->
+        <div class="col-md-2 col-md-2-print">
           <label class="cols" class="form-Label">Date<span class="text-danger ">*</span> </label>
           <!-- <input type="date" class="form-control" formControlName="date" [class.is-invalid]=" add().controls[i].get('date')?.hasError('required') && (add().controls[i].get('date').dirty || add().controls[i].get('date').touched) "/> -->
           <input  matInput  [matDatepicker]="pickerd4" [min]="minDate"

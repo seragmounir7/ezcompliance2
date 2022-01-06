@@ -381,7 +381,7 @@
   
   
       <tr mat-header-row
-        *matHeaderRowDef="['roleheader','dashboard','dynamicForm','logicalForms','formConfigure','subscriptionRates','logicalFormData','cms','stateRelation']">
+        *matHeaderRowDef="['roleheader','dashboard','dynamicForm','logicalForms','formConfigure','subscriptionRates','logicalFormData','CMS','stateRelation']">
       </tr>
       <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
       <tr mat-row *matRowDef="let row ; columns: displayedColumns;" (click)="getdata(row)"></tr>
@@ -438,8 +438,8 @@
             [formGroup]="rolemanagment"
           >
           <mat-tab-group *ngIf="formArr">
-            <mat-tab *ngFor="let tab of formNameArr; let x=index ">
-              <ng-template mat-tab-label >{{tab |  titlecase}}</ng-template>
+            <mat-tab *ngFor="let tab of formNameArr2; let x=index ">
+              <ng-template  mat-tab-label ><p  [class.textCapitaliza]="tab=='dashboard' || tab=='dynamicForm'">{{tab}}</p></ng-template>
               <!-- <ng-container *ngFor="let item of roleArr; let i=index"> -->
               
               
