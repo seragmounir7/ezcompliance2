@@ -417,6 +417,9 @@
             <span class="font-weight-bold small text-uppercase">{{
               roleArr[i].role
             }}</span>
+            <span class="material-icons float-right" style="color: rgba(236, 65, 65, 0.842);" (click)=" deleteRole(roleArr[i]._id)" matTooltip="Delete"   >
+              delete
+          </span>
           </p>
         </div>
       </div>
@@ -483,7 +486,7 @@
             [id]="formNameArr[x]+'_Update_'+roleArr[i]?.role"
             formControlName="{{formNameArr[x]+'_Update_'+roleArr[i]?.role}}">
             <label class="txtdefault fs-16   text-center label_2" style="font-weight: 400"[for]="formNameArr[x]+'_Update_'+roleArr[i]?.role"
-               >Updete</label>
+               >Update</label>
           </div>
             
           <div class="col-3 mt-1" *ngIf="formNameArr[x]!=='dashboard'">

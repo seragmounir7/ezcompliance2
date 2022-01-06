@@ -49,11 +49,14 @@
           <mat-icon >launch</mat-icon>
       </span>
   </a> -->
-  <div style="display: flex; justify-content: space-around;">
-    <span class="material-icons"  [routerLink]="element.link" style="font-size: 26px ;cursor: pointer !important;">
-      add_circle_outline
+  <div style="display: flex; justify-content: space-evenly;">
+    <span class="material-icons"  matTooltip="Fill The Form" [routerLink]="element.link" style="font-size: 26px ;cursor: pointer !important;" *ngIf="url[0].path=='fillConfigForm'">
+     <svg-icon name="Fill_form"></svg-icon>
     </span>
-    <span class="material-icons" (click)="goTo(element.title)"  style="cursor: pointer !important;">
+    <!-- <button  matTooltip="Fill The Form" mat-icon-button aria-label="Example icon button with a delete icon" [routerLink]="element.link">
+       
+   </button> -->
+    <span class="material-icons mt-2"  matTooltip="Saved Form List" (click)="goTo(element.title)"  style="cursor: pointer !important;" *ngIf="url[0].path=='fillConfigForm'">
       launch
     </span>
     </div>

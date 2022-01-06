@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import {
   FormBuilder,
@@ -13,19 +13,29 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-site-inspection',
   templateUrl: './site-inspection.component.html',
   styleUrls: ['./site-inspection.component.scss'],
 })
-export class SiteInspectionComponent implements OnInit, AfterViewInit {
+export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy {
   sidePreview!: FormGroup;
   SiteControl!: FormArray;
   siteshow = true;
   siteAction = false;
   itemvalue: any;
-  
+  sub: any;
+  isPrint: Observable<any>;
+  @HostListener("window:afterprint",[]) 
+  function(){
+    console.log("Printing completed...");
+    this.router.navigateByUrl("/admin/forms/siteinspectiontable")
+    this.shared.printNext(false)
+   
+} 
   maxDate = new Date();
   minDate = new Date();
   item_values: any = ['In Progress', 'Completed', 'Closed'];
@@ -61,7 +71,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
     public router: Router,
     private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe,
-    public forms:SavedformsService
+    public forms:SavedformsService,
+    private shared:RoleManagementSharedServiceService,
   ) {
     this.check = localStorage.getItem('key');
     this.sidePreview = this.fb.group({
@@ -137,8 +148,13 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
       siteCategorytTopic: this.fb.array([]),
     });
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("site destroy");
+  }
 
   ngOnInit(): void {
+    this.isPrint=(this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type=params['formType'];  
     });
@@ -205,7 +221,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
             }
           }
         }, 500);
-        if(this.check=='print'){
+        if(this.check){
           this.showAction()
         }
       });
@@ -220,17 +236,19 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    console.log("check1...",this.check);
     
-    if (this.check == 'print') {
+    this.sub= this.shared.printObs$.subscribe(res=> {
+      this.check=res
+      console.log("check1...",this.check);
+    if (this.check) {
       setTimeout( () => { 
         window.print();
         console.log("printing....");
       }, 3000);
       localStorage.setItem('key', ' ');
-     
-      
     }
+      
+    })
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
   }
@@ -402,7 +420,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
             showConfirmButton: false,
             timer: 1200,
           });
-          this.router.navigate(['/admin/forms']);
+          this.router.navigate(['/admin/forms/tableData']);
         });
     } else {
       const data = {
@@ -423,7 +441,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit {
           timer: 1200,
         });
         // this.router.navigate(["/admin/forms/tableData"]);
-        this.router.navigate(['/admin/forms']);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
       });
       console.log('data', data);
     }

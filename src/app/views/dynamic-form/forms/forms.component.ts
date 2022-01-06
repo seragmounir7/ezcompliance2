@@ -1,10 +1,10 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddFormComponent } from './add-form/add-form.component';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
-import { Router,  } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AfterViewInit } from '@angular/core';
 
@@ -27,7 +27,7 @@ export interface PeriodicElement {
 export class FormsComponent implements AfterViewInit, OnInit {
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = [
+ @Input() displayedColumns: string[] = [
     'index',
     'formName',
     'formFrequency',
@@ -37,6 +37,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  url: any;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -56,6 +57,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
     public router: Router,
     private fb: FormBuilder,
     private dynamicFormServise: DynamicFormsService,
+    private activatedRoute:ActivatedRoute
   ) {}
 
   addDyForm(){
@@ -74,6 +76,9 @@ export class FormsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.url=this.activatedRoute.snapshot.url
+    console.log("url",this.url);
+    
     sessionStorage.setItem('formId', '');
     sessionStorage.setItem('type', '');
     sessionStorage.setItem('formTitle', '');

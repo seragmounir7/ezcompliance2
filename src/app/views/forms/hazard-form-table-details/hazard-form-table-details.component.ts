@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { environment } from 'src/environments/environment';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-hazard-form-table-details',
@@ -18,7 +20,11 @@ export class HazardFormTableDetailsComponent implements OnInit {
   dataSource: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
+  constructor(private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,
+    private spinner: NgxSpinnerService,
+    private shared:RoleManagementSharedServiceService,
+    ) { }
 
 
   ngOnInit(): void {
@@ -73,6 +79,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
   }
   printPage(id)
   {
+    this.shared.printNext(true)
     console.log("check");
     // this.logicalFormInfo.printing.next('print');
     localStorage.setItem("key","print");
@@ -81,12 +88,15 @@ export class HazardFormTableDetailsComponent implements OnInit {
     //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
     //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
     
-    let iframe=document.createElement("iframe")
-    iframe.id = "printIframe"
-          iframe.src= environment.stagingUrl+"#/admin/forms/hazardRep/"+id
-          iframe.style.display="none";
-          let body = document.getElementsByTagName("body")
-          body[0].appendChild(iframe)
+    // let iframe=document.createElement("iframe")
+    // iframe.id = "printIframe"
+    //       iframe.src= environment.stagingUrl+"#/admin/forms/hazardRep/"+id
+    //       iframe.style.display="none";
+    //       let body = document.getElementsByTagName("body")
+    //       body[0].appendChild(iframe)
+
+    this.spinner.show("printLoader")
+     this.router.navigate(['/',{ outlets: {'print': ['print','hazardRep', id]}}])
   }
   sortData(sort:Sort) {
     this.getAllHazardFormData(sort.active,sort.direction)

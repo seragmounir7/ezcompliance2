@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
@@ -17,8 +17,10 @@ import { data } from 'jquery';
 import { ThrowStmt } from '@angular/compiler';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+
 
 
 @Component({
@@ -26,12 +28,22 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
   templateUrl: './risk-assessment-swms.component.html',
   styleUrls: ['./risk-assessment-swms.component.scss'],
 })
-export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
+export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDestroy{
+  
   @ViewChild('projectManager') projectManager: ElementRef;
   @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   @ViewChild('Signature2') signaturePad2: SignaturePad;
   @ViewChild('timepicker') timepicker: ElementRef;
+  sub: any;
+  isPrint: Observable<any>;
+  @HostListener("window:afterprint",[]) 
+  function(){
+    console.log("Printing completed...");
+    this.router.navigateByUrl("/admin/forms/riskAssessTable")
+    this.shared.printNext(false)
+   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+} 
   public Editor = ClassicEditor;
 
   riskAssessmentFb!: FormGroup;
@@ -177,9 +189,10 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private setTitle: SetTitleService,
     public upload: UploadFileServiceService,
-    public forms:SavedformsService
+    public forms:SavedformsService,
+    private shared:RoleManagementSharedServiceService,
   ) {
-    this.check = localStorage.getItem('key');
+    //this.check = localStorage.getItem('key');
     console.log("key check", this.check);
     this.id = this.activatedRoute.snapshot.params.id;
     console.log("id", this.id)
@@ -227,11 +240,17 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     });
     this.riskAssessmentFb.controls.editor.setValue(this.secondEditor);
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("risk destroy");
+    
+  }
   get siteControls() {
     return this.riskAssessmentFb.controls
   }
 
   ngOnInit(): void {
+  this.isPrint=(this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type=params['formType'];  
     });
@@ -503,8 +522,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   }
   checkJobtask(element, index) {
     let z = this.jobTaskData[index]._id;
-    console.log("z", z);
-    console.log("ele", element[z]);
+    //console.log("z", z);
+   // console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['jobTask'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -515,7 +534,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   }
   checkRisk(element, index) {
     let z = this.highRiskConstruction[index]._id;
-    console.log("ele", element[z]);
+    //console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -524,7 +543,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   }
   checkPPE(element, index) {
     let z = this.PPEselection[index]._id;
-    console.log("ele", element[z]);
+   // console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -533,7 +552,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   }
   checkLicense(element, index) {
     let z = this.licenseAndQualification[index]._id;
-    console.log("ele", element[z]);
+   // console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['licence'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -748,10 +767,15 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
   };
 
   ngAfterViewInit() {
-    if (this.check == 'print') {
-      setTimeout(function () { window.print(); }, 3000);
-      localStorage.setItem('key', ' ');
-    }
+   this.sub= this.shared.printObs$.subscribe(res=> {
+      this.check=res
+      console.log("this.check",this.check);
+      if (this.check ) {
+        setTimeout(function () { window.print(); }, 3000);
+        localStorage.setItem('key', ' ');
+      }
+    })
+   
     // this.signaturePad is now available
     //this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
     // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -760,6 +784,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     console.log('clear1 &2');
     console.log(this.signaturePad1Div)
   }
+
 
   drawComplete1() {
     // will be notified of szimek/signature_pad's onEnd event
@@ -1357,7 +1382,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
           showConfirmButton: false,
           timer: 1200,
         });
-        this.router.navigate(["/admin/forms/riskAssessTable"]);
+        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
         console.log("this.riskAssessmentFb posted", res);
       })
     }
