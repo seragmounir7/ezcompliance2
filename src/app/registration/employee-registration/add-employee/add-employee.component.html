@@ -535,9 +535,9 @@
         
           </mat-tab>
         <mat-tab label="PPE Register"  (click)="PPERegisteshow()"> 
-          <div formArrayName="PPEarr">
-            <div *ngFor="let row of addLicence().controls; let filed = index">
-              <div [formGroupName]="filed">
+          <div formArrayName="PPEArr">
+            <div *ngFor="let row of addPPE().controls; let filed1 = index">
+              <div [formGroupName]="filed1">
           <div class="row">
             
             <div class="mb-3 mt-3 col-3">
@@ -609,7 +609,7 @@
             </div>
             <div class="col-1 mt-4">
               <div class="my-4">
-                <span class="material-icons" (click)="addFiled()"
+                <span class="material-icons" (click)="addFiled2()"
                 >add_circle_outline
               </span>
               </div>
@@ -617,7 +617,7 @@
             </div>
             <div class="col-1 mt-4">
               <div class="my-4">
-                <span class="material-icons" (click)="removeFiled(filed)">
+                <span class="material-icons" (click)="removeFiled1(filed1)">
                   remove_circle_outline
                 </span>
               </div>
@@ -664,6 +664,133 @@
           </div>
         
         </mat-tab>
+        <mat-tab label="Add Plant/Equipment Register"  (click)="addPlantshow()"> 
+          <div formArrayName="plantArr">
+            <div *ngFor="let row of addEquip().controls; let filed2 = index">
+              <div [formGroupName]="filed2">
+          <div class="row">
+            
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Plant Type </label
+              >
+              <input
+              type="text"
+              formControlName="plantType"
+                class="form-control"
+               
+              />
+             
+   
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Model Number</label
+              >
+              <input
+                type="text"
+                formControlName="modelNumber"
+                class="form-control"
+               
+              />
+             
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Serial Number</label
+              >
+              <input
+                type="text"
+                formControlName="serialNumber"
+                class="form-control"
+                
+              />
+              
+            </div>
+            
+            <div class="mb-3 mt-3 col-2">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Service Renew Date</label
+              >
+              <input
+                type="date"
+                formControlName="serviceRenewDate"
+                class="form-control"
+               
+              />
+             
+            </div>
+           
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Need to be able to more</label
+              >
+              <input
+                type="text"
+                formControlName="needToMore"
+                class="form-control"
+               
+              />
+   
+            </div>
+            <div class="col-1 mt-4">
+              <div class="my-4">
+                <span class="material-icons" (click)="addEquipFiled2()"
+                >add_circle_outline
+              </span>
+              </div>
+              
+            </div>
+            <div class="col-1 mt-4">
+              <div class="my-4">
+                <span class="material-icons" (click)="removeEquipFiled1(filed2)">
+                  remove_circle_outline
+                </span>
+              </div>
+              
+            </div>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 mt-3 col-12">
+              <label>Signature</label>
+              <div class="sign">
+                <signature-pad
+                  #signature2
+                  [options]="signaturePadOptions"
+                  (onBeginEvent)="drawStart()"
+                  (onEndEvent)="drawComplete2()"
+                 
+                ></signature-pad>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary btn_1" (click)="clear2()">
+              Clear
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-primary btn_1"
+              *ngIf="!dataEmp"
+              (click)="onFormSubmit()"
+              
+            >
+              Submit
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-primary btn_1"
+              *ngIf="dataEmp"
+              (click)="onFormUpdate($event)"
+              
+            >
+              Update
+            </button>
+          </div>
+        
+        </mat-tab>
+        
       </mat-tab-group>
       <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">

@@ -20,6 +20,7 @@ export class AddEmployeeComponent implements OnInit {
   empDetails!: FormGroup;
   PPERegister = false;
   LicenceInfo = false;
+  EquipmentInfo = false;
   dataEmp:boolean;
   formData:any;
   uploadImage1: any;
@@ -28,11 +29,13 @@ export class AddEmployeeComponent implements OnInit {
   id:any;
   profile = true;
   @ViewChild('signature1') signaturePad: any;
+  @ViewChild('signature2') signaturePad2: any;
   sidePreview: any;
   registerForm: any;
   file1: any;
   dialogRef: any;
   dataUrl: any;
+  dataUrl2: any;
   roleData: any=[''];
   filteredOptions2: Observable<any>;
   filteredOptions1: Observable<any>;
@@ -78,20 +81,31 @@ export class AddEmployeeComponent implements OnInit {
       PPESupplied: [''],
       BrandOrType: [''],
       IssueDate: [''],
+      PPEArr: this.fb.array([]),
       ReplacementDate: [''],
       Sign: [''],
+      plantArr: this.fb.array([]),
+      plantSignature: [''],
+      plantType:[''],
+      modelNumber:[''],
+      serialNumber:[''],
+      serviceRenewDate:[''],
+      needToMore:[''],
     });
   }
 
   ngOnInit(): void {
     this.getAllRoles();
     this.id=this.activatedRoute.snapshot.params.id;
+   
     if(this.id!=="form"){
       this.dataEmp=true;
     this.patchData();
   }else{
     this.dataEmp=false;
     this.addFiled();
+    this.addFiled2();
+    this.addEquipFiled2();
   }
   this.filteredOptions2 = this.empDetails.controls.LicenceName.valueChanges.pipe(
     startWith(''),
@@ -139,7 +153,12 @@ export class AddEmployeeComponent implements OnInit {
      });
      
    });
-  
+  data.data.ppe.PPEArr.forEach(ele => {
+    this.addFiled3(ele);
+   });
+   data.data.plant.plantArr.forEach(ele => {
+    this.addEquipFiled3(ele);
+   });
     this.empDetails.patchValue({
       profTitie: data.data.title,
       profFirst: data.data.firstName,
@@ -168,9 +187,18 @@ export class AddEmployeeComponent implements OnInit {
       IssueDate: data.data.ppe.issueDate,
       ReplacementDate: data.data.ppe.replacementDate,
       Sign: data.data.ppe.signature,
+
+      plantType: data.data.plant.plantType,
+      modelNumber: data.data.plant.modelNumber,
+      serialNumber: data.data.plant.serialNumber,
+      serviceRenewDate: data.data.plant.serviceRenewDate,
+      needToMore: data.data.plant.needToMore,
+      plantSignature: data.data.plant.plantSignature,
+
     });
    
     this.dataUrl = data.data.ppe.signature;
+    this.dataUrl2 = data.data.plant.plantSignature;
     console.log("data.data.ppe.signature;",data.data.ppe.signature);
     
     let check =async () => { this.signaturePad != null }
@@ -178,6 +206,13 @@ export class AddEmployeeComponent implements OnInit {
       console.log("this.signaturePad",this.signaturePad,res);
       
       this.signaturePad.fromDataURL(data.data.ppe.signature)
+
+    })
+    let check2 =async () => { this.signaturePad2 != null }
+    check2().then((res) => {
+      console.log("this.signaturePad",this.signaturePad2,res);
+      
+      this.signaturePad2.fromDataURL(data.data.plant.plantSignature)
 
     })
     
@@ -189,12 +224,24 @@ export class AddEmployeeComponent implements OnInit {
     canvasWidth: 500,
     canvasHeight: 100,
   };
-
+  drawComplete2() {
+    // will be notified of szimek/signature_pad's onEnd event
+    this.empDetails.controls["plantSignature"].setValue(this.signaturePad2.toDataURL())
+    console.log(this.signaturePad2.toDataURL());
+  }
+  clear2() {
+    this.signaturePad2.clear();
+  }
+  drawStart2() {
+    // will be notified of szimek/signature_pad's onBegin event
+    console.log('begin drawing');
+  }
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
     this.empDetails.controls["Sign"].setValue(this.signaturePad.toDataURL())
     console.log(this.signaturePad.toDataURL());
   }
+
 
   clear() {
     this.signaturePad.clear();
@@ -246,6 +293,38 @@ export class AddEmployeeComponent implements OnInit {
  
   onFormUpdate(id) {
     const Sign = this.signaturePad.toDataURL();
+    const plantSignature = this.signaturePad2.toDataURL();
+    let ppeArr = ()=>{
+      this.addPPE().length;
+      let arr=[];
+      this.addPPE().controls.forEach((item:any)=>{
+        console.log("item",item);
+        arr.push(
+          {ppeSupplied: item.controls.PPESupplied.value,
+          brand: item.controls.BrandOrType.value,
+          issueDate: item.controls.IssueDate.value,
+          replacementDate: item.controls.ReplacementDate.value},
+          
+        )
+      })
+      return arr;
+    }
+    let equipArr = ()=>{
+      this.addPPE().length;
+      let arr=[];
+      this.addEquip().controls.forEach((item:any)=>{
+        console.log("item",item);
+        arr.push(
+          {plantType: item.controls.plantType.value,
+          modelNumber: item.controls.modelNumber.value,
+          serialNumber: item.controls.serialNumber.value,
+          serviceRenewDate: item.controls.serviceRenewDate.value,
+          needToMore: item.controls.needToMore.value},
+          
+        )
+      })
+      return arr;
+    }
     const data = {
       title: this.empDetails.get('profTitie').value,
       email: this.empDetails.get('porfEmail').value,
@@ -275,12 +354,14 @@ export class AddEmployeeComponent implements OnInit {
         uploadLicence: this.empDetails.get('UploadLicenceArr').value,
       },
       ppe: {
-        ppeSupplied: this.empDetails.get('PPESupplied').value,
-        // licenceName: 'ghjhgjh',
-        brand: this.empDetails.get('BrandOrType').value,
-        issueDate: this.empDetails.get('IssueDate').value,
-        replacementDate: this.empDetails.get('ReplacementDate').value,
+        PPEArr:ppeArr(),
         signature: Sign,
+        
+      },
+      plant: {
+        plantArr:equipArr(),
+        plantSignature: plantSignature,
+        
       },
       location: {
         address: this.empDetails.get('porfStreetAddress').value,
@@ -311,8 +392,40 @@ export class AddEmployeeComponent implements OnInit {
     // }
     const Sign = this.signaturePad.toDataURL();
     console.log('sign=>', this.signaturePad.toDataURL());
+    const plantSignature = this.signaturePad2.toDataURL();
+    
 
     console.log('this.EmployeeInfo.value', this.empDetails.value);
+    let ppeArr = ()=>{
+      this.addPPE().length;
+      let arr=[];
+      this.addPPE().controls.forEach((item:any)=>{
+        console.log("item",item);
+        arr.push(
+          {ppeSupplied: item.controls.PPESupplied.value,
+          brand: item.controls.BrandOrType.value,
+          issueDate: item.controls.IssueDate.value,
+          replacementDate: item.controls.ReplacementDate.value},
+        )
+      })
+      return arr;
+    }
+    let equipArr = ()=>{
+      this.addPPE().length;
+      let arr=[];
+      this.addEquip().controls.forEach((item:any)=>{
+        console.log("item",item);
+        arr.push(
+          {plantType: item.controls.plantType.value,
+          modelNumber: item.controls.modelNumber.value,
+          serialNumber: item.controls.serialNumber.value,
+          serviceRenewDate: item.controls.serviceRenewDate.value,
+          needToMore: item.controls.needToMore.value},
+          
+        )
+      })
+      return arr;
+    }
     const body = {
       title: this.empDetails.get('profTitie').value,
       email: this.empDetails.get('porfEmail').value,
@@ -342,12 +455,14 @@ export class AddEmployeeComponent implements OnInit {
         uploadLicence: this.empDetails.get('UploadLicenceArr').value,
       },
       ppe: {
-        ppeSupplied: this.empDetails.get('PPESupplied').value,
-        // licenceName: 'ghjhgjh',
-        brand: this.empDetails.get('BrandOrType').value,
-        issueDate: this.empDetails.get('IssueDate').value,
-        replacementDate: this.empDetails.get('ReplacementDate').value,
+        PPEArr:ppeArr(),
+       
         signature: Sign,
+      },
+      plant: {
+        plantArr:equipArr(),
+        plantSignature: plantSignature,
+        
       },
       location: {
         address: this.empDetails.get('porfStreetAddress').value,
@@ -389,22 +504,70 @@ export class AddEmployeeComponent implements OnInit {
     this.PPERegister = false;
     this.LicenceInfo = false;
     this.profile = true;
+    this.EquipmentInfo = false;
   }
   LicenceInfoshow() {
     this.PPERegister = false;
     this.LicenceInfo = true;
     this.profile = false;
+    this.EquipmentInfo = false;
   }
   PPERegisteshow() {
     this.PPERegister = true;
     this.LicenceInfo = false;
     this.profile = false;
+    this.EquipmentInfo = false;
+  }
+  addPlantshow() {
+    this.PPERegister = false;
+    this.LicenceInfo = false;
+    this.profile = false;
+    this.EquipmentInfo = true;
   }
   addLicence() {
     return this.empDetails.get('UploadLicenceArr') as FormArray;
   }
+  addEquip() {
+    return this.empDetails.get('plantArr') as FormArray;
+  }
+  newEquipFiled2(): FormGroup {
+    return this.fb.group({
+      plantType: [''],
+      modelNumber: [''],
+      serialNumber: [''],
+      serviceRenewDate: [''],
+      needToMore: [''],
+    });
+  }
+  addEquipFiled2() {
+    this.addEquip().push(this.newEquipFiled2());
+    console.log(this.empDetails.value);
+  }
+  newEquipFiled3(data): FormGroup {
+    console.log("newData",data);
+    
+    return this.fb.group({
+      plantType: [data.plantType],
+      modelNumber:[ data.modelNumber],
+      serialNumber: [data.serialNumber],
+      serviceRenewDate: [data.serviceRenewDate],
+      needToMore: [data.needToMore],
+    });
+  }
+  addEquipFiled3(data) {
+    console.log("data",data);
+    this.addEquip().push(this.newEquipFiled3(data));
+    console.log("addPPEFiled1",this.empDetails.value);
+  }
+  removeEquipFiled1(i) {
+    const item = <FormArray>this.empDetails.controls['equipmentRegister'];
+    if (item.length > 1) {
+      item.removeAt(i);
+    
+    }
+  }
   addPPE() {
-    return this.empDetails.get('PPEarr') as FormArray;
+    return this.empDetails.get('PPEArr') as FormArray;
   }
   newFiled2(): FormGroup {
     return this.fb.group({
@@ -418,18 +581,27 @@ export class AddEmployeeComponent implements OnInit {
     this.addPPE().push(this.newFiled2());
     console.log(this.empDetails.value);
   }
+  removeFiled1(i) {
+    const item = <FormArray>this.empDetails.controls['PPEArr'];
+    if (item.length > 1) {
+      item.removeAt(i);
+    
+    }
+  }
   newFiled3(data): FormGroup {
+    console.log("newData",data);
+    
     return this.fb.group({
-      PPESupplied: [data.PPESupplied],
-      BrandOrType:[ data.BrandOrType],
-      IssueDate: [data.IssueDate],
-      ReplacementDate: [data.ReplacementDate],
+      PPESupplied: [data.ppeSupplied],
+      BrandOrType:[ data.brand],
+      IssueDate: [data.issueDate],
+      ReplacementDate: [data.replacementDate],
     });
   }
   addFiled3(data) {
     console.log("data",data);
     this.addPPE().push(this.newFiled3(data));
-    console.log("addFiled1",this.empDetails.value);
+    console.log("addPPEFiled1",this.empDetails.value);
   }
   newFiled(): FormGroup {
     return this.fb.group({
@@ -450,13 +622,10 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   addFiled1(data) {
-    console.log("data",data);
     this.addLicence().push(this.newFiled1(data));
-    console.log("addFiled1",this.empDetails.value);
   }
   addFiled() {
     this.addLicence().push(this.newFiled());
-    console.log(this.empDetails.value);
   }
   removeFiled(i) {
     const item = <FormArray>this.empDetails.controls['UploadLicenceArr'];
@@ -480,10 +649,8 @@ export class AddEmployeeComponent implements OnInit {
       }),
         map((response: any) => {
           response.data = response.data.filter(option => {
-            console.log("11option>>",val);
             return option.LicenceName.toLowerCase().indexOf(val.toLowerCase()) === 0
           })
-          console.log("response.data>>",response.data);
           
           return response.data;
         })

@@ -316,7 +316,9 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
         isolatedHazard: res.data.isolatedHazard,
         dateHazardIdentify: res.data.dateHazardIdentify,
         eliminateHazardAction: res.data.eliminateHazardAction,
+        signaturePad1: res.data.signaturePad1,
       })
+      this.minDate=res.data.date;
       this.selectedImage = res.data.fileUpload
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;

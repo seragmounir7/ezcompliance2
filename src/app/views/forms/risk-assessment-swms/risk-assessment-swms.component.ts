@@ -225,6 +225,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       signature1: [""],
       signature2: [""]
     });
+    this.riskAssessmentFb.controls.editor.setValue(this.secondEditor);
   }
   get siteControls() {
     return this.riskAssessmentFb.controls
