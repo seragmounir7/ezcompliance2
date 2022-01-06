@@ -1,8 +1,12 @@
 {
   "iconImageFiles": [
     {
-      "iconName": "",
-      "iconPath": ""
+      "iconName": "sm-logo",
+      "iconPath": "assets/img/23.svg"
+    },
+    {
+      "iconName": "logo",
+      "iconPath": "assets/img/whs-icon.svg"
     }
   ],
   "customIcons": [
