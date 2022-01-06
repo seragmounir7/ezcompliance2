@@ -1,7 +1,8 @@
 <form [formGroup]="editTitle" >
     <h2>Edit Control And Action</h2>
-    <textarea   autosize 
-    class="form-control sign"   formControlName="title" ></textarea>
+    <!-- <textarea   autosize 
+    class="form-control sign"   formControlName="title" ></textarea> -->
+    <ckeditor  [editor]="Editor" formControlName="title"></ckeditor>
     <br>
     <div class="row">
         <div class="col-sm-2 offset-8 ">

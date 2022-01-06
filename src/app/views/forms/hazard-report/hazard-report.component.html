@@ -6,7 +6,7 @@
       class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
 <div id='section-to-print'  class="container card px-4 py-4 content-center">
-  <form class="px-4 py-4" [formGroup]="hazardReport">
+  <form class="px-4 py-4" [formGroup]="hazardReport" >
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form </p>
     </div>
@@ -46,7 +46,7 @@
       <div class="col-md-12">
         <div class="mb-3">
           <label for="exampleInputFullname" class="form-label">Full Name<span class="text-danger ">*</span></label>
-          <input type="text" [matAutocomplete]="employee"  name="exampleInputFullname" class="form-control" formControlName="fullName" id="exampleInputFullname"  
+          <input type="text" [matAutocomplete]="employee" autocomplete="off"   name="exampleInputFullname" class="form-control" formControlName="fullName" id="exampleInputFullname"  
             aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
             && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) " />
             <!-- <datalist id="browsers" >
@@ -315,12 +315,12 @@
         </div>
       </div>
     </div>
-    <div class="row py-4 ">
+    <div class="row py-4 pagebreak-print" >
       <div class="col-md-12">
         <h2>Hazard Treatment</h2>
       </div>
       <div class="col-md-12">
-        <table class="table table-bordered text-center">
+        <table class="table table-bordered text-center" >
           <thead>
             <tr>
               <th colspan="7" class="L_1">Risk Level Matrix</th>
@@ -752,10 +752,15 @@
       <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label class="form-label">Name<span class="text-danger ">*</span></label>
-          <input type="fullname" class="form-control" formControlName="name" aria-describedby="emailHelp"
+          <input type="fullname" class="form-control" [matAutocomplete]="employee1" formControlName="name" aria-describedby="emailHelp"
             [class.is-invalid]="hazardReport.get('name')?.hasError('required') 
             && (hazardReport.get('name').dirty || hazardReport.get('name').touched) " />
-          <span *ngIf="
+            <mat-autocomplete #employee1="matAutocomplete" (optionSelected)="employeeData1($event)">
+              <mat-option *ngFor="let option of filteredOptions3 | async ; let i = index " [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-autocomplete>
+            <span *ngIf="
             hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty 
             || hazardReport.get('name').touched) " class="invalid-feedback">
             Name is Required</span>

@@ -238,6 +238,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       signature1: [""],
       signature2: [""]
     });
+    this.riskAssessmentFb.controls.editor.setValue(this.secondEditor);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe()

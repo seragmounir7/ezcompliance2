@@ -19,13 +19,14 @@
             </div>
             <div class="col-8">
               <!-- <p for="exampleFormControlInput1" class="form-Label">Job Task Type</p> -->
-              <textarea autosize
+              <ckeditor  [editor]="Editor" formControlName="title"></ckeditor>
+              <!-- <textarea autosize
           
                 type="text"
                 formControlName="title"
                 class="form-control sign"
                 id="name"
-              ></textarea>
+              ></textarea> -->
             </div>
             <div class="col-1 mt-2">
               <span class="material-icons" (click)="addAction()"
