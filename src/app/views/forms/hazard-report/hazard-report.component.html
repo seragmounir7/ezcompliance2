@@ -862,7 +862,7 @@
             This Field is Required</span>
         </div>
         <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
-        <button *ngIf="check!='print'" class="btn btn-outline-primary my-3" (click)="clear()">
+        <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary my-3" (click)="clear()">
           Clear
         </button>
       </div>
@@ -872,7 +872,7 @@
 
     <br />
     <div class="col-md-2 col-sm-2-print">
-      <button type="submit" *ngIf="check!='print'" class="btn btn-primary btn-block" [disabled]="!hazardReport.valid"
+      <button type="submit" *ngIf="(isPrint | async)===false" class="btn btn-primary btn-block" [disabled]="!hazardReport.valid"
         (click)="onFormSubmit()">Submit</button>
     </div>
   </form>

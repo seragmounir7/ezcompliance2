@@ -3,7 +3,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2'
 
@@ -18,7 +20,11 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
   tempArray: MatTableDataSource <any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private logicalFormInfo: LogicalFormInfoService,public router: Router) { }
+  constructor(private logicalFormInfo: LogicalFormInfoService,
+    public router: Router,
+    private shared:RoleManagementSharedServiceService,
+    private spinner: NgxSpinnerService,
+    ) { }
 
   ngOnInit(): void {
     this.getIncidentReport();
@@ -80,6 +86,7 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
     
      printPage(id)
      {
+      this.shared.printNext(true)
        console.log("check");
        // this.logicalFormInfo.printing.next('print');
        localStorage.setItem("key","print");
@@ -88,11 +95,13 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
        //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
        //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
        
-       let iframe=document.createElement("iframe")
-       iframe.id = "printIframe"
-             iframe.src= environment.stagingUrl+"#/admin/forms/incidentRep/"+id
-             iframe.style.display="none";
-             let body = document.getElementsByTagName("body")
-             body[0].appendChild(iframe)
+      //  let iframe=document.createElement("iframe")
+      //  iframe.id = "printIframe"
+      //        iframe.src= environment.stagingUrl+"#/admin/forms/incidentRep/"+id
+      //        iframe.style.display="none";
+      //        let body = document.getElementsByTagName("body")
+      //        body[0].appendChild(iframe)
+      this.spinner.show()
+      this.router.navigate(['/',{ outlets: {'print': ['print','incidentRep', id]}}])
      }
 }

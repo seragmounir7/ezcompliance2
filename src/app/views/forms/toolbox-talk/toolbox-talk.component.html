@@ -200,7 +200,7 @@
           This Field is Required</span
           >
           </div>
-          <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="clear1()">
+          <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear
           </button>
         </div>
@@ -233,7 +233,7 @@
             </div>
             <div class="my-3 col-6">
               <p for="exampleFormControlInput1" class="form-Label">
-                Topic of discussion<span class="text-danger ">*</span>
+                Comments<span class="text-danger ">*</span>
               </p>
               <textarea
                 type="text"
@@ -350,7 +350,7 @@
             >
           </div>
           <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-Label">Complete<span class="text-danger ">*</span></p>
+            <p for="exampleFormControlInput1" class="form-Label">Completed By<span class="text-danger ">*</span></p>
             <select
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
@@ -439,7 +439,7 @@
           >
 
             </div>
-            <button *ngIf="check!='print'" class="btn btn-outline-primary mt-1" (click)="sign.clear(); clear2(i)">
+            <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1" (click)="sign.clear(); clear2(i)">
               Clear
             </button>
           </div>
@@ -458,7 +458,7 @@
       </ng-container>
     </div>
   </div>
-  <button *ngIf="check!='print'" class="btn btn-primary btn-block mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
+  <button *ngIf="(isPrint | async)===false" class="btn btn-primary btn-block mt-1" type="submit" [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
   align-self: center;">
     Submit
   </button>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
@@ -14,12 +14,14 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+
 @Component({
   selector: 'app-hazard-report',
   templateUrl: './hazard-report.component.html',
   styleUrls: ['./hazard-report.component.scss'],
 })
-export class HazardReportComponent implements OnInit,  AfterViewInit {
+export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
   title = 'hazardReport';
   hazardReport: FormGroup;
   myControl = new FormControl();
@@ -46,6 +48,15 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
   @ViewChild('Signature1') signaturePad1: SignaturePad;
   dataUrl: any;
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  sub: any;
+  isPrint: Observable<any>;
+  @HostListener("window:afterprint",[]) 
+  function(){
+    console.log("Printing completed...");
+    this.router.navigateByUrl("/admin/forms/hazardTable")
+    this.shared.printNext(false)
+   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+} 
   maxDate = new Date();
   minDate = new Date();
   type:any;
@@ -62,7 +73,8 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
     public upload: UploadFileServiceService,
     private activatedRoute: ActivatedRoute,
     private ngZone: NgZone,
-    public forms:SavedformsService
+    public forms:SavedformsService,
+    private shared:RoleManagementSharedServiceService,
   ) {
     this.check = localStorage.getItem('key');
 
@@ -127,12 +139,18 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
 
     });
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("hazard destroy");
+  }
   triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
     this.ngZone.onStable.pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit() {
+  this.isPrint=(this.shared.printObs$ as Observable<any>)
+
     this.activatedRoute.queryParams.subscribe(params => {
       this.type=params['formType'];  
     });
@@ -338,8 +356,9 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
 
   ngAfterViewInit() {
     console.log("check1...",this.check);
-    
-    if (this.check == 'print') {
+    this.sub= this.shared.printObs$.subscribe(res=> {
+      this.check=res
+    if (this.check) {
       setTimeout( () => { 
         window.print();
         console.log("printing....");
@@ -348,6 +367,7 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
      
       
     }
+  })
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -380,17 +400,17 @@ export class HazardReportComponent implements OnInit,  AfterViewInit {
   }
   Consequences: Array<any> = [
     { name: '1-Insignificant', value: 1 },
-    { name: '2-Moderate', value: 2 },
-    { name: '4-Minor', value: 4 },
-    { name: '3-Major', value: 3 },
+    { name: '2-Minor', value: 2 },
+    { name: '3-Moderate', value: 3 },
+    { name: '4-Major', value: 4 },
     { name: '5-Catastrophic', value: 5 },
   ];
 
 
   Likelihood: Array<any> = [
     { name: '1-Rare', value: 1 },
-    { name: '3-Moderate', value: 3 },
     { name: '2-Unlikely', value: 2 },
+    { name: '3-Moderate', value: 3 },
     { name: '4-Likely', value: 4 },
     { name: '5-Almost Certain', value: 5 }
   ];
