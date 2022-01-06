@@ -760,7 +760,13 @@ export class LogicalFormInfoService {
     if(value==''){
           field=''
     }
-    return this.https.get(this.apiUrl + `toolbox/getAll?field=${field}&value=${value}`)
+    return this.https.get(this.apiUrl + `toolbox/getAllNewRecords?field=${field}&value=${value}`)
+  }
+  gettoolBoxHistory(field="",value="",id) {
+    if(value==''){
+          field=''
+    }
+    return this.https.get(this.apiUrl + `toolbox/getRelatedOldData/${id}?field=${field}&value=${value}`)
   }
   getToolboxById(id) {
     return this.https.get(this.apiUrl + 'toolbox/get/' + id)
@@ -973,6 +979,7 @@ export interface JobNumber {
 }
 
 export interface ArrObj {
+  jobNumber?: string;
   siteName: string;
   streetNumber: string;
   streetAddress: string;

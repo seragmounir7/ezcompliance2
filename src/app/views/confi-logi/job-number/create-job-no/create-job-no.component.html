@@ -21,6 +21,17 @@
           <option [value]="item|json" *ngFor="let item of allSites ">{{item.siteName}}</option>
         </select>
       </div>
+      <div class="my-3 col-6">
+        <p for="exampleFormControlInput1" class="form-Label">Enter Custom Job No:</p>
+       <div style="display: flex;">
+         <mat-checkbox #check style="margin: 3%;" (change)="jobNumberChecked($event)"></mat-checkbox>
+         <input type="text" class="form-control" formControlName="jobNumber" val *ngIf="check.checked" [ngClass]="{'is-invalid': jobHasError}">
+         <div class="invalid-feedback">
+           <div>Job Number Is Required!</div>
+         </div>
+
+       </div>
+      </div>
     
     </div>
   

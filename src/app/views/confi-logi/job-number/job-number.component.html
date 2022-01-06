@@ -24,7 +24,7 @@
    
 <!-- Name Column -->
 <ng-container matColumnDef="jobNumber">
-  <th mat-header-cell *matHeaderCellDef > Job Number </th>
+  <th mat-header-cell *matHeaderCellDef mat-sort-header > Job Number </th>
   <td mat-cell *matCellDef="let element"> {{element.jobNumber}} </td>
 </ng-container>
 
@@ -54,7 +54,7 @@
 </ng-container>
 
 <ng-container matColumnDef="customerName">
-  <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
   <td mat-cell *matCellDef="let element"><span class="flex-start"> {{element.customerName}}</span> </td>
 </ng-container>
 

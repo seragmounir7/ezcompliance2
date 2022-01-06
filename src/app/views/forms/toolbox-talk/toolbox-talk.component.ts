@@ -8,7 +8,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-toolbox-talk',
   templateUrl: './toolbox-talk.component.html',
@@ -31,6 +32,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   previousUrl:any;
   @ViewChildren('Signature2') signaturePad2: QueryList<SignaturePad>;
   check: any;
+  isHistory: boolean;
+  returnTo: Observable<string>;
   constructor(
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
@@ -59,6 +62,13 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.isHistory = this.router.url.includes('/tableData\/history')
+    if(this.isHistory){
+      this.returnTo = this.activatedRoute.queryParamMap.pipe(
+       map(param => param.get('returnTo'))
+        )
+      this.returnTo.subscribe(res => console.log(res))
+    }
     this.activatedRoute.queryParams.subscribe(params => {
     this.type=params['formType'];  
   });

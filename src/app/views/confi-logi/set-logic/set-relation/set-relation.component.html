@@ -587,7 +587,10 @@
             <mat-option
               *ngFor="let parameter of allHazards"
               [value]="parameter._id"
-              >{{ parameter.title }}
+              [matTooltip]="span.innerText">
+              
+              <span style="display: none;" #span [innerHTML]="parameter.title"></span>
+            {{ span.innerText }} 
             </mat-option>
           </mat-select>
         </mat-form-field>

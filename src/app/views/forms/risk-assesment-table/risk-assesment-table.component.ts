@@ -70,11 +70,11 @@ export class RiskAssesmentTableComponent implements OnInit {
     //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
 
     
-    let iframe=document.createElement("iframe")
-          iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
-          let body = document.getElementsByTagName("body")
-          body[0].appendChild(iframe)
-    // this.router.navigate(['/',{ outlets: {'print': ['print','riskAssessSWMS', id]}}])
+    // let iframe=document.createElement("iframe")
+    //       iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
+    //       let body = document.getElementsByTagName("body")
+    //       body[0].appendChild(iframe)
+    this.router.navigate(['/',{ outlets: {'print': ['print','riskAssessSWMS', id]}}])
   }
   getToolBox(field="",value="")
   {

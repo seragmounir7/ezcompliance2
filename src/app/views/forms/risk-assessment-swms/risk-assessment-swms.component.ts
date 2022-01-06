@@ -255,31 +255,47 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       this.logicalFormInfo.getAllJurisdiction().pipe(dataMap)]
 
     let allApis =forkJoin(allApiObs$)
-      allApis.subscribe(res => {
-        console.log('forkjoin',res);
-        
-      })
+     
  
     this.addActionSDSRegister();
     if (this.id != "form") {
       this.getAssessmentByid(this.id);
     }else{
-      this.getAllJobTask();
-      this.getAllPPE();
-      this.getAllHighRisk();
-      this.getAllLicence();
-      this.getAllProjectMang();
-      this.getAllJobNumber();
-      this.getAllResidualRiskLevel();
-      this.getAllStaff();
-      this.getAllRiskLevel();
-      this.getAllChemical();
-      this.getAllHazard();
-      this.getAllContrActReq();
-      this.getAllRegulator();
-      this.getAllSafe();
-      this.getAllState();
-      this.getAllJurisdiction();
+      // this.getAllJobTask();
+      // this.getAllPPE();
+      // this.getAllHighRisk();
+      // this.getAllLicence();
+      // this.getAllProjectMang();
+      // this.getAllJobNumber();
+      // this.getAllResidualRiskLevel();
+      // this.getAllStaff();
+      // this.getAllRiskLevel();
+      // this.getAllChemical();
+      // this.getAllHazard();
+      // this.getAllContrActReq();
+      // this.getAllRegulator();
+      // this.getAllSafe();
+      // this.getAllState();
+      // this.getAllJurisdiction();
+      allApis.subscribe((res:any[]) => {
+        console.log('forkjoin',res);
+        this.getAllJobTask(res[0]);
+        this.getAllPPE(res[1]);
+        this.getAllHighRisk(res[2]);
+        this.getAllLicence(res[3]);
+        this.getAllProjectMang(res[4]);
+        this.getAllJobNumber(res[5]);
+        this.getAllResidualRiskLevel(res[6]);
+        this.getAllStaff(res[7]);
+        this.getAllRiskLevel(res[8]);
+        this.getAllChemical(res[9]);
+        this.getAllHazard(res[10]);
+        this.getAllContrActReq(res[11]);
+        this.getAllRegulator(res[12]);
+        this.getAllSafe(res[13]);
+        this.getAllState(res[14]);
+        this.getAllJurisdiction(res[15]);
+      })
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
     //   console.log(res);
@@ -797,7 +813,16 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     //this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
   }
 
-  getAllJobTask() {
+  getAllJobTask(data=[]) {
+    if(data){
+      this.jobTaskData = data;
+      console.log('jobTaskDetails=>', this.jobTaskData);
+      for (let i = 0; i < this.jobTaskData.length; i++) {
+        // this.taskArr[i] = 0;
+        this.jobtask().push(this.jobtaskk(i));
+      }
+      return
+    }
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       this.jobTaskData = res.data;
       console.log('jobTaskDetails=>', this.jobTaskData);
@@ -808,7 +833,17 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getAllPPE() {
+  getAllPPE(data=[]) {
+    if(data){
+      // console.log('PPE=>', res);
+      this.PPEselection = data;
+      for (let i = 0; i < this.PPEselection.length; i++) {
+        this.ppeArr[i] = 0;
+        this.ppe().push(this.ppeSelect(i));
+        this.ppe2().push(this.ppeSelect(i));
+      }
+      return
+    }
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
       // console.log('PPE=>', res);
       this.PPEselection = res.data;
@@ -819,13 +854,27 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  getAllProjectMang() {
+  getAllProjectMang(data=[]) {
+    if(data){
+      this.projectMang = data;
+      return
+    }
     this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
       this.projectMang = res.data;
       // console.log('getAllProjectMang=>', this.projectMang);
     });
   }
-  getAllHighRisk() {
+  getAllHighRisk(data=[]) {
+    if(data){
+      // console.log('Risk=>', res);
+      this.highRiskConstruction = data;
+      for (let i = 0; i < this.highRiskConstruction.length; i++) {
+        this.riskArr[i] = 0;
+        this.riskConstruct().push(this.riskCons(i))
+        this.riskConstruct2().push(this.riskCons(i))
+      }
+      return
+    }
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
       // console.log('Risk=>', res);
       this.highRiskConstruction = res.data;
@@ -846,7 +895,19 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  getAllLicence() {
+  getAllLicence(data=[]) {
+    if(data) {
+      this.licenseAndQualification = data;
+      // console.log(
+      //   'this.licenseAndQualification=>',
+      //   this.licenseAndQualification
+      // );
+      for (let i = 0; i < this.licenseAndQualification.length; i++) {
+        this.licenceArr[i] = 0;
+        this.Licence().push(this.license(i))
+      }
+      return
+    }
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       this.licenseAndQualification = res.data;
       // console.log(
@@ -859,13 +920,21 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  getAllHazard() {
+  getAllHazard(data=[]) {
+    if(data){
+      this.allHazards = data;
+      return
+    }
     this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
       // console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
-  getAllContrActReq() {
+  getAllContrActReq(data=[]) {
+    if (data) {
+      this.allContrlActReq = data;
+      return
+    }
     this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
       // console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
@@ -1128,27 +1197,45 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       console.log('allCOPSelected', this.allCOPSelected, myMap);
     });
   }
-  getAllJobNumber() {
+  getAllJobNumber(data=[]) {
+    if (data) {
+      this.allJobNumbers = data;
+    }
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
       this.allJobNumbers = res.data;
     });
   }
-  getAllStaff() {
+  getAllStaff(data=[]) {
+    if(data){
+      this.staff = data;
+      return
+    }
     this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
       this.staff = res.data;
     });
   }
-  getAllResidualRiskLevel() {
+  getAllResidualRiskLevel(data=[]) {
+    if(data){
+      this.resiRiskLevel = data;
+    }
     this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
       this.resiRiskLevel = res.data;
     });
   }
-  getAllRiskLevel() {
+  getAllRiskLevel(data=[]) {
+    if (data) {
+      this.riskLevel = data;
+      return
+    }
     this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
       this.riskLevel = res.data;
     });
   }
-  getAllChemical() {
+  getAllChemical(data=[]) {
+    if (data) {
+      this.allChemicals = data;
+      return
+    }
     this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
       this.allChemicals = res.data;
 
@@ -1265,7 +1352,11 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
       console.log('The dialog was closed');
     });
   }
-  getAllRegulator() {
+  getAllRegulator(data=[]) {
+    if(data){
+      this.regulatorData = data;
+      return
+    }
     this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
       console.log("this.regulatorData", res.data)
       this.regulatorData = res.data;
@@ -1273,19 +1364,31 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit {
     })
   }
 
-  getAllSafe() {
+  getAllSafe(data=[]) {
+    if(data){
+      this.safety = data
+      return
+    }
     this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
       console.log("this.safety", res)
       this.safety = res.data
     })
   }
-  getAllJurisdiction() {
+  getAllJurisdiction(data=[]) {
+    if(data){
+      this.JurisdictionData = data;
+      return
+    }
     this.logicalFormInfo.getAllJurisdiction().subscribe((res: any) => {
       console.log('JurisdictionData=>', res);
       this.JurisdictionData = res.data;
     });
   }
-  getAllState() {
+  getAllState(data=[]) {
+    if(data){
+      this.states = data;
+      return
+    }
     this.logicalFormInfo.getAllStates().subscribe((res: any) => {
       console.log('getAllStates=>', res);
       this.states = res.data;

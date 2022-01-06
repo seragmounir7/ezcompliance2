@@ -23,6 +23,8 @@ const routes: Routes = [
   { path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent },
   { path: 'riskAssessTable', component: RiskAssesmentTableComponent },
   { path: 'tableData', component: DisplayTableComponent},
+  { path: 'tableData/history/:id', component: DisplayTableComponent},
+  { path: 'tableData/history/toolboxTalk/:id', component: ToolboxTalkComponent},
   { path:'siteinspectiontable', component:SiteInspectionTableComponent},
   {path:'hazardTable',component:HazardFormTableDetailsComponent},
   { path: 'incidentsTable', component:IncidentsTableComponent},

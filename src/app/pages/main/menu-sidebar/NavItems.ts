@@ -60,7 +60,7 @@ export class NavItems {
                 {
                     displayedName: "Forms",
                     icon: "page",
-                    route: "/admin/forms/fillConfigForm/"+0,
+                    route: "/admin/forms/fillConfigForm/0",
                     hasAccess: true
                 }
             ],
