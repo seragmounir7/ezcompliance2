@@ -85,6 +85,9 @@ export class DisplayTableComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
+    if (this.isHistory) {
+      this.getToolBoxHistory(sort.active, sort.direction)
+    }
     this.getToolBox(sort.active, sort.direction)
   }
 
