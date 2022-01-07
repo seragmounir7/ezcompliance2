@@ -5,9 +5,9 @@ import { AddEmployeeComponent } from './employee-registration/add-employee/add-e
 import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 
 const routes: Routes = [
-{path: "", component: CompanyRegistrationComponent },
-{path: "employeeRegistration", component: EmployeeRegistrationComponent},
-{path: "addEmployee/:id", component: AddEmployeeComponent}
+  { path: "", component: CompanyRegistrationComponent },
+  { path: "employeeRegistration", component: EmployeeRegistrationComponent },
+  { path: "addEmployee/:id", component: AddEmployeeComponent }
 ];
 
 @NgModule({

@@ -8,9 +8,9 @@ describe('AddEditProjMangComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddEditProjMangComponent ]
+      declarations: [AddEditProjMangComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

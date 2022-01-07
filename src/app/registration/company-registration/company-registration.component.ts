@@ -36,7 +36,7 @@ export class CompanyRegistrationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   browser(event) {
     console.log('event=>', event);

@@ -1,48 +1,38 @@
-
 <section>
-    <form [formGroup]="addRole">
-      <div mat-dialog-title class="dialog-title">
+  <form [formGroup]="addRole">
+    <div mat-dialog-title class="dialog-title">
       <h2 class="text-center pt-2">
-        <p style="text-align: center"*ngIf="data.action==='new'"> Add Role Management</p>
+        <p style="text-align: center" *ngIf="data.action==='new'"> Add Role Management</p>
         <p style="text-align: center" *ngIf="data.action==='edit'"> Update Role Management</p>
       </h2>
-      <button type="button" class="close" 
-      style="font-size: 30px;"
-    
-    (click)="close()" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
+      <button type="button" class="close" style="font-size: 30px;" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <hr />
+    <div>
+      <div class="row">
+        <div class="col-12 mt-2 mb-2">
+          <p for="exampleFormControlInput1" class="form-Label">Role</p>
+          <input type="text" formControlName="role" style="height: 50px" class="form-control" id="heading" />
+        </div>
       </div>
-      <hr />
-      <div>
-        <div class="row">
-          <div class="col-12 mt-2 mb-2">
-            <p for="exampleFormControlInput1" class="form-Label">Role</p>
-            <input
-              type="text"
-              formControlName="role"
-              style="height: 50px"
-              class="form-control"
-              id="heading"
-            />
-          </div>
-       </div>
-       <br>
-       
-        </div>
-      
-        <br>
-        <div class="row">
-          <div class="col d-flex justify-content-center">
-            <button class="btn btn-primary " (click)="onSubmit()" [disabled]="addRole.invalid " *ngIf="data.action==='new'"> 
-              Submit
-            </button>
-            <button class="btn btn-primary " (click)="onSubmit()" [disabled]="addRole.invalid " *ngIf="data.action==='edit'"> 
-              Update
-            </button>
-          </div>
-        </div>
-      
-    </form>
- </section>
-  
+      <br>
+
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <button class="btn btn-primary " (click)="onSubmit()" [disabled]="addRole.invalid " *ngIf="data.action==='new'">
+          Submit
+        </button>
+        <button class="btn btn-primary " (click)="onSubmit()" [disabled]="addRole.invalid "
+          *ngIf="data.action==='edit'">
+          Update
+        </button>
+      </div>
+    </div>
+
+  </form>
+</section>

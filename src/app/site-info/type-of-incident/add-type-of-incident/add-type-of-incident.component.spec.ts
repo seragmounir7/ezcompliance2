@@ -8,9 +8,9 @@ describe('AddTypeOfIncidentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddTypeOfIncidentComponent ]
+      declarations: [AddTypeOfIncidentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

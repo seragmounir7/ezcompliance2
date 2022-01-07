@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private toastr: ToastrService,
     private appService: AppService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.renderer.addClass(document.querySelector('app-root'), 'register-page');

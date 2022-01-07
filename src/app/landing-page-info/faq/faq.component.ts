@@ -52,7 +52,7 @@ export class FAQComponent implements OnInit {
       this.ELEMENT_DATA = faqData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort=this.sort;
+      this.dataSource.sort = this.sort;
     });
 
   }

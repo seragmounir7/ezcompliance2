@@ -22,23 +22,23 @@ export class ChemicalComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  allChemical: any[]=[];
+  allChemical: any[] = [];
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private setTitle: SetTitleService,
     private logicalFormInfoService: LogicalFormInfoService,
     private spinner: NgxSpinnerService
-    ) { }
+  ) { }
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Chemical Info');
     this.getAllChemical()
   }
-  getAllChemical(field="",value=""){
-    this.logicalFormInfoService.getAllChemical(field,value).subscribe((res:any)=> {
+  getAllChemical(field = "", value = "") {
+    this.logicalFormInfoService.getAllChemical(field, value).subscribe((res: any) => {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -50,13 +50,13 @@ export class ChemicalComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       //this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
-   })
+    })
   }
- 
+
   edit(element) {
     const dialogRef = this.dialog.open(EditChemicalComponent, {
       width: "550px",
-     // height:'50%',
+      // height:'50%',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -81,8 +81,8 @@ export class ChemicalComponent implements OnInit {
         // this.model.attributes.splice(i,1);
         this.spinner.show()
         this.logicalFormInfoService.deleteChemical(item._id).subscribe((res => {
-        this.getAllChemical()
-        this.spinner.hide()
+          this.getAllChemical()
+          this.spinner.hide()
         }))
       }
     });
@@ -92,8 +92,8 @@ export class ChemicalComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllChemical(sort.active,sort.direction)
-     }
- 
+
+    this.getAllChemical(sort.active, sort.direction)
+  }
+
 }

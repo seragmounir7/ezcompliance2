@@ -8,9 +8,9 @@ describe('AddWhsManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddWhsManagerComponent ]
+      declarations: [AddWhsManagerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

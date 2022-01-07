@@ -8,9 +8,9 @@ describe('JobNumberComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JobNumberComponent ]
+      declarations: [JobNumberComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

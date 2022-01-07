@@ -34,7 +34,7 @@ export class EditWorkComponent implements OnInit {
   }
   ngOnInit(): void {
     this.workDetail = this.fb.group({
-        title: ['', Validators.required],
+      title: ['', Validators.required],
       image: ['', Validators.required],
       description: ['', Validators.required],
     });; if (this.data.action == "edit") {
@@ -53,7 +53,7 @@ export class EditWorkComponent implements OnInit {
 
     this.upload.upload(formdata).subscribe((res) => {
 
-      this.selectedImage= res.files[0];
+      this.selectedImage = res.files[0];
 
     });
   }

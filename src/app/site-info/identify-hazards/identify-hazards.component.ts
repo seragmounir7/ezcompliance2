@@ -21,7 +21,7 @@ export class IdentifyHazardsComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -34,9 +34,9 @@ export class IdentifyHazardsComponent implements OnInit {
   constructor(
     private snack: SnackbarService,
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog,
-    private setTitle:SetTitleService
-  ) {}
+    private dialog: MatDialog,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit(): void {
     this.getAllHazards();
@@ -44,8 +44,8 @@ export class IdentifyHazardsComponent implements OnInit {
 
   }
 
-  getAllHazards(field="",value="") {
-    this.logicalFormInfo.getAllHazards(field,value).subscribe((res:any) => {
+  getAllHazards(field = "", value = "") {
+    this.logicalFormInfo.getAllHazards(field, value).subscribe((res: any) => {
       console.log('getAllHazards=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -55,13 +55,13 @@ export class IdentifyHazardsComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-     // this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;
     });
   }
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditHazardComponent, {
       width: "550px",
       data: element,
@@ -85,17 +85,17 @@ export class IdentifyHazardsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteHazards(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteHazards(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllHazards();
+
           });
-          console.log('deleted res', res);
-          this.getAllHazards();
-            
-        });
       }
     });
   }
@@ -103,11 +103,11 @@ export class IdentifyHazardsComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  copySuccess(){
+  copySuccess() {
     console.log('copy successfull')
     this.snack.openSnackBar('Copied to clipboard');
   }
-  sortData(sort:Sort) {
-    this.getAllHazards(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllHazards(sort.active, sort.direction)
+  }
 }

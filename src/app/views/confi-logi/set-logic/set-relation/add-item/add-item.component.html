@@ -1,4 +1,4 @@
-<form [formGroup]="addItem" >
+<form [formGroup]="addItem">
     <h2 *ngIf="dataRec.type==='highRisk'"> Add High Risk Construction parameter</h2>
     <h2 *ngIf="dataRec.type==='ppe'"> Add PPE</h2>
     <h2 *ngIf="dataRec.type==='licence'"> Add Licence </h2>
@@ -8,19 +8,17 @@
     <h2 *ngIf="dataRec.type==='resRiskLevel'"> Add Residual Risk</h2>
     <h2 *ngIf="dataRec.type==='perResbl'"> Add Person Responsible </h2>
     <h2 *ngIf="dataRec.type==='codeOfPract'"> Add Code of Practice </h2>
-  
-    <textarea   autosize 
-    class="form-control sign" placeholder="Enter your text......" formControlName="title" ></textarea>
-  
+
+    <textarea autosize class="form-control sign" placeholder="Enter your text......" formControlName="title"></textarea>
+
     <br>
-    
+
     <div class="row">
         <div class="col-sm-2 offset-8 ">
             <button mat-raised-button (click)="closeDialog()">Close</button>
         </div>
         <div class="col-sm-2  ">
-            <button mat-raised-button  [disabled]="!addItem.valid"(click)="onFormSubmit()">Add</button>
+            <button mat-raised-button [disabled]="!addItem.valid" (click)="onFormSubmit()">Add</button>
         </div>
     </div>
-</form>   
-
+</form>

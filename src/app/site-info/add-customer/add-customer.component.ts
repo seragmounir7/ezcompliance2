@@ -1,4 +1,4 @@
-import  Swal  from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,31 +16,31 @@ import { MatSort, Sort } from '@angular/material/sort';
 })
 export class AddCustomerComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'customerName','customerContact','customerContactPhone','customerEmail', 'action'];
+  displayedColumns: string[] = ['index', 'customerName', 'customerContact', 'customerContactPhone', 'customerEmail', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor( 
-    private setTitle: SetTitleService, 
+  constructor(
+    private setTitle: SetTitleService,
     private dialog: MatDialog,
     private logicalFormInfoService: LogicalFormInfoService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getAllCustomers()
     this.setTitle.setTitle('WHS-Add Customer');
-    
+
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllCustomers(field="",value=""){
-    this.logicalFormInfoService.getAllCustomer(field,value).subscribe((res:any) => {
+  getAllCustomers(field = "", value = "") {
+    this.logicalFormInfoService.getAllCustomer(field, value).subscribe((res: any) => {
       console.log(res)
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
-//this.dataSource.sort = this.sort;
+      //this.dataSource.sort = this.sort;
     })
   }
 
@@ -63,31 +63,31 @@ export class AddCustomerComponent implements OnInit {
   // }
 
   openDialog(id) {
-		let dialogRef = this.dialog.open(AddingCustComponent, {
-      height:'600px',
-      width:'700px',
-    
-			data: {
-				action: "new",
-				userId: id,
-			},
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-      if(result === 'ok' ){
+    let dialogRef = this.dialog.open(AddingCustComponent, {
+      height: '600px',
+      width: '700px',
+
+      data: {
+        action: "new",
+        userId: id,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'ok') {
         this.getAllCustomers()
       }
-			console.log("CustomerInfoComponent -> openDialog -> result", result);
-			
-			console.log("The dialog was closed");
-		});
-	}
+      console.log("CustomerInfoComponent -> openDialog -> result", result);
+
+      console.log("The dialog was closed");
+    });
+  }
   edit(element) {
     console.log(element)
     const dialogRef = this.dialog.open(EditCustComponent, {
-      height:'700px',
-      width:'750px',
-  
-            // height:'400px',
+      height: '700px',
+      width: '750px',
+
+      // height:'400px',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -127,7 +127,7 @@ export class AddCustomerComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllCustomers(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllCustomers(sort.active, sort.direction)
+  }
 }

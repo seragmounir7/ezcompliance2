@@ -15,7 +15,7 @@ export class EditTaskComponent implements OnInit {
   editTitle: FormGroup;
   dataRec: any;
 
-  categories=[];
+  categories = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,23 +27,23 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("this.dataRec",this.dataRec);
-    
+    console.log("this.dataRec", this.dataRec);
+
     this.editTitle = this.fb.group({
       title: [this.dataRec.title, Validators.required],
-      tradeCategoryId:[this.dataRec.tradeCategoryId._id, Validators.required],
+      tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],
     });
-    this.getAllLicenceCat() 
+    this.getAllLicenceCat()
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value,
+
+    let data = {
+      title: this.editTitle.get('title').value,
       // PPE:this.dataRec.PPE,
       // codeOfPractice:this.dataRec.codeOfPractice,
       // licence:this.dataRec.licence,
       // risk:this.dataRec.risk,
-      tradeCategoryId:this.editTitle.get('tradeCategoryId').value,
+      tradeCategoryId: this.editTitle.get('tradeCategoryId').value,
     }
     this.logicalFormInfo
       .updateJobTask(data, this.dataRec._id)
@@ -55,10 +55,10 @@ export class EditTaskComponent implements OnInit {
           title: 'Parameter Edited successfully',
           showConfirmButton: false,
           timer: 1200,
-        });  
-          });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }
@@ -68,6 +68,6 @@ export class EditTaskComponent implements OnInit {
       this.categories = res.data;
       console.log('categories=>', res.data);
     });
- 
+
   }
 }

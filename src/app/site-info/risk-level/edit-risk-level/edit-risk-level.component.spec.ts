@@ -8,9 +8,9 @@ describe('EditRiskLevelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditRiskLevelComponent ]
+      declarations: [EditRiskLevelComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

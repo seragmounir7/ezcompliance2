@@ -19,10 +19,10 @@ import { templateJitUrl } from '@angular/compiler';
 export class DynamicFormComponent implements OnInit {
   @ViewChildren('Signature') SignaturePad: QueryList<SignaturePad>;
   @ViewChild('projectManager') projectManager: ElementRef;
-  projectMang:any;
-  isHidden=false;
-  check=false;
-  configData:any;
+  projectMang: any;
+  isHidden = false;
+  check = false;
+  configData: any;
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
     minWidth: 1,
@@ -259,10 +259,10 @@ export class DynamicFormComponent implements OnInit {
   report = false;
   reports: any = [];
   riskAssessmentFb!: FormGroup;
-  previewform:FormGroup;
-  allJobNumbers:any;
+  previewform: FormGroup;
+  allJobNumbers: any;
   formNameRecieved = '';
-  states:any;
+  states: any;
   constructor(
     public router: Router,
     private spinner: NgxSpinnerService,
@@ -272,35 +272,34 @@ export class DynamicFormComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.riskAssessmentFb = this.fb.group({
-      siteName:[''],
+      siteName: [''],
       customerName: [''],
       streetNo: [''],
       streetAddr: [''],
       subUrb: [''],
       statesSWMS: [''],
       custConct: [''],
-      custConctPh:[''],
+      custConctPh: [''],
       custEmail: [''],
       jobNumber: ['']
     });
-    this.previewform= this.fb.group({
-      siteName:[''],
+    this.previewform = this.fb.group({
+      siteName: [''],
       customerName: [''],
       streetNo: [''],
       streetAddr: [''],
       subUrb: [''],
       statesSWMS: [''],
       custConct: [''],
-      custConctPh:[''],
+      custConctPh: [''],
       custEmail: [''],
       jobNumber: ['']
     });
-   }
-   onChange2(eve)
-   { 
-     this.isHidden=eve.target.checked;
-     console.log("eve",eve.target.checked);
-   }
+  }
+  onChange2(eve) {
+    this.isHidden = eve.target.checked;
+    console.log("eve", eve.target.checked);
+  }
   ngOnInit() {
     this.getAllProjectMang();
     this.getAllState();
@@ -322,7 +321,7 @@ export class DynamicFormComponent implements OnInit {
           attributes: modelFields,
         };
         this.model.push(modelRow);
-        console.log("model",this.model);
+        console.log("model", this.model);
       }
     }
     if (sessionStorage.getItem('type') == 'edit') {
@@ -339,7 +338,7 @@ export class DynamicFormComponent implements OnInit {
         this.model = [];
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
-        this.isHidden=res.data.check;
+        this.isHidden = res.data.check;
         // this.configData=res.data.configure[0];
         this.riskAssessmentFb.patchValue(res.data.configure[0]);
         res.data.htmlObject.forEach((item) => {
@@ -366,8 +365,8 @@ export class DynamicFormComponent implements OnInit {
         this.model = res.data.htmlObject;
         // this.riskAssessmentFb.patchValue(res.data.configure[0])
         this.previewform.patchValue(res.data.configure[0])
-        this.isHidden=res.data.check;
-        console.log("is hidden",this.isHidden);
+        this.isHidden = res.data.check;
+        console.log("is hidden", this.isHidden);
         this.spinner.hide();
       });
     }
@@ -589,8 +588,8 @@ export class DynamicFormComponent implements OnInit {
     });
   }
   jobNoSel() {
-    console.log("this.riskAssessmentFb.get('jobNumber').value",this.riskAssessmentFb.get('jobNumber').value);
-    
+    console.log("this.riskAssessmentFb.get('jobNumber').value", this.riskAssessmentFb.get('jobNumber').value);
+
     this.allJobNumbers.forEach((item) => {
       if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
         console.log('Id found', item);
@@ -613,8 +612,8 @@ export class DynamicFormComponent implements OnInit {
   }
 
   jobNoSel1() {
-    console.log("this.riskAssessmentFb.get('jobNumber').value",this.riskAssessmentFb.get('jobNumber').value);
-    
+    console.log("this.riskAssessmentFb.get('jobNumber').value", this.riskAssessmentFb.get('jobNumber').value);
+
     this.allJobNumbers.forEach((item) => {
       if (this.previewform.get('jobNumber').value === item._id) {
         console.log('Id found', item);
@@ -653,15 +652,13 @@ export class DynamicFormComponent implements OnInit {
 
   initReport() {
     //  console.log('model.attributes=>', this.model);
-    this.configData={...this.riskAssessmentFb.value}
-    console.log("config",this.configData);
-    console.log("hidden",this.isHidden);
-    if(this.configData && this.isHidden)
-    {
-      console.log("check hidden",this.isHidden);
-      
-      if(this.type=='add')
-      {
+    this.configData = { ...this.riskAssessmentFb.value }
+    console.log("config", this.configData);
+    console.log("hidden", this.isHidden);
+    if (this.configData && this.isHidden) {
+      console.log("check hidden", this.isHidden);
+
+      if (this.type == 'add') {
         this.previewform.patchValue({
           siteName: this.configData.siteName,
           customerName: this.configData.customerName,
@@ -675,8 +672,7 @@ export class DynamicFormComponent implements OnInit {
           jobNumber: this.configData.jobNumber
         });
       }
-      else
-      {
+      else {
         this.previewform.patchValue({
           siteName: this.configData.siteName,
           customerName: this.configData.customerName,
@@ -691,7 +687,7 @@ export class DynamicFormComponent implements OnInit {
         });
       }
     }
-    this.check=true;
+    this.check = true;
     // this.isHidden=true;
     this.report = true;
     this.formData = [];
@@ -898,12 +894,12 @@ export class DynamicFormComponent implements OnInit {
     if (this.model[j].attributes[i].tableRows.length > 1)
       this.model[j].attributes[i].tableRows.pop();
   }
-  setProjectManager(value,e){
-    if(value === 'projectManagerSWMS'){
+  setProjectManager(value, e) {
+    if (value === 'projectManagerSWMS') {
       this.riskAssessmentFb.get('projectManager').setValue(e.target.value);
     }
-    if(value === 'projectManager'){
-      console.log('setProjectManager==>',this.projectManager)
+    if (value === 'projectManager') {
+      console.log('setProjectManager==>', this.projectManager)
       this.riskAssessmentFb.get('projectManagerSWMS').setValue(e.target.value);
     }
   }
@@ -917,87 +913,82 @@ export class DynamicFormComponent implements OnInit {
     this.model[i].attributes[j].tableHeading[l] = e.target.value;
   }
   addForm() {
-    console.log("model",this.model);
-    
-    if(!this.isHidden)
-     {
-       console.log("isHidden",this.isHidden);
-       
-       this.riskAssessmentFb.reset();
-     }
+    console.log("model", this.model);
+
+    if (!this.isHidden) {
+      console.log("isHidden", this.isHidden);
+
+      this.riskAssessmentFb.reset();
+    }
     if (this.type == 'add') {
       console.log('add', this.model);
-let tempModel=[];
-this.model.forEach(element => {
-  if(element.attributes.length){
-    tempModel.push(element)
-  }
-});
-console.log(tempModel);
-if(tempModel.length)
-{
-       const d=[];
-       d.push(this.riskAssessmentFb.value);
-       console.log("d",d);
-       
-      let data = {
-        title: this.formNameRecieved,
-        frequency: sessionStorage.getItem('frequency'),
-        htmlObject:tempModel ,
-        configure:d,
-        check:this.isHidden
-      };
-    console.log("data",data);
-
-      this.dynamicFormsService.addForm(data).subscribe((res) => {
-        Swal.fire('Form added successfully');
-        this.router.navigate(['/admin/dynamic/dynamicFormsList']);
-        this.riskAssessmentFb.reset();
-      })
-    }
-    else
-    {
-      Swal.fire('Please Add Atleast One Field');
-    }
-    }
-    if (this.type == 'edit') {
-      console.log('edit');
-      let tempModel=[];
-      this.model.forEach((element,i) => {
-        console.log("element",element);
-         element.attributes[0].value=""
-        if(element.attributes.length){
+      let tempModel = [];
+      this.model.forEach(element => {
+        if (element.attributes.length) {
           tempModel.push(element)
         }
       });
       console.log(tempModel);
-      if(tempModel.length)
-      {
-      const d=[];
-      d.push(this.riskAssessmentFb.value);
-      console.log("d",d);
-      let data = {
-        title: this.formNameRecieved,
-        htmlObject: tempModel,
-        enable: this.enableForm,
-        frequency: this.frequency,
-        configure:d,
-        check:this.isHidden
-      };
+      if (tempModel.length) {
+        const d = [];
+        d.push(this.riskAssessmentFb.value);
+        console.log("d", d);
 
-      this.dynamicFormsService
-        .editForm(data, this.formIdRec)
-        .subscribe((res) => {
-          Swal.fire('Form edited successfully');
+        let data = {
+          title: this.formNameRecieved,
+          frequency: sessionStorage.getItem('frequency'),
+          htmlObject: tempModel,
+          configure: d,
+          check: this.isHidden
+        };
+        console.log("data", data);
+
+        this.dynamicFormsService.addForm(data).subscribe((res) => {
+          Swal.fire('Form added successfully');
           this.router.navigate(['/admin/dynamic/dynamicFormsList']);
           this.riskAssessmentFb.reset();
-        });
+        })
+      }
+      else {
+        Swal.fire('Please Add Atleast One Field');
+      }
     }
-    else
-    {
-      Swal.fire('Please Add Atleast One Field');
+    if (this.type == 'edit') {
+      console.log('edit');
+      let tempModel = [];
+      this.model.forEach((element, i) => {
+        console.log("element", element);
+        element.attributes[0].value = ""
+        if (element.attributes.length) {
+          tempModel.push(element)
+        }
+      });
+      console.log(tempModel);
+      if (tempModel.length) {
+        const d = [];
+        d.push(this.riskAssessmentFb.value);
+        console.log("d", d);
+        let data = {
+          title: this.formNameRecieved,
+          htmlObject: tempModel,
+          enable: this.enableForm,
+          frequency: this.frequency,
+          configure: d,
+          check: this.isHidden
+        };
+
+        this.dynamicFormsService
+          .editForm(data, this.formIdRec)
+          .subscribe((res) => {
+            Swal.fire('Form edited successfully');
+            this.router.navigate(['/admin/dynamic/dynamicFormsList']);
+            this.riskAssessmentFb.reset();
+          });
+      }
+      else {
+        Swal.fire('Please Add Atleast One Field');
+      }
     }
-  }
   }
   duplicate(i, j) {
     console.log('duplicate', i, j, this.model[i].attributes);

@@ -8,9 +8,9 @@ describe('SetLogicComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SetLogicComponent ]
+      declarations: [SetLogicComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

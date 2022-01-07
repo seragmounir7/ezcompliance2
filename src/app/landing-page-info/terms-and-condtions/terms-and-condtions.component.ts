@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
@@ -65,28 +65,28 @@ export class TermsAndCondtionsComponent implements OnInit {
   getTerms() {
     this.mode = 'Terms';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-    //  this.termData = data.data[0];
-    this.dataSource.data = res.data
-    this.dataSource.paginator = this.paginator
-    let termData = res.data[0].subModules;
-    termData.forEach((element, index) => {
-      element.index = index + 1; //adding index
-    });
-    this.ELEMENTS_DATA = termData;
-    this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
-    this.dataSources.paginator = this.paginator;
-    this.dataSources.sort=this.sort;
+      //  this.termData = data.data[0];
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+      let termData = res.data[0].subModules;
+      termData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENTS_DATA = termData;
+      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+      this.dataSources.paginator = this.paginator;
+      this.dataSources.sort = this.sort;
     });
   }
   editForm(id, name: boolean, i?: any) {
     this.spinner.show();
-  
+
     this.myId = id;
     this.isEdit = true;
     this.mode = 'Terms';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       this.termData = data.data[0];
-     
+
       let dialogRef = this.dialog.open(EditTermsAndCondtionsComponent, {
         data: {
           action: 'edit',
@@ -100,14 +100,14 @@ export class TermsAndCondtionsComponent implements OnInit {
         height: '800px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        
+
 
         if ((result = 'true')) {
           this.ngOnInit();
         }
-        
+
       });
-      
+
       this.spinner.hide();
     });
   }
@@ -115,9 +115,9 @@ export class TermsAndCondtionsComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      
+
       this.termData = data.data[0];
-   
+
       let dialogRef = this.dialog.open(AddTermsAndCondtionsComponent, {
         data: {
           action: 'new',
@@ -129,17 +129,17 @@ export class TermsAndCondtionsComponent implements OnInit {
         height: '700px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-      
+
         if ((result = 'true')) {
           this.ngOnInit();
         }
       });
-      
+
       this.spinner.hide();
     });
   }
   delete(item) {
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.title}"?`,
@@ -150,10 +150,10 @@ export class TermsAndCondtionsComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       this.spinner.show()
+        this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-         this.getTerms();
+          this.getTerms();
           this.ngOnInit();
           this.spinner.hide()
         })

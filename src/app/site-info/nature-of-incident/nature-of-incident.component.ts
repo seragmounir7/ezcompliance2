@@ -17,7 +17,7 @@ export class NatureOfIncidentComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,20 +28,20 @@ export class NatureOfIncidentComponent implements OnInit {
   /////////////mat table end////////////////
 
   constructor(
-   
+
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog,
-    private setTitle:SetTitleService
-  ) {}
+    private dialog: MatDialog,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit(): void {
     this.getAllNatureOfInc();
     this.setTitle.setTitle('WHS-Nature Of Incident');
-    
+
   }
 
-  getAllNatureOfInc(field="",value="") {
-    this.logicalFormInfo.getAllNatOfInc(field,value).subscribe((res:any) => {
+  getAllNatureOfInc(field = "", value = "") {
+    this.logicalFormInfo.getAllNatOfInc(field, value).subscribe((res: any) => {
       console.log('NatOfIncAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -58,7 +58,7 @@ export class NatureOfIncidentComponent implements OnInit {
     });
   }
 
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditNatureIncidentComponent, {
       width: "550px",
       data: element,
@@ -82,18 +82,18 @@ export class NatureOfIncidentComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteNatOfInc(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteNatOfInc(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllNatureOfInc();
+
           });
-          console.log('deleted res', res);
-          this.getAllNatureOfInc();
-            
-        });
-      
+
       }
     });
   }
@@ -103,7 +103,7 @@ export class NatureOfIncidentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllNatureOfInc(sort.active,sort.direction)
-     }
+
+    this.getAllNatureOfInc(sort.active, sort.direction)
+  }
 }

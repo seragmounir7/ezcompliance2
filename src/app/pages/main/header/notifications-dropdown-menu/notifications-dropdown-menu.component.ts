@@ -22,10 +22,10 @@ export class NotificationsDropdownMenuComponent implements OnInit {
   //   }
   // }
 
-  constructor() {}
+  constructor() { }
   // constructor(private elementRef: ElementRef, private renderer: Rende/rer2) {}
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // toggleDropdownMenu() {
   //   if (this.dropdownMenu.nativeElement.classList.contains('show')) {

@@ -46,7 +46,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
+
     this.addJobNumberForm = this.fb.group({
       jobNumber: [''],
       siteName: ['', Validators.required],
@@ -60,7 +60,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
       customerEmail: [{ value: '', disabled: true }, Validators.required],
     })
     this.addJobNumberForm.controls.jobNumber.valueChanges.subscribe(res => {
-      console.log('this.addJobNumberForm.controls.jobNumber',this.addJobNumberForm.controls.jobNumber.errors,this.addJobNumberForm.invalid)
+      console.log('this.addJobNumberForm.controls.jobNumber', this.addJobNumberForm.controls.jobNumber.errors, this.addJobNumberForm.invalid)
     })
     this.logicalFormInfoService.getAllSite().subscribe((res: any) => {
       this.jobHasError = false
@@ -129,12 +129,12 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
   }
   jobNumberChecked(e: MatCheckboxChange) {
     console.log(e)
-    if(e.checked){
-      this.addJobNumberForm.get('jobNumber').setErrors(Validators.required) 
-    }else{
-       this.addJobNumberForm.get('jobNumber').setErrors(null)
+    if (e.checked) {
+      this.addJobNumberForm.get('jobNumber').setErrors(Validators.required)
+    } else {
+      this.addJobNumberForm.get('jobNumber').setErrors(null)
     }
-    
-    console.log('this.addJobNumberForm.controls.jobNumber',this.addJobNumberForm.controls.jobNumber.errors,this.addJobNumberForm.invalid);   
+
+    console.log('this.addJobNumberForm.controls.jobNumber', this.addJobNumberForm.controls.jobNumber.errors, this.addJobNumberForm.invalid);
   }
 }

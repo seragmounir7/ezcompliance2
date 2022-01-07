@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
   title = 'adminlte';
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private spinner: NgxSpinnerService,
     private authService: AuthService,
-    private sessionManagementService:SessionManagementService
-    ) {
+    private sessionManagementService: SessionManagementService
+  ) {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
     });

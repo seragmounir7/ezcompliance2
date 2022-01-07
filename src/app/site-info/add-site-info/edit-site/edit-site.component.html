@@ -1,77 +1,49 @@
-<section [formGroup]="editSitesForm" >
-    <div>
-      <div mat-dialog-title class="dialog-title">
+<section [formGroup]="editSitesForm">
+  <div>
+    <div mat-dialog-title class="dialog-title">
       <h2> Update Site Information</h2>
-      <button type="button" class="close" 
-      style="font-size: 30px;"
-        (click)="close()" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
+      <button type="button" class="close" style="font-size: 30px;" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
     </div>
     <hr>
-      <div class="row">
-      <div class="my-3 col-6">
-          <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="siteName"
-            id="siteName"
-          />
-        </div>
-   </div>
     <div class="row">
-        <div class="my-3 col-3">
-          <p for="exampleFormControlInput1" class="form-Label">Street Number</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="streetNumber"
-            id="streetNumber"
-          />
-        </div>
-        <div class="my-3 col-3">
-          <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
-          <textarea
-            type="text"
-            class="form-control"
-            formControlName="streetAddress"
-            id="streetAddress"
-          ></textarea>
-        </div>
-        <div class="my-3 col-4">
-          <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="suburb"
-            id="suburb"
-          />
-        </div>
-        <div class="my-3 col-2">
-            <p for="exampleFormControlInput1" class="form-label">State</p>
-          <select
-          class="form-select form-control col"
-          id="stateId"
-          aria-label="Default select example"
-          formControlName="stateId"
-
-        >
-        <option selected hidden>Select</option>
-        <option *ngFor ="let item of allState" [value]="item._id">{{item.title}}</option>
-        </select>
-     
-        </div>
+      <div class="my-3 col-6">
+        <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
+        <input type="text" class="form-control" formControlName="siteName" id="siteName" />
       </div>
-      <hr>
-    <div >
-    <button class="btn btn-primary" (click)="onSubmit()">
-      Update
-    </button>
     </div>
- 
-      
+    <div class="row">
+      <div class="my-3 col-3">
+        <p for="exampleFormControlInput1" class="form-Label">Street Number</p>
+        <input type="text" class="form-control" formControlName="streetNumber" id="streetNumber" />
+      </div>
+      <div class="my-3 col-3">
+        <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
+        <textarea type="text" class="form-control" formControlName="streetAddress" id="streetAddress"></textarea>
+      </div>
+      <div class="my-3 col-4">
+        <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
+        <input type="text" class="form-control" formControlName="suburb" id="suburb" />
+      </div>
+      <div class="my-3 col-2">
+        <p for="exampleFormControlInput1" class="form-label">State</p>
+        <select class="form-select form-control col" id="stateId" aria-label="Default select example"
+          formControlName="stateId">
+          <option selected hidden>Select</option>
+          <option *ngFor="let item of allState" [value]="item._id">{{item.title}}</option>
+        </select>
+
+      </div>
     </div>
-   
-    </section>
-    
+    <hr>
+    <div>
+      <button class="btn btn-primary" (click)="onSubmit()">
+        Update
+      </button>
+    </div>
+
+
+  </div>
+
+</section>

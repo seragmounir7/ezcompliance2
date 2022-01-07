@@ -1,46 +1,46 @@
 <div class="container px-4 py-4 bg-white">
- 
-    <div mat-dialog-title class="dialog-title">
-        <!-- <h2>Add Job Task</h2> -->
-        <h2 *ngIf="!dataRec">Add Job Task </h2>
-        <h2 *ngIf="dataRec">Edit Job Task</h2>
-     <button type="button" class="close"  style="font-size: 30px;"
-      (click)="close()" aria-label="Close">
-    <span aria-hidden="true">×</span>
-</button>
-    
-   </div>
-    <br />
 
-     <div class="row " *ngIf="Add"  [formGroup]="addjob">
-     <div class="col-6">
-        <input type="text" formControlName="title" class="form-control sign" id="title" />
-      </div>
-      <div class="col-6">
-        <select class="form-select form-control" aria-label="Default select example" formControlName="tradeCategoryId">
-          <option value="" selected hidden>Select category</option>
-          <option *ngFor="let tradeCat of licenceCatAll" [value]="tradeCat._id">{{tradeCat.title}}</option>
-         </select>
-      </div>
+  <div mat-dialog-title class="dialog-title">
+    <!-- <h2>Add Job Task</h2> -->
+    <h2 *ngIf="!dataRec">Add Job Task </h2>
+    <h2 *ngIf="dataRec">Edit Job Task</h2>
+    <button type="button" class="close" style="font-size: 30px;" (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
 
+  </div>
+  <br />
+
+  <div class="row " *ngIf="Add" [formGroup]="addjob">
+    <div class="col-6">
+      <input type="text" formControlName="title" class="form-control sign" id="title" />
     </div>
-    <div class="row "*ngIf="Edit" [formGroup]="jobTaskDetails" >
-      <div class="col-6">
-         <input type="text" formControlName="title" class="form-control sign" id="title" />
-       </div>
-       <div class="col-6">
-         <select class="form-select form-control" aria-label="Default select example" formControlName="tradeCategoryId">
-           <option value="" selected hidden>Select category</option>
-           <option *ngFor="let tradeCat of licenceCatAll" [value]="tradeCat._id">{{tradeCat.title}}</option>
-          </select>
-       </div>
- 
-     </div>
-    <br />
-   <hr>
-    <div class="col-md-2">
-      <button mat-raised-button color="primary"*ngIf="Edit" [disabled]="!jobTaskDetails.valid"(click)="onFormSubmit()">Update</button>
-      <button mat-raised-button color="primary"  *ngIf="Add" [disabled]="!addjob.valid" (click)="addForm()">Add</button>
+    <div class="col-6">
+      <select class="form-select form-control" aria-label="Default select example" formControlName="tradeCategoryId">
+        <option value="" selected hidden>Select category</option>
+        <option *ngFor="let tradeCat of licenceCatAll" [value]="tradeCat._id">{{tradeCat.title}}</option>
+      </select>
     </div>
-  
+
+  </div>
+  <div class="row " *ngIf="Edit" [formGroup]="jobTaskDetails">
+    <div class="col-6">
+      <input type="text" formControlName="title" class="form-control sign" id="title" />
+    </div>
+    <div class="col-6">
+      <select class="form-select form-control" aria-label="Default select example" formControlName="tradeCategoryId">
+        <option value="" selected hidden>Select category</option>
+        <option *ngFor="let tradeCat of licenceCatAll" [value]="tradeCat._id">{{tradeCat.title}}</option>
+      </select>
+    </div>
+
+  </div>
+  <br />
+  <hr>
+  <div class="col-md-2">
+    <button mat-raised-button color="primary" *ngIf="Edit" [disabled]="!jobTaskDetails.valid"
+      (click)="onFormSubmit()">Update</button>
+    <button mat-raised-button color="primary" *ngIf="Add" [disabled]="!addjob.valid" (click)="addForm()">Add</button>
+  </div>
+
 </div>

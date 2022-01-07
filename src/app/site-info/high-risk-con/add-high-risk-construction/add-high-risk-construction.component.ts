@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
@@ -45,17 +45,17 @@ export class AddHighRiskConstructionComponent implements OnInit {
   //     Swal.fire('Parameter added successfully');
   //   });
   // }
-  
+
   riskConstr!: FormGroup;
-  formData: any;numberOfLineBreaks: any;
-;
+  formData: any; numberOfLineBreaks: any;
+  ;
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private logicalFormInfo:LogicalFormInfoService
-  ) { 
-    this.riskConstr=this.fb.group({
-     // mode:"JobTask",
+    private logicalFormInfo: LogicalFormInfoService
+  ) {
+    this.riskConstr = this.fb.group({
+      // mode:"JobTask",
       arrObj: this.fb.array([]),
     });
   }
@@ -73,39 +73,39 @@ export class AddHighRiskConstructionComponent implements OnInit {
   }
   newAction(): FormGroup {
     return this.fb.group({
-     
+
       title: ['', Validators.required],
     });
   }
-  
+
   removeSafetyModule(i) {
     const item = <FormArray>this.riskConstr.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
-    
+
     }
   }
   onFormSubmit() {
     // console.log(this.riskConstr.value);
-    let data={
-      arrObj:this.riskConstr.get('arrObj').value
+    let data = {
+      arrObj: this.riskConstr.get('arrObj').value
     }
     // console.log(data);
-    
+
     this.logicalFormInfo.addMultipleRisk(data).subscribe((data) => {
       console.log('Risk=>', data);
       Swal.fire({
         title: 'Parameter Added successfully',
         showConfirmButton: false,
         timer: 1200,
-      });  
-      this.router.navigate(['/admin/siteInfo/highRisk']);    
-    },(err)=>{console.error(err);} 
-  
+      });
+      this.router.navigate(['/admin/siteInfo/highRisk']);
+    }, (err) => { console.error(err); }
+
     );
-}
-calcHeight(value) {
-  this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
-  console.log("numberOfLineBreaks",this.numberOfLineBreaks)
-}
+  }
+  calcHeight(value) {
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
+    console.log("numberOfLineBreaks", this.numberOfLineBreaks)
+  }
 }

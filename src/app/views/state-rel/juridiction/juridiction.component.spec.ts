@@ -8,9 +8,9 @@ describe('JuridictionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JuridictionComponent ]
+      declarations: [JuridictionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

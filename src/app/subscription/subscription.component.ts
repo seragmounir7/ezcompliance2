@@ -8,10 +8,10 @@ import { SetTitleService } from '../utils/services/set-title.service';
 })
 export class SubscriptionComponent implements OnInit {
 
-  constructor(private setTitle:SetTitleService) { }
+  constructor(private setTitle: SetTitleService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.setTitle.setTitle('WHS-Subscription');
-  } 
+  }
 
 }

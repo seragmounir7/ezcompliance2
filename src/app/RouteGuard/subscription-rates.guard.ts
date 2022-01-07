@@ -9,15 +9,15 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class SubscriptionRatesGuard implements CanActivate {
-    constructor(private toastr: ToastrService){}
+  constructor(private toastr: ToastrService) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!environment.allRouteTemp){
-        
-        let activeToast = this.toastr.error('You Are Not allowed to access this route.', '');
-      }
+    if (!environment.allRouteTemp) {
+
+      let activeToast = this.toastr.error('You Are Not allowed to access this route.', '');
+    }
     return environment.allRouteTemp;
   }
-  
+
 }

@@ -21,23 +21,23 @@ export class ResidualRiskLevelComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  allResidualRiskLevel: any[]=[];
-  
+  allResidualRiskLevel: any[] = [];
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private setTitle: SetTitleService,
     private logicalFormInfoService: LogicalFormInfoService,
     private spinner: NgxSpinnerService
-    ) { }
+  ) { }
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-ResidualRiskLevel Info');
     this.getAllResidualRiskLevel()
   }
-  getAllResidualRiskLevel(field="",value=""){
-    this.logicalFormInfoService.getAllResidual(field,value).subscribe((res:any)=> {
+  getAllResidualRiskLevel(field = "", value = "") {
+    this.logicalFormInfoService.getAllResidual(field, value).subscribe((res: any) => {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -49,13 +49,13 @@ export class ResidualRiskLevelComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
-   })
+    })
   }
- 
+
   edit(element) {
     const dialogRef = this.dialog.open(EditResidualRiskLevelComponent, {
       width: "550px",
-     // height:'50%',
+      // height:'50%',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -80,15 +80,15 @@ export class ResidualRiskLevelComponent implements OnInit {
         // this.model.attributes.splice(i,1);
         this.spinner.show()
         this.logicalFormInfoService.deleteResidual(item._id).subscribe((res => {
-        this.getAllResidualRiskLevel()
-        this.spinner.hide()
+          this.getAllResidualRiskLevel()
+          this.spinner.hide()
         }))
       }
     });
   }
 
   sortData(sort: Sort) {
- 
-    this.getAllResidualRiskLevel(sort.active,sort.direction)
-     }
+
+    this.getAllResidualRiskLevel(sort.active, sort.direction)
+  }
 }

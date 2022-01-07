@@ -8,9 +8,9 @@ describe('AddHappyClientComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddHappyClientComponent ]
+      declarations: [AddHappyClientComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -158,7 +158,7 @@ export class DashboardComponent implements OnInit {
       draggable: true,
     },
   ];
-  constructor(private spinner: NgxSpinnerService) {}
+  constructor(private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.spinner.show();

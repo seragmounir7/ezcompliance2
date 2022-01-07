@@ -62,7 +62,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
     console.log(this.navItems)
   }
 
-  openMenuOnLoad(){
+  openMenuOnLoad() {
     let rLink = this.router.url;
     this.navItems.map((x: NavItem) => {
       // x.hasAccess = true

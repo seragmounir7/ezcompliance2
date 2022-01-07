@@ -27,16 +27,16 @@ export class EditHighRiskConstructionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("this.dataRec",this.dataRec);
-    
+    console.log("this.dataRec", this.dataRec);
+
     this.editTitle = this.fb.group({
       title: [this.dataRec.title, Validators.required],
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value,
+
+    let data = {
+      title: this.editTitle.get('title').value,
     }
     this.logicalFormInfo
       .updateRisk(data, this.dataRec._id)
@@ -47,10 +47,10 @@ export class EditHighRiskConstructionComponent implements OnInit {
           title: 'Parameter Edited successfully',
           showConfirmButton: false,
           timer: 1200,
-        });  
-          });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

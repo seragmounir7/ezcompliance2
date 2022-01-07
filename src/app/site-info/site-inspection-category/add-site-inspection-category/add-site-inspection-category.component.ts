@@ -15,7 +15,7 @@ export class AddSiteInspectionCategoryComponent implements OnInit {
     private fb: FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.siteInspectionCategoryAdd = this.fb.group({

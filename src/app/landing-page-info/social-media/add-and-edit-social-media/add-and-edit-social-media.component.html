@@ -1,63 +1,42 @@
-
-  <div class="container px-4 py-4 bg-white">
-    <form [formGroup]='socialMediaDetail'  >
-      <h2 class="text-center">Add Social Media </h2>
-      <br />
-      <hr>
+<div class="container px-4 py-4 bg-white">
+  <form [formGroup]='socialMediaDetail'>
+    <h2 class="text-center">Add Social Media </h2>
+    <br />
+    <hr>
+    <ng-container>
       <ng-container>
-        <ng-container>
-          <div class="row" >
-           
-            <div class="my-3 col-6">
-                <p for="exampleFormControlInput1" class="form-Label">Facebook</p>
-              <input
-                type="text"
-                formControlName="facebook"
-                class="form-control"
-                id="facebook"
-              />
-            </div>
-            <div class="my-3 col-6">
-                <p for="exampleFormControlInput1" class="form-Label">Twitter</p>
-              <input
-                type="text"
-                formControlName="twitter"
-                class="form-control"
-                id="twitter"
-              />
-            </div>
-            </div>
-            <div class="row" >
-            <div class="my-3 col-6">
-                <p for="exampleFormControlInput1" class="form-Label">Youtube</p>
-              <input
-                type="text"
-                formControlName="youtube"
-                class="form-control"
-                id="youtube"
-              />
-            </div>
-            <div class="my-3 col-6">
-              <p for="exampleFormControlInput1" class="form-Label">Instagram</p>
-            <input
-              type="text"
-              formControlName="instagram"
-              class="form-control"
-              id="instagram"
-            />
+        <div class="row">
+
+          <div class="my-3 col-6">
+            <p for="exampleFormControlInput1" class="form-Label">Facebook</p>
+            <input type="text" formControlName="facebook" class="form-control" id="facebook" />
+          </div>
+          <div class="my-3 col-6">
+            <p for="exampleFormControlInput1" class="form-Label">Twitter</p>
+            <input type="text" formControlName="twitter" class="form-control" id="twitter" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="my-3 col-6">
+            <p for="exampleFormControlInput1" class="form-Label">Youtube</p>
+            <input type="text" formControlName="youtube" class="form-control" id="youtube" />
+          </div>
+          <div class="my-3 col-6">
+            <p for="exampleFormControlInput1" class="form-Label">Instagram</p>
+            <input type="text" formControlName="instagram" class="form-control" id="instagram" />
           </div>
 
-          </div>
-  
-          <hr />
-        </ng-container>
+        </div>
+
+        <hr />
       </ng-container>
-      <br />
-  
-      <div class="col-md-2">
-        <button mat-raised-button *ngIf="!data1"  [disabled]="!socialMediaDetail.valid" (click)="onSubmit()">Add</button>
-        <button mat-raised-button  *ngIf="data1" [disabled]="!socialMediaDetail.valid" (click)="onFormUpdate($event)">Update</button>
-      </div>
-    </form>
-  </div>
-  
+    </ng-container>
+    <br />
+
+    <div class="col-md-2">
+      <button mat-raised-button *ngIf="!data1" [disabled]="!socialMediaDetail.valid" (click)="onSubmit()">Add</button>
+      <button mat-raised-button *ngIf="data1" [disabled]="!socialMediaDetail.valid"
+        (click)="onFormUpdate($event)">Update</button>
+    </div>
+  </form>
+</div>

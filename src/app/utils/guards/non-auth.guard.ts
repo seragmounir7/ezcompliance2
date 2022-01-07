@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NonAuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

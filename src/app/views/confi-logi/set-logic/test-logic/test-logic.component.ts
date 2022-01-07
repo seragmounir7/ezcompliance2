@@ -26,56 +26,56 @@ export class TestLogicComponent implements OnInit {
   allCodeOfPract = [];
   isLinear = false;
   jobTaskId = null;
-  stepperList:any[]=[
+  stepperList: any[] = [
     {
-      name:'HighRisk Construction',
-      i:1,
-      ref:'test'
+      name: 'HighRisk Construction',
+      i: 1,
+      ref: 'test'
     },
     {
-      name:'PPE',
-      i:0,
-      ref:'test2'
+      name: 'PPE',
+      i: 0,
+      ref: 'test2'
     },
     {
-      name:'Licence',
-      i:0,
+      name: 'Licence',
+      i: 0,
     },
     {
-      name:'Identify Hazards',
-      i:0,
+      name: 'Identify Hazards',
+      i: 0,
     },
     {
-      name:'Risk Level',
-      i:0,
+      name: 'Risk Level',
+      i: 0,
     },
     {
-      name:'Control Action Required',
-      i:0,
+      name: 'Control Action Required',
+      i: 0,
     },
     {
-      name:'Code of Practice',
-      i:0,
+      name: 'Code of Practice',
+      i: 0,
     },
     {
-      name:'Residule Risk Level',
-      i:0,
+      name: 'Residule Risk Level',
+      i: 0,
     },
     {
-      name:'Code of Practice',
-      i:0,
+      name: 'Code of Practice',
+      i: 0,
     },
     {
-      name:'Chemical related Task',
-      i:0,
+      name: 'Chemical related Task',
+      i: 0,
     },
     {
-      name:'Person Responsible',
-      i:0,
+      name: 'Person Responsible',
+      i: 0,
     }
   ]
 
-  count:number=0
+  count: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -83,8 +83,8 @@ export class TestLogicComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService
-  ) {}
-  
+  ) { }
+
   ngOnInit(): void {
     this.JobTaskDetail = this.fb.group({
       highRiskConstr: [''],
@@ -106,7 +106,7 @@ export class TestLogicComponent implements OnInit {
         this.jobTask = res.data;
         console.log(
           'this.jobTask ',
-          this.jobTask 
+          this.jobTask
         );
         this.getLicenceByTradeCat(this.jobTask.tradeCategoryId);
 
@@ -115,7 +115,7 @@ export class TestLogicComponent implements OnInit {
             highRiskConstr: this.jobTask.risk,
             PPE: this.jobTask.PPE,
             codeOfPract: this.jobTask.PPE,
-           LicenceCat: this.jobTask.licence,
+            LicenceCat: this.jobTask.licence,
             identifyHazrds: this.jobTask.identifyHazard,
             contrActReq: this.jobTask.controlActionRequired,
             riskLevel: this.jobTask.riskLevel,
@@ -171,12 +171,12 @@ export class TestLogicComponent implements OnInit {
     });
   }
   getAllCodeOfPractice() {
-   
-    this.logicalFormInfo.getAllCOP().subscribe((res:any) => {
+
+    this.logicalFormInfo.getAllCOP().subscribe((res: any) => {
       console.log('codeOfPractice=>', res);
-   this.allCodeOfPract=res.data;
+      this.allCodeOfPract = res.data;
     });
- 
+
   }
 
   getAllHazard() {
@@ -201,29 +201,29 @@ export class TestLogicComponent implements OnInit {
   }
   setRelation() {
     console.log(this.JobTaskDetail.value);
-    let allContrlActReqTitle=[];
-    let temp1=this.JobTaskDetail.get('contrActReq').value;
+    let allContrlActReqTitle = [];
+    let temp1 = this.JobTaskDetail.get('contrActReq').value;
     this.allContrlActReq.forEach(element1 => {
       temp1.forEach(element2 => {
-        if(element1._id===element2){
+        if (element1._id === element2) {
           allContrlActReqTitle.push(element1.title)
         }
       });
     });
-    let allHazardsTitle=[];
-    let temp2=this.JobTaskDetail.get('identifyHazrds').value;
+    let allHazardsTitle = [];
+    let temp2 = this.JobTaskDetail.get('identifyHazrds').value;
     this.allHazards.forEach(element1 => {
       temp2.forEach(element2 => {
-        if(element1._id===element2){
+        if (element1._id === element2) {
           allHazardsTitle.push(element1.title)
         }
       });
     });
-    let allCOPTitle=[];
-    let temp3=this.JobTaskDetail.get('codeOfPract').value;
+    let allCOPTitle = [];
+    let temp3 = this.JobTaskDetail.get('codeOfPract').value;
     this.allCodeOfPract.forEach(element1 => {
       temp3.forEach(element2 => {
-        if(element1._id===element2){
+        if (element1._id === element2) {
           allCOPTitle.push(element1.title)
         }
       });
@@ -232,7 +232,7 @@ export class TestLogicComponent implements OnInit {
       title: this.jobTask.title,
       risk: this.JobTaskDetail.get('highRiskConstr').value,
       PPE: this.JobTaskDetail.get('PPE').value,
-      tradeCategoryId:this.jobTask.tradeCategoryId,
+      tradeCategoryId: this.jobTask.tradeCategoryId,
       licence: this.JobTaskDetail.get('LicenceCat').value,
       identifyHazard: this.JobTaskDetail.get('identifyHazrds').value,
       controlActionRequired: this.JobTaskDetail.get('contrActReq').value,
@@ -342,34 +342,34 @@ export class TestLogicComponent implements OnInit {
     });
   }
 
-  prev(item){
-    if(this.count != this.stepperList.length+1){
+  prev(item) {
+    if (this.count != this.stepperList.length + 1) {
       this.count--
       this.stepperList.map(x => {
         x.i = 0
-      }) 
+      })
       this.stepperList[this.count].i = 1
-      
+
     }
   }
-  next(item){
-    if(this.count != this.stepperList.length-1){
+  next(item) {
+    if (this.count != this.stepperList.length - 1) {
       this.count++
       this.stepperList.map(x => {
         x.i = 0
-      }) 
+      })
       this.stepperList[this.count].i = 1
-      
+
     }
   }
-  handleClick(index){
+  handleClick(index) {
     console.log(index)
     this.count = index
     this.stepperList.map(x => {
       x.i = 0
-    }) 
+    })
     this.stepperList[this.count].i = 1
   }
 
-ctx = {estimate: 'this.totalEstimate'};
+  ctx = { estimate: 'this.totalEstimate' };
 }

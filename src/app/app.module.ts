@@ -1,6 +1,6 @@
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { registerLocaleData, CommonModule ,HashLocationStrategy, LocationStrategy, DatePipe} from '@angular/common';
+import { registerLocaleData, CommonModule, HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
@@ -35,7 +35,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { TextareaAutoresizeDirective } from './Directives/textarea-autoresize.directive';
 import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
-import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
@@ -57,14 +57,14 @@ registerLocaleData(localeEn, 'en-EN');
     MessagesDropdownMenuComponent,
     NotificationsDropdownMenuComponent,
     UserDropdownMenuComponent,
-   
-    
+
+
     // ViewFormsComponent,
     NotFoundPageComponent,
     TextareaAutoresizeDirective,
-    
+
     PrintLayoutComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -98,15 +98,17 @@ registerLocaleData(localeEn, 'en-EN');
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     TextareaAutoresizeDirective,
-     { provide: LocationStrategy, 
-      useClass: HashLocationStrategy },
-      {
-        provide:HTTP_INTERCEPTORS,
-        useClass:SpinnerInterceptor,
-        multi:true
-      },
-      DatePipe
-    ],
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    },
+    DatePipe
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

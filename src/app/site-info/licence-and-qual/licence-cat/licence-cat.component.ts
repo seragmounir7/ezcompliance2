@@ -1,7 +1,7 @@
 import { EditLicenceCatComponent } from './edit-licence-cat/edit-licence-cat.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {  ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -19,7 +19,7 @@ export class LicenceCatComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,14 +28,14 @@ export class LicenceCatComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllLicenceCat();
   }
 
-  getAllLicenceCat(field="",value="") {
-    this.logicalFormInfo.getAllLicenceCat(field,value).subscribe((res) => {
+  getAllLicenceCat(field = "", value = "") {
+    this.logicalFormInfo.getAllLicenceCat(field, value).subscribe((res) => {
       console.log('getAllLicenceCat=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -49,10 +49,10 @@ export class LicenceCatComponent implements OnInit {
       // this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(EditLicenceCatComponent, {
       width: "550px",
       data: element,
@@ -77,17 +77,17 @@ export class LicenceCatComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteLicenceCat(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Category Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteLicenceCat(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Category Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllLicenceCat();
+
           });
-          console.log('deleted res', res);
-          this.getAllLicenceCat();
-            
-        });
       }
     });
   }
@@ -96,7 +96,7 @@ export class LicenceCatComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllLicenceCat(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllLicenceCat(sort.active, sort.direction)
+  }
 }

@@ -8,9 +8,9 @@ describe('SiteInspectionTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SiteInspectionTableComponent ]
+      declarations: [SiteInspectionTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

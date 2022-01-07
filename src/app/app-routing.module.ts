@@ -22,16 +22,17 @@ import { HazardReportComponent } from './views/forms/hazard-report/hazard-report
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'print',
+  {
+    path: 'print',
     outlet: 'print',
     component: PrintLayoutComponent,
     children: [
       { path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent },
-      { path: 'siteInspect/:id', component:SiteInspectionComponent },
-      { path: 'toolboxTalk/:id', component:ToolboxTalkComponent },
-      { path: 'incidentRep/:id', component:IncidentReportComponent },
-      { path: 'hazardRep/:id', component:HazardReportComponent },
-      
+      { path: 'siteInspect/:id', component: SiteInspectionComponent },
+      { path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
+      { path: 'incidentRep/:id', component: IncidentReportComponent },
+      { path: 'hazardRep/:id', component: HazardReportComponent },
+
     ]
   },
 
@@ -72,11 +73,11 @@ const routes: Routes = [
             (m) => m.LandingPageInfoModule
           ),
       },
-      { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule),canActivate:[DynamicFormAccessGuard] },
-      { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule),canActivate:[DynamicFormAccessGuard] },
-      { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule),canActivate:[DynamicFormAccessGuard] },
-      { path: 'stateRel', loadChildren: () => import('./views/state-rel/state-rel.module').then(m => m.StateRelModule),canActivate:[DynamicFormAccessGuard] },
-      { path: 'roleMangement', loadChildren: () => import('./role-management/role-management.module').then(m => m.RoleManagementModule),canActivate:[DynamicFormAccessGuard] },
+      { path: 'siteInfo', loadChildren: () => import('./site-info/site-info.module').then(m => m.SiteInfoModule), canActivate: [DynamicFormAccessGuard] },
+      { path: 'subscrpt', loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule), canActivate: [DynamicFormAccessGuard] },
+      { path: 'confiLogi', loadChildren: () => import('./views/confi-logi/confi-logi.module').then(m => m.ConfiLogiModule), canActivate: [DynamicFormAccessGuard] },
+      { path: 'stateRel', loadChildren: () => import('./views/state-rel/state-rel.module').then(m => m.StateRelModule), canActivate: [DynamicFormAccessGuard] },
+      { path: 'roleMangement', loadChildren: () => import('./role-management/role-management.module').then(m => m.RoleManagementModule), canActivate: [DynamicFormAccessGuard] },
       {
         path: 'savedForms',
         loadChildren: () =>

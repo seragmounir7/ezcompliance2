@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class TextareaAutoresizeDirective {
 
-  
+
   constructor(private elementRef: ElementRef) { }
 
   @HostListener(':input')

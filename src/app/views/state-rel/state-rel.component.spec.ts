@@ -8,9 +8,9 @@ describe('StateRelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StateRelComponent ]
+      declarations: [StateRelComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

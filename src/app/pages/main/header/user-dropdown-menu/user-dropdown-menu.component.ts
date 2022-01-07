@@ -30,7 +30,7 @@ export class UserDropdownMenuComponent implements OnInit {
     private renderer: Renderer2,
     private appService: AppService,
     private router: Router
-  ) {}
+  ) { }
   userName = '';
   phoneNo = '';
   ngOnInit(): void {

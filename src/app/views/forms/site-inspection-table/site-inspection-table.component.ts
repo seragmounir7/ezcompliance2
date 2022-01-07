@@ -14,26 +14,25 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
   styleUrls: ['./site-inspection-table.component.scss']
 })
 export class SiteInspectionTableComponent implements OnInit {
-  displayedColumns: string[] = ['position','customerName',"phone","email","site",'action'];
+  displayedColumns: string[] = ['position', 'customerName', "phone", "email", "site", 'action'];
   showDatas: any;
-  tempArray: MatTableDataSource <any>;
+  tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
     private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
     private spinner: NgxSpinnerService,
-    private shared:RoleManagementSharedServiceService,
-    ) { }
+    private shared: RoleManagementSharedServiceService,
+  ) { }
 
   ngOnInit(): void {
     this.getsiteInspection();
   }
   ngAfterViewInit() {
-   
+
   }
-  delete(id)
-  {
+  delete(id) {
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete `,
@@ -45,60 +44,56 @@ export class SiteInspectionTableComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo.deleteSiteInspection(id).subscribe((res) => {
-            Swal.fire({
-              title: 'Deleted successfully',
-              showConfirmButton: false,
-              timer: 1200,
-            });
-            console.log('deleted res', res);
-            this.getsiteInspection();
+          Swal.fire({
+            title: 'Deleted successfully',
+            showConfirmButton: false,
+            timer: 1200,
           });
+          console.log('deleted res', res);
+          this.getsiteInspection();
+        });
       }
     });
-   
+
   }
-  getsiteInspection(field="",value="")
-  {
-    this.logicalFormInfo.getAllSiteInspection(field,value).subscribe((res:any)=>
-    {
-      console.log("res",res.data);
-      
-      this.showDatas= res.data.map(x => {
+  getsiteInspection(field = "", value = "") {
+    this.logicalFormInfo.getAllSiteInspection(field, value).subscribe((res: any) => {
+      console.log("res", res.data);
+
+      this.showDatas = res.data.map(x => {
         console.log(x)
-    return {
-      ...x,
-      _id:x._id,
-    
-    }
-    })
-    console.log("res", this.showDatas);
-    this.showDatas.forEach((element,i) => {
-      return this.showDatas[i].index= i
-    });
+        return {
+          ...x,
+          _id: x._id,
+
+        }
+      })
+      console.log("res", this.showDatas);
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
+      });
 
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort; 
-      console.log("get res",this.showDatas);
+      this.tempArray.sort = this.sort;
+      console.log("get res", this.showDatas);
     })
   }
-  edit(id)
-  {
-    this.router.navigate(["/admin/forms/siteInspect/"+id]);
+  edit(id) {
+    this.router.navigate(["/admin/forms/siteInspect/" + id]);
   }
 
-  sortData(sort:Sort){
-    this.getsiteInspection(sort.active,sort.direction)
+  sortData(sort: Sort) {
+    this.getsiteInspection(sort.active, sort.direction)
 
   }
 
-  printPage(id)
-  {
+  printPage(id) {
     this.shared.printNext(true)
     console.log("check");
     // this.logicalFormInfo.printing.next('print');
     localStorage.clear();
-    localStorage.setItem("key","print");
+    localStorage.setItem("key", "print");
     // $("<iframe>")                             // create a new iframe element
     //     .hide()                               // make it invisible
     //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
@@ -114,10 +109,10 @@ export class SiteInspectionTableComponent implements OnInit {
     //         this.spinner.hide();
     //       }, 3500);
     this.spinner.show()
-    this.router.navigate(['/',{ outlets: {'print': ['print','siteInspect', id]}}])
+    this.router.navigate(['/', { outlets: { 'print': ['print', 'siteInspect', id] } }])
   }
-  
 
-  
+
+
 }
 

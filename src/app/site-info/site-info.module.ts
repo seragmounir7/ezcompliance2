@@ -52,7 +52,7 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-residual-risk-level/edit-residual-risk-level.component';
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
-import {AutosizeModule} from 'ngx-autosize';
+import { AutosizeModule } from 'ngx-autosize';
 import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component';
 import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
 import { EditSiteInspectionCategoryComponent } from './site-inspection-category/edit-site-inspection-category/edit-site-inspection-category.component';
@@ -115,7 +115,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ProjectManagerComponent,
     AddEditProjMangComponent,
     StaffComponent,
-    
+
     RiskLevelComponent,
     ResidualRiskLevelComponent,
     ChemicalComponent,
@@ -151,7 +151,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AddWhsManagerComponent,
     AddManagerComponent,
     EditManagerComponent,
-   
+
   ],
 
   imports: [
@@ -165,4 +165,4 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     CKEditorModule
   ],
 })
-export class SiteInfoModule {}
+export class SiteInfoModule { }

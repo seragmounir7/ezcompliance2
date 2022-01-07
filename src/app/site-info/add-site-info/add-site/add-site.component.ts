@@ -11,51 +11,51 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-site.component.scss']
 })
 export class AddSiteComponent implements OnInit {
-allState:any=[];
+  allState: any = [];
   addSitesForm;
-  numberOfLineBreaks:any;
-  constructor( 
+  numberOfLineBreaks: any;
+  constructor(
     private dialogRef: MatDialogRef<AddSiteComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any,
-    private fb:FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getAllStates();
     this.addSitesForm = this.fb.group({
-      siteName:['',Validators.required],
-      streetNumber:['',Validators.required],
-      streetAddress:['',Validators.required],
-      suburb:['',Validators.required],
-      stateId:['',Validators.required],
+      siteName: ['', Validators.required],
+      streetNumber: ['', Validators.required],
+      streetAddress: ['', Validators.required],
+      suburb: ['', Validators.required],
+      stateId: ['', Validators.required],
     })
   }
   getAllStates() {
     this.logicalFormInfoService.getAllStates().subscribe((res) => {
       console.log('getAllStates=>', res);
-  this.allState=res.data;
+      this.allState = res.data;
     });
- 
+
   }
 
-    onSubmit(){
-      console.log(this.addSitesForm.value)
-      this.logicalFormInfoService.addSite(this.addSitesForm.value).subscribe(res => {
-        console.log(res);
-        this.dialogRef.close('true');
-        Swal.fire({
-          title: 'Site Added successfully',
-          showConfirmButton: false,
-          timer: 1200,
-        });
+  onSubmit() {
+    console.log(this.addSitesForm.value)
+    this.logicalFormInfoService.addSite(this.addSitesForm.value).subscribe(res => {
+      console.log(res);
+      this.dialogRef.close('true');
+      Swal.fire({
+        title: 'Site Added successfully',
+        showConfirmButton: false,
+        timer: 1200,
       });
-    }
-    close() {
-      this.dialogRef.close();
+    });
+  }
+  close() {
+    this.dialogRef.close();
   }
   calcHeight(value) {
-    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
-    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
- }
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
+    console.log("numberOfLineBreaks", this.numberOfLineBreaks)
+  }
 }

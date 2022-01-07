@@ -8,9 +8,9 @@ describe('AddAndEditNatureIncidentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddAndEditNatureIncidentComponent ]
+      declarations: [AddAndEditNatureIncidentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

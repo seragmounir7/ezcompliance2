@@ -58,8 +58,8 @@
               <mat-icon >launch</mat-icon>
           </span>
       </a> -->
-        <div  *ngIf="!isHistory" style="display: flex; justify-content: space-around;">
-          
+        <div *ngIf="!isHistory" style="display: flex; justify-content: space-around;">
+
           <span mat-icon-button class="material-icons" matTooltip="Edit" (click)="edit(element._id)">
             edit
           </span>
@@ -69,10 +69,11 @@
           <span class="material-icons" matTooltip="Delete" (click)="delete(element._id)">
             delete
           </span>
-          <span class="material-icons" matTooltip="Delete" [routerLink]="['/admin/forms/tableData/history/'+element._id]" routerLinkActive="router-link-active" >
+          <span class="material-icons" matTooltip="Delete"
+            [routerLink]="['/admin/forms/tableData/history/'+element._id]" routerLinkActive="router-link-active">
             history
           </span>
-          
+
         </div>
         <div *ngIf="isHistory" style="display: flex; justify-content: space-around;">
           <span class="material-icons" matTooltip="View Form" (click)="view(element._id)">

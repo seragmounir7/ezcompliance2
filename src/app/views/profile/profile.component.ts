@@ -8,7 +8,7 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(public appService: AppService, private setTitle:SetTitleService) {}
+  constructor(public appService: AppService, private setTitle: SetTitleService) { }
 
   ngOnInit() {
     this.setTitle.setTitle('WHS-Profile');

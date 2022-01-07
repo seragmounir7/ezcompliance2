@@ -8,9 +8,9 @@ describe('AddJobTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddJobTaskComponent ]
+      declarations: [AddJobTaskComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

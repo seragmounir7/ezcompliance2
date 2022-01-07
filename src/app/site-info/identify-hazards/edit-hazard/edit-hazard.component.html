@@ -1,6 +1,6 @@
-<form [formGroup]="editTitle" >
+<form [formGroup]="editTitle">
     <h2>Edit Hazard</h2>
-    <ckeditor  [editor]="Editor" formControlName="title"></ckeditor>
+    <ckeditor [editor]="Editor" formControlName="title"></ckeditor>
     <!-- <textarea   autosize 
     class="form-control sign"   formControlName="title" ></textarea> -->
     <br>
@@ -9,7 +9,7 @@
             <button mat-raised-button (click)="closeDialog()">Close</button>
         </div>
         <div class="col-sm-2  ">
-            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
+            <button mat-raised-button [disabled]="!editTitle.valid" (click)="onFormSubmit()">Update</button>
         </div>
     </div>
-</form>   
+</form>

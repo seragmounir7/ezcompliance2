@@ -148,7 +148,7 @@ export class HeaderInfoComponent implements OnInit {
   refreshList(): void {
     this.retrieveTutorials({ page: this.page, pageSize: this.pageSize });
   }
-  retrieveTutorials(params: any): void {}
+  retrieveTutorials(params: any): void { }
   service: any;
   getHeaderById() {
     this.url.getHeaderBYId().subscribe((data) => {

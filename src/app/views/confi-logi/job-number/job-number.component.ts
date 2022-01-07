@@ -31,7 +31,7 @@ export class JobNumberComponent implements OnInit {
     'customerName',
     'customerContact',
     //'customerContactPhone',
-   // 'customerEmail',
+    // 'customerEmail',
     /* 'edit', */
     'action',
   ];
@@ -47,17 +47,17 @@ export class JobNumberComponent implements OnInit {
     private dialog: MatDialog,
     private setTitle: SetTitleService,
     private logicalFormInfoService: LogicalFormInfoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Add Site Info');
     this.getAllJobNumber();
   }
-  getAllJobNumber(field="",value="") {
-    this.logicalFormInfoService.getAllJobNumber(field,value).subscribe((res: any) => {
+  getAllJobNumber(field = "", value = "") {
+    this.logicalFormInfoService.getAllJobNumber(field, value).subscribe((res: any) => {
       console.log(res);
       this.dataSource = res.data;
-      console.log("getAllJobNumber",this.dataSource);
+      console.log("getAllJobNumber", this.dataSource);
       this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
     });
@@ -88,15 +88,15 @@ export class JobNumberComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('CustomerInfoComponent -> openDialog -> result', result);
-     console.log("result",result);
-     if(result ==="success"){
-      this.getAllJobNumber();
-      Swal.fire({
-        title: 'Job Number created successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });
-     }
+      console.log("result", result);
+      if (result === "success") {
+        this.getAllJobNumber();
+        Swal.fire({
+          title: 'Job Number created successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      }
       console.log('The dialog was closed');
     });
   }
@@ -138,7 +138,7 @@ export class JobNumberComponent implements OnInit {
     });
   }
   sortData(sort: Sort) {
- 
-    this.getAllJobNumber(sort.active,sort.direction)
-     }
+
+    this.getAllJobNumber(sort.active, sort.direction)
+  }
 }

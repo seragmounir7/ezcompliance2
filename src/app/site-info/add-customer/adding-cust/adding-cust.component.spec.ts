@@ -8,9 +8,9 @@ describe('AddingCustComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddingCustComponent ]
+      declarations: [AddingCustComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

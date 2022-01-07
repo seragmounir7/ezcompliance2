@@ -21,7 +21,7 @@ import { Observable } from 'rxjs';
   templateUrl: './site-inspection.component.html',
   styleUrls: ['./site-inspection.component.scss'],
 })
-export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy {
+export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy {
   sidePreview!: FormGroup;
   SiteControl!: FormArray;
   siteshow = true;
@@ -29,13 +29,13 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
   itemvalue: any;
   sub: any;
   isPrint: Observable<any>;
-  @HostListener("window:afterprint",[]) 
-  function(){
+  @HostListener("window:afterprint", [])
+  function() {
     console.log("Printing completed...");
     this.router.navigateByUrl("/admin/forms/siteinspectiontable")
     this.shared.printNext(false)
-   
-} 
+
+  }
   maxDate = new Date();
   minDate = new Date();
   item_values: any = ['In Progress', 'Completed', 'Closed'];
@@ -61,7 +61,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
   allTopic: any;
   showDatas: any;
   staff: any;
-  type:any;
+  type: any;
   check: any;
   constructor(
     private fb: FormBuilder,
@@ -71,8 +71,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
     public router: Router,
     private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe,
-    public forms:SavedformsService,
-    private shared:RoleManagementSharedServiceService,
+    public forms: SavedformsService,
+    private shared: RoleManagementSharedServiceService,
   ) {
     this.check = localStorage.getItem('key');
     this.sidePreview = this.fb.group({
@@ -154,30 +154,30 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
   }
 
   ngOnInit(): void {
-    this.isPrint=(this.shared.printObs$ as Observable<any>)
+    this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
-      this.type=params['formType'];  
+      this.type = params['formType'];
     });
     this.id = this.activatedRoute.snapshot.params.id;
 
     this.dynamicFormsService.homebarTitle.next('Site Inspection Form');
     this.setTitle.setTitle('WHS-Site Inspection Form');
-   
+
     if (this.id != 'form') {
       this.logicalFormInfo.getSiteInspection(this.id).subscribe((res: any) => {
         console.log('res', res);
 
         this.showDatas = res.data;
-        this.allTopic= this.showDatas.allTopic
-        this.allcategory=this.showDatas.allcategory
-        this.allJobNumbers =this.showDatas.allJobNumbersArr;
-        this.projectMang =this.showDatas.projectMangArr;
-        this.staff =this.showDatas.staffArr;
+        this.allTopic = this.showDatas.allTopic
+        this.allcategory = this.showDatas.allcategory
+        this.allJobNumbers = this.showDatas.allJobNumbersArr;
+        this.projectMang = this.showDatas.projectMangArr;
+        this.staff = this.showDatas.staffArr;
         this.maxDate = this.showDatas.date;
-       this.minDate = this.showDatas.date;
+        this.minDate = this.showDatas.date;
         for (let index = 0; index < this.allTopic.length; index++) {
           //this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
-  
+
           this.add2().push(this.newAction2(index));
           // console.log("index",index);
         }
@@ -191,7 +191,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
           } else {
             formatDate = '';
           }
-               
+
           this.sidePreview.patchValue({
             siteName: this.showDatas.siteName,
             customerName: this.showDatas.customerName,
@@ -205,49 +205,49 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
 
           if (this.add2().controls) {
             let key;
-            for ( let i = 0;i < this.allTopic.length;i++) {
-            
-                for (let index = 0; index <this.showDatas.siteCategorytTopic.length; index++) {
-                  key = Object.keys(
-                    this.showDatas.siteCategorytTopic[index]
-                  );
-                  this.add2()
-                .controls[i].get(key)
-                ?.setValue(
-                  this.showDatas.siteCategorytTopic[index][key]
+            for (let i = 0; i < this.allTopic.length; i++) {
+
+              for (let index = 0; index < this.showDatas.siteCategorytTopic.length; index++) {
+                key = Object.keys(
+                  this.showDatas.siteCategorytTopic[index]
                 );
-                }
-              
+                this.add2()
+                  .controls[i].get(key)
+                  ?.setValue(
+                    this.showDatas.siteCategorytTopic[index][key]
+                  );
+              }
+
             }
           }
         }, 500);
-        if(this.check){
+        if (this.check) {
           this.showAction()
         }
       });
-    }else{
+    } else {
       this.getAllCategory();
       this.getAllTopic();
       this.getAllJobNumber();
       this.getAllProjectMang();
       this.getAllStaff();
     }
-    
+
   }
-  
+
   ngAfterViewInit(): void {
-    
-    this.sub= this.shared.printObs$.subscribe(res=> {
-      this.check=res
-      console.log("check1...",this.check);
-    if (this.check) {
-      setTimeout( () => { 
-        window.print();
-        console.log("printing....");
-      }, 3000);
-      localStorage.setItem('key', ' ');
-    }
-      
+
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      console.log("check1...", this.check);
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
+      }
+
     })
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
@@ -279,11 +279,11 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
   }
   newAction(): FormGroup {
     return this.fb.group({
-      item: ['',Validators.required],
-      action: ['',Validators.required],
-      PersonResponsible: ['',Validators.required],
-      complete: ['',Validators.required],
-      topicId: ['',Validators.required],
+      item: ['', Validators.required],
+      action: ['', Validators.required],
+      PersonResponsible: ['', Validators.required],
+      complete: ['', Validators.required],
+      topicId: ['', Validators.required],
     });
   }
   showsite() {
@@ -396,18 +396,18 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
     }
   }
   onSave() {
-    
+
     console.log('form data', this.sidePreview.value);
     if (this.id != 'form') {
       const data = {
-    
-            ...this.sidePreview.value,
-            allTopic:this.allTopic,
-            allcategory:this.allcategory,
-            allJobNumbersArr: this.allJobNumbers,
-            projectMangArr: this.projectMang,
-            staffArr: this.staff
-       
+
+        ...this.sidePreview.value,
+        allTopic: this.allTopic,
+        allcategory: this.allcategory,
+        allJobNumbersArr: this.allJobNumbers,
+        projectMangArr: this.projectMang,
+        staffArr: this.staff
+
       };
       this.logicalFormInfo
         .updateSiteInspection(this.id, data)
@@ -424,14 +424,14 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
         });
     } else {
       const data = {
-       
-            ...this.sidePreview.value,
-              allTopic:this.allTopic,
-              allcategory:this.allcategory,
-              allJobNumbersArr: this.allJobNumbers,
-              projectMangArr: this.projectMang,
-              staffArr: this.staff
-      
+
+        ...this.sidePreview.value,
+        allTopic: this.allTopic,
+        allcategory: this.allcategory,
+        allJobNumbersArr: this.allJobNumbers,
+        projectMangArr: this.projectMang,
+        staffArr: this.staff
+
       };
       this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
         console.log('res', res);
@@ -441,7 +441,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit,OnDestroy 
           timer: 1200,
         });
         // this.router.navigate(["/admin/forms/tableData"]);
-        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
+        this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
       });
       console.log('data', data);
     }

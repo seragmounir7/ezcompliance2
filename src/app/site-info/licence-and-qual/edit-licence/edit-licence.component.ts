@@ -14,7 +14,7 @@ export class EditLicenceComponent implements OnInit {
 
   editTitle: FormGroup;
   dataRec: any;
-  categories=[];
+  categories = [];
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
@@ -26,7 +26,7 @@ export class EditLicenceComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.dataRec);
-    
+
     this.editTitle = this.fb.group({
       title: [this.dataRec.title, Validators.required],
       tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],
@@ -40,18 +40,18 @@ export class EditLicenceComponent implements OnInit {
       this.categories = res.data;
       console.log('categories=>', res.data);
     });
- 
+
   }
   onFormSubmit() {
 
-    let data={
-      title :this.editTitle.get('title').value,
-      tradeCategoryId:this.editTitle.get('tradeCategoryId').value,
+    let data = {
+      title: this.editTitle.get('title').value,
+      tradeCategoryId: this.editTitle.get('tradeCategoryId').value,
     }
-    console.log('tradeCategoryId',data);
-    
+    console.log('tradeCategoryId', data);
+
     this.logicalFormInfo
-      .updateLicence(this.dataRec._id,data)
+      .updateLicence(this.dataRec._id, data)
       .subscribe((resData) => {
         console.log('updateLicence', resData);
 
@@ -59,7 +59,7 @@ export class EditLicenceComponent implements OnInit {
         Swal.fire('Parameter Edited successfully');
       });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

@@ -2,11 +2,8 @@
   <h1>Site Inspection Category List</h1>
 </div>
 <div class="col ml-2 mb-2">
-  <button
-    [routerLink]="['/admin/siteInfo/addsiteinspection']"
-    type="button"
-    class="btn btn-outline-primary mt-1 mr-2 float-right"
-  >
+  <button [routerLink]="['/admin/siteInfo/addsiteinspection']" type="button"
+    class="btn btn-outline-primary mt-1 mr-2 float-right">
     <i class="fas fa-plus"></i> Add
   </button>
 </div>
@@ -36,27 +33,15 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          mat-icon-button
-          class="mr-2"
-          aria-label="Example icon button with a delete icon"
-          (click)="edit(element)"
-        >
+        <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          (click)="edit(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          aria-label="Example icon button with a delete icon"
-          (click)="delete(element)"
-        >
+        <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          class="mr-2"
-          aria-label="Example icon button with a delete icon"
-          [routerLink]="['/admin/siteInfo/siteinspectiontopic/' + element._id]"
-        >
+        <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          [routerLink]="['/admin/siteInfo/siteinspectiontopic/' + element._id]">
           <mat-icon>launch</mat-icon>
         </button>
       </td>
@@ -69,10 +54,6 @@
     </tr>
   </table>
 
-  <mat-paginator
-    [pageSizeOptions]="[20]"
-    showFirstLastButtons
-    aria-label="Select page of periodic elements"
-  >
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>

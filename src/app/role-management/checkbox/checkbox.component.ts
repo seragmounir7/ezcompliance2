@@ -7,7 +7,7 @@ import { RoleManagementService } from '../../utils/services/role-management.serv
 import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRoleComponent } from '../add-role/add-role.component';
-import{RoleManagementSharedServiceService }from'../../utils/services/role-management-shared-service.service';
+import { RoleManagementSharedServiceService } from '../../utils/services/role-management-shared-service.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-checkbox',
@@ -18,7 +18,7 @@ export class CheckboxComponent implements OnInit {
   // displayedColumns: string[] = ["role",'dynamicform',"Logicalforms","FormConfigure","SubscriptionRates",'LogicalFormData','CMS','StateRelation'];
   rolemanagment: FormGroup;
 
-  
+
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,10 +33,10 @@ export class CheckboxComponent implements OnInit {
     private fb: FormBuilder,
     private roleService: RoleManagementService,
     private dialog: MatDialog,
-    private roleSharedService:RoleManagementSharedServiceService,
+    private roleSharedService: RoleManagementSharedServiceService,
   ) {
-    this.roleSharedService.getRoleEvent().subscribe((res)=>{
-      if(res){
+    this.roleSharedService.getRoleEvent().subscribe((res) => {
+      if (res) {
         this.getAllRole()
       }
     })
@@ -180,21 +180,21 @@ export class CheckboxComponent implements OnInit {
   getAllRole() {
     this.roleService.getAllRole().subscribe((res: any) => {
       this.roleArr = res.data
-     this.roleArr= this.roleArr.map((x,i)=>{
-        console.log("i",i);
-      
-        if(i===0){
-          
-         x.i=1
-        
-        }else{
-    
-        x.i=0
-      
-      }
+      this.roleArr = this.roleArr.map((x, i) => {
+        console.log("i", i);
+
+        if (i === 0) {
+
+          x.i = 1
+
+        } else {
+
+          x.i = 0
+
+        }
         return x
       })
-      console.log("res",this.roleArr );
+      console.log("res", this.roleArr);
       this.tempArray = new MatTableDataSource<any>(this.roleArr);
       this.tempArray.sort = this.sort;
 
@@ -315,71 +315,71 @@ export class CheckboxComponent implements OnInit {
     this.formArr = true
   }
   openDialog(role) {
-		let dialogRef = this.dialog.open(AddRoleComponent, {
-      height:'50%',
-     width:'500px',
-    
-			data: {
-				action:"edit",
-				role: role,
-			},
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-      if(result === 'true' ){
-       this.ngOnInit()
+    let dialogRef = this.dialog.open(AddRoleComponent, {
+      height: '50%',
+      width: '500px',
+
+      data: {
+        action: "edit",
+        role: role,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'true') {
+        this.ngOnInit()
       }
-			console.log("AddRoleComponent -> openDialog -> result", result);
-			
-			console.log("The dialog was closed");
-		});
-	}
+      console.log("AddRoleComponent -> openDialog -> result", result);
+
+      console.log("The dialog was closed");
+    });
+  }
 
 
   //////////////////////////////////////////////////
 
-  count:number=0
+  count: number = 0
 
-  stepperList:any[]=[
+  stepperList: any[] = [
     {
-      name:'HighRisk Construction',
-      i:1,
-      code:'highRisk'
+      name: 'HighRisk Construction',
+      i: 1,
+      code: 'highRisk'
 
     },
     {
-      name:'PPE',
-      i:0,
-      code:'ppe'
+      name: 'PPE',
+      i: 0,
+      code: 'ppe'
     },
     {
-      name:'Licence',
-      i:0,
-       code:'licence'
+      name: 'Licence',
+      i: 0,
+      code: 'licence'
     },
     {
-      name:'Identify Hazards',
-      i:0,
-       code:'identifyHazards'
+      name: 'Identify Hazards',
+      i: 0,
+      code: 'identifyHazards'
     },
     {
-      name:'Risk Level',
-      i:0,
-       code:'riskLevel'
+      name: 'Risk Level',
+      i: 0,
+      code: 'riskLevel'
     },
     {
-      name:'Control Action Required',
-      i:0,
-       code:'ctrlActreq'
+      name: 'Control Action Required',
+      i: 0,
+      code: 'ctrlActreq'
     },
     {
-      name:'Code of Practice',
-      i:0,
-       code:'codeOfPract'
+      name: 'Code of Practice',
+      i: 0,
+      code: 'codeOfPract'
     },
     {
-      name:'Residule Risk Level',
-      i:0,
-       code:'resRiskLevel'
+      name: 'Residule Risk Level',
+      i: 0,
+      code: 'resRiskLevel'
     },
     // {
     //   name:'Code of Practice',
@@ -387,26 +387,26 @@ export class CheckboxComponent implements OnInit {
     //    code:'codeOfPract'
     // },
     {
-      name:'Chemical related Task',
-      i:0,
-       code:''
+      name: 'Chemical related Task',
+      i: 0,
+      code: ''
     },
     {
-      name:'Person Responsible',
-      i:0,
-       code:'perResbl'
+      name: 'Person Responsible',
+      i: 0,
+      code: 'perResbl'
     }
   ]
-  handleClick(index){
+  handleClick(index) {
     console.log(index)
     this.count = index
     this.roleArr.map(x => {
       x.i = 0
-    }) 
+    })
     this.roleArr[this.count].i = 1
   }
 
-  deleteRole(id){
+  deleteRole(id) {
     {
       Swal.fire({
         title: 'Are you sure?',
@@ -419,17 +419,17 @@ export class CheckboxComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.roleService.deleteRole(id).subscribe((res) => {
-              Swal.fire({
-                title: 'Deleted successfully',
-                showConfirmButton: false,
-                timer: 1200,
-              });
-              console.log('deleted res', res);
-              this.getAllRole();
+            Swal.fire({
+              title: 'Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
             });
+            console.log('deleted res', res);
+            this.getAllRole();
+          });
         }
       });
-     
+
     }
   }
 }

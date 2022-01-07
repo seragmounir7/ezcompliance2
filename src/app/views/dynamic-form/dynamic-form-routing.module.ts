@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'dynamicFormsList', component: FormsComponent },
   { path: 'savedDynamicForm', component: SavedDynamicFormDataComponent },
   { path: 'savedDynamicFormTable/:id', component: SavedDynamicFormTableComponent },
-  { path: 'dynamicForm', component: DynamicFormComponent},
+  { path: 'dynamicForm', component: DynamicFormComponent },
 ];
 
 @NgModule({

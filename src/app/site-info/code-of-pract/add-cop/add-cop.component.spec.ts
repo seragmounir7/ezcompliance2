@@ -8,9 +8,9 @@ describe('AddCOPComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddCOPComponent ]
+      declarations: [AddCOPComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

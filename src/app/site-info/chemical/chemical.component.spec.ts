@@ -8,9 +8,9 @@ describe('ChemicalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChemicalComponent ]
+      declarations: [ChemicalComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

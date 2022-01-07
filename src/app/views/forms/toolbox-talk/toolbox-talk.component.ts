@@ -16,16 +16,16 @@ import { Observable } from 'rxjs';
   templateUrl: './toolbox-talk.component.html',
   styleUrls: ['./toolbox-talk.component.scss'],
 })
-export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
+export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
   sub: any;
   isPrint: Observable<any>;
-  @HostListener("window:afterprint",[]) 
-  function(){
+  @HostListener("window:afterprint", [])
+  function() {
     console.log("Printing completed...");
     this.router.navigateByUrl("/admin/forms/tableData")
     this.shared.printNext(false)
-   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
-} 
+    // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+  }
   toolBox: FormGroup;
   allJobNumbers = [];
   sign = [];
@@ -38,8 +38,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
   dataUrl: any;
   singRequired: any;
   sing2Required = [];
-  type:any;
-  previousUrl:any;
+  type: any;
+  previousUrl: any;
   @ViewChildren('Signature2') signaturePad2: QueryList<SignaturePad>;
   check: any;
   isHistory: boolean;
@@ -51,8 +51,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
     private logicalFormInfo: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
-    public forms:SavedformsService,
-    public shared:RoleManagementSharedServiceService
+    public forms: SavedformsService,
+    public shared: RoleManagementSharedServiceService
   ) {
     this.check = localStorage.getItem('key');
     this.toolBox = this.fb.group({
@@ -78,16 +78,16 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
 
   ngOnInit(): void {
     this.isHistory = this.router.url.includes('/tableData\/history')
-    if(this.isHistory){
+    if (this.isHistory) {
       this.returnTo = this.activatedRoute.queryParamMap.pipe(
-       map(param => param.get('returnTo'))
-        )
+        map(param => param.get('returnTo'))
+      )
       this.returnTo.subscribe(res => console.log(res))
     }
-    this.isPrint=(this.shared.printObs$ as Observable<any>)
+    this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
-    this.type=params['formType'];  
-  });
+      this.type = params['formType'];
+    });
     //  this.type=this.forms.formTypeObs$;
 
     // this.router.events
@@ -299,19 +299,19 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
   };
 
   ngAfterViewInit() {
-   
-    this.sub= this.shared.printObs$.subscribe(res=> {
-      this.check=res
-      console.log("check1...",this.check);
-    if (this.check) {
-      setTimeout( () => { 
-        window.print();
-        console.log("printing....");
-      }, 3000);
-      localStorage.setItem('key', ' ');
-      
-    }
-  })
+
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      console.log("check1...", this.check);
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
+
+      }
+    })
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -397,7 +397,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit,OnDestroy{
           timer: 1200,
         });
 
-        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
+        this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
       })
     }
     this.toolBox.reset();

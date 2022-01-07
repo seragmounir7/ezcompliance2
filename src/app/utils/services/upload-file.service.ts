@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class UploadFileService {
   apiUrl = environment.apiUrl;
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) { }
 
   upload(files) {
     return this.https.post(this.apiUrl + 'upload', files).pipe(

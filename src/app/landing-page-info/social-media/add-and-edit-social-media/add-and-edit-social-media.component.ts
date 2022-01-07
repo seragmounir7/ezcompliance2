@@ -11,28 +11,28 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-and-edit-social-media.component.scss']
 })
 export class AddAndEditSocialMediaComponent implements OnInit {
-  socialMediaDetail:FormGroup;
+  socialMediaDetail: FormGroup;
   socialMedieDetails: any;
-  data1:any;
+  data1: any;
   constructor(
     private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddAndEditSocialMediaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { 
+  ) {
     this.socialMediaDetail = this.fb.group({
       facebook: ['', Validators.required],
       twitter: ['', Validators.required],
       youtube: ['', Validators.required],
-      instagram:['',Validators.required]
-    });this.data1=data;
-    if(data._id){
-      console.log("dataId",data._id);
+      instagram: ['', Validators.required]
+    }); this.data1 = data;
+    if (data._id) {
+      console.log("dataId", data._id);
       this.socialMediaDetail.patchValue({
         facebook: this.data1.facebook,
         twitter: this.data1.twitter,
         youtube: this.data1.youtube,
-        instagram:this.data1.instagram
+        instagram: this.data1.instagram
       })
     }
   }
@@ -40,8 +40,8 @@ export class AddAndEditSocialMediaComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit() {
-    console.log("this.socialMedieDetail",this.socialMediaDetail.value);
-    
+    console.log("this.socialMedieDetail", this.socialMediaDetail.value);
+
     this.landingPageInfo
       .addSocialMedia(this.socialMediaDetail.value)
       .subscribe((data) => {
@@ -53,22 +53,22 @@ export class AddAndEditSocialMediaComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 
-onFormUpdate(data) {
-  console.log("this.socialMedieDetail",this.socialMediaDetail.value);
- 
-  this.landingPageInfo
-    .editSocialMedia( this.socialMediaDetail.value, this.data._id)
-    .subscribe((resData) => {
-      console.log('updateSocialMedia', resData);
+  onFormUpdate(data) {
+    console.log("this.socialMedieDetail", this.socialMediaDetail.value);
 
-      this.dialogRef.close('true');
-      Swal.fire({
-        title: 'Social Media Edited successfully',
-        // showConfirmButton: false,
-        timer: 1200,
+    this.landingPageInfo
+      .editSocialMedia(this.socialMediaDetail.value, this.data._id)
+      .subscribe((resData) => {
+        console.log('updateSocialMedia', resData);
+
+        this.dialogRef.close('true');
+        Swal.fire({
+          title: 'Social Media Edited successfully',
+          // showConfirmButton: false,
+          timer: 1200,
+        });
       });
-    });
-}
+  }
 }

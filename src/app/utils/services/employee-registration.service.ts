@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class EmployeeRegistrationService {
   apiUrl = environment.apiUrl;
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) { }
 
   addEmployeeInfo(data) {
     return this.https.post(this.apiUrl + 'employee/add', data).pipe(

@@ -26,7 +26,7 @@ export class StatesComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllStates()
@@ -47,10 +47,10 @@ export class StatesComponent implements OnInit {
       // this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(AddAndEditStatesComponent, {
       width: "550px",
       data: element,
@@ -75,17 +75,17 @@ export class StatesComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteStates(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'States Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteStates(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'States Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllStates();
+
           });
-          console.log('deleted res', res);
-          this.getAllStates();
-            
-        });
       }
     });
   }

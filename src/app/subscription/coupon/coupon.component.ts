@@ -16,7 +16,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 })
 export class CouponComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'couponName','discount', 'action'];
+  displayedColumns: string[] = ['index', 'couponName', 'discount', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,67 +26,67 @@ export class CouponComponent implements OnInit {
   constructor(
     private subscript: SubscriptionService,
     private fb: FormBuilder,
-    private setTitle: SetTitleService, 
-    private dialog: MatDialog, 
+    private setTitle: SetTitleService,
+    private dialog: MatDialog,
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
     this.getAllCoupon();
     this.setTitle.setTitle('WHS-Coupon');
-    
+
   }
-getAllCoupon(field="",value=""){
-  this.subscript.getAllCoupon(field,value).subscribe((res)=>{
-    console.log(res)
-    let  couponData = res.data;
-    couponData.forEach((element, index) => {
-      element.index = index + 1; //adding index
+  getAllCoupon(field = "", value = "") {
+    this.subscript.getAllCoupon(field, value).subscribe((res) => {
+      console.log(res)
+      let couponData = res.data;
+      couponData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENT_DATA = couponData;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
-    this.ELEMENT_DATA = couponData;
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-  });
-}
-edit(element) {
-  const dialogRef = this.dialog.open(AddEditCouponComponent, {
-    width: "550px",
-   height:"300px",
-    data: element,
-  });
-  dialogRef.afterClosed().subscribe((result) => {
-    if ((result == "true")) {
-      this.getAllCoupon()
-    }
-    console.log("The dialog was closed");
-  });
+  }
+  edit(element) {
+    const dialogRef = this.dialog.open(AddEditCouponComponent, {
+      width: "550px",
+      height: "300px",
+      data: element,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if ((result == "true")) {
+        this.getAllCoupon()
+      }
+      console.log("The dialog was closed");
+    });
 
-}
-delete(item) {
-  Swal.fire({
-    title: 'Are you sure?',
-    text: `Do you want to delete "${item.couponName}"?`,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#00B96F',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, Delete!',
-  }).then((result) => {
-    if (result.value) {
-      console.log(result)
-      // this.model.attributes.splice(i,1);
-      this.spinner.show()
-      this.subscript.deleteCoupon(item._id).subscribe((res => {
-      this.getAllCoupon()
-      this.spinner.hide()
-      }))
-    }
-  });
-}
+  }
+  delete(item) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.couponName}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        console.log(result)
+        // this.model.attributes.splice(i,1);
+        this.spinner.show()
+        this.subscript.deleteCoupon(item._id).subscribe((res => {
+          this.getAllCoupon()
+          this.spinner.hide()
+        }))
+      }
+    });
+  }
 
-sortData(sort: Sort) {
- 
-  this.getAllCoupon(sort.active,sort.direction)
-   }
+  sortData(sort: Sort) {
+
+    this.getAllCoupon(sort.active, sort.direction)
+  }
 }

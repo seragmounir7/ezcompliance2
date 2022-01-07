@@ -32,7 +32,7 @@ export class SiteInspectionTopicComponent implements OnInit {
     private dialog: MatDialog,
     private logicalFormInfoService: LogicalFormInfoService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('Add Site Inspection Topic');
@@ -43,9 +43,9 @@ export class SiteInspectionTopicComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllTopic(field="",value="") {
+  getAllTopic(field = "", value = "") {
     this.logicalFormInfoService
-      .getTopicByCategoryID(this.id,field,value)
+      .getTopicByCategoryID(this.id, field, value)
       .subscribe((res: any) => {
         console.log(res);
         this.dataSource.data = res.data[0].topic;
@@ -121,7 +121,7 @@ export class SiteInspectionTopicComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllTopic(sort.active,sort.direction)
-     }
+
+    this.getAllTopic(sort.active, sort.direction)
+  }
 }

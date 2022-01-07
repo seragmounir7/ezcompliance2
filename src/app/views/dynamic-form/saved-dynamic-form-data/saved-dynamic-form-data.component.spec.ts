@@ -8,9 +8,9 @@ describe('SavedDynamicFormDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SavedDynamicFormDataComponent ]
+      declarations: [SavedDynamicFormDataComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

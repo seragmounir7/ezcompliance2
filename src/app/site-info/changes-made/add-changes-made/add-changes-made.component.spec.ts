@@ -8,9 +8,9 @@ describe('AddChangesMadeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddChangesMadeComponent ]
+      declarations: [AddChangesMadeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

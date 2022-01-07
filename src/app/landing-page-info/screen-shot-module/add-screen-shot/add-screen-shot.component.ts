@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -35,15 +35,15 @@ export class AddScreenShotComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addWork = this.fb.group({
-        moduleId: this.data.EditData,
+      moduleId: this.data.EditData,
       title: ['', Validators.required],
       description: ['', Validators.required],
       fileUrl: ['', Validators.required],
-     
+
     });
     console.log('data', data);
   }
-  
+
 
   ngOnInit(): void {
   }
@@ -59,7 +59,7 @@ export class AddScreenShotComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log("this.addWork.value",this.addWork.value)
+    console.log("this.addWork.value", this.addWork.value)
     this.addWork
       .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
@@ -70,10 +70,10 @@ export class AddScreenShotComponent implements OnInit {
         Swal.fire('Added Successfully')
         this.addWorkData = data;
         this.dialogRef.close('true');
- });
+      });
   }
- 
+
   close() {
     this.dialogRef.close();
-}
+  }
 }

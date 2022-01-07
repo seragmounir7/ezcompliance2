@@ -4,7 +4,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { RoleManagementComponent } from './role-management.component';
 
 const routes: Routes = [
-  {path:'',component:RoleManagementComponent}
+  { path: '', component: RoleManagementComponent }
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
@@ -62,28 +62,28 @@ export class SafetyModulesComponent implements OnInit {
   getSafety() {
     this.mode = 'Safety';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-    //  this.safetyData = data.data[0];
-    this.dataSource.data = res.data
-    this.dataSource.paginator = this.paginator
-    let safetyData = res.data[0].subModules;
-    safetyData.forEach((element, index) => {
-      element.index = index + 1; //adding index
-    });
-    this.ELEMENTS_DATA = safetyData;
-    this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
-    this.dataSources.paginator = this.paginator;
-    this.dataSources.sort=this.sort;
+      //  this.safetyData = data.data[0];
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator
+      let safetyData = res.data[0].subModules;
+      safetyData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENTS_DATA = safetyData;
+      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+      this.dataSources.paginator = this.paginator;
+      this.dataSources.sort = this.sort;
     });
   }
   editForm(id, name: boolean, i?: any) {
     this.spinner.show();
-  
+
     this.myId = id;
     this.isEdit = true;
     this.mode = 'Safety';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       this.safetyData = data.data[0];
-     
+
       let dialogRef = this.dialog.open(AddSafetyModuleComponent, {
         data: {
           action: 'edit',
@@ -97,14 +97,14 @@ export class SafetyModulesComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-        
+
 
         if ((result = 'true')) {
           this.ngOnInit();
         }
-        
+
       });
-      
+
       this.spinner.hide();
     });
   }
@@ -112,9 +112,9 @@ export class SafetyModulesComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-      
+
       this.safetyData = data.data[0];
-   
+
       let dialogRef = this.dialog.open(AddModulesInfoComponent, {
         data: {
           action: 'new',
@@ -126,17 +126,17 @@ export class SafetyModulesComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-      
+
         if ((result = 'true')) {
           this.ngOnInit();
         }
       });
-      
+
       this.spinner.hide();
     });
   }
   delete(item) {
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.title}"?`,
@@ -147,10 +147,10 @@ export class SafetyModulesComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       this.spinner.show()
+        this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-         this.getSafety();
+          this.getSafety();
           this.ngOnInit();
           this.spinner.hide()
         })

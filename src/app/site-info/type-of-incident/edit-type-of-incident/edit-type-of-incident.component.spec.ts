@@ -8,9 +8,9 @@ describe('EditTypeOfIncidentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTypeOfIncidentComponent ]
+      declarations: [EditTypeOfIncidentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

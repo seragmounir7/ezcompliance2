@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AddHighRiskConstructionComponent } from './add-high-risk-construction/add-high-risk-construction.component';
 import { EditHighRiskConstructionComponent } from './edit-high-risk-construction/edit-high-risk-construction.component';
-import { AfterViewInit,ViewChild } from '@angular/core';
+import { AfterViewInit, ViewChild } from '@angular/core';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -38,7 +38,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   componentId = '';
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -47,21 +47,21 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     public router: Router,
-    private setTitle:SetTitleService
+    private setTitle: SetTitleService
   ) {
-    
+
   }
 
   ngOnInit(): void {
     this.getAllHighRisk();
     this.setTitle.setTitle('WHS-High Risk Construction List');
   }
-  
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
- 
+
   // onFormSubmit() {
   //   console.log(this.riskDetails);
   //   this.logicalFormInfo
@@ -172,8 +172,8 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
   //     return `with: ${reason}`;
   //   }
   // }
-  getAllHighRisk(field="",value="") {
-    this.logicalFormInfo.getAllRisk(field,value).subscribe((res:any) => {
+  getAllHighRisk(field = "", value = "") {
+    this.logicalFormInfo.getAllRisk(field, value).subscribe((res: any) => {
       console.log('Risk=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -187,9 +187,9 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
       //this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditHighRiskConstructionComponent, {
       width: "550px",
       data: element,
@@ -213,17 +213,17 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteRisk(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteRisk(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllHighRisk();
+
           });
-          console.log('deleted res', res);
-          this.getAllHighRisk();
-            
-        });
       }
     });
   }
@@ -232,7 +232,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllHighRisk(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllHighRisk(sort.active, sort.direction)
+  }
 }

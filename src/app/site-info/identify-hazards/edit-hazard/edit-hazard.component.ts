@@ -29,9 +29,9 @@ export class EditHazardComponent implements OnInit {
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value
+
+    let data = {
+      title: this.editTitle.get('title').value
     }
     this.logicalFormInfo
       .updateHazards(data, this.dataRec._id)
@@ -43,10 +43,10 @@ export class EditHazardComponent implements OnInit {
           title: 'Parameter Updated successfully',
           showConfirmButton: false,
           timer: 1200,
-        });     
-       });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

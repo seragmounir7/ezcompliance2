@@ -8,9 +8,9 @@ describe('AddFaqComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddFaqComponent ]
+      declarations: [AddFaqComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

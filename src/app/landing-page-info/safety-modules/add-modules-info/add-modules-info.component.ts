@@ -44,7 +44,7 @@ export class AddModulesInfoComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
@@ -52,16 +52,16 @@ export class AddModulesInfoComponent implements OnInit {
 
 
     this.upload.upload(formdata).subscribe((res) => {
-    
+
       this.selectedImage.push(res.files[0]);
-     
+
     });
   }
   onSubmit() {
     this.safetyDetail
       .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
-  
+
     this.landingPageInfo
       .addSubModule(this.safetyDetail.value)
       .subscribe((data) => {
@@ -74,5 +74,5 @@ export class AddModulesInfoComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

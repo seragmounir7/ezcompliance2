@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'QA', component: QuesAnsComponent },
   { path: 'addQA', component: AddQuestionComponent },
   { path: 'editQA', component: EditQuestionComponent },
-  { path: 'socialMedia', component: SocialMediaComponent},
+  { path: 'socialMedia', component: SocialMediaComponent },
   { path: 'ourWork', component: OurWorkComponent },
   { path: 'editWork', component: EditWorkComponent },
   { path: 'editSubWork', component: AddEditSubWorkComponent },
@@ -58,9 +58,9 @@ const routes: Routes = [
   { path: 'different', component: DifferentModuleComponent },
   { path: 'add-Different', component: AddDifferentWorkComponent },
   { path: 'edit-Different', component: EditDifferentWorkComponent },
-  {path:'term',component:TermsAndCondtionsComponent},
-  {path:'addTerm',component:AddTermsAndCondtionsComponent},
-  {path:'editTerm',component:EditTermsAndCondtionsComponent}
+  { path: 'term', component: TermsAndCondtionsComponent },
+  { path: 'addTerm', component: AddTermsAndCondtionsComponent },
+  { path: 'editTerm', component: EditTermsAndCondtionsComponent }
 ];
 
 @NgModule({

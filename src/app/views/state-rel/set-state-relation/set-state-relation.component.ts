@@ -2,7 +2,7 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -24,7 +24,7 @@ export class SetStateRelationComponent implements OnInit {
   Jurisdiction: any = [];
   COP: any = [];
   SafetyData: any = [];
-  regulator=[];
+  regulator = [];
   // task: any = [];
   // riskLevel='';
   // residuleRiskL='';
@@ -130,11 +130,11 @@ export class SetStateRelationComponent implements OnInit {
     private logicalFormInfo: LogicalFormInfoService,
     private setTitle: SetTitleService,
     public router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Set States Relation');
- 
+
     this.setStatesDetail = this.fb.group({
       jurisdiction: this.fb.array([]),
       safe: this.fb.array([]),
@@ -154,7 +154,7 @@ export class SetStateRelationComponent implements OnInit {
     // this.getAllContrActReq();
   }
 
-  
+
 
   addActionJurisdiction() {
     {
@@ -211,7 +211,7 @@ export class SetStateRelationComponent implements OnInit {
   // identifyHazrdsFA(): FormArray {
   //   return this.setStatesDetail.get('identifyHazrds') as FormArray;
   // }
-  
+
   // addCOP(): FormArray {
   //   return this.setStatesDetail.get('codeOfPract') as FormArray;
   // }
@@ -270,11 +270,11 @@ export class SetStateRelationComponent implements OnInit {
     this.logicalFormInfo.getAllStates().subscribe((res: any) => {
       console.log('setStatesDetails=>', res);
       this.StatesData = res.data;
-      
+
       this.StatesData.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
-  
+
       this.ELEMENT_DATA = this.StatesData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
@@ -301,7 +301,7 @@ export class SetStateRelationComponent implements OnInit {
     });
   }
   getRegulator() {
-    this.logicalFormInfo.getAllRegulator().subscribe((res:any) => {
+    this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
       console.log('Regulator=>', res);
       this.regulator = res.data;
     });
@@ -318,41 +318,41 @@ export class SetStateRelationComponent implements OnInit {
   //     this.licenceCatAll = res.data;
   //   });
   // }
-  setRelation_2(id){
-   this.router.navigate(['/admin/stateRel/addState'],
+  setRelation_2(id) {
+    this.router.navigate(['/admin/stateRel/addState'],
 
-      {queryParams: { id:id}});
+      { queryParams: { id: id } });
   }
-  setRelation(title, id,i) {
+  setRelation(title, id, i) {
 
     console.log('index', title);
     console.log('id', id);
     console.log('id', i);
-let risk = [],
-ppe=[],
-licence=[],
-identifyHazard=[],
-controlActionRequired=[];
-  if(this.jurisdictionFA().controls[i].get('jurisdictionArr').value){
-    this.jurisdictionFA().controls[i].get('jurisdictionArr').value.forEach(element => {
-      risk.push(element._id)
-    });
-  }
-  if(this.COP_FA().controls[i].get('COPArr').value){
-    this.COP_FA().controls[i].get('COPArr').value.forEach(element => {
-      ppe.push(element._id)
-    });
-  }
-  if(this.safetyFA().controls[i].get('safetyArr').value){
-    this.safetyFA().controls[i].get('safetyArr').value.forEach(element => {
-      licence.push(element._id)
-    });
-  }
-  if(this.regulatorFA().controls[i].get('contrActReqArr').value){
-    this.regulatorFA().controls[i].get('contrActReqArr').value.forEach(element => {
-      controlActionRequired.push(element._id)
-    });
-  }
+    let risk = [],
+      ppe = [],
+      licence = [],
+      identifyHazard = [],
+      controlActionRequired = [];
+    if (this.jurisdictionFA().controls[i].get('jurisdictionArr').value) {
+      this.jurisdictionFA().controls[i].get('jurisdictionArr').value.forEach(element => {
+        risk.push(element._id)
+      });
+    }
+    if (this.COP_FA().controls[i].get('COPArr').value) {
+      this.COP_FA().controls[i].get('COPArr').value.forEach(element => {
+        ppe.push(element._id)
+      });
+    }
+    if (this.safetyFA().controls[i].get('safetyArr').value) {
+      this.safetyFA().controls[i].get('safetyArr').value.forEach(element => {
+        licence.push(element._id)
+      });
+    }
+    if (this.regulatorFA().controls[i].get('contrActReqArr').value) {
+      this.regulatorFA().controls[i].get('contrActReqArr').value.forEach(element => {
+        controlActionRequired.push(element._id)
+      });
+    }
 
     let data = {
       title: title,
@@ -360,12 +360,12 @@ controlActionRequired=[];
       COP: this.COP_FA().controls[i].get('COPArr').value,
       safety: this.safetyFA().controls[i].get('safetyArr').value,
       regulator: this.regulatorFA().controls[i].get('regulatorArr').value,
-     
-      set:true      
+
+      set: true
     };
     console.log(data);
 
-    this.logicalFormInfo.updateStates(data,id).subscribe((res) => {
+    this.logicalFormInfo.updateStates(data, id).subscribe((res) => {
       console.log('resStates Task=>', res);
       this.getStates();
 

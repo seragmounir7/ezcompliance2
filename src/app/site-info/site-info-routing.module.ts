@@ -36,7 +36,7 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
-import {SiteInspectionCategoryComponent} from './site-inspection-category/site-inspection-category.component'
+import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component'
 import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
 import { SiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/site-inspection-topic.component';
 import { AddSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
@@ -96,18 +96,18 @@ const routes: Routes = [
   { path: 'staff', component: StaffComponent },
   { path: 'addStaff', component: AddStaffComponent },
   { path: 'editStaff', component: EditStaffComponent },
-  { path: 'siteinspectioncategory', component:SiteInspectionCategoryComponent},
-  { path: 'addsiteinspection', component:AddSiteInspectionCategoryComponent},
-  { path: 'siteinspectiontopic/:id', component:SiteInspectionTopicComponent},
-  { path: 'addsiteinspectiontopic/:id', component:AddSiteInspectionTopicComponent},
-  { path: 'natureOfIncident', component: NatureOfIncidentComponent},
-  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent},
-  { path: 'changesMade', component: ChangesMadeComponent},
-  { path: 'addChangesMade', component: AddChangesMadeComponent},
-  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent},
-  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent},
-  { path: 'typeOfIncident', component: TypeOfIncidentComponent},
-  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent},
+  { path: 'siteinspectioncategory', component: SiteInspectionCategoryComponent },
+  { path: 'addsiteinspection', component: AddSiteInspectionCategoryComponent },
+  { path: 'siteinspectiontopic/:id', component: SiteInspectionTopicComponent },
+  { path: 'addsiteinspectiontopic/:id', component: AddSiteInspectionTopicComponent },
+  { path: 'natureOfIncident', component: NatureOfIncidentComponent },
+  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent },
+  { path: 'changesMade', component: ChangesMadeComponent },
+  { path: 'addChangesMade', component: AddChangesMadeComponent },
+  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent },
+  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent },
+  { path: 'typeOfIncident', component: TypeOfIncidentComponent },
+  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent },
   { path: 'manager', component: ManagerComponent },
   { path: 'addManager', component: AddManagerComponent },
   { path: 'editManager', component: EditManagerComponent },

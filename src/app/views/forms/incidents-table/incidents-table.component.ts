@@ -15,26 +15,25 @@ import Swal from 'sweetalert2'
   styleUrls: ['./incidents-table.component.scss']
 })
 export class IncidentsTableComponent implements OnInit {
-displayedColumns: string[] = ['position','projectName',"customerName","Email","Site",'Action'];
+  displayedColumns: string[] = ['position', 'projectName', "customerName", "Email", "Site", 'Action'];
   showDatas: any;
-  tempArray: MatTableDataSource <any>;
+  tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
-    private shared:RoleManagementSharedServiceService,
+    private shared: RoleManagementSharedServiceService,
     private spinner: NgxSpinnerService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getIncidentReport();
   }
   ngAfterViewInit() {
-  //   this.tempArray.paginator = this.paginator;
-  //   this.tempArray.sort = this.sort; 
-   }
-  delete(id)
-  {
+    //   this.tempArray.paginator = this.paginator;
+    //   this.tempArray.sort = this.sort; 
+  }
+  delete(id) {
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete `,
@@ -45,63 +44,59 @@ displayedColumns: string[] = ['position','projectName',"customerName","Email","S
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-        this.logicalFormInfo.deleteIncidentReport(id).subscribe((res)=>{
-          console.log("deleted",res);
-          
-            Swal.fire({
-              title: 'Deleted successfully',
-              showConfirmButton: false,
-              timer: 1200,
-            });
-            console.log('deleted res', res);
-            this.getIncidentReport();
+        this.logicalFormInfo.deleteIncidentReport(id).subscribe((res) => {
+          console.log("deleted", res);
+
+          Swal.fire({
+            title: 'Deleted successfully',
+            showConfirmButton: false,
+            timer: 1200,
           });
+          console.log('deleted res', res);
+          this.getIncidentReport();
+        });
       }
     });
-    
-   
+
+
   }
-  getIncidentReport(field="",value="")
-  {
-    this.logicalFormInfo.getAllIncidentReport(field,value).subscribe((res:any)=>
-    {
-      this.showDatas= res.data;
-      this.showDatas.forEach((element,i) => {
-        return this.showDatas[i].index= i
+  getIncidentReport(field = "", value = "") {
+    this.logicalFormInfo.getAllIncidentReport(field, value).subscribe((res: any) => {
+      this.showDatas = res.data;
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
       });
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort; 
-      console.log("get res",this.showDatas);
+      this.tempArray.sort = this.sort;
+      console.log("get res", this.showDatas);
     })
   }
-  edit(id)
-  {
-    this.router.navigate(["/admin/forms/incidentRep/"+id]);
+  edit(id) {
+    this.router.navigate(["/admin/forms/incidentRep/" + id]);
   }
 
-  sortData(sort:Sort) {
-    this.getIncidentReport(sort.active,sort.direction)
-     }
-    
-     printPage(id)
-     {
-      this.shared.printNext(true)
-       console.log("check");
-       // this.logicalFormInfo.printing.next('print');
-       localStorage.setItem("key","print");
-       // $("<iframe>")                             // create a new iframe element
-       //     .hide()                               // make it invisible
-       //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
-       //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-       
-      //  let iframe=document.createElement("iframe")
-      //  iframe.id = "printIframe"
-      //        iframe.src= environment.stagingUrl+"#/admin/forms/incidentRep/"+id
-      //        iframe.style.display="none";
-      //        let body = document.getElementsByTagName("body")
-      //        body[0].appendChild(iframe)
-      this.spinner.show()
-      this.router.navigate(['/',{ outlets: {'print': ['print','incidentRep', id]}}])
-     }
+  sortData(sort: Sort) {
+    this.getIncidentReport(sort.active, sort.direction)
+  }
+
+  printPage(id) {
+    this.shared.printNext(true)
+    console.log("check");
+    // this.logicalFormInfo.printing.next('print');
+    localStorage.setItem("key", "print");
+    // $("<iframe>")                             // create a new iframe element
+    //     .hide()                               // make it invisible
+    //     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
+    //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+
+    //  let iframe=document.createElement("iframe")
+    //  iframe.id = "printIframe"
+    //        iframe.src= environment.stagingUrl+"#/admin/forms/incidentRep/"+id
+    //        iframe.style.display="none";
+    //        let body = document.getElementsByTagName("body")
+    //        body[0].appendChild(iframe)
+    this.spinner.show()
+    this.router.navigate(['/', { outlets: { 'print': ['print', 'incidentRep', id] } }])
+  }
 }

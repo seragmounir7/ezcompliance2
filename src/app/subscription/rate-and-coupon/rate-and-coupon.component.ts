@@ -12,27 +12,27 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./rate-and-coupon.component.scss']
 })
 export class RateAndCouponComponent implements OnInit {
-  rateAndCoupon!:FormGroup;
-  dataPlan: any=[''];
+  rateAndCoupon!: FormGroup;
+  dataPlan: any = [''];
   myId: string;
   data: any;
-  isValid:boolean = false;
+  isValid: boolean = false;
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'monthly','defaultMonthly','defaultEmp','yearlyDiscount','coupon', 'action'];
+  displayedColumns: string[] = ['index', 'monthly', 'defaultMonthly', 'defaultEmp', 'yearlyDiscount', 'coupon', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
-  addPlan=false;
+  addPlan = false;
   coupon: any;
   constructor(
     private subscript: SubscriptionService,
     private fb: FormBuilder,
-    private setTitle: SetTitleService, 
-    private dialog: MatDialog, 
-  ) { 
+    private setTitle: SetTitleService,
+    private dialog: MatDialog,
+  ) {
     this.rateAndCoupon = this.fb.group({
       monthly: ['', Validators.required],
       yearly: ['', Validators.required],
-      
+
     });
   }
 
@@ -40,36 +40,36 @@ export class RateAndCouponComponent implements OnInit {
     this.getPlan();
     this.getPlanById();
     this.setTitle.setTitle('WHS-Subscription Details');
-    
+
   }
-  monthly:number;
-  yearly:number;
+  monthly: number;
+  yearly: number;
   getPlan() {
-    this.myId= '6177e0b96d0cc515a04870a2';
+    this.myId = '6177e0b96d0cc515a04870a2';
     this.subscript.getAllPlan().subscribe((data) => {
-      let  dataPlan = data.data;
-       if ( dataPlan.length == 0) {
-              this.addPlan=true;
-               }
-        else{
-          this.addPlan=false;
-          this.ELEMENT_DATA = dataPlan;
-          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-          // this.dataSource.sort = this.sort;
-        }
-    
-     
+      let dataPlan = data.data;
+      if (dataPlan.length == 0) {
+        this.addPlan = true;
+      }
+      else {
+        this.addPlan = false;
+        this.ELEMENT_DATA = dataPlan;
+        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        // this.dataSource.sort = this.sort;
+      }
+
+
       // console.log('mode=>', data);
       // this.dataSource.data = data.data;
-      console.log("dataPlan=>",  dataPlan)
-     // this.dataPlan = data.data;
-      
+      console.log("dataPlan=>", dataPlan)
+      // this.dataPlan = data.data;
+
     });
   }
- 
-  
-  editPlan(){
-    this.isValid= true;
+
+
+  editPlan() {
+    this.isValid = true;
   }
   // editPlanInfo(element) {
   //   console.log('id=>', element);
@@ -91,7 +91,7 @@ export class RateAndCouponComponent implements OnInit {
   edit(element) {
     const dialogRef = this.dialog.open(EditRateAndCouponComponent, {
       width: "550px",
-     height:"440px",
+      height: "440px",
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -102,16 +102,16 @@ export class RateAndCouponComponent implements OnInit {
     });
   }
 
-  getPlanById(){
-    let id ='61b739367f7aba4a9f8684e1';
-    this.subscript.getPlan(id).subscribe((res)=>{
-      console.log("getId",res)
+  getPlanById() {
+    let id = '61b739367f7aba4a9f8684e1';
+    this.subscript.getPlan(id).subscribe((res) => {
+      console.log("getId", res)
       this.coupon = res.data;
       // this.coupon.forEach((element, index) => {
       //   element.index = index + 1; //adding index
       // });
-     
+
     });
   }
-  }
+}
 

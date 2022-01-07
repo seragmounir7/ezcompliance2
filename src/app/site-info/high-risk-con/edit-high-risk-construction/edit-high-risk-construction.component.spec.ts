@@ -8,9 +8,9 @@ describe('EditHighRiskConstructionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditHighRiskConstructionComponent ]
+      declarations: [EditHighRiskConstructionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

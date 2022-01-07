@@ -17,7 +17,7 @@ export class RootCauseOfIncidentComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,20 +28,20 @@ export class RootCauseOfIncidentComponent implements OnInit {
   /////////////mat table end////////////////
 
   constructor(
-   
+
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog,
-    private setTitle:SetTitleService
-  ) {}
+    private dialog: MatDialog,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit(): void {
     this.getAllRoot();
     this.setTitle.setTitle('WHS-Root Cause Of Incident');
-    
+
   }
 
-  getAllRoot(field="",value="") {
-    this.logicalFormInfo.getAllRootCause(field,value).subscribe((res:any) => {
+  getAllRoot(field = "", value = "") {
+    this.logicalFormInfo.getAllRootCause(field, value).subscribe((res: any) => {
       console.log('root=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -58,7 +58,7 @@ export class RootCauseOfIncidentComponent implements OnInit {
     });
   }
 
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditRootCauseOfIncidentComponent, {
       width: "550px",
       data: element,
@@ -82,18 +82,18 @@ export class RootCauseOfIncidentComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteRootCause(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteRootCause(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllRoot();
+
           });
-          console.log('deleted res', res);
-          this.getAllRoot();
-            
-        });
-      
+
       }
     });
   }
@@ -103,7 +103,7 @@ export class RootCauseOfIncidentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllRoot(sort.active,sort.direction)
-     }
+
+    this.getAllRoot(sort.active, sort.direction)
+  }
 }

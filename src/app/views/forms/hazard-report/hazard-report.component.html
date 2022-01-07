@@ -1,12 +1,12 @@
-<div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i class="fa fa-arrow-left"
-    aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Hazard'" [routerLink]="['/admin/forms/hazardTable']"><i
+<div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i
     class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Hazard'" [routerLink]="['/admin/forms/hazardTable']">
+  <i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="type==='Hazard'" [routerLink]="['/admin/savedForms']"><i
-      class="fa fa-arrow-left" aria-hidden="true"></i></div>
+    class="fa fa-arrow-left" aria-hidden="true"></i></div>
 
-<div id='section-to-print'  class="container card px-4 py-4 content-center">
-  <form class="px-4 py-4" [formGroup]="hazardReport" >
+<div id='section-to-print' class="container card px-4 py-4 content-center">
+  <form class="px-4 py-4" [formGroup]="hazardReport">
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form </p>
     </div>
@@ -46,22 +46,23 @@
       <div class="col-md-12">
         <div class="mb-3">
           <label for="exampleInputFullname" class="form-label">Full Name<span class="text-danger ">*</span></label>
-          <input type="text" [matAutocomplete]="employee" autocomplete="off"   name="exampleInputFullname" class="form-control" formControlName="fullName" id="exampleInputFullname"  
-            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
+          <input type="text" [matAutocomplete]="employee" autocomplete="off" name="exampleInputFullname"
+            class="form-control" formControlName="fullName" id="exampleInputFullname" aria-describedby="emailHelp"
+            [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
             && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) " />
-            <!-- <datalist id="browsers" >
+          <!-- <datalist id="browsers" >
               <option *ngFor="let option of empData ; let i = index " [value]="option.firstName">
             </datalist> -->
-            <mat-autocomplete #employee="matAutocomplete" (optionSelected)="employeeData($event)">
-              <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
+          <mat-autocomplete #employee="matAutocomplete" (optionSelected)="employeeData($event)">
+            <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option">
+              {{option.fullName}}
+            </mat-option>
+          </mat-autocomplete>
           <span *ngIf="
             hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
             || hazardReport.get('fullName').touched) " class="invalid-feedback">
             Full Name is Required</span>
-            
+
         </div>
       </div>
     </div>
@@ -315,12 +316,12 @@
         </div>
       </div>
     </div>
-    <div class="row py-4 pagebreak-print" >
+    <div class="row py-4 pagebreak-print">
       <div class="col-md-12">
         <h2>Hazard Treatment</h2>
       </div>
       <div class="col-md-12">
-        <table class="table table-bordered text-center" >
+        <table class="table table-bordered text-center">
           <thead>
             <tr>
               <th colspan="7" class="L_1">Risk Level Matrix</th>
@@ -522,8 +523,8 @@
    
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd1" class="form-control" [min]="minDate" formControlName="eliminateWhen"
-            placeholder="dd-mm-yyyy">
+          <input matInput [matDatepicker]="pickerd1" class="form-control" [min]="minDate"
+            formControlName="eliminateWhen" placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd1"></mat-datepicker-toggle>
           <mat-datepicker #pickerd1></mat-datepicker>
         </div>
@@ -565,8 +566,8 @@
       
             aria-describedby="emailHelp"
           /> -->
-          <input matInput [matDatepicker]="pickerd2" class="form-control" [min]="minDate" formControlName="substituteWhen"
-            placeholder="dd-mm-yyyy">
+          <input matInput [matDatepicker]="pickerd2" class="form-control" [min]="minDate"
+            formControlName="substituteWhen" placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd2"></mat-datepicker-toggle>
           <mat-datepicker #pickerd2></mat-datepicker>
         </div>
@@ -695,8 +696,8 @@
            
             aria-describedby="emailHelp" 
           /> -->
-          <input matInput [matDatepicker]="pickerd5" class="form-control" [min]="minDate" formControlName="procedureRemove"
-            placeholder="dd-mm-yyyy">
+          <input matInput [matDatepicker]="pickerd5" class="form-control" [min]="minDate"
+            formControlName="procedureRemove" placeholder="dd-mm-yyyy">
           <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
           <mat-datepicker #pickerd5></mat-datepicker>
         </div>
@@ -752,15 +753,15 @@
       <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label class="form-label">Name<span class="text-danger ">*</span></label>
-          <input type="fullname" class="form-control" [matAutocomplete]="employee1" formControlName="name" aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('name')?.hasError('required') 
+          <input type="fullname" class="form-control" [matAutocomplete]="employee1" formControlName="name"
+            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('name')?.hasError('required') 
             && (hazardReport.get('name').dirty || hazardReport.get('name').touched) " />
-            <mat-autocomplete #employee1="matAutocomplete" (optionSelected)="employeeData1($event)">
-              <mat-option *ngFor="let option of filteredOptions3 | async ; let i = index " [value]="option">
-                {{option.name}}
-              </mat-option>
-            </mat-autocomplete>
-            <span *ngIf="
+          <mat-autocomplete #employee1="matAutocomplete" (optionSelected)="employeeData1($event)">
+            <mat-option *ngFor="let option of filteredOptions3 | async ; let i = index " [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+          <span *ngIf="
             hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty 
             || hazardReport.get('name').touched) " class="invalid-feedback">
             Name is Required</span>
@@ -877,8 +878,8 @@
 
     <br />
     <div class="col-md-2 col-sm-2-print">
-      <button type="submit" *ngIf="(isPrint | async)===false" class="btn btn-primary btn-block" [disabled]="!hazardReport.valid"
-        (click)="onFormSubmit()">Submit</button>
+      <button type="submit" *ngIf="(isPrint | async)===false" class="btn btn-primary btn-block"
+        [disabled]="!hazardReport.valid" (click)="onFormSubmit()">Submit</button>
     </div>
   </form>
 </div>

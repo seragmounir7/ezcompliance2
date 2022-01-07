@@ -21,8 +21,8 @@ export class field {
   inline?: any;
   value?: any;
   values?: Array<value>;
-  tableRows?:Array<any>;
-  tableHeading?:Array<any>;
+  tableRows?: Array<any>;
+  tableHeading?: Array<any>;
 }
 
 export class value {

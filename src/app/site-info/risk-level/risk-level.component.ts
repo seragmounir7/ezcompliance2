@@ -23,23 +23,23 @@ export class RiskLevelComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  allRiskLevel: any[]=[];
+  allRiskLevel: any[] = [];
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private setTitle: SetTitleService,
     private logicalFormInfoService: LogicalFormInfoService,
     private spinner: NgxSpinnerService
-    ) { }
+  ) { }
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-RiskLevel Info');
     this.getAllRiskLevel()
   }
-  getAllRiskLevel(field="",value=""){
-    this.logicalFormInfoService.getAllRiskLevel(field,value).subscribe((res:any)=> {
+  getAllRiskLevel(field = "", value = "") {
+    this.logicalFormInfoService.getAllRiskLevel(field, value).subscribe((res: any) => {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -51,13 +51,13 @@ export class RiskLevelComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
-   })
+    })
   }
- 
+
   edit(element) {
     const dialogRef = this.dialog.open(EditRiskLevelComponent, {
       width: "550px",
-     // height:'50%',
+      // height:'50%',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -82,14 +82,14 @@ export class RiskLevelComponent implements OnInit {
         // this.model.attributes.splice(i,1);
         this.spinner.show()
         this.logicalFormInfoService.deleteRiskLevel(item._id).subscribe((res => {
-        this.getAllRiskLevel()
-        this.spinner.hide()
+          this.getAllRiskLevel()
+          this.spinner.hide()
         }))
       }
     });
   }
   sortData(sort: Sort) {
- 
-    this.getAllRiskLevel(sort.active,sort.direction)
-     }
+
+    this.getAllRiskLevel(sort.active, sort.direction)
+  }
 }

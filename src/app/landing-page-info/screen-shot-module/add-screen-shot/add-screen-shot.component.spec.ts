@@ -8,9 +8,9 @@ describe('AddScreenShotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddScreenShotComponent ]
+      declarations: [AddScreenShotComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

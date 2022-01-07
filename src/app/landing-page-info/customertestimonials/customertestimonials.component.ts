@@ -80,7 +80,7 @@ export class CustomertestimonialsComponent implements OnInit {
       this.ELEMENTS_DATA = testimonialData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-      this.dataSources.sort=this.sort;
+      this.dataSources.sort = this.sort;
     });
   }
   editForm(element, name: boolean, i?: any) {
@@ -159,7 +159,7 @@ export class CustomertestimonialsComponent implements OnInit {
         this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-           this.getTestimonal();
+          this.getTestimonal();
           this.ngOnInit();
           this.spinner.hide()
         })

@@ -32,35 +32,35 @@ export class AddTeamInfoComponent implements OnInit {
       imageUrl: ['', Validators.required],
       title: ['', Validators.required],
     });
-    
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-   
+
 
     this.upload.upload(formdata).subscribe((res) => {
- 
+
       this.selectedImage.push(res.files[0]);
-     
+
     });
   }
   onSubmit() {
     this.companyDetail
       .get('imageUrl')
       ?.setValue(this.selectedImage[0].toString());
-   
+
     this.landingPageInfo.addTeam(this.companyDetail.value).subscribe((data) => {
       Swal.fire('Team Added Successfully')
-  
+
       this.teamData = data;
       this.dialogRef.close('true');
     });
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

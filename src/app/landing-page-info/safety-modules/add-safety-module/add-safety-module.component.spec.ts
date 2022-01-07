@@ -8,9 +8,9 @@ describe('AddSafetyModuleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddSafetyModuleComponent ]
+      declarations: [AddSafetyModuleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

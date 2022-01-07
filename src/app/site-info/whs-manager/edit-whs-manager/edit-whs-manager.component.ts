@@ -23,21 +23,21 @@ export class EditWhsManagerComponent implements OnInit {
     this.dataRec = data;
   }
   ngOnInit(): void {
-    console.log("this.dataRec",this.dataRec);
-    
+    console.log("this.dataRec", this.dataRec);
+
     this.editTitle = this.fb.group({
       name: [this.dataRec.name, Validators.required],
       email: [this.dataRec.email, Validators.required],
     });
   }
   onFormSubmit() {
-     
-    let data={
-      name :this.editTitle.get('name').value,
-    email:this.editTitle.get('email').value
+
+    let data = {
+      name: this.editTitle.get('name').value,
+      email: this.editTitle.get('email').value
     }
     this.logicalFormInfo
-      .editWHSManager(this.dataRec._id,data)
+      .editWHSManager(this.dataRec._id, data)
       .subscribe((resData) => {
         console.log('submodulesData', resData);
 
@@ -46,10 +46,10 @@ export class EditWhsManagerComponent implements OnInit {
           title: 'Parameter Edited successfully',
           showConfirmButton: false,
           timer: 1200,
-        });  
-          });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

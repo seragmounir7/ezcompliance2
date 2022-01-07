@@ -4,7 +4,7 @@ import {
   FormGroup,
   Validators,
   FormArray,
-  
+
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -18,16 +18,16 @@ import { Router } from '@angular/router';
 export class AddJobTaskComponent implements OnInit {
 
   jobTaskDetails!: FormGroup;
-  formData: any;numberOfLineBreaks: any;
-;
-  licenceCatAll=[];
+  formData: any; numberOfLineBreaks: any;
+  ;
+  licenceCatAll = [];
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private logicalFormInfo:LogicalFormInfoService
-  ) { 
-    this.jobTaskDetails=this.fb.group({
-     // mode:"JobTask",
+    private logicalFormInfo: LogicalFormInfoService
+  ) {
+    this.jobTaskDetails = this.fb.group({
+      // mode:"JobTask",
       arrObj: this.fb.array([]),
     });
   }
@@ -51,23 +51,23 @@ export class AddJobTaskComponent implements OnInit {
     return this.jobTaskDetails.get('arrObj') as FormArray;
   }
   newAction(): FormGroup {
-    return this.fb.group({     
+    return this.fb.group({
       title: ['', Validators.required],
-      tradeCategoryId: ['', Validators.required],      
+      tradeCategoryId: ['', Validators.required],
     });
   }
-  
+
   removeSafetyModule(i) {
     const item = <FormArray>this.jobTaskDetails.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
-    
+
     }
   }
   onFormSubmit() {
     console.log(this.jobTaskDetails.get('arrObj').value);
-    let data={
-      arrObj:this.jobTaskDetails.get('arrObj').value
+    let data = {
+      arrObj: this.jobTaskDetails.get('arrObj').value
     }
     this.logicalFormInfo.addMultipleJobTask(data).subscribe((data) => {
       console.log('JOBTask=>', data);
@@ -75,16 +75,16 @@ export class AddJobTaskComponent implements OnInit {
         title: 'Parameter Added successfully',
         showConfirmButton: false,
         timer: 1200,
-      }); 
-      this.router.navigate(['/admin/siteInfo/jobTask']);      
-    },(err)=>{console.error(err);} 
-  
+      });
+      this.router.navigate(['/admin/siteInfo/jobTask']);
+    }, (err) => { console.error(err); }
+
     );
-    
+
   }
   calcHeight(value) {
-    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
-    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
+    console.log("numberOfLineBreaks", this.numberOfLineBreaks)
   }
- 
+
 }

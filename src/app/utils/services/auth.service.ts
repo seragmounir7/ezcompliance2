@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   constructor(private https: HttpClient) {
-    if(sessionStorage.getItem('accessToken')){
+    if (sessionStorage.getItem('accessToken')) {
       this.nextLoginData({
         accessToken: sessionStorage.getItem('accessToken'),
         userName: sessionStorage.getItem('userName'),
@@ -36,7 +36,7 @@ export class AuthService {
       })
     );
   }
-  logout(){
+  logout() {
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('userName');
     sessionStorage.removeItem('phoneNo');
@@ -44,7 +44,7 @@ export class AuthService {
     location.reload();
 
   }
-  pergeData(){
+  pergeData() {
     sessionStorage.clear();
   }
 }

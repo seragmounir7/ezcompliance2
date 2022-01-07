@@ -8,9 +8,9 @@ describe('ResidualRiskLevelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResidualRiskLevelComponent ]
+      declarations: [ResidualRiskLevelComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

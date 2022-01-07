@@ -27,7 +27,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   templateUrl: './incident-report.component.html',
   styleUrls: ['./incident-report.component.scss'],
 })
-export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy {
+export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy {
   public Editor = ClassicEditor;
   IncidentReport: FormGroup;
   fileData: any;
@@ -50,14 +50,14 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   sub: any;
   isPrint: Observable<any>;
-  editorDisable=false;
-  @HostListener("window:afterprint",[]) 
-  function(){
+  editorDisable = false;
+  @HostListener("window:afterprint", [])
+  function() {
     console.log("Printing completed...");
     this.router.navigateByUrl("/admin/forms/incidentsTable")
     this.shared.printNext(false)
-   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
-} 
+    // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+  }
   projMan: any;
   projectMang: any;
   typeOfInc: [];
@@ -77,7 +77,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   selectedImage: string;
   singRequired: any;
   singRequired1: any;
-  type:any;
+  type: any;
   check: any;
   constructor(
     private fb: FormBuilder,
@@ -88,12 +88,12 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     public upload: UploadFileServiceService,
     private router: Router,
     private ngZone: NgZone,
-    public forms:SavedformsService,
-    private shared:RoleManagementSharedServiceService,
+    public forms: SavedformsService,
+    private shared: RoleManagementSharedServiceService,
   ) {
     this.id = this.activatedRoute.snapshot.params.id;
     if (this.id !== 'Form') {
-    this.editorDisable=true;
+      this.editorDisable = true;
     }
     this.check = localStorage.getItem('key');
     this.IncidentReport = this.fb.group({
@@ -145,7 +145,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       signaturePad1: ['', Validators.required],
       changesMadeOther: [false],
       changesMadeOtherText: [''],
-      instructions: new FormControl({value: '', disabled: this.editorDisable}),
+      instructions: new FormControl({ value: '', disabled: this.editorDisable }),
     });
     // this.IncidentReport = this.data;
     // this.IncidentReport.patchValue({
@@ -168,18 +168,18 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit(): void {
-    this.isPrint=(this.shared.printObs$ as Observable<any>)
+    this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
-      this.type=params['formType'];  
+      this.type = params['formType'];
     });
-    
+
     console.log("IncidentReport", this.IncidentReport);
 
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
     this.setTitle.setTitle('WHS-Incident Report Form');
 
     if (this.id !== 'Form') {
-      
+
       console.log("id", this.id);
       this.getIncidentsByid(this.id);
     }
@@ -209,7 +209,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     return this.fb.group({
       correctAction: ["", Validators.required],
       personRes: ['', Validators.required],
-     // complete: ["", Validators.required],
+      // complete: ["", Validators.required],
       date: ["", Validators.required],
     });
   }
@@ -384,19 +384,19 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   };
 
   ngAfterViewInit() {
-    console.log("check1...",this.check);
-    this.sub= this.shared.printObs$.subscribe(res=> {
-      this.check=res
-    if (this.check) {
-      setTimeout( () => { 
-        window.print();
-        console.log("printing....");
-      }, 3000);
-      localStorage.setItem('key', ' ');
-     
-      
-    }
-  })
+    console.log("check1...", this.check);
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
+
+
+      }
+    })
     // this.signaturePad is now available
     this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
     this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
@@ -699,10 +699,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
         priorIncidentText: res.data.priorIncidentText,
         changesMadeOther: res.data.changesMadeOther,
         changesMadeOtherText: res.data.changesMadeOtherText,
-        instructions:res.data.instructions
+        instructions: res.data.instructions
 
       })
-     
+
 
       for (let index = 0; index < res.data.arrObj.length; index++) {
         console.log("res.data.arrObj.length", res.data.arrObj.length);
@@ -712,7 +712,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
 
         let changeIndex = this.changeAdd().length
         this.addAction();
-       // this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
+        // this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
         this.add().controls[index].get("correctAction").setValue(res.data.arrObj[index].correctAction)
         this.add().controls[index].get("date").setValue(res.data.arrObj[index].date)
         this.add().controls[index].get("personRes").setValue(res.data.arrObj[index].personRes)
@@ -829,9 +829,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
 
       })
     })
-   
+
     console.log(" this.editorDisable", this.editorDisable);
-    
+
   }
   onSubmit() {
     console.log(this.IncidentReport.value);
@@ -888,7 +888,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
           showConfirmButton: false,
           timer: 1200,
         });
-        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
+        this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
       }, (err) => {
         console.error(err);
       });
@@ -984,5 +984,5 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     });
   }
 
-  
+
 }

@@ -19,7 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     SignaturePadModule,
     MatTableModule,
-    SharedModule, 
+    SharedModule,
   ]
 })
 export class RegistrationModule { }

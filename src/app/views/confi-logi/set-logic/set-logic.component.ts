@@ -27,8 +27,8 @@ import { MatSort } from '@angular/material/sort';
 export class SetLogicComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
   JobTaskDetail!: FormGroup;
-  allHazards=[];
-  allContrlActReq=[];
+  allHazards = [];
+  allContrlActReq = [];
   jobTaskData: any = [];
   highRiskData: any = [];
   PPESelectionData: any = [];
@@ -38,8 +38,8 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   licenceCatAll: any = [];
   highRiskConstructionData: any = [];
   task: any = [];
-  riskLevel='';
-  residuleRiskL='';
+  riskLevel = '';
+  residuleRiskL = '';
   PPEselection = [
     { label: 'Disposable dust mask', value: '' },
     { label: 'Dust Mas', value: '' },
@@ -138,15 +138,15 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   @ViewChildren('risk') Risk: QueryList<any>;
 
   constructor(
-    private fb: FormBuilder,    private dialog: MatDialog,
+    private fb: FormBuilder, private dialog: MatDialog,
     private logicalFormInfo: LogicalFormInfoService,
     private setTitle: SetTitleService,
     public router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Set Relation');
- 
+
     // this.JobTaskDetail = this.fb.group({
     //   highRiskConstr: this.fb.array([]),
     //   PPE: this.fb.array([]),
@@ -166,7 +166,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     // this.getAllContrActReq();
   }
 
-  
+
 
   // addActionHighRisk() {
   //   {
@@ -281,12 +281,12 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       console.log('jobTaskDetails=>', res);
       this.jobTaskData = res.data;
-      
+
       this.jobTaskData.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
 
-      this.ELEMENT_DATA =  this.jobTaskData;
+      this.ELEMENT_DATA = this.jobTaskData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
@@ -330,13 +330,13 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
     });
   }
   getAllHazard() {
-    this.logicalFormInfo.getAllHazards().subscribe((res:any) => {
+    this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
       console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
-  getAllContrActReq()  {
-    this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
+  getAllContrActReq() {
+    this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
       console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
     });
@@ -347,71 +347,71 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
       this.licenceCatAll = res.data;
     });
   }
-  setRelation_2(id){
-   this.router.navigate(['/admin/confiLogi/setRelation'],
+  setRelation_2(id) {
+    this.router.navigate(['/admin/confiLogi/setRelation'],
 
-      {queryParams: { id:id}});
+      { queryParams: { id: id } });
   }
- /* setRelation(title, id,i) {
-
-    console.log('index', title);
-    console.log('id', id);
-    console.log('id', i);
-let risk = [],
-ppe=[],
-licence=[],
-identifyHazard=[],
-controlActionRequired=[];
-  if(this.highRiskFA().controls[i].get('highRiskArr').value){
-    this.highRiskFA().controls[i].get('highRiskArr').value.forEach(element => {
-      risk.push(element._id)
-    });
-  }
-  if(this.PPE_FA().controls[i].get('ppeArr').value){
-    this.PPE_FA().controls[i].get('ppeArr').value.forEach(element => {
-      ppe.push(element._id)
-    });
-  }
-  if(this.licenceCatFA().controls[i].get('licenceArr').value){
-    this.licenceCatFA().controls[i].get('licenceArr').value.forEach(element => {
-      licence.push(element._id)
-    });
-  }
-  if(this.identifyHazrdsFA().controls[i].get('hazardsArr').value){
-    this.identifyHazrdsFA().controls[i].get('hazardsArr').value.forEach(element => {
-      identifyHazard.push(element._id)
-    });
-  }
-  if(this.contrActReqFA().controls[i].get('contrActReqArr').value){
-    this.contrActReqFA().controls[i].get('contrActReqArr').value.forEach(element => {
-      controlActionRequired.push(element._id)
-    });
-  }
-
-    let data = {
-      title: title,
-      risk: this.highRiskFA().controls[i].get('highRiskArr').value,
-      PPE: this.PPE_FA().controls[i].get('ppeArr').value,
-      licence: this.licenceCatFA().controls[i].get('licenceArr').value,
-      identifyHazard:this.identifyHazrdsFA().controls[i].get('hazardsArr').value,
-      controlActionRequired: this.contrActReqFA().controls[i].get('contrActReqArr').value,
-      riskLevel:this.riskLevelFA().controls[i].get('riskLevel').value ,
-      residualRisk: this.residlRiskLevelFA().controls[i].get('resiRiskLevel').value,
-      set:true      
-    };
-    console.log(data);
-
-    this.logicalFormInfo.updateJobTask(data,id).subscribe((res) => {
-      console.log('resJob Task=>', res);
-      this.getJobTask();
-
-      Swal.fire({
-        title: 'Relation set successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });
-    });
-  } */
+  /* setRelation(title, id,i) {
+ 
+     console.log('index', title);
+     console.log('id', id);
+     console.log('id', i);
+ let risk = [],
+ ppe=[],
+ licence=[],
+ identifyHazard=[],
+ controlActionRequired=[];
+   if(this.highRiskFA().controls[i].get('highRiskArr').value){
+     this.highRiskFA().controls[i].get('highRiskArr').value.forEach(element => {
+       risk.push(element._id)
+     });
+   }
+   if(this.PPE_FA().controls[i].get('ppeArr').value){
+     this.PPE_FA().controls[i].get('ppeArr').value.forEach(element => {
+       ppe.push(element._id)
+     });
+   }
+   if(this.licenceCatFA().controls[i].get('licenceArr').value){
+     this.licenceCatFA().controls[i].get('licenceArr').value.forEach(element => {
+       licence.push(element._id)
+     });
+   }
+   if(this.identifyHazrdsFA().controls[i].get('hazardsArr').value){
+     this.identifyHazrdsFA().controls[i].get('hazardsArr').value.forEach(element => {
+       identifyHazard.push(element._id)
+     });
+   }
+   if(this.contrActReqFA().controls[i].get('contrActReqArr').value){
+     this.contrActReqFA().controls[i].get('contrActReqArr').value.forEach(element => {
+       controlActionRequired.push(element._id)
+     });
+   }
+ 
+     let data = {
+       title: title,
+       risk: this.highRiskFA().controls[i].get('highRiskArr').value,
+       PPE: this.PPE_FA().controls[i].get('ppeArr').value,
+       licence: this.licenceCatFA().controls[i].get('licenceArr').value,
+       identifyHazard:this.identifyHazrdsFA().controls[i].get('hazardsArr').value,
+       controlActionRequired: this.contrActReqFA().controls[i].get('contrActReqArr').value,
+       riskLevel:this.riskLevelFA().controls[i].get('riskLevel').value ,
+       residualRisk: this.residlRiskLevelFA().controls[i].get('resiRiskLevel').value,
+       set:true      
+     };
+     console.log(data);
+ 
+     this.logicalFormInfo.updateJobTask(data,id).subscribe((res) => {
+       console.log('resJob Task=>', res);
+       this.getJobTask();
+ 
+       Swal.fire({
+         title: 'Relation set successfully',
+         showConfirmButton: false,
+         timer: 1200,
+       });
+     });
+   } */
   categorySel(catArr) {
     this.licenseAndQualificationData = [];
 
@@ -429,9 +429,9 @@ controlActionRequired=[];
     );
   }
 
- 
+
   // openDialog(element) {
-  
+
   //   const dialogRef = this.dialog.open(AddJobTaskComponent, {
   //     width: "800px",
   //     data: element,

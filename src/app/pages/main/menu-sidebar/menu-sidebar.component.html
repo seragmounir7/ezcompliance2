@@ -2,7 +2,8 @@
   <!-- Brand Logo -->
   <a [routerLink]="['/dashBoard']" class="brand-link">
     <!-- <img [src]="logoUrl" alt="AdminLTE Logo" class="brand-image" style="opacity: 1" /> -->
-    <svg-icon alt="AdminLTE Logo" applyClass="true" class="brand-image" [style]="{'width':'auto','height.px':30 ,'opacity': 1}" [name]="logoUrl"></svg-icon>
+    <svg-icon alt="AdminLTE Logo" applyClass="true" class="brand-image"
+      [style]="{'width':'auto','height.px':30 ,'opacity': 1}" [name]="logoUrl"></svg-icon>
     <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="223" height="88" viewBox="0 0 223 88">
       <defs>
         <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 3217 1280">
@@ -1896,19 +1897,21 @@
             </a>
             <ul *ngIf="item.childItem" class="nav nav-treeview">
               <ng-container *ngFor="let childNav0 of item.childItem">
-                <li *ngIf="!childNav0.childItem && childNav0.hasAccess" class="nav-item  ml-3" >
-                  <a routerLinkActive="active myColor" [routerLink]="[childNav0.route]" class="nav-link"  >
+                <li *ngIf="!childNav0.childItem && childNav0.hasAccess" class="nav-item  ml-3">
+                  <a routerLinkActive="active myColor" [routerLink]="[childNav0.route]" class="nav-link">
                     <svg-icon [name]="childNav0.icon"></svg-icon>
                     <p>{{childNav0.displayedName}}</p>
                   </a>
                 </li>
-                <li *ngIf="childNav0.childItem && childNav0.hasAccess" class="nav-item  ml-3" [ngClass]="{ 'menu-open': childNav0.menuOpen }" >
-                  <a *ngIf="!childNav0.childItem" (click)="menuOpen(childNav0)" routerLinkActive="active myColor" [routerLink]="[childNav0.route]"
-                    class="nav-link">
+                <li *ngIf="childNav0.childItem && childNav0.hasAccess" class="nav-item  ml-3"
+                  [ngClass]="{ 'menu-open': childNav0.menuOpen }">
+                  <a *ngIf="!childNav0.childItem" (click)="menuOpen(childNav0)" routerLinkActive="active myColor"
+                    [routerLink]="[childNav0.route]" class="nav-link">
                     <svg-icon [name]="childNav0.icon"></svg-icon>
                     <p>{{childNav0.displayedName}}</p>
                   </a>
-                  <a *ngIf="childNav0.childItem" (click)="menuOpen(childNav0)" routerLinkActive="active myColor" class="nav-link">
+                  <a *ngIf="childNav0.childItem" (click)="menuOpen(childNav0)" routerLinkActive="active myColor"
+                    class="nav-link">
                     <svg-icon [name]="childNav0.icon"></svg-icon>
                     <p>{{childNav0.displayedName}}</p>
                     <i class="right fas fa-angle-left"></i>

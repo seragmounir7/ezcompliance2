@@ -1,41 +1,39 @@
 <div class="col ml-2 pt-3">
-<h1> Identify Hazards List</h1>
+  <h1> Identify Hazards List</h1>
 </div>
-    <div class="col ml-2 mb-2">
-      
-      <button  class="btn btn-outline-primary mt-1 mr-2 float-right"[routerLink]="['/admin/siteInfo/addHazards']">
-        <i class="fas fa-folder-plus mr-2"></i>Add Hazard 
-      </button>
-    </div>
-    <div class="col-6">
-      <mat-form-field>
-        <input
-          matInput
-          #input
-          placeholder="Search"
-          (keyup)="applyFilter($event)"
-        />
-      </mat-form-field>
-    </div>
-    <div class="">
-      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
-    
-        <!-- Position Column -->
-        <ng-container matColumnDef="index">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-          <td mat-cell *matCellDef="let element">{{element.index}}</td>
-        </ng-container>
-    
-        <!-- Name Column -->
-       
+<div class="col ml-2 mb-2">
+
+  <button class="btn btn-outline-primary mt-1 mr-2 float-right" [routerLink]="['/admin/siteInfo/addHazards']">
+    <i class="fas fa-folder-plus mr-2"></i>Add Hazard
+  </button>
+</div>
+<div class="col-6">
+  <mat-form-field>
+    <input matInput #input placeholder="Search" (keyup)="applyFilter($event)" />
+  </mat-form-field>
+</div>
+<div class="">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element">{{element.index}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+
     <!-- Name Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element" [cdkCopyToClipboard]="element.title.toString()" (cdkCopyToClipboardCopied)="copySuccess()" [matTooltip]="span.innerText"><span #span  [innerHtml]="element.title"> {{element.title.length > 90? element.title.slice(0,90)+ '...' :element.title }}</span> </td>
+      <td mat-cell *matCellDef="let element" [cdkCopyToClipboard]="element.title.toString()"
+        (cdkCopyToClipboardCopied)="copySuccess()" [matTooltip]="span.innerText"><span #span
+          [innerHtml]="element.title"> {{element.title.length > 90? element.title.slice(0,90)+ '...' :element.title
+          }}</span> </td>
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Action </th>
-      <td mat-cell *matCellDef="let element"> 
+      <td mat-cell *matCellDef="let element">
         <!-- <i class="fas fa-pencil-alt mr-2" (click)="edit(element)" title="edit"></i>  <i  class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i>  -->
         <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon">
           <mat-icon (click)="edit(element)">edit</mat-icon>
@@ -55,17 +53,14 @@
         <td mat-cell *matCellDef="let element"(click)="delete(element)"> <i class="fas fa-trash "></i> 
         </td>
       </ng-container> -->
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">Data Not  Found  "{{input.value}}"</td>
-        </tr>
-      </table>
-    
-      <mat-paginator [pageSizeOptions]="[20]"
-                     showFirstLastButtons 
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>
-    </div>
-    
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

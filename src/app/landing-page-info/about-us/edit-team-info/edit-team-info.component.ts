@@ -139,13 +139,13 @@ export class EditTeamInfoComponent implements OnInit {
     });
   }
   onFormSubmit() {
-    
+
     this.editModule();
     this.editSubModule();
     this.companyDetail.get('fileUrl')?.setValue(this.Image);
-   
+
     let value = this.selectedImage[0];
-  
+
 
     let arrlength = this.add().length;
     for (let i = 0; i < arrlength; i++) {
@@ -154,7 +154,7 @@ export class EditTeamInfoComponent implements OnInit {
         .get('imageUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    
+
   }
 
   removeSafetyModule(i) {
@@ -166,22 +166,22 @@ export class EditTeamInfoComponent implements OnInit {
   }
 
   browser(event, i) {
-    
+
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage;
-  
+
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-       
+
 
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-  
+
         this.companyDetail.patchValue({
           filePath: res.filePath,
         });
@@ -197,25 +197,25 @@ export class EditTeamInfoComponent implements OnInit {
     formdata.append('', files);
 
     this.upload.upload(formdata).subscribe((res) => {
- 
+
 
       this.Image = res.files[0];
 
-   
+
     });
   }
   uploadImage(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-  
+
 
     this.upload.upload(formdata).subscribe((res) => {
-      
+
 
       this.Image1 = res.files[0];
 
-  
+
     });
   }
   editModule() {
@@ -228,7 +228,7 @@ export class EditTeamInfoComponent implements OnInit {
         fileUrl: this.Image,
         subTitle: this.companyDetail.controls.subTitle.value,
       };
-    
+
       this.landingPageInfo
         .editAboutUs(AboutUsData, this.data.EditData._id)
         .subscribe((resData) => {
@@ -248,12 +248,12 @@ export class EditTeamInfoComponent implements OnInit {
         imageUrl: this.selectedImage,
         title: this.add().at(0).get('title')?.value,
       };
-    
+
       this.landingPageInfo
         .editTeam(teamData, this.subId)
         .subscribe((resData) => {
           Swal.fire('Team Edited Successfully')
-         
+
 
           this.dialogRef.close('true');
           this.companyDetail.reset();
@@ -262,5 +262,5 @@ export class EditTeamInfoComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

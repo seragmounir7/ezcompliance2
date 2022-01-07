@@ -8,9 +8,9 @@ describe('EditTermsAndCondtionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTermsAndCondtionsComponent ]
+      declarations: [EditTermsAndCondtionsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddFormComponent } from './add-form/add-form.component';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AfterViewInit } from '@angular/core';
 
@@ -27,7 +27,7 @@ export interface PeriodicElement {
 export class FormsComponent implements AfterViewInit, OnInit {
   ELEMENT_DATA = [];
   /////////////mat table////////////////
- @Input() displayedColumns: string[] = [
+  @Input() displayedColumns: string[] = [
     'index',
     'formName',
     'formFrequency',
@@ -57,12 +57,12 @@ export class FormsComponent implements AfterViewInit, OnInit {
     public router: Router,
     private fb: FormBuilder,
     private dynamicFormServise: DynamicFormsService,
-    private activatedRoute:ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute
+  ) { }
 
-  addDyForm(){
+  addDyForm() {
     console.log('jjjj');
-    
+
     const dialogRef = this.dialog.open(AddFormComponent, {
       width: "700px",
       data: '',
@@ -76,9 +76,9 @@ export class FormsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this.url=this.activatedRoute.snapshot.url
-    console.log("url",this.url);
-    
+    this.url = this.activatedRoute.snapshot.url
+    console.log("url", this.url);
+
     sessionStorage.setItem('formId', '');
     sessionStorage.setItem('type', '');
     sessionStorage.setItem('formTitle', '');
@@ -126,15 +126,15 @@ export class FormsComponent implements AfterViewInit, OnInit {
           showConfirmButton: false,
           timer: 1200,
         });
-      } 
+      }
       else {
         Swal.fire({
           title: 'Form Disable successfully',
           showConfirmButton: false,
           timer: 1200,
         });
-      } 
-     
+      }
+
     });
   }
   delete(item) {
@@ -153,8 +153,8 @@ export class FormsComponent implements AfterViewInit, OnInit {
             title: 'Form Deleted successfully',
             showConfirmButton: false,
             timer: 1200,
-          });        
-            this.getAllForms();
+          });
+          this.getAllForms();
         });
       }
     });
@@ -243,14 +243,14 @@ export class FormsComponent implements AfterViewInit, OnInit {
       this.getAllForms();
     });
   }
-  add(element){
-    console.log("element",element._id);
-    let data= {
-      id:element._id,
-      type:"add"
+  add(element) {
+    console.log("element", element._id);
+    let data = {
+      id: element._id,
+      type: "add"
     }
     //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
-    this.router.navigate(['/admin/dynamic/savedDynamicForm'],{queryParams:data});
+    this.router.navigate(['/admin/dynamic/savedDynamicForm'], { queryParams: data });
   }
 
 }

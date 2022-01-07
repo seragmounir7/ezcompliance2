@@ -14,7 +14,7 @@ export class AddFormComponent implements OnInit {
     public dialogRef: MatDialogRef<AddFormComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();

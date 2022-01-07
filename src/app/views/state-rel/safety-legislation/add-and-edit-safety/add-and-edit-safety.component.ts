@@ -28,7 +28,7 @@ export class AddAndEditSafetyComponent implements OnInit {
     });
   }
 
-  
+
   onFormSubmit() {
     let data = {
       act: this.editTitle.get('act').value,

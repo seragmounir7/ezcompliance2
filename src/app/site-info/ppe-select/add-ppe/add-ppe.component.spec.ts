@@ -8,9 +8,9 @@ describe('AddPPEComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddPPEComponent ]
+      declarations: [AddPPEComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -13,9 +13,9 @@ import { FormControl } from '@angular/forms';
 export class EditQuestionComponent implements OnInit {
   editTitle: FormGroup;
   dataRec: any;
-  FAQ=[];
-  portalData:any = [];
-  
+  FAQ = [];
+  portalData: any = [];
+
   constructor(
     private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
@@ -27,33 +27,33 @@ export class EditQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.dataRec);
-    
+
     this.editTitle = this.fb.group({
       question: [this.dataRec.question, Validators.required],
       answer: [this.dataRec.answer, Validators.required],
       portalId: [this.dataRec.portalId, Validators.required],
     });
-   // this.getAllFaq();
+    // this.getAllFaq();
     this.getAllPortal();
   }
   getAllFaq() {
     this.landingPageInfo.getAllFaq().subscribe((res) => {
       console.log('getaLlFAQ=>', res);
       this.FAQ = res.data;
- 
+
     });
- 
+
   }
   onFormSubmit() {
 
-    let data={
-      question :this.editTitle.get('question').value,
-      answer:this.editTitle.get('answer').value,
-      portalId:this.editTitle.get('portalId').value,
-    
+    let data = {
+      question: this.editTitle.get('question').value,
+      answer: this.editTitle.get('answer').value,
+      portalId: this.editTitle.get('portalId').value,
+
     }
-    console.log("dataaa",data);
-    
+    console.log("dataaa", data);
+
     this.landingPageInfo
       .editFAQ(data, this.dataRec._id)
       .subscribe((resData) => {
@@ -63,17 +63,17 @@ export class EditQuestionComponent implements OnInit {
         Swal.fire('Question Edited successfully');
       });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }
-  getAllPortal(){
-    this.landingPageInfo.getAllPortal().subscribe((res)=>{
+  getAllPortal() {
+    this.landingPageInfo.getAllPortal().subscribe((res) => {
       console.log('getAllPortal=>', res);
-     this.portalData=res.data;
-     console.log('portalData=>', this.portalData);
-    
-   
+      this.portalData = res.data;
+      console.log('portalData=>', this.portalData);
+
+
     })
   }
 }

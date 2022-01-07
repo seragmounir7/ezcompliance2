@@ -8,9 +8,9 @@ describe('DisplayTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DisplayTableComponent ]
+      declarations: [DisplayTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

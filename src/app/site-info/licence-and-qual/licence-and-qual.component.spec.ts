@@ -8,9 +8,9 @@ describe('LicenceAndQualComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LicenceAndQualComponent ]
+      declarations: [LicenceAndQualComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

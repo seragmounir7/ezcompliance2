@@ -21,7 +21,7 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
   templateUrl: './hazard-report.component.html',
   styleUrls: ['./hazard-report.component.scss'],
 })
-export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
+export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'hazardReport';
   hazardReport: FormGroup;
   myControl = new FormControl();
@@ -33,7 +33,7 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
   filteredOptions4: Observable<any>;
   filteredManager: Observable<any>;
   id: any;
-  hazard:any;
+  hazard: any;
   singRequired: any;
   selectedImage: any;
 
@@ -52,19 +52,19 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   sub: any;
   isPrint: Observable<any>;
-  @HostListener("window:afterprint",[]) 
-  function(){
+  @HostListener("window:afterprint", [])
+  function() {
     console.log("Printing completed...");
     this.router.navigateByUrl("/admin/forms/hazardTable")
     this.shared.printNext(false)
-   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
-} 
+    // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+  }
   maxDate = new Date();
   minDate = new Date();
-  type:any;
+  type: any;
   empData: any;
   check: any;
-  
+
   constructor(
     private fb: FormBuilder,
     private employee: EmployeeRegistrationService,
@@ -75,8 +75,8 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
     public upload: UploadFileServiceService,
     private activatedRoute: ActivatedRoute,
     private ngZone: NgZone,
-    public forms:SavedformsService,
-    private shared:RoleManagementSharedServiceService,
+    public forms: SavedformsService,
+    private shared: RoleManagementSharedServiceService,
   ) {
     this.check = localStorage.getItem('key');
 
@@ -151,10 +151,10 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit() {
-  this.isPrint=(this.shared.printObs$ as Observable<any>)
+    this.isPrint = (this.shared.printObs$ as Observable<any>)
 
     this.activatedRoute.queryParams.subscribe(params => {
-      this.type=params['formType'];  
+      this.type = params['formType'];
     });
     this.getHazard();
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -171,13 +171,13 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
       debounceTime(400),
       distinctUntilChanged(),
       switchMap(val => {
-        console.log("myControl22..", val,this.filteredOptions2)
+        console.log("myControl22..", val, this.filteredOptions2)
         return this.filter2(val || '')
       })
     )
-    this.filteredOptions2.subscribe((res)=>{
-      console.log("item...",res);
-      
+    this.filteredOptions2.subscribe((res) => {
+      console.log("item...", res);
+
     })
 
     // The form was compiled by:
@@ -187,28 +187,28 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
       debounceTime(400),
       distinctUntilChanged(),
       switchMap(val => {
-        console.log("myControl22..", val,this.filteredOptions3)
+        console.log("myControl22..", val, this.filteredOptions3)
         return this.filter3(val || '')
       })
     )
 
-    this.filteredOptions3.subscribe((res)=>{
-      console.log("item...",res); 
+    this.filteredOptions3.subscribe((res) => {
+      console.log("item...", res);
     })
-    
-                   // Action By
+
+    // Action By
     this.filteredOptions4 = this.hazardReport.controls.elliminateAction.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
       switchMap(val => {
-        console.log("myControl22..", val,this.filteredOptions4)
+        console.log("myControl22..", val, this.filteredOptions4)
         return this.filter2(val || '')
       })
     )
-    this.filteredOptions4.subscribe((res)=>{
-      console.log("item...",res);
-      
+    this.filteredOptions4.subscribe((res) => {
+      console.log("item...", res);
+
     })
 
     this.filteredManager = this.myControlManager.valueChanges.pipe(
@@ -223,7 +223,7 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
     this.getAllHazardTreatmentRelation();
     this.getAllJobNumber();
     this.getall();
-  
+
     this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
     this.setTitle.setTitle('WHS-Hazard Report Form');
     this.hazardReport.get('managerSupervisor').valueChanges.subscribe((res) => {
@@ -252,7 +252,7 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
       this.getHazardByid(this.id);
 
     }
-   
+
     // this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
     //   if (res) {
     //     console.log(res);
@@ -307,7 +307,7 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
 
   }
 
- 
+
   getHazardByid(id) {
     this.url.getHazardFormDataById(id).subscribe((res: any) => {
       console.log(res);
@@ -368,7 +368,7 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
         eliminateHazardAction: res.data.eliminateHazardAction,
         signaturePad1: res.data.signaturePad1,
       })
-      this.minDate=res.data.date;
+      this.minDate = res.data.date;
       this.selectedImage = res.data.fileUpload
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;
@@ -389,19 +389,19 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
   };
 
   ngAfterViewInit() {
-    console.log("check1...",this.check);
-    this.sub= this.shared.printObs$.subscribe(res=> {
-      this.check=res
-    if (this.check) {
-      setTimeout( () => { 
-        window.print();
-        console.log("printing....");
-      }, 3000);
-      localStorage.setItem('key', ' ');
-     
-      
-    }
-  })
+    console.log("check1...", this.check);
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
+
+
+      }
+    })
     // this.signaturePad is now available
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -471,20 +471,20 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
   }
   filter2(val: string): Observable<any> {
     return this.employee.getAllEmployeeInfo()
-      .pipe(map((res)=>{
-        res.data=res.data.map((item)=>{
-          item.fullName=`${item.firstName} ${item.lastName}`
+      .pipe(map((res) => {
+        res.data = res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
           return item
         })
         return res
       }),
         map((response: any) => {
           response.data = response.data.filter(option => {
-            console.log("option>>",option);
+            console.log("option>>", option);
             return option.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0
           })
-          console.log("response.data>>",response.data);
-          
+          console.log("response.data>>", response.data);
+
           return response.data;
         })
       )
@@ -492,56 +492,56 @@ export class HazardReportComponent implements OnInit,  AfterViewInit,OnDestroy {
 
   filter3(val: string): Observable<any> {
     return this.employee.getAllEmployeeInfo()
-      .pipe(map((res)=>{
-        res.data=res.data.map((item)=>{
-          item.name=`${item.firstName} ${item.lastName}`
+      .pipe(map((res) => {
+        res.data = res.data.map((item) => {
+          item.name = `${item.firstName} ${item.lastName}`
           return item
         })
         return res
       }),
         map((response: any) => {
           response.data = response.data.filter(option => {
-            console.log("option>>",option);
+            console.log("option>>", option);
             return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
           })
-          console.log("response.data>>",response.data);
-          
+          console.log("response.data>>", response.data);
+
           return response.data;
         })
       )
   }
- 
 
-   // Action By
-   filter4(val: string): Observable<any> {
+
+  // Action By
+  filter4(val: string): Observable<any> {
     return this.employee.getAllEmployeeInfo()
-      .pipe(map((res)=>{
-        res.data=res.data.map((item)=>{
-          item.name=`${item.firstName} ${item.lastName}`
+      .pipe(map((res) => {
+        res.data = res.data.map((item) => {
+          item.name = `${item.firstName} ${item.lastName}`
           return item
         })
         return res
       }),
         map((response: any) => {
           response.data = response.data.filter(option => {
-            console.log("option>>",option);
+            console.log("option>>", option);
             return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
           })
-          console.log("response.data>>",response.data);
-          
+          console.log("response.data>>", response.data);
+
           return response.data;
         })
       )
   }
-  
-  
 
-getHazard(){
-  this.employee.getAllEmployeeInfo().subscribe((res: any) => {
-    console.log("emp..",res.data);
-     this.empData = res.data;
-  })
-}
+
+
+  getHazard() {
+    this.employee.getAllEmployeeInfo().subscribe((res: any) => {
+      console.log("emp..", res.data);
+      this.empData = res.data;
+    })
+  }
 
   filterEvent(val: string): Observable<any> {
     return this.url.getAllManager()
@@ -688,7 +688,7 @@ getHazard(){
           timer: 1200,
         });
         // this.router.navigate(["/admin/forms/tableData"]);
-        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
+        this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
       });
       console.log('data', data);
     }
@@ -712,35 +712,35 @@ getHazard(){
       );
     });
   }
-  employeeData(e:MatAutocompleteSelectedEvent){
+  employeeData(e: MatAutocompleteSelectedEvent) {
     const data = e.option.value;
     this.hazardReport.patchValue({
-      fullName:data.fullName,
-      department:data.department,
-      email:data.email,
-      position:data.position,
-      phone:data.phone,
+      fullName: data.fullName,
+      department: data.department,
+      email: data.email,
+      position: data.position,
+      phone: data.phone,
       // compilePosition:data.position,
       // compileDepartment:data.department,
-      
+
     })
-    console.log("e.option",e.option);
+    console.log("e.option", e.option);
     console.log("data...");
-    
+
   }
 
   // The form was compiled by:
-  
-  employeeData1(e:MatAutocompleteSelectedEvent){
+
+  employeeData1(e: MatAutocompleteSelectedEvent) {
     const data = e.option.value;
     this.hazardReport.patchValue({
-      name:data.name,
-      compileDepartment:data.department,
-      compilePosition:data.position,
+      name: data.name,
+      compileDepartment: data.department,
+      compilePosition: data.position,
       // elliminateAction:data.name
     })
-    console.log("e.option",e.option);
+    console.log("e.option", e.option);
     console.log("data...");
-    
+
   }
 }

@@ -14,7 +14,7 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
-  constructor(private spinner: NgxSpinnerService) {}
+  constructor(private spinner: NgxSpinnerService) { }
 
   intercept(
     request: HttpRequest<unknown>,
@@ -26,7 +26,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-         // console.log('spinnerhide====================>', request.url);
+          // console.log('spinnerhide====================>', request.url);
           this.spinner.hide();
         }
         return event;

@@ -8,7 +8,7 @@ export class SetTitleService {
 
   constructor(private titleService: Title) { }
 
-  setTitle(title){
+  setTitle(title) {
     this.titleService.setTitle(title);
   }
 }
