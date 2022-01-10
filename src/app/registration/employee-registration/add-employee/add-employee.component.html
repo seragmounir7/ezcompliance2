@@ -102,7 +102,7 @@
             </span>
           </div>
           <div class="mb-3 mt-3 col-3">
-            <label class="form-label mb-3">Role</label>
+            <label class="form-label mb-3">Administration Right</label>
             <select class="form-select form-control" aria-label="Default select example" formControlName="roleId"
               [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
 
@@ -466,7 +466,7 @@
         </div>
 
       </mat-tab>
-      <mat-tab label="Add Plant/Equipment Register" (click)="addPlantshow()">
+      <mat-tab label="Plant/Equipment Register" (click)="addPlantshow()">
         <div formArrayName="plantArr">
           <div *ngFor="let row of addEquip().controls; let filed2 = index">
             <div [formGroupName]="filed2">
@@ -483,23 +483,23 @@
                   <input type="text" formControlName="modelNumber" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-3">
+                <div class="mb-3 mt-3 col-2">
                   <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
                   <input type="text" formControlName="serialNumber" class="form-control" />
 
                 </div>
 
                 <div class="mb-3 mt-3 col-2">
-                  <label for="exampleFormControlInput1" class="form-label">Service Renew Date</label>
+                  <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
                   <input type="date" formControlName="serviceRenewDate" class="form-control" />
 
                 </div>
 
-                <div class="mb-3 mt-3 col-3">
+                <!-- <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Need to be able to more</label>
                   <input type="text" formControlName="needToMore" class="form-control" />
 
-                </div>
+                </div> -->
                 <div class="col-1 mt-4">
                   <div class="my-4">
                     <span class="material-icons" (click)="addEquipFiled2()">add_circle_outline

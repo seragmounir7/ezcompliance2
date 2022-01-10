@@ -981,7 +981,7 @@
                   <h2>Step:{{i+1}} {{ item.title }}</h2>
                 </div>
 
-                <div class="row">
+                <div class="row row-print">
                   <div class="col-10 col-sm-10-print">
                     <label for="sel2">Identity Hazards<span class="material-icons ml-3 my-auto p-0"
                         style="font-size: 19px;"
@@ -1030,8 +1030,8 @@
 
                   </div>
 
-                  <div>
-                    <ng-container formArrayName="residualRisk">
+                  <div class="col-2">
+                    <ng-container formArrayName="residualRisk" >
                       <div class=" my-3" [formGroupName]="i">
                         <label for="sel1">Residual Risk</label>
                         <select class="form-control" id="sel1" name="sellist1" formControlName="resiRiskLevel">
@@ -1039,7 +1039,7 @@
 
                         </select>
                       </div>
-                    </ng-container>
+                    </ng-container >
                     <ng-container formArrayName="persResp"><label for="sel1" class="pt-2">Person Responsible</label>
                       <div [formGroupName]="i">
                         <select multiple class="form-control" formControlName="personRes" id="sel2"
@@ -1844,8 +1844,8 @@
               <h2>Step:{{i+1}} {{ item.title }}</h2>
             </div>
 
-            <div class="row">
-              <div class="col-10">
+            <div class="row row-print">
+              <div class="col-10 col-sm-10-print">
                 <label for="sel2">Identity Hazards<span class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"
                     (click)="addItem('identifyHazards',i)">add_circle_outline</span></label>
                 <ol class="identifyHaz">
@@ -1871,7 +1871,7 @@
                 </div>
               </ng-container>
 
-              <div class="col-10 my-3">
+              <div class="col-10 col-sm-10-print my-3">
 
                 <label for="sel2">Control and Action Required<span class="material-icons ml-3 my-auto p-0"
                     style="font-size: 19px;" (click)="addItem('ctrlActreq',i)">add_circle_outline</span></label>
@@ -1892,9 +1892,9 @@
 
               </div>
 
-              <div>
+              <div class="col-2 col-sm-2-print">
                 <ng-container formArrayName="residualRisk">
-                  <div class=" my-3" [formGroupName]="i">
+                  <div class="my-3 " [formGroupName]="i">
                     <label for="sel1">Residual Risk</label>
                     <select class="form-control" id="sel1" name="sellist1" formControlName="resiRiskLevel">
                       <option *ngFor="let item of resiRiskLevel" [value]="item._id">{{item.title}}</option>

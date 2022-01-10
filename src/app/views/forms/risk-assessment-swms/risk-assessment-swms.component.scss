@@ -110,8 +110,16 @@
 //   font-family: Inter, sans-serif;
 // }
 
+
 //////////////////
 @media print {
+  .row-print {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -7.5px;
+    margin-left: -7.5px;
+}
+
 .col-sm-2-print {
   width: 16.66666667%;
 }
