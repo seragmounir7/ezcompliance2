@@ -226,6 +226,36 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
             }
           }
         }, 500);
+        if (this.id !== 'form') {
+          if (!this.add().length) {
+            for (
+              let index = 0;
+              index < this.showDatas.siteAction.length;
+              index++
+            ) {
+              console.log(this.showDatas.siteAction[index].item);
+
+              this.addAction();
+              this.add()
+                .controls[index].get('item')
+                .setValue(this.showDatas.siteAction[index].item);
+              this.add()
+                .controls[index].get('action')
+                .setValue(this.showDatas.siteAction[index].action);
+              this.add()
+                .controls[index].get('topicId')
+                .setValue(this.showDatas.siteAction[index].topicId);
+              this.add()
+                .controls[index].get('PersonResponsible')
+                .setValue(
+                  this.showDatas.siteAction[index].PersonResponsible
+                );
+              this.add()
+                .controls[index].get('complete')
+                .setValue(this.showDatas.siteAction[index].complete);
+            }
+          }
+        }
         if (this.check) {
           this.showAction()
         }
@@ -288,7 +318,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       action: ['', Validators.required],
       PersonResponsible: ['', Validators.required],
       complete: ['', Validators.required],
-      topicId: ['', Validators.required],
+      topicId: ['',],
     });
   }
   showsite() {
@@ -299,79 +329,92 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   showAction() {
     this.siteAction = true;
     this.siteshow = false;
-    this.add().clear();
-    if (this.id != 'form') {
-      for (
-        let index = 0;
-        index < this.showDatas.siteAction.length;
-        index++
-      ) {
-        console.log(this.showDatas.siteAction[index].item);
+    // this.add().clear();
+    //   if (this.id !== 'form') {
+    //     if(!this.add().length){
+    //     for (
+    //       let index = 0;
+    //       index < this.showDatas.siteAction.length;
+    //       index++
+    //     ) {
+    //       console.log(this.showDatas.siteAction[index].item);
 
-        this.addAction();
-        this.add()
-          .controls[index].get('item')
-          .setValue(this.showDatas.siteAction[index].item);
-        this.add()
-          .controls[index].get('action')
-          .setValue(this.showDatas.siteAction[index].action);
-        this.add()
-          .controls[index].get('topicId')
-          .setValue(this.showDatas.siteAction[index].topicId);
-        this.add()
-          .controls[index].get('PersonResponsible')
-          .setValue(
-            this.showDatas.siteAction[index].PersonResponsible
-          );
-        this.add()
-          .controls[index].get('complete')
-          .setValue(this.showDatas.siteAction[index].complete);
-      }
-    } else {
-      let key = [];
-      for (let y = 0; y < this.allTopic.length; y++) {
-        key.push(Object.keys(this.add2().at(y).value));
-      }
+    //       this.addAction();
+    //       this.add()
+    //         .controls[index].get('item')
+    //         .setValue(this.showDatas.siteAction[index].item);
+    //       this.add()
+    //         .controls[index].get('action')
+    //         .setValue(this.showDatas.siteAction[index].action);
+    //       this.add()
+    //         .controls[index].get('topicId')
+    //         .setValue(this.showDatas.siteAction[index].topicId);
+    //       this.add()
+    //         .controls[index].get('PersonResponsible')
+    //         .setValue(
+    //           this.showDatas.siteAction[index].PersonResponsible
+    //         );
+    //       this.add()
+    //         .controls[index].get('complete')
+    //         .setValue(this.showDatas.siteAction[index].complete);
+    //     }
+    //   }
+    // } else {
+    // let key = [];
+    // for (let y = 0; y < this.allTopic.length; y++) {
+    //   key.push(Object.keys(this.add2().at(y).value));
+    // }
 
-      console.log('this.keyArr.find((ele) => key.includes(ele))', key);
-      for (let i = 0; i < key.length - 1; i++) {
-        if (!this.keyArr.find((ele) => key[i].includes(ele))) {
-          let tempValue = this.add2().at(i).get(key[i]).value;
-          console.log('tempValue', tempValue);
-          let data = this.allTopic.find((obj) => {
-            if (obj._id == tempValue) {
-              console.log('obj', obj);
+    // console.log('this.keyArr.find((ele) => key.includes(ele))', key);
+    // for (let i = 0; i < key.length - 1; i++) {
+    //   if (!this.keyArr.find((ele) => key[i].includes(ele))) {
+    //     let tempValue = this.add2().at(i).get(key[i]).value;
+    //     console.log('tempValue', tempValue);
+    //     let data = this.allTopic.find((obj) => {
+    //       if (obj._id == tempValue) {
+    //         console.log('obj', obj);
 
-              return obj;
-            }
-          });
-          if (tempValue != '') {
-            if (tempValue != 'yes') {
-              let index = this.add().length;
-              this.addAction();
-              console.log('data', data);
+    //         return obj;
+    //       }
+    //     });
+    //     if (tempValue != '') {
+    //       if (tempValue != 'yes') {
+    //         let index = this.add().length;
+    //         this.addAction();
+    //         console.log('data', data);
 
-              this.add().controls[index].get('item').setValue(data.item);
-              this.add().controls[index].get('action').setValue(data.action);
-              this.add().controls[index].get('topicId').setValue(data._id);
-            }
-          }
-        }
-      }
-    }
+    //         this.add().controls[index].get('item').setValue(data.item);
+    //         this.add().controls[index].get('action').setValue(data.action);
+    //         this.add().controls[index].get('topicId').setValue(data._id);
+    //       }
+    //     }
+    //   }
+    // }
+    // }
   }
   removeAction() {
     let index = this.add().length;
     this.add().removeAt(index - 1);
   }
-  addAcionTab(event) {
+  addAcionData(data) {
     let b = Object.keys(this.sidePreview.value);
-    console.log('event', event);
-    //   let index =this.add().length
-    //   this.addAction()
-    // this.add().controls[index].get("item").setValue(event.target.value)
+    console.log('data', data);
+    let index = this.add().length
+    this.addAction()
+    this.add().controls[index].get("item").setValue(data.item)
+    this.add().controls[index].get('action').setValue(data.action);
+    this.add().controls[index].get('topicId').setValue(data._id);
+    console.log(this.sidePreview.controls[b[0]].value);
+  }
+  removeAcionData(data) {
+    for (let index = 0; index < this.add().length; index++) {
+      if (this.add().at(index).get('topicId').value == data._id) {
+        this.add().removeAt(index)
+        console.log("formcontrol remove");
 
-    //  console.log(this.sidePreview.controls[b[0]].value);
+      }
+
+    }
   }
 
   getAllJobTask() {
@@ -418,14 +461,13 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         .updateSiteInspection(this.id, data)
         .subscribe((res) => {
           console.log('res', res);
-          this.router.navigate(['/admin/forms']);
           // this.router.navigate(["/admin/forms/tableData"]);
           Swal.fire({
             title: 'Update successfully',
             showConfirmButton: false,
             timer: 1200,
           });
-          this.router.navigate(['/admin/forms/tableData']);
+          this.router.navigate(['/admin/forms/siteinspectiontable']);
         });
     } else {
       const data = {

@@ -198,11 +198,11 @@
                       {{allTopic[filed].topic}}
                     </p>
                     <p *ngIf=" allTopic[filed]?.categoryId==allcategory[index]?._id">
-                      <input type="radio" class="form-radio mr-1" formControlName="{{allTopic[filed]._id}}"
+                      <input type="radio" class="form-radio mr-1" (change)="removeAcionData(allTopic[filed])" formControlName="{{allTopic[filed]._id}}"
                         value="yes" />Yes
                     </p>
                     <p *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
-                      <input type="radio" class="mr-1" (change)="addAcionTab($event)"
+                      <input type="radio" class="mr-1" (change)="addAcionData(allTopic[filed])"
                         formControlName="{{allTopic[filed]._id}}" [value]="allTopic[filed]._id" />No
                     </p>
 
@@ -227,7 +227,7 @@
                 <input type="radio" class="form-radio mr-1" formControlName="Hazard" value="yes" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" (change)="addAcionTab($event)" formControlName="Hazard"
+                <input type="radio" class="mr-1" (change)="addAcionData($event)" formControlName="Hazard"
                   value="Hazard Signage not up to date" />No
               </p>
             </div>
@@ -240,7 +240,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="documentation" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value=" documentation not up to date" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value=" documentation not up to date" (change)="addAcionData($event)"
                   formControlName="documentation" />No
               </p>
             </div>
@@ -254,7 +254,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value=" workers not  inducted into onsite"
-                  (change)="addAcionTab($event)" formControlName="workeronsite" />No
+                  (change)="addAcionData($event)" formControlName="workeronsite" />No
               </p>
             </div>
 
@@ -267,7 +267,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="SWMS" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" (change)="addAcionTab($event)" value="workers not inducted into  SWMS"
+                <input type="radio" class="mr-1" (change)="addAcionData($event)" value="workers not inducted into  SWMS"
                   formControlName="SWMS" />No
               </p>
             </div>
@@ -280,7 +280,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="tooboxtalk" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" (change)="addAcionTab($event)" value="toobox talks not taking place"
+                <input type="radio" class="mr-1" (change)="addAcionData($event)" value="toobox talks not taking place"
                   formControlName="tooboxtalk" />No
               </p>
             </div>
@@ -305,7 +305,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="WHSManual" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" (change)="addAcionData($event)"
                   value="WHS Manual is not avaiable all workers" formControlName="WHSManual" />No
               </p>
             </div>
@@ -318,7 +318,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="IncidentReport" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Incident Report not available" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Incident Report not available" (change)="addAcionData($event)"
                   formControlName="IncidentReport" />No
               </p>
             </div>
@@ -331,7 +331,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="HazardReport" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Hazard Report not available" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Hazard Report not available" (change)="addAcionData($event)"
                   formControlName="HazardReport" />No
               </p>
             </div>
@@ -346,7 +346,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Emergrncy Evacuation plan not displayed"
-                  (change)="addAcionTab($event)" formControlName="emergrncyEvacuation" />No
+                  (change)="addAcionData($event)" formControlName="emergrncyEvacuation" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -358,7 +358,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="TrainingRecords" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Training Records not up tp date" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Training Records not up tp date" (change)="addAcionData($event)"
                   formControlName="TrainingRecords" />No
               </p>
             </div>
@@ -378,7 +378,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="HS Policy not  Displayed on notice board"
-                  (change)="addAcionTab($event)" formControlName="WHSPolicy" />No
+                  (change)="addAcionData($event)" formControlName="WHSPolicy" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -391,7 +391,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Return to Work Form not avaliable"
-                  (change)="addAcionTab($event)" formControlName="ReturnToWork" />No
+                  (change)="addAcionData($event)" formControlName="ReturnToWork" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -403,7 +403,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="displayHazardReport" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Hazard Report form not avaliable" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Hazard Report form not avaliable" (change)="addAcionData($event)"
                   formControlName="displayHazardReport" />No
               </p>
             </div>
@@ -418,7 +418,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Emergrncy Evacuation plan not displayed"
-                  (change)="addAcionTab($event)" formControlName="displayEmergrncyEvacuation" />No
+                  (change)="addAcionData($event)" formControlName="displayEmergrncyEvacuation" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -430,7 +430,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="NoSmoking" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="No Smoking signs not displayed" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="No Smoking signs not displayed" (change)="addAcionData($event)"
                   formControlName="NoSmoking" />No
               </p>
             </div>
@@ -443,7 +443,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="PPESignage" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="PPE Signage not displayed" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="PPE Signage not displayed" (change)="addAcionData($event)"
                   formControlName="PPESignage" />No
               </p>
             </div>
@@ -457,7 +457,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Report the Hazard signs not displayed"
-                  (change)="addAcionTab($event)" formControlName="ReportHazardsigns" />No
+                  (change)="addAcionData($event)" formControlName="ReportHazardsigns" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -470,7 +470,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Manual Handling Signs not Displayed"
-                  (change)="addAcionTab($event)" formControlName="ManualHandlingSigns" />No
+                  (change)="addAcionData($event)" formControlName="ManualHandlingSigns" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -482,7 +482,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="NoticeBoard" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionData($event)"
                   formControlName="NoticeBoard" />No
               </p>
             </div>
@@ -501,7 +501,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="accessEgrassHazards" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="oil, grease or other slip hazard" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="oil, grease or other slip hazard" (change)="addAcionData($event)"
                   formControlName="accessEgrassHazards" />No
               </p>
             </div>
@@ -514,7 +514,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="Walkways" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Walkways not clearly marked" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Walkways not clearly marked" (change)="addAcionData($event)"
                   formControlName="Walkways" />No
               </p>
             </div>
@@ -528,7 +528,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Walkways not free of clutter or obstructions"
-                  (change)="addAcionTab($event)" formControlName="Walkwaysfree" />No
+                  (change)="addAcionData($event)" formControlName="Walkwaysfree" />No
               </p>
             </div>
 
@@ -542,7 +542,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Stairs are  blocked and not  good condition"
-                  (change)="addAcionTab($event)" formControlName="StairsConditionGood" />No
+                  (change)="addAcionData($event)" formControlName="StairsConditionGood" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -555,7 +555,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Hoardings/fence and getes not secure"
-                  (change)="addAcionTab($event)" formControlName="HoardingsFenceGates" />No
+                  (change)="addAcionData($event)" formControlName="HoardingsFenceGates" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -568,7 +568,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Loose matrials not secure from wind"
-                  (change)="addAcionTab($event)" formControlName="LosseMatrialSecure" />No
+                  (change)="addAcionData($event)" formControlName="LosseMatrialSecure" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -581,7 +581,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Bins/Skips not located suitable areas"
-                  (change)="addAcionTab($event)" formControlName="binsSkipsLocated" />No
+                  (change)="addAcionData($event)" formControlName="binsSkipsLocated" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -593,7 +593,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="binsSkipsOverflowing" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Bins/Skips are overflowing" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Bins/Skips are overflowing" (change)="addAcionData($event)"
                   formControlName="binsSkipsOverflowing" />No
               </p>
             </div>
@@ -606,7 +606,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="NoticeBoard" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionData($event)"
                   formControlName="NoticeBoard" />No
               </p>
             </div>
@@ -625,7 +625,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="electricalMainboardLock" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Mainboard not lockable" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Mainboard not lockable" (change)="addAcionData($event)"
                   formControlName="electricalMainboardLock" />No
               </p>
             </div>
@@ -638,7 +638,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="PowerleadsTested" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Powerleads not tested and tagged" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Powerleads not tested and tagged" (change)="addAcionData($event)"
                   formControlName="PowerleadsTested" />No
               </p>
             </div>
@@ -652,7 +652,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Not Appropriate giards on equipment"
-                  (change)="addAcionTab($event)" formControlName="EquipmentGiards" />No
+                  (change)="addAcionData($event)" formControlName="EquipmentGiards" />No
               </p>
             </div>
 
@@ -665,7 +665,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="EquipmentCondition" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Equipment not good condition" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Equipment not good condition" (change)="addAcionData($event)"
                   formControlName="EquipmentCondition" />No
               </p>
             </div>
@@ -678,7 +678,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="LeadsSafety" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Leads not safety placed" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Leads not safety placed" (change)="addAcionData($event)"
                   formControlName="LeadsSafety" />No
               </p>
             </div>
@@ -698,7 +698,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Safey Data Sheet(SDS) not available"
-                  (change)="addAcionTab($event)" formControlName="SDSavailable" />No
+                  (change)="addAcionData($event)" formControlName="SDSavailable" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -711,7 +711,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="All Chemicals Are not stored as per the SDS"
-                  (change)="addAcionTab($event)" formControlName="chemicalsStoredSDS" />No
+                  (change)="addAcionData($event)" formControlName="chemicalsStoredSDS" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -724,7 +724,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="SDS Register not availables and not  up to date"
-                  (change)="addAcionTab($event)" formControlName="SDSRegisterAvailables" />No
+                  (change)="addAcionData($event)" formControlName="SDSRegisterAvailables" />No
               </p>
             </div>
 
@@ -737,7 +737,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="correctPPHand" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Incorrect PPE on hand and in use" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Incorrect PPE on hand and in use" (change)="addAcionData($event)"
                   formControlName="correctPPHand" />No
               </p>
             </div>
@@ -756,7 +756,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="FirstAidavailable" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="First Aid Kit not available" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="First Aid Kit not available" (change)="addAcionData($event)"
                   formControlName="FirstAidavailable" />No
               </p>
             </div>
@@ -770,7 +770,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="First Kit not  stocked as per contents list"
-                  (change)="addAcionTab($event)" formControlName="FirstKitContentsList" />No
+                  (change)="addAcionData($event)" formControlName="FirstKitContentsList" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -783,7 +783,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="First Aid Kit not  accessable to all workers"
-                  (change)="addAcionTab($event)" formControlName="KitAccessableWorkers" />No
+                  (change)="addAcionData($event)" formControlName="KitAccessableWorkers" />No
               </p>
             </div>
 
@@ -797,7 +797,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="All workers not aware first Aid kit location"
-                  (change)="addAcionTab($event)" formControlName="awarefirstKitLocation" />No
+                  (change)="addAcionData($event)" formControlName="awarefirstKitLocation" />No
               </p>
             </div>
           </div>
@@ -815,7 +815,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="Extinguishers" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Extinguishers not in place" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Extinguishers not in place" (change)="addAcionData($event)"
                   formControlName="Extinguishers" />No
               </p>
             </div>
@@ -828,7 +828,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="ExtinguishersClearlyMaked" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Extinguishers not clearly maked" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Extinguishers not clearly maked" (change)="addAcionData($event)"
                   formControlName="ExtinguishersClearlyMaked" />No
               </p>
             </div>
@@ -842,7 +842,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Extinguishers seviced not up to date"
-                  (change)="addAcionTab($event)" formControlName="ExtinguishersSevicedUpdate" />No
+                  (change)="addAcionData($event)" formControlName="ExtinguishersSevicedUpdate" />No
               </p>
             </div>
 
@@ -856,7 +856,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Exit Sings not in a Working condition"
-                  (change)="addAcionTab($event)" formControlName="ExitSingsCondition" />No
+                  (change)="addAcionData($event)" formControlName="ExitSingsCondition" />No
               </p>
             </div>
 
@@ -869,7 +869,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="ExitDoorsBlocked" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Exit Doors blocked " (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Exit Doors blocked " (change)="addAcionData($event)"
                   formControlName="ExitDoorsBlocked" />No
               </p>
             </div>
@@ -884,7 +884,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Exit Doors cannot be easily opened"
-                  (change)="addAcionTab($event)" formControlName="ExitDoorsOpened" />No
+                  (change)="addAcionData($event)" formControlName="ExitDoorsOpened" />No
               </p>
             </div>
 
@@ -898,7 +898,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Fire Alarm not tested and inspected not  up to date"
-                  (change)="addAcionTab($event)" formControlName="FireAlarmTested" />No
+                  (change)="addAcionData($event)" formControlName="FireAlarmTested" />No
               </p>
             </div>
 
@@ -911,7 +911,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="EvacuationPlans" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Evacuation Plans not displayed" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Evacuation Plans not displayed" (change)="addAcionData($event)"
                   formControlName="EvacuationPlans" />No
               </p>
             </div>
@@ -926,7 +926,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Emergency Drill not conduct within the last year"
-                  (change)="addAcionTab($event)" formControlName="emergencyDrillConduct" />No
+                  (change)="addAcionData($event)" formControlName="emergencyDrillConduct" />No
               </p>
             </div>
           </div>
@@ -945,7 +945,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Risk Assessment and SWMS not completed"
-                  (change)="addAcionTab($event)" formControlName="RiskAssessmentSWMS" />No
+                  (change)="addAcionData($event)" formControlName="RiskAssessmentSWMS" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -958,7 +958,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Plant is within valid service/inspection not in  period"
-                  (change)="addAcionTab($event)" formControlName="PlantValidService" />No
+                  (change)="addAcionData($event)" formControlName="PlantValidService" />No
               </p>
             </div>
             <div class="mt-2 col-4">
@@ -971,7 +971,7 @@
               </p>
               <p>
                 <input type="radio" class="mr-1" value="Opertion procedures and SOP's not in place"
-                  (change)="addAcionTab($event)" formControlName="OpertionProceduresSOPs" />No
+                  (change)="addAcionData($event)" formControlName="OpertionProceduresSOPs" />No
               </p>
             </div>
 
@@ -982,7 +982,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="PPEAvailable" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="PPE not available" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="PPE not available" (change)="addAcionData($event)"
                   formControlName="PPEAvailable" />No
               </p>
             </div>
@@ -996,7 +996,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="emergencyPlan" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Emergency Plan not an in place" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Emergency Plan not an in place" (change)="addAcionData($event)"
                   formControlName="emergencyPlan" />No
               </p>
             </div>
@@ -1010,7 +1010,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="PlantGoodCondition" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Plant is not  good Condition" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Plant is not  good Condition" (change)="addAcionData($event)"
                   formControlName="PlantGoodCondition" />No
               </p>
             </div>
@@ -1024,7 +1024,7 @@
                 <input type="radio" class="mr-1" value="yes" formControlName="appropriateGuards" />Yes
               </p>
               <p>
-                <input type="radio" class="mr-1" value="Appropriate guards not fitted" (change)="addAcionTab($event)"
+                <input type="radio" class="mr-1" value="Appropriate guards not fitted" (change)="addAcionData($event)"
                   formControlName="appropriateGuards" />No
               </p>
             </div>
@@ -1308,7 +1308,7 @@
                       value="yes" />Yes
                   </p>
                   <p *ngIf=" allTopic[filed].categoryId==allcategory[index]._id">
-                    <input type="radio" class="mr-1" (change)="addAcionTab($event)"
+                    <input type="radio" class="mr-1" (change)="addAcionData($event)"
                       formControlName="{{allTopic[filed]._id}}" [value]="allTopic[filed]._id" />No
                   </p>
 
@@ -1333,7 +1333,7 @@
               <input type="radio" class="form-radio mr-1" formControlName="Hazard" value="yes" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" (change)="addAcionTab($event)" formControlName="Hazard"
+              <input type="radio" class="mr-1" (change)="addAcionData($event)" formControlName="Hazard"
                 value="Hazard Signage not up to date" />No
             </p>
           </div>
@@ -1346,7 +1346,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="documentation" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value=" documentation not up to date" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value=" documentation not up to date" (change)="addAcionData($event)"
                 formControlName="documentation" />No
             </p>
           </div>
@@ -1359,7 +1359,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="workeronsite" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value=" workers not  inducted into onsite" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value=" workers not  inducted into onsite" (change)="addAcionData($event)"
                 formControlName="workeronsite" />No
             </p>
           </div>
@@ -1373,7 +1373,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="SWMS" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" (change)="addAcionTab($event)" value="workers not inducted into  SWMS"
+              <input type="radio" class="mr-1" (change)="addAcionData($event)" value="workers not inducted into  SWMS"
                 formControlName="SWMS" />No
             </p>
           </div>
@@ -1386,7 +1386,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="tooboxtalk" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" (change)="addAcionTab($event)" value="toobox talks not taking place"
+              <input type="radio" class="mr-1" (change)="addAcionData($event)" value="toobox talks not taking place"
                 formControlName="tooboxtalk" />No
             </p>
           </div>
@@ -1411,7 +1411,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="WHSManual" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" (change)="addAcionData($event)"
                 value="WHS Manual is not avaiable all workers" formControlName="WHSManual" />No
             </p>
           </div>
@@ -1424,7 +1424,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="IncidentReport" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Incident Report not available" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Incident Report not available" (change)="addAcionData($event)"
                 formControlName="IncidentReport" />No
             </p>
           </div>
@@ -1437,7 +1437,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="HazardReport" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Hazard Report not available" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Hazard Report not available" (change)="addAcionData($event)"
                 formControlName="HazardReport" />No
             </p>
           </div>
@@ -1452,7 +1452,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Emergrncy Evacuation plan not displayed"
-                (change)="addAcionTab($event)" formControlName="emergrncyEvacuation" />No
+                (change)="addAcionData($event)" formControlName="emergrncyEvacuation" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1464,7 +1464,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="TrainingRecords" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Training Records not up tp date" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Training Records not up tp date" (change)="addAcionData($event)"
                 formControlName="TrainingRecords" />No
             </p>
           </div>
@@ -1484,7 +1484,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="HS Policy not  Displayed on notice board"
-                (change)="addAcionTab($event)" formControlName="WHSPolicy" />No
+                (change)="addAcionData($event)" formControlName="WHSPolicy" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1496,7 +1496,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="ReturnToWork" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Return to Work Form not avaliable" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Return to Work Form not avaliable" (change)="addAcionData($event)"
                 formControlName="ReturnToWork" />No
             </p>
           </div>
@@ -1509,7 +1509,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="displayHazardReport" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Hazard Report form not avaliable" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Hazard Report form not avaliable" (change)="addAcionData($event)"
                 formControlName="displayHazardReport" />No
             </p>
           </div>
@@ -1524,7 +1524,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Emergrncy Evacuation plan not displayed"
-                (change)="addAcionTab($event)" formControlName="displayEmergrncyEvacuation" />No
+                (change)="addAcionData($event)" formControlName="displayEmergrncyEvacuation" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1536,7 +1536,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="NoSmoking" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="No Smoking signs not displayed" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="No Smoking signs not displayed" (change)="addAcionData($event)"
                 formControlName="NoSmoking" />No
             </p>
           </div>
@@ -1549,7 +1549,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="PPESignage" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="PPE Signage not displayed" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="PPE Signage not displayed" (change)="addAcionData($event)"
                 formControlName="PPESignage" />No
             </p>
           </div>
@@ -1563,7 +1563,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Report the Hazard signs not displayed"
-                (change)="addAcionTab($event)" formControlName="ReportHazardsigns" />No
+                (change)="addAcionData($event)" formControlName="ReportHazardsigns" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1576,7 +1576,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Manual Handling Signs not Displayed"
-                (change)="addAcionTab($event)" formControlName="ManualHandlingSigns" />No
+                (change)="addAcionData($event)" formControlName="ManualHandlingSigns" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1588,7 +1588,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="NoticeBoard" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionData($event)"
                 formControlName="NoticeBoard" />No
             </p>
           </div>
@@ -1607,7 +1607,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="accessEgrassHazards" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="oil, grease or other slip hazard" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="oil, grease or other slip hazard" (change)="addAcionData($event)"
                 formControlName="accessEgrassHazards" />No
             </p>
           </div>
@@ -1620,7 +1620,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="Walkways" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Walkways not clearly marked" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Walkways not clearly marked" (change)="addAcionData($event)"
                 formControlName="Walkways" />No
             </p>
           </div>
@@ -1634,7 +1634,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Walkways not free of clutter or obstructions"
-                (change)="addAcionTab($event)" formControlName="Walkwaysfree" />No
+                (change)="addAcionData($event)" formControlName="Walkwaysfree" />No
             </p>
           </div>
 
@@ -1648,7 +1648,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Stairs are  blocked and not  good condition"
-                (change)="addAcionTab($event)" formControlName="StairsConditionGood" />No
+                (change)="addAcionData($event)" formControlName="StairsConditionGood" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1661,7 +1661,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Hoardings/fence and getes not secure"
-                (change)="addAcionTab($event)" formControlName="HoardingsFenceGates" />No
+                (change)="addAcionData($event)" formControlName="HoardingsFenceGates" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1674,7 +1674,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Loose matrials not secure from wind"
-                (change)="addAcionTab($event)" formControlName="LosseMatrialSecure" />No
+                (change)="addAcionData($event)" formControlName="LosseMatrialSecure" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1687,7 +1687,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Bins/Skips not located suitable areas"
-                (change)="addAcionTab($event)" formControlName="binsSkipsLocated" />No
+                (change)="addAcionData($event)" formControlName="binsSkipsLocated" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1699,7 +1699,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="binsSkipsOverflowing" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Bins/Skips are overflowing" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Bins/Skips are overflowing" (change)="addAcionData($event)"
                 formControlName="binsSkipsOverflowing" />No
             </p>
           </div>
@@ -1712,7 +1712,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="NoticeBoard" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Notice Board not up to date" (change)="addAcionData($event)"
                 formControlName="NoticeBoard" />No
             </p>
           </div>
@@ -1731,7 +1731,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="electricalMainboardLock" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Mainboard not lockable" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Mainboard not lockable" (change)="addAcionData($event)"
                 formControlName="electricalMainboardLock" />No
             </p>
           </div>
@@ -1744,7 +1744,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="PowerleadsTested" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Powerleads not tested and tagged" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Powerleads not tested and tagged" (change)="addAcionData($event)"
                 formControlName="PowerleadsTested" />No
             </p>
           </div>
@@ -1758,7 +1758,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Not Appropriate giards on equipment"
-                (change)="addAcionTab($event)" formControlName="EquipmentGiards" />No
+                (change)="addAcionData($event)" formControlName="EquipmentGiards" />No
             </p>
           </div>
 
@@ -1771,7 +1771,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="EquipmentCondition" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Equipment not good condition" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Equipment not good condition" (change)="addAcionData($event)"
                 formControlName="EquipmentCondition" />No
             </p>
           </div>
@@ -1784,7 +1784,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="LeadsSafety" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Leads not safety placed" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Leads not safety placed" (change)="addAcionData($event)"
                 formControlName="LeadsSafety" />No
             </p>
           </div>
@@ -1804,7 +1804,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Safey Data Sheet(SDS) not available"
-                (change)="addAcionTab($event)" formControlName="SDSavailable" />No
+                (change)="addAcionData($event)" formControlName="SDSavailable" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1817,7 +1817,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="All Chemicals Are not stored as per the SDS"
-                (change)="addAcionTab($event)" formControlName="chemicalsStoredSDS" />No
+                (change)="addAcionData($event)" formControlName="chemicalsStoredSDS" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1830,7 +1830,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="SDS Register not availables and not  up to date"
-                (change)="addAcionTab($event)" formControlName="SDSRegisterAvailables" />No
+                (change)="addAcionData($event)" formControlName="SDSRegisterAvailables" />No
             </p>
           </div>
 
@@ -1843,7 +1843,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="correctPPHand" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Incorrect PPE on hand and in use" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Incorrect PPE on hand and in use" (change)="addAcionData($event)"
                 formControlName="correctPPHand" />No
             </p>
           </div>
@@ -1862,7 +1862,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="FirstAidavailable" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="First Aid Kit not available" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="First Aid Kit not available" (change)="addAcionData($event)"
                 formControlName="FirstAidavailable" />No
             </p>
           </div>
@@ -1876,7 +1876,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="First Kit not  stocked as per contents list"
-                (change)="addAcionTab($event)" formControlName="FirstKitContentsList" />No
+                (change)="addAcionData($event)" formControlName="FirstKitContentsList" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -1889,7 +1889,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="First Aid Kit not  accessable to all workers"
-                (change)="addAcionTab($event)" formControlName="KitAccessableWorkers" />No
+                (change)="addAcionData($event)" formControlName="KitAccessableWorkers" />No
             </p>
           </div>
 
@@ -1903,7 +1903,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="All workers not aware first Aid kit location"
-                (change)="addAcionTab($event)" formControlName="awarefirstKitLocation" />No
+                (change)="addAcionData($event)" formControlName="awarefirstKitLocation" />No
             </p>
           </div>
         </div>
@@ -1921,7 +1921,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="Extinguishers" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Extinguishers not in place" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Extinguishers not in place" (change)="addAcionData($event)"
                 formControlName="Extinguishers" />No
             </p>
           </div>
@@ -1934,7 +1934,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="ExtinguishersClearlyMaked" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Extinguishers not clearly maked" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Extinguishers not clearly maked" (change)="addAcionData($event)"
                 formControlName="ExtinguishersClearlyMaked" />No
             </p>
           </div>
@@ -1948,7 +1948,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Extinguishers seviced not up to date"
-                (change)="addAcionTab($event)" formControlName="ExtinguishersSevicedUpdate" />No
+                (change)="addAcionData($event)" formControlName="ExtinguishersSevicedUpdate" />No
             </p>
           </div>
 
@@ -1962,7 +1962,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Exit Sings not in a Working condition"
-                (change)="addAcionTab($event)" formControlName="ExitSingsCondition" />No
+                (change)="addAcionData($event)" formControlName="ExitSingsCondition" />No
             </p>
           </div>
 
@@ -1975,7 +1975,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="ExitDoorsBlocked" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Exit Doors blocked " (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Exit Doors blocked " (change)="addAcionData($event)"
                 formControlName="ExitDoorsBlocked" />No
             </p>
           </div>
@@ -1989,7 +1989,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="ExitDoorsOpened" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Exit Doors cannot be easily opened" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Exit Doors cannot be easily opened" (change)="addAcionData($event)"
                 formControlName="ExitDoorsOpened" />No
             </p>
           </div>
@@ -2004,7 +2004,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Fire Alarm not tested and inspected not  up to date"
-                (change)="addAcionTab($event)" formControlName="FireAlarmTested" />No
+                (change)="addAcionData($event)" formControlName="FireAlarmTested" />No
             </p>
           </div>
 
@@ -2017,7 +2017,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="EvacuationPlans" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Evacuation Plans not displayed" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Evacuation Plans not displayed" (change)="addAcionData($event)"
                 formControlName="EvacuationPlans" />No
             </p>
           </div>
@@ -2032,7 +2032,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Emergency Drill not conduct within the last year"
-                (change)="addAcionTab($event)" formControlName="emergencyDrillConduct" />No
+                (change)="addAcionData($event)" formControlName="emergencyDrillConduct" />No
             </p>
           </div>
         </div>
@@ -2051,7 +2051,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Risk Assessment and SWMS not completed"
-                (change)="addAcionTab($event)" formControlName="RiskAssessmentSWMS" />No
+                (change)="addAcionData($event)" formControlName="RiskAssessmentSWMS" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -2064,7 +2064,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Plant is within valid service/inspection not in  period"
-                (change)="addAcionTab($event)" formControlName="PlantValidService" />No
+                (change)="addAcionData($event)" formControlName="PlantValidService" />No
             </p>
           </div>
           <div class="mt-2 col-4">
@@ -2077,7 +2077,7 @@
             </p>
             <p>
               <input type="radio" class="mr-1" value="Opertion procedures and SOP's not in place"
-                (change)="addAcionTab($event)" formControlName="OpertionProceduresSOPs" />No
+                (change)="addAcionData($event)" formControlName="OpertionProceduresSOPs" />No
             </p>
           </div>
 
@@ -2088,7 +2088,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="PPEAvailable" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="PPE not available" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="PPE not available" (change)="addAcionData($event)"
                 formControlName="PPEAvailable" />No
             </p>
           </div>
@@ -2102,7 +2102,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="emergencyPlan" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Emergency Plan not an in place" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Emergency Plan not an in place" (change)="addAcionData($event)"
                 formControlName="emergencyPlan" />No
             </p>
           </div>
@@ -2116,7 +2116,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="PlantGoodCondition" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Plant is not  good Condition" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Plant is not  good Condition" (change)="addAcionData($event)"
                 formControlName="PlantGoodCondition" />No
             </p>
           </div>
@@ -2130,7 +2130,7 @@
               <input type="radio" class="mr-1" value="yes" formControlName="appropriateGuards" />Yes
             </p>
             <p>
-              <input type="radio" class="mr-1" value="Appropriate guards not fitted" (change)="addAcionTab($event)"
+              <input type="radio" class="mr-1" value="Appropriate guards not fitted" (change)="addAcionData($event)"
                 formControlName="appropriateGuards" />No
             </p>
           </div>

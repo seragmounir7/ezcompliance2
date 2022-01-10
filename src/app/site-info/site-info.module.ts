@@ -78,6 +78,8 @@ import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-ma
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynamic-form-categories.component';
+import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +153,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AddWhsManagerComponent,
     AddManagerComponent,
     EditManagerComponent,
+    DynamicFormCategoriesComponent,
+    AddFormCategoriesComponent,
 
   ],
 

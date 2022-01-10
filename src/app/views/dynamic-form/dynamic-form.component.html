@@ -22,6 +22,7 @@
   <div class="col-3 container mb-3" *ngIf="type == 'edit'">
     <input type="text" class="form-control" [(ngModel)]="formNameRecieved" />
   </div>
+  <p class="text-center mb-3 mt-2" style="font-size: 20px">{{  formCategories?.title }}</p>
   <div class="col-3 container mb-3" *ngIf="type == 'edit'|| type == 'add'">
     <div class="form-check">
       <label class="form-check-label">Configure With Job Number</label>

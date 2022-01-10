@@ -30,6 +30,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
   @Input() displayedColumns: string[] = [
     'index',
     'formName',
+    'formCategory',
     'formFrequency',
     'Disable/Enable',
     'edit',
