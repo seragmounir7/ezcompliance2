@@ -15,7 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./hazard-form-table-details.component.scss']
 })
 export class HazardFormTableDetailsComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', "phone", "email", "site", 'action'];
+  displayedColumns: string[] = ['formId', 'name', "phone", "email", "site", 'action'];
   showDatas: any;
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
