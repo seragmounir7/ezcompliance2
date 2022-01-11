@@ -14,7 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./display-table.component.scss']
 })
 export class DisplayTableComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'customerName', "phone", "email", "site", 'action'];
+  displayedColumns: string[] = ['position', 'customerName', "phone", "email", "site", 'createdAt', 'updatedAt','action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -88,6 +88,7 @@ export class DisplayTableComponent implements OnInit {
   sortData(sort: Sort) {
     if (this.isHistory) {
       this.getToolBoxHistory(sort.active, sort.direction)
+      return
     }
     this.getToolBox(sort.active, sort.direction)
   }

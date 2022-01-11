@@ -54,7 +54,8 @@ import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-ma
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
-
+import{DynamicFormCategoriesComponent}from './dynamic-form-categories/dynamic-form-categories.component'
+import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 
 const routes: Routes = [
   {
@@ -113,7 +114,9 @@ const routes: Routes = [
   { path: 'editManager', component: EditManagerComponent },
   { path: 'WHS-Manager', component: WHSManagerComponent },
   { path: 'addWHSManager', component: AddWhsManagerComponent },
-  { path: 'editWHSManager', component: EditWhsManagerComponent }
+  { path: 'editWHSManager', component: EditWhsManagerComponent },
+  { path: 'dynamicFormCategories', component: DynamicFormCategoriesComponent },
+  { path: 'addFormCategories', component: AddFormCategoriesComponent }
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

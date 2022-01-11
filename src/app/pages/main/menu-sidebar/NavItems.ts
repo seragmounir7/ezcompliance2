@@ -260,6 +260,12 @@ export class NavItems {
                     hasAccess: true
                 },
                 {
+                    displayedName: "Dynamic Form Categories",
+                    icon: "page",
+                    route: "/admin/siteInfo/dynamicFormCategories",
+                    hasAccess: true
+                },
+                {
                     displayedName: "State Relation",
                     icon: "page",
                     childItem: [

@@ -59,6 +59,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
+    if(this.router.url.includes('/admin/savedForms')){
+      this.router.navigateByUrl("/admin/savedForms")
+      return
+   }
     this.router.navigateByUrl("/admin/forms/incidentsTable")
     this.shared.printNext(false)
     // this.router.navigate(['/',{ outlets: {'print': ['print']}}])

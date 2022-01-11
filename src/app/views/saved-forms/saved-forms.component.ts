@@ -3,6 +3,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 
 @Component({
@@ -17,7 +19,10 @@ export class SavedFormsComponent implements OnInit {
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   totalCount: number
-  constructor(public forms: SavedformsService, public router: Router) { }
+  constructor(public forms: SavedformsService,
+    private spinner: NgxSpinnerService,
+    private shared: RoleManagementSharedServiceService,
+     public router: Router) { }
 
   ngOnInit(): void {
     this.getSavedforms();
@@ -59,6 +64,45 @@ export class SavedFormsComponent implements OnInit {
     }
     else if (type == 'Risk Assessment') {
       this.router.navigate(["/admin/forms/riskAssessSWMS/" + id], navigationExtras);
+    }
+  }
+  printPage(id,type) {
+    this.shared.printNext(true)
+    console.log("check");
+    // this.logicalFormInfo.printing.next('print');
+    localStorage.setItem("key", "print");
+    // $("<iframe>")                             // create a new iframe element
+    //     .hide()                               // make it invisible
+    //     .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
+    //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+
+
+    // let iframe=document.createElement("iframe")
+    //       iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
+    //       let body = document.getElementsByTagName("body")
+    //       body[0].appendChild(iframe)
+
+    this.spinner.show("printLoader")
+    // this.router.navigate(['/', { outlets: { 'print': ['print', 'riskAssessSWMS', id] } }])
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        "formType": type.toString()
+      }
+    };
+    if (type == 'Hazard') {
+      this.router.navigate(['/', { outlets: { 'print': ['print', 'hazardRep', id] } }],navigationExtras)
+    }
+    else if (type == 'Incident') {
+      this.router.navigate(['/', { outlets: { 'print': ['print', 'incidentRep', id] } }],navigationExtras)
+    }
+    else if (type == 'Site Inspection') {
+      this.router.navigate(['/', { outlets: { 'print': ['print', 'siteInspect', id] } }],navigationExtras)
+    }
+    else if (type == 'Tool Box') {
+      this.router.navigate(['/', { outlets: { 'print': ['print', 'toolboxTalk', id] } }],navigationExtras)
+    }
+    else if (type == 'Risk Assessment') {
+      this.router.navigate(['/', { outlets: { 'print': ['print', 'riskAssessSWMS', id] } }],navigationExtras)
     }
   }
   paginator(event: PageEvent) {

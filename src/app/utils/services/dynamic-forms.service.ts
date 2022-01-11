@@ -168,4 +168,21 @@ export class DynamicFormsService {
     this.categoryNameRecieved = categoryNameRecieved;
   }
   getFormIdType() { }
+
+  formCategoriesGetAll() {
+    return this.https.get(this.apiUrl + 'formCategory/getAll')
+  }
+  formCategoriesGetId(id) {
+    return this.https.get(this.apiUrl + 'formCategory/get/' + id)
+  }
+
+  formCategoriesPost(data) {
+    return this.https.post(this.apiUrl + 'formCategory/add', data)
+  }
+  formCategoriesPut(id, data) {
+    return this.https.put(this.apiUrl + 'formCategory/update/' + id, data)
+  }
+  formCategoriesDelete(id) {
+    return this.https.delete(this.apiUrl + 'formCategory/delete/' + id)
+  }
 }

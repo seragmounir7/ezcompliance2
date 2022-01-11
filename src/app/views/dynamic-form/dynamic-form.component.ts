@@ -263,6 +263,7 @@ export class DynamicFormComponent implements OnInit {
   allJobNumbers: any;
   formNameRecieved = '';
   states: any;
+  formCategories: any;
   constructor(
     public router: Router,
     private spinner: NgxSpinnerService,
@@ -315,6 +316,9 @@ export class DynamicFormComponent implements OnInit {
       // if(this.dynamicFormsService.formType =='add'){
       // this.formNameRecieved = this.dynamicFormsService.formTitle;
       this.formNameRecieved = sessionStorage.getItem('formTitle');
+      this.formCategories= JSON.parse(sessionStorage.getItem('formCategories'));
+      console.log("formCategories",this.formCategories.title);
+      
       for (let i = 0; i < this.totalModels.length; i++) {
         let modelFields: Array<field> = [];
         let modelRow = {
@@ -339,6 +343,7 @@ export class DynamicFormComponent implements OnInit {
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
         this.isHidden = res.data.check;
+        this.formCategories=res.data.formCategoryId
         // this.configData=res.data.configure[0];
         this.riskAssessmentFb.patchValue(res.data.configure[0]);
         res.data.htmlObject.forEach((item) => {
@@ -939,7 +944,8 @@ export class DynamicFormComponent implements OnInit {
           frequency: sessionStorage.getItem('frequency'),
           htmlObject: tempModel,
           configure: d,
-          check: this.isHidden
+          check: this.isHidden,
+          formCategoryId:this.formCategories._id
         };
         console.log("data", data);
 
@@ -974,7 +980,8 @@ export class DynamicFormComponent implements OnInit {
           enable: this.enableForm,
           frequency: this.frequency,
           configure: d,
-          check: this.isHidden
+          check: this.isHidden,
+          formCategoryId:this.formCategories._id
         };
 
         this.dynamicFormsService

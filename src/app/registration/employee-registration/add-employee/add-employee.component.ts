@@ -90,7 +90,6 @@ export class AddEmployeeComponent implements OnInit {
       modelNumber: [''],
       serialNumber: [''],
       serviceRenewDate: [''],
-      needToMore: [''],
     });
   }
 
@@ -192,7 +191,6 @@ export class AddEmployeeComponent implements OnInit {
         modelNumber: data.data.plant.modelNumber,
         serialNumber: data.data.plant.serialNumber,
         serviceRenewDate: data.data.plant.serviceRenewDate,
-        needToMore: data.data.plant.needToMore,
         plantSignature: data.data.plant.plantSignature,
 
       });
@@ -322,7 +320,6 @@ export class AddEmployeeComponent implements OnInit {
             modelNumber: item.controls.modelNumber.value,
             serialNumber: item.controls.serialNumber.value,
             serviceRenewDate: item.controls.serviceRenewDate.value,
-            needToMore: item.controls.needToMore.value
           },
 
         )
@@ -427,7 +424,6 @@ export class AddEmployeeComponent implements OnInit {
             modelNumber: item.controls.modelNumber.value,
             serialNumber: item.controls.serialNumber.value,
             serviceRenewDate: item.controls.serviceRenewDate.value,
-            needToMore: item.controls.needToMore.value
           },
 
         )
@@ -544,7 +540,6 @@ export class AddEmployeeComponent implements OnInit {
       modelNumber: [''],
       serialNumber: [''],
       serviceRenewDate: [''],
-      needToMore: [''],
     });
   }
   addEquipFiled2() {
@@ -559,7 +554,6 @@ export class AddEmployeeComponent implements OnInit {
       modelNumber: [data.modelNumber],
       serialNumber: [data.serialNumber],
       serviceRenewDate: [data.serviceRenewDate],
-      needToMore: [data.needToMore],
     });
   }
   addEquipFiled3(data) {
@@ -568,7 +562,7 @@ export class AddEmployeeComponent implements OnInit {
     console.log("addPPEFiled1", this.empDetails.value);
   }
   removeEquipFiled1(i) {
-    const item = <FormArray>this.empDetails.controls['equipmentRegister'];
+    const item = <FormArray>this.empDetails.controls['plantArr'];
     if (item.length > 1) {
       item.removeAt(i);
 
