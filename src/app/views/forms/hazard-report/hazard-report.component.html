@@ -633,7 +633,6 @@
           </div>
         </div>
       </div>
-   
     <div class="row">
       <div class="col-md-4 col-sm-4-print">
         <div class="mb-3">
@@ -646,42 +645,42 @@
           </select>
         </div>
       </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control" formControlName="solutionCorrect" cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy4" formControlName="solutionAction" aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy4="matAutocomplete"  [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.solutionAction | async ; let i = index "  [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
-              type="date"
-              class="form-control"
-              formControlName="solutionWhen"
-           
-              aria-describedby="emailHelp"
-            /> -->
-            <input matInput [matDatepicker]="pickerd4" class="form-control" [min]="minDate" formControlName="solutionWhen"
-              placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd4></mat-datepicker>
-          </div>
+      <div class="col-md-4 col-sm-4-print">
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
+          <label class="form-label">Corrective Action</label>
+          <textarea type="surname" class="form-control" formControlName="solutionCorrect" cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
+            aria-describedby="emailHelp"></textarea>
         </div>
       </div>
+      <div class="col-md-2 col-sm-2-print">
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
+          <label class="form-label label_1">Actioned by</label>
+          <input type="email" class="form-control" [matAutocomplete]="actionedBy4" formControlName="solutionAction" aria-describedby="emailHelp" />
+          <mat-autocomplete #actionedBy4="matAutocomplete"  [displayWith]="displayFn">
+            <mat-option *ngFor="let option of obj.solutionAction | async ; let i = index "  [value]="option">
+              {{option.fullName}}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-2-print">
+        <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
+          <label class="form-label label_1">By when</label>
+          <!-- <input
+            type="date"
+            class="form-control"
+            formControlName="solutionWhen"
+         
+            aria-describedby="emailHelp"
+          /> -->
+          <input matInput [matDatepicker]="pickerd4" class="form-control" [min]="minDate" formControlName="solutionWhen"
+            placeholder="dd-mm-yyyy">
+          <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
+          <mat-datepicker #pickerd4></mat-datepicker>
+        </div>
+      </div>
+    </div>
       <div class="row">
         <div class="col-md-4 col-sm-4-print">
           <div class="mb-3">
