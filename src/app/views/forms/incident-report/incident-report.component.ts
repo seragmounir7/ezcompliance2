@@ -1,3 +1,5 @@
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { AfterViewInit, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -16,7 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import Swal from 'sweetalert2';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { take } from 'rxjs/operators';
+import { debounceTime, map, startWith, take, tap } from 'rxjs/operators';
 import moment from 'moment';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
@@ -51,6 +53,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
   sub: any;
   isPrint: Observable<any>;
   editorDisable = false;
+  filteredOptions1: Observable<unknown>;
+  empData: any;
+  filteredOptions2: Observable<any>;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -80,6 +85,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
   type: any;
   check: any;
   constructor(
+    private employee: EmployeeRegistrationService,
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
@@ -168,6 +174,29 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit(): void {
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+    this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    )
+    this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => console.log('value', value)),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    )
+    })
     this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type = params['formType'];
@@ -194,6 +223,32 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       this.getAllProjectMang();
       this.getAllStaff();
     }
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+  employeeData(e: MatAutocompleteSelectedEvent,controlName:string) {
+    const data = e.option.value;
+    if(controlName == 'completedName'){
+      this.IncidentReport.patchValue({
+        completedDepartment: data.department,
+        completedPosition: data.position,
+    })
+    }
+    if(controlName == 'reviewedName'){
+      this.IncidentReport.patchValue({
+      reviewedDepartment: data.department,
+      reviewedPosition: data.position,
+    })
+    }
+    
+    console.log("e.option", e.option);
+    console.log("data...");
+
   }
 
   addAction() {

@@ -21,6 +21,7 @@ export class DisplayTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   id: any;
   isHistory: boolean;
+  role:any[] = ['product owner']
   constructor(
     private activatedRoute: ActivatedRoute,
     private logicalFormInfo: LogicalFormInfoService,
@@ -35,7 +36,7 @@ export class DisplayTableComponent implements OnInit {
     if (this.isHistory) {
       this.activatedRoute.paramMap.pipe(map(params => params.get('id'))).subscribe(res => {
         this.id = res
-        this.displayedColumns = ['version', 'position', 'customerName', "phone", "email", "site", 'createdAt', 'updatedAt', 'action'];
+        this.displayedColumns = ['version', 'position', 'customerName', "phone", "email", "site", 'createdTime', 'updatedTime', 'action'];
         this.getToolBoxHistory()
       })
     } else {

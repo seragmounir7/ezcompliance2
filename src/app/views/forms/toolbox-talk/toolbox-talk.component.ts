@@ -76,9 +76,27 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("toolbox destroy");
   }
 
+  disableForm(){
+    if (this.isHistory) {
+      this.toolBox.valueChanges.subscribe((res)=> {
+        this.toolBox.disable();
+      })
+      let check =  async () => {this.signaturePad2 != null}
+      check().then(x => {
+        this.signaturePad2.changes.subscribe((res:QueryList<SignaturePad>)=> {
+          if(res!=null)console.log(res)
+          res.toArray().map(item => {
+            item.off()
+          })
+        })
+      })
+    }
+  }
+
   ngOnInit(): void {
     this.isHistory = this.router.url.includes('/tableData\/history')
     if (this.isHistory) {
+      this.disableForm()
       this.returnTo = this.activatedRoute.queryParamMap.pipe(
         map(param => param.get('returnTo'))
       )
@@ -138,6 +156,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
       check().then(() => {
 
         this.signaturePad1.fromDataURL(res.data.signaturePad1)
+        if(this.isHistory)this.signaturePad1.off()
       })
       console.log("this.signaturePad1", this.signaturePad1);
 
@@ -148,6 +167,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
           let signaturePadArr = this.signaturePad2.toArray()
           res.data.attendees.forEach((x, i) => {
             signaturePadArr[i].fromDataURL(x.signature)
+            if(this.isHistory)signaturePadArr[i].off()
           });
         }, 2000);
       })
@@ -199,6 +219,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   addIssues() {
     this.issues().push(this.issuesForm());
+    this.disableForm()
   }
   // getissues(D): FormGroup {
   //   return this.fb.group({
@@ -254,6 +275,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   addCorrectAct() {
     this.correctAct().push(this.correctActForm());
+    this.disableForm()
   }
   correctAct(): FormArray {
     return this.toolBox.get('corrAction') as FormArray;
@@ -271,6 +293,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   addAttendee() {
     this.attendee().push(this.attendeeForm());
+    this.disableForm()
   }
   attendee(): FormArray {
     return this.toolBox.get('attendees') as FormArray;
@@ -299,6 +322,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   ngAfterViewInit() {
+    this.disableForm()
 
     this.sub = this.shared.printObs$.subscribe(res => {
       this.check = res

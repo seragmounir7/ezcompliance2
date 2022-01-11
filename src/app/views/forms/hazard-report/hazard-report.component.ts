@@ -5,7 +5,7 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { Observable } from 'rxjs';
-import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter, take } from 'rxjs/operators';
+import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter, take, tap } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -52,6 +52,14 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   sub: any;
   isPrint: Observable<any>;
+  obj: Actionedby = {
+    elliminateAction: null,
+    substituteAction: null,
+    isolatedAction: null,
+    solutionAction: null,
+    procedureRemoveAction: null,
+    PPEAction: null
+  };
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -141,22 +149,60 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
     });
   }
-  ngOnDestroy(): void {
-    this.sub.unsubscribe()
-    console.log("hazard destroy");
-  }
-  triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.ngZone.onStable.pipe(take(1))
-      .subscribe(() => this.autosize.resizeToFitContent(true));
-  }
+
+
   ngOnInit() {
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+      console.log('this.empData', this.empData)
+      this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+      this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        tap(value => console.log('value', value)),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+      let a = [
+        "elliminateAction",
+        "substituteAction",
+        "isolatedAction",
+        "solutionAction",
+        "procedureRemoveAction",
+        "PPEAction"
+      ]
+      // this.obj = new Object()
+      a.forEach(ctrlName => {
+        let filter = this.hazardReport.controls[ctrlName].valueChanges.pipe(
+          startWith(''),
+          debounceTime(400),
+          tap(value => console.log('value', value)),
+          map(value => (typeof value === 'string' ? value : value.fullName)),
+          map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+        )
+        // let o = new Object(ctrlName,filter)
+        // Object.assign(obj,{...o})
+        this.obj[ctrlName] = filter
+      })
+      console.log(this.obj)
+    })
     this.isPrint = (this.shared.printObs$ as Observable<any>)
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.type = params['formType'];
     });
-    this.getHazard();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -166,50 +212,22 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.filter(val || '')
       })
     )
-    this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(val => {
-        console.log("myControl22..", val, this.filteredOptions2)
-        return this.filter2(val || '')
-      })
-    )
-    this.filteredOptions2.subscribe((res) => {
-      console.log("item...", res);
 
-    })
+
+    // this.filteredOptions2.subscribe((res) => {
+    //   console.log("item...", res);
+
+    // })
 
     // The form was compiled by:
 
-    this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(val => {
-        console.log("myControl22..", val, this.filteredOptions3)
-        return this.filter3(val || '')
-      })
-    )
 
-    this.filteredOptions3.subscribe((res) => {
-      console.log("item...", res);
-    })
+
+
 
     // Action By
-    this.filteredOptions4 = this.hazardReport.controls.elliminateAction.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(val => {
-        console.log("myControl22..", val, this.filteredOptions4)
-        return this.filter2(val || '')
-      })
-    )
-    this.filteredOptions4.subscribe((res) => {
-      console.log("item...", res);
 
-    })
+
 
     this.filteredManager = this.myControlManager.valueChanges.pipe(
       startWith(''),
@@ -244,9 +262,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.id = this.activatedRoute.snapshot.params.id;
-    if (this.id != 'form')
-      console.log(this.id, "nnnn")
-    {
+    if (this.id != 'form') {
 
       console.log("id", this.id);
       this.getHazardByid(this.id);
@@ -305,6 +321,45 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     //   }
     // });
 
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+  ngAfterViewInit() {
+    console.log("check1...", this.check);
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
+
+
+      }
+    })
+    // this.signaturePad is now available
+    console.log(this.signaturePad1, this.dataUrl)
+    this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    this.signaturePad1.clear();
+    this.signaturePad1.fromDataURL(this.dataUrl);
+    // this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    // this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime
+    // invoke functions from szimek/signature_pad API
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("hazard destroy");
+  }
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this.ngZone.onStable.pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
 
@@ -388,29 +443,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     canvasHeight: 100,
   };
 
-  ngAfterViewInit() {
-    console.log("check1...", this.check);
-    this.sub = this.shared.printObs$.subscribe(res => {
-      this.check = res
-      if (this.check) {
-        setTimeout(() => {
-          window.print();
-          console.log("printing....");
-        }, 3000);
-        localStorage.setItem('key', ' ');
 
-
-      }
-    })
-    // this.signaturePad is now available
-    console.log(this.signaturePad1, this.dataUrl)
-    this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad1.clear();
-    this.signaturePad1.fromDataURL(this.dataUrl);
-    // this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    // this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime
-    // invoke functions from szimek/signature_pad API
-  }
 
 
 
@@ -448,14 +481,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: '4-Likely', value: 4 },
     { name: '5-Almost Certain', value: 5 }
   ];
-  // RiskRating: Array<any> = [
-
-  //   { name: 'Low' },
-  //   { name: 'Medium' },
-  //   { name: 'High' },
-
-
-  // ];
 
 
   filter(val: string): Observable<any> {
@@ -469,26 +494,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       )
   }
-  filter2(val: string): Observable<any> {
-    return this.employee.getAllEmployeeInfo()
-      .pipe(map((res) => {
-        res.data = res.data.map((item) => {
-          item.fullName = `${item.firstName} ${item.lastName}`
-          return item
-        })
-        return res
-      }),
-        map((response: any) => {
-          response.data = response.data.filter(option => {
-            console.log("option>>", option);
-            return option.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0
-          })
-          console.log("response.data>>", response.data);
 
-          return response.data;
-        })
-      )
-  }
 
   filter3(val: string): Observable<any> {
     return this.employee.getAllEmployeeInfo()
@@ -536,12 +542,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  getHazard() {
-    this.employee.getAllEmployeeInfo().subscribe((res: any) => {
-      console.log("emp..", res.data);
-      this.empData = res.data;
-    })
-  }
+
 
   filterEvent(val: string): Observable<any> {
     return this.url.getAllManager()
@@ -715,7 +716,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   employeeData(e: MatAutocompleteSelectedEvent) {
     const data = e.option.value;
     this.hazardReport.patchValue({
-      fullName: data.fullName,
+      // fullName: data.fullName,
       department: data.department,
       email: data.email,
       position: data.position,
@@ -734,7 +735,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   employeeData1(e: MatAutocompleteSelectedEvent) {
     const data = e.option.value;
     this.hazardReport.patchValue({
-      name: data.name,
+      // name: data.name,
       compileDepartment: data.department,
       compilePosition: data.position,
       // elliminateAction:data.name
@@ -743,4 +744,13 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("data...");
 
   }
+}
+
+export interface Actionedby {
+  elliminateAction: Observable<any>
+  substituteAction: Observable<any>
+  isolatedAction: Observable<any>
+  solutionAction: Observable<any>
+  procedureRemoveAction: Observable<any>
+  PPEAction: Observable<any>
 }
