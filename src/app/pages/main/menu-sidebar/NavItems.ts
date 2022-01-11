@@ -266,6 +266,18 @@ export class NavItems {
                     hasAccess: true
                 },
                 {
+                    displayedName: "Accident Instruction",
+                    icon: "page",
+                    route: "/admin/siteInfo/instructions/accident",
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Risk Assessment Instruction",
+                    icon: "page",
+                    route: "/admin/siteInfo/instructions/riskAssess",
+                    hasAccess: true
+                },
+                {
                     displayedName: "State Relation",
                     icon: "page",
                     childItem: [

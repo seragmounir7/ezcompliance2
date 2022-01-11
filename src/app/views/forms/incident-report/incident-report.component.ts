@@ -193,6 +193,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       this.getAllJobNumber();
       this.getAllProjectMang();
       this.getAllStaff();
+      this.getInstruction();
     }
   }
 
@@ -983,6 +984,14 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       );
     });
   }
+  getInstruction() {
+    this.logicalFormInfo.getInstruction().subscribe((res: any) => {
+      console.log("res", res.data[0].instruction);
 
+      this.IncidentReport.patchValue({
+        instructions: res.data[0].instruction
+      })
+    })
+  }
 
 }
