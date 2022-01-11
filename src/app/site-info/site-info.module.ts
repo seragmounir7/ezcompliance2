@@ -80,6 +80,8 @@ import { EditManagerComponent } from './manager/edit-manager/edit-manager.compon
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynamic-form-categories.component';
 import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
+import { InstructionsComponent } from './instructions/instructions.component';
+import { AddInstructionsComponent } from './instructions/add-instructions/add-instructions.component';
 
 @NgModule({
   declarations: [
@@ -155,6 +157,8 @@ import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-c
     EditManagerComponent,
     DynamicFormCategoriesComponent,
     AddFormCategoriesComponent,
+    InstructionsComponent,
+    AddInstructionsComponent,
 
   ],
 

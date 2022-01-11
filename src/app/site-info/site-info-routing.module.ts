@@ -1,3 +1,4 @@
+import { InstructionsComponent } from './instructions/instructions.component';
 import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
 import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.component';
 import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
@@ -116,7 +117,9 @@ const routes: Routes = [
   { path: 'addWHSManager', component: AddWhsManagerComponent },
   { path: 'editWHSManager', component: EditWhsManagerComponent },
   { path: 'dynamicFormCategories', component: DynamicFormCategoriesComponent },
-  { path: 'addFormCategories', component: AddFormCategoriesComponent }
+  { path: 'addFormCategories', component: AddFormCategoriesComponent },
+  { path: 'instructions/accident', component: InstructionsComponent },
+  { path: 'instructions/riskAssess', component: InstructionsComponent },
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

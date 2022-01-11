@@ -157,7 +157,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
         x.menuOpen = true
       }
       x.childItem ? x.childItem.map(y => {
-        console.log(item.displayedName, '==', y.displayedName, item.displayedName == y.displayedName, y.childItem && y.menuOpen == false && item.displayedName == y.displayedName)
+       // console.log(item.displayedName, '==', y.displayedName, item.displayedName == y.displayedName, y.childItem && y.menuOpen == false && item.displayedName == y.displayedName)
 
         if (y.childItem && y.menuOpen == false && item.displayedName == y.displayedName) {
           y.menuOpen = true

@@ -1,9 +1,10 @@
+
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData, CommonModule, HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,12 +34,16 @@ import { AgmCoreModule } from '@agm/core';
 import { SignaturePadModule } from 'angular2-signaturepad';
 // import { ViewFormsComponent } from './views/dynamic-form/categories/view-forms/view-forms.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import { TextareaAutoresizeDirective } from './Directives/textarea-autoresize.directive';
 import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import localeAu from '@angular/common/locales/en-AU';
+
+registerLocaleData(localeAu,'en-au');
+
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -57,14 +62,9 @@ registerLocaleData(localeEn, 'en-EN');
     MessagesDropdownMenuComponent,
     NotificationsDropdownMenuComponent,
     UserDropdownMenuComponent,
-
-
     // ViewFormsComponent,
     NotFoundPageComponent,
-    TextareaAutoresizeDirective,
-
     PrintLayoutComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -85,7 +85,7 @@ registerLocaleData(localeEn, 'en-EN');
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    NgbModule,
+    // NgbModule,
     NgxMatTimepickerModule,
     HttpClientModule,
     DndModule,
@@ -97,7 +97,7 @@ registerLocaleData(localeEn, 'en-EN');
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    TextareaAutoresizeDirective,
+    
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
@@ -107,6 +107,8 @@ registerLocaleData(localeEn, 'en-EN');
       useClass: SpinnerInterceptor,
       multi: true
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-au' },
+    { provide: LOCALE_ID, useValue: 'en-au' },
     DatePipe
   ],
   bootstrap: [AppComponent],

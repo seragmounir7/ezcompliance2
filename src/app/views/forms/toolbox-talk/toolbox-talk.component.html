@@ -64,7 +64,7 @@
             <p for="exampleFormControlInput1" class="form-Label">
               Customer Contact Phone<span class="text-danger ">*</span>
             </p>
-            <input type="text" class="form-control" formControlName="custConctPh" [class.is-invalid]="toolBox.get('custConctPh')?.hasError('required') 
+            <input type="text" class="form-control" numbersOnly accessControl moduleType="Users" accessType="create_action" formControlName="custConctPh" [class.is-invalid]="toolBox.get('custConctPh')?.hasError('required') 
           && (toolBox.get('custConctPh').dirty || toolBox.get('custConctPh').touched) " />
             <span *ngIf="
           toolBox.get('custConctPh')?.hasError('required') && (toolBox.get('custConctPh').dirty 
@@ -292,26 +292,30 @@
                   This Field is Required</span>
 
               </div>
+               <ng-container *ngIf="!isHistory">
               <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1"
                 (click)="sign.clear(); clear2(i)">
                 Clear
               </button>
+              </ng-container>
             </div>
+            <ng-container *ngIf="!isHistory">
 
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" (click)="addAttendee()">add_circle_outline
-              </span>
-            </div>
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" (click)="removeAttendee(i)">
-                remove_circle_outline
-              </span>
-            </div>
+              <div class="my-3 col-1 my-auto">
+                <span class="material-icons" (click)="addAttendee()">add_circle_outline
+                </span>
+              </div>
+              <div class="my-3 col-1 my-auto">
+                <span class="material-icons" (click)="removeAttendee(i)">
+                  remove_circle_outline
+                </span>
+              </div>
+            </ng-container>
           </div>
         </ng-container>
       </div>
     </div>
-    <button *ngIf="(isPrint | async)===false" class="btn btn-primary btn-block mt-1" type="submit"
+    <button *ngIf="(isPrint | async)===false || !isHistory" class="btn btn-primary btn-block mt-1" type="submit"
       [disabled]="!toolBox.valid || singRequired " (click)="onSave()" style="width: 10rem;
   align-self: center;">
       Submit

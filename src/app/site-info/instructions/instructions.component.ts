@@ -1,25 +1,22 @@
-import { SnackbarService } from './../../services/snackbar.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
-import { AfterViewInit, ViewChild } from '@angular/core';
-import Swal from 'sweetalert2';
-
-import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { EditHazardComponent } from './edit-hazard/edit-hazard.component';
 import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import Swal from 'sweetalert2';
+import { AddInstructionsComponent } from './add-instructions/add-instructions.component'
+
+
 @Component({
-  selector: 'app-identify-hazards',
-  templateUrl: './identify-hazards.component.html',
-  styleUrls: ['./identify-hazards.component.scss']
+  selector: 'app-instructions',
+  templateUrl: './instructions.component.html',
+  styleUrls: ['./instructions.component.scss']
 })
-export class IdentifyHazardsComponent implements OnInit {
+export class InstructionsComponent implements OnInit {
 
- 
-
-  mode: any;
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
@@ -28,49 +25,63 @@ export class IdentifyHazardsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  url: any;
+  addBtn=false
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
   /////////////mat table end////////////////
 
   constructor(
-    private snack: SnackbarService,
+
     private logicalFormInfo: LogicalFormInfoService,
     private dialog: MatDialog,
-    private setTitle: SetTitleService
+    private setTitle: SetTitleService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.getAllHazards();
-    this.setTitle.setTitle('WHS-PPE List');
+    
+    // this.setTitle.setTitle('WHS-Nature Of Incident');
+    this.url = this.activatedRoute.snapshot.url[1].path;
+    console.log("this.id", this.url);
+    if( this.url==="accident"){
+      this.getInstructions();
+    }else if( this.url==="riskAssess"){
+
+    }
 
   }
 
-  getAllHazards(field = "", value = "") {
-    this.logicalFormInfo.getAllHazards(field, value).subscribe((res: any) => {
-      console.log('getAllHazards=>', res);
+  getInstructions() {
+    this.logicalFormInfo.getInstruction().subscribe((res: any) => {
+      console.log('NatOfIncAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
+      if(data==''){
+        this.addBtn=true
+      }
 
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;
     });
   }
+
   edit(element) {
-    const dialogRef = this.dialog.open(EditHazardComponent, {
-      width: "550px",
+    const dialogRef = this.dialog.open(AddInstructionsComponent, {
+      width: "950px",
+      height: "500px",
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getAllHazards();
+        this.getInstructions();
       }
       console.log("The dialog was closed");
     });
@@ -87,7 +98,7 @@ export class IdentifyHazardsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-          .deleteHazards(item._id)
+          .deleteNatOfInc(item._id)
           .subscribe((res) => {
             Swal.fire({
               title: 'Parameter Deleted successfully',
@@ -95,21 +106,15 @@ export class IdentifyHazardsComponent implements OnInit {
               timer: 1200,
             });
             console.log('deleted res', res);
-            this.getAllHazards();
+            this.getInstructions();
 
           });
+
       }
     });
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  copySuccess() {
-    console.log('copy successfull')
-    this.snack.openSnackBar('Copied to clipboard');
-  }
-  sortData(sort: Sort) {
-    this.getAllHazards(sort.active, sort.direction)
-  }
+
+
+
+
 }

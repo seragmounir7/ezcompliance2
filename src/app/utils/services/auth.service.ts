@@ -37,14 +37,10 @@ export class AuthService {
     );
   }
   logout() {
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('userName');
-    sessionStorage.removeItem('phoneNo');
-    this.pergeData();
-    location.reload();
-
+      this.pergeData()
   }
   pergeData() {
     sessionStorage.clear();
+    return true
   }
 }
