@@ -1314,7 +1314,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   addItem(type, i) {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
-      // height:'50%',
+      height:'60%',
       data: {
         type: type,
         title: ''

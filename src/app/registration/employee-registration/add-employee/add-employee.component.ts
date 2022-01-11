@@ -86,10 +86,23 @@ export class AddEmployeeComponent implements OnInit {
       Sign: [''],
       plantArr: this.fb.array([]),
       plantSignature: [''],
-      plantType: [''],
+      plantName:[''],
+      checkedOut: [''],
+      hours: [''],
+      kilometres: [''],
+      date: [''],
+      make:[''],
       modelNumber: [''],
       serialNumber: [''],
+      registrationNumber:[''],
+      registrationRenewalDate: [''],
+      plantType: [''],
+      purchaseDate: [''],
       serviceRenewDate: [''],
+      insurancePolicyNumber: [''],
+      insuranceExpiry: [''],
+      fuelCardNumber: [''],
+      ETagNumber: [''],
     });
   }
 
@@ -192,7 +205,19 @@ export class AddEmployeeComponent implements OnInit {
         serialNumber: data.data.plant.serialNumber,
         serviceRenewDate: data.data.plant.serviceRenewDate,
         plantSignature: data.data.plant.plantSignature,
-
+        plantName:data.data.plant.plantName,
+        checkedOut: data.data.plant.checkedOut,
+        hours: data.data.plant.hours,
+        kilometres:data.data.plant.kilometres,
+        date: data.data.plant.date,
+        make:data.data.plant.make,
+        registrationNumber:data.data.plant.registrationNumber,
+        registrationRenewalDate:data.data.plant.registrationRenewalDate,
+        purchaseDate: data.data.plant.purchaseDate,
+        insurancePolicyNumber: data.data.plant.insurancePolicyNumber,
+        insuranceExpiry: data.data.plant.insuranceExpiry,
+        fuelCardNumber: data.data.plant.fuelCardNumber,
+        ETagNumber: data.data.plant.ETagNumber,
       });
 
       this.dataUrl = data.data.ppe.signature;
@@ -536,10 +561,23 @@ export class AddEmployeeComponent implements OnInit {
   }
   newEquipFiled2(): FormGroup {
     return this.fb.group({
-      plantType: [''],
+      plantName:[''],
+      checkedOut: [''],
+      hours: [''],
+      kilometres: [''],
+      date: [''],
+      make:[''],
       modelNumber: [''],
       serialNumber: [''],
+      registrationNumber:[''],
+      registrationRenewalDate: [''],
+      plantType: [''],
+      purchaseDate: [''],
       serviceRenewDate: [''],
+      insurancePolicyNumber: [''],
+      insuranceExpiry: [''],
+      fuelCardNumber: [''],
+      ETagNumber: [''],
     });
   }
   addEquipFiled2() {
@@ -554,6 +592,19 @@ export class AddEmployeeComponent implements OnInit {
       modelNumber: [data.modelNumber],
       serialNumber: [data.serialNumber],
       serviceRenewDate: [data.serviceRenewDate],
+      plantName:[data.plantName],
+      checkedOut: [data.checkedOut],
+      hours: [data.hours],
+      kilometres: [data.kilometres],
+      date: [data.date],
+      make:[data.make],
+      registrationNumber:[data.registrationNumber],
+      registrationRenewalDate: [data.registrationRenewalDate],
+      purchaseDate: [data.purchaseDate],
+      insurancePolicyNumber: [data.insurancePolicyNumber],
+      insuranceExpiry: [data.insuranceExpiry],
+      fuelCardNumber: [data.fuelCardNumber],
+      ETagNumber: [data.ETagNumber],
     });
   }
   addEquipFiled3(data) {

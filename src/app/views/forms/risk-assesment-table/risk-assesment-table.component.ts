@@ -15,7 +15,7 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
   styleUrls: ['./risk-assesment-table.component.scss']
 })
 export class RiskAssesmentTableComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'customerName', "phone", "email", "site", 'action'];
+  displayedColumns: string[] = ['formId', 'customerName', "phone", "email", "site", 'action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
