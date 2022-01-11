@@ -214,7 +214,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       custEmail: ['', Validators.required],
       employee1: ['', Validators.required],
       employee2: ['', Validators.required],
-      dateTime: ['', Validators.required],
+      dateTime: [new Date(), Validators.required],
       statesSWMS: ['', Validators.required],
       projectManager: ['', Validators.required],
       date: [new Date()],
@@ -319,6 +319,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
         this.getAllSafe(res[13]);
         this.getAllState(res[14]);
         this.getAllJurisdiction(res[15]);
+        let time= new Date()
+        this.dateGet=time
+      this.setTime=time.toTimeString().slice(0, 5)
       })
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
@@ -481,7 +484,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
         }
         this.PushActionSDSRegister(element)
         if (element.file) {
-          this.selectedFile1.push(element.file);
+          this.selectedFile1.push({fileName:element.file.split('-')[1],
+        fileUrl:element.file
+        });
           console.log("selected", this.selectedFile1);
         }
 

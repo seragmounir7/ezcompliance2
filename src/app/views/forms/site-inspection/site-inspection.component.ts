@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import {
   FormBuilder,
@@ -15,6 +15,10 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { Observable } from 'rxjs';
+import { SignaturePad } from 'angular2-signaturepad';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-site-inspection',
@@ -27,8 +31,11 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   siteshow = true;
   siteAction = false;
   itemvalue: any;
+  singRequired:any
   sub: any;
+  
   isPrint: Observable<any>;
+  @ViewChild('Signature') signaturePad: SignaturePad;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -61,6 +68,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     'date',
     'projectManager',
   ];
+  filteredOptions1: Observable<unknown>;
+  empData: any;
   id: any;
   allcategory: any;
   allTopic: any;
@@ -78,6 +87,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     private datePipe: DatePipe,
     public forms: SavedformsService,
     private shared: RoleManagementSharedServiceService,
+    private employee: EmployeeRegistrationService,
   ) {
     this.check = localStorage.getItem('key');
     this.sidePreview = this.fb.group({
@@ -92,6 +102,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       custEmail: ['', Validators.required],
       date: ['', Validators.required],
       projectManager: ['', Validators.required],
+      empName:['',Validators.required],
+      submitDate:['',Validators.required],
+      signature:['',Validators.required],
       // datetooboxtalk: [''],
       // Hazard: ['', Validators.required],
       // documentation: ['', Validators.required],
@@ -157,8 +170,16 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     this.sub.unsubscribe()
     console.log("site destroy");
   }
-
+  public signaturePadOptions1: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 350,
+    canvasHeight: 100,
+  };
   ngOnInit(): void {
+
+
+
     this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type = params['formType'];
@@ -190,7 +211,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         setTimeout(() => {
           let formatDate;
           if (this.showDatas.date) {
-            var date = new Date(this.showDatas.date);
+            let date = new Date(this.showDatas.date);
             formatDate = this.datePipe.transform(date, 'yyyy-MM-dd');
             this.sidePreview.patchValue({ date: formatDate });
           } else {
@@ -206,7 +227,14 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
             custEmail: this.showDatas.custEmail,
             jobNumber: this.showDatas.jobNumber,
             projectManager: this.showDatas.projectManager,
+            empName:{fullName:this.showDatas.empName},
+            submitDate:this.showDatas.submitDate,
+            signature:this.showDatas.signature
           });
+          let check = async () => { this.signaturePad != null }
+          check().then(() => {
+            this.signaturePad.fromDataURL(this.showDatas.signature)
+          })
 
           if (this.add2().controls) {
             let key;
@@ -268,8 +296,44 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       this.getAllStaff();
     }
 
+
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+    this.filteredOptions1 = this.sidePreview.controls.empName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    )
+    })
+
   }
 
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+  employeeData(e: MatAutocompleteSelectedEvent,controlName:string) {
+    const data = e.option.value;
+    
+    //   this.sidePreview.patchValue({
+    
+    //     empName: data.fullName,
+    // })
+    
+   
+
+  }
   ngAfterViewInit(): void {
 
     this.sub = this.shared.printObs$.subscribe(res => {
@@ -286,6 +350,24 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     })
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
+  }
+  drawComplete1() {
+    // will be notified of szimek/signature_pad's onEnd event
+    console.log(this.signaturePad.toDataURL());
+    this.sidePreview.controls["signature"].setValue(this.signaturePad.toDataURL());
+    this.singRequired = this.sidePreview.controls['signature'].invalid
+  }
+  clear1() {
+    console.log('clear1');
+    this.signaturePad.clear();
+    this.sidePreview.controls["signature"].setValue("");
+    this.singRequired = this.sidePreview.controls['signature'].untouched
+  }
+  drawStart1() {
+    // will be notified of szimek/signature_pad's onBegin event
+    console.log('begin drawing');
+
+    //this.singRequired = this.riskAssessmentFb.controls['signaturePad'].invalid
   }
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
@@ -447,15 +529,17 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
 
     console.log('form data', this.sidePreview.value);
     if (this.id != 'form') {
+     let empName= this.sidePreview.controls.empName.value
+     this.sidePreview.removeControl("empName")
       const data = {
 
-        ...this.sidePreview.value,
+         ...this.sidePreview.value,
         allTopic: this.allTopic,
         allcategory: this.allcategory,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
-
+        staffArr: this.staff,
+        empName:empName.fullName || empName,
       };
       this.logicalFormInfo
         .updateSiteInspection(this.id, data)
@@ -470,6 +554,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
           this.router.navigate(['/admin/forms/siteinspectiontable']);
         });
     } else {
+      let empName= this.sidePreview.controls.empName.value
+      this.sidePreview.removeControl("empName")
       const data = {
 
         ...this.sidePreview.value,
@@ -477,7 +563,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         allcategory: this.allcategory,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
+        staffArr: this.staff,
+        empName:empName.fullName || empName,
 
       };
       this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
@@ -493,6 +580,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       console.log('data', data);
     }
     this.sidePreview.reset();
+    this.signaturePad.clear();
   }
   getAllCategory() {
     this.logicalFormInfo

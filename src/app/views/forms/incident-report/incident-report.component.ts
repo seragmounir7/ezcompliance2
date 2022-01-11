@@ -56,6 +56,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
   filteredOptions1: Observable<unknown>;
   empData: any;
   filteredOptions2: Observable<any>;
+  uploadFile: string;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -700,8 +701,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       this.selectedImage = res.data.file;
       this.allJobNumbers = res.data.allJobNumbersArr;
       this.projectMang = res.data.projectMangArr;
-      this.staff = res.data.staff;
+      this.staff = res.data.staffArr;
 
+      this.uploadFile=this.selectedImage?.split('-')[1];
       for (let i = 0; i < this.changes.length; i++) {
         this.changesArr[i] = 0;
         this.changeAdd().push(this.changeAction(i))
@@ -747,11 +749,11 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
         whyDidtheUnsafeConditonExist: res.data.whyDidtheUnsafeConditonExist,
         priorIncident: res.data.priorIncident,
         similarIncident: res.data.similarIncident,
-        completedName: res.data.completedName,
+        completedName:{fullName:res.data.completedName},
         completedPosition: res.data.completedPosition,
         completedDepartment: res.data.completedDepartment,
         completedDate: res.data.completedDate,
-        reviewedName: res.data.reviewedName,
+        reviewedName: {fullName:res.data.reviewedName},
         reviewedPosition: res.data.reviewedPosition,
         reviewedDepartment: res.data.reviewedDepartment,
         reviewedDate: res.data.reviewedDate,
@@ -899,7 +901,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
     console.log(this.IncidentReport.value);
     if (this.id !== 'Form') {
       console.log("update");
-
+     let completedName= this.IncidentReport.controls.completedName.value;
+    let reviewedName= this.IncidentReport.controls.reviewedName.value;
+     this.IncidentReport.removeControl('completedName');
+     this.IncidentReport.removeControl('reviewedName');
       const data = {
         ...this.IncidentReport.value,
         changesArr: this.changes,
@@ -909,8 +914,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
         rootCauseIncidentArr: this.rootCauseIncident,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
-
+        staffArr: this.staff,
+        completedName:completedName.fullName || completedName,
+        reviewedName:reviewedName.fullName || reviewedName
       }
       console.log("data", data);
 
@@ -927,6 +933,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       });
     }
     else {
+      let completedName= this.IncidentReport.controls.completedName.value;
+      let reviewedName= this.IncidentReport.controls.reviewedName.value;
+       this.IncidentReport.removeControl('completedName');
+       this.IncidentReport.removeControl('reviewedName');
       const data = {
         ...this.IncidentReport.value,
         changesArr: this.changes,
@@ -936,7 +946,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
         rootCauseIncidentArr: this.rootCauseIncident,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
+        staffArr: this.staff,
+        completedName:completedName.fullName || completedName,
+        reviewedName:reviewedName.fullName || reviewedName
       }
       console.log("data", data);
 
