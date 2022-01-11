@@ -41,22 +41,22 @@ export class AppComponent implements OnInit {
     if (event instanceof NavigationStart) {
       this.spinner.show();
       setTimeout(() => {
-        this.spinner.hide();
+        this.spinner.hide(undefined,3000);
       }, 2000);
       console.log('NavigationStart');
     }
     if (event instanceof NavigationEnd) {
-      this.spinner.hide();
+      this.spinner.hide(undefined,3000);
       console.log('NavigationEnd');
     }
 
     // Set loading state .hide() in both of the below events to hide the spinner in case a request fails
     if (event instanceof NavigationCancel) {
-      this.spinner.hide();
+      this.spinner.hide(undefined,3000);
       console.log('NavigationCancel');
     }
     if (event instanceof NavigationError) {
-      this.spinner.hide();
+      this.spinner.hide(undefined,3000);
       console.log('NavigationError');
     }
   }

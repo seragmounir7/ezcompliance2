@@ -32,6 +32,11 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
+    if(this.router.url.includes('/admin/savedForms')){
+       this.router.navigateByUrl("/admin/savedForms")
+       return
+    }
+    console.log("url",this.router.url);
     this.router.navigateByUrl("/admin/forms/siteinspectiontable")
     this.shared.printNext(false)
 

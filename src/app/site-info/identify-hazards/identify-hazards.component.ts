@@ -17,6 +17,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 })
 export class IdentifyHazardsComponent implements OnInit {
 
+ 
+
   mode: any;
   jobTaskData: any = [];
   ELEMENT_DATA = [];

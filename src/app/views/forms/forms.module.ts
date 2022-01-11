@@ -1,3 +1,4 @@
+import { DirectivesModule } from './../../Directives/directives.module';
 import { TextareaAutoresizeDirective } from './../../Directives/textarea-autoresize.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -51,6 +52,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [
     CommonModule,
+    DirectivesModule,
     FormsRoutingModule,
     ReactiveFormsModule,
     SignaturePadModule,

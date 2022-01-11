@@ -40,6 +40,10 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
+    if(this.router.url.includes('/admin/savedForms')){
+      this.router.navigateByUrl("/admin/savedForms")
+      return
+   }
     this.router.navigateByUrl("/admin/forms/riskAssessTable")
     this.shared.printNext(false)
     // this.router.navigate(['/',{ outlets: {'print': ['print']}}])

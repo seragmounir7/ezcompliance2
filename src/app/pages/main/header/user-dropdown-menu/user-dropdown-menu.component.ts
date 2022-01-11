@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../utils/services/auth.service';
 import { Router } from '@angular/router';
 import {
   Component,
@@ -29,7 +30,8 @@ export class UserDropdownMenuComponent implements OnInit {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private appService: AppService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
   userName = '';
   phoneNo = '';
@@ -56,13 +58,7 @@ export class UserDropdownMenuComponent implements OnInit {
   }
 
   logout() {
-    //  this.appService.logout();
-    console.log('logout');
-
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('userName');
-    sessionStorage.removeItem('phoneNo');
-    window.location.reload();
-    // this.router.navigate['/'];
+    this.authService.logout()
+    this.router.navigate(['/'])
   }
 }

@@ -774,11 +774,18 @@
       <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
-          <input type="text" class="form-control" formControlName="completedName" [class.is-invalid]="
+          <input type="text" [matAutocomplete]="employee1" autocomplete="off" class="form-control"
+            formControlName="completedName" [class.is-invalid]="
               IncidentReport.get('completedName')?.hasError('required') &&
               (IncidentReport.get('completedName').dirty ||
                 IncidentReport.get('completedName').touched)
             " />
+          <mat-autocomplete #employee1="matAutocomplete" (optionSelected)="employeeData($event,'completedName')"
+            [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions1 | async ; let i = index " [value]="option">
+              {{option.fullName}}
+            </mat-option>
+          </mat-autocomplete>
           <span *ngIf="
               IncidentReport.get('completedName')?.hasError('required') &&
               (IncidentReport.get('completedName').dirty ||
@@ -865,11 +872,18 @@
       <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Name<span class="text-danger ">*</span></label>
-          <input type="text" class="form-control" formControlName="reviewedName" [class.is-invalid]="
+          <input type="text" class="form-control" formControlName="reviewedName" [matAutocomplete]="employee2"
+            autocomplete="off" [class.is-invalid]=" 
               IncidentReport.get('reviewedName')?.hasError('required') &&
               (IncidentReport.get('reviewedName').dirty ||
                 IncidentReport.get('reviewedName').touched)
             " />
+          <mat-autocomplete #employee2="matAutocomplete" (optionSelected)="employeeData($event,'reviewedName')"
+            [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option">
+              {{option.fullName}}
+            </mat-option>
+          </mat-autocomplete>
           <span *ngIf="
               IncidentReport.get('reviewedName')?.hasError('required') &&
               (IncidentReport.get('reviewedName').dirty ||
