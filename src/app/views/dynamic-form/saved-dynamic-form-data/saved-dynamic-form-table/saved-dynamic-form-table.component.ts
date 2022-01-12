@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class SavedDynamicFormTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'title', "frequency", "createdAt", "updatedAt", 'action'];
+  displayedColumns: string[] = ['formIndex', 'title', "frequency", "createdAt", "updatedAt", 'action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
