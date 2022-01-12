@@ -12,6 +12,11 @@
       <td mat-cell *matCellDef="let element;let i=index">{{element.index+1}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="formIndex">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> FormId </th>
+      <td mat-cell *matCellDef="let element;let i=index">{{element.formIndex}}</td>
+    </ng-container>
+
     <!-- Name Column -->
 
     <!-- Name Column -->

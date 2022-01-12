@@ -875,6 +875,12 @@
                     <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
                   </div>
                 </div>
+                <div class="my-3">
+                  <label for="formFile" class="form-label">Uploaded File List</label>
+                  <span class="form-control" *ngFor="let item of selectedFile1">
+                    {{item.fileName}}
+                  </span>
+                </div>
               </ng-container>
             </ng-container>
             <hr />
@@ -1039,7 +1045,7 @@
 
                         </select>
                       </div>
-                    </ng-container >
+                    </ng-container>
                     <ng-container formArrayName="persResp"><label for="sel1" class="pt-2">Person Responsible</label>
                       <div [formGroupName]="i">
                         <select multiple class="form-control" formControlName="personRes" id="sel2"
@@ -1993,10 +1999,10 @@
 
   </div>
   <br>
-  <div *ngIf="(isPrint | async)===true && selectedFile1">
+  <div style="padding-left: 30%;" *ngIf="(isPrint | async)===true && selectedFile1">
     <span *ngFor="let img of selectedFile1">
       <div>
-        <img height="400" width="400" [src]="img">
+        <img height="400" width="400" [src]="img.fileUrl">
       </div>
     </span>
   </div>

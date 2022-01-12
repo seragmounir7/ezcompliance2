@@ -6,7 +6,9 @@
     <h2 *ngIf="dataRec.type==='chemical'"> Add Chemical</h2>
 
     <mat-form-field appearance="legacy" class="example-full-width" style="width: 498px;">
-        <textarea matInput formControlName="title" rows=""></textarea>
+        <ckeditor *ngIf="!(dataRec.type==='chemical')" formControlName="title" style="width: 100%;" [editor]="Editor" >
+        </ckeditor>
+        <textarea *ngIf="dataRec.type==='chemical'" matInput formControlName="title" rows=""></textarea>
     </mat-form-field>
     <br>
 

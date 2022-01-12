@@ -536,6 +536,12 @@
         <input class="form-control" type="file" (change)="browser($event)" />
       </div>
     </div>
+    <div class="my-3 col-md-12">
+      <label for="formFile" class="form-label">Uploaded File List</label>
+      <span class="form-control">
+        {{uploadFile}}
+      </span>
+    </div>
   </div>
   <br />
 
@@ -970,5 +976,12 @@
       [disabled]="!IncidentReport.valid || singRequired || singRequired1" (click)="onSubmit()">
       Submit
     </button>
+  </div>
+  <div style="padding-left: 30%;" *ngIf="(isPrint | async)===true && selectedImage">
+    <span>
+      <div>
+        <img height="400" width="400" [src]="selectedImage">
+      </div>
+    </span>
   </div>
 </div>

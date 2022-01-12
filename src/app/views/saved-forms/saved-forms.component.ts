@@ -13,7 +13,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
   styleUrls: ['./saved-forms.component.scss']
 })
 export class SavedFormsComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'Name', "Phone", "Email", "Site", 'Action'];
+  displayedColumns: string[] = ['formId', "Phone", "Email", "Site", 'Action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   // @ViewChild(MatPaginator) paginator: MatPaginator;

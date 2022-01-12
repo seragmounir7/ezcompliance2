@@ -60,13 +60,15 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     procedureRemoveAction: null,
     PPEAction: null
   };
+  ActionedbyStrings: string[];
+  uploadFile: any;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
-    if(this.router.url.includes('/admin/savedForms')){
+    if (this.router.url.includes('/admin/savedForms')) {
       this.router.navigateByUrl("/admin/savedForms")
       return
-   }
+    }
     this.router.navigateByUrl("/admin/forms/hazardTable")
     this.shared.printNext(false)
     // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
@@ -179,7 +181,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         map(value => (typeof value === 'string' ? value : value.fullName)),
         map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
       )
-      let a = [
+      this.ActionedbyStrings = [
         "elliminateAction",
         "substituteAction",
         "isolatedAction",
@@ -188,7 +190,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         "PPEAction"
       ]
       // this.obj = new Object()
-      a.forEach(ctrlName => {
+      this.ActionedbyStrings.forEach(ctrlName => {
         let filter = this.hazardReport.controls[ctrlName].valueChanges.pipe(
           startWith(''),
           debounceTime(400),
@@ -216,23 +218,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.filter(val || '')
       })
     )
-
-
-    // this.filteredOptions2.subscribe((res) => {
-    //   console.log("item...", res);
-
-    // })
-
-    // The form was compiled by:
-
-
-
-
-
-    // Action By
-
-
-
     this.filteredManager = this.myControlManager.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -272,59 +257,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       this.getHazardByid(this.id);
 
     }
-
-    // this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
-    //   if (res) {
-    //     console.log(res);
-
-    //     if (res == '1-Insignificant') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-    //       this.hazardReport.get('action').setValue('option4');
-    //     }
-    //     if (res == '2-Moderate') {
-    //       this.hazardReport.get('riskRating').setValue('Medium');
-    //       this.hazardReport.get('action').setValue('option3');
-    //     }
-    //     if (res == '4-Minor') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-    //       this.hazardReport.get('action').setValue('option4');
-    //     }
-    //     if (res == '3-Major') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-    //       this.hazardReport.get('action').setValue('option1');
-    //     }
-    //     if (res == '5-Catastrophic') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-    //       this.hazardReport.get('action').setValue('option1');
-    //     }
-    //   }
-    // });
-    // this.hazardReport.get('likelihood').valueChanges.subscribe((res) => {
-    //   if (res) {
-    //     console.log(res);
-    //     if (res == '1-Insignificant') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-
-    //     }
-    //     if (res == '3-Moderate') {
-    //       this.hazardReport.get('riskRating').setValue('Medium');
-
-    //     }
-    //     if (res == '2-Minor') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-
-    //     }
-    //     if (res == '4-Major') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-
-    //     }
-    //     if (res == '5-Catastrophic') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-
-    //     }
-    //   }
-    // });
-
   }
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();
@@ -351,7 +283,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
     this.signaturePad1.clear();
-    this.signaturePad1.fromDataURL(this.dataUrl);
+    // this.signaturePad1.fromDataURL(this.dataUrl);
     // this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
     // this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime
     // invoke functions from szimek/signature_pad API
@@ -375,7 +307,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         myControl: res.data.myControl,
         myControlManager: res.data.myControlManager,
         employeeParttime: res.data.employeeParttime,
-        fullName: res.data.fullName,
+        fullName: { fullName: res.data.fullName },
         email: res.data.email,
         phone: res.data.phone,
         department: res.data.department,
@@ -390,26 +322,26 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         action: res.data.action,
         eliminateHazard: res.data.eliminateHazard,
         eliminateCorrect: res.data.eliminateCorrect,
-        elliminateAction: res.data.elliminateAction,
+        elliminateAction: {fullName:res.data.elliminateAction},
         eliminateWhen: res.data.eliminateWhen,
         substituteCorrect: res.data.substituteCorrect,
-        substituteAction: res.data.substituteAction,
+        substituteAction: {fullName:res.data.substituteAction},
         substituteWhen: res.data.substituteWhen,
         isolatedCorrect: res.data.isolatedCorrect,
-        isolatedAction: res.data.isolatedAction,
+        isolatedAction: {fullName:res.data.isolatedAction},
         isolatedWhen: res.data.isolatedWhen,
         solutionCorrect: res.data.solutionCorrect,
-        solutionAction: res.data.solutionAction,
+        solutionAction: {fullName:res.data.solutionAction},
         customerName: res.data.customerName,
         solutionWhen: res.data.solutionWhen,
         procedureRemove: res.data.procedureRemove,
         procedureRemoveCorrect: res.data.procedureRemoveCorrect,
-        procedureRemoveAction: res.data.procedureRemoveAction,
+        procedureRemoveAction: {fullName:res.data.procedureRemoveAction},
         procedureRemoveWhen: res.data.procedureRemoveWhen,
         PPECorrect: res.data.PPECorrect,
-        PPEAction: res.data.PPEAction,
+        PPEAction: {fullName:res.data.PPEAction},
         PPEWhen: res.data.PPEWhen,
-        name: res.data.name,
+        name: { fullName: res.data.name },
         locationHazard: res.data.locationHazard,
         compilePosition: res.data.compilePosition,
         compileDepartment: res.data.compileDepartment,
@@ -429,6 +361,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       })
       this.minDate = res.data.date;
       this.selectedImage = res.data.fileUpload
+      // this.uploadFile=this.selectedImage?.split(/-/)[1];
+      this.uploadFile= this.selectedImage.slice(this.selectedImage.indexOf('-') + 1)
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;
       let check = async () => { this.signaturePad1 != null }
@@ -662,16 +596,50 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     this.singRequired = this.hazardReport.controls['signaturePad1'].invalid
     console.log(this.id)
 
+    const {
+      fullName, 
+      name,
+      elliminateAction,
+      substituteAction,
+      isolatedAction,
+      solutionAction,
+      procedureRemoveAction,
+      PPEAction,
+      ...rest
+    } = this.hazardReport.value
+    // this.hazardReport.removeControl('fullName')
+    // this.hazardReport.removeControl('name')
+    // this.ActionedbyStrings.forEach(string => this.hazardReport.removeControl(string) )
+    console.log(this.hazardReport.value, fullName, 
+      name,
+      elliminateAction,
+      substituteAction,
+      isolatedAction,
+      solutionAction,
+      procedureRemoveAction,
+      PPEAction,
+      rest
+      );
+    
+    const data = {
+      ...rest,
+      fullName: fullName.fullName == '' ? '' : fullName.fullName || fullName,
+      name: name.fullName == '' ? '' : name.fullName || name,
+      elliminateAction: elliminateAction.fullName == '' ? '' : elliminateAction.fullName || elliminateAction,
+      substituteAction: substituteAction.fullName == '' ? '' : substituteAction.fullName || substituteAction,
+      isolatedAction: isolatedAction.fullName == '' ? '' : isolatedAction.fullName || isolatedAction,
+      solutionAction: solutionAction.fullName == '' ? '' : solutionAction.fullName || solutionAction,
+      procedureRemoveAction: procedureRemoveAction.fullName == '' ? '' : procedureRemoveAction.fullName || procedureRemoveAction,
+      PPEAction: PPEAction.fullName == '' ? '' : PPEAction.fullName || PPEAction
+    };
     if (this.id != 'form') {
-      const data = {
-        ...this.hazardReport.value,
-      };
       console.log(this.hazardReport.value, "mmmmmmm")
       this.url
         .updateHazardFormData(this.id, data)
         .subscribe((res) => {
           console.log('res', res);
           this.router.navigate(['/admin/forms']);
+          this.hazardReport.reset();
 
           Swal.fire({
             title: 'Update successfully',
@@ -679,13 +647,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
             timer: 1200,
           });
           this.router.navigate(['/admin/forms/hazardTable']);
+        },err => {
+          console.error(err)
         });
     } else {
-      const data = {
-
-        ...this.hazardReport.value,
-      };
       this.url.addHazardFormData(data).subscribe((res) => {
+        this.hazardReport.reset();
         console.log('res', res);
         Swal.fire({
           title: 'Submit successfully',
@@ -694,12 +661,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         // this.router.navigate(["/admin/forms/tableData"]);
         this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
-      });
+      },err => console.error(err));
       console.log('data', data);
     }
-    this.hazardReport.reset();
+    
   }
-
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();

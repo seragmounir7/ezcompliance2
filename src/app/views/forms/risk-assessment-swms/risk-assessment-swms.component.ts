@@ -40,10 +40,10 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
-    if(this.router.url.includes('/admin/savedForms')){
+    if (this.router.url.includes('/admin/savedForms')) {
       this.router.navigateByUrl("/admin/savedForms")
       return
-   }
+    }
     this.router.navigateByUrl("/admin/forms/riskAssessTable")
     this.shared.printNext(false)
     // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
@@ -214,7 +214,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       custEmail: ['', Validators.required],
       employee1: ['', Validators.required],
       employee2: ['', Validators.required],
-      dateTime: ['', Validators.required],
+      dateTime: [new Date(), Validators.required],
       statesSWMS: ['', Validators.required],
       projectManager: ['', Validators.required],
       date: [new Date()],
@@ -319,6 +319,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
         this.getAllSafe(res[13]);
         this.getAllState(res[14]);
         this.getAllJurisdiction(res[15]);
+        let time = new Date()
+        this.dateGet = time
+        this.setTime = time.toTimeString().slice(0, 5)
       })
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
@@ -481,7 +484,10 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
         }
         this.PushActionSDSRegister(element)
         if (element.file) {
-          this.selectedFile1.push(element.file);
+          this.selectedFile1.push({
+            fileName: element.file.split('-')[1],
+            fileUrl: element.file
+          });
           console.log("selected", this.selectedFile1);
         }
 
@@ -1309,7 +1315,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   addItem(type, i) {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
-      // height:'50%',
+      height: '60%',
       data: {
         type: type,
         title: ''
