@@ -61,6 +61,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     PPEAction: null
   };
   ActionedbyStrings: string[];
+  uploadFile: any;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -360,6 +361,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       })
       this.minDate = res.data.date;
       this.selectedImage = res.data.fileUpload
+      // this.uploadFile=this.selectedImage?.split(/-/)[1];
+      this.uploadFile= this.selectedImage.slice(this.selectedImage.indexOf('-') + 1)
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;
       let check = async () => { this.signaturePad1 != null }
@@ -601,21 +604,33 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       isolatedAction,
       solutionAction,
       procedureRemoveAction,
-      PPEAction
+      PPEAction,
+      ...rest
     } = this.hazardReport.value
-    this.hazardReport.removeControl('fullName')
-    this.hazardReport.removeControl('name')
-    this.ActionedbyStrings.forEach(string => this.hazardReport.removeControl(string) )
+    // this.hazardReport.removeControl('fullName')
+    // this.hazardReport.removeControl('name')
+    // this.ActionedbyStrings.forEach(string => this.hazardReport.removeControl(string) )
+    console.log(this.hazardReport.value, fullName, 
+      name,
+      elliminateAction,
+      substituteAction,
+      isolatedAction,
+      solutionAction,
+      procedureRemoveAction,
+      PPEAction,
+      rest
+      );
+    
     const data = {
-      ...this.hazardReport.value,
-      fullName: fullName.fullName||fullName,
-      name: name.fullName||name,
-      elliminateAction:elliminateAction.fullName||elliminateAction,
-      substituteAction:substituteAction.fullName||substituteAction,
-      isolatedAction:isolatedAction.fullName||isolatedAction,
-      solutionAction:solutionAction.fullName||solutionAction,
-      procedureRemoveAction:procedureRemoveAction.fullName||procedureRemoveAction,
-      PPEAction:PPEAction.fullName||PPEAction
+      ...rest,
+      fullName: fullName.fullName == '' ? '' : fullName.fullName || fullName,
+      name: name.fullName == '' ? '' : name.fullName || name,
+      elliminateAction: elliminateAction.fullName == '' ? '' : elliminateAction.fullName || elliminateAction,
+      substituteAction: substituteAction.fullName == '' ? '' : substituteAction.fullName || substituteAction,
+      isolatedAction: isolatedAction.fullName == '' ? '' : isolatedAction.fullName || isolatedAction,
+      solutionAction: solutionAction.fullName == '' ? '' : solutionAction.fullName || solutionAction,
+      procedureRemoveAction: procedureRemoveAction.fullName == '' ? '' : procedureRemoveAction.fullName || procedureRemoveAction,
+      PPEAction: PPEAction.fullName == '' ? '' : PPEAction.fullName || PPEAction
     };
     if (this.id != 'form') {
       console.log(this.hazardReport.value, "mmmmmmm")
@@ -624,6 +639,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         .subscribe((res) => {
           console.log('res', res);
           this.router.navigate(['/admin/forms']);
+          this.hazardReport.reset();
 
           Swal.fire({
             title: 'Update successfully',
@@ -631,9 +647,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
             timer: 1200,
           });
           this.router.navigate(['/admin/forms/hazardTable']);
+        },err => {
+          console.error(err)
         });
     } else {
       this.url.addHazardFormData(data).subscribe((res) => {
+        this.hazardReport.reset();
         console.log('res', res);
         Swal.fire({
           title: 'Submit successfully',
@@ -642,12 +661,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         // this.router.navigate(["/admin/forms/tableData"]);
         this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
-      });
+      },err => console.error(err));
       console.log('data', data);
     }
-    this.hazardReport.reset();
+    
   }
-
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();

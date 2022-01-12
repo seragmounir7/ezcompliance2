@@ -31,19 +31,19 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   siteshow = true;
   siteAction = false;
   itemvalue: any;
-  singRequired:any
+  singRequired: any
   sub: any;
-  
+
   isPrint: Observable<any>;
   @ViewChild('Signature') signaturePad: SignaturePad;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
-    if(this.router.url.includes('/admin/savedForms')){
-       this.router.navigateByUrl("/admin/savedForms")
-       return
+    if (this.router.url.includes('/admin/savedForms')) {
+      this.router.navigateByUrl("/admin/savedForms")
+      return
     }
-    console.log("url",this.router.url);
+    console.log("url", this.router.url);
     this.router.navigateByUrl("/admin/forms/siteinspectiontable")
     this.shared.printNext(false)
 
@@ -102,9 +102,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       custEmail: ['', Validators.required],
       date: ['', Validators.required],
       projectManager: ['', Validators.required],
-      empName:['',Validators.required],
-      submitDate:['',Validators.required],
-      signature:['',Validators.required],
+      empName: ['', Validators.required],
+      submitDate: ['', Validators.required],
+      signature: ['', Validators.required],
       // datetooboxtalk: [''],
       // Hazard: ['', Validators.required],
       // documentation: ['', Validators.required],
@@ -227,9 +227,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
             custEmail: this.showDatas.custEmail,
             jobNumber: this.showDatas.jobNumber,
             projectManager: this.showDatas.projectManager,
-            empName:{fullName:this.showDatas.empName},
-            submitDate:this.showDatas.submitDate,
-            signature:this.showDatas.signature
+            empName: { fullName: this.showDatas.empName },
+            submitDate: this.showDatas.submitDate,
+            signature: this.showDatas.signature
           });
           let check = async () => { this.signaturePad != null }
           check().then(() => {
@@ -306,12 +306,12 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       })
     ).subscribe(empData => {
       this.empData = empData
-    this.filteredOptions1 = this.sidePreview.controls.empName.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      map(value => (typeof value === 'string' ? value : value.fullName)),
-      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
-    )
+      this.filteredOptions1 = this.sidePreview.controls.empName.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
     })
 
   }
@@ -323,15 +323,15 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   displayFn(user: any): string {
     return user && user.fullName ? user.fullName : '';
   }
-  employeeData(e: MatAutocompleteSelectedEvent,controlName:string) {
+  employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
     const data = e.option.value;
-    
+
     //   this.sidePreview.patchValue({
-    
+
     //     empName: data.fullName,
     // })
-    
-   
+
+
 
   }
   ngAfterViewInit(): void {
@@ -529,17 +529,17 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
 
     console.log('form data', this.sidePreview.value);
     if (this.id != 'form') {
-     let empName= this.sidePreview.controls.empName.value
-     this.sidePreview.removeControl("empName")
+      let empName = this.sidePreview.controls.empName.value
+      this.sidePreview.removeControl("empName")
       const data = {
 
-         ...this.sidePreview.value,
+        ...this.sidePreview.value,
         allTopic: this.allTopic,
         allcategory: this.allcategory,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
         staffArr: this.staff,
-        empName:empName.fullName || empName,
+        empName: empName.fullName || empName,
       };
       this.logicalFormInfo
         .updateSiteInspection(this.id, data)
@@ -554,7 +554,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
           this.router.navigate(['/admin/forms/siteinspectiontable']);
         });
     } else {
-      let empName= this.sidePreview.controls.empName.value
+      let empName = this.sidePreview.controls.empName.value
       this.sidePreview.removeControl("empName")
       const data = {
 
@@ -564,7 +564,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
         staffArr: this.staff,
-        empName:empName.fullName || empName,
+        empName: empName.fullName || empName,
 
       };
       this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {

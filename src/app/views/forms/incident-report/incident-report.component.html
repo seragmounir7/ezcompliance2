@@ -538,9 +538,9 @@
     </div>
     <div class="my-3 col-md-12">
       <label for="formFile" class="form-label">Uploaded File List</label>
-     <span class="form-control" >
-      {{uploadFile}}
-     </span>
+      <span class="form-control">
+        {{uploadFile}}
+      </span>
     </div>
   </div>
   <br />
@@ -978,7 +978,7 @@
     </button>
   </div>
   <div style="padding-left: 30%;" *ngIf="(isPrint | async)===true && selectedImage">
-    <span >
+    <span>
       <div>
         <img height="400" width="400" [src]="selectedImage">
       </div>

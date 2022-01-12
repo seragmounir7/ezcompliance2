@@ -877,9 +877,9 @@
                 </div>
                 <div class="my-3">
                   <label for="formFile" class="form-label">Uploaded File List</label>
-                 <span class="form-control" *ngFor="let item of selectedFile1">
-                  {{item.fileName}}
-                 </span>
+                  <span class="form-control" *ngFor="let item of selectedFile1">
+                    {{item.fileName}}
+                  </span>
                 </div>
               </ng-container>
             </ng-container>
@@ -1045,7 +1045,7 @@
 
                         </select>
                       </div>
-                    </ng-container >
+                    </ng-container>
                     <ng-container formArrayName="persResp"><label for="sel1" class="pt-2">Person Responsible</label>
                       <div [formGroupName]="i">
                         <select multiple class="form-control" formControlName="personRes" id="sel2"
