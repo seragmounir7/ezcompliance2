@@ -64,8 +64,8 @@ export class LogicalFormInfoService {
     );
   }
   //licence api///
-  getAllLicence(field="",value="") {
-    if(value==''){
+  getAllLicence(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `licence/getAll?field=${field}&value=${value}`).pipe(
@@ -117,8 +117,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllLicenceCat(field="",value="") {
-    if(value==''){
+  getAllLicenceCat(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `tradeCategory/getAll?field=${field}&value=${value}`).pipe(
@@ -165,8 +165,8 @@ export class LogicalFormInfoService {
   deleteRisk(id) {
     return this.https.delete(this.apiUrl + 'risk/delete/' + id)
   }
-  getAllRisk(field="",value="") {
-    if(value==''){
+  getAllRisk(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `risk/getAll?field=${field}&value=${value}`)
@@ -189,8 +189,8 @@ export class LogicalFormInfoService {
   deleteJobTask(id) {
     return this.https.delete(this.apiUrl + 'jobTask/delete/' + id)
   }
-  getAllJobtask(field="",value="") {
-    if(value==''){
+  getAllJobtask(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `jobTask/getAll?field=${field}&value=${value}`)
@@ -213,8 +213,8 @@ export class LogicalFormInfoService {
   deletePPE(id) {
     return this.https.delete(this.apiUrl + 'ppe/delete/' + id)
   }
-  getAllPPE(field="",value="") {
-    if(value==''){
+  getAllPPE(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `ppe/getAll?field=${field}&value=${value}`)
@@ -237,8 +237,8 @@ export class LogicalFormInfoService {
   deleteHazards(id) {
     return this.https.delete(this.apiUrl + 'identifyHazard/delete/' + id)
   }
-  getAllHazards(field="",value="") {
-    if(value==''){
+  getAllHazards(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `identifyHazard/getAll?field=${field}&value=${value}`)
@@ -262,8 +262,8 @@ export class LogicalFormInfoService {
   deleteContrlActReq(id) {
     return this.https.delete(this.apiUrl + 'controlActionRequired/delete/' + id)
   }
-  getAllContrlActReq(field="",value="") {
-    if(value==''){
+  getAllContrlActReq(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `controlActionRequired/getAll?field=${field}&value=${value}`)
@@ -286,8 +286,8 @@ export class LogicalFormInfoService {
   deleteCOP(id) {
     return this.https.delete(this.apiUrl + 'cop/delete/' + id)
   }
-  getAllCOP(field="",value="") {
-    if(value==''){
+  getAllCOP(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `cop/getAll?field=${field}&value=${value}`)
@@ -309,8 +309,8 @@ export class LogicalFormInfoService {
   deleteProjectMang(id) {
     return this.https.delete(this.apiUrl + 'projectManager/delete/' + id)
   }
-  getAllProjectMang(field="",value="") {
-    if(value==''){
+  getAllProjectMang(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `projectManager/getAll?field=${field}&value=${value}`)
@@ -320,8 +320,8 @@ export class LogicalFormInfoService {
   }
   ///project manager end/////
   ///job no/////
-  getAllSite(field="",value="") {
-    if(value==''){
+  getAllSite(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `site/getAll?field=${field}&value=${value}`)
@@ -342,8 +342,8 @@ export class LogicalFormInfoService {
   ///site end/////
 
   ///customer strat/////
-  getAllCustomer(field="",value="") {
-    if(value==''){
+  getAllCustomer(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `customer/getAll?field=${field}&value=${value}`)
@@ -360,8 +360,8 @@ export class LogicalFormInfoService {
   ///customer end/////
 
   ///job number start/////
-  getAllJobNumber(field="",value="") {
-    if(value==''){
+  getAllJobNumber(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `jobNumber/getAll?field=${field}&value=${value}`)
@@ -377,8 +377,8 @@ export class LogicalFormInfoService {
   }
   ///job number end/////
   ////////////////// Start  Chemical Info///////////
-  getAllChemical(field="",value="") {
-    if(value==''){
+  getAllChemical(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `chemical/getAll?field=${field}&value=${value}`)
@@ -405,8 +405,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllJurisdiction(field="",value="") {
-    if(value==''){
+  getAllJurisdiction(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `jurisdiction/getAll?field=${field}&value=${value}`).pipe(
@@ -440,8 +440,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllRegulator(field="",value="") {
-    if(value==''){
+  getAllRegulator(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `regulator/getAll?field=${field}&value=${value}`).pipe(
@@ -507,8 +507,8 @@ export class LogicalFormInfoService {
       })
     );
   }
-  getAllSafety(field="",value="") {
-    if(value==''){
+  getAllSafety(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `safetyLegislation/getAll?field=${field}&value=${value}`).pipe(
@@ -572,8 +572,8 @@ export class LogicalFormInfoService {
   ///////////////////End States /////////
 
   //////////////// START RISK LEVEL INFO//////////////////
-  getAllRiskLevel(field="",value="") {
-    if(value==''){
+  getAllRiskLevel(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `riskLevel/getAll?field=${field}&value=${value}`)
@@ -593,8 +593,8 @@ export class LogicalFormInfoService {
   ///////////////////End RISK LEVEL INFO /////////
 
   //////////////////STArT RESIDUAL LEVEL INFO/////////////////////
-  getAllResidual(field="",value="") {
-    if(value==''){
+  getAllResidual(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `residualRisk/getAll?field=${field}&value=${value}`)
@@ -614,8 +614,8 @@ export class LogicalFormInfoService {
   /////////////////// End RESIDUAL INFO /////////
 
   ///////////////// START STAFF INFO//////////////
-  getAllStaff(field="",value="") {
-    if(value==''){
+  getAllStaff(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `staff/getAll?field=${field}&value=${value}`)
@@ -635,8 +635,8 @@ export class LogicalFormInfoService {
   ///////////////////  STAFF INFO End /////////
 
   ///////////////// START Nature Of Incident//////////////
-  getAllNatOfInc(field="",value="") {
-    if(value==''){
+  getAllNatOfInc(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `natureOfIncident/getAll?field=${field}&value=${value}`)
@@ -656,8 +656,8 @@ export class LogicalFormInfoService {
   ///////////////////  Nature Of Incident End /////////
 
   ///////////////// START Changes Made//////////////
-  getAllChangesMade(field="",value="") {
-    if(value==''){
+  getAllChangesMade(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `changesMade/getAll?field=${field}&value=${value}`)
@@ -677,8 +677,8 @@ export class LogicalFormInfoService {
   ///////////////////  Changes Made End /////////
 
   ///////////////// Root Cause Of Incident Made//////////////
-  getAllRootCause(field="",value="") {
-    if(value==''){
+  getAllRootCause(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `rootcauseOfIncident/getAll?field=${field}&value=${value}`)
@@ -698,8 +698,8 @@ export class LogicalFormInfoService {
   ///////////////////  Root Cause Of Incident End /////////
 
   ///////////////// Type Of Incident Made//////////////
-  getAllTypeOfIncident(field="",value="") {
-    if(value==''){
+  getAllTypeOfIncident(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `typeOfIncident/getAll?field=${field}&value=${value}`)
@@ -718,11 +718,11 @@ export class LogicalFormInfoService {
   }
   ///////////////////  Type Of Incident End /////////
 
-   ///////////////// Incident Report Form//////////////
-   getAllIncidentReport(field="",value="") {
-     if(value==''){
-      field=''
-     }
+  ///////////////// Incident Report Form//////////////
+  getAllIncidentReport(field = "", value = "") {
+    if (value == '') {
+      field = ''
+    }
     return this.https.get(this.apiUrl + `incidentForm/getAll?field=${field}&value=${value}`)
   }
   addIncidentReport(data) {
@@ -731,7 +731,7 @@ export class LogicalFormInfoService {
   addMultipleIncidentReport(data) {
     return this.https.post(this.apiUrl + 'incidentForm/add/multiple', data)
   }
-  updateIncidentReport(id,data) {
+  updateIncidentReport(id, data) {
     return this.https.put(this.apiUrl + 'incidentForm/update/' + id, data)
   }
   getIncidentReportById(id) {
@@ -756,11 +756,17 @@ export class LogicalFormInfoService {
   editToolBox(id, data) {
     return this.https.put(this.apiUrl + 'toolbox/update/' + id, data)
   }
-  gettoolBox(field="",value="") {
-    if(value==''){
-          field=''
+  gettoolBox(field = "", value = "") {
+    if (value == '') {
+      field = ''
     }
-    return this.https.get(this.apiUrl + `toolbox/getAll?field=${field}&value=${value}`)
+    return this.https.get(this.apiUrl + `toolbox/getAllNewRecords?field=${field}&value=${value}`)
+  }
+  gettoolBoxHistory(field = "", value = "", id) {
+    if (value == '') {
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `toolbox/getRelatedOldData/${id}?field=${field}&value=${value}`)
   }
   getToolboxById(id) {
     return this.https.get(this.apiUrl + 'toolbox/get/' + id)
@@ -777,8 +783,8 @@ export class LogicalFormInfoService {
   editManager(id, data) {
     return this.https.put(this.apiUrl + 'manager/update/' + id, data)
   }
-  getAllManager(field="",value="") {
-    if(value==''){
+  getAllManager(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `manager/getAll?field=${field}&value=${value}`)
@@ -800,8 +806,8 @@ export class LogicalFormInfoService {
   editWHSManager(id, data) {
     return this.https.put(this.apiUrl + 'WHSManager/update/' + id, data)
   }
-  getAllWHSManager(field="",value="") {
-    if(value==''){
+  getAllWHSManager(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `WHSManager/getAll?field=${field}&value=${value}`)
@@ -818,9 +824,9 @@ export class LogicalFormInfoService {
 
   ////////////////// Start Site Inspection ///////////
 
-  getAllSiteInspection(field="",value="") {
-    if(value==''){
-      field=''
+  getAllSiteInspection(field = "", value = "") {
+    if (value == '') {
+      field = ''
     }
     return this.https.get(this.apiUrl + `siteInspection/getAll?field=${field}&value=${value}`)
   }
@@ -840,10 +846,10 @@ export class LogicalFormInfoService {
 
   ////////////////// End Site Inspection ////////////
   ////////////////////// Start Hzaard ///////
-  
-  getAllHazardFormData(field="",value="") {
 
-    if(value==''){
+  getAllHazardFormData(field = "", value = "") {
+
+    if (value == '') {
       field = ''
     }
     // return this.https.get(this.apiUrl + `site/getAll?field=${field}&value=${value}`)
@@ -855,41 +861,41 @@ export class LogicalFormInfoService {
     return this.https.post(this.apiUrl + 'hazard/add', data)
   }
   getHazardFormDataById(id) {
-    return this.https.get(this.apiUrl + 'hazard/get/'+ id)
+    return this.https.get(this.apiUrl + 'hazard/get/' + id)
   }
   updateHazardFormData(id, data) {
-    return this.https.put(this.apiUrl + 'hazard/update/'+ id, data)
+    return this.https.put(this.apiUrl + 'hazard/update/' + id, data)
   }
   deleteHazardFormData(id) {
-    return this.https.delete(this.apiUrl + 'hazard/delete/'+ id)
+    return this.https.delete(this.apiUrl + 'hazard/delete/' + id)
   }
   //////////////End Hazard///////////
   getAllHazardTreatmentRelation() {
     return this.https.get(this.apiUrl + 'hazardTreatmentRelation/getAll')
   }
- 
+
   getHazardTreatmentById(id) {
-    return this.https.get(this.apiUrl + 'hazardTreatmentRelation/get/'+ id)
+    return this.https.get(this.apiUrl + 'hazardTreatmentRelation/get/' + id)
   }
   updateHazardTreatmentRelation(id, data) {
-    return this.https.put(this.apiUrl + 'hazardTreatmentRelation/update/'+ id, data)
+    return this.https.put(this.apiUrl + 'hazardTreatmentRelation/update/' + id, data)
   }
- 
-  
 
-   ////////////////// Start Site Inspection category ///////////
 
-   getAllSiteInspectionCategory(field="",value="") {
-    if(value==''){
+
+  ////////////////// Start Site Inspection category ///////////
+
+  getAllSiteInspectionCategory(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `siteInspectionCategory/getAll?field=${field}&value=${value}`)
   }
   getSiteInspectionCategory(id) {
-    return this.https.get(this.apiUrl + 'siteInspectionCategory/get/'+ id)
+    return this.https.get(this.apiUrl + 'siteInspectionCategory/get/' + id)
   }
-  getTopicByCategoryID(id,field="",value="") {
-    if(value==''){
+  getTopicByCategoryID(id, field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `siteInspectionCategory/getAllTopics/${id}?field=${field}&value=${value}`)
@@ -897,53 +903,67 @@ export class LogicalFormInfoService {
   addSiteInspectionCategory(data) {
     return this.https.post(this.apiUrl + 'siteInspectionCategory/add', data)
   }
-   updateSiteInspectionCategory(id, data) {
-    return this.https.put(this.apiUrl + 'siteInspectionCategory/update/'+ id, data)
+  updateSiteInspectionCategory(id, data) {
+    return this.https.put(this.apiUrl + 'siteInspectionCategory/update/' + id, data)
   }
   deleteSiteInspectionCategory(id) {
-    return this.https.delete(this.apiUrl + 'siteInspectionCategory/delete/'+ id)
+    return this.https.delete(this.apiUrl + 'siteInspectionCategory/delete/' + id)
   }
 
   ////////////////// End Site Inspection category ////////////
-    ////////////////// Start Site Inspection Topic ///////////
+  ////////////////// Start Site Inspection Topic ///////////
 
-    getAllSiteInspectionTopic() {
-      return this.https.get(this.apiUrl + 'siteInspectionTopic/getAll')
+  getAllSiteInspectionTopic() {
+    return this.https.get(this.apiUrl + 'siteInspectionTopic/getAll')
+  }
+  getSiteInspectionTopic(id) {
+    return this.https.get(this.apiUrl + 'siteInspectionTopic/get/' + id)
+  }
+  addMultipleSiteInspectionTopic(data) {
+    return this.https.post(this.apiUrl + 'siteInspectionTopic/add/multiple', data)
+  }
+  addSiteInspectionTopic(data) {
+    return this.https.post(this.apiUrl + 'siteInspectionTopic/add', data)
+  }
+  updateSiteInspectionTopic(id, data) {
+    return this.https.put(this.apiUrl + 'siteInspectionTopic/update/' + id, data)
+  }
+  deleteSiteInspectionTopic(id) {
+    return this.https.delete(this.apiUrl + 'siteInspectionTopic/delete/' + id)
+  }
+  getAllassessmet(field = "", value = "") {
+    if (value == '') {
+      field = ''
     }
-    getSiteInspectionTopic(id) {
-      return this.https.get(this.apiUrl + 'siteInspectionTopic/get/'+ id)
-    }
-    addMultipleSiteInspectionTopic(data) {
-      return this.https.post(this.apiUrl + 'siteInspectionTopic/add/multiple', data)
-    }
-    addSiteInspectionTopic(data) {
-      return this.https.post(this.apiUrl + 'siteInspectionTopic/add', data)
-    }
-     updateSiteInspectionTopic(id, data) {
-      return this.https.put(this.apiUrl + 'siteInspectionTopic/update/'+ id, data)
-    }
-    deleteSiteInspectionTopic(id) {
-      return this.https.delete(this.apiUrl + 'siteInspectionTopic/delete/'+ id)
-    }
-    getAllassessmet(field="",value="") {
-      if(value==''){
-         field=''
-      }
-      return this.https.get(this.apiUrl + `riskAssessment/getAll?field=${field}&value=${value}`)
-    }
-    getAssessmentbyId(id) {
-      return this.https.get(this.apiUrl + 'riskAssessment/get/'+ id)
-    }
-    addAssessment(data) {
-      return this.https.post(this.apiUrl + 'riskAssessment/add', data)
-    }
-     updateAssessment(id, data) {
-      return this.https.put(this.apiUrl + 'riskAssessment/update/'+ id, data)
-    }
-    deleteAssessment(id) {
-      return this.https.delete(this.apiUrl + 'riskAssessment/delete/'+ id)
-    }
-    ////////////////// End Site Inspection topic ////////////
+    return this.https.get(this.apiUrl + `riskAssessment/getAll?field=${field}&value=${value}`)
+  }
+  getAssessmentbyId(id) {
+    return this.https.get(this.apiUrl + 'riskAssessment/get/' + id)
+  }
+  addAssessment(data) {
+    return this.https.post(this.apiUrl + 'riskAssessment/add', data)
+  }
+  updateAssessment(id, data) {
+    return this.https.put(this.apiUrl + 'riskAssessment/update/' + id, data)
+  }
+  deleteAssessment(id) {
+    return this.https.delete(this.apiUrl + 'riskAssessment/delete/' + id)
+  }
+  ////////////////// End Site Inspection topic ////////////
+////////////////////Start Add Instruction ////////////////
+
+getInstruction() {
+  return this.https.get(this.apiUrl + 'accidentReportInstruction/getAll')
+}
+postInstruction(data) {
+  return this.https.post(this.apiUrl + 'accidentReportInstruction/add' ,data)
+}
+deleteInstruction(id) {
+  return this.https.delete(this.apiUrl + 'accidentReportInstruction/delete/' + id)
+}
+////////////////////End Add Instruction ////////////////
+
+
 }
 
 // Generated by https://quicktype.io
@@ -973,6 +993,7 @@ export interface JobNumber {
 }
 
 export interface ArrObj {
+  jobNumber?: string;
   siteName: string;
   streetNumber: string;
   streetAddress: string;

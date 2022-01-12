@@ -21,12 +21,12 @@ export class AddEmployeeComponent implements OnInit {
   PPERegister = false;
   LicenceInfo = false;
   EquipmentInfo = false;
-  dataEmp:boolean;
-  formData:any;
+  dataEmp: boolean;
+  formData: any;
   uploadImage1: any;
   uploadlicense1: any;
   submitted = false;
-  id:any;
+  id: any;
   profile = true;
   @ViewChild('signature1') signaturePad: any;
   @ViewChild('signature2') signaturePad2: any;
@@ -36,7 +36,7 @@ export class AddEmployeeComponent implements OnInit {
   dialogRef: any;
   dataUrl: any;
   dataUrl2: any;
-  roleData: any=[''];
+  roleData: any = [''];
   filteredOptions2: Observable<any>;
   filteredOptions1: Observable<any>;
   constructor(
@@ -61,7 +61,7 @@ export class AddEmployeeComponent implements OnInit {
       porfManager: ['', Validators.required],
       porfAdministrater: ['', Validators.required],
       file: ['', Validators.required],
-      roleId:['', Validators.required],
+      roleId: ['', Validators.required],
       porfStreetAddress: ['', Validators.required],
       porfCityTown: ['', Validators.required],
       porfState: ['', Validators.required],
@@ -86,137 +86,160 @@ export class AddEmployeeComponent implements OnInit {
       Sign: [''],
       plantArr: this.fb.array([]),
       plantSignature: [''],
-      plantType:[''],
-      modelNumber:[''],
-      serialNumber:[''],
-      serviceRenewDate:[''],
-      needToMore:[''],
+      plantName:[''],
+      checkedOut: [''],
+      hours: [''],
+      kilometres: [''],
+      date: [''],
+      make:[''],
+      modelNumber: [''],
+      serialNumber: [''],
+      registrationNumber:[''],
+      registrationRenewalDate: [''],
+      plantType: [''],
+      purchaseDate: [''],
+      serviceRenewDate: [''],
+      insurancePolicyNumber: [''],
+      insuranceExpiry: [''],
+      fuelCardNumber: [''],
+      ETagNumber: [''],
     });
   }
 
   ngOnInit(): void {
     this.getAllRoles();
-    this.id=this.activatedRoute.snapshot.params.id;
-   
-    if(this.id!=="form"){
-      this.dataEmp=true;
-    this.patchData();
-  }else{
-    this.dataEmp=false;
-    this.addFiled();
-    this.addFiled2();
-    this.addEquipFiled2();
-  }
-  this.filteredOptions2 = this.empDetails.controls.LicenceName.valueChanges.pipe(
-    startWith(''),
-    debounceTime(800),
-    distinctUntilChanged(),
-    switchMap(val => {
-      console.log("myControl22..", val,this.filteredOptions2)
-      return this.filter2(val || '')
-    })
-  )
-  this.filteredOptions1 = this.empDetails.controls.PPESupplied.valueChanges.pipe(
-    startWith(''),
-    debounceTime(800),
-    distinctUntilChanged(),
-    switchMap(val => {
-      console.log("myControl..", val,this.filteredOptions1)
-      return this.filter1(val || '')
-    })
-  )
+    this.id = this.activatedRoute.snapshot.params.id;
+
+    if (this.id !== "form") {
+      this.dataEmp = true;
+      this.patchData();
+    } else {
+      this.dataEmp = false;
+      this.addFiled();
+      this.addFiled2();
+      this.addEquipFiled2();
+    }
+    this.filteredOptions2 = this.empDetails.controls.LicenceName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(800),
+      distinctUntilChanged(),
+      switchMap(val => {
+        console.log("myControl22..", val, this.filteredOptions2)
+        return this.filter2(val || '')
+      })
+    )
+    this.filteredOptions1 = this.empDetails.controls.PPESupplied.valueChanges.pipe(
+      startWith(''),
+      debounceTime(800),
+      distinctUntilChanged(),
+      switchMap(val => {
+        console.log("myControl..", val, this.filteredOptions1)
+        return this.filter1(val || '')
+      })
+    )
   }
 
-  getAllRoles(){
-    this.role.getAllRole().subscribe((res:any)=>{
-      console.log("role..",res)
-        this.roleData = res.data;
-       
+  getAllRoles() {
+    this.role.getAllRole().subscribe((res: any) => {
+      console.log("role..", res)
+      this.roleData = res.data;
+
     });
   }
-//   ngAfterViewInit() {
-//     console.log("after..",this.signaturePad,this.dataUrl)
-//     // this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
-//     // this.signaturePad.clear();
-//     // this.signaturePad.fromDataURL(this.dataUrl);
-//    setTimeout(() => {
-//     console.log("after10s..",this.signaturePad,this.dataUrl)
-//    }, 10000);
-//  }
-  patchData(){
+  //   ngAfterViewInit() {
+  //     console.log("after..",this.signaturePad,this.dataUrl)
+  //     // this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
+  //     // this.signaturePad.clear();
+  //     // this.signaturePad.fromDataURL(this.dataUrl);
+  //    setTimeout(() => {
+  //     console.log("after10s..",this.signaturePad,this.dataUrl)
+  //    }, 10000);
+  //  }
+  patchData() {
     this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
-   data.data.licence.forEach(element => {
-     element.uploadLicence.forEach(ele => {
-      this.addFiled1(ele);
-     });
-     
-   });
-  data.data.ppe.PPEArr.forEach(ele => {
-    this.addFiled3(ele);
-   });
-   data.data.plant.plantArr.forEach(ele => {
-    this.addEquipFiled3(ele);
-   });
-    this.empDetails.patchValue({
-      profTitie: data.data.title,
-      profFirst: data.data.firstName,
-      porfListName:data.data.lastName,
-      porfEmail: data.data.email,
-      porfPosition:data.data.position,
-      porfDepartment: data.data.department,
-      porfPhone: data.data.phone,
-      porfMobile: data.data.mobile,
-     
-      roleId: data.data.roleId,
-      porfStreetAddress: data.data.location.address,
-      porfCityTown: data.data.location.city,
-      porfState: data.data.location.state,
-      porfPostalCode: data.data.location.pincode,
-      porfUploadImage: data.data.uploadImage,
-      EmpFirst: data.data.emergencyContact.firstName,
-      empLastName: data.data.emergencyContact.lastName,
-      empRelationship: data.data.emergencyContact.relationship,
-      empEmail: data.data.emergencyContact.email,
-      empPhone: data.data.emergencyContact.phone,
-      empMobile: data.data.emergencyContact.mobile,
-     
-      PPESupplied: data.data.ppe.ppeSupplied,
-      BrandOrType: data.data.ppe.brand,
-      IssueDate: data.data.ppe.issueDate,
-      ReplacementDate: data.data.ppe.replacementDate,
-      Sign: data.data.ppe.signature,
+      data.data.licence.forEach(element => {
+        element.uploadLicence.forEach(ele => {
+          this.addFiled1(ele);
+        });
 
-      plantType: data.data.plant.plantType,
-      modelNumber: data.data.plant.modelNumber,
-      serialNumber: data.data.plant.serialNumber,
-      serviceRenewDate: data.data.plant.serviceRenewDate,
-      needToMore: data.data.plant.needToMore,
-      plantSignature: data.data.plant.plantSignature,
+      });
+      data.data.ppe.PPEArr.forEach(ele => {
+        this.addFiled3(ele);
+      });
+      data.data.plant.plantArr.forEach(ele => {
+        this.addEquipFiled3(ele);
+      });
+      this.empDetails.patchValue({
+        profTitie: data.data.title,
+        profFirst: data.data.firstName,
+        porfListName: data.data.lastName,
+        porfEmail: data.data.email,
+        porfPosition: data.data.position,
+        porfDepartment: data.data.department,
+        porfPhone: data.data.phone,
+        porfMobile: data.data.mobile,
+
+        roleId: data.data.roleId,
+        porfStreetAddress: data.data.location.address,
+        porfCityTown: data.data.location.city,
+        porfState: data.data.location.state,
+        porfPostalCode: data.data.location.pincode,
+        porfUploadImage: data.data.uploadImage,
+        EmpFirst: data.data.emergencyContact.firstName,
+        empLastName: data.data.emergencyContact.lastName,
+        empRelationship: data.data.emergencyContact.relationship,
+        empEmail: data.data.emergencyContact.email,
+        empPhone: data.data.emergencyContact.phone,
+        empMobile: data.data.emergencyContact.mobile,
+
+        PPESupplied: data.data.ppe.ppeSupplied,
+        BrandOrType: data.data.ppe.brand,
+        IssueDate: data.data.ppe.issueDate,
+        ReplacementDate: data.data.ppe.replacementDate,
+        Sign: data.data.ppe.signature,
+
+        plantType: data.data.plant.plantType,
+        modelNumber: data.data.plant.modelNumber,
+        serialNumber: data.data.plant.serialNumber,
+        serviceRenewDate: data.data.plant.serviceRenewDate,
+        plantSignature: data.data.plant.plantSignature,
+        plantName:data.data.plant.plantName,
+        checkedOut: data.data.plant.checkedOut,
+        hours: data.data.plant.hours,
+        kilometres:data.data.plant.kilometres,
+        date: data.data.plant.date,
+        make:data.data.plant.make,
+        registrationNumber:data.data.plant.registrationNumber,
+        registrationRenewalDate:data.data.plant.registrationRenewalDate,
+        purchaseDate: data.data.plant.purchaseDate,
+        insurancePolicyNumber: data.data.plant.insurancePolicyNumber,
+        insuranceExpiry: data.data.plant.insuranceExpiry,
+        fuelCardNumber: data.data.plant.fuelCardNumber,
+        ETagNumber: data.data.plant.ETagNumber,
+      });
+
+      this.dataUrl = data.data.ppe.signature;
+      this.dataUrl2 = data.data.plant.plantSignature;
+      console.log("data.data.ppe.signature;", data.data.ppe.signature);
+
+      let check = async () => { this.signaturePad != null }
+      check().then((res) => {
+        console.log("this.signaturePad", this.signaturePad, res);
+
+        this.signaturePad.fromDataURL(data.data.ppe.signature)
+
+      })
+      let check2 = async () => { this.signaturePad2 != null }
+      check2().then((res) => {
+        console.log("this.signaturePad", this.signaturePad2, res);
+
+        this.signaturePad2.fromDataURL(data.data.plant.plantSignature)
+
+      })
 
     });
-   
-    this.dataUrl = data.data.ppe.signature;
-    this.dataUrl2 = data.data.plant.plantSignature;
-    console.log("data.data.ppe.signature;",data.data.ppe.signature);
-    
-    let check =async () => { this.signaturePad != null }
-    check().then((res) => {
-      console.log("this.signaturePad",this.signaturePad,res);
-      
-      this.signaturePad.fromDataURL(data.data.ppe.signature)
-
-    })
-    let check2 =async () => { this.signaturePad2 != null }
-    check2().then((res) => {
-      console.log("this.signaturePad",this.signaturePad2,res);
-      
-      this.signaturePad2.fromDataURL(data.data.plant.plantSignature)
-
-    })
-    
-  });
   }
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
@@ -251,7 +274,7 @@ export class AddEmployeeComponent implements OnInit {
     console.log('begin drawing');
   }
 
-  browser(event,index) {
+  browser(event, index) {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
@@ -284,43 +307,59 @@ export class AddEmployeeComponent implements OnInit {
         this.file1
       );
       this.empDetails.get("porfUploadImage").patchValue(this.file1)
-     
+
     });
   }
   selectedImage(arg0: string, selectedImage: any) {
     throw new Error('Method not implemented.');
   }
- 
+
   onFormUpdate(id) {
     const Sign = this.signaturePad.toDataURL();
     const plantSignature = this.signaturePad2.toDataURL();
-    let ppeArr = ()=>{
+    let ppeArr = () => {
       this.addPPE().length;
-      let arr=[];
-      this.addPPE().controls.forEach((item:any)=>{
-        console.log("item",item);
+      let arr = [];
+      this.addPPE().controls.forEach((item: any) => {
+        console.log("item", item);
         arr.push(
-          {ppeSupplied: item.controls.PPESupplied.value,
-          brand: item.controls.BrandOrType.value,
-          issueDate: item.controls.IssueDate.value,
-          replacementDate: item.controls.ReplacementDate.value},
-          
+          {
+            ppeSupplied: item.controls.PPESupplied.value,
+            brand: item.controls.BrandOrType.value,
+            issueDate: item.controls.IssueDate.value,
+            replacementDate: item.controls.ReplacementDate.value
+          },
+
         )
       })
       return arr;
     }
-    let equipArr = ()=>{
+    let equipArr = () => {
       this.addPPE().length;
-      let arr=[];
-      this.addEquip().controls.forEach((item:any)=>{
-        console.log("item",item);
+      let arr = [];
+      this.addEquip().controls.forEach((item: any) => {
+        console.log("item", item);
         arr.push(
-          {plantType: item.controls.plantType.value,
-          modelNumber: item.controls.modelNumber.value,
-          serialNumber: item.controls.serialNumber.value,
-          serviceRenewDate: item.controls.serviceRenewDate.value,
-          needToMore: item.controls.needToMore.value},
-          
+          {
+            plantType: item.controls.plantType.value,
+            modelNumber: item.controls.modelNumber.value,
+            serialNumber: item.controls.serialNumber.value,
+            serviceRenewDate: item.controls.serviceRenewDate.value,
+            plantName:item.controls.plantName.value,
+            checkedOut: item.controls.checkedOut.value,
+            hours: item.controls.hours.value,
+            kilometres: item.controls.kilometres.value,
+            date: item.controls.date.value,
+            make:item.controls.make.value,
+            registrationNumber:item.controls.registrationNumber.value,
+            registrationRenewalDate: item.controls.registrationRenewalDate.value,
+            purchaseDate: item.controls.purchaseDate.value,
+            insurancePolicyNumber: item.controls.insurancePolicyNumber.value,
+            insuranceExpiry: item.controls.insuranceExpiry.value,
+            fuelCardNumber: item.controls.fuelCardNumber.value,
+            ETagNumber: item.controls.ETagNumber.value,
+          },
+
         )
       })
       return arr;
@@ -354,14 +393,14 @@ export class AddEmployeeComponent implements OnInit {
         uploadLicence: this.empDetails.get('UploadLicenceArr').value,
       },
       ppe: {
-        PPEArr:ppeArr(),
+        PPEArr: ppeArr(),
         signature: Sign,
-        
+
       },
       plant: {
-        plantArr:equipArr(),
+        plantArr: equipArr(),
         plantSignature: plantSignature,
-        
+
       },
       location: {
         address: this.empDetails.get('porfStreetAddress').value,
@@ -372,7 +411,7 @@ export class AddEmployeeComponent implements OnInit {
         country: 'India',
       },
     };
-    
+
     this.employee
       .updateEmployeeInfo(this.id, data)
       .subscribe((resData) => {
@@ -393,35 +432,51 @@ export class AddEmployeeComponent implements OnInit {
     const Sign = this.signaturePad.toDataURL();
     console.log('sign=>', this.signaturePad.toDataURL());
     const plantSignature = this.signaturePad2.toDataURL();
-    
+
 
     console.log('this.EmployeeInfo.value', this.empDetails.value);
-    let ppeArr = ()=>{
+    let ppeArr = () => {
       this.addPPE().length;
-      let arr=[];
-      this.addPPE().controls.forEach((item:any)=>{
-        console.log("item",item);
+      let arr = [];
+      this.addPPE().controls.forEach((item: any) => {
+        console.log("item", item);
         arr.push(
-          {ppeSupplied: item.controls.PPESupplied.value,
-          brand: item.controls.BrandOrType.value,
-          issueDate: item.controls.IssueDate.value,
-          replacementDate: item.controls.ReplacementDate.value},
+          {
+            ppeSupplied: item.controls.PPESupplied.value,
+            brand: item.controls.BrandOrType.value,
+            issueDate: item.controls.IssueDate.value,
+            replacementDate: item.controls.ReplacementDate.value
+          },
         )
       })
       return arr;
     }
-    let equipArr = ()=>{
-      this.addPPE().length;
-      let arr=[];
-      this.addEquip().controls.forEach((item:any)=>{
-        console.log("item",item);
+    let equipArr = () => {
+      this.addEquip().length;
+      let arr = [];
+      this.addEquip().controls.forEach((item: any) => {
+        console.log("item", item);
         arr.push(
-          {plantType: item.controls.plantType.value,
-          modelNumber: item.controls.modelNumber.value,
-          serialNumber: item.controls.serialNumber.value,
-          serviceRenewDate: item.controls.serviceRenewDate.value,
-          needToMore: item.controls.needToMore.value},
-          
+          {
+            plantType: item.controls.plantType.value,
+            modelNumber: item.controls.modelNumber.value,
+            serialNumber: item.controls.serialNumber.value,
+            serviceRenewDate: item.controls.serviceRenewDate.value,
+            plantName:[item.controls.plantName.value],
+            checkedOut: [item.controls.checkedOut.value],
+            hours: [item.controls.hours.value],
+            kilometres: [item.controls.kilometres.value],
+            date: [item.controls.date.value],
+            make:[item.controls.make.value],
+            registrationNumber:[item.controls.registrationNumber.value],
+            registrationRenewalDate: [item.controls.registrationRenewalDate.value],
+            purchaseDate: [item.controls.purchaseDate.value],
+            insurancePolicyNumber: [item.controls.insurancePolicyNumber.value],
+            insuranceExpiry: [item.controls.insuranceExpiry.value],
+            fuelCardNumber: [item.controls.fuelCardNumber.value],
+            ETagNumber: [item.controls.ETagNumber.value],
+          },
+
         )
       })
       return arr;
@@ -455,14 +510,14 @@ export class AddEmployeeComponent implements OnInit {
         uploadLicence: this.empDetails.get('UploadLicenceArr').value,
       },
       ppe: {
-        PPEArr:ppeArr(),
-       
+        PPEArr: ppeArr(),
+
         signature: Sign,
       },
       plant: {
-        plantArr:equipArr(),
+        plantArr: equipArr(),
         plantSignature: plantSignature,
-        
+
       },
       location: {
         address: this.empDetails.get('porfStreetAddress').value,
@@ -473,7 +528,7 @@ export class AddEmployeeComponent implements OnInit {
         country: 'India',
       },
     };
-  
+
     console.log('body=>', body);
 
     this.employee.addEmployeeInfo(body).subscribe((data) => {
@@ -532,11 +587,23 @@ export class AddEmployeeComponent implements OnInit {
   }
   newEquipFiled2(): FormGroup {
     return this.fb.group({
-      plantType: [''],
+      plantName:[''],
+      checkedOut: [''],
+      hours: [''],
+      kilometres: [''],
+      date: [''],
+      make:[''],
       modelNumber: [''],
       serialNumber: [''],
+      registrationNumber:[''],
+      registrationRenewalDate: [''],
+      plantType: [''],
+      purchaseDate: [''],
       serviceRenewDate: [''],
-      needToMore: [''],
+      insurancePolicyNumber: [''],
+      insuranceExpiry: [''],
+      fuelCardNumber: [''],
+      ETagNumber: [''],
     });
   }
   addEquipFiled2() {
@@ -544,26 +611,38 @@ export class AddEmployeeComponent implements OnInit {
     console.log(this.empDetails.value);
   }
   newEquipFiled3(data): FormGroup {
-    console.log("newData",data);
-    
+    console.log("newData", data);
+
     return this.fb.group({
       plantType: [data.plantType],
-      modelNumber:[ data.modelNumber],
+      modelNumber: [data.modelNumber],
       serialNumber: [data.serialNumber],
       serviceRenewDate: [data.serviceRenewDate],
-      needToMore: [data.needToMore],
+      plantName:[data.plantName],
+      checkedOut: [data.checkedOut],
+      hours: [data.hours[0]],
+      kilometres: [data.kilometres[0]],
+      date: [data.date[0]],
+      make:[data.make],
+      registrationNumber:[data.registrationNumber],
+      registrationRenewalDate: [data.registrationRenewalDate],
+      purchaseDate: [data.purchaseDate],
+      insurancePolicyNumber: [data.insurancePolicyNumber],
+      insuranceExpiry: [data.insuranceExpiry],
+      fuelCardNumber: [data.fuelCardNumber],
+      ETagNumber: [data.ETagNumber],
     });
   }
   addEquipFiled3(data) {
-    console.log("data",data);
+    console.log("data", data);
     this.addEquip().push(this.newEquipFiled3(data));
-    console.log("addPPEFiled1",this.empDetails.value);
+    console.log("addPPEFiled1", this.empDetails.value);
   }
   removeEquipFiled1(i) {
-    const item = <FormArray>this.empDetails.controls['equipmentRegister'];
+    const item = <FormArray>this.empDetails.controls['plantArr'];
     if (item.length > 1) {
       item.removeAt(i);
-    
+
     }
   }
   addPPE() {
@@ -585,23 +664,23 @@ export class AddEmployeeComponent implements OnInit {
     const item = <FormArray>this.empDetails.controls['PPEArr'];
     if (item.length > 1) {
       item.removeAt(i);
-    
+
     }
   }
   newFiled3(data): FormGroup {
-    console.log("newData",data);
-    
+    console.log("newData", data);
+
     return this.fb.group({
       PPESupplied: [data.ppeSupplied],
-      BrandOrType:[ data.brand],
+      BrandOrType: [data.brand],
       IssueDate: [data.issueDate],
       ReplacementDate: [data.replacementDate],
     });
   }
   addFiled3(data) {
-    console.log("data",data);
+    console.log("data", data);
     this.addPPE().push(this.newFiled3(data));
-    console.log("addPPEFiled1",this.empDetails.value);
+    console.log("addPPEFiled1", this.empDetails.value);
   }
   newFiled(): FormGroup {
     return this.fb.group({
@@ -615,7 +694,7 @@ export class AddEmployeeComponent implements OnInit {
   newFiled1(data): FormGroup {
     return this.fb.group({
       file: [data.file],
-      LicenceName:[ data.LicenceName],
+      LicenceName: [data.LicenceName],
       LicenceNumber: [data.LicenceNumber],
       TrainingQrginisation: [data.TrainingQrginisation],
       ExpiryDate: [data.ExpiryDate],
@@ -631,7 +710,7 @@ export class AddEmployeeComponent implements OnInit {
     const item = <FormArray>this.empDetails.controls['UploadLicenceArr'];
     if (item.length > 1) {
       item.removeAt(i);
-    
+
     }
   }
 
@@ -640,9 +719,9 @@ export class AddEmployeeComponent implements OnInit {
   }
   filter2(val: string): Observable<any> {
     return this.licenceInfo.getAllLicence()
-      .pipe(map((res)=>{
-        res.data=res.data.map((item)=>{
-          item.LicenceName=`${item.title}`
+      .pipe(map((res) => {
+        res.data = res.data.map((item) => {
+          item.LicenceName = `${item.title}`
           return item
         })
         return res
@@ -651,27 +730,27 @@ export class AddEmployeeComponent implements OnInit {
           response.data = response.data.filter(option => {
             return option.LicenceName.toLowerCase().indexOf(val.toLowerCase()) === 0
           })
-          
+
           return response.data;
         })
       )
   }
   filter1(val: string): Observable<any> {
     return this.licenceInfo.getAllPPE()
-      .pipe(map((res:any)=>{
-        res.data=res.data.map((item)=>{
-          item.PPESupplied=`${item.title}`
+      .pipe(map((res: any) => {
+        res.data = res.data.map((item) => {
+          item.PPESupplied = `${item.title}`
           return item
         })
         return res
       }),
         map((response: any) => {
           response.data = response.data.filter(option => {
-            console.log("11option>>",val);
+            console.log("11option>>", val);
             return option.PPESupplied.toLowerCase().indexOf(val.toLowerCase()) === 0
           })
-          console.log("response.data>>",response.data);
-          
+          console.log("response.data>>", response.data);
+
           return response.data;
         })
       )
@@ -683,6 +762,6 @@ export class AddEmployeeComponent implements OnInit {
   //   })
   //   console.log("e.option",e.option);
   //   console.log("data...");
-    
+
   // }
 }

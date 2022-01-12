@@ -1,36 +1,21 @@
-<div
-  class="btn btn-outline-primary"
-  [routerLink]="['/admin/siteInfo/siteinspectioncategory']"
->
+<div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/siteinspectioncategory']">
   <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <section class="content" style="height: 60%">
-  <div
-    [formGroup]="siteInspectionCategoryAdd"
-    class="container px-4 py-4 bg-white"
-  >
+  <div [formGroup]="siteInspectionCategoryAdd" class="container px-4 py-4 bg-white">
     <h2>Add Site Inspection Category</h2>
     <hr />
     <div class="row">
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Category</p>
-        <input
-          type="text"
-          class="form-control"
-          id="customerName"
-          formControlName="category"
-        />
+        <input type="text" class="form-control" id="customerName" formControlName="category" />
       </div>
     </div>
     <div>
-      <button
-        (click)="onSubmit()"
-        class="btn btn-primary"
-        [disabled]="
+      <button (click)="onSubmit()" class="btn btn-primary" [disabled]="
           siteInspectionCategoryAdd.invalid &&
           siteInspectionCategoryAdd.get('category').invalid
-        "
-      >
+        ">
         Submit
       </button>
     </div>

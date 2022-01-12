@@ -8,9 +8,9 @@ describe('AddAndEditJuriComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddAndEditJuriComponent ]
+      declarations: [AddAndEditJuriComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

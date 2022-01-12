@@ -16,7 +16,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { DndModule } from 'ngx-drag-drop';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -41,9 +41,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DndModule,
     MatButtonModule,
     MatTooltipModule
-    
+
   ],
-  exports:[
+  exports: [
     FormsComponent,
   ]
 })

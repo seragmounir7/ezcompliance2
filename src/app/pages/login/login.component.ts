@@ -14,7 +14,7 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   public isAuthLoading = false;
-  submitBtn=false;
+  submitBtn = false;
   constructor(
     private renderer: Renderer2,
     private toastr: ToastrService,
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private setTitle: SetTitleService
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required,Validators.email]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
     });
   }
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.submitBtn=true;
+    this.submitBtn = true;
     if (this.loginForm.invalid) {
       return;
     }

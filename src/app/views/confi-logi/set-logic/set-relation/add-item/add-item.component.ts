@@ -1,8 +1,9 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
@@ -11,6 +12,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class AddItemComponent implements OnInit {
   addItem!: FormGroup;
   dataRec: any;
+  public Editor = ClassicEditor;
   constructor(
     private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
@@ -21,192 +23,192 @@ export class AddItemComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log(this.dataRec);
-    
+
     this.addItem = this.fb.group({
       title: ['', Validators.required],
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.addItem.get('title').value
+
+    let data = {
+      title: this.addItem.get('title').value
     }
 
     switch (this.dataRec.type) {
       case 'highRisk': {
-       this.addHighRisk(data);
+        this.addHighRisk(data);
         break;
       }
       case 'ppe': {
-       this.addPPE(data);
+        this.addPPE(data);
         break;
       }
       case 'licence': {
-       this.addLicence(data);
+        this.addLicence(data);
         break;
       }
       case 'identifyHazards': {
-       this.addHazard(data);
+        this.addHazard(data);
         break;
       }
       case 'codeOfPract': {
-       this.addCOP(data);
+        this.addCOP(data);
         break;
       }
       case 'riskLevel': {
-       this.addRiskLevel(data);
+        this.addRiskLevel(data);
         break;
       }
       case 'ctrlActreq': {
-       this.addControlActReq(data);
+        this.addControlActReq(data);
         break;
       }
       case 'resRiskLevel': {
-       this.addResidRiskLevel(data);
+        this.addResidRiskLevel(data);
         break;
       }
       case 'perResbl': {
-       this.addStaff(data);
+        this.addStaff(data);
         break;
       }
-    
-    
+
+
     }
 
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }
 
-  addHighRisk(data){
+  addHighRisk(data) {
     this.logicalFormInfo
-    .addRisk(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addRisk(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('highRisk');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('highRisk');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addPPE(data){
+  addPPE(data) {
     this.logicalFormInfo
-    .addPPE(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addPPE(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('ppe');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('ppe');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addRiskLevel(data){
+  addRiskLevel(data) {
     this.logicalFormInfo
-    .addRiskLevel(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addRiskLevel(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('riskLevel');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('riskLevel');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addResidRiskLevel(data){
+  addResidRiskLevel(data) {
     this.logicalFormInfo
-    .addResidual(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addResidual(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('resRiskLevel');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('resRiskLevel');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addHazard(data){
+  addHazard(data) {
     this.logicalFormInfo
-    .addHazards(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addHazards(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('identifyHazards');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('identifyHazards');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addLicence(data){
- let dataTemp={
-    title:data.title,
-    tradeCategoryId:this.dataRec.tradeCategoryId
-  }
+  addLicence(data) {
+    let dataTemp = {
+      title: data.title,
+      tradeCategoryId: this.dataRec.tradeCategoryId
+    }
     this.logicalFormInfo
-    .addLicence(dataTemp)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addLicence(dataTemp)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('licence');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('licence');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addControlActReq(data){
+  addControlActReq(data) {
     this.logicalFormInfo
-    .addContrlActReq(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addContrlActReq(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('ctrlActreq');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('ctrlActreq');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addStaff(data){
+  addStaff(data) {
     this.logicalFormInfo
-    .addStaff(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addStaff(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('perResbl');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('perResbl');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
-  addCOP(data){
+  addCOP(data) {
     this.logicalFormInfo
-    .addCode(data)
-    .subscribe((resData) => {
-      console.log('resData', resData);
+      .addCode(data)
+      .subscribe((resData) => {
+        console.log('resData', resData);
 
-      this.dialogRef.close('codeOfPract');
-      Swal.fire({
-        title: 'Item  Added successfully',
-        showConfirmButton: false,
-        timer: 1200,
-      });     
-     });
+        this.dialogRef.close('codeOfPract');
+        Swal.fire({
+          title: 'Item  Added successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      });
   }
 }

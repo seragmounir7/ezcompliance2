@@ -8,9 +8,9 @@ describe('AddContrActComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddContrActComponent ]
+      declarations: [AddContrActComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

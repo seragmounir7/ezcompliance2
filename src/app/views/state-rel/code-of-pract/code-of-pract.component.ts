@@ -16,7 +16,7 @@ export class CodeOfPractComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
 
@@ -27,7 +27,7 @@ export class CodeOfPractComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllCode();
@@ -48,10 +48,10 @@ export class CodeOfPractComponent implements OnInit {
 
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(AddAndEditCodeComponent, {
       width: "550px",
       data: element,
@@ -76,17 +76,17 @@ export class CodeOfPractComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteCode(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'COP Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteCode(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'COP Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllCode();
+
           });
-          console.log('deleted res', res);
-          this.getAllCode();
-            
-        });
       }
     });
   }

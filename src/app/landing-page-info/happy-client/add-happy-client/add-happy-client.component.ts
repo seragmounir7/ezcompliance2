@@ -44,7 +44,7 @@ export class AddHappyClientComponent implements OnInit {
       title: ['', Validators.required],
       mode: 'HappyClient',
     });
-    
+
   }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class AddHappyClientComponent implements OnInit {
     }
     if (this.data.action == 'edit') {
       this.Update = true;
-     
+
       this.clientDetail.patchValue({
         mode: 'HappyClient',
         title: this.data.EditData.title,
@@ -77,7 +77,7 @@ export class AddHappyClientComponent implements OnInit {
   }
   onFormSubmit() {
     let value = this.selectedImage[0];
-  
+
     let arrlength = this.clientArr().length;
     for (let i = 0; i < arrlength; i++) {
       this.clientArr()
@@ -85,11 +85,11 @@ export class AddHappyClientComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-  
+
   }
   addHappyClient() {
     this.clientArr().push(this.clientForm());
-  
+
   }
   clientArr(): FormArray {
     return this.clientDetail.get('arrObj') as FormArray;
@@ -124,7 +124,7 @@ export class AddHappyClientComponent implements OnInit {
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-     
+
         this.happyClientData.patchValue({
           filePath: res.filePath,
         });
@@ -155,7 +155,7 @@ export class AddHappyClientComponent implements OnInit {
         title: this.clientDetail.controls.title.value,
         arrObj: this.fb.array([]),
       };
-    
+
       this.landingPageInfo
         .addAppService(this.clientDetail.value)
         .subscribe((data) => {
@@ -196,5 +196,5 @@ export class AddHappyClientComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

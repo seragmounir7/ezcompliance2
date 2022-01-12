@@ -25,7 +25,7 @@ export class SiteInspectionCategoryComponent implements OnInit {
     private setTitle: SetTitleService,
     private dialog: MatDialog,
     private logicalFormInfoService: LogicalFormInfoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getAllCategory();
@@ -35,9 +35,9 @@ export class SiteInspectionCategoryComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllCategory(field="",value="") {
+  getAllCategory(field = "", value = "") {
     this.logicalFormInfoService
-      .getAllSiteInspectionCategory(field,value)
+      .getAllSiteInspectionCategory(field, value)
       .subscribe((res: any) => {
         console.log(res);
         this.dataSource.data = res.data;
@@ -111,7 +111,7 @@ export class SiteInspectionCategoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllCategory(sort.active,sort.direction)
-     }
+
+    this.getAllCategory(sort.active, sort.direction)
+  }
 }

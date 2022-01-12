@@ -190,10 +190,10 @@
 <div class="col ml-2 pt-3">
   <h1>Dynamic Forms List</h1>
 </div>
-<div class="col ml-2 mb-2"  *ngIf="url[0].path!='fillConfigForm'">
-      
-  <button  class="btn btn-outline-primary mt-1 mr-2 float-right"(click)="addDyForm()">
-    <i class="fas fa-folder-plus mr-2"></i>Add Form 
+<div class="col ml-2 mb-2" *ngIf="url[0].path!='fillConfigForm'">
+
+  <button class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="addDyForm()">
+    <i class="fas fa-folder-plus mr-2"></i>Add Form
   </button>
 </div>
 <div class=" ">
@@ -211,15 +211,15 @@
       <th mat-header-cell *matHeaderCellDef>Form Name</th>
       <td mat-cell *matCellDef="let element"><span class="flex-start">{{ element.title }}</span></td>
     </ng-container>
+    <ng-container matColumnDef="formCategory">
+      <th mat-header-cell *matHeaderCellDef>Form category</th>
+      <td mat-cell *matCellDef="let element"><span class="flex-start">{{ element?.formCategoryId?.title }}</span></td>
+    </ng-container>
     <ng-container matColumnDef="formFrequency">
-      <th mat-header-cell *matHeaderCellDef >Form Frequency</th>
+      <th mat-header-cell *matHeaderCellDef>Form Frequency</th>
       <td mat-cell *matCellDef="let element">
-        <select
-          class="form-select form-control "
-          aria-label="Default select example"
-          [value]="element.frequency"
-          (change)="frequencyChange($event, element)"
-        >
+        <select class="form-select form-control " aria-label="Default select example" [value]="element.frequency"
+          (change)="frequencyChange($event, element)">
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
           <option value="weekly">Monthly</option>
@@ -233,11 +233,8 @@
     <ng-container matColumnDef="Disable/Enable">
       <th mat-header-cell *matHeaderCellDef>Disable/Enable</th>
       <td mat-cell *matCellDef="let element">
-        <mat-slide-toggle
-          color="primary"
-          (change)="slideChanged($event, element)"
-          [checked]="element.enable"
-        ></mat-slide-toggle>
+        <mat-slide-toggle color="primary" (change)="slideChanged($event, element)" [checked]="element.enable">
+        </mat-slide-toggle>
       </td>
     </ng-container>
 
@@ -260,22 +257,27 @@
           title="Delete"
           (click)="delete(element)"
         ></i> -->
-        <button  matTooltip="Edit"mat-icon-button class="mr-2"  aria-label="Example icon button with a delete icon" (click)="editForm(element)" *ngIf="url[0].path!='fillConfigForm'">
-          <mat-icon >edit</mat-icon>
+        <button matTooltip="Edit" mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          (click)="editForm(element)" *ngIf="url[0].path!='fillConfigForm'">
+          <mat-icon>edit</mat-icon>
         </button>
-        <button  matTooltip="View"mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon" (click)="viewForm(element)" *ngIf="url[0].path!='fillConfigForm'">
-          <mat-icon  >visibility</mat-icon>
+        <button matTooltip="View" mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          (click)="viewForm(element)" *ngIf="url[0].path!='fillConfigForm'">
+          <mat-icon>visibility</mat-icon>
         </button>
-        <button  matTooltip="Delete"mat-icon-button aria-label="Example icon button with a delete icon"  (click)="delete(element)" *ngIf="url[0].path!='fillConfigForm'">
-          <mat-icon >delete</mat-icon>
+        <button matTooltip="Delete" mat-icon-button aria-label="Example icon button with a delete icon"
+          (click)="delete(element)" *ngIf="url[0].path!='fillConfigForm'">
+          <mat-icon>delete</mat-icon>
         </button>
         <div style="display: flex; justify-content: space-evenly;">
-        <button  matTooltip="Fill The Form" mat-icon-button aria-label="Example icon button with a delete icon"  (click)="add(element)" *ngIf="url[0].path=='fillConfigForm'">
-           <svg-icon name="Fill_form"></svg-icon> 
-        </button>
-       <button  matTooltip="Saved Form List" mat-icon-button aria-label="Example icon button with a delete icon" [routerLink]="['/admin/dynamic/savedDynamicFormTable/'+element._id]" *ngIf="url[0].path=='fillConfigForm'" >
-         <mat-icon >launch</mat-icon>
-      </button>
+          <button matTooltip="Fill The Form" mat-icon-button aria-label="Example icon button with a delete icon"
+            (click)="add(element)" *ngIf="url[0].path=='fillConfigForm'">
+            <svg-icon name="Fill_form"></svg-icon>
+          </button>
+          <button matTooltip="Saved Form List" mat-icon-button aria-label="Example icon button with a delete icon"
+            [routerLink]="['/admin/dynamic/savedDynamicFormTable/'+element._id]" *ngIf="url[0].path=='fillConfigForm'">
+            <mat-icon>launch</mat-icon>
+          </button>
         </div>
       </td>
     </ng-container>
@@ -284,10 +286,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <mat-paginator
-    [pageSizeOptions]="[20]"
-    showFirstLastButtons
-    aria-label="Select page of periodic elements"
-  >
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>

@@ -27,9 +27,9 @@ export class EditRootCauseOfIncidentComponent implements OnInit {
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value
+
+    let data = {
+      title: this.editTitle.get('title').value
     }
     this.logicalFormInfo
       .updateRootCause(data, this.dataRec._id)
@@ -41,10 +41,10 @@ export class EditRootCauseOfIncidentComponent implements OnInit {
           title: 'Parameter Updated successfully',
           showConfirmButton: false,
           timer: 1200,
-        });     
-       });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

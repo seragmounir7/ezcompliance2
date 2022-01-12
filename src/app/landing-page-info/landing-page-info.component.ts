@@ -7,7 +7,7 @@ import { SetTitleService } from '../utils/services/set-title.service';
   styleUrls: ['./landing-page-info.component.scss'],
 })
 export class LandingPageInfoComponent implements OnInit {
-  constructor( private setTitle: SetTitleService) {}
+  constructor(private setTitle: SetTitleService) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Landing Page Information');

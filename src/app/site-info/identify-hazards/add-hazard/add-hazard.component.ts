@@ -60,7 +60,7 @@ export class AddHazardComponent implements OnInit {
           title: 'Parameter Added successfully',
           showConfirmButton: false,
           timer: 1200,
-        });  
+        });
         this.router.navigate(['/admin/siteInfo/hazards']);
       },
       (err) => {
@@ -69,7 +69,7 @@ export class AddHazardComponent implements OnInit {
     );
   }
   calcHeight(value) {
-    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
-    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
+    console.log("numberOfLineBreaks", this.numberOfLineBreaks)
   }
 }

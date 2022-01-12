@@ -32,9 +32,9 @@ export class EditCOPComponent implements OnInit {
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value,
+
+    let data = {
+      title: this.editTitle.get('title').value,
     }
     this.logicalFormInfo
       .updateCOP(data, this.dataRec._id)
@@ -46,10 +46,10 @@ export class EditCOPComponent implements OnInit {
           title: 'Parameter Edited successfully',
           showConfirmButton: false,
           timer: 1200,
-        });  
-          });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

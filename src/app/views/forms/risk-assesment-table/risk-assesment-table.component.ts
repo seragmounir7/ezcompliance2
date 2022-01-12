@@ -15,27 +15,26 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
   styleUrls: ['./risk-assesment-table.component.scss']
 })
 export class RiskAssesmentTableComponent implements OnInit {
-  displayedColumns: string[] = ['position','customerName',"phone","email","site",'action'];
+  displayedColumns: string[] = ['formId', 'customerName', "phone", "email", "site", 'action'];
   showDatas: any;
-  tempArray: MatTableDataSource <any>;
+  tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
     private spinner: NgxSpinnerService,
-    private shared:RoleManagementSharedServiceService,
-    ) { }
+    private shared: RoleManagementSharedServiceService,
+  ) { }
 
   ngOnInit(): void {
     this.getToolBox();
   }
-  
+
   ngAfterViewInit() {
     // this.tempArray.paginator = this.paginator;
     // this.tempArray.sort = this.sort; 
   }
-  delete(item)
-  {
+  delete(item) {
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.customerName}"?`,
@@ -48,64 +47,60 @@ export class RiskAssesmentTableComponent implements OnInit {
       if (result.value) {
         this.spinner.show()
         this.logicalFormInfo
-        .deleteAssessment(item._id)
-        .subscribe((res => {
-          Swal.fire({
-            title: `"${item.customerName}"? Deleted successfully`,
-            showConfirmButton: false,
-            timer: 1200,
-          });
-        this.getToolBox()
-        this.spinner.hide()
-        }))
+          .deleteAssessment(item._id)
+          .subscribe((res => {
+            Swal.fire({
+              title: `"${item.customerName}"? Deleted successfully`,
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            this.getToolBox()
+            this.spinner.hide()
+          }))
       }
     });
-    
-   
+
+
   }
-  printPage(id)
-  {
+  printPage(id) {
     this.shared.printNext(true)
     console.log("check");
     // this.logicalFormInfo.printing.next('print');
-    localStorage.setItem("key","print");
+    localStorage.setItem("key", "print");
     // $("<iframe>")                             // create a new iframe element
     //     .hide()                               // make it invisible
     //     .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
     //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
 
-    
+
     // let iframe=document.createElement("iframe")
     //       iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
     //       let body = document.getElementsByTagName("body")
     //       body[0].appendChild(iframe)
-    
+
     this.spinner.show("printLoader")
-     this.router.navigate(['/',{ outlets: {'print': ['print','riskAssessSWMS', id]}}])
-     
+    this.router.navigate(['/', { outlets: { 'print': ['print', 'riskAssessSWMS', id] } }])
+
   }
-  getToolBox(field="",value="")
-  {
-    this.logicalFormInfo.getAllassessmet(field,value).subscribe((res:any)=>
-    {
-      this.showDatas= res.data;
-      this.showDatas.forEach((element,i) => {
-        return this.showDatas[i].index= i
+  getToolBox(field = "", value = "") {
+    this.logicalFormInfo.getAllassessmet(field, value).subscribe((res: any) => {
+      this.showDatas = res.data;
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
       });
-  
+
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort; 
-      console.log("get res",this.showDatas);
+      this.tempArray.sort = this.sort;
+      console.log("get res", this.showDatas);
     })
   }
-  edit(id)
-  {
-    localStorage.setItem('key',' ');
-    this.router.navigate(["/admin/forms/riskAssessSWMS/"+id]);
+  edit(id) {
+    localStorage.setItem('key', ' ');
+    this.router.navigate(["/admin/forms/riskAssessSWMS/" + id]);
   }
 
-  sortData(sort:Sort){
-    this.getToolBox(sort.active,sort.direction)
+  sortData(sort: Sort) {
+    this.getToolBox(sort.active, sort.direction)
   }
 }

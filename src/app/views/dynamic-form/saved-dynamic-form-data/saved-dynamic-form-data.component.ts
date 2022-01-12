@@ -347,7 +347,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
         this.isHidden = res.data.check;
-       this.mainFormId = res.data._id
+        this.mainFormId = res.data._id
         // this.configData=res.data.configure[0];
         this.previewform.patchValue(res.data.configure[0]);
         res.data.htmlObject.forEach((item) => {
@@ -369,7 +369,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
         console.log('formView=>', res);
         this.formNameRecieved = res.data.title;
         this.model = res.data.htmlObject;
-  
+
         this.previewform.patchValue(res.data.configure[0])
         this.isHidden = res.data.check;
         this.mainFormId = res.data.formId
@@ -1025,7 +1025,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 
         this.dynamicFormsService.savedFormPost(data).subscribe((res) => {
           Swal.fire('Form Submit successfully');
-          this.router.navigate(['/admin/forms/fillConfigForm/'+1]);
+          this.router.navigate(['/admin/forms/fillConfigForm/' + 1]);
           this.previewform.reset();
         })
       }
@@ -1060,7 +1060,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
           .savedFormPut(this.formIdRec, data)
           .subscribe((res) => {
             Swal.fire('Form Update successfully');
-            this.router.navigate(['/admin/dynamic/savedDynamicFormTable/'+this.mainFormId]);
+            this.router.navigate(['/admin/dynamic/savedDynamicFormTable/' + this.mainFormId]);
             this.previewform.reset();
           });
       }

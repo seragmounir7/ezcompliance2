@@ -52,7 +52,7 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { EditResidualRiskLevelComponent } from './residual-risk-level/edit-residual-risk-level/edit-residual-risk-level.component';
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
-import {AutosizeModule} from 'ngx-autosize';
+import { AutosizeModule } from 'ngx-autosize';
 import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component';
 import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
 import { EditSiteInspectionCategoryComponent } from './site-inspection-category/edit-site-inspection-category/edit-site-inspection-category.component';
@@ -78,6 +78,10 @@ import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-ma
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynamic-form-categories.component';
+import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
+import { InstructionsComponent } from './instructions/instructions.component';
+import { AddInstructionsComponent } from './instructions/add-instructions/add-instructions.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +119,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ProjectManagerComponent,
     AddEditProjMangComponent,
     StaffComponent,
-    
+
     RiskLevelComponent,
     ResidualRiskLevelComponent,
     ChemicalComponent,
@@ -151,7 +155,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AddWhsManagerComponent,
     AddManagerComponent,
     EditManagerComponent,
-   
+    DynamicFormCategoriesComponent,
+    AddFormCategoriesComponent,
+    InstructionsComponent,
+    AddInstructionsComponent,
+
   ],
 
   imports: [
@@ -165,4 +173,4 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     CKEditorModule
   ],
 })
-export class SiteInfoModule {}
+export class SiteInfoModule { }

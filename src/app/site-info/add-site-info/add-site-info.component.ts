@@ -20,35 +20,35 @@ export class AddSiteInfoComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'siteName',/* 'siteForemen', */'streetNo','streetAddress','Suburb','State', 'action'];
+  displayedColumns: string[] = ['index', 'siteName',/* 'siteForemen', */'streetNo', 'streetAddress', 'Suburb', 'State', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  allSites: any[]=[];
+  allSites: any[] = [];
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
   /////////////mat table end////////////////
 
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private setTitle: SetTitleService,
     private logicalFormInfoService: LogicalFormInfoService,
     private spinner: NgxSpinnerService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Add Site Info');
     this.getAllSites()
   }
-  getAllSites(field="",value=""){
-    this.logicalFormInfoService.getAllSite(field,value).subscribe((res:any)=> {
+  getAllSites(field = "", value = "") {
+    this.logicalFormInfoService.getAllSite(field, value).subscribe((res: any) => {
       console.log(res)
-   this.dataSource.data = res.data
-   this.dataSource.paginator = this.paginator;
-  // this.dataSource.sort = this.sort;
-   })
+      this.dataSource.data = res.data
+      this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
+    })
   }
 
   getAllJobTask() {
@@ -70,29 +70,29 @@ export class AddSiteInfoComponent implements OnInit {
   }
 
   openDialog(id) {
-		let dialogRef = this.dialog.open(AddSiteComponent, {
+    let dialogRef = this.dialog.open(AddSiteComponent, {
       // width: "550px",
-      height:'500px',
-			data: {
-				action: "new",
-				userId: id,
-			},
+      height: '500px',
+      data: {
+        action: "new",
+        userId: id,
+      },
       width: "630px",
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-      if(result == 'true'){
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'true') {
         this.getAllSites()
       }
-			console.log("CustomerInfoComponent -> openDialog -> result", result);
-			
-			console.log("The dialog was closed");
-		});
-	}
+      console.log("CustomerInfoComponent -> openDialog -> result", result);
+
+      console.log("The dialog was closed");
+    });
+  }
   edit(element) {
     const dialogRef = this.dialog.open(EditSiteComponent, {
       width: "600px",
       // width: "550px",
-      height:'500px',
+      height: '500px',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -117,19 +117,19 @@ export class AddSiteInfoComponent implements OnInit {
         // this.model.attributes.splice(i,1);
         this.spinner.show()
         this.logicalFormInfoService.deleteSite(item._id).subscribe((res => {
-        this.getAllSites()
-        this.spinner.hide()
+          this.getAllSites()
+          this.spinner.hide()
         }))
       }
     });
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllSites(sort.active,sort.direction)
-     }
- }
+  sortData(sort: Sort) {
+    this.getAllSites(sort.active, sort.direction)
+  }
+}

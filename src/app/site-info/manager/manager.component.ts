@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -19,7 +19,7 @@ export class ManagerComponent implements OnInit {
   mode: any;
   jobTaskData: any = [];
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'name','email', 'action'];
+  displayedColumns: string[] = ['index', 'name', 'email', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,10 +31,10 @@ export class ManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllManager();
-      this.setTitle.setTitle('WHS-Manager');
+    this.setTitle.setTitle('WHS-Manager');
   }
-  getAllManager(field="",value="") {
-    this.logicalFormInfo.getAllManager(field,value).subscribe((res: any) => {
+  getAllManager(field = "", value = "") {
+    this.logicalFormInfo.getAllManager(field, value).subscribe((res: any) => {
       console.log('getAllManager=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data
@@ -92,7 +92,7 @@ export class ManagerComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllManager(sort.active,sort.direction)
-     }
+
+    this.getAllManager(sort.active, sort.direction)
+  }
 }

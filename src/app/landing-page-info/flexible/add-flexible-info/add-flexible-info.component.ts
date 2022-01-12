@@ -41,32 +41,32 @@ export class AddFlexibleInfoComponent implements OnInit {
       subTitle: ['', Validators.required],
       fileUrl: ['', Validators.required],
     });
- 
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
     formdata.append('', files);
-   
+
 
     this.upload.upload(formdata).subscribe((res) => {
-    
+
       this.selectedImage.push(res.files[0]);
-      
+
     });
   }
   onSubmit() {
     this.flexibleDetail
       .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
-  
+
     this.landingPageInfo
       .addSubModule(this.flexibleDetail.value)
       .subscribe((data) => {
         Swal.fire('Added Successfully')
-       
+
         this.flexibleData = data;
         this.dialogRef.close('true');
         this.flexibleDetail.reset();
@@ -74,5 +74,5 @@ export class AddFlexibleInfoComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

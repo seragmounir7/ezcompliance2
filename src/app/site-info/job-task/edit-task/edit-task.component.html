@@ -1,33 +1,27 @@
-<form [formGroup]="editTitle" >
-    <h2>Edit Job Task</h2>
-    <div class="row">
-        <div class="col-6">
-    <mat-form-field appearance="legacy"
-    class="example-full-width" style="width: 208px;">
-    <!-- <mat-label>Edit Job Task</mat-label> -->
-    <input matInput  formControlName="title" >
-    
-    </mat-form-field>
+<form [formGroup]="editTitle">
+  <h2>Edit Job Task</h2>
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="legacy" class="example-full-width" style="width: 208px;">
+        <!-- <mat-label>Edit Job Task</mat-label> -->
+        <input matInput formControlName="title">
+
+      </mat-form-field>
     </div>
     <div class="col-6">
-        <select
-          class="form-select form-control"
-          aria-label="Default select example"
-          formControlName="tradeCategoryId"
-        >
-       
-          <option *ngFor="let item of categories" [value]="item._id">{{item.title}}</option>
-      
-        </select>
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2 offset-8 ">
-            <button mat-raised-button (click)="closeDialog()">Close</button>
-        </div>
-        <div class="col-sm-2  ">
-            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
-        </div>
-    </div>
-</form>   
+      <select class="form-select form-control" aria-label="Default select example" formControlName="tradeCategoryId">
 
+        <option *ngFor="let item of categories" [value]="item._id">{{item.title}}</option>
+
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 offset-8 ">
+      <button mat-raised-button (click)="closeDialog()">Close</button>
+    </div>
+    <div class="col-sm-2  ">
+      <button mat-raised-button [disabled]="!editTitle.valid" (click)="onFormSubmit()">Update</button>
+    </div>
+  </div>
+</form>

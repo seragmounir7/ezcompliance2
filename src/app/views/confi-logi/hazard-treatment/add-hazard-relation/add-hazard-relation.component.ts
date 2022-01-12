@@ -23,94 +23,94 @@ export class AddHazardRelationComponent implements OnInit {
     public router: Router,) { }
 
 
-    ngOnInit(): void {
-      this.setHazard = this.fb.group({
-        // Consequence: ['', Validators.required],
-        // Likelihood: ['', Validators.required],
-        riskRating: ['', Validators.required],
-        actionRequired: ['', Validators.required],
-  
+  ngOnInit(): void {
+    this.setHazard = this.fb.group({
+      // Consequence: ['', Validators.required],
+      // Likelihood: ['', Validators.required],
+      riskRating: ['', Validators.required],
+      actionRequired: ['', Validators.required],
+
+    });
+    this.route
+      .queryParams
+      .subscribe((id) => {
+        console.log(id);
+        this.hazardId = id.id;
+        this.logicalFormInfo.getHazardTreatmentById(this.hazardId).subscribe((res: any) => {
+          console.log("getHazardTreatmentById=>", res);
+          this.hazard = res.data;
+          console.log("hazard", this.hazard);
+          if (this.hazard.set == true) {
+            this.setHazard.patchValue({
+              riskRating: this.hazard.riskRating,
+              actionRequired: this.hazard.actionRequired,
+
+
+            });
+          }
+
+        })
       });
-      this.route
-        .queryParams
-        .subscribe((id) => {
-          console.log(id);
-          this.hazardId = id.id;
-          this.logicalFormInfo.getHazardTreatmentById(this.hazardId).subscribe((res: any) => {
-            console.log("getHazardTreatmentById=>", res);
-            this.hazard = res.data;
-            console.log("hazard", this.hazard);
-            if (this.hazard.set == true) {
-              this.setHazard.patchValue({
-                riskRating: this.hazard.riskRating,
-                actionRequired: this.hazard.actionRequired,
-                
-  
-              });
-            }
-          
-          })
-        });
-  
-  
-  
+
+
+
+  }
+  Consequences: Array<any> = [
+    { name: '1-Insignificant', value: 1 },
+    { name: '2-Moderate', value: 2 },
+    { name: '4-Minor', value: 4 },
+    { name: '3-Major', value: 3 },
+    { name: '5-Catastrophic', value: 5 },
+  ];
+
+
+  Likelihood: Array<any> = [
+    { name: '1-Insignificant', value: 1 },
+    { name: '3-Moderate', value: 3 },
+    { name: '2-Minor', value: 2 },
+    { name: '4-Major', value: 4 },
+    { name: '5-Catastrophic', value: 5 }
+  ];
+  RiskRating: Array<any> = [
+
+    { name: 'Low', value: 'low' },
+    { name: 'Medium', value: 'medium' },
+    { name: 'High', value: 'high' },
+
+
+  ];
+  ActionRequired: Array<any> = [
+
+    { name: 'Immediately', value: 'immediately' },
+    { name: 'Today', value: 'today' },
+    { name: 'This week', value: 'thisWeek' },
+    { name: 'This Month', value: 'thisMonth' },
+
+  ];
+
+  setRelation() {
+    console.log(this.setHazard.value)
+    let data = {
+      set: true,
+      title: this.hazard.title,
+      // Consequence: this.setHazard.get('Consequence').value,
+      // Likelihood: this.setHazard.get('Likelihood').value,
+      riskRating: this.setHazard.get('riskRating').value,
+      actionRequired: this.setHazard.get('actionRequired').value,
+
     }
-    Consequences: Array<any> = [
-      { name: '1-Insignificant',value:1 },
-      { name: '2-Moderate',value:2 },
-      { name: '4-Minor',value:4},
-      { name: '3-Major',value:3 },
-      { name: '5-Catastrophic',value:5 },
-    ];
-  
-  
-    Likelihood: Array<any> = [
-      { name: '1-Insignificant',value:1 },
-      { name: '3-Moderate',value:3},
-      { name: '2-Minor',value:2 },
-      { name: '4-Major',value:4 },
-      { name: '5-Catastrophic',value:5 }
-    ];
-    RiskRating: Array<any> = [
-  
-      { name: 'Low',value:'low'  },
-      { name: 'Medium',value: 'medium'},
-      { name: 'High',value:'high' },
-    
-  
-    ];
-    ActionRequired: Array<any> = [
-  
-      { name: 'Immediately',value:'immediately'  },
-      { name: 'Today',value:'today'  },
-      { name: 'This week',value:'thisWeek' },
-      { name: 'This Month',value:'thisMonth'  },
-  
-    ];
-  
-    setRelation() {
-      console.log(this.setHazard.value)
-      let data = {
-        set: true,
-        title: this.hazard.title,
-        // Consequence: this.setHazard.get('Consequence').value,
-        // Likelihood: this.setHazard.get('Likelihood').value,
-        riskRating: this.setHazard.get('riskRating').value,
-        actionRequired: this.setHazard.get('actionRequired').value,
-       
-      }
-      console.log("data=>", data)
-      console.log("hazardId=>", this.hazardId)
-      this.logicalFormInfo.updateHazardTreatmentRelation(this.hazardId,data).subscribe((res: any) => {
-        console.log('updateStates=>', res);
-  
-        Swal.fire({
-          title: 'Updated successfully',
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        this.router.navigate(['/admin/confiLogi/setHazard'])
+    console.log("data=>", data)
+    console.log("hazardId=>", this.hazardId)
+    this.logicalFormInfo.updateHazardTreatmentRelation(this.hazardId, data).subscribe((res: any) => {
+      console.log('updateStates=>', res);
+
+      Swal.fire({
+        title: 'Updated successfully',
+        showConfirmButton: false,
+        timer: 1200,
       });
-  
-    }
+      this.router.navigate(['/admin/confiLogi/setHazard'])
+    });
+
+  }
 }

@@ -1,0 +1,21 @@
+<div class="btn btn-outline-primary" (click)="closeDialog()" [routerLink]="['/admin/siteInfo/instructions/accident']">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div class="container px-4 py-4 bg-white">
+    <form [formGroup]="addIstruction" (ngSubmit)="onFormSubmit()">
+        <h2 class="text-center">Add Instructions</h2>
+        <br />
+        <hr />
+        <div class="col">
+            <!-- <textarea autosize [rows]="numberOfLineBreaks" type="text" formControlName="instruction"
+                class="form-control sign" id="name"></textarea> -->
+                <ckeditor class="toolbarborder" formControlName="instruction" style="width: 100%;" [editor]="Editor"
+         ></ckeditor>
+        </div>
+        <br />
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary" [disabled]="!addIstruction.valid">Add</button>
+        </div>
+    </form>
+</div>

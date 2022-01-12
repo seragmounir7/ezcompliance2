@@ -46,7 +46,7 @@ export class EditFlexibleInfoComponent implements OnInit {
   ) {
     this.Is_Mod = data.moduleName;
     this.Is_subMod = data.modulename;
-    
+
     this.flexibleDetail = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -55,7 +55,7 @@ export class EditFlexibleInfoComponent implements OnInit {
       arrObj: this.fb.array([]),
     });
 
-   
+
   }
 
   ngOnInit(): void {
@@ -68,7 +68,7 @@ export class EditFlexibleInfoComponent implements OnInit {
       this.module = true;
       this.subModule = false;
     }
-    
+
     if (this.data.action == 'edit') {
       this.Update = true;
 
@@ -90,7 +90,7 @@ export class EditFlexibleInfoComponent implements OnInit {
     let index = this.data.index;
     this.subId = this.data.EditData.subModules[index]._id;
 
-    
+
   }
 
   addAction() {
@@ -127,11 +127,11 @@ export class EditFlexibleInfoComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-    
+
 
     let serviceData = {};
 
-    
+
   }
   browser(event, i) {
 
@@ -139,16 +139,16 @@ export class EditFlexibleInfoComponent implements OnInit {
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage;
-   
+
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-      
+
         this.selectedImage = res.files[0];
       });
     } else {
       this.upload.upload(formData).subscribe((res) => {
-        
+
         this.flexibleDetail.patchValue({
           filePath: res.filePath,
         });
@@ -166,7 +166,7 @@ export class EditFlexibleInfoComponent implements OnInit {
         description: this.flexibleDetail.controls.description.value,
         mode: 'Flexible',
       };
-  
+
       this.landingPageInfo
         .editModule(flexibleData, this.data.EditData._id)
         .subscribe((resData) => {
@@ -186,13 +186,13 @@ export class EditFlexibleInfoComponent implements OnInit {
         fileUrl: this.selectedImage,
         subTitle: this.add().at(0).get('subTitle')?.value,
       };
-   
+
 
       this.landingPageInfo
         .editsubModule(submodulesData, this.subId)
         .subscribe((resData) => {
           Swal.fire('Edited Successfully')
-          
+
 
           this.dialogRef.close('true');
           this.flexibleDetail.reset();
@@ -205,16 +205,16 @@ export class EditFlexibleInfoComponent implements OnInit {
         description: this.flexibleDetail.controls.description.value,
         arrObj: this.fb.array([]),
       };
-   
+
       this.landingPageInfo
         .addAppService(this.flexibleDetail.value)
         .subscribe((data) => {
-      
+
           this.flexibleData = data;
         });
     }
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

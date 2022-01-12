@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import {AutosizeModule} from 'ngx-autosize';
+import { AutosizeModule } from 'ngx-autosize';
 import { LandingPageInfoRoutingModule } from './landing-page-info-routing.module';
 import { LandingPageInfoComponent } from './landing-page-info.component';
 import { HeaderInfoComponent } from './header-info/header-info.component';
@@ -73,12 +73,12 @@ import { EditTermsAndCondtionsComponent } from './terms-and-condtions/edit-terms
     AddCustomerTestimonailComponent,
     EditCustomerTestimonailComponent,
     CustomertestimonialsComponent,
-    FlexibleComponent,ContactUsComponent,ViewContactComponent,AddContactComponent,
-    EditTeamInfoComponent,AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent, ScreenShotModuleComponent, DifferentModuleComponent, AddScreenShotComponent, EditScreenShotComponent, AddDifferentWorkComponent, EditDifferentWorkComponent,
-    SocialMediaComponent,AddAndEditSocialMediaComponent, TermsAndCondtionsComponent, AddTermsAndCondtionsComponent, EditTermsAndCondtionsComponent
+    FlexibleComponent, ContactUsComponent, ViewContactComponent, AddContactComponent,
+    EditTeamInfoComponent, AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent, ScreenShotModuleComponent, DifferentModuleComponent, AddScreenShotComponent, EditScreenShotComponent, AddDifferentWorkComponent, EditDifferentWorkComponent,
+    SocialMediaComponent, AddAndEditSocialMediaComponent, TermsAndCondtionsComponent, AddTermsAndCondtionsComponent, EditTermsAndCondtionsComponent
 
 
- 
+
 
   ],
   imports: [

@@ -19,7 +19,7 @@ export class CodeOfPractComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,16 +29,16 @@ export class CodeOfPractComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog, private setTitle: SetTitleService) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog, private setTitle: SetTitleService) { }
 
   ngOnInit(): void {
     this.getAllCodeOfPractice();
     this.setTitle.setTitle('WHS-Code of Practice');
   }
 
-  getAllCodeOfPractice(field="",value="") {
-   
-    this.logicalFormInfo.getAllCOP(field,value).subscribe((res:any) => {
+  getAllCodeOfPractice(field = "", value = "") {
+
+    this.logicalFormInfo.getAllCOP(field, value).subscribe((res: any) => {
       console.log('codeOfPractice=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -49,12 +49,12 @@ export class CodeOfPractComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort=this.sort;
+      this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditCOPComponent, {
       width: "550px",
       data: element,
@@ -78,16 +78,16 @@ export class CodeOfPractComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteCOP(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
-          });          
-          this.getAllCodeOfPractice();
-            
-        });
+          .deleteCOP(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            this.getAllCodeOfPractice();
+
+          });
       }
     });
   }
@@ -96,7 +96,7 @@ export class CodeOfPractComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllCodeOfPractice(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllCodeOfPractice(sort.active, sort.direction)
+  }
 }

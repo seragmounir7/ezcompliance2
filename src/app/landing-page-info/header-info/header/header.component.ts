@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service'; 
-import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service'; 
+import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 @Component({
@@ -24,28 +24,28 @@ export class HeaderComponent implements OnInit {
   constructor(
     private url: LandingPageInfoServiceService,
     private dialogRef: MatDialogRef<HeaderComponent>,
-		@Inject(MAT_DIALOG_DATA) public data1: any,
+    @Inject(MAT_DIALOG_DATA) public data1: any,
     private fb: FormBuilder,
-    public upload: UploadFileServiceService,) { 
-      this.dataHeader = data1.headerData;
-    }
+    public upload: UploadFileServiceService,) {
+    this.dataHeader = data1.headerData;
+  }
 
   ngOnInit(): void {
     this.getHeaderById();
-    console.log("data1",this.data1);
-    
+    console.log("data1", this.data1);
+
     this.HeaderInformation = this.fb.group({
-      fileUrl:  ['', Validators.required],
+      fileUrl: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
-     
-    }); if(this.data1.action=="edit"){
-      this.selectedImage= this.dataHeader.fileUrl,
-      this.HeaderInformation.patchValue({
-        description: this.dataHeader.description,
-       
-        title: this.dataHeader.title,
-      })
+
+    }); if (this.data1.action == "edit") {
+      this.selectedImage = this.dataHeader.fileUrl,
+        this.HeaderInformation.patchValue({
+          description: this.dataHeader.description,
+
+          title: this.dataHeader.title,
+        })
     }
   }
 
@@ -53,60 +53,60 @@ export class HeaderComponent implements OnInit {
     this.HeaderInformation.get('fileUrl')?.setValue(
       this.selectedImage
     );
-    
+
     this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
-     console.log('HeaderInformation -> browser -> res', res);
-      
+      console.log('HeaderInformation -> browser -> res', res);
+
     });
   }
   browser(event) {
-        const files = event.target.files[0];
-        const formdata = new FormData();
-        formdata.append('', files);
-        console.log(files);
-    
-        this.upload.upload(formdata).subscribe((res) => {
-          console.log('AddProductComponent -> browser -> res', res);
-        
-          this.selectedImage=res.files[0];
- 
-          console.log(
-            'AddProductComponent -> browse -> this.selectedImage',
-            this.selectedImage
-          );
-        });
-      }
+    const files = event.target.files[0];
+    const formdata = new FormData();
+    formdata.append('', files);
+    console.log(files);
 
-      getHeaderById() {
-        this.url.getHeaderBYId().subscribe((data) => {
-          console.log('mode=>', data);
-          this.infoData = data.data;
-        });
-      }
-      
+    this.upload.upload(formdata).subscribe((res) => {
+      console.log('AddProductComponent -> browser -> res', res);
+
+      this.selectedImage = res.files[0];
+
+      console.log(
+        'AddProductComponent -> browse -> this.selectedImage',
+        this.selectedImage
+      );
+    });
+  }
+
+  getHeaderById() {
+    this.url.getHeaderBYId().subscribe((data) => {
+      console.log('mode=>', data);
+      this.infoData = data.data;
+    });
+  }
+
   editHeaderInfo(id) {
-        console.log("id=>",id);
-        this.myId = this.dataHeader._id;
-        this.HeaderInformation.get("fileUrl").setValue(this.selectedImage);
-        console.log("form",this.HeaderInformation.value);
-        
-        this.isEdit = true;
-        this.url.editHeader(this.myId,this.HeaderInformation.value).subscribe((res) => {
-          Swal.fire(' Edited Successfully')
-          console.log('Data Set response' + res);
-          this.data = res.data;
-          console.log('new response' + this.data);
-          this.dialogRef.close("true");
+    console.log("id=>", id);
+    this.myId = this.dataHeader._id;
+    this.HeaderInformation.get("fileUrl").setValue(this.selectedImage);
+    console.log("form", this.HeaderInformation.value);
 
-        });
-      }
-      close() {
-        this.dialogRef.close();
-    }
+    this.isEdit = true;
+    this.url.editHeader(this.myId, this.HeaderInformation.value).subscribe((res) => {
+      Swal.fire(' Edited Successfully')
+      console.log('Data Set response' + res);
+      this.data = res.data;
+      console.log('new response' + this.data);
+      this.dialogRef.close("true");
+
+    });
+  }
+  close() {
+    this.dialogRef.close();
+  }
   onFormSubmit() {
     let value = this.selectedImage[0];
     console.log('value', value);
-    
+
     let serviceData = {};
 
     console.log('file: ~ onFormSubmit ~ data', serviceData);
@@ -118,7 +118,7 @@ export class HeaderComponent implements OnInit {
         this.serviceData = data;
       });
   }
- 
+
 }
- 
+
 

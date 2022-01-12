@@ -8,7 +8,7 @@ import { version } from './../../../../../package.json';
 })
 export class FooterComponent implements OnInit {
   public appVersion = version;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

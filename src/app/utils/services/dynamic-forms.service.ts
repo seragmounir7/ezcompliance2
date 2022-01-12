@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DynamicFormsService {
   apiUrl = environment.apiUrl;
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) { }
 
   homebarTitle = new BehaviorSubject('');
   formIdEdit = '';
@@ -138,27 +138,27 @@ export class DynamicFormsService {
       })
     );
   }
-  savedFormGetAll(field="",value=""){
-    if(value==''){
+  savedFormGetAll(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `savedDynamicForm/getAll?field=${field}&value=${value}`)
   }
-  savedFormGetById(id){
-    return this.https.get(this.apiUrl + 'savedDynamicForm/get/'+id)
+  savedFormGetById(id) {
+    return this.https.get(this.apiUrl + 'savedDynamicForm/get/' + id)
   }
-  getsavedFormByFormId(id){
-    return this.https.get(this.apiUrl + 'savedDynamicForm/getBy/'+id)
+  getsavedFormByFormId(id) {
+    return this.https.get(this.apiUrl + 'savedDynamicForm/getBy/' + id)
   }
-  
-  savedFormPost(data){
+
+  savedFormPost(data) {
     return this.https.post(this.apiUrl + 'savedDynamicForm/add', data)
   }
-  savedFormPut(id,data){
-    return this.https.put(this.apiUrl + 'savedDynamicForm/update/'+id, data)
+  savedFormPut(id, data) {
+    return this.https.put(this.apiUrl + 'savedDynamicForm/update/' + id, data)
   }
-  savedFormDelete(id){
-    return this.https.delete(this.apiUrl + 'savedDynamicForm/delete/'+id)
+  savedFormDelete(id) {
+    return this.https.delete(this.apiUrl + 'savedDynamicForm/delete/' + id)
   }
   formNameRecieved = '';
   categoryNameRecieved = '';
@@ -167,5 +167,22 @@ export class DynamicFormsService {
     this.formNameRecieved = formNameRecieved;
     this.categoryNameRecieved = categoryNameRecieved;
   }
-  getFormIdType() {}
+  getFormIdType() { }
+
+  formCategoriesGetAll() {
+    return this.https.get(this.apiUrl + 'formCategory/getAll')
+  }
+  formCategoriesGetId(id) {
+    return this.https.get(this.apiUrl + 'formCategory/get/' + id)
+  }
+
+  formCategoriesPost(data) {
+    return this.https.post(this.apiUrl + 'formCategory/add', data)
+  }
+  formCategoriesPut(id, data) {
+    return this.https.put(this.apiUrl + 'formCategory/update/' + id, data)
+  }
+  formCategoriesDelete(id) {
+    return this.https.delete(this.apiUrl + 'formCategory/delete/' + id)
+  }
 }

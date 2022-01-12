@@ -8,9 +8,9 @@ describe('EditRateAndCouponComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditRateAndCouponComponent ]
+      declarations: [EditRateAndCouponComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

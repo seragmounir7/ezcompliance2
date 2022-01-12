@@ -8,9 +8,9 @@ describe('HighRiskConComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HighRiskConComponent ]
+      declarations: [HighRiskConComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

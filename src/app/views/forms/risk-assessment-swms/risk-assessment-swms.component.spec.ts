@@ -8,9 +8,9 @@ describe('RiskAssessmentSWMSComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RiskAssessmentSWMSComponent ]
+      declarations: [RiskAssessmentSWMSComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

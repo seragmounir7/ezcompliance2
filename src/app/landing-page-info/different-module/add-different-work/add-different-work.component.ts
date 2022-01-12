@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -27,18 +27,18 @@ export class AddDifferentWorkComponent implements OnInit {
   addWorkData: any;
   ID: any;
   hide: boolean = true;
-  constructor( private landingPageInfo: LandingPageInfoServiceService,
+  constructor(private landingPageInfo: LandingPageInfoServiceService,
     private fb: FormBuilder,
     public upload: UploadFileServiceService,
     public dialogRef: MatDialogRef<AddDifferentWorkComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addWork = this.fb.group({
-        moduleId: this.data.EditData,
+      moduleId: this.data.EditData,
       title: ['', Validators.required],
       description: ['', Validators.required],
       fileUrl: '',
-     
+
     });
     console.log('data', data);
   }
@@ -47,7 +47,7 @@ export class AddDifferentWorkComponent implements OnInit {
   }
 
   onSubmit() {
-     this.landingPageInfo
+    this.landingPageInfo
       .addSubModule(this.addWork.value)
       .subscribe((data) => {
         Swal.fire('Added Successfully')
@@ -55,8 +55,8 @@ export class AddDifferentWorkComponent implements OnInit {
         this.dialogRef.close('true');
       });
   }
- 
+
   close() {
     this.dialogRef.close();
-}
+  }
 }

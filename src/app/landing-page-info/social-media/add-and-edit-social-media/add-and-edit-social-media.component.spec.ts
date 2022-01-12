@@ -8,9 +8,9 @@ describe('AddAndEditSocialMediaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddAndEditSocialMediaComponent ]
+      declarations: [AddAndEditSocialMediaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

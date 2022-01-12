@@ -1,19 +1,17 @@
-<form [formGroup]="editTitle" >
+<form [formGroup]="editTitle">
     <h2>Edit PPE</h2>
-    
+
 
     <!-- <mat-label>Edit PPE</mat-label> -->
-    <textarea   autosize 
-    class="form-control sign"   formControlName="title" ></textarea>
-    
+    <textarea autosize class="form-control sign" formControlName="title"></textarea>
+
     <br>
     <div class="row">
         <div class="col-sm-2 offset-8 ">
             <button mat-raised-button (click)="closeDialog()">Close</button>
         </div>
         <div class="col-sm-2  ">
-            <button mat-raised-button  [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
+            <button mat-raised-button [disabled]="!editTitle.valid" (click)="onFormSubmit()">Update</button>
         </div>
     </div>
-</form>   
-
+</form>

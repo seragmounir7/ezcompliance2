@@ -8,9 +8,9 @@ describe('ConfiLogiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfiLogiComponent ]
+      declarations: [ConfiLogiComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -27,12 +27,12 @@ export class EditChemicalComponent implements OnInit {
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value
+
+    let data = {
+      title: this.editTitle.get('title').value
     }
     this.logicalFormInfo
-      .updateChemical(this.dataRec._id,data)
+      .updateChemical(this.dataRec._id, data)
       .subscribe((resData) => {
         console.log('resData', resData);
 
@@ -41,10 +41,10 @@ export class EditChemicalComponent implements OnInit {
           title: 'chemical Updated successfully',
           showConfirmButton: false,
           timer: 1200,
-        });     
-       });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

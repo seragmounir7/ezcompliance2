@@ -74,17 +74,17 @@ export class ContactUsComponent implements OnInit {
 
 
   getContact() {
-     this.url.getContact().subscribe((res) => {
+    this.url.getContact().subscribe((res) => {
       console.log('mode=>', res);
-        let dataContact = res.data;
+      let dataContact = res.data;
       dataContact.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
-        this.ELEMENT_DATA = dataContact;
+      this.ELEMENT_DATA = dataContact;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort=this.sort;
-     });
+      this.dataSource.sort = this.sort;
+    });
   }
 
   delete(item) {
@@ -100,16 +100,16 @@ export class ContactUsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log(result)
-         this.spinner.show()
-      this.url.deleteContactUs(item._id).subscribe((res) => {
-      Swal.fire('Deleted Successfully')
-      console.log('deleted res', res);
-      this.getContact();
-      this.ngOnInit();
-      this.spinner.hide()
-    })
+        this.spinner.show()
+        this.url.deleteContactUs(item._id).subscribe((res) => {
+          Swal.fire('Deleted Successfully')
+          console.log('deleted res', res);
+          this.getContact();
+          this.ngOnInit();
+          this.spinner.hide()
+        })
+      }
+    });
   }
-});
-}
 
 }

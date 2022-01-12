@@ -23,23 +23,23 @@ export class StaffComponent implements OnInit {
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  allStaff: any[]=[];
+  allStaff: any[] = [];
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private setTitle: SetTitleService,
     private logicalFormInfoService: LogicalFormInfoService,
     private spinner: NgxSpinnerService
-    ) { }
+  ) { }
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Staff Info');
     this.getAllStaff()
   }
-  getAllStaff(field="",value=""){
-    this.logicalFormInfoService.getAllStaff(field,value).subscribe((res:any)=> {
+  getAllStaff(field = "", value = "") {
+    this.logicalFormInfoService.getAllStaff(field, value).subscribe((res: any) => {
       console.log(res)
       let data = res.data;
       data.forEach((element, index) => {
@@ -51,13 +51,13 @@ export class StaffComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
-   })
+    })
   }
- 
+
   edit(element) {
     const dialogRef = this.dialog.open(EditStaffComponent, {
       width: "550px",
-     // height:'50%',
+      // height:'50%',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -82,15 +82,15 @@ export class StaffComponent implements OnInit {
         // this.model.attributes.splice(i,1);
         this.spinner.show()
         this.logicalFormInfoService.deleteStaff(item._id).subscribe((res => {
-        this.getAllStaff()
-        this.spinner.hide()
+          this.getAllStaff()
+          this.spinner.hide()
         }))
       }
     });
   }
   sortData(sort: Sort) {
- 
-    this.getAllStaff(sort.active,sort.direction)
-     }
+
+    this.getAllStaff(sort.active, sort.direction)
+  }
 }
 

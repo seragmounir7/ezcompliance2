@@ -17,7 +17,7 @@ export class TypeOfIncidentComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,20 +28,20 @@ export class TypeOfIncidentComponent implements OnInit {
   /////////////mat table end////////////////
 
   constructor(
-   
+
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog,
-    private setTitle:SetTitleService
-  ) {}
+    private dialog: MatDialog,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit(): void {
     this.getAllTypeOfInc();
     this.setTitle.setTitle('WHS-Type Of Incident');
-    
+
   }
 
-  getAllTypeOfInc(field="",value="") {
-    this.logicalFormInfo.getAllTypeOfIncident(field,value).subscribe((res:any) => {
+  getAllTypeOfInc(field = "", value = "") {
+    this.logicalFormInfo.getAllTypeOfIncident(field, value).subscribe((res: any) => {
       console.log('type=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -58,7 +58,7 @@ export class TypeOfIncidentComponent implements OnInit {
     });
   }
 
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditTypeOfIncidentComponent, {
       width: "550px",
       data: element,
@@ -82,18 +82,18 @@ export class TypeOfIncidentComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteTypeOfIncident(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteTypeOfIncident(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllTypeOfInc();
+
           });
-          console.log('deleted res', res);
-          this.getAllTypeOfInc();
-            
-        });
-      
+
       }
     });
   }
@@ -103,7 +103,7 @@ export class TypeOfIncidentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllTypeOfInc(sort.active,sort.direction)
-     }
+
+    this.getAllTypeOfInc(sort.active, sort.direction)
+  }
 }

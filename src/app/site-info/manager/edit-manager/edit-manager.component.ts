@@ -25,21 +25,21 @@ export class EditManagerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("this.dataRec",this.dataRec);
-    
+    console.log("this.dataRec", this.dataRec);
+
     this.editTitle = this.fb.group({
       name: [this.dataRec.name, Validators.required],
       email: [this.dataRec.email, Validators.required],
     });
   }
   onFormSubmit() {
-     
-    let data={
-      name :this.editTitle.get('name').value,
-    email:this.editTitle.get('email').value
+
+    let data = {
+      name: this.editTitle.get('name').value,
+      email: this.editTitle.get('email').value
     }
     this.logicalFormInfo
-      .editManager(this.dataRec._id,data)
+      .editManager(this.dataRec._id, data)
       .subscribe((resData) => {
         console.log('submodulesData', resData);
 
@@ -48,10 +48,10 @@ export class EditManagerComponent implements OnInit {
           title: 'Parameter Edited successfully',
           showConfirmButton: false,
           timer: 1200,
-        });  
-          });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

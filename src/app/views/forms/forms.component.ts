@@ -23,13 +23,13 @@ export class FormsComponent implements OnInit {
   pageSize = 10;
   collectionSize = 10;
   ELEMENT_DATA = [
-    { index: 1, title: 'Hazards Reported', link: ['/admin/forms/hazardRep/'+'form'] },
-   
-   
-    { index: 2, title: 'Notifiable Accident', link: ['/admin/forms/incidentRep/'+'Form'] },
-    { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/'+'form'] },
-    { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/'+'form'] },
-    { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS/'+'form'] }
+    { index: 1, title: 'Hazards Reported', link: ['/admin/forms/hazardRep/' + 'form'] },
+
+
+    { index: 2, title: 'Notifiable Accident', link: ['/admin/forms/incidentRep/' + 'Form'] },
+    { index: 3, title: 'Toolbox Talk', link: ['/admin/forms/toolboxTalk/' + 'form'] },
+    { index: 4, title: 'Site Inspection', link: ['/admin/forms/siteInspect/' + 'form'] },
+    { index: 5, title: 'Risk Assessment', link: ['/admin/forms/riskAssessSWMS/' + 'form'] }
   ];
   formName = '';
   addForm: FormGroup;
@@ -49,36 +49,30 @@ export class FormsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public router: Router,
     private setTitle: SetTitleService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) { }
-goTo(title)
-{
-  console.log("title",title);
-  if(title==="Toolbox Talk")
-  {
-    this.router.navigate(["/admin/forms/tableData"]);
+  goTo(title) {
+    console.log("title", title);
+    if (title === "Toolbox Talk") {
+      this.router.navigate(["/admin/forms/tableData"]);
+    }
+    if (title === "Site Inspection") {
+      this.router.navigate(["/admin/forms/siteinspectiontable"]);
+    }
+    if (title === "Hazards Reported") {
+      this.router.navigate(["/admin/forms/hazardTable"]);
+
+    }
+    if (title === "Notifiable Accident") {
+      this.router.navigate(["/admin/forms/incidentsTable"]);
+    }
+    if (title === "Risk Assessment") {
+      this.router.navigate(["/admin/forms/riskAssessTable"]);
+    }
   }
-  if(title==="Site Inspection")
-  {
-    this.router.navigate(["/admin/forms/siteinspectiontable"]);
-  }
-  if(title==="Hazards Reported")
-  {
-    this.router.navigate(["/admin/forms/hazardTable"]);
-  
-}
-if(title==="Notifiable Accident")
-  {
-    this.router.navigate(["/admin/forms/incidentsTable"]);
-  }
-  if(title==="Risk Assessment")
-  {
-    this.router.navigate(["/admin/forms/riskAssessTable"]);
-  }
-}
 
   ngOnInit(): void {
-    this.url=this.activatedRoute.snapshot.url
+    this.url = this.activatedRoute.snapshot.url
     this.setTitle.setTitle('WHS-All Form');
   }
 

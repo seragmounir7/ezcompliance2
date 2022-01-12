@@ -54,13 +54,13 @@ export class AddEditProjMangComponent implements OnInit {
       console.log('projectManager', resData);
 
       this.dialogRef.close('true');
-    
-        Swal.fire({
-          title: 'Project Manager added successfully',
-          showConfirmButton: false,
-          timer: 1200,
-        });
-      
+
+      Swal.fire({
+        title: 'Project Manager added successfully',
+        showConfirmButton: false,
+        timer: 1200,
+      });
+
     });
   }
   closeDialog() {

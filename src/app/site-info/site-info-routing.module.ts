@@ -1,3 +1,4 @@
+import { InstructionsComponent } from './instructions/instructions.component';
 import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
 import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.component';
 import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
@@ -36,7 +37,7 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
-import {SiteInspectionCategoryComponent} from './site-inspection-category/site-inspection-category.component'
+import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component'
 import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
 import { SiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/site-inspection-topic.component';
 import { AddSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
@@ -54,7 +55,8 @@ import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-ma
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
-
+import{DynamicFormCategoriesComponent}from './dynamic-form-categories/dynamic-form-categories.component'
+import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 
 const routes: Routes = [
   {
@@ -96,24 +98,28 @@ const routes: Routes = [
   { path: 'staff', component: StaffComponent },
   { path: 'addStaff', component: AddStaffComponent },
   { path: 'editStaff', component: EditStaffComponent },
-  { path: 'siteinspectioncategory', component:SiteInspectionCategoryComponent},
-  { path: 'addsiteinspection', component:AddSiteInspectionCategoryComponent},
-  { path: 'siteinspectiontopic/:id', component:SiteInspectionTopicComponent},
-  { path: 'addsiteinspectiontopic/:id', component:AddSiteInspectionTopicComponent},
-  { path: 'natureOfIncident', component: NatureOfIncidentComponent},
-  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent},
-  { path: 'changesMade', component: ChangesMadeComponent},
-  { path: 'addChangesMade', component: AddChangesMadeComponent},
-  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent},
-  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent},
-  { path: 'typeOfIncident', component: TypeOfIncidentComponent},
-  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent},
+  { path: 'siteinspectioncategory', component: SiteInspectionCategoryComponent },
+  { path: 'addsiteinspection', component: AddSiteInspectionCategoryComponent },
+  { path: 'siteinspectiontopic/:id', component: SiteInspectionTopicComponent },
+  { path: 'addsiteinspectiontopic/:id', component: AddSiteInspectionTopicComponent },
+  { path: 'natureOfIncident', component: NatureOfIncidentComponent },
+  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent },
+  { path: 'changesMade', component: ChangesMadeComponent },
+  { path: 'addChangesMade', component: AddChangesMadeComponent },
+  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent },
+  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent },
+  { path: 'typeOfIncident', component: TypeOfIncidentComponent },
+  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent },
   { path: 'manager', component: ManagerComponent },
   { path: 'addManager', component: AddManagerComponent },
   { path: 'editManager', component: EditManagerComponent },
   { path: 'WHS-Manager', component: WHSManagerComponent },
   { path: 'addWHSManager', component: AddWhsManagerComponent },
-  { path: 'editWHSManager', component: EditWhsManagerComponent }
+  { path: 'editWHSManager', component: EditWhsManagerComponent },
+  { path: 'dynamicFormCategories', component: DynamicFormCategoriesComponent },
+  { path: 'addFormCategories', component: AddFormCategoriesComponent },
+  { path: 'instructions/accident', component: InstructionsComponent },
+  { path: 'instructions/riskAssess', component: InstructionsComponent },
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

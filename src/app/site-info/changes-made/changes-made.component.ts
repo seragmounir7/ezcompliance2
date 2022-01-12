@@ -17,7 +17,7 @@ export class ChangesMadeComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,20 +28,20 @@ export class ChangesMadeComponent implements OnInit {
   /////////////mat table end////////////////
 
   constructor(
-   
+
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog,
-    private setTitle:SetTitleService
-  ) {}
+    private dialog: MatDialog,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit(): void {
     this.getAllChanges();
     this.setTitle.setTitle('WHS-Changes Made');
-    
+
   }
 
-  getAllChanges(field="",value="") {
-    this.logicalFormInfo.getAllChangesMade(field,value).subscribe((res:any) => {
+  getAllChanges(field = "", value = "") {
+    this.logicalFormInfo.getAllChangesMade(field, value).subscribe((res: any) => {
       console.log('Changes=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -51,14 +51,14 @@ export class ChangesMadeComponent implements OnInit {
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-     // this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;
     });
   }
 
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditChangesMadeComponent, {
       width: "550px",
       data: element,
@@ -82,18 +82,18 @@ export class ChangesMadeComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteChangesMade(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteChangesMade(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllChanges();
+
           });
-          console.log('deleted res', res);
-          this.getAllChanges();
-            
-        });
-      
+
       }
     });
   }
@@ -103,7 +103,7 @@ export class ChangesMadeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   sortData(sort: Sort) {
- 
-    this.getAllChanges(sort.active,sort.direction)
-     }
+
+    this.getAllChanges(sort.active, sort.direction)
+  }
 }

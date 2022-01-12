@@ -8,9 +8,9 @@ describe('AddEditSubWorkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddEditSubWorkComponent ]
+      declarations: [AddEditSubWorkComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

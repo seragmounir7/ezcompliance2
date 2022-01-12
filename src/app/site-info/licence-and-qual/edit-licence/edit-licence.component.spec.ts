@@ -8,9 +8,9 @@ describe('EditLicenceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditLicenceComponent ]
+      declarations: [EditLicenceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

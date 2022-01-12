@@ -8,9 +8,9 @@ describe('AddLicenceCatComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddLicenceCatComponent ]
+      declarations: [AddLicenceCatComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

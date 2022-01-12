@@ -41,10 +41,10 @@ export class AddClientInfoComponent implements OnInit {
       description: ['', Validators.required],
       fileUrl: ['', Validators.required],
     });
-    
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
@@ -54,23 +54,23 @@ export class AddClientInfoComponent implements OnInit {
     this.upload.upload(formdata).subscribe((res) => {
 
       this.selectedImage.push(res.files[0]);
-      
+
     });
   }
   onSubmit() {
     this.clientDetail
       .get('fileUrl')
       ?.setValue(this.selectedImage[0].toString());
-       this.landingPageInfo
+    this.landingPageInfo
       .addSubModule(this.clientDetail.value)
       .subscribe((data) => {
         Swal.fire('Client Added Successfully')
-       this.happyClientData = data;
+        this.happyClientData = data;
         this.dialogRef.close('true');
         this.clientDetail.reset();
       });
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

@@ -1,19 +1,19 @@
-<form [formGroup]="editTitle" >
+<form [formGroup]="editTitle">
     <h2 *ngIf="!dataRec">Add States</h2>
     <h2 *ngIf="dataRec">Edit States</h2>
-    <mat-form-field appearance="legacy"
-    class="example-full-width" style="width: 498px;">
-    <!-- <mat-label >Add Regulator</mat-label> -->
-    <!-- <mat-label >Edit Regulator</mat-label> -->
-    <input matInput  formControlName="title" >
+    <mat-form-field appearance="legacy" class="example-full-width" style="width: 498px;">
+        <!-- <mat-label >Add Regulator</mat-label> -->
+        <!-- <mat-label >Edit Regulator</mat-label> -->
+        <input matInput formControlName="title">
     </mat-form-field>
     <div class="row">
         <div class="col-sm-2 offset-8 ">
             <button mat-raised-button (click)="closeDialog()">Close</button>
         </div>
         <div class="col-sm-2  ">
-            <button mat-raised-button *ngIf="dataRec" [disabled]="!editTitle.valid"(click)="onFormSubmit()">Update</button>
-            <button mat-raised-button  *ngIf="!dataRec"  [disabled]="!editTitle.valid"(click)="addForm()">Add</button>
+            <button mat-raised-button *ngIf="dataRec" [disabled]="!editTitle.valid"
+                (click)="onFormSubmit()">Update</button>
+            <button mat-raised-button *ngIf="!dataRec" [disabled]="!editTitle.valid" (click)="addForm()">Add</button>
         </div>
     </div>
 </form>

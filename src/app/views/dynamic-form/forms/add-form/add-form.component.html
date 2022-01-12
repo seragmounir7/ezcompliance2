@@ -4,23 +4,13 @@
 <div class="row" [formGroup]="addForm">
   <div class="col">
     <p for="exampleFormControlInput1" class="form-Label">Form Name</p>
-    <input
-      type="text"
-      class="form-control"
-      id="siteName"
-      formControlName="formName"
-      placeholder="Enter Form Name"
-    />
+    <input type="text" class="form-control" id="siteName" formControlName="formName" placeholder="Enter Form Name" />
   </div>
   <div class="col">
     <p for="exampleFormControlInput1" class="form-Label">Frequency</p>
 
-    <select
-      class="form-select form-control"
-      aria-label="Default select example"
-      formControlName="frequency"
-    >
-      <option value="" hidden selected >Select frequency</option>
+    <select class="form-select form-control" aria-label="Default select example" formControlName="frequency">
+      <option value="" hidden selected>Select frequency</option>
       <option value="daily">Daily</option>
       <option value="weekly">Weekly</option>
       <option value="quaterly">Quaterly</option>
@@ -29,12 +19,24 @@
       <option value="onceOff">Once Off</option>
     </select>
   </div>
+
+
+  <div class="col">
+    <p for="exampleFormControlInput1" class="form-Label">Form Categorie</p>
+
+    <select class="form-select form-control" aria-label="Default select example" (change)="getCategory($event)" formControlName="formCategories">
+      <option value="" hidden selected>Select categories</option>
+      <option [ngValue]="category"   *ngFor="let category of formCategores ; let i=index">{{category.title}}</option>
+
+    </select>
+  </div>
+
 </div>
 <div class="row mt-4">
   <div class="col-sm-2 offset-8 ">
-      <button mat-raised-button (click)="closeDialog()">Close</button>
+    <button mat-raised-button (click)="closeDialog()">Close</button>
   </div>
   <div class="col-sm-2  ">
-      <button mat-raised-button   [disabled]="!addForm.valid"(click)="createForm()">Add</button>
+    <button mat-raised-button [disabled]="!addForm.valid" (click)="createForm()">Add</button>
   </div>
 </div>

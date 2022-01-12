@@ -8,9 +8,9 @@ describe('AddRootCauseOfIncidentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddRootCauseOfIncidentComponent ]
+      declarations: [AddRootCauseOfIncidentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

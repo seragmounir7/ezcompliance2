@@ -17,7 +17,7 @@ export class RegulatorComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,14 +26,14 @@ export class RegulatorComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllRegulator()
   }
 
-  getAllRegulator(field="",value="") {
-    this.logicalFormInfo.getAllRegulator(field,value).subscribe((res) => {
+  getAllRegulator(field = "", value = "") {
+    this.logicalFormInfo.getAllRegulator(field, value).subscribe((res) => {
       console.log('getAllRegulator=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -47,10 +47,10 @@ export class RegulatorComponent implements OnInit {
       // this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(AddAndEditRegComponent, {
       width: "550px",
       data: element,
@@ -75,22 +75,22 @@ export class RegulatorComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteRegulator(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Regulator Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteRegulator(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Regulator Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllRegulator();
+
           });
-          console.log('deleted res', res);
-          this.getAllRegulator();
-            
-        });
       }
     });
   }
   sortData(sort: Sort) {
- 
-    this.getAllRegulator(sort.active,sort.direction)
-     }
+
+    this.getAllRegulator(sort.active, sort.direction)
+  }
 }

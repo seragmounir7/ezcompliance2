@@ -8,9 +8,9 @@ describe('EditPPEComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditPPEComponent ]
+      declarations: [EditPPEComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

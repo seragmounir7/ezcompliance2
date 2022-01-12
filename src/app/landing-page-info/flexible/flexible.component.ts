@@ -79,27 +79,27 @@ export class FlexibleComponent implements OnInit {
       this.dataSource.paginator = this.paginator
       let testimonialData = res.data[0].subModules;
       testimonialData.forEach((element, index) => {
-        element.index = index + 1; 
+        element.index = index + 1;
       });
       this.ELEMENTS_DATA = testimonialData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-      this.dataSources.sort=this.sort;
+      this.dataSources.sort = this.sort;
       // this.flexibleData = data.data[0];
       // this.flexible = this.flexibleData.subModules[0].title;
-      
+
     });
   }
   editForm(id, name: boolean, i?: any) {
     this.spinner.show();
-  
+
     this.myId = id;
     this.isEdit = true;
     this.mode = 'Flexible';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-    
+
       this.flexibleData = data.data[0];
-    
+
 
       let dialogRef = this.dialog.open(EditFlexibleInfoComponent, {
         data: {
@@ -114,7 +114,7 @@ export class FlexibleComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-       
+
 
         if ((result = 'true')) {
           this.ngOnInit();
@@ -127,9 +127,9 @@ export class FlexibleComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-    
+
       this.flexibleData = data.data[0];
-   
+
       let dialogRef = this.dialog.open(AddFlexibleInfoComponent, {
         data: {
           action: 'new',
@@ -166,7 +166,7 @@ export class FlexibleComponent implements OnInit {
         this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-           this.getFlexible();
+          this.getFlexible();
           this.ngOnInit();
           this.spinner.hide()
         })

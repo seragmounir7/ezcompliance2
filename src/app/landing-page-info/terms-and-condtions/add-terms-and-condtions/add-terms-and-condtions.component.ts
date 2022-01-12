@@ -44,10 +44,10 @@ export class AddTermsAndCondtionsComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit() {
-   
+
     this.landingPageInfo
       .addSubModule(this.termsDetail.value)
       .subscribe((data) => {
@@ -60,6 +60,6 @@ export class AddTermsAndCondtionsComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 
 }

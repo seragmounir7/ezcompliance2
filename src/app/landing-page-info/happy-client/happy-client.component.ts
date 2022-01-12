@@ -32,7 +32,7 @@ export class HappyClientComponent implements OnInit {
   displayedColumns: string[] = ['heading', 'actions'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   ELEMENTS_DATA = [];
-  displayedColumnss: string[] = ['index', 'images','action'];
+  displayedColumnss: string[] = ['index', 'images', 'action'];
   dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -68,21 +68,21 @@ export class HappyClientComponent implements OnInit {
       this.ELEMENTS_DATA = happyClientData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-      this.dataSources.sort=this.sort;
+      this.dataSources.sort = this.sort;
       // this.happyClientData = data.data[0];
-     
+
     });
   }
 
   editForm(id, name: boolean, i?: any) {
     this.spinner.show();
-    
+
     this.myId = id;
     this.isEdit = true;
     this.mode = 'HappyClient';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
       this.happyClientData = data.data[0];
-    let dialogRef = this.dialog.open(AddHappyClientComponent, {
+      let dialogRef = this.dialog.open(AddHappyClientComponent, {
         data: {
           action: 'edit',
           EditData: this.happyClientData,
@@ -94,11 +94,11 @@ export class HappyClientComponent implements OnInit {
         height: '600px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-      
+
         if ((result = 'true')) {
           this.ngOnInit();
         }
-       
+
       });
       this.spinner.hide();
     });
@@ -132,7 +132,7 @@ export class HappyClientComponent implements OnInit {
     this.hide = false;
   }
   delete(item) {
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "this Client"?`,
@@ -143,11 +143,11 @@ export class HappyClientComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       
+
         this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-        
+
           this.getHappyClient();
           this.ngOnInit();
           this.spinner.hide()

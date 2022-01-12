@@ -11,7 +11,7 @@ export class AppService {
     image: 'assets/img/user2-160x160.jpg',
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   login() {
     sessionStorage.setItem('token', 'LOGGED_IN');

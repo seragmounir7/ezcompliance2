@@ -1,46 +1,47 @@
 <div class="col ml-2 pt-1">
-    <h1>
-      Staff Information List
-    </h1>
-  </div>
-  <div>
-  
-    <button type="button"  [routerLink]="['/admin/siteInfo/addStaff']" 
-      class="btn btn-outline-primary  mr-2 float-right"><i  class="fas fa-plus"></i> Add Staff
-    </button>
-  </div>
-  <div >
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="index">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-        <td mat-cell *matCellDef="let element,let i = index">{{element.index}}</td>
-      </ng-container>
-  
-      <!-- Name Column -->
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Staff Name </th>
-        <td mat-cell *matCellDef="let element"><span class="flex-start"> {{element.title}}</span> </td>
-      </ng-container>
-  
-     
-<ng-container matColumnDef="action">
-  <th mat-header-cell *matHeaderCellDef> Action </th>
-  <td mat-cell *matCellDef="let element"> 
-    <!-- <i class="fas fa-pencil-alt mr-2 " (click)="edit(element)" title="edit"></i>  <i  class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i>  -->
-    <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon" (click)="edit(element)">
-      <mat-icon >edit</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
-      <mat-icon >delete</mat-icon>
-    </button>
-  </td>
-</ng-container>
-     
-<!--   
+  <h1>
+    Staff Information List
+  </h1>
+</div>
+<div>
+
+  <button type="button" [routerLink]="['/admin/siteInfo/addStaff']" class="btn btn-outline-primary  mr-2 float-right"><i
+      class="fas fa-plus"></i> Add Staff
+  </button>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element,let i = index">{{element.index}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Staff Name </th>
+      <td mat-cell *matCellDef="let element"><span class="flex-start"> {{element.title}}</span> </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <!-- <i class="fas fa-pencil-alt mr-2 " (click)="edit(element)" title="edit"></i>  <i  class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i>  -->
+        <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          (click)="edit(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!--   
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit </th>
         <td mat-cell *matCellDef="let element" (click)="edit(element)"> <i class="fas fa-pencil-alt "></i>
@@ -51,12 +52,12 @@
         <td mat-cell *matCellDef="let element" (click)="delete(element)"> <i class="fas fa-trash "></i>
         </td>
       </ng-container> -->
-  
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </div>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

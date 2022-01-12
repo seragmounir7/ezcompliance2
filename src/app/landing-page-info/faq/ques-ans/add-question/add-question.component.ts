@@ -4,7 +4,7 @@ import {
   FormGroup,
   Validators,
   FormArray,
-  
+
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -17,47 +17,47 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-question.component.scss']
 })
 export class AddQuestionComponent implements OnInit {
-  portalData:any=[];
+  portalData: any = [];
   faqDetails!: FormGroup;
   formData: any;
-  hide=false;
-  constructor( private fb: FormBuilder,
+  hide = false;
+  constructor(private fb: FormBuilder,
     private router: Router,
-    private landingPageInfoService:LandingPageInfoServiceService
-  ) { 
-    this.faqDetails=this.fb.group({
+    private landingPageInfoService: LandingPageInfoServiceService
+  ) {
+    this.faqDetails = this.fb.group({
       question: ['', Validators.required],
       answer: ['', Validators.required],
       portalId: ['', Validators.required],
-      
-     });
+
+    });
   }
 
- 
+
   ngOnInit(): void {
-   this.getAllPortal();
+    this.getAllPortal();
   }
- 
+
   onFormSubmit() {
     console.log(this.faqDetails.value);
-  
+
     this.landingPageInfoService.addFAQ(this.faqDetails.value).subscribe((data) => {
       console.log('portal=>', data);
 
-      this.router.navigate(['/admin/landingPageInfo/QA']);      
-    },(err)=>{console.error(err);} 
-  
+      this.router.navigate(['/admin/landingPageInfo/QA']);
+    }, (err) => { console.error(err); }
+
     );
-    
+
   }
-  getAllPortal(){
-      this.landingPageInfoService.getAllPortal().subscribe((res)=>{
-        console.log('getAllPortal=>', res);
-       this.portalData=res.data;
-       console.log('portalData=>', this.portalData);
-      
-     
-      })
-    }
-   
+  getAllPortal() {
+    this.landingPageInfoService.getAllPortal().subscribe((res) => {
+      console.log('getAllPortal=>', res);
+      this.portalData = res.data;
+      console.log('portalData=>', this.portalData);
+
+
+    })
+  }
+
 }

@@ -7,19 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fill-configured-form.component.scss']
 })
 export class FillConfiguredFormComponent implements OnInit {
-  displayedColumns=[
+  displayedColumns = [
     'index',
     'formName',
     'edit',
   ]
-  selectValue:number;
+  selectValue: number;
   constructor(
-    private activatedRoute:ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-  this.selectValue=this.activatedRoute.snapshot.params.index
-   
+    this.selectValue = this.activatedRoute.snapshot.params.index
+
   }
 
 }

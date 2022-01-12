@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./adding-cust.component.scss']
 })
 export class AddingCustComponent implements OnInit {
-  StatesData:any=[''];
+  StatesData: any = [''];
   addCustomerForm: FormGroup;
-  numberOfLineBreaks:any;
+  numberOfLineBreaks: any;
   constructor(
     private fb: FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService,
@@ -20,12 +20,12 @@ export class AddingCustComponent implements OnInit {
 
   ngOnInit(): void {
     this.addCustomerForm = this.fb.group({
-      customerName: ['',Validators.required],
-      customerContact: ['',Validators.required],
-      streetAddress: ['',Validators.required],
-      stateId: ['',Validators.required],
-      postCode: ['',Validators.required],
-      ABN: ['',Validators.required],
+      customerName: ['', Validators.required],
+      customerContact: ['', Validators.required],
+      streetAddress: ['', Validators.required],
+      stateId: ['', Validators.required],
+      postCode: ['', Validators.required],
+      ABN: ['', Validators.required],
       contacts: this.fb.array([]),
       // customerContactPhone:[''],
       // customerEmail:[''],
@@ -42,9 +42,9 @@ export class AddingCustComponent implements OnInit {
   }
   customerForm(): FormGroup {
     return this.fb.group({
-      email: ['',Validators.required],
-      phone: ['',Validators.required],
-      position: ['',Validators.required]
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      position: ['', Validators.required]
 
     });
   }
@@ -66,7 +66,7 @@ export class AddingCustComponent implements OnInit {
       console.error(err);
     });
   }
-  
+
   getAllStates() {
     this.logicalFormInfoService.getAllStates().subscribe((res: any) => {
       console.log('setStatesDetails=>', res);
@@ -74,7 +74,7 @@ export class AddingCustComponent implements OnInit {
     });
   }
   calcHeight(value) {
-    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
-    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
- }
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
+    console.log("numberOfLineBreaks", this.numberOfLineBreaks)
+  }
 }

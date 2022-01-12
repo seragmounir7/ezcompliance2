@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
@@ -16,7 +16,7 @@ export class AddSafetyModuleComponent implements OnInit {
   safetyDetail: FormGroup;
   selectedImage: any;
   myId: boolean;
-  Is_subMod:boolean;
+  Is_subMod: boolean;
   isEdit = false;
   // data: any;
   enum: any;
@@ -27,9 +27,9 @@ export class AddSafetyModuleComponent implements OnInit {
   Add = false;
   type: string = '';
   Update = false;
-  module=false;
-  subModule=false;
-  moduleName:string;
+  module = false;
+  subModule = false;
+  moduleName: string;
   constructor(private fb: FormBuilder,
     private landingPageInfo: LandingPageInfoServiceService,
     public upload: UploadFileServiceService,
@@ -37,38 +37,38 @@ export class AddSafetyModuleComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<AddSafetyModuleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any)  
-    { this.Is_Mod = data.moduleName;
-      this.safetyDetail = fb.group({
-        mode: 'Safety',
-        arrObj: this.fb.array([]),
-        title: ['', Validators.required],
-        description: ['', Validators.required],
-      });
-    }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.Is_Mod = data.moduleName;
+    this.safetyDetail = fb.group({
+      mode: 'Safety',
+      arrObj: this.fb.array([]),
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+    });
+  }
   ngOnInit(): void {
-   
+
     if (this.Is_Mod == true) {
-      
-      
-      this.subModule=true;
-      this.module=false;
+
+
+      this.subModule = true;
+      this.module = false;
     }
-    if (this.Is_Mod == false)  {
-      this.module=true;
-      this.subModule=false;
-     
+    if (this.Is_Mod == false) {
+      this.module = true;
+      this.subModule = false;
+
 
 
     }
     this.addSafetyModule();
     if (this.data.action == "edit") {
       this.Update = true;
-     
+
       this.safetyDetail.patchValue({
         "mode": 'Safety',
-     
-        "title":this.data.EditData.title,
+
+        "title": this.data.EditData.title,
         "description": this.data.EditData.description,
       })
       this.safetyImgArr().at(0).patchValue({
@@ -77,11 +77,11 @@ export class AddSafetyModuleComponent implements OnInit {
       this.selectedImage = this.data.EditData.subModules[this.data.index].fileUrl,
         console.log("img", this.selectedImage);
 
-  }
-  let index = this.data.index
-  this.subId = this.data.EditData.subModules[index]._id;
+    }
+    let index = this.data.index
+    this.subId = this.data.EditData.subModules[index]._id;
 
- 
+
   }
   onFormSubmit() {
 
@@ -93,11 +93,11 @@ export class AddSafetyModuleComponent implements OnInit {
         .get('fileUrl')
         ?.setValue(this.selectedImage[i].toString());
     }
-  
+
   }
   addSafetyModule() {
     this.safetyImgArr().push(this.safetyForm());
-  
+
   }
   safetyImgArr(): FormArray {
     return this.safetyDetail.get('arrObj') as FormArray;
@@ -112,22 +112,23 @@ export class AddSafetyModuleComponent implements OnInit {
   }
   removeSafetyModule(i) {
     const item = <FormArray>this.safetyDetail.controls['arrObj'];
-    if (item.length > 1) {item.removeAt(i);
+    if (item.length > 1) {
+      item.removeAt(i);
       this.selectedImage.splice(i, 1);
     }
   }
 
   browser(event, i) {
-   
+
     const files = event.target.files[0];
     const formData = new FormData();
     formData.append('', files);
     let value = this.selectedImage[0];
-  
+
 
     if (value) {
       this.upload.upload(formData).subscribe((res) => {
-      
+
 
         this.selectedImage = res.files[0];
       });
@@ -139,68 +140,68 @@ export class AddSafetyModuleComponent implements OnInit {
         });
         this.selectedImage.push(res.files[0]);
 
-       
+
       });
     }
   }
-  editModule(){
- 
+  editModule() {
+
     if (this.data.action == "edit") {
-  
+
       let SafetyData = {
-       
+
         "title": this.safetyDetail.controls.title.value,
         "description": this.safetyDetail.controls.description.value,
         "mode": "Safety",
-        }
-      
-      this.landingPageInfo.editModule(SafetyData,this.data.EditData._id).subscribe((resData) => {
+      }
+
+      this.landingPageInfo.editModule(SafetyData, this.data.EditData._id).subscribe((resData) => {
         Swal.fire('Module Edited Successfully')
 
-  
+
         this.dialogRef.close("true");
         this.safetyDetail.reset();
       })
     }
-  
-     else {
-        let data = {
-          mode: 'Safety',
-  
-          title: this.safetyDetail.controls.title.value,
-          description: this.safetyDetail.controls.description.value,
-          arrObj: this.fb.array([]),
-  
-        }
-       
-        this.landingPageInfo
-          .addAppService(this.safetyDetail.value)
-          .subscribe((data) => {
-          
-            this.safetyData = data;
-          });
-  
-       }
-      
-       
-   
+
+    else {
+      let data = {
+        mode: 'Safety',
+
+        title: this.safetyDetail.controls.title.value,
+        description: this.safetyDetail.controls.description.value,
+        arrObj: this.fb.array([]),
+
+      }
+
+      this.landingPageInfo
+        .addAppService(this.safetyDetail.value)
+        .subscribe((data) => {
+
+          this.safetyData = data;
+        });
+
+    }
+
+
+
   }
-  editSubModule(){
-     
-    if (this.data.action == "edit" ) {
+  editSubModule() {
+
+    if (this.data.action == "edit") {
       let submodulesData = {
         "moduleId": this.data.EditData._id,
         "title": this.safetyImgArr().at(0).get('title')?.value,
         "fileUrl": this.selectedImage,
-       // "description": this.safetyImgArr().at(this.data.index).get('description')?.value,
-        
+        // "description": this.safetyImgArr().at(this.data.index).get('description')?.value,
+
       }
-      
-  
-      this.landingPageInfo.editsubModule(submodulesData,this.subId).subscribe((resData) => {
+
+
+      this.landingPageInfo.editsubModule(submodulesData, this.subId).subscribe((resData) => {
         Swal.fire('Module Edited Successfully')
-    
-  
+
+
         this.dialogRef.close("true");
 
       })
@@ -208,24 +209,24 @@ export class AddSafetyModuleComponent implements OnInit {
     else {
       let data = {
         mode: 'Safety',
-  
+
         title: this.safetyDetail.controls.title.value,
         description: this.safetyDetail.controls.description.value,
         arrObj: this.fb.array([]),
-  
+
       }
 
       this.landingPageInfo
         .addAppService(this.safetyDetail.value)
         .subscribe((data) => {
-         
+
           this.safetyData = data;
         });
-  
-     }
-  
+
     }
-    close() {
-      this.dialogRef.close();
+
+  }
+  close() {
+    this.dialogRef.close();
   }
 }

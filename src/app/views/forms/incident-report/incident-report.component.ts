@@ -1,3 +1,5 @@
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { AfterViewInit, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -16,7 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import Swal from 'sweetalert2';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { take } from 'rxjs/operators';
+import { debounceTime, map, startWith, take, tap } from 'rxjs/operators';
 import moment from 'moment';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
@@ -27,7 +29,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   templateUrl: './incident-report.component.html',
   styleUrls: ['./incident-report.component.scss'],
 })
-export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy {
+export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy {
   public Editor = ClassicEditor;
   IncidentReport: FormGroup;
   fileData: any;
@@ -50,13 +52,22 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   sub: any;
   isPrint: Observable<any>;
-  @HostListener("window:afterprint",[]) 
-  function(){
+  editorDisable = false;
+  filteredOptions1: Observable<unknown>;
+  empData: any;
+  filteredOptions2: Observable<any>;
+  uploadFile: string;
+  @HostListener("window:afterprint", [])
+  function() {
     console.log("Printing completed...");
+    if (this.router.url.includes('/admin/savedForms')) {
+      this.router.navigateByUrl("/admin/savedForms")
+      return
+    }
     this.router.navigateByUrl("/admin/forms/incidentsTable")
     this.shared.printNext(false)
-   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
-} 
+    // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+  }
   projMan: any;
   projectMang: any;
   typeOfInc: [];
@@ -76,9 +87,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   selectedImage: string;
   singRequired: any;
   singRequired1: any;
-  type:any;
+  type: any;
   check: any;
   constructor(
+    private employee: EmployeeRegistrationService,
     private fb: FormBuilder,
     private dynamicFormsService: DynamicFormsService,
     private logicalFormInfo: LogicalFormInfoService,
@@ -87,9 +99,13 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     public upload: UploadFileServiceService,
     private router: Router,
     private ngZone: NgZone,
-    public forms:SavedformsService,
-    private shared:RoleManagementSharedServiceService,
+    public forms: SavedformsService,
+    private shared: RoleManagementSharedServiceService,
   ) {
+    this.id = this.activatedRoute.snapshot.params.id;
+    if (this.id !== 'Form') {
+      this.editorDisable = true;
+    }
     this.check = localStorage.getItem('key');
     this.IncidentReport = this.fb.group({
       incidents: this.fb.array([]),
@@ -135,11 +151,12 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       file: [''],
       similarIncidentText: [''],
       priorIncidentText: [''],
-      instructions: [''],
+      //instructions: [''],
       signaturePad: ['', Validators.required],
       signaturePad1: ['', Validators.required],
       changesMadeOther: [false],
       changesMadeOtherText: [''],
+      instructions: new FormControl({ value: '', disabled: this.editorDisable }),
     });
     // this.IncidentReport = this.data;
     // this.IncidentReport.patchValue({
@@ -162,17 +179,41 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   ngOnInit(): void {
-    this.isPrint=(this.shared.printObs$ as Observable<any>)
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+      this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+      this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        tap(value => console.log('value', value)),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+    })
+    this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
-      this.type=params['formType'];  
+      this.type = params['formType'];
     });
-    this.id = this.activatedRoute.snapshot.params.id;
+
     console.log("IncidentReport", this.IncidentReport);
 
     this.dynamicFormsService.homebarTitle.next('Incident Report Form');
     this.setTitle.setTitle('WHS-Incident Report Form');
 
     if (this.id !== 'Form') {
+
       console.log("id", this.id);
       this.getIncidentsByid(this.id);
     }
@@ -186,7 +227,34 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       this.getAllJobNumber();
       this.getAllProjectMang();
       this.getAllStaff();
+      this.getInstruction();
     }
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+  employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
+    const data = e.option.value;
+    if (controlName == 'completedName') {
+      this.IncidentReport.patchValue({
+        completedDepartment: data.department,
+        completedPosition: data.position,
+      })
+    }
+    if (controlName == 'reviewedName') {
+      this.IncidentReport.patchValue({
+        reviewedDepartment: data.department,
+        reviewedPosition: data.position,
+      })
+    }
+
+    console.log("e.option", e.option);
+    console.log("data...");
+
   }
 
   addAction() {
@@ -202,7 +270,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     return this.fb.group({
       correctAction: ["", Validators.required],
       personRes: ['', Validators.required],
-      complete: ["", Validators.required],
+      // complete: ["", Validators.required],
       date: ["", Validators.required],
     });
   }
@@ -377,19 +445,19 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
   };
 
   ngAfterViewInit() {
-    console.log("check1...",this.check);
-    this.sub= this.shared.printObs$.subscribe(res=> {
-      this.check=res
-    if (this.check) {
-      setTimeout( () => { 
-        window.print();
-        console.log("printing....");
-      }, 3000);
-      localStorage.setItem('key', ' ');
-     
-      
-    }
-  })
+    console.log("check1...", this.check);
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
+
+
+      }
+    })
     // this.signaturePad is now available
     this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
     this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
@@ -633,8 +701,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       this.selectedImage = res.data.file;
       this.allJobNumbers = res.data.allJobNumbersArr;
       this.projectMang = res.data.projectMangArr;
-      this.staff = res.data.staff;
+      this.staff = res.data.staffArr;
 
+      this.uploadFile = this.selectedImage?.split('-')[1];
       for (let i = 0; i < this.changes.length; i++) {
         this.changesArr[i] = 0;
         this.changeAdd().push(this.changeAction(i))
@@ -680,11 +749,11 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
         whyDidtheUnsafeConditonExist: res.data.whyDidtheUnsafeConditonExist,
         priorIncident: res.data.priorIncident,
         similarIncident: res.data.similarIncident,
-        completedName: res.data.completedName,
+        completedName: { fullName: res.data.completedName },
         completedPosition: res.data.completedPosition,
         completedDepartment: res.data.completedDepartment,
         completedDate: res.data.completedDate,
-        reviewedName: res.data.reviewedName,
+        reviewedName: { fullName: res.data.reviewedName },
         reviewedPosition: res.data.reviewedPosition,
         reviewedDepartment: res.data.reviewedDepartment,
         reviewedDate: res.data.reviewedDate,
@@ -692,9 +761,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
         priorIncidentText: res.data.priorIncidentText,
         changesMadeOther: res.data.changesMadeOther,
         changesMadeOtherText: res.data.changesMadeOtherText,
-        instructions:res.data.instructions
+        instructions: res.data.instructions
 
       })
+
 
       for (let index = 0; index < res.data.arrObj.length; index++) {
         console.log("res.data.arrObj.length", res.data.arrObj.length);
@@ -704,7 +774,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
 
         let changeIndex = this.changeAdd().length
         this.addAction();
-        this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
+        // this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
         this.add().controls[index].get("correctAction").setValue(res.data.arrObj[index].correctAction)
         this.add().controls[index].get("date").setValue(res.data.arrObj[index].date)
         this.add().controls[index].get("personRes").setValue(res.data.arrObj[index].personRes)
@@ -821,6 +891,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
 
       })
     })
+
+    console.log(" this.editorDisable", this.editorDisable);
+
   }
   onSubmit() {
     console.log(this.IncidentReport.value);
@@ -828,7 +901,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
     console.log(this.IncidentReport.value);
     if (this.id !== 'Form') {
       console.log("update");
-
+      let completedName = this.IncidentReport.controls.completedName.value;
+      let reviewedName = this.IncidentReport.controls.reviewedName.value;
+      this.IncidentReport.removeControl('completedName');
+      this.IncidentReport.removeControl('reviewedName');
       const data = {
         ...this.IncidentReport.value,
         changesArr: this.changes,
@@ -838,8 +914,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
         rootCauseIncidentArr: this.rootCauseIncident,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
-
+        staffArr: this.staff,
+        completedName: completedName.fullName || completedName,
+        reviewedName: reviewedName.fullName || reviewedName
       }
       console.log("data", data);
 
@@ -856,6 +933,10 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       });
     }
     else {
+      let completedName = this.IncidentReport.controls.completedName.value;
+      let reviewedName = this.IncidentReport.controls.reviewedName.value;
+      this.IncidentReport.removeControl('completedName');
+      this.IncidentReport.removeControl('reviewedName');
       const data = {
         ...this.IncidentReport.value,
         changesArr: this.changes,
@@ -865,7 +946,9 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
         rootCauseIncidentArr: this.rootCauseIncident,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
+        staffArr: this.staff,
+        completedName: completedName.fullName || completedName,
+        reviewedName: reviewedName.fullName || reviewedName
       }
       console.log("data", data);
 
@@ -877,7 +960,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
           showConfirmButton: false,
           timer: 1200,
         });
-        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
+        this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
       }, (err) => {
         console.error(err);
       });
@@ -972,6 +1055,14 @@ export class IncidentReportComponent implements OnInit, AfterViewInit,OnDestroy 
       );
     });
   }
+  getInstruction() {
+    this.logicalFormInfo.getInstruction().subscribe((res: any) => {
+      console.log("res", res.data[0].instruction);
 
-  
+      this.IncidentReport.patchValue({
+        instructions: res.data[0].instruction
+      })
+    })
+  }
+
 }

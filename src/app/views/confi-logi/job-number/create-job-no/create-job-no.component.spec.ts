@@ -8,9 +8,9 @@ describe('CreateJobNoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateJobNoComponent ]
+      declarations: [CreateJobNoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

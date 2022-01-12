@@ -43,7 +43,7 @@ export class AddCustomerTestimonailComponent implements OnInit {
     });
     console.log('', data);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
@@ -76,5 +76,5 @@ export class AddCustomerTestimonailComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
+  }
 }

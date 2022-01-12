@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
 })
 export class SubscriptionService {
   apiUrl = environment.apiUrl;
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) { }
 
   getPlan(id: any) {
-    return this.https.get(this.apiUrl + 'plan/get/' + id ).pipe(
+    return this.https.get(this.apiUrl + 'plan/get/' + id).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
@@ -19,7 +19,7 @@ export class SubscriptionService {
     );
   }
   getAllPlan() {
-    return this.https.get(this.apiUrl + 'plan/getAll'  ).pipe(
+    return this.https.get(this.apiUrl + 'plan/getAll').pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
@@ -27,7 +27,7 @@ export class SubscriptionService {
     );
   }
 
-  editPlan(id, data){
+  editPlan(id, data) {
     return this.https.put(this.apiUrl + 'plan/update/' + id, data).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
@@ -45,15 +45,15 @@ export class SubscriptionService {
     );
   }
   getCoupon(id: any) {
-    return this.https.get(this.apiUrl + 'coupon/get/' + id ).pipe(
+    return this.https.get(this.apiUrl + 'coupon/get/' + id).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;
       })
     );
   }
-  getAllCoupon(field="",value="") {
-    if(value==''){
+  getAllCoupon(field = "", value = "") {
+    if (value == '') {
       field = ''
     }
     return this.https.get(this.apiUrl + `coupon/getAll?field=${field}&value=${value}`).pipe(
@@ -64,7 +64,7 @@ export class SubscriptionService {
     );
   }
 
-  editCoupon(id, data){
+  editCoupon(id, data) {
     return this.https.put(this.apiUrl + 'coupon/update/' + id, data).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
@@ -82,7 +82,7 @@ export class SubscriptionService {
     );
   }
   deleteCoupon(id) {
-    return this.https.delete(this.apiUrl + 'coupon/delete/' + id ).pipe(
+    return this.https.delete(this.apiUrl + 'coupon/delete/' + id).pipe(
       map((res: any) => {
         console.log('res.data=>', res.data);
         return res;

@@ -2,7 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
-import {MatSort, Sort} from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,11 +14,11 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
   templateUrl: './ppe-select.component.html',
   styleUrls: ['./ppe-select.component.scss'],
 })
-export class PpeSelectComponent implements AfterViewInit,OnInit {
+export class PpeSelectComponent implements AfterViewInit, OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title','action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,20 +29,20 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
   /////////////mat table end////////////////
 
   constructor(
-   
+
     private logicalFormInfo: LogicalFormInfoService,
-    private dialog:MatDialog,
-    private setTitle:SetTitleService
-  ) {}
+    private dialog: MatDialog,
+    private setTitle: SetTitleService
+  ) { }
 
   ngOnInit(): void {
     this.getAllPPEs();
     this.setTitle.setTitle('WHS-PPE List');
-    
+
   }
 
-  getAllPPEs(field="",value="") {
-    this.logicalFormInfo.getAllPPE(field,value).subscribe((res:any) => {
+  getAllPPEs(field = "", value = "") {
+    this.logicalFormInfo.getAllPPE(field, value).subscribe((res: any) => {
       console.log('PPEAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -58,7 +58,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
       //  this.task = res.data.subComponents;
     });
   }
-  edit(element){
+  edit(element) {
     const dialogRef = this.dialog.open(EditPPEComponent, {
       width: "550px",
       data: element,
@@ -82,18 +82,18 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deletePPE(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Parameter Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deletePPE(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Parameter Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllPPEs();
+
           });
-          console.log('deleted res', res);
-          this.getAllPPEs();
-            
-        });
-      
+
       }
     });
   }
@@ -102,7 +102,7 @@ export class PpeSelectComponent implements AfterViewInit,OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllPPEs(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllPPEs(sort.active, sort.direction)
+  }
 }

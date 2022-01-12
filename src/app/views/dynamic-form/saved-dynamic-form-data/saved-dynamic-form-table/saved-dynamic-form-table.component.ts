@@ -15,30 +15,29 @@ import Swal from 'sweetalert2';
 })
 export class SavedDynamicFormTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['position','title',"frequency","createdAt","updatedAt",'action'];
+  displayedColumns: string[] = ['formIndex', 'title', "frequency", "createdAt", "updatedAt", 'action'];
   showDatas: any;
-  tempArray: MatTableDataSource <any>;
+  tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   formId: any;
-  constructor(private dynamicFormsService: DynamicFormsService, 
-    private activatedRoute:ActivatedRoute,
+  constructor(private dynamicFormsService: DynamicFormsService,
+    private activatedRoute: ActivatedRoute,
     public router: Router,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.formId=this.activatedRoute.snapshot.params.id
+    this.formId = this.activatedRoute.snapshot.params.id
     this.getSavedForm();
-   
-   console.log("asdfghj",this.formId);
-   
+
+    console.log("asdfghj", this.formId);
+
   }
   ngAfterViewInit() {
     // this.tempArray.paginator = this.paginator;
     // this.tempArray.sort = this.sort; 
   }
-  delete(item)
-  {
+  delete(item) {
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.title}"?`,
@@ -51,48 +50,46 @@ export class SavedDynamicFormTableComponent implements OnInit {
       if (result.value) {
         this.spinner.show()
         this.dynamicFormsService
-        .savedFormDelete(item._id)
-        .subscribe((res => {
-          Swal.fire({
-            title: `"${item.title}"? Deleted successfully`,
-            showConfirmButton: false,
-            timer: 1200,
-          });
-        this.getSavedForm()
-        this.spinner.hide()
-        }))
+          .savedFormDelete(item._id)
+          .subscribe((res => {
+            Swal.fire({
+              title: `"${item.title}"? Deleted successfully`,
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            this.getSavedForm()
+            this.spinner.hide()
+          }))
       }
     });
-    
-   
-  }
- 
-  getSavedForm()
-  {
-    this.dynamicFormsService.getsavedFormByFormId(this.formId).subscribe((res:any)=>
-    {
-      this.showDatas= res.data[0].result;
-      console.log("get res",this.showDatas);
-      this.showDatas.forEach((element,i) => {
-        return this.showDatas[i].index= i
-      });
-  
-      this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort; 
-      console.log("get res",this.showDatas);
-    })
-  }
-  edit(id)
-  { let data= {
-    id:id,
-    type:"edit"
-  }
-  //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
-  this.router.navigate(['/admin/dynamic/savedDynamicForm'],{queryParams:data});
+
+
   }
 
-  sortData(sort:Sort){
+  getSavedForm() {
+    this.dynamicFormsService.getsavedFormByFormId(this.formId).subscribe((res: any) => {
+      this.showDatas = res.data[0].result;
+      console.log("get res", this.showDatas);
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
+      });
+
+      this.tempArray = new MatTableDataSource<any>(this.showDatas);
+      this.tempArray.paginator = this.paginator;
+      this.tempArray.sort = this.sort;
+      console.log("get res", this.showDatas);
+    })
+  }
+  edit(id) {
+    let data = {
+      id: id,
+      type: "edit"
+    }
+    //this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
+    this.router.navigate(['/admin/dynamic/savedDynamicForm'], { queryParams: data });
+  }
+
+  sortData(sort: Sort) {
     this.getSavedForm()
   }
 }

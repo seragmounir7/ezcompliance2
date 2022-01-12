@@ -17,7 +17,7 @@ export class SafetyLegislationComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'act', 'regulation' ,'action'];
+  displayedColumns: string[] = ['index', 'act', 'regulation', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,14 +26,14 @@ export class SafetyLegislationComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllSafetyReg()
   }
 
-  getAllSafetyReg(field="",value="") {
-    this.logicalFormInfo.getAllSafety(field,value).subscribe((res) => {
+  getAllSafetyReg(field = "", value = "") {
+    this.logicalFormInfo.getAllSafety(field, value).subscribe((res) => {
       console.log('getAllRegulator=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -47,10 +47,10 @@ export class SafetyLegislationComponent implements OnInit {
       // this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(AddAndEditSafetyComponent, {
       width: "550px",
       data: element,
@@ -75,22 +75,22 @@ export class SafetyLegislationComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteSafety(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Safety Legislation Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteSafety(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Safety Legislation Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllSafetyReg();
+
           });
-          console.log('deleted res', res);
-          this.getAllSafetyReg();
-            
-        });
       }
     });
   }
   sortData(sort: Sort) {
- 
-    this.getAllSafetyReg(sort.active,sort.direction)
-     }
+
+    this.getAllSafetyReg(sort.active, sort.direction)
+  }
 }

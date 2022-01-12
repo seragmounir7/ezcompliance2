@@ -81,22 +81,22 @@ export class ApplicationServiceInfoComponent implements OnInit {
       this.ELEMENTS_DATA = ServiceData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-      this.dataSources.sort=this.sort;
+      this.dataSources.sort = this.sort;
     });
-  
+
 
   }
 
   editForm(element, name: boolean, i?: any) {
     this.spinner.show();
-    
+
     this.myId = element._id;
     this.isEdit = true;
     this.mode = 'Service';
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-     
+
       this.ServiceData = data.data[0];
-     
+
       let dialogRef = this.dialog.open(AddApplicationServiceInfoComponent, {
         data: {
           action: 'edit',
@@ -110,12 +110,12 @@ export class ApplicationServiceInfoComponent implements OnInit {
         height: '500px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-      
+
 
         if ((result = 'true')) {
           this.getServiceData();
         }
-        
+
       });
 
       this.spinner.hide();
@@ -126,7 +126,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
   addForm(id) {
     this.spinner.show();
     this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-   
+
       this.ServiceData = data.data[0];
 
       let dialogRef = this.dialog.open(AddServiceInfoComponent, {
@@ -139,7 +139,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
         height: '600px',
       });
       dialogRef.afterClosed().subscribe((result) => {
-      
+
         if ((result = 'true')) {
           this.getServiceData();
         }
@@ -152,7 +152,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
     this.hide = false;
   }
   delete(item) {
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.title}"?`,
@@ -163,11 +163,11 @@ export class ApplicationServiceInfoComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       
+
         this.spinner.show()
         this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-        
+
           this.getServiceData();
           this.ngOnInit();
           this.spinner.hide()

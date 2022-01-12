@@ -18,7 +18,7 @@ import { AddAndEditSocialMediaComponent } from './add-and-edit-social-media/add-
 })
 export class SocialMediaComponent implements OnInit {
   ELEMENT_DATA = [];
-  socialMediaDetails!:FormGroup;
+  socialMediaDetails!: FormGroup;
   displayedColumns: string[] = ['facebook', 'twitter', 'youtube', 'instagram', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,21 +31,22 @@ export class SocialMediaComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public router: Router,
     private setTitle: SetTitleService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getSocialMedia();
     this.setTitle.setTitle('WHS-Social Media');
   }
-  getSocialMedia() {;
+  getSocialMedia() {
+    ;
     this.landingPageInfo.getAllSocialMedia().subscribe((res: any) => {
       console.log('SocialMediaDetails=>', res);
       let SocialMediaData = res.data;
-      
+
       this.ELEMENT_DATA = SocialMediaData;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort=this.sort;
+      this.dataSource.sort = this.sort;
     });
   }
   editForm(element) {
@@ -61,9 +62,9 @@ export class SocialMediaComponent implements OnInit {
     });
   }
 
-  
+
   delete(item) {
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.title}"?`,
@@ -74,7 +75,7 @@ export class SocialMediaComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       this.spinner.show()
+        this.spinner.show()
         this.landingPageInfo.deleteSocialMedia(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
           this.getSocialMedia();

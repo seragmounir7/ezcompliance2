@@ -1,15 +1,12 @@
 <div class="container px-4 py-4 card">
   <form [formGroup]="testiomnial">
     <div mat-dialog-title class="dialog-title">
-    <h2 class="text-center pt-2">
-      <p style="text-align: center"> Edit Customer Testimonial Info</p>
-    </h2>
-    <button type="button" class="close" 
-    style="font-size: 40px;"
-  
-  (click)="close()" aria-label="Close">
-    <span aria-hidden="true">×</span>
-  </button>
+      <h2 class="text-center pt-2">
+        <p style="text-align: center"> Edit Customer Testimonial Info</p>
+      </h2>
+      <button type="button" class="close" style="font-size: 40px;" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
     </div>
     <hr />
 
@@ -17,95 +14,49 @@
       <div class="row" *ngIf="module">
         <div class="col-sm-6">
           <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-          <input
-            type="text"
-            formControlName="title"
-            style="height: 50px"
-            class="form-control"
-            id="heading"
-          />
+          <input type="text" formControlName="title" style="height: 50px" class="form-control" id="heading" />
         </div>
 
         <div class="col-sm-6 ">
           <p for="exampleFormControlInput1" class="form-Label">Description</p>
-          <textarea
-            rows="3"
-            type="text"
-            formControlName="description"
-            class="form-control"
-          ></textarea>
+          <textarea rows="3" type="text" formControlName="description" class="form-control"></textarea>
         </div>
       </div>
 
       <div *ngIf="subModule">
         <ng-container formArrayName="arrObj">
-          <ng-container
-            *ngFor="let control of add().controls; let i = index"
-            [formGroupName]="i"
-          >
+          <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
             <div>
               <div class="row">
                 <div class="my-3 col-2">
                   <p for="exampleFormControlInput1" class="form-Label">
                     Upload Image
                   </p>
-                  <img
-                    [src]="selectedImage"
-                    onerror=" this.src='../../../assets/img/uploadImg.png' "
-                    alt=""
-                    width="150"
-                    height="100"
-                    class="imageService"
-                  />
-                  <input
-                    type="file"
-                    class="d-none"
-                    #file
-                    id="file"
-                    class="custom-file-input img1 form-control"
-                    name="file"
-                    (change)="browser($event, i)"
-                  />
-                  <span
-                    class="material-icons material-file"
-                    (click)="file.click()"
-                    class="btn border bg-white z-index"
+                  <img [src]="selectedImage" onerror=" this.src='../../../assets/img/uploadImg.png' " alt="" width="150"
+                    height="100" class="imageService" />
+                  <input type="file" class="d-none" #file id="file" class="custom-file-input img1 form-control"
+                    name="file" (change)="browser($event, i)" />
+                  <span class="material-icons material-file" (click)="file.click()" class="btn border bg-white z-index"
                     style="
                       position: absolute;
                       top: 120px;
                       left: 150;
                       font-size: 1rem !important;
-                    "
-                  >
-                    <i
-                      class="fa fa-upload"
-                      aria-hidden="true"
-                      style="margin: 0px"
-                    ></i>
+                    ">
+                    <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
                   </span>
                 </div>
                 <div class="my-3 col-4 ml-2">
                   <p for="exampleFormControlInput1" class="form-Label">
                     Heading
                   </p>
-                  <input
-                    type="text"
-                    formControlName="subTitle"
-                    style="height: 50px"
-                    class="form-control"
-                    id="title"
-                  />
+                  <input type="text" formControlName="subTitle" style="height: 50px" class="form-control" id="title" />
                 </div>
                 <div class="my-3 col-4 ml-2">
                   <p for="exampleFormControlInput1" class="form-Label">
                     Description
                   </p>
-                  <textarea
-                    rows="3"
-                    type="text"
-                    formControlName="description"
-                    class="form-control"
-                  ></textarea>
+                  <textarea rows="3" type="text" formControlName="description" class="form-control"></textarea>
                 </div>
               </div>
             </div>
@@ -117,20 +68,10 @@
     </div>
 
     <div class="col-md-2">
-      <button
-        type="submit"
-        class="btn btn-primary btn-block"
-        *ngIf="module"
-        (click)="editModule()"
-      >
+      <button type="submit" class="btn btn-primary btn-block" *ngIf="module" (click)="editModule()">
         Update
       </button>
-      <button
-        type="submit"
-        class="btn btn-primary btn-block"
-        *ngIf="subModule"
-        (click)="editSubModule()"
-      >
+      <button type="submit" class="btn btn-primary btn-block" *ngIf="subModule" (click)="editSubModule()">
         Update
       </button>
     </div>

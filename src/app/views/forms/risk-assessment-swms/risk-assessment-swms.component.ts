@@ -28,8 +28,8 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
   templateUrl: './risk-assessment-swms.component.html',
   styleUrls: ['./risk-assessment-swms.component.scss'],
 })
-export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDestroy{
-  
+export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDestroy {
+
   @ViewChild('projectManager') projectManager: ElementRef;
   @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
@@ -37,13 +37,17 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   @ViewChild('timepicker') timepicker: ElementRef;
   sub: any;
   isPrint: Observable<any>;
-  @HostListener("window:afterprint",[]) 
-  function(){
+  @HostListener("window:afterprint", [])
+  function() {
     console.log("Printing completed...");
+    if (this.router.url.includes('/admin/savedForms')) {
+      this.router.navigateByUrl("/admin/savedForms")
+      return
+    }
     this.router.navigateByUrl("/admin/forms/riskAssessTable")
     this.shared.printNext(false)
-   // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
-} 
+    // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+  }
   public Editor = ClassicEditor;
 
   riskAssessmentFb!: FormGroup;
@@ -72,7 +76,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   minDate = new Date();
   maxDate = new Date();
   cardImageBase64: any;
-  type:any;
+  type: any;
   highRiskConstruction2 = [
     {
       label: 'Working in or near trenches or shafts deeper than 1.5metres',
@@ -180,7 +184,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   check: any;
   selectedFile1 = [];
   dateGet: Date;
-  setTime:any
+  setTime: any
   constructor(
     public router: Router,
     private dialog: MatDialog,
@@ -189,8 +193,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     private activatedRoute: ActivatedRoute,
     private setTitle: SetTitleService,
     public upload: UploadFileServiceService,
-    public forms:SavedformsService,
-    private shared:RoleManagementSharedServiceService,
+    public forms: SavedformsService,
+    private shared: RoleManagementSharedServiceService,
   ) {
     //this.check = localStorage.getItem('key');
     console.log("key check", this.check);
@@ -210,7 +214,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       custEmail: ['', Validators.required],
       employee1: ['', Validators.required],
       employee2: ['', Validators.required],
-      dateTime: ['', Validators.required],
+      dateTime: [new Date(), Validators.required],
       statesSWMS: ['', Validators.required],
       projectManager: ['', Validators.required],
       date: [new Date()],
@@ -243,63 +247,82 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   ngOnDestroy(): void {
     this.sub.unsubscribe()
     console.log("risk destroy");
-    
+
   }
   get siteControls() {
     return this.riskAssessmentFb.controls
   }
 
   ngOnInit(): void {
-  this.isPrint=(this.shared.printObs$ as Observable<any>)
+    this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
-      this.type=params['formType'];  
+      this.type = params['formType'];
     });
     this.setTitle.setTitle('WHS-Risk Assesment Form');
-    let dataMap = map((res:any) => res.data)
-    let nameMap = map((res:any) => {res.data})
+    let dataMap = map((res: any) => res.data)
+    let nameMap = map((res: any) => { res.data })
     let allApiObs$ = [this.logicalFormInfo.getAllJobtask().pipe(dataMap),
-      this.logicalFormInfo.getAllPPE().pipe(dataMap),
-      this.logicalFormInfo.getAllRisk().pipe(dataMap),
-      this.logicalFormInfo.getAllLicence().pipe(dataMap),
-      this.logicalFormInfo.getAllProjectMang().pipe(dataMap),
-      this.logicalFormInfo.getAllJobNumber().pipe(dataMap),
-      this.logicalFormInfo.getAllResidual().pipe(dataMap),
-      this.logicalFormInfo.getAllStaff().pipe(dataMap),
-      this.logicalFormInfo.getAllRiskLevel().pipe(dataMap),
-       this.logicalFormInfo.getAllChemical().pipe(dataMap),
-      this.logicalFormInfo.getAllHazards().pipe(dataMap),
-      this.logicalFormInfo.getAllContrlActReq().pipe(dataMap),
-       this.logicalFormInfo.getAllRegulator().pipe(dataMap),
-      this.logicalFormInfo.getAllSafety().pipe(dataMap),
-      this.logicalFormInfo.getAllStates().pipe(dataMap),
-      this.logicalFormInfo.getAllJurisdiction().pipe(dataMap)]
+    this.logicalFormInfo.getAllPPE().pipe(dataMap),
+    this.logicalFormInfo.getAllRisk().pipe(dataMap),
+    this.logicalFormInfo.getAllLicence().pipe(dataMap),
+    this.logicalFormInfo.getAllProjectMang().pipe(dataMap),
+    this.logicalFormInfo.getAllJobNumber().pipe(dataMap),
+    this.logicalFormInfo.getAllResidual().pipe(dataMap),
+    this.logicalFormInfo.getAllStaff().pipe(dataMap),
+    this.logicalFormInfo.getAllRiskLevel().pipe(dataMap),
+    this.logicalFormInfo.getAllChemical().pipe(dataMap),
+    this.logicalFormInfo.getAllHazards().pipe(dataMap),
+    this.logicalFormInfo.getAllContrlActReq().pipe(dataMap),
+    this.logicalFormInfo.getAllRegulator().pipe(dataMap),
+    this.logicalFormInfo.getAllSafety().pipe(dataMap),
+    this.logicalFormInfo.getAllStates().pipe(dataMap),
+    this.logicalFormInfo.getAllJurisdiction().pipe(dataMap)]
 
-    let allApis =forkJoin(allApiObs$)
-      allApis.subscribe(res => {
-        console.log('forkjoin',res);
-        
-      })
- 
+    let allApis = forkJoin(allApiObs$)
+
+
     this.addActionSDSRegister();
     if (this.id != "form") {
       this.getAssessmentByid(this.id);
-    }else{
-      this.getAllJobTask();
-      this.getAllPPE();
-      this.getAllHighRisk();
-      this.getAllLicence();
-      this.getAllProjectMang();
-      this.getAllJobNumber();
-      this.getAllResidualRiskLevel();
-      this.getAllStaff();
-      this.getAllRiskLevel();
-      this.getAllChemical();
-      this.getAllHazard();
-      this.getAllContrActReq();
-      this.getAllRegulator();
-      this.getAllSafe();
-      this.getAllState();
-      this.getAllJurisdiction();
+    } else {
+      // this.getAllJobTask();
+      // this.getAllPPE();
+      // this.getAllHighRisk();
+      // this.getAllLicence();
+      // this.getAllProjectMang();
+      // this.getAllJobNumber();
+      // this.getAllResidualRiskLevel();
+      // this.getAllStaff();
+      // this.getAllRiskLevel();
+      // this.getAllChemical();
+      // this.getAllHazard();
+      // this.getAllContrActReq();
+      // this.getAllRegulator();
+      // this.getAllSafe();
+      // this.getAllState();
+      // this.getAllJurisdiction();
+      allApis.subscribe((res: any[]) => {
+        console.log('forkjoin', res);
+        this.getAllJobTask(res[0]);
+        this.getAllPPE(res[1]);
+        this.getAllHighRisk(res[2]);
+        this.getAllLicence(res[3]);
+        this.getAllProjectMang(res[4]);
+        this.getAllJobNumber(res[5]);
+        this.getAllResidualRiskLevel(res[6]);
+        this.getAllStaff(res[7]);
+        this.getAllRiskLevel(res[8]);
+        this.getAllChemical(res[9]);
+        this.getAllHazard(res[10]);
+        this.getAllContrActReq(res[11]);
+        this.getAllRegulator(res[12]);
+        this.getAllSafe(res[13]);
+        this.getAllState(res[14]);
+        this.getAllJurisdiction(res[15]);
+        let time = new Date()
+        this.dateGet = time
+        this.setTime = time.toTimeString().slice(0, 5)
+      })
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
     //   console.log(res);
@@ -309,7 +332,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     //     setTimeout( function() { window.print(); }, 3000);
     //   }
     // }) 
-   
+
     // this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
     //   if (res) {
     //     console.log('jobNumberres', res);
@@ -358,24 +381,24 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       this.allCOPSelected = [];
       console.log("assesment by id", res.data);
 
-      this.jobTaskData=res.data.jobTaskDataArr;
-      this.PPEselection=res.data.PPEselectionArr;
-      this.highRiskConstruction=res.data.highRiskConstructionArr;
-      this.licenseAndQualification=res.data.licenseAndQualificationArr;
-      this.projectMang=res.data. projectMangArr;
-      this.allJobNumbers=res.data.allJobNumbersArr;
-      this.resiRiskLevel=res.data.resiRiskLevelArr;
-      this.staff=res.data.staffArr;
-      this.riskLevel=res.data.riskLevelArr;
-      this.allChemicals=res.data.allChemicalsArr;
-      this.allHazards=res.data.allHazardsArr;
-      this.allContrlActReq=res.data.allContrlActReqArr;
-      this.regulatorData=res.data.regulatorDataArr;
-      this.safety=res.data.safetyArr;
-      this.states=res.data.statesArr;
-      this.JurisdictionData=res.data.JurisdictionDataArr;
-      this.maxDate=res.data.date;
-      this.minDate=res.data.date;
+      this.jobTaskData = res.data.jobTaskDataArr;
+      this.PPEselection = res.data.PPEselectionArr;
+      this.highRiskConstruction = res.data.highRiskConstructionArr;
+      this.licenseAndQualification = res.data.licenseAndQualificationArr;
+      this.projectMang = res.data.projectMangArr;
+      this.allJobNumbers = res.data.allJobNumbersArr;
+      this.resiRiskLevel = res.data.resiRiskLevelArr;
+      this.staff = res.data.staffArr;
+      this.riskLevel = res.data.riskLevelArr;
+      this.allChemicals = res.data.allChemicalsArr;
+      this.allHazards = res.data.allHazardsArr;
+      this.allContrlActReq = res.data.allContrlActReqArr;
+      this.regulatorData = res.data.regulatorDataArr;
+      this.safety = res.data.safetyArr;
+      this.states = res.data.statesArr;
+      this.JurisdictionData = res.data.JurisdictionDataArr;
+      this.maxDate = res.data.date;
+      this.minDate = res.data.date;
 
       for (let i = 0; i < this.jobTaskData.length; i++) {
         // this.taskArr[i] = 0;
@@ -410,25 +433,25 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       //  this.setTime=newTime.toString() 
       //  console.log("date=================>>>>>>>>>.",res.data.dateTime);
 
-       let  dateTime=new  Date(res.data.dateTime) 
-       
-       let time=dateTime.toTimeString()
-       console.log("date1=================>>>>>>>>>.",time);
-       this.setTime=time.slice(0,5)
-       // console.log("date2=================>>>>>>>>>.",newTime);
-        //this.setTime=newTime.splice(0,5).join('')
-        // newTime=newTime.split("")
-       // let  newTime2=newTime.splice(5,3).join('')
-        // this.setTime=newTime.toString() 
-        console.log("date=================>>>>>>>>>.", this.setTime);
+      let dateTime = new Date(res.data.dateTime)
 
-       let date=res.data.dateTime
-     //let newDate=date.split(/[-,T]/)
+      let time = dateTime.toTimeString()
+      console.log("date1=================>>>>>>>>>.", time);
+      this.setTime = time.slice(0, 5)
+      // console.log("date2=================>>>>>>>>>.",newTime);
+      //this.setTime=newTime.splice(0,5).join('')
+      // newTime=newTime.split("")
+      // let  newTime2=newTime.splice(5,3).join('')
+      // this.setTime=newTime.toString() 
+      console.log("date=================>>>>>>>>>.", this.setTime);
 
-    //  newTime=newTime.splice(3).toString()
-      this.dateGet= new Date(date)
-    
-     
+      let date = res.data.dateTime
+      //let newDate=date.split(/[-,T]/)
+
+      //  newTime=newTime.splice(3).toString()
+      this.dateGet = new Date(date)
+
+
       let check1 = async () => { this.signaturePad2 != null }
       check1().then(() => {
         this.signaturePad2.fromDataURL(res.data.signature2)
@@ -460,11 +483,14 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
           this.isHazardous[index] = true;
         }
         this.PushActionSDSRegister(element)
-        if(element.file){
-          this.selectedFile1.push(element.file);
+        if (element.file) {
+          this.selectedFile1.push({
+            fileName: element.file.split('-')[1],
+            fileUrl: element.file
+          });
           console.log("selected", this.selectedFile1);
         }
-        
+
       });
       res.data.riskLevel.forEach(element => {
         console.log("riskLevel", element.riskLevel);
@@ -504,8 +530,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
         this.checkLicense(element, index);
       });
     })
-     
-     
+
+
   }
   checkHazards(data, i) {
     for (let j = 0; j < this.jobTaskData.length; j++) {
@@ -523,7 +549,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   checkJobtask(element, index) {
     let z = this.jobTaskData[index]._id;
     //console.log("z", z);
-   // console.log("ele", element[z]);
+    // console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['jobTask'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -543,7 +569,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   }
   checkPPE(element, index) {
     let z = this.PPEselection[index]._id;
-   // console.log("ele", element[z]);
+    // console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -552,7 +578,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   }
   checkLicense(element, index) {
     let z = this.licenseAndQualification[index]._id;
-   // console.log("ele", element[z]);
+    // console.log("ele", element[z]);
     let c = this.riskAssessmentFb.controls['licence'] as FormArray
     let d = c.controls[index] as FormGroup
     if (element[z]) {
@@ -767,15 +793,15 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   };
 
   ngAfterViewInit() {
-   this.sub= this.shared.printObs$.subscribe(res=> {
-      this.check=res
-      console.log("this.check",this.check);
-      if (this.check ) {
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      console.log("this.check", this.check);
+      if (this.check) {
         setTimeout(function () { window.print(); }, 3000);
         localStorage.setItem('key', ' ');
       }
     })
-   
+
     // this.signaturePad is now available
     //this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
     // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -823,7 +849,16 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     //this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
   }
 
-  getAllJobTask() {
+  getAllJobTask(data = []) {
+    if (data) {
+      this.jobTaskData = data;
+      console.log('jobTaskDetails=>', this.jobTaskData);
+      for (let i = 0; i < this.jobTaskData.length; i++) {
+        // this.taskArr[i] = 0;
+        this.jobtask().push(this.jobtaskk(i));
+      }
+      return
+    }
     this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
       this.jobTaskData = res.data;
       console.log('jobTaskDetails=>', this.jobTaskData);
@@ -834,7 +869,17 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     });
   }
 
-  getAllPPE() {
+  getAllPPE(data = []) {
+    if (data) {
+      // console.log('PPE=>', res);
+      this.PPEselection = data;
+      for (let i = 0; i < this.PPEselection.length; i++) {
+        this.ppeArr[i] = 0;
+        this.ppe().push(this.ppeSelect(i));
+        this.ppe2().push(this.ppeSelect(i));
+      }
+      return
+    }
     this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
       // console.log('PPE=>', res);
       this.PPEselection = res.data;
@@ -845,13 +890,27 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       }
     });
   }
-  getAllProjectMang() {
+  getAllProjectMang(data = []) {
+    if (data) {
+      this.projectMang = data;
+      return
+    }
     this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
       this.projectMang = res.data;
       // console.log('getAllProjectMang=>', this.projectMang);
     });
   }
-  getAllHighRisk() {
+  getAllHighRisk(data = []) {
+    if (data) {
+      // console.log('Risk=>', res);
+      this.highRiskConstruction = data;
+      for (let i = 0; i < this.highRiskConstruction.length; i++) {
+        this.riskArr[i] = 0;
+        this.riskConstruct().push(this.riskCons(i))
+        this.riskConstruct2().push(this.riskCons(i))
+      }
+      return
+    }
     this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
       // console.log('Risk=>', res);
       this.highRiskConstruction = res.data;
@@ -872,7 +931,19 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       }
     });
   }
-  getAllLicence() {
+  getAllLicence(data = []) {
+    if (data) {
+      this.licenseAndQualification = data;
+      // console.log(
+      //   'this.licenseAndQualification=>',
+      //   this.licenseAndQualification
+      // );
+      for (let i = 0; i < this.licenseAndQualification.length; i++) {
+        this.licenceArr[i] = 0;
+        this.Licence().push(this.license(i))
+      }
+      return
+    }
     this.logicalFormInfo.getAllLicence().subscribe((res) => {
       this.licenseAndQualification = res.data;
       // console.log(
@@ -885,13 +956,21 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       }
     });
   }
-  getAllHazard() {
+  getAllHazard(data = []) {
+    if (data) {
+      this.allHazards = data;
+      return
+    }
     this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
       // console.log('getAllHazards=>', res);
       this.allHazards = res.data;
     });
   }
-  getAllContrActReq() {
+  getAllContrActReq(data = []) {
+    if (data) {
+      this.allContrlActReq = data;
+      return
+    }
     this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
       // console.log('getAllHazards=>', res);
       this.allContrlActReq = res.data;
@@ -1154,27 +1233,45 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       console.log('allCOPSelected', this.allCOPSelected, myMap);
     });
   }
-  getAllJobNumber() {
+  getAllJobNumber(data = []) {
+    if (data) {
+      this.allJobNumbers = data;
+    }
     this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
       this.allJobNumbers = res.data;
     });
   }
-  getAllStaff() {
+  getAllStaff(data = []) {
+    if (data) {
+      this.staff = data;
+      return
+    }
     this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
       this.staff = res.data;
     });
   }
-  getAllResidualRiskLevel() {
+  getAllResidualRiskLevel(data = []) {
+    if (data) {
+      this.resiRiskLevel = data;
+    }
     this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
       this.resiRiskLevel = res.data;
     });
   }
-  getAllRiskLevel() {
+  getAllRiskLevel(data = []) {
+    if (data) {
+      this.riskLevel = data;
+      return
+    }
     this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
       this.riskLevel = res.data;
     });
   }
-  getAllChemical() {
+  getAllChemical(data = []) {
+    if (data) {
+      this.allChemicals = data;
+      return
+    }
     this.logicalFormInfo.getAllChemical().subscribe((res: any) => {
       this.allChemicals = res.data;
 
@@ -1218,7 +1315,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
   addItem(type, i) {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: '550px',
-      // height:'50%',
+      height: '60%',
       data: {
         type: type,
         title: ''
@@ -1291,7 +1388,11 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       console.log('The dialog was closed');
     });
   }
-  getAllRegulator() {
+  getAllRegulator(data = []) {
+    if (data) {
+      this.regulatorData = data;
+      return
+    }
     this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
       console.log("this.regulatorData", res.data)
       this.regulatorData = res.data;
@@ -1299,19 +1400,31 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     })
   }
 
-  getAllSafe() {
+  getAllSafe(data = []) {
+    if (data) {
+      this.safety = data
+      return
+    }
     this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
       console.log("this.safety", res)
       this.safety = res.data
     })
   }
-  getAllJurisdiction() {
+  getAllJurisdiction(data = []) {
+    if (data) {
+      this.JurisdictionData = data;
+      return
+    }
     this.logicalFormInfo.getAllJurisdiction().subscribe((res: any) => {
       console.log('JurisdictionData=>', res);
       this.JurisdictionData = res.data;
     });
   }
-  getAllState() {
+  getAllState(data = []) {
+    if (data) {
+      this.states = data;
+      return
+    }
     this.logicalFormInfo.getAllStates().subscribe((res: any) => {
       console.log('getAllStates=>', res);
       this.states = res.data;
@@ -1345,22 +1458,22 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
       codeOfPract: this.allCOPSelected,
       identifyHazards: this.jobTaskSelected,
 
-      jobTaskDataArr:this.jobTaskData,
-      PPEselectionArr:this.PPEselection,
-      highRiskConstructionArr:this.highRiskConstruction,
-      licenseAndQualificationArr:this.licenseAndQualification,
-      projectMangArr:this.projectMang,
-      allJobNumbersArr:this.allJobNumbers,
-      resiRiskLevelArr:this.resiRiskLevel,
-      staffArr:this.staff,
-      riskLevelArr:this.riskLevel,
-      allChemicalsArr:this.allChemicals,
-      allHazardsArr:this.allHazards,
-      allContrlActReqArr:this.allContrlActReq,
-      regulatorDataArr:this.regulatorData,
-      safetyArr:this.safety,
-      statesArr:this.states,
-      JurisdictionDataArr:this.JurisdictionData
+      jobTaskDataArr: this.jobTaskData,
+      PPEselectionArr: this.PPEselection,
+      highRiskConstructionArr: this.highRiskConstruction,
+      licenseAndQualificationArr: this.licenseAndQualification,
+      projectMangArr: this.projectMang,
+      allJobNumbersArr: this.allJobNumbers,
+      resiRiskLevelArr: this.resiRiskLevel,
+      staffArr: this.staff,
+      riskLevelArr: this.riskLevel,
+      allChemicalsArr: this.allChemicals,
+      allHazardsArr: this.allHazards,
+      allContrlActReqArr: this.allContrlActReq,
+      regulatorDataArr: this.regulatorData,
+      safetyArr: this.safety,
+      statesArr: this.states,
+      JurisdictionDataArr: this.JurisdictionData
     }
     console.log("data", data);
     if (this.id !== 'form') {
@@ -1382,7 +1495,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
           showConfirmButton: false,
           timer: 1200,
         });
-        this.router.navigate(['/admin/forms/fillConfigForm/'+0]);
+        this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
         console.log("this.riskAssessmentFb posted", res);
       })
     }
@@ -1403,8 +1516,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     //  // a= a.splice(0,4,'12:30:00')
     //    console.log(" event.terget.valueeeeee",this.timepicker,d);
   }
-  getTime(event,timePicker) {
-    console.log("this.dateGet",this.dateGet)
+  getTime(event, timePicker) {
+    console.log("this.dateGet", this.dateGet)
     let time = event
     console.log("time", timePicker)
     let timeArr = []
@@ -1412,12 +1525,12 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit ,OnDes
     this.dateGet.setHours(timeArr[0])
     this.dateGet.setMinutes(timeArr[1])
     console.log("timepicker", this.dateGet)
-  let a=new Date(this.dateGet).toUTCString()
-   console.log("UTC",a)
-let b=new Date(a).toISOString()
-console.log("toISOString",b)
+    let a = new Date(this.dateGet).toUTCString()
+    console.log("UTC", a)
+    let b = new Date(a).toISOString()
+    console.log("toISOString", b)
     this.riskAssessmentFb.get("dateTime").setValue(b)
-   
+
 
 
   }

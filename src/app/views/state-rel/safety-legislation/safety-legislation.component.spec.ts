@@ -8,9 +8,9 @@ describe('SafetyLegislationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SafetyLegislationComponent ]
+      declarations: [SafetyLegislationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

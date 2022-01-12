@@ -10,11 +10,11 @@ import Swal from 'sweetalert2';
 })
 export class EditRateAndCouponComponent implements OnInit {
   editSubcriptionForm: FormGroup;
-  couponData:any;
-  couponsId:any=[];
+  couponData: any;
+  couponsId: any = [];
   dataRec: any;
   coupon: any;
-  
+
   constructor(
     private dialogRef: MatDialogRef<EditRateAndCouponComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,17 +31,17 @@ export class EditRateAndCouponComponent implements OnInit {
     this.dataRec.coupons.forEach(element => {
       this.couponsId.push(element._id)
     });
-    console.log("this.couponsId",this.couponsId);
-    
+    console.log("this.couponsId", this.couponsId);
+
     this.editSubcriptionForm = this.fb.group({
-      monthly: [this.dataRec.monthly,Validators.required],
-      defaultMonthly: [this.dataRec.defaultMonthly,Validators.required],
-      defaultEmp: [this.dataRec.defaultEmp,Validators.required],
-      yearlyDiscount: [this.dataRec.yearlyDiscount,Validators.required],
-      coupons: [this.couponsId,Validators.required],
+      monthly: [this.dataRec.monthly, Validators.required],
+      defaultMonthly: [this.dataRec.defaultMonthly, Validators.required],
+      defaultEmp: [this.dataRec.defaultEmp, Validators.required],
+      yearlyDiscount: [this.dataRec.yearlyDiscount, Validators.required],
+      coupons: [this.couponsId, Validators.required],
     });
   }
- 
+
   onSubmit() {
     let data = {
       monthly: this.editSubcriptionForm.get('monthly').value,
@@ -79,17 +79,17 @@ export class EditRateAndCouponComponent implements OnInit {
   }
   close() {
     this.dialogRef.close();
-}
-getAllCoupon(){
-  this.Subscription.getAllCoupon().subscribe((res)=>{
-    console.log(res)
-    this.couponData = res.data;
-    // couponData.forEach((element, index) => {
-    //   element.index = index + 1; //adding index
-    // });
-   
-  });
-}
+  }
+  getAllCoupon() {
+    this.Subscription.getAllCoupon().subscribe((res) => {
+      console.log(res)
+      this.couponData = res.data;
+      // couponData.forEach((element, index) => {
+      //   element.index = index + 1; //adding index
+      // });
+
+    });
+  }
 
 }
 

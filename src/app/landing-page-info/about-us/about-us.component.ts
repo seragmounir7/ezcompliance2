@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -36,10 +36,10 @@ export class AboutUsComponent implements OnInit {
   Is_id: any;
   closeResult: string;
   mode: any;
-  myId:any;
-  Id:any
+  myId: any;
+  Id: any
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['image','heading', 'subTitle','actions'];
+  displayedColumns: string[] = ['image', 'heading', 'subTitle', 'actions'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   ELEMENTS_DATA = [];
   displayedColumnss: string[] = ['index', 'images', 'title', 'action'];
@@ -74,7 +74,7 @@ export class AboutUsComponent implements OnInit {
   }
   /////////////////////// 61767ab18031f2102a69ef71 it is aboutusId and it never  be change so plz do not remove from this //////////////////
   getTeam() {
-   this.Id ='61767ab18031f2102a69ef71'
+    this.Id = '61767ab18031f2102a69ef71'
     this.landingPageInfo.getAboutUsById(this.Id).subscribe((res) => {
       this.dataSource.data = res.data
       this.dataSource.paginator = this.paginator
@@ -85,9 +85,9 @@ export class AboutUsComponent implements OnInit {
       this.ELEMENTS_DATA = teamData;
       this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
       this.dataSources.paginator = this.paginator;
-      this.dataSources.sort=this.sort;
+      this.dataSources.sort = this.sort;
       // this.teamData = data.data[0];
-      
+
     });
   }
 
@@ -95,13 +95,13 @@ export class AboutUsComponent implements OnInit {
     console.log('sakshi', id);
     this.myId = id;
     this.isEdit = true;
-    this.Id ='61767ab18031f2102a69ef71'
+    this.Id = '61767ab18031f2102a69ef71'
     this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
-         this.teamData = data.data[0];
-       let dialogRef = this.dialog.open(EditTeamInfoComponent, {
+      this.teamData = data.data[0];
+      let dialogRef = this.dialog.open(EditTeamInfoComponent, {
         data: {
           action: 'edit',
-      
+
           EditData: this.teamData,
           index: i,
           moduleName: name,
@@ -147,7 +147,7 @@ export class AboutUsComponent implements OnInit {
     this.hide = false;
   }
   delete(item) {
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete "${item.title}"?`,
@@ -158,11 +158,11 @@ export class AboutUsComponent implements OnInit {
       confirmButtonText: 'Yes, Delete!',
     }).then((result) => {
       if (result.value) {
-       
+
         this.spinner.show()
         this.landingPageInfo.deleteTeam(item._id).subscribe((res) => {
           Swal.fire('Deleted Successfully')
-        
+
           this.getTeam();
           this.ngOnInit();
           this.spinner.hide()
@@ -190,7 +190,7 @@ export class AboutUsComponent implements OnInit {
   //         console.log('dismissed');
   //       }
   //     );
-    
+
   // }
   // delete(item) {
   //   Swal.fire({

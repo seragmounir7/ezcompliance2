@@ -17,9 +17,9 @@ const routes: Routes = [
   { path: 'setJobNumber', component: JobNumberComponent },
   // { path: 'setRelation', component: TestLogicComponent },
   { path: 'setRelation', component: SetRelationComponent },
-  {path:'addTask',component:AddJobTaskComponent},
-  {path:'setHazard',component:HazardTreatmentComponent},
-  {path:'setHazardRelation',component:AddHazardRelationComponent}
+  { path: 'addTask', component: AddJobTaskComponent },
+  { path: 'setHazard', component: HazardTreatmentComponent },
+  { path: 'setHazardRelation', component: AddHazardRelationComponent }
 ];
 
 @NgModule({

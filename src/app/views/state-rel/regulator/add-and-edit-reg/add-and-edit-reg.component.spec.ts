@@ -8,9 +8,9 @@ describe('AddAndEditRegComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddAndEditRegComponent ]
+      declarations: [AddAndEditRegComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

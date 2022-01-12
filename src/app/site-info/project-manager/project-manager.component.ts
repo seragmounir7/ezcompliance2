@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {  ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -19,7 +19,7 @@ export class ProjectManagerComponent implements OnInit {
   jobTaskData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,14 +28,14 @@ export class ProjectManagerComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllProjectMang();
   }
 
-  getAllProjectMang(field="",value="") {
-    this.logicalFormInfo.getAllProjectMang(field,value).subscribe((res:any) => {
+  getAllProjectMang(field = "", value = "") {
+    this.logicalFormInfo.getAllProjectMang(field, value).subscribe((res: any) => {
       console.log('getAllProjectMang=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -50,10 +50,10 @@ export class ProjectManagerComponent implements OnInit {
 
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(AddEditProjMangComponent, {
       width: "550px",
       data: element,
@@ -78,17 +78,17 @@ export class ProjectManagerComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteProjectMang(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Project Manager Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteProjectMang(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Project Manager Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllProjectMang();
+
           });
-          console.log('deleted res', res);
-          this.getAllProjectMang();
-            
-        });
       }
     });
   }
@@ -97,7 +97,7 @@ export class ProjectManagerComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  sortData(sort:Sort) {
-    this.getAllProjectMang(sort.active,sort.direction)
-     }
+  sortData(sort: Sort) {
+    this.getAllProjectMang(sort.active, sort.direction)
+  }
 }

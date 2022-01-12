@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -28,12 +28,12 @@ export class EditResidualRiskLevelComponent implements OnInit {
     });
   }
   onFormSubmit() {
-     
-    let data={
-      title :this.editTitle.get('title').value
+
+    let data = {
+      title: this.editTitle.get('title').value
     }
     this.logicalFormInfo
-      .updateResidual(this.dataRec._id,data)
+      .updateResidual(this.dataRec._id, data)
       .subscribe((resData) => {
         console.log('resData', resData);
 
@@ -42,10 +42,10 @@ export class EditResidualRiskLevelComponent implements OnInit {
           title: 'Residual-Risk Updated successfully',
           showConfirmButton: false,
           timer: 1200,
-        });     
-       });
+        });
+      });
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close('false');
 
   }

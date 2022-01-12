@@ -1,7 +1,8 @@
+import { DirectivesModule } from './../../Directives/directives.module';
 import { TextareaAutoresizeDirective } from './../../Directives/textarea-autoresize.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 //import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
@@ -21,8 +22,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SiteInspectionTableComponent } from './site-inspection-table/site-inspection-table.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from 'src/app/interceptor/spinner.interceptor';
-import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
-import {AutosizeModule} from 'ngx-autosize';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { AutosizeModule } from 'ngx-autosize';
 import { MatInputModule } from '@angular/material/input';
 import { HazardFormTableDetailsComponent } from './hazard-form-table-details/hazard-form-table-details.component';
 import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
@@ -32,7 +33,7 @@ import { FillConfiguredFormComponent } from './fill-configured-form/fill-configu
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     FormsComponent,
@@ -51,6 +52,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ],
   imports: [
     CommonModule,
+    DirectivesModule,
     FormsRoutingModule,
     ReactiveFormsModule,
     SignaturePadModule,
@@ -59,7 +61,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     CKEditorModule,
     NgxMatTimepickerModule,
     AutosizeModule,
-    MatAutocompleteModule ,
+    MatAutocompleteModule,
     MatInputModule,
     MatDatepickerModule,
     DynamicFormModule,
@@ -67,15 +69,15 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AngularSvgIconPreloaderModule,
     AngularSvgIconModule,
     MatTooltipModule
-    
+
   ],
-  providers:[
+  providers: [
     TextareaAutoresizeDirective,
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:SpinnerInterceptor,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
     }
   ]
 })
-export class FormsModule1 {}
+export class FormsModule1 { }

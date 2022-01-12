@@ -1,71 +1,55 @@
-<section [formGroup]="addJobNumberForm" >
+<section [formGroup]="addJobNumberForm">
   <div>
     <div mat-dialog-title class="dialog-title">
-    <h1>Create Job Number</h1>
-    <button type="button" class="close" 
-    style="font-size: 25px;"
-      (click)="close()" aria-label="Close">
-    <span aria-hidden="true">×</span>
-  </button>
-  </div>
+      <h1>Create Job Number</h1>
+      <button type="button" class="close" style="font-size: 25px;" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
     <div class="row">
-  
+
       <div class="my-3 col-6">
         <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
-        <select
-          type="text"
-          class="form-control"
-          formControlName="siteName"
-          id="siteName"
-        >
+        <select type="text" class="form-control" formControlName="siteName" id="siteName">
           <option [value]="item|json" *ngFor="let item of allSites ">{{item.siteName}}</option>
         </select>
       </div>
-    
+      <div class="my-3 col-6">
+        <p for="exampleFormControlInput1" class="form-Label">Enter Custom Job No:</p>
+        <div style="display: flex;">
+          <mat-checkbox #check style="margin: 3%;" (change)="jobNumberChecked($event)"></mat-checkbox>
+          <input type="text" class="form-control" formControlName="jobNumber" val *ngIf="check.checked"
+            [ngClass]="{'is-invalid': jobHasError}">
+          <div class="invalid-feedback">
+            <div>Job Number Is Required!</div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-  
-    
+
+
     <div class="row">
       <div class="my-3 col-2">
         <p for="exampleFormControlInput1" class="form-Label">Street Number</p>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="streetNumber"
-          id="siteName"
-        />
+        <input type="text" class="form-control" formControlName="streetNumber" id="siteName" />
       </div>
       <div class="my-3 col-4">
         <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="streetAddress"
-          id="siteName"
-        />
+        <input type="text" class="form-control" formControlName="streetAddress" id="siteName" />
       </div>
       <div class="my-3 col-2">
         <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="suburb"
-          id="siteName"
-        />
+        <input type="text" class="form-control" formControlName="suburb" id="siteName" />
       </div>
       <div class="my-3 col-4">
-          <p for="exampleFormControlInput1" class="form-label"
-          >State</p
-        >
+        <p for="exampleFormControlInput1" class="form-label">State</p>
 
-          <select
-        class="form-select form-control col"
-        aria-label="Default select example"
-        formControlName="state"
-      >
-      <option selected hidden>Select</option>
-      <option *ngFor ="let item of allState" [value]="item._id">{{item.title}}</option>
-        <!-- <option selected hidden>Select</option>
+        <select class="form-select form-control col" aria-label="Default select example" formControlName="state">
+          <option selected hidden>Select</option>
+          <option *ngFor="let item of allState" [value]="item._id">{{item.title}}</option>
+          <!-- <option selected hidden>Select</option>
               <option value="NSW">NSW</option>
               <option value="ACT">ACT</option>
               <option value="QLD">QLD</option>
@@ -75,57 +59,37 @@
               <option value="TAS">TAS</option>
               <option value="VIC">VIC</option>
               <option value="WA">WA</option> -->
-      </select>
-    
+        </select>
+
       </div>
     </div>
     <div class="row">
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
-        <select
-          type="text"
-          class="form-control"
-          formControlName="customerName"
-          id="siteName"
-        >
+        <select type="text" class="form-control" formControlName="customerName" id="siteName">
           <option [value]="item|json" *ngFor="let item of allCustomers ">{{item.customerName}}</option>
         </select>
       </div>
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Customer Contact</p>
-        <input
-          type="text"
-          class="form-control"
-          id="siteName"
-          formControlName="customerContact"
-        />
+        <input type="text" class="form-control" id="siteName" formControlName="customerContact" />
       </div>
     </div>
     <div class="row">
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Customer Contact Phone</p>
-        <input
-          type="text"
-          class="form-control"
-          id="siteName"
-          formControlName="customerContactPhone"
-        />
+        <input type="text" class="form-control" id="siteName" formControlName="customerContactPhone" />
       </div>
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Customer Email</p>
-        <input
-          type="text"
-          class="form-control"
-          id="siteName"
-          formControlName="customerEmail"
-        />
+        <input type="text" class="form-control" id="siteName" formControlName="customerEmail" />
       </div>
-    </div> 
-  <div >
-    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="addJobNumberForm.invalid " >
-      Create
-    </button>
-  </div>
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="onSubmit()" [disabled]="addJobNumberForm.invalid ">
+        Create
+      </button>
+    </div>
     <!-- <div class="row">
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">
@@ -149,6 +113,4 @@
       </div>
     </div> -->
   </div>
-  </section>
-  
- 
+</section>

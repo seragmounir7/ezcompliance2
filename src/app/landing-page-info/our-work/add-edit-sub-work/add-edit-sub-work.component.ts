@@ -37,12 +37,12 @@ export class AddEditSubWorkComponent implements OnInit {
     private url: LandingPageInfoServiceService,
     public dialogRef: MatDialogRef<AddEditSubWorkComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log(data)
-      this.Is_Mod = data.moduleName;
-      this.Is_subMod = data.modulename;
-     
-       console.log( this.Is_Mod)
-    
+    console.log(data)
+    this.Is_Mod = data.moduleName;
+    this.Is_subMod = data.modulename;
+
+    console.log(this.Is_Mod)
+
     this.SubWorkDetail = this.fb.group({
       title: ['', Validators.required],
       mode: 'System',
@@ -52,67 +52,67 @@ export class AddEditSubWorkComponent implements OnInit {
     });
   }
 
- 
+
   ngOnInit(): void {
     this.addAction();
     this.Eddit();
-  this.Added();
+    this.Added();
 
-  if (this.Is_Mod == true) {
-    this.subModule = true;
-    this.module = false;
-  }
-  if (this.Is_Mod == false) {
-    this.module = true;
-    this.subModule = false;
-  }
-  
-  if (this.data.action == 'edit') {
-    this.Update = true;
-    console.log(" subTitle",this.data)
-    this.SubWorkDetail.patchValue({
-    mode: 'System',
-    title: this.data.EditData.title,
-   });
-  
-    this.add().at(0).patchValue({
-      
-     title: this.data.EditData.subModules[this.data.index].title,
+    if (this.Is_Mod == true) {
+      this.subModule = true;
+      this.module = false;
+    }
+    if (this.Is_Mod == false) {
+      this.module = true;
+      this.subModule = false;
+    }
 
-      description: this.data.EditData.subModules[this.data.index].description,
-    });
-    
-    (this.selectedImage = this.data.EditData.subModules[
-      this.data.index
-    ].fileUrl),
-      console.log('img', this.selectedImage);
-     
-  }
-  
-  let index = this.data.index;
-  console.log(index,"index")
-  this.subId = this.data.EditData.subModules[index]._id;
-  console.log(this.subId,"subId")
+    if (this.data.action == 'edit') {
+      this.Update = true;
+      console.log(" subTitle", this.data)
+      this.SubWorkDetail.patchValue({
+        mode: 'System',
+        title: this.data.EditData.title,
+      });
 
-  
-}
-Added() {
-  if (this.Edit == true) {
-    this.Edit = false;
-    this.Add = true;
-  } else {
-    this.Add = true;
-  }
-}
+      this.add().at(0).patchValue({
 
-Eddit() {
-  if (this.Add == true) {
-    this.Add = false;
-    this.Edit = true;
-  } else {
-    this.Edit = true;
+        title: this.data.EditData.subModules[this.data.index].title,
+
+        description: this.data.EditData.subModules[this.data.index].description,
+      });
+
+      (this.selectedImage = this.data.EditData.subModules[
+        this.data.index
+      ].fileUrl),
+        console.log('img', this.selectedImage);
+
+    }
+
+    let index = this.data.index;
+    console.log(index, "index")
+    this.subId = this.data.EditData.subModules[index]._id;
+    console.log(this.subId, "subId")
+
+
   }
-}
+  Added() {
+    if (this.Edit == true) {
+      this.Edit = false;
+      this.Add = true;
+    } else {
+      this.Add = true;
+    }
+  }
+
+  Eddit() {
+    if (this.Add == true) {
+      this.Add = false;
+      this.Edit = true;
+    } else {
+      this.Edit = true;
+    }
+  }
   addAction() {
     {
       this.add().push(this.newAction());
@@ -128,7 +128,7 @@ Eddit() {
       description: ['', Validators.required],
     });
   }
- removeSafetyModule(i) {
+  removeSafetyModule(i) {
     const item = <FormArray>this.SubWorkDetail.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
@@ -178,7 +178,7 @@ Eddit() {
 
     // this.url.addSubWork(this.SubWorkDetail.value).subscribe((res) => {
     //   console.log('AddProductComponent -> browser -> res', res);
-    
+
     //   console.log(
     //     'AddProductComponent -> browse -> this.selectedImage',
     //     this.selectedImage
@@ -194,7 +194,7 @@ Eddit() {
       console.log('asdfgh', ServiceData);
       console.log('this.EditData', this.data.EditData._id);
       this.url
-        .editModule(ServiceData,this.data.EditData._id)
+        .editModule(ServiceData, this.data.EditData._id)
         .subscribe((resData) => {
           Swal.fire('Edited Successfully')
           console.log('editModule', resData);
@@ -213,10 +213,10 @@ Eddit() {
         fileUrl: this.selectedImage,
         description: this.add().at(0).get('description')?.value,
       };
-  console.log(" submodulesData", submodulesData)
-  
+      console.log(" submodulesData", submodulesData)
+
       this.url
-        .editsubModule(submodulesData,this.subId)
+        .editsubModule(submodulesData, this.subId)
         .subscribe((resData) => {
           Swal.fire('Edited Successfully')
           console.log('submodulesData', resData);
@@ -224,11 +224,11 @@ Eddit() {
           this.dialogRef.close('true');
           this.SubWorkDetail.reset();
         });
-    } 
-    
+    }
+
   }
   close() {
-   this.dialogRef.close();
+    this.dialogRef.close();
   }
 }
 

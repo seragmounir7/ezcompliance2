@@ -1,68 +1,42 @@
-
-
-<div
-class="container px-4 py-4 card"
-[formGroup]="SubWorkDetail"
-
->
-<div mat-dialog-title class="dialog-title">
-  <h2 class="text-center pt-2">
-    <p style="text-align: center"> Edit Work Details Info</p>
-  </h2>
-  <button type="button" class="close" 
-  style="font-size: 40px;"
-
-(click)="close()" aria-label="Close">
-  <span aria-hidden="true">×</span>
-</button>
+<div class="container px-4 py-4 card" [formGroup]="SubWorkDetail">
+  <div mat-dialog-title class="dialog-title">
+    <h2 class="text-center pt-2">
+      <p style="text-align: center"> Edit Work Details Info</p>
+    </h2>
+    <button type="button" class="close" style="font-size: 40px;" (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
   </div>
-<hr />
+  <hr />
 
-<div>
-  <div class="row" *ngIf="module">
-    <div class="col-sm-6">
-      <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-      <input
-        type="text"
-        formControlName="title"
-        class="form-control sign"
-        id="title"
-      />
+  <div>
+    <div class="row" *ngIf="module">
+      <div class="col-sm-6">
+        <p for="exampleFormControlInput1" class="form-Label">Heading</p>
+        <input type="text" formControlName="title" class="form-control sign" id="title" />
+      </div>
+
     </div>
-
-  </div>
-  <div *ngIf="subModule">
-  <ng-container formArrayName="arrObj">
-    <ng-container
-      *ngFor="let control of add().controls; let i = index"
-      [formGroupName]="i"
-    >
-      <div>
-        <div class="row">
-          <div class="col-5 my-3">
-            <p for="exampleFormControlInput1" class="form-Label">
-              Title
-            </p>
-            <input
-              type="text"
-              formControlName="title"
-              class="form-control sign"
-              id="title"
-            />
-          </div>
-          <div class="col-6 my-3">
-              <p for="exampleFormControlInput1" class="form-Label">
-                Description
-              </p>
-              <textarea
-                type="text"
-                formControlName="description"
-                class="form-control sign"
-                id="description"
-              ></textarea>
+    <div *ngIf="subModule">
+      <ng-container formArrayName="arrObj">
+        <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
+          <div>
+            <div class="row">
+              <div class="col-5 my-3">
+                <p for="exampleFormControlInput1" class="form-Label">
+                  Title
+                </p>
+                <input type="text" formControlName="title" class="form-control sign" id="title" />
+              </div>
+              <div class="col-6 my-3">
+                <p for="exampleFormControlInput1" class="form-Label">
+                  Description
+                </p>
+                <textarea type="text" formControlName="description" class="form-control sign"
+                  id="description"></textarea>
+              </div>
             </div>
-        </div>
-        <!-- <div class="row">
+            <!-- <div class="row">
        <div class="my-3 col-3">
             <p for="exampleFormControlInput1" class="form-Label">
               UploadImage
@@ -103,30 +77,20 @@ class="container px-4 py-4 card"
             </span>
           </div>
         </div> -->
-      </div>
-      <hr />
-    </ng-container>
-  </ng-container>
-  </div>
- <br>
+          </div>
+          <hr />
+        </ng-container>
+      </ng-container>
+    </div>
+    <br>
 
-  <div class="col-md-2">
-      <button
-        type="submit"
-        class="btn btn-primary btn-block"
-        *ngIf="module"
-        (click)="editModule()"
-      >
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary btn-block" *ngIf="module" (click)="editModule()">
         Update
       </button>
-      <button
-        type="submit"
-        class="btn btn-primary btn-block"
-        *ngIf="subModule"
-        (click)="editSubModule()"
-      >
+      <button type="submit" class="btn btn-primary btn-block" *ngIf="subModule" (click)="editSubModule()">
         Update
       </button>
     </div>
-</div>
+  </div>
 </div>

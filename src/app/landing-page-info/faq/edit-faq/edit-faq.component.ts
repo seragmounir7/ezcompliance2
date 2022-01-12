@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject  } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -18,8 +18,8 @@ export class EditFaqComponent implements OnInit {
     public dialogRef: MatDialogRef<EditFaqComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-     this.dataRec = data;
-   
+    this.dataRec = data;
+
   }
 
   ngOnInit(): void {
@@ -31,9 +31,9 @@ export class EditFaqComponent implements OnInit {
   onFormSubmit() {
     let data = {
       title: this.editPortal.get('title').value,
-     
+
     };
-    console.log("porataldata",data, this.dataRec._id)
+    console.log("porataldata", data, this.dataRec._id)
     this.landingPageInfo
       .editportal(data, this.dataRec._id)
       .subscribe((resData) => {
@@ -70,7 +70,7 @@ export class EditFaqComponent implements OnInit {
       }
     });
   }
- 
+
   closeDialog() {
     this.dialogRef.close('false');
   }

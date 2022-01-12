@@ -8,9 +8,9 @@ describe('RoleManagementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoleManagementComponent ]
+      declarations: [RoleManagementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

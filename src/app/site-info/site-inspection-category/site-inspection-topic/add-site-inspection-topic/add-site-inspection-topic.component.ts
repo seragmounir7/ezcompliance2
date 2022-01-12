@@ -17,7 +17,7 @@ export class AddSiteInspectionTopicComponent implements OnInit {
     private logicalFormInfoService: LogicalFormInfoService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.categoryId = this.activatedRoute.snapshot.params.id;

@@ -8,9 +8,9 @@ describe('CodeOfPractComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CodeOfPractComponent ]
+      declarations: [CodeOfPractComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

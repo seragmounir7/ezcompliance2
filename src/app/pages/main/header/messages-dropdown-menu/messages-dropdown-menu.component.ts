@@ -22,9 +22,9 @@ export class MessagesDropdownMenuComponent implements OnInit {
   //   }
   // }
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // toggleDropdownMenu() {
   //   if (this.dropdownMenu.nativeElement.classList.contains('show')) {

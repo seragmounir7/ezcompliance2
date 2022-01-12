@@ -8,7 +8,7 @@ import { SetTitleService } from '../utils/services/set-title.service';
 })
 export class SiteInfoComponent implements OnInit {
 
-  constructor(private setTitle:SetTitleService) { }
+  constructor(private setTitle: SetTitleService) { }
 
   ngOnInit(): void {
     this.setTitle.setTitle('WHS-Site Info');

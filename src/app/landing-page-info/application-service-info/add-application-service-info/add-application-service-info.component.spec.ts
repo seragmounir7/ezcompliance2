@@ -8,9 +8,9 @@ describe('AddApplicationServiceInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddApplicationServiceInfoComponent ]
+      declarations: [AddApplicationServiceInfoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

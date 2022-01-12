@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { FormBuilder, FormGroup,  Validators,FormArray,} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,17 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-risk-level.component.scss']
 })
 export class AddRiskLevelComponent implements OnInit {
-  addRiskForm:FormGroup;
+  addRiskForm: FormGroup;
   numberOfLineBreaks: any;
-  constructor( 
-    private fb:FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private logicalFormInfo: LogicalFormInfoService,
     private router: Router,
-    ) { 
-      this.addRiskForm=this.fb.group({
-        arrObj: this.fb.array([]),
-      })
-    }
+  ) {
+    this.addRiskForm = this.fb.group({
+      arrObj: this.fb.array([]),
+    })
+  }
 
   ngOnInit(): void {
     this.addRisk();
@@ -34,33 +34,33 @@ export class AddRiskLevelComponent implements OnInit {
   }
   newAction(): FormGroup {
     return this.fb.group({
-     
+
       title: ['', Validators.required],
     });
   }
-  
+
   removeRisk(i) {
     const item = <FormArray>this.addRiskForm.controls['arrObj'];
     if (item.length > 1) {
       item.removeAt(i);
-    
+
     }
   }
   onFormSubmit() {
     console.log(this.addRiskForm.value);
-    let data={
-      arrObj:this.addRiskForm.get('arrObj').value
+    let data = {
+      arrObj: this.addRiskForm.get('arrObj').value
     }
     this.logicalFormInfo.addMultipleRiskLevel(data).subscribe((data) => {
       console.log('chemical=>', data);
-      this.router.navigate(['/admin/siteInfo/riskLevel']);      
-    },(err)=>{console.error(err);} 
-  
+      this.router.navigate(['/admin/siteInfo/riskLevel']);
+    }, (err) => { console.error(err); }
+
     );
-    
+
   }
   calcHeight(value) {
-    this.numberOfLineBreaks = (value.match(/\n/g) || []).length+1;
-    console.log("numberOfLineBreaks",this.numberOfLineBreaks)
+    this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
+    console.log("numberOfLineBreaks", this.numberOfLineBreaks)
   }
 }

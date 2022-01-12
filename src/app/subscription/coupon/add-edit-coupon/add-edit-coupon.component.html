@@ -1,15 +1,13 @@
 <section [formGroup]="couponDetails">
-  <div >
+  <div>
     <div mat-dialog-title class="dialog-title">
-    <h3 *ngIf="!dataRec">Add Coupon Details</h3>
-    <h3 *ngIf="dataRec">Edit Coupon Details </h3>
-    <button type="button" class="close" 
-    style="font-size: 25px;"
-      (click)="close()" aria-label="Close">
-    <span aria-hidden="true">×</span>
-  </button>
-  </div>
-  <hr>
+      <h3 *ngIf="!dataRec">Add Coupon Details</h3>
+      <h3 *ngIf="dataRec">Edit Coupon Details </h3>
+      <button type="button" class="close" style="font-size: 25px;" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <hr>
     <div class="row">
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Coupon Name</p>
@@ -23,7 +21,7 @@
 
     <hr>
     <div>
-      <button class="btn btn-primary" *ngIf="dataRec"    (click)="onSubmit()">
+      <button class="btn btn-primary" *ngIf="dataRec" (click)="onSubmit()">
         Update
       </button>
       <button class="btn btn-primary" *ngIf="!dataRec" [disabled]="couponDetails.invalid " (click)="addForm()">

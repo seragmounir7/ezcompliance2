@@ -8,9 +8,9 @@ describe('IdentifyHazardsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IdentifyHazardsComponent ]
+      declarations: [IdentifyHazardsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

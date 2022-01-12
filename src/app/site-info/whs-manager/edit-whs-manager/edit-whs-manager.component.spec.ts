@@ -8,9 +8,9 @@ describe('EditWhsManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditWhsManagerComponent ]
+      declarations: [EditWhsManagerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

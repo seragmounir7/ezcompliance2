@@ -17,7 +17,7 @@ export class JuridictionComponent implements OnInit {
   regData: any = [];
   ELEMENT_DATA = [];
   /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title' ,'action'];
+  displayedColumns: string[] = ['index', 'title', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,14 +26,14 @@ export class JuridictionComponent implements OnInit {
   }
   /////////////mat table end////////////////
 
-  constructor(private logicalFormInfo: LogicalFormInfoService,private dialog:MatDialog) {}
+  constructor(private logicalFormInfo: LogicalFormInfoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllJurisdiction();
   }
 
-  getAllJurisdiction(field="",value="") {
-    this.logicalFormInfo.getAllJurisdiction(field,value).subscribe((res) => {
+  getAllJurisdiction(field = "", value = "") {
+    this.logicalFormInfo.getAllJurisdiction(field, value).subscribe((res) => {
       console.log('getAllJurisdiction=>', res);
       // this.jobTaskData = res.data[0].subComponents;
       let data = res.data;
@@ -47,10 +47,10 @@ export class JuridictionComponent implements OnInit {
       // this.dataSource.sort = this.sort;
       //  this.task = res.data.subComponents;
     });
- 
+
   }
-  
-  edit(element){
+
+  edit(element) {
     const dialogRef = this.dialog.open(AddAndEditJuriComponent, {
       width: "550px",
       data: element,
@@ -75,22 +75,22 @@ export class JuridictionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.logicalFormInfo
-        .deleteJurisdiction(item._id)
-        .subscribe((res) => {
-          Swal.fire({
-            title: 'Jurisdiction Deleted successfully',
-            showConfirmButton: false,
-            timer: 1200,
+          .deleteJurisdiction(item._id)
+          .subscribe((res) => {
+            Swal.fire({
+              title: 'Jurisdiction Deleted successfully',
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            console.log('deleted res', res);
+            this.getAllJurisdiction();
+
           });
-          console.log('deleted res', res);
-          this.getAllJurisdiction();
-            
-        });
       }
     });
   }
   sortData(sort: Sort) {
- 
-    this.getAllJurisdiction(sort.active,sort.direction)
-     }
+
+    this.getAllJurisdiction(sort.active, sort.direction)
+  }
 }

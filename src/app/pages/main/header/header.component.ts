@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private appService: AppService,
     private dynamicFormsService: DynamicFormsService
-  ) {}
+  ) { }
   currentComp = 'admin';
   ngOnInit() {
     this.searchForm = new FormGroup({
