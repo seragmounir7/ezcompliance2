@@ -35,9 +35,7 @@
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-          <a href="#" class="small-box-footer"
-            >More info <i class="fas fa-arrow-circle-right"></i
-          ></a>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -52,9 +50,7 @@
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="#" class="small-box-footer"
-            >More info <i class="fas fa-arrow-circle-right"></i
-          ></a>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -69,9 +65,7 @@
           <div class="icon">
             <i class="ion ion-person-add"></i>
           </div>
-          <a href="#" class="small-box-footer"
-            >More info <i class="fas fa-arrow-circle-right"></i
-          ></a>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -86,9 +80,7 @@
           <div class="icon">
             <i class="ion ion-pie-graph"></i>
           </div>
-          <a href="#" class="small-box-footer"
-            >More info <i class="fas fa-arrow-circle-right"></i
-          ></a>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -100,68 +92,240 @@
 <!-- /.content -->
 
 <!--Canvas Sections-->
-<section class="geaphicalSectionContainer">
-	<div class="container">
-		<div class="row">
-			<div class="col-6">
-				<div class="firstCanvasBlk setSecty">
-					<div class="shadowBxSet" style="display: block;">
-						<canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColor" [options]="chartOptions">
-						</canvas>
-					</div>
-				</div>
-				
-				<div class="secndCanvasBlk setSecty">
-					<div class="shadowBxSet">
-						<ul class="setCanvasList">
-							<li>
-								<p class="text-center m-0">Low</p>
-								<canvas baseChart [data]="doughnutChartData1" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
-								</canvas>
-							</li>
-							<li>
-								<p class="text-center m-0">Medium</p>
-								<canvas baseChart [data]="doughnutChartData2" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
-								</canvas>
-							</li>
-							<li>
-								<p class="text-center m-0">High</p>
-								<canvas baseChart [data]="doughnutChartData3" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
-								</canvas>
-							</li>
-							<li>
-								<p class="text-center m-0">Critical</p>
-								<canvas baseChart [data]="doughnutChartData4" [labels]="doughnutChartLabels1" [chartType]="doughnutChartType" [colors]="doughnutChartColor">
-								</canvas>
-							</li>
-						</ul>
-					</div>
-				</div>
-				
-				<div class="setSecty thrdCanvasBlk">
-					<div class="shadowBxSet">
-						<canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
-						</canvas>
-					</div>
-				</div>
-			
-			</div>
-			<div class="col-6">
-				<div class="setSecty forthCanvasBlk">
-					<div class="shadowBxSet">
-						<canvas baseChart [datasets]="barChartDataH" [labels]="barChartLabelsH" [options]="barChartOptions" [legend]="barChartLegendH" [chartType]="barChartTypeH" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="horiztChartColor">
+<section  class="geaphicalSectionContainer">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="firstCanvasBlk setSecty">
+          <div class="shadowBxSet" style="display: block;">
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+              [colors]="doughnutChartColor" [options]="chartOptions">
             </canvas>
-					</div>
-				</div>
-				<div class="setSecty fifthCanvasBlk">
-					<div class="shadowBxSet">
-						<agm-map [latitude]="lat" [longitude]="lng">
-							<agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng">
-							</agm-marker>
-						</agm-map>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+          </div>
+        </div>
+
+        <div class="secndCanvasBlk setSecty">
+          <div class="shadowBxSet">
+            <ul class="setCanvasList">
+              <li>
+                <p class="text-center m-0">Low</p>
+                <canvas baseChart [data]="doughnutChartData1" [labels]="doughnutChartLabels1"
+                  [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                </canvas>
+              </li>
+              <li>
+                <p class="text-center m-0">Medium</p>
+                <canvas baseChart [data]="doughnutChartData2" [labels]="doughnutChartLabels1"
+                  [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                </canvas>
+              </li>
+              <li>
+                <p class="text-center m-0">High</p>
+                <canvas baseChart [data]="doughnutChartData3" [labels]="doughnutChartLabels1"
+                  [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                </canvas>
+              </li>
+              <li>
+                <p class="text-center m-0">Critical</p>
+                <canvas baseChart [data]="doughnutChartData4" [labels]="doughnutChartLabels1"
+                  [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                </canvas>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="setSecty thrdCanvasBlk">
+          <div class="shadowBxSet">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+              [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
+            </canvas>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-6">
+        <div class="setSecty forthCanvasBlk">
+          <div class="shadowBxSet">
+            <canvas baseChart [datasets]="barChartDataH" [labels]="barChartLabelsH" [options]="barChartOptions"
+              [legend]="barChartLegendH" [chartType]="barChartTypeH" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)" [colors]="horiztChartColor">
+            </canvas>
+          </div>
+        </div>
+        <div class="setSecty fifthCanvasBlk">
+          <div class="shadowBxSet">
+            <agm-map [latitude]="lat" [longitude]="lng">
+              <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng">
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- new DashBoard  -->
+<div class="container" *ngIf="false">
+  <h1 class="text-center">WHS performance Indicators </h1>
+  <div class="row">
+
+    <div class="col-md-4 ">
+      <table class="table table-bordered ">
+        <thead>
+          <tr>
+            <th> Month</th>
+            <th>Year</th>
+            <th>Site</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>January</td>
+            <td>2021</td>
+            <td>All Sites</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-md-8 ">
+
+      <div class="row">
+        <div class="col-md-12 ">
+          <div class="flex-container">
+            <div style="background-color: #FFDF00;border-radius: 5px;">
+              <h5>Near Miss</h5>
+              <b>3</b>
+            </div>
+            <div style="background-color: #66CDAA;border-radius: 5px;">
+              <h5>First Aid Treatments</h5>
+              <b>1</b>
+            </div>
+            <div style="background-color: #7FFFD4;border-radius: 5px;">
+              <h5>Medical Treatments</h5>
+              <b>1</b>
+            </div>
+            <div style="background-color: #E2F516;border-radius: 5px;">
+              <h5>Lost Time Injury</h5>
+              <b>1</b>
+            </div>
+            <div style="background-color: #FFA500;border-radius: 5px;">
+              <h5>Death or Series Injury</h5>
+              <b>0</b>
+            </div>
+          </div>
+
+        </div>
+
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="flex-container">
+            <div style="background-color: #659EC7;border-radius: 5px;">
+              <h5>Risk Assessments</h5>
+              <b>6</b>
+            </div>
+            <div style="background-color: #FFDF00;border-radius: 5px;">
+              <h5>SWMS</h5>
+              <b>6</b>
+            </div>
+            <div style="background-color: #FF0000;border-radius: 5px;">
+              <h5>Tool Box Talks</h5>
+              <b>8</b>
+            </div>
+            <div style="background-color: #1589FF;border-radius: 5px;">
+              <h5>Incident Reports</h5>
+              <b>1</b>
+            </div>
+            <div style="background-color: #737CA1;border-radius: 5px;">
+              <h5>Hazard Reports</h5>
+              <b>3</b>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6  p-2">
+      <table class="table table-bordered table-sm tab">
+        <thead>
+          <tr>
+            <th colspan="4" class="text-center">Corrective Actions</th>
+          </tr>
+          <tr>
+            <th>Item</th> 
+            <th>Action</th>
+            <th>Person Responsible</th>
+            <th>Due Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let a of corrAct'>
+            <td>{{a.Item}}</td>
+            <td>{{a.Action}}</td>
+            <td>{{a.personResposibility}}</td>
+            <td>{{a.date}}</td>
+          </tr>
+         
+        </tbody>
+      </table>
+      <!-- pie Chart -->
+      <div>
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+              [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
+            </canvas>
+      </div> 
+    </div>
+    <div class="col-md-3  p-2">
+      <table class="table table-bordered tab">
+        <thead>
+          <tr>
+            <th colspan="4" class="text-center">Expiry Reminders</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Expiry Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let b of expRem'>
+            <td><b>{{b.name}}</b></td>
+            <td>{{b.type}}</td>
+            <td>{{b.expdate}}</td>
+          </tr>
+         </tbody>
+
+      </table>
+    </div>
+    <div class="col-md-3 p-2">
+      <table class="table table-bordered tab">
+        <thead>
+          <tr>
+            <th colspan="2">WHS Audit and Forms Completed</th>
+          </tr>
+          <tr>
+            <th>Audit</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let c of auditAndForm'>
+            <td>{{c.audit}}</td>
+            <td>{{c.quantity}}</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
