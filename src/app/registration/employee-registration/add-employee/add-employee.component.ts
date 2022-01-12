@@ -345,6 +345,19 @@ export class AddEmployeeComponent implements OnInit {
             modelNumber: item.controls.modelNumber.value,
             serialNumber: item.controls.serialNumber.value,
             serviceRenewDate: item.controls.serviceRenewDate.value,
+            plantName:item.controls.plantName.value,
+            checkedOut: item.controls.checkedOut.value,
+            hours: item.controls.hours.value,
+            kilometres: item.controls.kilometres.value,
+            date: item.controls.date.value,
+            make:item.controls.make.value,
+            registrationNumber:item.controls.registrationNumber.value,
+            registrationRenewalDate: item.controls.registrationRenewalDate.value,
+            purchaseDate: item.controls.purchaseDate.value,
+            insurancePolicyNumber: item.controls.insurancePolicyNumber.value,
+            insuranceExpiry: item.controls.insuranceExpiry.value,
+            fuelCardNumber: item.controls.fuelCardNumber.value,
+            ETagNumber: item.controls.ETagNumber.value,
           },
 
         )
@@ -439,7 +452,7 @@ export class AddEmployeeComponent implements OnInit {
       return arr;
     }
     let equipArr = () => {
-      this.addPPE().length;
+      this.addEquip().length;
       let arr = [];
       this.addEquip().controls.forEach((item: any) => {
         console.log("item", item);
@@ -449,6 +462,19 @@ export class AddEmployeeComponent implements OnInit {
             modelNumber: item.controls.modelNumber.value,
             serialNumber: item.controls.serialNumber.value,
             serviceRenewDate: item.controls.serviceRenewDate.value,
+            plantName:[item.controls.plantName.value],
+            checkedOut: [item.controls.checkedOut.value],
+            hours: [item.controls.hours.value],
+            kilometres: [item.controls.kilometres.value],
+            date: [item.controls.date.value],
+            make:[item.controls.make.value],
+            registrationNumber:[item.controls.registrationNumber.value],
+            registrationRenewalDate: [item.controls.registrationRenewalDate.value],
+            purchaseDate: [item.controls.purchaseDate.value],
+            insurancePolicyNumber: [item.controls.insurancePolicyNumber.value],
+            insuranceExpiry: [item.controls.insuranceExpiry.value],
+            fuelCardNumber: [item.controls.fuelCardNumber.value],
+            ETagNumber: [item.controls.ETagNumber.value],
           },
 
         )
@@ -594,9 +620,9 @@ export class AddEmployeeComponent implements OnInit {
       serviceRenewDate: [data.serviceRenewDate],
       plantName:[data.plantName],
       checkedOut: [data.checkedOut],
-      hours: [data.hours],
-      kilometres: [data.kilometres],
-      date: [data.date],
+      hours: [data.hours[0]],
+      kilometres: [data.kilometres[0]],
+      date: [data.date[0]],
       make:[data.make],
       registrationNumber:[data.registrationNumber],
       registrationRenewalDate: [data.registrationRenewalDate],
