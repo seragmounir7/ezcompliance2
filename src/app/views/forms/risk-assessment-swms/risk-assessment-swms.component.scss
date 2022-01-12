@@ -110,8 +110,16 @@
 //   font-family: Inter, sans-serif;
 // }
 
+
 //////////////////
 @media print {
+  .row-print {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -7.5px;
+    margin-left: -7.5px;
+}
+
 .col-sm-2-print {
   width: 16.66666667%;
 }
@@ -159,6 +167,21 @@
   }
   .page {
     page-break-after: always !important;
+  }
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid black; /* for demo */
+    background: yellow; /* for demo */
+  }
+  
+  .page-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid black; /* for demo */
+    background: yellow; /* for demo */
   }
 }
 

@@ -102,7 +102,7 @@
             </span>
           </div>
           <div class="mb-3 mt-3 col-3">
-            <label class="form-label mb-3">Role</label>
+            <label class="form-label mb-3">Administration Right</label>
             <select class="form-select form-control" aria-label="Default select example" formControlName="roleId"
               [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
 
@@ -113,7 +113,21 @@
             <span
               *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required  "
               class="invalid-feedback">
-              Role is Required</span>
+              Administration Right is Required</span>
+          </div>
+          <div class="mb-3 mt-3 col-3">
+            <label class="form-label mb-3">Reporting To</label>
+            <select class="form-select form-control" aria-label="Default select example" formControlName="reportingTo"
+              [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
+
+              <option selected hidden>Select</option>
+              <option ></option>
+
+            </select>
+            <span
+              *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required  "
+              class="invalid-feedback">
+              Reporting To is Required</span>
           </div>
         </div>
 
@@ -278,9 +292,13 @@
             </span>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" (click)="onFormSubmit()">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
           Submit
         </button>
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+          Update
+        </button>
+     
       </mat-tab>
       <mat-tab label="Licence And Qualifications" (click)="LicenceInfoshow()">
 
@@ -364,8 +382,11 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" (click)="onFormSubmit()">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
           Submit
+        </button>
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+          Update
         </button>
         <!-- <div class="col-2 float-right" style="margin-top: -50px">
             <button
@@ -466,38 +487,120 @@
         </div>
 
       </mat-tab>
-      <mat-tab label="Add Plant/Equipment Register" (click)="addPlantshow()">
+      <mat-tab label="Plant/Equipment Register" (click)="addPlantshow()">
         <div formArrayName="plantArr">
           <div *ngFor="let row of addEquip().controls; let filed2 = index">
             <div [formGroupName]="filed2">
               <div class="row">
-
                 <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Plant Type </label>
-                  <input type="text" formControlName="plantType" class="form-control" />
-
+                  <label for="exampleFormControlInput1" class="form-label">Name </label>
+                  <input type="text" formControlName="plantName" class="form-control" />
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Checked Out to</label>
+                  <input type="text" formControlName="checkedOut" class="form-control" />
 
                 </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Make</label>
+                  <input type="text" formControlName="make" class="form-control" />
+
+                </div>
+                <!-- <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Model </label>
+                  <input type="text" formControlName="model" class="form-control" />
+                </div> -->
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Model Number</label>
                   <input type="text" formControlName="modelNumber" class="form-control" />
 
                 </div>
+                <div class="row container col-12">
+                  <div  class="col-12 ">
+                    <h4 class="text_2">Next Service</h4>
+                  </div>
+                  <div class="col-2 mt-2 ml-5">
+                    <input
+                      type="checkbox"
+                      formControlName="hours"
+                      name="hours"
+                      class="form-check-input mr-1"
+                      value="Hours"
+                    />
+                    <label for="exampleFormControlInput1" class="form-label  label_2"
+                      >Hours </label
+                    >
+                  </div>
+                  <div class="mt-2 col-2">
+                    <input
+                      type="checkbox"
+                      formControlName="kilometres"
+                      name="kilometres"
+                      class="form-check-input mr-1"
+                      value="Kilometres"
+                    />
+                    <label for="exampleFormControlInput1" class="form-label label_2"
+                      >Kilometres</label
+                    >
+                  </div>
+                  <div class="mt-2 col-2">
+                    <input
+                      type="checkbox"
+                      formControlName="date"
+                      name="date"
+                      class="form-check-input mr-1"
+                      value="Date"
+                    />
+                    <label for="exampleFormControlInput1" class="form-label label_2"
+                      >Date</label
+                    >
+                  </div>
+                </div>
+               
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
                   <input type="text" formControlName="serialNumber" class="form-control" />
 
                 </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Registration Number</label>
+                  <input type="text" formControlName="registrationNumber" class="form-control" />
 
-                <div class="mb-3 mt-3 col-2">
-                  <label for="exampleFormControlInput1" class="form-label">Service Renew Date</label>
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Registration renewal Date </label>
+                  <input type="date" formControlName="registrationRenewalDate" class="form-control" />
+
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Purchase Date </label>
+                  <input type="date" formControlName="purchaseDate" class="form-control" />
+
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
                   <input type="date" formControlName="serviceRenewDate" class="form-control" />
 
                 </div>
 
                 <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Need to be able to more</label>
-                  <input type="text" formControlName="needToMore" class="form-control" />
+                  <label for="exampleFormControlInput1" class="form-label">Insurance Policy Number </label>
+                  <input type="text" formControlName="insurancePolicyNumber" class="form-control" />
+
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Insurance Expiry  </label>
+                  <input type="date" formControlName="insuranceExpiry" class="form-control" />
+
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">Fuel Card Number  </label>
+                  <input type="text" formControlName="fuelCardNumber" class="form-control" />
+
+                </div>
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label">E Tag Number  </label>
+                  <input type="text" formControlName="ETagNumber" class="form-control" />
 
                 </div>
                 <div class="col-1 mt-4">

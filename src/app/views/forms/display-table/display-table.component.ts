@@ -14,13 +14,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./display-table.component.scss']
 })
 export class DisplayTableComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'customerName', "phone", "email", "site", 'createdAt', 'updatedAt','action'];
+  displayedColumns: string[] = ['formId', 'customerName', "phone", "email", "site", 'createdAt', 'updatedAt','action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   id: any;
   isHistory: boolean;
+  role:any[] = ['product owner']
   constructor(
     private activatedRoute: ActivatedRoute,
     private logicalFormInfo: LogicalFormInfoService,
@@ -35,7 +36,7 @@ export class DisplayTableComponent implements OnInit {
     if (this.isHistory) {
       this.activatedRoute.paramMap.pipe(map(params => params.get('id'))).subscribe(res => {
         this.id = res
-        this.displayedColumns = ['version', 'position', 'customerName', "phone", "email", "site", 'updatedAt', 'action'];
+        this.displayedColumns = ['version', 'formId', 'customerName', "phone", "email", "site", 'createdTime', 'updatedTime', 'action'];
         this.getToolBoxHistory()
       })
     } else {

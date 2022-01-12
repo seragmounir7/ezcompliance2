@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import {
   FormBuilder,
@@ -15,6 +15,10 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { Observable } from 'rxjs';
+import { SignaturePad } from 'angular2-signaturepad';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-site-inspection',
@@ -27,11 +31,19 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   siteshow = true;
   siteAction = false;
   itemvalue: any;
+  singRequired: any
   sub: any;
+
   isPrint: Observable<any>;
+  @ViewChild('Signature') signaturePad: SignaturePad;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
+    if (this.router.url.includes('/admin/savedForms')) {
+      this.router.navigateByUrl("/admin/savedForms")
+      return
+    }
+    console.log("url", this.router.url);
     this.router.navigateByUrl("/admin/forms/siteinspectiontable")
     this.shared.printNext(false)
 
@@ -56,6 +68,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     'date',
     'projectManager',
   ];
+  filteredOptions1: Observable<unknown>;
+  empData: any;
   id: any;
   allcategory: any;
   allTopic: any;
@@ -73,6 +87,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     private datePipe: DatePipe,
     public forms: SavedformsService,
     private shared: RoleManagementSharedServiceService,
+    private employee: EmployeeRegistrationService,
   ) {
     this.check = localStorage.getItem('key');
     this.sidePreview = this.fb.group({
@@ -87,6 +102,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       custEmail: ['', Validators.required],
       date: ['', Validators.required],
       projectManager: ['', Validators.required],
+      empName: ['', Validators.required],
+      submitDate: ['', Validators.required],
+      signature: ['', Validators.required],
       // datetooboxtalk: [''],
       // Hazard: ['', Validators.required],
       // documentation: ['', Validators.required],
@@ -152,8 +170,16 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     this.sub.unsubscribe()
     console.log("site destroy");
   }
-
+  public signaturePadOptions1: Object = {
+    // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    canvasWidth: 350,
+    canvasHeight: 100,
+  };
   ngOnInit(): void {
+
+
+
     this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type = params['formType'];
@@ -185,7 +211,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         setTimeout(() => {
           let formatDate;
           if (this.showDatas.date) {
-            var date = new Date(this.showDatas.date);
+            let date = new Date(this.showDatas.date);
             formatDate = this.datePipe.transform(date, 'yyyy-MM-dd');
             this.sidePreview.patchValue({ date: formatDate });
           } else {
@@ -201,7 +227,14 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
             custEmail: this.showDatas.custEmail,
             jobNumber: this.showDatas.jobNumber,
             projectManager: this.showDatas.projectManager,
+            empName: { fullName: this.showDatas.empName },
+            submitDate: this.showDatas.submitDate,
+            signature: this.showDatas.signature
           });
+          let check = async () => { this.signaturePad != null }
+          check().then(() => {
+            this.signaturePad.fromDataURL(this.showDatas.signature)
+          })
 
           if (this.add2().controls) {
             let key;
@@ -221,6 +254,36 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
             }
           }
         }, 500);
+        if (this.id !== 'form') {
+          if (!this.add().length) {
+            for (
+              let index = 0;
+              index < this.showDatas.siteAction.length;
+              index++
+            ) {
+              console.log(this.showDatas.siteAction[index].item);
+
+              this.addAction();
+              this.add()
+                .controls[index].get('item')
+                .setValue(this.showDatas.siteAction[index].item);
+              this.add()
+                .controls[index].get('action')
+                .setValue(this.showDatas.siteAction[index].action);
+              this.add()
+                .controls[index].get('topicId')
+                .setValue(this.showDatas.siteAction[index].topicId);
+              this.add()
+                .controls[index].get('PersonResponsible')
+                .setValue(
+                  this.showDatas.siteAction[index].PersonResponsible
+                );
+              this.add()
+                .controls[index].get('complete')
+                .setValue(this.showDatas.siteAction[index].complete);
+            }
+          }
+        }
         if (this.check) {
           this.showAction()
         }
@@ -233,8 +296,44 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       this.getAllStaff();
     }
 
+
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+      this.filteredOptions1 = this.sidePreview.controls.empName.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+    })
+
   }
 
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+  employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
+    const data = e.option.value;
+
+    //   this.sidePreview.patchValue({
+
+    //     empName: data.fullName,
+    // })
+
+
+
+  }
   ngAfterViewInit(): void {
 
     this.sub = this.shared.printObs$.subscribe(res => {
@@ -251,6 +350,24 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     })
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
+  }
+  drawComplete1() {
+    // will be notified of szimek/signature_pad's onEnd event
+    console.log(this.signaturePad.toDataURL());
+    this.sidePreview.controls["signature"].setValue(this.signaturePad.toDataURL());
+    this.singRequired = this.sidePreview.controls['signature'].invalid
+  }
+  clear1() {
+    console.log('clear1');
+    this.signaturePad.clear();
+    this.sidePreview.controls["signature"].setValue("");
+    this.singRequired = this.sidePreview.controls['signature'].untouched
+  }
+  drawStart1() {
+    // will be notified of szimek/signature_pad's onBegin event
+    console.log('begin drawing');
+
+    //this.singRequired = this.riskAssessmentFb.controls['signaturePad'].invalid
   }
   jobNoSel() {
     this.allJobNumbers.forEach((item) => {
@@ -283,7 +400,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       action: ['', Validators.required],
       PersonResponsible: ['', Validators.required],
       complete: ['', Validators.required],
-      topicId: ['', Validators.required],
+      topicId: ['',],
     });
   }
   showsite() {
@@ -294,79 +411,92 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   showAction() {
     this.siteAction = true;
     this.siteshow = false;
-    this.add().clear();
-    if (this.id != 'form') {
-      for (
-        let index = 0;
-        index < this.showDatas.siteAction.length;
-        index++
-      ) {
-        console.log(this.showDatas.siteAction[index].item);
+    // this.add().clear();
+    //   if (this.id !== 'form') {
+    //     if(!this.add().length){
+    //     for (
+    //       let index = 0;
+    //       index < this.showDatas.siteAction.length;
+    //       index++
+    //     ) {
+    //       console.log(this.showDatas.siteAction[index].item);
 
-        this.addAction();
-        this.add()
-          .controls[index].get('item')
-          .setValue(this.showDatas.siteAction[index].item);
-        this.add()
-          .controls[index].get('action')
-          .setValue(this.showDatas.siteAction[index].action);
-        this.add()
-          .controls[index].get('topicId')
-          .setValue(this.showDatas.siteAction[index].topicId);
-        this.add()
-          .controls[index].get('PersonResponsible')
-          .setValue(
-            this.showDatas.siteAction[index].PersonResponsible
-          );
-        this.add()
-          .controls[index].get('complete')
-          .setValue(this.showDatas.siteAction[index].complete);
-      }
-    } else {
-      let key = [];
-      for (let y = 0; y < this.allTopic.length; y++) {
-        key.push(Object.keys(this.add2().at(y).value));
-      }
+    //       this.addAction();
+    //       this.add()
+    //         .controls[index].get('item')
+    //         .setValue(this.showDatas.siteAction[index].item);
+    //       this.add()
+    //         .controls[index].get('action')
+    //         .setValue(this.showDatas.siteAction[index].action);
+    //       this.add()
+    //         .controls[index].get('topicId')
+    //         .setValue(this.showDatas.siteAction[index].topicId);
+    //       this.add()
+    //         .controls[index].get('PersonResponsible')
+    //         .setValue(
+    //           this.showDatas.siteAction[index].PersonResponsible
+    //         );
+    //       this.add()
+    //         .controls[index].get('complete')
+    //         .setValue(this.showDatas.siteAction[index].complete);
+    //     }
+    //   }
+    // } else {
+    // let key = [];
+    // for (let y = 0; y < this.allTopic.length; y++) {
+    //   key.push(Object.keys(this.add2().at(y).value));
+    // }
 
-      console.log('this.keyArr.find((ele) => key.includes(ele))', key);
-      for (let i = 0; i < key.length - 1; i++) {
-        if (!this.keyArr.find((ele) => key[i].includes(ele))) {
-          let tempValue = this.add2().at(i).get(key[i]).value;
-          console.log('tempValue', tempValue);
-          let data = this.allTopic.find((obj) => {
-            if (obj._id == tempValue) {
-              console.log('obj', obj);
+    // console.log('this.keyArr.find((ele) => key.includes(ele))', key);
+    // for (let i = 0; i < key.length - 1; i++) {
+    //   if (!this.keyArr.find((ele) => key[i].includes(ele))) {
+    //     let tempValue = this.add2().at(i).get(key[i]).value;
+    //     console.log('tempValue', tempValue);
+    //     let data = this.allTopic.find((obj) => {
+    //       if (obj._id == tempValue) {
+    //         console.log('obj', obj);
 
-              return obj;
-            }
-          });
-          if (tempValue != '') {
-            if (tempValue != 'yes') {
-              let index = this.add().length;
-              this.addAction();
-              console.log('data', data);
+    //         return obj;
+    //       }
+    //     });
+    //     if (tempValue != '') {
+    //       if (tempValue != 'yes') {
+    //         let index = this.add().length;
+    //         this.addAction();
+    //         console.log('data', data);
 
-              this.add().controls[index].get('item').setValue(data.item);
-              this.add().controls[index].get('action').setValue(data.action);
-              this.add().controls[index].get('topicId').setValue(data._id);
-            }
-          }
-        }
-      }
-    }
+    //         this.add().controls[index].get('item').setValue(data.item);
+    //         this.add().controls[index].get('action').setValue(data.action);
+    //         this.add().controls[index].get('topicId').setValue(data._id);
+    //       }
+    //     }
+    //   }
+    // }
+    // }
   }
   removeAction() {
     let index = this.add().length;
     this.add().removeAt(index - 1);
   }
-  addAcionTab(event) {
+  addAcionData(data) {
     let b = Object.keys(this.sidePreview.value);
-    console.log('event', event);
-    //   let index =this.add().length
-    //   this.addAction()
-    // this.add().controls[index].get("item").setValue(event.target.value)
+    console.log('data', data);
+    let index = this.add().length
+    this.addAction()
+    this.add().controls[index].get("item").setValue(data.item)
+    this.add().controls[index].get('action').setValue(data.action);
+    this.add().controls[index].get('topicId').setValue(data._id);
+    console.log(this.sidePreview.controls[b[0]].value);
+  }
+  removeAcionData(data) {
+    for (let index = 0; index < this.add().length; index++) {
+      if (this.add().at(index).get('topicId').value == data._id) {
+        this.add().removeAt(index)
+        console.log("formcontrol remove");
 
-    //  console.log(this.sidePreview.controls[b[0]].value);
+      }
+
+    }
   }
 
   getAllJobTask() {
@@ -399,6 +529,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
 
     console.log('form data', this.sidePreview.value);
     if (this.id != 'form') {
+      let empName = this.sidePreview.controls.empName.value
+      this.sidePreview.removeControl("empName")
       const data = {
 
         ...this.sidePreview.value,
@@ -406,23 +538,24 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         allcategory: this.allcategory,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
-
+        staffArr: this.staff,
+        empName: empName.fullName || empName,
       };
       this.logicalFormInfo
         .updateSiteInspection(this.id, data)
         .subscribe((res) => {
           console.log('res', res);
-          this.router.navigate(['/admin/forms']);
           // this.router.navigate(["/admin/forms/tableData"]);
           Swal.fire({
             title: 'Update successfully',
             showConfirmButton: false,
             timer: 1200,
           });
-          this.router.navigate(['/admin/forms/tableData']);
+          this.router.navigate(['/admin/forms/siteinspectiontable']);
         });
     } else {
+      let empName = this.sidePreview.controls.empName.value
+      this.sidePreview.removeControl("empName")
       const data = {
 
         ...this.sidePreview.value,
@@ -430,7 +563,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         allcategory: this.allcategory,
         allJobNumbersArr: this.allJobNumbers,
         projectMangArr: this.projectMang,
-        staffArr: this.staff
+        staffArr: this.staff,
+        empName: empName.fullName || empName,
 
       };
       this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
@@ -446,6 +580,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       console.log('data', data);
     }
     this.sidePreview.reset();
+    this.signaturePad.clear();
   }
   getAllCategory() {
     this.logicalFormInfo

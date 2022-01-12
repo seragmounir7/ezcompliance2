@@ -15,7 +15,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./incidents-table.component.scss']
 })
 export class IncidentsTableComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'projectName', "customerName", "Email", "Site", 'Action'];
+  displayedColumns: string[] = ['formId', 'projectName', "customerName", "Email", "Site", 'Action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;

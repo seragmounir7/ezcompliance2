@@ -1,3 +1,4 @@
+import { InstructionsComponent } from './instructions/instructions.component';
 import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
 import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.component';
 import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
@@ -54,7 +55,8 @@ import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-ma
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
-
+import{DynamicFormCategoriesComponent}from './dynamic-form-categories/dynamic-form-categories.component'
+import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 
 const routes: Routes = [
   {
@@ -113,7 +115,11 @@ const routes: Routes = [
   { path: 'editManager', component: EditManagerComponent },
   { path: 'WHS-Manager', component: WHSManagerComponent },
   { path: 'addWHSManager', component: AddWhsManagerComponent },
-  { path: 'editWHSManager', component: EditWhsManagerComponent }
+  { path: 'editWHSManager', component: EditWhsManagerComponent },
+  { path: 'dynamicFormCategories', component: DynamicFormCategoriesComponent },
+  { path: 'addFormCategories', component: AddFormCategoriesComponent },
+  { path: 'instructions/accident', component: InstructionsComponent },
+  { path: 'instructions/riskAssess', component: InstructionsComponent },
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

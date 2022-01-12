@@ -86,11 +86,23 @@ export class AddEmployeeComponent implements OnInit {
       Sign: [''],
       plantArr: this.fb.array([]),
       plantSignature: [''],
-      plantType: [''],
+      plantName:[''],
+      checkedOut: [''],
+      hours: [''],
+      kilometres: [''],
+      date: [''],
+      make:[''],
       modelNumber: [''],
       serialNumber: [''],
+      registrationNumber:[''],
+      registrationRenewalDate: [''],
+      plantType: [''],
+      purchaseDate: [''],
       serviceRenewDate: [''],
-      needToMore: [''],
+      insurancePolicyNumber: [''],
+      insuranceExpiry: [''],
+      fuelCardNumber: [''],
+      ETagNumber: [''],
     });
   }
 
@@ -192,9 +204,20 @@ export class AddEmployeeComponent implements OnInit {
         modelNumber: data.data.plant.modelNumber,
         serialNumber: data.data.plant.serialNumber,
         serviceRenewDate: data.data.plant.serviceRenewDate,
-        needToMore: data.data.plant.needToMore,
         plantSignature: data.data.plant.plantSignature,
-
+        plantName:data.data.plant.plantName,
+        checkedOut: data.data.plant.checkedOut,
+        hours: data.data.plant.hours,
+        kilometres:data.data.plant.kilometres,
+        date: data.data.plant.date,
+        make:data.data.plant.make,
+        registrationNumber:data.data.plant.registrationNumber,
+        registrationRenewalDate:data.data.plant.registrationRenewalDate,
+        purchaseDate: data.data.plant.purchaseDate,
+        insurancePolicyNumber: data.data.plant.insurancePolicyNumber,
+        insuranceExpiry: data.data.plant.insuranceExpiry,
+        fuelCardNumber: data.data.plant.fuelCardNumber,
+        ETagNumber: data.data.plant.ETagNumber,
       });
 
       this.dataUrl = data.data.ppe.signature;
@@ -322,7 +345,19 @@ export class AddEmployeeComponent implements OnInit {
             modelNumber: item.controls.modelNumber.value,
             serialNumber: item.controls.serialNumber.value,
             serviceRenewDate: item.controls.serviceRenewDate.value,
-            needToMore: item.controls.needToMore.value
+            plantName:item.controls.plantName.value,
+            checkedOut: item.controls.checkedOut.value,
+            hours: item.controls.hours.value,
+            kilometres: item.controls.kilometres.value,
+            date: item.controls.date.value,
+            make:item.controls.make.value,
+            registrationNumber:item.controls.registrationNumber.value,
+            registrationRenewalDate: item.controls.registrationRenewalDate.value,
+            purchaseDate: item.controls.purchaseDate.value,
+            insurancePolicyNumber: item.controls.insurancePolicyNumber.value,
+            insuranceExpiry: item.controls.insuranceExpiry.value,
+            fuelCardNumber: item.controls.fuelCardNumber.value,
+            ETagNumber: item.controls.ETagNumber.value,
           },
 
         )
@@ -417,7 +452,7 @@ export class AddEmployeeComponent implements OnInit {
       return arr;
     }
     let equipArr = () => {
-      this.addPPE().length;
+      this.addEquip().length;
       let arr = [];
       this.addEquip().controls.forEach((item: any) => {
         console.log("item", item);
@@ -427,7 +462,19 @@ export class AddEmployeeComponent implements OnInit {
             modelNumber: item.controls.modelNumber.value,
             serialNumber: item.controls.serialNumber.value,
             serviceRenewDate: item.controls.serviceRenewDate.value,
-            needToMore: item.controls.needToMore.value
+            plantName:[item.controls.plantName.value],
+            checkedOut: [item.controls.checkedOut.value],
+            hours: [item.controls.hours.value],
+            kilometres: [item.controls.kilometres.value],
+            date: [item.controls.date.value],
+            make:[item.controls.make.value],
+            registrationNumber:[item.controls.registrationNumber.value],
+            registrationRenewalDate: [item.controls.registrationRenewalDate.value],
+            purchaseDate: [item.controls.purchaseDate.value],
+            insurancePolicyNumber: [item.controls.insurancePolicyNumber.value],
+            insuranceExpiry: [item.controls.insuranceExpiry.value],
+            fuelCardNumber: [item.controls.fuelCardNumber.value],
+            ETagNumber: [item.controls.ETagNumber.value],
           },
 
         )
@@ -540,11 +587,23 @@ export class AddEmployeeComponent implements OnInit {
   }
   newEquipFiled2(): FormGroup {
     return this.fb.group({
-      plantType: [''],
+      plantName:[''],
+      checkedOut: [''],
+      hours: [''],
+      kilometres: [''],
+      date: [''],
+      make:[''],
       modelNumber: [''],
       serialNumber: [''],
+      registrationNumber:[''],
+      registrationRenewalDate: [''],
+      plantType: [''],
+      purchaseDate: [''],
       serviceRenewDate: [''],
-      needToMore: [''],
+      insurancePolicyNumber: [''],
+      insuranceExpiry: [''],
+      fuelCardNumber: [''],
+      ETagNumber: [''],
     });
   }
   addEquipFiled2() {
@@ -559,7 +618,19 @@ export class AddEmployeeComponent implements OnInit {
       modelNumber: [data.modelNumber],
       serialNumber: [data.serialNumber],
       serviceRenewDate: [data.serviceRenewDate],
-      needToMore: [data.needToMore],
+      plantName:[data.plantName],
+      checkedOut: [data.checkedOut],
+      hours: [data.hours[0]],
+      kilometres: [data.kilometres[0]],
+      date: [data.date[0]],
+      make:[data.make],
+      registrationNumber:[data.registrationNumber],
+      registrationRenewalDate: [data.registrationRenewalDate],
+      purchaseDate: [data.purchaseDate],
+      insurancePolicyNumber: [data.insurancePolicyNumber],
+      insuranceExpiry: [data.insuranceExpiry],
+      fuelCardNumber: [data.fuelCardNumber],
+      ETagNumber: [data.ETagNumber],
     });
   }
   addEquipFiled3(data) {
@@ -568,7 +639,7 @@ export class AddEmployeeComponent implements OnInit {
     console.log("addPPEFiled1", this.empDetails.value);
   }
   removeEquipFiled1(i) {
-    const item = <FormArray>this.empDetails.controls['equipmentRegister'];
+    const item = <FormArray>this.empDetails.controls['plantArr'];
     if (item.length > 1) {
       item.removeAt(i);
 

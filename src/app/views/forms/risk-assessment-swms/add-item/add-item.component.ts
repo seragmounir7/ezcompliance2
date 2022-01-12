@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
@@ -11,6 +12,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 export class AddItemComponent implements OnInit {
 
   addItem!: FormGroup;
+  public Editor = ClassicEditor;
   dataRec: any;
   constructor(
     private fb: FormBuilder,

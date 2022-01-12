@@ -460,7 +460,7 @@
 
           <div class="row">
             <div class="col-4">
-              <label class="form-label">Employee 1<span class="text-danger">*</span></label>
+              <label class="form-label">Employee Name<span class="text-danger">*</span></label>
               <p>
                 <input type="input" class="mr-1 form-control" value="" formControlName="employee1" [class.is-invalid]="riskAssessmentFb.get('employee1')?.hasError('required') 
                   && (riskAssessmentFb.get('employee1').dirty || riskAssessmentFb.get('employee1').touched) ">
@@ -875,6 +875,12 @@
                     <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
                   </div>
                 </div>
+                <div class="my-3">
+                  <label for="formFile" class="form-label">Uploaded File List</label>
+                  <span class="form-control" *ngFor="let item of selectedFile1">
+                    {{item.fileName}}
+                  </span>
+                </div>
               </ng-container>
             </ng-container>
             <hr />
@@ -981,7 +987,7 @@
                   <h2>Step:{{i+1}} {{ item.title }}</h2>
                 </div>
 
-                <div class="row">
+                <div class="row row-print">
                   <div class="col-10 col-sm-10-print">
                     <label for="sel2">Identity Hazards<span class="material-icons ml-3 my-auto p-0"
                         style="font-size: 19px;"
@@ -989,7 +995,7 @@
                     <ol class="identifyHaz">
                       <li *ngFor="let hazard of item.allHazardsTitle;let j=index">
                         <div class="d-flex">
-                          <div class=" stepItem p-1">{{ hazard.title }}</div>
+                          <div class=" stepItem p-1" [innerHTML]="hazard.title">{{ hazard.title }}</div>
                           <div class="" *ngIf="!hazard.id">
                             <mat-icon class="mr-1" style="font-size: 18px;"
                               (click)="editHazrds('editIdentifyHazards',hazard.title,i)">edit</mat-icon>
@@ -1016,7 +1022,7 @@
                     <ol class="identifyHaz">
                       <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index">
                         <div class="">
-                          <div class=" stepItem p-1">{{contrlActReq.title }}</div>
+                          <div class=" stepItem p-1" [innerHTML]="contrlActReq.title">{{contrlActReq.title }}</div>
                           <div class="col-3" *ngIf="!contrlActReq.id">
                             <mat-icon class="mr-1" style="font-size: 18px;"
                               (click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>
@@ -1030,7 +1036,7 @@
 
                   </div>
 
-                  <div>
+                  <div class="col-2">
                     <ng-container formArrayName="residualRisk">
                       <div class=" my-3" [formGroupName]="i">
                         <label for="sel1">Residual Risk</label>
@@ -1105,7 +1111,7 @@
             <div class="row">
               <div class="col-md-7">
                 <div class="my-3">
-                  <label for="exampleInputProjectNumber" class="form-label">Employee 2<span
+                  <label for="exampleInputProjectNumber" class="form-label">Employee Name<span
                       class="text-danger">*</span></label>
                   <input formControlName="employee2" type="text" class="form-control" id="exampleInputProjectNumber"
                     aria-describedby="emailHelp" [class.is-invalid]="riskAssessmentFb.get('employee2')?.hasError('required') 
@@ -1469,7 +1475,7 @@
 
       <div class="row">
         <div class="col-4">
-          <label class="form-label">Employee 1</label>
+          <label class="form-label">Employee Name</label>
           <p>
             <input type="input" class="mr-1 form-control" value="" formControlName="employee1" />
           </p>
@@ -1844,14 +1850,14 @@
               <h2>Step:{{i+1}} {{ item.title }}</h2>
             </div>
 
-            <div class="row">
-              <div class="col-10">
+            <div class="row row-print">
+              <div class="col-10 col-sm-10-print">
                 <label for="sel2">Identity Hazards<span class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"
                     (click)="addItem('identifyHazards',i)">add_circle_outline</span></label>
                 <ol class="identifyHaz">
                   <li *ngFor="let hazard of item.allHazardsTitle;let j=index">
                     <div class="d-flex">
-                      <div class=" stepItem p-1">{{ hazard.title }}</div>
+                      <div class=" stepItem p-1" [innerHTML]="hazard.title">{{ hazard.title }}</div>
                       <div class="" *ngIf="!hazard.id">
                         <mat-icon class="mr-1" style="font-size: 18px;"
                           (click)="editHazrds('editIdentifyHazards',hazard.title,i)">edit</mat-icon>
@@ -1871,14 +1877,14 @@
                 </div>
               </ng-container>
 
-              <div class="col-10 my-3">
+              <div class="col-10 col-sm-10-print my-3">
 
                 <label for="sel2">Control and Action Required<span class="material-icons ml-3 my-auto p-0"
                     style="font-size: 19px;" (click)="addItem('ctrlActreq',i)">add_circle_outline</span></label>
                 <ol class="identifyHaz">
                   <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index">
                     <div class="">
-                      <div class=" stepItem p-1">{{contrlActReq.title }}</div>
+                      <div class=" stepItem p-1" [innerHTML]="contrlActReq.title">{{contrlActReq.title }}</div>
                       <div class="col-3" *ngIf="!contrlActReq.id">
                         <mat-icon class="mr-1" style="font-size: 18px;"
                           (click)="editHazrds('editCtrlActreq',contrlActReq.title,i)">edit</mat-icon>
@@ -1892,9 +1898,9 @@
 
               </div>
 
-              <div>
+              <div class="col-2 col-sm-2-print">
                 <ng-container formArrayName="residualRisk">
-                  <div class=" my-3" [formGroupName]="i">
+                  <div class="my-3 " [formGroupName]="i">
                     <label for="sel1">Residual Risk</label>
                     <select class="form-control" id="sel1" name="sellist1" formControlName="resiRiskLevel">
                       <option *ngFor="let item of resiRiskLevel" [value]="item._id">{{item.title}}</option>
@@ -1966,7 +1972,7 @@
         <div class="row">
           <div class="col-md-7 col-sm-7-print">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label">Employee 2</label>
+              <label for="exampleInputProjectNumber" class="form-label">Employee Name</label>
               <input formControlName="employee2" type="text" class="form-control" id="exampleInputProjectNumber"
                 aria-describedby="emailHelp" />
             </div>
@@ -1993,10 +1999,10 @@
 
   </div>
   <br>
-  <div *ngIf="(isPrint | async)===true && selectedFile1">
+  <div style="padding-left: 30%;" *ngIf="(isPrint | async)===true && selectedFile1">
     <span *ngFor="let img of selectedFile1">
       <div>
-        <img height="400" width="400" [src]="img">
+        <img height="400" width="400" [src]="img.fileUrl">
       </div>
     </span>
   </div>

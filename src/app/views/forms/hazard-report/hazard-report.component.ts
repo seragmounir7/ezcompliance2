@@ -5,7 +5,7 @@ import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { Observable } from 'rxjs';
-import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter, take } from 'rxjs/operators';
+import { startWith, debounceTime, distinctUntilChanged, switchMap, map, filter, take, tap } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -52,9 +52,23 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   sub: any;
   isPrint: Observable<any>;
+  obj: Actionedby = {
+    elliminateAction: null,
+    substituteAction: null,
+    isolatedAction: null,
+    solutionAction: null,
+    procedureRemoveAction: null,
+    PPEAction: null
+  };
+  ActionedbyStrings: string[];
+  uploadFile: any;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
+    if (this.router.url.includes('/admin/savedForms')) {
+      this.router.navigateByUrl("/admin/savedForms")
+      return
+    }
     this.router.navigateByUrl("/admin/forms/hazardTable")
     this.shared.printNext(false)
     // this.router.navigate(['/',{ outlets: {'print': ['print']}}])
@@ -141,22 +155,60 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
     });
   }
-  ngOnDestroy(): void {
-    this.sub.unsubscribe()
-    console.log("hazard destroy");
-  }
-  triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.ngZone.onStable.pipe(take(1))
-      .subscribe(() => this.autosize.resizeToFitContent(true));
-  }
+
+
   ngOnInit() {
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+      console.log('this.empData', this.empData)
+      this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+      this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        tap(value => console.log('value', value)),
+        map(value => (typeof value === 'string' ? value : value.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+      this.ActionedbyStrings = [
+        "elliminateAction",
+        "substituteAction",
+        "isolatedAction",
+        "solutionAction",
+        "procedureRemoveAction",
+        "PPEAction"
+      ]
+      // this.obj = new Object()
+      this.ActionedbyStrings.forEach(ctrlName => {
+        let filter = this.hazardReport.controls[ctrlName].valueChanges.pipe(
+          startWith(''),
+          debounceTime(400),
+          tap(value => console.log('value', value)),
+          map(value => (typeof value === 'string' ? value : value.fullName)),
+          map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+        )
+        // let o = new Object(ctrlName,filter)
+        // Object.assign(obj,{...o})
+        this.obj[ctrlName] = filter
+      })
+      console.log(this.obj)
+    })
     this.isPrint = (this.shared.printObs$ as Observable<any>)
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.type = params['formType'];
     });
-    this.getHazard();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -166,51 +218,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.filter(val || '')
       })
     )
-    this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(val => {
-        console.log("myControl22..", val, this.filteredOptions2)
-        return this.filter2(val || '')
-      })
-    )
-    this.filteredOptions2.subscribe((res) => {
-      console.log("item...", res);
-
-    })
-
-    // The form was compiled by:
-
-    this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(val => {
-        console.log("myControl22..", val, this.filteredOptions3)
-        return this.filter3(val || '')
-      })
-    )
-
-    this.filteredOptions3.subscribe((res) => {
-      console.log("item...", res);
-    })
-
-    // Action By
-    this.filteredOptions4 = this.hazardReport.controls.elliminateAction.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(val => {
-        console.log("myControl22..", val, this.filteredOptions4)
-        return this.filter2(val || '')
-      })
-    )
-    this.filteredOptions4.subscribe((res) => {
-      console.log("item...", res);
-
-    })
-
     this.filteredManager = this.myControlManager.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -244,67 +251,51 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.id = this.activatedRoute.snapshot.params.id;
-    if (this.id != 'form')
-      console.log(this.id, "nnnn")
-    {
+    if (this.id != 'form') {
 
       console.log("id", this.id);
       this.getHazardByid(this.id);
 
     }
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+  ngAfterViewInit() {
+    console.log("check1...", this.check);
+    this.sub = this.shared.printObs$.subscribe(res => {
+      this.check = res
+      if (this.check) {
+        setTimeout(() => {
+          window.print();
+          console.log("printing....");
+        }, 3000);
+        localStorage.setItem('key', ' ');
 
-    // this.hazardReport.get('Consequence').valueChanges.subscribe((res) => {
-    //   if (res) {
-    //     console.log(res);
 
-    //     if (res == '1-Insignificant') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-    //       this.hazardReport.get('action').setValue('option4');
-    //     }
-    //     if (res == '2-Moderate') {
-    //       this.hazardReport.get('riskRating').setValue('Medium');
-    //       this.hazardReport.get('action').setValue('option3');
-    //     }
-    //     if (res == '4-Minor') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-    //       this.hazardReport.get('action').setValue('option4');
-    //     }
-    //     if (res == '3-Major') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-    //       this.hazardReport.get('action').setValue('option1');
-    //     }
-    //     if (res == '5-Catastrophic') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-    //       this.hazardReport.get('action').setValue('option1');
-    //     }
-    //   }
-    // });
-    // this.hazardReport.get('likelihood').valueChanges.subscribe((res) => {
-    //   if (res) {
-    //     console.log(res);
-    //     if (res == '1-Insignificant') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-
-    //     }
-    //     if (res == '3-Moderate') {
-    //       this.hazardReport.get('riskRating').setValue('Medium');
-
-    //     }
-    //     if (res == '2-Minor') {
-    //       this.hazardReport.get('riskRating').setValue('Low');
-
-    //     }
-    //     if (res == '4-Major') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-
-    //     }
-    //     if (res == '5-Catastrophic') {
-    //       this.hazardReport.get('riskRating').setValue('High');
-
-    //     }
-    //   }
-    // });
-
+      }
+    })
+    // this.signaturePad is now available
+    console.log(this.signaturePad1, this.dataUrl)
+    this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    this.signaturePad1.clear();
+    // this.signaturePad1.fromDataURL(this.dataUrl);
+    // this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    // this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime
+    // invoke functions from szimek/signature_pad API
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+    console.log("hazard destroy");
+  }
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this.ngZone.onStable.pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
 
@@ -316,7 +307,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         myControl: res.data.myControl,
         myControlManager: res.data.myControlManager,
         employeeParttime: res.data.employeeParttime,
-        fullName: res.data.fullName,
+        fullName: { fullName: res.data.fullName },
         email: res.data.email,
         phone: res.data.phone,
         department: res.data.department,
@@ -331,26 +322,26 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         action: res.data.action,
         eliminateHazard: res.data.eliminateHazard,
         eliminateCorrect: res.data.eliminateCorrect,
-        elliminateAction: res.data.elliminateAction,
+        elliminateAction: {fullName:res.data.elliminateAction},
         eliminateWhen: res.data.eliminateWhen,
         substituteCorrect: res.data.substituteCorrect,
-        substituteAction: res.data.substituteAction,
+        substituteAction: {fullName:res.data.substituteAction},
         substituteWhen: res.data.substituteWhen,
         isolatedCorrect: res.data.isolatedCorrect,
-        isolatedAction: res.data.isolatedAction,
+        isolatedAction: {fullName:res.data.isolatedAction},
         isolatedWhen: res.data.isolatedWhen,
         solutionCorrect: res.data.solutionCorrect,
-        solutionAction: res.data.solutionAction,
+        solutionAction: {fullName:res.data.solutionAction},
         customerName: res.data.customerName,
         solutionWhen: res.data.solutionWhen,
         procedureRemove: res.data.procedureRemove,
         procedureRemoveCorrect: res.data.procedureRemoveCorrect,
-        procedureRemoveAction: res.data.procedureRemoveAction,
+        procedureRemoveAction: {fullName:res.data.procedureRemoveAction},
         procedureRemoveWhen: res.data.procedureRemoveWhen,
         PPECorrect: res.data.PPECorrect,
-        PPEAction: res.data.PPEAction,
+        PPEAction: {fullName:res.data.PPEAction},
         PPEWhen: res.data.PPEWhen,
-        name: res.data.name,
+        name: { fullName: res.data.name },
         locationHazard: res.data.locationHazard,
         compilePosition: res.data.compilePosition,
         compileDepartment: res.data.compileDepartment,
@@ -370,6 +361,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       })
       this.minDate = res.data.date;
       this.selectedImage = res.data.fileUpload
+      // this.uploadFile=this.selectedImage?.split(/-/)[1];
+      this.uploadFile= this.selectedImage.slice(this.selectedImage.indexOf('-') + 1)
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;
       let check = async () => { this.signaturePad1 != null }
@@ -388,29 +381,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     canvasHeight: 100,
   };
 
-  ngAfterViewInit() {
-    console.log("check1...", this.check);
-    this.sub = this.shared.printObs$.subscribe(res => {
-      this.check = res
-      if (this.check) {
-        setTimeout(() => {
-          window.print();
-          console.log("printing....");
-        }, 3000);
-        localStorage.setItem('key', ' ');
 
-
-      }
-    })
-    // this.signaturePad is now available
-    console.log(this.signaturePad1, this.dataUrl)
-    this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad1.clear();
-    this.signaturePad1.fromDataURL(this.dataUrl);
-    // this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    // this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime
-    // invoke functions from szimek/signature_pad API
-  }
 
 
 
@@ -448,14 +419,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: '4-Likely', value: 4 },
     { name: '5-Almost Certain', value: 5 }
   ];
-  // RiskRating: Array<any> = [
-
-  //   { name: 'Low' },
-  //   { name: 'Medium' },
-  //   { name: 'High' },
-
-
-  // ];
 
 
   filter(val: string): Observable<any> {
@@ -469,26 +432,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       )
   }
-  filter2(val: string): Observable<any> {
-    return this.employee.getAllEmployeeInfo()
-      .pipe(map((res) => {
-        res.data = res.data.map((item) => {
-          item.fullName = `${item.firstName} ${item.lastName}`
-          return item
-        })
-        return res
-      }),
-        map((response: any) => {
-          response.data = response.data.filter(option => {
-            console.log("option>>", option);
-            return option.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0
-          })
-          console.log("response.data>>", response.data);
 
-          return response.data;
-        })
-      )
-  }
 
   filter3(val: string): Observable<any> {
     return this.employee.getAllEmployeeInfo()
@@ -536,12 +480,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  getHazard() {
-    this.employee.getAllEmployeeInfo().subscribe((res: any) => {
-      console.log("emp..", res.data);
-      this.empData = res.data;
-    })
-  }
+
 
   filterEvent(val: string): Observable<any> {
     return this.url.getAllManager()
@@ -657,16 +596,50 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     this.singRequired = this.hazardReport.controls['signaturePad1'].invalid
     console.log(this.id)
 
+    const {
+      fullName, 
+      name,
+      elliminateAction,
+      substituteAction,
+      isolatedAction,
+      solutionAction,
+      procedureRemoveAction,
+      PPEAction,
+      ...rest
+    } = this.hazardReport.value
+    // this.hazardReport.removeControl('fullName')
+    // this.hazardReport.removeControl('name')
+    // this.ActionedbyStrings.forEach(string => this.hazardReport.removeControl(string) )
+    console.log(this.hazardReport.value, fullName, 
+      name,
+      elliminateAction,
+      substituteAction,
+      isolatedAction,
+      solutionAction,
+      procedureRemoveAction,
+      PPEAction,
+      rest
+      );
+    
+    const data = {
+      ...rest,
+      fullName: fullName.fullName == '' ? '' : fullName.fullName || fullName,
+      name: name.fullName == '' ? '' : name.fullName || name,
+      elliminateAction: elliminateAction.fullName == '' ? '' : elliminateAction.fullName || elliminateAction,
+      substituteAction: substituteAction.fullName == '' ? '' : substituteAction.fullName || substituteAction,
+      isolatedAction: isolatedAction.fullName == '' ? '' : isolatedAction.fullName || isolatedAction,
+      solutionAction: solutionAction.fullName == '' ? '' : solutionAction.fullName || solutionAction,
+      procedureRemoveAction: procedureRemoveAction.fullName == '' ? '' : procedureRemoveAction.fullName || procedureRemoveAction,
+      PPEAction: PPEAction.fullName == '' ? '' : PPEAction.fullName || PPEAction
+    };
     if (this.id != 'form') {
-      const data = {
-        ...this.hazardReport.value,
-      };
       console.log(this.hazardReport.value, "mmmmmmm")
       this.url
         .updateHazardFormData(this.id, data)
         .subscribe((res) => {
           console.log('res', res);
           this.router.navigate(['/admin/forms']);
+          this.hazardReport.reset();
 
           Swal.fire({
             title: 'Update successfully',
@@ -674,13 +647,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
             timer: 1200,
           });
           this.router.navigate(['/admin/forms/hazardTable']);
+        },err => {
+          console.error(err)
         });
     } else {
-      const data = {
-
-        ...this.hazardReport.value,
-      };
       this.url.addHazardFormData(data).subscribe((res) => {
+        this.hazardReport.reset();
         console.log('res', res);
         Swal.fire({
           title: 'Submit successfully',
@@ -689,12 +661,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         // this.router.navigate(["/admin/forms/tableData"]);
         this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
-      });
+      },err => console.error(err));
       console.log('data', data);
     }
-    this.hazardReport.reset();
+    
   }
-
   browser(event) {
     const files = event.target.files[0];
     const formdata = new FormData();
@@ -715,7 +686,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   employeeData(e: MatAutocompleteSelectedEvent) {
     const data = e.option.value;
     this.hazardReport.patchValue({
-      fullName: data.fullName,
+      // fullName: data.fullName,
       department: data.department,
       email: data.email,
       position: data.position,
@@ -734,7 +705,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   employeeData1(e: MatAutocompleteSelectedEvent) {
     const data = e.option.value;
     this.hazardReport.patchValue({
-      name: data.name,
+      // name: data.name,
       compileDepartment: data.department,
       compilePosition: data.position,
       // elliminateAction:data.name
@@ -743,4 +714,13 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("data...");
 
   }
+}
+
+export interface Actionedby {
+  elliminateAction: Observable<any>
+  substituteAction: Observable<any>
+  isolatedAction: Observable<any>
+  solutionAction: Observable<any>
+  procedureRemoveAction: Observable<any>
+  PPEAction: Observable<any>
 }
