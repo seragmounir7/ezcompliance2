@@ -115,7 +115,7 @@
               class="invalid-feedback">
               Administration Right is Required</span>
           </div>
-          <!-- <div class="mb-3 mt-3 col-3">
+          <div class="mb-3 mt-3 col-3">
             <label class="form-label mb-3">Reporting To</label>
             <select class="form-select form-control" aria-label="Default select example" formControlName="reportingTo"
               [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
@@ -128,7 +128,7 @@
               *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required  "
               class="invalid-feedback">
               Reporting To is Required</span>
-          </div> -->
+          </div>
         </div>
 
         <!-- <div class="row text-center">
@@ -292,9 +292,13 @@
             </span>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" (click)="onFormSubmit()">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
           Submit
         </button>
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+          Update
+        </button>
+     
       </mat-tab>
       <mat-tab label="Licence And Qualifications" (click)="LicenceInfoshow()">
 
@@ -378,8 +382,11 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" (click)="onFormSubmit()">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
           Submit
+        </button>
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+          Update
         </button>
         <!-- <div class="col-2 float-right" style="margin-top: -50px">
             <button
@@ -494,46 +501,7 @@
                   <input type="text" formControlName="checkedOut" class="form-control" />
 
                 </div>
-                <div class="row col-12">
-                  <h3>Next Service </h3>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="radio"
-                      formControlName="hours"
-                      name="hours"
-                      class="form-check-input mr-1"
-                      value="Hours"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Hours </label
-                    >
-                  </div>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="radio"
-                      formControlName="kilometres"
-                      name="kilometres"
-                      class="form-check-input mr-1"
-                      value="Kilometres"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Kilometres</label
-                    >
-                  </div>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="radio"
-                      formControlName="date"
-                      name="date"
-                      class="form-check-input mr-1"
-                      value="Date"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Date</label
-                    >
-                  </div>
-                </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Make</label>
                   <input type="text" formControlName="make" class="form-control" />
 
@@ -547,27 +515,69 @@
                   <input type="text" formControlName="modelNumber" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="row container col-12">
+                  <div  class="col-12 ">
+                    <h4 class="text_2">Next Service</h4>
+                  </div>
+                  <div class="col-2 mt-2 ml-5">
+                    <input
+                      type="checkbox"
+                      formControlName="hours"
+                      name="hours"
+                      class="form-check-input mr-1"
+                      value="Hours"
+                    />
+                    <label for="exampleFormControlInput1" class="form-label  label_2"
+                      >Hours </label
+                    >
+                  </div>
+                  <div class="mt-2 col-2">
+                    <input
+                      type="checkbox"
+                      formControlName="kilometres"
+                      name="kilometres"
+                      class="form-check-input mr-1"
+                      value="Kilometres"
+                    />
+                    <label for="exampleFormControlInput1" class="form-label label_2"
+                      >Kilometres</label
+                    >
+                  </div>
+                  <div class="mt-2 col-2">
+                    <input
+                      type="checkbox"
+                      formControlName="date"
+                      name="date"
+                      class="form-check-input mr-1"
+                      value="Date"
+                    />
+                    <label for="exampleFormControlInput1" class="form-label label_2"
+                      >Date</label
+                    >
+                  </div>
+                </div>
+               
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
                   <input type="text" formControlName="serialNumber" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Registration Number</label>
                   <input type="text" formControlName="registrationNumber" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Registration renewal Date </label>
                   <input type="date" formControlName="registrationRenewalDate" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Purchase Date </label>
                   <input type="date" formControlName="purchaseDate" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
                   <input type="date" formControlName="serviceRenewDate" class="form-control" />
 
