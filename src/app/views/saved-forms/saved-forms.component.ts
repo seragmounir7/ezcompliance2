@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { merge } from 'rxjs';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 
@@ -12,24 +13,43 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
   templateUrl: './saved-forms.component.html',
   styleUrls: ['./saved-forms.component.scss']
 })
-export class SavedFormsComponent implements OnInit {
+export class SavedFormsComponent implements OnInit,AfterViewInit {
+  @ViewChild(MatPaginator) paginator1: MatPaginator;
+
   displayedColumns: string[] = ['formId', "Phone", "Email", "Site", 'Action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   totalCount: number
+  page: number = 1;
+  limit: number = 5;
+  searchString: string="";
   constructor(public forms: SavedformsService,
     private spinner: NgxSpinnerService,
     private shared: RoleManagementSharedServiceService,
      public router: Router) { }
 
+  ngAfterViewInit(): void {
+    this.sort.sortChange.subscribe(() => (this.paginator1.pageIndex = 0));
+    merge(this.sort.sortChange, this.paginator1.page).subscribe(() => {
+      // this.isLoadingResults = true;
+
+      const changeState = {
+        sort: this.sort.active || "",
+        order: this.sort.direction || "",
+        pageNumber: this.paginator1.pageIndex + 1
+      }
+      console.log(changeState)
+    })
+  }
+
   ngOnInit(): void {
     this.getSavedforms();
   }
 
-  getSavedforms(page = 1, limit = 5) {
-    this.forms.getAllSavedForms(page, limit).subscribe((res: any) => {
+  getSavedforms(page = this.page, limit = this.limit, searchString = this.searchString) {
+    this.forms.getAllSavedForms(page, limit, searchString).subscribe((res: any) => {
       this.showDatas = res.data;
       this.totalCount = res.totalCount
       this.showDatas.forEach((element, i) => {
@@ -106,6 +126,15 @@ export class SavedFormsComponent implements OnInit {
     }
   }
   paginator(event: PageEvent) {
-    this.getSavedforms(event.pageIndex + 1, event.pageSize)
+    this.page = event.pageIndex
+    this.limit = event.pageSize
+    this.getSavedforms()
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+     this.searchString = filterValue.trim().toLowerCase();
+     this.getSavedforms()
+  }
+
 }

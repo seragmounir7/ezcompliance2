@@ -57,6 +57,8 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
   empData: any;
   filteredOptions2: Observable<any>;
   uploadFile: string;
+  isHistory: boolean;
+  returnTo: Observable<string>;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -178,7 +180,31 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
     this.ngZone.onStable.pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
+
+  async disableForm(){
+    if (this.isHistory) {
+      this.IncidentReport.disable();
+      this.IncidentReport.statusChanges.subscribe(console.log)
+      this.IncidentReport.valueChanges.subscribe((res)=> {
+        this.IncidentReport.disable();
+      })
+      let check =  async () => {this.signaturePad != null}
+      let check2 =  async () => {this.signaturePad1 != null}
+      await check()
+      this.signaturePad.off()
+      await check2()
+      this.signaturePad1.off()
+    }
+  }
   ngOnInit(): void {
+    this.isHistory = this.router.url.includes('/incidentsTable\/history')
+    if (this.isHistory) {
+      this.disableForm()
+      this.returnTo = this.activatedRoute.queryParamMap.pipe(
+        map(param => param.get('returnTo'))
+      )
+      this.returnTo.subscribe(res => console.log(res))
+    }
     this.employee.getAllEmployeeInfo().pipe(
       map((res) => {
         return res.data.map((item) => {
