@@ -3,11 +3,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { environment } from 'src/environments/environment';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hazard-form-table-details',
@@ -15,20 +16,50 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./hazard-form-table-details.component.scss']
 })
 export class HazardFormTableDetailsComponent implements OnInit {
-  displayedColumns: string[] = ['formId', 'name', "phone", "email", "site", 'action'];
+  displayedColumns: string[] = ['formId', 'name', "phone", "email", "site", 'createdAt', 'updatedAt', 'action'];
   showDatas: any;
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  isHistory: boolean;
+  id: string;
   constructor(private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
     private spinner: NgxSpinnerService,
     private shared: RoleManagementSharedServiceService,
+    private activatedRoute:ActivatedRoute
   ) { }
 
 
   ngOnInit(): void {
-    this.getAllHazardFormData();
+    this.isHistory = this.router.url.includes('/hazardTable\/history')
+    console.log(this.isHistory)
+    if (this.isHistory) {
+      this.activatedRoute.paramMap.pipe(map(params => params.get('id'))).subscribe(res => {
+        this.id = res
+        this.displayedColumns = ['version', 'formId', 'name', "phone", "email", "site", 'createdTime', 'updatedTime', 'action'];
+        this.getAllHazardFormDataHistory()
+      })
+    } else {
+      this.getAllHazardFormData();
+    }
+
+  }
+  getAllHazardFormDataHistory(field="", value="",id = this.id ) {
+    this.logicalFormInfo.getAllHazardFormDataHistory(field, value,id).subscribe((res: any) => {
+      console.log("res", res.data);
+
+      this.showDatas =  res.result
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
+      });
+      console.log("this.showDatas", this.showDatas);
+
+      this.dataSource = new MatTableDataSource<any>(this.showDatas);
+      this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort; 
+      console.log("get res", this.showDatas);
+    })
   }
   delete(id) {
     Swal.fire({
@@ -94,6 +125,13 @@ export class HazardFormTableDetailsComponent implements OnInit {
     this.router.navigate(['/', { outlets: { 'print': ['print', 'hazardRep', id] } }])
   }
   sortData(sort: Sort) {
+    if (this.isHistory) {
+      this.getAllHazardFormDataHistory(sort.active, sort.direction)
+      return
+    }
     this.getAllHazardFormData(sort.active, sort.direction)
+  }
+  view(id) {
+    this.router.navigate(["/admin/forms/hazardTable/history/hazardRep/" + id], { queryParams: { returnTo: this.router.url } });
   }
 }

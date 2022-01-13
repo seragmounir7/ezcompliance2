@@ -1,4 +1,9 @@
-<div class="btn btn-outline-primary" (click)="closeDialog()" [routerLink]="['/admin/siteInfo/instructions/accident']">
+<div class="btn btn-outline-primary" (click)="closeDialog()" *ngIf="data.url==='accident'"
+    [routerLink]="['/admin/siteInfo/instructions/accident']">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div class="btn btn-outline-primary" (click)="closeDialog()" *ngIf="data.url==='riskAssess'"
+    [routerLink]="['/admin/siteInfo/instructions/riskAssess']">
     <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="container px-4 py-4 bg-white">
@@ -9,8 +14,8 @@
         <div class="col">
             <!-- <textarea autosize [rows]="numberOfLineBreaks" type="text" formControlName="instruction"
                 class="form-control sign" id="name"></textarea> -->
-                <ckeditor class="toolbarborder" formControlName="instruction" style="width: 100%;" [editor]="Editor"
-         ></ckeditor>
+            <ckeditor class="toolbarborder" formControlName="instruction" style="width: 100%;" [editor]="Editor">
+            </ckeditor>
         </div>
         <br />
 

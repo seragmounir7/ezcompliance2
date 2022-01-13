@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -26,7 +27,7 @@ export class InstructionsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   url: any;
-  addBtn=false
+  addBtn = false
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -41,14 +42,14 @@ export class InstructionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
     // this.setTitle.setTitle('WHS-Nature Of Incident');
     this.url = this.activatedRoute.snapshot.url[1].path;
     console.log("this.id", this.url);
-    if( this.url==="accident"){
+    if (this.url === "accident") {
       this.getInstructions();
-    }else if( this.url==="riskAssess"){
-
+    } else if (this.url === "riskAssess") {
+      this.getRiskInstructions()
     }
 
   }
@@ -60,8 +61,10 @@ export class InstructionsComponent implements OnInit {
       data.forEach((element, index) => {
         element.index = index + 1; //adding index
       });
-      if(data==''){
-        this.addBtn=true
+      if (data.length > 0) {
+        this.addBtn = false
+      } else {
+        this.addBtn = true
       }
 
       this.ELEMENT_DATA = data;
@@ -70,18 +73,49 @@ export class InstructionsComponent implements OnInit {
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
       //  this.task = res.data.subComponents;
-    });
+    }, err => this.addBtn = false);
+  }
+
+  getRiskInstructions() {
+    this.logicalFormInfo.getRiskInstruction().subscribe((res: any) => {
+      console.log('NatOfIncAll=>', res);
+      let data = res.data;
+      data.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      if (data.length > 0) {
+        this.addBtn = false
+      } else {
+        this.addBtn = true
+      }
+
+      this.ELEMENT_DATA = data;
+
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      // this.dataSource.sort = this.sort;
+      console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
+
+      //  this.task = res.data.subComponents;
+    }, err => this.addBtn = false);
   }
 
   edit(element) {
+    this.addBtn = false
     const dialogRef = this.dialog.open(AddInstructionsComponent, {
       width: "950px",
       height: "500px",
-      data: element,
+      data: {
+        element: element,
+        url: this.url
+      }
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ((result == "true")) {
-        this.getInstructions();
+        if (this.url === "accident") {
+          this.getInstructions();
+        } else if (this.url === "riskAssess") {
+          this.getRiskInstructions()
+        }
       }
       console.log("The dialog was closed");
     });
