@@ -46,10 +46,10 @@ export class HazardFormTableDetailsComponent implements OnInit {
 
   }
   getAllHazardFormDataHistory(field="", value="",id = this.id ) {
-    this.logicalFormInfo.getAllHazardFormData(field, value).subscribe((res: any) => {
+    this.logicalFormInfo.getAllHazardFormDataHistory(field, value,id).subscribe((res: any) => {
       console.log("res", res.data);
 
-      this.showDatas = res.data
+      this.showDatas =  res.result
       this.showDatas.forEach((element, i) => {
         return this.showDatas[i].index = i
       });

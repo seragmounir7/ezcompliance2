@@ -988,11 +988,11 @@ export class LogicalFormInfoService {
     }
     return this.https.get(this.apiUrl + `riskAssessment/getAllNewRecords?field=${field}&value=${value}`)
   }
-  getAllassessmetHistoty(field = "", value = "") {
+  getAllassessmetHistory(field = "", value = "",id) {
     if (value == '') {
       field = ''
     }
-    return this.https.get(this.apiUrl + `riskAssessment/getAllNewRecords?field=${field}&value=${value}`).
+    return this.https.get(this.apiUrl + `riskAssessment/getRelatedOldData/${id}?field=${field}&value=${value}`).
     pipe(
       map((data:any) => data.data[0])
     )

@@ -81,6 +81,11 @@
             history
           </span>
         </div>
+        <div *ngIf="isHistory" style="display: flex; justify-content: space-around;">
+          <span class="material-icons" matTooltip="View Form" (click)="view(element._id)">
+            visibility
+          </span>
+        </div>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

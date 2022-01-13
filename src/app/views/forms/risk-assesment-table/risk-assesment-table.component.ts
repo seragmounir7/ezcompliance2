@@ -44,8 +44,8 @@ export class RiskAssesmentTableComponent implements OnInit {
     }
   }
   getAssesmentHistory(field="", value="",id=this.id) {
-    this.logicalFormInfo.getAllassessmet(field, value).subscribe((res: any) => {
-      this.showDatas = res.data;
+    this.logicalFormInfo.getAllassessmetHistory(field, value,id).subscribe((res: any) => {
+      this.showDatas = res.result 
       this.showDatas.forEach((element, i) => {
         return this.showDatas[i].index = i
       });
@@ -135,6 +135,6 @@ export class RiskAssesmentTableComponent implements OnInit {
     this.getAssesment(sort.active, sort.direction)
   }
   view(id) {
-    this.router.navigate(["/admin/forms/riskAssessTable/history/hazardRep/" + id], { queryParams: { returnTo: this.router.url } });
+    this.router.navigate(["/admin/forms/riskAssessTable/history/riskAssessSWMS/" + id], { queryParams: { returnTo: this.router.url } });
   }
 }
