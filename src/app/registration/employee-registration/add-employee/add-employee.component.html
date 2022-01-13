@@ -118,14 +118,16 @@
           <div class="mb-3 mt-3 col-3">
             <label class="form-label mb-3">Reporting To</label>
             <select class="form-select form-control" aria-label="Default select example" formControlName="reportingTo"
-              [class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required ">
+              [class.is-invalid]="(registerFormControl.reportingTo.touched || submitted) && registerFormControl.reportingTo.errors?.required ">
 
               <option selected hidden>Select</option>
-              <option ></option>
+              <option [value]="">Manager</option>
+              <option [value]="">Supervisor</option>
+              <option [value]="">Worker</option>
 
             </select>
             <span
-              *ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required  "
+              *ngIf="(registerFormControl.reportingTo.touched || submitted) && registerFormControl.reportingTo.errors?.required  "
               class="invalid-feedback">
               Reporting To is Required</span>
           </div>
@@ -217,12 +219,9 @@
             <div class="my-3">
               <label for="formFile" class="form-label">Upload Image</label>
               <input class="form-control" type="file" (change)="browser1($event)"
-                [class.is-invalid]="(registerFormControl.porfUploadImage.touched || submitted) && registerFormControl.porfUploadImage.errors?.required " />
+                 />
             </div>
-            <span class="text-danger"
-              *ngIf="(registerFormControl.porfUploadImage.touched || submitted) && registerFormControl.porfUploadImage.errors?.required">
-              Upload Image is required
-            </span>
+           
           </div>
         </div>
 
@@ -292,10 +291,10 @@
             </span>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" [disabled]="!empDetails.valid" (click)="onFormSubmit()">
           Submit
         </button>
-        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" [disabled]="!empDetails.valid" (click)="onFormUpdate($event)">
           Update
         </button>
      
@@ -310,44 +309,35 @@
                   <label for="exampleFormControlInput1" class="form-label">Licence Name</label>
                   <input type="text" formControlName="LicenceName" [matAutocomplete]="employee1" class="form-control"
                     id="siteName"
-                    [class.is-invalid]="(registerFormControl.LicenceName.touched || submitted) && registerFormControl.LicenceName.errors?.required " />
+                    />
                   <mat-autocomplete #employee1="matAutocomplete">
                     <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option.title">
                       {{option.title}}
                     </mat-option>
                   </mat-autocomplete>
-                  <span class="text-danger"
+                  <!-- <span class="text-danger"
                     *ngIf="(registerFormControl.LicenceName.touched || submitted) && registerFormControl.LicenceName.errors?.required">
                     Licence Name is required
-                  </span>
+                  </span> -->
                 </div>
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Licence Number</label>
                   <input type="text" formControlName="LicenceNumber" class="form-control"
-                    [class.is-invalid]="(registerFormControl.LicenceNumber.touched || submitted) && registerFormControl.LicenceNumber.errors?.required " />
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.LicenceNumber.touched || submitted) && registerFormControl.LicenceNumber.errors?.required">
-                    Licence Number is required
-                  </span>
+                    />
+                  
                 </div>
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Training Organisation</label>
                   <input type="text" formControlName="TrainingQrginisation" class="form-control"
-                    [class.is-invalid]="(registerFormControl.TrainingQrginisation.touched || submitted) && registerFormControl.TrainingQrginisation.errors?.required " />
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.TrainingQrginisation.touched || submitted) && registerFormControl.TrainingQrginisation.errors?.required">
-                    Training Organisation is required
-                  </span>
+                     />
+                  
                 </div>
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Expiry Date
                   </label>
                   <input type="date" formControlName="ExpiryDate" class="form-control"
-                    [class.is-invalid]="(registerFormControl.ExpiryDate.touched || submitted) && registerFormControl.ExpiryDate.errors?.required " />
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.ExpiryDate.touched || submitted) && registerFormControl.ExpiryDate.errors?.required">
-                    Expiry Date is required
-                  </span>
+                    />
+                  
                 </div>
               </div>
 
@@ -382,10 +372,10 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" [disabled]="!empDetails.valid" (click)="onFormSubmit()">
           Submit
         </button>
-        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" [disabled]="!empDetails.valid" (click)="onFormUpdate($event)">
           Update
         </button>
         <!-- <div class="col-2 float-right" style="margin-top: -50px">
@@ -409,44 +399,32 @@
                   <label for="exampleFormControlInput1" class="form-label">PPE Supplied</label>
                   <input type="text" formControlName="PPESupplied" [matAutocomplete]="employee2" class="form-control"
                     id="siteName"
-                    [class.is-invalid]="(registerFormControl.PPESupplied.touched || submitted) && registerFormControl.PPESupplied.errors?.required " />
+                    />
                   <mat-autocomplete #employee2="matAutocomplete">
                     <mat-option *ngFor="let option of filteredOptions1 | async ; let i = index " [value]="option.title">
                       {{option.title}}
                     </mat-option>
                   </mat-autocomplete>
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.PPESupplied.touched || submitted) && registerFormControl.PPESupplied.errors?.required">
-                    PPE Supplied is required
-                  </span>
+                  
                 </div>
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Brand or Type</label>
                   <input type="text" formControlName="BrandOrType" class="form-control"
-                    [class.is-invalid]="(registerFormControl.BrandOrType.touched || submitted) && registerFormControl.BrandOrType.errors?.required " />
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.BrandOrType.touched || submitted) && registerFormControl.BrandOrType.errors?.required">
-                    Brand or Type is required
-                  </span>
+                    />
+                 
                 </div>
                 <div class="mb-3 mt-3 col-2">
                   <label for="exampleFormControlInput1" class="form-label">Issue Date</label>
                   <input type="date" formControlName="IssueDate" class="form-control"
-                    [class.is-invalid]="(registerFormControl.IssueDate.touched || submitted) && registerFormControl.IssueDate.errors?.required " />
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.IssueDate.touched || submitted) && registerFormControl.IssueDate.errors?.required">
-                    Issue Date is required
-                  </span>
+                    />
+                  
                 </div>
                 <div class="mb-3 mt-3 col-2">
                   <label for="exampleFormControlInput1" class="form-label">Replacement Date
                   </label>
                   <input type="date" formControlName="ReplacementDate" class="form-control"
-                    [class.is-invalid]="(registerFormControl.ReplacementDate.touched || submitted) && registerFormControl.ReplacementDate.errors?.required " />
-                  <span class="text-danger"
-                    *ngIf="(registerFormControl.ReplacementDate.touched || submitted) && registerFormControl.ReplacementDate.errors?.required">
-                    Replacement Date is required
-                  </span>
+                    />
+                  
                 </div>
                 <div class="col-1 mt-4">
                   <div class="my-4">
@@ -478,10 +456,10 @@
           <button class="btn btn-outline-primary btn_1" (click)="clear()">
             Clear
           </button>
-          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
+          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" [disabled]="!empDetails.valid" (click)="onFormSubmit()">
             Submit
           </button>
-          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" [disabled]="!empDetails.valid" (click)="onFormUpdate($event)">
             Update
           </button>
         </div>
@@ -492,117 +470,31 @@
           <div *ngFor="let row of addEquip().controls; let filed2 = index">
             <div [formGroupName]="filed2">
               <div class="row">
+                
+          
                 <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Name </label>
-                  <input type="text" formControlName="plantName" class="form-control" />
+                  <label for="exampleFormControlInput1" class="form-label">Plant Type </label>
+                  <input type="text" formControlName="plantType" class="form-control" />
                 </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Checked Out to</label>
-                  <input type="text" formControlName="checkedOut" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Make</label>
-                  <input type="text" formControlName="make" class="form-control" />
-
-                </div>
-                <!-- <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Model </label>
-                  <input type="text" formControlName="model" class="form-control" />
-                </div> -->
                 <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Model Number</label>
                   <input type="text" formControlName="modelNumber" class="form-control" />
 
                 </div>
-                <div class="row container col-12">
-                  <div  class="col-12 ">
-                    <h4 class="text_2">Next Service</h4>
-                  </div>
-                  <div class="col-2 mt-2 ml-5">
-                    <input
-                      type="checkbox"
-                      formControlName="hours"
-                      name="hours"
-                      class="form-check-input mr-1"
-                      value="Hours"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label  label_2"
-                      >Hours </label
-                    >
-                  </div>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="checkbox"
-                      formControlName="kilometres"
-                      name="kilometres"
-                      class="form-check-input mr-1"
-                      value="Kilometres"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Kilometres</label
-                    >
-                  </div>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="checkbox"
-                      formControlName="date"
-                      name="date"
-                      class="form-check-input mr-1"
-                      value="Date"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Date</label
-                    >
-                  </div>
-                </div>
+                
                
-                <div class="mb-3 mt-3 col-3">
+                <div class="mb-3 mt-3 col-2">
                   <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
                   <input type="text" formControlName="serialNumber" class="form-control" />
 
                 </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Registration Number</label>
-                  <input type="text" formControlName="registrationNumber" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Registration renewal Date </label>
-                  <input type="date" formControlName="registrationRenewalDate" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Purchase Date </label>
-                  <input type="date" formControlName="purchaseDate" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
+                
+                <div class="mb-3 mt-3 col-2">
                   <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
                   <input type="date" formControlName="serviceRenewDate" class="form-control" />
 
                 </div>
-
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Insurance Policy Number </label>
-                  <input type="text" formControlName="insurancePolicyNumber" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Insurance Expiry  </label>
-                  <input type="date" formControlName="insuranceExpiry" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Fuel Card Number  </label>
-                  <input type="text" formControlName="fuelCardNumber" class="form-control" />
-
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">E Tag Number  </label>
-                  <input type="text" formControlName="ETagNumber" class="form-control" />
-
-                </div>
+                
                 <div class="col-1 mt-4">
                   <div class="my-4">
                     <span class="material-icons" (click)="addEquipFiled2()">add_circle_outline
@@ -633,10 +525,10 @@
           <button class="btn btn-outline-primary btn_1" (click)="clear2()">
             Clear
           </button>
-          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" (click)="onFormSubmit()">
+          <button type="submit"  class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" [disabled]="!empDetails.valid" (click)="onFormSubmit()">
             Submit
           </button>
-          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" (click)="onFormUpdate($event)">
+          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" [disabled]="!empDetails.valid" (click)="onFormUpdate($event)">
             Update
           </button>
         </div>
