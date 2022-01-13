@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -723,7 +723,13 @@ export class LogicalFormInfoService {
     if (value == '') {
       field = ''
     }
-    return this.https.get(this.apiUrl + `incidentForm/getAll?field=${field}&value=${value}`)
+    return this.https.get(this.apiUrl + `incidentForm/getAllNewRecords?field=${field}&value=${value}`)
+  }
+  getAllIncidentHistory(field = "", value = "", id) {
+    if (value == '') {
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `incidentForm/getRelatedOldData/${id}?field=${field}&value=${value}`)
   }
   addIncidentReport(data) {
     return this.https.post(this.apiUrl + 'incidentForm/add', data)
@@ -828,7 +834,39 @@ export class LogicalFormInfoService {
     if (value == '') {
       field = ''
     }
-    return this.https.get(this.apiUrl + `siteInspection/getAll?field=${field}&value=${value}`)
+    return this.https.get(this.apiUrl + `siteInspection/getAllNewRecords?field=${field}&value=${value}`).
+    pipe(
+      map((res:any) => {
+        (res.data as any[]).map(x => {
+          console.log(x)
+          return {
+            ...x,
+            _id: x._id,
+          }
+        })
+        return res
+      })
+    )
+  }
+  getAllSiteInspectionHistory(field = "", value = "", id) {
+    if (value == '') {
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `siteInspection/getRelatedOldData/${id}?field=${field}&value=${value}`).
+    pipe(
+      map((data:any) => data.data[0]),
+      tap(console.log),
+      // map((res:any) => {
+      //   (res.result as any[]).map(x => {
+      //     console.log(x)
+      //     return {
+      //       ...x,
+      //       _id: x._id,
+      //     }
+      //   })
+      //   return res
+      // })
+    )
   }
   addSiteInspection(data) {
     return this.https.post(this.apiUrl + 'siteInspection/add', data)
@@ -855,7 +893,20 @@ export class LogicalFormInfoService {
     // return this.https.get(this.apiUrl + `site/getAll?field=${field}&value=${value}`)
 
 
-    return this.https.get(this.apiUrl + `hazard/getAll?field=${field}&value=${value}`)
+    return this.https.get(this.apiUrl + `hazard/getAllNewRecords?field=${field}&value=${value}`)
+  }
+  getAllHazardFormDataHistory(field = "", value = "", id) {
+
+    if (value == '') {
+      field = ''
+    }
+    // return this.https.get(this.apiUrl + `site/getAll?field=${field}&value=${value}`)
+
+
+    return this.https.get(this.apiUrl + `hazard/getRelatedOldData/${id}?field=${field}&value=${value}`).
+    pipe(
+      map((data:any) => data.data[0])
+    )
   }
   addHazardFormData(data) {
     return this.https.post(this.apiUrl + 'hazard/add', data)
@@ -935,7 +986,16 @@ export class LogicalFormInfoService {
     if (value == '') {
       field = ''
     }
-    return this.https.get(this.apiUrl + `riskAssessment/getAll?field=${field}&value=${value}`)
+    return this.https.get(this.apiUrl + `riskAssessment/getAllNewRecords?field=${field}&value=${value}`)
+  }
+  getAllassessmetHistoty(field = "", value = "") {
+    if (value == '') {
+      field = ''
+    }
+    return this.https.get(this.apiUrl + `riskAssessment/getAllNewRecords?field=${field}&value=${value}`).
+    pipe(
+      map((data:any) => data.data[0])
+    )
   }
   getAssessmentbyId(id) {
     return this.https.get(this.apiUrl + 'riskAssessment/get/' + id)

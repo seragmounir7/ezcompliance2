@@ -24,7 +24,19 @@ const routes: Routes = [
   { path: 'riskAssessTable', component: RiskAssesmentTableComponent },
   { path: 'tableData', component: DisplayTableComponent },
   { path: 'tableData/history/:id', component: DisplayTableComponent },
+
+  { path: 'tableData/history/:id', component: DisplayTableComponent },
+  { path: 'riskAssessTable/history/:id', component: RiskAssesmentTableComponent },
+  { path: 'siteinspectiontable/history/:id', component: SiteInspectionTableComponent },
+  { path: 'hazardTable/history/:id', component: HazardFormTableDetailsComponent },
+  { path: 'incidentsTable/history/:id', component: IncidentsTableComponent },
+
   { path: 'tableData/history/toolboxTalk/:id', component: ToolboxTalkComponent },
+  { path: 'riskAssessTable/history/riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent },
+  { path: 'siteinspectiontable/history/siteInspect/:id', component: SiteInspectionComponent },
+  { path: 'hazardTable/history/hazardRep/:id', component: HazardReportComponent },
+  { path: 'incidentsTable/history/incidentRep/:id', component: IncidentReportComponent },
+
   { path: 'siteinspectiontable', component: SiteInspectionTableComponent },
   { path: 'hazardTable', component: HazardFormTableDetailsComponent },
   { path: 'incidentsTable', component: IncidentsTableComponent },

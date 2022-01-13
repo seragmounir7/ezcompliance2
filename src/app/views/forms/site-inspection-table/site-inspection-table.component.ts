@@ -1,9 +1,10 @@
+import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,21 +15,35 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
   styleUrls: ['./site-inspection-table.component.scss']
 })
 export class SiteInspectionTableComponent implements OnInit {
-  displayedColumns: string[] = ['formId', 'customerName', "phone", "email", "site", 'action'];
+  displayedColumns: string[] = ['formId', 'customerName', "phone", "email", "site",'createdAt', 'updatedAt', 'action'];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  isHistory: boolean;
+  id: string;
   constructor(
     private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
     private spinner: NgxSpinnerService,
     private shared: RoleManagementSharedServiceService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getsiteInspection();
+    this.isHistory = this.router.url.includes('/siteinspectiontable\/history')
+    console.log(this.isHistory)
+    if (this.isHistory) {
+      this.activatedRoute.paramMap.pipe(map(params => params.get('id'))).subscribe(res => {
+        this.id = res
+        this.displayedColumns = ['version', 'formId', 'customerName', "phone", "email", "site", 'createdTime', 'updatedTime', 'action'];
+        this.getsiteInspectionHistory()
+      })
+    } else {
+      this.getsiteInspection();
+    }
   }
+  
   ngAfterViewInit() {
 
   }
@@ -60,14 +75,7 @@ export class SiteInspectionTableComponent implements OnInit {
     this.logicalFormInfo.getAllSiteInspection(field, value).subscribe((res: any) => {
       console.log("res", res.data);
 
-      this.showDatas = res.data.map(x => {
-        console.log(x)
-        return {
-          ...x,
-          _id: x._id,
-
-        }
-      })
+      this.showDatas = res.data
       console.log("res", this.showDatas);
       this.showDatas.forEach((element, i) => {
         return this.showDatas[i].index = i
@@ -75,7 +83,23 @@ export class SiteInspectionTableComponent implements OnInit {
 
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort;
+      // this.tempArray.sort = this.sort;
+      console.log("get res", this.showDatas);
+    })
+  }
+  getsiteInspectionHistory(field = "", value = "", id = this.id) {
+    this.logicalFormInfo.getAllSiteInspectionHistory(field, value, id).subscribe((res: any) => {
+      console.log("res", res.result);
+
+      this.showDatas = res.result
+      console.log("res", this.showDatas);
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
+      });
+
+      this.tempArray = new MatTableDataSource<any>(this.showDatas);
+      this.tempArray.paginator = this.paginator;
+      // this.tempArray.sort = this.sort;
       console.log("get res", this.showDatas);
     })
   }
@@ -84,6 +108,10 @@ export class SiteInspectionTableComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
+    if (this.isHistory) {
+      this.getsiteInspectionHistory(sort.active, sort.direction)
+      return
+    }
     this.getsiteInspection(sort.active, sort.direction)
 
   }
@@ -112,6 +140,9 @@ export class SiteInspectionTableComponent implements OnInit {
     this.router.navigate(['/', { outlets: { 'print': ['print', 'siteInspect', id] } }])
   }
 
+  view(id) {
+    this.router.navigate(["/admin/forms/siteinspectiontable/history/siteInspect/" + id], { queryParams: { returnTo: this.router.url } });
+  }
 
 
 }
