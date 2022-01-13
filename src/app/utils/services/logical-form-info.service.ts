@@ -950,7 +950,7 @@ export class LogicalFormInfoService {
     return this.https.delete(this.apiUrl + 'riskAssessment/delete/' + id)
   }
   ////////////////// End Site Inspection topic ////////////
-////////////////////Start Add Instruction ////////////////
+////////////////////Start Add Notifiable Accident Instruction ////////////////
 
 getInstruction() {
   return this.https.get(this.apiUrl + 'accidentReportInstruction/getAll')
@@ -961,7 +961,21 @@ postInstruction(data) {
 deleteInstruction(id) {
   return this.https.delete(this.apiUrl + 'accidentReportInstruction/delete/' + id)
 }
-////////////////////End Add Instruction ////////////////
+////////////////////End Add Notifiable Accident Instruction ////////////////
+
+
+////////////////////Start Add Risk Assessment Instruction ////////////////
+
+getRiskInstruction() {
+  return this.https.get(this.apiUrl + 'riskAsstInstruction/getAll')
+}
+postRiskInstruction(data) {
+  return this.https.post(this.apiUrl + 'riskAsstInstruction/add',data)
+}
+deleteRiskInstruction(id) {
+  return this.https.delete(this.apiUrl + 'riskAsstInstruction/delete' + id)
+}
+////////////////////End Add Risk Assessment Instruction ////////////////
 
 
 }
