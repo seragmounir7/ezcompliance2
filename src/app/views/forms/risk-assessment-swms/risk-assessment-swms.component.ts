@@ -37,6 +37,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   @ViewChild('timepicker') timepicker: ElementRef;
   sub: any;
   isPrint: Observable<any>;
+  isHistory: any;
+  returnTo: Observable<string>;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -252,8 +254,28 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   get siteControls() {
     return this.riskAssessmentFb.controls
   }
+  async disableForm() {
+    if (this.isHistory) {
+      this.riskAssessmentFb.disable();
+      let check = async () => { this.signaturePad1 != null }
+      let check2 = async () => { this.signaturePad2 != null }
+      await check()
+      this.signaturePad1.off()
+      await check2()
+      this.signaturePad2.off()
+    }
+  }
 
   ngOnInit(): void {
+    this.isHistory = this.router.url.includes('/riskAssessTable\/history')
+    if (this.isHistory) {
+      this.disableForm()
+      this.returnTo = this.activatedRoute.queryParamMap.pipe(
+        map(param => param.get('returnTo'))
+      )
+      this.returnTo.subscribe(res => console.log(res))
+    }
+
     this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
       this.type = params['formType'];
@@ -403,12 +425,14 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       for (let i = 0; i < this.jobTaskData.length; i++) {
         // this.taskArr[i] = 0;
         this.jobtask().push(this.jobtaskk(i));
+        this.disableForm()
       }
 
       for (let i = 0; i < this.PPEselection.length; i++) {
         this.ppeArr[i] = 0;
         this.ppe().push(this.ppeSelect(i));
         this.ppe2().push(this.ppeSelect(i));
+        this.disableForm()
       }
 
       for (let i = 0; i < this.highRiskConstruction.length; i++) {
@@ -420,6 +444,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       for (let i = 0; i < this.licenseAndQualification.length; i++) {
         this.licenceArr[i] = 0;
         this.Licence().push(this.license(i))
+        this.disableForm()
       }
       let check = async () => { this.signaturePad1 != null }
       check().then(() => {
@@ -645,6 +670,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   PushActionSDSRegister(data) {
     {
       this.sdsRegisterFA().push(this.GetsdsRegisterFG(data));
+      this.disableForm()
+
     }
   }
   jobtask(): FormArray {

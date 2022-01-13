@@ -1,11 +1,16 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='Form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='Form' && type!=='Incident'"
+    class="fa fa-arrow-left" aria-hidden="true"></i>
+  </div>
+<div class="btn btn-outline-primary" *ngIf="!isHistory && id!=='Form' && type!=='Incident'"
   [routerLink]="['/admin/forms/incidentsTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
 <div class="btn btn-outline-primary" *ngIf="type==='Incident'" [routerLink]="['/admin/savedForms']"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
+    class="fa fa-arrow-left" aria-hidden="true"></i>
+  </div>
+<div class="btn btn-outline-primary" *ngIf="isHistory" [routerLink]="returnTo | async"><i class="fa fa-arrow-left"
+    aria-hidden="true"></i>
+  </div>
 
-<div id='section-to-print' class="container card px-4 py-4" [formGroup]="IncidentReport">
+<div id='section-to-print' class="container card px-4 py-4" [class.disableDiv]="isHistory" [formGroup]="IncidentReport">
   <h2 class="text-center pt-3">
     <p>Accident Report Form</p>
   </h2>
@@ -530,7 +535,7 @@
     </div>
   </div>
   <div class="box" class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true">
       <div>
         <label class="form-Label">Attachments </label>
         <input class="form-control" type="file" (change)="browser($event)" />
@@ -759,11 +764,11 @@
             class="invalid-feedback1">
             Date is Required</span>
         </div>
-        <div class="col-1 mt-5">
+        <div class="col-1 mt-5" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true">
           <span class="material-icons" (click)="addAction()">add_circle_outline
           </span>
         </div>
-        <div class="col-1 mt-5">
+        <div class="col-1 mt-5" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true">
           <span class="material-icons" (click)="removeIncident(i)">
             remove_circle_outline
           </span>
@@ -864,7 +869,8 @@
             <span *ngIf="singRequired" class="invalid-feedback">
               This Field is Required</span>
           </div>
-          <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1" (click)="clear()">
+          <button *ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+            class="btn btn-outline-primary mt-1" (click)="clear()">
             Clear
           </button>
         </div>
@@ -960,7 +966,8 @@
             <span *ngIf="singRequired1" class="invalid-feedback">
               This Field is Required</span>
           </div>
-          <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary mt-1" (click)="clear1()">
+          <button *ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+            class="btn btn-outline-primary mt-1" (click)="clear1()">
             Clear
           </button>
         </div>
@@ -972,7 +979,7 @@
   <br />
 
   <div class="col-md-2 col-sm-2-print">
-    <button *ngIf="(isPrint | async)===false" type="submit" class="btn btn-primary btn-block"
+    <button *ngIf="(isPrint | async)===true?false:isHistory===true?false:true" type="submit" class="btn btn-primary btn-block"
       [disabled]="!IncidentReport.valid || singRequired || singRequired1" (click)="onSubmit()">
       Submit
     </button>
