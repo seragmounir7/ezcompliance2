@@ -9,9 +9,10 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { AddEmployeeComponent } from './employee-registration/add-employee/add-employee.component';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 @NgModule({
-  declarations: [CompanyRegistrationComponent, EmployeeRegistrationComponent, AddEmployeeComponent],
+  declarations: [CompanyRegistrationComponent, EmployeeRegistrationComponent, AddEmployeeComponent, CompanyDetailsComponent],
   imports: [
     CommonModule,
     RegistrationRoutingModule,
