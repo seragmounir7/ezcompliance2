@@ -9,7 +9,7 @@ export class SavedformsService {
   apiUrl = environment.apiUrl;
   constructor(private https: HttpClient) { }
 
-  getAllSavedForms(page = 1, limit = 10) {
+  getAllSavedForms(page = 1, limit = 10,searchSting="") {
     return this.https.get(this.apiUrl + `savedForms/getAll?page=${page}&limit=${limit}`);
   }
 

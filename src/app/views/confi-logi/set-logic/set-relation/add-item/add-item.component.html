@@ -8,9 +8,10 @@
     <h2 *ngIf="dataRec.type==='resRiskLevel'"> Add Residual Risk</h2>
     <h2 *ngIf="dataRec.type==='perResbl'"> Add Person Responsible </h2>
     <h2 *ngIf="dataRec.type==='codeOfPract'"> Add Code of Practice </h2>
-
-    <!-- <textarea autosize class="form-control sign" placeholder="Enter your text......" formControlName="title"></textarea> -->
-    <ckeditor  [editor]="Editor" formControlName="title"></ckeditor>
+    <textarea *ngIf="dataRec.type==='identifyHazards'?false:dataRec.type==='ctrlActreq'?false:true" autosize class="form-control sign" placeholder="Enter your text......" formControlName="title"></textarea>
+    <ng-container *ngIf="dataRec.type==='ctrlActreq' || dataRec.type==='identifyHazards'">
+        <ckeditor   [editor]="Editor" formControlName="title"></ckeditor>`
+    </ng-container>
     <br>
 
     <div class="row">

@@ -362,12 +362,13 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       this.minDate = res.data.date;
       this.selectedImage = res.data.fileUpload
       // this.uploadFile=this.selectedImage?.split(/-/)[1];
-      this.uploadFile= this.selectedImage.slice(this.selectedImage.indexOf('-') + 1)
+      this.uploadFile= this.selectedImage?.slice(this.selectedImage.indexOf('-') + 1)
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;
       let check = async () => { this.signaturePad1 != null }
       check().then(() => {
-
+          console.log("singpachet");
+          
         this.signaturePad1.fromDataURL(res.data.signaturePad1)
       })
 

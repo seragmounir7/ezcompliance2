@@ -344,7 +344,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.signaturePad1, this.dataUrl)
     this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
 
-    this.signaturePad1.fromDataURL(this.dataUrl);
+    //this.signaturePad1.fromDataURL(this.dataUrl);
     // this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
     // this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
     // this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API

@@ -1,17 +1,15 @@
-
-  <div class="col ml-2 pt-3" *ngIf="url==='accident'">
+<div class="col ml-2 pt-3" *ngIf="url==='accident'">
     <h1> Accident Instruction</h1>
 </div>
 <div class="col ml-2 pt-3" *ngIf="url==='riskAssess'">
-    <h1>  Risk Assessment Instruction</h1>
+    <h1> Risk Assessment Instruction</h1>
 </div>
 <div class="col ml-2 mb-2">
-  
-    <button class="btn btn-outline-primary mt-1 mr-2 float-right"
-     (click)="edit('')" *ngIf="addBtn">
-      <i class="fas fa-plus mr-2"></i>Add Instruction
+
+    <button class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="edit('')" *ngIf="addBtn">
+        <i class="fas fa-plus mr-2"></i>Add Instruction
     </button>
-  </div>
+</div>
 
 <div class="">
 
@@ -20,7 +18,7 @@
         <!-- Position Column -->
         <ng-container matColumnDef="index">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="index"> No. </th>
-            <td mat-cell *matCellDef="let element" >{{element.index}}</td>
+            <td mat-cell *matCellDef="let element">{{element.index}}</td>
         </ng-container>
 
         <!-- Name Column -->
@@ -28,7 +26,8 @@
         <!-- Name Column -->
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="title"> Instruction </th>
-            <td mat-cell *matCellDef="let element"><span class="flex-start p-3" [innerHtml]="element.instruction">{{element.instruction}}</span> </td>
+            <td mat-cell *matCellDef="let element"><span
+                    [innerHtml]="element.instruction">{{element.instruction}}</span> </td>
         </ng-container>
 
         <ng-container matColumnDef="action">

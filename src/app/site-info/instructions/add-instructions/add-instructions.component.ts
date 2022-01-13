@@ -31,10 +31,10 @@ export class AddInstructionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.data.instruction){
-      this.addIstruction.controls['instruction'].setValue(this.data.instruction)
+    if (this.data.element.instruction) {
+      this.addIstruction.controls['instruction'].setValue(this.data.element.instruction)
     }
-  
+
 
   }
 
@@ -45,20 +45,33 @@ export class AddInstructionsComponent implements OnInit {
     // let data = {
 
     // }
-    this.logicalFormInfo.postInstruction(this.addIstruction.value).subscribe((data) => {
-      console.log('nature=>', data);
-      this.dialogRef.close("true")
-      this.router.navigate(['/admin/siteInfo/instructions/accident']);
-    }, (err) => { console.error(err); }
+    if (this.data.url === 'accident') {
+      this.logicalFormInfo.postInstruction(this.addIstruction.value).subscribe((data) => {
+        console.log('nature=>', data);
+        this.router.navigate(['/admin/siteInfo/instructions/accident']);
+        this.dialogRef.close("true")
+      }, (err) => { console.error(err); }
 
-    );
+      );
 
+    } else if (this.data.url === 'riskAssess') {
+      this.logicalFormInfo.postRiskInstruction(this.addIstruction.value).subscribe((data) => {
+        console.log('nature=>', data);
+        this.router.navigate(['/admin/siteInfo/instructions/riskAssess']);
+        this.dialogRef.close("true")
+      }, (err) => { console.error(err); }
+
+      );
+
+    }
   }
   closeDialog() {
     this.dialogRef.close('false');
 
   }
-
-
-
 }
+
+
+
+
+

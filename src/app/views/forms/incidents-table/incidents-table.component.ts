@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { environment } from 'src/environments/environment';
@@ -15,19 +16,47 @@ import Swal from 'sweetalert2'
   styleUrls: ['./incidents-table.component.scss']
 })
 export class IncidentsTableComponent implements OnInit {
-  displayedColumns: string[] = ['formId', 'projectName', "customerName", "Email", "Site", 'Action'];
+  displayedColumns: string[] = ['formId', 'projectName', "customerName", "Email", "Site", 'createdAt', 'updatedAt', 'Action',];
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  isHistory: boolean=false;
+  id: string;
   constructor(private logicalFormInfo: LogicalFormInfoService,
     public router: Router,
     private shared: RoleManagementSharedServiceService,
     private spinner: NgxSpinnerService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.isHistory = this.router.url.includes('/incidentsTable\/history')
+    console.log(this.isHistory)
+    if (this.isHistory) {
+      this.activatedRoute.paramMap.pipe(map(params => params.get('id'))).subscribe(res => {
+        this.id = res
+        this.displayedColumns = ['version', 'formId', 'projectName', "customerName", "Email", "Site", 'createdTime', 'updatedTime', 'Action'];
+        this.getIncidentReportHistory()
+      })
+    } else {
     this.getIncidentReport();
+    }
+  }
+  view(id) {
+    this.router.navigate(["/admin/forms/incidentsTable/history/incidentRep/" + id], { queryParams: { returnTo: this.router.url } });
+  }
+  getIncidentReportHistory(field = "", value = "", id = this.id) {
+    this.logicalFormInfo.getAllIncidentHistory(field, value, id).subscribe((res: any) => {
+      this.showDatas = res.data[0].result;
+      this.showDatas.forEach((element, i) => {
+        return this.showDatas[i].index = i
+      });
+      this.tempArray = new MatTableDataSource<any>(this.showDatas);
+      this.tempArray.paginator = this.paginator;
+      this.tempArray.sort = this.sort;
+      console.log("get res", this.showDatas);
+    })
   }
   ngAfterViewInit() {
     //   this.tempArray.paginator = this.paginator;
