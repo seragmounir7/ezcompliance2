@@ -4,7 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
@@ -39,6 +39,11 @@ export class AddEmployeeComponent implements OnInit {
   roleData: any = [''];
   filteredOptions2: Observable<any>;
   filteredOptions1: Observable<any>;
+  filteredOptions3: Observable<any>;
+  empData: any[]=[];
+  licenceValueChanges: Observable<any>[];
+  PPEData: any[]=[];
+  PPEValueChanges: Observable<any>[];
   constructor(
     private fb: FormBuilder,
     private role: RoleManagementService,
@@ -98,6 +103,46 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.licenceInfo.getAllLicence().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.title}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+      console.log('this.empData', this.empData)
+      // this.filteredOptions2 = this.empDetails.controls.fullName.valueChanges.pipe(
+      //   startWith(''),
+      //   debounceTime(400),
+      //   map(value => (typeof value === 'string' ? value : value.fullName)),
+      //   map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      // )
+      // this.filteredOptions3 = this.empDetails.controls.name.valueChanges.pipe(
+      //   startWith(''),
+      //   debounceTime(400),
+      //   tap(value => console.log('value', value)),
+      //   map(value => (typeof value === 'string' ? value : value.fullName)),
+      //   map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      // )
+     
+      // this.obj = new Object()
+     
+      // console.log(this.obj)
+    })
+    this.licenceInfo.getAllPPE().pipe(
+      map((res:any) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.title}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.PPEData = empData
+      console.log('this.empData2', this.PPEData)
+     
+    })
     this.getAllRoles();
     this.id = this.activatedRoute.snapshot.params.id;
 
@@ -591,6 +636,18 @@ export class AddEmployeeComponent implements OnInit {
   addFiled2() {
     this.addPPE().push(this.newFiled2());
     console.log(this.empDetails.value);
+    this.PPEValueChanges =new Array<Observable<any>>()
+    for (let index = 0; index < this.addPPE().length; index++) {
+      let element = this.addPPE().at(index)
+     this.PPEValueChanges.push( (element['controls'].PPESupplied.valueChanges as Observable<any>).pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => console.log('value', value)),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filterPPE(fullName) : this.PPEData.slice())),
+    ))
+      console.log(element.valueChanges)
+    }
   }
   removeFiled1(i) {
     const item = <FormArray>this.empDetails.controls['PPEArr'];
@@ -637,6 +694,27 @@ export class AddEmployeeComponent implements OnInit {
   }
   addFiled() {
     this.addLicence().push(this.newFiled());
+    this.licenceValueChanges =new Array<Observable<any>>()
+    for (let index = 0; index < this.addLicence().length; index++) {
+      let element = this.addLicence().at(index)
+     this.licenceValueChanges.push( (element['controls'].LicenceName.valueChanges as Observable<any>).pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => console.log('value', value)),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    ))
+      console.log(element.valueChanges)
+    }
+    // this.licenceValueChanges.map(x => {
+    //   x.pipe(
+    //     startWith(''),
+    //     debounceTime(400),
+    //     tap(value => console.log('value', value)),
+    //     map(value => (typeof value === 'string' ? value : value.fullName)),
+    //     map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    //   )
+    // })
   }
   removeFiled(i) {
     const item = <FormArray>this.empDetails.controls['UploadLicenceArr'];
@@ -648,6 +726,15 @@ export class AddEmployeeComponent implements OnInit {
 
   get registerFormControl() {
     return this.empDetails.controls;
+  }
+
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  private _filterPPE(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.PPEData.filter(option => option.fullName.toLowerCase().includes(filterValue));
   }
   filter2(val: string): Observable<any> {
     return this.licenceInfo.getAllLicence()
@@ -696,4 +783,5 @@ export class AddEmployeeComponent implements OnInit {
   //   console.log("data...");
 
   // }
+ 
 }

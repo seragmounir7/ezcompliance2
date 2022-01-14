@@ -59,7 +59,7 @@ export class EmployeeRegistrationComponent implements OnInit {
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item.couponName}"?`,
+      text: `Do you want to delete "${item.firstName}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',

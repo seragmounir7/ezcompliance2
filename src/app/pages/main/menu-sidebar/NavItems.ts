@@ -23,6 +23,12 @@ export class NavItems {
                     icon: "Employee_Details",
                     route: "/admin/registration/employeeRegistration",
                     hasAccess: true
+                },
+                {
+                    displayedName: "Subcontractor Details",
+                    icon: "Employee_Details",
+                    route: "/admin/registration/subcontract",
+                    hasAccess: true
                 }
             ],
             hasAccess: true

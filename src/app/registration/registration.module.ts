@@ -11,9 +11,10 @@ import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
 import { PlantRegistrationComponent } from './plant-registration/plant-registration.component';
 import { SubcontractComponent } from './subcontract/subcontract.component';
+import { AddAndEditSubcontractComponent } from './subcontract/add-and-edit-subcontract/add-and-edit-subcontract.component';
 
 @NgModule({
-  declarations: [CompanyRegistrationComponent, EmployeeRegistrationComponent, AddEmployeeComponent, PlantRegistrationComponent, SubcontractComponent],
+  declarations: [CompanyRegistrationComponent, EmployeeRegistrationComponent, AddEmployeeComponent, PlantRegistrationComponent, SubcontractComponent, AddAndEditSubcontractComponent],
   imports: [
     CommonModule,
     RegistrationRoutingModule,

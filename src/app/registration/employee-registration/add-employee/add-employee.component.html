@@ -311,7 +311,7 @@
                     id="siteName"
                     />
                   <mat-autocomplete #employee1="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option.title">
+                    <mat-option *ngFor="let option of licenceValueChanges[filed] | async ; let i = index " [value]="option.title">
                       {{option.title}}
                     </mat-option>
                   </mat-autocomplete>
@@ -401,7 +401,7 @@
                     id="siteName"
                     />
                   <mat-autocomplete #employee2="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions1 | async ; let i = index " [value]="option.title">
+                    <mat-option *ngFor="let option of PPEValueChanges[filed1] | async ; let i = index " [value]="option.title">
                       {{option.title}}
                     </mat-option>
                   </mat-autocomplete>
