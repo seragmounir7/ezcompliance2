@@ -36,7 +36,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   hazard: any;
   singRequired: any;
   selectedImage: any;
-
+  isHistory: boolean;
   hasError: false;
 
   pad: "inp_padding";
@@ -62,6 +62,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   ActionedbyStrings: string[];
   uploadFile: any;
+  returnTo: Observable<string>;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -155,9 +156,27 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
     });
   }
+  async disableForm() {
+    if (this.isHistory) {
+      this.hazardReport.disable();
 
+      let check1 = async () => { this.signaturePad1 != null }
+      await check1()
+      this.signaturePad1.off()
+    }
+  }
 
   ngOnInit() {
+
+    this.isHistory = this.router.url.includes('/hazardTable\/history')
+    if (this.isHistory) {
+      this.disableForm()
+      this.returnTo = this.activatedRoute.queryParamMap.pipe(
+        map(param => param.get('returnTo'))
+      )
+      this.returnTo.subscribe(res => console.log(res))
+    }
+
     this.employee.getAllEmployeeInfo().pipe(
       map((res) => {
         return res.data.map((item) => {
@@ -322,24 +341,24 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         action: res.data.action,
         eliminateHazard: res.data.eliminateHazard,
         eliminateCorrect: res.data.eliminateCorrect,
-        elliminateAction: {fullName:res.data.elliminateAction},
+        elliminateAction: { fullName: res.data.elliminateAction },
         eliminateWhen: res.data.eliminateWhen,
         substituteCorrect: res.data.substituteCorrect,
-        substituteAction: {fullName:res.data.substituteAction},
+        substituteAction: { fullName: res.data.substituteAction },
         substituteWhen: res.data.substituteWhen,
         isolatedCorrect: res.data.isolatedCorrect,
-        isolatedAction: {fullName:res.data.isolatedAction},
+        isolatedAction: { fullName: res.data.isolatedAction },
         isolatedWhen: res.data.isolatedWhen,
         solutionCorrect: res.data.solutionCorrect,
-        solutionAction: {fullName:res.data.solutionAction},
+        solutionAction: { fullName: res.data.solutionAction },
         customerName: res.data.customerName,
         solutionWhen: res.data.solutionWhen,
         procedureRemove: res.data.procedureRemove,
         procedureRemoveCorrect: res.data.procedureRemoveCorrect,
-        procedureRemoveAction: {fullName:res.data.procedureRemoveAction},
+        procedureRemoveAction: { fullName: res.data.procedureRemoveAction },
         procedureRemoveWhen: res.data.procedureRemoveWhen,
         PPECorrect: res.data.PPECorrect,
-        PPEAction: {fullName:res.data.PPEAction},
+        PPEAction: { fullName: res.data.PPEAction },
         PPEWhen: res.data.PPEWhen,
         name: { fullName: res.data.name },
         locationHazard: res.data.locationHazard,
@@ -362,13 +381,13 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       this.minDate = res.data.date;
       this.selectedImage = res.data.fileUpload
       // this.uploadFile=this.selectedImage?.split(/-/)[1];
-      this.uploadFile= this.selectedImage?.slice(this.selectedImage.indexOf('-') + 1)
+      this.uploadFile = this.selectedImage?.slice(this.selectedImage.indexOf('-') + 1)
       console.log(this.selectedImage, "selectedImage")
       this.dataUrl = res.data.signaturePad1;
       let check = async () => { this.signaturePad1 != null }
       check().then(() => {
-          console.log("singpachet");
-          
+        console.log("singpachet");
+
         this.signaturePad1.fromDataURL(res.data.signaturePad1)
       })
 
@@ -598,7 +617,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.id)
 
     const {
-      fullName, 
+      fullName,
       name,
       elliminateAction,
       substituteAction,
@@ -611,7 +630,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.hazardReport.removeControl('fullName')
     // this.hazardReport.removeControl('name')
     // this.ActionedbyStrings.forEach(string => this.hazardReport.removeControl(string) )
-    console.log(this.hazardReport.value, fullName, 
+    console.log(this.hazardReport.value, fullName,
       name,
       elliminateAction,
       substituteAction,
@@ -620,8 +639,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       procedureRemoveAction,
       PPEAction,
       rest
-      );
-    
+    );
+
     const data = {
       ...rest,
       fullName: fullName.fullName == '' ? '' : fullName.fullName || fullName,
@@ -648,7 +667,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
             timer: 1200,
           });
           this.router.navigate(['/admin/forms/hazardTable']);
-        },err => {
+        }, err => {
           console.error(err)
         });
     } else {
@@ -662,10 +681,10 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         // this.router.navigate(["/admin/forms/tableData"]);
         this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
-      },err => console.error(err));
+      }, err => console.error(err));
       console.log('data', data);
     }
-    
+
   }
   browser(event) {
     const files = event.target.files[0];

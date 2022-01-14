@@ -181,15 +181,11 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
-  async disableForm(){
+  async disableForm() {
     if (this.isHistory) {
       this.IncidentReport.disable();
-      this.IncidentReport.statusChanges.subscribe(console.log)
-      this.IncidentReport.valueChanges.subscribe((res)=> {
-        this.IncidentReport.disable();
-      })
-      let check =  async () => {this.signaturePad != null}
-      let check2 =  async () => {this.signaturePad1 != null}
+      let check = async () => { this.signaturePad != null }
+      let check2 = async () => { this.signaturePad1 != null }
       await check()
       this.signaturePad.off()
       await check2()
@@ -286,6 +282,7 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
   addAction() {
     {
       this.add().push(this.newAction());
+      this.disableForm()
     }
   }
 
@@ -733,23 +730,28 @@ export class IncidentReportComponent implements OnInit, AfterViewInit, OnDestroy
       for (let i = 0; i < this.changes.length; i++) {
         this.changesArr[i] = 0;
         this.changeAdd().push(this.changeAction(i))
+        this.disableForm()
       }
       for (let i = 0; i < this.natureOFIncidents.length; i++) {
         this.natureOfIncArr[i] = 0;
         this.natureAdd().push(this.natureAction(i))
+        this.disableForm()
 
       }
       for (let i = 0; i < this.rootCauseIncident.length; i++) {
         this.rootArr[i] = 0;
         this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction(i))
+        this.disableForm()
       }
       for (let i = 0; i < this.incidents.length; i++) {
         this.incidentsArr[i] = 0;
         this.incidentsAdd().push(this.incidentsAction(i))
+        this.disableForm()
       }
       for (let i = 0; i < this.PPE.length; i++) {
         this.ppeArr[i] = 0;
         this.ppeAdd().push(this.ppeAction(i))
+        this.disableForm()
       }
       this.IncidentReport.patchValue({
         projectName: res.data.projectName,

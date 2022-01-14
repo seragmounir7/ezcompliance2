@@ -82,7 +82,7 @@ export class SiteInspectionTableComponent implements OnInit {
       });
 
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
+     // this.tempArray.paginator = this.paginator;
       // this.tempArray.sort = this.sort;
       console.log("get res", this.showDatas);
     })
@@ -98,7 +98,7 @@ export class SiteInspectionTableComponent implements OnInit {
       });
 
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
+     // this.tempArray.paginator = this.paginator;
       // this.tempArray.sort = this.sort;
       console.log("get res", this.showDatas);
     })

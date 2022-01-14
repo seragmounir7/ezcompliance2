@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [SavedFormsComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     SavedFormsRoutingModule
   ]

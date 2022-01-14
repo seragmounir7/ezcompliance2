@@ -1,9 +1,15 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Risk Assessment'"
-  [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+    class="fa fa-arrow-left" aria-hidden="true"></i>
+  </div>
+<div class="btn btn-outline-primary" *ngIf="!isHistory && id!=='form' && type!=='Risk Assessment'"
+  [routerLink]="['/admin/forms/riskAssessTable']"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
 <div class="btn btn-outline-primary" *ngIf="type==='Risk Assessment'" [routerLink]="['/admin/savedForms']"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
+    class="fa fa-arrow-left" aria-hidden="true"></i>
+  </div>
+    <div class="btn btn-outline-primary" *ngIf="isHistory" [routerLink]="returnTo | async"><i class="fa fa-arrow-left"
+      aria-hidden="true"></i>
+    </div>
 <div id='section-to-print' *ngIf="(isPrint | async)===true" class="page-header" style="text-align: center">
   I'm The Header
 </div>
@@ -53,7 +59,7 @@
   </ul> -->
   <mat-tab-group *ngIf="(isPrint | async)===false">
     <mat-tab label="Risk Assessment">
-      <div class="tab-content" id="myTabContent">
+      <div class="tab-content" id="myTabContent" [class.disableDiv]="isHistory">
         <div class="tab-pane fade show active px-4 py-4" id="RISKAssessment" role="tabpanel"
           aria-labelledby="RISKAssessment-tab">
           <h2>Site Information</h2>
@@ -479,7 +485,7 @@
                 <span *ngIf="singRequired" class="invalid-feedback">
                   This Field is Required</span>
               </div>
-              <button class="btn btn-outline-primary mt-1" (click)="clear1()">
+              <button *ngIf="!isHistory" class="btn btn-outline-primary mt-1" (click)="clear1()">
                 Clear
               </button>
             </div>
@@ -503,7 +509,7 @@
                   Date is Required</span>
 
                 <label class="form-label mt-1 mb-0">Time</label>
-                <input [ngxMatTimepicker]="timepicker" format="24" [value]="setTime" class="form-control" />
+                <input [class.disableDiv]="isHistory" [ngxMatTimepicker]="timepicker" format="24" [value]="setTime" class="form-control" />
                 <ngx-mat-timepicker #timepicker (timeSet)="getTime($event,timepicker)"></ngx-mat-timepicker>
                 <!-- <span *ngIf=" IncidentReport.get('timeOfTheIncident')?.hasError('required') && (IncidentReport.get('timeOfTheIncident').dirty  || IncidentReport.get('timeOfTheIncident').touched) " class="invalid-feedback" >
             Select Time is Required</span> -->
@@ -514,7 +520,7 @@
       </div>
     </mat-tab>
     <mat-tab label="SWMS">
-      <div class="tab-pane fade show active" id="SWSS" role="tabpanel" aria-labelledby="SWSS-tab">
+      <div class="tab-pane fade show active" id="SWSS" role="tabpanel" aria-labelledby="SWSS-tab" [class.disableDiv]="isHistory">
         <!--SWMS Forms-->
         <div class="container content-center">
           <div class="px-4 py-4">
@@ -784,7 +790,7 @@
                   <div class="col-md-3">
                     <div class="my-3">
                       <label for="sel2" class="form-label">Name of Chemical<span class="material-icons ml-3"
-                          style="font-size: 19px;" (click)="addChemical()">add_circle_outline</span></label>
+                          style="font-size: 19px;" (click)="addChemical()" *ngIf="!isHistory">add_circle_outline</span></label>
                       <select class="form-control" id="sel2" name="sellist2" formControlName="chemicalName"
                         [class.is-invalid]=" sdsRegisterFA().controls[i].get('chemicalName')?.hasError('required') 
                   && (sdsRegisterFA().controls[i].get('chemicalName').dirty 
@@ -865,12 +871,12 @@
                   <div class="col-md-10">
                     <div class="my-3">
                       <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                      <input class="form-control" (change)="fileChangeEvent($event,i)" type="file" id="formFile" />
+                      <input *ngIf="!isHistory" class="form-control" (change)="fileChangeEvent($event,i)" type="file" id="formFile" />
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-2" *ngIf="!isHistory">
                     <span class="material-icons" style="margin-top: 30%"
-                      (click)="addActionSDSRegister()">add_circle_outline
+                      (click)="addActionSDSRegister()" *ngIf="!isHistory">add_circle_outline
                     </span>
                     <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
                   </div>
@@ -991,7 +997,7 @@
                   <div class="col-10 col-sm-10-print">
                     <label for="sel2">Identity Hazards<span class="material-icons ml-3 my-auto p-0"
                         style="font-size: 19px;"
-                        (click)="addItem('identifyHazards',i)">add_circle_outline</span></label>
+                        (click)="addItem('identifyHazards',i)" *ngIf="!isHistory">add_circle_outline</span></label>
                     <ol class="identifyHaz">
                       <li *ngFor="let hazard of item.allHazardsTitle;let j=index">
                         <div class="d-flex">
@@ -1018,7 +1024,7 @@
                   <div class="col-10 col-sm-10-print my-3">
 
                     <label for="sel2">Control and Action Required<span class="material-icons ml-3 my-auto p-0"
-                        style="font-size: 19px;" (click)="addItem('ctrlActreq',i)">add_circle_outline</span></label>
+                        style="font-size: 19px;" (click)="addItem('ctrlActreq',i)" *ngIf="!isHistory">add_circle_outline</span></label>
                     <ol class="identifyHaz">
                       <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index">
                         <div class="">
@@ -1134,12 +1140,12 @@
 
                   </div>
                 </div>
-                <button class="btn btn-outline-primary mt-1" (click)="clear2()">
+                <button *ngIf="!isHistory" class="btn btn-outline-primary mt-1" (click)="clear2()">
                   Clear
                 </button>
               </div>
             </div>
-            <div>
+            <div *ngIf="!isHistory">
               <button type="submit" [disabled]="!riskAssessmentFb.valid || singRequired || signRequired1"
                 class="btn btn-primary " (click)="onSubmit()">Submit</button>
             </div>
@@ -1691,7 +1697,7 @@
               <div class="col-md-3 col-md-3-print">
                 <div class="my-3">
                   <label for="sel2" class="form-label">Name of Chemical<span class="material-icons ml-3"
-                      style="font-size: 19px;" (click)="addChemical()">add_circle_outline</span></label>
+                      style="font-size: 19px;" (click)="addChemical()"></span></label>
                   <select class="form-control" id="sel2" name="sellist2" formControlName="chemicalName">
                     <option *ngIf="!isSelected[i]" value="" hidden>Select</option>
 
@@ -1738,11 +1744,17 @@
                   <input class="form-control" type="file" id="formFile" formControlName="file" />
                 </div>
               </div>
-              <div class="col-md-2 col-sm-2-print">
+              <!-- <div class="col-md-2 col-sm-2-print">
                 <span class="material-icons" style="margin-top: 30%" (click)="addActionSDSRegister()">add_circle_outline
                 </span>
                 <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
-              </div>
+              </div> -->
+            </div>
+            <div class="my-3">
+              <label for="formFile" class="form-label">Uploaded File List</label>
+              <span class="form-control" *ngFor="let item of selectedFile1">
+                {{item.fileName}}
+              </span>
             </div>
           </ng-container>
         </ng-container>
@@ -1853,7 +1865,7 @@
             <div class="row row-print">
               <div class="col-10 col-sm-10-print">
                 <label for="sel2">Identity Hazards<span class="material-icons ml-3 my-auto p-0" style="font-size: 19px;"
-                    (click)="addItem('identifyHazards',i)">add_circle_outline</span></label>
+                    (click)="addItem('identifyHazards',i)"></span></label>
                 <ol class="identifyHaz">
                   <li *ngFor="let hazard of item.allHazardsTitle;let j=index">
                     <div class="d-flex">
@@ -1880,7 +1892,7 @@
               <div class="col-10 col-sm-10-print my-3">
 
                 <label for="sel2">Control and Action Required<span class="material-icons ml-3 my-auto p-0"
-                    style="font-size: 19px;" (click)="addItem('ctrlActreq',i)">add_circle_outline</span></label>
+                    style="font-size: 19px;" (click)="addItem('ctrlActreq',i)"></span></label>
                 <ol class="identifyHaz">
                   <li *ngFor="let contrlActReq of item.allContrlActReqTitle;let j=index">
                     <div class="">
@@ -1985,9 +1997,9 @@
                   (onEndEvent)="drawComplete2()" #Signature2></signature-pad>
               </div>
             </div>
-            <button class="btn btn-outline-primary mt-1" (click)="clear2()">
+            <!-- <button class="btn btn-outline-primary mt-1" (click)="clear2()">
               Clear
-            </button>
+            </button> -->
           </div>
         </div>
         <div>

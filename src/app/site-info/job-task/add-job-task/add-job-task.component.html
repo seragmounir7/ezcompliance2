@@ -1,4 +1,4 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/jobTask']">
+<div class="btn btn-outline-primary" *ngIf="!dialogRef" [routerLink]="['/admin/siteInfo/jobTask']">
   <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="container px-4 py-4 bg-white">

@@ -82,6 +82,7 @@ import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynami
 import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { AddInstructionsComponent } from './instructions/add-instructions/add-instructions.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -170,7 +171,8 @@ import { AddInstructionsComponent } from './instructions/add-instructions/add-in
     SharedModule,
     MatStepperModule,
     AutosizeModule,
-    CKEditorModule
+    CKEditorModule,
+    MatDialogModule
   ],
 })
 export class SiteInfoModule { }

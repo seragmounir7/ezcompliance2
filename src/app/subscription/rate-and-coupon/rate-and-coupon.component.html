@@ -49,7 +49,7 @@
         <!-- <i class="fas fa-pencil-alt mr-2 " (click)="edit(element)" title="edit"></i>  -->
         <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
           (click)="edit(element)">
-          <mat-icon>edit</mat-icon>
+          <mat-icon matTooltip="Edit">edit</mat-icon>
         </button>
 
       </td>
@@ -59,6 +59,9 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found </td>
+    </tr>
   </table>
 
 </div>

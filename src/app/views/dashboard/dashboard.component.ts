@@ -16,6 +16,38 @@ interface marker {
 })
 export class DashboardComponent implements OnInit {
   // Doughnut
+
+  
+  corrAct=[
+  {Item:'Incorrect Singage',Action:'Install correct singage',personResposibility:'Tim Smith',date:'11-01-22'},
+  {Item:'PPE not issued',Action:'issue PPE',personResposibility:'John Hunt',date:'11-01-22'},
+  {Item:'Staff to be inducted',Action:'Induct new staff members',personResposibility:'John Hunt',date:'11-01-22'}
+]
+
+expRem=[
+  {name:'Tim Smith',type:'driver Licence',expdate:'10-01-2022'},
+  {name:'Bob Green',type:'Security Licence',expdate:'19-01-2022'},
+  {name:'John Hunt',type:'EWP Licence',expdate:'22-01-2022'},
+  {name:'Thomas Do',type:'Electrical Licence',expdate:'01-02-2022'},
+  {name:'Mark jones',type:'EWP Licence',expdate:'06-02-2022'},
+  {name:'Mick Smart',type:'COVID Vacs Passport',expdate:'07-03-2022'},
+  {name:'Phil Collins',type:'Driver Licence',expdate:'10-03-2022'},
+  {name:'Steve Carol',type:'Police Check',expdate:'11-03-2022'},
+]
+
+auditAndForm=[
+  {audit:'Take 5',quantity:'20'},
+  {audit:'site Induction',quantity:'15'},
+  {audit:'Safety Meetings',quantity:'4'},
+  {audit:'Site Inspections',quantity:'6'},
+  {audit:'Plant Inspections',quantity:'5'},
+  {audit:'Corrective Actions',quantity:'5'},
+  {audit:'Return to work plan',quantity:'1'},
+  {audit:'Vehicle Inspections',quantity:'12'},
+  {audit:'Permit to Work',quantity:'4'}
+
+]
+
   public doughnutChartLabels: Label[] = ['Near Miss', 'Incident', 'Hazard'];
   public doughnutChartLabels1: Label[] = [];
   public doughnutChartData: MultiDataSet = [[350, 450, 100]];
@@ -61,6 +93,10 @@ export class DashboardComponent implements OnInit {
     { backgroundColor: 'rgba(211,211,211, 0.8)' },
     { backgroundColor: 'rgba(0, 0, 128, 0.8)' },
     { backgroundColor: 'rgba(199,20,55,1)' },
+
+        // new DashBoard 
+    // { backgroundColor: 'rgb(63, 127, 191)' },
+
   ];
 
   // public barChartColor=[
@@ -84,6 +120,19 @@ export class DashboardComponent implements OnInit {
     'Location3',
     'Location5',
     'Location7',
+
+        // new DashBoard 
+    // 'Abrasion',
+    // 'Amputation',
+    // 'Broken Bone',
+    // 'Bruise',
+    // 'Burn',
+    // 'Crushing Injury',
+    // 'Cuts',
+    // 'Head Injury',
+    // 'Hernia',
+    // 'Illness',
+    // 'Other',
   ];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
@@ -93,6 +142,10 @@ export class DashboardComponent implements OnInit {
     { data: [55, 59, 80, 81, 56, 55, 40], label: 'Near miss' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Incident' },
     { data: [18, 28, 20, 49, 36, 37, 50], label: 'Hazard' },
+
+    // new DashBoard 
+    // { data: [10,0,1,10,2,1,7,1,1,1,3], label: 'Type of Injuries' },
+
   ];
 
   ////horizontal chart
@@ -166,6 +219,9 @@ export class DashboardComponent implements OnInit {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 2000);
+
+    // console.log('Checking Arr=> ',this.arr);
+
   }
 
   public chartOptions: any = {

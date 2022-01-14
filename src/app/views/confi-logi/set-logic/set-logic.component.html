@@ -179,7 +179,10 @@
 
 <!-- stepper logic -->
 
-<h2 class="ml-2"> Set Relation</h2>
+<h2 class="ml-2"> Set Relation
+  <button type="button" class="btn btn-outline-primary mt-1 mr-2 float-right" (click)="addJobTask()" >
+    <i class="fas fa-plus"></i> Add JobTask </button>
+</h2>
 <!-- <div class="col ml-2 mb-2">
   
   <button  class="btn btn-outline-primary mt-1 mr-2 float-right"  (click)="openDialog('')" >
@@ -233,6 +236,9 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found </td>
+    </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">

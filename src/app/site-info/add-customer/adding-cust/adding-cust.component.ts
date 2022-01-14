@@ -16,6 +16,7 @@ export class AddingCustComponent implements OnInit {
     private fb: FormBuilder,
     private logicalFormInfoService: LogicalFormInfoService,
     private router: Router,
+    public dialogRef: MatDialogRef<AddingCustComponent>
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +61,10 @@ export class AddingCustComponent implements OnInit {
 
     this.logicalFormInfoService.addCustomer(this.addCustomerForm.value).subscribe(res => {
       console.log("addCustomerForm=>", res)
+      if(this.dialogRef){
+        this.dialogRef.close('ok')
+        return
+      }
       //this.dialogRef.close('ok')
       this.router.navigate(['/admin/siteInfo/addCustomer']);
     }, (err) => {

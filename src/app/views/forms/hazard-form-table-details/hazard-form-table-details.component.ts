@@ -56,7 +56,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
       console.log("this.showDatas", this.showDatas);
 
       this.dataSource = new MatTableDataSource<any>(this.showDatas);
-      this.dataSource.paginator = this.paginator;
+     // this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort; 
       console.log("get res", this.showDatas);
     })
@@ -96,7 +96,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
       console.log("this.showDatas", this.showDatas);
 
       this.dataSource = new MatTableDataSource<any>(this.showDatas);
-      this.dataSource.paginator = this.paginator;
+      // this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort; 
       console.log("get res", this.showDatas);
     })

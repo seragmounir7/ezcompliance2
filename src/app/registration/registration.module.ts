@@ -12,9 +12,18 @@ import { SharedModule } from '../shared/shared.module';
 import { PlantRegistrationComponent } from './plant-registration/plant-registration.component';
 import { SubcontractComponent } from './subcontract/subcontract.component';
 import { AddAndEditSubcontractComponent } from './subcontract/add-and-edit-subcontract/add-and-edit-subcontract.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 @NgModule({
-  declarations: [CompanyRegistrationComponent, EmployeeRegistrationComponent, AddEmployeeComponent, PlantRegistrationComponent, SubcontractComponent, AddAndEditSubcontractComponent],
+  declarations: [
+    CompanyRegistrationComponent,
+     EmployeeRegistrationComponent, 
+     AddEmployeeComponent, 
+     PlantRegistrationComponent, 
+     SubcontractComponent, 
+     AddAndEditSubcontractComponent,
+     CompanyDetailsComponent
+    ],
   imports: [
     CommonModule,
     RegistrationRoutingModule,

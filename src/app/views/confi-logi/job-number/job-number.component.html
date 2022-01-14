@@ -88,7 +88,7 @@
       <mat-icon (click)="edit(element)">edit</mat-icon>
     </button> -->
         <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
-          <mat-icon>delete</mat-icon>
+          <mat-icon matTooltip="Delete">delete</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -96,6 +96,9 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found </td>
+    </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">

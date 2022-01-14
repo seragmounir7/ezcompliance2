@@ -2,6 +2,7 @@
   <div>
     <div mat-dialog-title class="dialog-title">
       <h1>Create Job Number</h1>
+      <button class="btn btn-outline-primary mt-1 mr-2 " (click)="addSite()">Add Site</button><button class="btn btn-outline-primary mt-1 mr-2 " (click)="addCustomer()">Add Customer</button>
       <button type="button" class="close" style="font-size: 25px;" (click)="close()" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
@@ -11,7 +12,7 @@
       <div class="my-3 col-6">
         <p for="exampleFormControlInput1" class="form-Label">Site Name</p>
         <select type="text" class="form-control" formControlName="siteName" id="siteName">
-          <option [value]="item|json" *ngFor="let item of allSites ">{{item.siteName}}</option>
+          <option [ngValue]="item" *ngFor="let item of allSites ">{{item.siteName}}</option>
         </select>
       </div>
       <div class="my-3 col-6">
@@ -67,7 +68,7 @@
       <div class="my-3 col">
         <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
         <select type="text" class="form-control" formControlName="customerName" id="siteName">
-          <option [value]="item|json" *ngFor="let item of allCustomers ">{{item.customerName}}</option>
+          <option [ngValue]="item" *ngFor="let item of allCustomers ">{{item.customerName}}</option>
         </select>
       </div>
       <div class="my-3 col">
