@@ -1,3 +1,4 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -24,7 +25,8 @@ export class AddJobTaskComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private logicalFormInfo: LogicalFormInfoService
+    private logicalFormInfo: LogicalFormInfoService,
+    public dialogRef: MatDialogRef<AddJobTaskComponent>
   ) {
     this.jobTaskDetails = this.fb.group({
       // mode:"JobTask",
@@ -76,8 +78,17 @@ export class AddJobTaskComponent implements OnInit {
         showConfirmButton: false,
         timer: 1200,
       });
+      if(this.dialogRef){
+        this.dialogRef.close('ok')
+        return
+      }
       this.router.navigate(['/admin/siteInfo/jobTask']);
-    }, (err) => { console.error(err); }
+    }, (err) => { 
+      if(this.dialogRef){
+        this.dialogRef.close('error')
+      }
+      console.error(err); 
+    }
 
     );
 

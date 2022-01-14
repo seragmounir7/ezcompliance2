@@ -1,3 +1,4 @@
+import { AddJobTaskComponent } from './../../../site-info/job-task/add-job-task/add-job-task.component';
 
 import {
   Component,
@@ -17,7 +18,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddItemComponent } from './set-relation/add-item/add-item.component';
-import { AddJobTaskComponent } from './add-job-task/add-job-task.component';
 import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-set-logic',
@@ -138,7 +138,8 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   @ViewChildren('risk') Risk: QueryList<any>;
 
   constructor(
-    private fb: FormBuilder, private dialog: MatDialog,
+    private fb: FormBuilder, 
+    private dialog: MatDialog,
     private logicalFormInfo: LogicalFormInfoService,
     private setTitle: SetTitleService,
     public router: Router,
@@ -469,5 +470,16 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
   //     }
   //   });
   // }
+
+  addJobTask(){
+    let dilog = this.dialog.open(AddJobTaskComponent,{
+      width:'70%'
+    })
+    dilog.afterClosed().subscribe(res => {
+      if(res === 'ok'){
+        this.getJobTask()
+      }
+    })
+  }
 
 }
