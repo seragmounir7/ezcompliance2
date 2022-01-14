@@ -36,10 +36,10 @@
         <!-- <i  class="fas fa-eye mr-2" title="View"  (click)="view(element)"></i> <i class="fas fa-trash ml-2 mr-2"  (click)="delete(element)" title="Delete"></i>  -->
         <button mat-icon-button (click)="view(element)" class="mr-2"
           aria-label="Example icon button with a delete icon">
-          <mat-icon>visibility</mat-icon>
+          <mat-icon matTooltip="View Info">visibility</mat-icon>
         </button>
         <button mat-icon-button (click)="delete(element)" aria-label="Example icon button with a delete icon">
-          <mat-icon>delete</mat-icon>
+          <mat-icon matTooltip="Delete Info">delete</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -52,6 +52,9 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found </td>
+    </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
