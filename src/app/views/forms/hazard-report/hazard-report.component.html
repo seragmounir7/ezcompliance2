@@ -1,12 +1,17 @@
 <div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
-<div class="btn btn-outline-primary" *ngIf="id!=='form' && type!=='Hazard'" [routerLink]="['/admin/forms/hazardTable']">
+    class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div class="btn btn-outline-primary" *ngIf="!isHistory && id!=='form' && type!=='Hazard'"
+  [routerLink]="['/admin/forms/hazardTable']">
   <i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="btn btn-outline-primary" *ngIf="type==='Hazard'" [routerLink]="['/admin/savedForms']"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
-
-<div id='section-to-print' class="container card px-4 py-4 content-center">
+    class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div class="btn btn-outline-primary" *ngIf="isHistory" [routerLink]="returnTo | async"><i class="fa fa-arrow-left"
+    aria-hidden="true"></i>
+</div>
+<div id='section-to-print' class="container card px-4 py-4 content-center" [class.disableDiv]="isHistory">
   <form class="px-4 py-4" [formGroup]="hazardReport">
     <div class="mb-3">
       <p class="text-center title">Hazard Report Form </p>
@@ -832,7 +837,7 @@
             Department is Required</span>
         </div>
       </div>
-      <div class="mb-3 col-md-6 col-sm-6-print">
+      <div class="mb-3 col-md-6 col-sm-6-print" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true">
         <label class="form-label">File Upload</label>
 
         <!-- <img
@@ -915,7 +920,8 @@
             This Field is Required</span>
         </div>
         <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
-        <button *ngIf="(isPrint | async)===false" class="btn btn-outline-primary my-3" (click)="clear()">
+        <button *ngIf="(isPrint | async)===true?false:isHistory===true?false:true" class="btn btn-outline-primary my-3"
+          (click)="clear()">
           Clear
         </button>
       </div>
@@ -932,8 +938,8 @@
       </span>
     </div>
     <div class="col-md-2 col-sm-2-print">
-      <button type="submit" *ngIf="(isPrint | async)===false" class="btn btn-primary btn-block"
-        [disabled]="!hazardReport.valid" (click)="onFormSubmit()">Submit</button>
+      <button type="submit" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+        class="btn btn-primary btn-block" [disabled]="!hazardReport.valid" (click)="onFormSubmit()">Submit</button>
     </div>
   </form>
 </div>

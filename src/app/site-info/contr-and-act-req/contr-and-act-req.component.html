@@ -40,10 +40,10 @@
             <div class="col-1"><i  class="fas fa-trash ml-2 " (click)="delete(element)" title="delete"></i> </div>
     </div> -->
         <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon">
-          <mat-icon (click)="edit(element)">edit</mat-icon>
+          <mat-icon (click)="edit(element)" matTooltip="Edit">edit</mat-icon>
         </button>
         <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
-          <mat-icon>delete</mat-icon>
+          <mat-icon matTooltip="Delete">delete</mat-icon>
         </button>
       </td>
     </ng-container>

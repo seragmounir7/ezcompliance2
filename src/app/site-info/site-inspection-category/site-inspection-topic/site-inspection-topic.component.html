@@ -50,10 +50,10 @@
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
           (click)="edit(element)">
-          <mat-icon>edit</mat-icon>
+          <mat-icon matTooltip="Edit">edit</mat-icon>
         </button>
         <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
-          <mat-icon>delete</mat-icon>
+          <mat-icon matTooltip="Delete">delete</mat-icon>
         </button>
       </td>
     </ng-container>

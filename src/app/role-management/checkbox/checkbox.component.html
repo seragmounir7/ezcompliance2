@@ -363,6 +363,9 @@
       </tr>
       <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
       <tr mat-row *matRowDef="let row ; columns: displayedColumns;" (click)="getdata(row)"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Data Not Found </td>
+      </tr>
     </table>
 
   </ng-container>
