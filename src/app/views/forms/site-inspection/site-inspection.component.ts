@@ -36,6 +36,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
 
   isPrint: Observable<any>;
   @ViewChild('Signature') signaturePad: SignaturePad;
+  isHistory: boolean;
+  returnTo: Observable<string>;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -176,9 +178,25 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     canvasWidth: 350,
     canvasHeight: 100,
   };
+
+  async disableForm() {
+    if (this.isHistory) {
+      this.sidePreview.disable();
+      let check1 = async () => { this.signaturePad != null }
+      await check1()
+      this.signaturePad.off()
+    }
+  }
   ngOnInit(): void {
 
-
+    this.isHistory = this.router.url.includes('/siteinspectiontable\/history')
+    if (this.isHistory) {
+      this.disableForm()
+      this.returnTo = this.activatedRoute.queryParamMap.pipe(
+        map(param => param.get('returnTo'))
+      )
+      this.returnTo.subscribe(res => console.log(res))
+    }
 
     this.isPrint = (this.shared.printObs$ as Observable<any>)
     this.activatedRoute.queryParams.subscribe(params => {
@@ -389,6 +407,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   addAction() {
     {
       this.add().push(this.newAction());
+      this.disableForm()
     }
   }
   add(): FormArray {
@@ -618,6 +637,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
         //this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
 
         this.add2().push(this.newAction2(index));
+        this.disableForm()
+        
         // console.log("index",index);
       }
       console.log(this.sidePreview.value);

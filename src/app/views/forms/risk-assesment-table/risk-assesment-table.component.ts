@@ -51,8 +51,8 @@ export class RiskAssesmentTableComponent implements OnInit {
       });
 
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort;
+      //this.tempArray.paginator = this.paginator;
+      //this.tempArray.sort = this.sort;
       console.log("get res", this.showDatas);
     })
   }
@@ -117,8 +117,8 @@ export class RiskAssesmentTableComponent implements OnInit {
       });
 
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
-      this.tempArray.paginator = this.paginator;
-      this.tempArray.sort = this.sort;
+      //this.tempArray.paginator = this.paginator;
+     // this.tempArray.sort = this.sort;
       console.log("get res", this.showDatas);
     })
   }
