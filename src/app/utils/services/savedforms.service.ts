@@ -12,7 +12,7 @@ export class SavedformsService {
   getAllSavedForms(page = 1, limit = 10,field="",value="", sField="",searchSting="" ) {
     // if()
 
-    return this.https.get(this.apiUrl + `savedForms/getAll?page=${page}&limit=${limit}&field=${field}&value=${value}&sField=${sField}&searchSting=${searchSting}`);
+    return this.https.get(this.apiUrl + `savedForms/getAll?page=${page}&limit=${limit}${field?`&field=${field}&value=${value}`:''}&${sField?sField+'='+searchSting:''}`);
   }
 
 }

@@ -111,25 +111,6 @@ export class NavItems {
             hasAccess: true
         },
         {
-            displayedName: "Subscription Rates",
-            icon: "Subscription",
-            childItem: [
-                {
-                    displayedName: "Add Subscription",
-                    icon: "Add_Subsc",
-                    route: "/admin/subscrpt",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Coupon",
-                    icon: "Subscription",
-                    route: "/admin/subscrpt/coupon",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
-        {
             displayedName: "Logical Form Data",
             icon: "page",
             childItem: [
@@ -443,6 +424,25 @@ export class NavItems {
                     displayedName: "Social Media",
                     icon: "page",
                     route: "/admin/landingPageInfo/socialMedia",
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Subscription Rates",
+                    icon: "Subscription",
+                    childItem: [
+                        {
+                            displayedName: "Add Subscription",
+                            icon: "Add_Subsc",
+                            route: "/admin/subscrpt",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "Coupon",
+                            icon: "Subscription",
+                            route: "/admin/subscrpt/coupon",
+                            hasAccess: true
+                        }
+                    ],
                     hasAccess: true
                 }
             ],
