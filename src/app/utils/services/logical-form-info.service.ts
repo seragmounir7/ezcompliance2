@@ -1036,7 +1036,27 @@ deleteRiskInstruction(id) {
   return this.https.delete(this.apiUrl + 'riskAsstInstruction/delete' + id)
 }
 ////////////////////End Add Risk Assessment Instruction ////////////////
+////////////////// Start Site Inspection ///////////
 
+getAllSubcontract() {
+  return this.https.get(this.apiUrl + 'subContractor/getAll')
+}
+
+addSubcontract(data) {
+  return this.https.post(this.apiUrl + 'subContractor/add', data)
+}
+getSubcontract(id) {
+  return this.https.get(this.apiUrl + 'subContractor/get/' + id)
+}
+updateSubcontract(id, data) {
+  return this.https.put(this.apiUrl + 'subContractor/update/' + id, data)
+}
+deleteSubcontract(id) {
+  return this.https.delete(this.apiUrl + 'subContractor/delete/' + id)
+}
+
+
+////////////////// End Site Inspection ////////////
 
 }
 
