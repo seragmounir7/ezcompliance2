@@ -1,11 +1,10 @@
-import { map } from 'rxjs/operators';
+import {  debounceTime, map,  startWith,  tap } from 'rxjs/operators';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { Component, ElementRef, OnInit, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, AfterViewInit, HostListener, OnDestroy, ViewChildren, QueryList, LOCALE_ID } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
-import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddItemComponent } from './add-item/add-item.component';
@@ -13,13 +12,11 @@ import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
-import { data } from 'jquery';
-import { ThrowStmt } from '@angular/compiler';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 
 
 
@@ -33,12 +30,15 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   @ViewChild('projectManager') projectManager: ElementRef;
   @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
-  @ViewChild('Signature2') signaturePad2: SignaturePad;
+  @ViewChildren('Signature2') signaturePad2:  QueryList<SignaturePad>;
   @ViewChild('timepicker') timepicker: ElementRef;
   sub: any;
   isPrint: Observable<any>;
   isHistory: any;
   returnTo: Observable<string>;
+  empData:any[]=[];
+  valueChangesArr: Observable<any>[];
+  filteredOptions1: Observable<any>;
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -176,7 +176,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   allChemicals = [];
   allCOPSelected = [];
   singRequired: any;
-  signRequired1: any;
+  signRequired1 =[];
 
 
   regulatorData: any = [];
@@ -197,6 +197,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
     public upload: UploadFileServiceService,
     public forms: SavedformsService,
     private shared: RoleManagementSharedServiceService,
+    private employee: EmployeeRegistrationService,
   ) {
     //this.check = localStorage.getItem('key');
     console.log("key check", this.check);
@@ -215,7 +216,6 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       custConctPh: ['', Validators.required],
       custEmail: ['', Validators.required],
       employee1: ['', Validators.required],
-      employee2: ['', Validators.required],
       dateTime: [new Date(), Validators.required],
       statesSWMS: ['', Validators.required],
       projectManager: ['', Validators.required],
@@ -240,16 +240,16 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       PPEselection: this.fb.array([]),
       PPESelection2: this.fb.array([]),
       licence: this.fb.array([]),
+      employeeList: this.fb.array([]),
       editor: [""],
       signature1: [""],
-      signature2: [""]
+      
     });
     this.riskAssessmentFb.controls.editor.setValue(this.secondEditor);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe()
     console.log("risk destroy");
-
   }
   get siteControls() {
     return this.riskAssessmentFb.controls
@@ -262,11 +262,12 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       await check()
       this.signaturePad1.off()
       await check2()
-      this.signaturePad2.off()
+      //this.signaturePad2.off()
     }
   }
 
   ngOnInit(): void {
+    this.getEmployeeData()
     this.isHistory = this.router.url.includes('/riskAssessTable\/history')
     if (this.isHistory) {
       this.disableForm()
@@ -344,7 +345,19 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
         let time = new Date()
         this.dateGet = time
         this.setTime = time.toTimeString().slice(0, 5)
+        this.addEmployee()
       })
+      
+      
+      
+      this.filteredOptions1 = this.riskAssessmentFb.controls.employee1.valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.riskAssessmentFb['controls'].employee1 as AbstractControl).setErrors({'incorrect': true}) : '')),
+        map(value => (typeof value === 'string' ? value : value?.fullName)),
+        map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      )
+   
     }
     // this.logicalFormInfo.printing$.subscribe((res)=>{
     //   console.log(res);
@@ -421,7 +434,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       this.JurisdictionData = res.data.JurisdictionDataArr;
       this.maxDate = res.data.date;
       this.minDate = res.data.date;
-
+      
+   console.log("this.jobTaskData.length",this.jobTaskData);
+   
       for (let i = 0; i < this.jobTaskData.length; i++) {
         // this.taskArr[i] = 0;
         this.jobtask().push(this.jobtaskk(i));
@@ -450,6 +465,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       check().then(() => {
         this.signaturePad1.fromDataURL(res.data.signature1)
       })
+      
+    
       // let time=res.data.dateTime
       //  let newTime=time.split(/[-,T]/)
       //  newTime=newTime.splice(3).toString()
@@ -461,14 +478,12 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       let dateTime = new Date(res.data.dateTime)
 
       let time = dateTime.toTimeString()
-      console.log("date1=================>>>>>>>>>.", time);
       this.setTime = time.slice(0, 5)
       // console.log("date2=================>>>>>>>>>.",newTime);
       //this.setTime=newTime.splice(0,5).join('')
       // newTime=newTime.split("")
       // let  newTime2=newTime.splice(5,3).join('')
       // this.setTime=newTime.toString() 
-      console.log("date=================>>>>>>>>>.", this.setTime);
 
       let date = res.data.dateTime
       //let newDate=date.split(/[-,T]/)
@@ -477,10 +492,19 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       this.dateGet = new Date(date)
 
 
-      let check1 = async () => { this.signaturePad2 != null }
-      check1().then(() => {
-        this.signaturePad2.fromDataURL(res.data.signature2)
+     
+      for (let i = 0; i < res.data.employeeList.length; i++) {
+        
+        this.addEmployee()
+        this.disableForm()
+      }
+     
+      this.signaturePad2.changes.subscribe((item: QueryList<SignaturePad>) => {
+        res.data.employeeList.forEach((element,i) => {
+          item.toArray()[i].fromDataURL(element.signature2)
+        })
       })
+   
       if (res?.data.jurisdiction != "") {
         this.hasJuridiction = true;
       }
@@ -490,6 +514,11 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       if (res?.data.regulator != "") {
         this.hasRegulation = true;
       }
+      res.data.employee1.fullName = `${ res.data.employee1.firstName} ${ res.data.employee1.lastName}`
+      res.data.employeeList= res.data.employeeList.map((item) => {
+        item.employeeId.fullName = `${item.employeeId.firstName} ${item.employeeId.lastName}`
+        return item
+      })
       this.riskAssessmentFb.patchValue({
         ...res.data
       })
@@ -510,7 +539,8 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
         this.PushActionSDSRegister(element)
         if (element.file) {
           this.selectedFile1.push({
-            fileName: element.file.split('-')[1],
+            //fileName: element.file.split('-')[1],
+            fileName: element.file.substring(element.file.indexOf('-') + 1),
             fileUrl: element.file
           });
           console.log("selected", this.selectedFile1);
@@ -674,6 +704,32 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
 
     }
   }
+  addEmployee() {
+    {
+      this.employeeArr().push(this.employeeField());
+     this.valueChangesArr =new Array<Observable<any>>()
+      for (let index = 0; index < this.employeeArr().length; index++){
+        let element = this.employeeArr().at(index)
+        this.valueChangesArr.push( (element['controls'].employeeId.valueChanges as Observable<any>).pipe(
+          tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (element['controls'].employeeId as AbstractControl).setErrors({'incorrect': true}) : '')),
+          map(value => (typeof value === 'string' ? value : value?.fullName)),
+           map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      
+        ))
+        
+         console.log(element.valueChanges)
+      }
+      
+  }
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
+  }
+
   jobtask(): FormArray {
     return this.riskAssessmentFb.get('jobTask') as FormArray;
   }
@@ -706,6 +762,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   }
   personResFA(): FormArray {
     return this.riskAssessmentFb.get('persResp') as FormArray;
+  }
+  employeeArr(): FormArray {
+    return this.riskAssessmentFb.get('employeeList') as FormArray;
   }
   riskLevelFG(): FormGroup {
     return this.fb.group({
@@ -792,6 +851,19 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
 
     });
   }
+  employeeField(): FormGroup {
+    return this.fb.group({
+      employeeId: ['', Validators.required],
+      signature2: ['',Validators.required]
+    });
+  }
+  removeemployeeField(i) {
+    const item = <FormArray>this.riskAssessmentFb.controls['employeeList'];
+    if (item.length > 1) {
+      item.removeAt(i);
+      this.signRequired1.splice(i, 1)
+    }
+  }
   removeSDSRegister(i) {
     const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
     if (item.length > 1) {
@@ -820,6 +892,12 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   };
 
   ngAfterViewInit() {
+
+    this.signaturePad2.changes.subscribe((item: QueryList<SignaturePad>) => {
+        console.log("item=============>",item.toArray());
+        
+    })
+
     this.sub = this.shared.printObs$.subscribe(res => {
       this.check = res
       console.log("this.check", this.check);
@@ -857,17 +935,18 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
 
     //this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].invalid
   }
-  drawComplete2() {
+  drawComplete2(i) {
     // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad2.toDataURL());
-    this.riskAssessmentFb.controls["signature2"].setValue(this.signaturePad2.toDataURL());
-    this.signRequired1 = this.riskAssessmentFb.controls['signature2'].invalid
+    console.log("this.signaturePad2[i]",i);
+    this.employeeArr().at(i).get("signature2").setValue(this.signaturePad2.toArray()[i].toDataURL());
+    this.signRequired1[i]= this.employeeArr().at(i).get("signature2").invalid
+    
   }
-  clear2() {
+  clear2(i) {
     console.log('clear2');
-    this.signaturePad2.clear();
-    this.riskAssessmentFb.controls["signature2"].setValue("");
-    this.signRequired1 = this.riskAssessmentFb.controls['signature2'].untouched
+    this.signaturePad2.toArray()[i].clear();
+    this.employeeArr().at(i).get("signature2").setValue("");
+    this.signRequired1[i]=this.employeeArr().at(i).get("signature2").untouched
   }
   drawStart2() {
     // will be notified of szimek/signature_pad's onBegin event
@@ -1480,11 +1559,23 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
     });
   }
   onSubmit() {
+    let {
+      employee1,
+      employeeList, 
+   ... rest
+    }= this.riskAssessmentFb.value
+    console.log("employee1",employee1);
+    employeeList= employeeList.map((res)=>{
+      return {
+              employeeId:res.employeeId._id,
+              signature2:res.signature2 
+              }
+    })
     const data = {
-      ...this.riskAssessmentFb.value,
+      ...rest,
+    //  ... this.riskAssessmentFb.value,
       codeOfPract: this.allCOPSelected,
       identifyHazards: this.jobTaskSelected,
-
       jobTaskDataArr: this.jobTaskData,
       PPEselectionArr: this.PPEselection,
       highRiskConstructionArr: this.highRiskConstruction,
@@ -1500,7 +1591,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       regulatorDataArr: this.regulatorData,
       safetyArr: this.safety,
       statesArr: this.states,
-      JurisdictionDataArr: this.JurisdictionData
+      JurisdictionDataArr: this.JurisdictionData,
+      employee1:employee1._id,
+      employeeList
     }
     console.log("data", data);
     if (this.id !== 'form') {
@@ -1511,6 +1604,10 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
           showConfirmButton: false,
           timer: 1200,
         });
+      this.riskAssessmentFb.reset();
+      this.allCOPSelected = [];
+      this.jobTaskSelected = [];
+      this.signaturePad1.clear();
         this.router.navigate(["/admin/forms/riskAssessTable"]);
       })
 
@@ -1522,15 +1619,16 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
           showConfirmButton: false,
           timer: 1200,
         });
+      this.riskAssessmentFb.reset();
+      this.allCOPSelected = [];
+      this.jobTaskSelected = [];
+      this.signaturePad1.clear();
         this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
         console.log("this.riskAssessmentFb posted", res);
       })
     }
-    this.riskAssessmentFb.reset();
-    this.allCOPSelected = [];
-    this.jobTaskSelected = [];
-    this.signaturePad1.clear();
-    this.signaturePad2.clear();
+   
+   // this.signaturePad2.clear();
   }
   getDate(event) {
     console.log(" event.terget.value", event.value);
@@ -1560,5 +1658,19 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
 
 
 
+  }
+  getEmployeeData(){
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => {
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+    
+    }) 
+    
   }
 }

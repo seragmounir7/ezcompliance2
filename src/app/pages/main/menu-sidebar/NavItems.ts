@@ -23,6 +23,12 @@ export class NavItems {
                     icon: "Employee_Details",
                     route: "/admin/registration/employeeRegistration",
                     hasAccess: true
+                },
+                {
+                    displayedName: "Subcontractor Details",
+                    icon: "Employee_Details",
+                    route: "/admin/registration/subcontract",
+                    hasAccess: true
                 }
             ],
             hasAccess: true
@@ -99,25 +105,6 @@ export class NavItems {
                     displayedName: "Set Hazard Treatment",
                     icon: "page",
                     route: "/admin/confiLogi/setHazard",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
-        {
-            displayedName: "Subscription Rates",
-            icon: "Subscription",
-            childItem: [
-                {
-                    displayedName: "Add Subscription",
-                    icon: "Add_Subsc",
-                    route: "/admin/subscrpt",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Coupon",
-                    icon: "Subscription",
-                    route: "/admin/subscrpt/coupon",
                     hasAccess: true
                 }
             ],
@@ -437,6 +424,25 @@ export class NavItems {
                     displayedName: "Social Media",
                     icon: "page",
                     route: "/admin/landingPageInfo/socialMedia",
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Subscription Rates",
+                    icon: "Subscription",
+                    childItem: [
+                        {
+                            displayedName: "Add Subscription",
+                            icon: "Add_Subsc",
+                            route: "/admin/subscrpt",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "Coupon",
+                            icon: "Subscription",
+                            route: "/admin/subscrpt/coupon",
+                            hasAccess: true
+                        }
+                    ],
                     hasAccess: true
                 }
             ],

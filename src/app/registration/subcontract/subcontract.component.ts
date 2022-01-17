@@ -1,27 +1,23 @@
-
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-
-import { ViewChild } from '@angular/core';
-import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
-import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { MatTableDataSource } from '@angular/material/table';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import Swal from 'sweetalert2';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-employee-registration',
-  templateUrl: './employee-registration.component.html',
-  styleUrls: ['./employee-registration.component.scss'],
+  selector: 'app-subcontract',
+  templateUrl: './subcontract.component.html',
+  styleUrls: ['./subcontract.component.scss']
 })
-export class EmployeeRegistrationComponent implements OnInit {
+export class SubcontractComponent implements OnInit {
   ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'title', 'firstName', 'lastName', 'email', 'action'];
+  displayedColumns: string[] = ['index', 'companyName', 'email', 'streetAddress', 'phone', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -29,7 +25,7 @@ export class EmployeeRegistrationComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   constructor(
-    private employee: EmployeeRegistrationService,
+    private subContract: LogicalFormInfoService,
     private fb: FormBuilder,
     private setTitle: SetTitleService,
     private dialog: MatDialog,
@@ -38,12 +34,12 @@ export class EmployeeRegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllEmployee();
-    this.setTitle.setTitle('WHS-Employee Details');
+    this.getAllSubcontractor();
+    this.setTitle.setTitle('WHS-Subcontractor Details');
 
   }
-  getAllEmployee() {
-    this.employee.getAllEmployeeInfo().subscribe((res) => {
+  getAllSubcontractor() {
+    this.subContract.getAllSubcontract().subscribe((res:any) => {
       console.log(res)
       let couponData = res.data;
       couponData.forEach((element, index) => {
@@ -59,7 +55,7 @@ export class EmployeeRegistrationComponent implements OnInit {
   delete(item) {
     Swal.fire({
       title: 'Are you sure?',
-      text: `Do you want to delete "${item.firstName}"?`,
+      text: `Do you want to delete "${item.companyName}"?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#00B96F',
@@ -70,8 +66,8 @@ export class EmployeeRegistrationComponent implements OnInit {
         console.log(result)
         // this.model.attributes.splice(i,1);
         this.spinner.show()
-        this.employee.deleteEmployeeInfo(item._id).subscribe((res => {
-          this.getAllEmployee()
+        this.subContract.deleteSubcontract(item._id).subscribe((res => {
+          this.getAllSubcontractor()
           this.spinner.hide()
         }))
       }
@@ -79,7 +75,6 @@ export class EmployeeRegistrationComponent implements OnInit {
   }
 
   edit(id) {
-    this.router.navigate(["/admin/registration/addEmployee/" + id]);
+    this.router.navigate(["/admin/registration/addSubcontract/" + id]);
   }
 }
-

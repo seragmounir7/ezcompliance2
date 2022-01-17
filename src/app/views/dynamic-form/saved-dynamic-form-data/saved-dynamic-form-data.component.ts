@@ -44,6 +44,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
   success = false;
   show = false;
   enableForm: boolean;
+  formCategories:any;
   frequency: any;
   fieldModels: Array<field> = [
     {
@@ -346,6 +347,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
         this.formNameRecieved = res.data.title
         this.enableForm = res.data.enable;
         this.frequency = res.data.frequency;
+        this.formCategories=res.data.formCategoryId
         this.isHidden = res.data.check;
         this.mainFormId = res.data._id
         // this.configData=res.data.configure[0];
@@ -371,6 +373,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
         this.model = res.data.htmlObject;
 
         this.previewform.patchValue(res.data.configure[0])
+        this.formCategories=res.data.formCategoryId
         this.isHidden = res.data.check;
         this.mainFormId = res.data.formId
         console.log("is hidden", this.isHidden);
@@ -1011,7 +1014,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
           htmlObject: tempModel,
           configure: d,
           check: this.isHidden,
-          formId: this.mainFormId
+          formId: this.mainFormId,
+          formCategoryId:this.formCategories._id
 
 
           // "formId": "61ce9d44fcd37d281059e302"
@@ -1053,7 +1057,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
           frequency: this.frequency,
           configure: d,
           check: this.isHidden,
-          formId: this.mainFormId
+          formId: this.mainFormId,
+          formCategoryId:this.formCategories._id
         };
 
         this.dynamicFormsService
