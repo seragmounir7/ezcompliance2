@@ -371,6 +371,7 @@ export class DynamicFormComponent implements OnInit {
         // this.riskAssessmentFb.patchValue(res.data.configure[0])
         this.previewform.patchValue(res.data.configure[0])
         this.isHidden = res.data.check;
+        this.formCategories=res.data.formCategoryId
         console.log("is hidden", this.isHidden);
         this.spinner.hide();
       });

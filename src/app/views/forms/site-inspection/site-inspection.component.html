@@ -1088,16 +1088,31 @@
                   <p for="exampleFormControlInput1" class="form-Label">
                     Person Responsible<span class="text-danger ">*</span>
                   </p>
-                  <select class="form-select form-control col form-dropdown" aria-label="Default select example"
-                    formControlName="PersonResponsible"
-                    [class.is-invalid]=" add().controls[filed].get('PersonResponsible')?.hasError('required') && (add().controls[filed].get('PersonResponsible').dirty || add().controls[filed].get('PersonResponsible').touched) ">
+                  <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example"
+                    formControlName="personResponsible"
+                    [class.is-invalid]=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched) ">
                     <option selected hidden>Select</option>
                     <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
-                  </select>
+                  </select> -->
+
+                  <input type="input" class="mr-1 form-control" value="" formControlName="personResponsible" [class.is-invalid]="add().controls[filed].get('personResponsible')?.errors 
+                  && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched)"  [matAutocomplete]="personResponsible" autocomplete="off">
+                  <mat-autocomplete #personResponsible="matAutocomplete"
+                  [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of valueChangesArr[filed]  | async ; let i = index " [value]="option">
+                    {{option.fullName}}
+                  </mat-option>
+                </mat-autocomplete>
                   <span
-                    *ngIf=" add().controls[filed].get('PersonResponsible')?.hasError('required') && (add().controls[filed].get('PersonResponsible').dirty  || add().controls[filed].get('PersonResponsible').touched) "
+                    *ngIf=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty  || add().controls[filed].get('personResponsible').touched) "
                     class="invalid-feedback">
                     This Field is Required</span>
+                    <ng-container *ngIf="add().controls[filed].get('personResponsible')?.errors">
+                      <span *ngIf="
+                   add().controls[filed].get('personResponsible')?.errors.incorrect " class="invalid-feedback">
+                      Select Employee Form List
+                    </span>
+                    </ng-container>
                 </div>
                 <!-- <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
@@ -1106,7 +1121,7 @@
                 <select
                   class="form-select form-control col outline form-dropdown"
                   aria-label="Default select example"
-                  formControlName="PersonResponsible"
+                  formControlName="personResponsible"
                 >
                   <option selected hidden>Select</option>
                   <option class="mr-1" value="yes">Yes</option>
@@ -2257,14 +2272,22 @@
                 <p for="exampleFormControlInput1" class="form-Label">
                   Person Responsible<span class="text-danger ">*</span>
                 </p>
-                <select class="form-select form-control col form-dropdown" aria-label="Default select example"
-                  formControlName="PersonResponsible"
-                  [class.is-invalid]=" add().controls[filed].get('PersonResponsible')?.hasError('required') && (add().controls[filed].get('PersonResponsible').dirty || add().controls[filed].get('PersonResponsible').touched) ">
+                <!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example"
+                  formControlName="personResponsible"
+                  [class.is-invalid]=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched) ">
                   <option selected hidden>Select</option>
                   <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
-                </select>
+                </select> -->
+                <input type="input" class="mr-1 form-control" value="" formControlName="personResponsible" [class.is-invalid]="add().controls[filed].get('personResponsible')?.errors 
+                && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched)"  [matAutocomplete]="personResponsible" autocomplete="off">
+                <mat-autocomplete #personResponsible="matAutocomplete"
+                [displayWith]="displayFn">
+                <mat-option *ngFor="let option of valueChangesArr[filed]  | async ; let i = index " [value]="option">
+                  {{option.fullName}}
+                </mat-option>
+              </mat-autocomplete>
                 <span
-                  *ngIf=" add().controls[filed].get('PersonResponsible')?.hasError('required') && (add().controls[filed].get('PersonResponsible').dirty  || add().controls[filed].get('PersonResponsible').touched) "
+                  *ngIf=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty  || add().controls[filed].get('personResponsible').touched) "
                   class="invalid-feedback">
                   This Field is Required</span>
               </div>
@@ -2275,7 +2298,7 @@
             <select
               class="form-select form-control col outline form-dropdown"
               aria-label="Default select example"
-              formControlName="PersonResponsible"
+              formControlName="personResponsible"
             >
               <option selected hidden>Select</option>
               <option class="mr-1" value="yes">Yes</option>

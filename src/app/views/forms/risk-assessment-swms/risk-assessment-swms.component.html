@@ -468,13 +468,25 @@
             <div class="col-4">
               <label class="form-label">Employee Name<span class="text-danger">*</span></label>
               <p>
-                <input type="input" class="mr-1 form-control" value="" formControlName="employee1" [class.is-invalid]="riskAssessmentFb.get('employee1')?.hasError('required') 
-                  && (riskAssessmentFb.get('employee1').dirty || riskAssessmentFb.get('employee1').touched) ">
-                <span *ngIf="
+                <input type="input" class="mr-1 form-control" value="" formControlName="employee1" [class.is-invalid]="riskAssessmentFb.get('employee1')?.errors 
+                  && (riskAssessmentFb.get('employee1').dirty || riskAssessmentFb.get('employee1').touched)"  [matAutocomplete]="employee1" autocomplete="off">
+                  <mat-autocomplete #employee1="matAutocomplete"
+                  [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions1 | async ; let i = index " [value]="option">
+                    {{option.fullName}}
+                  </mat-option>
+                </mat-autocomplete>
+                  <span *ngIf="
                   riskAssessmentFb.get('employee1')?.hasError('required') && (riskAssessmentFb.get('employee1').dirty 
                   || riskAssessmentFb.get('employee1').touched) " class="invalid-feedback">
                   Employee Name is Required
                 </span>
+                <ng-container *ngIf="riskAssessmentFb.get('employee1')?.errors">
+                  <span *ngIf="
+                  riskAssessmentFb.get('employee1')?.errors.incorrect " class="invalid-feedback">
+                  Select Employee Form List
+                </span>
+                </ng-container>
               </p>
             </div>
             <div class="col-4">
@@ -1114,19 +1126,35 @@
             </div>
             <hr />
             <h3>Name of worker (Print and Sign)</h3>
-            <div class="row">
-              <div class="col-md-7">
+            <div class="row" formArrayName="employeeList">
+              <ng-container *ngFor="let control of employeeArr().controls; let i = index" [formGroupName]="i" >
+              <div class="col-md-5">
                 <div class="my-3">
                   <label for="exampleInputProjectNumber" class="form-label">Employee Name<span
                       class="text-danger">*</span></label>
-                  <input formControlName="employee2" type="text" class="form-control" id="exampleInputProjectNumber"
-                    aria-describedby="emailHelp" [class.is-invalid]="riskAssessmentFb.get('employee2')?.hasError('required') 
-                && (riskAssessmentFb.get('employee2').dirty || riskAssessmentFb.get('employee2').touched) ">
+                  <input formControlName="employeeId" type="text" class="form-control" id="exampleInputProjectNumber"
+                    aria-describedby="emailHelp" [class.is-invalid]=" employeeArr().controls[i].get('employeeId')?.errors 
+                && ( employeeArr().controls[i].get('employeeId').dirty ||  employeeArr().controls[i].get('employeeId').touched) " [matAutocomplete]="employee2" autocomplete="off">
+                <mat-autocomplete #employee2="matAutocomplete" 
+                [displayWith]="displayFn">
+                <mat-option *ngFor="let option of valueChangesArr[i] | async" [value]="option">
+                  {{option.fullName}}
+                </mat-option>
+              </mat-autocomplete>
                   <span *ngIf="
-                riskAssessmentFb.get('employee2')?.hasError('required') && (riskAssessmentFb.get('employee2').dirty 
-                || riskAssessmentFb.get('employee2').touched) " class="invalid-feedback">
+                 employeeArr().controls[i].get('employeeId')?.hasError('required') && ( employeeArr().controls[i].get('employeeId').dirty 
+                ||  employeeArr().controls[i].get('employeeId').touched) " class="invalid-feedback">
                     Employee Name is Required
                   </span>
+                  <ng-container *ngIf="employeeArr().controls[i].get('employeeId')?.errors">
+                    <span *ngIf="
+                 employeeArr().controls[i].get('employeeId')?.errors.incorrect " class="invalid-feedback">
+                    Select Employee Form List
+                  </span>
+                  </ng-container>
+                  
+                  
+                  
                 </div>
               </div>
               <div class="col-md-5">
@@ -1134,19 +1162,29 @@
                   <label>Signature<span class="text-danger">*</span></label>
                   <div class="sign">
                     <signature-pad [options]="signaturePadOptions2" (onBeginEvent)="drawStart2()"
-                      (onEndEvent)="drawComplete2()" #Signature2 [class.is-invalid]="signRequired1"></signature-pad>
-                    <span *ngIf="signRequired1" class="invalid-feedback">
+                      (onEndEvent)="drawComplete2(i)" #Signature2 [class.is-invalid]="signRequired1[i]"></signature-pad>
+                    <span *ngIf="signRequired1[i]" class="invalid-feedback">
                       This Field is Required</span>
 
                   </div>
                 </div>
-                <button *ngIf="!isHistory" class="btn btn-outline-primary mt-1" (click)="clear2()">
+                <button *ngIf="!isHistory" class="btn btn-outline-primary mt-1" (click)="clear2(i)">
                   Clear
                 </button>
               </div>
+              <div class="col-md-1 d-flex align-items-center">
+              <span class="material-icons" *ngIf="!isHistory" (click)="addEmployee()">add_circle_outline
+              </span>
             </div>
+            <div class="col-md-1 d-flex align-items-center">
+              <span class="material-icons" *ngIf="!isHistory" (click)="removeemployeeField(i)">
+                remove_circle_outline
+              </span>
+            </div>
+            </ng-container>
+          </div>
             <div *ngIf="!isHistory">
-              <button type="submit" [disabled]="!riskAssessmentFb.valid || singRequired || signRequired1"
+              <button type="submit" [disabled]="!riskAssessmentFb.valid "
                 class="btn btn-primary " (click)="onSubmit()">Submit</button>
             </div>
           </div>
@@ -1483,7 +1521,14 @@
         <div class="col-4">
           <label class="form-label">Employee Name</label>
           <p>
-            <input type="input" class="mr-1 form-control" value="" formControlName="employee1" />
+            <input type="input" class="mr-1 form-control" value="" formControlName="employee1" [class.is-invalid]="riskAssessmentFb.get('employee1')?.errors 
+            && (riskAssessmentFb.get('employee1').dirty || riskAssessmentFb.get('employee1').touched)"  [matAutocomplete]="employee1" autocomplete="off">
+            <mat-autocomplete #employee1="matAutocomplete"
+            [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions1 | async ; let i = index " [value]="option">
+              {{option.fullName}}
+            </mat-option>
+          </mat-autocomplete>
           </p>
         </div>
         <div class="col-4">
@@ -1741,7 +1786,7 @@
               <div class="col-md-10 col-sm-10-print">
                 <div class="my-3">
                   <label for="formFile" class="form-label">Attach SDS Sheet</label>
-                  <input class="form-control" type="file" id="formFile" formControlName="file" />
+                  <!-- <input class="form-control" type="file" id="formFile" formControlName="file" /> -->
                 </div>
               </div>
               <!-- <div class="col-md-2 col-sm-2-print">
@@ -1981,27 +2026,38 @@
         </div>
         <hr />
         <h3>Name of worker (Print and Sign)</h3>
-        <div class="row">
-          <div class="col-md-7 col-sm-7-print">
+        <div class="row" formArrayName="employeeList">
+          <ng-container *ngFor="let control of employeeArr().controls; let i = index" [formGroupName]="i" >
+          <div class="col-md-5">
             <div class="my-3">
-              <label for="exampleInputProjectNumber" class="form-label">Employee Name</label>
-              <input formControlName="employee2" type="text" class="form-control" id="exampleInputProjectNumber"
-                aria-describedby="emailHelp" />
+              <label for="exampleInputProjectNumber" class="form-label">Employee Name<span
+                  class="text-danger">*</span></label>
+              <input formControlName="employeeId" type="text" class="form-control" id="exampleInputProjectNumber"
+                aria-describedby="emailHelp" [class.is-invalid]=" employeeArr().controls[i].get('employeeId')?.errors 
+            && ( employeeArr().controls[i].get('employeeId').dirty ||  employeeArr().controls[i].get('employeeId').touched) " [matAutocomplete]="employee1" autocomplete="off">
+            <mat-autocomplete #employee1="matAutocomplete" 
+            [displayWith]="displayFn">
+            <mat-option *ngFor="let option of valueChangesArr[i] | async" [value]="option">
+              {{option.fullName}}
+            </mat-option>
+          </mat-autocomplete>
             </div>
           </div>
-          <div class="col-md-5 col-sm-5-print">
+          <div class="col-md-5">
             <div class="form-floating">
-              <label>Signature*</label>
+              <label>Signature<span class="text-danger">*</span></label>
               <div class="sign">
                 <signature-pad [options]="signaturePadOptions2" (onBeginEvent)="drawStart2()"
-                  (onEndEvent)="drawComplete2()" #Signature2></signature-pad>
+                  (onEndEvent)="drawComplete2(i)" #Signature2 [class.is-invalid]="signRequired1[i]"></signature-pad>
+
               </div>
             </div>
-            <!-- <button class="btn btn-outline-primary mt-1" (click)="clear2()">
+            <button *ngIf="!isHistory" class="btn btn-outline-primary mt-1" (click)="clear2(i)">
               Clear
-            </button> -->
+            </button>
           </div>
-        </div>
+        </ng-container>
+      </div>
         <div>
           <button *ngIf="(isPrint | async)===false" type="submit" class="btn btn-primary btn-block"
             (click)="onSubmit()">Submit</button>
