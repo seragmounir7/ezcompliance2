@@ -56,14 +56,38 @@ export class AddAndEditSubcontractComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
     this.id = this.activatedRoute.snapshot.params.id;
 
     if (this.id !== "form") {
+      this.licenceInfo.getAllLicence().pipe(
+        map((res) => {
+          return res.data.map((item) => {
+            item.fullName = `${item.title}`
+            return item
+          })
+        })
+      ).subscribe(empData => {
+        this.licenceData = empData
+        console.log('this.empData', this.licenceData)
+        
+      })
       this.dataEmp = true;
       this.patchData();
     } else {
       this.dataEmp = false;
-      this.addFiled();
+      this.licenceInfo.getAllLicence().pipe(
+        map((res) => {
+          return res.data.map((item) => {
+            item.fullName = `${item.title}`
+            return item
+          })
+        })
+      ).subscribe(empData => {
+        this.licenceData = empData
+        console.log('this.empData', this.licenceData)
+        this.addFiled();
+      })
      
     }
     // this.addFiled();
@@ -76,18 +100,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
         return this.filter2(val || '')
       })
     )
-    this.licenceInfo.getAllLicence().pipe(
-      map((res) => {
-        return res.data.map((item) => {
-          item.fullName = `${item.title}`
-          return item
-        })
-      })
-    ).subscribe(empData => {
-      this.licenceData = empData
-      console.log('this.empData', this.licenceData)
-      
-    })
+    
   }
   addLicence() {
     return this.subcontractDetails.get('licenceAndQualifications') as FormArray;

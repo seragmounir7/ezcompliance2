@@ -670,6 +670,18 @@ export class AddEmployeeComponent implements OnInit {
     console.log("data", data);
     this.addPPE().push(this.newFiled3(data));
     console.log("addPPEFiled1", this.empDetails.value);
+    this.PPEValueChanges =new Array<Observable<any>>()
+    for (let index = 0; index < this.addPPE().length; index++) {
+      let element = this.addPPE().at(index)
+     this.PPEValueChanges.push( (element['controls'].PPESupplied.valueChanges as Observable<any>).pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => console.log('value', value)),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filterPPE(fullName) : this.PPEData.slice())),
+    ))
+      console.log(element.valueChanges)
+    }
   }
   newFiled(): FormGroup {
     return this.fb.group({
@@ -691,6 +703,18 @@ export class AddEmployeeComponent implements OnInit {
   }
   addFiled1(data) {
     this.addLicence().push(this.newFiled1(data));
+    this.licenceValueChanges =new Array<Observable<any>>()
+    for (let index = 0; index < this.addLicence().length; index++) {
+      let element = this.addLicence().at(index)
+     this.licenceValueChanges.push( (element['controls'].LicenceName.valueChanges as Observable<any>).pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => console.log('value', value)),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    ))
+      console.log(element.valueChanges)
+    }
   }
   addFiled() {
     this.addLicence().push(this.newFiled());

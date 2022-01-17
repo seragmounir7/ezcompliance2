@@ -1,3 +1,5 @@
+import { debounceTime } from 'rxjs/operators';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -16,7 +18,25 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 export class SavedFormsComponent implements OnInit,AfterViewInit {
   @ViewChild(MatPaginator) paginator1: MatPaginator;
 
-  displayedColumns: string[] = ['formId', "Phone", "Email", "Site", 'Action'];
+  displayedColumns: string[] = ['formId', "formType", "createdAt", "updatedAt", 'Action'];
+  selectArr = [
+    {
+        "title": "Form Id",
+        "value": "formId"
+    },
+    {
+        "title": "Form Type",
+        "value": "fileType"
+    },
+    {
+        "title": "Created Date",
+        "value": "createdAt"
+    },
+    {
+        "title": "Updated Date",
+        "value": "updatedAt"
+    }
+]
   showDatas: any;
   tempArray: MatTableDataSource<any>;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,31 +45,48 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
   page: number = 1;
   limit: number = 5;
   searchString: string="";
+  changeState: any;
+  searchControl:FormGroup 
   constructor(public forms: SavedformsService,
     private spinner: NgxSpinnerService,
     private shared: RoleManagementSharedServiceService,
-     public router: Router) { }
+     public router: Router,
+     private fb: FormBuilder
+  ) { }
 
   ngAfterViewInit(): void {
     this.sort.sortChange.subscribe(() => (this.paginator1.pageIndex = 0));
-    merge(this.sort.sortChange, this.paginator1.page).subscribe(() => {
+    merge(this.sort.sortChange, this.paginator1.page,).subscribe(() => {
       // this.isLoadingResults = true;
 
-      const changeState = {
-        sort: this.sort.active || "",
-        order: this.sort.direction || "",
-        pageNumber: this.paginator1.pageIndex + 1
+      this.changeState = {
+        field: this.sort.active || "",
+        value: this.sort.direction || "",
+        page: this.paginator1.pageIndex ,
+        limit: this.paginator1.pageSize,
       }
-      console.log(changeState)
+      this.getSavedforms()
+      console.log(this.changeState)
     })
   }
 
   ngOnInit(): void {
+    this.searchControl = this.fb.group({
+      searchSelect:['',Validators.required],
+      searchInput:['',],
+    })
     this.getSavedforms();
   }
 
-  getSavedforms(page = this.page, limit = this.limit, searchString = this.searchString) {
-    this.forms.getAllSavedForms(page, limit, searchString).subscribe((res: any) => {
+  getSavedforms(
+    field = this.changeState?.field,
+    value = this.changeState?.value, 
+    page = this.changeState?.page, 
+    limit = this.changeState?.limit,
+    serachField = this.f.searchSelect.value, 
+    searchSting = this.f.searchInput.value
+  ) {
+    this.forms.getAllSavedForms(page, limit, field, value,serachField,searchSting).subscribe((res: any) => {
       this.showDatas = res.data;
       this.totalCount = res.totalCount
       this.showDatas.forEach((element, i) => {
@@ -91,7 +128,7 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
     console.log("check");
     // this.logicalFormInfo.printing.next('print');
     localStorage.setItem("key", "print");
-    // $("<iframe>")                             // create a new iframe element
+    // $("<iframe>")                             // createdAt a new iframe element
     //     .hide()                               // make it invisible
     //     .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
     //     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
@@ -132,9 +169,23 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-     this.searchString = filterValue.trim().toLowerCase();
-     this.getSavedforms()
+    this.searchString = (event.target as HTMLInputElement).value;
+    //  this.searchString = filterValue.trim().toLowerCase();
+    //  this.getSavedforms()
+  }
+
+  get f() {
+    return this.searchControl.controls
+  }
+  reset(){
+    this.f.searchSelect.setValue('');
+    this.f.searchInput.setValue('')
+    this.getSavedforms()
+  }
+  search(){
+    this.searchString = this.f.searchInput.value
+    this.searchString = this.f.searchInput.value
+    this.getSavedforms()
   }
 
 }
