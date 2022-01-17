@@ -55,6 +55,8 @@ export class PlantRegistrationComponent implements OnInit {
       serialNumber: [''],
       plantType: [''],
       serviceRenewDate: [''],
+      plantManagerName: [''],
+      plantDate: [''],
     });
   }
 
@@ -174,6 +176,18 @@ export class PlantRegistrationComponent implements OnInit {
     console.log("data", data);
     this.addPPE().push(this.newFiled3(data));
     console.log("addPPEFiled1", this.plantDetails.value);
+    this.PPEValueChanges =new Array<Observable<any>>()
+    for (let index = 0; index < this.addPPE().length; index++) {
+      let element = this.addPPE().at(index)
+     this.PPEValueChanges.push( (element['controls'].PPESupplied.valueChanges as Observable<any>).pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => console.log('value', value)),
+      map(value => (typeof value === 'string' ? value : value.fullName)),
+      map(fullName => (fullName ? this._filterPPE(fullName) : this.PPEData.slice())),
+    ))
+      console.log(element.valueChanges)
+    }
   }
   removeFiled1(i) {
     const item = <FormArray>this.plantDetails.controls['PPEArr'];
@@ -201,8 +215,8 @@ export class PlantRegistrationComponent implements OnInit {
     console.log(this.signaturePad.toDataURL());
   }
   patchData() {
-    // let id ='61dfd0151e1fff342f211925';
-    this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
+    let id ='61dfd0151e1fff342f211925';
+    this.employee.getEmployeeInfoById(id).subscribe((data) => {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
     

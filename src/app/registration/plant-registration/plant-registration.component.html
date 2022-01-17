@@ -65,6 +65,7 @@
           </div>
         </div>
       </div>
+      <hr>
       <div class="row">
         <div class="mb-3 mt-3 col-5">
           <label for="exampleFormControlInput1" class="form-label">Manager Name</label>
@@ -126,8 +127,14 @@
               <input type="date" formControlName="serviceRenewDate" class="form-control" />
   
             </div>
-            
-            <div class="col-1 mt-4">
+            <div class="mb-3 mt-3 col-2">
+              <label for="exampleFormControlInput1" class="form-label">Select Plant to Remove
+              </label><br>
+              <input type="checkbox"  value="no" class="form-check-input mt-2"/>
+                
+              
+            </div>
+            <!-- <div class="col-1 mt-4">
               <div class="my-4">
                 <span class="material-icons" (click)="addEquipFiled2()">add_circle_outline
                 </span>
@@ -141,12 +148,25 @@
                 </span>
               </div>
   
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
+    <hr>
         <div class="row">
+          <div class="mb-3 mt-3 col-5">
+            <label for="exampleFormControlInput1" class="form-label">Manager Name</label>
+            <input type="text" formControlName="plantManagerName" class="form-control"
+              />
+           
+          </div>
+          <div class="mb-3 mt-3 col-5">
+            <label for="exampleFormControlInput1" class="form-label"> Date</label>
+            <input type="date" formControlName="plantDate" class="form-control"
+              />
+            
+          </div>
           <div class="mb-3 mt-3 col-12">
             <label>Signature</label>
             <div class="sign">
