@@ -83,6 +83,7 @@ import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-c
 import { InstructionsComponent } from './instructions/instructions.component';
 import { AddInstructionsComponent } from './instructions/add-instructions/add-instructions.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AddFormCategoriesComponent,
     InstructionsComponent,
     AddInstructionsComponent,
+    TermsAndConditionsComponent,
 
   ],
 

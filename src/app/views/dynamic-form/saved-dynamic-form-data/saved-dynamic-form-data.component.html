@@ -20,9 +20,10 @@
       </div>
       <form class="ftheme">
         <div *ngIf="!success">
-          <p class="text-center mb-5" style="font-size: 30px">
+          <p class="text-center mb-3" style="font-size: 30px">
             {{ formNameRecieved }}
           </p>
+          <p class="text-center mb-3 mt-1" style="font-size: 20px">{{  formCategories?.title }}</p>
           <div *ngIf="isHidden" class="container" [formGroup]="previewform">
             <div class="row">
               <div class="my-3 col">

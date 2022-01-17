@@ -20,7 +20,7 @@ import { LicenceAndQualComponent } from './licence-and-qual/licence-and-qual.com
 import { HighRiskConComponent } from './high-risk-con/high-risk-con.component';
 import { JobTaskComponent } from './job-task/job-task.component';
 import { AddSiteInfoComponent } from './add-site-info/add-site-info.component';
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SiteInfoComponent } from './site-info.component';
@@ -57,6 +57,7 @@ import { EditManagerComponent } from './manager/edit-manager/edit-manager.compon
 import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
 import{DynamicFormCategoriesComponent}from './dynamic-form-categories/dynamic-form-categories.component'
 import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
@@ -120,6 +121,7 @@ const routes: Routes = [
   { path: 'addFormCategories', component: AddFormCategoriesComponent },
   { path: 'instructions/accident', component: InstructionsComponent },
   { path: 'instructions/riskAssess', component: InstructionsComponent },
+  {path:'terms&condition',component:TermsAndConditionsComponent}, 
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];

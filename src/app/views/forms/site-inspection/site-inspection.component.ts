@@ -7,6 +7,7 @@ import {
   Validators,
   FormArray,
   FormControl,
+  AbstractControl,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -18,7 +19,7 @@ import { Observable } from 'rxjs';
 import { SignaturePad } from 'angular2-signaturepad';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
-import { debounceTime, map, startWith } from 'rxjs/operators';
+import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-site-inspection',
@@ -38,6 +39,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChild('Signature') signaturePad: SignaturePad;
   isHistory: boolean;
   returnTo: Observable<string>;
+  valueChangesArr: Observable<any>[];
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -70,7 +72,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     'date',
     'projectManager',
   ];
-  filteredOptions1: Observable<unknown>;
+  filteredOptions1: Observable<any>;
+  filteredOptions2: Observable<any>;
   empData: any;
   id: any;
   allcategory: any;
@@ -102,10 +105,10 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       custConct: ['', Validators.required],
       custConctPh: ['', Validators.required],
       custEmail: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       projectManager: ['', Validators.required],
       empName: ['', Validators.required],
-      submitDate: ['', Validators.required],
+      submitDate: [new Date(), Validators.required],
       signature: ['', Validators.required],
       // datetooboxtalk: [''],
       // Hazard: ['', Validators.required],
@@ -235,7 +238,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
           } else {
             formatDate = '';
           }
-
+          this.showDatas.empName.fullName = `${this.showDatas.empName.firstName } ${this.showDatas.empName.lastName}`
           this.sidePreview.patchValue({
             siteName: this.showDatas.siteName,
             customerName: this.showDatas.customerName,
@@ -245,7 +248,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
             custEmail: this.showDatas.custEmail,
             jobNumber: this.showDatas.jobNumber,
             projectManager: this.showDatas.projectManager,
-            empName: { fullName: this.showDatas.empName },
+            
+            empName:this.showDatas.empName,
             submitDate: this.showDatas.submitDate,
             signature: this.showDatas.signature
           });
@@ -273,6 +277,10 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
           }
         }, 500);
         if (this.id !== 'form') {
+          this.showDatas.siteAction=this.showDatas.siteAction.map((item) => {
+            item.personResponsible.fullName = `${item.personResponsible.firstName} ${item.personResponsible.lastName}`
+            return item
+          })
           if (!this.add().length) {
             for (
               let index = 0;
@@ -292,9 +300,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
                 .controls[index].get('topicId')
                 .setValue(this.showDatas.siteAction[index].topicId);
               this.add()
-                .controls[index].get('PersonResponsible')
+                .controls[index].get('personResponsible')
                 .setValue(
-                  this.showDatas.siteAction[index].PersonResponsible
+                  this.showDatas.siteAction[index].personResponsible
                 );
               this.add()
                 .controls[index].get('complete')
@@ -335,6 +343,8 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private _filter(name: string): any[] {
+    console.log("name",name);
+    
     const filterValue = name.toLowerCase();
     return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
   }
@@ -408,6 +418,18 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     {
       this.add().push(this.newAction());
       this.disableForm()
+      this.valueChangesArr =new Array<Observable<any>>()
+      for (let index = 0; index < this.add().length; index++){
+        let element = this.add().at(index)
+        this.valueChangesArr.push( (element['controls'].personResponsible.valueChanges as Observable<any>).pipe(
+          tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (element['controls'].personResponsible as AbstractControl).setErrors({'incorrect': true}) : '')),
+          map(value => (typeof value === 'string' ? value : value?.fullName)),
+           map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+      
+        ))
+        
+         console.log(element.valueChanges)
+      }
     }
   }
   add(): FormArray {
@@ -417,7 +439,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     return this.fb.group({
       item: ['', Validators.required],
       action: ['', Validators.required],
-      PersonResponsible: ['', Validators.required],
+      personResponsible: ['', Validators.required],
       complete: ['', Validators.required],
       topicId: ['',],
     });
@@ -451,9 +473,9 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     //         .controls[index].get('topicId')
     //         .setValue(this.showDatas.siteAction[index].topicId);
     //       this.add()
-    //         .controls[index].get('PersonResponsible')
+    //         .controls[index].get('personResponsible')
     //         .setValue(
-    //           this.showDatas.siteAction[index].PersonResponsible
+    //           this.showDatas.siteAction[index].personResponsible
     //         );
     //       this.add()
     //         .controls[index].get('complete')
@@ -545,21 +567,38 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     }
   }
   onSave() {
+    let {
+      empName,
+      siteAction,
+      ...rest
+    }=this.sidePreview.value
 
     console.log('form data', this.sidePreview.value);
-    if (this.id != 'form') {
-      let empName = this.sidePreview.controls.empName.value
-      this.sidePreview.removeControl("empName")
-      const data = {
+    //let empName = this.sidePreview.controls.empName.value
+    siteAction= siteAction.map((res)=>{
+      return {
+        personResponsible: res.personResponsible._id,
+        action: res.action,
+        complete:res.complete, 
+        item: res.item,
+        topicId: res.topicId
+              }
+    })
+    const data = {
 
-        ...this.sidePreview.value,
-        allTopic: this.allTopic,
-        allcategory: this.allcategory,
-        allJobNumbersArr: this.allJobNumbers,
-        projectMangArr: this.projectMang,
-        staffArr: this.staff,
-        empName: empName.fullName || empName,
-      };
+      ...rest,
+      allTopic: this.allTopic,
+      allcategory: this.allcategory,
+      allJobNumbersArr: this.allJobNumbers,
+      projectMangArr: this.projectMang,
+      staffArr: this.staff,
+      empName: empName._id,
+      siteAction
+    };
+    if (this.id != 'form') {
+     
+      this.sidePreview.removeControl("empName")
+     
       this.logicalFormInfo
         .updateSiteInspection(this.id, data)
         .subscribe((res) => {
@@ -575,17 +614,6 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
     } else {
       let empName = this.sidePreview.controls.empName.value
       this.sidePreview.removeControl("empName")
-      const data = {
-
-        ...this.sidePreview.value,
-        allTopic: this.allTopic,
-        allcategory: this.allcategory,
-        allJobNumbersArr: this.allJobNumbers,
-        projectMangArr: this.projectMang,
-        staffArr: this.staff,
-        empName: empName.fullName || empName,
-
-      };
       this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
         console.log('res', res);
         Swal.fire({
