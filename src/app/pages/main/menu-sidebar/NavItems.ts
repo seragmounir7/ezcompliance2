@@ -5,7 +5,7 @@ export class NavItems {
         {
             displayedName: "Dashboard",
             icon: "Dashboard",
-            route: "/dashBoard",
+            route: "/admin",
             hasAccess: true
         },
         {
