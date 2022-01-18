@@ -14,7 +14,7 @@ export class AuthService {
     this.loginDataSubject.next(data);
   }
 
-  constructor(private https: HttpClient) {
+  constructor(private http: HttpClient) {
     if (sessionStorage.getItem('accessToken')) {
       this.nextLoginData({
         accessToken: sessionStorage.getItem('accessToken'),
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   login(data) {
-    return this.https.post(this.apiUrl + 'authentication/login', data).pipe(
+    return this.http.post(this.apiUrl + 'authentication/login', data).pipe(
       map((res: any) => {
         console.log('res.data.accessToken', res.data.accessToken);
         if (res.data.accessToken) {
