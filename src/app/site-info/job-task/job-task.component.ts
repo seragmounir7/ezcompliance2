@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
+import { AddJobTaskComponent } from './add-job-task/add-job-task.component';
 
 @Component({
   selector: 'app-job-task',
@@ -97,5 +98,15 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
   }
   sortData(sort: Sort) {
     this.getAllJobTask(sort.active, sort.direction)
+  }
+  addJobTask(){
+    let dilog = this.dialog.open(AddJobTaskComponent,{
+      width:'70%'
+    })
+    dilog.afterClosed().subscribe(res => {
+      if(res === 'ok'){
+        this.getAllJobTask()
+      }
+    })
   }
 }

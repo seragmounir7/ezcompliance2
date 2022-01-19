@@ -1,3 +1,5 @@
+import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -105,6 +107,16 @@ registerLocaleData(localeEn, 'en-EN');
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     },
     { provide: MAT_DATE_LOCALE, useValue: 'en-au' },

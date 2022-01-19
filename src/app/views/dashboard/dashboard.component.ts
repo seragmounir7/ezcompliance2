@@ -164,6 +164,7 @@ auditAndForm=[
     'Minor',
     'Moderate',
   ];
+  formShow: any;
 
   // events
   public chartClicked({
@@ -229,4 +230,8 @@ auditAndForm=[
       render: 'percentage',
     },
   };
+  slideChanged(event){
+ this.formShow=event.checked
+ 
+  }
 }

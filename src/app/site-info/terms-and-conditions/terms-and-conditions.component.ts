@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { AddInstructionsComponent } from '../instructions/add-instructions/add-instructions.component';
+import { AddTermsAndConditionsComponent } from './add-terms-and-conditions/add-terms-and-conditions.component';
 import Swal from 'sweetalert2';
 
 
@@ -46,34 +46,11 @@ export class TermsAndConditionsComponent implements OnInit {
     this.url = this.activatedRoute.snapshot.url[0].path;
     console.log("this.id", this.url);
     // this.getInstructions();
-    this. getRiskInstructions();
+    this.getTermsAndConditions();
 
   }
-
-  // getInstructions() {
-  //   this.logicalFormInfo.getInstruction().subscribe((res: any) => {
-  //     console.log('NatOfIncAll=>', res);
-  //     let data = res.data;
-  //     data.forEach((element, index) => {
-  //       element.index = index + 1; //adding index
-  //     });
-  //     if (data.length > 0) {
-  //       this.addBtn = false
-  //     } else {
-  //       this.addBtn = true
-  //     }
-
-  //     this.ELEMENT_DATA = data;
-  //     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  //     // this.dataSource.sort = this.sort;
-  //     console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
-
-  //     //  this.task = res.data.subComponents;
-  //   }, err => this.addBtn = false);
-  // }
-
-  getRiskInstructions() {
-    this.logicalFormInfo.getRiskInstruction().subscribe((res: any) => {
+  getTermsAndConditions() {
+    this.logicalFormInfo.getTermsAndConditions().subscribe((res: any) => {
       console.log('NatOfIncAll=>', res);
       let data = res.data;
       data.forEach((element, index) => {
@@ -88,18 +65,16 @@ export class TermsAndConditionsComponent implements OnInit {
       this.ELEMENT_DATA = data;
 
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      // this.dataSource.sort = this.sort;
       console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
-      //  this.task = res.data.subComponents;
     }, err => this.addBtn = false);
   }
 
-  
+
 
   edit(element) {
     this.addBtn = false
-    const dialogRef = this.dialog.open(AddInstructionsComponent, {
+    const dialogRef = this.dialog.open(AddTermsAndConditionsComponent, {
       width: "950px",
       height: "500px",
       data: {
@@ -108,7 +83,12 @@ export class TermsAndConditionsComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
-      
+      if (result == "true") {
+        this.getTermsAndConditions();
+
+      } else {
+        this.getTermsAndConditions();
+      }
       console.log("The dialog was closed");
     });
   }

@@ -5,7 +5,7 @@ export class NavItems {
         {
             displayedName: "Dashboard",
             icon: "Dashboard",
-            route: "/dashBoard",
+            route: "/admin",
             hasAccess: true
         },
         {
@@ -28,6 +28,18 @@ export class NavItems {
                     displayedName: "Subcontractor Details",
                     icon: "Employee_Details",
                     route: "/admin/registration/subcontract",
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Client Terms And Conditon ",
+                    icon: "Employee_Details",
+                    route: "/admin/siteInfo/termsAndcondition",
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Company Details ",
+                    icon: "Employee_Details",
+                    route: "/admin/registration/compdetails",
                     hasAccess: true
                 }
             ],

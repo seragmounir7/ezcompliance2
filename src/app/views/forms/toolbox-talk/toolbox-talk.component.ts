@@ -68,7 +68,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
       custEmail: ['', Validators.required],
       jobNumberId: ['', Validators.required],
       meetingBy: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       signaturePad1: ['', Validators.required],
       issues: this.fb.array([]),
       corrAction: this.fb.array([]),

@@ -90,9 +90,12 @@
   <!-- Main row -->
 </section>
 <!-- /.content -->
-
+<div>
+  <mat-slide-toggle color="primary" (change)="slideChanged($event)" >
+  </mat-slide-toggle>
+</div>
 <!--Canvas Sections-->
-<section  class="geaphicalSectionContainer">
+<section *ngIf="!formShow" class="geaphicalSectionContainer">
   <div class="container">
     <div class="row">
       <div class="col-6">
@@ -167,7 +170,7 @@
 </section>
 
 <!-- new DashBoard  -->
-<div class="container" *ngIf="false">
+<div class="container" *ngIf="formShow">
   <h1 class="text-center">WHS performance Indicators </h1>
   <div class="row">
 

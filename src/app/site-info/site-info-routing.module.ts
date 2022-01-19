@@ -121,7 +121,7 @@ const routes: Routes = [
   { path: 'addFormCategories', component: AddFormCategoriesComponent },
   { path: 'instructions/accident', component: InstructionsComponent },
   { path: 'instructions/riskAssess', component: InstructionsComponent },
-  {path:'terms&condition',component:TermsAndConditionsComponent}, 
+  {path:'termsAndcondition',component:TermsAndConditionsComponent}, 
 
   // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
