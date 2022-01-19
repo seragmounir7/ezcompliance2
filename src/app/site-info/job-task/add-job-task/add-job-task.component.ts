@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-job-task',
   templateUrl: './add-job-task.component.html',
-  styleUrls: ['./add-job-task.component.scss']
+  styleUrls: ['./add-job-task.component.scss'],
 })
 export class AddJobTaskComponent implements OnInit {
 

@@ -35,8 +35,6 @@ const routes: Routes = [
 
     ]
   },
-
-
   {
     path: 'admin',
     component: MainComponent,
@@ -94,7 +92,7 @@ const routes: Routes = [
     canActivate: [NonAuthGuard],
   },
 
-  { path: '**', redirectTo: 'admin', pathMatch: 'full' },
+  { path: '**', component: NotFoundPageComponent /* redirectTo: 'admin', pathMatch: 'full' */ },
 ];
 
 @NgModule({

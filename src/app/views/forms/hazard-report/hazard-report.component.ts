@@ -104,12 +104,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       department: ['', Validators.required],
       position: ['', Validators.required],
       // projectName: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       signaturePad1: ['', Validators.required],
       describeHazard: ['', Validators.required],
-      dateHazardReport: ['', Validators.required],
+      dateHazardReport: [new Date(), Validators.required],
       locationHazard: ['', Validators.required],
-      dateHazardIdentify: ['', Validators.required],
+      dateHazardIdentify: [new Date(), Validators.required],
       jobNumberId: ['', Validators.required],
       name: ['', Validators.required],
       compilePosition: ['', Validators.required],
@@ -124,23 +124,23 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
       eliminateHazard: [''],
       eliminateCorrect: [''],
       elliminateAction: [''],
-      eliminateWhen: [''],
+      eliminateWhen: [new Date()],
       substituteCorrect: [''],
       substituteAction: [''],
-      substituteWhen: [''],
+      substituteWhen: [new Date()],
       isolatedCorrect: [''],
       isolatedAction: [''],
-      isolatedWhen: [''],
+      isolatedWhen: [new Date()],
       solutionCorrect: [''],
       solutionAction: [''],
-      solutionWhen: [''],
-      procedureRemove: [''],
+      solutionWhen: [new Date()],
+      procedureRemove: [new Date()],
       procedureRemoveCorrect: [''],
       procedureRemoveAction: [''],
       procedureRemoveWhen: [''],
       PPECorrect: [''],
       PPEAction: [''],
-      PPEWhen: [''],
+      PPEWhen: [new Date()],
       fileUpload: [''],
       complete: [''],
       consequence: [],
@@ -167,7 +167,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-
+   
     this.isHistory = this.router.url.includes('/hazardTable\/history')
     if (this.isHistory) {
       this.disableForm()
