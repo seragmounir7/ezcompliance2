@@ -99,6 +99,12 @@ auditAndForm=[
 
   ];
 
+  public barChartColor1: Color[] = [
+        // new DashBoard 
+    { backgroundColor: 'rgb(63, 127, 191)' },
+
+  ];
+
   // public barChartColor=[
   //   {
   //    backgroundColor: [
@@ -113,6 +119,9 @@ auditAndForm=[
   public doughnutChartType: ChartType = 'doughnut';
 
   public barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public barChartOptions1: ChartOptions = {
     responsive: true,
   };
   public barChartLabels: Label[] = [
@@ -134,9 +143,27 @@ auditAndForm=[
     // 'Illness',
     // 'Other',
   ];
+
+  public barChartLabels1: Label[] = [
+    // new DashBoard 
+    'Abrasion',
+    'Amputation',
+    'Broken Bone',
+    'Bruise',
+    'Burn',
+    'Crushing Injury',
+    'Cuts',
+    'Head Injury',
+    'Hernia',
+    'Illness',
+    'Other',
+  ];
   public barChartType: ChartType = 'bar';
+  public barChartType1: ChartType = 'bar';
   public barChartLegend = true;
+  public barChartLegend1 = true;
   public barChartPlugins = [];
+  public barChartPlugins1 = [];
 
   public barChartData: ChartDataSets[] = [
     { data: [55, 59, 80, 81, 56, 55, 40], label: 'Near miss' },
@@ -147,6 +174,14 @@ auditAndForm=[
     // { data: [10,0,1,10,2,1,7,1,1,1,3], label: 'Type of Injuries' },
 
   ];
+
+  public barChartData1: ChartDataSets[] = [
+    
+
+    // new DashBoard 
+    { data: [10,0,1,10,2,1,7,1,1,1,3], label: 'Type of Injuries' },
+
+  ]; 
 
   ////horizontal chart
   public barChartTypeH: ChartType = 'horizontalBar';
