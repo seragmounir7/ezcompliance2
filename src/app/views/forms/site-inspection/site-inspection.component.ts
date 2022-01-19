@@ -440,7 +440,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       item: ['', Validators.required],
       action: ['', Validators.required],
       personResponsible: ['', Validators.required],
-      complete: ['', Validators.required],
+      complete: [new Date(), Validators.required],
       topicId: ['',],
     });
   }

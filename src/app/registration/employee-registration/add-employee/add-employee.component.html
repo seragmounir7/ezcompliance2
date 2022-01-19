@@ -175,8 +175,10 @@
         <div class="row">
           <div class="mb-3 mt-3 col-5">
             <label for="exampleFormControlInput1" class="form-label">Street Address</label>
-            <input type="text" formControlName="porfStreetAddress" class="form-control" id="siteName"
-              [class.is-invalid]="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required " />
+            <textarea autosize type="text" formControlName="porfStreetAddress" class="form-control" id="name"
+            [class.is-invalid]="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required " ></textarea>
+            <!-- <input type="text" formControlName="porfStreetAddress" class="form-control" id="siteName"
+              [class.is-invalid]="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required " /> -->
             <span class="text-danger"
               *ngIf="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required">
               Street Address is required
@@ -407,40 +409,44 @@
                   </mat-autocomplete>
                   
                 </div>
-                <div class="mb-3 mt-3 col-3">
+                <div class="mb-3 mt-3 col-2">
                   <label for="exampleFormControlInput1" class="form-label">Brand or Type</label>
                   <input type="text" formControlName="BrandOrType" class="form-control"
                     />
                  
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Issue Date</label>
                   <input type="date" formControlName="IssueDate" class="form-control"
                     />
                   
                 </div>
-                <div class="mb-3 mt-3 col-2">
+                <div class="mb-3 mt-3 col-3">
                   <label for="exampleFormControlInput1" class="form-label">Replacement Date
                   </label>
                   <input type="date" formControlName="ReplacementDate" class="form-control"
                     />
                   
                 </div>
-                <div class="col-1 mt-4">
+                <div class="col-1 mt-4 d-flex">
                   <div class="my-4">
                     <span class="material-icons" (click)="addFiled2()">add_circle_outline
                     </span>
                   </div>
-
+                  <div class="my-4 ml-2">
+                    <span class="material-icons" (click)="removeFiled1(filed1)">
+                      remove_circle_outline
+                    </span>
+                  </div>
                 </div>
-                <div class="col-1 mt-4">
+                <!-- <div class="col-1 mt-4">
                   <div class="my-4">
                     <span class="material-icons" (click)="removeFiled1(filed1)">
                       remove_circle_outline
                     </span>
                   </div>
 
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -489,27 +495,32 @@
 
                 </div>
                 
-                <div class="mb-3 mt-3 col-2">
-                  <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
-                  <input type="date" formControlName="serviceRenewDate" class="form-control" />
+                <div class="mb-3 mt-3 col-3">
+                  <label for="exampleFormControlInput1" class="form-label" >Service/Replacement Date</label>
+                  <!-- <label for="exampleFormControlInput1" class="form-label" style="padding: 4%;"></label> -->
+                  <input type="date" formControlName="serviceRenewDate" class="form-control"/>
 
                 </div>
                 
-                <div class="col-1 mt-4">
+                <div class="col-1 mt-4 d-flex justify-content-end">
                   <div class="my-4">
                     <span class="material-icons" (click)="addEquipFiled2()">add_circle_outline
                     </span>
                   </div>
-
+                  <div class="my-4 ml-2">
+                    <span class="material-icons" (click)="removeEquipFiled1(filed2)">
+                      remove_circle_outline
+                    </span>
+                  </div>
                 </div>
-                <div class="col-1 mt-4">
+                <!-- <div class="col-1 mt-4">
                   <div class="my-4">
                     <span class="material-icons" (click)="removeEquipFiled1(filed2)">
                       remove_circle_outline
                     </span>
                   </div>
 
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

@@ -111,11 +111,17 @@
       <div class="col-md-6 col-sm-6-print">
         <div>
           <label class="cols" class="form-Label">Site Address<span class="text-danger ">*</span></label>
-          <input type="text" class="form-control" formControlName="streetAddress" [class.is-invalid]="
+          <textarea autosize type="text" formControlName="streetAddress" class="form-control" id="name"
+          [class.is-invalid]="
               IncidentReport.get('streetAddress')?.hasError('required') &&
               (IncidentReport.get('streetAddress').dirty ||
                 IncidentReport.get('streetAddress').touched)
-            " />
+            "  ></textarea>
+          <!-- <input type="text" class="form-control" formControlName="streetAddress" [class.is-invalid]="
+              IncidentReport.get('streetAddress')?.hasError('required') &&
+              (IncidentReport.get('streetAddress').dirty ||
+                IncidentReport.get('streetAddress').touched)
+            " /> -->
           <span *ngIf="
               IncidentReport.get('streetAddress')?.hasError('required') &&
               (IncidentReport.get('streetAddress').dirty ||

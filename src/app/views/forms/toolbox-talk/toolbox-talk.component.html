@@ -39,8 +39,11 @@
         <div class="row">
           <div class="my-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Site Address<span class="text-danger ">*</span></p>
-            <input type="text" class="form-control" formControlName="streetAddr" [class.is-invalid]="toolBox.get('streetAddr')?.hasError('required') 
-          && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) " />
+            <textarea autosize type="text" formControlName="streetAddr" class="form-control" id="name"
+            [class.is-invalid]="toolBox.get('streetAddr')?.hasError('required') 
+          && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) " ></textarea>
+            <!-- <input type="text" class="form-control" formControlName="streetAddr" [class.is-invalid]="toolBox.get('streetAddr')?.hasError('required') 
+          && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) " /> -->
             <span *ngIf="
           toolBox.get('streetAddr')?.hasError('required') && (toolBox.get('streetAddr').dirty 
           || toolBox.get('streetAddr').touched) " class="invalid-feedback">
