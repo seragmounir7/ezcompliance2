@@ -13,7 +13,8 @@ import { PlantRegistrationComponent } from './plant-registration/plant-registrat
 import { SubcontractComponent } from './subcontract/subcontract.component';
 import { AddAndEditSubcontractComponent } from './subcontract/add-and-edit-subcontract/add-and-edit-subcontract.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
-
+import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 @NgModule({
   declarations: [
     CompanyRegistrationComponent,
@@ -32,6 +33,8 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
     SignaturePadModule,
     MatTableModule,
     SharedModule,
+    AngularSvgIconPreloaderModule,
+    AngularSvgIconModule
   ]
 })
 export class RegistrationModule { }
