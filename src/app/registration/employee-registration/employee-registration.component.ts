@@ -81,5 +81,8 @@ export class EmployeeRegistrationComponent implements OnInit {
   edit(id) {
     this.router.navigate(["/admin/registration/addEmployee/" + id]);
   }
+  returnById(id) {
+    this.router.navigate(["/admin/registration/plantRegistration"]);
+  }
 }
 

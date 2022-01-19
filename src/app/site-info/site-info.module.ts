@@ -84,6 +84,7 @@ import { InstructionsComponent } from './instructions/instructions.component';
 import { AddInstructionsComponent } from './instructions/add-instructions/add-instructions.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { AddTermsAndConditionsComponent } from './terms-and-conditions/add-terms-and-conditions/add-terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -162,6 +163,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
     InstructionsComponent,
     AddInstructionsComponent,
     TermsAndConditionsComponent,
+    AddTermsAndConditionsComponent,
 
   ],
 

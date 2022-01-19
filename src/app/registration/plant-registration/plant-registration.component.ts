@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith, tap } from 'rxjs/operators';
@@ -15,6 +15,8 @@ export class PlantRegistrationComponent implements OnInit {
   PPERegister = false;
   EquipmentInfo = false;
   PPEValueChanges: Observable<any>[];
+  filteredOptions1: Observable<any>;
+  filteredOptions2: Observable<any>;
   PPEData: any[]=[];
   @ViewChild('signature2') signaturePad2: any;
   @ViewChild('signature1') signaturePad: any;
@@ -22,24 +24,14 @@ export class PlantRegistrationComponent implements OnInit {
   
   dataPlant: boolean;
   dataUrl: any;
+  empData: any[]=[];
+  employeeData: any;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private employee: EmployeeRegistrationService,
   ) { 
     this.plantDetails = this.fb.group({
-      // plantName: ['', Validators.required],
-      // make: ['', Validators.required],
-      // hours: ['', Validators.required],
-      // kilometres: ['', Validators.required],
-      // date: ['', Validators.required],
-      // registrationNumber: ['', Validators.required],
-      // registrationRenewalDate: ['', Validators.required],
-      // purchaseDate: ['', Validators.required],
-      // insurancePolicyNumber: ['', Validators.required],
-      // insuranceExpiry: ['', Validators.required],
-      // fuelCardNumber: ['', Validators.required],
-      // ETagNumber: ['', Validators.required],
       PPESupplied: [''],
       BrandOrType: [''],
       IssueDate: [''],
@@ -63,32 +55,44 @@ export class PlantRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
     this.patchData();
-    // if (this.id !== "form") {
-    //   this.dataPlant = true;
-    //   this.patchData();
-    // } else {
-    //   this.dataPlant = false;
-    //   this. addFiled2();
-    //   this.addEquipFiled2();
-    // }
-    // this.addEquipFiled2();
-    // this. addFiled2();
+    this.employee.getAllEmployeeInfo().pipe(
+      map((res) => { 
+        return res.data.map((item) => {
+          item.fullName = `${item.firstName} ${item.lastName}`
+          return item
+        })
+      })
+    ).subscribe(empData => {
+      this.empData = empData
+    
+    
+    this.filteredOptions1 = this.plantDetails.controls.managerName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.plantDetails['controls'].managerName as AbstractControl).setErrors({'incorrect': true}) : '')),
+      map(value => (typeof value === 'string' ? value : value?.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    )
+    this.filteredOptions2 = this.plantDetails.controls.managerName.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.plantDetails['controls'].managerName as AbstractControl).setErrors({'incorrect': true}) : '')),
+      map(value => (typeof value === 'string' ? value : value?.fullName)),
+      map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+    )
+  }) 
+  }
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+    return this.empData.filter(option => option.fullName.toLowerCase().includes(filterValue));
+  }
+  displayFn(user: any): string {
+    return user && user.fullName ? user.fullName : '';
   }
   addEquip() {
     return this.plantDetails.get('plantArr') as FormArray;
   }
-  newEquipFiled2(): FormGroup {
-    return this.fb.group({
-      modelNumber: [''],
-      serialNumber: [''],
-      plantType: [''],
-      serviceRenewDate: [''],
-    });
-  }
-  addEquipFiled2() {
-    this.addEquip().push(this.newEquipFiled2());
-    console.log(this.plantDetails.value);
-  }
+  
   newEquipFiled3(data): FormGroup {
     console.log("newData", data);
 
@@ -104,13 +108,6 @@ export class PlantRegistrationComponent implements OnInit {
     console.log("data", data);
     this.addEquip().push(this.newEquipFiled3(data));
     console.log("addPPEFiled1", this.plantDetails.value);
-  }
-  removeEquipFiled1(i) {
-    const item = <FormArray>this.plantDetails.controls['plantArr'];
-    if (item.length > 1) {
-      item.removeAt(i);
-
-    }
   }
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
@@ -134,34 +131,7 @@ export class PlantRegistrationComponent implements OnInit {
   addPPE() {
     return this.plantDetails.get('PPEArr') as FormArray;
   }
-  newFiled2(): FormGroup {
-    return this.fb.group({
-      PPESupplied: [''],
-      BrandOrType: [''],
-      IssueDate: [''],
-      ReplacementDate: [''],
-    });
-  }
-  addFiled2() {
-    this.addPPE().push(this.newFiled2());
-    console.log(this.plantDetails.value);
-    this.PPEValueChanges =new Array<Observable<any>>()
-    for (let index = 0; index < this.addPPE().length; index++) {
-      let element = this.addPPE().at(index)
-     this.PPEValueChanges.push( (element['controls'].PPESupplied.valueChanges as Observable<any>).pipe(
-      startWith(''),
-      debounceTime(400),
-      tap(value => console.log('value', value)),
-      map(value => (typeof value === 'string' ? value : value.fullName)),
-      map(fullName => (fullName ? this._filterPPE(fullName) : this.PPEData.slice())),
-    ))
-      console.log(element.valueChanges)
-    }
-  }
-  private _filterPPE(name: string): any[] {
-    const filterValue = name.toLowerCase();
-    return this.PPEData.filter(option => option.fullName.toLowerCase().includes(filterValue));
-  }
+
   newFiled3(data): FormGroup {
     console.log("newData", data);
 
@@ -170,31 +140,13 @@ export class PlantRegistrationComponent implements OnInit {
       BrandOrType: [data.brand],
       IssueDate: [data.issueDate],
       ReplacementDate: [data.replacementDate],
+      ppeCheck:[''],
     });
   }
   addFiled3(data) {
     console.log("data", data);
     this.addPPE().push(this.newFiled3(data));
     console.log("addPPEFiled1", this.plantDetails.value);
-    this.PPEValueChanges =new Array<Observable<any>>()
-    for (let index = 0; index < this.addPPE().length; index++) {
-      let element = this.addPPE().at(index)
-     this.PPEValueChanges.push( (element['controls'].PPESupplied.valueChanges as Observable<any>).pipe(
-      startWith(''),
-      debounceTime(400),
-      tap(value => console.log('value', value)),
-      map(value => (typeof value === 'string' ? value : value.fullName)),
-      map(fullName => (fullName ? this._filterPPE(fullName) : this.PPEData.slice())),
-    ))
-      console.log(element.valueChanges)
-    }
-  }
-  removeFiled1(i) {
-    const item = <FormArray>this.plantDetails.controls['PPEArr'];
-    if (item.length > 1) {
-      item.removeAt(i);
-
-    }
   }
 
   PPERegisteshow() {
@@ -219,7 +171,7 @@ export class PlantRegistrationComponent implements OnInit {
     this.employee.getEmployeeInfoById(id).subscribe((data) => {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
-    
+    this.employeeData= data.data
       data.data.ppe.PPEArr.forEach(ele => {
         this.addFiled3(ele);
       });
@@ -227,36 +179,10 @@ export class PlantRegistrationComponent implements OnInit {
         this.addEquipFiled3(ele);
       });
       this.plantDetails.patchValue({
-        // profTitie: data.data.title,
-        // profFirst: data.data.firstName,
-        // porfListName: data.data.lastName,
-        // porfEmail: data.data.email,
-        // porfPosition: data.data.position,
-        // porfDepartment: data.data.department,
-        // porfPhone: data.data.phone,
-        // porfMobile: data.data.mobile,
-
-        // roleId: data.data.roleId,
-        // porfStreetAddress: data.data.location.address,
-        // porfCityTown: data.data.location.city,
-        // porfState: data.data.location.state,
-        // porfPostalCode: data.data.location.pincode,
-        // porfUploadImage: data.data.uploadImage,
-        // EmpFirst: data.data.emergencyContact.firstName,
-        // empLastName: data.data.emergencyContact.lastName,
-        // empRelationship: data.data.emergencyContact.relationship,
-        // empEmail: data.data.emergencyContact.email,
-        // empPhone: data.data.emergencyContact.phone,
-        // empMobile: data.data.emergencyContact.mobile,
-
         PPESupplied: data.data.ppe.ppeSupplied,
         BrandOrType: data.data.ppe.brand,
         IssueDate: data.data.ppe.issueDate,
         ReplacementDate: data.data.ppe.replacementDate,
-        // Sign: data.data.ppe.signature,
-        // managerName: data.data.managerName,
-        // date: data.data.date,
-
         plantType: data.data.plant.plantType,
         modelNumber: data.data.plant.modelNumber,
         serialNumber: data.data.plant.serialNumber,
@@ -268,21 +194,134 @@ export class PlantRegistrationComponent implements OnInit {
       this.dataUrl = data.data.plant.plantSignature;
       console.log("data.data.ppe.signature;", data.data.ppe.signature);
 
-      let check = async () => { this.signaturePad != null }
-      check().then((res) => {
-        console.log("this.signaturePad", this.signaturePad, res);
+      // let check = async () => { this.signaturePad != null }
+      // check().then((res) => {
+      //   console.log("this.signaturePad", this.signaturePad, res);
 
-        this.signaturePad.fromDataURL(data.data.ppe.signature)
+      //   this.signaturePad.fromDataURL(data.data.ppe.signature)
 
-      })
-      let check2 = async () => { this.signaturePad2 != null }
-      check2().then((res) => {
-        console.log("this.signaturePad", this.signaturePad2, res);
+      // })
+      // let check2 = async () => { this.signaturePad2 != null }
+      // check2().then((res) => {
+      //   console.log("this.signaturePad", this.signaturePad2, res);
 
-        this.signaturePad2.fromDataURL(data.data.plant.plantSignature)
+      //   this.signaturePad2.fromDataURL(data.data.plant.plantSignature)
 
-      })
+      // })
 
     });
+  }
+  peeSubmit(){
+    let submitPPEArr=[]
+    let notSubPPEArr=[]
+    let {
+      ppe,
+      ...rest
+    }= this.employeeData
+    // submitPPEArr.push(PPEArr.map((res)=>{ 
+    //   if(res.ppeCheck){
+    //   return {
+    //   PPESupplied: res.PPESupplied,
+    //   BrandOrType: res.BrandOrType,
+    //   IssueDate: res.IssueDate,
+    //   ReplacementDate: res.ReplacementDate,
+    //   }
+    // }else{
+
+    // }
+    // }))
+    // console.log("submitPPEArr",submitPPEArr);
+    
+    for (let index = 0; index < this.addPPE().length; index++) {
+    
+      if(this.addPPE().at(index).get("ppeCheck").value){
+        let arr={
+          ppeSupplied: this.addPPE().at(index).get("PPESupplied").value,
+          brand:this.addPPE().at(index).get("BrandOrType").value ,
+          issueDate:this.addPPE().at(index).get("IssueDate").value ,
+          replacementDate: this.addPPE().at(index).get("ReplacementDate").value ,
+        }
+        submitPPEArr.push(arr)
+        console.log("submitPPEArr",submitPPEArr);
+        
+      }else{
+        let arr={
+          ppeSupplied: this.addPPE().at(index).get("PPESupplied").value,
+          brand:this.addPPE().at(index).get("BrandOrType").value ,
+          issueDate:this.addPPE().at(index).get("IssueDate").value ,
+          replacementDate: this.addPPE().at(index).get("ReplacementDate").value ,
+        }
+        notSubPPEArr.push(arr)
+        console.log("PPEArr",notSubPPEArr);
+       }
+    }
+    let data={
+      signature:this.plantDetails.controls['Sign'].value,
+      date:this.plantDetails.controls['date'].value,
+      managerName:this.plantDetails.controls['managerName'].value._id,
+      submitPPEArr:submitPPEArr,
+      employeeId: this.employeeData._id
+      
+    }
+    console.log("ppe submit",data);
+    let data2={
+      ...rest,
+      ppe:{
+        PPEArr:notSubPPEArr,
+        signature:ppe.signature
+              }
+    }
+    console.log("this.",this.employeeData,data2);
+    
+  }
+  plantSubmit(){
+    let submitPlant=[]
+    let notSubPlant=[]
+    let {
+      plant,
+      ...rest
+    }= this.employeeData
+    
+    for (let index = 0; index < this.addEquip().length; index++) {
+    
+      if(this.addEquip().at(index).get("ppeCheck").value){
+        let arr={
+          ppeSupplied: this.addEquip().at(index).get("PPESupplied").value,
+          brand:this.addEquip().at(index).get("BrandOrType").value ,
+          issueDate:this.addEquip().at(index).get("IssueDate").value ,
+          replacementDate: this.addEquip().at(index).get("ReplacementDate").value ,
+        }
+        submitPlant.push(arr)
+        console.log("submitPlant",submitPlant);
+        
+      }else{
+        let arr={
+          ppeSupplied: this.addEquip().at(index).get("PPESupplied").value,
+          brand:this.addEquip().at(index).get("BrandOrType").value ,
+          issueDate:this.addEquip().at(index).get("IssueDate").value ,
+          replacementDate: this.addEquip().at(index).get("ReplacementDate").value ,
+        }
+        notSubPlant.push(arr)
+        console.log("PPEArr",notSubPlant);
+       }
+    }
+    let data={
+      signature:this.plantDetails.controls['Sign'].value,
+      date:this.plantDetails.controls['date'].value,
+      managerName:this.plantDetails.controls['managerName'].value._id,
+      submitPlant:submitPlant,
+      employeeId: this.employeeData._id
+      
+    }
+    console.log("plant submit",data);
+    let data2={
+      ...rest,
+      plant:{
+        plantArr:notSubPlant,
+        signature:plant.plantSignature
+              }
+    }
+    console.log("this.",this.employeeData,data2);
+    
   }
 }
