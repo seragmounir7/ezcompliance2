@@ -1,4 +1,4 @@
-import {  debounceTime, map,  startWith,  tap } from 'rxjs/operators';
+import {  debounceTime, delay, map,  startWith,  tap } from 'rxjs/operators';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Component, ElementRef, OnInit, AfterViewInit, HostListener, OnDestroy, ViewChildren, QueryList, LOCALE_ID } from '@angular/core';
@@ -27,6 +27,7 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 })
 export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @ViewChild('parent') parent: ElementRef
   @ViewChild('projectManager') projectManager: ElementRef;
   @ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
   @ViewChild('Signature1') signaturePad1: SignaturePad;
@@ -39,6 +40,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
   empData:any[]=[];
   valueChangesArr: Observable<any>[];
   filteredOptions1: Observable<any>;
+  tradeCategoryArr: any[];
   @HostListener("window:afterprint", [])
   function() {
     console.log("Printing completed...");
@@ -711,9 +713,10 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       for (let index = 0; index < this.employeeArr().length; index++){
         let element = this.employeeArr().at(index)
         this.valueChangesArr.push( (element['controls'].employeeId.valueChanges as Observable<any>).pipe(
+          startWith({firstName:''}),
           tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (element['controls'].employeeId as AbstractControl).setErrors({'incorrect': true}) : '')),
           map(value => (typeof value === 'string' ? value : value?.fullName)),
-           map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
+          map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
       
         ))
         
@@ -957,7 +960,23 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
 
   getAllJobTask(data = []) {
     if (data) {
-      this.jobTaskData = data;
+      this.logicalFormInfo.getAllLicenceCat().subscribe((res)=> {
+        console.log('getAllLicenceCat',res)
+        this.tradeCategoryArr = res.data
+      })
+      this.jobTaskData = data.sort(function(a, b) {
+        let titleA = a.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
+        let titleB = b.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
+        if (titleA < titleB) {
+          return -1;
+        }
+        if (titleA > titleB) {
+          return 1;
+        }
+      
+        // names must be equal
+        return 0;
+      });
       console.log('jobTaskDetails=>', this.jobTaskData);
       for (let i = 0; i < this.jobTaskData.length; i++) {
         // this.taskArr[i] = 0;
@@ -1673,4 +1692,9 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
     }) 
     
   }
+
+  doesCategoryExists(category_id: string){
+    return this.jobTaskData.find(x => x.tradeCategoryId._id == category_id)
+  }
+
 }

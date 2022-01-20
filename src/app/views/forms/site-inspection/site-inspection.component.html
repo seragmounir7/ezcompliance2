@@ -79,8 +79,10 @@
               <p for="exampleFormControlInput1" class="form-Label">
                 Site Address<span class="text-danger ">*</span>
               </p>
-              <input type="text" class="form-control outline" formControlName="streetAddr"
-                [class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) " />
+              <textarea autosize type="text" formControlName="streetAddr" class="form-control outline" id="name"
+              [class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) "  ></textarea>
+              <!-- <input type="text" class="form-control outline" formControlName="streetAddr"
+                [class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) " /> -->
               <span
                 *ngIf=" sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty  || sidePreview.get('streetAddr').touched) "
                 class="invalid-feedback">
