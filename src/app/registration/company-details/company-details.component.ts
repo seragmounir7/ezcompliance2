@@ -23,7 +23,7 @@ export class CompanyDetailsComponent implements OnInit {
     this.formData = this.fb.group({
       companyName: ['', Validators.required],
       phoneNumber:['',Validators.required],
-      fax:[],
+      porfListName:[],
       emailAddress:['',Validators.required],
       streetAddress:['',Validators.required],
       subUrb:['',Validators.required],
