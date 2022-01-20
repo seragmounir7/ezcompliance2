@@ -223,10 +223,13 @@ export class AddAndEditSubcontractComponent implements OnInit {
     this.licenceInfo.getSubcontract(this.id).subscribe((res:any) => {
       console.log('dataId=>', res.data);
      
-      res.data.licenceAndQualifications.forEach(ele => {
+      // res.data.licenceAndQualifications.forEach(ele => {
+      //   this.addFiled1(ele);
+      // });
+      res.data.licenceAndQualifications.length > 0 ? res.data.licenceAndQualifications.forEach(ele => {
         this.addFiled1(ele);
-      });
-      
+      }):this.addFiled();
+
       this.subcontractDetails.patchValue({
         // LicenceName: res.data.licenceAndQualifications.LicenceName,
         // LicenceNumber: res.data.licenceAndQualifications.LicenceNumber,

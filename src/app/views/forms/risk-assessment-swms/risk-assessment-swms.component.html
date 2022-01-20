@@ -129,9 +129,12 @@
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-                <input type="text" class="form-control col" formControlName="streetAddr"
+                <textarea autosize type="text" formControlName="streetAddr" class="form-control" id="name"
+                [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
+                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) " ></textarea>
+                <!-- <input type="text" class="form-control col" formControlName="streetAddr"
                   [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
-                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) ">
+                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "> -->
                 <span *ngIf="
                 riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty 
                 || riskAssessmentFb.get('streetAddr').touched) " class="invalid-feedback">
@@ -588,9 +591,12 @@
               <div class="col-md-4">
                 <div class="my-3">
                   <label class="form-label">Street Name<span class="text-danger">*</span></label>
-                  <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr"
+                  <textarea autosize type="text" formControlName="streetAddr" class="form-control" id="name"
+                  [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
+                  && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "></textarea>
+                  <!-- <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr"
                     [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required') 
-                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) ">
+                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "> -->
                   <span *ngIf="
                 riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty 
                 || riskAssessmentFb.get('streetAddr').touched) " class="invalid-feedback">
@@ -1256,7 +1262,9 @@
             >
               <option selected hidden>Select</option>
             </select> -->
-            <input type="text" class="form-control col" formControlName="streetAddr">
+            <textarea autosize type="text" formControlName="streetAddr" class="form-control col" id="name"
+            ></textarea>
+            <!-- <input type="text" class="form-control col" formControlName="streetAddr"> -->
           </div>
           <div class="my-3 col-4">
             <label class="form-label">Suburb</label>
@@ -1604,7 +1612,9 @@
           <div class="col-md-4 col-sm-4-print">
             <div class="my-3">
               <label class="form-label">Street Name</label>
-              <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr" />
+              <textarea autosize type="text" formControlName="streetAddr" class="form-control" id="name"
+              ></textarea>
+              <!-- <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr" /> -->
             </div>
           </div>
           <div class="col-md-4 col-sm-4-print ">

@@ -196,17 +196,21 @@ export class AddEmployeeComponent implements OnInit {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
       data.data.licence.forEach(element => {
-        element.uploadLicence.forEach(ele => {
+        // element.uploadLicence.forEach(ele => {
+        //   this.addFiled1(ele);
+        // });
+        element.uploadLicence.length > 0 ? element.uploadLicence.forEach(ele => {
           this.addFiled1(ele);
-        });
-
+        }):this.addFiled();
       });
-      data.data.ppe.PPEArr.forEach(ele => {
+     
+      data.data.ppe.PPEArr.length > 0 ? data.data.ppe.PPEArr.forEach(ele => {
         this.addFiled3(ele);
-      });
-      data.data.plant.plantArr.forEach(ele => {
+      }):this.addFiled2();
+      
+      data.data.plant.plantArr.length > 0 ? data.data.plant.plantArr.forEach(ele => {
         this.addEquipFiled3(ele);
-      });
+      }):this.addEquipFiled2();
       this.empDetails.patchValue({
         profTitie: data.data.title,
         profFirst: data.data.firstName,
