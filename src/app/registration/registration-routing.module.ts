@@ -1,3 +1,4 @@
+import { PlantRegistionTableComponent } from './plant-registration/plant-registion-table/plant-registion-table.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
@@ -12,10 +13,12 @@ const routes: Routes = [
   { path: "", component: CompanyRegistrationComponent },
   { path: "employeeRegistration", component: EmployeeRegistrationComponent },
   { path: "addEmployee/:id", component: AddEmployeeComponent },
-  { path: "plantRegistration", component: PlantRegistrationComponent},
+  { path: "plantRegistration/:id", component: PlantRegistrationComponent},
+  { path: "plantRegistrationTable/:id", component: PlantRegistionTableComponent},
   { path: "subcontract", component: SubcontractComponent},
   { path: "addSubcontract/:id", component: AddAndEditSubcontractComponent},
-  {path:"compdetails", component:CompanyDetailsComponent}
+  {path:"compdetails", component:CompanyDetailsComponent},
+  { path: "plantRegistration/history/:id", component: PlantRegistrationComponent},
 ];
 
 @NgModule({

@@ -130,4 +130,14 @@ export class AddCustomerComponent implements OnInit {
   sortData(sort: Sort) {
     this.getAllCustomers(sort.active, sort.direction)
   }
+  addCustomer(){
+    let dialog = this.dialog.open(AddingCustComponent,{
+
+    })
+    dialog.afterClosed().subscribe(res => {
+      if(res === 'ok'){
+        this.getAllCustomers()
+      }
+    })
+  }
 }
