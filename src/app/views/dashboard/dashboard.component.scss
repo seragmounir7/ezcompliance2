@@ -15,11 +15,13 @@ agm-map {
   .flex-container > div {
     width: 135px;
     margin: 5px;
-    text-align: center;
+    // text-align: center;
     font-size: 20px;
     padding-bottom: 10px;
   }
-  
+  .small-box .icon>i.fa, .small-box .icon>i.fab, .small-box .icon>i.fad, .small-box .icon>i.fal, .small-box .icon>i.far, .small-box .icon>i.fas {
+    font-size: 58px !important;
+  } 
   .container{
     // border: 1px solid black;
     padding-top: 10px;
