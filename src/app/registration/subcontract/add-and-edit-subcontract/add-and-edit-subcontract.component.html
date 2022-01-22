@@ -32,24 +32,37 @@
           </div>
           <div class="mb-3 mt-3 col-3">
             <label for="exampleFormControlInput1" class="form-label">Street Address </label>
-            <input type="text" formControlName="streetAddress" class="form-control" />
+              <textarea type="text"
+              formControlName="streetAddress" class="form-control" >
+              </textarea>
 
           </div>
           <div class="mb-3 mt-3 col-3">
             <label for="exampleFormControlInput1" class="form-label">Suburb</label>
-            <input type="text" formControlName="suburb" class="form-control" />
+            <textarea type="text" formControlName="suburb" class="form-control" ></textarea>
 
           </div>
           <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Post Code</label>
-            <input type="text" formControlName="postCode" class="form-control" />
+            <label for="exampleFormControlInput1" class="form-label">State</label>
+              <select class="form-select form-control col" aria-label="Default select example"
+              formControlName="state"  >
 
+              <option selected hidden>Select</option>
+              <option [value]="state._id" *ngFor="let state of StatesData">{{state.title}}</option>
+            </select>
+              <!-- <span class="text-danger"
+              *ngIf="(subcontractDetails.state.touched || submitted) && subcontractDetails.state.errors?.required">
+              State is required
+            </span> -->
           </div>
-          <div class="mb-3 mt-3 col-3">
+           <!-- <label for="exampleFormControlInput1" class="form-label">Post Code</label>
+            <input type="text" formControlName="postCode" class="form-control" /> -->
+
+          <!-- <div class="mb-3 mt-3 col-3">
             <label for="exampleFormControlInput1" class="form-label">Mailing Address</label>
-            <input type="text" formControlName="mailingAddress" class="form-control" />
+            <textarea type="text" formControlName="mailingAddress" class="form-control" ></textarea>
 
-          </div>
+          </div> -->
           <div class="mb-3 mt-3 col-3">
             <label for="exampleFormControlInput1" class="form-label">ABN</label>
             <input type="text" formControlName="ABN" class="form-control" />

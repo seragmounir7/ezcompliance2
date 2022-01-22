@@ -43,6 +43,7 @@ export class AddEmployeeComponent implements OnInit {
   empData: any[]=[];
   licenceValueChanges: Observable<any>[];
   PPEData: any[]=[];
+  StatesData: any = [];
   PPEValueChanges: Observable<any>[];
   constructor(
     private fb: FormBuilder,
@@ -69,6 +70,7 @@ export class AddEmployeeComponent implements OnInit {
       reportingTo: [''],
       roleId: ['', Validators.required],
       porfStreetAddress: ['', Validators.required],
+      porfSuburb:['',Validators.required],
       porfCityTown: ['', Validators.required],
       porfState: ['', Validators.required],
       porfPostalCode: ['', Validators.required],
@@ -143,6 +145,10 @@ export class AddEmployeeComponent implements OnInit {
       console.log('this.empData2', this.PPEData)
      
     })
+    
+    // let dataMap = map((res: any) => res.data)
+    // this.licenceInfo.getAllStates().pipe(dataMap),
+    
     this.getAllRoles();
     this.id = this.activatedRoute.snapshot.params.id;
 
@@ -173,6 +179,7 @@ export class AddEmployeeComponent implements OnInit {
         return this.filter1(val || '')
       })
     )
+    this.getAllStates();
   }
 
   getAllRoles() {
@@ -223,6 +230,7 @@ export class AddEmployeeComponent implements OnInit {
 
         roleId: data.data.roleId,
         porfStreetAddress: data.data.location.address,
+        porfSuburb:  data.data.location.suburb,
         porfCityTown: data.data.location.city,
         porfState: data.data.location.state,
         porfPostalCode: data.data.location.pincode,
@@ -421,6 +429,7 @@ export class AddEmployeeComponent implements OnInit {
         address: this.empDetails.get('porfStreetAddress').value,
         landmark: 'Nagpur',
         state: this.empDetails.get('porfState').value,
+        suburb:this.empDetails.get('porfSuburb').value,
         city: this.empDetails.get('porfCityTown').value,
         pincode: this.empDetails.get('porfPostalCode').value,
         country: 'India',
@@ -527,6 +536,7 @@ export class AddEmployeeComponent implements OnInit {
         address: this.empDetails.get('porfStreetAddress').value,
         landmark: 'Nagpur',
         state: this.empDetails.get('porfState').value,
+        suburb:this.empDetails.get('porfSuburb').value,
         city: this.empDetails.get('porfCityTown').value,
         pincode: this.empDetails.get('porfPostalCode').value,
         country: 'India',
@@ -751,7 +761,14 @@ export class AddEmployeeComponent implements OnInit {
 
     }
   }
-
+  // 
+  getAllStates() {
+    this.licenceInfo.getAllStates().subscribe((res: any) => {
+      console.log('setStatesDetails=>', res);
+      this.StatesData = res.data;
+    });
+  }
+// 
   get registerFormControl() {
     return this.empDetails.controls;
   }
