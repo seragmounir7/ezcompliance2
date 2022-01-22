@@ -422,6 +422,7 @@ export class SiteInspectionComponent implements OnInit, AfterViewInit, OnDestroy
       for (let index = 0; index < this.add().length; index++){
         let element = this.add().at(index)
         this.valueChangesArr.push( (element['controls'].personResponsible.valueChanges as Observable<any>).pipe(
+          startWith({fullName:''}),
           tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (element['controls'].personResponsible as AbstractControl).setErrors({'incorrect': true}) : '')),
           map(value => (typeof value === 'string' ? value : value?.fullName)),
            map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),

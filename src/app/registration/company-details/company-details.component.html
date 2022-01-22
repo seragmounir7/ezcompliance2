@@ -62,15 +62,27 @@
       </span>
       </div>
       <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Postcode </label>
+        <label for="exampleFormControlInput1" class="form-label">State</label>
+        <select class="form-select form-control col" aria-label="Default select example"
+        formControlName="sTate"  
+        [class.is-invalid]="(registerFormControl.sTate.touched || submitted) && registerFormControl.sTate.errors?.required ">
+
+        <option selected hidden>Select</option>
+        <option [value]="state._id" *ngFor="let state of StatesData">{{state.title}}</option>
+      </select>
+      <span class="text-danger"
+          *ngIf="(registerFormControl.sTate.touched || submitted) && registerFormControl.sTate.errors?.required">
+          State is required
+        </span>
+        <!-- <label for="exampleFormControlInput1" class="form-label"> Postcode </label>
         <input type="text" class="form-control"  formControlName="postCode"
-          [class.is-invalid]="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required " />
-        <span class="text-danger"
+          [class.is-invalid]="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required " /> -->
+        <!-- <span class="text-danger"
           *ngIf="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required">
           Postcode is required
-        </span>
+        </span> -->
       </div>
-      <div class="mb-3 mt-3 col-3">
+      <!-- <div class="mb-3 mt-3 col-3">
         <label for="exampleFormControlInput1" class="form-label"> Mailing Address </label>
         <textarea type="text" class="form-control"  formControlName="mailingAddress"
           [class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "></textarea>
@@ -78,7 +90,7 @@
           *ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required">
           Mailing Address is required
         </span>
-      </div>
+      </div> -->
     </div>
 
     <div class="row">

@@ -15,6 +15,7 @@ import { AddAndEditSubcontractComponent } from './subcontract/add-and-edit-subco
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { PlantRegistionTableComponent } from './plant-registration/plant-registion-table/plant-registion-table.component';
 @NgModule({
   declarations: [
     CompanyRegistrationComponent,
@@ -23,7 +24,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
      PlantRegistrationComponent, 
      SubcontractComponent, 
      AddAndEditSubcontractComponent,
-     CompanyDetailsComponent
+     CompanyDetailsComponent,
+     PlantRegistionTableComponent
     ],
   imports: [
     CommonModule,
