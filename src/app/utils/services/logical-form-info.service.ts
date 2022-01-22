@@ -1070,7 +1070,54 @@ postTermsAndConditions(data) {
 deleteTermsAndConditions(id) {
   return this.https.delete(this.apiUrl + 'termsAndCondition/delete/' + id)
 }
-////////////////////Start Add client Terms And Conditions ////////////////
+////////////////////End Add client Terms And Conditions ////////////////
+
+
+//////////////////Start Return PPE and plant/Equipment //////////////////
+/////PPE//////
+getSubmitedPPE() {
+  return this.https.get(this.apiUrl + 'ppeReturn/getAll')
+}
+getBySubmitedPPE(id) {
+  return this.https.get(this.apiUrl + 'ppeReturn/get/'+id)
+}
+postSubmitedPPE(data) {
+  return this.https.post(this.apiUrl + 'ppeReturn/add',data)
+}
+deleteSubmitedPPE(id) {
+  return this.https.delete(this.apiUrl + 'ppeReturn/delete/' + id)
+}
+updateSubmitedPPE(id,data) {
+  return this.https.delete(this.apiUrl + 'ppeReturn/update/' + id,data)
+}
+/////////////plant///////////////
+  getSubmitedPlant() {
+    return this.https.get(this.apiUrl + 'plantReturn/getAll')
+  }
+  getBySubmitedPlant(id) {
+    return this.https.get(this.apiUrl + 'plantReturn/get/'+id)
+  }
+  postSubmitedPlant(data) {
+    return this.https.post(this.apiUrl + 'plantReturn/add',data)
+  }
+  deleteSubmitedPlant(id) {
+    return this.https.delete(this.apiUrl + 'plantReturn/delete/' + id)
+  }
+  updateSubmitedPlant(id,data) {
+    return this.https.delete(this.apiUrl + 'plantReturn/update/' + id,data)
+}
+//////////////////////////Get PPE/Plant///////////////////////
+getSubmitedPPEPlantById(id) {
+  return this.https.get(this.apiUrl + 'plantReturn/getPlantPpe/'+id)
+}
+getSubmitedPPEPlantEmpId(id) {
+  return this.https.get(this.apiUrl + 'plantReturn/getBy/'+id)
+}
+getAllSubmitedPPEPlant() {
+  return this.https.get(this.apiUrl + 'plantReturn/getPlantAndPPE')
+}
+
+//////////////////End Return PPE and plant/Equipment //////////////////
 
 }
 

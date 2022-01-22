@@ -1,17 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
-
+import {LogicalFormInfoService}from '../../utils/services/logical-form-info.service'
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-plant-registration',
   templateUrl: './plant-registration.component.html',
   styleUrls: ['./plant-registration.component.scss']
 })
 export class PlantRegistrationComponent implements OnInit {
-  plantDetails!: FormGroup;
+  plantDetails: FormGroup;
+  ppeDetails: FormGroup;
   PPERegister = false;
   EquipmentInfo = false;
   PPEValueChanges: Observable<any>[];
@@ -21,17 +23,22 @@ export class PlantRegistrationComponent implements OnInit {
   @ViewChild('signature2') signaturePad2: any;
   @ViewChild('signature1') signaturePad: any;
   id: any;
-  
-  dataPlant: boolean;
+  empId:any
   dataUrl: any;
   empData: any[]=[];
   employeeData: any;
+  isHistory: any;
+  ppeDataHistory: any;
+  plantDataHistory: any;
+  selectValue:any;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private employee: EmployeeRegistrationService,
+    private logicalService:LogicalFormInfoService,
+    private router:Router
   ) { 
-    this.plantDetails = this.fb.group({
+    this.ppeDetails = this.fb.group({
       PPESupplied: [''],
       BrandOrType: [''],
       IssueDate: [''],
@@ -40,20 +47,40 @@ export class PlantRegistrationComponent implements OnInit {
       Sign: [''],
       managerName: [''],
       date: [''],
-      plantArr: this.fb.array([]),
-      plantSignature: [''],
      
+      
+    });
+    this.plantDetails=this.fb.group({
       modelNumber: [''],
       serialNumber: [''],
       plantType: [''],
       serviceRenewDate: [''],
       plantManagerName: [''],
       plantDate: [''],
+      plantSignature: [''],
+      plantArr: this.fb.array([]),
     });
   }
-
+  async disableForm(fileType) {
+    if (this.isHistory&& fileType==="PPE") {
+      this.ppeDetails.disable();
+      let check = async () => { this.signaturePad != null }
+      await check()
+      this.signaturePad.off()
+    }else if(this.isHistory&& fileType==="Plant/Equipment"){
+      this.plantDetails.disable();
+      let check2 = async () => { this.signaturePad2 != null } 
+      await check2()
+      this.signaturePad2.off()
+    }
+      
+    }
+  
   ngOnInit(): void {
+    this.isHistory = this.router.url.includes('/plantRegistration\/history')
     this.id = this.activatedRoute.snapshot.params.id;
+    console.log(this.isHistory,this.id);
+    
     this.patchData();
     this.employee.getAllEmployeeInfo().pipe(
       map((res) => { 
@@ -66,17 +93,17 @@ export class PlantRegistrationComponent implements OnInit {
       this.empData = empData
     
     
-    this.filteredOptions1 = this.plantDetails.controls.managerName.valueChanges.pipe(
+    this.filteredOptions1 = this.ppeDetails.controls.managerName.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
-      tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.plantDetails['controls'].managerName as AbstractControl).setErrors({'incorrect': true}) : '')),
+      tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.ppeDetails['controls'].managerName as AbstractControl).setErrors({'incorrect': true}) : '')),
       map(value => (typeof value === 'string' ? value : value?.fullName)),
       map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
     )
-    this.filteredOptions2 = this.plantDetails.controls.managerName.valueChanges.pipe(
+    this.filteredOptions2 = this.plantDetails.controls.plantManagerName.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
-      tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.plantDetails['controls'].managerName as AbstractControl).setErrors({'incorrect': true}) : '')),
+      tap(value => (typeof value === 'object' ?"":typeof value === 'string' ? (this.plantDetails['controls'].plantManagerName as AbstractControl).setErrors({'incorrect': true}) : '')),
       map(value => (typeof value === 'string' ? value : value?.fullName)),
       map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
     )
@@ -101,6 +128,7 @@ export class PlantRegistrationComponent implements OnInit {
       modelNumber: [data.modelNumber],
       serialNumber: [data.serialNumber],
       serviceRenewDate: [data.serviceRenewDate],
+      plantCheck:[''],
      
     });
   }
@@ -108,6 +136,7 @@ export class PlantRegistrationComponent implements OnInit {
     console.log("data", data);
     this.addEquip().push(this.newEquipFiled3(data));
     console.log("addPPEFiled1", this.plantDetails.value);
+    this.disableForm("Plant/Equipment")
   }
   public signaturePadOptions: Object = {
     // passed through to szimek/signature_pad constructor
@@ -129,7 +158,7 @@ export class PlantRegistrationComponent implements OnInit {
   }
 
   addPPE() {
-    return this.plantDetails.get('PPEArr') as FormArray;
+    return this.ppeDetails.get('PPEArr') as FormArray;
   }
 
   newFiled3(data): FormGroup {
@@ -147,6 +176,7 @@ export class PlantRegistrationComponent implements OnInit {
     console.log("data", data);
     this.addPPE().push(this.newFiled3(data));
     console.log("addPPEFiled1", this.plantDetails.value);
+    this.disableForm("PPE")
   }
 
   PPERegisteshow() {
@@ -163,61 +193,90 @@ export class PlantRegistrationComponent implements OnInit {
  
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
-    this.plantDetails.controls["Sign"].setValue(this.signaturePad.toDataURL())
+    this.ppeDetails.controls["Sign"].setValue(this.signaturePad.toDataURL())
     console.log(this.signaturePad.toDataURL());
   }
   patchData() {
-    let id ='61dfd0151e1fff342f211925';
-    this.employee.getEmployeeInfoById(id).subscribe((data) => {
+     if(!this.isHistory){
+    this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
       console.log('data=>', data);
       // this.signaturePad.toDataURL();
     this.employeeData= data.data
+    
       data.data.ppe.PPEArr.forEach(ele => {
         this.addFiled3(ele);
       });
       data.data.plant.plantArr.forEach(ele => {
         this.addEquipFiled3(ele);
       });
-      this.plantDetails.patchValue({
-        PPESupplied: data.data.ppe.ppeSupplied,
-        BrandOrType: data.data.ppe.brand,
-        IssueDate: data.data.ppe.issueDate,
-        ReplacementDate: data.data.ppe.replacementDate,
-        plantType: data.data.plant.plantType,
-        modelNumber: data.data.plant.modelNumber,
-        serialNumber: data.data.plant.serialNumber,
-        serviceRenewDate: data.data.plant.serviceRenewDate,
-       
-      });
-
-      this.dataUrl = data.data.ppe.signature;
-      this.dataUrl = data.data.plant.plantSignature;
-      console.log("data.data.ppe.signature;", data.data.ppe.signature);
-
-      // let check = async () => { this.signaturePad != null }
-      // check().then((res) => {
-      //   console.log("this.signaturePad", this.signaturePad, res);
-
-      //   this.signaturePad.fromDataURL(data.data.ppe.signature)
-
-      // })
-      // let check2 = async () => { this.signaturePad2 != null }
-      // check2().then((res) => {
-      //   console.log("this.signaturePad", this.signaturePad2, res);
-
-      //   this.signaturePad2.fromDataURL(data.data.plant.plantSignature)
-
-      // })
 
     });
+   }else{
+    this.logicalService.getSubmitedPPEPlantById(this.id).subscribe((res:any)=>{
+      console.log("res===========>",res);
+      
+      
+      if( res.data[0].fileType==="PPE"){
+        this.selectValue=0
+        this.ppeDataHistory= res.data[0]
+        
+       this.ppeDataHistory.managerName.fullName = `${this.ppeDataHistory.managerName.firstName} ${this.ppeDataHistory.managerName.lastName}`
+           
+        console.log("this.ppeDataHistory",this.ppeDataHistory);
+        this.empId=this.ppeDataHistory.employeeId._id
+       this.ppeDataHistory.submitPPEArr.forEach(ele => {
+        this.addFiled3(ele);
+      });
+      
+      this.ppeDetails.patchValue({
+       Sign:  this.ppeDataHistory.signature,
+        managerName:  this.ppeDataHistory.managerName,
+        date:  this.ppeDataHistory.date,
+       
+      });  this.dataUrl =  this.ppeDataHistory.signature;
+       let check = async () => { this.signaturePad != null }
+      check().then((res) => {
+        setTimeout(() => {
+          console.log("this.signaturePad", this.signaturePad, res);
+
+          this.signaturePad.fromDataURL(this.dataUrl)
+        }, 1000);
+    
+      })
+    }else if( res.data[0].fileType==="Plant/Equipment"){
+      this.selectValue=1
+     this.plantDataHistory=res.data[0]
+     this.plantDataHistory.managerName.fullName = `${this.plantDataHistory.managerName.firstName} ${this.plantDataHistory.managerName.lastName}`
+     this.empId=this.plantDataHistory.employeeId._id
+     this.plantDataHistory.submitPlantArr.forEach(ele => {
+      this.addEquipFiled3(ele);
+    });
+    this.plantDetails.patchValue({
+    plantManagerName: this.plantDataHistory.managerName,
+    plantDate: this.plantDataHistory.date,
+    plantSignature: this.plantDataHistory.signature,
+  })
+  this.dataUrl =this.plantDataHistory.signature
+  let check2 = async () => { this.signaturePad2 != null }
+      check2().then((res) => {
+        setTimeout(() => {
+          console.log("this.signaturePad", this.signaturePad2, res);
+
+          this.signaturePad2.fromDataURL(this.dataUrl)
+        }, 1000);
+       
+
+      })
+  }
+    })
+  }
   }
   peeSubmit(){
     let submitPPEArr=[]
     let notSubPPEArr=[]
-    let {
-      ppe,
+    let {ppe,
       ...rest
-    }= this.employeeData
+    }=this.employeeData
     // submitPPEArr.push(PPEArr.map((res)=>{ 
     //   if(res.ppeCheck){
     //   return {
@@ -254,25 +313,53 @@ export class PlantRegistrationComponent implements OnInit {
         notSubPPEArr.push(arr)
         console.log("PPEArr",notSubPPEArr);
        }
+
     }
     let data={
-      signature:this.plantDetails.controls['Sign'].value,
-      date:this.plantDetails.controls['date'].value,
-      managerName:this.plantDetails.controls['managerName'].value._id,
+      signature:this.ppeDetails.controls['Sign'].value,
+      date:this.ppeDetails.controls['date'].value,
+      managerName:this.ppeDetails.controls['managerName'].value._id,
       submitPPEArr:submitPPEArr,
       employeeId: this.employeeData._id
       
     }
-    console.log("ppe submit",data);
-    let data2={
+    let data2={}
+    console.log("ppe submit",notSubPPEArr.length,this.addPPE().length);
+    if( notSubPPEArr.length !== 0){
+     data2={
       ...rest,
       ppe:{
         PPEArr:notSubPPEArr,
         signature:ppe.signature
               }
     }
-    console.log("this.",this.employeeData,data2);
-    
+  }else{
+    data2={
+      ...rest,
+      ppe:{
+        PPEArr:notSubPPEArr,
+        signature:''
+              }
+    }
+  }
+    console.log("this.ppe",this.ppeDataHistory,data2);
+    this.logicalService.postSubmitedPPE(data).subscribe((res)=>{
+        this.employee.updateEmployeeInfo(this.employeeData._id,data2).subscribe((resData)=>{
+          Swal.fire({
+            title: 'Submit successfully',
+            showConfirmButton: false,
+            timer: 1200,
+          });
+        })
+    },(err)=>{
+      if(err){
+        Swal.fire({
+          title: 'Submit Failed',
+          showConfirmButton: false,
+          timer: 4000,
+        });
+      }
+    })
   }
   plantSubmit(){
     let submitPlant=[]
@@ -283,45 +370,76 @@ export class PlantRegistrationComponent implements OnInit {
     }= this.employeeData
     
     for (let index = 0; index < this.addEquip().length; index++) {
-    
-      if(this.addEquip().at(index).get("ppeCheck").value){
+      console.log("this.addEquip().at(index).get",this.addEquip().at(index).get("plantCheck").value);
+      if(this.addEquip().at(index).get("plantCheck").value){
+        
+        
         let arr={
-          ppeSupplied: this.addEquip().at(index).get("PPESupplied").value,
-          brand:this.addEquip().at(index).get("BrandOrType").value ,
-          issueDate:this.addEquip().at(index).get("IssueDate").value ,
-          replacementDate: this.addEquip().at(index).get("ReplacementDate").value ,
+          plantType: this.addEquip().at(index).get("plantType").value,
+          modelNumber:this.addEquip().at(index).get("modelNumber").value ,
+          serialNumber:this.addEquip().at(index).get("serialNumber").value ,
+          serviceRenewDate: this.addEquip().at(index).get("serviceRenewDate").value ,
         }
         submitPlant.push(arr)
         console.log("submitPlant",submitPlant);
         
       }else{
         let arr={
-          ppeSupplied: this.addEquip().at(index).get("PPESupplied").value,
-          brand:this.addEquip().at(index).get("BrandOrType").value ,
-          issueDate:this.addEquip().at(index).get("IssueDate").value ,
-          replacementDate: this.addEquip().at(index).get("ReplacementDate").value ,
+          plantType: this.addEquip().at(index).get("plantType").value,
+          modelNumber:this.addEquip().at(index).get("modelNumber").value ,
+          serialNumber:this.addEquip().at(index).get("serialNumber").value ,
+          serviceRenewDate: this.addEquip().at(index).get("serviceRenewDate").value ,
         }
         notSubPlant.push(arr)
         console.log("PPEArr",notSubPlant);
        }
+
     }
     let data={
-      signature:this.plantDetails.controls['Sign'].value,
-      date:this.plantDetails.controls['date'].value,
-      managerName:this.plantDetails.controls['managerName'].value._id,
-      submitPlant:submitPlant,
+      signature:this.plantDetails.controls['plantSignature'].value,
+      date:this.plantDetails.controls['plantDate'].value,
+      managerName:this.plantDetails.controls['plantManagerName'].value._id,
+      submitPlantArr:submitPlant,
       employeeId: this.employeeData._id
       
     }
+    let data2={}
     console.log("plant submit",data);
-    let data2={
+    if(notSubPlant.length !== 0){
+     data2={
       ...rest,
       plant:{
         plantArr:notSubPlant,
         signature:plant.plantSignature
               }
     }
+  }else{
+   data2={
+      ...rest,
+      plant:{
+        plantArr:notSubPlant,
+        signature:""
+              }
+  }
+}
     console.log("this.",this.employeeData,data2);
-    
+    this.logicalService.postSubmitedPlant(data).subscribe((res)=>{
+      this.employee.updateEmployeeInfo(this.employeeData._id,data2).subscribe((resData)=>{
+        Swal.fire({
+          title: 'Submit successfully',
+          showConfirmButton: false,
+          timer: 1200,
+        });
+
+      })
+  },(err)=>{
+    if(err){
+      Swal.fire({
+        title: 'Submit Failed',
+        showConfirmButton: false,
+        timer: 4000,
+      });
+    }
+  })
   }
 }
