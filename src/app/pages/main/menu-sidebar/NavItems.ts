@@ -9,6 +9,65 @@ export class NavItems {
             hasAccess: true
         },
         {
+            displayedName: "WHS Forms",
+            icon: "Role_Manangement",
+            childItem: [
+                {
+                    displayedName: "Dynamic Form",
+                    icon: "page",
+                    childItem: [
+                        {
+                            displayedName: "Forms",
+                            icon: "page",
+                            route: "/admin//dynamic/dynamicFormsList",
+                            hasAccess: true
+                        }
+                    ],
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Logical Forms",
+                    icon: "page",
+                    childItem: [
+                        {
+                            displayedName: "Forms",
+                            icon: "page",
+                            route: "/admin/forms",
+                            hasAccess: true
+                        }
+                    ],
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Fill Configured Forms",
+                    icon: "page",
+                    childItem: [
+                        {
+                            displayedName: "Forms",
+                            icon: "page",
+                            route: "/admin/forms/fillConfigForm/0",
+                            hasAccess: true
+                        }
+                    ],
+                    hasAccess: true
+                },
+                {
+                    displayedName: "Saved Forms",
+                    icon: "page",
+                    childItem: [
+                        {
+                            displayedName: "Forms",
+                            icon: "page",
+                            route: "/admin/savedForms",
+                            hasAccess: true
+                        }
+                    ],
+                    hasAccess: true
+                },
+            ],
+            hasAccess: true
+        },
+        {
             displayedName: "Role Manangement",
             icon: "Role_Manangement",
             childItem: [
@@ -45,58 +104,7 @@ export class NavItems {
             ],
             hasAccess: true
         },
-        {
-            displayedName: "Dynamic Form",
-            icon: "page",
-            childItem: [
-                {
-                    displayedName: "Forms",
-                    icon: "page",
-                    route: "/admin//dynamic/dynamicFormsList",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
-        {
-            displayedName: "Logical Forms",
-            icon: "page",
-            childItem: [
-                {
-                    displayedName: "Forms",
-                    icon: "page",
-                    route: "/admin/forms",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
-        {
-            displayedName: "Fill Configured Forms",
-            icon: "page",
-            childItem: [
-                {
-                    displayedName: "Forms",
-                    icon: "page",
-                    route: "/admin/forms/fillConfigForm/0",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
-        {
-            displayedName: "Saved Forms",
-            icon: "page",
-            childItem: [
-                {
-                    displayedName: "Forms",
-                    icon: "page",
-                    route: "/admin/savedForms",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
+
         {
             displayedName: "Form Configure",
             icon: "page",
@@ -123,7 +131,7 @@ export class NavItems {
             hasAccess: true
         },
         {
-            displayedName: "Logical Form Data",
+            displayedName: "Form Settings",
             icon: "page",
             childItem: [
                 {
@@ -263,69 +271,6 @@ export class NavItems {
                     ],
                     hasAccess: true
                 },
-
-                {
-                    displayedName: "Site",
-                    icon: "site",
-                    route: "/admin/siteInfo/addSite",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Customer",
-                    icon: "customer",
-                    route: "/admin/siteInfo/addCustomer",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Project Manager",
-                    icon: "customer",
-                    route: "/admin/siteInfo/projMang",
-                    hasAccess: true
-                },
-                
-                
-                
-                {
-                    displayedName: "Trade Category",
-                    icon: "page",
-                    route: "/admin/siteInfo/licenceCat",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "PPE Selection",
-                    icon: "page",
-                    route: "/admin/siteInfo/ppeSel",
-                    hasAccess: true
-                },
-                
-                {
-                    displayedName: "Hazards",
-                    icon: "page",
-                    route: "/admin/siteInfo/hazards",
-                    hasAccess: true
-                },
-                
-                
-               
-                {
-                    displayedName: "Staff",
-                    icon: "page",
-                    route: "/admin/siteInfo/staff",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Manager",
-                    icon: "page",
-                    route: "/admin/siteInfo/manager",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Whs-Manager",
-                    icon: "page",
-                    route: "/admin/siteInfo/WHS-Manager",
-                    hasAccess: true
-                },
-               
                 {
                     displayedName: "Site Inspection Category",
                     icon: "page",
@@ -337,10 +282,75 @@ export class NavItems {
                     icon: "page",
                     route: "/admin/siteInfo/dynamicFormCategories",
                     hasAccess: true
+                },
+                {
+                    displayedName: "General Form Settings",
+                    icon: "page",
+                    childItem: [
+                        {
+                            displayedName: "Site",
+                            icon: "site",
+                            route: "/admin/siteInfo/addSite",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "Customer",
+                            icon: "customer",
+                            route: "/admin/siteInfo/addCustomer",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "Project Manager",
+                            icon: "customer",
+                            route: "/admin/siteInfo/projMang",
+                            hasAccess: true
+                        },
+
+
+
+                        {
+                            displayedName: "Trade Category",
+                            icon: "page",
+                            route: "/admin/siteInfo/licenceCat",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "PPE Selection",
+                            icon: "page",
+                            route: "/admin/siteInfo/ppeSel",
+                            hasAccess: true
+                        },
+
+                        {
+                            displayedName: "Hazards",
+                            icon: "page",
+                            route: "/admin/siteInfo/hazards",
+                            hasAccess: true
+                        },
+
+
+
+                        {
+                            displayedName: "Staff",
+                            icon: "page",
+                            route: "/admin/siteInfo/staff",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "Manager",
+                            icon: "page",
+                            route: "/admin/siteInfo/manager",
+                            hasAccess: true
+                        },
+                        {
+                            displayedName: "Whs-Manager",
+                            icon: "page",
+                            route: "/admin/siteInfo/WHS-Manager",
+                            hasAccess: true
+                        },
+                    ],
+                    hasAccess: true
                 }
-               
-               
-              
             ],
             hasAccess: true
         },

@@ -305,7 +305,7 @@
                   <h4 class="jobTaskCat-heading">{{category.title}}</h4>
                 </div>
                 <ng-container *ngFor="let control of jobtask().controls; let i = index" [formGroupName]="i">
-                  <div class="mt-2 col-4" [id]="jobTaskData[i].tradeCategoryId.title.trim()" *ngIf="jobTaskData[i].tradeCategoryId._id === category._id">
+                  <div class="mt-2 col-4"  *ngIf="jobTaskData[i].tradeCategoryId._id === category._id">
                     <input type="checkbox" [id]="i+'jt'" class="form-check-input" [value]="jobTaskData[i]._id"
                       (change)="onJobtaskSelect($event, jobTaskData[i])" formControlName="{{jobTaskData[i]._id}}">
   
@@ -1376,17 +1376,24 @@
           <h2>Job Tasks</h2>
         </div>
 
-        <div class="row" formArrayName="jobTask">
-          <ng-container *ngFor="let control of jobtask().controls; let i = index" [formGroupName]="i">
-            <div class="mt-2 col-4">
-              <input type="checkbox" [id]="i+'jt'" class="form-check-input" [value]="jobTaskData[i]._id"
-                (change)="onJobtaskSelect($event, jobTaskData[i])" formControlName="{{jobTaskData[i]._id}}" />
-              <label [for]="i+'jt'" class="form-check-label label_2">{{
-                jobTaskData[i].title
-                }}</label>
+        <ng-container  *ngFor="let category of tradeCategoryArr">
+          <div class="row jobTaskCat"  *ngIf="doesCategoryExists(category._id)" #parent formArrayName="jobTask">
+            <div class="col-12">
+              <h4 class="jobTaskCat-heading">{{category.title}}</h4>
             </div>
+            <ng-container *ngFor="let control of jobtask().controls; let i = index" [formGroupName]="i">
+              <div class="mt-2 col-4" *ngIf="jobTaskData[i].tradeCategoryId._id === category._id">
+                <input type="checkbox" [id]="i+'jt'" class="form-check-input" [value]="jobTaskData[i]._id"
+                  (change)="onJobtaskSelect($event, jobTaskData[i])" formControlName="{{jobTaskData[i]._id}}">
+
+                <label [for]="i+'jt'" class="form-check-label label_2">{{
+                  jobTaskData[i].title
+                  }} {{jobTaskData[i].tradeCategoryId.title}}</label>
+
+              </div>
+            </ng-container>
+          </div>
           </ng-container>
-        </div>
 
         <hr />
         <div class="row mt-4">

@@ -82,7 +82,7 @@ export class EmployeeRegistrationComponent implements OnInit {
     this.router.navigate(["/admin/registration/addEmployee/" + id]);
   }
   returnById(id) {
-    this.router.navigate(["/admin/registration/plantRegistration"]);
+    this.router.navigate(["/admin/registration/plantRegistration/"+id]);
   }
 }
 
