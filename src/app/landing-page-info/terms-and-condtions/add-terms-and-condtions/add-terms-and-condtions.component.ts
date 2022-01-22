@@ -51,7 +51,7 @@ export class AddTermsAndCondtionsComponent implements OnInit {
     this.landingPageInfo
       .addSubModule(this.termsDetail.value)
       .subscribe((data) => {
-        Swal.fire('Module Added Successfully')
+        Swal.fire('Updated Successfully')
 
         this.safetyData = data;
         this.dialogRef.close('true');
