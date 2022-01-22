@@ -27,6 +27,7 @@ export class AddEmployeeComponent implements OnInit {
   uploadlicense1: any;
   submitted = false;
   id: any;
+  reportingData:any;
   profile = true;
   @ViewChild('signature1') signaturePad: any;
   @ViewChild('signature2') signaturePad2: any;
@@ -44,6 +45,7 @@ export class AddEmployeeComponent implements OnInit {
   licenceValueChanges: Observable<any>[];
   PPEData: any[]=[];
   PPEValueChanges: Observable<any>[];
+  url: any;
   constructor(
     private fb: FormBuilder,
     private role: RoleManagementService,
@@ -103,6 +105,24 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getall();
+    this.empDetails.get('reportingTo').valueChanges.subscribe((res) => {
+      if (res) {
+        console.log(res);
+
+        // for (let i = 0; i < this.reportingData.length; i++) {
+        //   if (res === this.reportingData[i]._id) {
+        //     console.log("id found");
+            
+        //     // this.empDetails.get('managerSupervisorEmail').setValue(this.whsData[i].email);
+
+        //     break;
+        //   }
+        // }
+
+
+      }
+    })
     this.licenceInfo.getAllLicence().pipe(
       map((res) => {
         return res.data.map((item) => {
@@ -174,6 +194,15 @@ export class AddEmployeeComponent implements OnInit {
       })
     )
   }
+  
+  getall() {
+    this.employee.getAllEmployeeInfo().subscribe((res) => {
+      console.log("getAll = > ",res)
+      this.reportingData = res.data;
+      console.log(this.reportingData);
+      
+    })
+  }
 
   getAllRoles() {
     this.role.getAllRole().subscribe((res: any) => {
@@ -222,6 +251,7 @@ export class AddEmployeeComponent implements OnInit {
         porfMobile: data.data.mobile,
 
         roleId: data.data.roleId,
+        reportingTo:data.data.reportingTo,
         porfStreetAddress: data.data.location.address,
         porfCityTown: data.data.location.city,
         porfState: data.data.location.state,
@@ -387,6 +417,7 @@ export class AddEmployeeComponent implements OnInit {
       roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
+      reportingTo:this.empDetails.get('reportingTo').value,
       department: this.empDetails.get('porfDepartment').value,
       phone: this.empDetails.get('porfPhone').value,
       firstName: this.empDetails.get('profFirst').value,
@@ -493,6 +524,7 @@ export class AddEmployeeComponent implements OnInit {
       roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
+      reportingTo:this.empDetails.get('reportingTo').value,
       department: this.empDetails.get('porfDepartment').value,
       phone: this.empDetails.get('porfPhone').value,
       firstName: this.empDetails.get('profFirst').value,

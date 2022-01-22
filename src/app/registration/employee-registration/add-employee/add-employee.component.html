@@ -121,9 +121,7 @@
               [class.is-invalid]="(registerFormControl.reportingTo.touched || submitted) && registerFormControl.reportingTo.errors?.required ">
 
               <option selected hidden>Select</option>
-              <option [value]="">Manager</option>
-              <option [value]="">Supervisor</option>
-              <option [value]="">Worker</option>
+              <option *ngFor="let x of reportingData" [value]="x._id">{{x.firstName}} {{x.lastName}}</option>
 
             </select>
             <span
