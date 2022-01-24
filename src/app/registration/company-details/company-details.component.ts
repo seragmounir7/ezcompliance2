@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
 @Component({
   selector: 'app-company-details',
@@ -14,19 +15,23 @@ export class CompanyDetailsComponent implements OnInit {
   dataPlant: boolean;
   plantDetails: any;
   id: any;
+  StatesData:any=[];
   constructor(
     private fb:FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    
+    private licenceInfo: LogicalFormInfoService,
     ) { }
 
   ngOnInit(): void {
     this.formData = this.fb.group({
       companyName: ['', Validators.required],
       phoneNumber:['',Validators.required],
-      fax:[],
+      porfListName:[],
       emailAddress:['',Validators.required],
       streetAddress:['',Validators.required],
       subUrb:['',Validators.required],
+      sTate:['',Validators.required],
       postCode:['',Validators.required],
       mailingAddress:['',Validators.required],
       companyABN: ['',Validators.required],
@@ -64,8 +69,14 @@ export class CompanyDetailsComponent implements OnInit {
   //   this.addEquipFiled2();
   // }
   this.addEquipFiled2();
+  this.getAllStates();
 }
-
+getAllStates() {
+  this.licenceInfo.getAllStates().subscribe((res: any) => {
+    console.log('setStatesDetails=>', res);
+    this.StatesData = res.data;
+  });
+}
 addEquip() {
   return this.formData.get('plantArr') as FormArray;
 }

@@ -52,7 +52,96 @@
     {
       "iconName": "company",
       "iconPath": " assets/img/role-svg/company-svgrepo-com.svg"
+    },
+    {
+      "iconName": "mainSetting",
+      "iconPath": "assets/img/svg/mainSetting.svg"
+    },
+    {
+      "iconName": "stateRelation",
+      "iconPath": "assets/img/svg/state_Relation.svg"
+    },
+    {
+      "iconName": "state",
+      "iconPath": "assets/img/svg/states.svg"
+    },
+    {
+      "iconName": "jurisdiction",
+      "iconPath": "assets/img/svg/jurisdiction.svg"
+    },
+    {
+      "iconName": "safety_legislation",
+      "iconPath": "assets/img/svg/safety_legislation.svg"
+    },
+    {
+      "iconName": "regulator",
+      "iconPath": "assets/img/svg/regulator.svg"
+    },
+    {
+      "iconName": "riskAssessment",
+      "iconPath": "assets/img/svg/risk_assessment.svg"
+    },
+    {
+      "iconName": "addInstruction",
+      "iconPath": "assets/img/svg/add_instruction.svg"
+    },
+    {
+      "iconName": "riskLevel",
+      "iconPath": "assets/img/svg/risk_level.svg"
+    },
+    {
+      "iconName": "chemical",
+      "iconPath": "assets/img/svg/chemical.svg"
+    },
+    {
+      "iconName": "controlAndAction",
+      "iconPath": "assets/img/svg/control and action.svg"
+    },
+    {
+      "iconName": "notifiableAccident",
+      "iconPath": "assets/img/svg/notifiable_accident.svg"
+    },
+    {
+      "iconName": "natureOfIncident",
+      "iconPath": "assets/img/svg/natureofincident.svg"
+    },
+    {
+      "iconName": "changesMade",
+      "iconPath": "assets/img/svg/changes_made.svg"
+    },
+    {
+      "iconName": "rootCause",
+      "iconPath": "assets/img/svg/root_cause.svg"
+    },
+    {
+      "iconName": "SICat",
+      "iconPath": "assets/img/svg/site_inspection_category.svg"
+    },
+    {
+      "iconName": "genFormSet",
+      "iconPath": "assets/img/svg/general_form_settings.svg"
+    },
+    {
+      "iconName": "tradeCategory",
+      "iconPath": "assets/img/svg/trade_category.svg"
+    },
+    {
+      "iconName": "PPESelection",
+      "iconPath": "assets/img/svg/PPE_selection.svg"
+    },
+    {
+      "iconName": "hazard",
+      "iconPath": "assets/img/svg/hazard.svg"
+    },
+    {
+      "iconName": "staff",
+      "iconPath": "assets/img/svg/staff.svg"
+    },
+    {
+      "iconName": "manager",
+      "iconPath": "assets/img/svg/manager.svg"
     }
+    
   ],
   "customIcons": [
     {

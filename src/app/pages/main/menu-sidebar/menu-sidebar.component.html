@@ -57,7 +57,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a class="nav-link" (click)="resetAll()" [routerLink]="['/admin']">
-            <svg-icon [name]="'Dashboard'"></svg-icon>
+            <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="'Dashboard'"></svg-icon>
             <!-- <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20.00pt"
@@ -1939,7 +1939,7 @@
                       </li>
                       <!-- <li *ngIf="childNav1.hasAccess" class="nav-item  ml-3" >
                                    <a routerLinkActive="active myColor" [routerLink]="[childNav1.route]" class="nav-link">
-                                     <svg-icon [name]="childNav1.icon"></svg-icon>
+                                     <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="childNav1.icon"></svg-icon>
                                      <p>{{childNav1.displayedName}}</p>
                                    </a>
                                  </li> -->

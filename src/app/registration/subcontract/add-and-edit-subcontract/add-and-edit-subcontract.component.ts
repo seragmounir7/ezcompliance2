@@ -23,6 +23,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
   licenceValueChanges: Observable<any>[];
   submitted: boolean;
   id: any;
+  StatesData: any =[];
   constructor(
     private fb: FormBuilder,
     private upload: UploadFileService,
@@ -36,6 +37,8 @@ export class AddAndEditSubcontractComponent implements OnInit {
       fax: [''],
       email: ['', Validators.required],
       suburb: ['', Validators.required],
+      
+      state: ['', Validators.required],
       postCode: ['', Validators.required],
       mailingAddress: ['', Validators.required],
       streetAddress: ['', Validators.required],
@@ -56,7 +59,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    this.getAllStates();
     this.id = this.activatedRoute.snapshot.params.id;
 
     if (this.id !== "form") {
@@ -88,7 +91,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
         console.log('this.empData', this.licenceData)
         this.addFiled();
       })
-     
+      
     }
     // this.addFiled();
     this.filteredOptions2 = this.subcontractDetails.controls.LicenceName.valueChanges.pipe(
@@ -100,7 +103,13 @@ export class AddAndEditSubcontractComponent implements OnInit {
         return this.filter2(val || '')
       })
     )
-    
+  
+  }
+  getAllStates() {
+    this.licenceInfo.getAllStates().subscribe((res: any) => {
+      console.log('setStatesDetails=>', res);
+      this.StatesData = res.data;
+    });
   }
   addLicence() {
     return this.subcontractDetails.get('licenceAndQualifications') as FormArray;
@@ -241,6 +250,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
         email: res.data.companyName,
         streetAddress: res.data.companyName,
         suburb: res.data.companyName,
+        state: res.data.companyName,
         postCode: res.data.companyName,
         mailingAddress: res.data.companyName,
         ABN: res.data.companyName,
@@ -284,6 +294,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
     email: this.subcontractDetails.get('email').value,
     streetAddress: this.subcontractDetails.get('streetAddress').value,
     suburb: this.subcontractDetails.get('suburb').value,
+    state: this.subcontractDetails.get('state').value,
     postCode: this.subcontractDetails.get('postCode').value,
     mailingAddress: this.subcontractDetails.get('mailingAddress').value,
     ABN: this.subcontractDetails.get('ABN').value,
@@ -334,6 +345,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
     email: this.subcontractDetails.get('email').value,
     streetAddress: this.subcontractDetails.get('streetAddress').value,
     suburb: this.subcontractDetails.get('suburb').value,
+    state: this.subcontractDetails.get('state').value,
     postCode: this.subcontractDetails.get('postCode').value,
     mailingAddress: this.subcontractDetails.get('mailingAddress').value,
     ABN: this.subcontractDetails.get('ABN').value,

@@ -121,9 +121,7 @@
               [class.is-invalid]="(registerFormControl.reportingTo.touched || submitted) && registerFormControl.reportingTo.errors?.required ">
 
               <option selected hidden>Select</option>
-              <option [value]="">Manager</option>
-              <option [value]="">Supervisor</option>
-              <option [value]="">Worker</option>
+              <option *ngFor="let x of reportingData" [value]="x._id">{{x.firstName}} {{x.lastName}}</option>
 
             </select>
             <span
@@ -184,25 +182,32 @@
               Street Address is required
             </span>
           </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">City/town</label>
-            <input type="text" formControlName="porfCityTown" class="form-control"
-              [class.is-invalid]="(registerFormControl.porfCityTown.touched || submitted) && registerFormControl.porfCityTown.errors?.required " />
+          <div class="mb-3 mt-3 col-4">
+            <label for="exampleFormControlInput1" class="form-label">Suburb</label>
+            <textarea autosize type="text" formControlName="porfSuburb" class="form-control"
+              [class.is-invalid]="(registerFormControl.porfSuburb.touched || submitted) && registerFormControl.porfSuburb.errors?.required " ></textarea>
             <span class="text-danger"
-              *ngIf="(registerFormControl.porfCityTown.touched || submitted) && registerFormControl.porfCityTown.errors?.required">
-              City/town is required
+              *ngIf="(registerFormControl.porfSuburb.touched || submitted) && registerFormControl.porfSuburb.errors?.required">
+              Suburb is required
             </span>
           </div>
-          <div class="mb-3 mt-3 col-2">
+          <div class="mb-3 mt-3 col-3">
             <label for="exampleFormControlInput1" class="form-label">State</label>
-            <input type="text" formControlName="porfState" class="form-control"
+            <!-- <input type="text" formControlName="porfState" class="form-control"
               [class.is-invalid]="(registerFormControl.porfState.touched || submitted) && registerFormControl.porfState.errors?.required " />
-            <span class="text-danger"
+              -->
+              <select class="form-select form-control col" aria-label="Default select example"
+              formControlName="porfState" [value]="registerFormControl.porfState.value" [class.is-invalid]="(registerFormControl.porfState.touched || submitted) && registerFormControl.porfState.errors?.required ">
+
+              <option selected hidden>Select</option>
+              <option [value]="state._id" *ngFor="let state of StatesData">{{state.title}}</option>
+            </select>
+              <span class="text-danger"
               *ngIf="(registerFormControl.porfState.touched || submitted) && registerFormControl.porfState.errors?.required">
               State is required
             </span>
           </div>
-          <div class="mb-3 mt-3 col-2">
+          <!-- <div class="mb-3 mt-3 col-2">
             <label for="exampleFormControlInput1" class="form-label">Postal Code</label>
             <input type="text" formControlName="porfPostalCode" class="form-control"
               [class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required " />
@@ -210,7 +215,7 @@
               *ngIf="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required">
               Postal Code is required
             </span>
-          </div>
+          </div> -->
         </div>
         <div class="row py-3">
           <div class="offset-1 col-3 mt-2">
