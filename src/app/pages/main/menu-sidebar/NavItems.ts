@@ -132,39 +132,39 @@ export class NavItems {
         },
         {
             displayedName: "Form Settings",
-            icon: "page",
+            icon: "mainSetting",
             childItem: [
                 {
                     displayedName: "State Relation",
-                    icon: "page",
+                    icon: "stateRelation",
                     childItem: [
                         {
                             displayedName: "States",
-                            icon: "page",
+                            icon: "state",
                             route: "/admin/stateRel/states",
                             hasAccess: true
                         },
                         {
                             displayedName: "Jurisdiction",
-                            icon: "page",
+                            icon: "jurisdiction",
                             route: "/admin/stateRel/juridiction",
                             hasAccess: true
                         },
                         {
                             displayedName: "Safety Legislation",
-                            icon: "page",
+                            icon: "safety_legislation",
                             route: "/admin/stateRel/safetyLegislation",
                             hasAccess: true
                         },
                         {
                             displayedName: "Regulator",
-                            icon: "page",
+                            icon: "regulator",
                             route: "/admin/stateRel/regulator",
                             hasAccess: true
                         },
                         {
                             displayedName: "Set State Relation",
-                            icon: "page",
+                            icon: "state",
                             route: "/admin/stateRel/setState",
                             hasAccess: true
                         }
@@ -174,23 +174,23 @@ export class NavItems {
 
                 {
                     displayedName: "Risk Assessment ",
-                    icon: "page",
+                    icon: "riskAssessment",
                     childItem: [
                         {
                             displayedName: "Add Instruction",
-                            icon: "page",
+                            icon: "addInstruction",
                             route: "/admin/siteInfo/instructions/riskAssess",
                             hasAccess: true
                         },
                         {
                             displayedName: "Risk-Level",
-                            icon: "page",
+                            icon: "riskLevel",
                             route: "/admin/siteInfo/riskLevel",
                             hasAccess: true
                         },
                         {
                             displayedName: "Residual Risk Level",
-                            icon: "page",
+                            icon: "riskLevel",
                             route: "/admin/siteInfo/residual",
                             hasAccess: true
                         },
@@ -208,7 +208,7 @@ export class NavItems {
                         },
                         {
                             displayedName: "Chemical",
-                            icon: "page",
+                            icon: "chemical",
                             route: "/admin/siteInfo/chemical",
                             hasAccess: true
                         },
@@ -226,7 +226,7 @@ export class NavItems {
                         },
                         {
                             displayedName: "Control And Action",
-                            icon: "page",
+                            icon: "controlAndAction",
                             route: "/admin/siteInfo/contrlActReq",
                             hasAccess: true
                         },
@@ -236,35 +236,35 @@ export class NavItems {
 
                 {
                     displayedName: "Notifiable Accident",
-                    icon: "page",
+                    icon: "notifiableAccident",
                     childItem: [
                         {
                             displayedName: "Accident Instruction",
-                            icon: "page",
+                            icon: "addInstruction",
                             route: "/admin/siteInfo/instructions/accident",
                             hasAccess: true
                         },
                         {
                             displayedName: "Nature Of Incident",
-                            icon: "page",
+                            icon: "natureOfIncident",
                             route: "/admin/siteInfo/natureOfIncident",
                             hasAccess: true
                         },
                         {
                             displayedName: "Type Of Incident",
-                            icon: "page",
+                            icon: "natureOfIncident",
                             route: "/admin/siteInfo/typeOfIncident",
                             hasAccess: true
                         },
                         {
                             displayedName: "Changes Made",
-                            icon: "page",
+                            icon: "changesMade",
                             route: "/admin/siteInfo/changesMade",
                             hasAccess: true
                         },
                         {
                             displayedName: "Root Cause Of Incident",
-                            icon: "page",
+                            icon: "rootCause",
                             route: "/admin/siteInfo/rootCauseOfIncident",
                             hasAccess: true
                         },
@@ -273,19 +273,19 @@ export class NavItems {
                 },
                 {
                     displayedName: "Site Inspection Category",
-                    icon: "page",
+                    icon: "SICat",
                     route: "/admin/siteInfo/siteinspectioncategory",
                     hasAccess: true
                 },
                 {
                     displayedName: "Dynamic Form Categories",
-                    icon: "page",
+                    icon: "SICat",
                     route: "/admin/siteInfo/dynamicFormCategories",
                     hasAccess: true
                 },
                 {
                     displayedName: "General Form Settings",
-                    icon: "page",
+                    icon: "genFormSet",
                     childItem: [
                         {
                             displayedName: "Site",
@@ -310,20 +310,20 @@ export class NavItems {
 
                         {
                             displayedName: "Trade Category",
-                            icon: "page",
+                            icon: "tradeCategory",
                             route: "/admin/siteInfo/licenceCat",
                             hasAccess: true
                         },
                         {
                             displayedName: "PPE Selection",
-                            icon: "page",
+                            icon: "PPESelection",
                             route: "/admin/siteInfo/ppeSel",
                             hasAccess: true
                         },
 
                         {
                             displayedName: "Hazards",
-                            icon: "page",
+                            icon: "hazard",
                             route: "/admin/siteInfo/hazards",
                             hasAccess: true
                         },
@@ -332,19 +332,19 @@ export class NavItems {
 
                         {
                             displayedName: "Staff",
-                            icon: "page",
+                            icon: "staff",
                             route: "/admin/siteInfo/staff",
                             hasAccess: true
                         },
                         {
                             displayedName: "Manager",
-                            icon: "page",
+                            icon: "manager",
                             route: "/admin/siteInfo/manager",
                             hasAccess: true
                         },
                         {
                             displayedName: "Whs-Manager",
-                            icon: "page",
+                            icon: "manager",
                             route: "/admin/siteInfo/WHS-Manager",
                             hasAccess: true
                         },
