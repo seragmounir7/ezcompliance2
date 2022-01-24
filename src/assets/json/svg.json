@@ -59,7 +59,11 @@
     },
     {
       "iconName": "stateRelation",
-      "iconPath": "assets/img/svg/state_Relation.svg"
+      "iconPath": "assets/img/svg/settings_under_formSetting.svg"
+    },
+    {
+      "iconName": "setRelation",
+      "iconPath": "assets/img/svg/state_relation.svg"
     },
     {
       "iconName": "state",
@@ -79,7 +83,7 @@
     },
     {
       "iconName": "riskAssessment",
-      "iconPath": "assets/img/svg/risk_assessment.svg"
+      "iconPath": "assets/img/svg/settings_under_formSetting.svg"
     },
     {
       "iconName": "addInstruction",
@@ -99,7 +103,7 @@
     },
     {
       "iconName": "notifiableAccident",
-      "iconPath": "assets/img/svg/notifiable_accident.svg"
+      "iconPath": "assets/img/svg/settings_under_formSetting.svg"
     },
     {
       "iconName": "natureOfIncident",
@@ -114,12 +118,20 @@
       "iconPath": "assets/img/svg/root_cause.svg"
     },
     {
-      "iconName": "SICat",
-      "iconPath": "assets/img/svg/site_inspection_category.svg"
+      "iconName": "hazardTreatment",
+      "iconPath": "assets/img/svg/hazard_treatment.svg"
+    },
+    {
+      "iconName": "category",
+      "iconPath": "assets/img/svg/category.svg"
     },
     {
       "iconName": "genFormSet",
       "iconPath": "assets/img/svg/general_form_settings.svg"
+    },
+    {
+      "iconName": "jobNumber",
+      "iconPath": "assets/img/svg/jobNumber.svg"
     },
     {
       "iconName": "tradeCategory",
