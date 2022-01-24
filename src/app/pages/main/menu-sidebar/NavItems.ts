@@ -356,95 +356,95 @@ export class NavItems {
         },
         {
             displayedName: "CMS",
-            icon: "page",
+            icon: "cms",
             childItem: [
                 {
                     displayedName: "Header",
-                    icon: "page",
+                    icon: "header",
                     route: "/admin/landingPageInfo/header",
                     hasAccess: true
                 },
                 {
                     displayedName: "Application Service Info",
-                    icon: "page",
+                    icon: "appInfo",
                     route: "/admin/landingPageInfo/applicationSerInfo",
                     hasAccess: true
                 },
                 {
                     displayedName: "Safety Module",
-                    icon: "page",
+                    icon: "safety",
                     route: "/admin/landingPageInfo/safetyModule",
                     hasAccess: true
                 },
                 {
                     displayedName: "Happy Client",
-                    icon: "page",
+                    icon: "HappyClient",
                     route: "/admin/landingPageInfo/happyClient",
                     hasAccess: true
                 },
                 {
                     displayedName: "Flexible",
-                    icon: "page",
+                    icon: "flexible",
                     route: "/admin/landingPageInfo/flexible",
                     hasAccess: true
                 },
                 {
                     displayedName: "CustomerTestimonial",
-                    icon: "page",
+                    icon: "subcontractor",
                     route: "/admin/landingPageInfo/customer",
                     hasAccess: true
                 },
                 {
                     displayedName: "About-Us",
-                    icon: "page",
+                    icon: "info",
                     route: "/admin/landingPageInfo/aboutUs",
                     hasAccess: true
                 },
                 {
                     displayedName: "Contact-Us",
-                    icon: "page",
+                    icon: "contactUs",
                     route: "/admin/landingPageInfo/contactUs",
                     hasAccess: true
                 },
                 {
                     displayedName: "Our-Work(Section-1)",
-                    icon: "page",
+                    icon: "work",
                     route: "/admin/landingPageInfo/ourWork",
                     hasAccess: true
                 },
                 {
                     displayedName: "Our-Work(Section-2)",
-                    icon: "page",
+                    icon: "work",
                     route: "/admin/landingPageInfo/screenShot",
                     hasAccess: true
                 },
                 {
                     displayedName: "Our-Work-(Section-3)",
-                    icon: "page",
+                    icon: "work",
                     route: "/admin/landingPageInfo/different",
                     hasAccess: true
                 },
                 {
                     displayedName: "FAQ",
-                    icon: "page",
+                    icon: "qna",
                     route: "/admin/landingPageInfo/faq",
                     hasAccess: true
                 },
                 {
                     displayedName: "Q&A Section",
-                    icon: "page",
+                    icon: "qna",
                     route: "/admin/landingPageInfo/QA",
                     hasAccess: true
                 },
                 {
                     displayedName: "Terms and Conditions",
-                    icon: "page",
+                    icon: "terms",
                     route: "/admin/landingPageInfo/term",
                     hasAccess: true
                 },
                 {
                     displayedName: "Social Media",
-                    icon: "page",
+                    icon: "social",
                     route: "/admin/landingPageInfo/socialMedia",
                     hasAccess: true
                 },

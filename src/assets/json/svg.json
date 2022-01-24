@@ -140,8 +140,51 @@
     {
       "iconName": "manager",
       "iconPath": "assets/img/svg/manager.svg"
-    }
-    
+    },
+    {
+      "iconName": "header",
+      "iconPath": "assets/img/cms-svg/header1.svg"
+    },
+    {
+      "iconName": "appInfo",
+      "iconPath": "assets/img/cms-svg/application-security-svgrepo-com.svg"
+    },
+    {
+      "iconName": "safety",
+      "iconPath": "assets/img/cms-svg/safety-svgrepo-com.svg"
+    },
+    {
+      "iconName": "contactUs",
+      "iconPath": "assets/img/cms-svg/call.svg"
+    },
+    {
+      "iconName": "HappyClient",
+      "iconPath": "assets/img/cms-svg/happy-svgrepo-com.svg"
+    },
+    {
+      "iconName": "qna",
+      "iconPath": "assets/img/cms-svg/customer-service-question.svg"
+    },
+    {
+      "iconName": "social",
+      "iconPath": "assets/img/cms-svg/social-media-campaign-svgrepo-com.svg"
+    }  ,
+    {
+      "iconName": "work",
+      "iconPath": "assets/img/cms-svg/working-on-a-pc-svgrepo-com.svg"
+    }  ,  
+    {
+      "iconName": "flexible",
+      "iconPath": "assets/img/cms-svg/flexible.svg"
+    }, 
+    {
+      "iconName": "info",
+      "iconPath": "assets/img/cms-svg/customer-service-information-svgrepo-com.svg"
+    } , 
+    {
+      "iconName": "cms",
+      "iconPath": "assets/img/cms-svg/cms.svg"
+    }   
   ],
   "customIcons": [
     {
