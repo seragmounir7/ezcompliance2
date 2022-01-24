@@ -7,6 +7,51 @@
     {
       "iconName": "logo",
       "iconPath": "assets/img/whs-icon.svg"
+    },
+    {
+      "iconName": "whsForms",
+      "iconPath": " assets/img/whsForm-svg/forms.svg"
+    },
+    {
+      "iconName": "dynamic",
+      "iconPath": " assets/img/whsForm-svg/document-svgrepo-com.svg"
+    },
+    {
+      "iconName": "logical",
+      "iconPath": " assets/img/whsForm-svg/logical.svg"
+    },
+    {
+      "iconName": "fillConfig",
+      "iconPath": " assets/img/whsForm-svg/pencil-writing-on-paper-svgrepo-com.svg"
+    },
+    {
+      "iconName": "savedForms",
+      "iconPath": " assets/img/whsForm-svg/saved.svg"
+    },
+    
+    {
+      "iconName": "roleMgmt",
+      "iconPath": " assets/img/role-svg/managementRole.svg"
+    },
+    {
+      "iconName": "roles",
+      "iconPath": " assets/img/role-svg/user-role-svgrepo-com.svg"
+    },
+    {
+      "iconName": "employee",
+      "iconPath": " assets/img/role-svg/id-management-svgrepo-com.svg"
+    }, 
+    {
+      "iconName": "subcontractor",
+      "iconPath": " assets/img/role-svg/contact-details-svgrepo-com.svg"
+    }, 
+    {
+      "iconName": "terms",
+      "iconPath": " assets/img/role-svg/terms.svg"
+    },
+    {
+      "iconName": "company",
+      "iconPath": " assets/img/role-svg/company-svgrepo-com.svg"
     }
   ],
   "customIcons": [

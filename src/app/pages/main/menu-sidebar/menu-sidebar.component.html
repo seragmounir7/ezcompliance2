@@ -1900,11 +1900,11 @@
         <ng-container *ngFor="let item of navItems;let i = index">
           <li *ngIf="item.hasAccess" class="nav-item" [ngClass]="{ 'menu-open': item.menuOpen }">
             <a *ngIf="item.route" class="nav-link" (click)="menuOpen(item)" [routerLink]="[item.route]">
-              <svg-icon [name]="'Dashboard'"></svg-icon>
+              <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="'Dashboard'"></svg-icon>
               <p>{{item.displayedName}}</p>
             </a>
             <a *ngIf="!item.route" class="nav-link" (click)="menuOpen(item)">
-              <svg-icon [name]="item.icon"></svg-icon>
+              <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="item.icon"></svg-icon>
               <p>{{item.displayedName}}</p>
               <i class="right fas fa-angle-left"></i>
             </a>
@@ -1912,7 +1912,7 @@
               <ng-container *ngFor="let childNav0 of item.childItem">
                 <li *ngIf="!childNav0.childItem && childNav0.hasAccess" class="nav-item  ml-3">
                   <a routerLinkActive="active myColor" [routerLink]="[childNav0.route]" class="nav-link">
-                    <svg-icon [name]="childNav0.icon"></svg-icon>
+                    <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="childNav0.icon"></svg-icon>
                     <p>{{childNav0.displayedName}}</p>
                   </a>
                 </li>
@@ -1920,12 +1920,12 @@
                   [ngClass]="{ 'menu-open': childNav0.menuOpen }">
                   <a *ngIf="!childNav0.childItem" (click)="menuOpen(childNav0)" routerLinkActive="active myColor"
                     [routerLink]="[childNav0.route]" class="nav-link">
-                    <svg-icon [name]="childNav0.icon"></svg-icon>
+                    <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="childNav0.icon"></svg-icon>
                     <p>{{childNav0.displayedName}}</p>
                   </a>
                   <a *ngIf="childNav0.childItem" (click)="menuOpen(childNav0)" routerLinkActive="active myColor"
                     class="nav-link">
-                    <svg-icon [name]="childNav0.icon"></svg-icon>
+                    <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="childNav0.icon"></svg-icon>
                     <p>{{childNav0.displayedName}}</p>
                     <i class="right fas fa-angle-left"></i>
                   </a>
@@ -1933,7 +1933,7 @@
                     <ng-container *ngFor="let childNav1 of childNav0.childItem">
                       <li *ngIf="childNav1.hasAccess" class="nav-item  ml-3" [class.menu-open]="true">
                         <a routerLinkActive="active myColor" [routerLink]="[childNav1.route]" class="nav-link">
-                          <svg-icon [name]="childNav1.icon"></svg-icon>
+                          <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="childNav1.icon"></svg-icon>
                           <p>{{childNav1.displayedName}}</p>
                         </a>
                       </li>

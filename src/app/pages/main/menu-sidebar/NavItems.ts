@@ -10,11 +10,11 @@ export class NavItems {
         },
         {
             displayedName: "WHS Forms",
-            icon: "Role_Manangement",
+            icon: "whsForms",
             childItem: [
                 {
                     displayedName: "Dynamic Form",
-                    icon: "page",
+                    icon: "dynamic",
                     childItem: [
                         {
                             displayedName: "Forms",
@@ -27,7 +27,7 @@ export class NavItems {
                 },
                 {
                     displayedName: "Logical Forms",
-                    icon: "page",
+                    icon: "logical",
                     childItem: [
                         {
                             displayedName: "Forms",
@@ -40,7 +40,7 @@ export class NavItems {
                 },
                 {
                     displayedName: "Fill Configured Forms",
-                    icon: "page",
+                    icon: "fillConfig",
                     childItem: [
                         {
                             displayedName: "Forms",
@@ -53,7 +53,7 @@ export class NavItems {
                 },
                 {
                     displayedName: "Saved Forms",
-                    icon: "page",
+                    icon: "savedForms",
                     childItem: [
                         {
                             displayedName: "Forms",
@@ -69,35 +69,35 @@ export class NavItems {
         },
         {
             displayedName: "Role Manangement",
-            icon: "Role_Manangement",
+            icon: "roleMgmt",
             childItem: [
                 {
                     displayedName: "Roles",
-                    icon: "Roles",
+                    icon: "roles",
                     route: "/admin/roleMangement",
                     hasAccess: true
                 },
                 {
                     displayedName: "Employee Details",
-                    icon: "Employee_Details",
+                    icon: "employee",
                     route: "/admin/registration/employeeRegistration",
                     hasAccess: true
                 },
                 {
                     displayedName: "Subcontractor Details",
-                    icon: "Employee_Details",
+                    icon: "subcontractor",
                     route: "/admin/registration/subcontract",
                     hasAccess: true
                 },
                 {
                     displayedName: "Client Terms And Conditon ",
-                    icon: "Employee_Details",
+                    icon: "terms",
                     route: "/admin/siteInfo/termsAndcondition",
                     hasAccess: true
                 },
                 {
                     displayedName: "Company Details ",
-                    icon: "Employee_Details",
+                    icon: "company",
                     route: "/admin/registration/compdetails",
                     hasAccess: true
                 }
@@ -132,7 +132,7 @@ export class NavItems {
         },
         {
             displayedName: "Form Settings",
-            icon: "page",
+            icon: "tune",
             childItem: [
                 {
                     displayedName: "State Relation",
