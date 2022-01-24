@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { merge } from 'rxjs';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
+import {  ConvertService } from 'src/app/utils/services/convert.service';
 
 @Component({
   selector: 'app-saved-forms',
@@ -18,7 +19,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 export class SavedFormsComponent implements OnInit,AfterViewInit {
   @ViewChild(MatPaginator) paginator1: MatPaginator;
 
-  displayedColumns: string[] = ['formId', "formType", "createdAt", "updatedAt", 'Action'];
+  displayedColumns: string[] = ['formName', "formType", "createdAt", "updatedAt", 'Action'];
   selectArr = [
     {
         "title": "Form Id",
@@ -46,8 +47,10 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
   limit: number = 5;
   searchString: string="";
   changeState: any;
-  searchControl:FormGroup 
-  constructor(public forms: SavedformsService,
+  searchControl:FormGroup
+  constructor(
+    public forms: SavedformsService,
+    private convertService: ConvertService,
     private spinner: NgxSpinnerService,
     private shared: RoleManagementSharedServiceService,
      public router: Router,
@@ -62,7 +65,7 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
       this.changeState = {
         field: this.sort.active || "",
         value: this.sort.direction || "",
-        page: this.paginator1.pageIndex ,
+        page: this.paginator1.pageIndex + 1 ,
         limit: this.paginator1.pageSize,
       }
       this.getSavedforms()
@@ -80,14 +83,18 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
 
   getSavedforms(
     field = this.changeState?.field,
-    value = this.changeState?.value, 
-    page = this.changeState?.page, 
+    value = this.changeState?.value,
+    page = this.changeState?.page,
     limit = this.changeState?.limit,
-    serachField = this.f.searchSelect.value, 
-    searchSting = this.f.searchInput.value
+    serachField = this.f.searchSelect.value,
+    searchString = this.f.searchInput.value
   ) {
-    this.forms.getAllSavedForms(page, limit, field, value,serachField,searchSting).subscribe((res: any) => {
+    if(serachField === "createdAt" || serachField === "updatedAt"){
+      searchString = this.convertService.inputDateToIso(searchString) //Converting input string date to iso String date
+    }
+    this.forms.getAllSavedForms(page, limit, field, value,serachField,searchString).subscribe((res: any) => {
       this.showDatas = res.data;
+      console.log("get res", this.showDatas);
       this.totalCount = res.totalCount
       this.showDatas.forEach((element, i) => {
         return this.showDatas[i].index = i
@@ -96,7 +103,6 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
       this.tempArray = new MatTableDataSource<any>(this.showDatas);
       // this.tempArray.paginator = this.paginator;
       this.tempArray.sort = this.sort;
-      console.log("get res", this.showDatas);
     })
   }
   edit(id, type) {
@@ -165,7 +171,7 @@ export class SavedFormsComponent implements OnInit,AfterViewInit {
   paginator(event: PageEvent) {
     this.page = event.pageIndex
     this.limit = event.pageSize
-    this.getSavedforms()
+    // this.getSavedforms()
   }
 
   applyFilter(event: Event) {

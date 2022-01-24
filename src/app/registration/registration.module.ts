@@ -17,26 +17,45 @@ import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PlantRegistionTableComponent } from './plant-registration/plant-registion-table/plant-registion-table.component';
 @NgModule({
-  declarations: [
-    CompanyRegistrationComponent,
-     EmployeeRegistrationComponent, 
-     AddEmployeeComponent, 
-     PlantRegistrationComponent, 
-     SubcontractComponent, 
-     AddAndEditSubcontractComponent,
-     CompanyDetailsComponent,
-     PlantRegistionTableComponent
-    ],
-  imports: [
-    CommonModule,
-    RegistrationRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SignaturePadModule,
-    MatTableModule,
-    SharedModule,
-    AngularSvgIconPreloaderModule,
-    AngularSvgIconModule
-  ]
+	declarations: [
+		CompanyRegistrationComponent,
+		EmployeeRegistrationComponent,
+		AddEmployeeComponent,
+		PlantRegistrationComponent,
+		SubcontractComponent,
+		AddAndEditSubcontractComponent,
+		CompanyDetailsComponent,
+		PlantRegistionTableComponent
+	],
+	imports: [
+		CommonModule,
+		RegistrationRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		SignaturePadModule,
+		MatTableModule,
+		SharedModule,
+		AngularSvgIconPreloaderModule,
+		AngularSvgIconModule
+	],
+	exports: [
+		CompanyRegistrationComponent,
+		EmployeeRegistrationComponent,
+		AddEmployeeComponent,
+		PlantRegistrationComponent,
+		SubcontractComponent,
+		AddAndEditSubcontractComponent,
+		CompanyDetailsComponent,
+		PlantRegistionTableComponent,
+		CommonModule,
+		RegistrationRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		SignaturePadModule,
+		MatTableModule,
+		SharedModule,
+		AngularSvgIconPreloaderModule,
+		AngularSvgIconModule
+	]
 })
-export class RegistrationModule { }
+export class RegistrationModule {}
