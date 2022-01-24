@@ -13,55 +13,27 @@ export class NavItems {
             icon: "whsForms",
             childItem: [
                 {
-                    displayedName: "Dynamic Form",
+                    displayedName: "Generate a New Form",
                     icon: "dynamic",
-                    childItem: [
-                        {
-                            displayedName: "Forms",
-                            icon: "page",
-                            route: "/admin//dynamic/dynamicFormsList",
-                            hasAccess: true
-                        }
-                    ],
+                    route: "/admin//dynamic/dynamicFormsList",
                     hasAccess: true
                 },
                 {
                     displayedName: "Logical Forms",
                     icon: "logical",
-                    childItem: [
-                        {
-                            displayedName: "Forms",
-                            icon: "page",
-                            route: "/admin/forms",
-                            hasAccess: true
-                        }
-                    ],
+                    route: "/admin/forms",
                     hasAccess: true
                 },
                 {
-                    displayedName: "Fill Configured Forms",
+                    displayedName: "Form List",
                     icon: "fillConfig",
-                    childItem: [
-                        {
-                            displayedName: "Forms",
-                            icon: "page",
-                            route: "/admin/forms/fillConfigForm/0",
-                            hasAccess: true
-                        }
-                    ],
+                    route: "/admin/forms/fillConfigForm/0",
                     hasAccess: true
                 },
                 {
-                    displayedName: "Saved Forms",
+                    displayedName: "Completed Forms",
                     icon: "savedForms",
-                    childItem: [
-                        {
-                            displayedName: "Forms",
-                            icon: "page",
-                            route: "/admin/savedForms",
-                            hasAccess: true
-                        }
-                    ],
+                    route: "/admin/savedForms",
                     hasAccess: true
                 },
             ],
@@ -99,32 +71,6 @@ export class NavItems {
                     displayedName: "Company Details ",
                     icon: "company",
                     route: "/admin/registration/compdetails",
-                    hasAccess: true
-                }
-            ],
-            hasAccess: true
-        },
-
-        {
-            displayedName: "Form Configure",
-            icon: "page",
-            childItem: [
-                {
-                    displayedName: "Set Relation",
-                    icon: "page",
-                    route: "/admin/confiLogi/setLogic",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Set Job Number",
-                    icon: "page",
-                    route: "/admin/confiLogi/setJobNumber",
-                    hasAccess: true
-                },
-                {
-                    displayedName: "Set Hazard Treatment",
-                    icon: "page",
-                    route: "/admin/confiLogi/setHazard",
                     hasAccess: true
                 }
             ],
@@ -230,6 +176,12 @@ export class NavItems {
                             route: "/admin/siteInfo/contrlActReq",
                             hasAccess: true
                         },
+                        {
+                            displayedName: "Set Relation",
+                            icon: "setRelation",
+                            route: "/admin/confiLogi/setLogic",
+                            hasAccess: true
+                        }
                     ],
                     hasAccess: true
                 },
@@ -272,14 +224,20 @@ export class NavItems {
                     hasAccess: true
                 },
                 {
+                    displayedName: "Set Hazard Treatment",
+                    icon: "hazardTreatment",
+                    route: "/admin/confiLogi/setHazard",
+                    hasAccess: true
+                },
+                {
                     displayedName: "Site Inspection Category",
-                    icon: "SICat",
+                    icon: "category",
                     route: "/admin/siteInfo/siteinspectioncategory",
                     hasAccess: true
                 },
                 {
                     displayedName: "Dynamic Form Categories",
-                    icon: "SICat",
+                    icon: "category",
                     route: "/admin/siteInfo/dynamicFormCategories",
                     hasAccess: true
                 },
@@ -287,6 +245,12 @@ export class NavItems {
                     displayedName: "General Form Settings",
                     icon: "genFormSet",
                     childItem: [
+                        {
+                            displayedName: "Set Job Number",
+                            icon: "jobNumber",
+                            route: "/admin/confiLogi/setJobNumber",
+                            hasAccess: true
+                        },
                         {
                             displayedName: "Site",
                             icon: "site",
