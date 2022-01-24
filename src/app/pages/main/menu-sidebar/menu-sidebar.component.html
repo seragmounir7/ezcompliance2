@@ -57,7 +57,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a class="nav-link" (click)="resetAll()" [routerLink]="['/admin']">
-            <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="'Dashboard'"></svg-icon>
+            <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="'dash'"></svg-icon>
             <!-- <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20.00pt"
@@ -1900,7 +1900,7 @@
         <ng-container *ngFor="let item of navItems;let i = index">
           <li *ngIf="item.hasAccess" class="nav-item" [ngClass]="{ 'menu-open': item.menuOpen }">
             <a *ngIf="item.route" class="nav-link" (click)="menuOpen(item)" [routerLink]="[item.route]">
-              <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="'Dashboard'"></svg-icon>
+              <svg-icon [svgStyle]="{ 'width.px':24,'height.px':24 }" [name]="'dash'"></svg-icon>
               <p>{{item.displayedName}}</p>
             </a>
             <a *ngIf="!item.route" class="nav-link" (click)="menuOpen(item)">

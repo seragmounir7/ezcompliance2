@@ -4,7 +4,7 @@ export class NavItems {
     navItems: NavItem[] = [
         {
             displayedName: "Dashboard",
-            icon: "Dashboard",
+            icon: "dash",
             route: "/admin",
             hasAccess: true
         },

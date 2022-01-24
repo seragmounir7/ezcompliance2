@@ -184,7 +184,11 @@
     {
       "iconName": "cms",
       "iconPath": "assets/img/cms-svg/cms.svg"
-    }   
+    } , 
+    {
+      "iconName": "dash",
+      "iconPath": "assets/img/cms-svg/dashboard-svgrepo-com.svg"
+    }  
   ],
   "customIcons": [
     {
