@@ -19,6 +19,7 @@ import { AuthGuard } from './utils/guards/auth.guard';
 import { NonAuthGuard } from './utils/guards/non-auth.guard';
 import { IncidentReportComponent } from './views/forms/incident-report/incident-report.component';
 import { HazardReportComponent } from './views/forms/hazard-report/hazard-report.component';
+import { FirstTimeLoginGuard } from './RouteGuard/first-time-login.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -35,6 +36,12 @@ const routes: Routes = [
 
     ]
   },
+  // {
+  //   path: 'admin',
+  //   canActivate: [FirstTimeLoginGuard],
+  //   loadChildren: () => import('./admin-setup/admin-setup.module').then(m => m.AdminSetupModule)
+
+  // },
   {
     path: 'admin',
     component: MainComponent,
@@ -42,6 +49,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       // { path: '', component: LoginComponent },
+
       { path: '', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'blank', component: BlankComponent },

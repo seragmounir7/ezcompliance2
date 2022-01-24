@@ -375,7 +375,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
         this.previewform.patchValue(res.data.configure[0])
         this.formCategories=res.data.formCategoryId
         this.isHidden = res.data.check;
-        this.mainFormId = res.data.formId
+        this.mainFormId = res.data.formId._id
         console.log("is hidden", this.isHidden);
         this.spinner.hide();
       });
