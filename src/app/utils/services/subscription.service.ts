@@ -89,4 +89,50 @@ export class SubscriptionService {
       })
     );
   }
+
+  //subscription start-----///////
+  getsubscription(id: any) {
+    return this.https.get(this.apiUrl + 'subscription/get/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  getAllsubscription() {
+   
+    return this.https.get(this.apiUrl + 'subscription/getAll').pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+
+  editsubscription(id, data) {
+    return this.https.put(this.apiUrl + 'subscription/update/' + id, data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+
+  addsubscription(data) {
+    return this.https.post(this.apiUrl + 'subscription/add', data).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+  deletesubscription(id) {
+    return this.https.delete(this.apiUrl + 'subscription/delete/' + id).pipe(
+      map((res: any) => {
+        console.log('res.data=>', res.data);
+        return res;
+      })
+    );
+  }
+//subscription End-----///////
 }

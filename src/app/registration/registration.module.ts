@@ -16,6 +16,8 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PlantRegistionTableComponent } from './plant-registration/plant-registion-table/plant-registion-table.component';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-company-info/add-and-edit-company-info.component';
 @NgModule({
   declarations: [
     CompanyRegistrationComponent,
@@ -25,7 +27,8 @@ import { PlantRegistionTableComponent } from './plant-registration/plant-registi
      SubcontractComponent, 
      AddAndEditSubcontractComponent,
      CompanyDetailsComponent,
-     PlantRegistionTableComponent
+     PlantRegistionTableComponent,
+     AddAndEditCompanyInfoComponent
     ],
   imports: [
     CommonModule,
@@ -36,7 +39,8 @@ import { PlantRegistionTableComponent } from './plant-registration/plant-registi
     MatTableModule,
     SharedModule,
     AngularSvgIconPreloaderModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    NgxMatTimepickerModule,
   ]
 })
 export class RegistrationModule { }
