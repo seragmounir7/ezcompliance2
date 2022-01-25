@@ -27,6 +27,7 @@ export class AddEmployeeComponent implements OnInit {
   uploadlicense1: any;
   submitted = false;
   id: any;
+  reportingData:any;
   profile = true;
   @ViewChild('signature1') signaturePad: any;
   @ViewChild('signature2') signaturePad2: any;
@@ -43,7 +44,9 @@ export class AddEmployeeComponent implements OnInit {
   empData: any[]=[];
   licenceValueChanges: Observable<any>[];
   PPEData: any[]=[];
+  StatesData: any = [];
   PPEValueChanges: Observable<any>[];
+  url: any;
   constructor(
     private fb: FormBuilder,
     private role: RoleManagementService,
@@ -69,6 +72,7 @@ export class AddEmployeeComponent implements OnInit {
       reportingTo: [''],
       roleId: ['', Validators.required],
       porfStreetAddress: ['', Validators.required],
+      porfSuburb:['',Validators.required],
       porfCityTown: ['', Validators.required],
       porfState: ['', Validators.required],
       porfPostalCode: ['', Validators.required],
@@ -103,6 +107,24 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getall();
+    this.empDetails.get('reportingTo').valueChanges.subscribe((res) => {
+      if (res) {
+        console.log(res);
+
+        // for (let i = 0; i < this.reportingData.length; i++) {
+        //   if (res === this.reportingData[i]._id) {
+        //     console.log("id found");
+            
+        //     // this.empDetails.get('managerSupervisorEmail').setValue(this.whsData[i].email);
+
+        //     break;
+        //   }
+        // }
+
+
+      }
+    })
     this.licenceInfo.getAllLicence().pipe(
       map((res) => {
         return res.data.map((item) => {
@@ -143,6 +165,10 @@ export class AddEmployeeComponent implements OnInit {
       console.log('this.empData2', this.PPEData)
      
     })
+    
+    // let dataMap = map((res: any) => res.data)
+    // this.licenceInfo.getAllStates().pipe(dataMap),
+    
     this.getAllRoles();
     this.id = this.activatedRoute.snapshot.params.id;
 
@@ -173,6 +199,16 @@ export class AddEmployeeComponent implements OnInit {
         return this.filter1(val || '')
       })
     )
+    this.getAllStates();
+  }
+  
+  getall() {
+    this.employee.getAllEmployeeInfo().subscribe((res) => {
+      console.log("getAll = > ",res)
+      this.reportingData = res.data;
+      console.log(this.reportingData);
+      
+    })
   }
 
   getAllRoles() {
@@ -222,7 +258,9 @@ export class AddEmployeeComponent implements OnInit {
         porfMobile: data.data.mobile,
 
         roleId: data.data.roleId,
+        reportingTo:data.data.reportingTo,
         porfStreetAddress: data.data.location.address,
+        porfSuburb:  data.data.location.suburb,
         porfCityTown: data.data.location.city,
         porfState: data.data.location.state,
         porfPostalCode: data.data.location.pincode,
@@ -387,6 +425,7 @@ export class AddEmployeeComponent implements OnInit {
       roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
+      reportingTo:this.empDetails.get('reportingTo').value,
       department: this.empDetails.get('porfDepartment').value,
       phone: this.empDetails.get('porfPhone').value,
       firstName: this.empDetails.get('profFirst').value,
@@ -421,6 +460,7 @@ export class AddEmployeeComponent implements OnInit {
         address: this.empDetails.get('porfStreetAddress').value,
         landmark: 'Nagpur',
         state: this.empDetails.get('porfState').value,
+        suburb:this.empDetails.get('porfSuburb').value,
         city: this.empDetails.get('porfCityTown').value,
         pincode: this.empDetails.get('porfPostalCode').value,
         country: 'India',
@@ -493,6 +533,7 @@ export class AddEmployeeComponent implements OnInit {
       roleId: this.empDetails.get('roleId').value,
       // designation: this.empDetails.get('porfEmployee').value,
       // deviceToken: '',
+      reportingTo:this.empDetails.get('reportingTo').value,
       department: this.empDetails.get('porfDepartment').value,
       phone: this.empDetails.get('porfPhone').value,
       firstName: this.empDetails.get('profFirst').value,
@@ -527,6 +568,7 @@ export class AddEmployeeComponent implements OnInit {
         address: this.empDetails.get('porfStreetAddress').value,
         landmark: 'Nagpur',
         state: this.empDetails.get('porfState').value,
+        suburb:this.empDetails.get('porfSuburb').value,
         city: this.empDetails.get('porfCityTown').value,
         pincode: this.empDetails.get('porfPostalCode').value,
         country: 'India',
@@ -751,7 +793,14 @@ export class AddEmployeeComponent implements OnInit {
 
     }
   }
-
+  // 
+  getAllStates() {
+    this.licenceInfo.getAllStates().subscribe((res: any) => {
+      console.log('setStatesDetails=>', res);
+      this.StatesData = res.data;
+    });
+  }
+// 
   get registerFormControl() {
     return this.empDetails.controls;
   }

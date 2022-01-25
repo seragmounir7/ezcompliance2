@@ -19,28 +19,48 @@ import { PlantRegistionTableComponent } from './plant-registration/plant-registi
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-company-info/add-and-edit-company-info.component';
 @NgModule({
-  declarations: [
-    CompanyRegistrationComponent,
-     EmployeeRegistrationComponent, 
-     AddEmployeeComponent, 
-     PlantRegistrationComponent, 
-     SubcontractComponent, 
-     AddAndEditSubcontractComponent,
-     CompanyDetailsComponent,
-     PlantRegistionTableComponent,
-     AddAndEditCompanyInfoComponent
-    ],
-  imports: [
-    CommonModule,
-    RegistrationRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SignaturePadModule,
-    MatTableModule,
-    SharedModule,
-    AngularSvgIconPreloaderModule,
-    AngularSvgIconModule,
-    NgxMatTimepickerModule,
-  ]
+	declarations: [
+		CompanyRegistrationComponent,
+		EmployeeRegistrationComponent,
+		AddEmployeeComponent,
+		PlantRegistrationComponent,
+		SubcontractComponent,
+		AddAndEditSubcontractComponent,
+		CompanyDetailsComponent,
+		AddAndEditCompanyInfoComponent,
+		PlantRegistionTableComponent
+	],
+	imports: [
+		CommonModule,
+		RegistrationRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		SignaturePadModule,
+		MatTableModule,
+		SharedModule,
+		AngularSvgIconPreloaderModule,
+		AngularSvgIconModule,
+		NgxMatTimepickerModule
+	],
+	exports: [
+		CompanyRegistrationComponent,
+		EmployeeRegistrationComponent,
+		AddEmployeeComponent,
+		PlantRegistrationComponent,
+		SubcontractComponent,
+		AddAndEditSubcontractComponent,
+		CompanyDetailsComponent,
+		PlantRegistionTableComponent,
+		CommonModule,
+		RegistrationRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		SignaturePadModule,
+		MatTableModule,
+		SharedModule,
+		AngularSvgIconPreloaderModule,
+		AngularSvgIconModule,
+		NgxMatTimepickerModule
+	]
 })
-export class RegistrationModule { }
+export class RegistrationModule {}

@@ -43,6 +43,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localeAu from '@angular/common/locales/en-AU';
+import { MatStepperModule } from '@angular/material/stepper';
 
 registerLocaleData(localeAu,'en-au');
 
@@ -71,6 +72,7 @@ registerLocaleData(localeEn, 'en-EN');
   imports: [
     BrowserModule,
     SharedModule,
+    MatStepperModule,
     AppRoutingModule,
     AngularSvgIconModule.forRoot(),
     AngularSvgIconPreloaderModule.forRoot({
@@ -99,7 +101,7 @@ registerLocaleData(localeEn, 'en-EN');
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    
+
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

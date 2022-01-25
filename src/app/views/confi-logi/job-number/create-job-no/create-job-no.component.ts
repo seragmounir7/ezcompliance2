@@ -93,7 +93,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
   }
   onSubmit() {
     console.log(this.addJobNumberForm.value)
-    const jobNumber = this.f.jobNumber.value ? { jobNumber: this.f.jobNumber.value } : ''
+    const jobNumber = this.f?.jobNumber?.value ? { jobNumber: this.f.jobNumber.value } : ''
     let data: JobNumber
     data = {
       arrObj: [{

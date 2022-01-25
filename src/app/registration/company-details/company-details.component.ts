@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import Swal from 'sweetalert2';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
 @Component({
   selector: 'app-company-details',
