@@ -11,70 +11,78 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-subcontract',
-  templateUrl: './subcontract.component.html',
-  styleUrls: ['./subcontract.component.scss']
+	selector: 'app-subcontract',
+	templateUrl: './subcontract.component.html',
+	styleUrls: ['./subcontract.component.scss']
 })
 export class SubcontractComponent implements OnInit {
-  ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'companyName', 'email', 'streetAddress', 'phone', 'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  constructor(
-    private subContract: LogicalFormInfoService,
-    private fb: FormBuilder,
-    private setTitle: SetTitleService,
-    private dialog: MatDialog,
-    private spinner: NgxSpinnerService,
-    public router: Router
-  ) { }
+	ELEMENT_DATA = [];
+	displayedColumns: string[] = [
+		'index',
+		'companyName',
+		'email',
+		'streetAddress',
+		'phone',
+		'action'
+	];
+	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	ngAfterViewInit() {
+		this.dataSource.paginator = this.paginator;
+	}
+	constructor(
+		private subContract: LogicalFormInfoService,
+		private fb: FormBuilder,
+		private setTitle: SetTitleService,
+		private dialog: MatDialog,
+		private spinner: NgxSpinnerService,
+		public router: Router
+	) {}
 
-  ngOnInit(): void {
-    this.getAllSubcontractor();
-    this.setTitle.setTitle('WHS-Subcontractor Details');
+	ngOnInit(): void {
+		this.getAllSubcontractor();
+		this.setTitle.setTitle('WHS-Subcontractor Details');
+	}
+	getAllSubcontractor() {
+		this.subContract.getAllSubcontract().subscribe((res: any) => {
+			console.log(res);
+			let couponData = res.data;
+			couponData.forEach((element, index) => {
+				element.index = index + 1; //adding index
+			});
+			this.ELEMENT_DATA = couponData;
+			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+			this.dataSource.paginator = this.paginator;
+			//this.dataSource.sort = this.sort;
+		});
+	}
 
-  }
-  getAllSubcontractor() {
-    this.subContract.getAllSubcontract().subscribe((res:any) => {
-      console.log(res)
-      let couponData = res.data;
-      couponData.forEach((element, index) => {
-        element.index = index + 1; //adding index
-      });
-      this.ELEMENT_DATA = couponData;
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      //this.dataSource.sort = this.sort;
-    });
-  }
+	delete(item) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete "${item.companyName}"?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				console.log(result);
+				// this.model.attributes.splice(i,1);
+				void this.spinner.show();
+				this.subContract
+					.deleteSubcontract(item._id)
+					.subscribe((res) => {
+						this.getAllSubcontractor();
+						void this.spinner.hide();
+					});
+			}
+		});
+	}
 
-  delete(item) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.companyName}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-        console.log(result)
-        // this.model.attributes.splice(i,1);
-        this.spinner.show()
-        this.subContract.deleteSubcontract(item._id).subscribe((res => {
-          this.getAllSubcontractor()
-          this.spinner.hide()
-        }))
-      }
-    });
-  }
-
-  edit(id) {
-    this.router.navigate(["/admin/registration/addSubcontract/" + id]);
-  }
+	edit(id) {
+		this.router.navigate(['/admin/registration/addSubcontract/' + id]);
+	}
 }

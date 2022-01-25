@@ -1,14 +1,17 @@
 <div class="wrapper">
-  <app-menu-sidebar (mainSidebarHeight)="mainSidebarHeight($event)" [logoUrl]="logoUrl"></app-menu-sidebar>
+	<app-menu-sidebar
+		[isMenuSideBarOpen]="sidebarMenuOpened"
+		(mainSidebarHeight)="mainSidebarHeight($event)"
+		[logoUrl]="logoUrl"
+	></app-menu-sidebar>
 
-  <app-header (toggleMenuSidebar)="toggleMenuSidebar()"></app-header>
+	<app-header (toggleMenuSidebar)="toggleMenuSidebar()"></app-header>
 
+	<div #contentWrapper class="content-wrapper">
+		<router-outlet></router-outlet>
+	</div>
 
-  <div #contentWrapper class="content-wrapper">
-    <router-outlet></router-outlet>
-  </div>
-
-  <app-footer></app-footer>
-  <aside class="control-sidebar control-sidebar-dark"></aside>
-  <div id="sidebar-overlay" (click)="toggleMenuSidebar()"></div>
+	<app-footer></app-footer>
+	<aside class="control-sidebar control-sidebar-dark"></aside>
+	<div id="sidebar-overlay" (click)="toggleMenuSidebar()"></div>
 </div>

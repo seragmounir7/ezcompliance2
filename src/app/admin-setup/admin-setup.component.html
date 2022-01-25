@@ -1,43 +1,58 @@
 <button mat-raised-button (click)="isEditable = !isEditable">
-  {{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
+	{{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
 </button>
 
 <mat-horizontal-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
-      </mat-form-field>
-      <div style="display: flex; justify-content: center;">
-        <app-company-registration></app-company-registration>
-      </div>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
+	<mat-step>
+		<ng-template matStepLabel>Eneter Company Details</ng-template>
+		<div>
+			<app-add-and-edit-company-info></app-add-and-edit-company-info>
+		</div>
+		<div>
+			<button mat-button matStepperNext>Next</button>
+		</div>
+	</mat-step>
+	<mat-step>
+		<ng-template matStepLabel>Add Roles</ng-template>
+		<div>
+			<app-role-management></app-role-management>
+		</div>
+		<div>
+			<button mat-button matStepperPrevious>Back</button>
+			<button mat-button matStepperNext>Next</button>
+		</div>
+	</mat-step>
+	<mat-step>
+		<ng-template matStepLabel>Employee Details</ng-template>
+		<div>
+			<app-employee-registration></app-employee-registration>
+		</div>
+		<div>
+			<button mat-button matStepperPrevious>Back</button>
+			<button mat-button matStepperNext>Next</button>
+		</div>
+	</mat-step>
+	<mat-step>
+		<ng-template matStepLabel>Add SubContractor</ng-template>
+		<div>
+			<app-subcontract></app-subcontract>
+		</div>
+		<div>
+			<button mat-button matStepperPrevious>Back</button>
+			<button mat-button matStepperNext>Next</button>
+		</div>
+	</mat-step>
+
+	<mat-step>
+		<ng-template matStepLabel>Done</ng-template>
+		<div>
+			<!-- <app-employee-registration></app-employee-registration> -->
+		</div>
+		<div>
+			<!-- <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button> -->
+			<button mat-button matStepperPrevious>Back</button>
+			<button mat-button (click)="stepper.reset()">Reset</button>
+		</div>
+	</mat-step>
 </mat-horizontal-stepper>

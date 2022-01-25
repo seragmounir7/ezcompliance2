@@ -12,80 +12,85 @@ import Swal from 'sweetalert2';
 import { AddAndEditSocialMediaComponent } from './add-and-edit-social-media/add-and-edit-social-media.component';
 
 @Component({
-  selector: 'app-social-media',
-  templateUrl: './social-media.component.html',
-  styleUrls: ['./social-media.component.scss']
+	selector: 'app-social-media',
+	templateUrl: './social-media.component.html',
+	styleUrls: ['./social-media.component.scss']
 })
 export class SocialMediaComponent implements OnInit {
-  ELEMENT_DATA = [];
-  socialMediaDetails!: FormGroup;
-  displayedColumns: string[] = ['facebook', 'twitter', 'youtube', 'instagram', 'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  hide: boolean;
-  constructor(
-    private fb: FormBuilder,
-    private landingPageInfo: LandingPageInfoServiceService,
-    public dialog: MatDialog,
-    private spinner: NgxSpinnerService,
-    public router: Router,
-    private setTitle: SetTitleService
-  ) { }
+	ELEMENT_DATA = [];
+	socialMediaDetails!: FormGroup;
+	displayedColumns: string[] = [
+		'facebook',
+		'twitter',
+		'youtube',
+		'instagram',
+		'action'
+	];
+	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	hide: boolean;
+	constructor(
+		private fb: FormBuilder,
+		private landingPageInfo: LandingPageInfoServiceService,
+		public dialog: MatDialog,
+		private spinner: NgxSpinnerService,
+		public router: Router,
+		private setTitle: SetTitleService
+	) {}
 
-  ngOnInit(): void {
-    this.getSocialMedia();
-    this.setTitle.setTitle('WHS-Social Media');
-  }
-  getSocialMedia() {
-    ;
-    this.landingPageInfo.getAllSocialMedia().subscribe((res: any) => {
-      console.log('SocialMediaDetails=>', res);
-      let SocialMediaData = res.data;
+	ngOnInit(): void {
+		this.getSocialMedia();
+		this.setTitle.setTitle('WHS-Social Media');
+	}
+	getSocialMedia() {
+		this.landingPageInfo.getAllSocialMedia().subscribe((res: any) => {
+			console.log('SocialMediaDetails=>', res);
+			let SocialMediaData = res.data;
 
-      this.ELEMENT_DATA = SocialMediaData;
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-  }
-  editForm(element) {
-    const dialogRef = this.dialog.open(AddAndEditSocialMediaComponent, {
-      width: "550px",
-      data: element,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "true")) {
-        this.getSocialMedia();
-      }
-      console.log("The dialog was closed");
-    });
-  }
+			this.ELEMENT_DATA = SocialMediaData;
+			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+		});
+	}
+	editForm(element) {
+		const dialogRef = this.dialog.open(AddAndEditSocialMediaComponent, {
+			width: '550px',
+			data: element
+		});
+		dialogRef.afterClosed().subscribe((result) => {
+			if (result == 'true') {
+				this.getSocialMedia();
+			}
+			console.log('The dialog was closed');
+		});
+	}
 
-
-  delete(item) {
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.title}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-        this.spinner.show()
-        this.landingPageInfo.deleteSocialMedia(item._id).subscribe((res) => {
-          Swal.fire('Deleted Successfully')
-          this.getSocialMedia();
-          this.ngOnInit();
-          this.spinner.hide()
-        })
-      }
-    });
-  }
-  close() {
-    this.hide = false;
-  }
+	delete(item) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete "${item.title}"?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				void this.spinner.show();
+				this.landingPageInfo
+					.deleteSocialMedia(item._id)
+					.subscribe((res) => {
+						Swal.fire('Deleted Successfully');
+						this.getSocialMedia();
+						this.ngOnInit();
+						void this.spinner.hide();
+					});
+			}
+		});
+	}
+	close() {
+		this.hide = false;
+	}
 }

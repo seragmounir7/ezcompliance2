@@ -1,71 +1,120 @@
 <div class="col ml-2 pt-1">
-  <h1>
-    Employee Details
-  </h1>
+	<h1>Employee Details</h1>
 </div>
 <div>
+	<button
+		type="button"
+		class="btn btn-outline-primary mr-2 float-right"
+		(click)="openAddEmployee()"
+	>
+		<i class="fas fa-plus"></i> Add Employee
+	</button>
 
-  <button type="button" class="btn btn-outline-primary  mr-2 float-right"
-    [routerLink]="['/admin/registration/addEmployee/'+'form']"><i class="fas fa-plus"></i> Add Employee
-  </button>
+	<button
+		type="button"
+		class="btn btn-outline-primary mr-2 float-right"
+		[routerLink]="['/admin/registration/addEmployee/'+'form']"
+	>
+		<i class="fas fa-plus"></i> Add Employee
+	</button>
 </div>
 <div>
-  <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="index">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-      <td mat-cell *matCellDef="let element,let i = index">{{element.index}}</td>
-    </ng-container>
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-      <td mat-cell *matCellDef="let element"> <span class="flex">{{element.title}}</span> </td>
-    </ng-container>
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.firstName}}</span> </td>
-    </ng-container>
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.lastName}}</span> </td>
-    </ng-container>
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.email}}</span> </td>
-    </ng-container>
+	<table mat-table [dataSource]="dataSource" matSort>
+		<ng-container matColumnDef="index">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+			<td mat-cell *matCellDef="let element,let i = index">
+				{{element.index}}
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="title">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+			<td mat-cell *matCellDef="let element">
+				<span class="flex">{{element.title}}</span>
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="firstName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				First Name
+			</th>
+			<td mat-cell *matCellDef="let element">
+				<span class="flex-start">{{element.firstName}}</span>
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="lastName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+			<td mat-cell *matCellDef="let element">
+				<span class="flex-start">{{element.lastName}}</span>
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="email">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+			<td mat-cell *matCellDef="let element">
+				<span class="flex-start">{{element.email}}</span>
+			</td>
+		</ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell *matCellDef="let element">
-        <!-- <i class="fas fa-pencil-alt "(click)="edit(element)"
+		<ng-container matColumnDef="action">
+			<th mat-header-cell *matHeaderCellDef>Action</th>
+			<td mat-cell *matCellDef="let element">
+				<!-- <i class="fas fa-pencil-alt "(click)="edit(element)"
          title="edit" ></i> <i class="fas fa-trash" (click)="delete(element)" title="delete"></i> -->
-         <span >
-        <button mat-icon-button class="" aria-label="Example icon button with a delete icon"
-          (click)="edit(element._id)">
-          <mat-icon matTooltip="Edit">edit</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
-          <mat-icon matTooltip="Delete">delete</mat-icon>
-        </button>
-        <button mat-icon-button class="" aria-label="Example icon button with a delete icon"
-          (click)="returnById(element._id)">
-          <svg-icon matTooltip="Return PPE OR Plant/Equipment" name="Return"></svg-icon>
-        </button>
-        <button mat-icon-button  aria-label="Example icon button with a delete icon"
-          (click)="returnById(element._id)">
-          <mat-icon style="font-weight: 900; font-size: 27px;" matTooltip="PPE/PLant History"  [routerLink]="['/admin/registration/plantRegistrationTable/'+element._id]" routerLinkActive="router-link-active">history</mat-icon>
-        </button>
-        </span>
-        <!-- <span class="material-icons mt-2" matTooltip="History"
+				<span>
+					<button
+						mat-icon-button
+						class=""
+						aria-label="Example icon button with a delete icon"
+						(click)="edit(element._id)"
+					>
+						<mat-icon matTooltip="Edit">edit</mat-icon>
+					</button>
+					<button
+						mat-icon-button
+						aria-label="Example icon button with a delete icon"
+						(click)="delete(element)"
+					>
+						<mat-icon matTooltip="Delete">delete</mat-icon>
+					</button>
+					<button
+						mat-icon-button
+						class=""
+						aria-label="Example icon button with a delete icon"
+						(click)="returnById(element._id)"
+					>
+						<svg-icon
+							matTooltip="Return PPE OR Plant/Equipment"
+							name="Return"
+						></svg-icon>
+					</button>
+					<button
+						mat-icon-button
+						aria-label="Example icon button with a delete icon"
+						(click)="returnById(element._id)"
+					>
+						<mat-icon
+							style="font-weight: 900; font-size: 27px"
+							matTooltip="PPE/PLant History"
+							[routerLink]="['/admin/registration/plantRegistrationTable/'+element._id]"
+							routerLinkActive="router-link-active"
+							>history</mat-icon
+						>
+					</button>
+				</span>
+				<!-- <span class="material-icons mt-2" matTooltip="History"
             [routerLink]="['/admin/registration/plantRegistrationTable/'+element._id]" routerLinkActive="router-link-active">
             history
           </span> -->
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">Data Not Found </td>
-    </tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
-  </mat-paginator>
+			</td>
+		</ng-container>
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		<tr class="mat-row" *matNoDataRow>
+			<td class="mat-cell" colspan="4">Data Not Found</td>
+		</tr>
+	</table>
+	<mat-paginator
+		[pageSizeOptions]="[20]"
+		showFirstLastButtons
+		aria-label="Select page of periodic elements"
+	>
+	</mat-paginator>
 </div>

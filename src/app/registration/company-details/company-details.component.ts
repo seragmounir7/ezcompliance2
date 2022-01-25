@@ -12,73 +12,78 @@ import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
 @Component({
-  selector: 'app-company-details',
-  templateUrl: './company-details.component.html',
-  styleUrls: ['./company-details.component.scss']
+	selector: 'app-company-details',
+	templateUrl: './company-details.component.html',
+	styleUrls: ['./company-details.component.scss']
 })
 export class CompanyDetailsComponent implements OnInit {
-  ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'companyName', 'phone', 'email', 'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  constructor(
-    private subscript: SubscriptionService,
-    private fb: FormBuilder,
-    private setTitle: SetTitleService,
-    private dialog: MatDialog,
-    private spinner: NgxSpinnerService,
-    public router: Router
-  ) { }
+	ELEMENT_DATA = [];
+	displayedColumns: string[] = [
+		'index',
+		'companyName',
+		'phone',
+		'email',
+		'action'
+	];
+	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	ngAfterViewInit() {
+		this.dataSource.paginator = this.paginator;
+	}
+	constructor(
+		private subscript: SubscriptionService,
+		private fb: FormBuilder,
+		private setTitle: SetTitleService,
+		private dialog: MatDialog,
+		private spinner: NgxSpinnerService,
+		public router: Router
+	) {}
 
-  ngOnInit(): void {
-    this.getAllSubscription();
-    this.setTitle.setTitle('WHS-Company Details');
+	ngOnInit(): void {
+		this.getAllSubscription();
+		this.setTitle.setTitle('WHS-Company Details');
+	}
+	getAllSubscription() {
+		this.subscript.getAllsubscription().subscribe((res) => {
+			console.log('getAll', res);
+			let companyData = res.data;
+			companyData.forEach((element, index) => {
+				element.index = index + 1; //adding index
+			});
+			this.ELEMENT_DATA = companyData;
+			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+			this.dataSource.paginator = this.paginator;
+			//this.dataSource.sort = this.sort;
+		});
+	}
 
-  }
-  getAllSubscription() {
-    this.subscript.getAllsubscription().subscribe((res) => {
-      console.log("getAll",res)
-      let companyData = res.data;
-      companyData.forEach((element, index) => {
-        element.index = index + 1; //adding index
-      });
-      this.ELEMENT_DATA = companyData;
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      //this.dataSource.sort = this.sort;
-    });
-  }
+	delete(item) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete "${item.companyName}"?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				console.log(result);
+				// this.model.attributes.splice(i,1);
+				void this.spinner.show();
+				this.subscript.deletesubscription(item._id).subscribe((res) => {
+					this.getAllSubscription();
+					void this.spinner.hide();
+				});
+			}
+		});
+	}
 
-  delete(item) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.companyName}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-        console.log(result)
-        // this.model.attributes.splice(i,1);
-        this.spinner.show()
-        this.subscript.deletesubscription(item._id).subscribe((res => {
-          this.getAllSubscription()
-          this.spinner.hide()
-        }))
-      }
-    });
-  }
-
-  edit(id) {
-    this.router.navigate(["/admin/registration/addCompanyInfo/" + id]);
-  }
-  // returnById(id) {
-  //   this.router.navigate(["/admin/registration/plantRegistration"]);
-  // }
+	edit(id) {
+		this.router.navigate(['/admin/registration/addCompanyInfo/' + id]);
+	}
+	// returnById(id) {
+	//   this.router.navigate(["/admin/registration/plantRegistration"]);
+	// }
 }

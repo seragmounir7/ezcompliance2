@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -15,74 +14,88 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-employee-registration',
-  templateUrl: './employee-registration.component.html',
-  styleUrls: ['./employee-registration.component.scss'],
+	selector: 'app-employee-registration',
+	templateUrl: './employee-registration.component.html',
+	styleUrls: ['./employee-registration.component.scss']
 })
 export class EmployeeRegistrationComponent implements OnInit {
-  ELEMENT_DATA = [];
-  displayedColumns: string[] = ['index', 'title', 'firstName', 'lastName', 'email', 'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  constructor(
-    private employee: EmployeeRegistrationService,
-    private fb: FormBuilder,
-    private setTitle: SetTitleService,
-    private dialog: MatDialog,
-    private spinner: NgxSpinnerService,
-    public router: Router
-  ) { }
+	ELEMENT_DATA = [];
+	displayedColumns: string[] = [
+		'index',
+		'title',
+		'firstName',
+		'lastName',
+		'email',
+		'action'
+	];
+	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	ngAfterViewInit() {
+		this.dataSource.paginator = this.paginator;
+	}
+	constructor(
+		private employee: EmployeeRegistrationService,
+		private fb: FormBuilder,
+		private setTitle: SetTitleService,
+		private dialog: MatDialog,
+		private spinner: NgxSpinnerService,
+		public router: Router
+	) {}
 
-  ngOnInit(): void {
-    this.getAllEmployee();
-    this.setTitle.setTitle('WHS-Employee Details');
+	ngOnInit(): void {
+		this.getAllEmployee();
+		this.setTitle.setTitle('WHS-Employee Details');
+	}
+	getAllEmployee() {
+		this.employee.getAllEmployeeInfo().subscribe((res) => {
+			console.log(res);
+			let couponData = res.data;
+			couponData.forEach((element, index) => {
+				element.index = index + 1; //adding index
+			});
+			this.ELEMENT_DATA = couponData;
+			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+			this.dataSource.paginator = this.paginator;
+			//this.dataSource.sort = this.sort;
+		});
+	}
 
-  }
-  getAllEmployee() {
-    this.employee.getAllEmployeeInfo().subscribe((res) => {
-      console.log(res)
-      let couponData = res.data;
-      couponData.forEach((element, index) => {
-        element.index = index + 1; //adding index
-      });
-      this.ELEMENT_DATA = couponData;
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      //this.dataSource.sort = this.sort;
-    });
-  }
+	delete(item) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete "${item.firstName}"?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				console.log(result);
+				// this.model.attributes.splice(i,1);
+				void this.spinner.show();
+				this.employee.deleteEmployeeInfo(item._id).subscribe((res) => {
+					this.getAllEmployee();
+					void this.spinner.hide();
+				});
+			}
+		});
+	}
 
-  delete(item) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.firstName}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-        console.log(result)
-        // this.model.attributes.splice(i,1);
-        this.spinner.show()
-        this.employee.deleteEmployeeInfo(item._id).subscribe((res => {
-          this.getAllEmployee()
-          this.spinner.hide()
-        }))
-      }
-    });
-  }
-
-  edit(id) {
-    this.router.navigate(["/admin/registration/addEmployee/" + id]);
-  }
-  returnById(id) {
-    this.router.navigate(["/admin/registration/plantRegistration/"+id]);
-  }
+	edit(id) {
+		this.router.navigate(['/admin/registration/addEmployee/' + id]);
+	}
+	returnById(id) {
+		this.router.navigate(['/admin/registration/plantRegistration/' + id]);
+	}
+	openAddEmployee() {
+		this.dialog.open(AddEmployeeComponent, {
+			data: {
+				isDialog: true
+			},
+			height: '90%',
+			width: '90%'
+		});
+	}
 }
-

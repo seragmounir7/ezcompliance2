@@ -14,214 +14,214 @@ import Swal from 'sweetalert2';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
 @Component({
-  selector: 'app-application-service-info',
-  templateUrl: './application-service-info.component.html',
-  styleUrls: ['./application-service-info.component.scss'],
+	selector: 'app-application-service-info',
+	templateUrl: './application-service-info.component.html',
+	styleUrls: ['./application-service-info.component.scss']
 })
 export class ApplicationServiceInfoComponent implements OnInit {
-  serviceDetail: FormGroup;
-  selectedImage: any;
-  myId: any;
-  isEdit = false;
-  data: any = [];
-  enum: any;
-  serviceData: any;
-  Is_id: any;
-  Edit = false;
-  Add = false;
-  page = 1;
-  pageSize = 10;
-  ServiceData: any = [];
-  Service: any = [];
-  mode: any;
-  collectionSize = 10;
-  hide = false;
-  closeResult: string;
-  ELEMENT_DATA = [];
-  displayedColumns: string[] = ['heading', 'description', 'actions'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  ELEMENTS_DATA = [];
-  displayedColumnss: string[] = ['index', 'images', 'title', 'descrip', 'action'];
-  dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  constructor(
-    private fb: FormBuilder,
-    private landingPageInfo: LandingPageInfoServiceService,
-    public upload: UploadFileServiceService,
+	serviceDetail: FormGroup;
+	selectedImage: any;
+	myId: any;
+	isEdit = false;
+	data: any = [];
+	enum: any;
+	serviceData: any;
+	Is_id: any;
+	Edit = false;
+	Add = false;
+	page = 1;
+	pageSize = 10;
+	ServiceData: any = [];
+	Service: any = [];
+	mode: any;
+	collectionSize = 10;
+	hide = false;
+	closeResult: string;
+	ELEMENT_DATA = [];
+	displayedColumns: string[] = ['heading', 'description', 'actions'];
+	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	ELEMENTS_DATA = [];
+	displayedColumnss: string[] = [
+		'index',
+		'images',
+		'title',
+		'descrip',
+		'action'
+	];
+	dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	constructor(
+		private fb: FormBuilder,
+		private landingPageInfo: LandingPageInfoServiceService,
+		public upload: UploadFileServiceService,
 
-    public dialog: MatDialog,
-    private spinner: NgxSpinnerService,
-    public router: Router,
-    private setTitle: SetTitleService
-  ) {
-    this.serviceDetail = fb.group({
-      arrObj: this.fb.array([]),
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      mode: 'Service',
-    });
-  }
+		public dialog: MatDialog,
+		private spinner: NgxSpinnerService,
+		public router: Router,
+		private setTitle: SetTitleService
+	) {
+		this.serviceDetail = fb.group({
+			arrObj: this.fb.array([]),
+			title: ['', Validators.required],
+			description: ['', Validators.required],
+			mode: 'Service'
+		});
+	}
 
-  ngOnInit(): void {
-    this.getServiceData();
-    this.setTitle.setTitle('WHS-Application Service Info');
-  }
+	ngOnInit(): void {
+		this.getServiceData();
+		this.setTitle.setTitle('WHS-Application Service Info');
+	}
 
-  service: any;
-  getServiceData() {
-    this.mode = 'Service';
-    this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-      this.dataSource.data = res.data
-      this.dataSource.paginator = this.paginator
-      let ServiceData = res.data[0].subModules;
-      ServiceData.forEach((element, index) => {
-        element.index = index + 1; //adding index
-      });
-      this.ELEMENTS_DATA = ServiceData;
-      this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
-      this.dataSources.paginator = this.paginator;
-      this.dataSources.sort = this.sort;
-    });
+	service: any;
+	getServiceData() {
+		this.mode = 'Service';
+		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
+			this.dataSource.data = res.data;
+			this.dataSource.paginator = this.paginator;
+			let ServiceData = res.data[0].subModules;
+			ServiceData.forEach((element, index) => {
+				element.index = index + 1; //adding index
+			});
+			this.ELEMENTS_DATA = ServiceData;
+			this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
+			this.dataSources.paginator = this.paginator;
+			this.dataSources.sort = this.sort;
+		});
+	}
 
+	editForm(element, name: boolean, i?: any) {
+		void this.spinner.show();
 
-  }
+		this.myId = element._id;
+		this.isEdit = true;
+		this.mode = 'Service';
+		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+			this.ServiceData = data.data[0];
 
-  editForm(element, name: boolean, i?: any) {
-    this.spinner.show();
+			let dialogRef = this.dialog.open(
+				AddApplicationServiceInfoComponent,
+				{
+					data: {
+						action: 'edit',
 
-    this.myId = element._id;
-    this.isEdit = true;
-    this.mode = 'Service';
-    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+						EditData: this.ServiceData,
+						index: i,
+						moduleName: name
+					},
 
-      this.ServiceData = data.data[0];
+					width: '1000px',
+					height: '500px'
+				}
+			);
+			dialogRef.afterClosed().subscribe((result) => {
+				if ((result = 'true')) {
+					this.getServiceData();
+				}
+			});
 
-      let dialogRef = this.dialog.open(AddApplicationServiceInfoComponent, {
-        data: {
-          action: 'edit',
+			void this.spinner.hide();
+		});
+	}
 
-          EditData: this.ServiceData,
-          index: i,
-          moduleName: name,
-        },
+	addForm(id) {
+		void this.spinner.show();
+		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
+			this.ServiceData = data.data[0];
 
-        width: '1000px',
-        height: '500px',
-      });
-      dialogRef.afterClosed().subscribe((result) => {
+			let dialogRef = this.dialog.open(AddServiceInfoComponent, {
+				data: {
+					action: 'new',
+					ID: id,
+					EditData: this.ServiceData._id
+				},
+				width: '800px',
+				height: '600px'
+			});
+			dialogRef.afterClosed().subscribe((result) => {
+				if ((result = 'true')) {
+					this.getServiceData();
+				}
+			});
 
+			void this.spinner.hide();
+		});
+	}
+	close() {
+		this.hide = false;
+	}
+	delete(item) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete "${item.title}"?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				void this.spinner.show();
+				this.landingPageInfo
+					.deletesubModule(item._id)
+					.subscribe((res) => {
+						Swal.fire('Deleted Successfully');
 
-        if ((result = 'true')) {
-          this.getServiceData();
-        }
+						this.getServiceData();
+						this.ngOnInit();
+						void this.spinner.hide();
+					});
+			}
+		});
+	}
 
-      });
+	// deleteopen(content, id) {
+	//   console.log("deleteopen close id=>",id);
+	//   this.Is_id = id;
+	//   this.modalService
+	//     .open(content, { ariaLabelledBy: 'modal-basic-title' })
+	//     .result.then(
+	//       (result) => {
+	//         this.closeResult = `Closed with: ${result}`;
+	//          console.log("deleting")
+	//         this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
+	//           Swal.fire('Deleted Successfully')
+	//           console.log('deleted res', res);
+	//           this.getServiceData();
+	//         });
+	//       },
+	//       (reason) => {
 
-      this.spinner.hide();
-    });
-  }
+	//         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+	//         console.log('dismissed');
+	//       }
+	//     );
 
+	// }
 
-  addForm(id) {
-    this.spinner.show();
-    this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-
-      this.ServiceData = data.data[0];
-
-      let dialogRef = this.dialog.open(AddServiceInfoComponent, {
-        data: {
-          action: 'new',
-          ID: id,
-          EditData: this.ServiceData._id,
-        },
-        width: '800px',
-        height: '600px',
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-
-        if ((result = 'true')) {
-          this.getServiceData();
-        }
-      });
-
-      this.spinner.hide();
-    });
-  }
-  close() {
-    this.hide = false;
-  }
-  delete(item) {
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.title}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-
-        this.spinner.show()
-        this.landingPageInfo.deletesubModule(item._id).subscribe((res) => {
-          Swal.fire('Deleted Successfully')
-
-          this.getServiceData();
-          this.ngOnInit();
-          this.spinner.hide()
-        })
-      }
-    });
-  }
-
-  // deleteopen(content, id) {
-  //   console.log("deleteopen close id=>",id);
-  //   this.Is_id = id;
-  //   this.modalService
-  //     .open(content, { ariaLabelledBy: 'modal-basic-title' })
-  //     .result.then(
-  //       (result) => {
-  //         this.closeResult = `Closed with: ${result}`;
-  //          console.log("deleting")
-  //         this.landingPageInfo.deletesubModule(this.Is_id).subscribe((res) => {
-  //           Swal.fire('Deleted Successfully')
-  //           console.log('deleted res', res);
-  //           this.getServiceData();
-  //         });
-  //       },
-  //       (reason) => {
-
-  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //         console.log('dismissed');
-  //       }
-  //     );
-
-  // }
-
-  // delete(item) {
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: `Do you want to delete "${item}"?`,
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#00B96F',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Yes, Delete!',
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       // this.model.attributes.splice(i,1);
-  //     }
-  //   });
-  // }
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
+	// delete(item) {
+	//   Swal.fire({
+	//     title: 'Are you sure?',
+	//     text: `Do you want to delete "${item}"?`,
+	//     icon: 'warning',
+	//     showCancelButton: true,
+	//     confirmButtonColor: '#00B96F',
+	//     cancelButtonColor: '#d33',
+	//     confirmButtonText: 'Yes, Delete!',
+	//   }).then((result) => {
+	//     if (result.value) {
+	//       // this.model.attributes.splice(i,1);
+	//     }
+	//   });
+	// }
+	// private getDismissReason(reason: any): string {
+	//   if (reason === ModalDismissReasons.ESC) {
+	//     return 'by pressing ESC';
+	//   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+	//     return 'by clicking on a backdrop';
+	//   } else {
+	//     return `with: ${reason}`;
+	//   }
+	// }
 }

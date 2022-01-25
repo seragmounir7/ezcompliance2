@@ -8,16 +8,19 @@ import { RoleManagementComponent } from './role-management.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AddRoleComponent } from './add-role/add-role.component';
 
-
-
 @NgModule({
-  declarations: [RoleManagementComponent, CheckboxComponent, AddRoleComponent],
-  imports: [
-    CommonModule,
-    RoleManagementRoutingModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+	declarations: [
+		RoleManagementComponent,
+		CheckboxComponent,
+		AddRoleComponent
+	],
+	imports: [
+		CommonModule,
+		RoleManagementRoutingModule,
+		SharedModule,
+		FormsModule,
+		ReactiveFormsModule
+	],
+	exports: [RoleManagementComponent, CheckboxComponent, AddRoleComponent]
 })
-export class RoleManagementModule { }
+export class RoleManagementModule {}
