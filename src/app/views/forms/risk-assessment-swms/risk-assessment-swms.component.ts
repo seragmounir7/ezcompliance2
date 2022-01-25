@@ -213,7 +213,7 @@ export class RiskAssessmentSWMSComponent implements OnInit, AfterViewInit, OnDes
       streetNo: ['', Validators.required],
       streetAddr: ['', Validators.required],
       suburb: ['', Validators.required],
-      town: ['', Validators.required],
+      // town: ['', Validators.required],
       custConct: ['', Validators.required],
       custConctPh: ['', Validators.required],
       custEmail: ['', Validators.required],

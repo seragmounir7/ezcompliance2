@@ -37,10 +37,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
       fax: [''],
       email: ['', Validators.required],
       suburb: ['', Validators.required],
-      
       state: ['', Validators.required],
-      postCode: ['', Validators.required],
-      mailingAddress: ['', Validators.required],
       streetAddress: ['', Validators.required],
       ABN: ['', Validators.required],
   
@@ -245,17 +242,17 @@ export class AddAndEditSubcontractComponent implements OnInit {
         // TrainingQrginisation: res.data.licenceAndQualifications.TrainingQrginisation,
         // ExpiryDate: res.data.licenceAndQualifications.ExpiryDate,
         companyName: res.data.companyName,
-        phone: res.data.companyName,
-        fax: res.data.companyName,
-        email: res.data.companyName,
-        streetAddress: res.data.companyName,
-        suburb: res.data.companyName,
-        state: res.data.companyName,
-        postCode: res.data.companyName,
-        mailingAddress: res.data.companyName,
-        ABN: res.data.companyName,
-        licenceNumber: res.data.companyName,
-        website: res.data.companyName,
+        phone: res.data.phone,
+        fax: res.data.fax,
+        email: res.data.email,
+        state: res.data.stateId,
+        streetAddress: res.data.streetAddress,
+        suburb: res.data.suburb,
+        // postCode: res.data.companyName,
+        // mailingAddress: res.data.companyName,
+        ABN: res.data.ABN,
+        licenceNumber: res.data.licenceNumber,
+        website: res.data.website,
        
       });
 
@@ -292,15 +289,15 @@ export class AddAndEditSubcontractComponent implements OnInit {
     phone: this.subcontractDetails.get('phone').value,
     fax: this.subcontractDetails.get('fax').value,
     email: this.subcontractDetails.get('email').value,
+    stateId: this.subcontractDetails.get('state').value,
     streetAddress: this.subcontractDetails.get('streetAddress').value,
     suburb: this.subcontractDetails.get('suburb').value,
-    state: this.subcontractDetails.get('state').value,
-    postCode: this.subcontractDetails.get('postCode').value,
-    mailingAddress: this.subcontractDetails.get('mailingAddress').value,
+    // postCode: this.subcontractDetails.get('postCode').value,
+    // mailingAddress: this.subcontractDetails.get('mailingAddress').value,
     ABN: this.subcontractDetails.get('ABN').value,
     licenceNumber: this.subcontractDetails.get('licenceNumber').value,
     website: this.subcontractDetails.get('website').value,
-     
+    
     };
 
     console.log('body=>', body);
@@ -343,15 +340,17 @@ export class AddAndEditSubcontractComponent implements OnInit {
     phone: this.subcontractDetails.get('phone').value,
     fax: this.subcontractDetails.get('fax').value,
     email: this.subcontractDetails.get('email').value,
+    
+    stateId: this.subcontractDetails.get('state').value,
     streetAddress: this.subcontractDetails.get('streetAddress').value,
     suburb: this.subcontractDetails.get('suburb').value,
-    state: this.subcontractDetails.get('state').value,
-    postCode: this.subcontractDetails.get('postCode').value,
-    mailingAddress: this.subcontractDetails.get('mailingAddress').value,
+    // postCode: this.subcontractDetails.get('postCode').value,
+    // mailingAddress: this.subcontractDetails.get('mailingAddress').value,
     ABN: this.subcontractDetails.get('ABN').value,
     licenceNumber: this.subcontractDetails.get('licenceNumber').value,
     website: this.subcontractDetails.get('website').value,
      
+    
     };
 
     console.log('body=>', body);
