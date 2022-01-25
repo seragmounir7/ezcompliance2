@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { SubscriptionService } from 'src/app/utils/services/subscription.service';
+import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
 @Component({
@@ -9,140 +17,68 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
   styleUrls: ['./company-details.component.scss']
 })
 export class CompanyDetailsComponent implements OnInit {
-  // registerComp : FormGroup;
-  formData : FormGroup;
-  submitted = false;
-  dataPlant: boolean;
-  plantDetails: any;
-  id: any;
-  StatesData:any=[];
+  ELEMENT_DATA = [];
+  displayedColumns: string[] = ['index', 'companyName', 'phone', 'email', 'action'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   constructor(
-    private fb:FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    
-    private licenceInfo: LogicalFormInfoService,
-    ) { }
+    private subscript: SubscriptionService,
+    private fb: FormBuilder,
+    private setTitle: SetTitleService,
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.formData = this.fb.group({
-      companyName: ['', Validators.required],
-      phoneNumber:['',Validators.required],
-      porfListName:[],
-      emailAddress:['',Validators.required],
-      streetAddress:['',Validators.required],
-      subUrb:['',Validators.required],
-      sTate:['',Validators.required],
-      // postCode:['',Validators.required],
-      // mailingAddress:['',Validators.required],
-      companyABN: ['',Validators.required],
-      companyAddr: ['',Validators.required],
-      licenceNumber:['',Validators.required],
-      companyWeb: ['',Validators.required],
-      companyLogo:['',Validators.required],
-      plantArr: this.fb.array([]),
-      plantName:[''],
-      checkedOut: [''],
-      hours: [''],
-      kilometres: [''],
-      date: [''],
-      make:[''],
-      modelNumber: [''],
-      registrationNumber:[''],
-      registrationRenewalDate: [''],
-      plantType: [''],
-      purchaseDate: [''],
-      insurancePolicyNumber: [''],
-      insuranceExpiry: [''],
-      fuelCardNumber: [''],
-      ETagNumber: [''],
-      plantSignature: [''],
-  })
+    this.getAllSubscription();
+    this.setTitle.setTitle('WHS-Company Details');
 
-  this.id = this.activatedRoute.snapshot.params.id;
+  }
+  getAllSubscription() {
+    this.subscript.getAllsubscription().subscribe((res) => {
+      console.log("getAll",res)
+      let companyData = res.data;
+      companyData.forEach((element, index) => {
+        element.index = index + 1; //adding index
+      });
+      this.ELEMENT_DATA = companyData;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+      //this.dataSource.sort = this.sort;
+    });
+  }
 
-  // if (this.id !== "form") {
-  //   this.dataPlant = true;
-  //   // this.patchData();
-  // } else {
-  //   this.dataPlant = false;
-   
-  //   this.addEquipFiled2();
+  delete(item) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete "${item.companyName}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00B96F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete!',
+    }).then((result) => {
+      if (result.value) {
+        console.log(result)
+        // this.model.attributes.splice(i,1);
+        this.spinner.show()
+        this.subscript.deletesubscription(item._id).subscribe((res => {
+          this.getAllSubscription()
+          this.spinner.hide()
+        }))
+      }
+    });
+  }
+
+  edit(id) {
+    this.router.navigate(["/admin/registration/addCompanyInfo/" + id]);
+  }
+  // returnById(id) {
+  //   this.router.navigate(["/admin/registration/plantRegistration"]);
   // }
-  this.addEquipFiled2();
-  this.getAllStates();
-}
-getAllStates() {
-  this.licenceInfo.getAllStates().subscribe((res: any) => {
-    console.log('setStatesDetails=>', res);
-    this.StatesData = res.data;
-  });
-}
-addEquip() {
-  return this.formData.get('plantArr') as FormArray;
-}
-
-newEquipFiled2(): FormGroup {
-  return this.fb.group({
-    plantName:[''],
-    checkedOut: [''],
-    hours: [''],
-    kilometres: [''],
-    date: [''],
-    make:[''],
-    modelNumber: [''],
-    registrationNumber:[''],
-    registrationRenewalDate: [''],
-    plantType: [''],
-    purchaseDate: [''],
-    insurancePolicyNumber: [''],
-    insuranceExpiry: [''],
-    fuelCardNumber: [''],
-    ETagNumber: [''],
-  });
-}
-addEquipFiled2() {
-  this.addEquip().push(this.newEquipFiled2());
-  console.log(this.formData.value);
-}
-removeEquipFiled1(i) {
-  const item = <FormArray>this.formData.controls['plantArr'];
-  if (item.length > 1) {
-    item.removeAt(i);
-
-  }
-}
-// public signaturePadOptions: Object = {
-//   // passed through to szimek/signature_pad constructor
-//   minWidth: 1,
-//   canvasWidth: 500,
-//   canvasHeight: 100,
-// };
-
-// drawStart() {
-//   // will be notified of szimek/signature_pad's onBegin event
-//   console.log('begin drawing');
-//   }
-
-  // get f() {
-  //   return this.registerFormControl.controls;
-  // }
-
-  get registerFormControl() {
-    return this.formData.controls;
-  }
-
-  browser2(event) {
-    const files = event.target.files[0];
-    const formdata = new FormData();
-    formdata.append('', files);
-    console.log(files);
-  }
-
-  submeet(){
-    console.log("clicked");
-    this.submitted = !this.submitted;
-    console.log("FormValues = > ",this.formData.value);
-    
-  }
-
 }

@@ -1,0 +1,430 @@
+<div class="btn btn-outline-primary " [routerLink]="['/admin/registration/compdetails']"><i
+  class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div class="container card px-4 py-4 bg-white">
+    <h1 class="text-center mt-3 pt-3">
+      <p class="title">Company Details Preview</p>
+    </h1>
+    <!-- <h1 class="text-center">Company Details</h1> -->
+    <form [formGroup] = "formData">
+      <mat-tab-group>
+        <mat-tab label="Company Details" (click)="companyShow()">
+      <div class="row">
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"> Company Name </label>
+          <input type="text" class="form-control"  formControlName="companyName"
+            [class.is-invalid]="(registerFormControl.companyName.touched || submitted) && registerFormControl.companyName.errors?.required " />
+          <span class="text-danger"
+            *ngIf="(registerFormControl.companyName.touched || submitted) && registerFormControl.companyName.errors?.required">
+            Company Name is required
+          </span>
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label">Phone</label>
+          <input type="text" formControlName="phone" class="form-control inputData" 
+            [class.is-invalid]="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.required " />
+    
+          <span class="text-danger"
+            *ngIf="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.required">
+            Phone Number is required
+          </span>
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label">Fax</label>
+          <input type="text" formControlName="fax" class="form-control" />
+         
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label">Email</label>
+          <input type="text" formControlName="emailAddress" class="form-control"
+            [class.is-invalid]="(registerFormControl.emailAddress.touched || submitted) && registerFormControl.emailAddress.errors?.required " />
+          <span class="text-danger"
+            *ngIf="(registerFormControl.emailAddress.touched || submitted) && registerFormControl.emailAddress.errors?.required">
+            Email is required
+          </span>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"> Street Address </label>
+          <textarea type="text" class="form-control"  formControlName="streetAddress"
+            [class.is-invalid]="(registerFormControl.streetAddress.touched || submitted) && registerFormControl.streetAddress.errors?.required " > </textarea>
+          <span class="text-danger"
+            *ngIf="(registerFormControl.streetAddress.touched || submitted) && registerFormControl.streetAddress.errors?.required">
+            Street Address is required
+          </span>
+       
+        </div>
+        
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label">Suburb</label>
+          <textarea type="text" formControlName="subUrb" class="form-control inputData" 
+            [class.is-invalid]="(registerFormControl.subUrb.touched || submitted) && registerFormControl.subUrb.errors?.required " > </textarea>
+    
+          <span class="text-danger"
+            *ngIf="(registerFormControl.subUrb.touched || submitted) && registerFormControl.subUrb.errors?.required">
+            Suburb Address is required
+        </span>
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label">State</label>
+          <select class="form-select form-control col" aria-label="Default select example"
+          formControlName="state" 
+          [class.is-invalid]="(registerFormControl.state.touched || submitted) && registerFormControl.state.errors?.required " >
+
+          <option selected hidden>Select</option>
+          <option [value]="state._id" *ngFor="let state of StatesData">{{state.title}}</option>
+        </select>
+        <span class="text-danger"
+            *ngIf="(registerFormControl.state.touched || submitted) && registerFormControl.state.errors?.required">
+            state  is required
+        </span>
+          <!-- <label for="exampleFormControlInput1" class="form-label"> Postcode </label>
+          <input type="text" class="form-control"  formControlName="postCode"
+            [class.is-invalid]="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required " />
+          <span class="text-danger"
+            *ngIf="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required">
+            Postcode is required
+          </span> -->
+        </div>
+        <!-- <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"> Mailing Address </label>
+          <textarea type="text" class="form-control"  formControlName="mailingAddress"
+            [class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "></textarea>
+          <span class="text-danger"
+            *ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required">
+            Mailing Address is required
+          </span>
+        </div> -->
+      </div>
+  
+      <div class="row">
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"> Company ABN </label>
+          <input type="text" class="form-control"  formControlName="companyABN"
+            [class.is-invalid]="(registerFormControl.companyABN.touched || submitted) && registerFormControl.companyABN.errors?.required " />
+          <span class="text-danger"
+            *ngIf="(registerFormControl.companyABN.touched || submitted) && registerFormControl.companyABN.errors?.required">
+            Company ABN is required
+          </span>
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"> Company Address </label>
+          <textarea type="text" formControlName="companyAddr" class="form-control inputData" 
+            [class.is-invalid]="(registerFormControl.companyAddr.touched || submitted) && registerFormControl.companyAddr.errors?.required "></textarea>
+    
+          <span class="text-danger"
+            *ngIf="(registerFormControl.companyAddr.touched || submitted) && registerFormControl.companyAddr.errors?.required">
+            Company Address is required
+          </span>
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"> Licence Number </label>
+          <input type="text" formControlName="licenceNumber" class="form-control inputData" 
+            [class.is-invalid]="(registerFormControl.licenceNumber.touched || submitted) && registerFormControl.licenceNumber.errors?.required " />
+    
+          <span class="text-danger"
+            *ngIf="(registerFormControl.licenceNumber.touched || submitted) && registerFormControl.licenceNumber.errors?.required">
+            Licence Number is required
+          </span>
+        </div>
+        <div class="mb-3 mt-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label">Website</label>
+          <input type="text" formControlName="companyWeb" class="form-control"
+            [class.is-invalid]="(registerFormControl.companyWeb.touched || submitted) && registerFormControl.companyWeb.errors?.required " />
+          <span class="text-danger"
+            *ngIf="(registerFormControl.companyWeb.touched || submitted) && registerFormControl.companyWeb.errors?.required">
+            Website is required
+          </span>
+        </div>
+      </div>
+  
+      <div class="row py-3">
+        <div class="offset-1  col-3 mt-2 ">
+          <!-- <img [src]="file1" onerror=" this.src='../../../assets/img/uploadImg.png' " alt="" width="130"
+            height="130" /> -->
+        </div>
+        <div class="col-5 ml-4">
+          <div class="my-3">
+            <label for="formFile" class="form-label"> Add Company Logo </label>
+            <input class="form-control"  type="file" (change)="browser2($event)"
+             />
+          </div>
+          
+          <!-- <span class="text-danger"
+            *ngIf="(registerFormControl.companyLogo.touched || submitted) && registerFormControl.companyLogo.errors?.required">
+            Company Logo is required
+          </span> -->
+        </div>
+      </div>
+        
+          <div class="row">
+            
+            <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataPlant"  (click)="onFormUpdate($event)">
+              Update
+            </button> 
+            <button type="submit" class="btn btn-outline-primary btn_1 ml-2" *ngIf="!dataPlant" [disabled]="!formData.valid" (click)="onFormSubmit()"  >
+              Submit
+            </button>
+          </div>
+        </mat-tab>
+        <mat-tab label="Plant Register" (click)="addPlantshow()">
+          <div formArrayName="plantArr" class="mt-4">
+            <div *ngFor="let row of addEquip().controls; let filed2 = index">
+              <div [formGroupName]="filed2">
+                <div class="row">
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Name </label>
+                    <input type="text" formControlName="plantName" class="form-control" />
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Checked Out To</label>
+                    <input type="text" formControlName="checkedOut" class="form-control" />
+    
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Make</label>
+                    <input type="text" formControlName="make" class="form-control" />
+    
+                  </div>
+                  <!-- <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Model </label>
+                    <input type="text" formControlName="model" class="form-control" />
+                  </div> -->
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Model Number</label>
+                    <input type="text" formControlName="modelNumber" class="form-control" />
+    
+                  </div>
+                  <div class="row container col-12">
+                    <div  class="col-12 ">
+                      <h4 class="text_2">Next Service</h4>
+                    </div>
+                    <div class="col-2 mt-2 ml-5">
+                      <input
+                        type="radio"
+                        class="form-check-input mr-1"
+                        value="Hours"
+                        name="nextService"
+                        id="inlineCheckbox1"
+                        (click)="hoursShow()"
+                      />
+                      <label for="inlineCheckbox1" class="form-label  label_2"
+                        >Hours </label
+                      >
+                    </div>
+                    <div class="mt-2 col-2">
+                      <input
+                        type="radio"
+                        name="nextService"
+                        class="form-check-input mr-1"
+                        value="Kilometres"
+                        id="inlineCheckbox2"
+                        (click)="kilometerShow()"
+                      />
+                      <label for="inlineCheckbox2" class="form-label label_2"
+                        >Kilometres</label
+                      >
+                    </div>
+                    <div class="mt-2 col-2">
+                      <input
+                        type="radio"
+                        name="nextService"
+                        class="form-check-input mr-1"
+                        value="Date"
+                        id="inlineCheckbox3"
+                        (click)="dateShow()"
+                      />
+                      <label for="inlineCheckbox3" class="form-label label_2"
+                        >Date</label
+                      >
+                    </div>
+                  </div>
+                  
+                 <div class="row col-12" *ngIf="date1">
+                  <div class="mb-3 mt-3 col-3">
+                    <input  type="date" class="form-control" formControlName="date">
+                  </div>
+                 </div>
+                  
+                 <div class="row col-12" *ngIf="kilometer1">
+                  <div class="mb-3 mt-3 col-3">
+                    <input  type="text" class="form-control" formControlName="kilometres">
+                  </div>
+                 </div>
+                 <div class="row col-12" *ngIf="hours1">
+                  <div class="mb-3 mt-3 col-3">
+                    <input [ngxMatTimepicker]="timepicker" class="form-control" formControlName="hours"
+                  />
+  
+                    <ngx-mat-timepicker #timepicker></ngx-mat-timepicker>
+                    <!-- <input  formControlName="hours" [ngxMatTimepicker]="timepicker" format="24" [value]="setTime" class="form-control" />
+                    <ngx-mat-timepicker #timepicker ></ngx-mat-timepicker> -->
+                  </div>
+                 </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Registration Number</label>
+                    <input type="text" formControlName="registrationNumber" class="form-control" />
+    
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Registration Renewal Date </label>
+                    <input type="date" formControlName="registrationRenewalDate" class="form-control" />
+    
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Purchase Date </label>
+                    <input type="date" formControlName="purchaseDate" class="form-control" />
+    
+                  </div>
+                  <!-- <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
+                    <input type="date" formControlName="serviceRenewDate" class="form-control" />
+    
+                  </div> -->
+    
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Insurance Policy Number </label>
+                    <input type="text" formControlName="insurancePolicyNumber" class="form-control" />
+    
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Insurance Expiry  </label>
+                    <input type="date" formControlName="insuranceExpiry" class="form-control" />
+    
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">Fuel Card Number  </label>
+                    <input type="text" formControlName="fuelCardNumber" class="form-control" />
+    
+                  </div>
+                  <div class="mb-3 mt-3 col-3">
+                    <label for="exampleFormControlInput1" class="form-label">E Tag Number  </label>
+                    <input type="text" formControlName="ETagNumber" class="form-control" />
+    
+                  </div>
+                  <div class="col-1 mt-4">
+                    <div class="my-4">
+                      <span class="material-icons" (click)="addEquipFiled2()">add_circle_outline
+                      </span>
+                    </div>
+    
+                  </div>
+                  <div class="col-1 mt-4">
+                    <div class="my-4">
+                      <span class="material-icons" (click)="removeEquipFiled1(filed2)">
+                        remove_circle_outline
+                      </span>
+                    </div>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 mt-3 col-12">
+              <label>Signature</label>
+              <div class="sign">
+                <signature-pad #signature2 [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
+                  (onEndEvent)="drawComplete2()"></signature-pad>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary btn_1 ml-2" (click)="clear2()">
+              Clear
+            </button>
+            <button type="submit"  class="btn btn-outline-primary btn_1" *ngIf="!dataPlant" [disabled]="!formData.valid" (click)="onFormSubmit()">
+              Submit
+            </button>
+            <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataPlant" (click)="onFormUpdate($event)">
+              Update
+            </button>
+          </div>
+  
+        </mat-tab>
+        <mat-tab label="Insurance and contract register" (click)="addInsuranceShow()">
+          <div formArrayName="insuranceArr" class="mt-4">
+            <div *ngFor="let row of addInsurance().controls; let filed3 = index">
+              <div [formGroupName]="filed3">
+          <div class="row">
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Document Number </label>
+              <input type="text" formControlName="documentNumber" class="form-control" />
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Document Type</label>
+              <select class="form-select form-control" aria-label="Default select example" formControlName="documentType"
+              >
+  
+              <option selected hidden>Select</option>
+              <option [value]="">123</option>
+             
+  
+            </select>
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Document Name</label>
+              <input type="text" formControlName="documentName" class="form-control" />
+  
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Third Party</label>
+              <input type="text" formControlName="thirdParty" class="form-control" />
+  
+            </div>
+           
+  
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Start Date </label>
+              <input type="date" formControlName="startDate" class="form-control" />
+  
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Expiry Date </label>
+              <input type="date" formControlName="expiryDate" class="form-control" />
+  
+            </div>
+            <div class="mb-3 mt-3 col-3">
+              <label for="exampleFormControlInput1" class="form-label">Reminder Notice</label>
+              <select class="form-select form-control" aria-label="Default select example" formControlName="reminderNotice"
+              >
+  
+              <option selected hidden>Select</option>
+              <option [value]="">45</option>
+              <option [value]="">30</option>
+              <option [value]="">15</option>
+             
+  
+            </select>
+            </div>
+            <div class="col-1 mt-4">
+              <div class="my-4">
+                <span class="material-icons" (click)="addInsuranceFiled2()">add_circle_outline
+                </span>
+              </div>
+  
+            </div>
+            <div class="col-1 mt-4">
+              <div class="my-4">
+                <span class="material-icons" (click)="removeInsuranceFiled1(filed3)">
+                  remove_circle_outline
+                </span>
+              </div>
+  
+            </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          <div class="row">
+            <button type="submit" class="btn btn-outline-primary btn_1 ml-2" *ngIf="dataPlant"  (click)="onFormUpdate($event)">
+              Update
+            </button> 
+            <button type="submit" class="btn btn-outline-primary btn_1 ml-2" *ngIf="!dataPlant" [disabled]="!formData.valid" (click)="onFormSubmit()"  >
+              Submit
+            </button>
+          </div>
+          </mat-tab>
+        </mat-tab-group>
+  </form>
+  </div>

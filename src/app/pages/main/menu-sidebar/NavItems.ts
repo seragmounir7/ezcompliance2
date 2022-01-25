@@ -148,7 +148,7 @@ export class NavItems {
                         },
                         {
                             displayedName: "Code Of Practice",
-                            icon: "page",
+                            icon: "cop",
                             route: "/admin/siteInfo/codeOfpract",
                             hasAccess: true
                         },
@@ -170,7 +170,7 @@ export class NavItems {
                             route: "/admin/siteInfo/licenceAndQual",
                             hasAccess: true
                         },
-                        {
+                        {   
                             displayedName: "Control And Action",
                             icon: "controlAndAction",
                             route: "/admin/siteInfo/contrlActReq",

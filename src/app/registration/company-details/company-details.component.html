@@ -1,339 +1,61 @@
-<div class="container card px-4 py-4 bg-white">
-  <h1 class="text-center">Company Details</h1>
-  <form [formGroup] = "formData">
+<div class="col ml-2 pt-1">
+  <h1>
+    Company Details
+  </h1>
+</div>
+<div>
 
+  <button type="button" class="btn btn-outline-primary  mr-2 float-right"
+    [routerLink]="['/admin/registration/addCompanyInfo/'+'form']"><i class="fas fa-plus"></i> Add Company Details
+  </button>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element,let i = index">{{element.index}}</td>
+    </ng-container>
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </th>
+      <td mat-cell *matCellDef="let element"> <span class="flex">{{element.customerDetails?.companyName}}</span> </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.customerDetails?.phone}}</span> </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.lastName}}</span> </td>
+    </ng-container> -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element"> <span class="flex-start">{{element.customerDetails?.email}}</span> </td>
+    </ng-container>
 
-    <div class="row">
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Company Name </label>
-        <input type="text" class="form-control"  formControlName="companyName"
-          [class.is-invalid]="(registerFormControl.companyName.touched || submitted) && registerFormControl.companyName.errors?.required " />
-        <span class="text-danger"
-          *ngIf="(registerFormControl.companyName.touched || submitted) && registerFormControl.companyName.errors?.required">
-          Company Name is required
-        </span>
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Phone</label>
-        <input type="text" formControlName="phoneNumber" class="form-control inputData" 
-          [class.is-invalid]="(registerFormControl.phoneNumber.touched || submitted) && registerFormControl.phoneNumber.errors?.required " />
-  
-        <span class="text-danger"
-          *ngIf="(registerFormControl.phoneNumber.touched || submitted) && registerFormControl.phoneNumber.errors?.required">
-          Phone Number is required
-        </span>
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Fax</label>
-        <input type="text" formControlName="porfListName" class="form-control" />
-       
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input type="text" formControlName="emailAddress" class="form-control"
-          [class.is-invalid]="(registerFormControl.emailAddress.touched || submitted) && registerFormControl.emailAddress.errors?.required " />
-        <span class="text-danger"
-          *ngIf="(registerFormControl.emailAddress.touched || submitted) && registerFormControl.emailAddress.errors?.required">
-          Email is required
-        </span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Street Address </label>
-        <textarea type="text" class="form-control"  formControlName="streetAddress"
-          [class.is-invalid]="(registerFormControl.streetAddress.touched || submitted) && registerFormControl.streetAddress.errors?.required " > </textarea>
-        <span class="text-danger"
-          *ngIf="(registerFormControl.streetAddress.touched || submitted) && registerFormControl.streetAddress.errors?.required">
-          Street Address is required
-        </span>
-     
-      </div>
-      
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Suburb</label>
-        <textarea type="text" formControlName="subUrb" class="form-control inputData" 
-          [class.is-invalid]="(registerFormControl.subUrb.touched || submitted) && registerFormControl.subUrb.errors?.required " > </textarea>
-  
-        <span class="text-danger"
-          *ngIf="(registerFormControl.subUrb.touched || submitted) && registerFormControl.subUrb.errors?.required">
-          Suburb Address is required
-      </span>
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">State</label>
-        <select class="form-select form-control col" aria-label="Default select example"
-        formControlName="sTate"  
-        [class.is-invalid]="(registerFormControl.sTate.touched || submitted) && registerFormControl.sTate.errors?.required ">
-
-        <option selected hidden>Select</option>
-        <option [value]="state._id" *ngFor="let state of StatesData">{{state.title}}</option>
-      </select>
-      <span class="text-danger"
-          *ngIf="(registerFormControl.sTate.touched || submitted) && registerFormControl.sTate.errors?.required">
-          State is required
-        </span>
-        <!-- <label for="exampleFormControlInput1" class="form-label"> Postcode </label>
-        <input type="text" class="form-control"  formControlName="postCode"
-          [class.is-invalid]="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required " /> -->
-        <!-- <span class="text-danger"
-          *ngIf="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required">
-          Postcode is required
-        </span> -->
-      </div>
-      <!-- <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Mailing Address </label>
-        <textarea type="text" class="form-control"  formControlName="mailingAddress"
-          [class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "></textarea>
-        <span class="text-danger"
-          *ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required">
-          Mailing Address is required
-        </span>
-      </div> -->
-    </div>
-
-    <div class="row">
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Company ABN </label>
-        <input type="text" class="form-control"  formControlName="companyABN"
-          [class.is-invalid]="(registerFormControl.companyABN.touched || submitted) && registerFormControl.companyABN.errors?.required " />
-        <span class="text-danger"
-          *ngIf="(registerFormControl.companyABN.touched || submitted) && registerFormControl.companyABN.errors?.required">
-          Company ABN is required
-        </span>
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Company Address </label>
-        <textarea type="text" formControlName="companyAddr" class="form-control inputData" 
-          [class.is-invalid]="(registerFormControl.companyAddr.touched || submitted) && registerFormControl.companyAddr.errors?.required "></textarea>
-  
-        <span class="text-danger"
-          *ngIf="(registerFormControl.companyAddr.touched || submitted) && registerFormControl.companyAddr.errors?.required">
-          Company Address is required
-        </span>
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label"> Licence Number </label>
-        <input type="text" formControlName="licenceNumber" class="form-control inputData" 
-          [class.is-invalid]="(registerFormControl.licenceNumber.touched || submitted) && registerFormControl.licenceNumber.errors?.required " />
-  
-        <span class="text-danger"
-          *ngIf="(registerFormControl.licenceNumber.touched || submitted) && registerFormControl.licenceNumber.errors?.required">
-          Licence Number is required
-        </span>
-      </div>
-      <div class="mb-3 mt-3 col-3">
-        <label for="exampleFormControlInput1" class="form-label">Website</label>
-        <input type="text" formControlName="companyWeb" class="form-control"
-          [class.is-invalid]="(registerFormControl.companyWeb.touched || submitted) && registerFormControl.companyWeb.errors?.required " />
-        <span class="text-danger"
-          *ngIf="(registerFormControl.companyWeb.touched || submitted) && registerFormControl.companyWeb.errors?.required">
-          Website is required
-        </span>
-      </div>
-    </div>
-
-    <div class="row py-3">
-      <div class="offset-1  col-3 mt-2 ">
-        <!-- <img [src]="file1" onerror=" this.src='../../../assets/img/uploadImg.png' " alt="" width="130"
-          height="130" /> -->
-      </div>
-      <div class="col-5 ml-4">
-        <div class="my-3">
-          <label for="formFile" class="form-label"> Add Company Logo </label>
-          <input class="form-control"  type="file" (change)="browser2($event)"
-            [class.is-invalid]="(registerFormControl.companyLogo.touched || submitted) && registerFormControl.companyLogo.errors?.required " />
-        </div>
-        
-        <span class="text-danger"
-          *ngIf="(registerFormControl.companyLogo.touched || submitted) && registerFormControl.companyLogo.errors?.required">
-          Company Logo is required
-        </span>
-      </div>
-    </div>
-
-     
-   
-
-    
-      <div formArrayName="plantArr" class="mt-4">
-          <div *ngFor="let row of addEquip().controls; let filed2 = index">
-            <div [formGroupName]="filed2">
-              <div class="row">
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Name </label>
-                  <input type="text" formControlName="plantName" class="form-control" />
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Checked Out To</label>
-                  <input type="text" formControlName="checkedOut" class="form-control" />
-  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Make</label>
-                  <input type="text" formControlName="make" class="form-control" />
-  
-                </div>
-                <!-- <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Model </label>
-                  <input type="text" formControlName="model" class="form-control" />
-                </div> -->
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Model Number</label>
-                  <input type="text" formControlName="modelNumber" class="form-control" />
-  
-                </div>
-                <div class="row container col-12">
-                  <div  class="col-12 ">
-                    <h4 class="text_2">Next Service</h4>
-                  </div>
-                  <div class="col-2 mt-2 ml-5">
-                    <input
-                      type="checkbox"
-                      formControlName="hours"
-                      name="hours"
-                      class="form-check-input mr-1"
-                      value="Hours"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label  label_2"
-                      >Hours </label
-                    >
-                  </div>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="checkbox"
-                      formControlName="kilometres"
-                      name="kilometres"
-                      class="form-check-input mr-1"
-                      value="Kilometres"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Kilometres</label
-                    >
-                  </div>
-                  <div class="mt-2 col-2">
-                    <input
-                      type="checkbox"
-                      formControlName="date"
-                      name="date"
-                      class="form-check-input mr-1"
-                      value="Date"
-                    />
-                    <label for="exampleFormControlInput1" class="form-label label_2"
-                      >Date</label
-                    >
-                  </div>
-                </div>
-               
-                <!-- <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Serial Number</label>
-                  <input type="text" formControlName="serialNumber" class="form-control" />
-  
-                </div> -->
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Registration Number</label>
-                  <input type="text" formControlName="registrationNumber" class="form-control" />
-  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Registration Renewal Date </label>
-                  <input type="date" formControlName="registrationRenewalDate" class="form-control" />
-  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Purchase Date </label>
-                  <input type="date" formControlName="purchaseDate" class="form-control" />
-  
-                </div>
-                <!-- <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
-                  <input type="date" formControlName="serviceRenewDate" class="form-control" />
-  
-                </div> -->
-  
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Insurance Policy Number </label>
-                  <input type="text" formControlName="insurancePolicyNumber" class="form-control" />
-  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Insurance Expiry  </label>
-                  <input type="date" formControlName="insuranceExpiry" class="form-control" />
-  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Fuel Card Number  </label>
-                  <input type="text" formControlName="fuelCardNumber" class="form-control" />
-  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">E Tag Number  </label>
-                  <input type="text" formControlName="ETagNumber" class="form-control" />
-  
-                </div>
-                <div class="col-1 mt-4">
-                  <div class="my-4">
-                    <span class="material-icons" (click)="addEquipFiled2()">add_circle_outline
-                    </span>
-                  </div>
-  
-                </div>
-                <div class="col-1 mt-4">
-                  <div class="my-4">
-                    <span class="material-icons" (click)="removeEquipFiled1(filed2)">
-                      remove_circle_outline
-                    </span>
-                  </div>
-  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- <div class="mb-3 mt-3 col-12">
-            <label>Signature</label>
-            <div class="sign">
-              <signature-pad #signature2 [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
-                (onEndEvent)="drawComplete2()"></signature-pad>
-            </div>
-          </div> -->
-          <!-- <button class="btn btn-outline-primary btn_1" (click)="clear2()">
-            Clear
-          </button>
-          <button type="submit"  class="btn btn-outline-primary btn_1" *ngIf="!dataPlant" [disabled]="!plantDetails.valid" >
-            Submit
-          </button>
-          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataPlant" [disabled]="!plantDetails.valid" >
-            Update
-          </button> -->
-        </div>
-  
-  
-    
-      
-        <div class="row">
-          <!-- <div class="mb-3 mt-3 col-12">
-            <label>Signature</label>
-            <div class="sign">
-              <signature-pad #signature2 [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
-                (onEndEvent)="drawComplete2()"></signature-pad>
-            </div>
-          </div> -->
-          <!-- <button class="btn btn-outline-primary btn_1" (click)="clear2()">
-            Clear
-          </button>
-          <button type="submit"  class="btn btn-outline-primary btn_1" *ngIf="!dataPlant" [disabled]="!plantDetails.valid" >
-            Submit
-          </button>
-          <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataPlant" [disabled]="!plantDetails.valid" >
-            Update
-          </button> -->
-          <button type="submit" class="btn btn-outline-primary border border-primary btn_1" (click)="submeet()"  >
-            Submit
-          </button>
-        </div>
-      
-</form>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <!-- <i class="fas fa-pencil-alt "(click)="edit(element)"
+         title="edit" ></i> <i class="fas fa-trash" (click)="delete(element)" title="delete"></i> -->
+        <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          (click)="edit(element._id)">
+          <mat-icon matTooltip="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="delete(element)">
+          <mat-icon matTooltip="Delete">delete</mat-icon>
+        </button>
+        <!-- <button mat-icon-button class="mr-2" aria-label="Example icon button with a delete icon"
+          (click)="returnById(element._id)">
+          <svg-icon matTooltip="Return PPE OR Plant/Equipment" name="Return"></svg-icon>
+        </button> -->
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Data Not Found </td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
 </div>

@@ -8,6 +8,7 @@ import { EmployeeRegistrationComponent } from './employee-registration/employee-
 import { PlantRegistrationComponent } from './plant-registration/plant-registration.component';
 import { AddAndEditSubcontractComponent } from './subcontract/add-and-edit-subcontract/add-and-edit-subcontract.component';
 import { SubcontractComponent } from './subcontract/subcontract.component';
+import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-company-info/add-and-edit-company-info.component';
 
 const routes: Routes = [
   { path: "", component: CompanyRegistrationComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "addSubcontract/:id", component: AddAndEditSubcontractComponent},
   {path:"compdetails", component:CompanyDetailsComponent},
   { path: "plantRegistration/history/:id", component: PlantRegistrationComponent},
+  { path: "addCompanyInfo/:id", component: AddAndEditCompanyInfoComponent}
 ];
 
 @NgModule({

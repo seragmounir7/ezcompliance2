@@ -25,7 +25,7 @@ export class AddSiteComponent implements OnInit {
     this.getAllStates();
     this.addSitesForm = this.fb.group({
       siteName: ['', Validators.required],
-      streetNumber: ['', Validators.required],
+      // streetNumber: ['', Validators.required],
       streetAddress: ['', Validators.required],
       suburb: ['', Validators.required],
       stateId: ['', Validators.required],

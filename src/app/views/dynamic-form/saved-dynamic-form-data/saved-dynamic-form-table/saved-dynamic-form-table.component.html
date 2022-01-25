@@ -57,9 +57,17 @@
             <svg-icon name="Edit_form"></svg-icon>
           </button>
 
-          <span class="material-icons  mt-2" matTooltip="Delete" (click)="delete(element)">
-            delete
-          </span>
+          <!-- <button matTooltip="history" mat-icon-button >
+            <span class="material-icons  mt-2"  >
+              history
+            </span>
+          </button> -->
+
+          <button matTooltip="Delete" mat-icon-button (click)="delete(element)">
+            <span class="material-icons  mt-2"  >
+              delete
+            </span>
+          </button>
         </div>
       </td>
     </ng-container>
