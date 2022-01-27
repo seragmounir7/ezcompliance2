@@ -446,6 +446,9 @@ export class AddEmployeeComponent implements OnInit {
 			roleId: this.empDetails.get('roleId').value,
 			// designation: this.empDetails.get('porfEmployee').value,
 			// deviceToken: '',
+
+			suburb: this.empDetails.get('porfSuburb').value,
+			stateId: this.empDetails.get('porfState').value,
 			reportingTo: this.empDetails.get('reportingTo').value,
 			department: this.empDetails.get('porfDepartment').value,
 			phone: this.empDetails.get('porfPhone').value,
@@ -473,17 +476,14 @@ export class AddEmployeeComponent implements OnInit {
 				PPEArr: ppeArr(),
 				signature: Sign
 			},
-			plant: {
-				plantArr: equipArr(),
-				plantSignature: plantSignature
-			},
 			location: {
 				address: this.empDetails.get('porfStreetAddress').value,
 				landmark: 'Nagpur',
+
+				// suburb:this.empDetails.get('porfSuburb').value,
 				state: this.empDetails.get('porfState').value,
-				suburb: this.empDetails.get('porfSuburb').value,
-				city: this.empDetails.get('porfCityTown').value,
-				pincode: this.empDetails.get('porfPostalCode').value,
+				// city: this.empDetails.get('porfCityTown').value,
+				// pincode: this.empDetails.get('porfPostalCode').value,
 				country: 'India'
 			}
 		};
@@ -552,6 +552,9 @@ export class AddEmployeeComponent implements OnInit {
 			// designation: this.empDetails.get('porfEmployee').value,
 			// deviceToken: '',
 			reportingTo: this.empDetails.get('reportingTo').value,
+
+			suburb: this.empDetails.get('porfSuburb').value,
+			stateId: this.empDetails.get('porfState').value,
 			department: this.empDetails.get('porfDepartment').value,
 			phone: this.empDetails.get('porfPhone').value,
 			firstName: this.empDetails.get('profFirst').value,
@@ -575,21 +578,15 @@ export class AddEmployeeComponent implements OnInit {
 				uploadLicence: this.empDetails.get('UploadLicenceArr').value
 			},
 			ppe: {
-				PPEArr: ppeArr(),
-
-				signature: Sign
-			},
-			plant: {
-				plantArr: equipArr(),
-				plantSignature: plantSignature
+				PPEArr: ppeArr()
 			},
 			location: {
 				address: this.empDetails.get('porfStreetAddress').value,
 				landmark: 'Nagpur',
+				// suburb:this.empDetails.get('porfSuburb').value,
 				state: this.empDetails.get('porfState').value,
-				suburb: this.empDetails.get('porfSuburb').value,
-				city: this.empDetails.get('porfCityTown').value,
-				pincode: this.empDetails.get('porfPostalCode').value,
+				// city: this.empDetails.get('porfCityTown').value,
+				// pincode: this.empDetails.get('porfPostalCode').value,
 				country: 'India'
 			}
 		};

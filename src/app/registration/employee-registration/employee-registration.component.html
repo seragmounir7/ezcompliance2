@@ -3,6 +3,7 @@
 </div>
 <div>
 	<button
+		*ngIf="(isEmployeeRegistration| async) === 'employeeRegistration '"
 		type="button"
 		class="btn btn-outline-primary mr-2 float-right"
 		(click)="openAddEmployee()"

@@ -11,7 +11,9 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-employee-registration',
@@ -31,6 +33,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
+	isEmployeeRegistration: Observable<string>;
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
@@ -40,10 +43,14 @@ export class EmployeeRegistrationComponent implements OnInit {
 		private setTitle: SetTitleService,
 		private dialog: MatDialog,
 		private spinner: NgxSpinnerService,
-		public router: Router
+		public router: Router,
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
+		this.isEmployeeRegistration = this.activatedRoute.url.pipe(
+			map((value) => value[0].path)
+		);
 		this.getAllEmployee();
 		this.setTitle.setTitle('WHS-Employee Details');
 	}
