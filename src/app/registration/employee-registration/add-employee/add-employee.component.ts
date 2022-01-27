@@ -90,9 +90,9 @@ export class AddEmployeeComponent implements OnInit {
 			roleId: ['', Validators.required],
 			porfStreetAddress: ['', Validators.required],
 			porfSuburb: ['', Validators.required],
-			porfCityTown: ['', Validators.required],
+
 			porfState: ['', Validators.required],
-			porfPostalCode: ['', Validators.required],
+
 			porfUploadImage: [''],
 			EmpFirst: ['', Validators.required],
 			empLastName: ['', Validators.required],
@@ -287,9 +287,9 @@ export class AddEmployeeComponent implements OnInit {
 				reportingTo: data.data.reportingTo,
 				porfStreetAddress: data.data.location.address,
 				porfSuburb: data.data.location.suburb,
-				porfCityTown: data.data.location.city,
+
 				porfState: data.data.location.state,
-				porfPostalCode: data.data.location.pincode,
+
 				porfUploadImage: data.data.uploadImage,
 				EmpFirst: data.data.emergencyContact.firstName,
 				empLastName: data.data.emergencyContact.lastName,
@@ -482,8 +482,8 @@ export class AddEmployeeComponent implements OnInit {
 
 				// suburb:this.empDetails.get('porfSuburb').value,
 				state: this.empDetails.get('porfState').value,
-				// city: this.empDetails.get('porfCityTown').value,
-				// pincode: this.empDetails.get('porfPostalCode').value,
+				// city: this.empDetails.get('
+				// pincode: this.empDetails.get('
 				country: 'India'
 			}
 		};
@@ -585,8 +585,8 @@ export class AddEmployeeComponent implements OnInit {
 				landmark: 'Nagpur',
 				// suburb:this.empDetails.get('porfSuburb').value,
 				state: this.empDetails.get('porfState').value,
-				// city: this.empDetails.get('porfCityTown').value,
-				// pincode: this.empDetails.get('porfPostalCode').value,
+				// city: this.empDetails.get('
+				// pincode: this.empDetails.get('
 				country: 'India'
 			}
 		};
