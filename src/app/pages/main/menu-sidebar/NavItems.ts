@@ -70,7 +70,7 @@ export class NavItems {
                 {
                     displayedName: "Company Details ",
                     icon: "company",
-                    route: "/admin/registration/compdetails",
+                    route: "/admin/registration/addCompanyInfo/61eeeef751744133c768653c",
                     hasAccess: true
                 }
             ],

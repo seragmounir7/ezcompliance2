@@ -430,6 +430,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
        
       });
 
+      
       // this.dataUrl = data.data.ppe.signature;
       this.dataUrl2 = data.data.plantRegister.signature;
       console.log("data.data.ppe.signature;", data.data.plantRegister.signature);
