@@ -286,7 +286,7 @@ export class AddEmployeeComponent implements OnInit {
 				roleId: data.data.roleId,
 				reportingTo: data.data.reportingTo,
 				porfStreetAddress: data.data.location.address,
-				porfSuburb: data.data.location.suburb,
+				porfSuburb: data.data.suburb,
 
 				porfState: data.data.location.state,
 
