@@ -9,87 +9,88 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditRiskLevelComponent } from './edit-risk-level/edit-risk-level.component';
 import { MatSort, Sort } from '@angular/material/sort';
 
-
 @Component({
-  selector: 'app-risk-level',
-  templateUrl: './risk-level.component.html',
-  styleUrls: ['./risk-level.component.scss']
+	selector: 'app-risk-level',
+	templateUrl: './risk-level.component.html',
+	styleUrls: ['./risk-level.component.scss']
 })
 export class RiskLevelComponent implements OnInit {
+	ELEMENT_DATA = [];
+	/////////////mat table////////////////
+	displayedColumns: string[] = ['index', 'title', 'action'];
+	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	allRiskLevel: any[] = [];
 
-  ELEMENT_DATA = [];
-  /////////////mat table////////////////
-  displayedColumns: string[] = ['index', 'title', 'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  allRiskLevel: any[] = [];
+	ngAfterViewInit() {
+		this.dataSource.paginator = this.paginator;
+	}
+	constructor(
+		private dialog: MatDialog,
+		private setTitle: SetTitleService,
+		private logicalFormInfoService: LogicalFormInfoService,
+		private spinner: NgxSpinnerService
+	) {}
+	ngOnInit(): void {
+		this.setTitle.setTitle('WHS-RiskLevel Info');
+		this.getAllRiskLevel();
+	}
+	getAllRiskLevel(field = '', value = '') {
+		this.logicalFormInfoService
+			.getAllRiskLevel(field, value)
+			.subscribe((res: any) => {
+				console.log(res);
+				let data = res.data;
+				data.forEach((element, index) => {
+					element.index = index + 1; //adding index
+				});
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  constructor(
-    private dialog: MatDialog,
-    private setTitle: SetTitleService,
-    private logicalFormInfoService: LogicalFormInfoService,
-    private spinner: NgxSpinnerService
-  ) { }
-  ngOnInit(): void {
-    this.setTitle.setTitle('WHS-RiskLevel Info');
-    this.getAllRiskLevel()
-  }
-  getAllRiskLevel(field = "", value = "") {
-    this.logicalFormInfoService.getAllRiskLevel(field, value).subscribe((res: any) => {
-      console.log(res)
-      let data = res.data;
-      data.forEach((element, index) => {
-        element.index = index + 1; //adding index
-      });
+				this.ELEMENT_DATA = data;
+				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+				this.dataSource.paginator = this.paginator;
+				// this.dataSource.sort = this.sort;
+				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
+			});
+	}
 
-      this.ELEMENT_DATA = data;
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
-      console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
-    })
-  }
-
-  edit(element) {
-    const dialogRef = this.dialog.open(EditRiskLevelComponent, {
-      width: "550px",
-      // height:'50%',
-      data: element,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if ((result == "true")) {
-        this.getAllRiskLevel()
-      }
-      console.log("The dialog was closed");
-    });
-  }
-  delete(item) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to delete "${item.title}"?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#00B96F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete!',
-    }).then((result) => {
-      if (result.value) {
-        console.log(result)
-        // this.model.attributes.splice(i,1);
-        this.spinner.show()
-        this.logicalFormInfoService.deleteRiskLevel(item._id).subscribe((res => {
-          this.getAllRiskLevel()
-          this.spinner.hide()
-        }))
-      }
-    });
-  }
-  sortData(sort: Sort) {
-
-    this.getAllRiskLevel(sort.active, sort.direction)
-  }
+	edit(element) {
+		const dialogRef = this.dialog.open(EditRiskLevelComponent, {
+			width: '550px',
+			// height:'50%',
+			data: element
+		});
+		dialogRef.afterClosed().subscribe((result) => {
+			if (result == 'true') {
+				this.getAllRiskLevel();
+			}
+			console.log('The dialog was closed');
+		});
+	}
+	delete(item) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete "${item.title}"?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				console.log(result);
+				// this.model.attributes.splice(i,1);
+				void this.spinner.show();
+				this.logicalFormInfoService
+					.deleteRiskLevel(item._id)
+					.subscribe((res) => {
+						this.getAllRiskLevel();
+						void this.spinner.hide();
+					});
+			}
+		});
+	}
+	sortData(sort: Sort) {
+		this.getAllRiskLevel(sort.active, sort.direction);
+	}
 }

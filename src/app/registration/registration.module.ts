@@ -43,6 +43,7 @@ import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-c
 		NgxMatTimepickerModule
 	],
 	exports: [
+		AddAndEditCompanyInfoComponent,
 		CompanyRegistrationComponent,
 		EmployeeRegistrationComponent,
 		AddEmployeeComponent,
