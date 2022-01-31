@@ -6,25 +6,29 @@ import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
 	selector: 'app-licence-cat',
 	templateUrl: './licence-cat.component.html',
 	styleUrls: ['./licence-cat.component.scss']
 })
 export class LicenceCatComponent implements OnInit {
+	@ViewChild('table') table: MatTable<any>;
+
 	mode: any;
 	jobTaskData: any = [];
 	ELEMENT_DATA = [];
 	/////////////mat table////////////////
-	displayedColumns: string[] = ['index', 'title', 'action'];
-	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	displayedColumns: string[] = ['title', 'action'];
+	// dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+	dataSource = new Array<any>();
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 	ngAfterViewInit() {
-		this.dataSource.paginator = this.paginator;
+		// this.dataSource.paginator = this.paginator;
 	}
 	/////////////mat table end////////////////
 
@@ -47,8 +51,9 @@ export class LicenceCatComponent implements OnInit {
 			});
 
 			this.ELEMENT_DATA = data;
-			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-			this.dataSource.paginator = this.paginator;
+			// this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+			this.dataSource = this.ELEMENT_DATA;
+			// this.dataSource.paginator = this.paginator;
 			// this.dataSource.sort = this.sort;
 			//  this.task = res.data.subComponents;
 		});
@@ -93,8 +98,8 @@ export class LicenceCatComponent implements OnInit {
 		});
 	}
 	applyFilter(event: Event) {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
+		// const filterValue = (event.target as HTMLInputElement).value;
+		// this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 
 	sortData(sort: Sort) {
@@ -115,5 +120,20 @@ export class LicenceCatComponent implements OnInit {
 				});
 			});
 		// }
+	}
+
+	dropTable(event: CdkDragDrop<any[]>) {
+		const prevIndex = this.dataSource.findIndex(
+			(d) => d === event.item.data
+		);
+		moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
+		this.table.renderRows();
+		console.log(this.dataSource);
+	}
+	onSaveOrder() {
+		this.displayedColumns = ['title', 'action'];
+		this.logicalFormInfo.reOrderCat(this.dataSource).subscribe((res) => {
+			console.log(res);
+		});
 	}
 }
