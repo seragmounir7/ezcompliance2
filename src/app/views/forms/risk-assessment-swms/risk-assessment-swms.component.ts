@@ -10,7 +10,8 @@ import {
 	OnDestroy,
 	ViewChildren,
 	QueryList,
-	LOCALE_ID
+	LOCALE_ID,
+	Renderer2
 } from '@angular/core';
 import {
 	FormBuilder,
@@ -59,6 +60,7 @@ export class RiskAssessmentSWMSComponent
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
+		this.renderer.removeClass(document.querySelector('app-main'), 'hidden');
 		if (this.router.url.includes('/admin/savedForms')) {
 			this.router.navigateByUrl('/admin/savedForms');
 			return;
@@ -214,7 +216,8 @@ export class RiskAssessmentSWMSComponent
 		public upload: UploadFileServiceService,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		private employee: EmployeeRegistrationService
+		private employee: EmployeeRegistrationService,
+		private renderer: Renderer2
 	) {
 		//this.check = localStorage.getItem('key');
 		console.log('key check', this.check);

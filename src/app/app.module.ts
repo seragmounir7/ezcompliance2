@@ -51,6 +51,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localeAu from '@angular/common/locales/en-AU';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { DirectivesModule } from './Directives/directives.module';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -90,6 +91,7 @@ registerLocaleData(localeEn, 'en-EN');
 		ReactiveFormsModule,
 		BrowserAnimationsModule,
 		CommonModule,
+		DirectivesModule,
 		SignaturePadModule,
 		ToastrModule.forRoot({
 			timeOut: 10000,
