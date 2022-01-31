@@ -132,6 +132,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
 		let observer = new MutationObserver(
 			(mutations: MutationRecord[], observer: MutationObserver) => {
+				console.log('side menu mutation');
 				mutations.forEach((item: any) => {
 					if (item.target.classList.contains('sidebar-mini')) {
 						this.mainSidebar.nativeElement.addEventListener(

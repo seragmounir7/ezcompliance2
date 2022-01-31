@@ -3,7 +3,13 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { registerLocaleData, CommonModule, HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
+import {
+	registerLocaleData,
+	CommonModule,
+	HashLocationStrategy,
+	LocationStrategy,
+	DatePipe
+} from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeEn from '@angular/common/locales/en';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -44,87 +50,89 @@ import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localeAu from '@angular/common/locales/en-AU';
 import { MatStepperModule } from '@angular/material/stepper';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { DirectivesModule } from './Directives/directives.module';
 
-registerLocaleData(localeAu,'en-au');
-
+registerLocaleData(localeAu, 'en-au');
 
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainComponent,
-    LoginComponent,
-    HeaderComponent,
-    FooterComponent,
-    MenuSidebarComponent,
-    BlankComponent,
-    ProfileComponent,
-    RegisterComponent,
-    DashboardComponent,
-    MessagesDropdownMenuComponent,
-    NotificationsDropdownMenuComponent,
-    UserDropdownMenuComponent,
-    // ViewFormsComponent,
-    NotFoundPageComponent,
-    PrintLayoutComponent,
-  ],
-  imports: [
-    BrowserModule,
-    SharedModule,
-    MatStepperModule,
-    AppRoutingModule,
-    AngularSvgIconModule.forRoot(),
-    AngularSvgIconPreloaderModule.forRoot({
-      configUrl: './assets/json/svg.json',
-    }),
-    FormsModule,
-    NgxSpinnerModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    SignaturePadModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
-    // NgbModule,
-    NgxMatTimepickerModule,
-    HttpClientModule,
-    DndModule,
-    //   DxButtonModule,
-    ChartsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM',
-    }),
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-
-    {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SpinnerInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    },
-    { provide: MAT_DATE_LOCALE, useValue: 'en-au' },
-    { provide: LOCALE_ID, useValue: 'en-au' },
-    DatePipe
-  ],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		MainComponent,
+		LoginComponent,
+		HeaderComponent,
+		FooterComponent,
+		MenuSidebarComponent,
+		BlankComponent,
+		ProfileComponent,
+		RegisterComponent,
+		DashboardComponent,
+		MessagesDropdownMenuComponent,
+		NotificationsDropdownMenuComponent,
+		UserDropdownMenuComponent,
+		// ViewFormsComponent,
+		NotFoundPageComponent,
+		PrintLayoutComponent,
+		ResetPasswordComponent
+	],
+	imports: [
+		BrowserModule,
+		SharedModule,
+		MatStepperModule,
+		AppRoutingModule,
+		AngularSvgIconModule.forRoot(),
+		AngularSvgIconPreloaderModule.forRoot({
+			configUrl: './assets/json/svg.json'
+		}),
+		FormsModule,
+		NgxSpinnerModule,
+		ReactiveFormsModule,
+		BrowserAnimationsModule,
+		CommonModule,
+		DirectivesModule,
+		SignaturePadModule,
+		ToastrModule.forRoot({
+			timeOut: 10000,
+			positionClass: 'toast-bottom-right',
+			preventDuplicates: true
+		}),
+		// NgbModule,
+		NgxMatTimepickerModule,
+		HttpClientModule,
+		DndModule,
+		//   DxButtonModule,
+		ChartsModule,
+		AgmCoreModule.forRoot({
+			apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM'
+		})
+	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers: [
+		{
+			provide: LocationStrategy,
+			useClass: HashLocationStrategy
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: SpinnerInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorInterceptor,
+			multi: true
+		},
+		{ provide: MAT_DATE_LOCALE, useValue: 'en-au' },
+		{ provide: LOCALE_ID, useValue: 'en-au' },
+		DatePipe
+	],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

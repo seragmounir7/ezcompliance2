@@ -14,6 +14,9 @@
 	body * {
 		visibility: hidden;
 	}
+	.hidden {
+		display: none;
+	}
 	#section-to-print,
 	#section-to-print * {
 		visibility: visible !important;
