@@ -225,10 +225,10 @@ export class RiskAssessmentSWMSComponent
 			jobNumber: ['', Validators.required],
 			siteName: ['', Validators.required],
 			customerName: ['', Validators.required],
-			streetNo: ['', Validators.required],
+			// streetNo: ['', Validators.required],
 			streetAddr: ['', Validators.required],
 			suburb: ['', Validators.required],
-			town: ['', Validators.required],
+			// town: ['', Validators.required],
 			custConct: ['', Validators.required],
 			custConctPh: ['', Validators.required],
 			custEmail: ['', Validators.required],
@@ -372,7 +372,7 @@ export class RiskAssessmentSWMSComponent
 			});
 
 			this.filteredOptions1 = this.riskAssessmentFb.controls.employee1.valueChanges.pipe(
-				startWith(''),
+				startWith({ fullName: '' }),
 				debounceTime(400),
 				tap((value) =>
 					typeof value === 'object'
@@ -457,7 +457,7 @@ export class RiskAssessmentSWMSComponent
 		this.logicalFormInfo.getAssessmentbyId(id).subscribe((res: any) => {
 			this.allCOPSelected = [];
 			console.log('assesment by id', res.data);
-
+			this.tradeCategoryArr = res.data.tradeCategoryArr;
 			this.jobTaskData = res.data.jobTaskDataArr;
 			this.PPEselection = res.data.PPEselectionArr;
 			this.highRiskConstruction = res.data.highRiskConstructionArr;
@@ -696,7 +696,7 @@ export class RiskAssessmentSWMSComponent
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
-					streetNo: item.streetNumber,
+					// streetNo: item.streetNumber,
 					streetAddr: item.streetAddress,
 					suburb: item.suburb,
 					statesSWMS: item.stateId._id,
@@ -1704,6 +1704,7 @@ export class RiskAssessmentSWMSComponent
 		const data = {
 			...rest,
 			//  ... this.riskAssessmentFb.value,
+			tradeCategoryArr: this.tradeCategoryArr,
 			codeOfPract: this.allCOPSelected,
 			identifyHazards: this.jobTaskSelected,
 			jobTaskDataArr: this.jobTaskData,
@@ -1817,5 +1818,16 @@ export class RiskAssessmentSWMSComponent
 				console.log(checkBox);
 			}
 		});
+	}
+
+	public findInvalidControls() {
+		const invalid = [];
+		const controls = this.riskAssessmentFb.controls;
+		for (const name in controls) {
+			if (controls[name].invalid) {
+				invalid.push(name);
+			}
+		}
+		return invalid;
 	}
 }

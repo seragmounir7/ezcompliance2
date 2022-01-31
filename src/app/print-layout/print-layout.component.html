@@ -1,35 +1,36 @@
-<table id="section-to-print">
-  <thead>
-    <tr>
-      <td>
-        <div class="header-space"></div>
-        <!-- <div class="header" >COOL HEADER</div> -->
-      </td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <div class="content">
-          <router-outlet></router-outlet>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td>
-        <div class="footer-space"></div>
-        <!-- <div class="footer" >AWESOME FOOTER</div> -->
-      </td>
-    </tr>
-  </tfoot>
+<div class="page-header" style="text-align: center">
+	I'm The Header
+	<br />
+</div>
+
+<table>
+	<thead>
+		<tr>
+			<td>
+				<div class="page-header-space"></div>
+				<!-- <div class="header" >COOL HEADER</div> -->
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<div class="page">
+					<router-outlet></router-outlet>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td>
+				<div class="page-footer-space"></div>
+				<!-- <div class="footer" >AWESOME FOOTER</div> -->
+			</td>
+		</tr>
+	</tfoot>
 </table>
 
-
-<ngx-spinner id="printLoader" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin-clockwise"
-  [fullScreen]="true">
-  <p style="color: white">Loading...</p>
-</ngx-spinner>
+<div class="page-footer">I'm The Footer</div>
 
 <!-- <router-outlet></router-outlet> -->
