@@ -1,6 +1,30 @@
 <div class="page-header" style="text-align: center">
-	I'm The Header
 	<br />
+	<div class="d-flex mb-0 pb-1 justify-content-center">
+		<!-- <img src="{{companyLogo}}" alt="img" width="40" height="40" id="imgwrap" class="img mr-4" /> -->
+		<img
+			src="../assets/img/Artboard – 4.png"
+			alt="img"
+			width="40"
+			height="40"
+			id="imgwrap"
+			class="img mr-4"
+		/>
+		<div class="pt-2 d-flex">
+			<h3 class="mr-3">{{ companyName | titlecase }}</h3>
+			<p class="mx-2 mt-1 phone">
+				<i class="fas fa-phone-alt"></i> {{phone}}
+			</p>
+			<p class="mx-2 mt-1"><i class="fas fa-at"></i> {{emailAddress}}</p>
+			<p class="mx-2 mt-1">
+				<i class="fas fa-map-marker-alt"></i> {{streetAddress}} ,
+				{{subUrb}}
+			</p>
+			<p class="mx-2 mt-1">ABN : {{companyABN}}</p>
+			<p class="mx-2 mt-1">Licence : {{licenceNumber}}</p>
+			<p class="mx-2 mt-1"><i class="fas fa-globe"></i> {{companyWeb}}</p>
+		</div>
+	</div>
 </div>
 
 <table style="display: table">
@@ -29,6 +53,25 @@
 	</tfoot>
 </table>
 
-<div class="page-footer">I'm The Footer</div>
+<div class="page-footer">
+	<div class="d-flex mb-0 pb-1 ml-3">
+		<!-- <img src="{{companyLogo}}" alt="img" width="40" height="40" id="imgwrap" class="img mr-4" /> -->
+		<!-- <img src="../assets/img/Artboard – 4.png" alt="img" width="40" height="40" id="imgwrap" class="img mr-4" /> -->
+		<div class="pt-2 d-flex">
+			<h3 class="mr-3">{{ companyName | titlecase }}</h3>
+			<p class="mx-2 mt-1 phone">
+				<i class="fas fa-phone-alt"></i> {{phone}}
+			</p>
+			<p class="mx-2 mt-1"><i class="fas fa-at"></i> {{emailAddress}}</p>
+			<p class="mx-2 mt-1">
+				<i class="fas fa-map-marker-alt"></i> {{streetAddress}} ,
+				{{subUrb}}
+			</p>
+			<p class="mx-2 mt-1">ABN : {{companyABN}}</p>
+			<p class="mx-2 mt-1">Licence : {{licenceNumber}}</p>
+			<p class="mx-2 mt-1"><i class="fas fa-globe"></i> {{companyWeb}}</p>
+		</div>
+	</div>
+</div>
 
 <!-- <router-outlet></router-outlet> -->
