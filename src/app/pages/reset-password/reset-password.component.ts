@@ -42,7 +42,6 @@ export class ResetPasswordComponent implements OnInit {
 	password(formGroup: FormGroup) {
 		const { value: newPassword } = formGroup.get('newPassword');
 		const { value: confirm_password } = formGroup.get('confirm_password');
-		console.log('fb-->', formGroup, newPassword, confirm_password);
 		return newPassword === confirm_password
 			? null
 			: { passwordNotMatch: true };

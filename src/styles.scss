@@ -27,6 +27,9 @@
 		left: 0 !important;
 		top: 0 !important;
 	}
+	.pagebreak-print {
+		page-break-before: always !important;
+	}
 }
 .flex-start {
 	display: flex;

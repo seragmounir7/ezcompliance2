@@ -635,7 +635,7 @@
 						</div>
 						<hr />
 
-						<div class="mt-4 page">
+						<div class="mt-4 pagebreak-print">
 							<h2>High Risk Construction</h2>
 						</div>
 
@@ -2429,7 +2429,7 @@
 				</div>
 				<hr />
 
-				<div class="mt-4">
+				<div class="mt-4 pagebreak-print">
 					<h2>High Risk Construction</h2>
 				</div>
 
@@ -2482,7 +2482,7 @@
 
 			<hr />
 
-			<div class="mt-4">
+			<div class="mt-4 pagebreak-print">
 				<h2>Licence and Qualifications</h2>
 			</div>
 
@@ -2848,14 +2848,16 @@
 					</div>
 				</div>
 				<hr />
+
 				<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
+
 				<div class="row">
 					<!--<div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
          <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
         </div> -->
 					<div
 						*ngFor="let item of allCOPSelected; let i = index"
-						class="mt-2 col-4"
+						class="mt-2 col-4 col-sm-4-print"
 					>
 						<input
 							type="checkbox"
@@ -2871,7 +2873,9 @@
 					</div>
 				</div>
 				<hr />
+
 				<h2>High Risk Construction</h2>
+
 				<div class="row" formArrayName="riskConstruction2">
 					<div
 						*ngFor="let control of riskConstruct2().controls; let i = index"
@@ -2893,7 +2897,6 @@
 					</div>
 				</div>
 				<hr />
-
 				<h2>PPE Selection</h2>
 				<div class="row" formArrayName="PPESelection2">
 					<div
@@ -3057,7 +3060,7 @@
 					</ng-container>
 				</ng-container>
 				<hr />
-				<div class="row">
+				<div class="row pagebreak-print">
 					<table class="table table-bordered text-center">
 						<thead>
 							<tr>

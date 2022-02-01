@@ -119,9 +119,6 @@
 		margin-left: -7.5px;
 	}
 
-	// #section-to-print {
-	//   margin-top: -30rem;
-	// }
 	.col-sm-2-print {
 		width: 16.66666667%;
 	}
@@ -167,9 +164,7 @@
 		background-color: #5fdf5f !important;
 		-webkit-print-color-adjust: exact;
 	}
-	.page {
-		page-break-after: always !important;
-	}
+	// .pagebreak-print { page-break-before: always !important; }
 	.page-footer {
 		position: fixed;
 		bottom: 0;
