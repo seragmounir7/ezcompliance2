@@ -1351,7 +1351,6 @@ export interface JobNumber {
 export interface ArrObj {
 	jobNumber?: string;
 	siteName: string;
-	streetNumber: string;
 	streetAddress: string;
 	suburb: string;
 	stateId: string;
