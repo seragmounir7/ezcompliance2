@@ -1,79 +1,153 @@
-<div class="btn btn-outline-primary" *ngIf="id ==='form'" [routerLink]="['/admin/forms/fillConfigForm/'+0]"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	*ngIf="id ==='form'"
+	[routerLink]="['/admin/forms/fillConfigForm/'+0]"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<div class="btn btn-outline-primary" *ngIf="!isHistory && id!=='form' && type!=='Hazard'"
-  [routerLink]="['/admin/forms/hazardTable']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	*ngIf="!isHistory && id!=='form' && type!=='Hazard'"
+	[routerLink]="['/admin/forms/hazardTable']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<div class="btn btn-outline-primary" *ngIf="type==='Hazard'" [routerLink]="['/admin/savedForms']"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	*ngIf="type==='Hazard'"
+	[routerLink]="['/admin/savedForms']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<div class="btn btn-outline-primary" *ngIf="isHistory" [routerLink]="returnTo | async"><i class="fa fa-arrow-left"
-    aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	*ngIf="isHistory"
+	[routerLink]="returnTo | async"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<div id='section-to-print' class="container card px-4 py-4 content-center" [class.disableDiv]="isHistory">
-  <form class="px-4 py-4" [formGroup]="hazardReport">
-    <div class="mb-3">
-      <p class="text-center title">Hazard Report Form </p>
-    </div>
-    <hr class="mt-5" />
+<div
+	id="section-to-print"
+	class="container card px-4 py-4 content-center"
+	[class.disableDiv]="isHistory"
+>
+	<form class="px-4 py-4" [formGroup]="hazardReport">
+		<div class="mb-3">
+			<p class="text-center title">Hazard Report Form</p>
+		</div>
+		<hr class="mt-5" />
 
-    <div class="row py-4">
-      <div class="col-md-12">
-        <div style="padding: 0px" class="col-md-6 col-sm-6-print">
-          <h3 class="mb-3 text_1">Part A - Form Details</h3>
-          <h4 class="text_2">Position Reporting The Hazard</h4>
-        </div>
-        <div style="padding: 0px" class="col-md-12">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" formControlName="employeeParttime" id="inlineCheckbox5"
-              value="option4" />
-            <label class="form-check-label ml-1" for="inlineCheckbox5">Fulltime Employee</label>
-          </div>
-          <div class="form-check form-check-inline ml-4">
-            <input class="form-check-input checkbox-lg" type="radio" formControlName="employeeParttime"
-              id="inlineCheckbox6" value="option5" />
-            <label class="form-check-label ml-1" for="inlineCheckbox6">Part-time Employee</label>
-          </div>
-          <div class="form-check form-check-inline ml-4">
-            <input class="form-check-input" type="radio" formControlName="employeeParttime" id="inlineCheckbox7"
-              value="option6" />
-            <label class="form-check-label ml-1" for="inlineCheckbox7">Casual</label>
-          </div>
-          <div class="form-check form-check-inline ml-4">
-            <input class="form-check-input" type="radio" formControlName="employeeParttime" id="inlineCheckbox8"
-              value="option7" />
-            <label class="form-check-label ml-1" for="inlineCheckbox8">Contractor</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="mb-3">
-          <label for="exampleInputFullname" class="form-label">Full Name<span class="text-danger ">*</span></label>
-          <input type="text" [matAutocomplete]="employee" autocomplete="off" name="exampleInputFullname"
-            class="form-control" formControlName="fullName" id="exampleInputFullname" aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
-            && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) " />
-          <!-- <datalist id="browsers" >
+		<div class="row py-4">
+			<div class="col-md-12">
+				<div style="padding: 0px" class="col-md-6 col-sm-6-print">
+					<h3 class="mb-3 text_1">Part A - Form Details</h3>
+					<h4 class="text_2">Position Reporting The Hazard</h4>
+				</div>
+				<div style="padding: 0px" class="col-md-12">
+					<div class="form-check form-check-inline">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="employeeParttime"
+							id="inlineCheckbox5"
+							value="option4"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox5"
+							>Fulltime Employee</label
+						>
+					</div>
+					<div class="form-check form-check-inline ml-4">
+						<input
+							class="form-check-input checkbox-lg"
+							type="radio"
+							formControlName="employeeParttime"
+							id="inlineCheckbox6"
+							value="option5"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox6"
+							>Part-time Employee</label
+						>
+					</div>
+					<div class="form-check form-check-inline ml-4">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="employeeParttime"
+							id="inlineCheckbox7"
+							value="option6"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox7"
+							>Casual</label
+						>
+					</div>
+					<div class="form-check form-check-inline ml-4">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="employeeParttime"
+							id="inlineCheckbox8"
+							value="option7"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox8"
+							>Contractor</label
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="mb-3">
+					<label for="exampleInputFullname" class="form-label"
+						>Full Name<span class="text-danger">*</span></label
+					>
+					<input
+						type="text"
+						[matAutocomplete]="employee"
+						autocomplete="off"
+						name="exampleInputFullname"
+						class="form-control"
+						formControlName="fullName"
+						id="exampleInputFullname"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
+            && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) "
+					/>
+					<!-- <datalist id="browsers" >
               <option *ngFor="let option of empData ; let i = index " [value]="option.firstName">
             </datalist> -->
-          <mat-autocomplete #employee="matAutocomplete" (optionSelected)="employeeData($event)"
-            [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions2 | async ; let i = index " [value]="option">
-              {{option.fullName}}
-            </mat-option>
-          </mat-autocomplete>
-          <span *ngIf="
+					<mat-autocomplete
+						#employee="matAutocomplete"
+						(optionSelected)="employeeData($event)"
+						[displayWith]="displayFn"
+					>
+						<mat-option
+							*ngFor="let option of filteredOptions2 | async ; let i = index "
+							[value]="option"
+						>
+							{{option.fullName}}
+						</mat-option>
+					</mat-autocomplete>
+					<span
+						*ngIf="
             hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
-            || hazardReport.get('fullName').touched) " class="invalid-feedback">
-            Full Name is Required</span>
-
-        </div>
-      </div>
-    </div>
-    <!-- <div class="col-md-6 col-sm-6-print">
+            || hazardReport.get('fullName').touched) "
+						class="invalid-feedback"
+					>
+						Full Name is Required</span
+					>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputSurname" class="form-label">Surname</label>
           <input
@@ -85,59 +159,110 @@
           />
         </div>
       </div> -->
-    <div class="row">
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address<span class="text-danger ">*</span></label>
-          <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1"
-            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('email')?.hasError('required') 
-            && (hazardReport.get('email').dirty || hazardReport.get('email').touched) " />
-          <span *ngIf="
+		<div class="row">
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label"
+						>Email address<span class="text-danger">*</span></label
+					>
+					<input
+						type="email"
+						class="form-control"
+						formControlName="email"
+						id="exampleInputEmail1"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('email')?.hasError('required') 
+            && (hazardReport.get('email').dirty || hazardReport.get('email').touched) "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('email')?.hasError('required') && (hazardReport.get('email').dirty 
-            || hazardReport.get('email').touched) " class="invalid-feedback">
-            Email is Required</span>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputPhone" class="form-label">Phone<span class="text-danger ">*</span></label>
-          <input maxlength="10" class="form-control" formControlName="phone" id="exampleInputPhone"
-            aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('phone')?.hasError('required') 
-            && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) || hazardReport.get('phone')?.hasError('pattern') " />
-          <span *ngIf="
+            || hazardReport.get('email').touched) "
+						class="invalid-feedback"
+					>
+						Email is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="exampleInputPhone" class="form-label"
+						>Phone<span class="text-danger">*</span></label
+					>
+					<input
+						maxlength="10"
+						class="form-control"
+						formControlName="phone"
+						id="exampleInputPhone"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('phone')?.hasError('required') 
+            && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) || hazardReport.get('phone')?.hasError('pattern') "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('phone')?.hasError('required') && (hazardReport.get('phone').dirty 
-            || hazardReport.get('phone').touched) " class="invalid-feedback">
-            Phone Number is Required</span>
-          <span *ngIf="hazardReport.get('phone')?.hasError('pattern')" class="invalid-feedback">
-            Phone Number Should be 10 digits</span>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputDepartment" class="form-label">Department<span class="text-danger ">*</span></label>
-          <input type="department" class="form-control" formControlName="department" id="exampleInputDepartment"
-            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('department')?.hasError('required') 
-            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) " />
-          <span *ngIf="
+            || hazardReport.get('phone').touched) "
+						class="invalid-feedback"
+					>
+						Phone Number is Required</span
+					>
+					<span
+						*ngIf="hazardReport.get('phone')?.hasError('pattern')"
+						class="invalid-feedback"
+					>
+						Phone Number Should be 10 digits</span
+					>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="exampleInputDepartment" class="form-label"
+						>Department<span class="text-danger">*</span></label
+					>
+					<input
+						type="department"
+						class="form-control"
+						formControlName="department"
+						id="exampleInputDepartment"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+            && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
-            || hazardReport.get('department').touched) " class="invalid-feedback">
-            Department is Required</span>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputPosition" class="form-label">Position<span class="text-danger ">*</span></label>
-          <input type="position" class="form-control" formControlName="position" id="exampleInputPosition"
-            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('position')?.hasError('required') 
-            && (hazardReport.get('position').dirty || hazardReport.get('position').touched) " />
-          <span *ngIf="
+            || hazardReport.get('department').touched) "
+						class="invalid-feedback"
+					>
+						Department is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="exampleInputPosition" class="form-label"
+						>Position<span class="text-danger">*</span></label
+					>
+					<input
+						type="position"
+						class="form-control"
+						formControlName="position"
+						id="exampleInputPosition"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('position')?.hasError('required') 
+            && (hazardReport.get('position').dirty || hazardReport.get('position').touched) "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('position')?.hasError('required') && (hazardReport.get('position').dirty 
-            || hazardReport.get('position').touched) " class="invalid-feedback">
-            Position is Required</span>
-        </div>
-      </div>
-      <!-- <div class="col-md-6 col-sm-6-print">
+            || hazardReport.get('position').touched) "
+						class="invalid-feedback"
+					>
+						Position is Required</span
+					>
+				</div>
+			</div>
+			<!-- <div class="col-md-6 col-sm-6-print">
         <div class="mb-3">
           <label for="exampleInputProjectNumber" class="form-label"
             >Project Number</label
@@ -162,29 +287,38 @@
           >
         </div>
       </div> -->
-    </div>
+		</div>
 
-    <hr />
-    <div class="row">
-      <div class="col-md-12 report_1">
-        <h3 style="margin-top: 1.5%">Report to be sent to the following</h3>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label class="form-label">Manager/Supervisor</label>
-          <select formControlName="managerSupervisor" class="form-select form-control col form-dropdown"
-            aria-label="Default select example">
-            <option selected hidden>Select</option>
-            <option *ngFor="let manager of whsData" [value]="manager._id">{{manager.name}}</option>
-
-          </select>
-          <!-- <input
+		<hr />
+		<div class="row">
+			<div class="col-md-12 report_1">
+				<h3 style="margin-top: 1.5%">
+					Report to be sent to the following
+				</h3>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label class="form-label">Manager/Supervisor</label>
+					<select
+						formControlName="managerSupervisor"
+						class="form-select form-control col form-dropdown"
+						aria-label="Default select example"
+					>
+						<option selected hidden>Select</option>
+						<option
+							*ngFor="let manager of whsData"
+							[value]="manager._id"
+						>
+							{{manager.name}}
+						</option>
+					</select>
+					<!-- <input
             type="text"
             class="form-control"
             formControlName="managerSupervisor"
             aria-describedby="emailHelp"
           /> -->
-          <!-- <input 
+					<!-- <input 
           class="form-control"
                   type="text" 
                
@@ -200,647 +334,1089 @@
                  {{manager.name}}
               </mat-option>
           </mat-autocomplete> -->
-
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email Address</label>
-          <select formControlName="managerSupervisorEmail" class="form-select form-control col form-dropdown"
-            aria-label="Default select example">
-            <option selected hidden>Select</option>
-            <option *ngFor="let manager of whsData" [value]="manager.email">{{manager.email}}</option>
-
-          </select>
-          <!-- <input
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="email" class="form-label">Email Address</label>
+					<select
+						formControlName="managerSupervisorEmail"
+						class="form-select form-control col form-dropdown"
+						aria-label="Default select example"
+					>
+						<option selected hidden>Select</option>
+						<option
+							*ngFor="let manager of whsData"
+							[value]="manager.email"
+						>
+							{{manager.email}}
+						</option>
+					</select>
+					<!-- <input
             type="email"
             class="form-control"
             formControlName="managerSupervisorEmail"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
           />  -->
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="exampleInputProjectNumber" class="form-label"
+						>WHS Manager</label
+					>
 
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputProjectNumber" class="form-label">WHS Manager</label>
-
-          <input class="form-control" type="text" placeholder="Enter Name" formControlName="myControl" matInput
-            [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="change($event)">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{option.name}}
-            </mat-option>
-          </mat-autocomplete>
-
-
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" class="form-control" formControlName="whsManagerEmail" id="exampleInputProjectNumber"
-            aria-describedby="emailHelp" />
-
-
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="text_3">Hazard Details</h2>
-      </div>
-      <div class="col-md-12 py-4">
-        <div class="form-floating">
-          <h3>Describe the Hazard<span class="text-danger ">*</span></h3>
-          <textarea class="form-control" formControlName="describeHazard" placeholder="Leave a comment here"
-            id="floatingTextarea2" style="height: 120px" aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('describeHazard')?.hasError('required') 
-            && (hazardReport.get('describeHazard').dirty || hazardReport.get('describeHazard').touched) "></textarea>
-          <span *ngIf="
+					<input
+						class="form-control"
+						type="text"
+						placeholder="Enter Name"
+						formControlName="myControl"
+						matInput
+						[matAutocomplete]="auto"
+					/>
+					<mat-autocomplete
+						#auto="matAutocomplete"
+						(optionSelected)="change($event)"
+					>
+						<mat-option
+							*ngFor="let option of filteredOptions | async"
+							[value]="option"
+						>
+							{{option.name}}
+						</mat-option>
+					</mat-autocomplete>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label for="email" class="form-label">Email Address</label>
+					<input
+						type="email"
+						class="form-control"
+						formControlName="whsManagerEmail"
+						id="exampleInputProjectNumber"
+						aria-describedby="emailHelp"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text_3">Hazard Details</h2>
+			</div>
+			<div class="col-md-12 py-4">
+				<div class="form-floating">
+					<h3>
+						Describe the Hazard<span class="text-danger">*</span>
+					</h3>
+					<textarea
+						class="form-control"
+						formControlName="describeHazard"
+						placeholder="Leave a comment here"
+						id="floatingTextarea2"
+						style="height: 120px"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('describeHazard')?.hasError('required') 
+            && (hazardReport.get('describeHazard').dirty || hazardReport.get('describeHazard').touched) "
+					></textarea>
+					<span
+						*ngIf="
           hazardReport.get('describeHazard')?.hasError('required') && (hazardReport.get('describeHazard').dirty 
-          || hazardReport.get('describeHazard').touched) " class="invalid-feedback">
-            Description is Required</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-md-3-print">
-        <div class="mb-3">
-          <label for="email" class="form-label">Date Hazard Reported<span class="text-danger ">*</span></label>
-          <input matInput [matDatepicker]="datepicker" [max]="maxDate" class="form-control"
-            formControlName="dateHazardReport" id="exampleInputProjectNumber" [class.is-invalid-date]="hazardReport.get('dateHazardReport')?.hasError('required') 
+          || hazardReport.get('describeHazard').touched) "
+						class="invalid-feedback"
+					>
+						Description is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-3 col-md-3-print">
+				<div class="mb-3">
+					<label for="email" class="form-label"
+						>Date Hazard Reported<span class="text-danger"
+							>*</span
+						></label
+					>
+					<input
+						matInput
+						[matDatepicker]="datepicker"
+						[max]="maxDate"
+						class="form-control"
+						formControlName="dateHazardReport"
+						id="exampleInputProjectNumber"
+						[class.is-invalid-date]="hazardReport.get('dateHazardReport')?.hasError('required') 
             && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
-            placeholder="dd-mm-yyyy">
-          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-          <mat-datepicker #datepicker></mat-datepicker>
-          <!--  -->
-          <span *ngIf="
+						placeholder="dd-mm-yyyy"
+					/>
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="datepicker"
+					></mat-datepicker-toggle>
+					<mat-datepicker #datepicker></mat-datepicker>
+					<!--  -->
+					<span
+						*ngIf="
             hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
-            || hazardReport.get('dateHazardReport').touched) " class="invalid-feedback1 ">
-            Date is Required</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-md-3-print">
-        <div class="mb-3">
-          <label for="email" class="form-label">Location of Hazard<span class="text-danger ">*</span></label>
-          <input type="text" class="form-control" formControlName="locationHazard" id="exampleInputProjectNumber"
-            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('locationHazard')?.hasError('required') 
-            && (hazardReport.get('locationHazard').dirty || hazardReport.get('locationHazard').touched) " />
-          <span *ngIf="
+            || hazardReport.get('dateHazardReport').touched) "
+						class="invalid-feedback1"
+					>
+						Date is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-3 col-md-3-print">
+				<div class="mb-3">
+					<label for="email" class="form-label"
+						>Location of Hazard<span class="text-danger"
+							>*</span
+						></label
+					>
+					<input
+						type="text"
+						class="form-control"
+						formControlName="locationHazard"
+						id="exampleInputProjectNumber"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('locationHazard')?.hasError('required') 
+            && (hazardReport.get('locationHazard').dirty || hazardReport.get('locationHazard').touched) "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('locationHazard')?.hasError('required') && (hazardReport.get('locationHazard').dirty 
-            || hazardReport.get('locationHazard').touched) " class="invalid-feedback">
-            Location is Required</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-md-3-print">
-        <div class="mb-3">
-          <label for="email" class="form-label">Date Hazard Identified<span class="text-danger ">*</span></label>
-          <input matInput [matDatepicker]="datepicker1" [max]="maxDate" class="form-control"
-            formControlName="dateHazardIdentify" id="exampleInputProjectNumber" [class.is-invalid-date]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
+            || hazardReport.get('locationHazard').touched) "
+						class="invalid-feedback"
+					>
+						Location is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-3 col-md-3-print">
+				<div class="mb-3">
+					<label for="email" class="form-label"
+						>Date Hazard Identified<span class="text-danger"
+							>*</span
+						></label
+					>
+					<input
+						matInput
+						[matDatepicker]="datepicker1"
+						[max]="maxDate"
+						class="form-control"
+						formControlName="dateHazardIdentify"
+						id="exampleInputProjectNumber"
+						[class.is-invalid-date]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
             && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
-            placeholder="dd-mm-yyyy">
-          <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
-          <mat-datepicker #datepicker1></mat-datepicker>
+						placeholder="dd-mm-yyyy"
+					/>
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="datepicker1"
+					></mat-datepicker-toggle>
+					<mat-datepicker #datepicker1></mat-datepicker>
 
-          <span *ngIf="
+					<span
+						*ngIf="
             hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
-            || hazardReport.get('dateHazardIdentify').touched) " class="invalid-feedback1">
-            Date is Required</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-md-3-print">
-        <div class="mb-3">
-          <label class="form-label">Job Number<span class="text-danger ">*</span></label>
-          <select class="form-control form-select" formControlName="jobNumberId" [class.is-invalid]="hazardReport.get('jobNumberId')?.hasError('required') 
-            && (hazardReport.get('jobNumberId').dirty || hazardReport.get('jobNumberId').touched) ">
-            <option selected hidden>Select</option>
-            <option [value]="jobNo._id" *ngFor="let jobNo of allJobNumbers">{{jobNo.jobNumber}}</option>
-
-          </select>
-          <span *ngIf="
+            || hazardReport.get('dateHazardIdentify').touched) "
+						class="invalid-feedback1"
+					>
+						Date is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-3 col-md-3-print">
+				<div class="mb-3">
+					<label class="form-label"
+						>Job Number<span class="text-danger">*</span></label
+					>
+					<select
+						class="form-control form-select"
+						formControlName="jobNumberId"
+						[class.is-invalid]="hazardReport.get('jobNumberId')?.hasError('required') 
+            && (hazardReport.get('jobNumberId').dirty || hazardReport.get('jobNumberId').touched) "
+					>
+						<option selected hidden>Select</option>
+						<option
+							[value]="jobNo._id"
+							*ngFor="let jobNo of allJobNumbers"
+						>
+							{{jobNo.jobNumber}}
+						</option>
+					</select>
+					<span
+						*ngIf="
             hazardReport.get('jobNumberId')?.hasError('required') && (hazardReport.get('jobNumberId').dirty 
-            || hazardReport.get('jobNumberId').touched) " class="invalid-feedback">
-            Job Number is Required</span>
-        </div>
-      </div>
-    </div>
-    <div class="row py-4 pagebreak-print">
-      <div class="col-md-12">
-        <h2>Hazard Treatment</h2>
-      </div>
-      <div class="col-md-12">
-        <table class="table table-bordered text-center">
-          <thead>
-            <tr>
-              <th colspan="7" class="L_1">Risk Level Matrix</th>
-              <th colspan="8" class="L_1">Risk Analysis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th colspan="2" rowspan="2"></th>
-              <td colspan="5">Consequence</td>
-              <td colspan="4" rowspan="2">
-                <div class="like_2">Likelihood</div>
-              </td>
-              <td colspan="4" rowspan="2">
-                <div class="like_2">Consequence</div>
-              </td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <th rowspan="5">
-                <div class="like_1">Likelihood</div>
-              </th>
-              <td>5</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td colspan="2">
-                <div class="space_1">1</div>
-              </td>
-              <td colspan="2">Rare</td>
-              <td colspan="2">
-                <div class="space_1">1</div>
-              </td>
-              <td colspan="2">Insignificant</td>
-            </tr>
-            <tr>
-              <th>4</th>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td colspan="2">2</td>
-              <td colspan="2">Unlikely</td>
-              <td colspan="2">2</td>
-              <td colspan="2">Minor</td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td class="L_1">L</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td class="H_1">H</td>
-              <td colspan="2">3</td>
-              <td colspan="2">Moderate</td>
-              <td colspan="2">3</td>
-              <td colspan="2">Moderate</td>
-            </tr>
-            <tr>
-              <th scope="col">2</th>
-              <td class="L_1">L</td>
-              <td class="L_1">L</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td class="H_1">H</td>
-              <td colspan="2">4</td>
-              <td colspan="2">Likely</td>
-              <td colspan="2">4</td>
-              <td colspan="2">Major</td>
-            </tr>
-            <tr>
-              <th scope="col">1</th>
-              <td class="L_1">L</td>
-              <td class="L_1">L</td>
-              <td class="L_1">L</td>
-              <td class="M_1">M</td>
-              <td class="M_1">M</td>
-              <td colspan="2" class="mr-2 ml-2">5</td>
-              <td colspan="2">Almost Certain</td>
-              <td colspan="2">5</td>
-              <td colspan="2">Catastrophic</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="mb-3 col">
-        <label for="exampleFormControlInput1" class="form-label">Consequence</label>
+            || hazardReport.get('jobNumberId').touched) "
+						class="invalid-feedback"
+					>
+						Job Number is Required</span
+					>
+				</div>
+			</div>
+		</div>
+		<div class="row py-4 pagebreak-print">
+			<div class="col-md-12">
+				<h2>Hazard Treatment</h2>
+			</div>
+			<div class="col-md-12">
+				<table class="table table-bordered text-center">
+					<thead>
+						<tr>
+							<th colspan="7" class="L_1">Risk Level Matrix</th>
+							<th colspan="8" class="L_1">Risk Analysis</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th colspan="2" rowspan="2"></th>
+							<td colspan="5">Consequence</td>
+							<td colspan="4" rowspan="2">
+								<div class="like_2">Likelihood</div>
+							</td>
+							<td colspan="4" rowspan="2">
+								<div class="like_2">Consequence</div>
+							</td>
+						</tr>
+						<tr>
+							<th>1</th>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+						</tr>
+						<tr>
+							<th rowspan="5">
+								<div class="like_1">Likelihood</div>
+							</th>
+							<td>5</td>
+							<td class="M_1">M</td>
+							<td class="H_1">H</td>
+							<td class="H_1">H</td>
+							<td class="H_1">H</td>
+							<td class="H_1">H</td>
+							<td colspan="2">
+								<div class="space_1">1</div>
+							</td>
+							<td colspan="2">Rare</td>
+							<td colspan="2">
+								<div class="space_1">1</div>
+							</td>
+							<td colspan="2">Insignificant</td>
+						</tr>
+						<tr>
+							<th>4</th>
+							<td class="M_1">M</td>
+							<td class="M_1">M</td>
+							<td class="M_1">M</td>
+							<td class="H_1">H</td>
+							<td class="H_1">H</td>
+							<td colspan="2">2</td>
+							<td colspan="2">Unlikely</td>
+							<td colspan="2">2</td>
+							<td colspan="2">Minor</td>
+						</tr>
+						<tr>
+							<th>3</th>
+							<td class="L_1">L</td>
+							<td class="M_1">M</td>
+							<td class="M_1">M</td>
+							<td class="H_1">H</td>
+							<td class="H_1">H</td>
+							<td colspan="2">3</td>
+							<td colspan="2">Moderate</td>
+							<td colspan="2">3</td>
+							<td colspan="2">Moderate</td>
+						</tr>
+						<tr>
+							<th scope="col">2</th>
+							<td class="L_1">L</td>
+							<td class="L_1">L</td>
+							<td class="M_1">M</td>
+							<td class="M_1">M</td>
+							<td class="H_1">H</td>
+							<td colspan="2">4</td>
+							<td colspan="2">Likely</td>
+							<td colspan="2">4</td>
+							<td colspan="2">Major</td>
+						</tr>
+						<tr>
+							<th scope="col">1</th>
+							<td class="L_1">L</td>
+							<td class="L_1">L</td>
+							<td class="L_1">L</td>
+							<td class="M_1">M</td>
+							<td class="M_1">M</td>
+							<td colspan="2" class="mr-2 ml-2">5</td>
+							<td colspan="2">Almost Certain</td>
+							<td colspan="2">5</td>
+							<td colspan="2">Catastrophic</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="mb-3 col">
+				<label for="exampleFormControlInput1" class="form-label"
+					>Consequence</label
+				>
 
-        <select formControlName="consequence" class="form-select form-control col form-dropdown"
-          aria-label="Default select example" (change)="getHazardNo()">
-          <option selected hidden>Select</option>
-          <option *ngFor="let consequence of Consequences" [value]="consequence.value">{{consequence.name}}</option>
-          <!-- <option value="1">1-Insignificant</option>
+				<select
+					formControlName="consequence"
+					class="form-select form-control col form-dropdown"
+					aria-label="Default select example"
+					(change)="getHazardNo()"
+				>
+					<option selected hidden>Select</option>
+					<option
+						*ngFor="let consequence of Consequences"
+						[value]="consequence.value"
+					>
+						{{consequence.name}}
+					</option>
+					<!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
           <option value="4">4-Major</option>
           <option value="5">5-Catastrophic</option> -->
-        </select>
-      </div>
-      <div class="mb-3 col">
-        <label for="exampleFormControlInput1" class="form-label">Likelihood</label>
-        <select formControlName="likelihood" class="form-select form-control col form-dropdown"
-          aria-label="Default select example" (change)="getHazardNo()">
-          <option selected hidden>Select</option>
-          <option *ngFor="let likelihood of Likelihood" [value]="likelihood.value">{{likelihood.name}}</option>
+				</select>
+			</div>
+			<div class="mb-3 col">
+				<label for="exampleFormControlInput1" class="form-label"
+					>Likelihood</label
+				>
+				<select
+					formControlName="likelihood"
+					class="form-select form-control col form-dropdown"
+					aria-label="Default select example"
+					(change)="getHazardNo()"
+				>
+					<option selected hidden>Select</option>
+					<option
+						*ngFor="let likelihood of Likelihood"
+						[value]="likelihood.value"
+					>
+						{{likelihood.name}}
+					</option>
 
-          <!-- <option value="1">1-Insignificant</option>
+					<!-- <option value="1">1-Insignificant</option>
           <option value="2">2-Minor</option>
           <option value="3">3-Moderate</option>
           <option value="4">4-Major</option>
           <option value="5">5-Catastrophic</option> -->
-        </select>
-      </div>
-      <div class="mb-3 col">
-        <label for="exampleFormControlInput1" class="form-label">Risk Rating</label>
-        <select formControlName="riskRating" class="form-select form-control col form-dropdown"
-          aria-label="Default select example">
-          <option selected hidden>Select</option>
-          <option *ngFor="let rating of RiskRating" [value]="rating.value">{{rating.name}}</option>
-          <!-- <option value="1">Low</option>
+				</select>
+			</div>
+			<div class="mb-3 col">
+				<label for="exampleFormControlInput1" class="form-label"
+					>Risk Rating</label
+				>
+				<select
+					formControlName="riskRating"
+					class="form-select form-control col form-dropdown"
+					aria-label="Default select example"
+				>
+					<option selected hidden>Select</option>
+					<option
+						*ngFor="let rating of RiskRating"
+						[value]="rating.value"
+					>
+						{{rating.name}}
+					</option>
+					<!-- <option value="1">Low</option>
           <option value="2">Medium</option>
           <option value="3">High</option> -->
-        </select>
-      </div>
+				</select>
+			</div>
+		</div>
+		<div class="row py-4">
+			<div class="col-md">
+				<h2>Action Required</h2>
+				<div class="form-check form-check-inline">
+					<input
+						class="form-check-input"
+						type="radio"
+						formControlName="actionRequired"
+						id="inlineCheckbox1"
+						value="immediately"
+					/>
+					<label class="form-check-label ml-1" for="inlineCheckbox1"
+						>Immediately</label
+					>
+				</div>
+				<div class="form-check form-check-inline ml-4">
+					<input
+						class="form-check-input"
+						type="radio"
+						formControlName="actionRequired"
+						id="inlineCheckbox2"
+						value="today"
+					/>
+					<label class="form-check-label ml-1" for="inlineCheckbox2"
+						>Today</label
+					>
+				</div>
+				<div class="form-check form-check-inline ml-4">
+					<input
+						class="form-check-input"
+						type="radio"
+						formControlName="actionRequired"
+						id="inlineCheckbox3"
+						value="thisWeek"
+					/>
+					<label class="form-check-label ml-1" for="inlineCheckbox3"
+						>This week</label
+					>
+				</div>
+				<div class="form-check form-check-inline ml-4">
+					<input
+						class="form-check-input"
+						type="radio"
+						formControlName="actionRequired"
+						id="inlineCheckbox4"
+						value="thisMonth"
+					/>
+					<label class="form-check-label ml-1" for="inlineCheckbox4"
+						>This Month</label
+					>
+				</div>
+			</div>
+		</div>
+		<h2 class="mt-3">Corrective Action</h2>
 
-
-    </div>
-    <div class="row py-4">
-      <div class="col-md">
-        <h2>Action Required</h2>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="actionRequired" id="inlineCheckbox1"
-            value="immediately" />
-          <label class="form-check-label ml-1" for="inlineCheckbox1">Immediately</label>
-        </div>
-        <div class="form-check form-check-inline ml-4">
-          <input class="form-check-input" type="radio" formControlName="actionRequired" id="inlineCheckbox2"
-            value="today" />
-          <label class="form-check-label ml-1" for="inlineCheckbox2">Today</label>
-        </div>
-        <div class="form-check form-check-inline ml-4">
-          <input class="form-check-input" type="radio" formControlName="actionRequired" id="inlineCheckbox3"
-            value="thisWeek" />
-          <label class="form-check-label ml-1" for="inlineCheckbox3">This week</label>
-        </div>
-        <div class="form-check form-check-inline ml-4">
-          <input class="form-check-input" type="radio" formControlName="actionRequired" id="inlineCheckbox4"
-            value="thisMonth" />
-          <label class="form-check-label ml-1" for="inlineCheckbox4">This Month</label>
-        </div>
-      </div>
-    </div>
-    <h2 class="mt-3">Corrective Action</h2>
-
-    <ng-container *ngIf="obj">
-
-      <div class="row">
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3">
-            <label class="form-label">Can you eliminate the hazard</label>
-            <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
-              formControlName="eliminateHazard">
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control" formControlName="eliminateCorrect" cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy1" formControlName="elliminateAction"
-              aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy1="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.elliminateAction | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
+		<ng-container *ngIf="obj">
+			<div class="row">
+				<div class="col-md-4 col-sm-4-print">
+					<div class="mb-3">
+						<label class="form-label"
+							>Can you eliminate the hazard</label
+						>
+						<select
+							class="form-select form-control col outline form-dropdown"
+							aria-label="Default select example"
+							formControlName="eliminateHazard"
+						>
+							<option selected hidden>Select</option>
+							<option class="mr-1" value="yes">Yes</option>
+							<option class="mr-1" value="no">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
+					>
+						<label class="form-label">Corrective Action</label>
+						<textarea
+							type="surname"
+							class="form-control"
+							formControlName="eliminateCorrect"
+							cdkTextareaAutosize
+							#autosize="cdkTextareaAutosize"
+							cdkAutosizeMinRows="1.6"
+							cdkAutosizeMaxRows="5"
+							aria-describedby="emailHelp"
+						></textarea>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
+					>
+						<label class="form-label label_1">Actioned by</label>
+						<input
+							type="email"
+							class="form-control"
+							[matAutocomplete]="actionedBy1"
+							formControlName="elliminateAction"
+							aria-describedby="emailHelp"
+						/>
+						<mat-autocomplete
+							#actionedBy1="matAutocomplete"
+							[displayWith]="displayFn"
+						>
+							<mat-option
+								*ngFor="let option of obj.elliminateAction | async ; let i = index "
+								[value]="option"
+							>
+								{{option.fullName}}
+							</mat-option>
+						</mat-autocomplete>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
+					>
+						<label class="form-label label_1">By when</label>
+						<!-- <input
               type="date"
               class="form-control"
               formControlName="eliminateWhen"
      
               aria-describedby="emailHelp"
             /> -->
-            <input matInput [matDatepicker]="pickerd1" class="form-control" [min]="minDate"
-              formControlName="eliminateWhen" placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd1"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd1></mat-datepicker>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3">
-            <label class="form-label">Can you substitute a safe process</label>
-            <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
-              formControlName="process">
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('process').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control textarea-autosize" formControlName="substituteCorrect"
-              cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('process').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy2" formControlName="substituteAction"
-              aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy2="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.substituteAction | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('process').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
+						<input
+							matInput
+							[matDatepicker]="pickerd1"
+							class="form-control"
+							[min]="minDate"
+							formControlName="eliminateWhen"
+							placeholder="dd-mm-yyyy"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="pickerd1"
+						></mat-datepicker-toggle>
+						<mat-datepicker #pickerd1></mat-datepicker>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-4-print">
+					<div class="mb-3">
+						<label class="form-label"
+							>Can you substitute a safe process</label
+						>
+						<select
+							class="form-select form-control col outline form-dropdown"
+							aria-label="Default select example"
+							formControlName="process"
+						>
+							<option selected hidden>Select</option>
+							<option class="mr-1" value="yes">Yes</option>
+							<option class="mr-1" value="no">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
+					>
+						<label class="form-label">Corrective Action</label>
+						<textarea
+							type="surname"
+							class="form-control textarea-autosize"
+							formControlName="substituteCorrect"
+							cdkTextareaAutosize
+							#autosize="cdkTextareaAutosize"
+							cdkAutosizeMinRows="1.6"
+							cdkAutosizeMaxRows="5"
+							aria-describedby="emailHelp"
+						></textarea>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
+					>
+						<label class="form-label label_1">Actioned by</label>
+						<input
+							type="email"
+							class="form-control"
+							[matAutocomplete]="actionedBy2"
+							formControlName="substituteAction"
+							aria-describedby="emailHelp"
+						/>
+						<mat-autocomplete
+							#actionedBy2="matAutocomplete"
+							[displayWith]="displayFn"
+						>
+							<mat-option
+								*ngFor="let option of obj.substituteAction | async ; let i = index "
+								[value]="option"
+							>
+								{{option.fullName}}
+							</mat-option>
+						</mat-autocomplete>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
+					>
+						<label class="form-label label_1">By when</label>
+						<!-- <input
               type="date"
               class="form-control"
               formControlName="substituteWhen"
         
               aria-describedby="emailHelp"
             /> -->
-            <input matInput [matDatepicker]="pickerd2" class="form-control" [min]="minDate"
-              formControlName="substituteWhen" placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd2"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd2></mat-datepicker>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3">
-            <label class="form-label">Can the hazard be isolated</label>
-            <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
-              formControlName="isolatedHazard">
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control" formControlName="isolatedCorrect" cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy3" formControlName="isolatedAction"
-              aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy3="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.isolatedAction | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
+						<input
+							matInput
+							[matDatepicker]="pickerd2"
+							class="form-control"
+							[min]="minDate"
+							formControlName="substituteWhen"
+							placeholder="dd-mm-yyyy"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="pickerd2"
+						></mat-datepicker-toggle>
+						<mat-datepicker #pickerd2></mat-datepicker>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-4-print">
+					<div class="mb-3">
+						<label class="form-label"
+							>Can the hazard be isolated</label
+						>
+						<select
+							class="form-select form-control col outline form-dropdown"
+							aria-label="Default select example"
+							formControlName="isolatedHazard"
+						>
+							<option selected hidden>Select</option>
+							<option class="mr-1" value="yes">Yes</option>
+							<option class="mr-1" value="no">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
+					>
+						<label class="form-label">Corrective Action</label>
+						<textarea
+							type="surname"
+							class="form-control"
+							formControlName="isolatedCorrect"
+							cdkTextareaAutosize
+							#autosize="cdkTextareaAutosize"
+							cdkAutosizeMinRows="1.6"
+							cdkAutosizeMaxRows="5"
+							aria-describedby="emailHelp"
+						></textarea>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
+					>
+						<label class="form-label label_1">Actioned by</label>
+						<input
+							type="email"
+							class="form-control"
+							[matAutocomplete]="actionedBy3"
+							formControlName="isolatedAction"
+							aria-describedby="emailHelp"
+						/>
+						<mat-autocomplete
+							#actionedBy3="matAutocomplete"
+							[displayWith]="displayFn"
+						>
+							<mat-option
+								*ngFor="let option of obj.isolatedAction | async ; let i = index "
+								[value]="option"
+							>
+								{{option.fullName}}
+							</mat-option>
+						</mat-autocomplete>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
+					>
+						<label class="form-label label_1">By when</label>
+						<!-- <input
               type="date"
               class="form-control"
               formControlName="isolatedWhen"
             
               aria-describedby="emailHelp"
             /> -->
-            <input matInput [matDatepicker]="pickerd3" class="form-control" [min]="minDate"
-              formControlName="isolatedWhen" placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd3"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd3></mat-datepicker>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3">
-            <label class="form-label">Can a solution be engineered</label>
-            <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
-              formControlName="complete">
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control" formControlName="solutionCorrect" cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy4" formControlName="solutionAction"
-              aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy4="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.solutionAction | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('complete').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
+						<input
+							matInput
+							[matDatepicker]="pickerd3"
+							class="form-control"
+							[min]="minDate"
+							formControlName="isolatedWhen"
+							placeholder="dd-mm-yyyy"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="pickerd3"
+						></mat-datepicker-toggle>
+						<mat-datepicker #pickerd3></mat-datepicker>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-4-print">
+					<div class="mb-3">
+						<label class="form-label"
+							>Can a solution be engineered</label
+						>
+						<select
+							class="form-select form-control col outline form-dropdown"
+							aria-label="Default select example"
+							formControlName="complete"
+						>
+							<option selected hidden>Select</option>
+							<option class="mr-1" value="yes">Yes</option>
+							<option class="mr-1" value="no">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
+					>
+						<label class="form-label">Corrective Action</label>
+						<textarea
+							type="surname"
+							class="form-control"
+							formControlName="solutionCorrect"
+							cdkTextareaAutosize
+							#autosize="cdkTextareaAutosize"
+							cdkAutosizeMinRows="1.6"
+							cdkAutosizeMaxRows="5"
+							aria-describedby="emailHelp"
+						></textarea>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
+					>
+						<label class="form-label label_1">Actioned by</label>
+						<input
+							type="email"
+							class="form-control"
+							[matAutocomplete]="actionedBy4"
+							formControlName="solutionAction"
+							aria-describedby="emailHelp"
+						/>
+						<mat-autocomplete
+							#actionedBy4="matAutocomplete"
+							[displayWith]="displayFn"
+						>
+							<mat-option
+								*ngFor="let option of obj.solutionAction | async ; let i = index "
+								[value]="option"
+							>
+								{{option.fullName}}
+							</mat-option>
+						</mat-autocomplete>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
+					>
+						<label class="form-label label_1">By when</label>
+						<!-- <input
             type="date"
             class="form-control"
             formControlName="solutionWhen"
          
             aria-describedby="emailHelp"
           /> -->
-            <input matInput [matDatepicker]="pickerd4" class="form-control" [min]="minDate"
-              formControlName="solutionWhen" placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd4"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd4></mat-datepicker>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3">
-            <label class="form-label">Can procedures remove or reduce the risk</label>
-            <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
-              formControlName="procedures">
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control" formControlName="procedureRemoveCorrect" cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy5"
-              formControlName="procedureRemoveAction" aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy5="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.procedureRemoveAction | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('procedures').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
+						<input
+							matInput
+							[matDatepicker]="pickerd4"
+							class="form-control"
+							[min]="minDate"
+							formControlName="solutionWhen"
+							placeholder="dd-mm-yyyy"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="pickerd4"
+						></mat-datepicker-toggle>
+						<mat-datepicker #pickerd4></mat-datepicker>
+					</div>
+				</div>
+			</div>
+			<div class="row pagebreak-print">
+				<div class="col-md-4 col-sm-4-print">
+					<div class="mb-3">
+						<label class="form-label"
+							>Can procedures remove or reduce the risk</label
+						>
+						<select
+							class="form-select form-control col outline form-dropdown"
+							aria-label="Default select example"
+							formControlName="procedures"
+						>
+							<option selected hidden>Select</option>
+							<option class="mr-1" value="yes">Yes</option>
+							<option class="mr-1" value="no">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
+					>
+						<label class="form-label">Corrective Action</label>
+						<textarea
+							type="surname"
+							class="form-control"
+							formControlName="procedureRemoveCorrect"
+							cdkTextareaAutosize
+							#autosize="cdkTextareaAutosize"
+							cdkAutosizeMinRows="1.6"
+							cdkAutosizeMaxRows="5"
+							aria-describedby="emailHelp"
+						></textarea>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
+					>
+						<label class="form-label label_1">Actioned by</label>
+						<input
+							type="email"
+							class="form-control"
+							[matAutocomplete]="actionedBy5"
+							formControlName="procedureRemoveAction"
+							aria-describedby="emailHelp"
+						/>
+						<mat-autocomplete
+							#actionedBy5="matAutocomplete"
+							[displayWith]="displayFn"
+						>
+							<mat-option
+								*ngFor="let option of obj.procedureRemoveAction | async ; let i = index "
+								[value]="option"
+							>
+								{{option.fullName}}
+							</mat-option>
+						</mat-autocomplete>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
+					>
+						<label class="form-label label_1">By when</label>
+						<!-- <input
               type="date"
               class="form-control"
               formControlName="procedureRemove"
              
               aria-describedby="emailHelp" 
             /> -->
-            <input matInput [matDatepicker]="pickerd5" class="form-control" [min]="minDate"
-              formControlName="procedureRemove" placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd5"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd5></mat-datepicker>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3">
-            <label class="form-label">Can the use PPE reduce the risk</label>
-            <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
-              formControlName="reduceRisk">
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
-            <label class="form-label">Corrective Action</label>
-            <textarea type="surname" class="form-control" formControlName="PPECorrect" cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1.6" cdkAutosizeMaxRows="5"
-              aria-describedby="emailHelp"></textarea>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
-            <label class="form-label label_1">Actioned by</label>
-            <input type="email" class="form-control" [matAutocomplete]="actionedBy6" formControlName="PPEAction"
-              aria-describedby="emailHelp" />
-            <mat-autocomplete #actionedBy6="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of obj.PPEAction | async ; let i = index " [value]="option">
-                {{option.fullName}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2-print">
-          <div class="mb-3" [class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'">
-            <label class="form-label label_1">By when</label>
-            <!-- <input
+						<input
+							matInput
+							[matDatepicker]="pickerd5"
+							class="form-control"
+							[min]="minDate"
+							formControlName="procedureRemove"
+							placeholder="dd-mm-yyyy"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="pickerd5"
+						></mat-datepicker-toggle>
+						<mat-datepicker #pickerd5></mat-datepicker>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-4-print">
+					<div class="mb-3">
+						<label class="form-label"
+							>Can the use PPE reduce the risk</label
+						>
+						<select
+							class="form-select form-control col outline form-dropdown"
+							aria-label="Default select example"
+							formControlName="reduceRisk"
+						>
+							<option selected hidden>Select</option>
+							<option class="mr-1" value="yes">Yes</option>
+							<option class="mr-1" value="no">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
+					>
+						<label class="form-label">Corrective Action</label>
+						<textarea
+							type="surname"
+							class="form-control"
+							formControlName="PPECorrect"
+							cdkTextareaAutosize
+							#autosize="cdkTextareaAutosize"
+							cdkAutosizeMinRows="1.6"
+							cdkAutosizeMaxRows="5"
+							aria-describedby="emailHelp"
+						></textarea>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
+					>
+						<label class="form-label label_1">Actioned by</label>
+						<input
+							type="email"
+							class="form-control"
+							[matAutocomplete]="actionedBy6"
+							formControlName="PPEAction"
+							aria-describedby="emailHelp"
+						/>
+						<mat-autocomplete
+							#actionedBy6="matAutocomplete"
+							[displayWith]="displayFn"
+						>
+							<mat-option
+								*ngFor="let option of obj.PPEAction | async ; let i = index "
+								[value]="option"
+							>
+								{{option.fullName}}
+							</mat-option>
+						</mat-autocomplete>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2-print">
+					<div
+						class="mb-3"
+						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
+					>
+						<label class="form-label label_1">By when</label>
+						<!-- <input
               type="date"
               class="form-control"
               formControlName="PPEWhen"
           
               aria-describedby="emailHelp"
             /> -->
-            <input matInput [matDatepicker]="pickerd6" class="form-control" [min]="minDate" formControlName="PPEWhen"
-              placeholder="dd-mm-yyyy">
-            <mat-datepicker-toggle matSuffix [for]="pickerd6"></mat-datepicker-toggle>
-            <mat-datepicker #pickerd6></mat-datepicker>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <h2>The form was compiled by:</h2>
+						<input
+							matInput
+							[matDatepicker]="pickerd6"
+							class="form-control"
+							[min]="minDate"
+							formControlName="PPEWhen"
+							placeholder="dd-mm-yyyy"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="pickerd6"
+						></mat-datepicker-toggle>
+						<mat-datepicker #pickerd6></mat-datepicker>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+		<h2>The form was compiled by:</h2>
 
-    <div class="row">
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label class="form-label">Name<span class="text-danger ">*</span></label>
-          <input type="fullname" class="form-control" [matAutocomplete]="employee1" formControlName="name"
-            aria-describedby="emailHelp" [class.is-invalid]="hazardReport.get('name')?.hasError('required') 
-            && (hazardReport.get('name').dirty || hazardReport.get('name').touched) " />
-          <mat-autocomplete #employee1="matAutocomplete" (optionSelected)="employeeData1($event)"
-            [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions3 | async ; let i = index " [value]="option">
-              {{option.fullName}}
-            </mat-option>
-          </mat-autocomplete>
-          <span *ngIf="
+		<div class="row">
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label class="form-label"
+						>Name<span class="text-danger">*</span></label
+					>
+					<input
+						type="fullname"
+						class="form-control"
+						[matAutocomplete]="employee1"
+						formControlName="name"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('name')?.hasError('required') 
+            && (hazardReport.get('name').dirty || hazardReport.get('name').touched) "
+					/>
+					<mat-autocomplete
+						#employee1="matAutocomplete"
+						(optionSelected)="employeeData1($event)"
+						[displayWith]="displayFn"
+					>
+						<mat-option
+							*ngFor="let option of filteredOptions3 | async ; let i = index "
+							[value]="option"
+						>
+							{{option.fullName}}
+						</mat-option>
+					</mat-autocomplete>
+					<span
+						*ngIf="
             hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty 
-            || hazardReport.get('name').touched) " class="invalid-feedback">
-            Name is Required</span>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label class="form-label">Position<span class="text-danger ">*</span></label>
-          <input type="surname" class="form-control" formControlName="compilePosition" aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required') 
-            && (hazardReport.get('compilePosition').dirty || hazardReport.get('compilePosition').touched) " />
-          <span *ngIf="
+            || hazardReport.get('name').touched) "
+						class="invalid-feedback"
+					>
+						Name is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label class="form-label"
+						>Position<span class="text-danger">*</span></label
+					>
+					<input
+						type="surname"
+						class="form-control"
+						formControlName="compilePosition"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required') 
+            && (hazardReport.get('compilePosition').dirty || hazardReport.get('compilePosition').touched) "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('compilePosition')?.hasError('required') && (hazardReport.get('compilePosition').dirty 
-            || hazardReport.get('compilePosition').touched) " class="invalid-feedback">
-            Position is Required</span>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label class="form-label">Department<span class="text-danger ">*</span></label>
-          <input type="surname" class="form-control" formControlName="compileDepartment" aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('compileDepartment')?.hasError('required') 
-            && (hazardReport.get('compileDepartment').dirty || hazardReport.get('compileDepartment').touched) " />
-          <span *ngIf="
+            || hazardReport.get('compilePosition').touched) "
+						class="invalid-feedback"
+					>
+						Position is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<div class="mb-3">
+					<label class="form-label"
+						>Department<span class="text-danger">*</span></label
+					>
+					<input
+						type="surname"
+						class="form-control"
+						formControlName="compileDepartment"
+						aria-describedby="emailHelp"
+						[class.is-invalid]="hazardReport.get('compileDepartment')?.hasError('required') 
+            && (hazardReport.get('compileDepartment').dirty || hazardReport.get('compileDepartment').touched) "
+					/>
+					<span
+						*ngIf="
             hazardReport.get('compileDepartment')?.hasError('required') && (hazardReport.get('compileDepartment').dirty 
-            || hazardReport.get('compileDepartment').touched) " class="invalid-feedback">
-            Department is Required</span>
-        </div>
-      </div>
-      <div class="mb-3 col-md-6 col-sm-6-print" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true">
-        <label class="form-label">File Upload</label>
+            || hazardReport.get('compileDepartment').touched) "
+						class="invalid-feedback"
+					>
+						Department is Required</span
+					>
+				</div>
+			</div>
+			<div
+				class="mb-3 col-md-6 col-sm-6-print"
+				*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+			>
+				<label class="form-label">File Upload</label>
 
-        <!-- <img
+				<!-- <img
         [src]="selectedImage"
         onerror="this.src='../../../assets/img/uploadImg.png'"
         class="imageStud"
@@ -873,73 +1449,115 @@
         style="margin: 0px"
       ></i>
     </span> -->
-        <!-- <input
+				<!-- <input
           class="form-control"
           formControlName="fileUpload"
           type="file"
           id="formFile"
         /> -->
 
-        <input type="file" class="form-control" (change)="browser($event)" #file id="file" />
-        <!-- <img   [src]="selectedImage"alt="Site Logo" width="50" height="50"> -->
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <!-- <mat-form-field appearance="outline">
+				<input
+					type="file"
+					class="form-control"
+					(change)="browser($event)"
+					#file
+					id="file"
+				/>
+				<!-- <img   [src]="selectedImage"alt="Site Logo" width="50" height="50"> -->
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<!-- <mat-form-field appearance="outline">
           <input formControlName="date" class="date_1" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>  -->
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label">Date<span class="text-danger ">*</span></label>
-          <!-- <input type="date"value=""class="form-control" formControlName="date"   aria-describedby="emailHelp"
+				<div class="mb-3">
+					<label for="exampleInputSurname" class="form-label"
+						>Date<span class="text-danger">*</span></label
+					>
+					<!-- <input type="date"value=""class="form-control" formControlName="date"   aria-describedby="emailHelp"
             [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "/> -->
-          <input matInput [matDatepicker]="datepicker2" [max]="maxDate" [min]="minDate" class="form-control"
-            formControlName="date" [class.is-invalid-date]="hazardReport.get('date')?.hasError('required') 
-            && (hazardReport.get('date').dirty || hazardReport.get('date').touched) " placeholder="dd-mm-yyyy">
-          <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
-          <mat-datepicker #datepicker2></mat-datepicker>
-          <span *ngIf="
+					<input
+						matInput
+						[matDatepicker]="datepicker2"
+						[max]="maxDate"
+						[min]="minDate"
+						class="form-control"
+						formControlName="date"
+						[class.is-invalid-date]="hazardReport.get('date')?.hasError('required') 
+            && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "
+						placeholder="dd-mm-yyyy"
+					/>
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="datepicker2"
+					></mat-datepicker-toggle>
+					<mat-datepicker #datepicker2></mat-datepicker>
+					<span
+						*ngIf="
             hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 
-            || hazardReport.get('date').touched) " class="invalid-feedback1">
-            Date is Required</span>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6-print">
-        <label for="formFile" class="form-label">Uploaded File List</label>
-        <span class="form-control">
-          {{uploadFile}}
-        </span>
-      </div>
-      <div class="col-md-12">
-        <label>Signature<span class="text-danger ">*</span></label>
-        <div class="sign">
-          <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"
-            #Signature1 [class.is-invalid]="singRequired"></signature-pad>
-          <span *ngIf="singRequired" class="invalid-feedback">
-            This Field is Required</span>
-        </div>
-        <!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
-        <button *ngIf="(isPrint | async)===true?false:isHistory===true?false:true" class="btn btn-outline-primary my-3"
-          (click)="clear()">
-          Clear
-        </button>
-      </div>
-    </div>
+            || hazardReport.get('date').touched) "
+						class="invalid-feedback1"
+					>
+						Date is Required</span
+					>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6-print">
+				<label for="formFile" class="form-label"
+					>Uploaded File List</label
+				>
+				<span class="form-control"> {{uploadFile}} </span>
+			</div>
+			<div class="col-md-12">
+				<label>Signature<span class="text-danger">*</span></label>
+				<div class="sign">
+					<signature-pad
+						[options]="signaturePadOptions"
+						(onBeginEvent)="drawStart()"
+						(onEndEvent)="drawComplete()"
+						#Signature1
+						[class.is-invalid]="singRequired"
+					></signature-pad>
+					<span *ngIf="singRequired" class="invalid-feedback">
+						This Field is Required</span
+					>
+				</div>
+				<!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
+				<button
+					*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+					class="btn btn-outline-primary my-3"
+					(click)="clear()"
+				>
+					Clear
+				</button>
+			</div>
+		</div>
 
-    <hr />
+		<hr />
 
-    <br />
-    <div style="padding-left: 30%;" *ngIf="(isPrint | async)===true && selectedImage">
-      <span>
-        <div>
-          <img height="400" width="400" [src]="selectedImage">
-        </div>
-      </span>
-    </div>
-    <div class="col-md-2 col-sm-2-print">
-      <button type="submit" *ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
-        class="btn btn-primary btn-block" [disabled]="!hazardReport.valid" (click)="onFormSubmit()">Submit</button>
-    </div>
-  </form>
+		<br />
+		<div
+			style="padding-left: 30%"
+			*ngIf="(isPrint | async)===true && selectedImage"
+		>
+			<span>
+				<div>
+					<img height="400" width="400" [src]="selectedImage" />
+				</div>
+			</span>
+		</div>
+		<div class="col-md-2 col-sm-2-print">
+			<button
+				type="submit"
+				*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+				class="btn btn-primary btn-block"
+				[disabled]="!hazardReport.valid"
+				(click)="onFormSubmit()"
+			>
+				Submit
+			</button>
+		</div>
+	</form>
 </div>
