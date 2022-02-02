@@ -11,7 +11,7 @@
     "dev:e2e": "ng e2e",
     "webpack-bundle-analyzer": "webpack-bundle-analyzer dist/adminlte/stats.json && start",
     "analyze": "run-s dev:build-Stats webpack-bundle-analyzer",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\""
   },
   "private": true,
   "husky": {

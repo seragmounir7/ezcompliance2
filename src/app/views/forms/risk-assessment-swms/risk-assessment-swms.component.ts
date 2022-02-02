@@ -30,10 +30,11 @@ import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
 	selector: 'app-risk-assessment-swms',
@@ -42,7 +43,7 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 })
 export class RiskAssessmentSWMSComponent
 	implements OnInit, AfterViewInit, OnDestroy {
-	@ViewChild('parent') parent: ElementRef;
+	@ViewChildren('parent') parent: QueryList<ElementRef>;
 	@ViewChild('projectManager') projectManager: ElementRef;
 	@ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
 	@ViewChild('Signature1') signaturePad1: SignaturePad;
@@ -57,6 +58,7 @@ export class RiskAssessmentSWMSComponent
 	valueChangesArr: Observable<any>[];
 	filteredOptions1: Observable<any>;
 	tradeCategoryArr: any[];
+	allChecked: Observable<any>;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -976,6 +978,29 @@ export class RiskAssessmentSWMSComponent
 			}
 		});
 
+		this.allChecked = this.parent.changes.pipe(
+			map((res: QueryList<ElementRef<HTMLElement>>) => {
+				console.log(res);
+				let arr = [];
+				res.toArray().forEach((x) => {
+					let check = x.nativeElement.querySelectorAll(
+						'input[type=checkbox]'
+					);
+					let allChecked = Array.from(check).reduce(
+						(previousValue, currentValue) => {
+							return previousValue == currentValue['checked'];
+						},
+						Array.from(check)[0]['checked']
+					);
+
+					arr.push(allChecked);
+					console.count(allChecked);
+				});
+				return of(arr);
+			}),
+			tap((x) => console.log(x))
+		);
+
 		// this.signaturePad is now available
 		//this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		// this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -1812,13 +1837,36 @@ export class RiskAssessmentSWMSComponent
 		);
 	}
 
-	jobTaskCategoryChecked(parent: HTMLElement) {
-		console.log();
+	jobTaskCategoryChecked(
+		parent: HTMLElement,
+		matCheck: MatCheckbox,
+		i: number
+	) {
 		let checkBoxes = parent.querySelectorAll('input[type=checkbox]');
+		console.error(matCheck);
+
+		this.tradeCategoryArr[i].checked = matCheck.checked;
+		console.table(this.tradeCategoryArr);
+		if (matCheck.checked) {
+			// this.tradeCategoryArr.map((x) =>
+			// 	x._id === matCheck.value
+			// 		? { ...x, checked: matCheck.checked }
+			// 		: { ...x }
+			// );
+			//   console.log(x._id,matCheck.value)
+			//   if (x._id === matCheck.value) {
+			//     x.checked = matCheck.checked
+			//   }
+			//   return x
+			// })
+		}
 		checkBoxes.forEach((checkBox, i) => {
 			if (!checkBox.classList.contains('mat-checkbox-input')) {
+				// if(checkBox.classList.contains('mat-checkbox-input')){
+				//   console.log('mat-checkbox',checkBox)
+				// }
 				checkBox['click']();
-				console.log(checkBox);
+				// console.log(checkBox);
 			}
 		});
 	}

@@ -476,7 +476,9 @@
 							<h2>Job Tasks</h2>
 						</div>
 
-						<ng-container *ngFor="let category of tradeCategoryArr">
+						<ng-container
+							*ngFor="let category of tradeCategoryArr;let catIndex = index"
+						>
 							<ng-container *ngIf="category?.show ">
 								<div
 									class="row jobTaskCat"
@@ -490,8 +492,10 @@
 									>
 										<mat-checkbox
 											#matCheck
-											(change)="jobTaskCategoryChecked(parent)"
-											indetermined
+											(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
+											[indeterminate]="allChecked[catIndex] | async"
+											[value]="category._id"
+											[checked]="category.checked"
 										></mat-checkbox>
 										<h4 class="jobTaskCat-heading">
 											{{category.title}}
@@ -2280,8 +2284,10 @@
 					<h2>Job Tasks</h2>
 				</div>
 
-				<ng-container *ngFor="let category of tradeCategoryArr">
-					<ng-container *ngIf="category?.show">
+				<ng-container
+					*ngFor="let category of tradeCategoryArr;let catIndex = index"
+				>
+					<ng-container *ngIf="category?.show ">
 						<div
 							class="row jobTaskCat"
 							*ngIf="doesCategoryExists(category._id)"
@@ -2291,8 +2297,10 @@
 							<div class="col-12 d-flex" style="gap: 1rem">
 								<mat-checkbox
 									#matCheck
-									(change)="jobTaskCategoryChecked(parent)"
-									indetermined
+									(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
+									[indeterminate]="allChecked[catIndex] | async"
+									[value]="category._id"
+									[checked]="category.checked"
 								></mat-checkbox>
 								<h4 class="jobTaskCat-heading">
 									{{category.title}}

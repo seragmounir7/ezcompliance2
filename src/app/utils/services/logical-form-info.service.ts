@@ -125,7 +125,7 @@ export class LogicalFormInfoService {
 	}
 	getAllLicenceCat(field = '', value = '') {
 		field = 'order';
-		value = 'asc';
+		value = '1';
 		if (value == '') {
 			field = '';
 		}
