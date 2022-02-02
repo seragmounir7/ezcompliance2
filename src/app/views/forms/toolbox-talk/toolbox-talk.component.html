@@ -37,7 +37,7 @@
 			<p class="title">Site Information</p>
 			<div>
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Site Name<span class="text-danger">*</span>
 						</p>
@@ -58,7 +58,7 @@
 							Site Name is Required</span
 						>
 					</div>
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Name<span class="text-danger">*</span>
 						</p>
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Site Address<span class="text-danger">*</span>
 						</p>
@@ -104,7 +104,7 @@
 							Site Address is Required</span
 						>
 					</div>
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Contact<span class="text-danger">*</span>
 						</p>
@@ -127,7 +127,7 @@
 				</div>
 
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Contact Phone<span class="text-danger"
 								>*</span
@@ -153,7 +153,7 @@
 							Phone Number is Required</span
 						>
 					</div>
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Contact Email<span class="text-danger"
 								>*</span
@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Job Number<span class="text-danger">*</span>
 						</p>
@@ -211,7 +211,7 @@
 						>
 					</div>
 
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Date<span class="text-danger">*</span>
 						</p>
@@ -241,7 +241,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Meeting Conducted By<span class="text-danger"
 								>*</span
@@ -266,7 +266,7 @@
 							This Field is Required</span
 						>
 					</div>
-					<div class="my-3 col">
+					<div class="my-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Signature<span class="text-danger">*</span>
 						</p>
@@ -305,7 +305,7 @@
 				>
 					<div>
 						<div class="row">
-							<div class="my-3 col-2">
+							<div class="my-3 col-sm-2 col-md-2">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label"
@@ -328,7 +328,7 @@
 									This Field is Required</span
 								>
 							</div>
-							<div class="my-3 col-6">
+							<div class="my-3 col-sm-6 col-md-6">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label"
@@ -351,7 +351,7 @@
 									This Field is Required</span
 								>
 							</div>
-							<div class="my-3 col-2">
+							<div class="my-3 col-sm-2 col-md-2">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label"
@@ -380,22 +380,26 @@
 									This Field is Required</span
 								>
 							</div>
-							<div class="my-3 col-1 my-auto">
-								<span
-									class="material-icons"
-									style="margin-top: 35%"
-									(click)="addIssues()"
-									>add_circle_outline
-								</span>
-							</div>
-							<div class="my-3 col-1 my-auto">
-								<span
-									class="material-icons"
-									style="margin-top: 35%"
-									(click)="removeIssues(i)"
+							<div class="d-flex">
+								<div class="my-3 col-sm-1 col-md-1 my-auto">
+									<span
+										class="material-icons"
+										style="margin-top: 35%"
+										(click)="addIssues()"
+										>add_circle_outline
+									</span>
+								</div>
+								<div
+									class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
 								>
-									remove_circle_outline
-								</span>
+									<span
+										class="material-icons"
+										style="margin-top: 35%"
+										(click)="removeIssues(i)"
+									>
+										remove_circle_outline
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -411,7 +415,7 @@
 					[formGroupName]="i"
 				>
 					<div class="row">
-						<div class="my-3 col-6">
+						<div class="my-3 col-sm-6 col-md-6">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -445,7 +449,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="my-3 col-2">
+						<div class="my-3 col-sm-2 col-md-2">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -478,7 +482,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="my-3 col-2">
+						<div class="my-3 col-sm-2 col-md-2">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -505,22 +509,24 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="my-3 col-1 my-auto">
-							<span
-								class="material-icons"
-								style="margin-top: 35%"
-								(click)="addCorrectAct()"
-								>add_circle_outline
-							</span>
-						</div>
-						<div class="my-3 col-1 my-auto">
-							<span
-								class="material-icons"
-								style="margin-top: 35%"
-								(click)="removeCorrectAct(i)"
-							>
-								remove_circle_outline
-							</span>
+						<div class="d-flex">
+							<div class="my-3 col-sm-1 col-md-1 my-auto">
+								<span
+									class="material-icons"
+									style="margin-top: 35%"
+									(click)="addCorrectAct()"
+									>add_circle_outline
+								</span>
+							</div>
+							<div class="my-3 col-sm-1 col-md-1 my-auto mx-auto">
+								<span
+									class="material-icons"
+									style="margin-top: 35%"
+									(click)="removeCorrectAct(i)"
+								>
+									remove_circle_outline
+								</span>
+							</div>
 						</div>
 					</div>
 				</ng-container>
@@ -535,7 +541,7 @@
 					[formGroupName]="i"
 				>
 					<div class="row">
-						<div class="my-3 col-5">
+						<div class="my-3 col-sm-5 col-md-5">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -559,7 +565,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="my-3 col-5">
+						<div class="my-3 col-sm-5 col-md-5">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -598,20 +604,24 @@
 							</ng-container>
 						</div>
 						<ng-container *ngIf="!isHistory">
-							<div class="my-3 col-1 my-auto">
-								<span
-									class="material-icons"
-									(click)="addAttendee()"
-									>add_circle_outline
-								</span>
-							</div>
-							<div class="my-3 col-1 my-auto">
-								<span
-									class="material-icons"
-									(click)="removeAttendee(i)"
+							<div class="d-flex">
+								<div class="my-3 col-sm-1 col-md-1 my-auto">
+									<span
+										class="material-icons"
+										(click)="addAttendee()"
+										>add_circle_outline
+									</span>
+								</div>
+								<div
+									class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
 								>
-									remove_circle_outline
-								</span>
+									<span
+										class="material-icons"
+										(click)="removeAttendee(i)"
+									>
+										remove_circle_outline
+									</span>
+								</div>
 							</div>
 						</ng-container>
 					</div>
