@@ -472,3 +472,9 @@ mat-datepicker-toggle {
 	font-size: 19px;
 	font-weight: 600;
 }
+@media only screen and (max-width: 768px) {
+	/* For mobile phones: */
+	.table_1 {
+		width: 100%;
+	}
+}
