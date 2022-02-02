@@ -96,14 +96,14 @@
 					<h2>Site Information</h2>
 					<div>
 						<div class="row">
-							<div class="my-3 col">
+							<div class="my-3 col-md col-sm">
 								<label class="form-label"
 									>Site Name<span class="text-danger"
 										>*</span
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="siteName"
                   aria-label="Default select example"
                 >
@@ -111,7 +111,7 @@
                 </select> -->
 								<input
 									type="text"
-									class="form-control col"
+									class="form-control col-md col-sm"
 									formControlName="siteName"
 									[value]="siteControls.siteName.value"
 									[class.is-invalid]="riskAssessmentFb.get('siteName')?.hasError('required')
@@ -126,14 +126,14 @@
 									Site Name is Required</span
 								>
 							</div>
-							<div class="my-3 col">
+							<div class="my-3 col-md col-sm">
 								<label class="form-label"
 									>Customer Name<span class="text-danger"
 										>*</span
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="CustomerName"
                   aria-label="Default select example"
                 >
@@ -141,7 +141,7 @@
                 </select> -->
 								<input
 									type="text"
-									class="form-control col"
+									class="form-control col-md col-sm"
 									formControlName="customerName"
 									[value]="siteControls.customerName.value"
 									[class.is-invalid]="riskAssessmentFb.get('customerName')?.hasError('required')
@@ -158,16 +158,16 @@
 							</div>
 						</div>
 						<div class="row">
-							<!-- <div class="my-3 col-2">
+							<!-- <div class="my-3 col-md-2 col-sm-2">
                 <label class="form-label">Street Number<span class="text-danger ">*</span></label> -->
 							<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="StreetNumber"
                   aria-label="Default select example"
                 >
                   <option selected hidden>Select</option>
                 </select> -->
-							<!-- <input type="text" class="form-control col" formControlName="streetNo"
+							<!-- <input type="text" class="form-control col-md col-sm" formControlName="streetNo"
                   [value]="siteControls.streetNo.value" [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required')
                 && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) ">
                 <span *ngIf="
@@ -176,14 +176,14 @@
                   street Number is Required
                 </span>
               </div> -->
-							<div class="my-3 col-4">
+							<div class="my-3 col-md-4 col-sm-4">
 								<label class="form-label"
 									>Street Address<span class="text-danger"
 										>*</span
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="StreetAddress"
                   aria-label="Default select example"
                 >
@@ -199,7 +199,7 @@
 									[class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required')
                 && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "
 								></textarea>
-								<!-- <input type="text" class="form-control col" formControlName="streetAddr"
+								<!-- <input type="text" class="form-control col-md col-sm" formControlName="streetAddr"
                   [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required')
                 && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "> -->
 								<span
@@ -211,14 +211,14 @@
 									Street Address is Required
 								</span>
 							</div>
-							<div class="my-3 col-4">
+							<div class="my-3 col-md-4 col-sm-4">
 								<label class="form-label"
 									>Suburb<span class="text-danger"
 										>*</span
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="Suburb"
                   aria-label="Default select example"
                 >
@@ -227,7 +227,7 @@
 								<textarea
 									autosize
 									type="text"
-									class="form-control col"
+									class="form-control col-md col-sm"
 									formControlName="suburb"
 									[class.is-invalid]="riskAssessmentFb.get('suburb')?.hasError('required')
                 && (riskAssessmentFb.get('suburb').dirty || riskAssessmentFb.get('suburb').touched) "
@@ -241,14 +241,14 @@
 									Suburb is Required
 								</span>
 							</div>
-							<div class="my-3 col-4">
+							<div class="my-3 col-md-4 col-sm-4">
 								<label class="form-label"
 									>State<span class="text-danger"
 										>*</span
 									></label
 								>
 								<select
-									class="form-select form-control col"
+									class="form-select form-control col-md col-sm"
 									aria-label="Default select example"
 									formControlName="statesSWMS"
 									[value]="siteControls.statesSWMS.value"
@@ -285,14 +285,14 @@
 						</div>
 
 						<div class="row">
-							<div class="my-3 col">
+							<div class="my-3 col-md col-sm">
 								<label class="form-label"
 									>Customer Contact<span class="text-danger"
 										>*</span
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="CustomerContact"
                   aria-label="Default select example"
                 >
@@ -300,7 +300,7 @@
                 </select> -->
 								<input
 									type="text"
-									class="form-control col"
+									class="form-control col-md col-sm"
 									formControlName="custConct"
 									[value]="siteControls.custConct.value"
 									[class.is-invalid]="riskAssessmentFb.get('custConct')?.hasError('required')
@@ -315,7 +315,7 @@
 									Customer Contact Number is Required
 								</span>
 							</div>
-							<div class="my-3 col">
+							<div class="my-3 col-md col-sm">
 								<label class="form-label"
 									>Customer Contact Phone<span
 										class="text-danger"
@@ -323,7 +323,7 @@
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="CustomerContactPhone"
                   aria-label="Default select example"
                 >
@@ -331,7 +331,7 @@
                 </select> -->
 								<input
 									type="text"
-									class="form-control col"
+									class="form-control col-md col-sm"
 									formControlName="custConctPh"
 									[value]="siteControls.custConctPh.value"
 									[class.is-invalid]="riskAssessmentFb.get('custConctPh')?.hasError('required')
@@ -348,14 +348,14 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="my-3 col-4">
+							<div class="my-3 col-md-4 col-sm-4">
 								<label class="form-label"
 									>Customer Email<span class="text-danger"
 										>*</span
 									></label
 								>
 								<!-- <select
-                  class="form-select form-control col"
+                  class="form-select form-control col-md col-sm"
                   id="CustomerEmail"
                   aria-label="Default select example"
                 >
@@ -363,7 +363,7 @@
                 </select> -->
 								<input
 									type="text"
-									class="form-control col"
+									class="form-control col-md col-sm"
 									formControlName="custEmail"
 									[value]="siteControls.custEmail.value"
 									[class.is-invalid]="riskAssessmentFb.get('custEmail')?.hasError('required')
@@ -378,14 +378,14 @@
 									Email is Required
 								</span>
 							</div>
-							<div class="my-3 col-2">
+							<div class="my-3 col-md-2 col-sm-2">
 								<label class="form-label"
 									>Job Number<span class="text-danger"
 										>*</span
 									></label
 								>
 								<select
-									class="form-select form-control col"
+									class="form-select form-control col-md col-sm"
 									aria-label="Default select example"
 									formControlName="jobNumber"
 									(change)="jobNoSel()"
@@ -409,14 +409,14 @@
 									Job Number is Required
 								</span>
 							</div>
-							<div class="my-3 col-6">
+							<div class="my-3 col-md-6 col-sm-6">
 								<label class="form-label"
 									>Project Manager<span class="text-danger"
 										>*</span
 									></label
 								>
 								<select
-									class="form-select form-control col"
+									class="form-select form-control col-md col-sm"
 									aria-label="Default select example"
 									formControlName="projectManager"
 									(change)="setProjectManager('projectManager',$event)"
@@ -442,7 +442,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="my-3 col-4">
+							<div class="my-3 col-md-4 col-sm-4">
 								<label class="form-label">Date</label>
 								<!-- <input type="date" class="form-control" formControlName="date" /> -->
 								<input
@@ -485,7 +485,7 @@
 									formArrayName="jobTask"
 								>
 									<div
-										class="col-12 d-flex"
+										class="col-md-12 col-sm-12 d-flex"
 										style="gap: 1rem"
 									>
 										<mat-checkbox
@@ -502,7 +502,7 @@
 										[formGroupName]="i"
 									>
 										<div
-											class="mt-2 col-4"
+											class="mt-2 col-md-4 col-sm-4"
 											*ngIf="jobTaskData[i].tradeCategoryId._id === category._id"
 										>
 											<input
@@ -531,7 +531,7 @@
 						</ng-template>
 
 						<hr />
-						<div class="row mt-4">
+						<div class="row mt-4 table_1">
 							<table class="table table-bordered text-center">
 								<thead>
 									<tr>
@@ -607,7 +607,7 @@
 										<td colspan="2">Moderate</td>
 									</tr>
 									<tr>
-										<th scope="col">2</th>
+										<th scope="col-md col-sm">2</th>
 										<td class="L_1">L</td>
 										<td class="L_1">L</td>
 										<td class="M_1">M</td>
@@ -619,7 +619,7 @@
 										<td colspan="2">Major</td>
 									</tr>
 									<tr>
-										<th scope="col">1</th>
+										<th scope="col-md col-sm">1</th>
 										<td class="L_1">L</td>
 										<td class="L_1">L</td>
 										<td class="L_1">L</td>
@@ -643,7 +643,7 @@
 							<div
 								*ngFor="let control of riskConstruct().controls; let i = index"
 								[formGroupName]="i"
-								class="mt-2 col-4"
+								class="mt-2 col-md-4 col-sm-4"
 							>
 								<input
 									type="checkbox"
@@ -671,7 +671,7 @@
 						<div
 							*ngFor="let control of ppe().controls; let i = index"
 							[formGroupName]="i"
-							class="mt-2 col-4"
+							class="mt-2 col-md-4 col-sm-4"
 						>
 							<input
 								type="checkbox"
@@ -700,7 +700,7 @@
 						<div
 							*ngFor="let control of Licence().controls; let i = index"
 							[formGroupName]="i"
-							class="mt-2 col-4"
+							class="mt-2 col-md-4 col-sm-4"
 						>
 							<input
 								type="checkbox"
@@ -726,7 +726,7 @@
 					</h2>
 
 					<div class="row">
-						<div class="col-4">
+						<div class="col-md-4 col-sm-4">
 							<label class="form-label"
 								>Employee Name<span class="text-danger"
 									>*</span
@@ -775,7 +775,7 @@
 								</ng-container>
 							</p>
 						</div>
-						<div class="col-4">
+						<div class="col-md-4 col-sm-4">
 							<label class="form-label"
 								>Signature<span class="text-danger"
 									>*</span
@@ -804,7 +804,7 @@
 								Clear
 							</button>
 						</div>
-						<div class="col-3">
+						<div class="col-md-3 col-sm-3">
 							<label class="form-label"
 								>Date<span class="text-danger">*</span></label
 							>
@@ -871,7 +871,7 @@
 				<div class="container content-center">
 					<div class="px-4 py-4">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="my-3">
 									<label class="form-label"
 										>Site Name<span class="text-danger"
@@ -897,7 +897,7 @@
 									>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="my-3">
 									<label class="form-label"
 										>Customer Name<span class="text-danger"
@@ -923,7 +923,7 @@
 									</span>
 								</div>
 							</div>
-							<!-- <div class="col-md-2">
+							<!-- <div class="col-md-2 col-sm-2">
                 <div class="my-3">
                   <label class="form-label">Street Number<span class="text-danger">*</span></label>
                   <input type="number" class="form-control" aria-describedby="emailHelp" formControlName="streetNo"
@@ -936,7 +936,7 @@
                   </span>
                 </div>
               </div> -->
-							<div class="col-md-4">
+							<div class="col-md-4 col-sm-4">
 								<div class="my-3">
 									<label class="form-label"
 										>Street Name<span class="text-danger"
@@ -966,7 +966,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 col-sm-4">
 								<div class="my-3">
 									<label class="form-label"
 										>Suburb<span class="text-danger"
@@ -976,7 +976,7 @@
 									<textarea
 										autosize
 										type="text"
-										class="form-control col"
+										class="form-control col-md col-sm"
 										formControlName="suburb"
 										[class.is-invalid]="riskAssessmentFb.get('suburb')?.hasError('required')
                   && (riskAssessmentFb.get('suburb').dirty || riskAssessmentFb.get('suburb').touched) "
@@ -991,7 +991,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 col-sm-4">
 								<div class="my-3">
 									<label class="form-label"
 										>State<span class="text-danger"
@@ -999,7 +999,7 @@
 										></label
 									>
 									<select
-										class="form-select form-control col"
+										class="form-select form-control col-md col-sm"
 										aria-label="Default select example"
 										formControlName="statesSWMS"
 										[value]="siteControls.statesSWMS.value"
@@ -1024,7 +1024,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="my-3">
 									<label class="form-label"
 										>Customer Contact<span
@@ -1051,7 +1051,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="my-3">
 									<label class="form-label"
 										>Customer Contact Phone<span
@@ -1078,7 +1078,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="my-3">
 									<label class="form-label"
 										>Customer Contact Email<span
@@ -1105,7 +1105,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-3 col-md-3">
 								<div class="my-3">
 									<label class="form-label"
 										>Job Number<span class="text-danger"
@@ -1113,7 +1113,7 @@
 										></label
 									>
 									<select
-										class="form-select form-control col"
+										class="form-select form-control col-md col-sm"
 										aria-label="Default select example"
 										formControlName="jobNumber"
 										(change)="jobNoSel()"
@@ -1137,7 +1137,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-3 col-md-3">
 								<div class="my-3">
 									<label class="form-label"
 										>Project Manager<span
@@ -1146,7 +1146,7 @@
 										></label
 									>
 									<select
-										class="form-select form-control col"
+										class="form-select form-control col-md col-sm"
 										aria-label="Default select example"
 										formControlName="projectManagerSWMS"
 										(change)="setProjectManager('projectManagerSWMS',$event)"
@@ -1174,7 +1174,7 @@
 						</div>
 						<hr />
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-2 col-sm-2">
 								<div class="my-3">
 									<label
 										for="exampleInputProjectNumber"
@@ -1184,7 +1184,7 @@
 										></label
 									>
 									<select
-										class="form-select form-control col"
+										class="form-select form-control col-md col-sm"
 										aria-label="Default select example"
 										formControlName="jurisdiction"
 										[class.is-invalid]="riskAssessmentFb.get('jurisdiction')?.hasError('required')
@@ -1215,7 +1215,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-5 col-sm-5">
 								<div class="my-3">
 									<label
 										>Safety Legislation<span
@@ -1256,7 +1256,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-5 col-sm-5">
 								<div class="my-3">
 									<label class="form-label"
 										>Regulator & other Legislation<span
@@ -1265,7 +1265,7 @@
 										></label
 									>
 									<select
-										class="form-select form-control col"
+										class="form-select form-control col-md col-sm"
 										id="siteName"
 										aria-label="Default select example"
 										formControlName="regulator"
@@ -1301,12 +1301,12 @@
 						<hr />
 						<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
 						<div class="row">
-							<!--<div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
+							<!--<div class="col-md-3 col-sm-3" *ngFor="let item of allCOPSelected;let i=index ">
            <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
           </div> -->
 							<div
 								*ngFor="let item of allCOPSelected; let i = index"
-								class="mt-2 col-4"
+								class="mt-2 col-md-4 col-sm-4"
 							>
 								<input
 									type="checkbox"
@@ -1329,7 +1329,7 @@
 							<div
 								*ngFor="let control of riskConstruct2().controls; let i = index"
 								[formGroupName]="i"
-								class="mt-2 col-4"
+								class="mt-2 col-md-4 col-sm-4"
 							>
 								<input
 									type="checkbox"
@@ -1354,7 +1354,7 @@
 							<div
 								*ngFor="let control of ppe2().controls; let i = index"
 								[formGroupName]="i"
-								class="mt-2 col-4"
+								class="mt-2 col-md-4 col-sm-4"
 							>
 								<input
 									type="checkbox"
@@ -1381,7 +1381,7 @@
 									*ngFor="let controls of sdsRegisterFA().controls;let i=index"
 									[formGroupName]="i"
 								>
-									<div class="col-md-3">
+									<div class="col-sm-3 col-md-3">
 										<div class="my-3">
 											<label for="sel2" class="form-label"
 												>Name of Chemical<span
@@ -1425,7 +1425,7 @@
 											</span>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-sm-3 col-md-3">
 										<div class="my-3">
 											<label
 												for="exampleInputProjectNumber"
@@ -1452,7 +1452,7 @@
 											</span>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-2 col-sm-2">
 										<div class="my-3">
 											<label
 												for="exampleInputProjectNumber"
@@ -1489,7 +1489,7 @@
 											</span>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-2 col-sm-2">
 										<div class="my-3">
 											<label
 												for="exampleInputProjectNumber"
@@ -1516,7 +1516,7 @@
 											</span>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-2 col-sm-2">
 										<div class="my-3">
 											<label
 												for="exampleInputProjectNumber"
@@ -1543,7 +1543,7 @@
 											</span>
 										</div>
 									</div>
-									<div class="col-md-10">
+									<div class="col-md-10 col-sm-10">
 										<div class="my-3">
 											<label
 												for="formFile"
@@ -1559,7 +1559,10 @@
 											/>
 										</div>
 									</div>
-									<div class="col-md-2" *ngIf="!isHistory">
+									<div
+										class="col-md-2 col-sm-2"
+										*ngIf="!isHistory"
+									>
 										<span
 											class="material-icons"
 											style="margin-top: 30%"
@@ -1589,7 +1592,7 @@
 							</ng-container>
 						</ng-container>
 						<hr />
-						<div class="row">
+						<div class="row col-sm col-md">
 							<table class="table table-bordered text-center">
 								<thead>
 									<tr>
@@ -1665,7 +1668,7 @@
 										<td colspan="2">Moderate</td>
 									</tr>
 									<tr>
-										<th scope="col">2</th>
+										<th scope="col-md col-sm">2</th>
 										<td class="L_1">L</td>
 										<td class="L_1">L</td>
 										<td class="M_1">M</td>
@@ -1677,7 +1680,7 @@
 										<td colspan="2">Major</td>
 									</tr>
 									<tr>
-										<th scope="col">1</th>
+										<th scope="col-md col-sm">1</th>
 										<td class="L_1">L</td>
 										<td class="L_1">L</td>
 										<td class="L_1">L</td>
@@ -1707,7 +1710,9 @@
 								</div>
 
 								<div class="row row-print">
-									<div class="col-10 col-sm-10-print">
+									<div
+										class="col-md-10 col-sm-10 col-sm-10-print"
+									>
 										<label for="sel2"
 											>Identity Hazards<span
 												class="material-icons ml-3 my-auto p-0"
@@ -1753,7 +1758,10 @@
 										</ol>
 									</div>
 									<ng-container formArrayName="riskLevel">
-										<div class="col-2" [formGroupName]="i">
+										<div
+											class="col-md-2 col-sm-2"
+											[formGroupName]="i"
+										>
 											<label for="sel1">Risk</label>
 											<select
 												class="form-control"
@@ -1771,7 +1779,9 @@
 										</div>
 									</ng-container>
 
-									<div class="col-10 col-sm-10-print my-3">
+									<div
+										class="col-md-10 col-sm-10 col-sm-10-print my-3"
+									>
 										<label for="sel2"
 											>Control and Action Required<span
 												class="material-icons ml-3 my-auto p-0"
@@ -1793,7 +1803,7 @@
 														{{contrlActReq.title }}
 													</div>
 													<div
-														class="col-3"
+														class="col-md-3 col-sm-3"
 														*ngIf="!contrlActReq.id"
 													>
 														<mat-icon
@@ -1817,7 +1827,7 @@
 										</ol>
 									</div>
 
-									<div class="col-2">
+									<div class="col-md-2 col-sm-2">
 										<ng-container
 											formArrayName="residualRisk"
 										>
@@ -1923,7 +1933,7 @@
 								*ngFor="let control of employeeArr().controls; let i = index"
 								[formGroupName]="i"
 							>
-								<div class="col-md-5">
+								<div class="col-md-5 col-sm-5">
 									<div class="my-3">
 										<label
 											for="exampleInputProjectNumber"
@@ -1976,7 +1986,7 @@
 										</ng-container>
 									</div>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-5 col-sm-5">
 									<div class="form-floating">
 										<label
 											>Signature<span class="text-danger"
@@ -2007,7 +2017,9 @@
 										Clear
 									</button>
 								</div>
-								<div class="col-md-1 d-flex align-items-center">
+								<div
+									class="col-md-1 col-sm-1 d-flex align-items-center"
+								>
 									<span
 										class="material-icons"
 										*ngIf="!isHistory"
@@ -2015,7 +2027,9 @@
 										>add_circle_outline
 									</span>
 								</div>
-								<div class="col-md-1 d-flex align-items-center">
+								<div
+									class="col-md-1 col-sm-1 d-flex align-items-center"
+								>
 									<span
 										class="material-icons"
 										*ngIf="!isHistory"
@@ -2051,10 +2065,10 @@
 			<h2>Site Information</h2>
 			<div>
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-md col-sm">
 						<label class="form-label">Site Name</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="siteName"
               aria-label="Default select example"
             >
@@ -2062,14 +2076,14 @@
             </select> -->
 						<input
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="siteName"
 						/>
 					</div>
-					<div class="my-3 col">
+					<div class="my-3 col-md col-sm">
 						<label class="form-label">Customer Name</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="CustomerName"
               aria-label="Default select example"
             >
@@ -2077,16 +2091,16 @@
             </select> -->
 						<input
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="customerName"
 						/>
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col-2">
+					<div class="my-3 col-md-2 col-sm-2">
 						<label class="form-label">Street Number</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="StreetNumber"
               aria-label="Default select example"
             >
@@ -2094,14 +2108,14 @@
             </select> -->
 						<input
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="streetNo"
 						/>
 					</div>
-					<div class="my-3 col-4">
+					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Street Address</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="StreetAddress"
               aria-label="Default select example"
             >
@@ -2111,25 +2125,25 @@
 							autosize
 							type="text"
 							formControlName="streetAddr"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							id="name"
 						></textarea>
-						<!-- <input type="text" class="form-control col" formControlName="streetAddr"> -->
+						<!-- <input type="text" class="form-control col-md col-sm" formControlName="streetAddr"> -->
 					</div>
-					<div class="my-3 col-4">
+					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Suburb</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="Suburb"
               aria-label="Default select example"
             >
               <option selected hidden>Select</option>
             </select> -->
-						<!-- <input type="text" class="form-control col" formControlName="suburb"> -->
+						<!-- <input type="text" class="form-control col-md col-sm" formControlName="suburb"> -->
 						<textarea
 							autosize
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="suburb"
 							[class.is-invalid]="riskAssessmentFb.get('suburb')?.hasError('required')
             && (riskAssessmentFb.get('suburb').dirty || riskAssessmentFb.get('suburb').touched) "
@@ -2143,10 +2157,10 @@
 							Suburb is Required
 						</span>
 					</div>
-					<div class="my-3 col-2">
+					<div class="my-3 col-md-2 col-sm-2">
 						<label class="form-label">State</label>
 						<select
-							class="form-select form-control col"
+							class="form-select form-control col-md col-sm"
 							aria-label="Default select example"
 							formControlName="statesSWMS"
 						>
@@ -2172,10 +2186,10 @@
 				</div>
 
 				<div class="row">
-					<div class="my-3 col">
+					<div class="my-3 col-md col-sm">
 						<label class="form-label">Customer Contact</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="CustomerContact"
               aria-label="Default select example"
             >
@@ -2183,14 +2197,14 @@
             </select> -->
 						<input
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="custConct"
 						/>
 					</div>
-					<div class="my-3 col">
+					<div class="my-3 col-md col-sm">
 						<label class="form-label">Customer Contact Phone</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="CustomerContactPhone"
               aria-label="Default select example"
             >
@@ -2198,16 +2212,16 @@
             </select> -->
 						<input
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="custConctPh"
 						/>
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col-4">
+					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Customer Email</label>
 						<!-- <select
-              class="form-select form-control col"
+              class="form-select form-control col-md col-sm"
               id="CustomerEmail"
               aria-label="Default select example"
             >
@@ -2215,14 +2229,14 @@
             </select> -->
 						<input
 							type="text"
-							class="form-control col"
+							class="form-control col-md col-sm"
 							formControlName="custEmail"
 						/>
 					</div>
-					<div class="my-3 col-2">
+					<div class="my-3 col-md-2 col-sm-2">
 						<label class="form-label">Job Number</label>
 						<select
-							class="form-select form-control col"
+							class="form-select form-control col-md col-sm"
 							aria-label="Default select example"
 							formControlName="jobNumber"
 							(change)="jobNoSel()"
@@ -2236,10 +2250,10 @@
 							</option>
 						</select>
 					</div>
-					<div class="my-3 col-6">
+					<div class="my-3 col-md-6 col-sm-6">
 						<label class="form-label">Project Manager</label>
 						<select
-							class="form-select form-control col"
+							class="form-select form-control col-md col-sm"
 							aria-label="Default select example"
 							formControlName="projectManager"
 							(change)="setProjectManager('projectManager',$event)"
@@ -2255,7 +2269,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col-4">
+					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Date</label>
 						<!-- <input type="date" class="form-control" formControlName="date" /> -->
 						<input
@@ -2288,7 +2302,10 @@
 							#parent
 							formArrayName="jobTask"
 						>
-							<div class="col-12 d-flex" style="gap: 1rem">
+							<div
+								class="col-md-12 col-sm-12 d-flex"
+								style="gap: 1rem"
+							>
 								<mat-checkbox
 									#matCheck
 									(change)="jobTaskCategoryChecked(parent)"
@@ -2303,7 +2320,7 @@
 								[formGroupName]="i"
 							>
 								<div
-									class="mt-2 col-4"
+									class="mt-2 col-md-4 col-sm-4"
 									*ngIf="jobTaskData[i].tradeCategoryId._id === category._id"
 								>
 									<input
@@ -2329,7 +2346,7 @@
 				</ng-container>
 
 				<hr />
-				<div class="row mt-4">
+				<div class="row mt-4 table_1">
 					<table class="table table-bordered text-center">
 						<thead>
 							<tr>
@@ -2401,7 +2418,7 @@
 								<td colspan="2">Moderate</td>
 							</tr>
 							<tr>
-								<th scope="col">2</th>
+								<th scope="col-md col-sm">2</th>
 								<td class="L_1">L</td>
 								<td class="L_1">L</td>
 								<td class="M_1">M</td>
@@ -2413,7 +2430,7 @@
 								<td colspan="2">Major</td>
 							</tr>
 							<tr>
-								<th scope="col">1</th>
+								<th scope="col-md col-sm">1</th>
 								<td class="L_1">L</td>
 								<td class="L_1">L</td>
 								<td class="L_1">L</td>
@@ -2437,7 +2454,7 @@
 					<div
 						*ngFor="let control of riskConstruct().controls; let i = index"
 						[formGroupName]="i"
-						class="mt-2 col-4"
+						class="mt-2 col-md-4 col-sm-4"
 					>
 						<input
 							type="checkbox"
@@ -2463,7 +2480,7 @@
 				<div
 					*ngFor="let control of ppe().controls; let i = index"
 					[formGroupName]="i"
-					class="mt-2 col-4"
+					class="mt-2 col-md-4 col-sm-4"
 				>
 					<input
 						type="checkbox"
@@ -2490,7 +2507,7 @@
 				<div
 					*ngFor="let control of Licence().controls; let i = index"
 					[formGroupName]="i"
-					class="mt-2 col-4"
+					class="mt-2 col-md-4 col-sm-4"
 				>
 					<input
 						type="checkbox"
@@ -2514,7 +2531,7 @@
 			</h2>
 
 			<div class="row">
-				<div class="col-4">
+				<div class="col-md-4 col-sm-4">
 					<label class="form-label">Employee Name</label>
 					<p>
 						<input
@@ -2540,7 +2557,7 @@
 						</mat-autocomplete>
 					</p>
 				</div>
-				<div class="col-4">
+				<div class="col-md-4 col-sm-4">
 					<label class="form-label">Signature</label>
 					<div class="sign" #signaturePad1Div>
 						<signature-pad
@@ -2557,7 +2574,7 @@
 						Clear
 					</button>
 				</div>
-				<div class="col-3">
+				<div class="col-md-3 col-sm-3">
 					<label class="form-label">Date</label>
 					<p>
 						<input
@@ -2611,7 +2628,7 @@
 		<div class="container content-center">
 			<div class="px-4 py-4">
 				<div class="row">
-					<div class="col-md-6 col-sm-6-print">
+					<div class="col-md-6 col-sm-6 col-sm-6-print">
 						<div class="my-3">
 							<label class="form-label">Site Name</label>
 							<input
@@ -2622,7 +2639,7 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6-print">
+					<div class="col-md-6 col-sm-6 col-sm-6-print">
 						<div class="my-3">
 							<label class="form-label">Customer Name</label>
 							<input
@@ -2633,7 +2650,7 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-2-print">
+					<div class="col-md-2 col-sm-2 col-sm-2-print">
 						<div class="my-3">
 							<label class="form-label">Street Number</label>
 							<input
@@ -2668,11 +2685,11 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-2-print">
+					<div class="col-md-2 col-sm-2 col-sm-2-print">
 						<div class="my-3">
 							<label class="form-label">State</label>
 							<select
-								class="form-select form-control col"
+								class="form-select form-control col-md col-sm"
 								aria-label="Default select example"
 								formControlName="statesSWMS"
 							>
@@ -2686,7 +2703,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6-print">
+					<div class="col-md-6 col-sm-6 col-sm-6-print">
 						<div class="my-3">
 							<label class="form-label">Customer Contact</label>
 							<input
@@ -2697,7 +2714,7 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6-print">
+					<div class="col-md-6 col-sm-6 col-sm-6-print">
 						<div class="my-3">
 							<label class="form-label"
 								>Customer Contact Phone</label
@@ -2710,7 +2727,7 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6-print">
+					<div class="col-md-6 col-sm-6 col-sm-6-print">
 						<div class="my-3">
 							<label class="form-label"
 								>Customer Contact Email</label
@@ -2723,11 +2740,11 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-3 col-md-3-print">
+					<div class="col-md-3 col-sm-3 col-md-3-print">
 						<div class="my-3">
 							<label class="form-label">Job Number</label>
 							<select
-								class="form-select form-control col"
+								class="form-select form-control col-md col-sm"
 								aria-label="Default select example"
 								formControlName="jobNumber"
 								(change)="jobNoSel()"
@@ -2741,11 +2758,11 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-3 col-md-3-print">
+					<div class="col-md-3 col-sm-3 col-md-3-print">
 						<div class="my-3">
 							<label class="form-label">Project Manager</label>
 							<select
-								class="form-select form-control col"
+								class="form-select form-control col-md col-sm"
 								aria-label="Default select example"
 								formControlName="projectManagerSWMS"
 								(change)="setProjectManager('projectManagerSWMS',$event)"
@@ -2763,7 +2780,7 @@
 				</div>
 				<hr />
 				<div class="row">
-					<div class="col-md-2 col-sm-2-print">
+					<div class="col-md-2 col-sm-2 col-sm-2-print">
 						<div class="my-3">
 							<label
 								for="exampleInputProjectNumber"
@@ -2771,7 +2788,7 @@
 								>Jurisdiction</label
 							>
 							<select
-								class="form-select form-control col"
+								class="form-select form-control col-md col-sm"
 								aria-label="Default select example"
 								formControlName="jurisdiction"
 							>
@@ -2792,7 +2809,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-5 col-sm-5-print">
+					<div class="col-md-5 col-sm-5 col-sm-5-print">
 						<div class="my-3">
 							<label>Safety Legislation</label>
 							<select
@@ -2818,13 +2835,13 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-5 col-sm-5-print">
+					<div class="col-md-5 col-sm-5 col-sm-5-print">
 						<div class="my-3">
 							<label class="form-label"
 								>Regulator & other Legislation</label
 							>
 							<select
-								class="form-select form-control col"
+								class="form-select form-control col-md col-sm"
 								id="siteName"
 								aria-label="Default select example"
 								formControlName="regulator"
@@ -2852,12 +2869,12 @@
 				<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
 
 				<div class="row">
-					<!--<div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
+					<!--<div class="col-md-3 col-sm-3" *ngFor="let item of allCOPSelected;let i=index ">
          <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
         </div> -->
 					<div
 						*ngFor="let item of allCOPSelected; let i = index"
-						class="mt-2 col-4 col-sm-4-print"
+						class="mt-2 col-md-4 col-sm-4 col-sm-4-print"
 					>
 						<input
 							type="checkbox"
@@ -2880,7 +2897,7 @@
 					<div
 						*ngFor="let control of riskConstruct2().controls; let i = index"
 						[formGroupName]="i"
-						class="mt-2 col-4 col-sm-4-print"
+						class="mt-2 col-md-4 col-sm-4 col-sm-4-print"
 					>
 						<input
 							type="checkbox"
@@ -2902,7 +2919,7 @@
 					<div
 						*ngFor="let control of ppe2().controls; let i = index"
 						[formGroupName]="i"
-						class="mt-2 col-4 col-sm-4-print"
+						class="mt-2 col-md-4 col-sm-4 col-sm-4-print"
 					>
 						<input
 							type="checkbox"
@@ -2927,7 +2944,7 @@
 							*ngFor="let controls of sdsRegisterFA().controls;let i=index"
 							[formGroupName]="i"
 						>
-							<div class="col-md-3 col-md-3-print">
+							<div class="col-md-3 col-sm-3 col-md-3-print">
 								<div class="my-3">
 									<label for="sel2" class="form-label"
 										>Name of Chemical<span
@@ -2958,7 +2975,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-3 col-md-3-print">
+							<div class="col-md-3 col-sm-3 col-md-3-print">
 								<div class="my-3">
 									<label
 										for="exampleInputProjectNumber"
@@ -2974,7 +2991,7 @@
 									/>
 								</div>
 							</div>
-							<div class="col-md-2 col-sm-2-print">
+							<div class="col-md-2 col-sm-2 col-sm-2-print">
 								<div class="my-3">
 									<label
 										for="exampleInputProjectNumber"
@@ -3000,7 +3017,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2 col-sm-2-print">
+							<div class="col-md-2 col-sm-2 col-sm-2-print">
 								<div class="my-3">
 									<label
 										for="exampleInputProjectNumber"
@@ -3016,7 +3033,7 @@
 									/>
 								</div>
 							</div>
-							<div class="col-md-2 col-sm-2-print">
+							<div class="col-md-2 col-sm-2 col-sm-2-print">
 								<div class="my-3">
 									<label
 										for="exampleInputProjectNumber"
@@ -3032,7 +3049,7 @@
 									/>
 								</div>
 							</div>
-							<div class="col-md-10 col-sm-10-print">
+							<div class="col-md-10 col-sm-10 col-sm-10-print">
 								<div class="my-3">
 									<label for="formFile" class="form-label"
 										>Attach SDS Sheet</label
@@ -3040,7 +3057,7 @@
 									<!-- <input class="form-control" type="file" id="formFile" formControlName="file" /> -->
 								</div>
 							</div>
-							<!-- <div class="col-md-2 col-sm-2-print">
+							<!-- <div class="col-md-2 col-sm-2 col-sm-2-print">
                 <span class="material-icons" style="margin-top: 30%" (click)="addActionSDSRegister()">add_circle_outline
                 </span>
                 <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
@@ -3132,7 +3149,7 @@
 								<td colspan="2">Moderate</td>
 							</tr>
 							<tr>
-								<th scope="col">2</th>
+								<th scope="col-md col-sm">2</th>
 								<td class="L_1">L</td>
 								<td class="L_1">L</td>
 								<td class="M_1">M</td>
@@ -3144,7 +3161,7 @@
 								<td colspan="2">Major</td>
 							</tr>
 							<tr>
-								<th scope="col">1</th>
+								<th scope="col-md col-sm">1</th>
 								<td class="L_1">L</td>
 								<td class="L_1">L</td>
 								<td class="L_1">L</td>
@@ -3174,7 +3191,7 @@
 						</div>
 
 						<div class="row row-print">
-							<div class="col-10 col-sm-10-print">
+							<div class="col-md-10 col-sm-10 col-sm-10-print">
 								<label for="sel2"
 									>Identity Hazards<span
 										class="material-icons ml-3 my-auto p-0"
@@ -3213,7 +3230,7 @@
 							</div>
 							<ng-container formArrayName="riskLevel">
 								<div
-									class="col-2 col-sm-2-print"
+									class="col-sm-2 col-md-2 col-sm-2-print"
 									[formGroupName]="i"
 								>
 									<label for="sel1">Risk</label>
@@ -3233,7 +3250,9 @@
 								</div>
 							</ng-container>
 
-							<div class="col-10 col-sm-10-print my-3">
+							<div
+								class="col-md-10 col-sm-10 col-sm-10-print my-3"
+							>
 								<label for="sel2"
 									>Control and Action Required<span
 										class="material-icons ml-3 my-auto p-0"
@@ -3253,7 +3272,7 @@
 												{{contrlActReq.title }}
 											</div>
 											<div
-												class="col-3"
+												class="col-md-3 col-sm-3"
 												*ngIf="!contrlActReq.id"
 											>
 												<mat-icon
@@ -3274,7 +3293,7 @@
 								</ol>
 							</div>
 
-							<div class="col-2 col-sm-2-print">
+							<div class="col-sm-2 col-md-2 col-sm-2-print">
 								<ng-container formArrayName="residualRisk">
 									<div class="my-3" [formGroupName]="i">
 										<label for="sel1">Residual Risk</label>
@@ -3372,7 +3391,7 @@
 						*ngFor="let control of employeeArr().controls; let i = index"
 						[formGroupName]="i"
 					>
-						<div class="col-md-5">
+						<div class="col-md-5 col-sm-5">
 							<div class="my-3">
 								<label
 									for="exampleInputProjectNumber"
@@ -3405,7 +3424,7 @@
 								</mat-autocomplete>
 							</div>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5 col-sm-5">
 							<div class="form-floating">
 								<label
 									>Signature<span class="text-danger"
