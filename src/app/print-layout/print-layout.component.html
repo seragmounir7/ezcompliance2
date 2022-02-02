@@ -1,35 +1,79 @@
-<table id="section-to-print">
-  <thead>
-    <tr>
-      <td>
-        <div class="header-space"></div>
-        <!-- <div class="header" >COOL HEADER</div> -->
-      </td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <div class="content">
-          <router-outlet></router-outlet>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td>
-        <div class="footer-space"></div>
-        <!-- <div class="footer" >AWESOME FOOTER</div> -->
-      </td>
-    </tr>
-  </tfoot>
+<div class="page-header" style="text-align: center">
+	<br />
+	<div class="d-flex mb-0 pb-1 justify-content-center">
+		<!-- <img src="{{companyLogo}}" alt="img" width="40" height="40" id="imgwrap" class="img mr-4" /> -->
+		<img
+			src="../assets/img/Artboard – 4.png"
+			alt="img"
+			width="40"
+			height="40"
+			id="imgwrap"
+			class="img mr-4"
+		/>
+		<div class="pt-2 d-flex">
+			<h3 class="mr-3">{{ companyName | titlecase }}</h3>
+			<p class="mx-2 mt-1 phone">
+				<i class="fas fa-phone-alt"></i> {{phone}}
+			</p>
+			<p class="mx-2 mt-1"><i class="fas fa-at"></i> {{emailAddress}}</p>
+			<p class="mx-2 mt-1">
+				<i class="fas fa-map-marker-alt"></i> {{streetAddress}} ,
+				{{subUrb}}
+			</p>
+			<p class="mx-2 mt-1">ABN : {{companyABN}}</p>
+			<p class="mx-2 mt-1">Licence : {{licenceNumber}}</p>
+			<p class="mx-2 mt-1"><i class="fas fa-globe"></i> {{companyWeb}}</p>
+		</div>
+	</div>
+</div>
+
+<table style="display: table">
+	<thead>
+		<tr>
+			<td>
+				<div class="page-header-space"></div>
+				<!-- <div class="header" >COOL HEADER</div> -->
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<div>
+					<router-outlet></router-outlet>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td>
+				<div class="page-footer-space"></div>
+				<!-- <div class="footer" >AWESOME FOOTER</div> -->
+			</td>
+		</tr>
+	</tfoot>
 </table>
 
-
-<ngx-spinner id="printLoader" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin-clockwise"
-  [fullScreen]="true">
-  <p style="color: white">Loading...</p>
-</ngx-spinner>
+<div class="page-footer">
+	<div class="d-flex mb-0 pb-1 ml-3">
+		<!-- <img src="{{companyLogo}}" alt="img" width="40" height="40" id="imgwrap" class="img mr-4" /> -->
+		<!-- <img src="../assets/img/Artboard – 4.png" alt="img" width="40" height="40" id="imgwrap" class="img mr-4" /> -->
+		<div class="pt-2 d-flex">
+			<h3 class="mr-3">{{ companyName | titlecase }}</h3>
+			<p class="mx-2 mt-1 phone">
+				<i class="fas fa-phone-alt"></i> {{phone}}
+			</p>
+			<p class="mx-2 mt-1"><i class="fas fa-at"></i> {{emailAddress}}</p>
+			<p class="mx-2 mt-1">
+				<i class="fas fa-map-marker-alt"></i> {{streetAddress}} ,
+				{{subUrb}}
+			</p>
+			<p class="mx-2 mt-1">ABN : {{companyABN}}</p>
+			<p class="mx-2 mt-1">Licence : {{licenceNumber}}</p>
+			<p class="mx-2 mt-1"><i class="fas fa-globe"></i> {{companyWeb}}</p>
+		</div>
+	</div>
+</div>
 
 <!-- <router-outlet></router-outlet> -->

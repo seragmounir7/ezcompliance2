@@ -1,40 +1,62 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/rootCauseOfIncident']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	[routerLink]="['/admin/siteInfo/rootCauseOfIncident']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="container px-4 py-4 bg-white">
-  <form [formGroup]="rootformgp" (ngSubmit)="onFormSubmit()">
-    <h2 class="text-center">Add Root Cause Of Incdent</h2>
-    <br />
-    <hr />
-    <ng-container formArrayName="arrObj">
-      <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
-        <div class="row justify-content-center">
-          <div class="mr-1 mt-2">
-            <span>{{i+1}}.
-            </span>
-          </div>
-          <div class="col-8">
-            <textarea autosize (keyup)=" calcHeight($event.target.value)" [rows]="numberOfLineBreaks" type="text"
-              formControlName="title" class="form-control sign" id="name"></textarea>
-          </div>
-          <div class="col-1 mt-2">
-            <span class="material-icons" (click)="addAction()">add_circle_outline
-            </span>
-          </div>
-          <div class="col-1 mt-2">
-            <span class="material-icons" (click)="removeSafetyModule(i)">
-              remove_circle_outline
-            </span>
-          </div>
-        </div>
+	<form [formGroup]="rootformgp" (ngSubmit)="onFormSubmit()">
+		<h2 class="text-center">Add Root Cause Of Incident</h2>
+		<br />
+		<hr />
+		<ng-container formArrayName="arrObj">
+			<ng-container
+				*ngFor="let control of add().controls; let i = index"
+				[formGroupName]="i"
+			>
+				<div class="row justify-content-center">
+					<div class="mr-1 mt-2">
+						<span>{{i+1}}. </span>
+					</div>
+					<div class="col-8">
+						<textarea
+							autosize
+							(keyup)=" calcHeight($event.target.value)"
+							[rows]="numberOfLineBreaks"
+							type="text"
+							formControlName="title"
+							class="form-control sign"
+							id="name"
+						></textarea>
+					</div>
+					<div class="col-1 mt-2">
+						<span class="material-icons" (click)="addAction()"
+							>add_circle_outline
+						</span>
+					</div>
+					<div class="col-1 mt-2">
+						<span
+							class="material-icons"
+							(click)="removeSafetyModule(i)"
+						>
+							remove_circle_outline
+						</span>
+					</div>
+				</div>
 
-        <hr />
-      </ng-container>
-    </ng-container>
-    <br />
+				<hr />
+			</ng-container>
+		</ng-container>
+		<br />
 
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary" [disabled]="rootformgp.get('arrObj').invalid">Add</button>
-    </div>
-  </form>
+		<div class="col-md-2">
+			<button
+				type="submit"
+				class="btn btn-primary"
+				[disabled]="rootformgp.get('arrObj').invalid"
+			>
+				Add
+			</button>
+		</div>
+	</form>
 </div>

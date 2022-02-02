@@ -130,4 +130,10 @@ export class LicenceCatComponent implements OnInit {
 		this.table.renderRows();
 		console.log(this.dataSource);
 	}
+	onSaveOrder() {
+		this.displayedColumns = ['title', 'action'];
+		this.logicalFormInfo.reOrderCat(this.dataSource).subscribe((res) => {
+			console.log(res);
+		});
+	}
 }

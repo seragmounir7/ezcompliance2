@@ -1,6 +1,12 @@
 import { SessionManagementService } from './services/session-management.service';
 import { AuthService } from './utils/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import {
+	Component,
+	HostListener,
+	OnInit,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import {
 	NavigationCancel,
 	NavigationEnd,
@@ -18,12 +24,24 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent implements OnInit {
 	title = 'adminlte';
+	@ViewChild('mainrouter') mainRouteroutlet: any;
+	@HostListener('window:beforeprint', [])
+	beforePrint() {
+		console.log('beforeprint');
+		this.renderer.addClass(document.querySelector('.wrapper'), 'hidden');
+	}
 
+	@HostListener('window:afterprint', [])
+	afterPrint() {
+		console.log('afterprint');
+		this.renderer.removeClass(document.querySelector('.wrapper'), 'hidden');
+	}
 	constructor(
 		private router: Router,
 		private spinner: NgxSpinnerService,
 		private authService: AuthService,
-		private sessionManagementService: SessionManagementService
+		private sessionManagementService: SessionManagementService,
+		private renderer: Renderer2
 	) {
 		router.events.subscribe((event: RouterEvent) => {
 			this.navigationInterceptor(event);

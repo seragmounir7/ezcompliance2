@@ -476,8 +476,10 @@
 							<h2>Job Tasks</h2>
 						</div>
 
-						<ng-container *ngFor="let category of tradeCategoryArr">
-							<ng-container *ngIf="category?.show">
+						<ng-container
+							*ngFor="let category of tradeCategoryArr;let catIndex = index"
+						>
+							<ng-container *ngIf="category?.show ">
 								<div
 									class="row jobTaskCat"
 									*ngIf="doesCategoryExists(category._id)"
@@ -490,8 +492,10 @@
 									>
 										<mat-checkbox
 											#matCheck
-											(change)="jobTaskCategoryChecked(parent)"
-											indetermined
+											(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
+											[indeterminate]="allChecked[catIndex] | async"
+											[value]="category._id"
+											[checked]="category.checked"
 										></mat-checkbox>
 										<h4 class="jobTaskCat-heading">
 											{{category.title}}
@@ -635,7 +639,7 @@
 						</div>
 						<hr />
 
-						<div class="mt-4 page">
+						<div class="mt-4 pagebreak-print">
 							<h2>High Risk Construction</h2>
 						</div>
 
@@ -2083,21 +2087,21 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="my-3 col-2">
+					<!-- <div class="my-3 col-2">
 						<label class="form-label">Street Number</label>
-						<!-- <select
+						<select
               class="form-select form-control col"
               id="StreetNumber"
               aria-label="Default select example"
             >
               <option selected hidden>Select</option>
-            </select> -->
+            </select>
 						<input
 							type="text"
 							class="form-control col"
 							formControlName="streetNo"
 						/>
-					</div>
+					</div> -->
 					<div class="my-3 col-4">
 						<label class="form-label">Street Address</label>
 						<!-- <select
@@ -2280,44 +2284,56 @@
 					<h2>Job Tasks</h2>
 				</div>
 
-				<ng-container *ngFor="let category of tradeCategoryArr">
-					<div
-						class="row jobTaskCat"
-						*ngIf="doesCategoryExists(category._id)"
-						#parent
-						formArrayName="jobTask"
-					>
-						<div class="col-12">
-							<h4 class="jobTaskCat-heading">
-								{{category.title}}
-							</h4>
-						</div>
-						<ng-container
-							*ngFor="let control of jobtask().controls; let i = index"
-							[formGroupName]="i"
+				<ng-container
+					*ngFor="let category of tradeCategoryArr;let catIndex = index"
+				>
+					<ng-container *ngIf="category?.show ">
+						<div
+							class="row jobTaskCat"
+							*ngIf="doesCategoryExists(category._id)"
+							#parent
+							formArrayName="jobTask"
 						>
-							<div
-								class="mt-2 col-4"
-								*ngIf="jobTaskData[i].tradeCategoryId._id === category._id"
-							>
-								<input
-									type="checkbox"
-									[id]="i+'jt'"
-									class="form-check-input"
-									[value]="jobTaskData[i]._id"
-									(change)="onJobtaskSelect($event, jobTaskData[i])"
-									formControlName="{{jobTaskData[i]._id}}"
-								/>
-
-								<label
-									[for]="i+'jt'"
-									class="form-check-label label_2"
-									>{{ jobTaskData[i].title }}
-									{{jobTaskData[i].tradeCategoryId.title}}</label
-								>
+							<div class="col-12 d-flex" style="gap: 1rem">
+								<mat-checkbox
+									#matCheck
+									(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
+									[indeterminate]="allChecked[catIndex] | async"
+									[value]="category._id"
+									[checked]="category.checked"
+								></mat-checkbox>
+								<h4 class="jobTaskCat-heading">
+									{{category.title}}
+								</h4>
 							</div>
-						</ng-container>
-					</div>
+							<ng-container
+								*ngFor="let control of jobtask().controls; let i = index"
+								[formGroupName]="i"
+							>
+								<div
+									class="mt-2 col-4"
+									*ngIf="jobTaskData[i].tradeCategoryId._id === category._id"
+								>
+									<input
+										type="checkbox"
+										[id]="i+'jt'"
+										#check
+										class="form-check-input"
+										[value]="jobTaskData[i]._id"
+										(change)="onJobtaskSelect($event, jobTaskData[i])"
+										formControlName="{{jobTaskData[i]._id}}"
+									/>
+
+									<label
+										[for]="i+'jt'"
+										class="form-check-label label_2"
+										>{{ jobTaskData[i].title }}
+										{{jobTaskData[i].tradeCategoryId.title}}</label
+									>
+								</div>
+							</ng-container>
+						</div>
+					</ng-container>
 				</ng-container>
 
 				<hr />
@@ -2421,7 +2437,7 @@
 				</div>
 				<hr />
 
-				<div class="mt-4">
+				<div class="mt-4 pagebreak-print">
 					<h2>High Risk Construction</h2>
 				</div>
 
@@ -2474,7 +2490,7 @@
 
 			<hr />
 
-			<div class="mt-4">
+			<div class="mt-4 pagebreak-print">
 				<h2>Licence and Qualifications</h2>
 			</div>
 
@@ -2625,7 +2641,7 @@
 							/>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-2-print">
+					<!-- <div class="col-md-2 col-sm-2-print">
 						<div class="my-3">
 							<label class="form-label">Street Number</label>
 							<input
@@ -2635,7 +2651,7 @@
 								formControlName="streetNo"
 							/>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-4 col-sm-4-print">
 						<div class="my-3">
 							<label class="form-label">Street Name</label>
@@ -2649,7 +2665,7 @@
 							<!-- <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr" /> -->
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-4-print">
+					<!-- <div class="col-md-4 col-sm-4-print">
 						<div class="my-3">
 							<label class="form-label">Town/City</label>
 							<input
@@ -2659,7 +2675,7 @@
 								formControlName="town"
 							/>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-2 col-sm-2-print">
 						<div class="my-3">
 							<label class="form-label">State</label>
@@ -2840,14 +2856,16 @@
 					</div>
 				</div>
 				<hr />
+
 				<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
+
 				<div class="row">
 					<!--<div class="col-3" *ngFor="let item of allCOPSelected;let i=index ">
          <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
         </div> -->
 					<div
 						*ngFor="let item of allCOPSelected; let i = index"
-						class="mt-2 col-4"
+						class="mt-2 col-4 col-sm-4-print"
 					>
 						<input
 							type="checkbox"
@@ -2863,7 +2881,9 @@
 					</div>
 				</div>
 				<hr />
+
 				<h2>High Risk Construction</h2>
+
 				<div class="row" formArrayName="riskConstruction2">
 					<div
 						*ngFor="let control of riskConstruct2().controls; let i = index"
@@ -2885,7 +2905,6 @@
 					</div>
 				</div>
 				<hr />
-
 				<h2>PPE Selection</h2>
 				<div class="row" formArrayName="PPESelection2">
 					<div
@@ -3049,7 +3068,7 @@
 					</ng-container>
 				</ng-container>
 				<hr />
-				<div class="row">
+				<div class="row pagebreak-print">
 					<table class="table table-bordered text-center">
 						<thead>
 							<tr>

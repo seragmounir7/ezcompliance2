@@ -20,6 +20,7 @@ import { NonAuthGuard } from './utils/guards/non-auth.guard';
 import { IncidentReportComponent } from './views/forms/incident-report/incident-report.component';
 import { HazardReportComponent } from './views/forms/hazard-report/hazard-report.component';
 import { FirstTimeLoginGuard } from './RouteGuard/first-time-login.guard';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -136,6 +137,7 @@ const routes: Routes = [
 		]
 	},
 	{ path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
+	{ path: 'resetPassword', component: ResetPasswordComponent },
 	{
 		path: 'register',
 		component: RegisterComponent,

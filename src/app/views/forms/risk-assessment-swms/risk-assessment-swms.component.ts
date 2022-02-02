@@ -10,7 +10,8 @@ import {
 	OnDestroy,
 	ViewChildren,
 	QueryList,
-	LOCALE_ID
+	LOCALE_ID,
+	Renderer2
 } from '@angular/core';
 import {
 	FormBuilder,
@@ -29,10 +30,11 @@ import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
 	selector: 'app-risk-assessment-swms',
@@ -41,7 +43,7 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 })
 export class RiskAssessmentSWMSComponent
 	implements OnInit, AfterViewInit, OnDestroy {
-	@ViewChild('parent') parent: ElementRef;
+	@ViewChildren('parent') parent: QueryList<ElementRef>;
 	@ViewChild('projectManager') projectManager: ElementRef;
 	@ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
 	@ViewChild('Signature1') signaturePad1: SignaturePad;
@@ -56,9 +58,11 @@ export class RiskAssessmentSWMSComponent
 	valueChangesArr: Observable<any>[];
 	filteredOptions1: Observable<any>;
 	tradeCategoryArr: any[];
+	allChecked: Observable<any>;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
+		this.renderer.removeClass(document.querySelector('app-main'), 'hidden');
 		if (this.router.url.includes('/admin/savedForms')) {
 			this.router.navigateByUrl('/admin/savedForms');
 			return;
@@ -214,7 +218,8 @@ export class RiskAssessmentSWMSComponent
 		public upload: UploadFileServiceService,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		private employee: EmployeeRegistrationService
+		private employee: EmployeeRegistrationService,
+		private renderer: Renderer2
 	) {
 		//this.check = localStorage.getItem('key');
 		console.log('key check', this.check);
@@ -225,10 +230,10 @@ export class RiskAssessmentSWMSComponent
 			jobNumber: ['', Validators.required],
 			siteName: ['', Validators.required],
 			customerName: ['', Validators.required],
-			streetNo: ['', Validators.required],
+			// streetNo: ['', Validators.required],
 			streetAddr: ['', Validators.required],
 			suburb: ['', Validators.required],
-			town: ['', Validators.required],
+			// town: ['', Validators.required],
 			custConct: ['', Validators.required],
 			custConctPh: ['', Validators.required],
 			custEmail: ['', Validators.required],
@@ -372,7 +377,7 @@ export class RiskAssessmentSWMSComponent
 			});
 
 			this.filteredOptions1 = this.riskAssessmentFb.controls.employee1.valueChanges.pipe(
-				startWith(''),
+				startWith({ fullName: '' }),
 				debounceTime(400),
 				tap((value) =>
 					typeof value === 'object'
@@ -457,7 +462,7 @@ export class RiskAssessmentSWMSComponent
 		this.logicalFormInfo.getAssessmentbyId(id).subscribe((res: any) => {
 			this.allCOPSelected = [];
 			console.log('assesment by id', res.data);
-
+			this.tradeCategoryArr = res.data.tradeCategoryArr;
 			this.jobTaskData = res.data.jobTaskDataArr;
 			this.PPEselection = res.data.PPEselectionArr;
 			this.highRiskConstruction = res.data.highRiskConstructionArr;
@@ -696,7 +701,7 @@ export class RiskAssessmentSWMSComponent
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
-					streetNo: item.streetNumber,
+					// streetNo: item.streetNumber,
 					streetAddr: item.streetAddress,
 					suburb: item.suburb,
 					statesSWMS: item.stateId._id,
@@ -972,6 +977,29 @@ export class RiskAssessmentSWMSComponent
 				localStorage.setItem('key', ' ');
 			}
 		});
+
+		this.allChecked = this.parent.changes.pipe(
+			map((res: QueryList<ElementRef<HTMLElement>>) => {
+				console.log(res);
+				let arr = [];
+				res.toArray().forEach((x) => {
+					let check = x.nativeElement.querySelectorAll(
+						'input[type=checkbox]'
+					);
+					let allChecked = Array.from(check).reduce(
+						(previousValue, currentValue) => {
+							return previousValue == currentValue['checked'];
+						},
+						Array.from(check)[0]['checked']
+					);
+
+					arr.push(allChecked);
+					console.count(allChecked);
+				});
+				return of(arr);
+			}),
+			tap((x) => console.log(x))
+		);
 
 		// this.signaturePad is now available
 		//this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -1704,6 +1732,7 @@ export class RiskAssessmentSWMSComponent
 		const data = {
 			...rest,
 			//  ... this.riskAssessmentFb.value,
+			tradeCategoryArr: this.tradeCategoryArr,
 			codeOfPract: this.allCOPSelected,
 			identifyHazards: this.jobTaskSelected,
 			jobTaskDataArr: this.jobTaskData,
@@ -1808,14 +1837,48 @@ export class RiskAssessmentSWMSComponent
 		);
 	}
 
-	jobTaskCategoryChecked(parent: HTMLElement) {
-		console.log();
+	jobTaskCategoryChecked(
+		parent: HTMLElement,
+		matCheck: MatCheckbox,
+		i: number
+	) {
 		let checkBoxes = parent.querySelectorAll('input[type=checkbox]');
+		console.error(matCheck);
+
+		this.tradeCategoryArr[i].checked = matCheck.checked;
+		console.table(this.tradeCategoryArr);
+		if (matCheck.checked) {
+			// this.tradeCategoryArr.map((x) =>
+			// 	x._id === matCheck.value
+			// 		? { ...x, checked: matCheck.checked }
+			// 		: { ...x }
+			// );
+			//   console.log(x._id,matCheck.value)
+			//   if (x._id === matCheck.value) {
+			//     x.checked = matCheck.checked
+			//   }
+			//   return x
+			// })
+		}
 		checkBoxes.forEach((checkBox, i) => {
 			if (!checkBox.classList.contains('mat-checkbox-input')) {
+				// if(checkBox.classList.contains('mat-checkbox-input')){
+				//   console.log('mat-checkbox',checkBox)
+				// }
 				checkBox['click']();
-				console.log(checkBox);
+				// console.log(checkBox);
 			}
 		});
+	}
+
+	public findInvalidControls() {
+		const invalid = [];
+		const controls = this.riskAssessmentFb.controls;
+		for (const name in controls) {
+			if (controls[name].invalid) {
+				invalid.push(name);
+			}
+		}
+		return invalid;
 	}
 }
