@@ -476,7 +476,9 @@
 							<h2>Job Tasks</h2>
 						</div>
 
-						<ng-container *ngFor="let category of tradeCategoryArr">
+						<ng-container
+							*ngFor="let category of tradeCategoryArr;let catIndex = index"
+						>
 							<ng-container *ngIf="category?.show ">
 								<div
 									class="row jobTaskCat"
@@ -490,8 +492,10 @@
 									>
 										<mat-checkbox
 											#matCheck
-											(change)="jobTaskCategoryChecked(parent)"
-											indetermined
+											(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
+											[indeterminate]="allChecked[catIndex] | async"
+											[value]="category._id"
+											[checked]="category.checked"
 										></mat-checkbox>
 										<h4 class="jobTaskCat-heading">
 											{{category.title}}
@@ -2105,7 +2109,7 @@
               aria-label="Default select example"
             >
               <option selected hidden>Select</option>
-            </select> -->
+            </select>
 						<input
 							type="text"
 							class="form-control col-md col-sm"
@@ -2114,7 +2118,7 @@
 					</div>
 					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Street Address</label>
-						<!-- <select
+						 <select
               class="form-select form-control col-md col-sm"
               id="StreetAddress"
               aria-label="Default select example"
@@ -2294,8 +2298,10 @@
 					<h2>Job Tasks</h2>
 				</div>
 
-				<ng-container *ngFor="let category of tradeCategoryArr">
-					<ng-container *ngIf="category?.show">
+				<ng-container
+					*ngFor="let category of tradeCategoryArr;let catIndex = index"
+				>
+					<ng-container *ngIf="category?.show ">
 						<div
 							class="row jobTaskCat"
 							*ngIf="doesCategoryExists(category._id)"
@@ -2308,8 +2314,10 @@
 							>
 								<mat-checkbox
 									#matCheck
-									(change)="jobTaskCategoryChecked(parent)"
-									indetermined
+									(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
+									[indeterminate]="allChecked[catIndex] | async"
+									[value]="category._id"
+									[checked]="category.checked"
 								></mat-checkbox>
 								<h4 class="jobTaskCat-heading">
 									{{category.title}}
@@ -2661,6 +2669,7 @@
 							/>
 						</div>
 					</div>
+					-->
 					<div class="col-md-4 col-sm-4-print">
 						<div class="my-3">
 							<label class="form-label">Street Name</label>
@@ -2674,7 +2683,7 @@
 							<!-- <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr" /> -->
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-4-print">
+					<!-- <div class="col-md-4 col-sm-4-print">
 						<div class="my-3">
 							<label class="form-label">Town/City</label>
 							<input

@@ -118,7 +118,9 @@
 		margin-right: -7.5px;
 		margin-left: -7.5px;
 	}
-
+	textarea {
+		height: fit-content !important;
+	}
 	.col-sm-2-print {
 		width: 16.66666667%;
 	}

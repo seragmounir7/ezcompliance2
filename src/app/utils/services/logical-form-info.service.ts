@@ -125,7 +125,7 @@ export class LogicalFormInfoService {
 	}
 	getAllLicenceCat(field = '', value = '') {
 		field = 'order';
-		value = 'asc';
+		value = '1';
 		if (value == '') {
 			field = '';
 		}
@@ -1351,7 +1351,6 @@ export interface JobNumber {
 export interface ArrObj {
 	jobNumber?: string;
 	siteName: string;
-	streetNumber: string;
 	streetAddress: string;
 	suburb: string;
 	stateId: string;
