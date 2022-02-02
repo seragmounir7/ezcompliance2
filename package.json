@@ -16,8 +16,7 @@
   "private": true,
   "husky": {
     "hooks": {
-        "pre-commit": "pretty-quick --staged",
-        "pre-push": "npm run dev:build"
+        "pre-commit": "pretty-quick --staged"
     }
   },
   "dependencies": {
