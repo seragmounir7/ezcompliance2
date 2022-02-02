@@ -16,7 +16,7 @@
   "private": true,
   "husky": {
     "hooks": {
-        "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "dependencies": {
@@ -38,7 +38,7 @@
     "angular-responsive-carousel": "^2.1.2",
     "angular-svg-icon": "^11.2.0",
     "angular-svg-icon-preloader": "^2.0.1",
-    "angular2-signaturepad": "^3.0.4",
+    "angular2-signaturepad": "^2.8.0",
     "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.6.1",
     "chart.js": "^2.9.4",
