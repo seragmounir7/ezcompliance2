@@ -251,3 +251,10 @@ datalist > option {
 		height: 48%;
 	}
 }
+
+@media only screen and (max-width: 400px) {
+	.sign {
+		border: 1px solid lightgray;
+		width: inherit;
+	}
+}
