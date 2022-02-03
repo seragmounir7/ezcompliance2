@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
+import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,13 +28,14 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	dateGet: any;
 	dataUrl2: any;
 	StatesData: any = [];
+	selectedLogo: any;
 	constructor(
 		private fb: FormBuilder,
 		private activatedRoute: ActivatedRoute,
 		private subscript: SubscriptionService,
 		private spinner: NgxSpinnerService,
 		public router: Router,
-
+		private upload: UploadFileService,
 		private licenceInfo: LogicalFormInfoService
 	) {}
 
@@ -94,6 +96,23 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		this.getAllStates();
 	}
 
+	browser(event) {
+		const files = event.target.files[0];
+		const formdata = new FormData();
+		formdata.append('', files);
+		console.log(files);
+
+		this.upload.upload(formdata).subscribe((res) => {
+			console.log('AddProductComponent -> browser -> res', res);
+
+			this.selectedLogo = res.files[0];
+			this.formData.get('companyLogo').patchValue(this.selectedLogo);
+			console.log(
+				'AddProductComponent -> browse -> this.selectedLogo',
+				this.selectedLogo
+			);
+		});
+	}
 	addEquip() {
 		return this.formData.get('plantArr') as FormArray;
 	}
@@ -218,12 +237,12 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		return this.formData.controls;
 	}
 
-	browser2(event) {
-		const files = event.target.files[0];
-		const formdata = new FormData();
-		formdata.append('', files);
-		console.log(files);
-	}
+	// browser2(event) {
+	// 	const files = event.target.files[0];
+	// 	const formdata = new FormData();
+	// 	formdata.append('', files);
+	// 	console.log(files);
+	// }
 	public signaturePadOptions: Object = {
 		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
@@ -393,6 +412,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 						this.addEquipFiled3(ele);
 				  })
 				: this.addEquipFiled2();
+			this.selectedLogo = data.data.customerDetails.companyLogo;
 			this.formData.patchValue({
 				companyName: data.data.customerDetails.companyName,
 				phone: data.data.customerDetails.phone,
@@ -406,7 +426,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				companyAddr: data.data.customerDetails.companyAddress,
 				licenceNumber: data.data.customerDetails.licenceNumber,
 				companyWeb: data.data.customerDetails.website,
-				companyLogo: data.data.customerDetails.companyLogo,
+				companyLogo: this.selectedLogo,
 
 				plantName: data.data.plantRegister.plant.plantName,
 				checkedOut: data.data.plantRegister.plant.checkedOut,

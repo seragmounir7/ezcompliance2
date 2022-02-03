@@ -487,12 +487,7 @@ export class SetRelationComponent implements OnInit {
 			}
 			return {
 				_id: item._id,
-				jobTaskId:
-					event.value == item._id
-						? event.selected
-							? this.jobTaskId
-							: ''
-						: item?.jobTaskId
+				jobTaskId: item?.jobTaskId
 			};
 		});
 		console.table(this.sendContrlActReq);
@@ -508,15 +503,16 @@ export class SetRelationComponent implements OnInit {
 					item['jobTaskId'] = '';
 				}
 			}
-			return {
-				_id: item._id,
-				jobTaskId:
-					event.value == item._id
-						? event.selected
-							? this.jobTaskId
-							: ''
-						: item?.jobTaskId
-			};
+			return { _id: item._id, jobTaskId: item.jobTaskId };
+			// return {
+			// 	_id: item._id,
+			// 	jobTaskId:
+			// 		event.value == item._id
+			// 			? event.selected
+			// 				? this.jobTaskId
+			// 				: ''
+			// 			: item?.jobTaskId
+			// };
 		});
 		console.table(this.sendHazards);
 	}

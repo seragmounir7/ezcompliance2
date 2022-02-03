@@ -249,8 +249,13 @@
 
 				<div class="row py-3">
 					<div class="offset-1 col-3 mt-2">
-						<!-- <img [src]="file1" onerror=" this.src='../../../assets/img/uploadImg.png' " alt="" width="130"
-            height="130" /> -->
+						<img
+							[src]="selectedLogo"
+							onerror="this.src='../../../assets/img/uploadImg.png' "
+							alt=""
+							width="130"
+							height="130"
+						/>
 					</div>
 					<div class="col-5 ml-4">
 						<div class="my-3">
@@ -260,7 +265,7 @@
 							<input
 								class="form-control"
 								type="file"
-								(change)="browser2($event)"
+								(change)="browser($event)"
 							/>
 						</div>
 

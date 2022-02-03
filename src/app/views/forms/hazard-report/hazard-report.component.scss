@@ -2,7 +2,9 @@
 	background-color: #f1f7f7;
 	border-left: 4px solid blue;
 }
-
+.img-table {
+	display: none;
+}
 div.like_1 {
 	transform: rotate(-90deg);
 	margin-top: 92px;
@@ -205,5 +207,54 @@ datalist > option {
 	}
 	.page {
 		page-break-after: always !important;
+	}
+}
+@media only screen and(min-width:360px) and(max-width:390px) {
+	.title {
+		font-size: 24px;
+	}
+	.img-risk {
+		width: 323px;
+	}
+}
+@media only screen and(min-width:393px) and(max-width:414px) {
+	.title {
+		font-size: 27px;
+	}
+	.img-risk {
+		width: 377px;
+	}
+}
+@media only screen and(min-width:360px) and(max-width:414px) {
+	.table {
+		display: none;
+	}
+	.img-table {
+		display: block;
+		margin-left: -45px; //-22px
+	}
+	.form-check-inline {
+		margin-left: 1.5rem;
+	}
+	.in-grid {
+		display: inline-grid;
+	}
+	.form-control {
+		width: 89%;
+	}
+	mat-datepicker-toggle {
+		::ng-deep .mat-icon-button {
+			left: -1.5rem;
+		}
+	}
+	input[type='file'] {
+		height: 48%;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.sign {
+		border: 1px solid lightgray;
+		width: inherit;
 	}
 }

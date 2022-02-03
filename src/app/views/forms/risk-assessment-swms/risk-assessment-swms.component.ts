@@ -1,4 +1,11 @@
-import { debounceTime, delay, map, startWith, tap } from 'rxjs/operators';
+import {
+	debounceTime,
+	delay,
+	map,
+	startWith,
+	takeUntil,
+	tap
+} from 'rxjs/operators';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import {
@@ -35,6 +42,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
 	selector: 'app-risk-assessment-swms',
@@ -59,6 +67,7 @@ export class RiskAssessmentSWMSComponent
 	filteredOptions1: Observable<any>;
 	tradeCategoryArr: any[];
 	allChecked: Observable<any>;
+	count: number = 0;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -219,7 +228,8 @@ export class RiskAssessmentSWMSComponent
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
 		private employee: EmployeeRegistrationService,
-		private renderer: Renderer2
+		private renderer: Renderer2,
+		private breakpointObserver: BreakpointObserver
 	) {
 		//this.check = localStorage.getItem('key');
 		console.log('key check', this.check);
@@ -378,7 +388,6 @@ export class RiskAssessmentSWMSComponent
 
 			this.filteredOptions1 = this.riskAssessmentFb.controls.employee1.valueChanges.pipe(
 				startWith({ fullName: '' }),
-				debounceTime(400),
 				tap((value) =>
 					typeof value === 'object'
 						? ''
@@ -961,6 +970,9 @@ export class RiskAssessmentSWMSComponent
 	};
 
 	ngAfterViewInit() {
+		this.count++;
+		console.log(this.count);
+
 		this.signaturePad2.changes.subscribe(
 			(item: QueryList<SignaturePad>) => {
 				console.log('item=============>', item.toArray());
@@ -1001,6 +1013,27 @@ export class RiskAssessmentSWMSComponent
 			tap((x) => console.log(x))
 		);
 
+		// if(this.count==1){
+		this.breakpointObserver
+			.observe([Breakpoints.XSmall])
+			.subscribe((result) => {
+				console.log(result);
+
+				if (result.matches) {
+					this.reSizeSignArray(this.signaturePad2, 233, 114);
+					let sign = this.signaturePad1.toDataURL();
+					this.signaturePad1.set('canvasWidth', 247);
+					this.signaturePad1.set('canvasHeight', 107);
+					this.signaturePad1.fromDataURL(sign);
+				} else {
+					this.reSizeSignArray(this.signaturePad2, 420, 121);
+					let sign = this.signaturePad1.toDataURL();
+					this.signaturePad1.set('canvasWidth', 338);
+					this.signaturePad1.set('canvasHeight', 107);
+					this.signaturePad1.fromDataURL(sign);
+				}
+			});
+
 		// this.signaturePad is now available
 		//this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		// this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -1008,6 +1041,21 @@ export class RiskAssessmentSWMSComponent
 		// this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
 		console.log('clear1 &2');
 		console.log(this.signaturePad1Div);
+	}
+
+	reSizeSignArray(
+		signArr: QueryList<SignaturePad>,
+		canvasWidth: number,
+		canvasHeight: number
+	) {
+		console.log(signArr, canvasWidth, canvasHeight);
+
+		signArr.toArray().forEach((x) => {
+			let sign = x.toDataURL();
+			x.set('canvasWidth', canvasWidth);
+			x.set('canvasHeight', canvasHeight);
+			x.fromDataURL(sign);
+		});
 	}
 
 	drawComplete1() {
