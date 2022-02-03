@@ -265,3 +265,19 @@ select {
 	border: solid 3px #f85f5f !important;
 	border-radius: 10px !important;
 }
+@media only screen and(min-width:360px) and(max-width:414px) {
+	.pt-3 {
+		font-size: 25px;
+	}
+	.form-control {
+		width: 85%;
+	}
+	mat-datepicker-toggle {
+		::ng-deep .mat-icon-button {
+			left: -2.5rem;
+		}
+	}
+	.disp-itm {
+		display: initial;
+	}
+}
