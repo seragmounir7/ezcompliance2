@@ -213,10 +213,16 @@ datalist > option {
 	.title {
 		font-size: 24px;
 	}
+	.img-risk {
+		width: 323px;
+	}
 }
 @media only screen and(min-width:393px) and(max-width:414px) {
 	.title {
 		font-size: 27px;
+	}
+	.img-risk {
+		width: 377px;
 	}
 }
 @media only screen and(min-width:360px) and(max-width:414px) {
