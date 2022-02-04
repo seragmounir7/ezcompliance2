@@ -7,67 +7,67 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
 @Component({
-  selector: 'app-edit-task',
-  templateUrl: './edit-task.component.html',
-  styleUrls: ['./edit-task.component.scss'],
+	selector: 'app-edit-task',
+	templateUrl: './edit-task.component.html',
+	styleUrls: ['./edit-task.component.scss']
 })
 export class EditTaskComponent implements OnInit {
-  editTitle: FormGroup;
-  dataRec: any;
+	editTitle: FormGroup;
+	dataRec: any;
 
-  categories = [];
+	categories = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private logicalFormInfo: LogicalFormInfoService,
-    public dialogRef: MatDialogRef<EditTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.dataRec = data;
-  }
+	constructor(
+		private fb: FormBuilder,
+		private logicalFormInfo: LogicalFormInfoService,
+		public dialogRef: MatDialogRef<EditTaskComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) {
+		this.dataRec = data;
+	}
 
-  ngOnInit(): void {
-    console.log("this.dataRec", this.dataRec);
+	ngOnInit(): void {
+		console.log('this.dataRec', this.dataRec);
 
-    this.editTitle = this.fb.group({
-      title: [this.dataRec.title, Validators.required],
-      tradeCategoryId: [this.dataRec.tradeCategoryId._id, Validators.required],
-    });
-    this.getAllLicenceCat()
-  }
-  onFormSubmit() {
+		this.editTitle = this.fb.group({
+			title: [this.dataRec.title, Validators.required],
+			tradeCategoryId: [
+				this.dataRec.tradeCategoryId._id,
+				Validators.required
+			]
+		});
+		this.getAllLicenceCat();
+	}
+	onFormSubmit() {
+		let data = {
+			title: this.editTitle.get('title').value,
+			// PPE:this.dataRec.PPE,
+			// codeOfPractice:this.dataRec.codeOfPractice,
+			// licence:this.dataRec.licence,
+			// risk:this.dataRec.risk,
+			tradeCategoryId: this.editTitle.get('tradeCategoryId').value
+		};
+		this.logicalFormInfo
+			.updateJobTask(data, this.dataRec._id)
+			.subscribe((resData) => {
+				console.log('submodulesData', resData);
 
-    let data = {
-      title: this.editTitle.get('title').value,
-      // PPE:this.dataRec.PPE,
-      // codeOfPractice:this.dataRec.codeOfPractice,
-      // licence:this.dataRec.licence,
-      // risk:this.dataRec.risk,
-      tradeCategoryId: this.editTitle.get('tradeCategoryId').value,
-    }
-    this.logicalFormInfo
-      .updateJobTask(data, this.dataRec._id)
-      .subscribe((resData) => {
-        console.log('submodulesData', resData);
-
-        this.dialogRef.close('true');
-        Swal.fire({
-          title: 'Parameter Edited successfully',
-          showConfirmButton: false,
-          timer: 1200,
-        });
-      });
-  }
-  closeDialog() {
-    this.dialogRef.close('false');
-
-  }
-  getAllLicenceCat() {
-    this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-      console.log('getAllLicenceCat=>', res);
-      this.categories = res.data;
-      console.log('categories=>', res.data);
-    });
-
-  }
+				this.dialogRef.close('true');
+				Swal.fire({
+					title: 'Parameter Edited successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			});
+	}
+	closeDialog() {
+		this.dialogRef.close('false');
+	}
+	getAllLicenceCat() {
+		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
+			console.log('getAllLicenceCat=>', res);
+			this.categories = res.data;
+			console.log('categories=>', res.data);
+		});
+	}
 }

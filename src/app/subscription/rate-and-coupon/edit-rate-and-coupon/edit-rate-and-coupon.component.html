@@ -1,41 +1,79 @@
 <section [formGroup]="editSubcriptionForm">
-  <div>
-    <div mat-dialog-title class="dialog-title">
-      <h3 *ngIf="!dataRec">Add Subcription Rate</h3>
-      <h3 *ngIf="dataRec">Edit Subcription Rate</h3>
-      <button type="button" class="close" style="font-size: 25px;" (click)="close()" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Monthly Rate</p>
-        <input type="text" class="form-control" id="monthly" formControlName="monthly" />
-      </div>
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label"> Default Monthly Rate</p>
-        <input type="text" class="form-control" id="defaultMonthly" formControlName="defaultMonthly" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Default Emp</p>
-        <input type="text" class="form-control" id="defaultEmp" formControlName="defaultEmp" />
-      </div>
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label"> Yearly Discount %</p>
-        <input type="text" class="form-control" id="yearlyDiscount" formControlName="yearlyDiscount" />
-      </div>
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label"> Coupon</p>
-        <mat-form-field appearance="outline">
-          <mat-select formControlName="coupons" multiple>
-            <mat-option *ngFor="let coupon of couponData" [value]="coupon._id">{{coupon.couponName}}&nbsp;
-              {{coupon.discount+'%'}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- <select                  
+	<div>
+		<div mat-dialog-title class="dialog-title">
+			<h3 *ngIf="!dataRec">Add Subcription Rate</h3>
+			<h3 *ngIf="dataRec">Edit Subcription Rate</h3>
+			<button
+				type="button"
+				class="close"
+				style="font-size: 25px"
+				(click)="close()"
+				aria-label="Close"
+			>
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="my-3 col">
+				<p for="exampleFormControlInput1" class="form-Label">
+					Monthly Rate
+				</p>
+				<input
+					type="text"
+					class="form-control"
+					id="monthly"
+					formControlName="monthly"
+				/>
+			</div>
+			<div class="my-3 col">
+				<p for="exampleFormControlInput1" class="form-Label">
+					Default Monthly Rate
+				</p>
+				<input
+					type="text"
+					class="form-control"
+					id="defaultMonthly"
+					formControlName="defaultMonthly"
+				/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="my-3 col">
+				<p for="exampleFormControlInput1" class="form-Label">
+					Default Emp
+				</p>
+				<input
+					type="text"
+					class="form-control"
+					id="defaultEmp"
+					formControlName="defaultEmp"
+				/>
+			</div>
+			<div class="my-3 col">
+				<p for="exampleFormControlInput1" class="form-Label">
+					Yearly Discount %
+				</p>
+				<input
+					type="text"
+					class="form-control"
+					id="yearlyDiscount"
+					formControlName="yearlyDiscount"
+				/>
+			</div>
+			<div class="my-3 col">
+				<p for="exampleFormControlInput1" class="form-Label">Coupon</p>
+				<mat-form-field appearance="outline">
+					<mat-select formControlName="coupons" multiple>
+						<mat-option
+							*ngFor="let coupon of couponData"
+							[value]="coupon._id"
+							>{{coupon.couponName}}&nbsp;
+							{{coupon.discount+'%'}}</mat-option
+						>
+					</mat-select>
+				</mat-form-field>
+				<!-- <select                  
             class="form-control"
             id="coupon"
             name="coupon"
@@ -45,18 +83,25 @@
             <option [value]="coupon._id" *ngFor="let coupon of couponData">{{coupon.couponName}}&nbsp; %{{coupon.discount}}</option>
             
           </select> -->
-
-      </div>
-    </div>
-    <hr>
-    <div>
-      <button class="btn btn-primary" *ngIf="dataRec" (click)="onSubmit()">
-        Update
-      </button>
-      <button class="btn btn-primary" *ngIf="!dataRec" (click)="addForm()" [disabled]="editSubcriptionForm.invalid ">
-        Add
-      </button>
-    </div>
-
-  </div>
+			</div>
+		</div>
+		<hr />
+		<div>
+			<button
+				class="btn btn-primary"
+				*ngIf="dataRec"
+				(click)="onSubmit()"
+			>
+				Update
+			</button>
+			<button
+				class="btn btn-primary"
+				*ngIf="!dataRec"
+				(click)="addForm()"
+				[disabled]="editSubcriptionForm.invalid "
+			>
+				Add
+			</button>
+		</div>
+	</div>
 </section>

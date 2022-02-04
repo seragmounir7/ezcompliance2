@@ -5,120 +5,113 @@ import { UploadFileServiceService } from 'src/app/utils/services/upload-file-ser
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+	selector: 'app-header',
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+	selectedImage: any;
+	HeaderInformation!: FormGroup;
+	serviceDetail: any;
+	serviceData: any;
+	myId: any;
+	isEdit: boolean;
+	data: any;
+	dataHeader: any;
+	headerId: any;
+	infoData: any;
+	constructor(
+		private url: LandingPageInfoServiceService,
+		private dialogRef: MatDialogRef<HeaderComponent>,
+		@Inject(MAT_DIALOG_DATA) public data1: any,
+		private fb: FormBuilder,
+		public upload: UploadFileServiceService
+	) {
+		this.dataHeader = data1.headerData;
+	}
 
-  selectedImage: any;
-  HeaderInformation!: FormGroup;
-  serviceDetail: any;
-  serviceData: any;
-  myId: any;
-  isEdit: boolean;
-  data: any;
-  dataHeader: any;
-  headerId: any;
-  infoData: any;
-  constructor(
-    private url: LandingPageInfoServiceService,
-    private dialogRef: MatDialogRef<HeaderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data1: any,
-    private fb: FormBuilder,
-    public upload: UploadFileServiceService,) {
-    this.dataHeader = data1.headerData;
-  }
+	ngOnInit(): void {
+		this.getHeaderById();
+		console.log('data1', this.data1);
 
-  ngOnInit(): void {
-    this.getHeaderById();
-    console.log("data1", this.data1);
+		this.HeaderInformation = this.fb.group({
+			fileUrl: ['', Validators.required],
+			title: ['', Validators.required],
+			description: ['', Validators.required]
+		});
+		if (this.data1.action == 'edit') {
+			(this.selectedImage = this.dataHeader.fileUrl),
+				this.HeaderInformation.patchValue({
+					description: this.dataHeader.description,
 
-    this.HeaderInformation = this.fb.group({
-      fileUrl: ['', Validators.required],
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+					title: this.dataHeader.title
+				});
+		}
+	}
 
-    }); if (this.data1.action == "edit") {
-      this.selectedImage = this.dataHeader.fileUrl,
-        this.HeaderInformation.patchValue({
-          description: this.dataHeader.description,
+	onSubmit() {
+		this.HeaderInformation.get('fileUrl')?.setValue(this.selectedImage);
 
-          title: this.dataHeader.title,
-        })
-    }
-  }
+		this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
+			console.log('HeaderInformation -> browser -> res', res);
+		});
+	}
+	browser(event) {
+		const files = event.target.files[0];
+		const formdata = new FormData();
+		formdata.append('', files);
+		console.log(files);
 
-  onSubmit() {
-    this.HeaderInformation.get('fileUrl')?.setValue(
-      this.selectedImage
-    );
+		this.upload.upload(formdata).subscribe((res) => {
+			console.log('AddProductComponent -> browser -> res', res);
 
-    this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
-      console.log('HeaderInformation -> browser -> res', res);
+			this.selectedImage = res.files[0];
 
-    });
-  }
-  browser(event) {
-    const files = event.target.files[0];
-    const formdata = new FormData();
-    formdata.append('', files);
-    console.log(files);
+			console.log(
+				'AddProductComponent -> browse -> this.selectedImage',
+				this.selectedImage
+			);
+		});
+	}
 
-    this.upload.upload(formdata).subscribe((res) => {
-      console.log('AddProductComponent -> browser -> res', res);
+	getHeaderById() {
+		this.url.getHeaderBYId().subscribe((data) => {
+			console.log('mode=>', data);
+			this.infoData = data.data;
+		});
+	}
 
-      this.selectedImage = res.files[0];
+	editHeaderInfo(id) {
+		console.log('id=>', id);
+		this.myId = this.dataHeader._id;
+		this.HeaderInformation.get('fileUrl').setValue(this.selectedImage);
+		console.log('form', this.HeaderInformation.value);
 
-      console.log(
-        'AddProductComponent -> browse -> this.selectedImage',
-        this.selectedImage
-      );
-    });
-  }
+		this.isEdit = true;
+		this.url
+			.editHeader(this.myId, this.HeaderInformation.value)
+			.subscribe((res) => {
+				Swal.fire(' Edited Successfully');
+				console.log('Data Set response' + res);
+				this.data = res.data;
+				console.log('new response' + this.data);
+				this.dialogRef.close('true');
+			});
+	}
+	close() {
+		this.dialogRef.close();
+	}
+	onFormSubmit() {
+		let value = this.selectedImage[0];
+		console.log('value', value);
 
-  getHeaderById() {
-    this.url.getHeaderBYId().subscribe((data) => {
-      console.log('mode=>', data);
-      this.infoData = data.data;
-    });
-  }
+		let serviceData = {};
 
-  editHeaderInfo(id) {
-    console.log("id=>", id);
-    this.myId = this.dataHeader._id;
-    this.HeaderInformation.get("fileUrl").setValue(this.selectedImage);
-    console.log("form", this.HeaderInformation.value);
+		console.log('file: ~ onFormSubmit ~ data', serviceData);
 
-    this.isEdit = true;
-    this.url.editHeader(this.myId, this.HeaderInformation.value).subscribe((res) => {
-      Swal.fire(' Edited Successfully')
-      console.log('Data Set response' + res);
-      this.data = res.data;
-      console.log('new response' + this.data);
-      this.dialogRef.close("true");
-
-    });
-  }
-  close() {
-    this.dialogRef.close();
-  }
-  onFormSubmit() {
-    let value = this.selectedImage[0];
-    console.log('value', value);
-
-    let serviceData = {};
-
-    console.log('file: ~ onFormSubmit ~ data', serviceData);
-
-    this.url
-      .AddHeader(this.HeaderInformation.value)
-      .subscribe((data) => {
-        console.log('data=>', data);
-        this.serviceData = data;
-      });
-  }
-
+		this.url.AddHeader(this.HeaderInformation.value).subscribe((data) => {
+			console.log('data=>', data);
+			this.serviceData = data;
+		});
+	}
 }
-
-

@@ -1,46 +1,94 @@
 <section class="content" style="height: 60%">
-  <div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/siteinspectiontopic/' + this.categoryId]">
-    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-  </div>
-  <div [formGroup]="siteInspectionTopicAdd" class="container px-4 py-4 bg-white">
-    <ng-container formArrayName="arrObj">
-      <ng-container *ngFor="let control of topicArr().controls; let i = index" [formGroupName]="i">
-        <div>
-          <div class="row">
-            <p for="exampleFormControlInput1" class="form-Label">Topic</p>
-            <input type="text" formControlName="topic" class="form-control" id="phone" />
-          </div>
-          <div class="row">
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label">Item</p>
-              <input type="text" formControlName="item" class="form-control" id="position" />
-            </div>
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label">Action</p>
-              <input type="text" formControlName="action" class="form-control" id="direction" />
-            </div>
+	<div
+		class="btn btn-outline-primary"
+		[routerLink]="['/admin/siteInfo/siteinspectiontopic/' + this.categoryId]"
+	>
+		<i class="fa fa-arrow-left" aria-hidden="true"></i>
+	</div>
+	<div
+		[formGroup]="siteInspectionTopicAdd"
+		class="container px-4 py-4 bg-white"
+	>
+		<ng-container formArrayName="arrObj">
+			<ng-container
+				*ngFor="let control of topicArr().controls; let i = index"
+				[formGroupName]="i"
+			>
+				<div>
+					<div class="row">
+						<p for="exampleFormControlInput1" class="form-Label">
+							Topic
+						</p>
+						<input
+							type="text"
+							formControlName="topic"
+							class="form-control"
+							id="phone"
+						/>
+					</div>
+					<div class="row">
+						<div class="my-3 col-3">
+							<p
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Item
+							</p>
+							<input
+								type="text"
+								formControlName="item"
+								class="form-control"
+								id="position"
+							/>
+						</div>
+						<div class="my-3 col-3">
+							<p
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Action
+							</p>
+							<input
+								type="text"
+								formControlName="action"
+								class="form-control"
+								id="direction"
+							/>
+						</div>
 
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" style="margin-top: 35%" (click)="addTopic()">add_circle_outline
-              </span>
-            </div>
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" style="margin-top: 35%" (click)="removeTopic(i)">
-                remove_circle_outline
-              </span>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </ng-container>
-    </ng-container>
-    <div>
-      <button (click)="onSubmit()" class="btn btn-primary" [disabled]="
+						<div class="my-3 col-1 my-auto">
+							<span
+								class="material-icons"
+								style="margin-top: 35%"
+								(click)="addTopic()"
+								>add_circle_outline
+							</span>
+						</div>
+						<div class="my-3 col-1 my-auto">
+							<span
+								class="material-icons"
+								style="margin-top: 35%"
+								(click)="removeTopic(i)"
+							>
+								remove_circle_outline
+							</span>
+						</div>
+					</div>
+				</div>
+				<hr />
+			</ng-container>
+		</ng-container>
+		<div>
+			<button
+				(click)="onSubmit()"
+				class="btn btn-primary"
+				[disabled]="
           siteInspectionTopicAdd.invalid &&
           siteInspectionTopicAdd.get('arrObj').invalid
-        ">
-        Submit
-      </button>
-    </div>
-  </div>
+        "
+			>
+				Submit
+			</button>
+		</div>
+	</div>
 </section>

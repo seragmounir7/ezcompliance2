@@ -6,25 +6,21 @@ import { CommonModule } from '@angular/common';
 import { HideForRoleDirective } from './hide-for-role.directive';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 
-
-
 @NgModule({
-  declarations: [
-    TextareaAutoresizeDirective,
-    HideForRoleDirective,
-    AccessControlDirective,
-    AppNotDirective,
-    NumberDirective
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports:[
-    TextareaAutoresizeDirective,
-    HideForRoleDirective,
-    AccessControlDirective,
-    AppNotDirective,
-    NumberDirective
-  ]
+	declarations: [
+		TextareaAutoresizeDirective,
+		HideForRoleDirective,
+		AccessControlDirective,
+		AppNotDirective,
+		NumberDirective
+	],
+	imports: [CommonModule],
+	exports: [
+		TextareaAutoresizeDirective,
+		HideForRoleDirective,
+		AccessControlDirective,
+		AppNotDirective,
+		NumberDirective
+	]
 })
-export class DirectivesModule { }
+export class DirectivesModule {}

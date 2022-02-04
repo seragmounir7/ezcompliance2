@@ -1,57 +1,60 @@
 <div class="row">
-  <div class="col pt-3">
-    <h2>Header Format</h2>
-  </div>
-
+	<div class="col pt-3">
+		<h2>Header Format</h2>
+	</div>
 </div>
 <div class="row">
-  <div class="col-12">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body p-0">
+				<table class="table table-hover text-wrap">
+					<thead>
+						<tr>
+							<th style="width: 20%">Images</th>
+							<th style="width: 20%">Heading</th>
+							<th style="width: 40%">Description</th>
 
-    <div class="card">
+							<th style="width: 10%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<img
+									src="{{ infoData?.fileUrl }}"
+									height="120px"
+									width="120px"
+								/>
+							</td>
 
-      <div class="card-body p-0">
-        <table class="table table-hover text-wrap">
-          <thead>
-            <tr>
-              <th style="width: 20%">Images</th>
-              <th style="width: 20%">Heading</th>
-              <th style="width: 40%"> Description</th>
+							<td>{{ infoData?.title }}</td>
+							<td>{{ infoData?.description }}</td>
 
-
-              <th style="width: 10%">Action</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><img src="{{ infoData?.fileUrl }}" height="120px" width="120px"></td>
-
-              <td>{{ infoData?.title }}</td>
-              <td>{{ infoData?.description }}</td>
-
-
-              <td>
-                <!-- <button
+							<td>
+								<!-- <button
                         class="btn editBtn "
                        
                       >
                         <i class="fas fa-pencil-alt " aria-hidden="true" title="Edit"></i>
                       </button> -->
-                <button mat-icon-button (click)="openDialogEdit(serviceDetail)" class="mr-2"
-                  aria-label="Example icon button with a delete icon">
-                  <mat-icon matTooltip="Edit Header">edit</mat-icon>
-                </button>
-
-
-              </td>
-            </tr>
-            <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell" colspan="4">Data Not Found </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </div>
+								<button
+									mat-icon-button
+									(click)="openDialogEdit(serviceDetail)"
+									class="mr-2"
+									aria-label="Example icon button with a delete icon"
+								>
+									<mat-icon matTooltip="Edit Header"
+										>edit</mat-icon
+									>
+								</button>
+							</td>
+						</tr>
+						<tr class="mat-row" *matNoDataRow>
+							<td class="mat-cell" colspan="4">Data Not Found</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>

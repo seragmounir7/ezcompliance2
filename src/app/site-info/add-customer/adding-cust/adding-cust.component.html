@@ -1,57 +1,106 @@
-<div class="btn btn-outline-primary" *ngIf="!dialogRef" [routerLink]="['/admin/siteInfo/addCustomer']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	*ngIf="!dialogRef"
+	[routerLink]="['/admin/siteInfo/addCustomer']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<mat-dialog-content >
-<section class="content" style="height: 60%;">
-  <div [formGroup]="addCustomerForm" class="container px-4 py-4 bg-white">
-    <h2>Add Customer</h2>
-    <hr>
-    <div class="row">
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Customer Name</p>
-        <input type="text" class="form-control" id="customerName" formControlName="customerName" />
-      </div>
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Customer Contact</p>
-        <input type="text" class="form-control" id="customerContact" formControlName="customerContact" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Street Address</p>
-        <textarea autosize type="text" class="form-control" id="customerStreetAddress"
-          formControlName="streetAddress"></textarea>
-      </div>
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Suburb</p>
-        <textarea autosize type="text" class="form-control" formControlName="subUrb" id="siteName" ></textarea>
-<!--      
+<mat-dialog-content>
+	<section class="content" style="height: 60%">
+		<div [formGroup]="addCustomerForm" class="container px-4 py-4 bg-white">
+			<h2>Add Customer</h2>
+			<hr />
+			<div class="row">
+				<div class="my-3 col">
+					<p for="exampleFormControlInput1" class="form-Label">
+						Customer Name
+					</p>
+					<input
+						type="text"
+						class="form-control"
+						id="customerName"
+						formControlName="customerName"
+					/>
+				</div>
+				<div class="my-3 col">
+					<p for="exampleFormControlInput1" class="form-Label">
+						Customer Contact
+					</p>
+					<input
+						type="text"
+						class="form-control"
+						id="customerContact"
+						formControlName="customerContact"
+					/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="my-3 col">
+					<p for="exampleFormControlInput1" class="form-Label">
+						Street Address
+					</p>
+					<textarea
+						autosize
+						type="text"
+						class="form-control"
+						id="customerStreetAddress"
+						formControlName="streetAddress"
+					></textarea>
+				</div>
+				<div class="my-3 col">
+					<p for="exampleFormControlInput1" class="form-Label">
+						Suburb
+					</p>
+					<textarea
+						autosize
+						type="text"
+						class="form-control"
+						formControlName="subUrb"
+						id="siteName"
+					></textarea>
+					<!--      
         <p for="exampleFormControlInput1" class="form-Label">PostCode</p>
         <input type="text" class="form-control" id="customerPostCode" formControlName="postCode" /> -->
-      </div>
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">State</p>
-        <select class="form-select form-control" aria-label="Default select example" formControlName="stateId">
-          <option value="" selected hidden> Select State</option>
-          <option *ngFor="let state of StatesData" [value]="state._id">{{state.title}}</option>
-
-        </select>
-        <!-- <input
+				</div>
+				<div class="my-3 col">
+					<p for="exampleFormControlInput1" class="form-Label">
+						State
+					</p>
+					<select
+						class="form-select form-control"
+						aria-label="Default select example"
+						formControlName="stateId"
+					>
+						<option value="" selected hidden>Select State</option>
+						<option
+							*ngFor="let state of StatesData"
+							[value]="state._id"
+						>
+							{{state.title}}
+						</option>
+					</select>
+					<!-- <input
               type="text"
               class="form-control"
               id="customerState"
               formControlName="customerState"
             /> -->
-      </div>
-     
-    </div>
-    <div class="row">
-      <div class="my-3 col">
-        <p for="exampleFormControlInput1" class="form-Label">Australian Business Name (ABN)</p>
-        <input type="text" class="form-control" id="businessName" formControlName="ABN" />
-      </div>
-    </div>
-    <!-- <div class="row">
+				</div>
+			</div>
+			<div class="row">
+				<div class="my-3 col">
+					<p for="exampleFormControlInput1" class="form-Label">
+						Australian Business Name (ABN)
+					</p>
+					<input
+						type="text"
+						class="form-control"
+						id="businessName"
+						formControlName="ABN"
+					/>
+				</div>
+			</div>
+			<!-- <div class="row">
           <div class="my-3 col">
             <p for="exampleFormControlInput1" class="form-Label">Customer Contact Phone</p>
             <input
@@ -71,47 +120,88 @@
             />
           </div>
         </div>  -->
-    <ng-container formArrayName="contacts">
-      <ng-container *ngFor="let control of customerArr().controls; let i = index" [formGroupName]="i">
-        <div>
-          <h1> Contact {{i+1}}</h1>
-          <div class="row">
+			<ng-container formArrayName="contacts">
+				<ng-container
+					*ngFor="let control of customerArr().controls; let i = index"
+					[formGroupName]="i"
+				>
+					<div>
+						<h1>Contact {{i+1}}</h1>
+						<div class="row">
+							<div class="my-3 col-3">
+								<p
+									for="exampleFormControlInput1"
+									class="form-Label"
+								>
+									Position
+								</p>
+								<input
+									type="text"
+									formControlName="position"
+									class="form-control"
+									id="position"
+								/>
+							</div>
+							<div class="my-3 col-3">
+								<p
+									for="exampleFormControlInput1"
+									class="form-Label"
+								>
+									Email
+								</p>
+								<input
+									type="text"
+									formControlName="email"
+									class="form-control"
+									id="email"
+								/>
+							</div>
+							<div class="my-3 col-3">
+								<p
+									for="exampleFormControlInput1"
+									class="form-Label"
+								>
+									Phone Number
+								</p>
+								<input
+									type="text"
+									formControlName="phone"
+									class="form-control"
+									id="phone"
+								/>
+							</div>
 
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label"> Position</p>
-              <input type="text" formControlName="position" class="form-control" id="position" />
-            </div>
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label">
-                Email
-              </p>
-              <input type="text" formControlName="email" class="form-control" id="email" />
-            </div>
-            <div class="my-3 col-3">
-              <p for="exampleFormControlInput1" class="form-Label"> Phone Number</p>
-              <input type="text" formControlName="phone" class="form-control" id="phone" />
-            </div>
-
-            <div class=" my-3 col-1 my-auto">
-              <span class="material-icons" style="margin-top: 35%" (click)="addCustomerDetails()">add_circle_outline
-              </span>
-            </div>
-            <div class="my-3 col-1 my-auto">
-              <span class="material-icons" style="margin-top: 35%" (click)="removeCustomerDetails(i)">
-                remove_circle_outline
-              </span>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </ng-container>
-    </ng-container>
-    <div>
-      <button (click)="onSubmit()" class="btn btn-primary" [disabled]="addCustomerForm.invalid">
-        Submit
-      </button>
-    </div>
-
-  </div>
-</section>
+							<div class="my-3 col-1 my-auto">
+								<span
+									class="material-icons"
+									style="margin-top: 35%"
+									(click)="addCustomerDetails()"
+									>add_circle_outline
+								</span>
+							</div>
+							<div class="my-3 col-1 my-auto">
+								<span
+									class="material-icons"
+									style="margin-top: 35%"
+									(click)="removeCustomerDetails(i)"
+								>
+									remove_circle_outline
+								</span>
+							</div>
+						</div>
+					</div>
+					<hr />
+				</ng-container>
+			</ng-container>
+			<div>
+				<button
+					(click)="onSubmit()"
+					class="btn btn-primary"
+					[disabled]="addCustomerForm.invalid"
+				>
+					Submit
+				</button>
+			</div>
+		</div>
+	</section>
 </mat-dialog-content>

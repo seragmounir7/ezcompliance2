@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 //import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-
 import { FormsRoutingModule } from './forms-routing.module';
 import { FormsComponent } from './forms.component';
 import { SiteInspectionComponent } from './site-inspection/site-inspection.component';
@@ -35,49 +34,48 @@ import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
-  declarations: [
-    FormsComponent,
-    SiteInspectionComponent,
-    ToolboxTalkComponent,
-    HazardReportComponent,
-    IncidentReportComponent,
-    RiskAssessmentSWMSComponent,
-    AddItemComponent,
-    DisplayTableComponent,
-    SiteInspectionTableComponent,
-    HazardFormTableDetailsComponent,
-    IncidentsTableComponent,
-    RiskAssesmentTableComponent,
-    FillConfiguredFormComponent,
-  ],
-  imports: [
-    CommonModule,
-    DirectivesModule,
-    FormsRoutingModule,
-    ReactiveFormsModule,
-    SignaturePadModule,
-    SharedModule,
-    FormsModule,
-    CKEditorModule,
-    NgxMatTimepickerModule,
-    AutosizeModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatDatepickerModule,
-    DynamicFormModule,
-    //PdfViewerModule
-    AngularSvgIconPreloaderModule,
-    AngularSvgIconModule,
-    MatTooltipModule
-
-  ],
-  providers: [
-    TextareaAutoresizeDirective,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SpinnerInterceptor,
-      multi: true
-    }
-  ]
+	declarations: [
+		FormsComponent,
+		SiteInspectionComponent,
+		ToolboxTalkComponent,
+		HazardReportComponent,
+		IncidentReportComponent,
+		RiskAssessmentSWMSComponent,
+		AddItemComponent,
+		DisplayTableComponent,
+		SiteInspectionTableComponent,
+		HazardFormTableDetailsComponent,
+		IncidentsTableComponent,
+		RiskAssesmentTableComponent,
+		FillConfiguredFormComponent
+	],
+	imports: [
+		CommonModule,
+		DirectivesModule,
+		FormsRoutingModule,
+		ReactiveFormsModule,
+		SignaturePadModule,
+		SharedModule,
+		FormsModule,
+		CKEditorModule,
+		NgxMatTimepickerModule,
+		AutosizeModule,
+		MatAutocompleteModule,
+		MatInputModule,
+		MatDatepickerModule,
+		DynamicFormModule,
+		//PdfViewerModule
+		AngularSvgIconPreloaderModule,
+		AngularSvgIconModule,
+		MatTooltipModule
+	],
+	providers: [
+		TextareaAutoresizeDirective,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: SpinnerInterceptor,
+			multi: true
+		}
+	]
 })
-export class FormsModule1 { }
+export class FormsModule1 {}

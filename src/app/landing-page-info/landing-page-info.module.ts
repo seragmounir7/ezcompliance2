@@ -52,42 +52,60 @@ import { AddTermsAndCondtionsComponent } from './terms-and-condtions/add-terms-a
 import { EditTermsAndCondtionsComponent } from './terms-and-condtions/edit-terms-and-condtions/edit-terms-and-condtions.component';
 
 @NgModule({
-
-
-  declarations: [
-    LandingPageInfoComponent,
-    HeaderInfoComponent,
-    ApplicationServiceInfoComponent,
-    HappyClientComponent,
-    AddApplicationServiceInfoComponent,
-    AddHappyClientComponent,
-    SafetyModulesComponent,
-    AddSafetyModuleComponent,
-    HeaderComponent,
-    AddServiceInfoComponent,
-    AddClientInfoComponent,
-    AddModulesInfoComponent,
-    EditFlexibleInfoComponent,
-    AddFlexibleInfoComponent,
-    AboutUsComponent,
-    AddCustomerTestimonailComponent,
-    EditCustomerTestimonailComponent,
-    CustomertestimonialsComponent,
-    FlexibleComponent, ContactUsComponent, ViewContactComponent, AddContactComponent,
-    EditTeamInfoComponent, AddTeamInfoComponent, FAQComponent, AddFaqComponent, EditFaqComponent, QuesAnsComponent, AddQuestionComponent, EditQuestionComponent, OurWorkComponent, EditWorkComponent, AddEditSubWorkComponent, AddSubWorkComponent, ScreenShotModuleComponent, DifferentModuleComponent, AddScreenShotComponent, EditScreenShotComponent, AddDifferentWorkComponent, EditDifferentWorkComponent,
-    SocialMediaComponent, AddAndEditSocialMediaComponent, TermsAndCondtionsComponent, AddTermsAndCondtionsComponent, EditTermsAndCondtionsComponent
-
-
-
-
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    LandingPageInfoRoutingModule,
-    SharedModule,
-    AutosizeModule
-  ],
+	declarations: [
+		LandingPageInfoComponent,
+		HeaderInfoComponent,
+		ApplicationServiceInfoComponent,
+		HappyClientComponent,
+		AddApplicationServiceInfoComponent,
+		AddHappyClientComponent,
+		SafetyModulesComponent,
+		AddSafetyModuleComponent,
+		HeaderComponent,
+		AddServiceInfoComponent,
+		AddClientInfoComponent,
+		AddModulesInfoComponent,
+		EditFlexibleInfoComponent,
+		AddFlexibleInfoComponent,
+		AboutUsComponent,
+		AddCustomerTestimonailComponent,
+		EditCustomerTestimonailComponent,
+		CustomertestimonialsComponent,
+		FlexibleComponent,
+		ContactUsComponent,
+		ViewContactComponent,
+		AddContactComponent,
+		EditTeamInfoComponent,
+		AddTeamInfoComponent,
+		FAQComponent,
+		AddFaqComponent,
+		EditFaqComponent,
+		QuesAnsComponent,
+		AddQuestionComponent,
+		EditQuestionComponent,
+		OurWorkComponent,
+		EditWorkComponent,
+		AddEditSubWorkComponent,
+		AddSubWorkComponent,
+		ScreenShotModuleComponent,
+		DifferentModuleComponent,
+		AddScreenShotComponent,
+		EditScreenShotComponent,
+		AddDifferentWorkComponent,
+		EditDifferentWorkComponent,
+		SocialMediaComponent,
+		AddAndEditSocialMediaComponent,
+		TermsAndCondtionsComponent,
+		AddTermsAndCondtionsComponent,
+		EditTermsAndCondtionsComponent
+	],
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		LandingPageInfoRoutingModule,
+		SharedModule,
+		AutosizeModule
+	]
 })
-export class LandingPageInfoModule { }
+export class LandingPageInfoModule {}

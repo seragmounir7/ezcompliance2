@@ -5,50 +5,45 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
 @Component({
-  selector: 'app-edit-residual-risk-level',
-  templateUrl: './edit-residual-risk-level.component.html',
-  styleUrls: ['./edit-residual-risk-level.component.scss']
+	selector: 'app-edit-residual-risk-level',
+	templateUrl: './edit-residual-risk-level.component.html',
+	styleUrls: ['./edit-residual-risk-level.component.scss']
 })
 export class EditResidualRiskLevelComponent implements OnInit {
+	editTitle!: FormGroup;
+	dataRec: any;
+	constructor(
+		private fb: FormBuilder,
+		private logicalFormInfo: LogicalFormInfoService,
+		public dialogRef: MatDialogRef<EditResidualRiskLevelComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) {
+		this.dataRec = data;
+	}
 
-  editTitle!: FormGroup;
-  dataRec: any;
-  constructor(
-    private fb: FormBuilder,
-    private logicalFormInfo: LogicalFormInfoService,
-    public dialogRef: MatDialogRef<EditResidualRiskLevelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.dataRec = data;
-  }
+	ngOnInit(): void {
+		this.editTitle = this.fb.group({
+			title: [this.dataRec.title, Validators.required]
+		});
+	}
+	onFormSubmit() {
+		let data = {
+			title: this.editTitle.get('title').value
+		};
+		this.logicalFormInfo
+			.updateResidual(this.dataRec._id, data)
+			.subscribe((resData) => {
+				console.log('resData', resData);
 
-  ngOnInit(): void {
-    this.editTitle = this.fb.group({
-      title: [this.dataRec.title, Validators.required],
-    });
-  }
-  onFormSubmit() {
-
-    let data = {
-      title: this.editTitle.get('title').value
-    }
-    this.logicalFormInfo
-      .updateResidual(this.dataRec._id, data)
-      .subscribe((resData) => {
-        console.log('resData', resData);
-
-        this.dialogRef.close('true');
-        Swal.fire({
-          title: 'Residual-Risk Updated successfully',
-          showConfirmButton: false,
-          timer: 1200,
-        });
-      });
-  }
-  closeDialog() {
-    this.dialogRef.close('false');
-
-  }
-
-
+				this.dialogRef.close('true');
+				Swal.fire({
+					title: 'Residual-Risk Updated successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			});
+	}
+	closeDialog() {
+		this.dialogRef.close('false');
+	}
 }

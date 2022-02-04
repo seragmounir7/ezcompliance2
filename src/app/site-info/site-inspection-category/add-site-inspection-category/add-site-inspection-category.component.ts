@@ -5,37 +5,39 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-site-inspection-category',
-  templateUrl: './add-site-inspection-category.component.html',
-  styleUrls: ['./add-site-inspection-category.component.scss'],
+	selector: 'app-add-site-inspection-category',
+	templateUrl: './add-site-inspection-category.component.html',
+	styleUrls: ['./add-site-inspection-category.component.scss']
 })
 export class AddSiteInspectionCategoryComponent implements OnInit {
-  siteInspectionCategoryAdd: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private logicalFormInfoService: LogicalFormInfoService,
-    private router: Router
-  ) { }
+	siteInspectionCategoryAdd: FormGroup;
+	constructor(
+		private fb: FormBuilder,
+		private logicalFormInfoService: LogicalFormInfoService,
+		private router: Router
+	) {}
 
-  ngOnInit(): void {
-    this.siteInspectionCategoryAdd = this.fb.group({
-      category: ['', Validators.required],
-    });
-  }
-  onSubmit() {
-    console.log(this.siteInspectionCategoryAdd.value);
+	ngOnInit(): void {
+		this.siteInspectionCategoryAdd = this.fb.group({
+			category: ['', Validators.required]
+		});
+	}
+	onSubmit() {
+		console.log(this.siteInspectionCategoryAdd.value);
 
-    this.logicalFormInfoService
-      .addSiteInspectionCategory(this.siteInspectionCategoryAdd.value)
-      .subscribe(
-        (res) => {
-          console.log('addCustomerForm=>', res);
-          //this.dialogRef.close('ok')
-          this.router.navigate(['/admin/siteInfo/siteinspectioncategory']);
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
-  }
+		this.logicalFormInfoService
+			.addSiteInspectionCategory(this.siteInspectionCategoryAdd.value)
+			.subscribe(
+				(res) => {
+					console.log('addCustomerForm=>', res);
+					//this.dialogRef.close('ok')
+					this.router.navigate([
+						'/admin/siteInfo/siteinspectioncategory'
+					]);
+				},
+				(err) => {
+					console.error(err);
+				}
+			);
+	}
 }

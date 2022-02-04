@@ -21,15 +21,29 @@ import { AddHazardRelationComponent } from './hazard-treatment/add-hazard-relati
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
-  declarations: [ConfiLogiComponent, SetLogicComponent, JobNumberComponent, CreateJobNoComponent, SetRelationComponent, AddItemComponent, TestLogicComponent, AddJobTaskComponent, HazardTreatmentComponent, AddHazardRelationComponent],
-  imports: [
-    CommonModule,
-    ConfiLogiRoutingModule, SharedModule, FormsModule,
-    ReactiveFormsModule, MatStepperModule,
-    MatIconModule,
-    MatButtonModule,
-    AutosizeModule,
-    CKEditorModule
-  ]
+	declarations: [
+		ConfiLogiComponent,
+		SetLogicComponent,
+		JobNumberComponent,
+		CreateJobNoComponent,
+		SetRelationComponent,
+		AddItemComponent,
+		TestLogicComponent,
+		AddJobTaskComponent,
+		HazardTreatmentComponent,
+		AddHazardRelationComponent
+	],
+	imports: [
+		CommonModule,
+		ConfiLogiRoutingModule,
+		SharedModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatStepperModule,
+		MatIconModule,
+		MatButtonModule,
+		AutosizeModule,
+		CKEditorModule
+	]
 })
-export class ConfiLogiModule { }
+export class ConfiLogiModule {}

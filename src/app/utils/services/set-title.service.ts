@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class SetTitleService {
+	constructor(private titleService: Title) {}
 
-  constructor(private titleService: Title) { }
-
-  setTitle(title) {
-    this.titleService.setTitle(title);
-  }
+	setTitle(title) {
+		this.titleService.setTitle(title);
+	}
 }

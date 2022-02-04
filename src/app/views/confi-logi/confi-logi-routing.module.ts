@@ -12,18 +12,18 @@ import { HazardTreatmentComponent } from './hazard-treatment/hazard-treatment.co
 import { AddHazardRelationComponent } from './hazard-treatment/add-hazard-relation/add-hazard-relation.component';
 
 const routes: Routes = [
-  { path: '', component: ConfiLogiComponent },
-  { path: 'setLogic', component: SetLogicComponent },
-  { path: 'setJobNumber', component: JobNumberComponent },
-  // { path: 'setRelation', component: TestLogicComponent },
-  { path: 'setRelation', component: SetRelationComponent },
-  { path: 'addTask', component: AddJobTaskComponent },
-  { path: 'setHazard', component: HazardTreatmentComponent },
-  { path: 'setHazardRelation', component: AddHazardRelationComponent }
+	{ path: '', component: ConfiLogiComponent },
+	{ path: 'setLogic', component: SetLogicComponent },
+	{ path: 'setJobNumber', component: JobNumberComponent },
+	// { path: 'setRelation', component: TestLogicComponent },
+	{ path: 'setRelation', component: SetRelationComponent },
+	{ path: 'addTask', component: AddJobTaskComponent },
+	{ path: 'setHazard', component: HazardTreatmentComponent },
+	{ path: 'setHazardRelation', component: AddHazardRelationComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
-export class ConfiLogiRoutingModule { }
+export class ConfiLogiRoutingModule {}

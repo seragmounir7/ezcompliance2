@@ -1,45 +1,70 @@
 <div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/manager']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="container px-4 py-4 bg-white">
-  <form [formGroup]="ManagerDetails" (ngSubmit)="onFormSubmit()">
-    <h2 class="text-center">Add Manager</h2>
-    <br />
-    <hr />
-    <ng-container formArrayName="arrObj">
-      <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
-        <div class="row justify-content-center">
-          <div class="mr-1 mt-2">
-            <span>{{i+1}}.
-            </span>
-          </div>
-          <div class="col-4">
-            <p for="exampleFormControlInput1" class="form-Label">Name</p>
-            <input type="text" formControlName="name" class="form-control sign" id="name" />
-          </div>
-          <div class="col-4">
-            <p for="exampleFormControlInput1" class="form-Label">Email</p>
-            <input type="text" formControlName="email" class="form-control sign" id="email" />
+	<form [formGroup]="ManagerDetails" (ngSubmit)="onFormSubmit()">
+		<h2 class="text-center">Add Manager</h2>
+		<br />
+		<hr />
+		<ng-container formArrayName="arrObj">
+			<ng-container
+				*ngFor="let control of add().controls; let i = index"
+				[formGroupName]="i"
+			>
+				<div class="row justify-content-center">
+					<div class="mr-1 mt-2">
+						<span>{{i+1}}. </span>
+					</div>
+					<div class="col-4">
+						<p for="exampleFormControlInput1" class="form-Label">
+							Name
+						</p>
+						<input
+							type="text"
+							formControlName="name"
+							class="form-control sign"
+							id="name"
+						/>
+					</div>
+					<div class="col-4">
+						<p for="exampleFormControlInput1" class="form-Label">
+							Email
+						</p>
+						<input
+							type="text"
+							formControlName="email"
+							class="form-control sign"
+							id="email"
+						/>
+					</div>
+					<div class="col-1 mt-2">
+						<span class="material-icons" (click)="addAction()"
+							>add_circle_outline
+						</span>
+					</div>
+					<div class="col-1 mt-2">
+						<span
+							class="material-icons"
+							(click)="removeSafetyModule(i)"
+						>
+							remove_circle_outline
+						</span>
+					</div>
+				</div>
 
-          </div>
-          <div class="col-1 mt-2">
-            <span class="material-icons" (click)="addAction()">add_circle_outline
-            </span>
-          </div>
-          <div class="col-1 mt-2">
-            <span class="material-icons" (click)="removeSafetyModule(i)">
-              remove_circle_outline
-            </span>
-          </div>
-        </div>
+				<hr />
+			</ng-container>
+		</ng-container>
+		<br />
 
-        <hr />
-      </ng-container>
-    </ng-container>
-    <br />
-
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary" [disabled]="ManagerDetails.get('arrObj').invalid">Add</button>
-    </div>
-  </form>
+		<div class="col-md-2">
+			<button
+				type="submit"
+				class="btn btn-primary"
+				[disabled]="ManagerDetails.get('arrObj').invalid"
+			>
+				Add
+			</button>
+		</div>
+	</form>
 </div>

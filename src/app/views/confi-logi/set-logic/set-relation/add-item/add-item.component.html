@@ -1,25 +1,41 @@
 <form [formGroup]="addItem">
-    <h2 *ngIf="dataRec.type==='highRisk'"> Add High Risk Construction parameter</h2>
-    <h2 *ngIf="dataRec.type==='ppe'"> Add PPE</h2>
-    <h2 *ngIf="dataRec.type==='licence'"> Add Licence </h2>
-    <h2 *ngIf="dataRec.type==='identifyHazards'"> Add Identify Hazards </h2>
-    <h2 *ngIf="dataRec.type==='riskLevel'"> Add Risk Level</h2>
-    <h2 *ngIf="dataRec.type==='ctrlActreq'"> Add Control Action Required</h2>
-    <h2 *ngIf="dataRec.type==='resRiskLevel'"> Add Residual Risk</h2>
-    <h2 *ngIf="dataRec.type==='perResbl'"> Add Person Responsible </h2>
-    <h2 *ngIf="dataRec.type==='codeOfPract'"> Add Code of Practice </h2>
-    <textarea *ngIf="dataRec.type==='identifyHazards'?false:dataRec.type==='ctrlActreq'?false:true" autosize class="form-control sign" placeholder="Enter your text......" formControlName="title"></textarea>
-    <ng-container *ngIf="dataRec.type==='ctrlActreq' || dataRec.type==='identifyHazards'">
-        <ckeditor   [editor]="Editor" formControlName="title"></ckeditor>`
-    </ng-container>
-    <br>
+	<h2 *ngIf="dataRec.type==='highRisk'">
+		Add High Risk Construction parameter
+	</h2>
+	<h2 *ngIf="dataRec.type==='ppe'">Add PPE</h2>
+	<h2 *ngIf="dataRec.type==='licence'">Add Licence</h2>
+	<h2 *ngIf="dataRec.type==='identifyHazards'">Add Identify Hazards</h2>
+	<h2 *ngIf="dataRec.type==='riskLevel'">Add Risk Level</h2>
+	<h2 *ngIf="dataRec.type==='ctrlActreq'">Add Control Action Required</h2>
+	<h2 *ngIf="dataRec.type==='resRiskLevel'">Add Residual Risk</h2>
+	<h2 *ngIf="dataRec.type==='perResbl'">Add Person Responsible</h2>
+	<h2 *ngIf="dataRec.type==='codeOfPract'">Add Code of Practice</h2>
+	<textarea
+		*ngIf="dataRec.type==='identifyHazards'?false:dataRec.type==='ctrlActreq'?false:true"
+		autosize
+		class="form-control sign"
+		placeholder="Enter your text......"
+		formControlName="title"
+	></textarea>
+	<ng-container
+		*ngIf="dataRec.type==='ctrlActreq' || dataRec.type==='identifyHazards'"
+	>
+		<ckeditor [editor]="Editor" formControlName="title"></ckeditor>`
+	</ng-container>
+	<br />
 
-    <div class="row">
-        <div class="col-sm-2 offset-8 ">
-            <button mat-raised-button (click)="closeDialog()">Close</button>
-        </div>
-        <div class="col-sm-2  ">
-            <button mat-raised-button [disabled]="!addItem.valid" (click)="onFormSubmit()">Add</button>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-2 offset-8">
+			<button mat-raised-button (click)="closeDialog()">Close</button>
+		</div>
+		<div class="col-sm-2">
+			<button
+				mat-raised-button
+				[disabled]="!addItem.valid"
+				(click)="onFormSubmit()"
+			>
+				Add
+			</button>
+		</div>
+	</div>
 </form>

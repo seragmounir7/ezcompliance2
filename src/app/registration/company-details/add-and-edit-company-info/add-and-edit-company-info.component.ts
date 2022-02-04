@@ -1,5 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	AbstractControl,
+	FormArray,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -262,27 +269,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	clear2() {
 		this.signaturePad2.clear();
-	}
-	// onSubmit() {
-	//   console.log("clicked");
-	//   this.submitted = !this.submitted;
-	//   console.log("FormValues = > ", this.formData.value);
-
-	// }
-	dateShow() {
-		this.date1 = true;
-		this.kilometer1 = false;
-		this.hours1 = false;
-	}
-	kilometerShow() {
-		this.date1 = false;
-		this.kilometer1 = true;
-		this.hours1 = false;
-	}
-	hoursShow() {
-		this.date1 = false;
-		this.kilometer1 = false;
-		this.hours1 = true;
 	}
 	companyShow() {
 		this.companyRegister = true;
@@ -574,5 +560,39 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				console.error(err);
 			}
 		);
+	}
+
+	nextServiceToggle(index, value) {
+		switch (value) {
+			case 'Hours':
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.kilometres.setValue('');
+				(this.addEquip().at(index) as FormGroup).controls.date.setValue(
+					''
+				);
+				break;
+			case 'Kilometres':
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.hours.setValue('');
+				(this.addEquip().at(index) as FormGroup).controls.date.setValue(
+					''
+				);
+
+				break;
+			case 'Date':
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.kilometres.setValue('');
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.hours.setValue('');
+
+				break;
+
+			default:
+				break;
+		}
 	}
 }

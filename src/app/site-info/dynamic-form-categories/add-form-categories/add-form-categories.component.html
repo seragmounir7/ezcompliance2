@@ -1,23 +1,37 @@
 <!-- <div class="btn btn-outline-primary" [routerLink]="['/admin/siteInfo/dynamicFormCategories']">
     <i class="fa fa-arrow-left" aria-hidden="true"></i>
   </div> -->
-  <section class="content" style="height: 60%">
-    <div [formGroup]="dynamicFormCategoryAdd" class="container px-4 py-4 bg-white">
-      <h2>Add Form Category</h2>
-      <hr />
-      <div class="row">
-        <div class="my-3 col">
-          <p for="exampleFormControlInput1" class="form-Label">Category</p>
-          <input type="text" class="form-control" id="customerName" formControlName="title" />
-        </div>
-      </div>
-      <div>
-        <button (click)="onSubmit()" class="btn btn-primary" [disabled]="
+<section class="content" style="height: 60%">
+	<div
+		[formGroup]="dynamicFormCategoryAdd"
+		class="container px-4 py-4 bg-white"
+	>
+		<h2>Add Form Category</h2>
+		<hr />
+		<div class="row">
+			<div class="my-3 col">
+				<p for="exampleFormControlInput1" class="form-Label">
+					Category
+				</p>
+				<input
+					type="text"
+					class="form-control"
+					id="customerName"
+					formControlName="title"
+				/>
+			</div>
+		</div>
+		<div>
+			<button
+				(click)="onSubmit()"
+				class="btn btn-primary"
+				[disabled]="
             dynamicFormCategoryAdd.invalid &&
             dynamicFormCategoryAdd.get('title').invalid
-          ">
-          Submit
-        </button>
-      </div>
-    </div>
-  </section>
+          "
+			>
+				Submit
+			</button>
+		</div>
+	</div>
+</section>

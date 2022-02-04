@@ -37,7 +37,7 @@ import { AddResidualRiskLevelComponent } from './residual-risk-level/add-residua
 import { AddStaffComponent } from './staff/add-staff/add-staff.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { AddingCustComponent } from './add-customer/adding-cust/adding-cust.component';
-import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component'
+import { SiteInspectionCategoryComponent } from './site-inspection-category/site-inspection-category.component';
 import { AddSiteInspectionCategoryComponent } from './site-inspection-category/add-site-inspection-category/add-site-inspection-category.component';
 import { SiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/site-inspection-topic.component';
 import { AddSiteInspectionTopicComponent } from './site-inspection-category/site-inspection-topic/add-site-inspection-topic/add-site-inspection-topic.component';
@@ -55,79 +55,102 @@ import { AddWhsManagerComponent } from './whs-manager/add-whs-manager/add-whs-ma
 import { AddManagerComponent } from './manager/add-manager/add-manager.component';
 import { EditManagerComponent } from './manager/edit-manager/edit-manager.component';
 import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs-manager.component';
-import{DynamicFormCategoriesComponent}from './dynamic-form-categories/dynamic-form-categories.component'
+import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynamic-form-categories.component';
 import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
-  {
-    path: 'addSite', component: AddSiteInfoComponent, children: [
-      { path: 'addSite1', component: AddSiteComponent },
-      { path: 'editSite', component: EditSiteComponent }
-    ]
-  },
-  { path: 'addCustomer', component: AddCustomerComponent },
-  { path: 'addingCustomer', component: AddingCustComponent },
-  { path: 'jobTask', component: JobTaskComponent },
-  { path: 'addJobTask', component: AddJobTaskComponent },
-  { path: 'addHighRisk', component: AddHighRiskConstructionComponent },
-  { path: 'addPPE', component: AddPPEComponent },
+	{
+		path: 'addSite',
+		component: AddSiteInfoComponent,
+		children: [
+			{ path: 'addSite1', component: AddSiteComponent },
+			{ path: 'editSite', component: EditSiteComponent }
+		]
+	},
+	{ path: 'addCustomer', component: AddCustomerComponent },
+	{ path: 'addingCustomer', component: AddingCustComponent },
+	{ path: 'jobTask', component: JobTaskComponent },
+	{ path: 'addJobTask', component: AddJobTaskComponent },
+	{ path: 'addHighRisk', component: AddHighRiskConstructionComponent },
+	{ path: 'addPPE', component: AddPPEComponent },
 
-  { path: 'highRisk', component: HighRiskConComponent },
-  { path: 'licenceAndQual', component: LicenceAndQualComponent },
-  { path: 'addLicence', component: AddLicenceComponent },
-  { path: 'editLicence', component: EditLicenceComponent },
-  { path: 'licenceCat', component: LicenceCatComponent },
-  { path: 'addLicenceCat', component: AddLicenceCatComponent },
-  { path: 'editLicenceCat', component: EditLicenceCatComponent },
-  { path: 'ppeSel', component: PpeSelectComponent },
-  { path: 'codeOfpract', component: CodeOfPractComponent },
-  { path: 'addCOP', component: AddCOPComponent },
-  { path: 'editCOP', component: EditCOPComponent },
-  // { path: 'uploadData', component: UploadBulkDataComponent },
-  { path: 'projMang', component: ProjectManagerComponent },
-  { path: 'hazards', component: IdentifyHazardsComponent },
-  { path: 'addHazards', component: AddHazardComponent },
-  { path: 'contrlActReq', component: ContrAndActReqComponent },
-  { path: 'addContrlActReq', component: AddContrActComponent },
-  { path: 'chemical', component: ChemicalComponent },
-  { path: 'addChemical', component: AddChemicalComponent },
-  { path: 'riskLevel', component: RiskLevelComponent },
-  { path: 'addRisk', component: AddRiskLevelComponent },
-  { path: 'residual', component: ResidualRiskLevelComponent },
-  { path: 'addResidual', component: AddResidualRiskLevelComponent },
-  { path: 'staff', component: StaffComponent },
-  { path: 'addStaff', component: AddStaffComponent },
-  { path: 'editStaff', component: EditStaffComponent },
-  { path: 'siteinspectioncategory', component: SiteInspectionCategoryComponent },
-  { path: 'addsiteinspection', component: AddSiteInspectionCategoryComponent },
-  { path: 'siteinspectiontopic/:id', component: SiteInspectionTopicComponent },
-  { path: 'addsiteinspectiontopic/:id', component: AddSiteInspectionTopicComponent },
-  { path: 'natureOfIncident', component: NatureOfIncidentComponent },
-  { path: 'addAndEditNatureIncident', component: AddAndEditNatureIncidentComponent },
-  { path: 'changesMade', component: ChangesMadeComponent },
-  { path: 'addChangesMade', component: AddChangesMadeComponent },
-  { path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent },
-  { path: 'addRootCauseOfIncident', component: AddRootCauseOfIncidentComponent },
-  { path: 'typeOfIncident', component: TypeOfIncidentComponent },
-  { path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent },
-  { path: 'manager', component: ManagerComponent },
-  { path: 'addManager', component: AddManagerComponent },
-  { path: 'editManager', component: EditManagerComponent },
-  { path: 'WHS-Manager', component: WHSManagerComponent },
-  { path: 'addWHSManager', component: AddWhsManagerComponent },
-  { path: 'editWHSManager', component: EditWhsManagerComponent },
-  { path: 'dynamicFormCategories', component: DynamicFormCategoriesComponent },
-  { path: 'addFormCategories', component: AddFormCategoriesComponent },
-  { path: 'instructions/accident', component: InstructionsComponent },
-  { path: 'instructions/riskAssess', component: InstructionsComponent },
-  {path:'termsAndcondition',component:TermsAndConditionsComponent}, 
+	{ path: 'highRisk', component: HighRiskConComponent },
+	{ path: 'licenceAndQual', component: LicenceAndQualComponent },
+	{ path: 'addLicence', component: AddLicenceComponent },
+	{ path: 'editLicence', component: EditLicenceComponent },
+	{ path: 'licenceCat', component: LicenceCatComponent },
+	{ path: 'addLicenceCat', component: AddLicenceCatComponent },
+	{ path: 'editLicenceCat', component: EditLicenceCatComponent },
+	{ path: 'ppeSel', component: PpeSelectComponent },
+	{ path: 'codeOfpract', component: CodeOfPractComponent },
+	{ path: 'addCOP', component: AddCOPComponent },
+	{ path: 'editCOP', component: EditCOPComponent },
+	// { path: 'uploadData', component: UploadBulkDataComponent },
+	{ path: 'projMang', component: ProjectManagerComponent },
+	{ path: 'hazards', component: IdentifyHazardsComponent },
+	{ path: 'addHazards', component: AddHazardComponent },
+	{ path: 'contrlActReq', component: ContrAndActReqComponent },
+	{ path: 'addContrlActReq', component: AddContrActComponent },
+	{ path: 'chemical', component: ChemicalComponent },
+	{ path: 'addChemical', component: AddChemicalComponent },
+	{ path: 'riskLevel', component: RiskLevelComponent },
+	{ path: 'addRisk', component: AddRiskLevelComponent },
+	{ path: 'residual', component: ResidualRiskLevelComponent },
+	{ path: 'addResidual', component: AddResidualRiskLevelComponent },
+	{ path: 'staff', component: StaffComponent },
+	{ path: 'addStaff', component: AddStaffComponent },
+	{ path: 'editStaff', component: EditStaffComponent },
+	{
+		path: 'siteinspectioncategory',
+		component: SiteInspectionCategoryComponent
+	},
+	{
+		path: 'addsiteinspection',
+		component: AddSiteInspectionCategoryComponent
+	},
+	{
+		path: 'siteinspectiontopic/:id',
+		component: SiteInspectionTopicComponent
+	},
+	{
+		path: 'addsiteinspectiontopic/:id',
+		component: AddSiteInspectionTopicComponent
+	},
+	{ path: 'natureOfIncident', component: NatureOfIncidentComponent },
+	{
+		path: 'addAndEditNatureIncident',
+		component: AddAndEditNatureIncidentComponent
+	},
+	{ path: 'changesMade', component: ChangesMadeComponent },
+	{ path: 'addChangesMade', component: AddChangesMadeComponent },
+	{ path: 'rootCauseOfIncident', component: RootCauseOfIncidentComponent },
+	{
+		path: 'addRootCauseOfIncident',
+		component: AddRootCauseOfIncidentComponent
+	},
+	{ path: 'typeOfIncident', component: TypeOfIncidentComponent },
+	{ path: 'addTypeOfIncident', component: AddTypeOfIncidentComponent },
+	{ path: 'manager', component: ManagerComponent },
+	{ path: 'addManager', component: AddManagerComponent },
+	{ path: 'editManager', component: EditManagerComponent },
+	{ path: 'WHS-Manager', component: WHSManagerComponent },
+	{ path: 'addWHSManager', component: AddWhsManagerComponent },
+	{ path: 'editWHSManager', component: EditWhsManagerComponent },
+	{
+		path: 'dynamicFormCategories',
+		component: DynamicFormCategoriesComponent
+	},
+	{ path: 'addFormCategories', component: AddFormCategoriesComponent },
+	{ path: 'instructions/accident', component: InstructionsComponent },
+	{ path: 'instructions/riskAssess', component: InstructionsComponent },
+	{ path: 'termsAndcondition', component: TermsAndConditionsComponent }
 
-  // { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
+	// { path: 'uploadDataInBulk', component: UploadBulkDataComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
-export class SiteInfoRoutingModule { }
+export class SiteInfoRoutingModule {}
