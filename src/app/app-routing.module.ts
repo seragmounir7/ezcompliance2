@@ -39,26 +39,6 @@ const routes: Routes = [
 			{ path: 'hazardRep/:id', component: HazardReportComponent }
 		]
 	},
-	{
-		path: 'mobileView',
-		outlet: 'mobileView',
-		component: PrintLayoutComponent,
-		children: [
-			{
-				path: 'riskAssessSWMS/:id',
-				component: RiskAssessmentSWMSComponent
-			},
-			{ path: 'siteInspect/', component: SiteInspectionComponent },
-			{ path: 'toolboxTalk/', component: ToolboxTalkComponent },
-			{ path: 'incidentRep/', component: IncidentReportComponent },
-			{ path: 'hazardRep/', component: HazardReportComponent },
-
-			{ path: 'siteInspect/:id', component: SiteInspectionComponent },
-			{ path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
-			{ path: 'incidentRep/:id', component: IncidentReportComponent },
-			{ path: 'hazardRep/:id', component: HazardReportComponent }
-		]
-	},
 	// {
 	//   path: 'admin',
 	//   // canActivate: [FirstTimeLoginGuard],
