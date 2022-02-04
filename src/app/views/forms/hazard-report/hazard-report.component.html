@@ -29,6 +29,7 @@
 <div
 	id="section-to-print"
 	class="container card px-4 py-4 content-center"
+	[class.px-4]="!(mobileViewService.isMobile| async)"
 	[class.disableDiv]="isHistory"
 >
 	<form class="px-4 py-4" [formGroup]="hazardReport">
@@ -737,55 +738,65 @@
 			</div>
 		</div>
 		<div class="row py-4">
-			<div class="col-md in-grid">
+			<div class="col-md">
 				<h2>Action Required</h2>
-				<div class="form-check form-check-inline">
-					<input
-						class="form-check-input"
-						type="radio"
-						formControlName="actionRequired"
-						id="inlineCheckbox1"
-						value="immediately"
-					/>
-					<label class="form-check-label ml-1" for="inlineCheckbox1"
-						>Immediately</label
-					>
-				</div>
-				<div class="form-check form-check-inline ml-4">
-					<input
-						class="form-check-input"
-						type="radio"
-						formControlName="actionRequired"
-						id="inlineCheckbox2"
-						value="today"
-					/>
-					<label class="form-check-label ml-1" for="inlineCheckbox2"
-						>Today</label
-					>
-				</div>
-				<div class="form-check form-check-inline ml-4">
-					<input
-						class="form-check-input"
-						type="radio"
-						formControlName="actionRequired"
-						id="inlineCheckbox3"
-						value="thisWeek"
-					/>
-					<label class="form-check-label ml-1" for="inlineCheckbox3"
-						>This week</label
-					>
-				</div>
-				<div class="form-check form-check-inline ml-4">
-					<input
-						class="form-check-input"
-						type="radio"
-						formControlName="actionRequired"
-						id="inlineCheckbox4"
-						value="thisMonth"
-					/>
-					<label class="form-check-label ml-1" for="inlineCheckbox4"
-						>This Month</label
-					>
+				<div class="in-grid">
+					<div class="form-check form-check-inline">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="actionRequired"
+							id="inlineCheckbox1"
+							value="immediately"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox1"
+							>Immediately</label
+						>
+					</div>
+					<div class="form-check form-check-inline ml-4">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="actionRequired"
+							id="inlineCheckbox2"
+							value="today"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox2"
+							>Today</label
+						>
+					</div>
+					<div class="form-check form-check-inline ml-4">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="actionRequired"
+							id="inlineCheckbox3"
+							value="thisWeek"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox3"
+							>This week</label
+						>
+					</div>
+					<div class="form-check form-check-inline ml-4">
+						<input
+							class="form-check-input"
+							type="radio"
+							formControlName="actionRequired"
+							id="inlineCheckbox4"
+							value="thisMonth"
+						/>
+						<label
+							class="form-check-label ml-1"
+							for="inlineCheckbox4"
+							>This Month</label
+						>
+					</div>
 				</div>
 			</div>
 		</div>

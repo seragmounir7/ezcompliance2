@@ -36,7 +36,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 
 @Component({
 	selector: 'app-hazard-report',
@@ -114,7 +114,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		private ngZone: NgZone,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		private breakpointObserver: BreakpointObserver
+		public mobileViewService: MobileViewService
 	) {
 		this.check = localStorage.getItem('key');
 
@@ -347,25 +347,23 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		console.log(this.signaturePad1, this.dataUrl);
 		this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		this.signaturePad1.clear();
-		this.breakpointObserver
-			.observe([Breakpoints.XSmall])
-			.subscribe((result) => {
-				console.log(result);
+		this.mobileViewService.observeXsmall().subscribe((result) => {
+			console.log(result);
 
-				if (result.matches) {
-					// this.reSizeSignArray(this.signaturePad2, 233, 114);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 247);
-					this.signaturePad1.set('canvasHeight', 106);
-					this.signaturePad1.fromDataURL(sign);
-				} else {
-					// this.reSizeSignArray(this.signaturePad2, 420, 121);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 500);
-					this.signaturePad1.set('canvasHeight', 100);
-					this.signaturePad1.fromDataURL(sign);
-				}
-			});
+			if (result.matches) {
+				// this.reSizeSignArray(this.signaturePad2, 233, 114);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 247);
+				this.signaturePad1.set('canvasHeight', 106);
+				this.signaturePad1.fromDataURL(sign);
+			} else {
+				// this.reSizeSignArray(this.signaturePad2, 420, 121);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 500);
+				this.signaturePad1.set('canvasHeight', 100);
+				this.signaturePad1.fromDataURL(sign);
+			}
+		});
 		// this.signaturePad1.fromDataURL(this.dataUrl);
 		// this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		// this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime

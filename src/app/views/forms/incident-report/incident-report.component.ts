@@ -31,7 +31,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { Observable } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 @Component({
 	selector: 'app-incident-report',
 	templateUrl: './incident-report.component.html',
@@ -112,7 +112,7 @@ export class IncidentReportComponent
 		private ngZone: NgZone,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		private breakpointObserver: BreakpointObserver
+		public mobileViewService: MobileViewService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -507,33 +507,31 @@ export class IncidentReportComponent
 		this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
 		this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
 
-		this.breakpointObserver
-			.observe([Breakpoints.XSmall])
-			.subscribe((result) => {
-				console.log(result);
+		this.mobileViewService.observeXsmall().subscribe((result) => {
+			console.log(result);
 
-				if (result.matches) {
-					// this.reSizeSignArray(this.signaturePad2, 233, 114);
-					const sign = this.signaturePad.toDataURL();
-					const sign1 = this.signaturePad1.toDataURL();
-					this.signaturePad.set('canvasWidth', 247);
-					this.signaturePad.set('canvasHeight', 106);
-					this.signaturePad.fromDataURL(sign);
-					this.signaturePad1.set('canvasWidth', 247);
-					this.signaturePad1.set('canvasHeight', 106);
-					this.signaturePad1.fromDataURL(sign1);
-				} else {
-					// this.reSizeSignArray(this.signaturePad2, 420, 121);
-					const sign = this.signaturePad.toDataURL();
-					const sign1 = this.signaturePad1.toDataURL();
-					this.signaturePad.set('canvasWidth', 500);
-					this.signaturePad.set('canvasHeight', 100);
-					this.signaturePad.fromDataURL(sign);
-					this.signaturePad1.set('canvasWidth', 500);
-					this.signaturePad1.set('canvasHeight', 100);
-					this.signaturePad1.fromDataURL(sign1);
-				}
-			});
+			if (result.matches) {
+				// this.reSizeSignArray(this.signaturePad2, 233, 114);
+				const sign = this.signaturePad.toDataURL();
+				const sign1 = this.signaturePad1.toDataURL();
+				this.signaturePad.set('canvasWidth', 247);
+				this.signaturePad.set('canvasHeight', 106);
+				this.signaturePad.fromDataURL(sign);
+				this.signaturePad1.set('canvasWidth', 247);
+				this.signaturePad1.set('canvasHeight', 106);
+				this.signaturePad1.fromDataURL(sign1);
+			} else {
+				// this.reSizeSignArray(this.signaturePad2, 420, 121);
+				const sign = this.signaturePad.toDataURL();
+				const sign1 = this.signaturePad1.toDataURL();
+				this.signaturePad.set('canvasWidth', 500);
+				this.signaturePad.set('canvasHeight', 100);
+				this.signaturePad.fromDataURL(sign);
+				this.signaturePad1.set('canvasWidth', 500);
+				this.signaturePad1.set('canvasHeight', 100);
+				this.signaturePad1.fromDataURL(sign1);
+			}
+		});
 	}
 
 	drawComplete() {
