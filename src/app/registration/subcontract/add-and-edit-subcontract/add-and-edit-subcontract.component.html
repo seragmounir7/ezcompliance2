@@ -1,167 +1,289 @@
-<div class="btn btn-outline-primary " [routerLink]="['/admin/registration/subcontract']"><i
-    class="fa fa-arrow-left" aria-hidden="true"></i></div>
+<div
+	class="btn btn-outline-primary"
+	[routerLink]="['/admin/registration/subcontract']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
 
 <div class="container bg-white" [formGroup]="subcontractDetails">
-    <h1 class="text-center mt-3 pt-3">
-        <p class="title">Subcontractor Information Preview</p>
-      </h1>
-      <mat-tab-group>
-        <mat-tab label="Profile" (click)="profileshow()">
-    <div class="row">
-        <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Company Name  </label>
-            <input type="text" formControlName="companyName" class="form-control" />
-          </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Phone</label>
-            <input type="text" formControlName="phone" class="form-control" />
+	<h1 class="text-center mt-3 pt-3">
+		<p class="title">Subcontractor Information Preview</p>
+	</h1>
+	<mat-tab-group>
+		<mat-tab label="Profile" (click)="profileshow()">
+			<div class="row">
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Company Name
+					</label>
+					<input
+						type="text"
+						formControlName="companyName"
+						class="form-control"
+					/>
+				</div>
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Phone</label
+					>
+					<input
+						type="text"
+						formControlName="phone"
+						class="form-control"
+					/>
+				</div>
 
-          </div>
-          
-         
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Fax </label>
-            <input type="text" formControlName="fax" class="form-control" />
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Fax
+					</label>
+					<input
+						type="text"
+						formControlName="fax"
+						class="form-control"
+					/>
+				</div>
 
-          </div>
-          
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input type="text" formControlName="email" class="form-control" />
-
-          </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Street Address </label>
-              <textarea type="text"
-              formControlName="streetAddress" class="form-control" >
-              </textarea>
-
-          </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Suburb</label>
-            <textarea type="text" formControlName="suburb" class="form-control" ></textarea>
-
-          </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">State</label>
-              <select class="form-select form-control col" aria-label="Default select example"
-              formControlName="state"  >
-
-              <option selected hidden>Select</option>
-              <option [value]="state._id" *ngFor="let state of StatesData">{{state.title}}</option>
-            </select>
-              <!-- <span class="text-danger"
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Email</label
+					>
+					<input
+						type="text"
+						formControlName="email"
+						class="form-control"
+					/>
+				</div>
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Street Address
+					</label>
+					<textarea
+						type="text"
+						formControlName="streetAddress"
+						class="form-control"
+					>
+					</textarea>
+				</div>
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Suburb</label
+					>
+					<textarea
+						type="text"
+						formControlName="suburb"
+						class="form-control"
+					></textarea>
+				</div>
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>State</label
+					>
+					<select
+						class="form-select form-control col"
+						aria-label="Default select example"
+						formControlName="state"
+					>
+						<option selected hidden>Select</option>
+						<option
+							[value]="state._id"
+							*ngFor="let state of StatesData"
+						>
+							{{state.title}}
+						</option>
+					</select>
+					<!-- <span class="text-danger"
               *ngIf="(subcontractDetails.state.touched || submitted) && subcontractDetails.state.errors?.required">
               State is required
             </span> -->
-          </div>
-           <!-- <label for="exampleFormControlInput1" class="form-label">Post Code</label>
+				</div>
+				<!-- <label for="exampleFormControlInput1" class="form-label">Post Code</label>
             <input type="text" formControlName="postCode" class="form-control" /> -->
 
-          <!-- <div class="mb-3 mt-3 col-3">
+				<!-- <div class="mb-3 mt-3 col-3">
             <label for="exampleFormControlInput1" class="form-label">Mailing Address</label>
             <textarea type="text" formControlName="mailingAddress" class="form-control" ></textarea>
 
           </div> -->
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">ABN</label>
-            <input type="text" formControlName="ABN" class="form-control" />
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>ABN</label
+					>
+					<input
+						type="text"
+						formControlName="ABN"
+						class="form-control"
+					/>
+				</div>
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Licence Number
+					</label>
+					<input
+						type="text"
+						formControlName="licenceNumber"
+						class="form-control"
+					/>
+				</div>
+				<div class="mb-3 mt-3 col-3">
+					<label for="exampleFormControlInput1" class="form-label"
+						>Website
+					</label>
+					<input
+						type="text"
+						formControlName="website"
+						class="form-control"
+					/>
+				</div>
+			</div>
+			<button
+				type="submit"
+				class="btn btn-outline-primary btn_1"
+				*ngIf="!dataEmp"
+				[disabled]="!subcontractDetails.valid"
+				(click)="onFormSubmit()"
+			>
+				Submit
+			</button>
+			<button
+				type="submit"
+				class="btn btn-outline-primary btn_1"
+				*ngIf="dataEmp"
+				[disabled]="!subcontractDetails.valid"
+				(click)="onFormUpdate($event)"
+			>
+				Update
+			</button>
+		</mat-tab>
+		<mat-tab label="Licence And Qualifications" (click)="LicenceInfoshow()">
+			<div formArrayName="licenceAndQualifications">
+				<div
+					*ngFor="let row of addLicence().controls; let filed = index"
+				>
+					<div [formGroupName]="filed">
+						<div class="row">
+							<div class="mb-3 mt-3 col-3">
+								<label
+									for="exampleFormControlInput1"
+									class="form-label"
+									>Licence Name</label
+								>
+								<input
+									type="text"
+									formControlName="LicenceName"
+									[matAutocomplete]="employee1"
+									class="form-control"
+									id="siteName"
+								/>
+								<mat-autocomplete
+									#employee1="matAutocomplete"
+									[displayWith]="displayFn"
+								>
+									<mat-option
+										*ngFor="let option of licenceValueChanges[filed] | async ; let i = index "
+										[value]="option"
+									>
+										{{option.title}}
+									</mat-option>
+								</mat-autocomplete>
+							</div>
+							<div class="mb-3 mt-3 col-3">
+								<label
+									for="exampleFormControlInput1"
+									class="form-label"
+									>Licence Number</label
+								>
+								<input
+									type="text"
+									formControlName="LicenceNumber"
+									class="form-control"
+								/>
+							</div>
+							<div class="mb-3 mt-3 col-3">
+								<label
+									for="exampleFormControlInput1"
+									class="form-label"
+									>Training Organisation</label
+								>
+								<input
+									type="text"
+									formControlName="TrainingQrginisation"
+									class="form-control"
+								/>
+							</div>
+							<div class="mb-3 mt-3 col-3">
+								<label
+									for="exampleFormControlInput1"
+									class="form-label"
+									>Expiry Date
+								</label>
+								<input
+									type="date"
+									formControlName="ExpiryDate"
+									class="form-control"
+								/>
+							</div>
+						</div>
 
-          </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Licence Number </label>
-            <input type="text" formControlName="licenceNumber" class="form-control" />
-
-          </div>
-          <div class="mb-3 mt-3 col-3">
-            <label for="exampleFormControlInput1" class="form-label">Website  </label>
-            <input type="text" formControlName="website" class="form-control" />
-
-          </div>
-    </div>
-    <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" [disabled]="!subcontractDetails.valid" (click)="onFormSubmit()">
-        Submit
-      </button>
-      <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" [disabled]="!subcontractDetails.valid" (click)="onFormUpdate($event)">
-        Update
-      </button>
-    </mat-tab>
-    <mat-tab label="Licence And Qualifications" (click)="LicenceInfoshow()">
-
-        <div formArrayName="licenceAndQualifications">
-          <div *ngFor="let row of addLicence().controls; let filed = index">
-            <div [formGroupName]="filed">
-              <div class="row">
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Licence Name</label>
-                  <input type="text" formControlName="LicenceName" [matAutocomplete]="employee1" class="form-control"
-                    id="siteName" 
-                    />
-                  <mat-autocomplete #employee1="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let option of licenceValueChanges[filed] | async ; let i = index " [value]="option">
-                      {{option.title}}
-                    </mat-option>
-                  </mat-autocomplete>
-                  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Licence Number</label>
-                  <input type="text" formControlName="LicenceNumber" class="form-control"
-                    />
-                  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Training Organisation</label>
-                  <input type="text" formControlName="TrainingQrginisation" class="form-control"
-                     />
-                  
-                </div>
-                <div class="mb-3 mt-3 col-3">
-                  <label for="exampleFormControlInput1" class="form-label">Expiry Date
-                  </label>
-                  <input type="date" formControlName="ExpiryDate" class="form-control"
-                    />
-                  
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-10">
-                  <div class="my-3">
-                    <label for="formFile1" class="form-label">Upload Licence</label>
-                    <input class="form-control" type="file" (change)="browser($event,filed)" />
-                    <!-- <span class="text-danger"
+						<div class="row">
+							<div class="col-10">
+								<div class="my-3">
+									<label for="formFile1" class="form-label"
+										>Upload Licence</label
+									>
+									<input
+										class="form-control"
+										type="file"
+										(change)="browser($event,filed)"
+									/>
+									<!-- <span class="text-danger"
               *ngIf="(addLicence(filed).file.touched || submitted) && addLicence(filed).file.errors?.required">
               Upload Licence is required
           </span> -->
-                  </div>
-                </div>
+								</div>
+							</div>
 
-                <div class="col-1 mt-4">
-                  <div class="my-4">
-                    <span class="material-icons" (click)="addFiled()">add_circle_outline
-                    </span>
-                  </div>
-
-                </div>
-                <div class="col-1 mt-4">
-                  <div class="my-4">
-                    <span class="material-icons" (click)="removeFiled(filed)">
-                      remove_circle_outline
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="!dataEmp" [disabled]="!subcontractDetails.valid" (click)="onFormSubmit()">
-          Submit
-        </button>
-        <button type="submit" class="btn btn-outline-primary btn_1" *ngIf="dataEmp" [disabled]="!subcontractDetails.valid" (click)="onFormUpdate($event)">
-          Update
-        </button>
-      </mat-tab>
-      </mat-tab-group>
+							<div class="col-1 mt-4">
+								<div class="my-4">
+									<span
+										class="material-icons"
+										(click)="addFiled()"
+										>add_circle_outline
+									</span>
+								</div>
+							</div>
+							<div class="col-1 mt-4">
+								<div class="my-4">
+									<span
+										class="material-icons"
+										(click)="removeFiled(filed)"
+									>
+										remove_circle_outline
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button
+				type="submit"
+				class="btn btn-outline-primary btn_1"
+				*ngIf="!dataEmp"
+				[disabled]="!subcontractDetails.valid"
+				(click)="onFormSubmit()"
+			>
+				Submit
+			</button>
+			<button
+				type="submit"
+				class="btn btn-outline-primary btn_1"
+				*ngIf="dataEmp"
+				[disabled]="!subcontractDetails.valid"
+				(click)="onFormUpdate($event)"
+			>
+				Update
+			</button>
+		</mat-tab>
+	</mat-tab-group>
 </div>

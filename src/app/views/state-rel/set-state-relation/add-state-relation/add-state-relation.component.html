@@ -1,8 +1,11 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/stateRel/setState']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	[routerLink]="['/admin/stateRel/setState']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="ml-2">
-  <h2>States Relation :&nbsp;{{ states?.title }}</h2>
+	<h2>States Relation :&nbsp;{{ states?.title }}</h2>
 </div>
 
 <!-- <ng-template matStepLabel>Jurisdiction</ng-template> -->
@@ -112,31 +115,62 @@
 <!-- </div> -->
 
 <div class="row" [formGroup]="SetState">
-
-  <div class="col-4">
-    <select class="form-select form-control" aria-label="Default select example" formControlName="jurisdictionId">
-      <option value="" selected hidden> Select Jurisdiction</option>
-      <option *ngFor="let parameter of JurisdictionData" [value]="parameter._id">{{ parameter.title }}</option>
-
-    </select>
-  </div>
-  <div class="col-4">
-    <select class="form-select form-control" aria-label="Default select example" formControlName="safetyLegislationId">
-      <option value="" selected hidden> Select Safety Legislation</option>
-      <option *ngFor="let parameter of safety" [value]="parameter._id">{{ parameter.act }}{{ parameter.regulation }}
-      </option>
-
-    </select>
-  </div>
-  <div class="col-4 ">
-    <select class="form-select form-control" aria-label="Default select example" formControlName="regulatorId">
-      <option value="" selected hidden> Select Regulator</option>
-      <option *ngFor="let parameter of regulatorData" [value]="parameter._id">{{ parameter.title }}</option>
-
-    </select>
-  </div>
-  <div class="ml-3 mt-3">
-    <button *ngIf="!states?.set" class="btn btn-primary" (click)="setRelation()">Set</button>
-    <button *ngIf="states?.set" class="btn btn-primary" (click)=" setRelation() ">Update</button>
-  </div>
+	<div class="col-4">
+		<select
+			class="form-select form-control"
+			aria-label="Default select example"
+			formControlName="jurisdictionId"
+		>
+			<option value="" selected hidden>Select Jurisdiction</option>
+			<option
+				*ngFor="let parameter of JurisdictionData"
+				[value]="parameter._id"
+			>
+				{{ parameter.title }}
+			</option>
+		</select>
+	</div>
+	<div class="col-4">
+		<select
+			class="form-select form-control"
+			aria-label="Default select example"
+			formControlName="safetyLegislationId"
+		>
+			<option value="" selected hidden>Select Safety Legislation</option>
+			<option *ngFor="let parameter of safety" [value]="parameter._id">
+				{{ parameter.act }}{{ parameter.regulation }}
+			</option>
+		</select>
+	</div>
+	<div class="col-4">
+		<select
+			class="form-select form-control"
+			aria-label="Default select example"
+			formControlName="regulatorId"
+		>
+			<option value="" selected hidden>Select Regulator</option>
+			<option
+				*ngFor="let parameter of regulatorData"
+				[value]="parameter._id"
+			>
+				{{ parameter.title }}
+			</option>
+		</select>
+	</div>
+	<div class="ml-3 mt-3">
+		<button
+			*ngIf="!states?.set"
+			class="btn btn-primary"
+			(click)="setRelation()"
+		>
+			Set
+		</button>
+		<button
+			*ngIf="states?.set"
+			class="btn btn-primary"
+			(click)=" setRelation() "
+		>
+			Update
+		</button>
+	</div>
 </div>

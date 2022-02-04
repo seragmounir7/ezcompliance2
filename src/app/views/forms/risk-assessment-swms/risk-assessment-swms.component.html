@@ -536,6 +536,15 @@
 
 						<hr />
 						<div class="row mt-4 table_1">
+							<div class="img-table">
+								<img
+									src="../assets/img/clients/table1.jpg"
+									alt="img"
+									width="323px"
+									id="imgwrap"
+									class="img"
+								/>
+							</div>
 							<table class="table table-bordered text-center">
 								<thead>
 									<tr>
@@ -1597,6 +1606,15 @@
 						</ng-container>
 						<hr />
 						<div class="row col-sm col-md">
+							<div class="img-table">
+								<img
+									src="../assets/img/clients/table1.jpg"
+									alt="img"
+									width="323px"
+									id="imgwrap"
+									class="img"
+								/>
+							</div>
 							<table class="table table-bordered text-center">
 								<thead>
 									<tr>
@@ -2021,26 +2039,28 @@
 										Clear
 									</button>
 								</div>
-								<div
-									class="col-md-1 col-sm-1 d-flex align-items-center"
-								>
-									<span
-										class="material-icons"
-										*ngIf="!isHistory"
-										(click)="addEmployee()"
-										>add_circle_outline
-									</span>
-								</div>
-								<div
-									class="col-md-1 col-sm-1 d-flex align-items-center"
-								>
-									<span
-										class="material-icons"
-										*ngIf="!isHistory"
-										(click)="removeemployeeField(i)"
+								<div class="d-flex">
+									<div
+										class="col-md-1 col-sm-1 d-flex align-items-center"
 									>
-										remove_circle_outline
-									</span>
+										<span
+											class="material-icons"
+											*ngIf="!isHistory"
+											(click)="addEmployee()"
+											>add_circle_outline
+										</span>
+									</div>
+									<div
+										class="col-md-1 col-sm-1 d-flex align-items-center mx-auto"
+									>
+										<span
+											class="material-icons"
+											*ngIf="!isHistory"
+											(click)="removeemployeeField(i)"
+										>
+											remove_circle_outline
+										</span>
+									</div>
 								</div>
 							</ng-container>
 						</div>

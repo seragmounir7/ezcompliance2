@@ -38,7 +38,7 @@ export class CouponComponent implements OnInit {
 	getAllCoupon(field = '', value = '') {
 		this.subscript.getAllCoupon(field, value).subscribe((res) => {
 			console.log(res);
-			let couponData = res.data;
+			const couponData = res.data;
 			couponData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

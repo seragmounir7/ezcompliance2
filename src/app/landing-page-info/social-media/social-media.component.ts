@@ -46,7 +46,7 @@ export class SocialMediaComponent implements OnInit {
 	getSocialMedia() {
 		this.landingPageInfo.getAllSocialMedia().subscribe((res: any) => {
 			console.log('SocialMediaDetails=>', res);
-			let SocialMediaData = res.data;
+			const SocialMediaData = res.data;
 
 			this.ELEMENT_DATA = SocialMediaData;
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);

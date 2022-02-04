@@ -71,7 +71,7 @@ export class OurWorkComponent implements OnInit {
 		void this.spinner.show();
 		this.myId = id;
 		this.isEdit = true;
-		let dialogRef = this.dialog.open(EditWorkComponent, {
+		const dialogRef = this.dialog.open(EditWorkComponent, {
 			data: {
 				action: 'edit',
 				EditData: this.workData
@@ -94,7 +94,7 @@ export class OurWorkComponent implements OnInit {
 			console.log('System', res.data);
 			this.dataSource.data = res.data;
 			// this.SystemData = res.data;
-			let SystemData = res.data[0].subModules;
+			const SystemData = res.data[0].subModules;
 			SystemData.forEach((element, index) => {
 				element.index = index + 1;
 			});
@@ -112,7 +112,7 @@ export class OurWorkComponent implements OnInit {
 		this.mode = 'System';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.SystemData = data.data[0];
-			let dialogRef = this.dialog.open(AddEditSubWorkComponent, {
+			const dialogRef = this.dialog.open(AddEditSubWorkComponent, {
 				data: {
 					action: 'edit',
 					EditData: this.SystemData,
@@ -138,7 +138,7 @@ export class OurWorkComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.SystemData = data.data[0];
 			console.log(this.SystemData);
-			let dialogRef = this.dialog.open(AddSubWorkComponent, {
+			const dialogRef = this.dialog.open(AddSubWorkComponent, {
 				data: {
 					action: 'new',
 					ID: id,

@@ -1,158 +1,154 @@
-
-
 .viewBtn i {
-    color: #007bff;
-    font-size: 21px !important;
+	color: #007bff;
+	font-size: 21px !important;
 }
 ::ng-deep .mat-sort-header-container {
-  margin-left: 47% !important;
+	margin-left: 47% !important;
 }
 table {
-    width: 100%;
-  }
-.select{
-    width:100%!important;
+	width: 100%;
 }
-  .pt-3 {
-    display: inline-block;
-    font-size: 32px;
-    font-weight: 700;
-    word-break: break-word;
-    font-family: Inter, sans-serif;
-  }
-  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-
-    border: solid 2px #eaeaea
+.select {
+	width: 100% !important;
+}
+.pt-3 {
+	display: inline-block;
+	font-size: 32px;
+	font-weight: 700;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
+}
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+	border: solid 2px #eaeaea;
 }
 ::-webkit-scrollbar {
-  width: 10px;
+	width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+	background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+	background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(122, 122, 122); 
+	background: rgb(122, 122, 122);
 }
-.roleZIndex{
-z-index: 200 !important;
+.roleZIndex {
+	z-index: 200 !important;
 }
-button.link { background:none; border:none;
- 
-  }
-button.link:hover { color: #007bff;
+button.link {
+	background: none;
+	border: none;
+}
+button.link:hover {
+	color: #007bff;
 }
 ////////@at-root
 @import 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css';
 @import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 
 .nav-pills-custom .nav-link {
-    color: #aaa;
-    background: #fff;
-    position: relative;
+	color: #aaa;
+	background: #fff;
+	position: relative;
 }
 
 .nav-pills-custom .nav-link.active {
-    color: #45b649;
-    background: #fff;
-    border: solid 1px;
+	color: #45b649;
+	background: #fff;
+	border: solid 1px;
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-evenly;
+.buttons {
+	display: flex;
+	justify-content: space-evenly;
 }
-
 
 /* Add indicator arrow for the active tab */
 @media (min-width: 992px) {
-    .nav-pills-custom .nav-link::before {
-        content: '';
-        display: block;
-        border-top: 8px solid transparent;
-        border-left: 10px solid #45b649;
-        border-bottom: 8px solid transparent;
-        position: absolute;
-        top: 50%;
-        right: -10px;
-        transform: translateY(-50%);
-        opacity: 0;
-    }
+	.nav-pills-custom .nav-link::before {
+		content: '';
+		display: block;
+		border-top: 8px solid transparent;
+		border-left: 10px solid #45b649;
+		border-bottom: 8px solid transparent;
+		position: absolute;
+		top: 50%;
+		right: -10px;
+		transform: translateY(-50%);
+		opacity: 0;
+	}
 }
 
 .nav-pills-custom .nav-link.active::before {
-    opacity: 1;
+	opacity: 1;
 }
 
-
-
 body {
-    min-height: 100vh;
-    background: linear-gradient(to left, #dce35b, #45b649);
+	min-height: 100vh;
+	background: linear-gradient(to left, #dce35b, #45b649);
 }
 /////////////////////////////
 :host {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 :host ::ng-deep .mat-tab-labels {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 mat-tab-group {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
 }
 
 :host ::ng-deep .mat-tab-body-wrapper {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 mat-tab-body {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 :host ::ng-deep mat-ink-bar {
-  display: none;
+	display: none;
 }
 :host ::ng-deep.mat-tab-label.mat-tab-label-active {
-  background-color: transparent;
- 
- 
-  border-right: 3px solid #45b649;
+	background-color: transparent;
+
+	border-right: 3px solid #45b649;
 }
 
 :host ::ng-deep.mat-tab-label {
-  background-color: transparent;
-
+	background-color: transparent;
 }
 
 .example-large-box {
-  height: 300px;
-  width: 450px;
+	height: 300px;
+	width: 450px;
 }
 :host ::ng-deep.mat-tab-body-content {
-  height: 100%;
-  overflow: auto;
-  display: flex;
-  justify-content: center;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
 }
 
-.textCapitaliza{
-  text-transform: capitalize !important;
+.textCapitaliza {
+	text-transform: capitalize !important;
 }

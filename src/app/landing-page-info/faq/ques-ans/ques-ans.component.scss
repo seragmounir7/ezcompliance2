@@ -1,33 +1,33 @@
 table {
-    width: 100%;
-  }
-  ::ng-deep .mat-sort-header-container {
-    margin-left: 47% !important;
-  }
-  .pt-3 {
-    display: inline-block;
-    font-size: 32px;
-    font-weight: 700;
-    word-break: break-word;
-    font-family: Inter, sans-serif;
-  }
-  .mat-column-index {
-    width: 8px;
-  padding-right: 8px;
-    text-align: center;
-  }
-  .mat-column-question {
-    width: 32px;
-    padding-right: 10px;
-    text-align: center;
-  }
-  .mat-column-answer {
-    width: 32px;
-    padding-right: 24px;
-    text-align: center;
-  }
-  .mat-column-action{
-    width: 32px;
-    padding-right: 24px;
-    text-align: center;
-  }
+	width: 100%;
+}
+::ng-deep .mat-sort-header-container {
+	margin-left: 47% !important;
+}
+.pt-3 {
+	display: inline-block;
+	font-size: 32px;
+	font-weight: 700;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
+}
+.mat-column-index {
+	width: 8px;
+	padding-right: 8px;
+	text-align: center;
+}
+.mat-column-question {
+	width: 32px;
+	padding-right: 10px;
+	text-align: center;
+}
+.mat-column-answer {
+	width: 32px;
+	padding-right: 24px;
+	text-align: center;
+}
+.mat-column-action {
+	width: 32px;
+	padding-right: 24px;
+	text-align: center;
+}

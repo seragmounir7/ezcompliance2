@@ -105,10 +105,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 				console.log(res.data);
 			},
 			(err) => {
-				if (
-					err instanceof HttpErrorResponse &&
-					(err as HttpErrorResponse).status === 422
-				) {
+				if (err instanceof HttpErrorResponse && err.status === 422) {
 					this.jobHasError = true;
 				}
 				console.error(err);
@@ -147,7 +144,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			},
 			(err) => {
 				if (err instanceof HttpErrorResponse) {
-					if ((err as HttpErrorResponse).status === 422) {
+					if (err.status === 422) {
 						this.toastrService.error('Job Number Already exists!');
 					}
 					console.error(err);
@@ -205,7 +202,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		);
 	}
 	addSite() {
-		let dialog = this.dialog.open(AddSiteComponent, {});
+		const dialog = this.dialog.open(AddSiteComponent, {});
 		dialog.afterClosed().subscribe((res) => {
 			if (res === 'true') {
 				this.getAllSites();
@@ -213,7 +210,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		});
 	}
 	addCustomer() {
-		let dialog = this.dialog.open(AddingCustComponent, {});
+		const dialog = this.dialog.open(AddingCustComponent, {});
 		dialog.afterClosed().subscribe((res) => {
 			if (res === 'ok') {
 				this.getAllCustomer();

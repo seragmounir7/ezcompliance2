@@ -11,20 +11,26 @@ import { SubcontractComponent } from './subcontract/subcontract.component';
 import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-company-info/add-and-edit-company-info.component';
 
 const routes: Routes = [
-  { path: "", component: CompanyRegistrationComponent },
-  { path: "employeeRegistration", component: EmployeeRegistrationComponent },
-  { path: "addEmployee/:id", component: AddEmployeeComponent },
-  { path: "plantRegistration/:id", component: PlantRegistrationComponent},
-  { path: "plantRegistrationTable/:id", component: PlantRegistionTableComponent},
-  { path: "subcontract", component: SubcontractComponent},
-  { path: "addSubcontract/:id", component: AddAndEditSubcontractComponent},
-  {path:"compdetails", component:CompanyDetailsComponent},
-  { path: "plantRegistration/history/:id", component: PlantRegistrationComponent},
-  { path: "addCompanyInfo/:id", component: AddAndEditCompanyInfoComponent}
+	{ path: '', component: CompanyRegistrationComponent },
+	{ path: 'employeeRegistration', component: EmployeeRegistrationComponent },
+	{ path: 'addEmployee/:id', component: AddEmployeeComponent },
+	{ path: 'plantRegistration/:id', component: PlantRegistrationComponent },
+	{
+		path: 'plantRegistrationTable/:id',
+		component: PlantRegistionTableComponent
+	},
+	{ path: 'subcontract', component: SubcontractComponent },
+	{ path: 'addSubcontract/:id', component: AddAndEditSubcontractComponent },
+	{ path: 'compdetails', component: CompanyDetailsComponent },
+	{
+		path: 'plantRegistration/history/:id',
+		component: PlantRegistrationComponent
+	},
+	{ path: 'addCompanyInfo/:id', component: AddAndEditCompanyInfoComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
-export class RegistrationRoutingModule { }
+export class RegistrationRoutingModule {}

@@ -10,15 +10,20 @@ import { EditRateAndCouponComponent } from './rate-and-coupon/edit-rate-and-coup
 import { CouponComponent } from './coupon/coupon.component';
 import { AddEditCouponComponent } from './coupon/add-edit-coupon/add-edit-coupon.component';
 
-
 @NgModule({
-  declarations: [SubscriptionComponent, RateAndCouponComponent, EditRateAndCouponComponent, CouponComponent, AddEditCouponComponent],
-  imports: [
-    CommonModule,
-    SubscriptionRoutingModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+	declarations: [
+		SubscriptionComponent,
+		RateAndCouponComponent,
+		EditRateAndCouponComponent,
+		CouponComponent,
+		AddEditCouponComponent
+	],
+	imports: [
+		CommonModule,
+		SubscriptionRoutingModule,
+		SharedModule,
+		FormsModule,
+		ReactiveFormsModule
+	]
 })
-export class SubscriptionModule { }
+export class SubscriptionModule {}

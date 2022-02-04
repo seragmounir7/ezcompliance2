@@ -11,6 +11,7 @@
     "dev:e2e": "ng e2e",
     "webpack-bundle-analyzer": "webpack-bundle-analyzer dist/adminlte/stats.json && start",
     "analyze": "run-s dev:build-Stats webpack-bundle-analyzer",
+    "prettier": "prettier --write \"src/app/**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
     "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\""
   },
   "private": true,

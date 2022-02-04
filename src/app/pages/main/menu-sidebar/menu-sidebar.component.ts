@@ -40,7 +40,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		console.log('logo=>', this.logoUrl);
 
 		console.log(this.router.url);
-		let rLink = this.router.url;
+		const rLink = this.router.url;
 		this.navItems.forEach((x) => this.treeArr.push(false));
 		if (rLink === '/admin/roleMangement') {
 			this.menuOpen1(1);
@@ -81,7 +81,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 	}
 
 	openMenuOnLoad() {
-		let rLink = this.router.url;
+		const rLink = this.router.url;
 		this.navItems.map((x: NavItem) => {
 			// x.hasAccess = true
 			if (x.childItem) {
@@ -103,8 +103,9 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 				: '';
 			return x;
 		});
-		let Cobj, CCobj;
-		let obj = this.navItems.find((o) => {
+		let Cobj;
+		let CCobj;
+		const obj = this.navItems.find((o) => {
 			if (o.childItem) {
 				Cobj = o.childItem.find((item) => {
 					if (item.childItem) {
@@ -126,11 +127,11 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		this.mainSidebarHeight.emit(
 			this.mainSidebar.nativeElement.offsetHeight
 		);
-		let mouseenter = () =>
+		const mouseenter = () =>
 			(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
-		let mouseleave = () =>
+		const mouseleave = () =>
 			(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
-		let observer = new MutationObserver(
+		const observer = new MutationObserver(
 			(mutations: MutationRecord[], observer: MutationObserver) => {
 				console.log('side menu mutation');
 				mutations.forEach((item: any) => {
@@ -183,7 +184,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 	stateRel = false;
 	treeArr = [];
 	menuOpen1(i) {
-		let temp = this.treeArr[i];
+		const temp = this.treeArr[i];
 		this.resetAll();
 		this.treeArr[i] = !temp;
 		console.log(i, temp, this.treeArr);

@@ -1,94 +1,94 @@
 label:not(.form-check-label):not(.custom-file-label) {
-  font-weight: 500;
+	font-weight: 500;
 }
 input:focus {
-  border: 2px solid dodgerblue;
+	border: 2px solid dodgerblue;
 }
 label {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  word-break: break-word;
-  font-family: Inter, sans-serif;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 500;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
 }
 .form-control:hover {
-  border-color: rgba(46, 105, 255, 0.5);
-  box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
+	border-color: rgba(46, 105, 255, 0.5);
+	box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
 }
 .pt-3 {
-  display: inline-block;
-  font-size: 32px;
-  font-weight: 700;
-  word-break: break-word;
-  font-family: Inter, sans-serif;
+	display: inline-block;
+	font-size: 32px;
+	font-weight: 700;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
 }
 .container {
-  background-color: white;
+	background-color: white;
 }
 .form-Label {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  word-break: break-word;
-  font-family: Inter, sans-serif;
-  width: 100%;
-  margin-left: 2px;
-  margin-bottom: 14px;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 500;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
+	width: 100%;
+	margin-left: 2px;
+	margin-bottom: 14px;
 }
 table {
-  width: 100%;
+	width: 100%;
 }
 .mat-column-index {
-  width: 16px;
+	width: 16px;
 
-  padding-right: 24px;
-  text-align: center;
+	padding-right: 24px;
+	text-align: center;
 }
 .mat-column-images {
-  width: 32px;
+	width: 32px;
 
-  padding-right: 24px;
-  text-align: center;
+	padding-right: 24px;
+	text-align: center;
 }
 .mat-column-title {
-  width: 32px;
+	width: 32px;
 
-  padding-right: 24px;
-  text-align: center;
+	padding-right: 24px;
+	text-align: center;
 }
 
 .mat-column-descrip {
-  width: 32px;
- 
-  padding-right: 24px;
-  text-align: center;
+	width: 32px;
+
+	padding-right: 24px;
+	text-align: center;
 }
 .mat-column-action {
-  width: 32px;
- 
-  padding-right: 24px;
-  text-align: center;
+	width: 32px;
+
+	padding-right: 24px;
+	text-align: center;
 }
 .mat-column-heading {
-  width: 32px;
+	width: 32px;
 
-  padding-right: 24px;
-  text-align: center;
+	padding-right: 24px;
+	text-align: center;
 }
 
 .mat-column-description {
-  width: 32px;
+	width: 32px;
 
-  padding-right: 24px;
-  text-align: center;
+	padding-right: 24px;
+	text-align: center;
 }
 
 .mat-column-actions {
-  width: 32px;
- 
-  padding-right: 24px;
-  text-align: center;
+	width: 32px;
+
+	padding-right: 24px;
+	text-align: center;
 }
 ::ng-deep .mat-sort-header-container {
-  margin-left: 47% !important;
+	margin-left: 47% !important;
 }

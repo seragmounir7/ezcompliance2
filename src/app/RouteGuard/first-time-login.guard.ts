@@ -4,7 +4,7 @@ import {
 	ActivatedRouteSnapshot,
 	RouterStateSnapshot,
 	UrlTree,
-  Router
+	Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 	providedIn: 'root'
 })
 export class FirstTimeLoginGuard implements CanActivate {
-  constructor(private router: Router){}
+	constructor(private router: Router) {}
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
@@ -21,7 +21,7 @@ export class FirstTimeLoginGuard implements CanActivate {
 		| Promise<boolean | UrlTree>
 		| boolean
 		| UrlTree {
-      console.log('FirstTimeLoginGuard')
+		console.log('FirstTimeLoginGuard');
 		return false;
 	}
 }

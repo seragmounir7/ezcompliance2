@@ -85,7 +85,7 @@
 				</div>
 				<div>
 					<div class="row">
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -106,7 +106,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -128,7 +128,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -152,7 +152,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -177,7 +177,7 @@
 					</div>
 
 					<div class="row">
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -199,7 +199,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -223,7 +223,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -232,7 +232,7 @@
 							</p>
 
 							<select
-								class="form-select form-control col outline form-dropdown"
+								class="form-select form-control col-sm col-md outline form-dropdown"
 								aria-label="Default select example"
 								formControlName="jobNumber"
 								(change)="jobNoSel()"
@@ -256,7 +256,7 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col">
+						<div class="mb-3 col-sm col-md">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -266,7 +266,7 @@
 								>
 							</p>
 							<select
-								class="form-select form-control col outline form-dropdown"
+								class="form-select form-control col-sm col-md outline form-dropdown"
 								aria-label="Default select example"
 								formControlName="projectManager"
 								[class.is-invalid]="sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty || sidePreview.get('projectManager').touched) "
@@ -291,7 +291,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="mb-3 col-6">
+						<div class="mb-3 col-sm-6 col-md-6">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -322,7 +322,7 @@
 							>
 						</div>
 
-						<!-- <div class="mb-3 col">
+						<!-- <div class="mb-3 col-sm col-md">
           <p for="exampleFormControlInput1" class="form-Label"
               >Signature*</p
             >
@@ -350,7 +350,7 @@
 							>
 								<ng-container [formGroupName]="filed">
 									<div
-										class="mt-2 col-4"
+										class="mt-2 col-sm-4 col-md-4"
 										*ngIf=" allTopic[filed]?.categoryId==allcategory[index]?._id"
 									>
 										<p
@@ -394,7 +394,7 @@
 						<p class="subtitel">Site Control</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p for="exampleFormControlInput1" class="">
 								Is the Hazard Signage up to date
 							</p>
@@ -416,7 +416,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -442,7 +442,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -469,7 +469,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -495,7 +495,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -521,7 +521,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -540,7 +540,7 @@
 						<p class="subtitel">WHS Documentation</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -566,7 +566,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -592,7 +592,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -619,7 +619,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -645,7 +645,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -677,7 +677,7 @@
 						<p class="subtitel">Display Material</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -703,7 +703,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -729,7 +729,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -756,7 +756,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -782,7 +782,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -808,7 +808,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -834,7 +834,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -860,7 +860,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -886,7 +886,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -918,7 +918,7 @@
 						<p class="subtitel">Access And Egrass</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -944,7 +944,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -970,7 +970,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -997,7 +997,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1023,7 +1023,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1049,7 +1049,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1075,7 +1075,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1101,7 +1101,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1127,7 +1127,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1159,7 +1159,7 @@
 						<p class="subtitel">Electrical Equipment</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1185,7 +1185,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1211,7 +1211,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1238,7 +1238,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1264,7 +1264,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1296,7 +1296,7 @@
 						<p class="subtitel">Chemicals</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1322,7 +1322,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1348,7 +1348,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1375,7 +1375,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1407,7 +1407,7 @@
 						<p class="subtitel">First Aid</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1433,7 +1433,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1459,7 +1459,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1486,7 +1486,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1518,7 +1518,7 @@
 						<p class="subtitel">Fire and Evacuation</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1544,7 +1544,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1570,7 +1570,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1597,7 +1597,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1624,7 +1624,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1651,7 +1651,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1678,7 +1678,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1705,7 +1705,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1732,7 +1732,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1764,7 +1764,7 @@
 						<p class="subtitel">Plant Equipment</p>
 					</div>
 					<div class="row">
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1790,7 +1790,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1816,7 +1816,7 @@
 								/>No
 							</p>
 						</div>
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1843,7 +1843,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1870,7 +1870,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1897,7 +1897,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1924,7 +1924,7 @@
 							</p>
 						</div>
 
-						<div class="mt-2 col-4">
+						<div class="mt-2 col-sm-4 col-md-4">
 							<p
 								for="exampleFormControlInput1"
 								class="form-Label"
@@ -1967,7 +1967,7 @@
 					<div *ngFor="let row of add().controls; let filed = index">
 						<div [formGroupName]="filed">
 							<div class="row">
-								<div class="mb-3 col-3">
+								<div class="mb-3 col-sm-3 col-md-3">
 									<p
 										for="exampleFormControlInput1"
 										class="form-Label mt-2"
@@ -1988,7 +1988,7 @@
 									>
 
 									<!-- <select
-                  class="form-select form-control col outline form-dropdown"
+                  class="form-select form-control col-sm col-md outline form-dropdown"
                   aria-label="Default select example"
                   formControlName="item"
                 >
@@ -1997,10 +1997,10 @@
                   </option>
                   <option *ngFor="let item of item_values">{{ item }}</option>
                 </select> -->
-									<!-- <input type="text"  class="form-select form-control col" aria-label="Default select example" formControlName="item"> -->
+									<!-- <input type="text"  class="form-select form-control col-sm col-md" aria-label="Default select example" formControlName="item"> -->
 								</div>
 
-								<div class="mb-3 col-3">
+								<div class="mb-3 col-sm-3 col-md-3">
 									<p
 										for="exampleFormControlInput1"
 										class="form-Label mt-2"
@@ -2020,7 +2020,7 @@
 										This Field is Required</span
 									>
 									<!-- <select
-                  class="form-select form-control col outline form-dropdown"
+                  class="form-select form-control col-sm col-md outline form-dropdown"
                   aria-label="Default select example"
                   formControlName="action"
                 >
@@ -2028,7 +2028,7 @@
                 </select> -->
 								</div>
 
-								<div class="my-2 col-2">
+								<div class="my-2 col-sm-2 col-md-2">
 									<p
 										for="exampleFormControlInput1"
 										class="form-Label"
@@ -2038,7 +2038,7 @@
 											>*</span
 										>
 									</p>
-									<!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example"
+									<!-- <select class="form-select form-control col-sm col-md form-dropdown" aria-label="Default select example"
                     formControlName="personResponsible"
                     [class.is-invalid]=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched) ">
                     <option selected hidden>Select</option>
@@ -2084,12 +2084,12 @@
 										</span>
 									</ng-container>
 								</div>
-								<!-- <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
+								<!-- <div class="mb-3 col-sm-3 col-md-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Person Responsible
                 </p>
                 <select
-                  class="form-select form-control col outline form-dropdown"
+                  class="form-select form-control col-sm col-md outline form-dropdown"
                   aria-label="Default select example"
                   formControlName="personResponsible"
                 >
@@ -2098,11 +2098,11 @@
                   <option class="mr-1" value="no">No</option>
                 </select>
               </div> -->
-								<!-- <div class="mb-3 col-2">
+								<!-- <div class="mb-3 col-sm-2 col-md-2">
                   <p for="exampleFormControlInput1" class="form-Label mt-2">
                     Complete<span class="text-danger ">*</span>
                   </p>
-                  <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
+                  <select class="form-select form-control col-sm col-md outline form-dropdown" aria-label="Default select example"
                     formControlName="complete"
                     [class.is-invalid]=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty || add().controls[filed].get('complete').touched) ">
                     <option selected hidden>Select</option>
@@ -2115,7 +2115,7 @@
                     This Field is Required</span>
                 </div> -->
 
-								<div class="mb-3 mt-2 col-2">
+								<div class="mb-3 mt-2 col-sm-2 col-md-2">
 									<p
 										for="exampleFormControlInput1"
 										class="form-Label"
@@ -2175,7 +2175,7 @@
 			</div>
 
 			<div class="row">
-				<div class="mb-3 mt-3 col-6">
+				<div class="mb-3 mt-3 col-sm-6 col-md-6">
 					<p for="exampleFormControlInput1" class="form-Label">
 						Employee Name<span class="text-danger">*</span>
 					</p>
@@ -2210,7 +2210,7 @@
 					>
 				</div>
 
-				<div class="mb-3 mt-3 col-4">
+				<div class="mb-3 mt-3 col-sm-4 col-md-4">
 					<p for="exampleFormControlInput1" class="form-Label">
 						Date<span class="text-danger">*</span>
 					</p>
@@ -2239,7 +2239,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-4">
+				<div class="col-sm-4 col-md-4">
 					<p class="form-label">
 						Signature<span class="text-danger">*</span>
 					</p>
@@ -2294,7 +2294,7 @@
 			</div>
 			<div>
 				<div class="row">
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Site Name<span class="text-danger">*</span>
 						</p>
@@ -2312,7 +2312,7 @@
 							This Field is Required</span
 						>
 					</div>
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Name<span class="text-danger">*</span>
 						</p>
@@ -2331,7 +2331,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Site Address<span class="text-danger">*</span>
 						</p>
@@ -2348,7 +2348,7 @@
 							This Field is Required</span
 						>
 					</div>
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Contact<span class="text-danger">*</span>
 						</p>
@@ -2368,7 +2368,7 @@
 				</div>
 
 				<div class="row">
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Contact Phone<span class="text-danger"
 								>*</span
@@ -2387,7 +2387,7 @@
 							This Field is Required</span
 						>
 					</div>
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Customer Contact Email<span class="text-danger"
 								>*</span
@@ -2408,13 +2408,13 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Job Number<span class="text-danger">*</span>
 						</p>
 
 						<select
-							class="form-select form-control col outline form-dropdown"
+							class="form-select form-control col-sm col-md outline form-dropdown"
 							aria-label="Default select example"
 							formControlName="jobNumber"
 							(change)="jobNoSel()"
@@ -2438,12 +2438,12 @@
 							This Field is Required</span
 						>
 					</div>
-					<div class="mb-3 col">
+					<div class="mb-3 col-sm col-md">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Project Manager<span class="text-danger">*</span>
 						</p>
 						<select
-							class="form-select form-control col outline form-dropdown"
+							class="form-select form-control col-sm col-md outline form-dropdown"
 							aria-label="Default select example"
 							formControlName="projectManager"
 							[class.is-invalid]="sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty || sidePreview.get('projectManager').touched) "
@@ -2468,7 +2468,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="mb-3 col-6">
+					<div class="mb-3 col-sm-6 col-md-6">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Date<span class="text-danger">*</span>
 						</p>
@@ -2496,7 +2496,7 @@
 						>
 					</div>
 
-					<!-- <div class="mb-3 col">
+					<!-- <div class="mb-3 col-sm col-md">
         <p for="exampleFormControlInput1" class="form-Label"
             >Signature*</p
           >
@@ -2520,7 +2520,7 @@
 						>
 							<ng-container [formGroupName]="filed">
 								<div
-									class="mt-2 col-4"
+									class="mt-2 col-sm-4 col-md-4"
 									*ngIf=" allTopic[filed]?.categoryId==allcategory[index]?._id"
 								>
 									<p
@@ -2563,7 +2563,7 @@
 					<p class="subtitel">Site Control</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="">
 							Is the Hazard Signage up to date
 						</p>
@@ -2585,7 +2585,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Is the documentation up to date
 						</p>
@@ -2608,7 +2608,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Have all workers been inducted onsite
 						</p>
@@ -2632,7 +2632,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Have all workers been inducted into the SWMS
 						</p>
@@ -2655,7 +2655,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Are regular toobox talks taking place
 						</p>
@@ -2678,7 +2678,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Date of last toolbox talk
 						</p>
@@ -2694,7 +2694,7 @@
 					<p class="subtitel">WHS Documentation</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							WHS Manual is avaiable to all workers
 						</p>
@@ -2717,7 +2717,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Incident Report form available
 						</p>
@@ -2740,7 +2740,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Hazard Report form available
 						</p>
@@ -2764,7 +2764,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergrncy Evacuation plan displayed
 						</p>
@@ -2787,7 +2787,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Training Records are up tp date
 						</p>
@@ -2816,7 +2816,7 @@
 					<p class="subtitel">Display Material</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							WHS Policy Displayed on notice board
 						</p>
@@ -2839,7 +2839,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Return to Work Form avaliable
 						</p>
@@ -2862,7 +2862,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Hazard Report form avaliable
 						</p>
@@ -2886,7 +2886,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergrncy Evacuation plan displayed
 						</p>
@@ -2909,7 +2909,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							No Smoking signs displayed
 						</p>
@@ -2932,7 +2932,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							PPE Signage displayed
 						</p>
@@ -2955,7 +2955,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Report the Hazard signs displayed
 						</p>
@@ -2978,7 +2978,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Manual Handling Signs Displayed
 						</p>
@@ -3001,7 +3001,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Notice Board is up to date
 						</p>
@@ -3030,7 +3030,7 @@
 					<p class="subtitel">Access And Egrass</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							No oil, grease or other slip hazard
 						</p>
@@ -3053,7 +3053,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Walkways clearly marked
 						</p>
@@ -3076,7 +3076,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Walkways are free of clutter or obstructions
 						</p>
@@ -3100,7 +3100,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Stairs are not blocked and good condition
 						</p>
@@ -3123,7 +3123,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Hoardings/fence and getes secure
 						</p>
@@ -3146,7 +3146,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Loose matrials secure from wind
 						</p>
@@ -3169,7 +3169,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Bins/Skips located suitable areas
 						</p>
@@ -3192,7 +3192,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Bins/Skips are not overflowing
 						</p>
@@ -3215,7 +3215,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Notice Board is up to date
 						</p>
@@ -3244,7 +3244,7 @@
 					<p class="subtitel">Electrical Equipment</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Mainboard lockable
 						</p>
@@ -3267,7 +3267,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Powerleads tested and tagged
 						</p>
@@ -3290,7 +3290,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Appropriate giards on equipment
 						</p>
@@ -3314,7 +3314,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Equipment in good condition
 						</p>
@@ -3337,7 +3337,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Leads safety placed
 						</p>
@@ -3366,7 +3366,7 @@
 					<p class="subtitel">Chemicals</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Safey Data Sheet(SDS) available
 						</p>
@@ -3389,7 +3389,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							All Chemicals Are stored as per the SDS
 						</p>
@@ -3412,7 +3412,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							SDS Register is availables and up to date
 						</p>
@@ -3436,7 +3436,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Correct PPE on hand and in use
 						</p>
@@ -3465,7 +3465,7 @@
 					<p class="subtitel">First Aid</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							First Aid Kit available
 						</p>
@@ -3488,7 +3488,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							First Kit stocked as per contents list
 						</p>
@@ -3511,7 +3511,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							First Aid Kit accessable to all workers
 						</p>
@@ -3535,7 +3535,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							All workers aware of the first Aid kit location
 						</p>
@@ -3564,7 +3564,7 @@
 					<p class="subtitel">Fire and Evacuation</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Extinguishers are in place
 						</p>
@@ -3587,7 +3587,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Extinguishers are clearly maked
 						</p>
@@ -3610,7 +3610,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Extinguishers seviced and up to date
 						</p>
@@ -3634,7 +3634,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Exit Sings are in Working condition
 						</p>
@@ -3658,7 +3658,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Exit Doors not blocked
 						</p>
@@ -3682,7 +3682,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Exit Doors can be easily opened
 						</p>
@@ -3706,7 +3706,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Fire Alarm tested and inspected up to date
 						</p>
@@ -3730,7 +3730,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Evacuation Plans displayed
 						</p>
@@ -3754,7 +3754,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergency Drill conduct within the last year
 						</p>
@@ -3783,7 +3783,7 @@
 					<p class="subtitel">Plant Equipment</p>
 				</div>
 				<div class="row">
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Risk Assessment and SWMS completed
 						</p>
@@ -3806,7 +3806,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Plant is within valid service/inspection period
 						</p>
@@ -3829,7 +3829,7 @@
 							/>No
 						</p>
 					</div>
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Opertion procedures and SOP's in place
 						</p>
@@ -3853,7 +3853,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							PPE available
 						</p>
@@ -3877,7 +3877,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergency Plan in place
 						</p>
@@ -3901,7 +3901,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Plant is in good Condition
 						</p>
@@ -3925,7 +3925,7 @@
 						</p>
 					</div>
 
-					<div class="mt-2 col-4">
+					<div class="mt-2 col-sm-4 col-md-4">
 						<p for="exampleFormControlInput1" class="form-Label">
 							Appropriate guards fitted
 						</p>
@@ -3961,7 +3961,7 @@
 				<div *ngFor="let row of add().controls; let filed = index">
 					<div [formGroupName]="filed">
 						<div class="row">
-							<div class="mb-3 col-3">
+							<div class="mb-3 col-sm-3 col-md-3">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label mt-2"
@@ -3982,7 +3982,7 @@
 								>
 
 								<!-- <select
-              class="form-select form-control col outline form-dropdown"
+              class="form-select form-control col-sm col-md outline form-dropdown"
               aria-label="Default select example"
               formControlName="item"
             >
@@ -3991,10 +3991,10 @@
               </option>
               <option *ngFor="let item of item_values">{{ item }}</option>
             </select> -->
-								<!-- <input type="text"  class="form-select form-control col" aria-label="Default select example" formControlName="item"> -->
+								<!-- <input type="text"  class="form-select form-control col-sm col-md" aria-label="Default select example" formControlName="item"> -->
 							</div>
 
-							<div class="mb-3 col-3">
+							<div class="mb-3 col-sm-3 col-md-3">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label mt-2"
@@ -4014,7 +4014,7 @@
 									This Field is Required</span
 								>
 								<!-- <select
-              class="form-select form-control col outline form-dropdown"
+              class="form-select form-control col-sm col-md outline form-dropdown"
               aria-label="Default select example"
               formControlName="action"
             >
@@ -4022,7 +4022,7 @@
             </select> -->
 							</div>
 
-							<div class="my-2 col-2">
+							<div class="my-2 col-sm-2 col-md-2">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label"
@@ -4031,7 +4031,7 @@
 										>*</span
 									>
 								</p>
-								<!-- <select class="form-select form-control col form-dropdown" aria-label="Default select example"
+								<!-- <select class="form-select form-control col-sm col-md form-dropdown" aria-label="Default select example"
                   formControlName="personResponsible"
                   [class.is-invalid]=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched) ">
                   <option selected hidden>Select</option>
@@ -4065,12 +4065,12 @@
 									This Field is Required</span
 								>
 							</div>
-							<!-- <div class="mb-3 col-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
+							<!-- <div class="mb-3 col-sm-3 col-md-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
             <p for="exampleFormControlInput1" class="form-Label mt-2">
               Person Responsible
             </p>
             <select
-              class="form-select form-control col outline form-dropdown"
+              class="form-select form-control col-sm col-md outline form-dropdown"
               aria-label="Default select example"
               formControlName="personResponsible"
             >
@@ -4079,11 +4079,11 @@
               <option class="mr-1" value="no">No</option>
             </select>
           </div> -->
-							<!-- <div class="mb-3 col-2">
+							<!-- <div class="mb-3 col-sm-2 col-md-2">
                 <p for="exampleFormControlInput1" class="form-Label mt-2">
                   Complete<span class="text-danger ">*</span>
                 </p>
-                <select class="form-select form-control col outline form-dropdown" aria-label="Default select example"
+                <select class="form-select form-control col-sm col-md outline form-dropdown" aria-label="Default select example"
                   formControlName="complete"
                   [class.is-invalid]=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty || add().controls[filed].get('complete').touched) ">
                   <option selected hidden>Select</option>
@@ -4096,7 +4096,7 @@
                   This Field is Required</span>
               </div> -->
 
-							<div class="mb-3 mt-2 col-2">
+							<div class="mb-3 mt-2 col-sm-2 col-md-2">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label"
@@ -4143,7 +4143,7 @@
 		</div>
 
 		<div class="row">
-			<div class="mb-3 mt-3 col-6">
+			<div class="mb-3 mt-3 col-sm-6 col-md-6">
 				<p for="exampleFormControlInput1" class="form-Label">
 					Employee Name<span class="text-danger">*</span>
 				</p>
@@ -4178,7 +4178,7 @@
 				>
 			</div>
 
-			<div class="mb-3 mt-3 col-4">
+			<div class="mb-3 mt-3 col-sm-4 col-md-4">
 				<p for="exampleFormControlInput1" class="form-Label">
 					Date<span class="text-danger">*</span>
 				</p>
@@ -4207,7 +4207,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-4">
+			<div class="col-sm-4 col-md-4">
 				<p class="form-label">
 					Signature<span class="text-danger">*</span>
 				</p>

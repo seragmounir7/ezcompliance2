@@ -1,48 +1,70 @@
 <form [formGroup]="editTitle">
-  <div mat-dialog-title class="dialog-title">
-    <h2 mat-dialog-title>Edit Q&A</h2>
-    <button type="button" class="close" style="font-size: 40px;" (click)="closeDialog()" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
-
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-8">
-      <p for="exampleFormControlInput1" class="form-Label">Portal</p>
-      <select class="form-select form-control" aria-label="Default select example" formControlName="portalId">
-        <option *ngFor="let portal of portalData" [value]="portal._id">{{portal.title}}</option>
-
-      </select>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-8">
-      <p for="exampleFormControlInput1" class="form-Label">Question</p>
-      <textarea type="text" formControlName="question" class="form-control sign" id="question"
-        placeholder="Add Question"></textarea>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-8">
-      <p for="exampleFormControlInput1" class="form-Label">Answer</p>
-      <textarea type="text" formControlName="answer" class="form-control sign" id="answer"
-        placeholder="Add Answer"></textarea>
-    </div>
-
-  </div>
-  <br>
-  <hr>
-  <!-- <div class="row mt-4">
+	<div mat-dialog-title class="dialog-title">
+		<h2 mat-dialog-title>Edit Q&A</h2>
+		<button
+			type="button"
+			class="close"
+			style="font-size: 40px"
+			(click)="closeDialog()"
+			aria-label="Close"
+		>
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-8">
+			<p for="exampleFormControlInput1" class="form-Label">Portal</p>
+			<select
+				class="form-select form-control"
+				aria-label="Default select example"
+				formControlName="portalId"
+			>
+				<option *ngFor="let portal of portalData" [value]="portal._id">
+					{{portal.title}}
+				</option>
+			</select>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="col-8">
+			<p for="exampleFormControlInput1" class="form-Label">Question</p>
+			<textarea
+				type="text"
+				formControlName="question"
+				class="form-control sign"
+				id="question"
+				placeholder="Add Question"
+			></textarea>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="col-8">
+			<p for="exampleFormControlInput1" class="form-Label">Answer</p>
+			<textarea
+				type="text"
+				formControlName="answer"
+				class="form-control sign"
+				id="answer"
+				placeholder="Add Answer"
+			></textarea>
+		</div>
+	</div>
+	<br />
+	<hr />
+	<!-- <div class="row mt-4">
     <div class="col-sm-2 offset-8">
       <button mat-raised-button (click)="closeDialog()">Close</button>
     </div> -->
-  <div class="col-sm-2">
-    <button mat-raised-button class="btn btn-primary" (click)="onFormSubmit()">
-      Update
-    </button>
-  </div>
-
+	<div class="col-sm-2">
+		<button
+			mat-raised-button
+			class="btn btn-primary"
+			(click)="onFormSubmit()"
+		>
+			Update
+		</button>
+	</div>
 </form>

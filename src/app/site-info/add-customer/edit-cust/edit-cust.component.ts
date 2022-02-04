@@ -76,7 +76,7 @@ export class EditCustComponent implements OnInit {
 		});
 	}
 	removeCustomerDetails(i) {
-		const item = <FormArray>this.editCustomerForm.controls['contacts'];
+		const item = <FormArray>this.editCustomerForm.controls.contacts;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}

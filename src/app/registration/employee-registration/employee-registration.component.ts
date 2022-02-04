@@ -57,7 +57,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 	getAllEmployee() {
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
 			console.log(res);
-			let couponData = res.data;
+			const couponData = res.data;
 			couponData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

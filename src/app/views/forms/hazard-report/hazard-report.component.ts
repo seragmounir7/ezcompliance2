@@ -185,7 +185,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		if (this.isHistory) {
 			this.hazardReport.disable();
 
-			let check1 = async () => {
+			const check1 = async () => {
 				this.signaturePad1 != null;
 			};
 			await check1();
@@ -247,7 +247,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				];
 				// this.obj = new Object()
 				this.ActionedbyStrings.forEach((ctrlName) => {
-					let filter = this.hazardReport.controls[
+					const filter = this.hazardReport.controls[
 						ctrlName
 					].valueChanges.pipe(
 						startWith(''),
@@ -271,7 +271,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 
 		this.activatedRoute.queryParams.subscribe((params) => {
-			this.type = params['formType'];
+			this.type = params.formType;
 		});
 		this.filteredOptions = this.myControl.valueChanges.pipe(
 			startWith(''),
@@ -354,13 +354,13 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 				if (result.matches) {
 					// this.reSizeSignArray(this.signaturePad2, 233, 114);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 247);
 					this.signaturePad1.set('canvasHeight', 106);
 					this.signaturePad1.fromDataURL(sign);
 				} else {
 					// this.reSizeSignArray(this.signaturePad2, 420, 121);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 500);
 					this.signaturePad1.set('canvasHeight', 100);
 					this.signaturePad1.fromDataURL(sign);
@@ -452,7 +452,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			);
 			console.log(this.selectedImage, 'selectedImage');
 			this.dataUrl = res.data.signaturePad1;
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad1 != null;
 			};
 			check().then(() => {
@@ -472,23 +472,21 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	drawComplete() {
 		console.log('signnn', this.signaturePad1);
-		this.hazardReport.controls['signaturePad1'].setValue(
+		this.hazardReport.controls.signaturePad1.setValue(
 			this.signaturePad1.toDataURL()
 		);
 		console.log(
 			'signaturePad1 control',
-			this.hazardReport.controls['signaturePad1'].value
+			this.hazardReport.controls.signaturePad1.value
 		);
-		this.singRequired = this.hazardReport.controls['signaturePad1'].invalid;
+		this.singRequired = this.hazardReport.controls.signaturePad1.invalid;
 		// will be notified of szimek/signature_pad's onEnd event
 		console.log(this.signaturePad1.toDataURL());
 	}
 	clear() {
 		this.signaturePad1.clear();
-		this.hazardReport.controls['signaturePad1'].setValue('');
-		this.singRequired = this.hazardReport.controls[
-			'signaturePad1'
-		].untouched;
+		this.hazardReport.controls.signaturePad1.setValue('');
+		this.singRequired = this.hazardReport.controls.signaturePad1.untouched;
 	}
 	drawStart() {
 		// will be notified of szimek/signature_pad's onBegin event
@@ -640,7 +638,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.hazardReport.get('consequence').value &&
 			this.hazardReport.get('likelihood').value
 		) {
-			let addition =
+			const addition =
 				parseInt(this.hazardReport.get('consequence').value) +
 				parseInt(this.hazardReport.get('likelihood').value);
 			console.log(addition);
@@ -676,7 +674,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.hazardReport.get('fileUpload')?.setValue(this.selectedImage);
 
 		console.log('form data', this.hazardReport.value);
-		this.singRequired = this.hazardReport.controls['signaturePad1'].invalid;
+		this.singRequired = this.hazardReport.controls.signaturePad1.invalid;
 		console.log(this.id);
 
 		const {

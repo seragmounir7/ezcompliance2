@@ -249,8 +249,13 @@
 
 				<div class="row py-3">
 					<div class="offset-1 col-3 mt-2">
-						<!-- <img [src]="file1" onerror=" this.src='../../../assets/img/uploadImg.png' " alt="" width="130"
-            height="130" /> -->
+						<img
+							[src]="selectedLogo"
+							onerror="this.src='../../../assets/img/uploadImg.png' "
+							alt=""
+							width="130"
+							height="130"
+						/>
 					</div>
 					<div class="col-5 ml-4">
 						<div class="my-3">
@@ -260,7 +265,7 @@
 							<input
 								class="form-control"
 								type="file"
-								(change)="browser2($event)"
+								(change)="browser($event)"
 							/>
 						</div>
 
@@ -356,52 +361,58 @@
 									</div>
 									<div class="col-2 mt-2 ml-5">
 										<input
+											#Hours
 											type="radio"
 											class="form-check-input mr-1"
 											value="Hours"
-											name="nextService"
-											id="inlineCheckbox1"
-											(click)="hoursShow()"
+											[name]="'nextService' + filed2"
+											[id]="'inlineCheckbox1' + filed2"
+											[checked]="addEquip().at(filed2)['controls'].hours.value"
+											(click)="nextServiceToggle(filed2,Hours.value)"
 										/>
 										<label
-											for="inlineCheckbox1"
+											[for]="'inlineCheckbox1' + filed2"
 											class="form-label label_2"
 											>Hours
 										</label>
 									</div>
 									<div class="mt-2 col-2">
 										<input
+											#Kilometres
 											type="radio"
-											name="nextService"
+											[name]="'nextService' + filed2"
 											class="form-check-input mr-1"
 											value="Kilometres"
-											id="inlineCheckbox2"
-											(click)="kilometerShow()"
+											[id]="'inlineCheckbox2' + filed2"
+											[checked]="addEquip().at(filed2)['controls'].kilometres.value"
+											(click)="nextServiceToggle(filed2,Kilometres.value)"
 										/>
 										<label
-											for="inlineCheckbox2"
+											[for]="'inlineCheckbox2' + filed2"
 											class="form-label label_2"
 											>Kilometres</label
 										>
 									</div>
 									<div class="mt-2 col-2">
 										<input
+											#Date
 											type="radio"
-											name="nextService"
+											[name]="'nextService' + filed2"
 											class="form-check-input mr-1"
 											value="Date"
-											id="inlineCheckbox3"
-											(click)="dateShow()"
+											[id]="'inlineCheckbox3' + filed2"
+											[checked]="addEquip().at(filed2)['controls'].date.value"
+											(click)="nextServiceToggle(filed2,Date.value)"
 										/>
 										<label
-											for="inlineCheckbox3"
+											[for]="'inlineCheckbox3' + filed2"
 											class="form-label label_2"
 											>Date</label
 										>
 									</div>
 								</div>
 
-								<div class="row col-12" *ngIf="date1">
+								<div class="row col-12" *ngIf="Date.checked">
 									<div class="mb-3 mt-3 col-3">
 										<input
 											type="date"
@@ -411,7 +422,10 @@
 									</div>
 								</div>
 
-								<div class="row col-12" *ngIf="kilometer1">
+								<div
+									class="row col-12"
+									*ngIf="Kilometres.checked"
+								>
 									<div class="mb-3 mt-3 col-3">
 										<input
 											type="text"
@@ -420,7 +434,7 @@
 										/>
 									</div>
 								</div>
-								<div class="row col-12" *ngIf="hours1">
+								<div class="row col-12" *ngIf="Hours.checked">
 									<div class="mb-3 mt-3 col-3">
 										<input
 											[ngxMatTimepicker]="timepicker"
@@ -474,7 +488,7 @@
 								<!-- <div class="mb-3 mt-3 col-3">
                     <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
                     <input type="date" formControlName="serviceRenewDate" class="form-control" />
-    
+
                   </div> -->
 
 								<div class="mb-3 mt-3 col-3">

@@ -77,7 +77,7 @@ export class AboutUsComponent implements OnInit {
 		this.landingPageInfo.getAboutUsById(this.Id).subscribe((res) => {
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
-			let teamData = res.data[0].team;
+			const teamData = res.data[0].team;
 			teamData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});
@@ -96,7 +96,7 @@ export class AboutUsComponent implements OnInit {
 		this.Id = '61767ab18031f2102a69ef71';
 		this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
 			this.teamData = data.data[0];
-			let dialogRef = this.dialog.open(EditTeamInfoComponent, {
+			const dialogRef = this.dialog.open(EditTeamInfoComponent, {
 				data: {
 					action: 'edit',
 
@@ -124,7 +124,7 @@ export class AboutUsComponent implements OnInit {
 			console.log('teamData=>', data);
 			this.teamData = data.data[0];
 			console.log('', this.teamData);
-			let dialogRef = this.dialog.open(AddTeamInfoComponent, {
+			const dialogRef = this.dialog.open(AddTeamInfoComponent, {
 				data: {
 					action: 'new',
 					ID: id,

@@ -80,7 +80,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
-			let ServiceData = res.data[0].subModules;
+			const ServiceData = res.data[0].subModules;
 			ServiceData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});
@@ -100,7 +100,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.ServiceData = data.data[0];
 
-			let dialogRef = this.dialog.open(
+			const dialogRef = this.dialog.open(
 				AddApplicationServiceInfoComponent,
 				{
 					data: {
@@ -130,7 +130,7 @@ export class ApplicationServiceInfoComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.ServiceData = data.data[0];
 
-			let dialogRef = this.dialog.open(AddServiceInfoComponent, {
+			const dialogRef = this.dialog.open(AddServiceInfoComponent, {
 				data: {
 					action: 'new',
 					ID: id,

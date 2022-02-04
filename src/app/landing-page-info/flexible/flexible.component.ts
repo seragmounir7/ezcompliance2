@@ -83,7 +83,7 @@ export class FlexibleComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
-			let testimonialData = res.data[0].subModules;
+			const testimonialData = res.data[0].subModules;
 			testimonialData.forEach((element, index) => {
 				element.index = index + 1;
 			});
@@ -104,7 +104,7 @@ export class FlexibleComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.flexibleData = data.data[0];
 
-			let dialogRef = this.dialog.open(EditFlexibleInfoComponent, {
+			const dialogRef = this.dialog.open(EditFlexibleInfoComponent, {
 				data: {
 					action: 'edit',
 
@@ -130,7 +130,7 @@ export class FlexibleComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.flexibleData = data.data[0];
 
-			let dialogRef = this.dialog.open(AddFlexibleInfoComponent, {
+			const dialogRef = this.dialog.open(AddFlexibleInfoComponent, {
 				data: {
 					action: 'new',
 					ID: id,

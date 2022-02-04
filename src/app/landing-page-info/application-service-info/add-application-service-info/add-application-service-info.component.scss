@@ -1,58 +1,58 @@
 abel:not(.form-check-label):not(.custom-file-label) {
-  font-weight: 500;
+	font-weight: 500;
 }
 input:focus {
-  border: 2px solid dodgerblue;
+	border: 2px solid dodgerblue;
 }
 label {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  word-break: break-word;
-  font-family: Inter, sans-serif;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 500;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
 }
 .form-control:hover {
-  border-color: rgba(46, 105, 255, 0.5);
-  box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
+	border-color: rgba(46, 105, 255, 0.5);
+	box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
 }
 .pt-3 {
-  display: inline-block;
-  font-size: 32px;
-  font-weight: 700;
-  word-break: break-word;
-  font-family: Inter, sans-serif;
+	display: inline-block;
+	font-size: 32px;
+	font-weight: 700;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
 }
 .container {
-  background-color: white;
+	background-color: white;
 }
 .form-Label {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  word-break: break-word;
-  font-family: Inter, sans-serif;
-  width: 100%;
-  margin-left: 2px;
-  margin-bottom: 14px;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 500;
+	word-break: break-word;
+	font-family: Inter, sans-serif;
+	width: 100%;
+	margin-left: 2px;
+	margin-bottom: 14px;
 }
 .sign {
-  padding: 10px;
-  border: 1px solid rgba(46, 105, 255, 0.5);
-  width: 500px;
-  border-radius: 5px;
+	padding: 10px;
+	border: 1px solid rgba(46, 105, 255, 0.5);
+	width: 500px;
+	border-radius: 5px;
 }
 .sign:hover {
-  border: 1px solid;
-  border-color: #2e69ff40;
-  box-shadow: 0 0 0 3px rgb(46, 105, 255, 0.25);
+	border: 1px solid;
+	border-color: #2e69ff40;
+	box-shadow: 0 0 0 3px rgb(46, 105, 255, 0.25);
 }
 
 .imgStyle {
-  border: 2px solid #2e69ff40;
-  border-radius: 10px;
+	border: 2px solid #2e69ff40;
+	border-radius: 10px;
 }
 .dialog-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

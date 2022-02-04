@@ -68,14 +68,14 @@ export class PlantRegistrationComponent implements OnInit {
 	async disableForm(fileType) {
 		if (this.isHistory && fileType === 'PPE') {
 			this.ppeDetails.disable();
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad != null;
 			};
 			await check();
 			this.signaturePad.off();
 		} else if (this.isHistory && fileType === 'Plant/Equipment') {
 			this.plantDetails.disable();
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad2 != null;
 			};
 			await check2();
@@ -109,8 +109,7 @@ export class PlantRegistrationComponent implements OnInit {
 						typeof value === 'object'
 							? ''
 							: typeof value === 'string'
-							? (this.ppeDetails['controls']
-									.managerName as AbstractControl).setErrors({
+							? this.ppeDetails.controls.managerName.setErrors({
 									incorrect: true
 							  })
 							: ''
@@ -129,8 +128,7 @@ export class PlantRegistrationComponent implements OnInit {
 						typeof value === 'object'
 							? ''
 							: typeof value === 'string'
-							? (this.plantDetails['controls']
-									.plantManagerName as AbstractControl).setErrors(
+							? this.plantDetails.controls.plantManagerName.setErrors(
 									{ incorrect: true }
 							  )
 							: ''
@@ -182,7 +180,7 @@ export class PlantRegistrationComponent implements OnInit {
 	};
 	drawComplete2() {
 		// will be notified of szimek/signature_pad's onEnd event
-		this.plantDetails.controls['plantSignature'].setValue(
+		this.plantDetails.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
 		console.log(this.signaturePad2.toDataURL());
@@ -233,9 +231,7 @@ export class PlantRegistrationComponent implements OnInit {
 
 	drawComplete() {
 		// will be notified of szimek/signature_pad's onEnd event
-		this.ppeDetails.controls['Sign'].setValue(
-			this.signaturePad.toDataURL()
-		);
+		this.ppeDetails.controls.Sign.setValue(this.signaturePad.toDataURL());
 		console.log(this.signaturePad.toDataURL());
 	}
 	patchData() {
@@ -276,7 +272,7 @@ export class PlantRegistrationComponent implements OnInit {
 							date: this.ppeDataHistory.date
 						});
 						this.dataUrl = this.ppeDataHistory.signature;
-						let check = async () => {
+						const check = async () => {
 							this.signaturePad != null;
 						};
 						check().then((res) => {
@@ -304,7 +300,7 @@ export class PlantRegistrationComponent implements OnInit {
 							plantSignature: this.plantDataHistory.signature
 						});
 						this.dataUrl = this.plantDataHistory.signature;
-						let check2 = async () => {
+						const check2 = async () => {
 							this.signaturePad2 != null;
 						};
 						check2().then((res) => {
@@ -323,9 +319,9 @@ export class PlantRegistrationComponent implements OnInit {
 		}
 	}
 	peeSubmit() {
-		let submitPPEArr = [];
-		let notSubPPEArr = [];
-		let { ppe, ...rest } = this.employeeData;
+		const submitPPEArr = [];
+		const notSubPPEArr = [];
+		const { ppe, ...rest } = this.employeeData;
 		// submitPPEArr.push(PPEArr.map((res)=>{
 		//   if(res.ppeCheck){
 		//   return {
@@ -342,7 +338,7 @@ export class PlantRegistrationComponent implements OnInit {
 
 		for (let index = 0; index < this.addPPE().length; index++) {
 			if (this.addPPE().at(index).get('ppeCheck').value) {
-				let arr = {
+				const arr = {
 					ppeSupplied: this.addPPE().at(index).get('PPESupplied')
 						.value,
 					brand: this.addPPE().at(index).get('BrandOrType').value,
@@ -354,7 +350,7 @@ export class PlantRegistrationComponent implements OnInit {
 				submitPPEArr.push(arr);
 				console.log('submitPPEArr', submitPPEArr);
 			} else {
-				let arr = {
+				const arr = {
 					ppeSupplied: this.addPPE().at(index).get('PPESupplied')
 						.value,
 					brand: this.addPPE().at(index).get('BrandOrType').value,
@@ -367,11 +363,11 @@ export class PlantRegistrationComponent implements OnInit {
 				console.log('PPEArr', notSubPPEArr);
 			}
 		}
-		let data = {
-			signature: this.ppeDetails.controls['Sign'].value,
-			date: this.ppeDetails.controls['date'].value,
-			managerName: this.ppeDetails.controls['managerName'].value._id,
-			submitPPEArr: submitPPEArr,
+		const data = {
+			signature: this.ppeDetails.controls.Sign.value,
+			date: this.ppeDetails.controls.date.value,
+			managerName: this.ppeDetails.controls.managerName.value._id,
+			submitPPEArr,
 			employeeId: this.employeeData._id
 		};
 		let data2 = {};
@@ -418,9 +414,9 @@ export class PlantRegistrationComponent implements OnInit {
 		);
 	}
 	plantSubmit() {
-		let submitPlant = [];
-		let notSubPlant = [];
-		let { plant, ...rest } = this.employeeData;
+		const submitPlant = [];
+		const notSubPlant = [];
+		const { plant, ...rest } = this.employeeData;
 
 		for (let index = 0; index < this.addEquip().length; index++) {
 			console.log(
@@ -428,7 +424,7 @@ export class PlantRegistrationComponent implements OnInit {
 				this.addEquip().at(index).get('plantCheck').value
 			);
 			if (this.addEquip().at(index).get('plantCheck').value) {
-				let arr = {
+				const arr = {
 					plantType: this.addEquip().at(index).get('plantType').value,
 					modelNumber: this.addEquip().at(index).get('modelNumber')
 						.value,
@@ -441,7 +437,7 @@ export class PlantRegistrationComponent implements OnInit {
 				submitPlant.push(arr);
 				console.log('submitPlant', submitPlant);
 			} else {
-				let arr = {
+				const arr = {
 					plantType: this.addEquip().at(index).get('plantType').value,
 					modelNumber: this.addEquip().at(index).get('modelNumber')
 						.value,
@@ -455,11 +451,10 @@ export class PlantRegistrationComponent implements OnInit {
 				console.log('PPEArr', notSubPlant);
 			}
 		}
-		let data = {
-			signature: this.plantDetails.controls['plantSignature'].value,
-			date: this.plantDetails.controls['plantDate'].value,
-			managerName: this.plantDetails.controls['plantManagerName'].value
-				._id,
+		const data = {
+			signature: this.plantDetails.controls.plantSignature.value,
+			date: this.plantDetails.controls.plantDate.value,
+			managerName: this.plantDetails.controls.plantManagerName.value._id,
 			submitPlantArr: submitPlant,
 			employeeId: this.employeeData._id
 		};
