@@ -29,7 +29,7 @@ export class FormsComponent implements OnInit {
 
 		{
 			index: 2,
-			title: 'Notifiable Accident',
+			title: 'Accident Report',
 			link: ['/admin/forms/incidentRep/' + 'Form']
 		},
 		{
@@ -44,7 +44,7 @@ export class FormsComponent implements OnInit {
 		},
 		{
 			index: 5,
-			title: 'Risk Assessment',
+			title: 'Risk Assessment and SWMS',
 			link: ['/admin/forms/riskAssessSWMS/' + 'form']
 		}
 	];

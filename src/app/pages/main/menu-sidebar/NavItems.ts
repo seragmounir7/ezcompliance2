@@ -31,7 +31,7 @@ export class NavItems {
 					hasAccess: true
 				},
 				{
-					displayedName: 'Completed Forms',
+					displayedName: 'Submitted Forms',
 					icon: 'savedForms',
 					route: '/admin/savedForms',
 					hasAccess: true
@@ -40,9 +40,16 @@ export class NavItems {
 			hasAccess: true
 		},
 		{
-			displayedName: 'Role Manangement',
+			displayedName: 'Company Information',
 			icon: 'roleMgmt',
 			childItem: [
+				{
+					displayedName: 'Company Details ',
+					icon: 'company',
+					route:
+						'/admin/registration/addCompanyInfo/61eeeef751744133c768653c',
+					hasAccess: true
+				},
 				{
 					displayedName: 'Roles',
 					icon: 'roles',
@@ -65,13 +72,6 @@ export class NavItems {
 					displayedName: 'Client Terms And Conditon ',
 					icon: 'terms',
 					route: '/admin/siteInfo/termsAndcondition',
-					hasAccess: true
-				},
-				{
-					displayedName: 'Company Details ',
-					icon: 'company',
-					route:
-						'/admin/registration/addCompanyInfo/61eeeef751744133c768653c',
 					hasAccess: true
 				}
 			],
