@@ -87,8 +87,8 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			});
 	}
 	edit(id) {
-		let data = {
-			id: id,
+		const data = {
+			id,
 			type: 'edit'
 		};
 		//this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})

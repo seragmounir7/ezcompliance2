@@ -64,7 +64,7 @@ export class ScreenShotModuleComponent implements OnInit {
 			console.log('Screenshot', res.data);
 			this.dataSource.data = res.data;
 			// this.ScreenData = res.data;
-			let ScreenData = res.data[0].subModules;
+			const ScreenData = res.data[0].subModules;
 			ScreenData.forEach((element, index) => {
 				element.index = index + 1;
 			});
@@ -82,7 +82,7 @@ export class ScreenShotModuleComponent implements OnInit {
 		this.mode = 'Screenshot';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.ScreenData = data.data[0];
-			let dialogRef = this.dialog.open(EditScreenShotComponent, {
+			const dialogRef = this.dialog.open(EditScreenShotComponent, {
 				data: {
 					action: 'edit',
 					EditData: this.ScreenData,
@@ -108,7 +108,7 @@ export class ScreenShotModuleComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.ScreenData = data.data[0];
 			console.log(this.ScreenData);
-			let dialogRef = this.dialog.open(AddScreenShotComponent, {
+			const dialogRef = this.dialog.open(AddScreenShotComponent, {
 				data: {
 					action: 'new',
 					ID: id,

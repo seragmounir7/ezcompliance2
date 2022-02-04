@@ -90,7 +90,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 				console.log('img', this.selectedImage);
 		}
 
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;
 	}
 
@@ -115,9 +115,9 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 	onFormSubmit() {
 		this.editModule();
 		this.editSubModule();
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
-		let arrlength = this.appService().length;
+		const arrlength = this.appService().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.appService()
 				.at(i)
@@ -141,7 +141,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 		});
 	}
 	removeAppService(i) {
-		const item = <FormArray>this.serviceDetail.controls['arrObj'];
+		const item = <FormArray>this.serviceDetail.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 			this.selectedImage.splice(i, 1);
@@ -152,7 +152,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
@@ -170,7 +170,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 
 	editModule() {
 		if (this.data.action == 'edit') {
-			let ServiceData = {
+			const ServiceData = {
 				title: this.serviceDetail.controls.title.value,
 				description: this.serviceDetail.controls.description.value,
 				mode: 'Service'
@@ -188,7 +188,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				moduleId: this.data.EditData._id,
 				title: this.appService().at(0).get('title')?.value,
 				fileUrl: this.selectedImage,
@@ -202,7 +202,7 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 					this.serviceDetail.reset();
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'Service',
 
 				title: this.serviceDetail.controls.title.value,

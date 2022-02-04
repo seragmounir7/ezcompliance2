@@ -71,7 +71,7 @@ export class AddCustomerComponent implements OnInit {
 	// }
 
 	openDialog(id) {
-		let dialogRef = this.dialog.open(AddingCustComponent, {
+		const dialogRef = this.dialog.open(AddingCustComponent, {
 			height: '600px',
 			width: '700px',
 
@@ -142,7 +142,7 @@ export class AddCustomerComponent implements OnInit {
 		this.getAllCustomers(sort.active, sort.direction);
 	}
 	addCustomer() {
-		let dialog = this.dialog.open(AddingCustComponent, {});
+		const dialog = this.dialog.open(AddingCustComponent, {});
 		dialog.afterClosed().subscribe((res) => {
 			if (res === 'ok') {
 				this.getAllCustomers();

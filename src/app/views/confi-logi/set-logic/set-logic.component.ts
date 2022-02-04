@@ -350,7 +350,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 		this.router.navigate(
 			['/admin/confiLogi/setRelation'],
 
-			{ queryParams: { id: id } }
+			{ queryParams: { id } }
 		);
 	}
 	/* setRelation(title, id,i) {
@@ -471,7 +471,7 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 	// }
 
 	addJobTask() {
-		let dilog = this.dialog.open(AddJobTaskComponent, {
+		const dilog = this.dialog.open(AddJobTaskComponent, {
 			width: '70%'
 		});
 		dilog.afterClosed().subscribe((res) => {

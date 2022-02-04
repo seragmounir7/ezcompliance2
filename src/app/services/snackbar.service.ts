@@ -25,7 +25,7 @@ export class SnackbarService {
 
 @Component({
 	selector: 'selector-name',
-	template: `<span class="example-pizza-party"> test </span>`,
+	template: `<span class="example-pizza-party"> test </span> `,
 	styles: ['']
 })
 export class NameComponent implements OnInit {

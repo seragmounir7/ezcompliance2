@@ -42,7 +42,7 @@ export class EditRateAndCouponComponent implements OnInit {
 	}
 
 	onSubmit() {
-		let data = {
+		const data = {
 			monthly: this.editSubcriptionForm.get('monthly').value,
 			defaultMonthly: this.editSubcriptionForm.get('defaultMonthly')
 				.value,

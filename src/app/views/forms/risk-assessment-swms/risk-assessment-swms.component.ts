@@ -68,20 +68,7 @@ export class RiskAssessmentSWMSComponent
 	tradeCategoryArr: any[];
 	allChecked: Observable<any>;
 	count: number = 0;
-	@HostListener('window:afterprint', [])
-	function() {
-		console.log('Printing completed...');
-		this.renderer.removeClass(document.querySelector('app-main'), 'hidden');
-		if (this.router.url.includes('/admin/savedForms')) {
-			this.router.navigateByUrl('/admin/savedForms');
-			return;
-		}
-		this.router.navigateByUrl('/admin/forms/riskAssessTable');
-		this.shared.printNext(false);
-		// this.router.navigate(['/',{ outlets: {'print': ['print']}}])
-	}
 	public Editor = ClassicEditor;
-
 	riskAssessmentFb!: FormGroup;
 	SWMSTab!: FormArray;
 	RiskAssessment = true;
@@ -109,6 +96,18 @@ export class RiskAssessmentSWMSComponent
 	maxDate = new Date();
 	cardImageBase64: any;
 	type: any;
+	public signaturePadOptions1: Object = {
+		// passed through to szimek/signature_pad constructor
+		minWidth: 1,
+		canvasWidth: 450,
+		canvasHeight: 100
+	};
+	public signaturePadOptions2: Object = {
+		// passed through to szimek/signature_pad constructor
+		minWidth: 1,
+		canvasWidth: 430,
+		canvasHeight: 100
+	};
 	highRiskConstruction2 = [
 		{
 			label:
@@ -217,6 +216,18 @@ export class RiskAssessmentSWMSComponent
 	selectedFile1 = [];
 	dateGet: Date;
 	setTime: any;
+	@HostListener('window:afterprint', [])
+	function(): void {
+		console.log('Printing completed...');
+		this.renderer.removeClass(document.querySelector('app-main'), 'hidden');
+		if (this.router.url.includes('/admin/savedForms')) {
+			void this.router.navigateByUrl('/admin/savedForms');
+			return;
+		}
+		void this.router.navigateByUrl('/admin/forms/riskAssessTable');
+		this.shared.printNext(false);
+		// this.router.navigate(['/',{ outlets: {'print': ['print']}}])
+	}
 	constructor(
 		public router: Router,
 		private dialog: MatDialog,
@@ -288,10 +299,10 @@ export class RiskAssessmentSWMSComponent
 	async disableForm() {
 		if (this.isHistory) {
 			this.riskAssessmentFb.disable();
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad1 != null;
 			};
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad2 != null;
 			};
 			await check();
@@ -314,14 +325,14 @@ export class RiskAssessmentSWMSComponent
 
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 		this.activatedRoute.queryParams.subscribe((params) => {
-			this.type = params['formType'];
+			this.type = params.formType;
 		});
 		this.setTitle.setTitle('WHS-Risk Assesment Form');
-		let dataMap = map((res: any) => res.data);
-		let nameMap = map((res: any) => {
+		const dataMap = map((res: any) => res.data);
+		const nameMap = map((res: any) => {
 			res.data;
 		});
-		let allApiObs$ = [
+		const allApiObs$ = [
 			this.logicalFormInfo.getAllJobtask().pipe(dataMap),
 			this.logicalFormInfo.getAllPPE().pipe(dataMap),
 			this.logicalFormInfo.getAllRisk().pipe(dataMap),
@@ -340,7 +351,7 @@ export class RiskAssessmentSWMSComponent
 			this.logicalFormInfo.getAllJurisdiction().pipe(dataMap)
 		];
 
-		let allApis = forkJoin(allApiObs$);
+		const allApis = forkJoin(allApiObs$);
 
 		this.addActionSDSRegister();
 		if (this.id != 'form') {
@@ -380,7 +391,7 @@ export class RiskAssessmentSWMSComponent
 				this.getAllSafe(res[13]);
 				this.getAllState(res[14]);
 				this.getAllJurisdiction(res[15]);
-				let time = new Date();
+				const time = new Date();
 				this.dateGet = time;
 				this.setTime = time.toTimeString().slice(0, 5);
 				this.addEmployee();
@@ -392,8 +403,7 @@ export class RiskAssessmentSWMSComponent
 					typeof value === 'object'
 						? ''
 						: typeof value === 'string'
-						? (this.riskAssessmentFb['controls']
-								.employee1 as AbstractControl).setErrors({
+						? this.riskAssessmentFb.controls.employee1.setErrors({
 								incorrect: true
 						  })
 						: ''
@@ -517,7 +527,7 @@ export class RiskAssessmentSWMSComponent
 				this.Licence().push(this.license(i));
 				this.disableForm();
 			}
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad1 != null;
 			};
 			check().then(() => {
@@ -532,9 +542,9 @@ export class RiskAssessmentSWMSComponent
 			//  this.setTime=newTime.toString()
 			//  console.log("date=================>>>>>>>>>.",res.data.dateTime);
 
-			let dateTime = new Date(res.data.dateTime);
+			const dateTime = new Date(res.data.dateTime);
 
-			let time = dateTime.toTimeString();
+			const time = dateTime.toTimeString();
 			this.setTime = time.slice(0, 5);
 			// console.log("date2=================>>>>>>>>>.",newTime);
 			//this.setTime=newTime.splice(0,5).join('')
@@ -542,7 +552,7 @@ export class RiskAssessmentSWMSComponent
 			// let  newTime2=newTime.splice(5,3).join('')
 			// this.setTime=newTime.toString()
 
-			let date = res.data.dateTime;
+			const date = res.data.dateTime;
 			//let newDate=date.split(/[-,T]/)
 
 			//  newTime=newTime.splice(3).toString()
@@ -578,9 +588,7 @@ export class RiskAssessmentSWMSComponent
 			this.riskAssessmentFb.patchValue({
 				...res.data
 			});
-			const item = <FormArray>(
-				this.riskAssessmentFb.controls['SDSRegister']
-			);
+			const item = <FormArray>this.riskAssessmentFb.controls.SDSRegister;
 			while (item.length > 0) {
 				item.removeAt(0);
 			}
@@ -645,7 +653,7 @@ export class RiskAssessmentSWMSComponent
 			});
 		});
 	}
-	checkHazards(data, i) {
+	checkHazards(data, i): void {
 		for (let j = 0; j < this.jobTaskData.length; j++) {
 			if (this.jobTaskData[j]._id == data._id) {
 				this.jobTaskData[j].allHazardsTitle = [];
@@ -665,11 +673,11 @@ export class RiskAssessmentSWMSComponent
 		}
 	}
 	checkJobtask(element, index) {
-		let z = this.jobTaskData[index]._id;
+		const z = this.jobTaskData[index]._id;
 		//console.log("z", z);
 		// console.log("ele", element[z]);
-		let c = this.riskAssessmentFb.controls['jobTask'] as FormArray;
-		let d = c.controls[index] as FormGroup;
+		const c = this.riskAssessmentFb.controls.jobTask as FormArray;
+		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
 			d.controls[z].setValue(element[z]);
 			this.jobTaskSelected.push(this.jobTaskData[index]);
@@ -677,28 +685,28 @@ export class RiskAssessmentSWMSComponent
 		}
 	}
 	checkRisk(element, index) {
-		let z = this.highRiskConstruction[index]._id;
+		const z = this.highRiskConstruction[index]._id;
 		//console.log("ele", element[z]);
-		let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray;
-		let d = c.controls[index] as FormGroup;
+		const c = this.riskAssessmentFb.controls.riskConstruction as FormArray;
+		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
 			d.controls[z].setValue(element[z]);
 		}
 	}
 	checkPPE(element, index) {
-		let z = this.PPEselection[index]._id;
+		const z = this.PPEselection[index]._id;
 		// console.log("ele", element[z]);
-		let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray;
-		let d = c.controls[index] as FormGroup;
+		const c = this.riskAssessmentFb.controls.PPEselection as FormArray;
+		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
 			d.controls[z].setValue(element[z]);
 		}
 	}
 	checkLicense(element, index) {
-		let z = this.licenseAndQualification[index]._id;
+		const z = this.licenseAndQualification[index]._id;
 		// console.log("ele", element[z]);
-		let c = this.riskAssessmentFb.controls['licence'] as FormArray;
-		let d = c.controls[index] as FormGroup;
+		const c = this.riskAssessmentFb.controls.licence as FormArray;
+		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
 			d.controls[z].setValue(element[z]);
 		}
@@ -770,16 +778,16 @@ export class RiskAssessmentSWMSComponent
 			this.employeeArr().push(this.employeeField());
 			this.valueChangesArr = new Array<Observable<any>>();
 			for (let index = 0; index < this.employeeArr().length; index++) {
-				let element = this.employeeArr().at(index);
+				const element = this.employeeArr().at(index) as FormGroup;
 				this.valueChangesArr.push(
-					(element['controls'].employeeId
+					(element.controls.employeeId
 						.valueChanges as Observable<any>).pipe(
 						startWith({ firstName: '' }),
 						tap((value) =>
 							typeof value === 'object'
 								? ''
 								: typeof value === 'string'
-								? (element['controls']
+								? (element.controls
 										.employeeId as AbstractControl).setErrors(
 										{ incorrect: true }
 								  )
@@ -936,14 +944,14 @@ export class RiskAssessmentSWMSComponent
 		});
 	}
 	removeemployeeField(i) {
-		const item = <FormArray>this.riskAssessmentFb.controls['employeeList'];
+		const item = <FormArray>this.riskAssessmentFb.controls.employeeList;
 		if (item.length > 1) {
 			item.removeAt(i);
 			this.signRequired1.splice(i, 1);
 		}
 	}
 	removeSDSRegister(i) {
-		const item = <FormArray>this.riskAssessmentFb.controls['SDSRegister'];
+		const item = <FormArray>this.riskAssessmentFb.controls.SDSRegister;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -956,18 +964,6 @@ export class RiskAssessmentSWMSComponent
 		this.SWMSShow = true;
 		this.RiskAssessment = false;
 	}
-	public signaturePadOptions1: Object = {
-		// passed through to szimek/signature_pad constructor
-		minWidth: 1,
-		canvasWidth: 450,
-		canvasHeight: 100
-	};
-	public signaturePadOptions2: Object = {
-		// passed through to szimek/signature_pad constructor
-		minWidth: 1,
-		canvasWidth: 430,
-		canvasHeight: 100
-	};
 
 	ngAfterViewInit() {
 		this.count++;
@@ -993,12 +989,12 @@ export class RiskAssessmentSWMSComponent
 		this.allChecked = this.parent.changes.pipe(
 			map((res: QueryList<ElementRef<HTMLElement>>) => {
 				console.log(res);
-				let arr = [];
+				const arr = [];
 				res.toArray().forEach((x) => {
-					let check = x.nativeElement.querySelectorAll(
+					const check = x.nativeElement.querySelectorAll(
 						'input[type=checkbox]'
 					);
-					let allChecked = Array.from(check).reduce(
+					const allChecked = Array.from(check).reduce(
 						(previousValue, currentValue) => {
 							return previousValue == currentValue['checked'];
 						},
@@ -1021,13 +1017,13 @@ export class RiskAssessmentSWMSComponent
 
 				if (result.matches) {
 					this.reSizeSignArray(this.signaturePad2, 233, 114);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 247);
 					this.signaturePad1.set('canvasHeight', 107);
 					this.signaturePad1.fromDataURL(sign);
 				} else {
 					this.reSizeSignArray(this.signaturePad2, 420, 121);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 338);
 					this.signaturePad1.set('canvasHeight', 107);
 					this.signaturePad1.fromDataURL(sign);
@@ -1051,7 +1047,7 @@ export class RiskAssessmentSWMSComponent
 		console.log(signArr, canvasWidth, canvasHeight);
 
 		signArr.toArray().forEach((x) => {
-			let sign = x.toDataURL();
+			const sign = x.toDataURL();
 			x.set('canvasWidth', canvasWidth);
 			x.set('canvasHeight', canvasHeight);
 			x.fromDataURL(sign);
@@ -1061,20 +1057,16 @@ export class RiskAssessmentSWMSComponent
 	drawComplete1() {
 		// will be notified of szimek/signature_pad's onEnd event
 		console.log(this.signaturePad1.toDataURL());
-		this.riskAssessmentFb.controls['signature1'].setValue(
+		this.riskAssessmentFb.controls.signature1.setValue(
 			this.signaturePad1.toDataURL()
 		);
-		this.singRequired = this.riskAssessmentFb.controls[
-			'signature1'
-		].invalid;
+		this.singRequired = this.riskAssessmentFb.controls.signature1.invalid;
 	}
 	clear1() {
 		console.log('clear1');
 		this.signaturePad1.clear();
-		this.riskAssessmentFb.controls['signature1'].setValue('');
-		this.singRequired = this.riskAssessmentFb.controls[
-			'signature1'
-		].untouched;
+		this.riskAssessmentFb.controls.signature1.setValue('');
+		this.singRequired = this.riskAssessmentFb.controls.signature1.untouched;
 	}
 	drawStart1() {
 		// will be notified of szimek/signature_pad's onBegin event
@@ -1115,8 +1107,8 @@ export class RiskAssessmentSWMSComponent
 				this.tradeCategoryArr = res.data;
 			});
 			this.jobTaskData = data.sort(function (a, b) {
-				let titleA = a.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
-				let titleB = b.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
+				const titleA = a.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
+				const titleB = b.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
 				if (titleA < titleB) {
 					return -1;
 				}
@@ -1197,7 +1189,7 @@ export class RiskAssessmentSWMSComponent
 		});
 	}
 	getHighRiskById() {
-		let mode = 'Risk';
+		const mode = 'Risk';
 		this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
 			this.highRiskConstruction = res.data[0].subComponents;
 			// console.log(' this.highRiskConstruction=>', this.highRiskConstruction);
@@ -1277,8 +1269,8 @@ export class RiskAssessmentSWMSComponent
 	}
 	onLicenseChange(e, license, i) {
 		console.log('e', e.target.checked);
-		let c = this.riskAssessmentFb.controls['licence'] as FormArray;
-		let d = c.controls[i] as FormGroup;
+		const c = this.riskAssessmentFb.controls.licence as FormArray;
+		const d = c.controls[i] as FormGroup;
 		if (e.target.checked) {
 			d.controls[license].setValue('Open Cable Licence');
 		} else {
@@ -1287,8 +1279,8 @@ export class RiskAssessmentSWMSComponent
 	}
 	onRiskChange(e, risk, i) {
 		console.log('e', e.target.checked);
-		let c = this.riskAssessmentFb.controls['riskConstruction'] as FormArray;
-		let d = c.controls[i] as FormGroup;
+		const c = this.riskAssessmentFb.controls.riskConstruction as FormArray;
+		const d = c.controls[i] as FormGroup;
 		if (e.target.checked) {
 			d.controls[risk].setValue(
 				'Working in or near trenches or shafts deeper than 1.5metres'
@@ -1299,8 +1291,8 @@ export class RiskAssessmentSWMSComponent
 	}
 	onPPEChange(e, ppe, i) {
 		console.log('e', e.target.checked);
-		let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray;
-		let d = c.controls[i] as FormGroup;
+		const c = this.riskAssessmentFb.controls.PPEselection as FormArray;
+		const d = c.controls[i] as FormGroup;
 		if (e.target.checked) {
 			d.controls[ppe].setValue('Disposable dust mask');
 		} else {
@@ -1309,10 +1301,8 @@ export class RiskAssessmentSWMSComponent
 	}
 	onRiskChange2(e, risk, i) {
 		console.log('e', e.target.checked);
-		let c = this.riskAssessmentFb.controls[
-			'riskConstruction2'
-		] as FormArray;
-		let d = c.controls[i] as FormGroup;
+		const c = this.riskAssessmentFb.controls.riskConstruction2 as FormArray;
+		const d = c.controls[i] as FormGroup;
 		if (e.target.checked) {
 			d.controls[risk].setValue(
 				'Working in or near trenches or shafts deeper than 1.5metres'
@@ -1323,8 +1313,8 @@ export class RiskAssessmentSWMSComponent
 	}
 	onPPEChange2(e, ppe, i) {
 		console.log('e', e.target.checked);
-		let c = this.riskAssessmentFb.controls['PPESelection2'] as FormArray;
-		let d = c.controls[i] as FormGroup;
+		const c = this.riskAssessmentFb.controls.PPESelection2 as FormArray;
+		const d = c.controls[i] as FormGroup;
 		if (e.target.checked) {
 			d.controls[ppe].setValue('Disposable dust mask');
 		} else {
@@ -1335,7 +1325,7 @@ export class RiskAssessmentSWMSComponent
 		// this.jobTaskSelected=[];
 
 		console.log('event', e.target.value, jobTaskRecd);
-		let item = e.target.value;
+		const item = e.target.value;
 		if (e.target.checked) {
 			this.checkArray.push(item);
 			console.log('jobTaskRecd', jobTaskRecd);
@@ -1353,32 +1343,29 @@ export class RiskAssessmentSWMSComponent
 
 		for (let k = 0; k < this.riskArr.length; k++) {
 			this.riskArr[k] = 0;
-			let c = this.riskAssessmentFb.controls[
-				'riskConstruction'
-			] as FormArray;
-			let c1 = this.riskAssessmentFb.controls[
-				'riskConstruction2'
-			] as FormArray;
-			let d = c.controls[k] as FormGroup;
-			let d1 = c1.controls[k] as FormGroup;
+			const c = this.riskAssessmentFb.controls
+				.riskConstruction as FormArray;
+			const c1 = this.riskAssessmentFb.controls
+				.riskConstruction2 as FormArray;
+			const d = c.controls[k] as FormGroup;
+			const d1 = c1.controls[k] as FormGroup;
 			d.controls[this.highRiskConstruction[k]._id].reset();
 			d1.controls[this.highRiskConstruction[k]._id].reset();
 		}
 		for (let k = 0; k < this.ppeArr.length; k++) {
 			this.ppeArr[k] = 0;
-			let c = this.riskAssessmentFb.controls['PPEselection'] as FormArray;
-			let d = c.controls[k] as FormGroup;
+			const c = this.riskAssessmentFb.controls.PPEselection as FormArray;
+			const d = c.controls[k] as FormGroup;
 			d.controls[this.PPEselection[k]._id].reset();
-			let c1 = this.riskAssessmentFb.controls[
-				'PPESelection2'
-			] as FormArray;
-			let d1 = c1.controls[k] as FormGroup;
+			const c1 = this.riskAssessmentFb.controls
+				.PPESelection2 as FormArray;
+			const d1 = c1.controls[k] as FormGroup;
 			d1.controls[this.PPEselection[k]._id].reset();
 		}
 		for (let k = 0; k < this.licenceArr.length; k++) {
 			this.licenceArr[k] = 0;
-			let c = this.riskAssessmentFb.controls['licence'] as FormArray;
-			let d = c.controls[k] as FormGroup;
+			const c = this.riskAssessmentFb.controls.licence as FormArray;
+			const d = c.controls[k] as FormGroup;
 			d.controls[this.licenseAndQualification[k]._id].reset();
 		}
 		this.chemicalTask = false;
@@ -1395,19 +1382,17 @@ export class RiskAssessmentSWMSComponent
 				this.highRiskConstruction.forEach((highRisk, index) => {
 					if (highRisk._id === item) {
 						this.riskArr[index] = 1;
-						let c = this.riskAssessmentFb.controls[
-							'riskConstruction'
-						] as FormArray;
-						let d = c.controls[index] as FormGroup;
+						const c = this.riskAssessmentFb.controls
+							.riskConstruction as FormArray;
+						const d = c.controls[index] as FormGroup;
 						d.controls[
 							this.highRiskConstruction[index]._id
 						].setValue(
 							'Working in or near trenches or shafts deeper than 1.5metres'
 						);
-						let c1 = this.riskAssessmentFb.controls[
-							'riskConstruction2'
-						] as FormArray;
-						let d1 = c1.controls[index] as FormGroup;
+						const c1 = this.riskAssessmentFb.controls
+							.riskConstruction2 as FormArray;
+						const d1 = c1.controls[index] as FormGroup;
 						d1.controls[
 							this.highRiskConstruction[index]._id
 						].setValue(
@@ -1426,17 +1411,15 @@ export class RiskAssessmentSWMSComponent
 				this.PPEselection.forEach((ppeItem, index) => {
 					if (ppeItem._id === item) {
 						this.ppeArr[index] = 1;
-						let c = this.riskAssessmentFb.controls[
-							'PPEselection'
-						] as FormArray;
-						let d = c.controls[index] as FormGroup;
+						const c = this.riskAssessmentFb.controls
+							.PPEselection as FormArray;
+						const d = c.controls[index] as FormGroup;
 						d.controls[this.PPEselection[index]._id].setValue(
 							'Disposable dust mask'
 						);
-						let c1 = this.riskAssessmentFb.controls[
-							'PPESelection2'
-						] as FormArray;
-						let d1 = c1.controls[index] as FormGroup;
+						const c1 = this.riskAssessmentFb.controls
+							.PPESelection2 as FormArray;
+						const d1 = c1.controls[index] as FormGroup;
 						d1.controls[this.PPEselection[index]._id].setValue(
 							'Disposable dust mask'
 						);
@@ -1449,10 +1432,9 @@ export class RiskAssessmentSWMSComponent
 						console.log('item', item);
 						console.log('ele', ele);
 						this.licenceArr[index] = 1;
-						let c = this.riskAssessmentFb.controls[
-							'licence'
-						] as FormArray;
-						let d = c.controls[index] as FormGroup;
+						const c = this.riskAssessmentFb.controls
+							.licence as FormArray;
+						const d = c.controls[index] as FormGroup;
 						d.controls[
 							this.licenseAndQualification[index]._id
 						].setValue('Open Cable Licence');
@@ -1532,7 +1514,7 @@ export class RiskAssessmentSWMSComponent
 			});
 
 			console.log('allCOPSelected', this.allCOPSelected);
-			let myMap = new Map();
+			const myMap = new Map();
 			this.allCOPSelected.forEach((item) => {
 				if (myMap.has(item)) {
 					myMap.set(item, myMap.get(item) + 1);
@@ -1631,13 +1613,13 @@ export class RiskAssessmentSWMSComponent
 			width: '550px',
 			height: '60%',
 			data: {
-				type: type,
+				type,
 				title: ''
 			}
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {
-			let data = {
+			const data = {
 				title: result,
 				id: ''
 			};
@@ -1656,13 +1638,13 @@ export class RiskAssessmentSWMSComponent
 			width: '550px',
 			// height:'50%',
 			data: {
-				type: type,
-				title: title
+				type,
+				title
 			}
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {
-			let data = {
+			const data = {
 				title: result,
 				id: ''
 			};
@@ -1688,7 +1670,7 @@ export class RiskAssessmentSWMSComponent
 
 		dialogRef.afterClosed().subscribe((result) => {
 			if (result != 'false' && result) {
-				let data = {
+				const data = {
 					title: result
 				};
 				this.logicalFormInfo.addChemical(data).subscribe((res: any) => {
@@ -1850,16 +1832,16 @@ export class RiskAssessmentSWMSComponent
 	}
 	getTime(event, timePicker) {
 		console.log('this.dateGet', this.dateGet);
-		let time = event;
+		const time = event;
 		console.log('time', timePicker);
 		let timeArr = [];
 		timeArr = time.split(':');
 		this.dateGet.setHours(timeArr[0]);
 		this.dateGet.setMinutes(timeArr[1]);
 		console.log('timepicker', this.dateGet);
-		let a = new Date(this.dateGet).toUTCString();
+		const a = new Date(this.dateGet).toUTCString();
 		console.log('UTC', a);
-		let b = new Date(a).toISOString();
+		const b = new Date(a).toISOString();
 		console.log('toISOString', b);
 		this.riskAssessmentFb.get('dateTime').setValue(b);
 	}
@@ -1889,8 +1871,8 @@ export class RiskAssessmentSWMSComponent
 		parent: HTMLElement,
 		matCheck: MatCheckbox,
 		i: number
-	) {
-		let checkBoxes = parent.querySelectorAll('input[type=checkbox]');
+	): void {
+		const checkBoxes = parent.querySelectorAll('input[type=checkbox]');
 		console.error(matCheck);
 
 		this.tradeCategoryArr[i].checked = matCheck.checked;
@@ -1908,7 +1890,7 @@ export class RiskAssessmentSWMSComponent
 			//   return x
 			// })
 		}
-		checkBoxes.forEach((checkBox, i) => {
+		checkBoxes.forEach((checkBox) => {
 			if (!checkBox.classList.contains('mat-checkbox-input')) {
 				// if(checkBox.classList.contains('mat-checkbox-input')){
 				//   console.log('mat-checkbox',checkBox)
@@ -1919,7 +1901,7 @@ export class RiskAssessmentSWMSComponent
 		});
 	}
 
-	public findInvalidControls() {
+	public findInvalidControls(): Array<any> {
 		const invalid = [];
 		const controls = this.riskAssessmentFb.controls;
 		for (const name in controls) {

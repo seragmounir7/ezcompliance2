@@ -79,7 +79,7 @@ export class CustomertestimonialsComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
-			let testimonialData = res.data[0].subModules;
+			const testimonialData = res.data[0].subModules;
 			testimonialData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});
@@ -98,18 +98,21 @@ export class CustomertestimonialsComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.testimonialData = data.data[0];
 
-			let dialogRef = this.dialog.open(EditCustomerTestimonailComponent, {
-				data: {
-					action: 'edit',
+			const dialogRef = this.dialog.open(
+				EditCustomerTestimonailComponent,
+				{
+					data: {
+						action: 'edit',
 
-					EditData: this.testimonialData,
-					index: i,
-					moduleName: name
-				},
+						EditData: this.testimonialData,
+						index: i,
+						moduleName: name
+					},
 
-				width: '1000px',
-				height: '500px'
-			});
+					width: '1000px',
+					height: '500px'
+				}
+			);
 			dialogRef.afterClosed().subscribe((result) => {
 				if ((result = 'true')) {
 					this.getTestimonal();
@@ -124,15 +127,18 @@ export class CustomertestimonialsComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.testimonialData = data.data[0];
 
-			let dialogRef = this.dialog.open(AddCustomerTestimonailComponent, {
-				data: {
-					action: 'new',
-					ID: id,
-					EditData: this.testimonialData._id
-				},
-				width: '800px',
-				height: '500px'
-			});
+			const dialogRef = this.dialog.open(
+				AddCustomerTestimonailComponent,
+				{
+					data: {
+						action: 'new',
+						ID: id,
+						EditData: this.testimonialData._id
+					},
+					width: '800px',
+					height: '500px'
+				}
+			);
 			dialogRef.afterClosed().subscribe((result) => {
 				if ((result = 'true')) {
 					this.getTestimonal();

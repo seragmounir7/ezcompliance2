@@ -102,10 +102,10 @@ export class HeaderComponent implements OnInit {
 		this.dialogRef.close();
 	}
 	onFormSubmit() {
-		let value = this.selectedImage[0];
+		const value = this.selectedImage[0];
 		console.log('value', value);
 
-		let serviceData = {};
+		const serviceData = {};
 
 		console.log('file: ~ onFormSubmit ~ data', serviceData);
 

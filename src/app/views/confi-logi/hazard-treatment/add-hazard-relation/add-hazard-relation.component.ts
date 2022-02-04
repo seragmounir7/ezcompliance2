@@ -80,7 +80,7 @@ export class AddHazardRelationComponent implements OnInit {
 
 	setRelation() {
 		console.log(this.setHazard.value);
-		let data = {
+		const data = {
 			set: true,
 			title: this.hazard.title,
 			// Consequence: this.setHazard.get('Consequence').value,

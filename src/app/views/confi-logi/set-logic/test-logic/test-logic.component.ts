@@ -195,8 +195,8 @@ export class TestLogicComponent implements OnInit {
 	}
 	setRelation() {
 		console.log(this.JobTaskDetail.value);
-		let allContrlActReqTitle = [];
-		let temp1 = this.JobTaskDetail.get('contrActReq').value;
+		const allContrlActReqTitle = [];
+		const temp1 = this.JobTaskDetail.get('contrActReq').value;
 		this.allContrlActReq.forEach((element1) => {
 			temp1.forEach((element2) => {
 				if (element1._id === element2) {
@@ -204,8 +204,8 @@ export class TestLogicComponent implements OnInit {
 				}
 			});
 		});
-		let allHazardsTitle = [];
-		let temp2 = this.JobTaskDetail.get('identifyHazrds').value;
+		const allHazardsTitle = [];
+		const temp2 = this.JobTaskDetail.get('identifyHazrds').value;
 		this.allHazards.forEach((element1) => {
 			temp2.forEach((element2) => {
 				if (element1._id === element2) {
@@ -213,8 +213,8 @@ export class TestLogicComponent implements OnInit {
 				}
 			});
 		});
-		let allCOPTitle = [];
-		let temp3 = this.JobTaskDetail.get('codeOfPract').value;
+		const allCOPTitle = [];
+		const temp3 = this.JobTaskDetail.get('codeOfPract').value;
 		this.allCodeOfPract.forEach((element1) => {
 			temp3.forEach((element2) => {
 				if (element1._id === element2) {
@@ -222,7 +222,7 @@ export class TestLogicComponent implements OnInit {
 				}
 			});
 		});
-		let data = {
+		const data = {
 			title: this.jobTask.title,
 			risk: this.JobTaskDetail.get('highRiskConstr').value,
 			PPE: this.JobTaskDetail.get('PPE').value,
@@ -254,17 +254,17 @@ export class TestLogicComponent implements OnInit {
 	}
 	addItem(type) {
 		let temp = {
-			type: type,
+			type,
 			tradeCategoryId: this.jobTask.tradeCategoryId
 		};
 		if (type === 'licence') {
 			temp = {
-				type: type,
+				type,
 				tradeCategoryId: this.jobTask.tradeCategoryId
 			};
 		} else {
 			temp = {
-				type: type,
+				type,
 				tradeCategoryId: ''
 			};
 		}
@@ -278,55 +278,55 @@ export class TestLogicComponent implements OnInit {
 		dialogRef.afterClosed().subscribe((result) => {
 			switch (result) {
 				case 'highRisk': {
-					let data = this.JobTaskDetail.get('highRiskConstr').value;
+					const data = this.JobTaskDetail.get('highRiskConstr').value;
 					this.getAllHighRisk();
 					this.JobTaskDetail.get('highRiskConstr').patchValue(data);
 					break;
 				}
 				case 'ppe': {
-					let data = this.JobTaskDetail.get('PPE').value;
+					const data = this.JobTaskDetail.get('PPE').value;
 					this.getAllPPE();
 					this.JobTaskDetail.get('PPE').patchValue(data);
 					break;
 				}
 				case 'codeOfPract': {
-					let data = this.JobTaskDetail.get('codeOfPract').value;
+					const data = this.JobTaskDetail.get('codeOfPract').value;
 					this.getAllCodeOfPractice();
 					this.JobTaskDetail.get('codeOfPract').patchValue(data);
 					break;
 				}
 				case 'licence': {
-					let data = this.JobTaskDetail.get('LicenceCat').value;
+					const data = this.JobTaskDetail.get('LicenceCat').value;
 					this.getLicenceByTradeCat(this.jobTask.tradeCategoryId);
 					this.JobTaskDetail.get('LicenceCat').patchValue(data);
 					break;
 				}
 				case 'identifyHazards': {
-					let data = this.JobTaskDetail.get('identifyHazrds').value;
+					const data = this.JobTaskDetail.get('identifyHazrds').value;
 					this.getAllHazard();
 					this.JobTaskDetail.get('identifyHazrds').patchValue(data);
 					break;
 				}
 				case 'riskLevel': {
-					let data = this.JobTaskDetail.get('riskLevel').value;
+					const data = this.JobTaskDetail.get('riskLevel').value;
 					this.getAllRiskLevel();
 					this.JobTaskDetail.get('riskLevel').patchValue(data);
 					break;
 				}
 				case 'ctrlActreq': {
-					let data = this.JobTaskDetail.get('contrActReq').value;
+					const data = this.JobTaskDetail.get('contrActReq').value;
 					this.getAllContrActReq();
 					this.JobTaskDetail.get('contrActReq').patchValue(data);
 					break;
 				}
 				case 'resRiskLevel': {
-					let data = this.JobTaskDetail.get('residualRiskL').value;
+					const data = this.JobTaskDetail.get('residualRiskL').value;
 					this.getAllResidualRiskLevel();
 					this.JobTaskDetail.get('residualRiskL').patchValue(data);
 					break;
 				}
 				case 'perResbl': {
-					let data = this.JobTaskDetail.get('personResp').value;
+					const data = this.JobTaskDetail.get('personResp').value;
 					this.getAllStaff();
 					this.JobTaskDetail.get('personResp').patchValue(data);
 					break;

@@ -41,7 +41,7 @@ export class AddSiteInspectionTopicComponent implements OnInit {
 		});
 	}
 	removeTopic(i) {
-		const item = <FormArray>this.siteInspectionTopicAdd.controls['arrObj'];
+		const item = <FormArray>this.siteInspectionTopicAdd.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}

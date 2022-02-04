@@ -42,7 +42,7 @@ export class PpeSelectComponent implements AfterViewInit, OnInit {
 	getAllPPEs(field = '', value = '') {
 		this.logicalFormInfo.getAllPPE(field, value).subscribe((res: any) => {
 			console.log('PPEAll=>', res);
-			let data = res.data;
+			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

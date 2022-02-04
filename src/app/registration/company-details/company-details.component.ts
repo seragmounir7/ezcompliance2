@@ -47,7 +47,7 @@ export class CompanyDetailsComponent implements OnInit {
 	getAllSubscription() {
 		this.subscript.getAllsubscription().subscribe((res) => {
 			console.log('getAll', res);
-			let companyData = res.data;
+			const companyData = res.data;
 			companyData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

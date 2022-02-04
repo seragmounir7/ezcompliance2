@@ -27,7 +27,7 @@ export class AddFormCategoriesComponent implements OnInit {
 		if (this.data.action == 'edit') {
 			console.log('edit');
 
-			this.dynamicFormCategoryAdd.controls['title'].setValue(
+			this.dynamicFormCategoryAdd.controls.title.setValue(
 				this.data?.element?.title
 			);
 		}

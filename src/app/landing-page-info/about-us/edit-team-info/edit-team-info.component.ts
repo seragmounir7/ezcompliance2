@@ -104,7 +104,7 @@ export class EditTeamInfoComponent implements OnInit {
 				console.log('img', this.selectedImage);
 		}
 
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.team[index]._id;
 
 		console.log('aaaaaaa', this.subId);
@@ -145,9 +145,9 @@ export class EditTeamInfoComponent implements OnInit {
 		this.editSubModule();
 		this.companyDetail.get('fileUrl')?.setValue(this.Image);
 
-		let value = this.selectedImage[0];
+		const value = this.selectedImage[0];
 
-		let arrlength = this.add().length;
+		const arrlength = this.add().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.add()
 				.at(i)
@@ -157,7 +157,7 @@ export class EditTeamInfoComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.companyDetail.controls['arrObj'];
+		const item = <FormArray>this.companyDetail.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 			this.selectedImage.splice(i, 1);
@@ -168,7 +168,7 @@ export class EditTeamInfoComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
@@ -203,7 +203,7 @@ export class EditTeamInfoComponent implements OnInit {
 	}
 	editModule() {
 		if (this.data.action == 'edit') {
-			let AboutUsData = {
+			const AboutUsData = {
 				title: this.companyDetail.controls.title.value,
 				description: this.companyDetail.controls.description.value,
 				//  imageUrl: this.Image1 ,
@@ -224,7 +224,7 @@ export class EditTeamInfoComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let teamData = {
+			const teamData = {
 				aboutUsId: this.data.EditData._id,
 
 				imageUrl: this.selectedImage,

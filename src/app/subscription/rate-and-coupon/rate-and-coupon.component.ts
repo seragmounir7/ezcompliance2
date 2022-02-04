@@ -53,7 +53,7 @@ export class RateAndCouponComponent implements OnInit {
 	getPlan() {
 		this.myId = '6177e0b96d0cc515a04870a2';
 		this.subscript.getAllPlan().subscribe((data) => {
-			let dataPlan = data.data;
+			const dataPlan = data.data;
 			if (dataPlan.length == 0) {
 				this.addPlan = true;
 			} else {
@@ -105,7 +105,7 @@ export class RateAndCouponComponent implements OnInit {
 	}
 
 	getPlanById() {
-		let id = '61b739367f7aba4a9f8684e1';
+		const id = '61b739367f7aba4a9f8684e1';
 		this.subscript.getPlan(id).subscribe((res) => {
 			console.log('getId', res);
 			this.coupon = res.data;

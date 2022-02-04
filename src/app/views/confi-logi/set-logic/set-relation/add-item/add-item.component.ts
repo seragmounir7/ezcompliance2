@@ -29,7 +29,7 @@ export class AddItemComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			title: this.addItem.get('title').value
 		};
 
@@ -137,7 +137,7 @@ export class AddItemComponent implements OnInit {
 		});
 	}
 	addLicence(data) {
-		let dataTemp = {
+		const dataTemp = {
 			title: data.title,
 			tradeCategoryId: this.dataRec.tradeCategoryId
 		};

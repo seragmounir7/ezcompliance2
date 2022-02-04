@@ -79,12 +79,12 @@ export class AddSafetyModuleComponent implements OnInit {
 			].fileUrl),
 				console.log('img', this.selectedImage);
 		}
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;
 	}
 	onFormSubmit() {
-		let value = this.selectedImage[0];
-		let arrlength = this.safetyImgArr().length;
+		const value = this.selectedImage[0];
+		const arrlength = this.safetyImgArr().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.safetyImgArr()
 				.at(i)
@@ -107,7 +107,7 @@ export class AddSafetyModuleComponent implements OnInit {
 		});
 	}
 	removeSafetyModule(i) {
-		const item = <FormArray>this.safetyDetail.controls['arrObj'];
+		const item = <FormArray>this.safetyDetail.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 			this.selectedImage.splice(i, 1);
@@ -118,7 +118,7 @@ export class AddSafetyModuleComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage[0];
+		const value = this.selectedImage[0];
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
@@ -135,7 +135,7 @@ export class AddSafetyModuleComponent implements OnInit {
 	}
 	editModule() {
 		if (this.data.action == 'edit') {
-			let SafetyData = {
+			const SafetyData = {
 				title: this.safetyDetail.controls.title.value,
 				description: this.safetyDetail.controls.description.value,
 				mode: 'Safety'
@@ -150,7 +150,7 @@ export class AddSafetyModuleComponent implements OnInit {
 					this.safetyDetail.reset();
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'Safety',
 
 				title: this.safetyDetail.controls.title.value,
@@ -167,7 +167,7 @@ export class AddSafetyModuleComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				moduleId: this.data.EditData._id,
 				title: this.safetyImgArr().at(0).get('title')?.value,
 				fileUrl: this.selectedImage
@@ -182,7 +182,7 @@ export class AddSafetyModuleComponent implements OnInit {
 					this.dialogRef.close('true');
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'Safety',
 
 				title: this.safetyDetail.controls.title.value,

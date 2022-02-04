@@ -40,14 +40,14 @@ export class AddStaffComponent implements OnInit {
 	}
 
 	removeStaff(i) {
-		const item = <FormArray>this.addStaffForm.controls['arrObj'];
+		const item = <FormArray>this.addStaffForm.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.addStaffForm.value);
-		let data = {
+		const data = {
 			arrObj: this.addStaffForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleStaff(data).subscribe(

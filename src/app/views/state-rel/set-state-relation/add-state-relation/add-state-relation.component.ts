@@ -79,7 +79,7 @@ export class AddStateRelationComponent implements OnInit {
 	}
 
 	setRelation() {
-		let data = {
+		const data = {
 			set: true,
 			title: this.states.title,
 			jurisdictionId: this.SetState.get('jurisdictionId').value,

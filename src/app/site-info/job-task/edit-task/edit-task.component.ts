@@ -39,7 +39,7 @@ export class EditTaskComponent implements OnInit {
 		this.getAllLicenceCat();
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			title: this.editTitle.get('title').value,
 			// PPE:this.dataRec.PPE,
 			// codeOfPractice:this.dataRec.codeOfPractice,

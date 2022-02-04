@@ -26,7 +26,7 @@ export class EditChemicalComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo

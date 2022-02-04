@@ -40,7 +40,7 @@ export class WHSManagerComponent implements OnInit {
 			.subscribe((res: any) => {
 				console.log('getAllWHSManager=>', res);
 				// this.jobTaskData = res.data[0].subComponents;
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});

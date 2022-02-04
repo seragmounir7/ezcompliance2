@@ -40,14 +40,14 @@ export class AddPPEComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.PPEformgp.controls['arrObj'];
+		const item = <FormArray>this.PPEformgp.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.PPEformgp.value);
-		let data = {
+		const data = {
 			arrObj: this.PPEformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultiplePPE(data).subscribe(

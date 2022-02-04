@@ -43,7 +43,7 @@ export class TypeOfIncidentComponent implements OnInit {
 			.getAllTypeOfIncident(field, value)
 			.subscribe((res: any) => {
 				console.log('type=>', res);
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});

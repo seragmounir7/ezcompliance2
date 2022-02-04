@@ -41,14 +41,14 @@ export class AddChangesMadeComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.changesformgp.controls['arrObj'];
+		const item = <FormArray>this.changesformgp.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.changesformgp.value);
-		let data = {
+		const data = {
 			arrObj: this.changesformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleChangesMade(data).subscribe(

@@ -54,7 +54,7 @@ export class SiteInspectionTopicComponent implements OnInit {
 			});
 	}
 	openDialog(id) {
-		let dialogRef = this.dialog.open(AddSiteInspectionTopicComponent, {
+		const dialogRef = this.dialog.open(AddSiteInspectionTopicComponent, {
 			height: '600px',
 			width: '700px',
 
@@ -83,7 +83,7 @@ export class SiteInspectionTopicComponent implements OnInit {
 
 			// height:'400px',
 			data: {
-				element: element,
+				element,
 				categoryId: this.id
 			}
 		});

@@ -30,7 +30,7 @@ export class AddTermsAndConditionsComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.data.element.termsAndCond) {
-			this.addTerms.controls['termsAndCond'].setValue(
+			this.addTerms.controls.termsAndCond.setValue(
 				this.data.element.termsAndCond
 			);
 		}

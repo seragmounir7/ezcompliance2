@@ -28,7 +28,7 @@ export class EditFaqComponent implements OnInit {
 	}
 
 	onFormSubmit() {
-		let data = {
+		const data = {
 			title: this.editPortal.get('title').value
 		};
 		console.log('porataldata', data, this.dataRec._id);
@@ -46,7 +46,7 @@ export class EditFaqComponent implements OnInit {
 			});
 	}
 	addForm() {
-		let data = {
+		const data = {
 			title: this.editPortal.get('title').value
 		};
 		this.landingPageInfo.addPortal(data).subscribe((resData) => {

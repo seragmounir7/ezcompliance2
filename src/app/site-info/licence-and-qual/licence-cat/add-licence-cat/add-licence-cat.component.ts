@@ -39,13 +39,13 @@ export class AddLicenceCatComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.addLicenceCatFG.controls['arrObj'];
+		const item = <FormArray>this.addLicenceCatFG.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			arrObj: this.addLicenceCatFG.get('arrObj').value
 		};
 		this.logicalFormInfo.addLicenceCat(data).subscribe(

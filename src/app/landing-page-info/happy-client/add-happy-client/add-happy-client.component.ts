@@ -69,13 +69,13 @@ export class AddHappyClientComponent implements OnInit {
 				console.log('img', this.selectedImage);
 		}
 
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;
 	}
 	onFormSubmit() {
-		let value = this.selectedImage[0];
+		const value = this.selectedImage[0];
 
-		let arrlength = this.clientArr().length;
+		const arrlength = this.clientArr().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.clientArr()
 				.at(i)
@@ -98,7 +98,7 @@ export class AddHappyClientComponent implements OnInit {
 		});
 	}
 	removeHappyClient(i) {
-		const item = <FormArray>this.clientDetail.controls['arrObj'];
+		const item = <FormArray>this.clientDetail.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 			this.selectedImage.splice(i, 1);
@@ -109,7 +109,7 @@ export class AddHappyClientComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
@@ -126,7 +126,7 @@ export class AddHappyClientComponent implements OnInit {
 	}
 	editModule() {
 		if (this.data.action == 'edit') {
-			let ServiceData = {
+			const ServiceData = {
 				title: this.clientDetail.controls.title.value,
 				mode: 'HappyClient'
 			};
@@ -139,7 +139,7 @@ export class AddHappyClientComponent implements OnInit {
 					this.clientDetail.reset();
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'HappyClient',
 
 				title: this.clientDetail.controls.title.value,
@@ -155,7 +155,7 @@ export class AddHappyClientComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				moduleId: this.data.EditData._id,
 				fileUrl: this.selectedImage
 			};
@@ -168,7 +168,7 @@ export class AddHappyClientComponent implements OnInit {
 					this.clientDetail.reset();
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'HappyClient',
 				title: this.clientDetail.controls.title.value,
 				arrObj: this.fb.array([])

@@ -99,7 +99,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 			console.log('allForms', resF);
 			// console.log('allForms', resF.data);
 			this.allForms = resF.data;
-			let data = resF.data;
+			const data = resF.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});
@@ -113,7 +113,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		});
 	}
 	slideChanged(e, form) {
-		let data = {
+		const data = {
 			title: form.title,
 			htmlObject: form.htmlObject,
 			enable: e.checked,
@@ -232,7 +232,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 
 	frequencyChange(e, form) {
 		console.log(e.target.value);
-		let data = {
+		const data = {
 			title: form.title,
 			htmlObject: form.htmlObject,
 			enable: form.enable,
@@ -246,7 +246,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	}
 	add(element) {
 		console.log('element', element._id);
-		let data = {
+		const data = {
 			id: element._id,
 			type: 'add'
 		};

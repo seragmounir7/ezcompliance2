@@ -81,7 +81,7 @@ export class JobNumberComponent implements OnInit {
 	}
 
 	openDialog(id) {
-		let dialogRef = this.dialog.open(CreateJobNoComponent, {
+		const dialogRef = this.dialog.open(CreateJobNoComponent, {
 			height: '80%',
 			data: {
 				action: 'new',

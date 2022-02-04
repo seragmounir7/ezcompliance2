@@ -41,14 +41,14 @@ export class AddTypeOfIncidentComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.typeformgp.controls['arrObj'];
+		const item = <FormArray>this.typeformgp.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.typeformgp.value);
-		let data = {
+		const data = {
 			arrObj: this.typeformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleTypeOfIncident(data).subscribe(

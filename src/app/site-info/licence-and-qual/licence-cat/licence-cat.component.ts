@@ -45,7 +45,7 @@ export class LicenceCatComponent implements OnInit {
 		this.logicalFormInfo.getAllLicenceCat(field, value).subscribe((res) => {
 			console.log('getAllLicenceCat=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
-			let data = res.data;
+			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

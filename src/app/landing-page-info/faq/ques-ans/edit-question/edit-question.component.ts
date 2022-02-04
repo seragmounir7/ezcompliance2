@@ -43,7 +43,7 @@ export class EditQuestionComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			question: this.editTitle.get('question').value,
 			answer: this.editTitle.get('answer').value,
 			portalId: this.editTitle.get('portalId').value

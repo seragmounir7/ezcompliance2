@@ -48,7 +48,7 @@ export class TermsAndConditionsComponent implements OnInit {
 		this.logicalFormInfo.getTermsAndConditions().subscribe(
 			(res: any) => {
 				console.log('NatOfIncAll=>', res);
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});
@@ -73,7 +73,7 @@ export class TermsAndConditionsComponent implements OnInit {
 			width: '950px',
 			height: '500px',
 			data: {
-				element: element,
+				element,
 				url: this.url
 			}
 		});

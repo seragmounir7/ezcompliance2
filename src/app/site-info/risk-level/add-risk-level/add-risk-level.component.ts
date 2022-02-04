@@ -39,14 +39,14 @@ export class AddRiskLevelComponent implements OnInit {
 	}
 
 	removeRisk(i) {
-		const item = <FormArray>this.addRiskForm.controls['arrObj'];
+		const item = <FormArray>this.addRiskForm.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.addRiskForm.value);
-		let data = {
+		const data = {
 			arrObj: this.addRiskForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleRiskLevel(data).subscribe(

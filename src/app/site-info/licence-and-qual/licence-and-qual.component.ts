@@ -48,7 +48,7 @@ export class LicenceAndQualComponent implements OnInit {
 		this.logicalFormInfo.getAllLicence(field, value).subscribe((res) => {
 			console.log('getAllLicence=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
-			let data = res.data;
+			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

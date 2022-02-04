@@ -42,13 +42,13 @@ export class AddCOPComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.codeOfPractFG.controls['arrObj'];
+		const item = <FormArray>this.codeOfPractFG.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			arrObj: this.codeOfPractFG.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleCOP(data).subscribe(

@@ -39,14 +39,14 @@ export class AddChemicalComponent implements OnInit {
 	}
 
 	removeChemical(i) {
-		const item = <FormArray>this.addChemicalForm.controls['arrObj'];
+		const item = <FormArray>this.addChemicalForm.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.addChemicalForm.value);
-		let data = {
+		const data = {
 			arrObj: this.addChemicalForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleChemical(data).subscribe(

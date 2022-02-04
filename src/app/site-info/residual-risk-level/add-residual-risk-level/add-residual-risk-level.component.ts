@@ -40,14 +40,14 @@ export class AddResidualRiskLevelComponent implements OnInit {
 	}
 
 	removeResidual(i) {
-		const item = <FormArray>this.addResidualForm.controls['arrObj'];
+		const item = <FormArray>this.addResidualForm.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.addResidualForm.value);
-		let data = {
+		const data = {
 			arrObj: this.addResidualForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleResidual(data).subscribe(

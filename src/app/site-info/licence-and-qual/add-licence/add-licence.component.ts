@@ -45,7 +45,7 @@ export class AddLicenceComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.addLicenceFG.controls['arrObj'];
+		const item = <FormArray>this.addLicenceFG.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -57,7 +57,7 @@ export class AddLicenceComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			arrObj: this.addLicenceFG.get('arrObj').value
 		};
 		console.log('data li cat', data);

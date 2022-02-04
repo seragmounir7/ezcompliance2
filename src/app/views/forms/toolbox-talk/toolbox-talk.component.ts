@@ -95,7 +95,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.toolBox.valueChanges.subscribe((res) => {
 				this.toolBox.disable();
 			});
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad2 != null;
 			};
 			check().then((x) => {
@@ -122,7 +122,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 		this.activatedRoute.queryParams.subscribe((params) => {
-			this.type = params['formType'];
+			this.type = params.formType;
 		});
 		//  this.type=this.forms.formTypeObs$;
 
@@ -167,7 +167,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 				date: res.data.date
 			});
 			this.dataUrl = res.data.signaturePad1;
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad1 != null;
 			};
 			check().then(() => {
@@ -176,13 +176,13 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			});
 			console.log('this.signaturePad1', this.signaturePad1);
 
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad2 != null;
 			};
 			check2().then(() => {
 				console.log(this.signaturePad2);
 				setTimeout(() => {
-					let signaturePadArr = this.signaturePad2.toArray();
+					const signaturePadArr = this.signaturePad2.toArray();
 					res.data.attendees.forEach((x, i) => {
 						signaturePadArr[i].fromDataURL(x.signature);
 						if (this.isHistory) signaturePadArr[i].off();
@@ -302,7 +302,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 	removeIssues(i) {
-		const item = <FormArray>this.toolBox.controls['issues'];
+		const item = <FormArray>this.toolBox.controls.issues;
 		if (item.length > 1) item.removeAt(i);
 	}
 	addCorrectAct() {
@@ -320,7 +320,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 	removeCorrectAct(i) {
-		const item = <FormArray>this.toolBox.controls['corrAction'];
+		const item = <FormArray>this.toolBox.controls.corrAction;
 		if (item.length > 1) item.removeAt(i);
 	}
 	addAttendee() {
@@ -337,7 +337,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 	removeAttendee(i) {
-		const item = <FormArray>this.toolBox.controls['attendees'];
+		const item = <FormArray>this.toolBox.controls.attendees;
 		if (item.length > 1) item.removeAt(i);
 	}
 	public signaturePadOptions1: Object = {
@@ -361,7 +361,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		console.log(signArr, canvasWidth, canvasHeight);
 
 		signArr.toArray().forEach((x) => {
-			let sign = x.toDataURL();
+			const sign = x.toDataURL();
 			x.set('canvasWidth', canvasWidth);
 			x.set('canvasHeight', canvasHeight);
 			x.fromDataURL(sign);
@@ -389,26 +389,26 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 
 				if (result.matches) {
 					// this.reSizeSignArray(this.signaturePad2, 233, 114);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 247);
 					this.signaturePad1.set('canvasHeight', 106);
 					this.signaturePad1.fromDataURL(sign);
 				} else {
 					// this.reSizeSignArray(this.signaturePad2, 420, 121);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 500);
 					this.signaturePad1.set('canvasHeight', 100);
 					this.signaturePad1.fromDataURL(sign);
 				}
 				if (result.matches) {
 					this.reSizeSignArray(this.signaturePad2, 233, 114);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 247);
 					this.signaturePad1.set('canvasHeight', 107);
 					this.signaturePad1.fromDataURL(sign);
 				} else {
 					this.reSizeSignArray(this.signaturePad2, 420, 121);
-					let sign = this.signaturePad1.toDataURL();
+					const sign = this.signaturePad1.toDataURL();
 					this.signaturePad1.set('canvasWidth', 338);
 					this.signaturePad1.set('canvasHeight', 107);
 					this.signaturePad1.fromDataURL(sign);
@@ -453,19 +453,19 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	drawComplete1() {
 		// will be notified of szimek/signature_pad's onEnd event
 		console.log('signnn', this.signaturePad1);
-		this.toolBox.controls['signaturePad1'].setValue(
+		this.toolBox.controls.signaturePad1.setValue(
 			this.signaturePad1.toDataURL()
 		);
 		console.log(
 			'signaturePad1 control',
-			this.toolBox.controls['signaturePad1'].value
+			this.toolBox.controls.signaturePad1.value
 		);
-		this.singRequired = this.toolBox.controls['signaturePad1'].invalid;
+		this.singRequired = this.toolBox.controls.signaturePad1.invalid;
 	}
 	clear1() {
 		this.signaturePad1.clear();
-		this.toolBox.controls['signaturePad1'].setValue('');
-		this.singRequired = this.toolBox.controls['signaturePad1'].untouched;
+		this.toolBox.controls.signaturePad1.setValue('');
+		this.singRequired = this.toolBox.controls.signaturePad1.untouched;
 	}
 	drawStart1() {
 		// will be notified of szimek/signature_pad's onBegin event
@@ -505,7 +505,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			).invalid;
 		}
 
-		this.singRequired = this.toolBox.controls['signaturePad1'].invalid;
+		this.singRequired = this.toolBox.controls.signaturePad1.invalid;
 
 		console.log('form data', this.toolBox.value);
 		if (this.id !== 'form') {

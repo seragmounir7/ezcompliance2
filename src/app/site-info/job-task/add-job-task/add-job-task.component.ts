@@ -53,14 +53,14 @@ export class AddJobTaskComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.jobTaskDetails.controls['arrObj'];
+		const item = <FormArray>this.jobTaskDetails.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.jobTaskDetails.get('arrObj').value);
-		let data = {
+		const data = {
 			arrObj: this.jobTaskDetails.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleJobTask(data).subscribe(

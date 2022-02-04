@@ -88,7 +88,7 @@ export class EditScreenShotComponent implements OnInit {
 				console.log('img', this.selectedImage);
 		}
 
-		let index = this.data.index;
+		const index = this.data.index;
 		console.log(index, 'index');
 		this.subId = this.data.EditData.subModules[index]._id;
 		console.log(this.subId, 'subId');
@@ -126,7 +126,7 @@ export class EditScreenShotComponent implements OnInit {
 		});
 	}
 	removeSafetyModule(i) {
-		const item = <FormArray>this.SubWorkDetail.controls['arrObj'];
+		const item = <FormArray>this.SubWorkDetail.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 			this.selectedImage.splice(i, 1);
@@ -138,7 +138,7 @@ export class EditScreenShotComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 		console.log('vvvvvv', value);
 
 		if (value) {
@@ -160,11 +160,11 @@ export class EditScreenShotComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 		console.log('vvvvvv', value);
 
 		console.log(this.SubWorkDetail.value);
-		let arrlength = this.add().length;
+		const arrlength = this.add().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.add()
 				.at(i)
@@ -184,7 +184,7 @@ export class EditScreenShotComponent implements OnInit {
 	}
 	editModule() {
 		if (this.data.action == 'edit') {
-			let ServiceData = {
+			const ServiceData = {
 				title: this.SubWorkDetail.controls.title.value,
 				mode: 'Screenshot'
 			};
@@ -203,7 +203,7 @@ export class EditScreenShotComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				// subTitle: this.SubWorkDetail.controls.subTitle.value,
 				moduleId: this.data.EditData._id,
 				title: this.add().at(0).get('title')?.value,

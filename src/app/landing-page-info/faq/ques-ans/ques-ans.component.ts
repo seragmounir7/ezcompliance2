@@ -78,7 +78,7 @@ export class QuesAnsComponent implements OnInit {
 	}
 	getAllFaqbasedOnPortal(id) {
 		this.landingPafeInfo.getAllFaqbasedOnPortal(id).subscribe((res) => {
-			let allData = res.data;
+			const allData = res.data;
 			console.log('getAllFaqbasedOnPortal', allData);
 			allData[0].faq.forEach((element, index) => {
 				element.index = index + 1;

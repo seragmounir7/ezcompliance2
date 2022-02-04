@@ -89,7 +89,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
 				console.log('img', this.selectedImage);
 		}
 
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;
 	}
 	Added() {
@@ -114,10 +114,10 @@ export class EditCustomerTestimonailComponent implements OnInit {
 
 		this.editModule();
 		this.editSubModule();
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
 		console.log(this.testiomnial.value);
-		let arrlength = this.add().length;
+		const arrlength = this.add().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.add()
 				.at(i)
@@ -149,7 +149,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
@@ -170,7 +170,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
 
 	editModule() {
 		if (this.data.action == 'edit') {
-			let ServiceData = {
+			const ServiceData = {
 				title: this.testiomnial.controls.title.value,
 				description: this.testiomnial.controls.description.value,
 				mode: 'Testimonial'
@@ -190,7 +190,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				moduleId: this.data.EditData._id,
 				subTitle: this.add().at(0).get('subTitle')?.value,
 				fileUrl: this.selectedImage,
@@ -207,7 +207,7 @@ export class EditCustomerTestimonailComponent implements OnInit {
 					this.testiomnial.reset();
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'Testimonial',
 
 				title: this.testiomnial.controls.title.value,

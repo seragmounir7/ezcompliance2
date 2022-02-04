@@ -49,7 +49,7 @@ export class AddingCustComponent implements OnInit {
 		});
 	}
 	removeCustomerDetails(i) {
-		const item = <FormArray>this.addCustomerForm.controls['contacts'];
+		const item = <FormArray>this.addCustomerForm.controls.contacts;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}

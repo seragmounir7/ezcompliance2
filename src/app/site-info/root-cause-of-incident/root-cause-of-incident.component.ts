@@ -43,7 +43,7 @@ export class RootCauseOfIncidentComponent implements OnInit {
 			.getAllRootCause(field, value)
 			.subscribe((res: any) => {
 				console.log('root=>', res);
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});

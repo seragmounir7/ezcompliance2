@@ -44,14 +44,14 @@ export class AddFaqComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.portalDetails.controls['faq'];
+		const item = <FormArray>this.portalDetails.controls.faq;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.portalDetails.value);
-		let data = {
+		const data = {
 			title: this.portalDetails.value
 			//  faq:this.portalDetails.get('faq').value
 		};

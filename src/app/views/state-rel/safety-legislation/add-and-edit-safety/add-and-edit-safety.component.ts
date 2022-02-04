@@ -29,7 +29,7 @@ export class AddAndEditSafetyComponent implements OnInit {
 	}
 
 	onFormSubmit() {
-		let data = {
+		const data = {
 			act: this.editTitle.get('act').value,
 			regulation: this.editTitle.get('regulation').value,
 			componentId: this.dataRec.componentId
@@ -48,7 +48,7 @@ export class AddAndEditSafetyComponent implements OnInit {
 			});
 	}
 	addForm() {
-		let data = {
+		const data = {
 			act: this.editTitle.get('act').value,
 			regulation: this.editTitle.get('regulation').value
 		};

@@ -62,9 +62,9 @@ export class ContactUsComponent implements OnInit {
 	}
 	view(data) {
 		console.log('dataView', data);
-		let dialogRef = this.dialog.open(ViewContactComponent, {
+		const dialogRef = this.dialog.open(ViewContactComponent, {
 			width: '800px',
-			data: data
+			data
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {
@@ -80,7 +80,7 @@ export class ContactUsComponent implements OnInit {
 	getContact() {
 		this.url.getContact().subscribe((res) => {
 			console.log('mode=>', res);
-			let dataContact = res.data;
+			const dataContact = res.data;
 			dataContact.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

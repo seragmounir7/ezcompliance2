@@ -78,14 +78,14 @@ export class AddHighRiskConstructionComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.riskConstr.controls['arrObj'];
+		const item = <FormArray>this.riskConstr.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		// console.log(this.riskConstr.value);
-		let data = {
+		const data = {
 			arrObj: this.riskConstr.get('arrObj').value
 		};
 		// console.log(data);

@@ -42,7 +42,7 @@ export class FAQComponent implements OnInit {
 	getAllPortal() {
 		this.landingPageInfo.getAllPortal().subscribe((res: any) => {
 			console.log('portalDetails=>', res);
-			let faqData = res.data;
+			const faqData = res.data;
 			faqData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

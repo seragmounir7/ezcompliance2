@@ -86,7 +86,7 @@ export class EditFlexibleInfoComponent implements OnInit {
 				console.log('img', this.selectedImage);
 		}
 
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;
 	}
 
@@ -112,9 +112,9 @@ export class EditFlexibleInfoComponent implements OnInit {
 	onFormSubmit() {
 		this.editModule();
 		this.editSubModule();
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
-		let arrlength = this.add().length;
+		const arrlength = this.add().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.add()
 				.at(i)
@@ -122,13 +122,13 @@ export class EditFlexibleInfoComponent implements OnInit {
 				?.setValue(this.selectedImage[i].toString());
 		}
 
-		let serviceData = {};
+		const serviceData = {};
 	}
 	browser(event, i) {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage;
+		const value = this.selectedImage;
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
@@ -146,7 +146,7 @@ export class EditFlexibleInfoComponent implements OnInit {
 
 	editModule() {
 		if (this.data.action == 'edit') {
-			let flexibleData = {
+			const flexibleData = {
 				title: this.flexibleDetail.controls.title.value,
 				description: this.flexibleDetail.controls.description.value,
 				mode: 'Flexible'
@@ -165,7 +165,7 @@ export class EditFlexibleInfoComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				moduleId: this.data.EditData._id,
 				title: this.add().at(0).get('title')?.value,
 				fileUrl: this.selectedImage,
@@ -181,7 +181,7 @@ export class EditFlexibleInfoComponent implements OnInit {
 					this.flexibleDetail.reset();
 				});
 		} else {
-			let data = {
+			const data = {
 				mode: 'Flexible',
 
 				title: this.flexibleDetail.controls.title.value,

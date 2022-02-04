@@ -80,7 +80,7 @@ export class AddJobTaskComponent implements OnInit {
 	}
 	onFormSubmit() {
 		console.log(this.jobTaskDetails.get('title').value);
-		let data = {
+		const data = {
 			title: this.jobTaskDetails.get('title').value,
 			tradeCategoryId: this.jobTaskDetails.get('tradeCategoryId').value
 		};

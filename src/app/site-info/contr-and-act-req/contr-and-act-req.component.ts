@@ -46,7 +46,7 @@ export class ContrAndActReqComponent implements OnInit {
 			.getAllContrlActReq(field, value)
 			.subscribe((res: any) => {
 				console.log('PPEAll=>', res);
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});

@@ -326,18 +326,18 @@ export class SetStateRelationComponent implements OnInit {
 		this.router.navigate(
 			['/admin/stateRel/addState'],
 
-			{ queryParams: { id: id } }
+			{ queryParams: { id } }
 		);
 	}
 	setRelation(title, id, i) {
 		console.log('index', title);
 		console.log('id', id);
 		console.log('id', i);
-		let risk = [],
-			ppe = [],
-			licence = [],
-			identifyHazard = [],
-			controlActionRequired = [];
+		const risk = [];
+		const ppe = [];
+		const licence = [];
+		const identifyHazard = [];
+		const controlActionRequired = [];
 		if (this.jurisdictionFA().controls[i].get('jurisdictionArr').value) {
 			this.jurisdictionFA()
 				.controls[i].get('jurisdictionArr')
@@ -367,8 +367,8 @@ export class SetStateRelationComponent implements OnInit {
 				});
 		}
 
-		let data = {
-			title: title,
+		const data = {
+			title,
 			jurisdiction: this.jurisdictionFA().controls[i].get(
 				'jurisdictionArr'
 			).value,

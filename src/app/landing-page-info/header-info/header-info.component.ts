@@ -80,7 +80,7 @@ export class HeaderInfoComponent implements OnInit {
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
-		let value = this.selectedImage[0];
+		const value = this.selectedImage[0];
 		console.log('vvvvvv', value);
 
 		if (value) {
@@ -127,7 +127,7 @@ export class HeaderInfoComponent implements OnInit {
 	}
 
 	openDialogEdit(serviceDetail) {
-		let dialogRef = this.dialog.open(HeaderComponent, {
+		const dialogRef = this.dialog.open(HeaderComponent, {
 			data: {
 				action: 'edit',
 				headerData: this.infoData

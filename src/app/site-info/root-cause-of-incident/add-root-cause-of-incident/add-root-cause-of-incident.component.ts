@@ -41,14 +41,14 @@ export class AddRootCauseOfIncidentComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.rootformgp.controls['arrObj'];
+		const item = <FormArray>this.rootformgp.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.rootformgp.value);
-		let data = {
+		const data = {
 			arrObj: this.rootformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleRootCause(data).subscribe(

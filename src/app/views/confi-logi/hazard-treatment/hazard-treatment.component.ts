@@ -69,7 +69,7 @@ export class HazardTreatmentComponent implements OnInit {
 		this.router.navigate(
 			['/admin/confiLogi/setHazardRelation'],
 
-			{ queryParams: { id: id } }
+			{ queryParams: { id } }
 		);
 	}
 }

@@ -173,7 +173,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 		this.logicalFormInfo.getAllRisk(field, value).subscribe((res: any) => {
 			console.log('Risk=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
-			let data = res.data;
+			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

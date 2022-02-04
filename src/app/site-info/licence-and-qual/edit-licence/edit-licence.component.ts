@@ -44,7 +44,7 @@ export class EditLicenceComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			title: this.editTitle.get('title').value,
 			tradeCategoryId: this.editTitle.get('tradeCategoryId').value
 		};

@@ -78,7 +78,7 @@ export class EditTermsAndCondtionsComponent implements OnInit {
 					.description
 			});
 		}
-		let index = this.data.index;
+		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;
 	}
 	onFormSubmit() {}
@@ -97,7 +97,7 @@ export class EditTermsAndCondtionsComponent implements OnInit {
 		});
 	}
 	removeSafetyModule(i) {
-		const item = <FormArray>this.termsDetail.controls['arrObj'];
+		const item = <FormArray>this.termsDetail.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -105,7 +105,7 @@ export class EditTermsAndCondtionsComponent implements OnInit {
 
 	editModule() {
 		if (this.data.action == 'edit') {
-			let SafetyData = {
+			const SafetyData = {
 				title: this.termsDetail.controls.title.value,
 				description: this.termsDetail.controls.description.value,
 				mode: 'Terms'
@@ -123,7 +123,7 @@ export class EditTermsAndCondtionsComponent implements OnInit {
 	}
 	editSubModule() {
 		if (this.data.action == 'edit') {
-			let submodulesData = {
+			const submodulesData = {
 				moduleId: this.data.EditData._id,
 				title: this.safetyImgArr().at(0).get('title')?.value,
 				description: this.safetyImgArr().at(0).get('description')

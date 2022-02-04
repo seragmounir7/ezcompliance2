@@ -61,7 +61,7 @@ export class HappyClientComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
-			let happyClientData = res.data[0].subModules;
+			const happyClientData = res.data[0].subModules;
 			happyClientData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});
@@ -81,7 +81,7 @@ export class HappyClientComponent implements OnInit {
 		this.mode = 'HappyClient';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.happyClientData = data.data[0];
-			let dialogRef = this.dialog.open(AddHappyClientComponent, {
+			const dialogRef = this.dialog.open(AddHappyClientComponent, {
 				data: {
 					action: 'edit',
 					EditData: this.happyClientData,
@@ -107,7 +107,7 @@ export class HappyClientComponent implements OnInit {
 			console.log('HappyClient=>', data);
 			this.happyClientData = data.data[0];
 			console.log('', this.happyClientData);
-			let dialogRef = this.dialog.open(AddClientInfoComponent, {
+			const dialogRef = this.dialog.open(AddClientInfoComponent, {
 				data: {
 					action: 'new',
 					ID: id,

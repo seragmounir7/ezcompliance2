@@ -41,14 +41,14 @@ export class AddAndEditNatureIncidentComponent implements OnInit {
 	}
 
 	removeSafetyModule(i) {
-		const item = <FormArray>this.natureformgp.controls['arrObj'];
+		const item = <FormArray>this.natureformgp.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
 	}
 	onFormSubmit() {
 		console.log(this.natureformgp.value);
-		let data = {
+		const data = {
 			arrObj: this.natureformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleNatOfInc(data).subscribe(

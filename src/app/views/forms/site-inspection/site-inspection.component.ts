@@ -192,7 +192,7 @@ export class SiteInspectionComponent
 	async disableForm() {
 		if (this.isHistory) {
 			this.sidePreview.disable();
-			let check1 = async () => {
+			const check1 = async () => {
 				this.signaturePad != null;
 			};
 			await check1();
@@ -213,7 +213,7 @@ export class SiteInspectionComponent
 
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 		this.activatedRoute.queryParams.subscribe((params) => {
-			this.type = params['formType'];
+			this.type = params.formType;
 		});
 		this.id = this.activatedRoute.snapshot.params.id;
 
@@ -244,7 +244,7 @@ export class SiteInspectionComponent
 					setTimeout(() => {
 						let formatDate;
 						if (this.showDatas.date) {
-							let date = new Date(this.showDatas.date);
+							const date = new Date(this.showDatas.date);
 							formatDate = this.datePipe.transform(
 								date,
 								'yyyy-MM-dd'
@@ -268,7 +268,7 @@ export class SiteInspectionComponent
 							submitDate: this.showDatas.submitDate,
 							signature: this.showDatas.signature
 						});
-						let check = async () => {
+						const check = async () => {
 							this.signaturePad != null;
 						};
 						check().then(() => {
@@ -422,16 +422,16 @@ export class SiteInspectionComponent
 	drawComplete1() {
 		// will be notified of szimek/signature_pad's onEnd event
 		console.log(this.signaturePad.toDataURL());
-		this.sidePreview.controls['signature'].setValue(
+		this.sidePreview.controls.signature.setValue(
 			this.signaturePad.toDataURL()
 		);
-		this.singRequired = this.sidePreview.controls['signature'].invalid;
+		this.singRequired = this.sidePreview.controls.signature.invalid;
 	}
 	clear1() {
 		console.log('clear1');
 		this.signaturePad.clear();
-		this.sidePreview.controls['signature'].setValue('');
-		this.singRequired = this.sidePreview.controls['signature'].untouched;
+		this.sidePreview.controls.signature.setValue('');
+		this.singRequired = this.sidePreview.controls.signature.untouched;
 	}
 	drawStart1() {
 		// will be notified of szimek/signature_pad's onBegin event
@@ -462,16 +462,16 @@ export class SiteInspectionComponent
 			this.disableForm();
 			this.valueChangesArr = new Array<Observable<any>>();
 			for (let index = 0; index < this.add().length; index++) {
-				let element = this.add().at(index);
+				const element = this.add().at(index) as FormGroup;
 				this.valueChangesArr.push(
-					(element['controls'].personResponsible
+					(element.controls.personResponsible
 						.valueChanges as Observable<any>).pipe(
 						startWith({ fullName: '' }),
 						tap((value) =>
 							typeof value === 'object'
 								? ''
 								: typeof value === 'string'
-								? (element['controls']
+								? (element.controls
 										.personResponsible as AbstractControl).setErrors(
 										{ incorrect: true }
 								  )
@@ -576,13 +576,13 @@ export class SiteInspectionComponent
 		// }
 	}
 	removeAction() {
-		let index = this.add().length;
+		const index = this.add().length;
 		this.add().removeAt(index - 1);
 	}
 	addAcionData(data) {
-		let b = Object.keys(this.sidePreview.value);
+		const b = Object.keys(this.sidePreview.value);
 		console.log('data', data);
-		let index = this.add().length;
+		const index = this.add().length;
 		this.addAction();
 		this.add().controls[index].get('item').setValue(data.item);
 		this.add().controls[index].get('action').setValue(data.action);
@@ -664,7 +664,7 @@ export class SiteInspectionComponent
 					this.router.navigate(['/admin/forms/siteinspectiontable']);
 				});
 		} else {
-			let empName = this.sidePreview.controls.empName.value;
+			const empName = this.sidePreview.controls.empName.value;
 			this.sidePreview.removeControl('empName');
 			this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
 				console.log('res', res);

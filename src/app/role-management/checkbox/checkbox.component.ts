@@ -242,9 +242,9 @@ export class CheckboxComponent implements OnInit {
 	}
 	onSubmit() {
 		console.log('submit', this.rolemanagment.value);
-		let key = Object.keys(this.rolemanagment.value);
-		let checkeBox = key.map((x: string) => {
-			let arr = x.split('_');
+		const key = Object.keys(this.rolemanagment.value);
+		const checkeBox = key.map((x: string) => {
+			const arr = x.split('_');
 			let obj;
 			obj = {
 				form: arr[0],
@@ -259,7 +259,7 @@ export class CheckboxComponent implements OnInit {
 		console.log('form', checkeBox);
 		let filterArr;
 		let obj3;
-		let access = [];
+		const access = [];
 
 		for (let index = 0; index < this.roleArr.length; index++) {
 			for (let i = 0; i < this.formNameArr.length; i++) {
@@ -274,14 +274,14 @@ export class CheckboxComponent implements OnInit {
 				access.push(obj3);
 			}
 		}
-		let objArr = [];
+		const objArr = [];
 		for (let index = 0; index < this.roleArr.length; index++) {
 			let arr = [];
 			arr = access.filter((x) => x.role === this.roleArr[index].role);
 			arr.forEach((x) => {
 				delete x.role;
 			});
-			let obj = {
+			const obj = {
 				access: arr,
 				role: this.roleArr[index].role,
 				_id: this.roleArr[index]._id
@@ -307,7 +307,7 @@ export class CheckboxComponent implements OnInit {
 	setValue() {
 		for (let index = 0; index < this.roleArr.length; index++) {
 			for (let x = 0; x < this.roleArr[index].access.length; x++) {
-				let key = Object.keys(this.roleArr[index].access[x]);
+				const key = Object.keys(this.roleArr[index].access[x]);
 
 				key.splice(0, 1);
 				key.forEach((z: any, i) => {
@@ -336,13 +336,13 @@ export class CheckboxComponent implements OnInit {
 		this.formArr = true;
 	}
 	openDialog(role) {
-		let dialogRef = this.dialog.open(AddRoleComponent, {
+		const dialogRef = this.dialog.open(AddRoleComponent, {
 			height: '50%',
 			width: '500px',
 
 			data: {
 				action: 'edit',
-				role: role
+				role
 			}
 		});
 		dialogRef.afterClosed().subscribe((result) => {

@@ -30,7 +30,7 @@ export class AddInstructionsComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.data.element.instruction) {
-			this.addIstruction.controls['instruction'].setValue(
+			this.addIstruction.controls.instruction.setValue(
 				this.data.element.instruction
 			);
 		}

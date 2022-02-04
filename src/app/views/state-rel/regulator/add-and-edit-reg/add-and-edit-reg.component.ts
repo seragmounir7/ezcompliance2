@@ -28,7 +28,7 @@ export class AddAndEditRegComponent implements OnInit {
 	}
 
 	onFormSubmit() {
-		let data = {
+		const data = {
 			title: this.editTitle.get('title').value,
 			componentId: this.dataRec.componentId
 		};
@@ -46,7 +46,7 @@ export class AddAndEditRegComponent implements OnInit {
 			});
 	}
 	addForm() {
-		let data = {
+		const data = {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo.addRegulator(data).subscribe((resData) => {

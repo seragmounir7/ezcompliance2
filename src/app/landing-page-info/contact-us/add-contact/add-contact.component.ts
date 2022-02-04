@@ -52,7 +52,7 @@ export class AddContactComponent implements OnInit {
 	//   });
 	// }
 	onSubmit() {
-		let data = {
+		const data = {
 			// "title": this.HeaderInformation.get("heading").value,
 			// "description":  this.HeaderInformation.get("description").value,
 			// "fileUrl":this.HeaderInformation.get("uploadImage").value,

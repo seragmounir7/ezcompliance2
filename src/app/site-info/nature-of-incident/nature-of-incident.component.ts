@@ -43,7 +43,7 @@ export class NatureOfIncidentComponent implements OnInit {
 			.getAllNatOfInc(field, value)
 			.subscribe((res: any) => {
 				console.log('NatOfIncAll=>', res);
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});

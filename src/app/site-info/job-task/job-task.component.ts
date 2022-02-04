@@ -52,7 +52,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
 			.subscribe((res: any) => {
 				console.log('jobTaskDetails=>', res);
 				// this.jobTaskData = res.data[0].subComponents;
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});
@@ -109,7 +109,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
 		this.getAllJobTask(sort.active, sort.direction);
 	}
 	addJobTask() {
-		let dilog = this.dialog.open(AddJobTaskComponent, {
+		const dilog = this.dialog.open(AddJobTaskComponent, {
 			width: '70%'
 		});
 		dilog.afterClosed().subscribe((res) => {

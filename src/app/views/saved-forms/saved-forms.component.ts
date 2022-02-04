@@ -127,7 +127,7 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 	}
 	edit(id, type) {
 		// this.forms.formType.next(type);
-		let navigationExtras: NavigationExtras = {
+		const navigationExtras: NavigationExtras = {
 			queryParams: {
 				formType: type.toString()
 			}
@@ -176,7 +176,7 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 
 		this.spinner.show('printLoader');
 		// this.router.navigate(['/', { outlets: { 'print': ['print', 'riskAssessSWMS', id] } }])
-		let navigationExtras: NavigationExtras = {
+		const navigationExtras: NavigationExtras = {
 			queryParams: {
 				formType: type.toString()
 			}

@@ -14,7 +14,7 @@ export class RoleManagementComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Role Management');
 	}
 	openDialog(id) {
-		let dialogRef = this.dialog.open(AddRoleComponent, {
+		const dialogRef = this.dialog.open(AddRoleComponent, {
 			height: '50%',
 			width: '500px',
 

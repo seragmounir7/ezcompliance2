@@ -27,7 +27,7 @@ export class AddEditCouponComponent implements OnInit {
 		});
 	}
 	onSubmit() {
-		let data = {
+		const data = {
 			couponName: this.couponDetails.get('couponName').value,
 			discount: this.couponDetails.get('discount').value
 		};

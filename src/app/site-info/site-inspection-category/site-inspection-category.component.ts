@@ -47,7 +47,7 @@ export class SiteInspectionCategoryComponent implements OnInit {
 	}
 
 	openDialog(id) {
-		let dialogRef = this.dialog.open(AddSiteInspectionCategoryComponent, {
+		const dialogRef = this.dialog.open(AddSiteInspectionCategoryComponent, {
 			height: '600px',
 			width: '700px',
 

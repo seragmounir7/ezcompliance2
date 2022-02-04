@@ -58,7 +58,7 @@ export class DifferentModuleComponent implements OnInit {
 			console.log('Different', res.data);
 			this.dataSource.data = res.data;
 			// this.differentData = res.data;
-			let differentData = res.data[0].subModules;
+			const differentData = res.data[0].subModules;
 			differentData.forEach((element, index) => {
 				element.index = index + 1;
 			});
@@ -76,7 +76,7 @@ export class DifferentModuleComponent implements OnInit {
 		this.mode = 'Different';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.differentData = data.data[0];
-			let dialogRef = this.dialog.open(EditDifferentWorkComponent, {
+			const dialogRef = this.dialog.open(EditDifferentWorkComponent, {
 				data: {
 					action: 'edit',
 					EditData: this.differentData,
@@ -102,7 +102,7 @@ export class DifferentModuleComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.differentData = data.data[0];
 			console.log(this.differentData);
-			let dialogRef = this.dialog.open(AddDifferentWorkComponent, {
+			const dialogRef = this.dialog.open(AddDifferentWorkComponent, {
 				data: {
 					action: 'new',
 					ID: id,

@@ -43,7 +43,7 @@ export class ChangesMadeComponent implements OnInit {
 			.getAllChangesMade(field, value)
 			.subscribe((res: any) => {
 				console.log('Changes=>', res);
-				let data = res.data;
+				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});

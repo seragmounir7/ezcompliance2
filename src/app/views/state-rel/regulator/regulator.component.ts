@@ -39,7 +39,7 @@ export class RegulatorComponent implements OnInit {
 		this.logicalFormInfo.getAllRegulator(field, value).subscribe((res) => {
 			console.log('getAllRegulator=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
-			let data = res.data;
+			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});

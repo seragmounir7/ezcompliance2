@@ -44,7 +44,7 @@ export class DynamicFormCategoriesComponent implements OnInit {
 	}
 
 	openDialog() {
-		let dialogRef = this.dialog.open(AddFormCategoriesComponent, {
+		const dialogRef = this.dialog.open(AddFormCategoriesComponent, {
 			height: '600px',
 			width: '700px',
 

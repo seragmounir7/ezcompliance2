@@ -31,7 +31,7 @@ export class EditWhsManagerComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		let data = {
+		const data = {
 			name: this.editTitle.get('name').value,
 			email: this.editTitle.get('email').value
 		};
