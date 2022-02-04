@@ -42,7 +42,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 
 @Component({
 	selector: 'app-risk-assessment-swms',
@@ -240,7 +240,7 @@ export class RiskAssessmentSWMSComponent
 		private shared: RoleManagementSharedServiceService,
 		private employee: EmployeeRegistrationService,
 		private renderer: Renderer2,
-		private breakpointObserver: BreakpointObserver
+		public mobileViewService: MobileViewService
 	) {
 		//this.check = localStorage.getItem('key');
 		console.log('key check', this.check);
@@ -1010,25 +1010,23 @@ export class RiskAssessmentSWMSComponent
 		);
 
 		// if(this.count==1){
-		this.breakpointObserver
-			.observe([Breakpoints.XSmall])
-			.subscribe((result) => {
-				console.log(result);
+		this.mobileViewService.observeXsmall().subscribe((result) => {
+			console.log(result);
 
-				if (result.matches) {
-					this.reSizeSignArray(this.signaturePad2, 233, 114);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 247);
-					this.signaturePad1.set('canvasHeight', 107);
-					this.signaturePad1.fromDataURL(sign);
-				} else {
-					this.reSizeSignArray(this.signaturePad2, 420, 121);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 338);
-					this.signaturePad1.set('canvasHeight', 107);
-					this.signaturePad1.fromDataURL(sign);
-				}
-			});
+			if (result.matches) {
+				this.reSizeSignArray(this.signaturePad2, 233, 114);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 247);
+				this.signaturePad1.set('canvasHeight', 107);
+				this.signaturePad1.fromDataURL(sign);
+			} else {
+				this.reSizeSignArray(this.signaturePad2, 420, 121);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 338);
+				this.signaturePad1.set('canvasHeight', 107);
+				this.signaturePad1.fromDataURL(sign);
+			}
+		});
 
 		// this.signaturePad is now available
 		//this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime

@@ -52,6 +52,7 @@ import localeAu from '@angular/common/locales/en-AU';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { DirectivesModule } from './Directives/directives.module';
+import { MobileViewService } from './utils/services/mobile-view.service';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -131,7 +132,8 @@ registerLocaleData(localeEn, 'en-EN');
 		},
 		{ provide: MAT_DATE_LOCALE, useValue: 'en-au' },
 		{ provide: LOCALE_ID, useValue: 'en-au' },
-		DatePipe
+		DatePipe,
+		MobileViewService
 	],
 	bootstrap: [AppComponent]
 })

@@ -38,6 +38,7 @@
 <div
 	id="section-to-print"
 	class="container card px-4 py-4"
+	[class.px-4]="!(mobileViewService.isMobile| async)"
 	[formGroup]="riskAssessmentFb"
 >
 	<h2 class="text-center pt-3">
