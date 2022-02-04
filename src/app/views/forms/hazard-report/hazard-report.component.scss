@@ -244,17 +244,21 @@ datalist > option {
 	}
 	mat-datepicker-toggle {
 		::ng-deep .mat-icon-button {
-			left: -1.5rem;
+			left: -3rem;
 		}
 	}
 	input[type='file'] {
 		height: 48%;
 	}
-}
-
-@media only screen and (max-width: 400px) {
 	.sign {
 		border: 1px solid lightgray;
-		width: inherit;
+		width: 270px;
 	}
 }
+
+// @media only screen and (max-width: 400px) {
+// 	.sign {
+// 		border: 1px solid lightgray;
+// 		width: inherit;
+// 	}
+// }
