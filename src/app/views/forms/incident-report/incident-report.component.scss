@@ -26,7 +26,7 @@ label {
 	font-family: Inter, sans-serif;
 }
 
-::ng-deep .mat-checkbox .mat-checkbox-inner-container {
+:host ::ng-deep .mat-checkbox .mat-checkbox-inner-container {
 	width: 30px;
 	height: 30px;
 }
@@ -265,22 +265,19 @@ select {
 	border: solid 3px #f85f5f !important;
 	border-radius: 10px !important;
 }
-@media only screen and(min-width:360px) and(max-width:414px) {
+@media only screen and(min-width:360px) and(max-width:500px) {
 	.pt-3 {
 		font-size: 25px;
 	}
-	.form-control {
-		width: 85%;
-	}
-	mat-datepicker-toggle {
-		::ng-deep .mat-icon-button {
-			left: -2.5rem;
-		}
-	}
 	.disp-itm {
 		display: initial;
+		margin-left: 0.25rem;
+		margin-top: 0px;
 	}
 	.sign {
-		width: 271px;
+		width: 100%; //271px;
+	}
+	.ppeCheck {
+		display: flex;
 	}
 }

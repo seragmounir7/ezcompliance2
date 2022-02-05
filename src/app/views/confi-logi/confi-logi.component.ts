@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-confi-logi',
-  templateUrl: './confi-logi.component.html',
-  styleUrls: ['./confi-logi.component.scss']
+	selector: 'app-confi-logi',
+	templateUrl: './confi-logi.component.html',
+	styleUrls: ['./confi-logi.component.scss']
 })
 export class ConfiLogiComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {}
 }

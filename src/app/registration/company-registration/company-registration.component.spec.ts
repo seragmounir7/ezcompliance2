@@ -3,23 +3,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CompanyRegistrationComponent } from './company-registration.component';
 
 describe('CompanyRegistrationComponent', () => {
-  let component: CompanyRegistrationComponent;
-  let fixture: ComponentFixture<CompanyRegistrationComponent>;
+	let component: CompanyRegistrationComponent;
+	let fixture: ComponentFixture<CompanyRegistrationComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [CompanyRegistrationComponent]
-    })
-      .compileComponents();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [CompanyRegistrationComponent]
+		}).compileComponents();
+	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CompanyRegistrationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(CompanyRegistrationComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

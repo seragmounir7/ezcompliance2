@@ -7,14 +7,14 @@ import { RateAndCouponComponent } from './rate-and-coupon/rate-and-coupon.compon
 import { SubscriptionComponent } from './subscription.component';
 
 const routes: Routes = [
-  // { path: '', component: SubscriptionComponent },
-  { path: '', component: RateAndCouponComponent },
-  { path: 'editRate', component: EditRateAndCouponComponent },
-  { path: 'coupon', component: CouponComponent },
+	// { path: '', component: SubscriptionComponent },
+	{ path: '', component: RateAndCouponComponent },
+	{ path: 'editRate', component: EditRateAndCouponComponent },
+	{ path: 'coupon', component: CouponComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
-export class SubscriptionRoutingModule { }
+export class SubscriptionRoutingModule {}

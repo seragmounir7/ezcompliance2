@@ -1,57 +1,109 @@
 <div class="container card px-4 py-4">
-  <div mat-dialog-title class="dialog-title">
-    <h2 class="text-center pt-2">
-      <p> Edit Header Information</p>
-    </h2>
-    <button type="button" class="close" style="font-size: 30px;" (click)="close()" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <hr />
-  <div class="box" [formGroup]="HeaderInformation" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-md-6">
-        <div>
-          <label class="cols" for="heading text" for="exampleFormControlInput1" class="form-Label">Heading</label>
-          <input type="text" class="form-control" id="heading" formControlName="title" />
-        </div>
-      </div>
+	<div mat-dialog-title class="dialog-title">
+		<h2 class="text-center pt-2">
+			<p>Edit Header Information</p>
+		</h2>
+		<button
+			type="button"
+			class="close"
+			style="font-size: 30px"
+			(click)="close()"
+			aria-label="Close"
+		>
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<hr />
+	<div class="box" [formGroup]="HeaderInformation" (ngSubmit)="onSubmit()">
+		<div class="row">
+			<div class="col-md-6">
+				<div>
+					<label
+						class="cols"
+						for="heading text"
+						for="exampleFormControlInput1"
+						class="form-Label"
+						>Heading</label
+					>
+					<input
+						type="text"
+						class="form-control"
+						id="heading"
+						formControlName="title"
+					/>
+				</div>
+			</div>
 
-      <div class="col-md-6" style="height: 1px">
-        <div>
-          <label class="cols" for="description text" class="form-Label">Description</label>
+			<div class="col-md-6" style="height: 1px">
+				<div>
+					<label
+						class="cols"
+						for="description text"
+						class="form-Label"
+						>Description</label
+					>
 
-          <textarea class="form-control" id="description" formControlName="description">
-            </textarea>
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row mt-2">
-      <label for="formFile" class="form-Label">Upload Image</label>
-    </div>
-    <div class="col-sm-3 mt-2">
-      <img [src]="selectedImage" onerror="this.src='../../../assets/img/uploadImg.png'" class="imageStud" alt=""
-        width="150" height="130" />
-      <input type="file" #contactImage class="custom-file-input img1 form-control" (change)="browser($event)"
-        id="inputGroupFile01" name="avatar" style="display: none" />
-      <span class="material-icons material-file" (click)="contactImage.click()" class="btn border bg-white" style="
-          position: absolute;
-          top: 95px;
-          font-size: 1rem !important;
-        ">
-        <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
-      </span>
-
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col d-flex justify-content-center">
-        <!-- <button class="btn btn-primary rounded-pill"  (click)="onSubmit()">
+					<textarea
+						class="form-control"
+						id="description"
+						formControlName="description"
+					>
+					</textarea>
+				</div>
+			</div>
+		</div>
+		<br />
+		<div class="row mt-2">
+			<label for="formFile" class="form-Label">Upload Image</label>
+		</div>
+		<div class="col-sm-3 mt-2">
+			<img
+				[src]="selectedImage"
+				onerror="this.src='../../../assets/img/uploadImg.png'"
+				class="imageStud"
+				alt=""
+				width="150"
+				height="130"
+			/>
+			<input
+				type="file"
+				#contactImage
+				class="custom-file-input img1 form-control"
+				(change)="browser($event)"
+				id="inputGroupFile01"
+				name="avatar"
+				style="display: none"
+			/>
+			<span
+				class="material-icons material-file"
+				(click)="contactImage.click()"
+				class="btn border bg-white"
+				style="
+					position: absolute;
+					top: 95px;
+					font-size: 1rem !important;
+				"
+			>
+				<i
+					class="fa fa-upload"
+					aria-hidden="true"
+					style="margin: 0px"
+				></i>
+			</span>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col d-flex justify-content-center">
+				<!-- <button class="btn btn-primary rounded-pill"  (click)="onSubmit()">
             Submit
           </button> -->
-        <button class="btn btn-primary" (click)="editHeaderInfo($event)">
-          Update
-        </button>
-      </div>
-    </div>
+				<button
+					class="btn btn-primary"
+					(click)="editHeaderInfo($event)"
+				>
+					Update
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

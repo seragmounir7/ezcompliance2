@@ -314,7 +314,7 @@ export class AddEmployeeComponent implements OnInit {
 			this.dataUrl2 = data.data.plant.plantSignature;
 			console.log('data.data.ppe.signature;', data.data.ppe.signature);
 
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad != null;
 			};
 			check().then((res) => {
@@ -322,7 +322,7 @@ export class AddEmployeeComponent implements OnInit {
 
 				this.signaturePad.fromDataURL(data.data.ppe.signature);
 			});
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad2 != null;
 			};
 			check2().then((res) => {
@@ -340,7 +340,7 @@ export class AddEmployeeComponent implements OnInit {
 	};
 	drawComplete2() {
 		// will be notified of szimek/signature_pad's onEnd event
-		this.empDetails.controls['plantSignature'].setValue(
+		this.empDetails.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
 		console.log(this.signaturePad2.toDataURL());
@@ -354,9 +354,7 @@ export class AddEmployeeComponent implements OnInit {
 	}
 	drawComplete() {
 		// will be notified of szimek/signature_pad's onEnd event
-		this.empDetails.controls['Sign'].setValue(
-			this.signaturePad.toDataURL()
-		);
+		this.empDetails.controls.Sign.setValue(this.signaturePad.toDataURL());
 		console.log(this.signaturePad.toDataURL());
 	}
 
@@ -410,9 +408,9 @@ export class AddEmployeeComponent implements OnInit {
 	onFormUpdate(id) {
 		const Sign = this.signaturePad.toDataURL();
 		const plantSignature = this.signaturePad2.toDataURL();
-		let ppeArr = () => {
+		const ppeArr = () => {
 			this.addPPE().length;
-			let arr = [];
+			const arr = [];
 			this.addPPE().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -424,9 +422,9 @@ export class AddEmployeeComponent implements OnInit {
 			});
 			return arr;
 		};
-		let equipArr = () => {
+		const equipArr = () => {
 			this.addPPE().length;
-			let arr = [];
+			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -515,9 +513,9 @@ export class AddEmployeeComponent implements OnInit {
 		const plantSignature = this.signaturePad2.toDataURL();
 
 		console.log('this.EmployeeInfo.value', this.empDetails.value);
-		let ppeArr = () => {
+		const ppeArr = () => {
 			this.addPPE().length;
-			let arr = [];
+			const arr = [];
 			this.addPPE().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -529,9 +527,9 @@ export class AddEmployeeComponent implements OnInit {
 			});
 			return arr;
 		};
-		let equipArr = () => {
+		const equipArr = () => {
 			this.addEquip().length;
-			let arr = [];
+			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -616,7 +614,7 @@ export class AddEmployeeComponent implements OnInit {
 	}
 
 	addAcionTab(event) {
-		let b = Object.keys(this.sidePreview.value);
+		const b = Object.keys(this.sidePreview.value);
 		//   let index =this.add().length
 		//   this.addAction()
 		// this.add().controls[index].get("item").setValue(event.target.value)
@@ -682,7 +680,7 @@ export class AddEmployeeComponent implements OnInit {
 		console.log('addPPEFiled1', this.empDetails.value);
 	}
 	removeEquipFiled1(i) {
-		const item = <FormArray>this.empDetails.controls['plantArr'];
+		const item = <FormArray>this.empDetails.controls.plantArr;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -703,10 +701,9 @@ export class AddEmployeeComponent implements OnInit {
 		console.log(this.empDetails.value);
 		this.PPEValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addPPE().length; index++) {
-			let element = this.addPPE().at(index);
+			const element = this.addPPE().at(index) as FormGroup;
 			this.PPEValueChanges.push(
-				(element['controls'].PPESupplied
-					.valueChanges as Observable<any>).pipe(
+				element.controls.PPESupplied.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
 					tap((value) => console.log('value', value)),
@@ -724,7 +721,7 @@ export class AddEmployeeComponent implements OnInit {
 		}
 	}
 	removeFiled1(i) {
-		const item = <FormArray>this.empDetails.controls['PPEArr'];
+		const item = this.empDetails.controls.PPEArr as FormArray;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -745,10 +742,9 @@ export class AddEmployeeComponent implements OnInit {
 		console.log('addPPEFiled1', this.empDetails.value);
 		this.PPEValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addPPE().length; index++) {
-			let element = this.addPPE().at(index);
+			const element = this.addPPE().at(index) as FormGroup;
 			this.PPEValueChanges.push(
-				(element['controls'].PPESupplied
-					.valueChanges as Observable<any>).pipe(
+				element.controls.PPESupplied.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
 					tap((value) => console.log('value', value)),
@@ -787,10 +783,9 @@ export class AddEmployeeComponent implements OnInit {
 		this.addLicence().push(this.newFiled1(data));
 		this.licenceValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addLicence().length; index++) {
-			let element = this.addLicence().at(index);
+			const element = this.addLicence().at(index) as FormGroup;
 			this.licenceValueChanges.push(
-				(element['controls'].LicenceName
-					.valueChanges as Observable<any>).pipe(
+				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
 					tap((value) => console.log('value', value)),
@@ -809,10 +804,9 @@ export class AddEmployeeComponent implements OnInit {
 		this.addLicence().push(this.newFiled());
 		this.licenceValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addLicence().length; index++) {
-			let element = this.addLicence().at(index);
+			const element = this.addLicence().at(index) as FormGroup;
 			this.licenceValueChanges.push(
-				(element['controls'].LicenceName
-					.valueChanges as Observable<any>).pipe(
+				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
 					tap((value) => console.log('value', value)),
@@ -837,7 +831,7 @@ export class AddEmployeeComponent implements OnInit {
 		// })
 	}
 	removeFiled(i) {
-		const item = <FormArray>this.empDetails.controls['UploadLicenceArr'];
+		const item = <FormArray>this.empDetails.controls.UploadLicenceArr;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}

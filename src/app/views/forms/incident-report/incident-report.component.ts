@@ -31,7 +31,7 @@ import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { Observable } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 @Component({
 	selector: 'app-incident-report',
 	templateUrl: './incident-report.component.html',
@@ -112,7 +112,7 @@ export class IncidentReportComponent
 		private ngZone: NgZone,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		private breakpointObserver: BreakpointObserver
+		public mobileViewService: MobileViewService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -198,10 +198,10 @@ export class IncidentReportComponent
 	async disableForm() {
 		if (this.isHistory) {
 			this.IncidentReport.disable();
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad != null;
 			};
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad1 != null;
 			};
 			await check();
@@ -255,7 +255,7 @@ export class IncidentReportComponent
 			});
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 		this.activatedRoute.queryParams.subscribe((params) => {
-			this.type = params['formType'];
+			this.type = params.formType;
 		});
 
 		console.log('IncidentReport', this.IncidentReport);
@@ -326,7 +326,7 @@ export class IncidentReportComponent
 		});
 	}
 	removeIncident(i) {
-		const item = <FormArray>this.IncidentReport.controls['arrObj'];
+		const item = <FormArray>this.IncidentReport.controls.arrObj;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -507,33 +507,31 @@ export class IncidentReportComponent
 		this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
 		this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
 
-		this.breakpointObserver
-			.observe([Breakpoints.XSmall])
-			.subscribe((result) => {
-				console.log(result);
+		this.mobileViewService.observeXsmall().subscribe((result) => {
+			console.log(result);
 
-				if (result.matches) {
-					// this.reSizeSignArray(this.signaturePad2, 233, 114);
-					let sign = this.signaturePad.toDataURL();
-					let sign1 = this.signaturePad1.toDataURL();
-					this.signaturePad.set('canvasWidth', 247);
-					this.signaturePad.set('canvasHeight', 106);
-					this.signaturePad.fromDataURL(sign);
-					this.signaturePad1.set('canvasWidth', 247);
-					this.signaturePad1.set('canvasHeight', 106);
-					this.signaturePad1.fromDataURL(sign1);
-				} else {
-					// this.reSizeSignArray(this.signaturePad2, 420, 121);
-					let sign = this.signaturePad.toDataURL();
-					let sign1 = this.signaturePad1.toDataURL();
-					this.signaturePad.set('canvasWidth', 500);
-					this.signaturePad.set('canvasHeight', 100);
-					this.signaturePad.fromDataURL(sign);
-					this.signaturePad1.set('canvasWidth', 500);
-					this.signaturePad1.set('canvasHeight', 100);
-					this.signaturePad1.fromDataURL(sign1);
-				}
-			});
+			if (result.matches) {
+				// this.reSizeSignArray(this.signaturePad2, 233, 114);
+				const sign = this.signaturePad.toDataURL();
+				const sign1 = this.signaturePad1.toDataURL();
+				this.signaturePad.set('canvasWidth', 247);
+				this.signaturePad.set('canvasHeight', 106);
+				this.signaturePad.fromDataURL(sign);
+				this.signaturePad1.set('canvasWidth', 247);
+				this.signaturePad1.set('canvasHeight', 106);
+				this.signaturePad1.fromDataURL(sign1);
+			} else {
+				// this.reSizeSignArray(this.signaturePad2, 420, 121);
+				const sign = this.signaturePad.toDataURL();
+				const sign1 = this.signaturePad1.toDataURL();
+				this.signaturePad.set('canvasWidth', 500);
+				this.signaturePad.set('canvasHeight', 100);
+				this.signaturePad.fromDataURL(sign);
+				this.signaturePad1.set('canvasWidth', 500);
+				this.signaturePad1.set('canvasHeight', 100);
+				this.signaturePad1.fromDataURL(sign1);
+			}
+		});
 	}
 
 	drawComplete() {
@@ -541,48 +539,40 @@ export class IncidentReportComponent
 		console.log(this.signaturePad.toDataURL());
 		console.log('signnn', this.signaturePad);
 
-		this.IncidentReport.controls['signaturePad'].setValue(
+		this.IncidentReport.controls.signaturePad.setValue(
 			this.signaturePad.toDataURL()
 		);
-		this.singRequired = this.IncidentReport.controls[
-			'signaturePad'
-		].invalid;
+		this.singRequired = this.IncidentReport.controls.signaturePad.invalid;
 	}
 	drawComplete1() {
 		// will be notified of szimek/signature_pad's onEnd event
 		console.log(this.signaturePad1.toDataURL());
 		console.log('signnn', this.signaturePad1);
-		this.IncidentReport.controls['signaturePad1'].setValue(
+		this.IncidentReport.controls.signaturePad1.setValue(
 			this.signaturePad1.toDataURL()
 		);
 		console.log(
 			'signaturePad1 control',
-			this.IncidentReport.controls['signaturePad1'].value
+			this.IncidentReport.controls.signaturePad1.value
 		);
-		this.singRequired1 = this.IncidentReport.controls[
-			'signaturePad1'
-		].invalid;
+		this.singRequired1 = this.IncidentReport.controls.signaturePad1.invalid;
 	}
 	clear() {
 		this.signaturePad.clear();
-		this.singRequired = this.IncidentReport.controls[
-			'signaturePad1'
-		].untouched;
+		this.singRequired = this.IncidentReport.controls.signaturePad1.untouched;
 	}
 	clear1() {
 		console.log('cl1');
 
 		this.signaturePad1.clear();
-		this.singRequired1 = this.IncidentReport.controls[
-			'signaturePad1'
-		].untouched;
+		this.singRequired1 = this.IncidentReport.controls.signaturePad1.untouched;
 	}
 	drawStart() {
 		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
 		console.log(
 			'signaturePad control',
-			this.IncidentReport.controls['signaturePad'].touched
+			this.IncidentReport.controls.signaturePad.touched
 		);
 		//this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
 	}
@@ -680,7 +670,7 @@ export class IncidentReportComponent
 	//   }
 	// }
 	ppeSelected(e) {
-		let item = e.target.value;
+		const item = e.target.value;
 		if (e.target.checked) {
 			this.ppeSelectedArr.push(item);
 		} else {
@@ -694,7 +684,7 @@ export class IncidentReportComponent
 		console.log('ppeSelectedArr', this.ppeSelectedArr);
 	}
 	changesSelected(e, i) {
-		let item = e.target.value;
+		const item = e.target.value;
 		if (e.target.checked) {
 			this.changesSelectedArr.push(item);
 		} else {
@@ -712,7 +702,7 @@ export class IncidentReportComponent
 	}
 
 	natureOfIncSelected(e) {
-		let item = e.target.value;
+		const item = e.target.value;
 		if (e.target.checked) {
 			this.natureOfIncSelectedArr.push(item);
 		} else {
@@ -727,7 +717,7 @@ export class IncidentReportComponent
 	}
 
 	typeOfIncidentsSelected(e) {
-		let item = e.target.value;
+		const item = e.target.value;
 		if (e.target.checked) {
 			this.typeOfIncidentsSelectedArr.push(item);
 		} else {
@@ -742,7 +732,7 @@ export class IncidentReportComponent
 	}
 
 	rootSelected(e) {
-		let item = e.target.value;
+		const item = e.target.value;
 		if (e.target.checked) {
 			this.rootSelectedArr.push(item);
 		} else {
@@ -852,7 +842,7 @@ export class IncidentReportComponent
 				let key;
 				key = Object.keys(res.data.arrObj[index]);
 
-				let changeIndex = this.changeAdd().length;
+				const changeIndex = this.changeAdd().length;
 				this.addAction();
 				// this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
 				this.add()
@@ -869,7 +859,7 @@ export class IncidentReportComponent
 				let key;
 				key = Object.keys(res.data.changes[index]);
 
-				let changeIndex = this.changeAdd().length;
+				const changeIndex = this.changeAdd().length;
 
 				this.changeAdd()
 					.controls[index].get(key)
@@ -879,7 +869,7 @@ export class IncidentReportComponent
 				let key;
 				key = Object.keys(res.data.PPE[index]);
 
-				let changeIndex = this.changeAdd().length;
+				const changeIndex = this.changeAdd().length;
 
 				this.ppeAdd()
 					.controls[index].get(key)
@@ -889,7 +879,7 @@ export class IncidentReportComponent
 				let key;
 				key = Object.keys(res.data.incidents[index]);
 
-				let changeIndex = this.changeAdd().length;
+				const changeIndex = this.changeAdd().length;
 				this.incidentsAdd()
 					.controls[index].get(key)
 					.setValue(res.data.incidents[index][key]);
@@ -903,7 +893,7 @@ export class IncidentReportComponent
 				let key;
 				key = Object.keys(res.data.natureOFIncidents[index]);
 
-				let changeIndex = this.changeAdd().length;
+				const changeIndex = this.changeAdd().length;
 
 				this.natureAdd()
 					.controls[index].get(key)
@@ -917,7 +907,7 @@ export class IncidentReportComponent
 				let key;
 				key = Object.keys(res.data.rootCauseIncident[index]);
 
-				let changeIndex = this.changeAdd().length;
+				const changeIndex = this.changeAdd().length;
 
 				this.rootCauseIncidentAdd()
 					.controls[index].get(key)
@@ -967,13 +957,13 @@ export class IncidentReportComponent
 			// this.ppeAdd(res.data.attendees);
 			// this.rootCauseIncidentAdd(res.data.attendees);
 			this.dataUrl = res.data.signaturePad1;
-			let check = async () => {
+			const check = async () => {
 				this.signaturePad1 != null;
 			};
 			check().then(() => {
 				this.signaturePad1.fromDataURL(res.data.signaturePad1);
 			});
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad != null;
 			};
 			check2().then(() => {
@@ -1000,9 +990,10 @@ export class IncidentReportComponent
 		console.log(this.IncidentReport.value);
 		if (this.id !== 'Form') {
 			console.log('update');
-			let completedName = this.IncidentReport.controls.completedName
+			const completedName = this.IncidentReport.controls.completedName
 				.value;
-			let reviewedName = this.IncidentReport.controls.reviewedName.value;
+			const reviewedName = this.IncidentReport.controls.reviewedName
+				.value;
 			this.IncidentReport.removeControl('completedName');
 			this.IncidentReport.removeControl('reviewedName');
 			const data = {
@@ -1035,9 +1026,10 @@ export class IncidentReportComponent
 				}
 			);
 		} else {
-			let completedName = this.IncidentReport.controls.completedName
+			const completedName = this.IncidentReport.controls.completedName
 				.value;
-			let reviewedName = this.IncidentReport.controls.reviewedName.value;
+			const reviewedName = this.IncidentReport.controls.reviewedName
+				.value;
 			this.IncidentReport.removeControl('completedName');
 			this.IncidentReport.removeControl('reviewedName');
 			const data = {

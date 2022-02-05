@@ -1,75 +1,137 @@
 <div class="container px-4 py-4 card" [formGroup]="SubWorkDetail">
-  <div mat-dialog-title class="dialog-title">
-    <h2 class="text-center pt-2">
-      <p style="text-align: center"> Edit Work Details Info</p>
-    </h2>
-    <button type="button" class="close" style="font-size: 40px;" (click)="close()" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <hr />
+	<div mat-dialog-title class="dialog-title">
+		<h2 class="text-center pt-2">
+			<p style="text-align: center">Edit Work Details Info</p>
+		</h2>
+		<button
+			type="button"
+			class="close"
+			style="font-size: 40px"
+			(click)="close()"
+			aria-label="Close"
+		>
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<hr />
 
-  <div>
-    <div class="row" *ngIf="module">
-      <div class="col-sm-6">
-        <p for="exampleFormControlInput1" class="form-Label">Heading</p>
-        <input type="text" formControlName="title" class="form-control sign" id="title" />
-      </div>
+	<div>
+		<div class="row" *ngIf="module">
+			<div class="col-sm-6">
+				<p for="exampleFormControlInput1" class="form-Label">Heading</p>
+				<input
+					type="text"
+					formControlName="title"
+					class="form-control sign"
+					id="title"
+				/>
+			</div>
+		</div>
+		<div *ngIf="subModule">
+			<ng-container formArrayName="arrObj">
+				<ng-container
+					*ngFor="let control of add().controls; let i = index"
+					[formGroupName]="i"
+				>
+					<div>
+						<div class="row">
+							<div class="col-5 my-3">
+								<p
+									for="exampleFormControlInput1"
+									class="form-Label"
+								>
+									Title
+								</p>
+								<input
+									type="text"
+									formControlName="title"
+									class="form-control sign"
+									id="title"
+								/>
+							</div>
+							<div class="col-6 my-3">
+								<p
+									for="exampleFormControlInput1"
+									class="form-Label"
+								>
+									Description
+								</p>
+								<textarea
+									type="text"
+									formControlName="description"
+									class="form-control sign"
+									id="description"
+								></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="my-3 col-3">
+								<p
+									for="exampleFormControlInput1"
+									class="form-Label"
+								>
+									UploadImage
+								</p>
+								<img
+									[src]="selectedImage"
+									onerror="this.src='../../../assets/img/uploadImg.png'"
+									alt=""
+									width="150"
+									height="100"
+									class="imgStyle"
+								/>
+								<input
+									type="file"
+									class="d-none"
+									#file
+									id="file"
+									class="custom-file-input img1 form-control"
+									name="avatar"
+									(change)="browser($event, i)"
+								/>
+								<span
+									class="material-icons material-file"
+									(click)="file.click()"
+									class="btn border bg-white z-index mb-1"
+									style="
+										position: absolute;
+										top: 120px;
+										left: 0;
+										font-size: 1rem !important;
+									"
+								>
+									<i
+										class="fa fa-upload"
+										aria-hidden="true"
+										style="margin: 0px"
+									></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<hr />
+				</ng-container>
+			</ng-container>
+		</div>
+		<br />
 
-    </div>
-    <div *ngIf="subModule">
-      <ng-container formArrayName="arrObj">
-        <ng-container *ngFor="let control of add().controls; let i = index" [formGroupName]="i">
-          <div>
-            <div class="row">
-              <div class="col-5 my-3">
-                <p for="exampleFormControlInput1" class="form-Label">
-                  Title
-                </p>
-                <input type="text" formControlName="title" class="form-control sign" id="title" />
-              </div>
-              <div class="col-6 my-3">
-                <p for="exampleFormControlInput1" class="form-Label">
-                  Description
-                </p>
-                <textarea type="text" formControlName="description" class="form-control sign"
-                  id="description"></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div class="my-3 col-3">
-                <p for="exampleFormControlInput1" class="form-Label">
-                  UploadImage
-                </p>
-                <img [src]="selectedImage" onerror="this.src='../../../assets/img/uploadImg.png'" alt="" width="150"
-                  height="100" class="imgStyle" />
-                <input type="file" class="d-none" #file id="file" class="custom-file-input img1 form-control"
-                  name="avatar" (change)="browser($event, i)" />
-                <span class="material-icons material-file" (click)="file.click()"
-                  class="btn border bg-white z-index mb-1" style="
-                position: absolute;
-                top: 120px;
-                left: 0;
-                font-size: 1rem !important;
-              ">
-                  <i class="fa fa-upload" aria-hidden="true" style="margin: 0px"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-          <hr />
-        </ng-container>
-      </ng-container>
-    </div>
-    <br>
-
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary btn-block" *ngIf="module" (click)="editModule()">
-        Update
-      </button>
-      <button type="submit" class="btn btn-primary btn-block" *ngIf="subModule" (click)="editSubModule()">
-        Update
-      </button>
-    </div>
-  </div>
+		<div class="col-md-2">
+			<button
+				type="submit"
+				class="btn btn-primary btn-block"
+				*ngIf="module"
+				(click)="editModule()"
+			>
+				Update
+			</button>
+			<button
+				type="submit"
+				class="btn btn-primary btn-block"
+				*ngIf="subModule"
+				(click)="editSubModule()"
+			>
+				Update
+			</button>
+		</div>
+	</div>
 </div>

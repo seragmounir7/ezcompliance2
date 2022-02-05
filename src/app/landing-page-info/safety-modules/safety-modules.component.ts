@@ -65,7 +65,7 @@ export class SafetyModulesComponent implements OnInit {
 			//  this.safetyData = data.data[0];
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
-			let safetyData = res.data[0].subModules;
+			const safetyData = res.data[0].subModules;
 			safetyData.forEach((element, index) => {
 				element.index = index + 1; //adding index
 			});
@@ -84,7 +84,7 @@ export class SafetyModulesComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.safetyData = data.data[0];
 
-			let dialogRef = this.dialog.open(AddSafetyModuleComponent, {
+			const dialogRef = this.dialog.open(AddSafetyModuleComponent, {
 				data: {
 					action: 'edit',
 
@@ -111,7 +111,7 @@ export class SafetyModulesComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.safetyData = data.data[0];
 
-			let dialogRef = this.dialog.open(AddModulesInfoComponent, {
+			const dialogRef = this.dialog.open(AddModulesInfoComponent, {
 				data: {
 					action: 'new',
 					ID: id,

@@ -77,7 +77,7 @@ export class AddSiteInfoComponent implements OnInit {
 	}
 
 	openDialog(id) {
-		let dialogRef = this.dialog.open(AddSiteComponent, {
+		const dialogRef = this.dialog.open(AddSiteComponent, {
 			// width: "550px",
 			height: '500px',
 			data: {

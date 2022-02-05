@@ -1,27 +1,56 @@
 <form [formGroup]="addItem">
-    <h2 *ngIf="dataRec.type==='identifyHazards'"> Add Identify Hazards </h2>
-    <h2 *ngIf="dataRec.type==='editIdentifyHazards'">Update Identify Hazards </h2>
-    <h2 *ngIf="dataRec.type==='ctrlActreq'"> Add Control Action Required</h2>
-    <h2 *ngIf="dataRec.type==='editCtrlActreq'"> Update Control Action Required</h2>
-    <h2 *ngIf="dataRec.type==='chemical'"> Add Chemical</h2>
+	<h2 *ngIf="dataRec.type==='identifyHazards'">Add Identify Hazards</h2>
+	<h2 *ngIf="dataRec.type==='editIdentifyHazards'">
+		Update Identify Hazards
+	</h2>
+	<h2 *ngIf="dataRec.type==='ctrlActreq'">Add Control Action Required</h2>
+	<h2 *ngIf="dataRec.type==='editCtrlActreq'">
+		Update Control Action Required
+	</h2>
+	<h2 *ngIf="dataRec.type==='chemical'">Add Chemical</h2>
 
-    <mat-form-field appearance="legacy" class="example-full-width" style="width: 498px;">
-        <ckeditor *ngIf="!(dataRec.type==='chemical')" formControlName="title" style="width: 100%;" [editor]="Editor" >
-        </ckeditor>
-        <textarea *ngIf="dataRec.type==='chemical'" matInput formControlName="title" rows=""></textarea>
-    </mat-form-field>
-    <br>
+	<mat-form-field
+		appearance="legacy"
+		class="example-full-width"
+		style="width: 498px"
+	>
+		<ckeditor
+			*ngIf="!(dataRec.type==='chemical')"
+			formControlName="title"
+			style="width: 100%"
+			[editor]="Editor"
+		>
+		</ckeditor>
+		<textarea
+			*ngIf="dataRec.type==='chemical'"
+			matInput
+			formControlName="title"
+			rows=""
+		></textarea>
+	</mat-form-field>
+	<br />
 
-    <div class="row">
-        <div class="col-sm-2 offset-8 ">
-            <button mat-raised-button (click)="closeDialog()">Close</button>
-        </div>
-        <div class="col-sm-2  ">
-            <button mat-raised-button
-                *ngIf="dataRec.type==='identifyHazards'||dataRec.type==='ctrlActreq'||dataRec.type==='chemical'"
-                [disabled]="!addItem.valid" (click)="onSubmit()">Add</button>
-            <button mat-raised-button *ngIf="dataRec.type==='editIdentifyHazards'||dataRec.type==='editCtrlActreq'"
-                [disabled]="!addItem.valid" (click)="onSubmit()">Update</button>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-2 offset-8">
+			<button mat-raised-button (click)="closeDialog()">Close</button>
+		</div>
+		<div class="col-sm-2">
+			<button
+				mat-raised-button
+				*ngIf="dataRec.type==='identifyHazards'||dataRec.type==='ctrlActreq'||dataRec.type==='chemical'"
+				[disabled]="!addItem.valid"
+				(click)="onSubmit()"
+			>
+				Add
+			</button>
+			<button
+				mat-raised-button
+				*ngIf="dataRec.type==='editIdentifyHazards'||dataRec.type==='editCtrlActreq'"
+				[disabled]="!addItem.valid"
+				(click)="onSubmit()"
+			>
+				Update
+			</button>
+		</div>
+	</div>
 </form>

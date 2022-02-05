@@ -4,7 +4,7 @@ export function ConfirmedValidator(
 	controlName: string,
 	matchingControlName: string
 ) {
-	let fn = (formGroup: FormGroup) => {
+	const fn = (formGroup: FormGroup) => {
 		const control = formGroup.controls[controlName];
 		const matchingControl = formGroup.controls[matchingControlName];
 		if (

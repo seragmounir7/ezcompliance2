@@ -3,22 +3,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HappyClientComponent } from './happy-client.component';
 
 describe('HappyClientComponent', () => {
-  let component: HappyClientComponent;
-  let fixture: ComponentFixture<HappyClientComponent>;
+	let component: HappyClientComponent;
+	let fixture: ComponentFixture<HappyClientComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HappyClientComponent],
-    }).compileComponents();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [HappyClientComponent]
+		}).compileComponents();
+	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HappyClientComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(HappyClientComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

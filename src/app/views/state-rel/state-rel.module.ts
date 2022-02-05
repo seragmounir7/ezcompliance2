@@ -24,17 +24,31 @@ import { AddStateRelationComponent } from './set-state-relation/add-state-relati
 import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
-  declarations: [StateRelComponent, JuridictionComponent, SafetyLegislationComponent, RegulatorComponent, CodeOfPractComponent, AddAndEditRegComponent, AddAndEditJuriComponent, AddAndEditCodeComponent, AddAndEditSafetyComponent, StatesComponent, AddAndEditStatesComponent, SetStateRelationComponent, AddStateRelationComponent],
-  imports: [
-    MatSortModule,
-    CommonModule,
-    StateRelRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatFormFieldModule,
-    SharedModule
-  ]
+	declarations: [
+		StateRelComponent,
+		JuridictionComponent,
+		SafetyLegislationComponent,
+		RegulatorComponent,
+		CodeOfPractComponent,
+		AddAndEditRegComponent,
+		AddAndEditJuriComponent,
+		AddAndEditCodeComponent,
+		AddAndEditSafetyComponent,
+		StatesComponent,
+		AddAndEditStatesComponent,
+		SetStateRelationComponent,
+		AddStateRelationComponent
+	],
+	imports: [
+		MatSortModule,
+		CommonModule,
+		StateRelRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatPaginatorModule,
+		MatTableModule,
+		MatFormFieldModule,
+		SharedModule
+	]
 })
-export class StateRelModule { }
+export class StateRelModule {}

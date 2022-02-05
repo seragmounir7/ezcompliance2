@@ -1,5 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	AbstractControl,
+	FormArray,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
@@ -172,7 +179,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		console.log('addPPEFiled1', this.formData.value);
 	}
 	removeEquipFiled1(i) {
-		const item = <FormArray>this.formData.controls['plantArr'];
+		const item = <FormArray>this.formData.controls.plantArr;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -212,7 +219,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		console.log(this.formData.value);
 	}
 	removeInsuranceFiled1(i) {
-		const item = <FormArray>this.formData.controls['insuranceArr'];
+		const item = <FormArray>this.formData.controls.insuranceArr;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -255,34 +262,13 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	drawComplete2() {
 		// will be notified of szimek/signature_pad's onEnd event
-		this.formData.controls['plantSignature'].setValue(
+		this.formData.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
 		console.log(this.signaturePad2.toDataURL());
 	}
 	clear2() {
 		this.signaturePad2.clear();
-	}
-	// onSubmit() {
-	//   console.log("clicked");
-	//   this.submitted = !this.submitted;
-	//   console.log("FormValues = > ", this.formData.value);
-
-	// }
-	dateShow() {
-		this.date1 = true;
-		this.kilometer1 = false;
-		this.hours1 = false;
-	}
-	kilometerShow() {
-		this.date1 = false;
-		this.kilometer1 = true;
-		this.hours1 = false;
-	}
-	hoursShow() {
-		this.date1 = false;
-		this.kilometer1 = false;
-		this.hours1 = true;
 	}
 	companyShow() {
 		this.companyRegister = true;
@@ -309,9 +295,9 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		const plantSignature = this.signaturePad2.toDataURL();
 
 		console.log('this.EmployeeInfo.value', this.formData.value);
-		let insuranceArr = () => {
+		const insuranceArr = () => {
 			this.addInsurance().length;
-			let arr = [];
+			const arr = [];
 			this.addInsurance().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -326,9 +312,9 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			});
 			return arr;
 		};
-		let equipArr = () => {
+		const equipArr = () => {
 			this.addEquip().length;
-			let arr = [];
+			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -476,7 +462,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			//   this.signaturePad.fromDataURL(data.data.ppe.signature)
 
 			// })
-			let check2 = async () => {
+			const check2 = async () => {
 				this.signaturePad2 != null;
 			};
 			check2().then((res) => {
@@ -491,9 +477,9 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	onFormUpdate(id) {
 		// const Sign = this.signaturePad2.toDataURL();
 		const plantSignature = this.signaturePad2.toDataURL();
-		let insuranceArr = () => {
+		const insuranceArr = () => {
 			this.addInsurance().length;
-			let arr = [];
+			const arr = [];
 			this.addInsurance().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -508,9 +494,9 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			});
 			return arr;
 		};
-		let equipArr = () => {
+		const equipArr = () => {
 			this.addEquip().length;
-			let arr = [];
+			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -574,5 +560,39 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				console.error(err);
 			}
 		);
+	}
+
+	nextServiceToggle(index, value) {
+		switch (value) {
+			case 'Hours':
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.kilometres.setValue('');
+				(this.addEquip().at(index) as FormGroup).controls.date.setValue(
+					''
+				);
+				break;
+			case 'Kilometres':
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.hours.setValue('');
+				(this.addEquip().at(index) as FormGroup).controls.date.setValue(
+					''
+				);
+
+				break;
+			case 'Date':
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.kilometres.setValue('');
+				(this.addEquip().at(
+					index
+				) as FormGroup).controls.hours.setValue('');
+
+				break;
+
+			default:
+				break;
+		}
 	}
 }

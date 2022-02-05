@@ -1,29 +1,51 @@
 <form [formGroup]="editPortal">
-    <!-- <h2 *ngIf="!dataRec">Add Portal</h2>
+	<!-- <h2 *ngIf="!dataRec">Add Portal</h2>
     <h2 *ngIf="dataRec">Edit Portal</h2> -->
-    <mat-form-field appearance="legacy" class="example-full-width" style="width: 498px;">
-        <div mat-dialog-title class="dialog-title">
+	<mat-form-field
+		appearance="legacy"
+		class="example-full-width"
+		style="width: 498px"
+	>
+		<div mat-dialog-title class="dialog-title">
+			<mat-label *ngIf="!dataRec">Add Portal </mat-label>
+			<mat-label *ngIf="dataRec">Edit Portal </mat-label>
 
-            <mat-label *ngIf="!dataRec">Add Portal
-            </mat-label>
-            <mat-label *ngIf="dataRec">Edit Portal </mat-label>
+			<button
+				type="button"
+				class="close"
+				style="font-size: 25px"
+				(click)="closeDialog()"
+				aria-label="Close"
+			>
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<input matInput formControlName="title" />
+	</mat-form-field>
 
-            <button type="button" class="close" style="font-size: 25px;" (click)="closeDialog()" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <input matInput formControlName="title">
-    </mat-form-field>
-
-    <div class="row">
-        <!-- <div class="col-sm-2 offset-8 ">
+	<div class="row">
+		<!-- <div class="col-sm-2 offset-8 ">
           <button mat-raised-button (click)="closeDialog()">Close</button>
       </div> -->
-        <div class="col-sm-2  ">
-            <button mat-raised-button class="btn btn-primary" *ngIf="dataRec" [disabled]="!editPortal.valid"
-                (click)="onFormSubmit()">Update</button>
-            <button mat-raised-button class="btn btn-primary" *ngIf="!dataRec" [disabled]="!editPortal.valid"
-                (click)="addForm()">Add</button>
-        </div>
-    </div>
+		<div class="col-sm-2">
+			<button
+				mat-raised-button
+				class="btn btn-primary"
+				*ngIf="dataRec"
+				[disabled]="!editPortal.valid"
+				(click)="onFormSubmit()"
+			>
+				Update
+			</button>
+			<button
+				mat-raised-button
+				class="btn btn-primary"
+				*ngIf="!dataRec"
+				[disabled]="!editPortal.valid"
+				(click)="addForm()"
+			>
+				Add
+			</button>
+		</div>
+	</div>
 </form>

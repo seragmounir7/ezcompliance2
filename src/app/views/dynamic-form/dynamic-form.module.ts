@@ -18,33 +18,29 @@ import { MatTableModule } from '@angular/material/table';
 import { DndModule } from 'ngx-drag-drop';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-
 @NgModule({
-  declarations: [
-    DynamicFormComponent,
-    SavedDynamicFormDataComponent,
-    SavedDynamicFormTableComponent,
-    FormsComponent,
-    AddFormComponent,
-  ],
-  imports: [
-    CommonModule,
-    DynamicFormRoutingModule,
-    FormsModule,
-    SignaturePadModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatIconModule,
-    AngularSvgIconModule,
-    MatSlideToggleModule,
-    MatTableModule,
-    DndModule,
-    MatButtonModule,
-    MatTooltipModule
-
-  ],
-  exports: [
-    FormsComponent,
-  ]
+	declarations: [
+		DynamicFormComponent,
+		SavedDynamicFormDataComponent,
+		SavedDynamicFormTableComponent,
+		FormsComponent,
+		AddFormComponent
+	],
+	imports: [
+		CommonModule,
+		DynamicFormRoutingModule,
+		FormsModule,
+		SignaturePadModule,
+		ReactiveFormsModule,
+		MatPaginatorModule,
+		MatIconModule,
+		AngularSvgIconModule,
+		MatSlideToggleModule,
+		MatTableModule,
+		DndModule,
+		MatButtonModule,
+		MatTooltipModule
+	],
+	exports: [FormsComponent]
 })
-export class DynamicFormModule { }
+export class DynamicFormModule {}

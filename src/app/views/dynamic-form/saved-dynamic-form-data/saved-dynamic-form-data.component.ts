@@ -331,8 +331,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			// this.formNameRecieved = this.dynamicFormsService.formTitle;
 			this.formNameRecieved = sessionStorage.getItem('formTitle');
 			for (let i = 0; i < this.totalModels.length; i++) {
-				let modelFields: Array<field> = [];
-				let modelRow = {
+				const modelFields: Array<field> = [];
+				const modelRow = {
 					attributes: modelFields
 				};
 				this.model.push(modelRow);
@@ -438,8 +438,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		// console.log(this.model.data);
 	}
 	addDragAndDropRow(position, index) {
-		let modelFields: Array<field> = [];
-		let modelRow = {
+		const modelFields: Array<field> = [];
+		const modelRow = {
 			attributes: modelFields
 		};
 		if (position == 'inTheEnd') {
@@ -594,7 +594,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 
 				if (this.model[j].attributes[i].type == 'table') {
 					console.log('table found', i);
-					let index = this.tableIndexMap.get(i);
+					const index = this.tableIndexMap.get(i);
 
 					this.rows.splice(index, 1);
 				}
@@ -666,7 +666,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.previewform.get('jobNumber').updateValueAndValidity();
 	}
 	updateForm() {
-		let input = new FormData();
+		const input = new FormData();
 		//   input.append('id', this.model._id);
 		//  input.append('name', this.model.name);
 		//input.append('description', this.model.description);
@@ -722,7 +722,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.report = true;
 		this.formData = [];
 		for (let j = 0; j < this.model[0].attributes.length; j++) {
-			let temp = [];
+			const temp = [];
 			for (let i = 0; i < this.model.length; i++) {
 				temp.push(this.model[i].attributes[j]);
 			}
@@ -754,10 +754,12 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 	regexErr = [];
 	submit() {
-		let allTableHeadings = Array.from(
+		const allTableHeadings = Array.from(
 			document.querySelectorAll('.tableHeadings')
 		);
-		let allTableRows = Array.from(document.querySelectorAll('.tableRows'));
+		const allTableRows = Array.from(
+			document.querySelectorAll('.tableRows')
+		);
 		allTableHeadings.forEach((element: any) => {
 			console.log('allTableHeadings.value', element.value);
 		});
@@ -771,7 +773,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.regexErr = [];
 
 		this.submitBtn = true;
-		let valid = true;
+		const valid = true;
 		/* commenting for future use
     console.log('this.model.attributes', this.model.attributes);
     let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
@@ -832,7 +834,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 
 	ngAfterViewInit() {
-		let indexOfSignature = new Map();
+		const indexOfSignature = new Map();
 		let index = 0;
 		console.log('SignaturePad', this.SignaturePad.toArray());
 		console.log('SignaturePadArr', this.SignaturePad.toArray()[0]);
@@ -848,13 +850,13 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.SignaturePad.changes.subscribe((item: QueryList<SignaturePad>) => {
 			this.model[0].attributes.forEach((element, i) => {
 				if (element.type == 'signature') {
-					let myIndex = i.toString();
+					const myIndex = i.toString();
 					indexOfSignature.set(index, myIndex);
 					index++;
 				}
 				if (index == item.toArray().length) {
 					item.toArray().forEach((x, i) => {
-						let m = indexOfSignature.get(i);
+						const m = indexOfSignature.get(i);
 						x.fromDataURL(this.model[0].attributes[m].value);
 					});
 				}
@@ -865,13 +867,13 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	drawComplete(j, i) {
 		// will be notified of szimek/signature_pad's onEnd event
 
-		let indexOfSignature = new Map();
+		const indexOfSignature = new Map();
 		let index = 0;
 
 		this.model.forEach((modelRow, k) => {
 			modelRow.attributes.forEach((element, l) => {
 				if (element.type == 'signature') {
-					let myIndex = k.toString() + l.toString();
+					const myIndex = k.toString() + l.toString();
 					indexOfSignature.set(myIndex, index);
 					index++;
 					console.log('indexOfSignature', indexOfSignature);
@@ -879,10 +881,10 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			});
 		});
 
-		let temp = i.toString() + j.toString(); //making unique code
+		const temp = i.toString() + j.toString(); //making unique code
 		console.log('temp', temp);
 
-		let m = indexOfSignature.get(temp);
+		const m = indexOfSignature.get(temp);
 		console.log('m', m);
 
 		this.model[0].attributes[j].value = this.SignaturePad.toArray()[
@@ -890,13 +892,13 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		].toDataURL();
 	}
 	clear(i, j) {
-		let indexOfSignature = new Map();
+		const indexOfSignature = new Map();
 		let index = 0;
 
 		this.model.forEach((modelRow, k) => {
 			modelRow.attributes.forEach((element, l) => {
 				if (element.type == 'signature') {
-					let myIndex = k.toString() + l.toString();
+					const myIndex = k.toString() + l.toString();
 					indexOfSignature.set(myIndex, index);
 					index++;
 					console.log('indexOfSignature', indexOfSignature);
@@ -904,10 +906,10 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			});
 		});
 
-		let temp = i.toString() + j.toString(); //making unique code
+		const temp = i.toString() + j.toString(); //making unique code
 		console.log('temp', temp);
 
-		let m = indexOfSignature.get(temp);
+		const m = indexOfSignature.get(temp);
 		console.log('m', m);
 
 		this.SignaturePad.toArray()[m].clear();
@@ -958,7 +960,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		// }
 	}
 	addRow(j, i) {
-		let arr = [];
+		const arr = [];
 		for (
 			let k = 0;
 			k < this.model[j].attributes[i].tableRows[0].length;
@@ -1014,7 +1016,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		}
 		if (this.type == 'add') {
 			console.log('add', this.model);
-			let tempModel = [];
+			const tempModel = [];
 			this.model.forEach((element) => {
 				if (element.attributes.length) {
 					tempModel.push(element);
@@ -1026,7 +1028,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				d.push(this.previewform.value);
 				console.log('d', d);
 
-				let data = {
+				const data = {
 					title: this.formNameRecieved,
 					frequency: this.frequency,
 					htmlObject: tempModel,
@@ -1058,7 +1060,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		}
 		if (this.type == 'edit') {
 			console.log('edit');
-			let tempModel = [];
+			const tempModel = [];
 			this.model.forEach((element) => {
 				if (element.attributes.length) {
 					tempModel.push(element);
@@ -1069,7 +1071,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				const d = [];
 				d.push(this.previewform.value);
 				console.log('d', d);
-				let data = {
+				const data = {
 					title: this.formNameRecieved,
 					htmlObject: tempModel,
 					enable: this.enableForm,
@@ -1097,8 +1099,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 	duplicate(i, j) {
 		console.log('duplicate', i, j, this.model[i].attributes);
-		let modelFields: Array<field> = [];
-		let modelRow = {
+		const modelFields: Array<field> = [];
+		const modelRow = {
 			attributes: modelFields
 		};
 
@@ -1107,7 +1109,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				if (element.type == field.type) {
 					console.log('field', field);
 					field.label = element.label;
-					let temp = Object.assign({}, element);
+					const temp = Object.assign({}, element);
 					modelFields.push(temp);
 				}
 			});

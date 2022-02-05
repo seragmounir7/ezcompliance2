@@ -7,14 +7,17 @@ import { SavedDynamicFormDataComponent } from './saved-dynamic-form-data/saved-d
 import { SavedDynamicFormTableComponent } from './saved-dynamic-form-data/saved-dynamic-form-table/saved-dynamic-form-table.component';
 
 const routes: Routes = [
-  { path: 'dynamicFormsList', component: FormsComponent },
-  { path: 'savedDynamicForm', component: SavedDynamicFormDataComponent },
-  { path: 'savedDynamicFormTable/:id', component: SavedDynamicFormTableComponent },
-  { path: 'dynamicForm', component: DynamicFormComponent },
+	{ path: 'dynamicFormsList', component: FormsComponent },
+	{ path: 'savedDynamicForm', component: SavedDynamicFormDataComponent },
+	{
+		path: 'savedDynamicFormTable/:id',
+		component: SavedDynamicFormTableComponent
+	},
+	{ path: 'dynamicForm', component: DynamicFormComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
-export class DynamicFormRoutingModule { }
+export class DynamicFormRoutingModule {}

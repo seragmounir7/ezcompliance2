@@ -1,38 +1,59 @@
-<div class="btn btn-outline-primary" [routerLink]="['/admin/landingPageInfo/QA']">
-  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+<div
+	class="btn btn-outline-primary"
+	[routerLink]="['/admin/landingPageInfo/QA']"
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 <div class="container px-4 py-4 bg-white">
-  <form [formGroup]="faqDetails" (ngSubmit)="onFormSubmit()">
-    <h2 class="text-center">Add Question</h2>
+	<form [formGroup]="faqDetails" (ngSubmit)="onFormSubmit()">
+		<h2 class="text-center">Add Question</h2>
 
-    <br />
-    <hr />
-    <div class="row">
-      <div class="col-4">
-        <p for="exampleFormControlInput1" class="form-Label">Question</p>
-        <textarea type="text" formControlName="question" class="form-control sign" id="question"></textarea>
-      </div>
+		<br />
+		<hr />
+		<div class="row">
+			<div class="col-4">
+				<p for="exampleFormControlInput1" class="form-Label">
+					Question
+				</p>
+				<textarea
+					type="text"
+					formControlName="question"
+					class="form-control sign"
+					id="question"
+				></textarea>
+			</div>
 
-      <div class="col-4">
-        <p for="exampleFormControlInput1" class="form-Label">Answer</p>
-        <textarea type="text" formControlName="answer" class="form-control sign" id="answer"></textarea>
-      </div>
-      <div class="col-4">
-        <p for="exampleFormControlInput1" class="form-Label">Portal</p>
-        <select class="form-select form-control" aria-label="Default select example" formControlName="portalId">
-          <option value="" selected hidden> Select Portal</option>
-          <option *ngFor="let portal of portalData" [value]="portal._id">{{portal.title}}</option>
+			<div class="col-4">
+				<p for="exampleFormControlInput1" class="form-Label">Answer</p>
+				<textarea
+					type="text"
+					formControlName="answer"
+					class="form-control sign"
+					id="answer"
+				></textarea>
+			</div>
+			<div class="col-4">
+				<p for="exampleFormControlInput1" class="form-Label">Portal</p>
+				<select
+					class="form-select form-control"
+					aria-label="Default select example"
+					formControlName="portalId"
+				>
+					<option value="" selected hidden>Select Portal</option>
+					<option
+						*ngFor="let portal of portalData"
+						[value]="portal._id"
+					>
+						{{portal.title}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<br />
+		<hr />
 
-        </select>
-      </div>
-
-    </div>
-    <br>
-    <hr>
-
-
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary">Add</button>
-    </div>
-  </form>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary">Add</button>
+		</div>
+	</form>
 </div>

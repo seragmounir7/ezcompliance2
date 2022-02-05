@@ -1,6 +1,6 @@
 export interface Tutorial {
-  id?: any;
-  title?: string;
-  description?: string;
-  published?: boolean;
+	id?: any;
+	title?: string;
+	description?: string;
+	published?: boolean;
 }

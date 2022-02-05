@@ -289,7 +289,7 @@ export class LogicalFormInfoService {
 	updateAllHazards(data, jobTaskId) {
 		return this.https.patch(this.apiUrl + `identifyHazard/updateAll`, {
 			order: data,
-			jobTaskId: jobTaskId
+			jobTaskId
 		});
 	}
 	//add Identify Hazards end
@@ -327,7 +327,7 @@ export class LogicalFormInfoService {
 	updateAllContrlActReq(data, jobTaskId) {
 		return this.https.patch(
 			this.apiUrl + `controlActionRequired/updateAll`,
-			{ order: data, jobTaskId: jobTaskId }
+			{ order: data, jobTaskId }
 		);
 	}
 

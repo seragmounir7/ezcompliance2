@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -144,10 +145,9 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		this.addLicence().push(this.newFiled1(data));
 		this.licenceValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addLicence().length; index++) {
-			let element = this.addLicence().at(index);
+			const element = this.addLicence().at(index) as FormGroup;
 			this.licenceValueChanges.push(
-				(element['controls'].LicenceName
-					.valueChanges as Observable<any>).pipe(
+				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
 					tap((value) => console.log('value', value)),
@@ -168,9 +168,9 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		this.addLicence().push(this.newFiled());
 		this.licenceValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addLicence().length; index++) {
-			let element = this.addLicence().at(index);
+			const element = this.addLicence().at(index) as FormGroup;
 			this.licenceValueChanges.push(
-				(element['controls'].LicenceName
+				(element.controls.LicenceName
 					.valueChanges as Observable<any>).pipe(
 					startWith(''),
 					debounceTime(400),
@@ -205,7 +205,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 	}
 	removeFiled(i) {
 		const item = <FormArray>(
-			this.subcontractDetails.controls['licenceAndQualifications']
+			this.subcontractDetails.controls.licenceAndQualifications
 		);
 		if (item.length > 1) {
 			item.removeAt(i);
@@ -303,9 +303,9 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		//   this.formData='formfield'
 		// }
 
-		let licenceArr = () => {
+		const licenceArr = () => {
 			this.addLicence().length;
-			let arr = [];
+			const arr = [];
 			this.addLicence().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({
@@ -354,9 +354,9 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		);
 	}
 	onFormUpdate(id) {
-		let licenceArr = () => {
+		const licenceArr = () => {
 			this.addLicence().length;
-			let arr = [];
+			const arr = [];
 			this.addLicence().controls.forEach((item: any) => {
 				console.log('item', item);
 				arr.push({

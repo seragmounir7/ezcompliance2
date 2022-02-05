@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminSetupComponent } from './admin-setup.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AdminSetupComponent
-  }
+	{
+		path: '',
+		component: AdminSetupComponent
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
-export class AdminSetupRoutingModule { }
+export class AdminSetupRoutingModule {}
