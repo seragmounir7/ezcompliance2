@@ -331,6 +331,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	displayFn(user: any): string {
 		return user && user.fullName ? user.fullName : '';
 	}
+
 	ngAfterViewInit() {
 		console.log('check1...', this.check);
 		this.sub = this.shared.printObs$.subscribe((res) => {
