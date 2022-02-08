@@ -1,11 +1,31 @@
 import { NavItem } from './nav-items';
 
 export class NavItems {
-	navItems: NavItem[] = [
+	protected returnNav: NavItem[];
+
+	get getNav(): NavItem[] {
+		return this.returnNav;
+	}
+	constructor() {
+		let role = sessionStorage.getItem('role') as string;
+		if (!role) return;
+		switch (role.toLowerCase()) {
+			case 'admin':
+				this.returnNav = this.navItemsAll;
+				break;
+			case 'clientadmin':
+				this.returnNav = this.clientAdminNav;
+				break;
+			default:
+				break;
+		}
+		// this.returnNav = role?this.clientAdminNav: this.navItemsAll
+	}
+	protected navItemsAll: NavItem[] = [
 		{
 			displayedName: 'Dashboard',
 			icon: 'dash',
-			route: '/admin',
+			route: './',
 			hasAccess: true
 		},
 		{
@@ -15,25 +35,25 @@ export class NavItems {
 				{
 					displayedName: 'Generate a New Form',
 					icon: 'dynamic',
-					route: '/admin//dynamic/dynamicFormsList',
+					route: './dynamic/dynamicFormsList',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Logical Forms',
 					icon: 'logical',
-					route: '/admin/forms',
+					route: './forms',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Form List',
 					icon: 'fillConfig',
-					route: '/admin/forms/fillConfigForm/0',
+					route: './forms/fillConfigForm/0',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Submitted Forms',
 					icon: 'savedForms',
-					route: '/admin/savedForms',
+					route: './savedForms',
 					hasAccess: true
 				}
 			],
@@ -47,31 +67,31 @@ export class NavItems {
 					displayedName: 'Company Details ',
 					icon: 'company',
 					route:
-						'/admin/registration/addCompanyInfo/61eeeef751744133c768653c',
+						'./registration/addCompanyInfo/61eeeef751744133c768653c',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Roles',
 					icon: 'roles',
-					route: '/admin/roleMangement',
+					route: './roleMangement',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Employee Details',
 					icon: 'employee',
-					route: '/admin/registration/employeeRegistration',
+					route: './registration/employeeRegistration',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Subcontractor Details',
 					icon: 'subcontractor',
-					route: '/admin/registration/subcontract',
+					route: './registration/subcontract',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Client Terms And Conditon ',
 					icon: 'terms',
-					route: '/admin/siteInfo/termsAndcondition',
+					route: './siteInfo/termsAndcondition',
 					hasAccess: true
 				}
 			],
@@ -88,31 +108,31 @@ export class NavItems {
 						{
 							displayedName: 'States',
 							icon: 'state',
-							route: '/admin/stateRel/states',
+							route: './stateRel/states',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Jurisdiction',
 							icon: 'jurisdiction',
-							route: '/admin/stateRel/juridiction',
+							route: './stateRel/juridiction',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Safety Legislation',
 							icon: 'safety_legislation',
-							route: '/admin/stateRel/safetyLegislation',
+							route: './stateRel/safetyLegislation',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Regulator',
 							icon: 'regulator',
-							route: '/admin/stateRel/regulator',
+							route: './stateRel/regulator',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Set State Relation',
 							icon: 'state',
-							route: '/admin/stateRel/setState',
+							route: './stateRel/setState',
 							hasAccess: true
 						}
 					],
@@ -126,61 +146,61 @@ export class NavItems {
 						{
 							displayedName: 'Add Instruction',
 							icon: 'addInstruction',
-							route: '/admin/siteInfo/instructions/riskAssess',
+							route: './siteInfo/instructions/riskAssess',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Risk-Level',
 							icon: 'riskLevel',
-							route: '/admin/siteInfo/riskLevel',
+							route: './siteInfo/riskLevel',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Residual Risk Level',
 							icon: 'riskLevel',
-							route: '/admin/siteInfo/residual',
+							route: './siteInfo/residual',
 							hasAccess: true
 						},
 						{
 							displayedName: 'High Risk Construct',
 							icon: 'Risk_construct',
-							route: '/admin/siteInfo/highRisk',
+							route: './siteInfo/highRisk',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Code Of Practice',
 							icon: 'cop',
-							route: '/admin/siteInfo/codeOfpract',
+							route: './siteInfo/codeOfpract',
 							hasAccess: true
 						},
 						{
-							displayedName: 'Chemical',
+							displayedName: 'Hazardous Substances',
 							icon: 'chemical',
-							route: '/admin/siteInfo/chemical',
+							route: './siteInfo/chemical',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Job Task',
 							icon: 'job_task',
-							route: '/admin/siteInfo/jobTask',
+							route: './siteInfo/jobTask',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Licence & Qualification',
 							icon: 'license',
-							route: '/admin/siteInfo/licenceAndQual',
+							route: './siteInfo/licenceAndQual',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Control And Action',
 							icon: 'controlAndAction',
-							route: '/admin/siteInfo/contrlActReq',
+							route: './siteInfo/contrlActReq',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Set Relation',
 							icon: 'setRelation',
-							route: '/admin/confiLogi/setLogic',
+							route: './confiLogi/setLogic',
 							hasAccess: true
 						}
 					],
@@ -194,31 +214,31 @@ export class NavItems {
 						{
 							displayedName: 'Accident Instruction',
 							icon: 'addInstruction',
-							route: '/admin/siteInfo/instructions/accident',
+							route: './siteInfo/instructions/accident',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Nature Of Incident',
 							icon: 'natureOfIncident',
-							route: '/admin/siteInfo/natureOfIncident',
+							route: './siteInfo/natureOfIncident',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Type Of Incident',
 							icon: 'natureOfIncident',
-							route: '/admin/siteInfo/typeOfIncident',
+							route: './siteInfo/typeOfIncident',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Changes Made',
 							icon: 'changesMade',
-							route: '/admin/siteInfo/changesMade',
+							route: './siteInfo/changesMade',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Root Cause Of Incident',
 							icon: 'rootCause',
-							route: '/admin/siteInfo/rootCauseOfIncident',
+							route: './siteInfo/rootCauseOfIncident',
 							hasAccess: true
 						}
 					],
@@ -227,19 +247,19 @@ export class NavItems {
 				{
 					displayedName: 'Set Hazard Treatment',
 					icon: 'hazardTreatment',
-					route: '/admin/confiLogi/setHazard',
+					route: './confiLogi/setHazard',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Site Inspection Category',
 					icon: 'category',
-					route: '/admin/siteInfo/siteinspectioncategory',
+					route: './siteInfo/siteinspectioncategory',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Dynamic Form Categories',
 					icon: 'category',
-					route: '/admin/siteInfo/dynamicFormCategories',
+					route: './siteInfo/dynamicFormCategories',
 					hasAccess: true
 				},
 				{
@@ -249,64 +269,64 @@ export class NavItems {
 						{
 							displayedName: 'Set Job Number',
 							icon: 'jobNumber',
-							route: '/admin/confiLogi/setJobNumber',
+							route: './confiLogi/setJobNumber',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Site',
 							icon: 'site',
-							route: '/admin/siteInfo/addSite',
+							route: './siteInfo/addSite',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Customer',
 							icon: 'customer',
-							route: '/admin/siteInfo/addCustomer',
+							route: './siteInfo/addCustomer',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Project Manager',
 							icon: 'customer',
-							route: '/admin/siteInfo/projMang',
+							route: './siteInfo/projMang',
 							hasAccess: true
 						},
 
 						{
 							displayedName: 'Trade Category',
 							icon: 'tradeCategory',
-							route: '/admin/siteInfo/licenceCat',
+							route: './siteInfo/licenceCat',
 							hasAccess: true
 						},
 						{
 							displayedName: 'PPE Selection',
 							icon: 'PPESelection',
-							route: '/admin/siteInfo/ppeSel',
+							route: './siteInfo/ppeSel',
 							hasAccess: true
 						},
 
 						{
 							displayedName: 'Hazards',
 							icon: 'hazard',
-							route: '/admin/siteInfo/hazards',
+							route: './siteInfo/hazards',
 							hasAccess: true
 						},
 
 						{
 							displayedName: 'Staff',
 							icon: 'staff',
-							route: '/admin/siteInfo/staff',
+							route: './siteInfo/staff',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Manager',
 							icon: 'manager',
-							route: '/admin/siteInfo/manager',
+							route: './siteInfo/manager',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Whs-Manager',
 							icon: 'manager',
-							route: '/admin/siteInfo/WHS-Manager',
+							route: './siteInfo/WHS-Manager',
 							hasAccess: true
 						}
 					],
@@ -322,91 +342,91 @@ export class NavItems {
 				{
 					displayedName: 'Header',
 					icon: 'header',
-					route: '/admin/landingPageInfo/header',
+					route: './landingPageInfo/header',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Application Service Info',
 					icon: 'appInfo',
-					route: '/admin/landingPageInfo/applicationSerInfo',
+					route: './landingPageInfo/applicationSerInfo',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Safety Module',
 					icon: 'safety',
-					route: '/admin/landingPageInfo/safetyModule',
+					route: './landingPageInfo/safetyModule',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Happy Client',
 					icon: 'HappyClient',
-					route: '/admin/landingPageInfo/happyClient',
+					route: './landingPageInfo/happyClient',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Flexible',
 					icon: 'flexible',
-					route: '/admin/landingPageInfo/flexible',
+					route: './landingPageInfo/flexible',
 					hasAccess: true
 				},
 				{
 					displayedName: 'CustomerTestimonial',
 					icon: 'subcontractor',
-					route: '/admin/landingPageInfo/customer',
+					route: './landingPageInfo/customer',
 					hasAccess: true
 				},
 				{
 					displayedName: 'About-Us',
 					icon: 'info',
-					route: '/admin/landingPageInfo/aboutUs',
+					route: './landingPageInfo/aboutUs',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Contact-Us',
 					icon: 'contactUs',
-					route: '/admin/landingPageInfo/contactUs',
+					route: './landingPageInfo/contactUs',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Our-Work(Section-1)',
 					icon: 'work',
-					route: '/admin/landingPageInfo/ourWork',
+					route: './landingPageInfo/ourWork',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Our-Work(Section-2)',
 					icon: 'work',
-					route: '/admin/landingPageInfo/screenShot',
+					route: './landingPageInfo/screenShot',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Our-Work-(Section-3)',
 					icon: 'work',
-					route: '/admin/landingPageInfo/different',
+					route: './landingPageInfo/different',
 					hasAccess: true
 				},
 				{
 					displayedName: 'FAQ',
 					icon: 'qna',
-					route: '/admin/landingPageInfo/faq',
+					route: './landingPageInfo/faq',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Q&A Section',
 					icon: 'qna',
-					route: '/admin/landingPageInfo/QA',
+					route: './landingPageInfo/QA',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Terms and Conditions',
 					icon: 'terms',
-					route: '/admin/landingPageInfo/term',
+					route: './landingPageInfo/term',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Social Media',
 					icon: 'social',
-					route: '/admin/landingPageInfo/socialMedia',
+					route: './landingPageInfo/socialMedia',
 					hasAccess: true
 				},
 				{
@@ -416,13 +436,13 @@ export class NavItems {
 						{
 							displayedName: 'Add Subscription',
 							icon: 'Add_Subsc',
-							route: '/admin/subscrpt',
+							route: './subscrpt',
 							hasAccess: true
 						},
 						{
 							displayedName: 'Coupon',
 							icon: 'Subscription',
-							route: '/admin/subscrpt/coupon',
+							route: './subscrpt/coupon',
 							hasAccess: true
 						}
 					],
@@ -431,42 +451,321 @@ export class NavItems {
 			],
 			hasAccess: true
 		}
-		// {
-		//     displayedName: "State Relation",
-		//     icon: "page",
-		//     childItem: [
-		//         {
-		//             displayedName: "States",
-		//             icon: "page",
-		//             route: "/admin/stateRel/states",
-		//             hasAccess: true
-		//         },
-		//         {
-		//             displayedName: "Jurisdiction",
-		//             icon: "page",
-		//             route: "/admin/stateRel/juridiction",
-		//             hasAccess: true
-		//         },
-		//         {
-		//             displayedName: "Safety Legislation",
-		//             icon: "page",
-		//             route: "/admin/stateRel/safetyLegislation",
-		//             hasAccess: true
-		//         },
-		//         {
-		//             displayedName: "Regulator",
-		//             icon: "page",
-		//             route: "/admin/stateRel/regulator",
-		//             hasAccess: true
-		//         },
-		//         {
-		//             displayedName: "Set State Relation",
-		//             icon: "page",
-		//             route: "/admin/stateRel/setState",
-		//             hasAccess: true
-		//         }
-		//     ],
-		//     hasAccess: true
-		// }
+	];
+
+	protected clientAdminNav: NavItem[] = [
+		{
+			displayedName: 'Dashboard',
+			icon: 'dash',
+			route: './',
+			hasAccess: true
+		},
+		{
+			displayedName: 'WHS Forms',
+			icon: 'whsForms',
+			childItem: [
+				{
+					displayedName: 'Generate a New Form',
+					icon: 'dynamic',
+					route: './dynamic/dynamicFormsList',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Logical Forms',
+					icon: 'logical',
+					route: './forms',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Form List',
+					icon: 'fillConfig',
+					route: './forms/fillConfigForm/0',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Submitted Forms',
+					icon: 'savedForms',
+					route: './savedForms',
+					hasAccess: true
+				}
+			],
+			hasAccess: true
+		},
+		{
+			displayedName: 'Company Information',
+			icon: 'roleMgmt',
+			childItem: [
+				{
+					displayedName: 'Company Details ',
+					icon: 'company',
+					route:
+						'./registration/addCompanyInfo/61eeeef751744133c768653c',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Roles',
+					icon: 'roles',
+					route: './roleMangement',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Employee Details',
+					icon: 'employee',
+					route: './registration/employeeRegistration',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Subcontractor Details',
+					icon: 'subcontractor',
+					route: './registration/subcontract',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Client Terms And Conditon ',
+					icon: 'terms',
+					route: './siteInfo/termsAndcondition',
+					hasAccess: true
+				}
+			],
+			hasAccess: true
+		},
+		{
+			displayedName: 'Form Settings',
+			icon: 'mainSetting',
+			childItem: [
+				{
+					displayedName: 'State Relation',
+					icon: 'stateRelation',
+					childItem: [
+						{
+							displayedName: 'States',
+							icon: 'state',
+							route: './stateRel/states',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Jurisdiction',
+							icon: 'jurisdiction',
+							route: './stateRel/juridiction',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Safety Legislation',
+							icon: 'safety_legislation',
+							route: './stateRel/safetyLegislation',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Regulator',
+							icon: 'regulator',
+							route: './stateRel/regulator',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Set State Relation',
+							icon: 'state',
+							route: './stateRel/setState',
+							hasAccess: true
+						}
+					],
+					hasAccess: true
+				},
+
+				{
+					displayedName: 'Risk Assessment ',
+					icon: 'riskAssessment',
+					childItem: [
+						{
+							displayedName: 'Add Instruction',
+							icon: 'addInstruction',
+							route: './siteInfo/instructions/riskAssess',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Risk-Level',
+							icon: 'riskLevel',
+							route: './siteInfo/riskLevel',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Residual Risk Level',
+							icon: 'riskLevel',
+							route: './siteInfo/residual',
+							hasAccess: true
+						},
+						{
+							displayedName: 'High Risk Construct',
+							icon: 'Risk_construct',
+							route: './siteInfo/highRisk',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Code Of Practice',
+							icon: 'cop',
+							route: './siteInfo/codeOfpract',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Hazardous Substances',
+							icon: 'chemical',
+							route: './siteInfo/chemical',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Job Task',
+							icon: 'job_task',
+							route: './siteInfo/jobTask',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Licence & Qualification',
+							icon: 'license',
+							route: './siteInfo/licenceAndQual',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Control And Action',
+							icon: 'controlAndAction',
+							route: './siteInfo/contrlActReq',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Set Relation',
+							icon: 'setRelation',
+							route: './confiLogi/setLogic',
+							hasAccess: true
+						}
+					],
+					hasAccess: true
+				},
+
+				{
+					displayedName: 'Notifiable Accident',
+					icon: 'notifiableAccident',
+					childItem: [
+						{
+							displayedName: 'Accident Instruction',
+							icon: 'addInstruction',
+							route: './siteInfo/instructions/accident',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Nature Of Incident',
+							icon: 'natureOfIncident',
+							route: './siteInfo/natureOfIncident',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Type Of Incident',
+							icon: 'natureOfIncident',
+							route: './siteInfo/typeOfIncident',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Changes Made',
+							icon: 'changesMade',
+							route: './siteInfo/changesMade',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Root Cause Of Incident',
+							icon: 'rootCause',
+							route: './siteInfo/rootCauseOfIncident',
+							hasAccess: true
+						}
+					],
+					hasAccess: true
+				},
+				{
+					displayedName: 'Set Hazard Treatment',
+					icon: 'hazardTreatment',
+					route: './confiLogi/setHazard',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Site Inspection Category',
+					icon: 'category',
+					route: './siteInfo/siteinspectioncategory',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Dynamic Form Categories',
+					icon: 'category',
+					route: './siteInfo/dynamicFormCategories',
+					hasAccess: true
+				},
+				{
+					displayedName: 'General Form Settings',
+					icon: 'genFormSet',
+					childItem: [
+						{
+							displayedName: 'Set Job Number',
+							icon: 'jobNumber',
+							route: './confiLogi/setJobNumber',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Site',
+							icon: 'site',
+							route: './siteInfo/addSite',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Customer',
+							icon: 'customer',
+							route: './siteInfo/addCustomer',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Project Manager',
+							icon: 'customer',
+							route: './siteInfo/projMang',
+							hasAccess: true
+						},
+
+						{
+							displayedName: 'Trade Category',
+							icon: 'tradeCategory',
+							route: './siteInfo/licenceCat',
+							hasAccess: true
+						},
+						{
+							displayedName: 'PPE Selection',
+							icon: 'PPESelection',
+							route: './siteInfo/ppeSel',
+							hasAccess: true
+						},
+
+						{
+							displayedName: 'Hazards',
+							icon: 'hazard',
+							route: './siteInfo/hazards',
+							hasAccess: true
+						},
+
+						{
+							displayedName: 'Staff',
+							icon: 'staff',
+							route: './siteInfo/staff',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Manager',
+							icon: 'manager',
+							route: './siteInfo/manager',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Whs-Manager',
+							icon: 'manager',
+							route: './siteInfo/WHS-Manager',
+							hasAccess: true
+						}
+					],
+					hasAccess: true
+				}
+			],
+			hasAccess: true
+		}
 	];
 }

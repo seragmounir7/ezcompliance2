@@ -2,6 +2,7 @@ import {
 	AfterViewInit,
 	Component,
 	HostListener,
+	Inject,
 	NgZone,
 	OnDestroy,
 	OnInit
@@ -37,7 +38,11 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
+import { DOCUMENT, ViewportScroller } from '@angular/common';
+import { fromEvent } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
 	selector: 'app-hazard-report',
 	templateUrl: './hazard-report.component.html',
@@ -60,7 +65,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	selectedImage: any;
 	isHistory: boolean;
 	hasError: false;
-
 	pad: 'inp_padding';
 	allJobNumbers = [];
 	whsData: any = [''];
@@ -203,30 +207,51 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.returnTo.subscribe((res) => console.log(res));
 		}
 
-		this.employee
-			.getAllEmployeeInfo()
-			.pipe(
-				map((res) => {
-					return res.data.map((item) => {
-						item.fullName = `${item.firstName} ${item.lastName}`;
-						return item;
-					});
-				})
-			)
-			.subscribe((empData) => {
-				this.empData = empData;
-				console.log('this.empData', this.empData);
-				this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
-					startWith(''),
-					debounceTime(400),
-					map((value) =>
-						typeof value === 'string' ? value : value.fullName
-					),
-					map((fullName) =>
-						fullName ? this._filter(fullName) : this.empData.slice()
-					)
-				);
-				this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+			console.log('this.empData', this.empData);
+			this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
+				startWith(''),
+				tap((value) => console.log('value', value)),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.filteredOptions = this.myControl.valueChanges.pipe(
+				startWith(''),
+				tap(console.log),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.ActionedbyStrings = [
+				'elliminateAction',
+				'substituteAction',
+				'isolatedAction',
+				'solutionAction',
+				'procedureRemoveAction',
+				'PPEAction'
+			];
+			// this.obj = new Object()
+			this.ActionedbyStrings.forEach((ctrlName) => {
+				const filter = this.hazardReport.controls[
+					ctrlName
+				].valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
 					tap((value) => console.log('value', value)),
@@ -237,51 +262,18 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 						fullName ? this._filter(fullName) : this.empData.slice()
 					)
 				);
-				this.ActionedbyStrings = [
-					'elliminateAction',
-					'substituteAction',
-					'isolatedAction',
-					'solutionAction',
-					'procedureRemoveAction',
-					'PPEAction'
-				];
-				// this.obj = new Object()
-				this.ActionedbyStrings.forEach((ctrlName) => {
-					const filter = this.hazardReport.controls[
-						ctrlName
-					].valueChanges.pipe(
-						startWith(''),
-						debounceTime(400),
-						tap((value) => console.log('value', value)),
-						map((value) =>
-							typeof value === 'string' ? value : value.fullName
-						),
-						map((fullName) =>
-							fullName
-								? this._filter(fullName)
-								: this.empData.slice()
-						)
-					);
-					// let o = new Object(ctrlName,filter)
-					// Object.assign(obj,{...o})
-					this.obj[ctrlName] = filter;
-				});
-				console.log(this.obj);
+				// let o = new Object(ctrlName,filter)
+				// Object.assign(obj,{...o})
+				this.obj[ctrlName] = filter;
 			});
+			console.log(this.obj);
+		});
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 
 		this.activatedRoute.queryParams.subscribe((params) => {
 			this.type = params.formType;
 		});
-		this.filteredOptions = this.myControl.valueChanges.pipe(
-			startWith(''),
-			debounceTime(400),
-			distinctUntilChanged(),
-			switchMap((val) => {
-				console.log('myControl', val);
-				return this.filter(val || '');
-			})
-		);
+
 		this.filteredManager = this.myControlManager.valueChanges.pipe(
 			startWith(''),
 			debounceTime(400),
@@ -524,13 +516,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	filter3(val: string): Observable<any> {
 		return this.employee.getAllEmployeeInfo().pipe(
-			map((res) => {
-				res.data = res.data.map((item) => {
-					item.name = `${item.firstName} ${item.lastName}`;
-					return item;
-				});
-				return res;
-			}),
 			map((response: any) => {
 				response.data = response.data.filter((option) => {
 					console.log('option>>', option);
@@ -549,13 +534,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	// Action By
 	filter4(val: string): Observable<any> {
 		return this.employee.getAllEmployeeInfo().pipe(
-			map((res) => {
-				res.data = res.data.map((item) => {
-					item.name = `${item.firstName} ${item.lastName}`;
-					return item;
-				});
-				return res;
-			}),
 			map((response: any) => {
 				response.data = response.data.filter((option) => {
 					console.log('option>>', option);
@@ -588,9 +566,9 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	change(event) {
 		console.log('evebt', event);
-		this.hazardReport
-			.get('myControl')
-			.setValue(event.option.value.name || '');
+		// this.hazardReport
+		// 	.get('myControl')
+		// 	.setValue(event.option.value.name || '');
 		this.hazardReport
 			.get('whsManagerEmail')
 			.setValue(event.option.value.email || '');

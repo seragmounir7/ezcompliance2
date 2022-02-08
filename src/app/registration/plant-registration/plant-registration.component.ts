@@ -89,58 +89,48 @@ export class PlantRegistrationComponent implements OnInit {
 		console.log(this.isHistory, this.id);
 
 		this.patchData();
-		this.employee
-			.getAllEmployeeInfo()
-			.pipe(
-				map((res) => {
-					return res.data.map((item) => {
-						item.fullName = `${item.firstName} ${item.lastName}`;
-						return item;
-					});
-				})
-			)
-			.subscribe((empData) => {
-				this.empData = empData;
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
 
-				this.filteredOptions1 = this.ppeDetails.controls.managerName.valueChanges.pipe(
-					startWith(''),
-					debounceTime(400),
-					tap((value) =>
-						typeof value === 'object'
-							? ''
-							: typeof value === 'string'
-							? this.ppeDetails.controls.managerName.setErrors({
-									incorrect: true
-							  })
-							: ''
-					),
-					map((value) =>
-						typeof value === 'string' ? value : value?.fullName
-					),
-					map((fullName) =>
-						fullName ? this._filter(fullName) : this.empData.slice()
-					)
-				);
-				this.filteredOptions2 = this.plantDetails.controls.plantManagerName.valueChanges.pipe(
-					startWith(''),
-					debounceTime(400),
-					tap((value) =>
-						typeof value === 'object'
-							? ''
-							: typeof value === 'string'
-							? this.plantDetails.controls.plantManagerName.setErrors(
-									{ incorrect: true }
-							  )
-							: ''
-					),
-					map((value) =>
-						typeof value === 'string' ? value : value?.fullName
-					),
-					map((fullName) =>
-						fullName ? this._filter(fullName) : this.empData.slice()
-					)
-				);
-			});
+			this.filteredOptions1 = this.ppeDetails.controls.managerName.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				tap((value) =>
+					typeof value === 'object'
+						? ''
+						: typeof value === 'string'
+						? this.ppeDetails.controls.managerName.setErrors({
+								incorrect: true
+						  })
+						: ''
+				),
+				map((value) =>
+					typeof value === 'string' ? value : value?.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.filteredOptions2 = this.plantDetails.controls.plantManagerName.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				tap((value) =>
+					typeof value === 'object'
+						? ''
+						: typeof value === 'string'
+						? this.plantDetails.controls.plantManagerName.setErrors(
+								{ incorrect: true }
+						  )
+						: ''
+				),
+				map((value) =>
+					typeof value === 'string' ? value : value?.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+		});
 	}
 	private _filter(name: string): any[] {
 		const filterValue = name.toLowerCase();

@@ -148,23 +148,8 @@ export class SiteInspectionTableComponent implements OnInit {
 			formName: 'Site Inspection Form'
 		});
 		console.log('check');
-		// this.logicalFormInfo.printing.next('print');
 		localStorage.clear();
 		localStorage.setItem('key', 'print');
-		// $("<iframe>")                             // create a new iframe element
-		//     .hide()                               // make it invisible
-		//     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
-		//     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-		// void this.spinner.show();
-		// let iframe=document.createElement("iframe")
-		// iframe.id = "printIframe"
-		//       iframe.src= environment.stagingUrl+"#/admin/forms/siteInspect/"+id
-		//       iframe.style.display="none";
-		//       let body = document.getElementsByTagName("body")
-		//       body[0].appendChild(iframe)
-		//       setTimeout(() => {
-		//         void this.spinner.hide();
-		//       }, 3500);
 		void this.spinner.show();
 		this.router.navigate([
 			'/',

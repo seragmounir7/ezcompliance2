@@ -45,9 +45,11 @@ export class MainComponent implements OnInit, AfterViewInit {
 						'content-wrapper'
 					);
 			} else {
-				this.contentWrapper.nativeElement.classList.add(
-					'content-wrapper'
-				);
+				this.contentWrapper
+					? this.contentWrapper.nativeElement.classList.add(
+							'content-wrapper'
+					  )
+					: '';
 			}
 		});
 		this.renderer.removeClass(

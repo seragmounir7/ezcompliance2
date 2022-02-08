@@ -33,7 +33,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		private setTitle: SetTitleService,
 		private router: Router
 	) {
-		this.navItems = new NavItems().navItems;
+		this.navItems = new NavItems().getNav;
 	}
 
 	ngOnInit() {
@@ -42,39 +42,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		console.log(this.router.url);
 		const rLink = this.router.url;
 		this.navItems.forEach((x) => this.treeArr.push(false));
-		if (rLink === '/admin/roleMangement') {
-			this.menuOpen1(1);
-		} else if (rLink === '/admin/dynamic/dynamicFormsList') {
-			this.menuOpen1(2);
-		} else if (rLink === '/admin/forms') {
-			this.menuOpen1(3);
-		} else if (
-			rLink === '/admin/confiLogi/setLogic' ||
-			rLink === '/admin/confiLogi/setJobNumber'
-		) {
-			this.menuOpen1(4);
-		} else if (
-			rLink === '/admin/siteInfo/addSite' ||
-			rLink === '/admin/siteInfo/addCustomer' ||
-			rLink === '/admin/siteInfo/jobTask' ||
-			rLink === '/admin/siteInfo/highRisk' ||
-			rLink === '/admin/siteInfo/licenceAndQual' ||
-			rLink === '/admin/siteInfo/licenceCat' ||
-			rLink === '/admin/siteInfo/ppeSel' ||
-			rLink === '/admin/siteInfo/hazards' ||
-			rLink === '/admin/siteInfo/contrlActReq' ||
-			rLink === '/admin/siteInfo/chemical' ||
-			rLink === '/admin/siteInfo/riskLevel' ||
-			rLink === '/admin/siteInfo/riskLevel' ||
-			rLink === '/admin/siteInfo/staff'
-		) {
-			this.menuOpen1(5);
-		} else if (rLink === '/admin/savedForms') {
-			this.menuOpen1(6);
-		} else if (rLink === '/admin/forms/fillConfigForm') {
-			this.menuOpen1(7);
-		}
-
 		this.setTitle.setTitle('WHS-Menu Sidebar');
 		this.openMenuOnLoad();
 		console.log(this.navItems);

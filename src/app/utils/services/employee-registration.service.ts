@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 @Injectable({
 	providedIn: 'root'
 })
@@ -20,8 +20,12 @@ export class EmployeeRegistrationService {
 	getAllEmployeeInfo() {
 		return this.https.get(this.apiUrl + 'employee/getAll').pipe(
 			map((res: any) => {
-				return res;
-			})
+				return res.data.map((item) => {
+					item.fullName = `${item.firstName} ${item.lastName}`;
+					return item;
+				});
+			}),
+			tap((res) => console.log('employee/getAll', res))
 		);
 	}
 	getEmployeeInfoById(id) {

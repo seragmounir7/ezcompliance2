@@ -1,3 +1,4 @@
+<app-scroll></app-scroll>
 <div
 	class="btn btn-outline-primary"
 	*ngIf="id ==='form' && type!=='Tool Box'"
@@ -46,12 +47,12 @@
 							class="form-control"
 							id="siteName"
 							formControlName="siteName"
-							[class.is-invalid]="toolBox.get('siteName')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('siteName')?.hasError('required')
           && (toolBox.get('siteName').dirty || toolBox.get('siteName').touched) "
 						/>
 						<span
 							*ngIf="
-          toolBox.get('siteName')?.hasError('required') && (toolBox.get('siteName').dirty 
+          toolBox.get('siteName')?.hasError('required') && (toolBox.get('siteName').dirty
           || toolBox.get('siteName').touched) "
 							class="invalid-feedback"
 						>
@@ -66,12 +67,12 @@
 							type="text"
 							class="form-control"
 							formControlName="customerName"
-							[class.is-invalid]="toolBox.get('customerName')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('customerName')?.hasError('required')
           && (toolBox.get('customerName').dirty || toolBox.get('customerName').touched) "
 						/>
 						<span
 							*ngIf="
-          toolBox.get('customerName')?.hasError('required') && (toolBox.get('customerName').dirty 
+          toolBox.get('customerName')?.hasError('required') && (toolBox.get('customerName').dirty
           || toolBox.get('customerName').touched) "
 							class="invalid-feedback"
 						>
@@ -90,14 +91,14 @@
 							formControlName="streetAddr"
 							class="form-control"
 							id="name"
-							[class.is-invalid]="toolBox.get('streetAddr')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('streetAddr')?.hasError('required')
           && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) "
 						></textarea>
-						<!-- <input type="text" class="form-control" formControlName="streetAddr" [class.is-invalid]="toolBox.get('streetAddr')?.hasError('required') 
+						<!-- <input type="text" class="form-control" formControlName="streetAddr" [class.is-invalid]="toolBox.get('streetAddr')?.hasError('required')
           && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) " /> -->
 						<span
 							*ngIf="
-          toolBox.get('streetAddr')?.hasError('required') && (toolBox.get('streetAddr').dirty 
+          toolBox.get('streetAddr')?.hasError('required') && (toolBox.get('streetAddr').dirty
           || toolBox.get('streetAddr').touched) "
 							class="invalid-feedback"
 						>
@@ -112,12 +113,12 @@
 							type="text"
 							class="form-control"
 							formControlName="custConct"
-							[class.is-invalid]="toolBox.get('custConct')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('custConct')?.hasError('required')
           && (toolBox.get('custConct').dirty || toolBox.get('custConct').touched) "
 						/>
 						<span
 							*ngIf="
-          toolBox.get('custConct')?.hasError('required') && (toolBox.get('custConct').dirty 
+          toolBox.get('custConct')?.hasError('required') && (toolBox.get('custConct').dirty
           || toolBox.get('custConct').touched) "
 							class="invalid-feedback"
 						>
@@ -141,12 +142,12 @@
 							moduleType="Users"
 							accessType="create_action"
 							formControlName="custConctPh"
-							[class.is-invalid]="toolBox.get('custConctPh')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('custConctPh')?.hasError('required')
           && (toolBox.get('custConctPh').dirty || toolBox.get('custConctPh').touched) "
 						/>
 						<span
 							*ngIf="
-          toolBox.get('custConctPh')?.hasError('required') && (toolBox.get('custConctPh').dirty 
+          toolBox.get('custConctPh')?.hasError('required') && (toolBox.get('custConctPh').dirty
           || toolBox.get('custConctPh').touched) "
 							class="invalid-feedback"
 						>
@@ -163,12 +164,12 @@
 							type="text"
 							class="form-control"
 							formControlName="custEmail"
-							[class.is-invalid]="toolBox.get('custEmail')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('custEmail')?.hasError('required')
           && (toolBox.get('custEmail').dirty || toolBox.get('custEmail').touched) "
 						/>
 						<span
 							*ngIf="
-          toolBox.get('custEmail')?.hasError('required') && (toolBox.get('custEmail').dirty 
+          toolBox.get('custEmail')?.hasError('required') && (toolBox.get('custEmail').dirty
           || toolBox.get('custEmail').touched) "
 							class="invalid-feedback"
 						>
@@ -187,13 +188,13 @@
 							aria-label="Default select example"
 							formControlName="jobNumberId"
 							(change)="jobNoSel()"
-							[class.is-invalid]="toolBox.get('jobNumberId')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('jobNumberId')?.hasError('required')
             && (toolBox.get('jobNumberId').dirty || toolBox.get('jobNumberId').touched) "
 						>
 							<option selected hidden>Select</option>
 							<option
-								[value]="jobNo._id"
 								*ngFor="let jobNo of allJobNumbers"
+								[value]="jobNo._id"
 							>
 								{{jobNo.jobNumber}}
 							</option>
@@ -203,7 +204,7 @@
 						</select>
 						<span
 							*ngIf="
-          toolBox.get('jobNumberId')?.hasError('required') && (toolBox.get('jobNumberId').dirty 
+          toolBox.get('jobNumberId')?.hasError('required') && (toolBox.get('jobNumberId').dirty
           || toolBox.get('jobNumberId').touched) "
 							class="invalid-feedback"
 						>
@@ -222,7 +223,7 @@
 							[min]="minDate"
 							class="form-control"
 							formControlName="date"
-							[class.is-invalid-date]="toolBox.get('date')?.hasError('required') 
+							[class.is-invalid-date]="toolBox.get('date')?.hasError('required')
            && (toolBox.get('date').dirty || toolBox.get('date').touched) "
 							placeholder="dd-mm-yyyy"
 						/>
@@ -232,7 +233,7 @@
 						></mat-datepicker-toggle>
 						<mat-datepicker #datepicker2></mat-datepicker>
 						<span
-							*ngIf=" toolBox.get('date')?.hasError('required') && (toolBox.get('date').dirty 
+							*ngIf=" toolBox.get('date')?.hasError('required') && (toolBox.get('date').dirty
           || toolBox.get('date').touched) "
 							class="invalid-feedback1"
 						>
@@ -251,15 +252,15 @@
 							formControlName="meetingBy"
 							class="form-select form-control col form-dropdown"
 							aria-label="Default select example"
-							[class.is-invalid]="toolBox.get('meetingBy')?.hasError('required') 
+							[class.is-invalid]="toolBox.get('meetingBy')?.hasError('required')
             && (toolBox.get('meetingBy').dirty || toolBox.get('meetingBy').touched) "
 						>
 							<option *ngFor="let p of staff" [value]="p?._id">
-								{{p.title}}
+								{{p.fullName}}
 							</option>
 						</select>
 						<span
-							*ngIf=" toolBox.get('meetingBy')?.hasError('required') && (toolBox.get('meetingBy').dirty 
+							*ngIf=" toolBox.get('meetingBy')?.hasError('required') && (toolBox.get('meetingBy').dirty
           || toolBox.get('meetingBy').touched) "
 							class="invalid-feedback"
 						>
@@ -316,12 +317,12 @@
 									type="text"
 									class="form-control"
 									formControlName="index"
-									[class.is-invalid]=" issues().at(i).get('index')?.hasError('required') 
+									[class.is-invalid]=" issues().at(i).get('index')?.hasError('required')
             && ( issues().at(i).get('index').dirty ||  issues().at(i).get('index').touched) "
 								/>
 								<span
 									*ngIf="
-               issues().at(i).get('index')?.hasError('required') && ( issues().at(i).get('index').dirty 
+               issues().at(i).get('index')?.hasError('required') && ( issues().at(i).get('index').dirty
               || issues().at(i).get('index').touched) "
 									class="invalid-feedback"
 								>
@@ -339,12 +340,12 @@
 									type="text"
 									class="form-control"
 									formControlName="topicDisc"
-									[class.is-invalid]="  issues().at(i).get('topicDisc')?.hasError('required') 
+									[class.is-invalid]="  issues().at(i).get('topicDisc')?.hasError('required')
             && (  issues().at(i).get('topicDisc').dirty ||   issues().at(i).get('topicDisc').touched) "
 								></textarea>
 								<span
 									*ngIf="
-                issues().at(i).get('topicDisc')?.hasError('required') && (  issues().at(i).get('topicDisc').dirty 
+                issues().at(i).get('topicDisc')?.hasError('required') && (  issues().at(i).get('topicDisc').dirty
               ||  issues().at(i).get('topicDisc').touched) "
 									class="invalid-feedback"
 								>
@@ -364,7 +365,7 @@
 									class="form-select form-control col form-dropdown"
 									aria-label="Default select example"
 									formControlName="topicRes"
-									[class.is-invalid]=" issues().at(i).get('topicRes')?.hasError('required') 
+									[class.is-invalid]=" issues().at(i).get('topicRes')?.hasError('required')
                 && ( issues().at(i).get('topicRes').dirty ||  issues().at(i).get('topicRes').touched) "
 								>
 									<option selected hidden>Select</option>
@@ -373,7 +374,7 @@
 								</select>
 								<span
 									*ngIf="
-               issues().at(i).get('topicRes')?.hasError('required') && ( issues().at(i).get('topicRes').dirty 
+               issues().at(i).get('topicRes')?.hasError('required') && ( issues().at(i).get('topicRes').dirty
               || issues().at(i).get('topicRes').touched) "
 									class="invalid-feedback"
 								>
@@ -426,23 +427,23 @@
               class="form-select form-control col form-dropdown"
               aria-label="Default select example"
               formControlName="action"
-              [class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required') 
+              [class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required')
                 && ( correctAct().at(i).get('action').dirty ||  correctAct().at(i).get('action').touched) "
             >
               <option selected hidden>Select</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select> -->
-							<input
+							<textarea
 								type="text"
 								class="form-control"
 								formControlName="action"
-								[class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required') 
+								[class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required')
               && ( correctAct().at(i).get('action').dirty ||  correctAct().at(i).get('action').touched) "
-							/>
+							></textarea>
 							<span
 								*ngIf="
-               correctAct().at(i).get('action')?.hasError('required') && ( correctAct().at(i).get('action').dirty 
+               correctAct().at(i).get('action')?.hasError('required') && ( correctAct().at(i).get('action').dirty
               || correctAct().at(i).get('action').touched) "
 								class="invalid-feedback"
 							>
@@ -462,7 +463,7 @@
 								class="form-select form-control col form-dropdown"
 								aria-label="Default select example"
 								formControlName="personRes"
-								[class.is-invalid]=" correctAct().at(i).get('personRes')?.hasError('required') 
+								[class.is-invalid]=" correctAct().at(i).get('personRes')?.hasError('required')
                 && ( correctAct().at(i).get('personRes').dirty ||  correctAct().at(i).get('personRes').touched) "
 							>
 								<option selected hidden>Select</option>
@@ -470,12 +471,12 @@
 									*ngFor="let j of staff"
 									[value]="j?._id"
 								>
-									{{j?.title}}
+									{{j?.fullName}}
 								</option>
 							</select>
 							<span
 								*ngIf="
-               correctAct().at(i).get('personRes')?.hasError('required') && ( correctAct().at(i).get('personRes').dirty 
+               correctAct().at(i).get('personRes')?.hasError('required') && ( correctAct().at(i).get('personRes').dirty
               || correctAct().at(i).get('personRes').touched) "
 								class="invalid-feedback"
 							>
@@ -487,13 +488,37 @@
 								for="exampleFormControlInput1"
 								class="form-Label"
 							>
-								Completed By<span class="text-danger">*</span>
+								Complete By Date<span class="text-danger"
+									>*</span
+								>
 							</p>
-							<select
+							<input
+								matInput
+								[matDatepicker]="datepicker2"
+								[min]="minDate"
+								class="form-control"
+								formControlName="complete"
+								[class.is-invalid-date]="correctAct().at(i).get('complete')?.hasError('required')
+           && (correctAct().at(i).get('complete').dirty || correctAct().at(i).get('complete').touched) "
+								placeholder="dd-mm-yyyy"
+							/>
+							<mat-datepicker-toggle
+								matSuffix
+								[for]="datepicker2"
+							></mat-datepicker-toggle>
+							<mat-datepicker #datepicker2></mat-datepicker>
+							<span
+								*ngIf=" correctAct().at(i).get('complete')?.hasError('required') && (correctAct().at(i).get('complete').dirty
+          || correctAct().at(i).get('complete').touched)"
+								class="invalid-feedback1"
+							>
+								Date is Required</span
+							>
+							<!-- <select
 								class="form-select form-control col form-dropdown"
 								aria-label="Default select example"
 								formControlName="complete"
-								[class.is-invalid]=" correctAct().at(i).get('complete')?.hasError('required') 
+								[class.is-invalid]=" correctAct().at(i).get('complete')?.hasError('required')
               && ( correctAct().at(i).get('complete').dirty ||  correctAct().at(i).get('complete').touched) "
 							>
 								<option selected hidden>Select</option>
@@ -502,12 +527,12 @@
 							</select>
 							<span
 								*ngIf="
-               correctAct().at(i).get('complete')?.hasError('required') && ( correctAct().at(i).get('complete').dirty 
+               correctAct().at(i).get('complete')?.hasError('required') && ( correctAct().at(i).get('complete').dirty
               || correctAct().at(i).get('complete').touched) "
 								class="invalid-feedback"
 							>
 								This Field is Required</span
-							>
+							> -->
 						</div>
 						<div class="d-flex">
 							<div class="my-3 col-sm-1 col-md-1 my-auto">
@@ -553,12 +578,12 @@
 								type="text"
 								class="form-control"
 								formControlName="employee"
-								[class.is-invalid]="attendee().controls[i].get('employee')?.hasError('required') 
+								[class.is-invalid]="attendee().controls[i].get('employee')?.hasError('required')
               && (attendee().controls[i].get('employee').dirty || attendee().controls[i].get('employee').touched) "
 							/>
 							<span
 								*ngIf="
-              attendee().controls[i].get('employee')?.hasError('required') && (attendee().controls[i].get('employee').dirty 
+              attendee().controls[i].get('employee')?.hasError('required') && (attendee().controls[i].get('employee').dirty
               ||attendee().controls[i].get('employee').touched) "
 								class="invalid-feedback"
 							>

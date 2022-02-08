@@ -20,6 +20,7 @@ import { filter, map } from 'rxjs/operators';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 @Component({
 	selector: 'app-toolbox-talk',
 	templateUrl: './toolbox-talk.component.html',
@@ -66,7 +67,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		public router: Router,
 		public forms: SavedformsService,
 		public shared: RoleManagementSharedServiceService,
-		private breakpointObserver: BreakpointObserver
+		private breakpointObserver: BreakpointObserver,
+		private employee: EmployeeRegistrationService
 	) {
 		this.check = localStorage.getItem('key');
 		this.toolBox = this.fb.group({
@@ -539,8 +541,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.toolBox.reset();
 	}
 	getAllStaff() {
-		this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
-			this.staff = res.data;
+		this.employee.getAllEmployeeInfo().subscribe((res: any) => {
+			this.staff = res;
 			console.log('res', this.staff);
 		});
 	}
