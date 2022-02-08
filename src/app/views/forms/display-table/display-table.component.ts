@@ -119,8 +119,9 @@ export class DisplayTableComponent implements OnInit {
 		this.getToolBox(sort.active, sort.direction);
 	}
 
-	printPage(id) {
+	printPage(element) {
 		this.shared.printNext(true);
+		this.shared.sendPrintData({ ...element, formName: 'Toolbox Talk' });
 		console.log('check');
 		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
@@ -138,7 +139,7 @@ export class DisplayTableComponent implements OnInit {
 		void this.spinner.show();
 		this.router.navigate([
 			'/',
-			{ outlets: { print: ['print', 'toolboxTalk', id] } }
+			{ outlets: { print: ['print', 'toolboxTalk', element._id] } }
 		]);
 	}
 }

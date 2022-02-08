@@ -142,8 +142,13 @@ export class IncidentsTableComponent implements OnInit {
 		this.getIncidentReport(sort.active, sort.direction);
 	}
 
-	printPage(id) {
+	printPage(element) {
 		this.shared.printNext(true);
+		this.shared.sendPrintData({
+			...element,
+			formName: 'Accident Report Form'
+		});
+
 		console.log('check');
 		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
@@ -161,7 +166,7 @@ export class IncidentsTableComponent implements OnInit {
 		void this.spinner.show();
 		this.router.navigate([
 			'/',
-			{ outlets: { print: ['print', 'incidentRep', id] } }
+			{ outlets: { print: ['print', 'incidentRep', element._id] } }
 		]);
 	}
 }

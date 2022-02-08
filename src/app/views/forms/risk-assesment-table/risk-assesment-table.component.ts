@@ -111,8 +111,12 @@ export class RiskAssesmentTableComponent implements OnInit {
 			}
 		});
 	}
-	printPage(id) {
+	printPage(element) {
 		this.shared.printNext(true);
+		this.shared.sendPrintData({
+			...element,
+			formName: 'Risk Assessment and SWMS'
+		});
 		console.log('check');
 		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
@@ -129,7 +133,7 @@ export class RiskAssesmentTableComponent implements OnInit {
 		this.spinner.show('printLoader');
 		this.router.navigate([
 			'/',
-			{ outlets: { print: ['print', 'riskAssessSWMS', id] } }
+			{ outlets: { print: ['print', 'riskAssessSWMS', element._id] } }
 		]);
 	}
 	getAssesment(field = '', value = '') {

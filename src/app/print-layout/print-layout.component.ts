@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleManagementSharedServiceService } from '../utils/services/role-management-shared-service.service';
 import { SubscriptionService } from '../utils/services/subscription.service';
 
 @Component({
@@ -24,10 +25,20 @@ export class PrintLayoutComponent implements OnInit {
 	fax: any;
 	state: any;
 	companyAddress: any;
-	constructor(private subscript: SubscriptionService) {}
+	formNam: any;
+	version: any;
+	constructor(
+		private subscript: SubscriptionService,
+		private shared: RoleManagementSharedServiceService
+	) {}
 
 	ngOnInit(): void {
 		this.getData();
+		this.shared.printDataObs$.subscribe((res) => {
+			console.log('check print data obs::', res);
+			this.formNam = res.formName;
+			this.version = res.version;
+		});
 	}
 
 	getData() {

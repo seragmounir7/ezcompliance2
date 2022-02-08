@@ -141,8 +141,12 @@ export class SiteInspectionTableComponent implements OnInit {
 		this.getsiteInspection(sort.active, sort.direction);
 	}
 
-	printPage(id) {
+	printPage(element) {
 		this.shared.printNext(true);
+		this.shared.sendPrintData({
+			...element,
+			formName: 'Site Inspection Form'
+		});
 		console.log('check');
 		// this.logicalFormInfo.printing.next('print');
 		localStorage.clear();
@@ -164,7 +168,7 @@ export class SiteInspectionTableComponent implements OnInit {
 		void this.spinner.show();
 		this.router.navigate([
 			'/',
-			{ outlets: { print: ['print', 'siteInspect', id] } }
+			{ outlets: { print: ['print', 'siteInspect', element._id] } }
 		]);
 	}
 

@@ -7,6 +7,9 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 export class RoleManagementSharedServiceService {
 	private roleGet = new Subject<any>();
 	private printSubject = new BehaviorSubject<Boolean>(false);
+	private printData = new BehaviorSubject<any>({});
+	public printDataObs$ = this.printData.asObservable();
+
 	public printObs$ = this.printSubject.asObservable();
 	constructor() {}
 
@@ -17,7 +20,12 @@ export class RoleManagementSharedServiceService {
 	getRoleEvent(): Observable<any> {
 		return this.roleGet.asObservable();
 	}
-
+	sendPrintData(value) {
+		this.printData.next(value);
+	}
+	printDataNext(value) {
+		this.printData.next(value);
+	}
 	printNext(value) {
 		this.printSubject.next(value);
 	}
