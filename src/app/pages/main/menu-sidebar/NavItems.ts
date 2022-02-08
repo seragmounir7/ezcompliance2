@@ -163,7 +163,7 @@ export class NavItems {
 						},
 						{
 							displayedName: 'High Risk Construct',
-							icon: 'Risk_construct',
+							icon: 'highRisk',
 							route: './siteInfo/highRisk',
 							hasAccess: true
 						},
@@ -173,6 +173,13 @@ export class NavItems {
 							route: './siteInfo/codeOfpract',
 							hasAccess: true
 						},
+						{
+							displayedName: 'Hazards',
+							icon: 'hazard',
+							route: './siteInfo/hazards',
+							hasAccess: true
+						},
+
 						{
 							displayedName: 'Hazardous Substances',
 							icon: 'chemical',
@@ -301,13 +308,6 @@ export class NavItems {
 							displayedName: 'PPE Selection',
 							icon: 'PPESelection',
 							route: './siteInfo/ppeSel',
-							hasAccess: true
-						},
-
-						{
-							displayedName: 'Hazards',
-							icon: 'hazard',
-							route: './siteInfo/hazards',
 							hasAccess: true
 						},
 
@@ -595,7 +595,7 @@ export class NavItems {
 						},
 						{
 							displayedName: 'High Risk Construct',
-							icon: 'Risk_construct',
+							icon: 'highRisk',
 							route: './siteInfo/highRisk',
 							hasAccess: true
 						},
@@ -603,6 +603,12 @@ export class NavItems {
 							displayedName: 'Code Of Practice',
 							icon: 'cop',
 							route: './siteInfo/codeOfpract',
+							hasAccess: true
+						},
+						{
+							displayedName: 'Hazards',
+							icon: 'hazard',
+							route: './siteInfo/hazards',
 							hasAccess: true
 						},
 						{
@@ -733,13 +739,6 @@ export class NavItems {
 							displayedName: 'PPE Selection',
 							icon: 'PPESelection',
 							route: './siteInfo/ppeSel',
-							hasAccess: true
-						},
-
-						{
-							displayedName: 'Hazards',
-							icon: 'hazard',
-							route: './siteInfo/hazards',
 							hasAccess: true
 						},
 
