@@ -1,5 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/utils/services/auth.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
@@ -11,16 +14,17 @@ export class ResetPasswordComponent implements OnInit {
 	public resetForm: FormGroup;
 	submitBtn = false;
 	buttonData = false;
+	email: string;
 	constructor(
 		private setTitle: SetTitleService,
-		private renderer: Renderer2
+		private renderer: Renderer2,
+		private activatedRoute: ActivatedRoute,
+		private authService: AuthService,
+		private router: Router,
+		private toast: ToastrService
 	) {
 		this.resetForm = new FormGroup(
 			{
-				otp: new FormControl(null, [
-					Validators.required,
-					Validators.email
-				]),
 				oldPassword: new FormControl(null, Validators.required),
 				newPassword: new FormControl(null, Validators.required),
 				confirm_password: new FormControl(null, Validators.required)
@@ -32,6 +36,9 @@ export class ResetPasswordComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.activatedRoute.queryParams.subscribe(
+			(res) => (this.email = res['email'])
+		);
 		this.renderer.addClass(
 			document.querySelector('app-root'),
 			'login-page'
@@ -47,8 +54,29 @@ export class ResetPasswordComponent implements OnInit {
 			: { passwordNotMatch: true };
 	}
 
-	login() {
+	changePassword() {
 		this.submitBtn = true;
+		if (this.resetForm.invalid) {
+			console.log(this.resetForm.invalid);
+			return;
+		}
+		console.log(this.resetForm.value);
+		this.authService
+			.resetPassword(
+				this.email,
+				this.resetForm.controls.oldPassword.value,
+				this.resetForm.controls.newPassword.value
+			)
+			.subscribe(
+				(res) => {
+					console.log(res);
+					this.toast.success('Password Successfully Changed!', '', {
+						timeOut: 3000
+					});
+					this.router.navigate(['/']);
+				},
+				(err) => this.toast.error('Something Went Wrong!')
+			);
 	}
 	ngOnDestroy() {
 		this.renderer.removeClass(

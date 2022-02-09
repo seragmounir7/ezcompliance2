@@ -1,3 +1,6 @@
+<ng-container>
+	<app-scroll></app-scroll>
+</ng-container>
 <div
 	class="btn btn-outline-primary"
 	*ngIf="id ==='form'"
@@ -119,7 +122,7 @@
 						formControlName="fullName"
 						id="exampleInputFullname"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('fullName')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('fullName')?.hasError('required')
             && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) "
 					/>
 					<!-- <datalist id="browsers" >
@@ -139,7 +142,7 @@
 					</mat-autocomplete>
 					<span
 						*ngIf="
-            hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty 
+            hazardReport.get('fullName')?.hasError('required') && (hazardReport.get('fullName').dirty
             || hazardReport.get('fullName').touched) "
 						class="invalid-feedback"
 					>
@@ -172,12 +175,12 @@
 						formControlName="email"
 						id="exampleInputEmail1"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('email')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('email')?.hasError('required')
             && (hazardReport.get('email').dirty || hazardReport.get('email').touched) "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('email')?.hasError('required') && (hazardReport.get('email').dirty 
+            hazardReport.get('email')?.hasError('required') && (hazardReport.get('email').dirty
             || hazardReport.get('email').touched) "
 						class="invalid-feedback"
 					>
@@ -196,12 +199,12 @@
 						formControlName="phone"
 						id="exampleInputPhone"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('phone')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('phone')?.hasError('required')
             && (hazardReport.get('phone').dirty || hazardReport.get('phone').touched) || hazardReport.get('phone')?.hasError('pattern') "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('phone')?.hasError('required') && (hazardReport.get('phone').dirty 
+            hazardReport.get('phone')?.hasError('required') && (hazardReport.get('phone').dirty
             || hazardReport.get('phone').touched) "
 						class="invalid-feedback"
 					>
@@ -226,12 +229,12 @@
 						formControlName="department"
 						id="exampleInputDepartment"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('department')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('department')?.hasError('required')
             && (hazardReport.get('department').dirty || hazardReport.get('department').touched) "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty 
+            hazardReport.get('department')?.hasError('required') && (hazardReport.get('department').dirty
             || hazardReport.get('department').touched) "
 						class="invalid-feedback"
 					>
@@ -250,12 +253,12 @@
 						formControlName="position"
 						id="exampleInputPosition"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('position')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('position')?.hasError('required')
             && (hazardReport.get('position').dirty || hazardReport.get('position').touched) "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('position')?.hasError('required') && (hazardReport.get('position').dirty 
+            hazardReport.get('position')?.hasError('required') && (hazardReport.get('position').dirty
             || hazardReport.get('position').touched) "
 						class="invalid-feedback"
 					>
@@ -274,13 +277,13 @@
             formControlName="projectName"
             id="exampleInputProjectNumber"
             aria-describedby="emailHelp"
-            
-            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required') 
+
+            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required')
             && (hazardReport.get('projectName').dirty || hazardReport.get('projectName').touched) "
             />
             <span
             *ngIf="
-            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty 
+            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty
             || hazardReport.get('projectName').touched) "
             class="invalid-feedback"
           >
@@ -313,28 +316,6 @@
 							{{manager.name}}
 						</option>
 					</select>
-					<!-- <input
-            type="text"
-            class="form-control"
-            formControlName="managerSupervisor"
-            aria-describedby="emailHelp"
-          /> -->
-					<!-- <input 
-          class="form-control"
-                  type="text" 
-               
-                  placeholder="Enter Name" 
-                  formControlName="myControlManager"
-                  matInput
-     
-                  [matAutocomplete]="auto2">
-           <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="changeName($event)" >
-               <mat-option           
-                   *ngFor="let manager of filteredManager | async" 
-                   [value]="manager">
-                 {{manager.name}}
-              </mat-option>
-          </mat-autocomplete> -->
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
@@ -373,18 +354,18 @@
 						type="text"
 						placeholder="Enter Name"
 						formControlName="myControl"
-						matInput
 						[matAutocomplete]="auto"
 					/>
 					<mat-autocomplete
 						#auto="matAutocomplete"
+						[displayWith]="displayFn"
 						(optionSelected)="change($event)"
 					>
 						<mat-option
 							*ngFor="let option of filteredOptions | async"
 							[value]="option"
 						>
-							{{option.name}}
+							{{option.fullName}}
 						</mat-option>
 					</mat-autocomplete>
 				</div>
@@ -418,12 +399,12 @@
 						id="floatingTextarea2"
 						style="height: 120px"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('describeHazard')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('describeHazard')?.hasError('required')
             && (hazardReport.get('describeHazard').dirty || hazardReport.get('describeHazard').touched) "
 					></textarea>
 					<span
 						*ngIf="
-          hazardReport.get('describeHazard')?.hasError('required') && (hazardReport.get('describeHazard').dirty 
+          hazardReport.get('describeHazard')?.hasError('required') && (hazardReport.get('describeHazard').dirty
           || hazardReport.get('describeHazard').touched) "
 						class="invalid-feedback"
 					>
@@ -445,7 +426,7 @@
 						class="form-control"
 						formControlName="dateHazardReport"
 						id="exampleInputProjectNumber"
-						[class.is-invalid-date]="hazardReport.get('dateHazardReport')?.hasError('required') 
+						[class.is-invalid-date]="hazardReport.get('dateHazardReport')?.hasError('required')
             && (hazardReport.get('dateHazardReport').dirty || hazardReport.get('dateHazardReport').touched) "
 						placeholder="dd-mm-yyyy"
 					/>
@@ -457,7 +438,7 @@
 					<!--  -->
 					<span
 						*ngIf="
-            hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty 
+            hazardReport.get('dateHazardReport')?.hasError('required') && (hazardReport.get('dateHazardReport').dirty
             || hazardReport.get('dateHazardReport').touched) "
 						class="invalid-feedback1"
 					>
@@ -478,12 +459,12 @@
 						formControlName="locationHazard"
 						id="exampleInputProjectNumber"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('locationHazard')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('locationHazard')?.hasError('required')
             && (hazardReport.get('locationHazard').dirty || hazardReport.get('locationHazard').touched) "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('locationHazard')?.hasError('required') && (hazardReport.get('locationHazard').dirty 
+            hazardReport.get('locationHazard')?.hasError('required') && (hazardReport.get('locationHazard').dirty
             || hazardReport.get('locationHazard').touched) "
 						class="invalid-feedback"
 					>
@@ -505,7 +486,7 @@
 						class="form-control"
 						formControlName="dateHazardIdentify"
 						id="exampleInputProjectNumber"
-						[class.is-invalid-date]="hazardReport.get('dateHazardIdentify')?.hasError('required') 
+						[class.is-invalid-date]="hazardReport.get('dateHazardIdentify')?.hasError('required')
             && (hazardReport.get('dateHazardIdentify').dirty || hazardReport.get('dateHazardIdentify').touched) "
 						placeholder="dd-mm-yyyy"
 					/>
@@ -517,7 +498,7 @@
 
 					<span
 						*ngIf="
-            hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty 
+            hazardReport.get('dateHazardIdentify')?.hasError('required') && (hazardReport.get('dateHazardIdentify').dirty
             || hazardReport.get('dateHazardIdentify').touched) "
 						class="invalid-feedback1"
 					>
@@ -533,7 +514,7 @@
 					<select
 						class="form-control form-select"
 						formControlName="jobNumberId"
-						[class.is-invalid]="hazardReport.get('jobNumberId')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('jobNumberId')?.hasError('required')
             && (hazardReport.get('jobNumberId').dirty || hazardReport.get('jobNumberId').touched) "
 					>
 						<option selected hidden>Select</option>
@@ -546,7 +527,7 @@
 					</select>
 					<span
 						*ngIf="
-            hazardReport.get('jobNumberId')?.hasError('required') && (hazardReport.get('jobNumberId').dirty 
+            hazardReport.get('jobNumberId')?.hasError('required') && (hazardReport.get('jobNumberId').dirty
             || hazardReport.get('jobNumberId').touched) "
 						class="invalid-feedback"
 					>
@@ -874,7 +855,7 @@
               type="date"
               class="form-control"
               formControlName="eliminateWhen"
-     
+
               aria-describedby="emailHelp"
             /> -->
 						<input
@@ -964,7 +945,7 @@
               type="date"
               class="form-control"
               formControlName="substituteWhen"
-        
+
               aria-describedby="emailHelp"
             /> -->
 						<input
@@ -1054,7 +1035,7 @@
               type="date"
               class="form-control"
               formControlName="isolatedWhen"
-            
+
               aria-describedby="emailHelp"
             /> -->
 						<input
@@ -1144,7 +1125,7 @@
             type="date"
             class="form-control"
             formControlName="solutionWhen"
-         
+
             aria-describedby="emailHelp"
           /> -->
 						<input
@@ -1234,8 +1215,8 @@
               type="date"
               class="form-control"
               formControlName="procedureRemove"
-             
-              aria-describedby="emailHelp" 
+
+              aria-describedby="emailHelp"
             /> -->
 						<input
 							matInput
@@ -1324,7 +1305,7 @@
               type="date"
               class="form-control"
               formControlName="PPEWhen"
-          
+
               aria-describedby="emailHelp"
             /> -->
 						<input
@@ -1358,7 +1339,7 @@
 						[matAutocomplete]="employee1"
 						formControlName="name"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('name')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('name')?.hasError('required')
             && (hazardReport.get('name').dirty || hazardReport.get('name').touched) "
 					/>
 					<mat-autocomplete
@@ -1375,7 +1356,7 @@
 					</mat-autocomplete>
 					<span
 						*ngIf="
-            hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty 
+            hazardReport.get('name')?.hasError('required') && (hazardReport.get('name').dirty
             || hazardReport.get('name').touched) "
 						class="invalid-feedback"
 					>
@@ -1393,12 +1374,12 @@
 						class="form-control"
 						formControlName="compilePosition"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required')
             && (hazardReport.get('compilePosition').dirty || hazardReport.get('compilePosition').touched) "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('compilePosition')?.hasError('required') && (hazardReport.get('compilePosition').dirty 
+            hazardReport.get('compilePosition')?.hasError('required') && (hazardReport.get('compilePosition').dirty
             || hazardReport.get('compilePosition').touched) "
 						class="invalid-feedback"
 					>
@@ -1416,12 +1397,12 @@
 						class="form-control"
 						formControlName="compileDepartment"
 						aria-describedby="emailHelp"
-						[class.is-invalid]="hazardReport.get('compileDepartment')?.hasError('required') 
+						[class.is-invalid]="hazardReport.get('compileDepartment')?.hasError('required')
             && (hazardReport.get('compileDepartment').dirty || hazardReport.get('compileDepartment').touched) "
 					/>
 					<span
 						*ngIf="
-            hazardReport.get('compileDepartment')?.hasError('required') && (hazardReport.get('compileDepartment').dirty 
+            hazardReport.get('compileDepartment')?.hasError('required') && (hazardReport.get('compileDepartment').dirty
             || hazardReport.get('compileDepartment').touched) "
 						class="invalid-feedback"
 					>
@@ -1495,7 +1476,7 @@
 						>Date<span class="text-danger">*</span></label
 					>
 					<!-- <input type="date"value=""class="form-control" formControlName="date"   aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('date')?.hasError('required') 
+            [class.is-invalid]="hazardReport.get('date')?.hasError('required')
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "/> -->
 					<input
 						matInput
@@ -1504,7 +1485,7 @@
 						[min]="minDate"
 						class="form-control"
 						formControlName="date"
-						[class.is-invalid-date]="hazardReport.get('date')?.hasError('required') 
+						[class.is-invalid-date]="hazardReport.get('date')?.hasError('required')
             && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "
 						placeholder="dd-mm-yyyy"
 					/>
@@ -1515,7 +1496,7 @@
 					<mat-datepicker #datepicker2></mat-datepicker>
 					<span
 						*ngIf="
-            hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty 
+            hazardReport.get('date')?.hasError('required') && (hazardReport.get('date').dirty
             || hazardReport.get('date').touched) "
 						class="invalid-feedback1"
 					>
@@ -1580,3 +1561,11 @@
 		</div>
 	</form>
 </div>
+<!-- Back to top button -->
+<!-- <button
+	type="button"
+	class="btn btn-primary rounded-circle btn-floating btn-lg"
+	id="btn-back-to-top"
+>
+	<i class="fas fa-arrow-up"></i>
+</button> -->

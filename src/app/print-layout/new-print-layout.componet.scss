@@ -43,7 +43,9 @@ h3 {
 @page {
 	margin: 20mm;
 }
-
+.ml-nam {
+	margin-left: 9.5rem;
+}
 @media print {
 	div.page {
 		visibility: visible;

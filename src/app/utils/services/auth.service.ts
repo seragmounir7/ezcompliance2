@@ -26,6 +26,14 @@ export class AuthService {
 		}
 	}
 
+	resetPassword(email: string, oldPassword: string, newPassword: string) {
+		return this.http.post(
+			this.apiUrl +
+				`authentication/mail/forget/password/${email}/${oldPassword}`,
+			{ password: newPassword }
+		);
+	}
+
 	login(data) {
 		return this.http.post(this.apiUrl + 'authentication/login', data).pipe(
 			map((res: any) => {
@@ -33,6 +41,11 @@ export class AuthService {
 				if (res.data.accessToken) {
 					this.nextLoginData(res.data);
 					sessionStorage.setItem('accessToken', res.data.accessToken);
+					sessionStorage.setItem('role', res.data.designation);
+					sessionStorage.setItem(
+						'userData',
+						JSON.stringify(res.data)
+					);
 				}
 				return res;
 			})

@@ -360,29 +360,19 @@ export class SiteInspectionComponent
 			this.getAllStaff();
 		}
 
-		this.employee
-			.getAllEmployeeInfo()
-			.pipe(
-				map((res) => {
-					return res.data.map((item) => {
-						item.fullName = `${item.firstName} ${item.lastName}`;
-						return item;
-					});
-				})
-			)
-			.subscribe((empData) => {
-				this.empData = empData;
-				this.filteredOptions1 = this.sidePreview.controls.empName.valueChanges.pipe(
-					startWith(''),
-					debounceTime(400),
-					map((value) =>
-						typeof value === 'string' ? value : value.fullName
-					),
-					map((fullName) =>
-						fullName ? this._filter(fullName) : this.empData.slice()
-					)
-				);
-			});
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+			this.filteredOptions1 = this.sidePreview.controls.empName.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+		});
 	}
 
 	private _filter(name: string): any[] {

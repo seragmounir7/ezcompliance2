@@ -227,7 +227,7 @@ export class AddEmployeeComponent implements OnInit {
 	getall() {
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
 			console.log('getAll = > ', res);
-			this.reportingData = res.data;
+			this.reportingData = res;
 			console.log(this.reportingData);
 		});
 	}

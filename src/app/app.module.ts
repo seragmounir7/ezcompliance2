@@ -53,6 +53,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { DirectivesModule } from './Directives/directives.module';
 import { MobileViewService } from './utils/services/mobile-view.service';
+import { ScrollModule } from './shared/scroll/scroll.module';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -81,6 +82,7 @@ registerLocaleData(localeEn, 'en-EN');
 	imports: [
 		BrowserModule,
 		SharedModule,
+		ScrollModule,
 		MatStepperModule,
 		AppRoutingModule,
 		AngularSvgIconModule.forRoot(),

@@ -22,7 +22,7 @@ export class MainComponent implements OnInit, AfterViewInit {
 	logoUrl: string = 'logo';
 	constructor(
 		private renderer: Renderer2,
-		private mobileViewService: MobileViewService
+		public mobileViewService: MobileViewService
 	) {}
 	ngAfterViewInit(): void {
 		if (this.mobileViewService.isXsmall) {
@@ -36,6 +36,10 @@ export class MainComponent implements OnInit, AfterViewInit {
 		this.mobileViewService.observeXsmall().subscribe((result) => {
 			console.log(result);
 			if (result.matches) {
+				this.renderer.addClass(
+					document.querySelector('app-header'),
+					'hide'
+				);
 				this.renderer.removeClass(
 					document.querySelector('app-root'),
 					'sidebar-open'
@@ -45,9 +49,15 @@ export class MainComponent implements OnInit, AfterViewInit {
 						'content-wrapper'
 					);
 			} else {
-				this.contentWrapper.nativeElement.classList.add(
-					'content-wrapper'
+				this.renderer.removeClass(
+					document.querySelector('app-header'),
+					'hide'
 				);
+				this.contentWrapper
+					? this.contentWrapper.nativeElement.classList.add(
+							'content-wrapper'
+					  )
+					: '';
 			}
 		});
 		this.renderer.removeClass(

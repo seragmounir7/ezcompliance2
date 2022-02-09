@@ -68,6 +68,8 @@ export class IncidentReportComponent
 	uploadFile: string;
 	isHistory: boolean;
 	returnTo: Observable<string>;
+	personCompletingForm$: Observable<any>;
+	injuredorAffectedPersonName$: Observable<any>;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -219,40 +221,62 @@ export class IncidentReportComponent
 			);
 			this.returnTo.subscribe((res) => console.log(res));
 		}
-		this.employee
-			.getAllEmployeeInfo()
-			.pipe(
-				map((res) => {
-					return res.data.map((item) => {
-						item.fullName = `${item.firstName} ${item.lastName}`;
-						return item;
-					});
-				})
-			)
-			.subscribe((empData) => {
-				this.empData = empData;
-				this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+			const filteredOptions = () => {
+				return (
 					startWith(''),
 					debounceTime(400),
-					map((value) =>
+					map((value: any) =>
 						typeof value === 'string' ? value : value.fullName
 					),
-					map((fullName) =>
+					map((fullName: string) =>
 						fullName ? this._filter(fullName) : this.empData.slice()
 					)
 				);
-				this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
-					startWith(''),
-					debounceTime(400),
-					tap((value) => console.log('value', value)),
-					map((value) =>
-						typeof value === 'string' ? value : value.fullName
-					),
-					map((fullName) =>
-						fullName ? this._filter(fullName) : this.empData.slice()
-					)
-				);
-			});
+			};
+			this.injuredorAffectedPersonName$ = this.IncidentReport.controls.name.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+			this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
+				startWith(''),
+				debounceTime(400),
+				tap((value) => console.log('value', value)),
+				map((value) =>
+					typeof value === 'string' ? value : value.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
+		});
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 		this.activatedRoute.queryParams.subscribe((params) => {
 			this.type = params.formType;
@@ -302,7 +326,6 @@ export class IncidentReportComponent
 				reviewedPosition: data.position
 			});
 		}
-
 		console.log('e.option', e.option);
 		console.log('data...');
 	}
@@ -746,8 +769,9 @@ export class IncidentReportComponent
 		console.log('natureOfIncSelectedArr', this.rootSelectedArr);
 	}
 	getAllStaff() {
-		this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
-			this.staff = res.data;
+		this;
+		this.employee.getAllEmployeeInfo().subscribe((res: any) => {
+			this.staff = res;
 			console.log('res', this.staff);
 		});
 	}

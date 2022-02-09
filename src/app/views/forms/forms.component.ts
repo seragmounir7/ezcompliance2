@@ -75,21 +75,47 @@ export class FormsComponent implements OnInit {
 	) {}
 	goTo(title) {
 		console.log('title', title);
-		if (title === 'Toolbox Talk') {
-			this.router.navigate(['/admin/forms/tableData']);
+		switch (title) {
+			case 'Toolbox Talk': {
+				this.router.navigate(['/admin/forms/tableData']);
+				break;
+			}
+			case 'Site Inspection': {
+				this.router.navigate(['/admin/forms/siteinspectiontable']);
+				break;
+			}
+			case 'Hazards Reported': {
+				this.router.navigate(['/admin/forms/hazardTable']);
+				break;
+			}
+			case 'Accident Report': {
+				this.router.navigate(['/admin/forms/incidentsTable']);
+				break;
+			}
+			case 'Risk Assessment and SWMS': {
+				this.router.navigate(['/admin/forms/riskAssessTable']);
+				break;
+			}
+			default: {
+				console.log('No such Title exists!');
+				break;
+			}
 		}
-		if (title === 'Site Inspection') {
-			this.router.navigate(['/admin/forms/siteinspectiontable']);
-		}
-		if (title === 'Hazards Reported') {
-			this.router.navigate(['/admin/forms/hazardTable']);
-		}
-		if (title === 'Notifiable Accident') {
-			this.router.navigate(['/admin/forms/incidentsTable']);
-		}
-		if (title === 'Risk Assessment') {
-			this.router.navigate(['/admin/forms/riskAssessTable']);
-		}
+		// if (title === 'Toolbox Talk') {
+		// 	this.router.navigate(['/admin/forms/tableData']);
+		// }
+		// if (title === 'Site Inspection') {
+		// 	this.router.navigate(['/admin/forms/siteinspectiontable']);
+		// }
+		// if (title === 'Hazards Reported') {
+		// 	this.router.navigate(['/admin/forms/hazardTable']);
+		// }
+		// if (title === 'Accident Report') {
+		// 	this.router.navigate(['/admin/forms/incidentsTable']);
+		// }
+		// if (title === 'Risk Assessment and SWMS') {
+		// 	this.router.navigate(['/admin/forms/riskAssessTable']);
+		// }
 	}
 
 	ngOnInit(): void {

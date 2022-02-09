@@ -129,8 +129,13 @@ export class HazardFormTableDetailsComponent implements OnInit {
 	edit(id) {
 		this.router.navigate(['/admin/forms/hazardRep/' + id]);
 	}
-	printPage(id) {
+	printPage(element) {
 		this.shared.printNext(true);
+
+		this.shared.sendPrintData({
+			...element,
+			formName: 'Hazard Report Form'
+		});
 		console.log('check');
 		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
@@ -149,7 +154,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
 		this.spinner.show('printLoader');
 		this.router.navigate([
 			'/',
-			{ outlets: { print: ['print', 'hazardRep', id] } }
+			{ outlets: { print: ['print', 'hazardRep', element._id] } }
 		]);
 	}
 	sortData(sort: Sort) {

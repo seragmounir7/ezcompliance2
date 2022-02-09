@@ -1014,12 +1014,20 @@ export class RiskAssessmentSWMSComponent
 			console.log(result);
 
 			if (result.matches) {
+				this.renderer.addClass(
+					document.querySelector('.btn.btn-outline-primary'),
+					'hide'
+				);
 				this.reSizeSignArray(this.signaturePad2, 233, 114);
 				const sign = this.signaturePad1.toDataURL();
 				this.signaturePad1.set('canvasWidth', 247);
 				this.signaturePad1.set('canvasHeight', 107);
 				this.signaturePad1.fromDataURL(sign);
 			} else {
+				this.renderer.removeClass(
+					document.querySelector('.btn.btn-outline-primary'),
+					'hide'
+				);
 				this.reSizeSignArray(this.signaturePad2, 420, 121);
 				const sign = this.signaturePad1.toDataURL();
 				this.signaturePad1.set('canvasWidth', 338);
@@ -1844,19 +1852,9 @@ export class RiskAssessmentSWMSComponent
 		this.riskAssessmentFb.get('dateTime').setValue(b);
 	}
 	getEmployeeData() {
-		this.employee
-			.getAllEmployeeInfo()
-			.pipe(
-				map((res) => {
-					return res.data.map((item) => {
-						item.fullName = `${item.firstName} ${item.lastName}`;
-						return item;
-					});
-				})
-			)
-			.subscribe((empData) => {
-				this.empData = empData;
-			});
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+		});
 	}
 
 	doesCategoryExists(category_id: string) {
