@@ -132,12 +132,12 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 				formType: type.toString()
 			}
 		};
-		if (type == 'Hazard') {
+		if (type == 'Hazard Report') {
 			this.router.navigate(
 				['/admin/forms/hazardRep/' + id],
 				navigationExtras
 			);
-		} else if (type == 'Incident') {
+		} else if (type == 'Notifiable Accident') {
 			this.router.navigate(
 				['/admin/forms/incidentRep/' + id],
 				navigationExtras
@@ -159,8 +159,12 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			);
 		}
 	}
-	printPage(id, type) {
+	printPage(element, type) {
 		this.shared.printNext(true);
+		this.shared.sendPrintData({
+			...element,
+			formName: type.toString()
+		});
 		console.log('check');
 		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
@@ -181,29 +185,60 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 				formType: type.toString()
 			}
 		};
-		if (type == 'Hazard') {
+		if (type == 'Hazard Report') {
 			this.router.navigate(
-				['/', { outlets: { print: ['print', 'hazardRep', id] } }],
+				[
+					'/',
+					{ outlets: { print: ['print', 'hazardRep', element._id] } }
+				],
 				navigationExtras
 			);
-		} else if (type == 'Incident') {
+		} else if (type == 'Notifiable Accident') {
 			this.router.navigate(
-				['/', { outlets: { print: ['print', 'incidentRep', id] } }],
+				[
+					'/',
+					{
+						outlets: {
+							print: ['print', 'incidentRep', element._id]
+						}
+					}
+				],
 				navigationExtras
 			);
 		} else if (type == 'Site Inspection') {
 			this.router.navigate(
-				['/', { outlets: { print: ['print', 'siteInspect', id] } }],
+				[
+					'/',
+					{
+						outlets: {
+							print: ['print', 'siteInspect', element._id]
+						}
+					}
+				],
 				navigationExtras
 			);
 		} else if (type == 'Tool Box') {
 			this.router.navigate(
-				['/', { outlets: { print: ['print', 'toolboxTalk', id] } }],
+				[
+					'/',
+					{
+						outlets: {
+							print: ['print', 'toolboxTalk', element._id]
+						}
+					}
+				],
 				navigationExtras
 			);
 		} else if (type == 'Risk Assessment') {
 			this.router.navigate(
-				['/', { outlets: { print: ['print', 'riskAssessSWMS', id] } }],
+				[
+					'/',
+					{
+						outlets: {
+							print: ['print', 'riskAssessSWMS', element._id]
+						}
+					}
+				],
 				navigationExtras
 			);
 		}

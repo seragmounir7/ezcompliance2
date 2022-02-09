@@ -146,7 +146,7 @@ export class IncidentsTableComponent implements OnInit {
 		this.shared.printNext(true);
 		this.shared.sendPrintData({
 			...element,
-			formName: 'Accident Report Form'
+			formName: 'Accident Report'
 		});
 
 		console.log('check');
