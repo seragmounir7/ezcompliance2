@@ -260,7 +260,7 @@
             </div> -->
 
 				<div class="row">
-					<div class="mb-3 mt-3 col-5">
+					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
 							>Street Address</label
 						>
@@ -281,7 +281,7 @@
 							Street Address is required
 						</span>
 					</div>
-					<div class="mb-3 mt-3 col-4">
+					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
 							>Suburb</label
 						>
@@ -328,15 +328,23 @@
 							State is required
 						</span>
 					</div>
-					<!-- <div class="mb-3 mt-3 col-2">
-              <label for="exampleFormControlInput1" class="form-label">Postal Code</label>
-              <input type="text" formControlName="porfPostalCode" class="form-control"
-                [class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required " />
-              <span class="text-danger"
-                *ngIf="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required">
-                Postal Code is required
-              </span>
-            </div> -->
+					<div class="mb-3 mt-3 col-3">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Postal Code</label
+						>
+						<input
+							type="text"
+							formControlName="porfPostalCode"
+							class="form-control"
+							[class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required "
+						/>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required"
+						>
+							Postal Code is required
+						</span>
+					</div>
 				</div>
 				<div class="row py-3">
 					<div class="offset-1 col-3 mt-2">

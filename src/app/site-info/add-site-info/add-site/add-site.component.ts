@@ -28,6 +28,7 @@ export class AddSiteComponent implements OnInit {
 			// streetNumber: ['', Validators.required],
 			streetAddress: ['', Validators.required],
 			suburb: ['', Validators.required],
+			postcode: ['', Validators.required],
 			stateId: ['', Validators.required]
 		});
 	}

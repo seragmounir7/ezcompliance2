@@ -31,7 +31,7 @@
         <p for="exampleFormControlInput1" class="form-Label">Street No.</p>
         <input type="text" class="form-control" formControlName="streetNumber" id="streetNumber" />
       </div> -->
-			<div class="my-3 col-4">
+			<div class="my-3 col-3">
 				<p for="exampleFormControlInput1" class="form-Label">
 					Street Address
 				</p>
@@ -43,7 +43,7 @@
 					id="streetAddress"
 				></textarea>
 			</div>
-			<div class="my-3 col-4">
+			<div class="my-3 col-3">
 				<p for="exampleFormControlInput1" class="form-Label">Suburb</p>
 				<textarea
 					autosize
@@ -53,7 +53,7 @@
 					id="suburb"
 				></textarea>
 			</div>
-			<div class="my-3 col-4">
+			<div class="my-3 col-3">
 				<p for="exampleFormControlInput1" class="form-label">State</p>
 				<select
 					class="form-select form-control col"
@@ -66,6 +66,17 @@
 						{{item.title}}
 					</option>
 				</select>
+			</div>
+			<div class="my-3 col-3">
+				<p for="exampleFormControlInput1" class="form-Label">
+					PostCode
+				</p>
+				<input
+					type="text"
+					class="form-control"
+					id="postcode"
+					formControlName="postcode"
+				/>
 			</div>
 		</div>
 		<hr />

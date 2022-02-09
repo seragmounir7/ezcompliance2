@@ -24,6 +24,7 @@ export class EditSiteComponent implements OnInit {
 			streetNumber: [this.data.streetNumber],
 			streetAddress: [this.data.streetAddress],
 			suburb: [this.data.suburb],
+			postcode: [this.data.postcode],
 			stateId: [this.data.stateId._id]
 		});
 		this.getAllStates();

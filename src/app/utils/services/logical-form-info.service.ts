@@ -1353,6 +1353,7 @@ export interface ArrObj {
 	siteName: string;
 	streetAddress: string;
 	suburb: string;
+	postcode: string;
 	stateId: string;
 	customerName: string;
 	customerContact: string;

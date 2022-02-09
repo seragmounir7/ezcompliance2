@@ -178,7 +178,7 @@
                   street Number is Required
                 </span>
               </div> -->
-							<div class="my-3 col-md-4 col-sm-4">
+							<div class="my-3 col-md-3 col-sm-3">
 								<label class="form-label"
 									>Street Address<span class="text-danger"
 										>*</span
@@ -213,19 +213,12 @@
 									Street Address is Required
 								</span>
 							</div>
-							<div class="my-3 col-md-4 col-sm-4">
+							<div class="my-3 col-md-3 col-sm-3">
 								<label class="form-label"
 									>Suburb<span class="text-danger"
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="Suburb"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<textarea
 									autosize
 									type="text"
@@ -243,7 +236,7 @@
 									Suburb is Required
 								</span>
 							</div>
-							<div class="my-3 col-md-4 col-sm-4">
+							<div class="my-3 col-md-3 col-sm-3">
 								<label class="form-label"
 									>State<span class="text-danger"
 										>*</span
@@ -282,6 +275,29 @@
 									class="invalid-feedback"
 								>
 									State is Required
+								</span>
+							</div>
+							<div class="my-3 col-md-3 col-sm-3">
+								<label class="form-label"
+									>Postal Code<span class="text-danger"
+										>*</span
+									></label
+								>
+								<input
+									autosize
+									type="text"
+									class="form-control col-md col-sm"
+									formControlName="postcode"
+									[class.is-invalid]="riskAssessmentFb.get('postcode')?.hasError('required')
+                && (riskAssessmentFb.get('postcode').dirty || riskAssessmentFb.get('postcode').touched) "
+								/>
+								<span
+									*ngIf="
+                riskAssessmentFb.get('postcode')?.hasError('required') && (riskAssessmentFb.get('postcode').dirty
+                || riskAssessmentFb.get('postcode').touched) "
+									class="invalid-feedback"
+								>
+									Postal Code is Required
 								</span>
 							</div>
 						</div>
@@ -951,7 +967,7 @@
                   </span>
                 </div>
               </div> -->
-							<div class="col-md-4 col-sm-4">
+							<div class="col-md-3 col-sm-3">
 								<div class="my-3">
 									<label class="form-label"
 										>Street Name<span class="text-danger"
@@ -981,7 +997,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4">
+							<div class="col-md-3 col-sm-3">
 								<div class="my-3">
 									<label class="form-label"
 										>Suburb<span class="text-danger"
@@ -1006,7 +1022,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 col-sm-4">
+							<div class="col-md-3 col-sm-3">
 								<div class="my-3">
 									<label class="form-label"
 										>State<span class="text-danger"
@@ -1038,6 +1054,29 @@
 										State is Required
 									</span>
 								</div>
+							</div>
+							<div class="my-3 col-md-3 col-sm-3">
+								<label class="form-label"
+									>Postal Code<span class="text-danger"
+										>*</span
+									></label
+								>
+								<input
+									autosize
+									type="text"
+									class="form-control col-md col-sm"
+									formControlName="postcode"
+									[class.is-invalid]="riskAssessmentFb.get('postcode')?.hasError('required')
+                && (riskAssessmentFb.get('postcode').dirty || riskAssessmentFb.get('postcode').touched) "
+								/>
+								<span
+									*ngIf="
+                riskAssessmentFb.get('postcode')?.hasError('required') && (riskAssessmentFb.get('postcode').dirty
+                || riskAssessmentFb.get('postcode').touched) "
+									class="invalid-feedback"
+								>
+									Postal Code is Required
+								</span>
 							</div>
 							<div class="col-md-6 col-sm-6">
 								<div class="my-3">
@@ -2208,6 +2247,29 @@
             <option value="VIC">VIC</option>
             <option value="WA">WA</option> -->
 						</select>
+					</div>
+					<div class="my-3 col-md-3 col-sm-3">
+						<label class="form-label"
+							>Postal Code<span class="text-danger"
+								>*</span
+							></label
+						>
+						<input
+							autosize
+							type="text"
+							class="form-control col-md col-sm"
+							formControlName="postcode"
+							[class.is-invalid]="riskAssessmentFb.get('postcode')?.hasError('required')
+		&& (riskAssessmentFb.get('postcode').dirty || riskAssessmentFb.get('postcode').touched) "
+						/>
+						<span
+							*ngIf="
+		riskAssessmentFb.get('postcode')?.hasError('required') && (riskAssessmentFb.get('postcode').dirty
+		|| riskAssessmentFb.get('postcode').touched) "
+							class="invalid-feedback"
+						>
+							Postal Code is Required
+						</span>
 					</div>
 				</div>
 

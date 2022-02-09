@@ -31,6 +31,7 @@ export class EditCustComponent implements OnInit {
 			streetAddress: [this.formData.streetAddress],
 			stateId: [this.formData.stateId],
 			suburb: [this.formData.suburb],
+			postCode: [this.formData.postCode],
 			ABN: [this.formData.ABN],
 			contacts: this.fb.array([])
 		});

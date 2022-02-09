@@ -45,10 +45,10 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {
 		this.addJobNumberForm = this.fb.group({
 			siteName: ['', Validators.required],
-			// streetNumber: [{ value: '', disabled: true }, Validators.required],
 			streetAddress: [{ value: '', disabled: true }, Validators.required],
 			suburb: [{ value: '', disabled: true }, Validators.required],
 			state: [{ value: '', disabled: true }, Validators.required],
+			postcode: [{ value: '', disabled: true }, Validators.required],
 			customerName: ['', Validators.required],
 			customerContact: [
 				{ value: '', disabled: true },
@@ -68,6 +68,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 				.setValue(res.streetAddress);
 			this.addJobNumberForm.get('suburb').setValue(res.suburb);
 			this.addJobNumberForm.get('state').setValue(res.stateId._id);
+			this.addJobNumberForm.get('postcode').setValue(res.postcode);
 		});
 		this.addJobNumberForm
 			.get('customerName')
@@ -132,6 +133,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 					stateId: this.f.state.value,
 					streetAddress: this.f.streetAddress.value,
 					suburb: this.f.suburb.value,
+					postcode: this.f.postcode.value,
 					...jobNumber
 				}
 			]
@@ -158,6 +160,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		this.addJobNumberForm.get('streetAddress').setValue(item.streetAddress);
 		this.addJobNumberForm.get('suburb').setValue(item.suburb);
 		this.addJobNumberForm.get('state').setValue(item.stateId._id);
+		this.addJobNumberForm.get('postcode').setValue(item.postcode);
 	}
 	setCustomer(item) {
 		this.addJobNumberForm

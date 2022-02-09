@@ -146,27 +146,51 @@
 						>
 							state is required
 						</span>
-						<!-- <label for="exampleFormControlInput1" class="form-label"> Postcode </label>
-          <input type="text" class="form-control"  formControlName="postCode"
-            [class.is-invalid]="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required " />
-          <span class="text-danger"
-            *ngIf="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required">
-            Postcode is required
-          </span> -->
 					</div>
-					<!-- <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label"> Mailing Address </label>
-          <textarea type="text" class="form-control"  formControlName="mailingAddress"
-            [class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "></textarea>
-          <span class="text-danger"
-            *ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required">
-            Mailing Address is required
-          </span>
-        </div> -->
+					<div class="mb-3 mt-3 col-3">
+						<label
+							for="exampleFormControlInput1"
+							class="form-label"
+						>
+							Postcode
+						</label>
+						<input
+							type="text"
+							class="form-control"
+							formControlName="postcode"
+							[class.is-invalid]="(registerFormControl.postcode.touched || submitted) && registerFormControl.postcode.errors?.required "
+						/>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.postcode.touched || submitted) && registerFormControl.postcode.errors?.required"
+						>
+							Postcode is required
+						</span>
+					</div>
 				</div>
 
 				<div class="row">
-					<div class="mb-3 mt-3 col-3">
+					<div class="mb-3 mt-3 col-2">
+						<label
+							for="exampleFormControlInput1"
+							class="form-label"
+						>
+							Mailing Address
+						</label>
+						<textarea
+							type="text"
+							class="form-control"
+							formControlName="mailingAddress"
+							[class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "
+						></textarea>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required"
+						>
+							Mailing Address is required
+						</span>
+					</div>
+					<div class="mb-3 mt-3 col-2">
 						<label
 							for="exampleFormControlInput1"
 							class="form-label"
@@ -207,7 +231,7 @@
 							Company Address is required
 						</span>
 					</div>
-					<div class="mb-3 mt-3 col-3">
+					<div class="mb-3 mt-3 col-2">
 						<label
 							for="exampleFormControlInput1"
 							class="form-label"
@@ -563,23 +587,16 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="mb-3 mt-3 col-12">
+					<!-- <div class="mb-3 mt-3 col-12">
 						<label>Signature</label>
 						<div class="sign">
-							<signature-pad
-								#signature2
-								[options]="signaturePadOptions"
-								(onBeginEvent)="drawStart()"
-								(onEndEvent)="drawComplete2()"
-							></signature-pad>
+							<signature-pad #signature2 [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
+								(onEndEvent)="drawComplete2()"></signature-pad>
 						</div>
 					</div>
-					<button
-						class="btn btn-outline-primary btn_1 ml-2"
-						(click)="clear2()"
-					>
+					<button class="btn btn-outline-primary btn_1 ml-2" (click)="clear2()">
 						Clear
-					</button>
+					</button> -->
 					<button
 						type="submit"
 						class="btn btn-outline-primary btn_1"

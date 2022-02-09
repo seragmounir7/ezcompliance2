@@ -17,6 +17,7 @@ export class PrintLayoutComponent implements OnInit {
 	companyLogo: any;
 	streetAddress: any;
 	subUrb: any;
+	postcode: any;
 	companyABN: any;
 	licenceNumber: any;
 	companyWeb: any;
@@ -53,6 +54,7 @@ export class PrintLayoutComponent implements OnInit {
 				(this.subUrb = data.data.customerDetails.suburb),
 				(this.state = data.data.customerDetails.stateId),
 				// mailingAddress= data.data.customerDetails.mailingAddress,
+				(this.postcode = data.data.customerDetails.postcode),
 				(this.companyABN = data.data.customerDetails.companyABN),
 				(this.companyAddress =
 					data.data.customerDetails.companyAddress),
