@@ -15,6 +15,8 @@ import { map } from 'rxjs/operators';
 	selector: 'app-scroll',
 	template: `
 		<button
+			matTooltip="Scroll To Top"
+			matTooltipPosition="above"
 			*ngIf="showScroll$ | async"
 			mat-mini-fab
 			color="primary"

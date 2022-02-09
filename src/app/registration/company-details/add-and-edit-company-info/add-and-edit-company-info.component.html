@@ -268,11 +268,6 @@
 								(change)="browser($event)"
 							/>
 						</div>
-
-						<!-- <span class="text-danger"
-            *ngIf="(registerFormControl.companyLogo.touched || submitted) && registerFormControl.companyLogo.errors?.required">
-            Company Logo is required
-          </span> -->
 					</div>
 				</div>
 
@@ -339,10 +334,6 @@
 										class="form-control"
 									/>
 								</div>
-								<!-- <div class="mb-3 mt-3 col-3">
-                    <label for="exampleFormControlInput1" class="form-label">Model </label>
-                    <input type="text" formControlName="model" class="form-control" />
-                  </div> -->
 								<div class="mb-3 mt-3 col-3">
 									<label
 										for="exampleFormControlInput1"
@@ -437,16 +428,10 @@
 								<div class="row col-12" *ngIf="Hours.checked">
 									<div class="mb-3 mt-3 col-3">
 										<input
-											[ngxMatTimepicker]="timepicker"
+											type="number"
 											class="form-control"
 											formControlName="hours"
 										/>
-
-										<ngx-mat-timepicker
-											#timepicker
-										></ngx-mat-timepicker>
-										<!-- <input  formControlName="hours" [ngxMatTimepicker]="timepicker" format="24" [value]="setTime" class="form-control" />
-                    <ngx-mat-timepicker #timepicker ></ngx-mat-timepicker> -->
 									</div>
 								</div>
 								<div class="mb-3 mt-3 col-3">
@@ -485,12 +470,6 @@
 										class="form-control"
 									/>
 								</div>
-								<!-- <div class="mb-3 mt-3 col-3">
-                    <label for="exampleFormControlInput1" class="form-label">Service/Replacement Date</label>
-                    <input type="date" formControlName="serviceRenewDate" class="form-control" />
-
-                  </div> -->
-
 								<div class="mb-3 mt-3 col-3">
 									<label
 										for="exampleFormControlInput1"

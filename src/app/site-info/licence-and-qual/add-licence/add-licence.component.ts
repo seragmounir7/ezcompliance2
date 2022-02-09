@@ -13,6 +13,7 @@ export class AddLicenceComponent implements OnInit {
 	addLicenceFG!: FormGroup;
 	formData: any;
 	categories = [];
+	allCategories = [];
 	numberOfLineBreaks: any;
 	constructor(
 		private fb: FormBuilder,
@@ -54,6 +55,9 @@ export class AddLicenceComponent implements OnInit {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
 			console.log('getAllLicenceCat=>', res);
 			this.categories = res.data;
+			this.allCategories = (res.data as any[]).map(
+				(category) => category._id
+			);
 		});
 	}
 	onFormSubmit() {

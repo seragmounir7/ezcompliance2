@@ -229,9 +229,9 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 					fullName ? this._filter(fullName) : this.empData.slice()
 				)
 			);
-			this.filteredOptions = this.myControl.valueChanges.pipe(
+			this.filteredOptions = this.hazardReport.controls.myControl.valueChanges.pipe(
 				startWith(''),
-				tap(console.log),
+				tap((res) => console.log(res)),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),

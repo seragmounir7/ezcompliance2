@@ -40,6 +40,9 @@
 							<option value="" selected hidden>
 								Select category
 							</option>
+							<option [value]="allCategories">
+								Select All categories
+							</option>
 							<option
 								*ngFor="let category of categories"
 								[value]="category._id"
