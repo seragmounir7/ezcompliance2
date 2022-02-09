@@ -33,6 +33,7 @@ import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 import { AngularSvgIconPreloaderModule } from 'angular-svg-icon-preloader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ScrollModule } from 'src/app/shared/scroll/scroll.module';
 @NgModule({
 	declarations: [
 		FormsComponent,
@@ -67,7 +68,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 		//PdfViewerModule
 		AngularSvgIconPreloaderModule,
 		AngularSvgIconModule,
-		MatTooltipModule
+		MatTooltipModule,
+		ScrollModule
 	],
 	providers: [
 		TextareaAutoresizeDirective,

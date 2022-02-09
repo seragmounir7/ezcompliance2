@@ -1844,19 +1844,9 @@ export class RiskAssessmentSWMSComponent
 		this.riskAssessmentFb.get('dateTime').setValue(b);
 	}
 	getEmployeeData() {
-		this.employee
-			.getAllEmployeeInfo()
-			.pipe(
-				map((res) => {
-					return res.data.map((item) => {
-						item.fullName = `${item.firstName} ${item.lastName}`;
-						return item;
-					});
-				})
-			)
-			.subscribe((empData) => {
-				this.empData = empData;
-			});
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+		});
 	}
 
 	doesCategoryExists(category_id: string) {
