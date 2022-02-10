@@ -77,11 +77,15 @@
 						<svg-icon name="Edit_form"></svg-icon>
 					</button>
 
-					<!-- <button matTooltip="history" mat-icon-button >
-            <span class="material-icons  mt-2"  >
-              history
-            </span>
-          </button> -->
+					<button
+						matTooltip="history"
+						mat-icon-button
+						*ngIf="!isHistory"
+						[routerLink]="['/admin/dynamic/savedDynamicForm/'+element._id]"
+						routerLinkActive="router-link-active"
+					>
+						<span class="material-icons mt-2"> history </span>
+					</button>
 
 					<button
 						matTooltip="Delete"

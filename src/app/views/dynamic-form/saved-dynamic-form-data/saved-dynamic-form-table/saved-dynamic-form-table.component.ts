@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-saved-dynamic-form-table',
@@ -22,6 +23,8 @@ export class SavedDynamicFormTableComponent implements OnInit {
 		'action'
 	];
 	showDatas: any;
+	id: any;
+	isHistory: boolean;
 	tempArray: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
@@ -38,6 +41,20 @@ export class SavedDynamicFormTableComponent implements OnInit {
 		this.getSavedForm();
 
 		console.log('asdfghj', this.formId);
+
+		// this.isHistory = this.router.url.includes('dynamic/savedDynamicForm/history');
+		// console.log(this.isHistory);
+		// if (this.isHistory) {
+		// 	this.activatedRoute.paramMap
+		// 		.pipe(map((params) => params.get('id')))
+		// 		.subscribe((res) => {
+		// 			this.id = res;
+
+		// 			this.getSavedFormHistory();
+		// 		});
+		// } else {
+		// 	this.getSavedForm();
+		// }
 	}
 	ngAfterViewInit() {
 		// this.tempArray.paginator = this.paginator;
@@ -69,7 +86,22 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			}
 		});
 	}
+	// getSavedFormHistory(id = this.id) {
+	// 	this.dynamicFormsService
+	// 		.getsavedFormByFormId(this.formId)
+	// 		.subscribe((res: any) => {
+	// 			this.showDatas = res.data[0].result;
+	// 			console.log('get res', this.showDatas);
+	// 			this.showDatas.forEach((element, i) => {
+	// 				return (this.showDatas[i].index = i);
+	// 			});
 
+	// 			this.tempArray = new MatTableDataSource<any>(this.showDatas);
+	// 			this.tempArray.paginator = this.paginator;
+	// 			this.tempArray.sort = this.sort;
+	// 			console.log('get res', this.showDatas);
+	// 		});
+	// }
 	getSavedForm() {
 		this.dynamicFormsService
 			.getsavedFormByFormId(this.formId)
@@ -99,5 +131,9 @@ export class SavedDynamicFormTableComponent implements OnInit {
 
 	sortData(sort: Sort) {
 		this.getSavedForm();
+		// if (this.isHistory) {
+		// 	this.getSavedFormHistory(sort.active);
+		// 	return;
+		// }
 	}
 }
