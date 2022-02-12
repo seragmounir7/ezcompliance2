@@ -63,4 +63,8 @@ export class PrintLayoutComponent implements OnInit {
 				(this.companyLogo = data.data.customerDetails.companyLogo);
 		});
 	}
+
+	testPrint() {
+		this.shared.printNext(true);
+	}
 }

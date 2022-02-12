@@ -29,7 +29,7 @@ import { debounceTime, map, startWith, take, tap } from 'rxjs/operators';
 import moment from 'moment';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 @Component({
@@ -59,7 +59,7 @@ export class IncidentReportComponent
 	maxDate = new Date();
 	minDate = new Date();
 	@ViewChild('autosize') autosize: CdkTextareaAutosize;
-	sub: any;
+	sub: Subscription;
 	isPrint: Observable<any>;
 	editorDisable = false;
 	filteredOptions1: Observable<unknown>;
@@ -524,6 +524,7 @@ export class IncidentReportComponent
 				localStorage.setItem('key', ' ');
 			}
 		});
+		this.sub.add(this.mobileViewService.removeButton());
 		// this.signaturePad is now available
 		this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime

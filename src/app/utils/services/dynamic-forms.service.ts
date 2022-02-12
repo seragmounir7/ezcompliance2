@@ -155,6 +155,11 @@ export class DynamicFormsService {
 	getsavedFormByFormId(id) {
 		return this.https.get(this.apiUrl + 'savedDynamicForm/getBy/' + id);
 	}
+	getSavedFormHistory(id: string) {
+		return this.https
+			.get(this.apiUrl + `savedDynamicForm/getRelatedOldData/${id}`)
+			.pipe(map((res: any) => res.data[0].result));
+	}
 
 	savedFormPost(data) {
 		return this.https.post(this.apiUrl + 'savedDynamicForm/add', data);
