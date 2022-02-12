@@ -38,7 +38,7 @@ export class ContrAndActReqComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllContrlActReq();
-		this.setTitle.setTitle('WHS-PPE List');
+		this.setTitle.setTitle('WHS-Control And Action Required List');
 	}
 
 	getAllContrlActReq(field = '', value = '') {

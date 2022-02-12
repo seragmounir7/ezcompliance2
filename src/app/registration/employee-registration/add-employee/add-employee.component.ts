@@ -16,6 +16,7 @@ import {
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
@@ -67,7 +68,8 @@ export class AddEmployeeComponent implements OnInit {
 		public router: Router,
 		// @Inject(MAT_DIALOG_DATA) public data?,
 		// private matDialogRef?:MatDialogRef<AddEmployeeComponent>
-		private injector: Injector
+		private injector: Injector,
+		private setTitle: SetTitleService
 	) {
 		this.dialogRef = this.injector.get(MatDialogRef, null);
 		this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
@@ -124,6 +126,8 @@ export class AddEmployeeComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getall();
+
+		this.setTitle.setTitle('WHS-Employee Information');
 		this.empDetails.get('reportingTo').valueChanges.subscribe((res) => {
 			if (res) {
 				console.log(res);

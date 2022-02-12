@@ -23,7 +23,8 @@
 img,
 p,
 i,
-h3 {
+h3,
+#pageFooter {
 	visibility: visible;
 }
 .page-header {
@@ -43,9 +44,19 @@ h3 {
 @page {
 	margin: 20mm;
 }
+#pageFooter:after {
+	content: counter(page) ' of ' counter(pages);
+	counter-increment: page;
+}
 .ml-nam {
 	margin-left: 11rem;
 }
+.add {
+	margin-top: -1vh;
+}
+// .ml-nam-fotr{
+// 	margin-left: -4.2rem;
+// }
 @media print {
 	div.page {
 		visibility: visible;

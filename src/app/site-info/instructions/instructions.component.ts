@@ -39,7 +39,7 @@ export class InstructionsComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		// this.setTitle.setTitle('WHS-Nature Of Incident');
+		this.setTitle.setTitle('WHS-Accident Instruction');
 		this.url = this.activatedRoute.snapshot.url[1].path;
 		console.log('this.id', this.url);
 		if (this.url === 'accident') {

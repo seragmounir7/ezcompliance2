@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddEditProjMangComponent } from './add-edit-proj-mang/add-edit-proj-mang.component';
 import { MatSort, Sort } from '@angular/material/sort';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
 	selector: 'app-project-manager',
 	templateUrl: './project-manager.component.html',
@@ -29,11 +30,13 @@ export class ProjectManagerComponent implements OnInit {
 
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private setTitle: SetTitleService
 	) {}
 
 	ngOnInit(): void {
 		this.getAllProjectMang();
+		this.setTitle.setTitle('WHS-Project Manager List');
 	}
 
 	getAllProjectMang(field = '', value = '') {

@@ -12,6 +12,7 @@ import {
 	tap
 } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
@@ -37,7 +38,8 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		private upload: UploadFileService,
 		private activatedRoute: ActivatedRoute,
 		public router: Router,
-		private licenceInfo: LogicalFormInfoService
+		private licenceInfo: LogicalFormInfoService,
+		private setTitle: SetTitleService
 	) {
 		this.subcontractDetails = this.fb.group({
 			companyName: ['', Validators.required],
@@ -64,6 +66,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllStates();
+		this.setTitle.setTitle('WHS-Subcontractor Information');
 		this.id = this.activatedRoute.snapshot.params.id;
 
 		if (this.id !== 'form') {

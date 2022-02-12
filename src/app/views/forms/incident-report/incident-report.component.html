@@ -847,6 +847,7 @@
 					class="form-control"
 					type="file"
 					(change)="browser($event)"
+					accept="image/*"
 				/>
 			</div>
 		</div>
@@ -1557,14 +1558,17 @@
 			Submit
 		</button>
 	</div>
-	<div
-		style="padding-left: 30%"
-		*ngIf="(isPrint | async)===true && selectedImage"
-	>
-		<span>
-			<div>
-				<img height="400" width="400" [src]="selectedImage" />
-			</div>
-		</span>
-	</div>
+
+	<ng-container *ngIf="showImg()">
+		<div
+			style="padding-left: 30%"
+			*ngIf="(isPrint | async)===true && selectedImage"
+		>
+			<span>
+				<div>
+					<img height="400" width="400" [src]="selectedImage" />
+				</div>
+			</span>
+		</div>
+	</ng-container>
 </div>

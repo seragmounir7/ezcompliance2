@@ -7,6 +7,7 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { map } from 'rxjs/operators';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-saved-dynamic-form-table',
@@ -31,6 +32,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 	formId: any;
 	constructor(
 		private dynamicFormsService: DynamicFormsService,
+		private setTitle: SetTitleService,
 		private activatedRoute: ActivatedRoute,
 		public router: Router,
 		private spinner: NgxSpinnerService
@@ -39,7 +41,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 	ngOnInit(): void {
 		this.formId = this.activatedRoute.snapshot.params.id;
 		this.getSavedForm();
-
+		this.setTitle.setTitle('WHS-Saved Dynamic Form');
 		console.log('asdfghj', this.formId);
 
 		// this.isHistory = this.router.url.includes('dynamic/savedDynamicForm/history');

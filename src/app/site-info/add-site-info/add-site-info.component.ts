@@ -47,7 +47,7 @@ export class AddSiteInfoComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.setTitle.setTitle('WHS-Add Site Info');
+		this.setTitle.setTitle('WHS-Site Information List');
 		this.getAllSites();
 	}
 	getAllSites(field = '', value = '') {

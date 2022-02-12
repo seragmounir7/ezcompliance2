@@ -35,7 +35,7 @@ export class AddCustomerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllCustomers();
-		this.setTitle.setTitle('WHS-Add Customer');
+		this.setTitle.setTitle('WHS-Customer List');
 	}
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;

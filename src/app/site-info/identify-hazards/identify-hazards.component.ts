@@ -39,7 +39,7 @@ export class IdentifyHazardsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllHazards();
-		this.setTitle.setTitle('WHS-PPE List');
+		this.setTitle.setTitle('WHS-Identify Hazards List');
 	}
 
 	getAllHazards(field = '', value = '') {

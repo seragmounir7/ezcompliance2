@@ -50,7 +50,7 @@ export class JobNumberComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.setTitle.setTitle('WHS-Add Site Info');
+		this.setTitle.setTitle('WHS-Job Number List');
 		this.getAllJobNumber();
 	}
 	getAllJobNumber(field = '', value = '') {
