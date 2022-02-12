@@ -39,12 +39,14 @@ const routes: Routes = [
 			{ path: 'hazardRep/:id', component: HazardReportComponent }
 		]
 	},
-	// {
-	//   path: 'admin',
-	//   // canActivate: [FirstTimeLoginGuard],
-	//   loadChildren: () => import('./admin-setup/admin-setup.module').then(m => m.AdminSetupModule)
-
-	// },
+	{
+		path: 'firsttimeLogin',
+		// canActivate: [FirstTimeLoginGuard],
+		loadChildren: () =>
+			import('./admin-setup/admin-setup.module').then(
+				(m) => m.AdminSetupModule
+			)
+	},
 	{
 		path: 'admin',
 		component: MainComponent,

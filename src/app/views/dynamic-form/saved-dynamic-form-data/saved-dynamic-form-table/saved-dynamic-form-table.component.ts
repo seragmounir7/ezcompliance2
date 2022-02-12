@@ -6,8 +6,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
-import { map } from 'rxjs/operators';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-saved-dynamic-form-table',
@@ -30,6 +31,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 	formId: any;
+	returnTo: Observable<string>;
 	constructor(
 		private dynamicFormsService: DynamicFormsService,
 		private setTitle: SetTitleService,
@@ -39,24 +41,41 @@ export class SavedDynamicFormTableComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.isHistory = this.router.url.includes('/history');
+		this.returnTo = this.activatedRoute.queryParams.pipe(
+			map((res) => res.returnTo)
+		);
 		this.formId = this.activatedRoute.snapshot.params.id;
 		this.getSavedForm();
 		this.setTitle.setTitle('WHS-Saved Dynamic Form');
+		// this.getSavedForm();
+
 		console.log('asdfghj', this.formId);
 
 		// this.isHistory = this.router.url.includes('dynamic/savedDynamicForm/history');
 		// console.log(this.isHistory);
-		// if (this.isHistory) {
-		// 	this.activatedRoute.paramMap
-		// 		.pipe(map((params) => params.get('id')))
-		// 		.subscribe((res) => {
-		// 			this.id = res;
+		if (this.isHistory) {
+			this.activatedRoute.paramMap
+				.pipe(
+					tap(console.log),
+					map((params) => params.get('id'))
+				)
+				.subscribe((res) => {
+					this.id = res;
+					this.displayedColumns = [
+						'version',
+						'formIndex',
+						'title',
+						'createdTime',
+						'updatedTime',
+						'action'
+					];
 
-		// 			this.getSavedFormHistory();
-		// 		});
-		// } else {
-		// 	this.getSavedForm();
-		// }
+					this.getSavedFormHistory();
+				});
+		} else {
+			this.getSavedForm();
+		}
 	}
 	ngAfterViewInit() {
 		// this.tempArray.paginator = this.paginator;
@@ -88,22 +107,22 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			}
 		});
 	}
-	// getSavedFormHistory(id = this.id) {
-	// 	this.dynamicFormsService
-	// 		.getsavedFormByFormId(this.formId)
-	// 		.subscribe((res: any) => {
-	// 			this.showDatas = res.data[0].result;
-	// 			console.log('get res', this.showDatas);
-	// 			this.showDatas.forEach((element, i) => {
-	// 				return (this.showDatas[i].index = i);
-	// 			});
+	getSavedFormHistory(id = this.id) {
+		this.dynamicFormsService
+			.getSavedFormHistory(this.formId)
+			.subscribe((res: any) => {
+				this.showDatas = res;
+				console.log('get res', this.showDatas);
+				this.showDatas.forEach((element, i) => {
+					return (this.showDatas[i].index = i);
+				});
 
-	// 			this.tempArray = new MatTableDataSource<any>(this.showDatas);
-	// 			this.tempArray.paginator = this.paginator;
-	// 			this.tempArray.sort = this.sort;
-	// 			console.log('get res', this.showDatas);
-	// 		});
-	// }
+				this.tempArray = new MatTableDataSource<any>(this.showDatas);
+				this.tempArray.paginator = this.paginator;
+				this.tempArray.sort = this.sort;
+				console.log('get res', this.showDatas);
+			});
+	}
 	getSavedForm() {
 		this.dynamicFormsService
 			.getsavedFormByFormId(this.formId)
@@ -126,6 +145,16 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			type: 'edit'
 		};
 		//this.router.navigateByUrl('/admin/savedDynamicForm/',{data{a}})
+		if (this.isHistory) {
+			this.router.navigate(['/admin/dynamic/savedDynamicForm/history'], {
+				queryParams: {
+					id,
+					type: 'view',
+					returnTo: this.router.url
+				}
+			});
+			return;
+		}
 		this.router.navigate(['/admin/dynamic/savedDynamicForm'], {
 			queryParams: data
 		});
@@ -137,5 +166,10 @@ export class SavedDynamicFormTableComponent implements OnInit {
 		// 	this.getSavedFormHistory(sort.active);
 		// 	return;
 		// }
+	}
+	onHistoryClick(id: string) {
+		this.router.navigate([`${this.router.url}/history/${id}`], {
+			queryParams: { returnTo: this.router.url }
+		});
 	}
 }

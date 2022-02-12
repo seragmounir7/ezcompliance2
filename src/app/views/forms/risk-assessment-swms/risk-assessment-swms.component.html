@@ -511,7 +511,6 @@
 										<mat-checkbox
 											#matCheck
 											(change)="jobTaskCategoryChecked(parent,matCheck,catIndex)"
-											[indeterminate]="allChecked[catIndex] | async"
 											[value]="category._id"
 											[checked]="category.checked"
 										></mat-checkbox>

@@ -10,7 +10,15 @@ const routes: Routes = [
 	{ path: 'dynamicFormsList', component: FormsComponent },
 	{ path: 'savedDynamicForm', component: SavedDynamicFormDataComponent },
 	{
+		path: 'savedDynamicForm/history',
+		component: SavedDynamicFormDataComponent
+	},
+	{
 		path: 'savedDynamicFormTable/:id',
+		component: SavedDynamicFormTableComponent
+	},
+	{
+		path: 'savedDynamicFormTable/:id/history/:id',
 		component: SavedDynamicFormTableComponent
 	},
 	{ path: 'dynamicForm', component: DynamicFormComponent }

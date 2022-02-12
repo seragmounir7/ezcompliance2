@@ -18,16 +18,16 @@ import Swal from 'sweetalert2';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { filter, map } from 'rxjs/operators';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
-import { Observable } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable, Subscription } from 'rxjs';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
+import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 @Component({
 	selector: 'app-toolbox-talk',
 	templateUrl: './toolbox-talk.component.html',
 	styleUrls: ['./toolbox-talk.component.scss']
 })
 export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
-	sub: any;
+	sub: Subscription;
 	isPrint: Observable<any>;
 	@HostListener('window:afterprint', [])
 	function() {
@@ -38,7 +38,6 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		this.router.navigateByUrl('/admin/forms/tableData');
 		this.shared.printNext(false);
-		// this.router.navigate(['/',{ outlets: {'print': ['print']}}])
 	}
 	toolBox: FormGroup;
 	allJobNumbers = [];
@@ -67,8 +66,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		public router: Router,
 		public forms: SavedformsService,
 		public shared: RoleManagementSharedServiceService,
-		private breakpointObserver: BreakpointObserver,
-		private employee: EmployeeRegistrationService
+		private employee: EmployeeRegistrationService,
+		private mobileViewService: MobileViewService
 	) {
 		this.check = localStorage.getItem('key');
 		this.toolBox = this.fb.group({
@@ -126,14 +125,6 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.activatedRoute.queryParams.subscribe((params) => {
 			this.type = params.formType;
 		});
-		//  this.type=this.forms.formTypeObs$;
-
-		// this.router.events
-		// .pipe(filter(event => event instanceof NavigationEnd))
-		// .subscribe((event: NavigationEnd) => {
-		//   console.log('prev:', event.url);
-		//   this.previousUrl = event.url;
-		// });
 		this.id = this.activatedRoute.snapshot.params.id;
 		this.getAllJobNumber();
 		this.getAllStaff();
@@ -152,9 +143,6 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	getToolboxByid(id) {
 		this.logicalFormInfo.getToolboxById(id).subscribe((res: any) => {
 			console.log(res);
-			//this.pushissues(res.data.issues);
-			// this.pushCorrective(res.data.corrAction);
-			// this.pushattendee(res.data.attendees);
 			this.maxDate = res.data.date;
 			this.minDate = res.data.date;
 			this.toolBox.patchValue({
@@ -255,44 +243,6 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.issues().push(this.issuesForm());
 		this.disableForm();
 	}
-	// getissues(D): FormGroup {
-	//   return this.fb.group({
-	//     index: D.index,
-	//     topicDisc: D.topicDisc,
-	//     topicRes: D.topicRes,
-	//   });
-	// }
-	// pushissues(D) {
-	//   console.log("D",D);
-	//   D.forEach((element) => {
-	//    this.issues().push(this.getissues(element));
-	//   });
-	// }
-	// getCorrective(D): FormGroup {
-	//   return this.fb.group({
-	//     action: D.action,
-	//     personRes: D.personRes,
-	//     complete: D.complete,
-	//   });
-	// }
-	// pushCorrective(D) {
-	//   console.log("D",D);
-	//   D.forEach((element) => {
-	//    this.correctAct().push(this.getCorrective(element));
-	//   });
-	// }
-	// getattendee(D): FormGroup {
-	//   return this.fb.group({
-	//     employee: D.employee,
-	//     signature:D.signature,
-	//   });
-	// }
-	// pushattendee(D) {
-	//   console.log("D",D);
-	//   D.forEach((element) => {
-	//    this.attendee().push(this.getattendee(element));
-	//   });
-	// }
 	issues(): FormArray {
 		return this.toolBox.get('issues') as FormArray;
 	}
@@ -383,77 +333,42 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 				localStorage.setItem('key', ' ');
 			}
 		});
+		this.sub.add(this.mobileViewService.removeButton());
+		this.mobileViewService.observeXsmall().subscribe((result) => {
+			console.log(result);
 
-		this.breakpointObserver
-			.observe([Breakpoints.XSmall])
-			.subscribe((result) => {
-				console.log(result);
-
-				if (result.matches) {
-					// this.reSizeSignArray(this.signaturePad2, 233, 114);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 247);
-					this.signaturePad1.set('canvasHeight', 106);
-					this.signaturePad1.fromDataURL(sign);
-				} else {
-					// this.reSizeSignArray(this.signaturePad2, 420, 121);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 500);
-					this.signaturePad1.set('canvasHeight', 100);
-					this.signaturePad1.fromDataURL(sign);
-				}
-				if (result.matches) {
-					this.reSizeSignArray(this.signaturePad2, 233, 114);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 247);
-					this.signaturePad1.set('canvasHeight', 107);
-					this.signaturePad1.fromDataURL(sign);
-				} else {
-					this.reSizeSignArray(this.signaturePad2, 420, 121);
-					const sign = this.signaturePad1.toDataURL();
-					this.signaturePad1.set('canvasWidth', 338);
-					this.signaturePad1.set('canvasHeight', 107);
-					this.signaturePad1.fromDataURL(sign);
-				}
-				// if (result.matches) {
-				// 	// this.reSizeSignArray(this.signaturePad2, 233, 114);
-				// 	let sign = this.signaturePad1.toDataURL();
-				// 	this.signaturePad1.set('canvasWidth', 295);
-				// 	this.signaturePad1.set('canvasHeight', 135);
-				// 	this.signaturePad1.fromDataURL(sign);
-				// } else {
-				// 	// this.reSizeSignArray(this.signaturePad2, 420, 121);
-				// 	let sign = this.signaturePad1.toDataURL();
-				// 	this.signaturePad1.set('canvasWidth', 538);
-				// 	this.signaturePad1.set('canvasHeight', 134);
-				// 	this.signaturePad1.fromDataURL(sign);
-				// }
-				// if (result.matches) {
-				// 	// this.reSizeSignArray(this.signaturePad2, 233, 114);
-				// 	let sign = this.signaturePad1.toDataURL();
-				// 	this.signaturePad1.set('canvasWidth', 295);
-				// 	this.signaturePad1.set('canvasHeight', 142);
-				// 	this.signaturePad1.fromDataURL(sign);
-				// } else {
-				// 	// this.reSizeSignArray(this.signaturePad2, 420, 121);
-				// 	let sign = this.signaturePad1.toDataURL();
-				// 	this.signaturePad1.set('canvasWidth', 446);
-				// 	this.signaturePad1.set('canvasHeight', 146);
-				// 	this.signaturePad1.fromDataURL(sign);
-				// }
-			});
-		// this.signaturePad is now available
+			if (result.matches) {
+				// this.reSizeSignArray(this.signaturePad2, 233, 114);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 247);
+				this.signaturePad1.set('canvasHeight', 106);
+				this.signaturePad1.fromDataURL(sign);
+			} else {
+				// this.reSizeSignArray(this.signaturePad2, 420, 121);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 500);
+				this.signaturePad1.set('canvasHeight', 100);
+				this.signaturePad1.fromDataURL(sign);
+			}
+			if (result.matches) {
+				this.reSizeSignArray(this.signaturePad2, 233, 114);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 247);
+				this.signaturePad1.set('canvasHeight', 107);
+				this.signaturePad1.fromDataURL(sign);
+			} else {
+				this.reSizeSignArray(this.signaturePad2, 420, 121);
+				const sign = this.signaturePad1.toDataURL();
+				this.signaturePad1.set('canvasWidth', 338);
+				this.signaturePad1.set('canvasHeight', 107);
+				this.signaturePad1.fromDataURL(sign);
+			}
+		});
 		console.log(this.signaturePad1, this.dataUrl);
 		this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-
-		//this.signaturePad1.fromDataURL(this.dataUrl);
-		// this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
-		// this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
-		// this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
 	}
 
 	drawComplete1() {
-		// will be notified of szimek/signature_pad's onEnd event
 		console.log('signnn', this.signaturePad1);
 		this.toolBox.controls.signaturePad1.setValue(
 			this.signaturePad1.toDataURL()
@@ -470,10 +385,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.singRequired = this.toolBox.controls.signaturePad1.untouched;
 	}
 	drawStart1() {
-		// will be notified of szimek/signature_pad's onBegin event
-		// this.signaturePad2=null;
 		console.log('begin drawing');
-		//this.singRequired = this.toolBox.controls['signaturePad1'].invalid
 	}
 	drawComplete2(index, sign) {
 		console.log('sign', sign);
@@ -481,7 +393,6 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.attendee()
 			.controls[index].get('signature')
 			.setValue(sign.toDataURL());
-		// will be notified of szimek/signature_pad's onEnd event
 		this.sing2Required[index] = this.attendee().controls[index].get(
 			'signature'
 		).invalid;
@@ -491,13 +402,9 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.sing2Required[i] = this.attendee().controls[i].get(
 			'signature'
 		).untouched;
-
-		// this.signaturePad2.clear();
 	}
 	drawStart2(index) {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
-		// this.sing2Required[index]=this.attendee().controls[index].get('signature').invalid
 		console.log(' this.sing2Required', this.sing2Required[index]);
 	}
 	onSave() {

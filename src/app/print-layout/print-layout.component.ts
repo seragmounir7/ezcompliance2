@@ -69,10 +69,8 @@ export class PrintLayoutComponent implements OnInit {
 				(this.companyLogo = data.data.customerDetails.companyLogo);
 		});
 	}
-	// addPageNumbers() {
-	// 	var totalPages = Math.ceil(document.body.scrollHeight / 1123);  //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi,
-	// 	for (var i = 1; i <= totalPages; i++) {
-	// 	  this.pageNumber = document.createTextNode("Page " + i + " of " + totalPages);
-	// 	 }
-	//   }
+
+	testPrint() {
+		this.shared.printNext(true);
+	}
 }

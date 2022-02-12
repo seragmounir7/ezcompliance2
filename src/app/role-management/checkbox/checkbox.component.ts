@@ -50,6 +50,15 @@ export class CheckboxComponent implements OnInit {
 		this.rolemanagment = this.fb.group({});
 	}
 
+	/* formNameArr = [
+    'Dashboard',
+		'Generate a New Form',
+		'Logical Forms',
+		'Form List',
+		'Submitted Forms',
+    'Employee Details',
+    'Form Settings'
+	]; */
 	formNameArr = [
 		'dashboard',
 		'dynamicForm',
@@ -288,20 +297,6 @@ export class CheckboxComponent implements OnInit {
 			};
 			objArr.push(obj);
 		}
-
-		// let obj2=filterArr.reduce(((r, c) => Object.assign(r, c)), {});
-		// console.log("filterArr",obj2);
-
-		// for (let index = 0; index < checkeBox.length; index++) {
-		//   let accessObj={
-		//     form:checkeBox[index].form,
-		//     view:checkeBox[index].View,
-		//     add:checkeBox[index].Add,
-		//     update:checkeBox[index].Update,
-		//     delete:checkeBox[index].Delete,
-		//   }
-		//   access.push(accessObj)
-		// }
 		console.log('acess', objArr);
 	}
 	setValue() {
@@ -319,17 +314,6 @@ export class CheckboxComponent implements OnInit {
 								this.roleArr[index].role
 						)
 						.setValue(this.roleArr[index]?.access[x][z]);
-
-					// if(this.roleArr[index]?.access[x]?.Add){
-
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Add_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Add)
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Delete_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Delete)
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Update_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Update)
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Access_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Access)
-					// this.rolemanagment.get(this.roleArr[index].access[x].form+'_View_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.View)
-					// }
-					// this.rolemanagment.get(this.roleArr[index].access[x].form+'_Access_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Access)
-					// this.rolemanagment.get(this.roleArr[index].access[x].form+'_View_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.View)
 				});
 			}
 		}
@@ -359,63 +343,6 @@ export class CheckboxComponent implements OnInit {
 
 	count: number = 0;
 
-	stepperList: any[] = [
-		{
-			name: 'HighRisk Construction',
-			i: 1,
-			code: 'highRisk'
-		},
-		{
-			name: 'PPE',
-			i: 0,
-			code: 'ppe'
-		},
-		{
-			name: 'Licence',
-			i: 0,
-			code: 'licence'
-		},
-		{
-			name: 'Identify Hazards',
-			i: 0,
-			code: 'identifyHazards'
-		},
-		{
-			name: 'Risk Level',
-			i: 0,
-			code: 'riskLevel'
-		},
-		{
-			name: 'Control Action Required',
-			i: 0,
-			code: 'ctrlActreq'
-		},
-		{
-			name: 'Code of Practice',
-			i: 0,
-			code: 'codeOfPract'
-		},
-		{
-			name: 'Residule Risk Level',
-			i: 0,
-			code: 'resRiskLevel'
-		},
-		// {
-		//   name:'Code of Practice',
-		//   i:0,
-		//    code:'codeOfPract'
-		// },
-		{
-			name: 'Chemical related Task',
-			i: 0,
-			code: ''
-		},
-		{
-			name: 'Person Responsible',
-			i: 0,
-			code: 'perResbl'
-		}
-	];
 	handleClick(index) {
 		console.log(index);
 		this.count = index;
