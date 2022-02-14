@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditStatesComponent } from './add-and-edit-states/add-and-edit-states.component';
 
@@ -28,11 +29,13 @@ export class StatesComponent implements OnInit {
 
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
+		private setTitle: SetTitleService,
 		private dialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
 		this.getAllStates();
+		this.setTitle.setTitle('WHS-States List');
 	}
 
 	getAllStates() {

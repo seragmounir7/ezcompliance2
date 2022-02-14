@@ -33,7 +33,7 @@ export class StaffComponent implements OnInit {
 		private spinner: NgxSpinnerService
 	) {}
 	ngOnInit(): void {
-		this.setTitle.setTitle('WHS-Staff Info');
+		this.setTitle.setTitle('WHS-Staff Information List');
 		this.getAllStaff();
 	}
 	getAllStaff(field = '', value = '') {

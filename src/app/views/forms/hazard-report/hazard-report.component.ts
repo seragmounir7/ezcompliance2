@@ -25,7 +25,8 @@ import {
 	map,
 	filter,
 	take,
-	tap
+	tap,
+	last
 } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import {
@@ -106,7 +107,9 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	type: any;
 	empData: any;
 	check: any;
-
+	isImg: any;
+	// showImg:any;
+	image: any[] = ['tif', 'tiff', 'jpg', 'jpeg', 'gif', 'png', 'svg'];
 	constructor(
 		private fb: FormBuilder,
 		private employee: EmployeeRegistrationService,
@@ -196,7 +199,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.signaturePad1.off();
 		}
 	}
+	showImg() {
+		let ext = this.selectedImage.split('.');
+		console.log('ext.....', ext);
 
+		return this.image.includes(ext[ext.length - 1]);
+	}
 	ngOnInit() {
 		this.activatedRoute.queryParams.subscribe(
 			(res) => (this.doesQueryMobilExists = res?.mobile ? true : false)
@@ -438,10 +446,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			});
 			this.minDate = res.data.date;
 			this.selectedImage = res.data.fileUpload;
+
 			// this.uploadFile=this.selectedImage?.split(/-/)[1];
 			this.uploadFile = this.selectedImage?.slice(
 				this.selectedImage.indexOf('-') + 1
 			);
+
 			console.log(this.selectedImage, 'selectedImage');
 			this.dataUrl = res.data.signaturePad1;
 			const check = async () => {

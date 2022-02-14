@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -33,6 +34,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 	returnTo: Observable<string>;
 	constructor(
 		private dynamicFormsService: DynamicFormsService,
+		private setTitle: SetTitleService,
 		private activatedRoute: ActivatedRoute,
 		public router: Router,
 		private spinner: NgxSpinnerService
@@ -44,6 +46,8 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			map((res) => res.returnTo)
 		);
 		this.formId = this.activatedRoute.snapshot.params.id;
+		this.getSavedForm();
+		this.setTitle.setTitle('WHS-Saved Dynamic Form');
 		// this.getSavedForm();
 
 		console.log('asdfghj', this.formId);

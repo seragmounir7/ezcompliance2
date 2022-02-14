@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
@@ -46,7 +47,8 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		public router: Router,
 		private upload: UploadFileService,
 		private licenceInfo: LogicalFormInfoService,
-		private authService: AuthService
+		private authService: AuthService,
+		private setTitle: SetTitleService
 	) {}
 
 	ngOnInit(): void {
@@ -105,6 +107,8 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			this.addInsuranceFiled2();
 		}
 		this.getAllStates();
+
+		this.setTitle.setTitle('WHS-Company Details');
 	}
 
 	browser(event) {

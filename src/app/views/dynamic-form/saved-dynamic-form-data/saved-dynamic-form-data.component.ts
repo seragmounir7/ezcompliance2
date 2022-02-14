@@ -322,7 +322,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			"sessionStorage.getItem('type')",
 			sessionStorage.getItem('type')
 		);
-		this.setTitle.setTitle('WHS-Dynamic Forms');
+		this.setTitle.setTitle('WHS-Saved Dynamic Forms');
 		// this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
 		this.getAllJobNumber();
 		if (this.savedFormData.type == 'add') {

@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 	providedIn: 'root'
 })
 export class LogicalFormInfoService {
+	[x: string]: any;
 	apiUrl = environment.apiUrl;
 
 	constructor(private https: HttpClient) {}

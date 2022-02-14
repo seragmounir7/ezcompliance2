@@ -28,6 +28,9 @@ export class PrintLayoutComponent implements OnInit {
 	companyAddress: any;
 	formNam: any;
 	version: any;
+	pageNumber: any;
+	totalPages: any;
+
 	constructor(
 		private subscript: SubscriptionService,
 		private shared: RoleManagementSharedServiceService
@@ -40,6 +43,9 @@ export class PrintLayoutComponent implements OnInit {
 			this.formNam = res.formName;
 			this.version = res.version;
 		});
+		// window.onload = this.addPageNumbers;
+		// this.addPageNumbers();
+		this.totalPages = Math.ceil(document.body.scrollHeight / 1123);
 	}
 
 	getData() {

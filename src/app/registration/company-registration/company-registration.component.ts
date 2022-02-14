@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyRegistrationService } from 'src/app/utils/services/company-registration.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-company-registration',
@@ -12,7 +13,8 @@ export class CompanyRegistrationComponent implements OnInit {
 	selectedImage: any;
 	constructor(
 		private fb: FormBuilder,
-		private company: CompanyRegistrationService
+		private company: CompanyRegistrationService,
+		private setTitle: SetTitleService
 	) {
 		this.companyInfo = fb.group({
 			companyName: [null, Validators.required],
@@ -36,7 +38,9 @@ export class CompanyRegistrationComponent implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.setTitle.setTitle('WHS-Company Information');
+	}
 
 	browser(event) {
 		console.log('event=>', event);

@@ -34,7 +34,7 @@ export class ChemicalComponent implements OnInit {
 		private spinner: NgxSpinnerService
 	) {}
 	ngOnInit(): void {
-		this.setTitle.setTitle('WHS-Chemical Info');
+		this.setTitle.setTitle('WHS-Hazardous Substance List');
 		this.getAllChemical();
 	}
 	getAllChemical(field = '', value = '') {

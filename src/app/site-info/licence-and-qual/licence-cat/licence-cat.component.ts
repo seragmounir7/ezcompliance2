@@ -10,6 +10,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
 	selector: 'app-licence-cat',
 	templateUrl: './licence-cat.component.html',
@@ -34,11 +35,13 @@ export class LicenceCatComponent implements OnInit {
 
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
+		private setTitle: SetTitleService,
 		private dialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
 		this.getAllLicenceCat();
+		this.setTitle.setTitle('WHS-Trade Category List');
 	}
 
 	getAllLicenceCat(field = '', value = '') {

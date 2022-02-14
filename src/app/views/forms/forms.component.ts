@@ -120,6 +120,6 @@ export class FormsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.url = this.activatedRoute.snapshot.url;
-		this.setTitle.setTitle('WHS-All Form');
+		this.setTitle.setTitle('WHS-Forms List');
 	}
 }

@@ -15,6 +15,7 @@ import { merge } from 'rxjs';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { ConvertService } from 'src/app/utils/services/convert.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-saved-forms',
@@ -65,7 +66,8 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 		private spinner: NgxSpinnerService,
 		private shared: RoleManagementSharedServiceService,
 		public router: Router,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private setTitle: SetTitleService
 	) {}
 
 	ngAfterViewInit(): void {
@@ -90,6 +92,8 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			searchInput: ['']
 		});
 		this.getSavedforms();
+
+		this.setTitle.setTitle('WHS-All Saved Forms');
 	}
 
 	getSavedforms(

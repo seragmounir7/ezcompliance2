@@ -100,6 +100,8 @@ export class IncidentReportComponent
 	selectedImage: string;
 	singRequired: any;
 	singRequired1: any;
+	image: any[] = ['tif', 'tiff', 'jpg', 'jpeg', 'gif', 'png', 'svg'];
+
 	type: any;
 	check: any;
 	constructor(
@@ -190,6 +192,7 @@ export class IncidentReportComponent
 		this.sub.unsubscribe();
 		console.log('incident destroy');
 	}
+
 	triggerResize() {
 		// Wait for changes to be applied, then trigger textarea resize.
 		this.ngZone.onStable
@@ -282,10 +285,10 @@ export class IncidentReportComponent
 			this.type = params.formType;
 		});
 
-		console.log('IncidentReport', this.IncidentReport);
+		console.log('AccidentReport', this.IncidentReport);
 
 		this.dynamicFormsService.homebarTitle.next('Incident Report Form');
-		this.setTitle.setTitle('WHS-Incident Report Form');
+		this.setTitle.setTitle('WHS-Accident Report Form');
 
 		if (this.id !== 'Form') {
 			console.log('id', this.id);
@@ -311,6 +314,12 @@ export class IncidentReportComponent
 	}
 	displayFn(user: any): string {
 		return user && user.fullName ? user.fullName : '';
+	}
+	showImg() {
+		let ext = this.selectedImage.split('.');
+		console.log('ext.....', ext);
+
+		return this.image.includes(ext[ext.length - 1]);
 	}
 	employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
 		const data = e.option.value;

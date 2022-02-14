@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditSafetyComponent } from './add-and-edit-safety/add-and-edit-safety.component';
 
@@ -28,11 +29,13 @@ export class SafetyLegislationComponent implements OnInit {
 
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
+		private setTitle: SetTitleService,
 		private dialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
 		this.getAllSafetyReg();
+		this.setTitle.setTitle('WHS-Safety Legislation List');
 	}
 
 	getAllSafetyReg(field = '', value = '') {

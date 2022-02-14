@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { Router } from '@angular/router';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-add-question',
@@ -18,7 +19,8 @@ export class AddQuestionComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private router: Router,
-		private landingPageInfoService: LandingPageInfoServiceService
+		private landingPageInfoService: LandingPageInfoServiceService,
+		private setTitle: SetTitleService
 	) {
 		this.faqDetails = this.fb.group({
 			question: ['', Validators.required],
@@ -29,6 +31,7 @@ export class AddQuestionComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllPortal();
+		this.setTitle.setTitle('WHS-Add Question');
 	}
 
 	onFormSubmit() {
