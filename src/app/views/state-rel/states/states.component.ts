@@ -41,7 +41,6 @@ export class StatesComponent implements OnInit {
 	getAllStates() {
 		this.logicalFormInfo.getAllStates().subscribe((res) => {
 			console.log('getAllStates=>', res);
-			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -50,8 +49,6 @@ export class StatesComponent implements OnInit {
 			this.ELEMENT_DATA = data;
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
-			// this.dataSource.sort = this.sort;
-			//  this.task = res.data.subComponents;
 		});
 	}
 

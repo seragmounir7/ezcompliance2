@@ -66,7 +66,6 @@ export class AddAndEditSocialMediaComponent implements OnInit {
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Social Media Edited successfully',
-					// showConfirmButton: false,
 					timer: 1200
 				});
 			});

@@ -53,21 +53,6 @@ export class QuesAnsComponent implements OnInit {
 		});
 	}
 
-	// getAllQA() {
-	//   this.landingPafeInfo.getAllFaq().subscribe((res) => {
-	//     console.log('getAllFaq=>', res);
-	//     let data = res.data;
-	//     data.forEach((element, index) => {
-	//       element.index = index + 1; //adding index
-	//     });
-
-	//     this.ELEMENT_DATA = data;
-	//     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-	//     this.dataSource.paginator = this.paginator;
-
-	//   });
-
-	// }
 	getAllPortal() {
 		this.landingPafeInfo.getAllPortal().subscribe((res) => {
 			console.log('getAllPortal=>', res);

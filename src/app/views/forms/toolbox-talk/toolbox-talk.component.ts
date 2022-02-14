@@ -338,13 +338,11 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			console.log(result);
 
 			if (result.matches) {
-				// this.reSizeSignArray(this.signaturePad2, 233, 114);
 				const sign = this.signaturePad1.toDataURL();
 				this.signaturePad1.set('canvasWidth', 247);
 				this.signaturePad1.set('canvasHeight', 106);
 				this.signaturePad1.fromDataURL(sign);
 			} else {
-				// this.reSizeSignArray(this.signaturePad2, 420, 121);
 				const sign = this.signaturePad1.toDataURL();
 				this.signaturePad1.set('canvasWidth', 500);
 				this.signaturePad1.set('canvasHeight', 100);

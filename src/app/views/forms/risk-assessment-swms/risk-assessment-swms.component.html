@@ -46,42 +46,6 @@
 		<p class="title">Risk Assessment and SWMS</p>
 	</h2>
 
-	<!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button
-        [ngClass]="
-          RiskAssessment === true ? 'nav-link active' : 'nav-link outline myBtn'
-        "
-        id="RISKAssessment-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#RISKAssessment"
-        type="button"
-        role="tab"
-        aria-controls="RISKAssessment"
-        (click)="showsite()"
-        aria-selected="true"
-      >
-        RISK Assessment
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button
-        [ngClass]="
-          SWMSShow === true ? 'nav-link active' : 'nav-link outline myBtn'
-        "
-        id="SWSS-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#SWSS"
-        type="button"
-        role="tab"
-        aria-controls="siteAction"
-        (click)="showAction()"
-        aria-selected="false"
-      >
-        SWMS
-      </button>
-    </li>
-  </ul> -->
 	<mat-tab-group *ngIf="(isPrint | async)===false">
 		<mat-tab label="Risk Assessment">
 			<div
@@ -104,13 +68,6 @@
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="siteName"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col-md col-sm"
@@ -134,13 +91,7 @@
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="CustomerName"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
+
 								<input
 									type="text"
 									class="form-control col-md col-sm"
@@ -160,37 +111,12 @@
 							</div>
 						</div>
 						<div class="row">
-							<!-- <div class="my-3 col-md-2 col-sm-2">
-                <label class="form-label">Street Number<span class="text-danger ">*</span></label> -->
-							<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="StreetNumber"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
-							<!-- <input type="text" class="form-control col-md col-sm" formControlName="streetNo"
-                  [value]="siteControls.streetNo.value" [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required')
-                && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) ">
-                <span *ngIf="
-                riskAssessmentFb.get('streetNo')?.hasError('required') && (riskAssessmentFb.get('streetNo').dirty
-                || riskAssessmentFb.get('streetNo').touched) " class="invalid-feedback">
-                  street Number is Required
-                </span>
-              </div> -->
 							<div class="my-3 col-md-3 col-sm-3">
 								<label class="form-label"
 									>Street Address<span class="text-danger"
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="StreetAddress"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<textarea
 									autosize
 									type="text"
@@ -201,9 +127,6 @@
 									[class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required')
                 && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "
 								></textarea>
-								<!-- <input type="text" class="form-control col-md col-sm" formControlName="streetAddr"
-                  [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required')
-                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "> -->
 								<span
 									*ngIf="
                 riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty
@@ -257,16 +180,6 @@
 									>
 										{{state.title}}
 									</option>
-									<!-- <option selected hidden>Select</option>
-                <option value="NSW">NSW</option>
-                <option value="ACT">ACT</option>
-                <option value="QLD">QLD</option>
-                <option value="NT">NT</option>
-                <option value="SA">SA</option>
-                <option value="NZ">NZ</option>
-                <option value="TAS">TAS</option>s
-                <option value="VIC">VIC</option>
-                <option value="WA">WA</option> -->
 								</select>
 								<span
 									*ngIf="
@@ -309,13 +222,6 @@
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="CustomerContact"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col-md col-sm"
@@ -340,13 +246,6 @@
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="CustomerContactPhone"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col-md col-sm"
@@ -372,13 +271,6 @@
 										>*</span
 									></label
 								>
-								<!-- <select
-                  class="form-select form-control col-md col-sm"
-                  id="CustomerEmail"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col-md col-sm"
@@ -953,19 +845,7 @@
 									</span>
 								</div>
 							</div>
-							<!-- <div class="col-md-2 col-sm-2">
-                <div class="my-3">
-                  <label class="form-label">Street Number<span class="text-danger">*</span></label>
-                  <input type="number" class="form-control" aria-describedby="emailHelp" formControlName="streetNo"
-                    [value]="siteControls.streetNo.value" [class.is-invalid]="riskAssessmentFb.get('streetNo')?.hasError('required')
-                && (riskAssessmentFb.get('streetNo').dirty || riskAssessmentFb.get('streetNo').touched) ">
-                  <span *ngIf="
-                riskAssessmentFb.get('streetNo')?.hasError('required') && (riskAssessmentFb.get('streetNo').dirty
-                || riskAssessmentFb.get('streetNo').touched) " class="invalid-feedback">
-                    street Number is Required
-                  </span>
-                </div>
-              </div> -->
+
 							<div class="col-md-3 col-sm-3">
 								<div class="my-3">
 									<label class="form-label"
@@ -983,9 +863,6 @@
 										[class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required')
                   && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "
 									></textarea>
-									<!-- <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr"
-                    [value]="siteControls.streetAddr.value" [class.is-invalid]="riskAssessmentFb.get('streetAddr')?.hasError('required')
-                && (riskAssessmentFb.get('streetAddr').dirty || riskAssessmentFb.get('streetAddr').touched) "> -->
 									<span
 										*ngIf="
                 riskAssessmentFb.get('streetAddr')?.hasError('required') && (riskAssessmentFb.get('streetAddr').dirty
@@ -1354,9 +1231,6 @@
 						<hr />
 						<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
 						<div class="row">
-							<!--<div class="col-md-3 col-sm-3" *ngFor="let item of allCOPSelected;let i=index ">
-           <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
-          </div> -->
 							<div
 								*ngFor="let item of allCOPSelected; let i = index"
 								class="mt-2 col-md-4 col-sm-4"
@@ -1941,43 +1815,7 @@
 								<hr />
 							</div>
 						</div>
-						<div class="row">
-							<!-- <br /><br />
-          <h3 class="txt_1">
-            Only persons who have completed the singoff are authorised to work
-            on the relevent tasks covered by this document. <br />
-            Note: Work must be performed in accordance with this SWMS, any Risk
-            Assessment prepared in relation to this work and any <br />
-            relevent Safe WorkProcedures.<br />
-            This SWMS must be accessible for inspection untill the energised
-            electrical work to which this SWMS relates is completed. If the
-            <br />
-            SWMS is revised, all version should be kept.<br />
-            If a Notifiable incident occurs in relation to the high-risk
-            construction work in this SWMS, the SWMS must be kept for at least 2
-            years<br />
-            from the date of the Notifiable incident.<br /><br />
-            If Changes are made to the work practice and the content of the SWMS
-            workers will need sign to confirm that they haverecieved an<br />
-            updated briefing, undestand the content and will comply with the
-            requirements.<br /><br />
-            Where there are other parties working adjascent to the contractor
-            and the work activity that could impact upon the safety and
-            welfare<br />
-            of others not directly employed, SWMS will make references to how
-            they will coordinate the work activity and where applicable<br />
-            communicate to the other parties.<br /><br />
-          </h3> -->
-						</div>
-
-						<!-- <div  class="row mb-2">
-          <ckeditor style="width: 100%;" [editor]="Editor" data="<h1 class='form-control' >
-            <strong>Worker consultation, instruction, training, toolbox talks, review,
-            acceptance record:</strong>
-          </h1>"></ckeditor>
-
-
-        </div> -->
+						<div class="row"></div>
 
 						<div class="row">
 							<ckeditor
@@ -2131,13 +1969,6 @@
 				<div class="row">
 					<div class="my-3 col-md col-sm">
 						<label class="form-label">Site Name</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="siteName"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
 						<input
 							type="text"
 							class="form-control col-md col-sm"
@@ -2146,13 +1977,6 @@
 					</div>
 					<div class="my-3 col-md col-sm">
 						<label class="form-label">Customer Name</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="CustomerName"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
 						<input
 							type="text"
 							class="form-control col-md col-sm"
@@ -2163,28 +1987,6 @@
 				<div class="row">
 					<div class="my-3 col-md-2 col-sm-2">
 						<label class="form-label">Street Number</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="StreetNumber"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select>
-						<input
-							type="text"
-							class="form-control col-md col-sm"
-							formControlName="streetNo"
-						/>
-					</div>
-					<div class="my-3 col-md-4 col-sm-4">
-						<label class="form-label">Street Address</label>
-						 <select
-              class="form-select form-control col-md col-sm"
-              id="StreetAddress"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
 						<textarea
 							autosize
 							type="text"
@@ -2192,18 +1994,9 @@
 							class="form-control col-md col-sm"
 							id="name"
 						></textarea>
-						<!-- <input type="text" class="form-control col-md col-sm" formControlName="streetAddr"> -->
 					</div>
 					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Suburb</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="Suburb"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
-						<!-- <input type="text" class="form-control col-md col-sm" formControlName="suburb"> -->
 						<textarea
 							autosize
 							type="text"
@@ -2235,16 +2028,6 @@
 							>
 								{{state.title}}
 							</option>
-							<!-- <option selected hidden>Select</option>
-            <option value="NSW">NSW</option>
-            <option value="ACT">ACT</option>
-            <option value="QLD">QLD</option>
-            <option value="NT">NT</option>
-            <option value="SA">SA</option>
-            <option value="NZ">NZ</option>
-            <option value="TAS">TAS</option>s
-            <option value="VIC">VIC</option>
-            <option value="WA">WA</option> -->
 						</select>
 					</div>
 					<div class="my-3 col-md-3 col-sm-3">
@@ -2275,13 +2058,6 @@
 				<div class="row">
 					<div class="my-3 col-md col-sm">
 						<label class="form-label">Customer Contact</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="CustomerContact"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
 						<input
 							type="text"
 							class="form-control col-md col-sm"
@@ -2290,13 +2066,6 @@
 					</div>
 					<div class="my-3 col-md col-sm">
 						<label class="form-label">Customer Contact Phone</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="CustomerContactPhone"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
 						<input
 							type="text"
 							class="form-control col-md col-sm"
@@ -2307,13 +2076,6 @@
 				<div class="row">
 					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Customer Email</label>
-						<!-- <select
-              class="form-select form-control col-md col-sm"
-              id="CustomerEmail"
-              aria-label="Default select example"
-            >
-              <option selected hidden>Select</option>
-            </select> -->
 						<input
 							type="text"
 							class="form-control col-md col-sm"
@@ -2358,7 +2120,6 @@
 				<div class="row">
 					<div class="my-3 col-md-4 col-sm-4">
 						<label class="form-label">Date</label>
-						<!-- <input type="date" class="form-control" formControlName="date" /> -->
 						<input
 							matInput
 							[matDatepicker]="datepicker2"
@@ -2704,11 +2465,6 @@
 							#timepicker
 							(timeSet)="getTime($event,timepicker)"
 						></ngx-mat-timepicker>
-						<!-- <input
-              type="date"
-              class="mr-1 form-control"
-              value=""
-              formControlName="dateTime"/> -->
 					</p>
 				</div>
 			</div>
@@ -2763,207 +2519,8 @@
 								class="form-control"
 								id="name"
 							></textarea>
-							<!-- <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="streetAddr" /> -->
 						</div>
 					</div>
-					<!-- <div class="col-md-4 col-sm-4-print">
-						<div class="my-3">
-							<label class="form-label">Town/City</label>
-							<input
-								type="department"
-								class="form-control"
-								aria-describedby="emailHelp"
-								formControlName="town"
-							/>
-						</div>
-					</div>
-					<div class="col-md-2 col-sm-2 col-sm-2-print">
-						<div class="my-3">
-							<label class="form-label">State</label>
-							<select
-								class="form-select form-control col-md col-sm"
-								aria-label="Default select example"
-								formControlName="statesSWMS"
-							>
-								<option selected hidden>Select</option>
-								<option
-									[value]="state._id"
-									*ngFor="let state of states"
-								>
-									{{state.title}}
-								</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-sm-6-print">
-						<div class="my-3">
-							<label class="form-label">Customer Contact</label>
-							<input
-								type="Projectnumber"
-								class="form-control"
-								aria-describedby="emailHelp"
-								formControlName="custConct"
-							/>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-sm-6-print">
-						<div class="my-3">
-							<label class="form-label"
-								>Customer Contact Phone</label
-							>
-							<input
-								type="tel"
-								class="form-control"
-								aria-describedby="emailHelp"
-								formControlName="custConctPh"
-							/>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-sm-6-print">
-						<div class="my-3">
-							<label class="form-label"
-								>Customer Contact Email</label
-							>
-							<input
-								type="email"
-								class="form-control"
-								aria-describedby="emailHelp"
-								formControlName="custEmail"
-							/>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3 col-md-3-print">
-						<div class="my-3">
-							<label class="form-label">Job Number</label>
-							<select
-								class="form-select form-control col-md col-sm"
-								aria-label="Default select example"
-								formControlName="jobNumber"
-								(change)="jobNoSel()"
-							>
-								<option
-									[value]="jobNo._id"
-									*ngFor="let jobNo of allJobNumbers"
-								>
-									{{jobNo.jobNumber}}
-								</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3 col-md-3-print">
-						<div class="my-3">
-							<label class="form-label">Project Manager</label>
-							<select
-								class="form-select form-control col-md col-sm"
-								aria-label="Default select example"
-								formControlName="projectManagerSWMS"
-								(change)="setProjectManager('projectManagerSWMS',$event)"
-							>
-								<option selected hidden>Select</option>
-								<option
-									[value]="mang._id"
-									*ngFor="let mang of projectMang"
-								>
-									{{mang.title}}
-								</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<hr />
-				<div class="row">
-					<div class="col-md-2 col-sm-2 col-sm-2-print">
-						<div class="my-3">
-							<label
-								for="exampleInputProjectNumber"
-								class="form-label"
-								>Jurisdiction</label
-							>
-							<select
-								class="form-select form-control col-md col-sm"
-								aria-label="Default select example"
-								formControlName="jurisdiction"
-							>
-								<option
-									*ngIf="!hasJuridiction"
-									value=""
-									selected
-									hidden
-								>
-									Select
-								</option>
-								<option
-									[value]="jurisdiction._id"
-									*ngFor="let jurisdiction of JurisdictionData"
-								>
-									{{jurisdiction.title}}
-								</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-5 col-sm-5 col-sm-5-print">
-						<div class="my-3">
-							<label>Safety Legislation</label>
-							<select
-								class="form-control"
-								name="sellist2"
-								formControlName="safetyLeg"
-							>
-								<option
-									*ngIf="!hasLegist"
-									value=""
-									selected
-									hidden
-								>
-									Select
-								</option>
-								<option
-									[value]="safetyLegislation._id"
-									*ngFor="let safetyLegislation of safety"
-								>
-									Act: {{safetyLegislation.act}}&nbsp;
-									Regulation:{{safetyLegislation.regulation}}
-								</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-5 col-sm-5 col-sm-5-print">
-						<div class="my-3">
-							<label class="form-label"
-								>Regulator & other Legislation</label
-							>
-							<select
-								class="form-select form-control col-md col-sm"
-								id="siteName"
-								aria-label="Default select example"
-								formControlName="regulator"
-							>
-								<option
-									*ngIf="!hasRegulation"
-									value=""
-									selected
-									hidden
-								>
-									Select
-								</option>
-								<option
-									[value]="regulator._id"
-									*ngFor="let regulator of regulatorData"
-								>
-									{{regulator.title}}
-								</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<hr />
-
-				<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
-
-				<div class="row">
-					<!--<div class="col-md-3 col-sm-3" *ngFor="let item of allCOPSelected;let i=index ">
-         <label for="" class="d-flex"><div><i class="fas fa-circle mr-1"></i></div> <div>{{item.title}}</div></label>
-        </div> -->
 					<div
 						*ngFor="let item of allCOPSelected; let i = index"
 						class="mt-2 col-md-4 col-sm-4 col-sm-4-print"
@@ -3146,14 +2703,8 @@
 									<label for="formFile" class="form-label"
 										>Attach SDS Sheet</label
 									>
-									<!-- <input class="form-control" type="file" id="formFile" formControlName="file" /> -->
 								</div>
 							</div>
-							<!-- <div class="col-md-2 col-sm-2 col-sm-2-print">
-                <span class="material-icons" style="margin-top: 30%" (click)="addActionSDSRegister()">add_circle_outline
-                </span>
-                <span class="material-icons" (click)="removeSDSRegister(i)"> remove_circle_outline </span>
-              </div> -->
 						</div>
 						<div class="my-3">
 							<label for="formFile" class="form-label"
@@ -3430,43 +2981,7 @@
 						<hr />
 					</div>
 				</div>
-				<div class="row">
-					<!-- <br /><br />
-        <h3 class="txt_1">
-          Only persons who have completed the singoff are authorised to work
-          on the relevent tasks covered by this document. <br />
-          Note: Work must be performed in accordance with this SWMS, any Risk
-          Assessment prepared in relation to this work and any <br />
-          relevent Safe WorkProcedures.<br />
-          This SWMS must be accessible for inspection untill the energised
-          electrical work to which this SWMS relates is completed. If the
-          <br />
-          SWMS is revised, all version should be kept.<br />
-          If a Notifiable incident occurs in relation to the high-risk
-          construction work in this SWMS, the SWMS must be kept for at least 2
-          years<br />
-          from the date of the Notifiable incident.<br /><br />
-          If Changes are made to the work practice and the content of the SWMS
-          workers will need sign to confirm that they haverecieved an<br />
-          updated briefing, undestand the content and will comply with the
-          requirements.<br /><br />
-          Where there are other parties working adjascent to the contractor
-          and the work activity that could impact upon the safety and
-          welfare<br />
-          of others not directly employed, SWMS will make references to how
-          they will coordinate the work activity and where applicable<br />
-          communicate to the other parties.<br /><br />
-        </h3> -->
-				</div>
-
-				<!-- <div  class="row mb-2">
-        <ckeditor style="width: 100%;" [editor]="Editor" data="<h1 class='form-control' >
-          <strong>Worker consultation, instruction, training, toolbox talks, review,
-          acceptance record:</strong>
-        </h1>"></ckeditor>
-
-
-      </div> -->
+				<div class="row"></div>
 
 				<div class="row">
 					<ckeditor
@@ -3567,12 +3082,4 @@
 			</div>
 		</span>
 	</div>
-	<!-- <div *ngIf="(isPrint | async)===true">
-  <pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'"
-  [render-text]="true"
-  [original-size]="false"
-  style="width: 400px; height: 500px"
-  [show-all]="true"
-></pdf-viewer>
- </div> -->
 </div>

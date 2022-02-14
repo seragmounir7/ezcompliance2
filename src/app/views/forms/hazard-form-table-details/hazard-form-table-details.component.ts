@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-hazard-form-table-details',
@@ -37,10 +38,12 @@ export class HazardFormTableDetailsComponent implements OnInit {
 		public router: Router,
 		private spinner: NgxSpinnerService,
 		private shared: RoleManagementSharedServiceService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private setTitle: SetTitleService
 	) {}
 
 	ngOnInit(): void {
+		this.setTitle.setTitle('WHS-Hazard Form List');
 		this.isHistory = this.router.url.includes('/hazardTable/history');
 		console.log(this.isHistory);
 		if (this.isHistory) {
@@ -78,8 +81,6 @@ export class HazardFormTableDetailsComponent implements OnInit {
 				console.log('this.showDatas', this.showDatas);
 
 				this.dataSource = new MatTableDataSource<any>(this.showDatas);
-				// this.dataSource.paginator = this.paginator;
-				// this.dataSource.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}
@@ -121,8 +122,6 @@ export class HazardFormTableDetailsComponent implements OnInit {
 				console.log('this.showDatas', this.showDatas);
 
 				this.dataSource = new MatTableDataSource<any>(this.showDatas);
-				// this.dataSource.paginator = this.paginator;
-				// this.dataSource.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}
@@ -137,19 +136,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
 			formName: 'Hazard Report Form'
 		});
 		console.log('check');
-		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
-		// $("<iframe>")                             // create a new iframe element
-		//     .hide()                               // make it invisible
-		//     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
-		//     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-
-		// let iframe=document.createElement("iframe")
-		// iframe.id = "printIframe"
-		//       iframe.src= environment.stagingUrl+"#/admin/forms/hazardRep/"+id
-		//       iframe.style.display="none";
-		//       let body = document.getElementsByTagName("body")
-		//       body[0].appendChild(iframe)
 
 		this.spinner.show('printLoader');
 		this.router.navigate([

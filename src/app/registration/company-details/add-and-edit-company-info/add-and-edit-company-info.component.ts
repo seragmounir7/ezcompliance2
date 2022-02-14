@@ -31,7 +31,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	plantRegister = false;
 	insuranceRegister = false;
 	plantDetails: any;
-	// @ViewChild('signature2') signaturePad2: any;
 	id: any;
 	dateGet: any;
 	dataUrl2: any;
@@ -65,30 +64,8 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			companyWeb: ['', Validators.required],
 			companyLogo: [''],
 			plantArr: this.fb.array([]),
-			// plantName: [''],
-			// checkedOut: [''],
-			// hours: [''],
-			// kilometres: [''],
-			// date: [''],
-			// make: [''],
-			// modelNumber: [''],
-			// registrationNumber: [''],
-			// registrationRenewalDate: [''],
-			// plantType: [''],
-			// purchaseDate: [''],
-			// insurancePolicyNumber: [''],
-			// insuranceExpiry: [''],
-			// fuelCardNumber: [''],
-			// ETagNumber: [''],
 			plantSignature: [''],
 			insuranceArr: this.fb.array([])
-			// documentNumber: [''],
-			// documentType: [''],
-			// documentName: [''],
-			// thirdParty: [''],
-			// startDate: [''],
-			// expiryDate: [''],
-			// reminderNotice: [''],
 		});
 
 		this.id = this.activatedRoute.snapshot.params.id;
@@ -228,52 +205,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			item.removeAt(i);
 		}
 	}
-	// public signaturePadOptions: Object = {
-	//   // passed through to szimek/signature_pad constructor
-	//   minWidth: 1,
-	//   canvasWidth: 500,
-	//   canvasHeight: 100,
-	// };
-
-	// drawStart() {
-	//   // will be notified of szimek/signature_pad's onBegin event
-	//   console.log('begin drawing');
-	//   }
-
-	// get f() {
-	//   return this.registerFormControl.controls;
-	// }
 
 	get registerFormControl() {
 		return this.formData.controls;
 	}
 
-	// browser2(event) {
-	// 	const files = event.target.files[0];
-	// 	const formdata = new FormData();
-	// 	formdata.append('', files);
-	// 	console.log(files);
-	// }
-	// public signaturePadOptions: Object = {
-	// 	// passed through to szimek/signature_pad constructor
-	// 	minWidth: 1,
-	// 	canvasWidth: 500,
-	// 	canvasHeight: 100
-	// };
-	// drawStart() {
-	// 	// will be notified of szimek/signature_pad's onBegin event
-	// 	console.log('begin drawing');
-	// }
-	// drawComplete2() {
-	// 	// will be notified of szimek/signature_pad's onEnd event
-	// 	this.formData.controls.plantSignature.setValue(
-	// 		this.signaturePad2.toDataURL()
-	// 	);
-	// 	console.log(this.signaturePad2.toDataURL());
-	// }
-	// clear2() {
-	// 	this.signaturePad2.clear();
-	// }
 	companyShow() {
 		this.companyRegister = true;
 		this.plantRegister = false;
@@ -291,13 +227,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	onFormSubmit() {
 		this.submitted = true;
-		// if (!this.empDetails.controls.valid) {
-		//   this.formData='formfield'
-		// }
-		// const Sign = this.signaturePad2.toDataURL();
-		// console.log('sign=>', this.signaturePad2.toDataURL());
-		// const plantSignature = this.signaturePad2.toDataURL();
-
 		console.log('this.EmployeeInfo.value', this.formData.value);
 		const insuranceArr = () => {
 			this.addInsurance().length;
@@ -363,7 +292,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			},
 			plantRegister: {
 				plant: equipArr()
-				// signature: 'plantSignature'
 			},
 			insuranceRegister: {
 				insurance: insuranceArr()
@@ -375,7 +303,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		this.subscript.addsubscription(body).subscribe(
 			(data) => {
 				console.log('data=>', data);
-				// this.signaturePad2.toDataURL();
 				Swal.fire({
 					title: 'Company Detail Added successfully',
 					showConfirmButton: false,
@@ -391,7 +318,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	patchData() {
 		this.subscript.getsubscription(this.id).subscribe((data) => {
 			console.log('data=>', data);
-			// this.signaturePad.toDataURL();
 
 			data.data.insuranceRegister.insurance.length > 0
 				? data.data.insuranceRegister.insurance.forEach((ele) => {
@@ -454,36 +380,9 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				reminderNotice:
 					data.data.insuranceRegister.insurance.reminderNotice
 			});
-
-			// this.dataUrl = data.data.ppe.signature;
-			// this.dataUrl2 = data.data.plantRegister.signature;
-			// console.log(
-			// 	'data.data.ppe.signature;',
-			// 	data.data.plantRegister.signature
-			// );
-
-			// let check = async () => { this.signaturePad != null }
-			// check().then((res) => {
-			//   console.log("this.signaturePad", this.signaturePad, res);
-
-			//   this.signaturePad.fromDataURL(data.data.ppe.signature)
-
-			// })
-			// const check2 = async () => {
-			// 	this.signaturePad2 != null;
-			// };
-			// check2().then((res) => {
-			// 	console.log('this.signaturePad', this.signaturePad2, res);
-
-			// 	this.signaturePad2.fromDataURL(
-			// 		data.data.plantRegister.signature
-			// 	);
-			// });
 		});
 	}
 	onFormUpdate(id) {
-		// const Sign = this.signaturePad2.toDataURL();
-		// const plantSignature = this.signaturePad2.toDataURL();
 		const insuranceArr = () => {
 			this.addInsurance().length;
 			const arr = [];
@@ -547,7 +446,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			},
 			plantRegister: {
 				plant: equipArr()
-				// signature: 'plantSignature'
 			},
 			insuranceRegister: {
 				insurance: insuranceArr()

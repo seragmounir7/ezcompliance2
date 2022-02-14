@@ -38,7 +38,6 @@ export class CodeOfPractComponent implements OnInit {
 	getAllCode() {
 		this.logicalFormInfo.getAllCode().subscribe((res) => {
 			console.log('getAllCode=>', res);
-			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index

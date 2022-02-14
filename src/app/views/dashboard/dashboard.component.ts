@@ -80,29 +80,15 @@ export class DashboardComponent implements OnInit {
 	public doughnutChartColor = [
 		{
 			backgroundColor: [
-				// 'rgba(110, 114, 20, 1)',
-				// 'rgba(118, 183, 172, 1)',
 				'rgba(211,211,211, 0.8)', //near miss
 				'rgba(0, 0, 128, 0.8)', //incident
 				'rgba(199,20,55,1)' //hazard
 			]
 		}
 	];
-	// public horiztChartColor = [
-	//   {
-	//     backgroundColor: [
-	//       // 'rgba(110, 114, 20, 1)',
-	//       'rgba(118, 183, 172, 1)',
-
-	//     ],
-	//   },
-	// ];
 	public horiztChartColor: Color[] = [
 		{
 			backgroundColor: [
-				// 'rgba(200, 0, 0, 0.4)',
-				// 'rgba(200, 0, 0, 0.6)',
-				// 'rgba(200, 0, 0, 0.8)',
 				'rgba(199,20,55,0.4)',
 				'rgba(199,20,55,0.6)',
 				'rgba(199,20,55,0.8)',
@@ -114,9 +100,6 @@ export class DashboardComponent implements OnInit {
 		{ backgroundColor: 'rgba(211,211,211, 0.8)' },
 		{ backgroundColor: 'rgba(0, 0, 128, 0.8)' },
 		{ backgroundColor: 'rgba(199,20,55,1)' }
-
-		// new DashBoard
-		// { backgroundColor: 'rgb(63, 127, 191)' },
 	];
 
 	public barChartColor1: Color[] = [
@@ -124,17 +107,6 @@ export class DashboardComponent implements OnInit {
 		{ backgroundColor: 'rgb(63, 127, 191)' }
 	];
 
-	// public barChartColor=[
-	//   {
-	//    backgroundColor: [
-	//   // 'rgba(110, 114, 20, 1)',
-	//   'rgba(118, 183, 172, 1)',
-
-	//    'rgba(118, 183, 172, 1)',
-	//    'rgba(0, 148, 97, 1)',
-	//    ]
-	//    }
-	//    ];
 	public doughnutChartType: ChartType = 'doughnut';
 
 	public barChartOptions: ChartOptions = {
@@ -148,19 +120,6 @@ export class DashboardComponent implements OnInit {
 		'Location3',
 		'Location5',
 		'Location7'
-
-		// new DashBoard
-		// 'Abrasion',
-		// 'Amputation',
-		// 'Broken Bone',
-		// 'Bruise',
-		// 'Burn',
-		// 'Crushing Injury',
-		// 'Cuts',
-		// 'Head Injury',
-		// 'Hernia',
-		// 'Illness',
-		// 'Other',
 	];
 
 	public barChartLabels1: Label[] = [
@@ -188,9 +147,6 @@ export class DashboardComponent implements OnInit {
 		{ data: [55, 59, 80, 81, 56, 55, 40], label: 'Near miss' },
 		{ data: [28, 48, 40, 19, 86, 27, 90], label: 'Incident' },
 		{ data: [18, 28, 20, 49, 36, 37, 50], label: 'Hazard' }
-
-		// new DashBoard
-		// { data: [10,0,1,10,2,1,7,1,1,1,3], label: 'Type of Injuries' },
 	];
 
 	public barChartData1: ChartDataSets[] = [
@@ -204,9 +160,6 @@ export class DashboardComponent implements OnInit {
 
 	public barChartDataH: ChartDataSets[] = [
 		{ data: [70, 15, 10, 5], label: 'Safety Consequences', stack: 'a' }
-		// { data: [1, 2, 3], label: 'Accepted', stack: 'a' },
-		// { data: [1, 2, 3], label: 'Open', stack: 'a' },
-		// { data: [1, 2, 3], label: 'In Progress', stack: 'a' },
 	];
 	public barChartLabelsH: string[] = [
 		'Insignificant',
@@ -270,8 +223,6 @@ export class DashboardComponent implements OnInit {
 			/** spinner ends after 5 seconds */
 			void this.spinner.hide();
 		}, 2000);
-
-		// console.log('Checking Arr=> ',this.arr);
 	}
 
 	public chartOptions: any = {

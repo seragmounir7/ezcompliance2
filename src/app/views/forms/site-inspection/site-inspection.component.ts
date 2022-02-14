@@ -124,7 +124,6 @@ export class SiteInspectionComponent
 		});
 	}
 	ngOnDestroy(): void {
-		// this.sub.unsubscribe();
 		console.log('site destroy');
 	}
 	public signaturePadOptions1: Object = {
@@ -516,7 +515,6 @@ export class SiteInspectionComponent
 				.updateSiteInspection(this.id, data)
 				.subscribe((res) => {
 					console.log('res', res);
-					// this.router.navigate(["/admin/forms/tableData"]);
 					Swal.fire({
 						title: 'Update successfully',
 						showConfirmButton: false,
@@ -534,7 +532,6 @@ export class SiteInspectionComponent
 					showConfirmButton: false,
 					timer: 1200
 				});
-				// this.router.navigate(["/admin/forms/tableData"]);
 				this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
 			});
 			console.log('data', data);

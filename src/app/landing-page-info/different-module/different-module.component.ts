@@ -57,7 +57,6 @@ export class DifferentModuleComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
 			console.log('Different', res.data);
 			this.dataSource.data = res.data;
-			// this.differentData = res.data;
 			const differentData = res.data[0].subModules;
 			differentData.forEach((element, index) => {
 				element.index = index + 1;

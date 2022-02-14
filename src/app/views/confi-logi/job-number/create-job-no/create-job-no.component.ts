@@ -62,7 +62,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		});
 		this.addJobNumberForm.get('siteName').valueChanges.subscribe((res) => {
 			console.log(res);
-			// this.addJobNumberForm.get('streetNumber').setValue(res.streetNumber)
 			this.addJobNumberForm
 				.get('streetAddress')
 				.setValue(res.streetAddress);
@@ -74,7 +73,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			.get('customerName')
 			.valueChanges.subscribe((res) => {
 				console.log(res);
-				// res = JSON.parse(res)
 				this.addJobNumberForm
 					.get('customerContact')
 					.setValue(res.customerContact);
@@ -84,11 +82,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 				this.addJobNumberForm
 					.get('customerEmail')
 					.setValue(res.contacts[0]?.email);
-				// this.addJobNumberForm.get('customerEmail').setValue(res.ABN)
 			});
-		// this.addJobNumberForm.controls.jobNumber.valueChanges.subscribe(res => {
-		//   console.log('this.addJobNumberForm.controls.jobNumber', this.addJobNumberForm.controls.jobNumber.errors, this.addJobNumberForm.invalid)
-		// })
 		this.getAllSites();
 		this.getAllCustomer();
 		this.getAllStates();
@@ -156,7 +150,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 	}
 	setSite(item) {
 		console.log(item);
-		// this.addJobNumberForm.get('streetNumber').setValue(item.streetNumber)
 		this.addJobNumberForm.get('streetAddress').setValue(item.streetAddress);
 		this.addJobNumberForm.get('suburb').setValue(item.suburb);
 		this.addJobNumberForm.get('state').setValue(item.stateId._id);
@@ -172,7 +165,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		this.addJobNumberForm
 			.get('customerEmail')
 			.setValue(item.contacts[0]?.email);
-		//   this.addJobNumberForm.get('customerEmail').setValue(item.ABN)
 	}
 	close() {
 		this.dialogRef.close();
@@ -190,12 +182,8 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 				'jobNumber',
 				new FormControl('', Validators.required)
 			);
-			// this.addJobNumberForm.get('jobNumber').setErrors(Validators.required)
-			// this.addJobNumberForm.get('jobNumber').updateValueAndValidity()
 		} else {
 			this.addJobNumberForm.removeControl('jobNumber');
-			// this.addJobNumberForm.get('jobNumber').setErrors(null)
-			// this.addJobNumberForm.get('jobNumber').updateValueAndValidity()
 		}
 
 		console.log(

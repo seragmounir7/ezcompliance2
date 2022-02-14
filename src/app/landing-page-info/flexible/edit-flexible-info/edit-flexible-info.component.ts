@@ -22,7 +22,6 @@ export class EditFlexibleInfoComponent implements OnInit {
 	myId: boolean;
 	Is_subMod: boolean;
 	isEdit = false;
-	// data: any;
 	enum: any;
 	subId: any;
 	flexibleData: any;
@@ -50,7 +49,6 @@ export class EditFlexibleInfoComponent implements OnInit {
 		this.flexibleDetail = this.fb.group({
 			title: ['', Validators.required],
 			description: ['', Validators.required],
-			// uploadImage: ['', Validators.required],
 			mode: 'Flexible',
 			arrObj: this.fb.array([])
 		});

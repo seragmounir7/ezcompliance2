@@ -41,7 +41,6 @@ export class RegulatorComponent implements OnInit {
 	getAllRegulator(field = '', value = '') {
 		this.logicalFormInfo.getAllRegulator(field, value).subscribe((res) => {
 			console.log('getAllRegulator=>', res);
-			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -50,8 +49,6 @@ export class RegulatorComponent implements OnInit {
 			this.ELEMENT_DATA = data;
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
-			// this.dataSource.sort = this.sort;
-			//  this.task = res.data.subComponents;
 		});
 	}
 

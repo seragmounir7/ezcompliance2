@@ -62,7 +62,6 @@ export class SafetyModulesComponent implements OnInit {
 	getSafety() {
 		this.mode = 'Safety';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-			//  this.safetyData = data.data[0];
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
 			const safetyData = res.data[0].subModules;

@@ -150,7 +150,6 @@ export class EditDifferentWorkComponent implements OnInit {
 	editSubModule() {
 		if (this.data.action == 'edit') {
 			const submodulesData = {
-				// subTitle: this.SubWorkDetail.controls.subTitle.value,
 				moduleId: this.data.EditData._id,
 				title: this.add().at(0).get('title')?.value,
 				fileUrl: '',

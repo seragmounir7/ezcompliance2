@@ -54,9 +54,6 @@ export class AddRoleComponent implements OnInit {
 					this.dialogRef.close('true');
 				});
 		}
-
-		// Swal.fire('Added Successfully')
-		// this.dialogRef.close();
 	}
 	close() {
 		this.dialogRef.close();

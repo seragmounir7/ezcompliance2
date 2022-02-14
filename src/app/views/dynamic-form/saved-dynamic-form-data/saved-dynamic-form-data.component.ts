@@ -323,12 +323,9 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			sessionStorage.getItem('type')
 		);
 		this.setTitle.setTitle('WHS-Saved Dynamic Forms');
-		// this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
 		this.getAllJobNumber();
 		if (this.savedFormData.type == 'add') {
 			this.type = 'add';
-			// if(this.dynamicFormsService.formType =='add'){
-			// this.formNameRecieved = this.dynamicFormsService.formTitle;
 			this.formNameRecieved = sessionStorage.getItem('formTitle');
 			for (let i = 0; i < this.totalModels.length; i++) {
 				const modelFields: Array<field> = [];
@@ -340,11 +337,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			}
 		}
 		if (this.savedFormData.type == 'add') {
-			// if(this.dynamicFormsService.formType =='edit'){
-			// this.formNameRecieved = this.dynamicFormsService.formTitle;
 			this.type = 'add';
 
-			// this.formIdRec=this.dynamicFormsService.formIdEdit;
 			this.formIdRec = this.savedFormData.id;
 			void this.spinner.show();
 			this.dynamicFormsService
@@ -389,53 +383,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					void this.spinner.hide();
 				});
 		}
-
-		// this.route
-		// .queryParams
-		// .subscribe(params => {
-		//   console.log("params",params['data'].type);
-
-		//   if(params['type']=='add'){
-		//     this.type = 'add';
-		//     this.formNameRecieved = params['formName'];
-
-		//     console.log( this.formNameRecieved);
-		//   }
-		//  if(params['type']=='edit'){
-		//   this.type = 'edit';
-		//   this.formIdRec=params['formId'];
-		//   void this.spinner.show();
-		//    this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
-		//      console.log("form=>",res);
-		//      this.formNameRecieved = res.data.title;
-		//      this.model.attributes = res.data.htmlObject;
-		//      void this.spinner.hide();
-		//    })
-		//  }
-		//  if(params['type']=='view'){
-		//   this.type = 'view';
-		//   void this.spinner.show();
-		//    this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
-		//      console.log("form=>",res);
-		//      this.report = true;
-		//      this.model.attributes = res.data.htmlObject;
-		//      void this.spinner.hide();
-		//    })
-		//  }
-
-		// });
-		//  this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
-
-		// this.route.params.subscribe( params =>{
-		//   console.log(params);
-		//   this.us.getDataApi('/admin/getFormById',{id:params.id}).subscribe(r=>{
-		//     console.log(r);
-		//     this.model = r['data'];
-		//   });
-		// });
-
-		// this.model = this.cs.data;
-		// console.log(this.model.data);
 	}
 	addDragAndDropRow(position, index) {
 		const modelFields: Array<field> = [];
@@ -521,47 +468,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 
 			console.log('event.data.type ', event.data.type);
 
-			// if (event.data.type == 'table') {
-			//   let tablendex = 0;
-			//   this.tableIndexMap.clear();
-
-			//   this.model.attributes.forEach((element, i) => {
-			//     console.log(element.type);
-
-			//     if (element.type == 'table') {
-			//       console.log(element.type);
-
-			//       this.tableIndexMap.set(i, tablendex);
-			//       tablendex++;
-			//     }
-			//   });
-
-			//   let tempRow = [
-			//     ['', '', '', ''],
-			//     ['', '', '', ''],
-			//     ['', '', '', ''],
-			//     ['', '', '', ''],
-			//   ];
-
-			//   this.rows.splice(this.tableIndexMap.get(event.index), 0, tempRow);
-			// }
-
 			console.log(this.rows);
-
-			// if(event.data.type =="table"){
-
-			// this.rows.push(tempRows)
-
-			// }
-			// let tablendex=0;
-			// this.tableIndexMap.clear();
-			//     this.model.attributes.forEach((element,i )=> {
-			//   if(element.type == 'table'){
-			//     index++;
-			//     this.tableIndexMap.set(i,index);
-			//     ///this.rows.push(tempRows)
-			//   }
-			// });
 
 			// console.log('table Map', this.tableIndexMap);
 		}
@@ -599,9 +506,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					this.rows.splice(index, 1);
 				}
 				this.model[j].attributes.splice(i, 1);
-
-				// let index = this.tableIndexMap.get(i);
-				// this.rows.splice();
 			}
 		});
 
@@ -667,18 +571,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 	updateForm() {
 		const input = new FormData();
-		//   input.append('id', this.model._id);
-		//  input.append('name', this.model.name);
-		//input.append('description', this.model.description);
-		//  input.append('bannerImage', this.model.theme.bannerImage);
-		//  input.append('bgColor', this.model.theme.bgColor);
-		// input.append('textColor', this.model.theme.textColor);
 		input.append('attributes', JSON.stringify(this.model.attributes));
-
-		// this.us.putDataApi('/admin/updateForm',input).subscribe(r=>{
-		//   console.log(r);
-		//   Swal.fire('Success','App updated successfully','success');
-		// });
 	}
 
 	initReport() {
@@ -728,22 +621,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			}
 			this.formData.push(temp);
 		}
-		// console.log('formData', this.formData);
-
-		// let input = {
-		//   id:this.model._id
-		// }
-		// this.us.getDataApi('/admin/allFilledForms',input).subscribe(r=>{
-		//   this.reports = r.data;
-		//   console.log('reports',this.reports);
-		//   this.reports.map(records=>{
-		//     return records.attributes.map(record=>{
-		//       if(record.type=='checkbox'){
-		//         record.value = record.values.filter(r=>r.selected).map(i=>i.value).join(',');
-		//       }
-		//     })
-		//   });
-		// });
 	}
 
 	toggleValue(item) {
@@ -838,15 +715,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		let index = 0;
 		console.log('SignaturePad', this.SignaturePad.toArray());
 		console.log('SignaturePadArr', this.SignaturePad.toArray()[0]);
-		// this.SignaturePad.changes.subscribe((item: QueryList<SignaturePad>) => {
-		//   console.log("item1", item, item.toArray());
-		//   item.toArray().forEach((x, i) => {
-		//     console.log("item2", x);
-
-		//     x.fromDataURL(this.model[0].attributes[i].value)
-
-		//   })
-		// })
 		this.SignaturePad.changes.subscribe((item: QueryList<SignaturePad>) => {
 			this.model[0].attributes.forEach((element, i) => {
 				if (element.type == 'signature') {
@@ -928,15 +796,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.model[j].attributes[i].tableRows.forEach((item) => {
 			item.push('');
 		});
-
-		// console.log(this.tableIndexMap);
-
-		// console.log('add col', i);
-		// let index = this.tableIndexMap.get(i);
-		// let tempRow = this.rows[index];
-		// tempRow.forEach((row) => {
-		//   row.push('');
-		// });
 	}
 	removeCol(j, i) {
 		if (
@@ -948,16 +807,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				item.pop();
 			});
 		}
-		// let index = this.tableIndexMap.get(i);
-
-		// console.log('remove col', i);
-		// let tempRow = this.rows[index];
-
-		// if (tempRow[0].length > 1) {
-		//   tempRow.forEach((row) => {
-		//     row.pop();
-		//   });
-		// }
 	}
 	addRow(j, i) {
 		const arr = [];
@@ -969,18 +818,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			arr.push('');
 		}
 		this.model[j].attributes[i].tableRows.push(arr);
-		// console.log('add row', i);
-		// let index = this.tableIndexMap.get(i);
-		// let tempRow = this.rows[index];
-
-		// let arr = [];
-		// for (let i = 0; i < tempRow[0].length; i++) {
-		//   arr.push('');
-		// }
-		// this.rows[index].push(arr);
 	}
 	removeRow(j, i) {
-		// let index = this.tableIndexMap.get(i);
 		if (this.model[j].attributes[i].tableRows.length > 1)
 			this.model[j].attributes[i].tableRows.pop();
 	}
@@ -1036,12 +875,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					check: this.isHidden,
 					formId: this.mainFormId,
 					formCategoryId: this.formCategories._id
-
-					// "formId": "61ce9d44fcd37d281059e302"
-					// "title": "dynamic form",
-					// "htmlObject": [],
-					// "configure": [],
-					// "frequency": "yearly"
 				};
 				console.log('data', data);
 

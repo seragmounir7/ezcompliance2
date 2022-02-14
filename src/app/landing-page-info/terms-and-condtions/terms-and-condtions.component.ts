@@ -64,7 +64,6 @@ export class TermsAndCondtionsComponent implements OnInit {
 	getTerms() {
 		this.mode = 'Terms';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-			//  this.termData = data.data[0];
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
 			const termData = res.data[0].subModules;

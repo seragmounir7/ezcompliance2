@@ -48,13 +48,6 @@
 						<div class="row">
 							<div class="my-3 col">
 								<label class="form-label">Site Name</label>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="siteName"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -63,13 +56,7 @@
 							</div>
 							<div class="my-3 col">
 								<label class="form-label">Customer Name</label>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="CustomerName"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
@@ -80,13 +67,7 @@
 						<div class="row">
 							<div class="my-3 col-2">
 								<label class="form-label">Street Number</label>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="StreetNumber"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
@@ -95,13 +76,7 @@
 							</div>
 							<div class="my-3 col-4">
 								<label class="form-label">Street Address</label>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="StreetAddress"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
@@ -110,13 +85,7 @@
 							</div>
 							<div class="my-3 col-4">
 								<label class="form-label">Suburb</label>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="Suburb"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
@@ -137,16 +106,6 @@
 									>
 										{{state.title}}
 									</option>
-									<!-- <option selected hidden>Select</option>
-                <option value="NSW">NSW</option>
-                <option value="ACT">ACT</option>
-                <option value="QLD">QLD</option>
-                <option value="NT">NT</option>
-                <option value="SA">SA</option>
-                <option value="NZ">NZ</option>
-                <option value="TAS">TAS</option>s
-                <option value="VIC">VIC</option>
-                <option value="WA">WA</option> -->
 								</select>
 							</div>
 						</div>
@@ -156,13 +115,6 @@
 								<label class="form-label"
 									>Customer Contact</label
 								>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="CustomerContact"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -173,13 +125,7 @@
 								<label class="form-label"
 									>Customer Contact Phone</label
 								>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="CustomerContactPhone"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
@@ -190,13 +136,6 @@
 						<div class="row">
 							<div class="my-3 col-4">
 								<label class="form-label">Customer Email</label>
-								<!-- <select
-                  class="form-select form-control col"
-                  id="CustomerEmail"
-                  aria-label="Default select example"
-                >
-                  <option selected hidden>Select</option>
-                </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -220,21 +159,6 @@
 									</option>
 								</select>
 							</div>
-							<!-- <div class="my-3 col-6">
-                <label class="form-label"
-                  >Project Manager</label
-                >
-                <select
-                  class="form-select form-control col"
-                  aria-label="Default select example"
-                  formControlName="projectManager"
-                  (change)="setProjectManager('projectManager',$event)"
-                >
-                  <option selected hidden>Select</option>
-                  <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
-                
-                </select>
-              </div> -->
 						</div>
 					</div>
 					<div
@@ -514,10 +438,9 @@
 											border: 1px solid rgb(149 162 173);
 										"
 									>
-  <span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
-                <h4>{{ item.placeholder }}</h4> </span>
-              </textarea
-									>
+                                     <span *ngIf="item.required && !item.value && submitBtn" class="invalid-feedback">
+                                     <h4>{{ item.placeholder }}</h4> </span>
+                                    </textarea>
 								</div>
 								<div
 									*ngIf="item.type == 'file'"
@@ -586,7 +509,6 @@
 											{{ v.label }}
 										</option>
 									</select>
-									<!-- <small class="form-text text-muted">{{item.description}}</small> -->
 								</div>
 
 								<div
@@ -768,13 +690,11 @@
 															scope="col"
 															*ngFor="let row of item.tableHeading;let l=index"
 														>
-															<!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]" (change)="changeValueTH($event,i,j,l)" [ngModelOptions]="{ standalone: true }"/> -->
 															<input
 																class="form-control tableHeadings"
 																type="text"
 																placeholder="heading"
 															/>
-															<!-- <input class="form-control" type="text" placeholder="heading" [value]="item.tableHeading[l]" (change)="changeValueTH($event,i,j,l)"/> -->
 														</th>
 													</tr>
 												</thead>
@@ -1018,7 +938,6 @@
 											{{ v.label }}
 										</option>
 									</select>
-									<!-- <small class="form-text text-muted">{{item.description}}</small> -->
 								</div>
 
 								<div
@@ -1076,29 +995,12 @@
 										</label>
 									</div>
 								</div>
-								<!-- <div
-                *ngIf="item.type == 'button'"
-                class="btn-cont"
-                class="col mr-1"
-              >
-                <input
-                  type="{{ item.subtype }}"
-                  (click)="submit()"
-                  value="{{ item.label }}"
-                  class="btn btn-primary"
-                  id="{{ item.name }}"
-                />
-              </div> -->
 							</div>
 						</ng-template>
 					</div>
 					<div class="btn btn-primary mt-4" (click)="addForm()">
 						Submit
 					</div>
-					<!-- 
-          <p (click)="showData()" class="marginT60 pointer">
-            Show developer data
-          </p> -->
 				</div>
 			</form>
 		</div>

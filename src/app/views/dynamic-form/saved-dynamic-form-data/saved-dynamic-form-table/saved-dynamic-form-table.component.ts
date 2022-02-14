@@ -52,8 +52,6 @@ export class SavedDynamicFormTableComponent implements OnInit {
 
 		console.log('asdfghj', this.formId);
 
-		// this.isHistory = this.router.url.includes('dynamic/savedDynamicForm/history');
-		// console.log(this.isHistory);
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
 				.pipe(
@@ -77,10 +75,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			this.getSavedForm();
 		}
 	}
-	ngAfterViewInit() {
-		// this.tempArray.paginator = this.paginator;
-		// this.tempArray.sort = this.sort;
-	}
+	ngAfterViewInit() {}
 	delete(item) {
 		Swal.fire({
 			title: 'Are you sure?',

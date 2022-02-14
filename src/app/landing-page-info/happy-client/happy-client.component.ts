@@ -69,7 +69,6 @@ export class HappyClientComponent implements OnInit {
 			this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
 			this.dataSources.paginator = this.paginator;
 			this.dataSources.sort = this.sort;
-			// this.happyClientData = data.data[0];
 		});
 	}
 

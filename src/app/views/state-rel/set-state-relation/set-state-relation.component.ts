@@ -20,105 +20,12 @@ import Swal from 'sweetalert2';
 })
 export class SetStateRelationComponent implements OnInit {
 	setStatesDetail!: FormGroup;
-	// allContrlActReq=[];
-	// highRiskData: any = [];
-	// codeOfPract: any = [];
-	// licenseAndQualificationData: any = [];
-	// licenceCatAll: any = [];
 
 	StatesData: any = [];
 	Jurisdiction: any = [];
 	COP: any = [];
 	SafetyData: any = [];
 	regulator = [];
-	// task: any = [];
-	// riskLevel='';
-	// residuleRiskL='';
-	// PPEselection = [
-	//   { label: 'Disposable dust mask', value: '' },
-	//   { label: 'Dust Mas', value: '' },
-	//   { label: 'Face shield', value: '' },
-	//   { label: 'Full face respirator', value: '' },
-	//   { label: 'Gttors', value: '' },
-	//   { label: 'Half face respirator', value: '' },
-	//   { label: 'Hard Hat', value: '' },
-	//   { label: 'Hearing protection', value: '' },
-	//   { label: 'High-Vis Clothing', value: '' },
-	//   { label: 'Lock Out Tags', value: '' },
-	//   { label: 'Long sleeve/Long pants', value: '' },
-	//   { label: 'Out of Service Tags', value: '' },
-	//   { label: 'Protective gloves', value: '' },
-	//   { label: 'Rescue kit', value: '' },
-	//   { label: 'Safety boots', value: '' },
-	//   { label: 'Safety glasses', value: '' },
-	//   { label: 'Sun Screen', value: '' },
-	//   { label: 'torch', value: '' },
-	//   { label: 'Wide Brim Hat', value: '' },
-	// ];
-
-	// licenseAndQualification = [
-	//   { label: 'Open Cable Licence', value: '' },
-	//   { label: 'White Card', value: '' },
-	//   { label: 'EWP Licence', value: '' },
-	//   { label: 'Working At Heights', value: '' },
-	//   { label: 'Security Licence', value: '' },
-	//   { label: 'Asbestos Awarness', value: '' },
-	//   { label: 'Working In Confined Space', value: '' },
-	// ];
-
-	// highRiskConstruction2 = [
-	//   {
-	//     label: 'Working in or near trenches or shafts deeper than 1.5metres',
-	//     value: '',
-	//   },
-	//   { label: 'Work in or near a confined space', value: '' },
-	//   {
-	//     label:
-	//       'Work in an area that may have a contaminated or flammable atmosphere',
-	//     value: '',
-	//   },
-	//   { label: 'Working around or near mobile plant', value: '' },
-	//   { label: 'Work with near or near asbestos', value: '' },
-	//   { label: 'Working with hazardous substances', value: '' },
-	//   { label: 'Working with or near tilt-up/precast concrete', value: '' },
-	//   { label: 'Risk of falls higher than 2 metres', value: '' },
-	//   {
-	//     label: 'Working near on or adjacent to a road or rail corridor',
-	//     value: '',
-	//   },
-	//   { label: 'Working on or near telecommunication tower', value: '' },
-	//   { label: 'Working on or near telecommunication tower', value: '' },
-	//   { label: 'Work near explosives', value: '' },
-	//   {
-	//     label:
-	//       'Work in or near water or other liquid that involves a risk of drowning',
-	//     value: '',
-	//   },
-	//   { label: 'Demolition of load-bearing structure', value: '' },
-	//   { label: 'Diving work', value: '' },
-	// ];
-
-	// PPEselection2 = [
-	//   { label: 'Disposable dust mask', value: '' },
-	//   { label: 'Dust Mas', value: '' },
-	//   { label: 'Face shield', value: '' },
-	//   { label: 'Full face respirator', value: '' },
-	//   { label: 'Gttors', value: '' },
-	//   { label: 'Half face respirator', value: '' },
-	//   { label: 'Hard Hat', value: '' },
-	//   { label: 'Hearing protection', value: '' },
-	//   { label: 'High-Vis Clothing', value: '' },
-	//   { label: 'Lock Out Tags', value: '' },
-	//   { label: 'Long sleeve/Long pants', value: '' },
-	//   { label: 'Out of Service Tags', value: '' },
-	//   { label: 'Protective gloves', value: '' },
-	//   { label: 'Rescue kit', value: '' },
-	//   { label: 'Safety boots', value: '' },
-	//   { label: 'Safety glasses', value: '' },
-	//   { label: 'Sun Screen', value: '' },
-	//   { label: 'torch', value: '' },
-	//   { label: 'Wide Brim Hat', value: '' },
-	// ];
 	ELEMENT_DATA = [];
 	/////////////mat table////////////////
 	displayedColumns: string[] = ['index', 'title', 'edit'];
@@ -128,7 +35,6 @@ export class SetStateRelationComponent implements OnInit {
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
-	// @ViewChild('risk') risk: any;
 	@ViewChildren('risk') Risk: QueryList<any>;
 
 	constructor(
@@ -146,18 +52,9 @@ export class SetStateRelationComponent implements OnInit {
 			safe: this.fb.array([]),
 			COP: this.fb.array([]),
 			regulator: this.fb.array([])
-			// contrActReq: this.fb.array([]),
-			// riskLevel: this.fb.array([]),
-			// residualRisk: this.fb.array([]),
 		});
 
 		this.getStates();
-		// this.getAllHighRisk();
-		// this.getAllLicence();
-		// this.getAllCategories();
-		// this.getAllPPE();
-		// this.getAllHazard();
-		// this.getAllContrActReq();
 	}
 
 	addActionJurisdiction() {
@@ -180,26 +77,6 @@ export class SetStateRelationComponent implements OnInit {
 			this.regulatorFA().push(this.regulatorFG());
 		}
 	}
-	// addActionIdentifyHazrds() {
-	//   {
-	//     this.identifyHazrdsFA().push(this.identifyHazrdsFG());
-	//   }
-	// }
-	// addActionRiskLevel() {
-	//   {
-	//     this.riskLevelFA().push(this.riskLevelFG());
-	//   }
-	// }
-	// addActionResiRiskLevel() {
-	//   {
-	//     this.residlRiskLevelFA().push(this.residlRiskLevelFG());
-	//   }
-	// }
-	// addActionCOP() {
-	//   {
-	//     this.addCOP().push(this.newActionCOP());
-	//   }
-	// }
 	jurisdictionFA(): FormArray {
 		return this.setStatesDetail.get('jurisdiction') as FormArray;
 	}
@@ -212,19 +89,6 @@ export class SetStateRelationComponent implements OnInit {
 	regulatorFA(): FormArray {
 		return this.setStatesDetail.get('regulator') as FormArray;
 	}
-	// identifyHazrdsFA(): FormArray {
-	//   return this.setStatesDetail.get('identifyHazrds') as FormArray;
-	// }
-
-	// addCOP(): FormArray {
-	//   return this.setStatesDetail.get('codeOfPract') as FormArray;
-	// }
-	// riskLevelFA(): FormArray {
-	//   return this.setStatesDetail.get('riskLevel') as FormArray;
-	// }
-	// residlRiskLevelFA(): FormArray {
-	//   return this.setStatesDetail.get('residualRisk') as FormArray;
-	// }
 	jurisdictionFG(): FormGroup {
 		return this.fb.group({
 			jurisdictionkArr: ['']
@@ -245,27 +109,6 @@ export class SetStateRelationComponent implements OnInit {
 			contrActReqArr: ['']
 		});
 	}
-	// identifyHazrdsFG(): FormGroup {
-	//   return this.fb.group({
-	//     hazardsArr: [''],
-	//   });
-	// }
-
-	// riskLevelFG(): FormGroup {
-	//   return this.fb.group({
-	//     riskLevel: [''],
-	//   });
-	// }
-	// residlRiskLevelFG(): FormGroup {
-	//   return this.fb.group({
-	//     resiRiskLevel: [''],
-	//   });
-	// }
-	// newActionCOP(): FormGroup {
-	//   return this.fb.group({
-	//     copArr: [''],
-	//   });
-	// }
 
 	onFormSubmit() {
 		console.log(this.setStatesDetail);
@@ -310,18 +153,6 @@ export class SetStateRelationComponent implements OnInit {
 			this.regulator = res.data;
 		});
 	}
-	// getAllContrActReq()  {
-	//   this.logicalFormInfo.getAllContrlActReq().subscribe((res:any) => {
-	//     console.log('getAllHazards=>', res);
-	//     this.allContrlActReq = res.data;
-	//   });
-	// }
-	// getAllCategories() {
-	//   this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-	//     console.log('getAllLicenceCat=>', res);
-	//     this.licenceCatAll = res.data;
-	//   });
-	// }
 	setRelation_2(id) {
 		this.router.navigate(
 			['/admin/stateRel/addState'],
@@ -391,20 +222,4 @@ export class SetStateRelationComponent implements OnInit {
 			});
 		});
 	}
-	// categorySel(catArr) {
-	//   this.licenseAndQualificationData = [];
-
-	//   console.log(catArr);
-	//   catArr.forEach((element) => {
-	//     this.licenseAndQual.forEach((item) => {
-	//       if (element === item.licenceCategoryId._id) {
-	//         this.licenseAndQualificationData.push(item);
-	//       }
-	//     });
-	//   });
-	//   console.log(
-	//     ' this.licenseAndQualificationData',
-	//     this.licenseAndQualificationData
-	//   );
-	// }
 }

@@ -104,7 +104,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					this.addFiled();
 				});
 		}
-		// this.addFiled();
 		this.filteredOptions2 = this.subcontractDetails.controls.LicenceName.valueChanges.pipe(
 			startWith(''),
 			debounceTime(800),
@@ -190,15 +189,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			);
 			console.log(element.valueChanges);
 		}
-		// this.licenceValueChanges.map(x => {
-		//   x.pipe(
-		//     startWith(''),
-		//     debounceTime(400),
-		//     tap(value => console.log('value', value)),
-		//     map(value => (typeof value === 'string' ? value : value.fullName)),
-		//     map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
-		//   )
-		// })
 	}
 	private _filter(name: string): any[] {
 		const filterValue = name.toLowerCase();
@@ -271,9 +261,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		this.licenceInfo.getSubcontract(this.id).subscribe((res: any) => {
 			console.log('dataId=>', res.data);
 
-			// res.data.licenceAndQualifications.forEach(ele => {
-			//   this.addFiled1(ele);
-			// });
 			res.data.licenceAndQualifications.length > 0
 				? res.data.licenceAndQualifications.forEach((ele) => {
 						this.addFiled1(ele);
@@ -281,10 +268,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				: this.addFiled();
 
 			this.subcontractDetails.patchValue({
-				// LicenceName: res.data.licenceAndQualifications.LicenceName,
-				// LicenceNumber: res.data.licenceAndQualifications.LicenceNumber,
-				// TrainingQrginisation: res.data.licenceAndQualifications.TrainingQrginisation,
-				// ExpiryDate: res.data.licenceAndQualifications.ExpiryDate,
 				companyName: res.data.companyName,
 				phone: res.data.phone,
 				fax: res.data.fax,
@@ -302,9 +285,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 	}
 	onFormSubmit() {
 		this.submitted = true;
-		// if (!this.empDetails.controls.valid) {
-		//   this.formData='formfield'
-		// }
 
 		const licenceArr = () => {
 			this.addLicence().length;

@@ -275,8 +275,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 						fullName ? this._filter(fullName) : this.empData.slice()
 					)
 				);
-				// let o = new Object(ctrlName,filter)
-				// Object.assign(obj,{...o})
 				this.obj[ctrlName] = filter;
 			});
 			console.log(this.obj);
@@ -447,7 +445,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.minDate = res.data.date;
 			this.selectedImage = res.data.fileUpload;
 
-			// this.uploadFile=this.selectedImage?.split(/-/)[1];
 			this.uploadFile = this.selectedImage?.slice(
 				this.selectedImage.indexOf('-') + 1
 			);

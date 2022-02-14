@@ -84,7 +84,6 @@ export class EditTeamInfoComponent implements OnInit {
 		if (this.data.action == 'edit') {
 			this.Update = true;
 			console.log('data to patch=>', this.data);
-			// this.Image1 = this.data.EditData.imageUrl,
 			this.Image = this.data.EditData.fileUrl;
 			console.log('1', this.Image);
 			console.log('1', this.Image1);

@@ -22,7 +22,6 @@ export class AddSafetyModuleComponent implements OnInit {
 	myId: boolean;
 	Is_subMod: boolean;
 	isEdit = false;
-	// data: any;
 	enum: any;
 	subId: any;
 	safetyData: any;

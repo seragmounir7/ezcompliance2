@@ -74,15 +74,6 @@
 		<ng-container matColumnDef="Action">
 			<th mat-header-cell *matHeaderCellDef>Action</th>
 			<td mat-cell *matCellDef="let element">
-				<!-- <i class="fa fa-eye "aria-hidden="true" title="view"></i> -->
-				<!-- <button [routerLink]="element.link" mat-icon-button aria-label="Example icon button with a delete icon">
-          <mat-icon>visibility</mat-icon>
-        </button>
-        <a (click)="goTo(element.title)">
-          <span style="cursor: pointer !important;">
-              <mat-icon >launch</mat-icon>
-          </span>
-      </a> -->
 				<div style="display: flex; justify-content: space-around">
 					<span
 						class="material-icons"
@@ -98,9 +89,6 @@
 					>
 						print
 					</span>
-					<!-- <span class="material-icons" matTooltip="Delete" (click)="delete(element._id)" >
-            delete
-        </span> -->
 				</div>
 			</td>
 		</ng-container>

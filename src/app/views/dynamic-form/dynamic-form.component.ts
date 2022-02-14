@@ -225,32 +225,14 @@ export class DynamicFormComponent implements OnInit {
 				['', '', '', '']
 			]
 		}
-		// {
-		//   type: 'button',
-		//   icon: 'fa-paper-plane',
-		//   subtype: 'submit',
-		//   label: 'Submit',
-		// },
 	];
 	type: string = '';
 	formIdRec = '';
 	rows = [];
 	formData = [];
 	tableIndexMap = new Map();
-	//   modelFields:Array<field>=[];
-	//  modelFields:Array<field>=[];
 
 	model: any = [
-		// {
-		//   name: '',
-		//   description: '',
-		//   theme: {
-		//     bgColor: '#ffffff',
-		//     textColor: '#555555',
-		//     bannerImage: '',
-		//   },
-		//   attributes: this.modelFields0,
-		// },
 		// {
 		//   name: '',
 		//   description: '',
@@ -340,12 +322,9 @@ export class DynamicFormComponent implements OnInit {
 			}
 		}
 		if (sessionStorage.getItem('type') == 'edit') {
-			// if(this.dynamicFormsService.formType =='edit'){
 			this.formNameRecieved = sessionStorage.getItem('formTitle');
-			// this.formNameRecieved = this.dynamicFormsService.formTitle;
 			this.type = 'edit';
 
-			// this.formIdRec=this.dynamicFormsService.formIdEdit;
 			this.formIdRec = sessionStorage.getItem('formId');
 			void this.spinner.show();
 			this.dynamicFormsService
@@ -357,24 +336,18 @@ export class DynamicFormComponent implements OnInit {
 					this.frequency = res.data.frequency;
 					this.isHidden = res.data.check;
 					this.formCategories = res.data.formCategoryId;
-					// this.configData=res.data.configure[0];
 					this.riskAssessmentFb.patchValue(res.data.configure[0]);
 					res.data.htmlObject.forEach((item) => {
 						this.model.push(item);
 					});
 
-					// this.formNameRecieved = res.data.title;
-					// this.model.attributes = res.data.htmlObject;
 					void this.spinner.hide();
 				});
 		}
 		if (sessionStorage.getItem('type') == 'view') {
 			this.report = true;
-			// if(this.dynamicFormsService.formType =='view'){
-			// this.formNameRecieved = this.dynamicFormsService.formTitle;
 			this.formNameRecieved = sessionStorage.getItem('formTitle');
 			this.type = 'view';
-			// this.formIdRec=this.dynamicFormsService.formIdEdit;
 			this.formIdRec = sessionStorage.getItem('formId');
 			void this.spinner.show();
 			this.dynamicFormsService
@@ -383,7 +356,6 @@ export class DynamicFormComponent implements OnInit {
 					console.log('formView=>', res);
 					this.formNameRecieved = res.data.title;
 					this.model = res.data.htmlObject;
-					// this.riskAssessmentFb.patchValue(res.data.configure[0])
 					this.previewform.patchValue(res.data.configure[0]);
 					this.isHidden = res.data.check;
 					this.formCategories = res.data.formCategoryId;
@@ -391,53 +363,6 @@ export class DynamicFormComponent implements OnInit {
 					void this.spinner.hide();
 				});
 		}
-
-		// this.route
-		// .queryParams
-		// .subscribe(params => {
-		//   console.log("params",params['data'].type);
-
-		//   if(params['type']=='add'){
-		//     this.type = 'add';
-		//     this.formNameRecieved = params['formName'];
-
-		//     console.log( this.formNameRecieved);
-		//   }
-		//  if(params['type']=='edit'){
-		//   this.type = 'edit';
-		//   this.formIdRec=params['formId'];
-		//   void this.spinner.show();
-		//    this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
-		//      console.log("form=>",res);
-		//      this.formNameRecieved = res.data.title;
-		//      this.model.attributes = res.data.htmlObject;
-		//      void this.spinner.hide();
-		//    })
-		//  }
-		//  if(params['type']=='view'){
-		//   this.type = 'view';
-		//   void this.spinner.show();
-		//    this.dynamicFormsService.getFormById(params['formId']).subscribe(res=>{
-		//      console.log("form=>",res);
-		//      this.report = true;
-		//      this.model.attributes = res.data.htmlObject;
-		//      void this.spinner.hide();
-		//    })
-		//  }
-
-		// });
-		//  this.formNameRecieved= this.dynamicFormsService.formNameRecieved;
-
-		// this.route.params.subscribe( params =>{
-		//   console.log(params);
-		//   this.us.getDataApi('/admin/getFormById',{id:params.id}).subscribe(r=>{
-		//     console.log(r);
-		//     this.model = r['data'];
-		//   });
-		// });
-
-		// this.model = this.cs.data;
-		// console.log(this.model.data);
 	}
 	addDragAndDropRow(position, index) {
 		const modelFields: Array<field> = [];
@@ -523,49 +448,7 @@ export class DynamicFormComponent implements OnInit {
 
 			console.log('event.data.type ', event.data.type);
 
-			// if (event.data.type == 'table') {
-			//   let tablendex = 0;
-			//   this.tableIndexMap.clear();
-
-			//   this.model.attributes.forEach((element, i) => {
-			//     console.log(element.type);
-
-			//     if (element.type == 'table') {
-			//       console.log(element.type);
-
-			//       this.tableIndexMap.set(i, tablendex);
-			//       tablendex++;
-			//     }
-			//   });
-
-			//   let tempRow = [
-			//     ['', '', '', ''],
-			//     ['', '', '', ''],
-			//     ['', '', '', ''],
-			//     ['', '', '', ''],
-			//   ];
-
-			//   this.rows.splice(this.tableIndexMap.get(event.index), 0, tempRow);
-			// }
-
 			console.log(this.rows);
-
-			// if(event.data.type =="table"){
-
-			// this.rows.push(tempRows)
-
-			// }
-			// let tablendex=0;
-			// this.tableIndexMap.clear();
-			//     this.model.attributes.forEach((element,i )=> {
-			//   if(element.type == 'table'){
-			//     index++;
-			//     this.tableIndexMap.set(i,index);
-			//     ///this.rows.push(tempRows)
-			//   }
-			// });
-
-			// console.log('table Map', this.tableIndexMap);
 		}
 	}
 
@@ -601,9 +484,6 @@ export class DynamicFormComponent implements OnInit {
 					this.rows.splice(index, 1);
 				}
 				this.model[j].attributes.splice(i, 1);
-
-				// let index = this.tableIndexMap.get(i);
-				// this.rows.splice();
 			}
 		});
 
@@ -623,7 +503,6 @@ export class DynamicFormComponent implements OnInit {
 		this.allJobNumbers.forEach((item) => {
 			if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
 				console.log('Id found', item);
-				// this.configData=item;
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
@@ -651,7 +530,6 @@ export class DynamicFormComponent implements OnInit {
 		this.allJobNumbers.forEach((item) => {
 			if (this.previewform.get('jobNumber').value === item._id) {
 				console.log('Id found', item);
-				// this.configData=item;
 				this.previewform.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
@@ -671,22 +549,10 @@ export class DynamicFormComponent implements OnInit {
 	}
 	updateForm() {
 		const input = new FormData();
-		//   input.append('id', this.model._id);
-		//  input.append('name', this.model.name);
-		//input.append('description', this.model.description);
-		//  input.append('bannerImage', this.model.theme.bannerImage);
-		//  input.append('bgColor', this.model.theme.bgColor);
-		// input.append('textColor', this.model.theme.textColor);
 		input.append('attributes', JSON.stringify(this.model.attributes));
-
-		// this.us.putDataApi('/admin/updateForm',input).subscribe(r=>{
-		//   console.log(r);
-		//   Swal.fire('Success','App updated successfully','success');
-		// });
 	}
 
 	initReport() {
-		//  console.log('model.attributes=>', this.model);
 		this.configData = { ...this.riskAssessmentFb.value };
 		console.log('config', this.configData);
 		console.log('hidden', this.isHidden);
@@ -735,21 +601,6 @@ export class DynamicFormComponent implements OnInit {
 			this.formData.push(temp);
 		}
 		// console.log('formData', this.formData);
-
-		// let input = {
-		//   id:this.model._id
-		// }
-		// this.us.getDataApi('/admin/allFilledForms',input).subscribe(r=>{
-		//   this.reports = r.data;
-		//   console.log('reports',this.reports);
-		//   this.reports.map(records=>{
-		//     return records.attributes.map(record=>{
-		//       if(record.type=='checkbox'){
-		//         record.value = record.values.filter(r=>r.selected).map(i=>i.value).join(',');
-		//       }
-		//     })
-		//   });
-		// });
 	}
 
 	toggleValue(item) {
@@ -780,63 +631,6 @@ export class DynamicFormComponent implements OnInit {
 
 		this.submitBtn = true;
 		const valid = true;
-		/* commenting for future use
-    console.log('this.model.attributes', this.model.attributes);
-    let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
-    validationArray.reverse().forEach((field, index) => {
-      console.log(field.label + '=>' + field.required + '=>' + field.value);
-      // if(field.required && !field.value && field.type != 'checkbox'){
-      //   console.log("field.required ",field.required );
-      //   console.log("!field.value",!field.value);
-      //   console.log("field",field);
-
-      //   Swal.fire('Error','Please enter '+field.label,'error');
-      //   valid = false;
-      //   return false;
-      // }
-      console.log(
-        'field.regex',
-        field.regex + 'field.label',
-        field.label + 'index',
-        index
-      );
-
-      if (field.required && field.regex) {
-        let regex = new RegExp(field.regex);
-        if (regex.test(field.value) == false) {
-          // Swal.fire('Error',field.errorText,'error');
-          // valid = false;
-          // return false;
-          this.regexErr[index] = true;
-        }
-      } else {
-        this.regexErr[index] = false;
-      }
-      if (field.required && field.type == 'checkbox') {
-        if (field.values.filter((r) => r.selected).length == 0) {
-          Swal.fire('Error', 'Please enterrr ' + field.label, 'error');
-          valid = false;
-          return false;
-        }
-      }
-    });
-    console.log(this.regexErr);
-
-    if (!valid) {
-      return false;
-    }
-    console.log('Save', this.model);
-    let input = new FormData();
-    input.append('formId', this.model._id);
-    input.append('attributes', JSON.stringify(this.model.attributes));*/
-		//////////////////upto this//////////
-		// this.us.postDataApi('/user/formFill',input).subscribe(r=>{
-		//   console.log(r);
-		//   Swal.fire('Success','You have contact sucessfully','success');
-		//   this.success = true;
-		// },error=>{
-		//   Swal.fire('Error',error.message,'error');
-		// });
 	}
 
 	ngAfterViewInit() {
@@ -879,15 +673,6 @@ export class DynamicFormComponent implements OnInit {
 		this.model[j].attributes[i].tableRows.forEach((item) => {
 			item.push('');
 		});
-
-		// console.log(this.tableIndexMap);
-
-		// console.log('add col', i);
-		// let index = this.tableIndexMap.get(i);
-		// let tempRow = this.rows[index];
-		// tempRow.forEach((row) => {
-		//   row.push('');
-		// });
 	}
 	removeCol(j, i) {
 		if (
@@ -899,16 +684,6 @@ export class DynamicFormComponent implements OnInit {
 				item.pop();
 			});
 		}
-		// let index = this.tableIndexMap.get(i);
-
-		// console.log('remove col', i);
-		// let tempRow = this.rows[index];
-
-		// if (tempRow[0].length > 1) {
-		//   tempRow.forEach((row) => {
-		//     row.pop();
-		//   });
-		// }
 	}
 	addRow(j, i) {
 		const arr = [];
@@ -920,18 +695,8 @@ export class DynamicFormComponent implements OnInit {
 			arr.push('');
 		}
 		this.model[j].attributes[i].tableRows.push(arr);
-		// console.log('add row', i);
-		// let index = this.tableIndexMap.get(i);
-		// let tempRow = this.rows[index];
-
-		// let arr = [];
-		// for (let i = 0; i < tempRow[0].length; i++) {
-		//   arr.push('');
-		// }
-		// this.rows[index].push(arr);
 	}
 	removeRow(j, i) {
-		// let index = this.tableIndexMap.get(i);
 		if (this.model[j].attributes[i].tableRows.length > 1)
 			this.model[j].attributes[i].tableRows.pop();
 	}

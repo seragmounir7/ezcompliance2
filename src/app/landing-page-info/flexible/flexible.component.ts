@@ -73,7 +73,6 @@ export class FlexibleComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		//  this.addAction();
 		this.getFlexible();
 		this.setTitle.setTitle('WHS-Flexible Complience');
 	}
@@ -91,8 +90,6 @@ export class FlexibleComponent implements OnInit {
 			this.dataSources = new MatTableDataSource(this.ELEMENTS_DATA);
 			this.dataSources.paginator = this.paginator;
 			this.dataSources.sort = this.sort;
-			// this.flexibleData = data.data[0];
-			// this.flexible = this.flexibleData.subModules[0].title;
 		});
 	}
 	editForm(id, name: boolean, i?: any) {

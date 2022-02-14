@@ -21,13 +21,10 @@ export class AddFaqComponent implements OnInit {
 	) {
 		this.portalDetails = this.fb.group({
 			title: ['', Validators.required]
-			//  faq: this.fb.array([]),
 		});
 	}
 
-	ngOnInit(): void {
-		// this.addAction();
-	}
+	ngOnInit(): void {}
 	addAction() {
 		{
 			this.add().push(this.newAction());
@@ -53,7 +50,6 @@ export class AddFaqComponent implements OnInit {
 		console.log(this.portalDetails.value);
 		const data = {
 			title: this.portalDetails.value
-			//  faq:this.portalDetails.get('faq').value
 		};
 		this.landingPageInfoService
 			.addPortal(this.portalDetails.value)

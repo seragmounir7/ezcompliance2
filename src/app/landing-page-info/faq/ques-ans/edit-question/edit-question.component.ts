@@ -33,7 +33,6 @@ export class EditQuestionComponent implements OnInit {
 			answer: [this.dataRec.answer, Validators.required],
 			portalId: [this.dataRec.portalId, Validators.required]
 		});
-		// this.getAllFaq();
 		this.getAllPortal();
 	}
 	getAllFaq() {

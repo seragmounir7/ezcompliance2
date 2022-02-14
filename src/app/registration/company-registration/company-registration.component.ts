@@ -55,7 +55,6 @@ export class CompanyRegistrationComponent implements OnInit {
 			console.log('AddProductComponent -> browser -> res', res);
 
 			this.selectedImage = res.files;
-			// this.HeaderInformation.get("uploadImage").patchValue(this.selectedImage)
 			console.log(
 				'AddProductComponent -> browse -> this.selectedImage',
 				this.selectedImage
@@ -63,7 +62,6 @@ export class CompanyRegistrationComponent implements OnInit {
 		});
 	}
 	onFormSubmit() {
-		// this.companyInfo.controls["file"].setValue(this.selectedImage);
 		console.log('this.companyInfo.value', this.companyInfo.value);
 		this.company
 			.addCompanyInfo(this.companyInfo.value)

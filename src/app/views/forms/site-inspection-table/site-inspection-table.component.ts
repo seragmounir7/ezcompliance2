@@ -9,6 +9,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
 	selector: 'app-site-inspection-table',
 	templateUrl: './site-inspection-table.component.html',
@@ -36,10 +37,13 @@ export class SiteInspectionTableComponent implements OnInit {
 		public router: Router,
 		private spinner: NgxSpinnerService,
 		private shared: RoleManagementSharedServiceService,
+		private setTitle: SetTitleService,
 		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
+		this.setTitle.setTitle('WHS-Site Inspection List');
+
 		this.isHistory = this.router.url.includes(
 			'/siteinspectiontable/history'
 		);
@@ -106,8 +110,6 @@ export class SiteInspectionTableComponent implements OnInit {
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				// this.tempArray.paginator = this.paginator;
-				// this.tempArray.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}
@@ -124,8 +126,6 @@ export class SiteInspectionTableComponent implements OnInit {
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				// this.tempArray.paginator = this.paginator;
-				// this.tempArray.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}

@@ -92,10 +92,6 @@
 							{{state.title}}
 						</option>
 					</select>
-					<!-- <span class="text-danger"
-              *ngIf="(subcontractDetails.state.touched || submitted) && subcontractDetails.state.errors?.required">
-              State is required
-            </span> -->
 				</div>
 
 				<div class="mb-3 mt-3 col-3">
@@ -107,9 +103,6 @@
 						formControlName="postCode"
 						class="form-control"
 					/>
-
-					<!-- <label for="exampleFormControlInput1" class="form-label">Mailing Address</label>
-            <textarea type="text" formControlName="mailingAddress" class="form-control" ></textarea> -->
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -242,10 +235,6 @@
 										type="file"
 										(change)="browser($event,filed)"
 									/>
-									<!-- <span class="text-danger"
-              *ngIf="(addLicence(filed).file.touched || submitted) && addLicence(filed).file.errors?.required">
-              Upload Licence is required
-          </span> -->
 								</div>
 							</div>
 

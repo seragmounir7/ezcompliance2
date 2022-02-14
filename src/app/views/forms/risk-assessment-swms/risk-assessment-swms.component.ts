@@ -351,22 +351,6 @@ export class RiskAssessmentSWMSComponent
 		if (this.id != 'form') {
 			this.getAssessmentByid(this.id);
 		} else {
-			// this.getAllJobTask();
-			// this.getAllPPE();
-			// this.getAllHighRisk();
-			// this.getAllLicence();
-			// this.getAllProjectMang();
-			// this.getAllJobNumber();
-			// this.getAllResidualRiskLevel();
-			// this.getAllStaff();
-			// this.getAllRiskLevel();
-			// this.getAllChemical();
-			// this.getAllHazard();
-			// this.getAllContrActReq();
-			// this.getAllRegulator();
-			// this.getAllSafe();
-			// this.getAllState();
-			// this.getAllJurisdiction();
 			allApis.subscribe((res: any[]) => {
 				console.log('forkjoin', res);
 				this.getAllJobTask(res[0]);
