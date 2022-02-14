@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/utils/services/auth.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
@@ -36,6 +37,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	dataUrl2: any;
 	StatesData: any = [];
 	selectedLogo: any;
+	userId: string;
 	constructor(
 		private fb: FormBuilder,
 		private activatedRoute: ActivatedRoute,
@@ -43,10 +45,12 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		private spinner: NgxSpinnerService,
 		public router: Router,
 		private upload: UploadFileService,
-		private licenceInfo: LogicalFormInfoService
+		private licenceInfo: LogicalFormInfoService,
+		private authService: AuthService
 	) {}
 
 	ngOnInit(): void {
+		this.authService.loginData$.subscribe((res) => (this.userId = res.id));
 		this.formData = this.fb.group({
 			companyName: ['', Validators.required],
 			phone: ['', Validators.required],
@@ -368,7 +372,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 
 		console.log('body=>', body);
 
-		this.subscript.addsubscription(body).subscribe(
+		this.subscript.updateCompanyDetails(body).subscribe(
 			(data) => {
 				console.log('data=>', data);
 				// this.signaturePad2.toDataURL();
@@ -385,7 +389,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		);
 	}
 	patchData() {
-		this.subscript.getsubscription(this.id).subscribe((data) => {
+		this.subscript.getCompanyDeatils().subscribe((data: any) => {
 			console.log('data=>', data);
 			// this.signaturePad.toDataURL();
 
@@ -400,21 +404,21 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 						this.addEquipFiled3(ele);
 				  })
 				: this.addEquipFiled2();
-			this.selectedLogo = data.data.customerDetails.companyLogo;
+			this.selectedLogo = data.data.companyLogo;
 			this.formData.patchValue({
-				companyName: data.data.customerDetails.companyName,
-				phone: data.data.customerDetails.phone,
-				fax: data.data.customerDetails.fax,
-				emailAddress: data.data.customerDetails.email,
-				streetAddress: data.data.customerDetails.streetAddress,
-				subUrb: data.data.customerDetails.suburb,
-				state: data.data.customerDetails.stateId,
-				postcode: data.data.customerDetails.postcode,
-				mailingAddress: data.data.customerDetails.mailingAddress,
-				companyABN: data.data.customerDetails.companyABN,
-				companyAddr: data.data.customerDetails.companyAddress,
-				licenceNumber: data.data.customerDetails.licenceNumber,
-				companyWeb: data.data.customerDetails.website,
+				companyName: data.data.companyName,
+				phone: data.data.phone,
+				fax: data.data.fax,
+				emailAddress: data.data.email,
+				streetAddress: data.data.streetAddress,
+				subUrb: data.data.suburb,
+				state: data.data.stateId,
+				postcode: data.data.postcode,
+				mailingAddress: data.data.mailingAddress,
+				companyABN: data.data.companyABN,
+				companyAddr: data.data.companyAddress,
+				licenceNumber: data.data.licenceNumber,
+				companyWeb: data.data.website,
 				companyLogo: this.selectedLogo,
 
 				plantName: data.data.plantRegister.plant.plantName,
@@ -525,32 +529,31 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			return arr;
 		};
 		const body = {
-			customerDetails: {
-				companyName: this.formData.get('companyName').value,
-				fax: this.formData.get('fax').value,
-				phone: this.formData.get('phone').value,
-				email: this.formData.get('emailAddress').value,
-				streetAddress: this.formData.get('streetAddress').value,
-				suburb: this.formData.get('subUrb').value,
-				stateId: this.formData.get('state').value,
-				postcode: this.formData.get('postcode').value,
-				mailingAddress: this.formData.get('mailingAddress').value,
-				companyABN: this.formData.get('companyABN').value,
-				companyAddress: this.formData.get('companyAddr').value,
-				licenceNumber: this.formData.get('licenceNumber').value,
-				website: this.formData.get('companyWeb').value,
-				companyLogo: this.formData.get('companyLogo').value
-			},
+			companyName: this.formData.get('companyName').value,
+			email: this.formData.get('emailAddress').value,
+			phone: this.formData.get('phone').value,
+			companyABN: this.formData.get('companyABN').value,
+			streetAddress: this.formData.get('streetAddress').value,
+			suburb: this.formData.get('subUrb').value,
+			website: this.formData.get('companyWeb').value,
+			fax: this.formData.get('fax').value,
+			mailingAddress: this.formData.get('mailingAddress').value,
+			companyAddress: this.formData.get('companyAddr').value,
+			licenceNumber: this.formData.get('licenceNumber').value,
+			companyLogo: this.formData.get('companyLogo').value,
+			postcode: this.formData.get('postcode').value,
+			stateId: this.formData.get('state').value,
 			plantRegister: {
 				plant: equipArr()
 				// signature: 'plantSignature'
 			},
 			insuranceRegister: {
 				insurance: insuranceArr()
-			}
+			},
+			userId: this.userId
 		};
 
-		this.subscript.editsubscription(this.id, body).subscribe(
+		this.subscript.updateCompanyDetails(body).subscribe(
 			(resData) => {
 				console.log('updateData', resData);
 				Swal.fire({
@@ -558,7 +561,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
-				this.router.navigate(['/admin/registration/compdetails']);
+				// this.router.navigate(['/admin/registration/compdetails']);
 			},
 			(err) => {
 				console.error(err);

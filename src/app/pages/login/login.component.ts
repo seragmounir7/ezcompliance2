@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 							resData.data.username
 						);
 						sessionStorage.setItem('phoneNo', resData.data.phone);
-						this.router.navigate(['/admin']);
+						this.router.navigate(['/setup']);
 						this.toastr.success('Login Successful', '');
 					}
 				},

@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddRoleComponent } from '../add-role/add-role.component';
 import { RoleManagementSharedServiceService } from '../../utils/services/role-management-shared-service.service';
 import Swal from 'sweetalert2';
+import { SideNavAccess } from 'src/app/side-nav-access.enum';
 @Component({
 	selector: 'app-checkbox',
 	templateUrl: './checkbox.component.html',
@@ -50,16 +51,26 @@ export class CheckboxComponent implements OnInit {
 		this.rolemanagment = this.fb.group({});
 	}
 
-	/* formNameArr = [
-    'Dashboard',
+	formNameArr2 = [
+		'Dashboard',
 		'Generate a New Form',
 		'Logical Forms',
 		'Form List',
 		'Submitted Forms',
-    'Employee Details',
-    'Form Settings'
-	]; */
+		'Employee Details',
+		'Form Settings'
+	];
 	formNameArr = [
+		'dashboard',
+		'GenerateaNewForm',
+		'LogicalForms',
+		'FormList',
+		'SubmittedForms',
+		'EmployeeDetails',
+		'FormSettings'
+	];
+	/* formNameArr = [
+
 		'dashboard',
 		'dynamicForm',
 		'Logicalforms',
@@ -68,8 +79,8 @@ export class CheckboxComponent implements OnInit {
 		'LogicalFormData',
 		'CMS',
 		'StateRelation'
-	];
-	formNameArr2 = [
+	]; */
+	/* formNameArr2 = [
 		'Dashboard',
 		'Dynamic Form',
 		'Logical Forms',
@@ -78,7 +89,7 @@ export class CheckboxComponent implements OnInit {
 		'Logical FormData',
 		'CMS',
 		'State Relation'
-	];
+	]; */
 	displayedColumns: string[] = [
 		//"role",
 
@@ -298,6 +309,9 @@ export class CheckboxComponent implements OnInit {
 			objArr.push(obj);
 		}
 		console.log('acess', objArr);
+		this.roleService
+			.addMultipleRole(objArr)
+			.subscribe((res) => console.log(res));
 	}
 	setValue() {
 		for (let index = 0; index < this.roleArr.length; index++) {

@@ -40,8 +40,8 @@ const routes: Routes = [
 		]
 	},
 	{
-		path: 'firsttimeLogin',
-		// canActivate: [FirstTimeLoginGuard],
+		path: 'setup',
+		canActivate: [FirstTimeLoginGuard],
 		loadChildren: () =>
 			import('./admin-setup/admin-setup.module').then(
 				(m) => m.AdminSetupModule
