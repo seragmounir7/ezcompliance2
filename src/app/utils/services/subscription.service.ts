@@ -93,6 +93,12 @@ export class SubscriptionService {
 	}
 
 	//subscription start-----///////
+	getCompanyDeatils() {
+		return this.https.get(`${this.apiUrl}companyDetail/get/`);
+	}
+	updateCompanyDetails(data) {
+		return this.https.put(`${this.apiUrl}companyDetail/update`, data);
+	}
 	getsubscription(id: any) {
 		return this.https.get(this.apiUrl + 'subscription/get/' + id).pipe(
 			map((res: any) => {

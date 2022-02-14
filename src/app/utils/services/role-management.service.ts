@@ -14,6 +14,10 @@ export class RoleManagementService {
 	addRole(data) {
 		return this.https.post(this.apiUrl + 'role/add', data);
 	}
+
+	addMultipleRole(data) {
+		return this.https.put(this.apiUrl + 'role/updateAll', { arrObj: data });
+	}
 	// addMultipleRisk(data) {
 	//   return this.https.post(this.apiUrl + 'risk/add/multiple', data);
 	// }

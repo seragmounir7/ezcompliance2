@@ -22,6 +22,10 @@ export class FirstTimeLoginGuard implements CanActivate {
 		| boolean
 		| UrlTree {
 		console.log('FirstTimeLoginGuard');
-		return false;
+		if (JSON.parse(sessionStorage.getItem('userData')).firstTimeLogin) {
+			return true;
+		} else {
+			return this.router.createUrlTree(['/admin']);
+		}
 	}
 }

@@ -21,7 +21,8 @@ export class AuthService {
 			this.nextLoginData({
 				accessToken: sessionStorage.getItem('accessToken'),
 				userName: sessionStorage.getItem('userName'),
-				phoneNo: sessionStorage.getItem('phoneNo')
+				phoneNo: sessionStorage.getItem('phoneNo'),
+				id: sessionStorage.getItem('id')
 			});
 		}
 	}
@@ -42,9 +43,10 @@ export class AuthService {
 					this.nextLoginData(res.data);
 					sessionStorage.setItem('accessToken', res.data.accessToken);
 					sessionStorage.setItem('role', res.data.designation);
+					sessionStorage.setItem('id', res.data.id);
 					sessionStorage.setItem(
 						'userData',
-						JSON.stringify(res.data)
+						JSON.stringify({ firstTimeLogin: false, ...res.data })
 					);
 				}
 				return res;
