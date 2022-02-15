@@ -26,7 +26,7 @@ const routes: Routes = [
 		path: 'plantRegistration/history/:id',
 		component: PlantRegistrationComponent
 	},
-	{ path: 'addCompanyInfo/:id', component: AddAndEditCompanyInfoComponent }
+	{ path: 'companyDetail', component: AddAndEditCompanyInfoComponent }
 ];
 
 @NgModule({

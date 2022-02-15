@@ -42,29 +42,32 @@ export class PrintLayoutComponent implements OnInit {
 			console.log('check print data obs::', res);
 			this.formNam = res.formName;
 			this.version = res.version;
+
+			this.totalPages = Math.ceil(document.body.scrollHeight / 1123);
 		});
-		this.totalPages = Math.ceil(document.body.scrollHeight / 1123);
 	}
 
 	getData() {
-		this.id = '61eeeef751744133c768653c';
-		this.subscript.getsubscription(this.id).subscribe((data) => {
-			console.log('data=>', data);
-			(this.companyName = data.data.customerDetails.companyName),
-				(this.phone = data.data.customerDetails.phone),
-				(this.fax = data.data.customerDetails.fax),
-				(this.emailAddress = data.data.customerDetails.email),
-				(this.streetAddress = data.data.customerDetails.streetAddress),
-				(this.subUrb = data.data.customerDetails.suburb),
-				(this.state = data.data.customerDetails.stateId),
-				// mailingAddress= data.data.customerDetails.mailingAddress,
-				(this.postcode = data.data.customerDetails.postcode),
-				(this.companyABN = data.data.customerDetails.companyABN),
-				(this.companyAddress =
-					data.data.customerDetails.companyAddress),
-				(this.licenceNumber = data.data.customerDetails.licenceNumber),
-				(this.companyWeb = data.data.customerDetails.website),
-				(this.companyLogo = data.data.customerDetails.companyLogo);
+		console.log('is Calling >>>>>>>>>>>>>>>>');
+
+		this.id = '62090789d083841874e3faad';
+		this.subscript.getCompanyDeatils().subscribe((data: any) => {
+			console.log('data=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', data);
+			// this.companyData = data;
+			(this.companyName = data.data.companyName),
+				(this.phone = data.data.phone),
+				(this.fax = data.data.fax),
+				(this.emailAddress = data.data.email),
+				(this.streetAddress = data.data.streetAddress),
+				(this.subUrb = data.data.suburb),
+				(this.state = data.data.stateId),
+				// mailingAddress= data.data.mailingAddress,
+				(this.postcode = data.data.postcode),
+				(this.companyABN = data.data.companyABN),
+				(this.companyAddress = data.data.companyAddress),
+				(this.licenceNumber = data.data.licenceNumber),
+				(this.companyWeb = data.data.website),
+				(this.companyLogo = data.data.companyLogo);
 		});
 	}
 

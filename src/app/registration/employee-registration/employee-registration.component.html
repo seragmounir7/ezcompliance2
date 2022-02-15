@@ -12,6 +12,7 @@
 	</button>
 
 	<button
+		*ngIf="(isEmployeeRegistration| async) == 'employeeRegistration'"
 		type="button"
 		class="btn btn-outline-primary mr-2 float-right"
 		[routerLink]="['/admin/registration/addEmployee/'+'form']"

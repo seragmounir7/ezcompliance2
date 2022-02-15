@@ -66,8 +66,7 @@ export class NavItems {
 				{
 					displayedName: 'Company Details ',
 					icon: 'company',
-					route:
-						'./registration/addCompanyInfo/61eeeef751744133c768653c',
+					route: './registration/companyDetail',
 					hasAccess: true
 				},
 				{
@@ -498,8 +497,7 @@ export class NavItems {
 				{
 					displayedName: 'Company Details ',
 					icon: 'company',
-					route:
-						'./registration/addCompanyInfo/61eeeef751744133c768653c',
+					route: './registration/companyDetail',
 					hasAccess: true
 				},
 				{

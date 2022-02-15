@@ -200,10 +200,16 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 	}
 	showImg() {
-		let ext = this.selectedImage.split('.');
+		let ext = this.selectedImage ? this.selectedImage.split('.') : [];
 		console.log('ext.....', ext);
 
-		return this.image.includes(ext[ext.length - 1]);
+		return ext.length != 0
+			? this.image.includes(ext[ext.length - 1])
+			: false;
+		// let ext = this.selectedImage.split('.');
+		// console.log('ext.....', ext);
+
+		// return this.image.includes(ext[ext.length - 1]);
 	}
 	ngOnInit() {
 		this.activatedRoute.queryParams.subscribe(
