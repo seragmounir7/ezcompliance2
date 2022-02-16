@@ -25,13 +25,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import Swal from 'sweetalert2';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { debounceTime, map, startWith, take, tap } from 'rxjs/operators';
+import { map, startWith, take, tap } from 'rxjs/operators';
 import moment from 'moment';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { Observable, Subscription } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 @Component({
 	selector: 'app-incident-report',
 	templateUrl: './incident-report.component.html',
@@ -70,6 +71,11 @@ export class IncidentReportComponent
 	returnTo: Observable<string>;
 	personCompletingForm$: Observable<any>;
 	injuredorAffectedPersonName$: Observable<any>;
+	department$: Observable<any>;
+	roleData: any[] = [];
+	completedDepartment$: Observable<any[]>;
+	reviewedDepartment$: Observable<any[]>;
+	isImg: boolean = false;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -115,7 +121,8 @@ export class IncidentReportComponent
 		private ngZone: NgZone,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		public mobileViewService: MobileViewService
+		public mobileViewService: MobileViewService,
+		public role: RoleManagementService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -208,12 +215,42 @@ export class IncidentReportComponent
 			);
 			this.returnTo.subscribe((res) => console.log(res));
 		}
+		this.role.getAllRole().subscribe((res: any) => {
+			console.log('getAllRole', res);
+			this.roleData = res.data;
+			this.completedDepartment$ = this.IncidentReport.controls.completedDepartment.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.role
+				),
+				map((role) =>
+					role ? this._filterRole(role) : this.roleData.slice()
+				)
+			);
+			this.reviewedDepartment$ = this.IncidentReport.controls.reviewedDepartment.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.role
+				),
+				map((role) =>
+					role ? this._filterRole(role) : this.roleData.slice()
+				)
+			);
+			this.department$ = this.IncidentReport.controls.department.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.role
+				),
+				map((role) =>
+					role ? this._filterRole(role) : this.roleData.slice()
+				)
+			);
+		});
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
 			const filteredOptions = () => {
 				return (
 					startWith(''),
-					debounceTime(400),
 					map((value: any) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -224,7 +261,6 @@ export class IncidentReportComponent
 			};
 			this.injuredorAffectedPersonName$ = this.IncidentReport.controls.name.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -234,7 +270,6 @@ export class IncidentReportComponent
 			);
 			this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -244,7 +279,6 @@ export class IncidentReportComponent
 			);
 			this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -254,7 +288,6 @@ export class IncidentReportComponent
 			);
 			this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				tap((value) => console.log('value', value)),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
@@ -296,16 +329,24 @@ export class IncidentReportComponent
 			option.fullName.toLowerCase().includes(filterValue)
 		);
 	}
+	private _filterRole(name: string): any[] {
+		const filterValue = name.toLowerCase();
+		return this.roleData.filter((option) =>
+			option.role.toLowerCase().includes(filterValue)
+		);
+	}
 	displayFn(user: any): string {
 		return user && user.fullName ? user.fullName : '';
+	}
+	displayFnRole(user: any): string {
+		return user && user.role ? user.role : '';
 	}
 	showImg() {
 		let ext = this.selectedImage ? this.selectedImage.split('.') : [];
 		console.log('ext.....', ext);
 
-		return ext.length != 0
-			? this.image.includes(ext[ext.length - 1])
-			: false;
+		this.isImg =
+			ext.length != 0 ? this.image.includes(ext[ext.length - 1]) : false;
 	}
 	employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
 		const data = e.option.value;
@@ -511,6 +552,7 @@ export class IncidentReportComponent
 		console.log('check1...', this.check);
 		this.sub = this.shared.printObs$.subscribe((res) => {
 			this.check = res;
+			this.showImg();
 			if (this.check) {
 				setTimeout(() => {
 					window.print();

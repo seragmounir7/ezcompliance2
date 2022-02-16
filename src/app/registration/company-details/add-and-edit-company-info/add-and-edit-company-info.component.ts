@@ -89,21 +89,55 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 
 	browser(event) {
-		const files = event.target.files[0];
-		const formdata = new FormData();
-		formdata.append('', files);
-		console.log(files);
+		let regex = new RegExp('([a-zA-Z0-9s_\\.-:])+(.jpg|.png|.gif)$');
 
-		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
+		if (regex.test(event.target.value.toLowerCase())) {
+			const files = event.target.files[0];
+			if (typeof event.target.files != 'undefined') {
+				//Initiate the FileReader object.
+				let reader = new FileReader();
+				reader.readAsDataURL(event.target.files[0]);
+				reader.onload = (e) => {
+					//Initiate the JavaScript Image object.
+					let image = new Image();
 
-			this.selectedLogo = res.files[0];
-			this.formData.get('companyLogo').patchValue(this.selectedLogo);
-			console.log(
-				'AddProductComponent -> browse -> this.selectedLogo',
-				this.selectedLogo
-			);
-		});
+					//Set the Base64 string return from FileReader as source.
+					image.src = e.target.result as string;
+
+					//Validate the File Height and Width.
+					image.onload = function () {
+						let height = image.height;
+						let width = image.width;
+						if (height > 100 || width > 100) {
+							alert('Height and Width must not exceed 100px.');
+							return false;
+						}
+						alert('Uploaded image has valid Height and Width.');
+						return true;
+					};
+				};
+			} else {
+				alert('This browser does not support HTML5.');
+				return false;
+			}
+			const formdata = new FormData();
+			formdata.append('', files);
+			console.log(files);
+
+			this.upload.upload(formdata).subscribe((res) => {
+				console.log('AddProductComponent -> browser -> res', res);
+
+				this.selectedLogo = res.files[0];
+				this.formData.get('companyLogo').patchValue(this.selectedLogo);
+				console.log(
+					'AddProductComponent -> browse -> this.selectedLogo',
+					this.selectedLogo
+				);
+			});
+		} else {
+			alert('Please select a valid Image file.');
+			return false;
+		}
 	}
 	addEquip() {
 		return this.formData.get('plantArr') as FormArray;

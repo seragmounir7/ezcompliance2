@@ -18,6 +18,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PlantRegistionTableComponent } from './plant-registration/plant-registion-table/plant-registion-table.component';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-company-info/add-and-edit-company-info.component';
+import { DirectivesModule } from '../Directives/directives.module';
 @NgModule({
 	declarations: [
 		CompanyRegistrationComponent,
@@ -40,7 +41,8 @@ import { AddAndEditCompanyInfoComponent } from './company-details/add-and-edit-c
 		SharedModule,
 		AngularSvgIconPreloaderModule,
 		AngularSvgIconModule,
-		NgxMatTimepickerModule
+		NgxMatTimepickerModule,
+		DirectivesModule
 	],
 	exports: [
 		AddAndEditCompanyInfoComponent,

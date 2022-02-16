@@ -330,9 +330,10 @@
 							>First Name</label
 						>
 						<input
+							appTitleCase
 							type="text"
 							formControlName="EmpFirst"
-							class="form-control inputData"
+							class="form-control"
 							id="siteName"
 							[class.is-invalid]="(registerFormControl.EmpFirst.touched || submitted) && registerFormControl.EmpFirst.errors?.required "
 						/>
@@ -348,9 +349,10 @@
 							>Last Name</label
 						>
 						<input
+							appTitleCase
 							type="text"
 							formControlName="empLastName"
-							class="form-control inputData"
+							class="form-control"
 							[class.is-invalid]="(registerFormControl.empLastName.touched || submitted) && registerFormControl.empLastName.errors?.required "
 						/>
 						<span

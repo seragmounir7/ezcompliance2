@@ -506,6 +506,7 @@
 				>
 				<input
 					type="text"
+					[matAutocomplete]="department"
 					class="form-control"
 					formControlName="department"
 					[class.is-invalid]="
@@ -514,6 +515,17 @@
               IncidentReport.get('department').touched)
           "
 				/>
+				<mat-autocomplete
+					#department="matAutocomplete"
+					[displayWith]="displayFnRole"
+				>
+					<mat-option
+						*ngFor="let option of department$ | async ; let i = index "
+						[value]="option"
+					>
+						{{option.role}}
+					</mat-option>
+				</mat-autocomplete>
 				<span
 					*ngIf="
             IncidentReport.get('department')?.hasError('required') &&
@@ -1171,6 +1183,7 @@
 					>
 					<input
 						type="text"
+						[matAutocomplete]="completedDepartment"
 						class="form-control"
 						formControlName="completedDepartment"
 						[class.is-invalid]="
@@ -1179,6 +1192,17 @@
                 IncidentReport.get('completedDepartment').touched)
             "
 					/>
+					<mat-autocomplete
+						#completedDepartment="matAutocomplete"
+						[displayWith]="displayFnRole"
+					>
+						<mat-option
+							*ngFor="let option of completedDepartment$ | async ; let i = index "
+							[value]="option"
+						>
+							{{option.role}}
+						</mat-option>
+					</mat-autocomplete>
 					<span
 						*ngIf="
               IncidentReport.get('completedDepartment')?.hasError('required') &&
@@ -1334,6 +1358,7 @@
 						>
 						<input
 							type="text"
+							[matAutocomplete]="reviewedDepartment"
 							class="form-control"
 							formControlName="reviewedDepartment"
 							[class.is-invalid]="
@@ -1342,6 +1367,17 @@
                 IncidentReport.get('reviewedDepartment').touched)
             "
 						/>
+						<mat-autocomplete
+							#reviewedDepartment="matAutocomplete"
+							[displayWith]="displayFnRole"
+						>
+							<mat-option
+								*ngFor="let option of reviewedDepartment$ | async ; let i = index "
+								[value]="option"
+							>
+								{{option.role}}
+							</mat-option>
+						</mat-autocomplete>
 						<span
 							*ngIf="
               IncidentReport.get('reviewedDepartment')?.hasError('required') &&
@@ -1433,7 +1469,7 @@
 		</button>
 	</div>
 
-	<ng-container *ngIf="showImg()">
+	<ng-container *ngIf="isImg">
 		<div
 			style="padding-left: 30%"
 			*ngIf="(isPrint | async)===true && selectedImage"

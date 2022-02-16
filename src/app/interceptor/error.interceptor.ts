@@ -11,13 +11,15 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { HttpError } from './http-error.enum';
 import { Router } from '@angular/router';
+import { AuthService } from '../utils/services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 	constructor(
 		private _injector: Injector,
 		private router: Router,
-		private toastrService: ToastrService
+		private toastrService: ToastrService,
+		private authService: AuthService
 	) {}
 
 	intercept(
@@ -36,8 +38,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 						case HttpError.Unauthorized:
 							console.error('%c Unauthorized 401', logFormat);
-							window.location.href =
-								'/login' + window.location.hash;
+							this.authService.logout();
 							break;
 
 						case HttpError.NotFound:
@@ -51,7 +52,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 							//     typeId: 'error',
 							//     isDismissable: true
 							// });
-							this.router.navigate(['']);
+							// this.router.navigate(['']);
 							break;
 
 						case HttpError.TimeOut:

@@ -1229,7 +1229,7 @@
 							</div>
 						</div>
 						<hr />
-						<h2 *ngIf="allCOPSelected.length">Code Of Practices</h2>
+						<h2 *ngIf="allCOPSelected.length">Code Of Practice</h2>
 						<div class="row">
 							<div
 								*ngFor="let item of allCOPSelected; let i = index"
@@ -1823,6 +1823,7 @@
 								style="width: 100%"
 								[editor]="Editor"
 								[data]="secondEditor"
+								disabled="true"
 							>
 							</ckeditor>
 						</div>
@@ -2989,6 +2990,7 @@
 						style="width: 100%"
 						[editor]="Editor"
 						[data]="secondEditor"
+						disabled="true"
 					></ckeditor>
 				</div>
 				<hr />

@@ -103,7 +103,7 @@ export class InstructionsComponent implements OnInit {
 	edit(element) {
 		this.addBtn = false;
 		const dialogRef = this.dialog.open(AddInstructionsComponent, {
-			width: '950px',
+			width: '80%',
 			height: '500px',
 			data: {
 				element,

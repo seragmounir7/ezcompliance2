@@ -10,7 +10,7 @@ export class NavItems {
 		let role = sessionStorage.getItem('role') as string;
 		if (!role) return;
 		switch (role.toLowerCase()) {
-			case 'admin':
+			case 'superadmin':
 				this.returnNav = this.navItemsAll;
 				break;
 			case 'clientadmin':
