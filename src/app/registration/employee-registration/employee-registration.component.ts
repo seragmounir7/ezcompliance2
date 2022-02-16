@@ -64,7 +64,6 @@ export class EmployeeRegistrationComponent implements OnInit {
 			this.ELEMENT_DATA = couponData;
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
-			//this.dataSource.sort = this.sort;
 		});
 	}
 
@@ -80,7 +79,6 @@ export class EmployeeRegistrationComponent implements OnInit {
 		}).then((result) => {
 			if (result.value) {
 				console.log(result);
-				// this.model.attributes.splice(i,1);
 				void this.spinner.show();
 				this.employee.deleteEmployeeInfo(item._id).subscribe((res) => {
 					this.getAllEmployee();

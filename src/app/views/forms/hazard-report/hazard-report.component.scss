@@ -38,12 +38,8 @@ label {
 .label_1 {
 	margin-bottom: 18px;
 }
-// .selector:hover {
-// 	background-color: blue;
-// }
 .form-check-input:hover {
 	border-color: rgba(46, 105, 255, 0.5);
-	// box-shadow: 0 0 0 2px rgb(46 105 255 / 25%);
 }
 .form-check-input {
 	width: 20px;
@@ -134,13 +130,6 @@ select {
 	margin-left: 16px;
 }
 
-// .inp_padding{
-//     padding-right: 50px;
-// }
-
-// ::ng-deep  mat-datepicker-toggle  .mat-icon-button{
-//   padding-right: 50px;
-// }
 .form-control.is-invalid,
 .was-validated .form-control:invalid {
 	border-color: #dc3545;
@@ -215,9 +204,6 @@ datalist > option {
 	.title {
 		font-size: 27px;
 	}
-	// .img-risk {
-	// 	width: 377px;
-	// }
 }
 @media only screen and(min-width:360px) and(max-width:500px) {
 	.table {
@@ -225,7 +211,6 @@ datalist > option {
 	}
 	.img-table {
 		display: block;
-		// margin-left: -45px; //-22px
 	}
 	.img-risk {
 		width: 100%;
@@ -249,14 +234,4 @@ datalist > option {
 #btn-back-to-top {
 	position: fixed;
 	bottom: 20px;
-
-	// right: 20px;
-	// display: none;
 }
-
-// @media only screen and (max-width: 400px) {
-// 	.sign {
-// 		border: 1px solid lightgray;
-// 		width: inherit;
-// 	}
-// }

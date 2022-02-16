@@ -163,13 +163,11 @@ export class PlantRegistrationComponent implements OnInit {
 		this.disableForm('Plant/Equipment');
 	}
 	public signaturePadOptions: Object = {
-		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
 		canvasWidth: 500,
 		canvasHeight: 100
 	};
 	drawComplete2() {
-		// will be notified of szimek/signature_pad's onEnd event
 		this.plantDetails.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
@@ -180,7 +178,6 @@ export class PlantRegistrationComponent implements OnInit {
 		this.plantDetails.controls.plantSignature.setValue('');
 	}
 	drawStart() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
 	}
 
@@ -220,7 +217,6 @@ export class PlantRegistrationComponent implements OnInit {
 	}
 
 	drawComplete() {
-		// will be notified of szimek/signature_pad's onEnd event
 		this.ppeDetails.controls.Sign.setValue(this.signaturePad.toDataURL());
 		console.log(this.signaturePad.toDataURL());
 	}
@@ -228,7 +224,6 @@ export class PlantRegistrationComponent implements OnInit {
 		if (!this.isHistory) {
 			this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
 				console.log('data=>', data);
-				// this.signaturePad.toDataURL();
 				this.employeeData = data.data;
 
 				data.data.ppe.PPEArr.forEach((ele) => {
@@ -312,19 +307,6 @@ export class PlantRegistrationComponent implements OnInit {
 		const submitPPEArr = [];
 		const notSubPPEArr = [];
 		const { ppe, ...rest } = this.employeeData;
-		// submitPPEArr.push(PPEArr.map((res)=>{
-		//   if(res.ppeCheck){
-		//   return {
-		//   PPESupplied: res.PPESupplied,
-		//   BrandOrType: res.BrandOrType,
-		//   IssueDate: res.IssueDate,
-		//   ReplacementDate: res.ReplacementDate,
-		//   }
-		// }else{
-
-		// }
-		// }))
-		// console.log("submitPPEArr",submitPPEArr);
 
 		for (let index = 0; index < this.addPPE().length; index++) {
 			if (this.addPPE().at(index).get('ppeCheck').value) {

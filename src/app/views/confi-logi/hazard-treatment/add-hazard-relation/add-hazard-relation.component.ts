@@ -28,8 +28,6 @@ export class AddHazardRelationComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.setHazard = this.fb.group({
-			// Consequence: ['', Validators.required],
-			// Likelihood: ['', Validators.required],
 			riskRating: ['', Validators.required],
 			actionRequired: ['', Validators.required]
 		});
@@ -83,8 +81,6 @@ export class AddHazardRelationComponent implements OnInit {
 		const data = {
 			set: true,
 			title: this.hazard.title,
-			// Consequence: this.setHazard.get('Consequence').value,
-			// Likelihood: this.setHazard.get('Likelihood').value,
 			riskRating: this.setHazard.get('riskRating').value,
 			actionRequired: this.setHazard.get('actionRequired').value
 		};

@@ -65,7 +65,6 @@ import { ScrollModule } from 'src/app/shared/scroll/scroll.module';
 		MatInputModule,
 		MatDatepickerModule,
 		DynamicFormModule,
-		//PdfViewerModule
 		AngularSvgIconPreloaderModule,
 		AngularSvgIconModule,
 		MatTooltipModule,

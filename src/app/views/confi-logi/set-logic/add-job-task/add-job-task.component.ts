@@ -101,10 +101,6 @@ export class AddJobTaskComponent implements OnInit {
 		);
 	}
 	addForm() {
-		// let data = {
-		//   title: this.addjob.get('title').value,
-		//   tradeCategoryId:this.addjob.get('tradeCategoryId').value
-		// };
 		console.log('addForm', this.addjob.value);
 		this.logicalFormInfo.addJobTask(this.addjob.value).subscribe(
 			(data) => {

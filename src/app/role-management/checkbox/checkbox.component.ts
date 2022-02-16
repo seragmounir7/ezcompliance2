@@ -16,18 +16,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddRoleComponent } from '../add-role/add-role.component';
 import { RoleManagementSharedServiceService } from '../../utils/services/role-management-shared-service.service';
 import Swal from 'sweetalert2';
+import { SideNavAccess } from 'src/app/side-nav-access.enum';
 @Component({
 	selector: 'app-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
-	// displayedColumns: string[] = ["role",'dynamicform',"Logicalforms","FormConfigure","SubscriptionRates",'LogicalFormData','CMS','StateRelation'];
 	rolemanagment: FormGroup;
 
 	showDatas: any;
 	tempArray: MatTableDataSource<any>;
-	// @ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 	@Input() Arry: any;
 	@Output() Arry1: any;
@@ -50,7 +49,26 @@ export class CheckboxComponent implements OnInit {
 		this.rolemanagment = this.fb.group({});
 	}
 
+	formNameArr2 = [
+		'Dashboard',
+		'Generate a New Form',
+		'Logical Forms',
+		'Form List',
+		'Submitted Forms',
+		'Employee Details',
+		'Form Settings'
+	];
 	formNameArr = [
+		'dashboard',
+		'GenerateaNewForm',
+		'LogicalForms',
+		'FormList',
+		'SubmittedForms',
+		'EmployeeDetails',
+		'FormSettings'
+	];
+	/* formNameArr = [
+
 		'dashboard',
 		'dynamicForm',
 		'Logicalforms',
@@ -59,8 +77,8 @@ export class CheckboxComponent implements OnInit {
 		'LogicalFormData',
 		'CMS',
 		'StateRelation'
-	];
-	formNameArr2 = [
+	]; */
+	/* formNameArr2 = [
 		'Dashboard',
 		'Dynamic Form',
 		'Logical Forms',
@@ -69,10 +87,8 @@ export class CheckboxComponent implements OnInit {
 		'Logical FormData',
 		'CMS',
 		'State Relation'
-	];
+	]; */
 	displayedColumns: string[] = [
-		//"role",
-
 		'dashboard.Access',
 		'dashboard.View',
 
@@ -121,46 +137,9 @@ export class CheckboxComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllRole();
-		//     of(this.data).subscribe((res:any)=>{
-		//       console.log("resdata",res);
-		// this.roleData=res
-		//       for (let index = 0; index < this.roleData.length; index++) {
-		//         for (let x = 0; x < this.roleData[index].access.length; x++) {
-
-		//         let key=Object.keys( this.roleData[index].access[x])
-
-		//            key.splice(0,1)
-		//         key.forEach((z:any,i)=>{
-
-		//          setTimeout(() => {
-		//           console.log("this.roleData[index].access[x]",);
-		//          this.rolemanagment.get(this.roleData[index].access[x].form+`_${z}_`+this.roleData[index].role).setValue(this.roleData[index]?.access[x][z])
-
-		//           // if(this.roleData[index]?.access[x]?.Add){
-
-		//           //   this.rolemanagment.get(this.roleData[index].access[x].form+'_Add_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.Add)
-		//           //   this.rolemanagment.get(this.roleData[index].access[x].form+'_Delete_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.Delete)
-		//           //   this.rolemanagment.get(this.roleData[index].access[x].form+'_Update_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.Update)
-		//           //   this.rolemanagment.get(this.roleData[index].access[x].form+'_Access_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.Access)
-		//           // this.rolemanagment.get(this.roleData[index].access[x].form+'_View_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.View)
-		//           // }
-		//           // this.rolemanagment.get(this.roleData[index].access[x].form+'_Access_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.Access)
-		//           // this.rolemanagment.get(this.roleData[index].access[x].form+'_View_'+this.roleData[index].role).setValue(this.roleData[index]?.access[x]?.View)
-
-		//          }, 2000);
-
-		//         })
-
-		//         }
-
-		//       }
-
-		//     })
 	}
 	doCheckboxCheck(e): void {
-		// this.roles[index].checked = !this.roles[index].checked;
 		console.log('event', e);
-		//console.log("aaaa",this.rolemanagment.get('Access').value);
 	}
 	applyFilter($event) {}
 	ngOnChanges(changes: any): void {}
@@ -288,21 +267,10 @@ export class CheckboxComponent implements OnInit {
 			};
 			objArr.push(obj);
 		}
-
-		// let obj2=filterArr.reduce(((r, c) => Object.assign(r, c)), {});
-		// console.log("filterArr",obj2);
-
-		// for (let index = 0; index < checkeBox.length; index++) {
-		//   let accessObj={
-		//     form:checkeBox[index].form,
-		//     view:checkeBox[index].View,
-		//     add:checkeBox[index].Add,
-		//     update:checkeBox[index].Update,
-		//     delete:checkeBox[index].Delete,
-		//   }
-		//   access.push(accessObj)
-		// }
 		console.log('acess', objArr);
+		this.roleService
+			.addMultipleRole(objArr)
+			.subscribe((res) => console.log(res));
 	}
 	setValue() {
 		for (let index = 0; index < this.roleArr.length; index++) {
@@ -319,17 +287,6 @@ export class CheckboxComponent implements OnInit {
 								this.roleArr[index].role
 						)
 						.setValue(this.roleArr[index]?.access[x][z]);
-
-					// if(this.roleArr[index]?.access[x]?.Add){
-
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Add_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Add)
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Delete_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Delete)
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Update_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Update)
-					//   this.rolemanagment.get(this.roleArr[index].access[x].form+'_Access_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Access)
-					// this.rolemanagment.get(this.roleArr[index].access[x].form+'_View_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.View)
-					// }
-					// this.rolemanagment.get(this.roleArr[index].access[x].form+'_Access_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.Access)
-					// this.rolemanagment.get(this.roleArr[index].access[x].form+'_View_'+this.roleArr[index].role).setValue(this.roleArr[index]?.access[x]?.View)
 				});
 			}
 		}
@@ -355,67 +312,8 @@ export class CheckboxComponent implements OnInit {
 		});
 	}
 
-	//////////////////////////////////////////////////
-
 	count: number = 0;
 
-	stepperList: any[] = [
-		{
-			name: 'HighRisk Construction',
-			i: 1,
-			code: 'highRisk'
-		},
-		{
-			name: 'PPE',
-			i: 0,
-			code: 'ppe'
-		},
-		{
-			name: 'Licence',
-			i: 0,
-			code: 'licence'
-		},
-		{
-			name: 'Identify Hazards',
-			i: 0,
-			code: 'identifyHazards'
-		},
-		{
-			name: 'Risk Level',
-			i: 0,
-			code: 'riskLevel'
-		},
-		{
-			name: 'Control Action Required',
-			i: 0,
-			code: 'ctrlActreq'
-		},
-		{
-			name: 'Code of Practice',
-			i: 0,
-			code: 'codeOfPract'
-		},
-		{
-			name: 'Residule Risk Level',
-			i: 0,
-			code: 'resRiskLevel'
-		},
-		// {
-		//   name:'Code of Practice',
-		//   i:0,
-		//    code:'codeOfPract'
-		// },
-		{
-			name: 'Chemical related Task',
-			i: 0,
-			code: ''
-		},
-		{
-			name: 'Person Responsible',
-			i: 0,
-			code: 'perResbl'
-		}
-	];
 	handleClick(index) {
 		console.log(index);
 		this.count = index;

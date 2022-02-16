@@ -101,25 +101,10 @@ export class FormsComponent implements OnInit {
 				break;
 			}
 		}
-		// if (title === 'Toolbox Talk') {
-		// 	this.router.navigate(['/admin/forms/tableData']);
-		// }
-		// if (title === 'Site Inspection') {
-		// 	this.router.navigate(['/admin/forms/siteinspectiontable']);
-		// }
-		// if (title === 'Hazards Reported') {
-		// 	this.router.navigate(['/admin/forms/hazardTable']);
-		// }
-		// if (title === 'Accident Report') {
-		// 	this.router.navigate(['/admin/forms/incidentsTable']);
-		// }
-		// if (title === 'Risk Assessment and SWMS') {
-		// 	this.router.navigate(['/admin/forms/riskAssessTable']);
-		// }
 	}
 
 	ngOnInit(): void {
 		this.url = this.activatedRoute.snapshot.url;
-		this.setTitle.setTitle('WHS-All Form');
+		this.setTitle.setTitle('WHS-Forms List');
 	}
 }

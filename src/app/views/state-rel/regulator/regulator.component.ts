@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditRegComponent } from './add-and-edit-reg/add-and-edit-reg.component';
 
@@ -28,17 +29,18 @@ export class RegulatorComponent implements OnInit {
 
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
+		private setTitle: SetTitleService,
 		private dialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
 		this.getAllRegulator();
+		this.setTitle.setTitle('WHS-Regulator List');
 	}
 
 	getAllRegulator(field = '', value = '') {
 		this.logicalFormInfo.getAllRegulator(field, value).subscribe((res) => {
 			console.log('getAllRegulator=>', res);
-			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -47,8 +49,6 @@ export class RegulatorComponent implements OnInit {
 			this.ELEMENT_DATA = data;
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
-			// this.dataSource.sort = this.sort;
-			//  this.task = res.data.subComponents;
 		});
 	}
 

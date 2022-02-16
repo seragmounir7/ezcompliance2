@@ -11,15 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="col-12">
-			<div class="btn-cont">
-				<!-- <button (click)="updateForm()" class="btn btn-primary pull-right">
-          Update
-        </button>
-        <button class="btn btn-primary pull-right" style="margin-right: 3px">
-          View <i class="fa fa-external-link"></i>
-        </button> -->
-				<!-- routerLink="/application/{{model._id}}" -->
-			</div>
+			<div class="btn-cont"></div>
 		</div>
 	</div>
 	<div class="spacer30"></div>
@@ -56,13 +48,6 @@
 		<div class="row">
 			<div class="my-3 col">
 				<label class="form-label">Site Name</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="siteName"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<input
 					type="text"
 					class="form-control col"
@@ -71,13 +56,6 @@
 			</div>
 			<div class="my-3 col">
 				<label class="form-label">Customer Name</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="CustomerName"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<input
 					type="text"
 					class="form-control col"
@@ -86,50 +64,23 @@
 			</div>
 		</div>
 		<div class="row">
-			<!-- <div class="my-3 col-2"> -->
-			<!-- <label class="form-label">Street Number</label> -->
-			<!-- <select
-        class="form-select form-control col"
-        id="StreetNumber"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
-
-			<!-- <input type="text" class="form-control col" formControlName="streetNo">
-
-      </div> -->
-			<div class="my-3 col-4">
+			<div class="my-3 col-3">
 				<label class="form-label">Street Address</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="StreetAddress"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<textarea
 					type="text"
 					class="form-control col"
 					formControlName="streetAddr"
 				></textarea>
 			</div>
-			<div class="my-3 col-4">
+			<div class="my-3 col-3">
 				<label class="form-label">Suburb</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="Suburb"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<textarea
 					type="text"
 					class="form-control col"
 					formControlName="subUrb"
 				></textarea>
 			</div>
-			<div class="my-3 col-2">
+			<div class="my-3 col-3">
 				<label class="form-label">State</label>
 				<select
 					class="form-select form-control col"
@@ -140,30 +91,23 @@
 					<option [value]="state._id" *ngFor="let state of states">
 						{{state.title}}
 					</option>
-					<!-- <option selected hidden>Select</option>
-      <option value="NSW">NSW</option>
-      <option value="ACT">ACT</option>
-      <option value="QLD">QLD</option>
-      <option value="NT">NT</option>
-      <option value="SA">SA</option>
-      <option value="NZ">NZ</option>
-      <option value="TAS">TAS</option>s
-      <option value="VIC">VIC</option>
-      <option value="WA">WA</option> -->
 				</select>
+			</div>
+
+			<div class="my-3 col-3">
+				<label class="form-label">Postal Code</label>
+
+				<input
+					type="text"
+					class="form-control col"
+					formControlName="postcode"
+				/>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="my-3 col">
 				<label class="form-label">Customer Contact</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="CustomerContact"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<input
 					type="text"
 					class="form-control col"
@@ -172,13 +116,6 @@
 			</div>
 			<div class="my-3 col">
 				<label class="form-label">Customer Contact Phone</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="CustomerContactPhone"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<input
 					type="text"
 					class="form-control col"
@@ -189,13 +126,6 @@
 		<div class="row">
 			<div class="my-3 col-4">
 				<label class="form-label">Customer Email</label>
-				<!-- <select
-        class="form-select form-control col"
-        id="CustomerEmail"
-        aria-label="Default select example"
-      >
-        <option selected hidden>Select</option>
-      </select> -->
 				<input
 					type="text"
 					class="form-control col"
@@ -219,47 +149,10 @@
 					</option>
 				</select>
 			</div>
-			<!-- <div class="my-3 col-6">
-      <label class="form-label"
-        >Project Manager</label
-      >
-      <select
-        class="form-select form-control col"
-        aria-label="Default select example"
-        formControlName="projectManager"
-        (change)="setProjectManager('projectManager',$event)"
-      >
-        <option selected hidden>Select</option>
-        <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
-      
-      </select>
-    </div> -->
 		</div>
 	</div>
 	<div class="row mt-2 position-relative">
 		<div class="col-1 ml-2 sideWalkSet scrollbar">
-			<!-- <div class="row">
-        <label class="col-8">Background Color</label>
-        <input
-          class="colorpick col-4"
-          type="color"
-          name="bgColor"
-          [(ngModel)]="model.theme.bgColor"
-        />
-      </div>
-      <div class="row">
-        <label class="col-8">Text Color</label>
-        <input
-          class="colorpick col-4"
-          type="color"
-          name="textColor"
-          [(ngModel)]="model.theme.textColor"
-        />
-      </div> -->
-
-			<!-- <h5>Select Fields</h5> -->
-			<!-- <p>Customize your form by drag and drop below fields to the form area.</p> -->
-			<!--a draggable element left side items with icons-->
 			<div
 				class="fields mt-3 text-center"
 				*ngFor="let item of fieldModels"
@@ -284,33 +177,6 @@
 				class="row position-relative mt-20 p-l-15 p-r-15"
 				*ngFor="let modelRow of model; let j = index"
 			>
-				<!-- <div
-          class="form-group"
-          [style.backgroundColor]="model.theme.bgColor"
-          [style.color]="model.theme.textColor"
-        >
-          <span class="mb-1"
-            ><input
-              class="form-control"
-              type="text"
-              [(ngModel)]="model.name"
-              placeholder="Form Name"
-          /></span>
-         
-        </div>
-        <div   class="form-group"
-        [style.backgroundColor]="model.theme.bgColor"
-        [style.color]="model.theme.textColor">
-        <input
-        class="form-control"
-        type="text"
-        placeholder="Form Category"
-        [(ngModel)]="model.description"
-      />
-        </div> -->
-
-				<!--a dropzone-->
-				<!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
 				<ng-container class="col-11">
 					<section
 						dndDropzone
@@ -341,9 +207,6 @@
 									></i>
 								</div>
 								<div class="col-7">
-									<!-- <i [ngClass]="item.icon" class="fa pull-left"></i>
-              <h5>{{item.label}}
-              <span *ngIf="item.required" class="red">*</span></h5> -->
 									<!-- text -->
 									<div *ngIf="item.type == 'text'">
 										<label class="form-label"
@@ -659,15 +522,6 @@
 																/>
 															</td>
 														</tr>
-														<!-- <tr
-                              *ngFor="
-                                let row of rows[this.tableIndexMap.get(i)]
-                              "
-                            >
-                              <td *ngFor="let col of row">
-                                <input class="form-control" type="text" />
-                              </td>
-                            </tr> -->
 													</tbody>
 												</table>
 											</div>
@@ -760,21 +614,6 @@
 									/>
 								</div>
 
-								<!-- <div
-                  *ngIf="
-                    item.type != 'textarea' &&
-                    item.type != 'signature' &&
-                    item.type != 'externalLink'
-                  "
-                  class="form-group"
-                >
-                  <label>Name</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    [(ngModel)]="item.name"
-                  />
-                </div> -->
 								<div
 									*ngIf="
                     item.type != 'textarea' &&
@@ -961,11 +800,6 @@
 					</span>
 				</div>
 			</div>
-			<!-- <div class="text-center my-4">
-        <span class="material-icons addIcon" (click)="addDragAndDropRow('inTheEnd',-1)"
-          >add_circle_outline
-        </span>
-      </div> -->
 		</div>
 	</div>
 </div>
@@ -1002,14 +836,9 @@
 			</div>
 			<!-- <pre>{{reports|json}}</pre> -->
 		</div>
-		<!-- if no records found -->
-		<!-- <div *ngIf="reports?.length == 0" class="col-12 btn-cont">
-      No response found
-    </div> -->
 	</div>
 </div>
 
-<!-- <pre *ngIf="model">{{model|json}}</pre> -->
 <!--  real form response -->
 <ng-container *ngIf="report">
 	<div *ngIf="model" class="container" style="min-width: 1000px">
@@ -1046,13 +875,7 @@
 						<div class="row">
 							<div class="my-3 col">
 								<label class="form-label">Site Name</label>
-								<!-- <select
-                class="form-select form-control col"
-                id="siteName"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
@@ -1061,13 +884,6 @@
 							</div>
 							<div class="my-3 col">
 								<label class="form-label">Customer Name</label>
-								<!-- <select
-                class="form-select form-control col"
-                id="CustomerName"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -1076,52 +892,25 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="my-3 col-2">
-								<label class="form-label">Street Number</label>
-								<!-- <select
-                class="form-select form-control col"
-                id="StreetNumber"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
-								<input
-									type="text"
-									class="form-control col"
-									formControlName="streetNo"
-								/>
-							</div>
-							<div class="my-3 col-4">
+							<div class="my-3 col-3">
 								<label class="form-label">Street Address</label>
-								<!-- <select
-                class="form-select form-control col"
-                id="StreetAddress"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
 									formControlName="streetAddr"
 								/>
 							</div>
-							<div class="my-3 col-4">
+							<div class="my-3 col-3">
 								<label class="form-label">Suburb</label>
-								<!-- <select
-                class="form-select form-control col"
-                id="Suburb"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
+
 								<input
 									type="text"
 									class="form-control col"
 									formControlName="subUrb"
 								/>
 							</div>
-							<div class="my-3 col-2">
+							<div class="my-3 col-3">
 								<label class="form-label">State</label>
 								<select
 									class="form-select form-control col"
@@ -1135,17 +924,16 @@
 									>
 										{{state.title}}
 									</option>
-									<!-- <option selected hidden>Select</option>
-              <option value="NSW">NSW</option>
-              <option value="ACT">ACT</option>
-              <option value="QLD">QLD</option>
-              <option value="NT">NT</option>
-              <option value="SA">SA</option>
-              <option value="NZ">NZ</option>
-              <option value="TAS">TAS</option>s
-              <option value="VIC">VIC</option>
-              <option value="WA">WA</option> -->
 								</select>
+							</div>
+							<div class="my-3 col-3">
+								<label class="form-label">Postal Code</label>
+
+								<input
+									type="text"
+									class="form-control col"
+									formControlName="postcode"
+								/>
 							</div>
 						</div>
 
@@ -1154,13 +942,6 @@
 								<label class="form-label"
 									>Customer Contact</label
 								>
-								<!-- <select
-                class="form-select form-control col"
-                id="CustomerContact"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -1171,13 +952,6 @@
 								<label class="form-label"
 									>Customer Contact Phone</label
 								>
-								<!-- <select
-                class="form-select form-control col"
-                id="CustomerContactPhone"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -1188,13 +962,6 @@
 						<div class="row">
 							<div class="my-3 col-4">
 								<label class="form-label">Customer Email</label>
-								<!-- <select
-                class="form-select form-control col"
-                id="CustomerEmail"
-                aria-label="Default select example"
-              >
-                <option selected hidden>Select</option>
-              </select> -->
 								<input
 									type="text"
 									class="form-control col"
@@ -1218,21 +985,6 @@
 									</option>
 								</select>
 							</div>
-							<!-- <div class="my-3 col-6">
-              <label class="form-label"
-                >Project Manager</label
-              >
-              <select
-                class="form-select form-control col"
-                aria-label="Default select example"
-                formControlName="projectManager"
-                (change)="setProjectManager('projectManager',$event)"
-              >
-                <option selected hidden>Select</option>
-                <option [value]="mang._id" *ngFor="let mang of projectMang">{{mang.title}}</option>
-              
-              </select>
-            </div> -->
 						</div>
 					</div>
 					<div
@@ -1584,7 +1336,6 @@
 											{{ v.label }}
 										</option>
 									</select>
-									<!-- <small class="form-text text-muted">{{item.description}}</small> -->
 								</div>
 
 								<div
@@ -1766,7 +1517,6 @@
 															scope="col"
 															*ngFor="let row of item.tableHeading;let l=index"
 														>
-															<!-- <input class="form-control" type="text" placeholder="heading" [(ngModel)]="model[i].attributes[j].tableHeading[l]" (change)="changeValueTH($event,i,j,l)" [ngModelOptions]="{ standalone: true }"/> -->
 															<input
 																class="form-control tableHeadings"
 																type="text"
@@ -2074,29 +1824,12 @@
 										</label>
 									</div>
 								</div>
-								<!-- <div
-              *ngIf="item.type == 'button'"
-              class="btn-cont"
-              class="col mr-1"
-            >
-              <input
-                type="{{ item.subtype }}"
-                (click)="submit()"
-                value="{{ item.label }}"
-                class="btn btn-primary"
-                id="{{ item.name }}"
-              />
-            </div> -->
 							</div>
 						</ng-template>
 					</div>
 					<div class="btn btn-primary mt-4" (click)="submit()">
 						Submit
 					</div>
-					<!-- 
-        <p (click)="showData()" class="marginT60 pointer">
-          Show developer data
-        </p> -->
 				</div>
 			</form>
 		</div>

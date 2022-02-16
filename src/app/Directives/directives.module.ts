@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HideForRoleDirective } from './hide-for-role.directive';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
+import { TitleCaseDirective } from './title-case.directive';
 
 @NgModule({
 	declarations: [
@@ -12,7 +13,8 @@ import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 		HideForRoleDirective,
 		AccessControlDirective,
 		AppNotDirective,
-		NumberDirective
+		NumberDirective,
+		TitleCaseDirective
 	],
 	imports: [CommonModule],
 	exports: [
@@ -20,7 +22,8 @@ import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 		HideForRoleDirective,
 		AccessControlDirective,
 		AppNotDirective,
-		NumberDirective
+		NumberDirective,
+		TitleCaseDirective
 	]
 })
 export class DirectivesModule {}

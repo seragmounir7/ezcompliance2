@@ -38,7 +38,7 @@ export class TermsAndConditionsComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		// this.setTitle.setTitle('WHS-Nature Of Incident');
+		this.setTitle.setTitle('WHS-Terms & Conditions');
 		this.url = this.activatedRoute.snapshot.url[0].path;
 		console.log('this.id', this.url);
 		// this.getInstructions();

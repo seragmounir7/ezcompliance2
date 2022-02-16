@@ -1,4 +1,3 @@
-<!-- <mat-dialog-contaner *ngIf="data.isDialog"> -->
 <div
 	class="btn btn-outline-primary"
 	*ngIf="!dialogData?.isDialog"
@@ -10,7 +9,7 @@
 <div class="container card px-4 py-4">
 	<form [formGroup]="empDetails">
 		<h1 class="text-center mt-3 pt-3">
-			<p class="title">Employee Information Preview</p>
+			<p class="title">Employee Information</p>
 		</h1>
 		<mat-tab-group>
 			<mat-tab label="Profile" (click)="profileshow()">
@@ -31,13 +30,6 @@
 							<option [value]="">Miss</option>
 							<option [value]="">Ms.</option>
 						</select>
-						<!-- <input
-                  type="text"
-                  formControlName="profTitie"
-                  class="form-control"
-                  id="siteName"
-                  [class.is-invalid]="(registerFormControl.profTitie.touched || submitted) && registerFormControl.profTitie.errors?.required "
-                /> -->
 						<span
 							class="text-danger"
 							*ngIf="(registerFormControl.profTitie.touched || submitted) && registerFormControl.profTitie.errors?.required"
@@ -220,47 +212,8 @@
 					</div>
 				</div>
 
-				<!-- <div class="row text-center">
-              <div class="mt-2 col-2">
-                <input  [value]="roleId._id" *ngFor="let jobNo of allJobNumbers"{{jobNo.jobNumber}}
-                  type="radio"
-                  formControlName="porfEmployee"
-                  name="porfEmployee"
-                  class="form-check-input mr-1"
-                  value="Employee"
-                />
-                <label for="exampleFormControlInput1" class="form-label label_2"
-                  >Employee</label
-                >
-              </div>
-              <div class="mt-2 col-2">
-                <input
-                  type="radio"
-                  formControlName="porfEmployee"
-                  name="porfEmployee"
-                  class="form-check-input mr-1"
-                  value="Manager"
-                />
-                <label for="exampleFormControlInput1" class="form-label label_2"
-                  >Manager</label
-                >
-              </div>
-              <div class="mt-2 col-2">
-                <input
-                  type="radio"
-                  formControlName="porfEmployee"
-                  name="porfEmployee"
-                  class="form-check-input mr-1"
-                  value="Administrater"
-                />
-                <label for="exampleFormControlInput1" class="form-label label_2"
-                  >Administrater</label
-                >
-              </div>
-            </div> -->
-
 				<div class="row">
-					<div class="mb-3 mt-3 col-5">
+					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
 							>Street Address</label
 						>
@@ -272,8 +225,6 @@
 							id="name"
 							[class.is-invalid]="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required "
 						></textarea>
-						<!-- <input type="text" formControlName="porfStreetAddress" class="form-control" id="siteName"
-                [class.is-invalid]="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required " /> -->
 						<span
 							class="text-danger"
 							*ngIf="(registerFormControl.porfStreetAddress.touched || submitted) && registerFormControl.porfStreetAddress.errors?.required"
@@ -281,7 +232,7 @@
 							Street Address is required
 						</span>
 					</div>
-					<div class="mb-3 mt-3 col-4">
+					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
 							>Suburb</label
 						>
@@ -303,9 +254,6 @@
 						<label for="exampleFormControlInput1" class="form-label"
 							>State</label
 						>
-						<!-- <input type="text" formControlName="porfState" class="form-control"
-                [class.is-invalid]="(registerFormControl.porfState.touched || submitted) && registerFormControl.porfState.errors?.required " />
-                -->
 						<select
 							class="form-select form-control col"
 							aria-label="Default select example"
@@ -328,15 +276,23 @@
 							State is required
 						</span>
 					</div>
-					<!-- <div class="mb-3 mt-3 col-2">
-              <label for="exampleFormControlInput1" class="form-label">Postal Code</label>
-              <input type="text" formControlName="porfPostalCode" class="form-control"
-                [class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required " />
-              <span class="text-danger"
-                *ngIf="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required">
-                Postal Code is required
-              </span>
-            </div> -->
+					<div class="mb-3 mt-3 col-3">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Postal Code</label
+						>
+						<input
+							type="text"
+							formControlName="porfPostalCode"
+							class="form-control"
+							[class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required "
+						/>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required"
+						>
+							Postal Code is required
+						</span>
+					</div>
 				</div>
 				<div class="row py-3">
 					<div class="offset-1 col-3 mt-2">
@@ -374,9 +330,10 @@
 							>First Name</label
 						>
 						<input
+							appTitleCase
 							type="text"
 							formControlName="EmpFirst"
-							class="form-control inputData"
+							class="form-control"
 							id="siteName"
 							[class.is-invalid]="(registerFormControl.EmpFirst.touched || submitted) && registerFormControl.EmpFirst.errors?.required "
 						/>
@@ -392,9 +349,10 @@
 							>Last Name</label
 						>
 						<input
+							appTitleCase
 							type="text"
 							formControlName="empLastName"
-							class="form-control inputData"
+							class="form-control"
 							[class.is-invalid]="(registerFormControl.empLastName.touched || submitted) && registerFormControl.empLastName.errors?.required "
 						/>
 						<span
@@ -529,10 +487,6 @@
 											{{option.title}}
 										</mat-option>
 									</mat-autocomplete>
-									<!-- <span class="text-danger"
-                      *ngIf="(registerFormControl.LicenceName.touched || submitted) && registerFormControl.LicenceName.errors?.required">
-                      Licence Name is required
-                    </span> -->
 								</div>
 								<div class="mb-3 mt-3 col-3">
 									<label
@@ -585,10 +539,6 @@
 											type="file"
 											(change)="browser($event,filed)"
 										/>
-										<!-- <span class="text-danger"
-                *ngIf="(addLicence(filed).file.touched || submitted) && addLicence(filed).file.errors?.required">
-                Upload Licence is required
-            </span> -->
 									</div>
 								</div>
 
@@ -633,15 +583,6 @@
 				>
 					Update
 				</button>
-				<!-- <div class="col-2 float-right" style="margin-top: -50px">
-              <button
-                (click)="addFiled()"
-                class="btn btn-outline-primary"
-                style="width: 100%"
-              >
-                Add
-              </button>
-            </div> -->
 			</mat-tab>
 			<mat-tab label="PPE Register" (click)="PPERegisteshow()">
 				<div formArrayName="PPEArr">
@@ -727,14 +668,6 @@
 										</span>
 									</div>
 								</div>
-								<!-- <div class="col-1 mt-4">
-                    <div class="my-4">
-                      <span class="material-icons" (click)="removeFiled1(filed1)">
-                        remove_circle_outline
-                      </span>
-                    </div>
-
-                  </div> -->
 							</div>
 						</div>
 					</div>
@@ -828,7 +761,6 @@
 										class="form-label"
 										>Service/Replacement Date</label
 									>
-									<!-- <label for="exampleFormControlInput1" class="form-label" style="padding: 4%;"></label> -->
 									<input
 										type="date"
 										formControlName="serviceRenewDate"
@@ -855,14 +787,6 @@
 										</span>
 									</div>
 								</div>
-								<!-- <div class="col-1 mt-4">
-                    <div class="my-4">
-                      <span class="material-icons" (click)="removeEquipFiled1(filed2)">
-                        remove_circle_outline
-                      </span>
-                    </div>
-
-                  </div> -->
 							</div>
 						</div>
 					</div>
@@ -906,71 +830,5 @@
 				</div>
 			</mat-tab>
 		</mat-tab-group>
-		<!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              [ngClass]="profile === true ? 'nav-link active' : 'nav-link outline'"
-              id="profile-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#profile"
-              type="button"
-              role="tab"
-              aria-controls="profile"
-              (click)="profileshow()"
-              aria-selected="true"
-            >
-              Profile
-            </button>
-             <div
-            class="tab-pane fade show active"
-            id="profile"
-            role="tabpanel"
-            *ngIf="profile"
-            aria-labelledby="profile-tab"
-          ></div>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              [ngClass]="
-                LicenceInfo === true ? 'nav-link active' : 'nav-link outline'
-              "
-              id="LicenceInfo-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#LicenceInfo"
-              type="button"
-              role="tab"
-              aria-controls="LicenceInfo"
-              (click)="LicenceInfoshow()"
-              aria-selected="false"
-            >
-              Licence And Quaifications
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              [ngClass]="
-                PPERegister === true ? 'nav-link active' : 'nav-link outline'
-              "
-              id="PPERegister-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#PPERegister"
-              type="button"
-              role="tab"
-              aria-controls="PPERegister"
-              (click)="PPERegisteshow()"
-              aria-selected="false"
-            >
-              PPE Register
-            </button>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-
-
-
-
-
-        </div> -->
 	</form>
 </div>
-<!-- </mat-dialog-contaner> -->

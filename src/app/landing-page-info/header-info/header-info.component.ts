@@ -19,7 +19,6 @@ export class HeaderInfoComponent implements OnInit {
 	serviceDetail: FormGroup;
 	closeResult: string;
 	selectedImage: any = [];
-	// HeaderInformation!: FormGroup;
 	myId: any;
 	isEdit = false;
 	data: any = [];
@@ -131,20 +130,15 @@ export class HeaderInfoComponent implements OnInit {
 			data: {
 				action: 'edit',
 				headerData: this.infoData
-				// headerId: id
 			},
 			width: '800px'
 		});
-		// this.expensesId = expenses.Action;
 		dialogRef.afterClosed().subscribe((result) => {
 			console.log(
 				'ExpensesInfoComponent -> openDialog -> result',
 				result
 			);
 			this.getHeaderById();
-			//   if ((result == "true")) {
-			// 	this.getAllExpenses();
-			//   }
 			console.log('The dialog was closed');
 		});
 	}

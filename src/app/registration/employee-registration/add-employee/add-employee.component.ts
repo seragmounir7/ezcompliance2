@@ -16,6 +16,7 @@ import {
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
@@ -67,7 +68,8 @@ export class AddEmployeeComponent implements OnInit {
 		public router: Router,
 		// @Inject(MAT_DIALOG_DATA) public data?,
 		// private matDialogRef?:MatDialogRef<AddEmployeeComponent>
-		private injector: Injector
+		private injector: Injector,
+		private setTitle: SetTitleService
 	) {
 		this.dialogRef = this.injector.get(MatDialogRef, null);
 		this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
@@ -92,7 +94,7 @@ export class AddEmployeeComponent implements OnInit {
 			porfSuburb: ['', Validators.required],
 
 			porfState: ['', Validators.required],
-
+			porfPostalCode: ['', Validators.required],
 			porfUploadImage: [''],
 			EmpFirst: ['', Validators.required],
 			empLastName: ['', Validators.required],
@@ -124,19 +126,11 @@ export class AddEmployeeComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getall();
+
+		this.setTitle.setTitle('WHS-Employee Information');
 		this.empDetails.get('reportingTo').valueChanges.subscribe((res) => {
 			if (res) {
 				console.log(res);
-
-				// for (let i = 0; i < this.reportingData.length; i++) {
-				//   if (res === this.reportingData[i]._id) {
-				//     console.log("id found");
-
-				//     // this.empDetails.get('managerSupervisorEmail').setValue(this.whsData[i].email);
-
-				//     break;
-				//   }
-				// }
 			}
 		});
 		this.licenceInfo
@@ -152,23 +146,6 @@ export class AddEmployeeComponent implements OnInit {
 			.subscribe((empData) => {
 				this.empData = empData;
 				console.log('this.empData', this.empData);
-				// this.filteredOptions2 = this.empDetails.controls.fullName.valueChanges.pipe(
-				//   startWith(''),
-				//   debounceTime(400),
-				//   map(value => (typeof value === 'string' ? value : value.fullName)),
-				//   map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
-				// )
-				// this.filteredOptions3 = this.empDetails.controls.name.valueChanges.pipe(
-				//   startWith(''),
-				//   debounceTime(400),
-				//   tap(value => console.log('value', value)),
-				//   map(value => (typeof value === 'string' ? value : value.fullName)),
-				//   map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
-				// )
-
-				// this.obj = new Object()
-
-				// console.log(this.obj)
 			});
 		this.licenceInfo
 			.getAllPPE()
@@ -184,9 +161,6 @@ export class AddEmployeeComponent implements OnInit {
 				this.PPEData = empData;
 				console.log('this.empData2', this.PPEData);
 			});
-
-		// let dataMap = map((res: any) => res.data)
-		// this.licenceInfo.getAllStates().pipe(dataMap),
 
 		this.getAllRoles();
 
@@ -238,23 +212,10 @@ export class AddEmployeeComponent implements OnInit {
 			this.roleData = res.data;
 		});
 	}
-	//   ngAfterViewInit() {
-	//     console.log("after..",this.signaturePad,this.dataUrl)
-	//     // this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
-	//     // this.signaturePad.clear();
-	//     // this.signaturePad.fromDataURL(this.dataUrl);
-	//    setTimeout(() => {
-	//     console.log("after10s..",this.signaturePad,this.dataUrl)
-	//    }, 10000);
-	//  }
 	patchData() {
 		this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
 			console.log('data=>', data);
-			// this.signaturePad.toDataURL();
 			data.data.licence.forEach((element) => {
-				// element.uploadLicence.forEach(ele => {
-				//   this.addFiled1(ele);
-				// });
 				element.uploadLicence.length > 0
 					? element.uploadLicence.forEach((ele) => {
 							this.addFiled1(ele);
@@ -287,7 +248,7 @@ export class AddEmployeeComponent implements OnInit {
 				reportingTo: data.data.reportingTo,
 				porfStreetAddress: data.data.location.address,
 				porfSuburb: data.data.suburb,
-
+				porfPostalCode: data.data.location.postcode,
 				porfState: data.data.location.state,
 
 				porfUploadImage: data.data.uploadImage,
@@ -333,13 +294,11 @@ export class AddEmployeeComponent implements OnInit {
 		});
 	}
 	public signaturePadOptions: Object = {
-		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
 		canvasWidth: 500,
 		canvasHeight: 100
 	};
 	drawComplete2() {
-		// will be notified of szimek/signature_pad's onEnd event
 		this.empDetails.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
@@ -349,11 +308,9 @@ export class AddEmployeeComponent implements OnInit {
 		this.signaturePad2.clear();
 	}
 	drawStart2() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
 	}
 	drawComplete() {
-		// will be notified of szimek/signature_pad's onEnd event
 		this.empDetails.controls.Sign.setValue(this.signaturePad.toDataURL());
 		console.log(this.signaturePad.toDataURL());
 	}
@@ -362,7 +319,6 @@ export class AddEmployeeComponent implements OnInit {
 		this.signaturePad.clear();
 	}
 	drawStart() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
 	}
 
@@ -443,7 +399,7 @@ export class AddEmployeeComponent implements OnInit {
 			mobile: this.empDetails.get('porfMobile').value,
 			roleId: this.empDetails.get('roleId').value,
 			// designation: this.empDetails.get('porfEmployee').value,
-			// deviceToken: '',
+			// deviceToken: '',porfPostalCode
 
 			suburb: this.empDetails.get('porfSuburb').value,
 			stateId: this.empDetails.get('porfState').value,
@@ -478,10 +434,8 @@ export class AddEmployeeComponent implements OnInit {
 				address: this.empDetails.get('porfStreetAddress').value,
 				landmark: 'Nagpur',
 
-				// suburb:this.empDetails.get('porfSuburb').value,
 				state: this.empDetails.get('porfState').value,
-				// city: this.empDetails.get('
-				// pincode: this.empDetails.get('
+				postcode: this.empDetails.get('porfPostalCode').value,
 				country: 'India'
 			}
 		};
@@ -505,9 +459,6 @@ export class AddEmployeeComponent implements OnInit {
 	}
 	onFormSubmit() {
 		this.submitted = true;
-		// if (!this.empDetails.controls.valid) {
-		//   this.formData='formfield'
-		// }
 		const Sign = this.signaturePad.toDataURL();
 		console.log('sign=>', this.signaturePad.toDataURL());
 		const plantSignature = this.signaturePad2.toDataURL();
@@ -547,8 +498,6 @@ export class AddEmployeeComponent implements OnInit {
 			position: this.empDetails.get('porfPosition').value,
 			mobile: this.empDetails.get('porfMobile').value,
 			roleId: this.empDetails.get('roleId').value,
-			// designation: this.empDetails.get('porfEmployee').value,
-			// deviceToken: '',
 			reportingTo: this.empDetails.get('reportingTo').value,
 
 			suburb: this.empDetails.get('porfSuburb').value,
@@ -581,10 +530,8 @@ export class AddEmployeeComponent implements OnInit {
 			location: {
 				address: this.empDetails.get('porfStreetAddress').value,
 				landmark: 'Nagpur',
-				// suburb:this.empDetails.get('porfSuburb').value,
 				state: this.empDetails.get('porfState').value,
-				// city: this.empDetails.get('
-				// pincode: this.empDetails.get('
+				postcode: this.empDetails.get('porfPostalCode').value,
 				country: 'India'
 			}
 		};
@@ -615,11 +562,6 @@ export class AddEmployeeComponent implements OnInit {
 
 	addAcionTab(event) {
 		const b = Object.keys(this.sidePreview.value);
-		//   let index =this.add().length
-		//   this.addAction()
-		// this.add().controls[index].get("item").setValue(event.target.value)
-
-		//  console.log(this.sidePreview.controls[b[0]].value);
 	}
 
 	profileshow() {
@@ -820,15 +762,6 @@ export class AddEmployeeComponent implements OnInit {
 			);
 			console.log(element.valueChanges);
 		}
-		// this.licenceValueChanges.map(x => {
-		//   x.pipe(
-		//     startWith(''),
-		//     debounceTime(400),
-		//     tap(value => console.log('value', value)),
-		//     map(value => (typeof value === 'string' ? value : value.fullName)),
-		//     map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
-		//   )
-		// })
 	}
 	removeFiled(i) {
 		const item = <FormArray>this.empDetails.controls.UploadLicenceArr;
@@ -906,13 +839,4 @@ export class AddEmployeeComponent implements OnInit {
 			})
 		);
 	}
-	// employeeData(e:MatAutocompleteSelectedEvent){
-	//   const data = e.option.value;
-	//   this.empDetails.patchValue({
-	//     LicenceName:[ data.title],
-	//   })
-	//   console.log("e.option",e.option);
-	//   console.log("data...");
-
-	// }
 }

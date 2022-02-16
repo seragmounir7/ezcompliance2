@@ -93,7 +93,6 @@ export class OurWorkComponent implements OnInit {
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
 			console.log('System', res.data);
 			this.dataSource.data = res.data;
-			// this.SystemData = res.data;
 			const SystemData = res.data[0].subModules;
 			SystemData.forEach((element, index) => {
 				element.index = index + 1;

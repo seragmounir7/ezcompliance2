@@ -12,6 +12,7 @@ import {
 	tap
 } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
@@ -37,7 +38,8 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		private upload: UploadFileService,
 		private activatedRoute: ActivatedRoute,
 		public router: Router,
-		private licenceInfo: LogicalFormInfoService
+		private licenceInfo: LogicalFormInfoService,
+		private setTitle: SetTitleService
 	) {
 		this.subcontractDetails = this.fb.group({
 			companyName: ['', Validators.required],
@@ -48,7 +50,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			state: ['', Validators.required],
 			streetAddress: ['', Validators.required],
 			ABN: ['', Validators.required],
-
+			postCode: ['', Validators.required],
 			file: [''],
 			licenceNumber: ['', Validators.required],
 			website: ['', Validators.required],
@@ -64,6 +66,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllStates();
+		this.setTitle.setTitle('WHS-Subcontractor Information');
 		this.id = this.activatedRoute.snapshot.params.id;
 
 		if (this.id !== 'form') {
@@ -101,7 +104,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					this.addFiled();
 				});
 		}
-		// this.addFiled();
 		this.filteredOptions2 = this.subcontractDetails.controls.LicenceName.valueChanges.pipe(
 			startWith(''),
 			debounceTime(800),
@@ -187,15 +189,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			);
 			console.log(element.valueChanges);
 		}
-		// this.licenceValueChanges.map(x => {
-		//   x.pipe(
-		//     startWith(''),
-		//     debounceTime(400),
-		//     tap(value => console.log('value', value)),
-		//     map(value => (typeof value === 'string' ? value : value.fullName)),
-		//     map(fullName => (fullName ? this._filter(fullName) : this.empData.slice())),
-		//   )
-		// })
 	}
 	private _filter(name: string): any[] {
 		const filterValue = name.toLowerCase();
@@ -268,9 +261,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		this.licenceInfo.getSubcontract(this.id).subscribe((res: any) => {
 			console.log('dataId=>', res.data);
 
-			// res.data.licenceAndQualifications.forEach(ele => {
-			//   this.addFiled1(ele);
-			// });
 			res.data.licenceAndQualifications.length > 0
 				? res.data.licenceAndQualifications.forEach((ele) => {
 						this.addFiled1(ele);
@@ -278,10 +268,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				: this.addFiled();
 
 			this.subcontractDetails.patchValue({
-				// LicenceName: res.data.licenceAndQualifications.LicenceName,
-				// LicenceNumber: res.data.licenceAndQualifications.LicenceNumber,
-				// TrainingQrginisation: res.data.licenceAndQualifications.TrainingQrginisation,
-				// ExpiryDate: res.data.licenceAndQualifications.ExpiryDate,
 				companyName: res.data.companyName,
 				phone: res.data.phone,
 				fax: res.data.fax,
@@ -289,7 +275,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				state: res.data.stateId,
 				streetAddress: res.data.streetAddress,
 				suburb: res.data.suburb,
-				// postCode: res.data.companyName,
+				postCode: res.data.postCode,
 				// mailingAddress: res.data.companyName,
 				ABN: res.data.ABN,
 				licenceNumber: res.data.licenceNumber,
@@ -299,9 +285,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 	}
 	onFormSubmit() {
 		this.submitted = true;
-		// if (!this.empDetails.controls.valid) {
-		//   this.formData='formfield'
-		// }
 
 		const licenceArr = () => {
 			this.addLicence().length;
@@ -328,7 +311,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			stateId: this.subcontractDetails.get('state').value,
 			streetAddress: this.subcontractDetails.get('streetAddress').value,
 			suburb: this.subcontractDetails.get('suburb').value,
-			// postCode: this.subcontractDetails.get('postCode').value,
+			postCode: this.subcontractDetails.get('postCode').value,
 			// mailingAddress: this.subcontractDetails.get('mailingAddress').value,
 			ABN: this.subcontractDetails.get('ABN').value,
 			licenceNumber: this.subcontractDetails.get('licenceNumber').value,
@@ -380,7 +363,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			stateId: this.subcontractDetails.get('state').value,
 			streetAddress: this.subcontractDetails.get('streetAddress').value,
 			suburb: this.subcontractDetails.get('suburb').value,
-			// postCode: this.subcontractDetails.get('postCode').value,
+			postCode: this.subcontractDetails.get('postCode').value,
 			// mailingAddress: this.subcontractDetails.get('mailingAddress').value,
 			ABN: this.subcontractDetails.get('ABN').value,
 			licenceNumber: this.subcontractDetails.get('licenceNumber').value,

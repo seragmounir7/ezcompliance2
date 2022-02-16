@@ -20,7 +20,6 @@ export class EditScreenShotComponent implements OnInit {
 	myId: boolean;
 	Is_subMod: boolean;
 	isEdit = false;
-	// data: any;
 	enum: any;
 	subId: any;
 	testimonailData: any;
@@ -172,15 +171,6 @@ export class EditScreenShotComponent implements OnInit {
 				?.setValue(this.selectedImage[i].toString());
 		}
 		console.log(this.SubWorkDetail.value);
-
-		// this.url.addSubWork(this.SubWorkDetail.value).subscribe((res) => {
-		//   console.log('AddProductComponent -> browser -> res', res);
-
-		//   console.log(
-		//     'AddProductComponent -> browse -> this.selectedImage',
-		//     this.selectedImage
-		//   );
-		// });
 	}
 	editModule() {
 		if (this.data.action == 'edit') {
@@ -204,7 +194,6 @@ export class EditScreenShotComponent implements OnInit {
 	editSubModule() {
 		if (this.data.action == 'edit') {
 			const submodulesData = {
-				// subTitle: this.SubWorkDetail.controls.subTitle.value,
 				moduleId: this.data.EditData._id,
 				title: this.add().at(0).get('title')?.value,
 				fileUrl: this.selectedImage,

@@ -54,7 +54,6 @@ export class SubcontractComponent implements OnInit {
 			this.ELEMENT_DATA = couponData;
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
-			//this.dataSource.sort = this.sort;
 		});
 	}
 
@@ -70,7 +69,6 @@ export class SubcontractComponent implements OnInit {
 		}).then((result) => {
 			if (result.value) {
 				console.log(result);
-				// this.model.attributes.splice(i,1);
 				void this.spinner.show();
 				this.subContract
 					.deleteSubcontract(item._id)

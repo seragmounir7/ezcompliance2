@@ -5,6 +5,7 @@ import {
 	HostListener,
 	OnDestroy,
 	OnInit,
+	Renderer2,
 	ViewChild
 } from '@angular/core';
 import Swal from 'sweetalert2';
@@ -22,11 +23,12 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { SignaturePad } from 'angular2-signaturepad';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { debounceTime, map, startWith, tap } from 'rxjs/operators';
+import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 
 @Component({
 	selector: 'app-site-inspection',
@@ -41,7 +43,7 @@ export class SiteInspectionComponent
 	siteAction = false;
 	itemvalue: any;
 	singRequired: any;
-	sub: any;
+	sub: Subscription;
 
 	isPrint: Observable<any>;
 	@ViewChild('Signature') signaturePad: SignaturePad;
@@ -99,16 +101,16 @@ export class SiteInspectionComponent
 		private datePipe: DatePipe,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		private employee: EmployeeRegistrationService
+		private employee: EmployeeRegistrationService,
+		private renderer: Renderer2,
+		private mobileViewService: MobileViewService
 	) {
 		this.check = localStorage.getItem('key');
 		this.sidePreview = this.fb.group({
 			jobNumber: ['', Validators.required],
 			siteName: ['', Validators.required],
 			customerName: ['', Validators.required],
-			//streetNo: [''],
 			streetAddr: ['', Validators.required],
-			// subUrb: [''],
 			custConct: ['', Validators.required],
 			custConctPh: ['', Validators.required],
 			custEmail: ['', Validators.required],
@@ -117,73 +119,14 @@ export class SiteInspectionComponent
 			empName: ['', Validators.required],
 			submitDate: [new Date(), Validators.required],
 			signature: ['', Validators.required],
-			// datetooboxtalk: [''],
-			// Hazard: ['', Validators.required],
-			// documentation: ['', Validators.required],
-			// workeronsite: ['', Validators.required],
-			// SWMS: ['', Validators.required],
-			// tooboxtalk: ['', Validators.required],
-			// WHSManual: ['', Validators.required],
-			// IncidentReport: ['', Validators.required],
-			// HazardReport: ['', Validators.required],
-			// emergrncyEvacuation: ['', Validators.required],
-			// TrainingRecords: ['', Validators.required],
-			// WHSPolicy: ['', Validators.required],
-			// ReturnToWork: ['', Validators.required],
-			// displayHazardReport: ['', Validators.required],
-			// displayEmergrncyEvacuation: ['', Validators.required],
-			// NoSmoking: ['', Validators.required],
-			// PPESignage: ['', Validators.required],
-			// ReportHazardsigns: ['', Validators.required],
-			// ManualHandlingSigns: ['', Validators.required],
-			// NoticeBoard: ['', Validators.required],
-			// accessEgrassHazards: ['', Validators.required],
-			// Walkways: ['', Validators.required],
-			// Walkwaysfree: ['', Validators.required],
-			// StairsConditionGood: ['', Validators.required],
-			// HoardingsFenceGates: ['', Validators.required],
-			// LosseMatrialSecure: ['', Validators.required],
-			// binsSkipsLocated: ['', Validators.required],
-			// binsSkipsOverflowing: ['', Validators.required],
-			// electricalMainboardLock: ['', Validators.required],
-			// PowerleadsTested: ['', Validators.required],
-			// EquipmentGiards: ['', Validators.required],
-			// EquipmentCondition: ['', Validators.required],
-			// LeadsSafety: ['', Validators.required],
-			// SDSavailable: ['', Validators.required],
-			// chemicalsStoredSDS: ['', Validators.required],
-			// SDSRegisterAvailables: ['', Validators.required],
-			// correctPPHand: ['', Validators.required],
-			// FirstAidavailable: ['', Validators.required],
-			// FirstKitContentsList: ['', Validators.required],
-			// KitAccessableWorkers: ['', Validators.required],
-			// awarefirstKitLocation: ['', Validators.required],
-			// Extinguishers: ['', Validators.required],
-			// ExtinguishersClearlyMaked: ['', Validators.required],
-			// ExtinguishersSevicedUpdate: ['', Validators.required],
-			// ExitSingsCondition: ['', Validators.required],
-			// ExitDoorsBlocked: ['', Validators.required],
-			// ExitDoorsOpened: ['', Validators.required],
-			// FireAlarmTested: ['', Validators.required],
-			// EvacuationPlans: ['', Validators.required],
-			// emergencyDrillConduct: ['', Validators.required],
-			// RiskAssessmentSWMS: ['', Validators.required],
-			// PlantValidService: ['', Validators.required],
-			// OpertionProceduresSOPs: ['', Validators.required],
-			// PPEAvailable: ['', Validators.required],
-			// emergencyPlan: ['', Validators.required],
-			// PlantGoodCondition: ['', Validators.required],
-			// appropriateGuards: ['', Validators.required],
 			siteAction: this.fb.array([]),
 			siteCategorytTopic: this.fb.array([])
 		});
 	}
 	ngOnDestroy(): void {
-		this.sub.unsubscribe();
 		console.log('site destroy');
 	}
 	public signaturePadOptions1: Object = {
-		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
 		canvasWidth: 350,
 		canvasHeight: 100
@@ -235,10 +178,7 @@ export class SiteInspectionComponent
 					this.maxDate = this.showDatas.date;
 					this.minDate = this.showDatas.date;
 					for (let index = 0; index < this.allTopic.length; index++) {
-						//this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
-
 						this.add2().push(this.newAction2(index));
-						// console.log("index",index);
 					}
 					console.log(this.sidePreview.value);
 					setTimeout(() => {
@@ -388,29 +328,24 @@ export class SiteInspectionComponent
 	}
 	employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
 		const data = e.option.value;
-
-		//   this.sidePreview.patchValue({
-
-		//     empName: data.fullName,
-		// })
 	}
 	ngAfterViewInit(): void {
-		this.sub = this.shared.printObs$.subscribe((res) => {
-			this.check = res;
-			console.log('check1...', this.check);
-			if (this.check) {
-				setTimeout(() => {
-					window.print();
-					console.log('printing....');
-				}, 3000);
-				localStorage.setItem('key', ' ');
-			}
-		});
-		//Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-		//Add 'implements AfterViewInit' to the class.
+		this.sub = this.mobileViewService.removeButton();
+		this.sub.add(
+			this.shared.printObs$.subscribe((res) => {
+				this.check = res;
+				console.log('check1...', this.check);
+				if (this.check) {
+					setTimeout(() => {
+						window.print();
+						console.log('printing....');
+					}, 3000);
+					localStorage.setItem('key', ' ');
+				}
+			})
+		);
 	}
 	drawComplete1() {
-		// will be notified of szimek/signature_pad's onEnd event
 		console.log(this.signaturePad.toDataURL());
 		this.sidePreview.controls.signature.setValue(
 			this.signaturePad.toDataURL()
@@ -424,10 +359,7 @@ export class SiteInspectionComponent
 		this.singRequired = this.sidePreview.controls.signature.untouched;
 	}
 	drawStart1() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
-
-		//this.singRequired = this.riskAssessmentFb.controls['signaturePad'].invalid
 	}
 	jobNoSel() {
 		this.allJobNumbers.forEach((item) => {
@@ -502,68 +434,6 @@ export class SiteInspectionComponent
 	showAction() {
 		this.siteAction = true;
 		this.siteshow = false;
-		// this.add().clear();
-		//   if (this.id !== 'form') {
-		//     if(!this.add().length){
-		//     for (
-		//       let index = 0;
-		//       index < this.showDatas.siteAction.length;
-		//       index++
-		//     ) {
-		//       console.log(this.showDatas.siteAction[index].item);
-
-		//       this.addAction();
-		//       this.add()
-		//         .controls[index].get('item')
-		//         .setValue(this.showDatas.siteAction[index].item);
-		//       this.add()
-		//         .controls[index].get('action')
-		//         .setValue(this.showDatas.siteAction[index].action);
-		//       this.add()
-		//         .controls[index].get('topicId')
-		//         .setValue(this.showDatas.siteAction[index].topicId);
-		//       this.add()
-		//         .controls[index].get('personResponsible')
-		//         .setValue(
-		//           this.showDatas.siteAction[index].personResponsible
-		//         );
-		//       this.add()
-		//         .controls[index].get('complete')
-		//         .setValue(this.showDatas.siteAction[index].complete);
-		//     }
-		//   }
-		// } else {
-		// let key = [];
-		// for (let y = 0; y < this.allTopic.length; y++) {
-		//   key.push(Object.keys(this.add2().at(y).value));
-		// }
-
-		// console.log('this.keyArr.find((ele) => key.includes(ele))', key);
-		// for (let i = 0; i < key.length - 1; i++) {
-		//   if (!this.keyArr.find((ele) => key[i].includes(ele))) {
-		//     let tempValue = this.add2().at(i).get(key[i]).value;
-		//     console.log('tempValue', tempValue);
-		//     let data = this.allTopic.find((obj) => {
-		//       if (obj._id == tempValue) {
-		//         console.log('obj', obj);
-
-		//         return obj;
-		//       }
-		//     });
-		//     if (tempValue != '') {
-		//       if (tempValue != 'yes') {
-		//         let index = this.add().length;
-		//         this.addAction();
-		//         console.log('data', data);
-
-		//         this.add().controls[index].get('item').setValue(data.item);
-		//         this.add().controls[index].get('action').setValue(data.action);
-		//         this.add().controls[index].get('topicId').setValue(data._id);
-		//       }
-		//     }
-		//   }
-		// }
-		// }
 	}
 	removeAction() {
 		const index = this.add().length;
@@ -645,7 +515,6 @@ export class SiteInspectionComponent
 				.updateSiteInspection(this.id, data)
 				.subscribe((res) => {
 					console.log('res', res);
-					// this.router.navigate(["/admin/forms/tableData"]);
 					Swal.fire({
 						title: 'Update successfully',
 						showConfirmButton: false,
@@ -663,7 +532,6 @@ export class SiteInspectionComponent
 					showConfirmButton: false,
 					timer: 1200
 				});
-				// this.router.navigate(["/admin/forms/tableData"]);
 				this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
 			});
 			console.log('data', data);
@@ -677,15 +545,6 @@ export class SiteInspectionComponent
 			.subscribe((res: any) => {
 				this.allcategory = res.data;
 				console.log('Allcategory', res);
-				// for (let index = 0; index < this.allcategory.length; index++) {
-				//   //this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
-
-				// }
-				// for (let x = 0; x < this.allcategory.length; x++) {
-				//   let y=this.allcategory[x].category
-
-				//  this.add2().push(this.newAction2())
-				// }
 			});
 	}
 	add2(): FormArray {
@@ -703,15 +562,9 @@ export class SiteInspectionComponent
 				this.allTopic = res.data;
 				console.log('alltopic', this.allTopic);
 
-				// this.add2().push(this.newAction2(index))
-
 				for (let index = 0; index < this.allTopic.length; index++) {
-					//this.sidePreview.addControl( this.allcategory[index].category ,new FormArray([]))
-
 					this.add2().push(this.newAction2(index));
 					this.disableForm();
-
-					// console.log("index",index);
 				}
 				console.log(this.sidePreview.value);
 			});

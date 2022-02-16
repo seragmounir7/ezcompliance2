@@ -30,9 +30,6 @@ export class JobNumberComponent implements OnInit {
 		'state',
 		'customerName',
 		'customerContact',
-		//'customerContactPhone',
-		// 'customerEmail',
-		/* 'edit', */
 		'action'
 	];
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -50,7 +47,7 @@ export class JobNumberComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.setTitle.setTitle('WHS-Add Site Info');
+		this.setTitle.setTitle('WHS-Job Number List');
 		this.getAllJobNumber();
 	}
 	getAllJobNumber(field = '', value = '') {
@@ -67,16 +64,7 @@ export class JobNumberComponent implements OnInit {
 
 	getAllJobTask() {
 		// this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
-		//   console.log('jobTaskDetails=>', res);
-		//   // this.jobTaskData = res.data[0].subComponents;
 		//   let data = res.data
-		//   data.forEach((element, index) => {
-		//     element.index = index + 1; //adding index
-		//   });
-		//   this.ELEMENT_DATA = data;
-		//   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-		//   this.dataSource.paginator = this.paginator;
-		//   //  this.task = res.data.subComponents;
 		// });
 	}
 

@@ -26,7 +26,7 @@ export class AddingCustComponent implements OnInit {
 			streetAddress: ['', Validators.required],
 			stateId: ['', Validators.required],
 			subUrb: ['', Validators.required],
-			// postCode: ['', Validators.required],
+			postCode: ['', Validators.required],
 			ABN: ['', Validators.required],
 			contacts: this.fb.array([])
 			// customerContactPhone:[''],

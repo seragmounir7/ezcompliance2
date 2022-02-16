@@ -36,38 +36,6 @@
 		<p class="title">Site Inspection</p>
 	</h2>
 
-	<!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button
-        [ngClass]="siteshow === true ? 'nav-link active' : 'nav-link outline'"
-        id="siteInspection-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#siteInspection"
-        type="button"
-        role="tab"
-        aria-controls="siteInspection"
-        (click)="showsite()"
-        aria-selected="true"
-      >
-        Site Inspection
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button
-        [ngClass]="siteAction === true ? 'nav-link active' : 'nav-link outline'"
-        id="siteAction-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#siteAction"
-        type="button"
-        role="tab"
-        aria-controls="siteAction"
-        (click)="showAction()"
-        aria-selected="false"
-      >
-        Site Inspection Corrective Action
-      </button>
-    </li>
-  </ul> -->
 	<mat-tab-group
 		(selectedTabChange)="tabClick($event)"
 		*ngIf="(isPrint | async)===false"
@@ -144,8 +112,6 @@
 								id="name"
 								[class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) "
 							></textarea>
-							<!-- <input type="text" class="form-control outline" formControlName="streetAddr"
-                [class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) " /> -->
 							<span
 								*ngIf=" sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty  || sidePreview.get('streetAddr').touched) "
 								class="invalid-feedback"
@@ -279,9 +245,6 @@
 								>
 									{{mang.title}}
 								</option>
-								<!-- <option value="1">John</option>
-              <option value="2">Akash</option>
-              <option value="3">Rahul</option> -->
 							</select>
 							<span
 								*ngIf=" sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty  || sidePreview.get('projectManager').touched) "
@@ -322,13 +285,6 @@
 								Date is Required</span
 							>
 						</div>
-
-						<!-- <div class="mb-3 col-sm col-md">
-          <p for="exampleFormControlInput1" class="form-Label"
-              >Signature*</p
-            >
-            <input type="text" class="form-control" />
-          </div> -->
 					</div>
 				</div>
 				<!-- /////////////////////////////////////////////////// -->
@@ -477,7 +433,6 @@
 							>
 								Have all workers been inducted into the SWMS
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -548,7 +503,6 @@
 							>
 								WHS Manual is avaiable to all workers
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -627,7 +581,6 @@
 							>
 								Emergrncy Evacuation plan displayed
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -764,7 +717,6 @@
 							>
 								Emergrncy Evacuation plan displayed
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -926,7 +878,6 @@
 							>
 								No oil, grease or other slip hazard
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1005,7 +956,6 @@
 							>
 								Stairs are not blocked and good condition
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1304,7 +1254,6 @@
 							>
 								Safey Data Sheet(SDS) available
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1383,7 +1332,6 @@
 							>
 								Correct PPE on hand and in use
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1415,7 +1363,6 @@
 							>
 								First Aid Kit available
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1494,7 +1441,6 @@
 							>
 								All workers aware of the first Aid kit location
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1526,7 +1472,6 @@
 							>
 								Extinguishers are in place
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1605,7 +1550,6 @@
 							>
 								Exit Sings are in Working condition
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1632,7 +1576,6 @@
 							>
 								Exit Doors not blocked
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1659,7 +1602,6 @@
 							>
 								Exit Doors can be easily opened
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1686,7 +1628,6 @@
 							>
 								Fire Alarm tested and inspected up to date
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1713,7 +1654,6 @@
 							>
 								Evacuation Plans displayed
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1740,7 +1680,6 @@
 							>
 								Emergency Drill conduct within the last year
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1772,7 +1711,6 @@
 							>
 								Risk Assessment and SWMS completed
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1851,7 +1789,6 @@
 							>
 								PPE available
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1878,7 +1815,6 @@
 							>
 								Emergency Plan in place
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1905,7 +1841,6 @@
 							>
 								Plant is in good Condition
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1932,7 +1867,6 @@
 							>
 								Appropriate guards fitted
 							</p>
-							<!-- <input type="text" class="form-control" formControlName="index" /> -->
 							<p>
 								<input
 									type="radio"
@@ -1987,18 +1921,6 @@
 									>
 										This Field is Required</span
 									>
-
-									<!-- <select
-                  class="form-select form-control col-sm col-md outline form-dropdown"
-                  aria-label="Default select example"
-                  formControlName="item"
-                >
-                  <option class="mr-1" value="no">
-                    {{ this.add().controls[filed].get('item').value }}
-                  </option>
-                  <option *ngFor="let item of item_values">{{ item }}</option>
-                </select> -->
-									<!-- <input type="text"  class="form-select form-control col-sm col-md" aria-label="Default select example" formControlName="item"> -->
 								</div>
 
 								<div class="mb-3 col-sm-3 col-md-3">
@@ -2020,13 +1942,6 @@
 									>
 										This Field is Required</span
 									>
-									<!-- <select
-                  class="form-select form-control col-sm col-md outline form-dropdown"
-                  aria-label="Default select example"
-                  formControlName="action"
-                >
-                  <option  class="mr-1" value="{{ this.add().controls[filed].get('action').value }}"> {{ this.add().controls[filed].get('action').value }}</option>
-                </select> -->
 								</div>
 
 								<div class="my-2 col-sm-2 col-md-2">
@@ -2039,12 +1954,6 @@
 											>*</span
 										>
 									</p>
-									<!-- <select class="form-select form-control col-sm col-md form-dropdown" aria-label="Default select example"
-                    formControlName="personResponsible"
-                    [class.is-invalid]=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched) ">
-                    <option selected hidden>Select</option>
-                    <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
-                  </select> -->
 
 									<input
 										type="input"
@@ -2085,36 +1994,6 @@
 										</span>
 									</ng-container>
 								</div>
-								<!-- <div class="mb-3 col-sm-3 col-md-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
-                <p for="exampleFormControlInput1" class="form-Label mt-2">
-                  Person Responsible
-                </p>
-                <select
-                  class="form-select form-control col-sm col-md outline form-dropdown"
-                  aria-label="Default select example"
-                  formControlName="personResponsible"
-                >
-                  <option selected hidden>Select</option>
-                  <option class="mr-1" value="yes">Yes</option>
-                  <option class="mr-1" value="no">No</option>
-                </select>
-              </div> -->
-								<!-- <div class="mb-3 col-sm-2 col-md-2">
-                  <p for="exampleFormControlInput1" class="form-Label mt-2">
-                    Complete<span class="text-danger ">*</span>
-                  </p>
-                  <select class="form-select form-control col-sm col-md outline form-dropdown" aria-label="Default select example"
-                    formControlName="complete"
-                    [class.is-invalid]=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty || add().controls[filed].get('complete').touched) ">
-                    <option selected hidden>Select</option>
-                    <option class="mr-1" value="yes">Yes</option>
-                    <option class="mr-1" value="no">No</option>
-                  </select>
-                  <span
-                    *ngIf=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty  || add().controls[filed].get('complete').touched) "
-                    class="invalid-feedback">
-                    This Field is Required</span>
-                </div> -->
 
 								<div class="mb-3 mt-2 col-sm-2 col-md-2">
 									<p
@@ -2428,9 +2307,6 @@
 							>
 								{{jobNo.jobNumber}}
 							</option>
-							<!-- <option value="1">1000</option>
-            <option value="2">1001</option>
-            <option value="3">1002</option> -->
 						</select>
 						<span
 							*ngIf=" sidePreview.get('jobNumber')?.hasError('required') && (sidePreview.get('jobNumber').dirty  || sidePreview.get('jobNumber').touched) "
@@ -2456,9 +2332,6 @@
 							>
 								{{mang.title}}
 							</option>
-							<!-- <option value="1">John</option>
-            <option value="2">Akash</option>
-            <option value="3">Rahul</option> -->
 						</select>
 						<span
 							*ngIf=" sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty  || sidePreview.get('projectManager').touched) "
@@ -2496,13 +2369,6 @@
 							Date is Required</span
 						>
 					</div>
-
-					<!-- <div class="mb-3 col-sm col-md">
-        <p for="exampleFormControlInput1" class="form-Label"
-            >Signature*</p
-          >
-          <input type="text" class="form-control" />
-        </div> -->
 				</div>
 			</div>
 			<!-- /////////////////////////////////////////////////// -->
@@ -2637,7 +2503,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Have all workers been inducted into the SWMS
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -2699,7 +2564,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							WHS Manual is avaiable to all workers
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -2769,7 +2633,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergrncy Evacuation plan displayed
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -2821,7 +2684,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							WHS Policy Displayed on notice board
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -2891,7 +2753,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergrncy Evacuation plan displayed
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3105,7 +2966,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Stairs are not blocked and good condition
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3319,7 +3179,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Equipment in good condition
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3371,7 +3230,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Safey Data Sheet(SDS) available
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3441,7 +3299,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Correct PPE on hand and in use
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3470,7 +3327,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							First Aid Kit available
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3540,7 +3396,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							All workers aware of the first Aid kit location
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3569,7 +3424,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Extinguishers are in place
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3639,7 +3493,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Exit Sings are in Working condition
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3663,7 +3516,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Exit Doors not blocked
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3687,7 +3539,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Exit Doors can be easily opened
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3711,7 +3562,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Fire Alarm tested and inspected up to date
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3735,7 +3585,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Evacuation Plans displayed
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3759,7 +3608,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergency Drill conduct within the last year
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3788,7 +3636,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Risk Assessment and SWMS completed
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3858,7 +3705,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							PPE available
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3882,7 +3728,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Emergency Plan in place
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3906,7 +3751,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Plant is in good Condition
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3930,7 +3774,6 @@
 						<p for="exampleFormControlInput1" class="form-Label">
 							Appropriate guards fitted
 						</p>
-						<!-- <input type="text" class="form-control" formControlName="index" /> -->
 						<p>
 							<input
 								type="radio"
@@ -3981,18 +3824,6 @@
 								>
 									This Field is Required</span
 								>
-
-								<!-- <select
-              class="form-select form-control col-sm col-md outline form-dropdown"
-              aria-label="Default select example"
-              formControlName="item"
-            >
-              <option class="mr-1" value="no">
-                {{ this.add().controls[filed].get('item').value }}
-              </option>
-              <option *ngFor="let item of item_values">{{ item }}</option>
-            </select> -->
-								<!-- <input type="text"  class="form-select form-control col-sm col-md" aria-label="Default select example" formControlName="item"> -->
 							</div>
 
 							<div class="mb-3 col-sm-3 col-md-3">
@@ -4014,13 +3845,6 @@
 								>
 									This Field is Required</span
 								>
-								<!-- <select
-              class="form-select form-control col-sm col-md outline form-dropdown"
-              aria-label="Default select example"
-              formControlName="action"
-            >
-              <option  class="mr-1" value="{{ this.add().controls[filed].get('action').value }}"> {{ this.add().controls[filed].get('action').value }}</option>
-            </select> -->
 							</div>
 
 							<div class="my-2 col-sm-2 col-md-2">
@@ -4032,12 +3856,7 @@
 										>*</span
 									>
 								</p>
-								<!-- <select class="form-select form-control col-sm col-md form-dropdown" aria-label="Default select example"
-                  formControlName="personResponsible"
-                  [class.is-invalid]=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched) ">
-                  <option selected hidden>Select</option>
-                  <option *ngFor="let j of staff" [value]="j?._id">{{j?.title}}</option>
-                </select> -->
+
 								<input
 									type="input"
 									class="mr-1 form-control"
@@ -4066,36 +3885,6 @@
 									This Field is Required</span
 								>
 							</div>
-							<!-- <div class="mb-3 col-sm-3 col-md-3" [class.disableDiv]="add().controls[filed].get('complete').value  == 'yes'">
-            <p for="exampleFormControlInput1" class="form-Label mt-2">
-              Person Responsible
-            </p>
-            <select
-              class="form-select form-control col-sm col-md outline form-dropdown"
-              aria-label="Default select example"
-              formControlName="personResponsible"
-            >
-              <option selected hidden>Select</option>
-              <option class="mr-1" value="yes">Yes</option>
-              <option class="mr-1" value="no">No</option>
-            </select>
-          </div> -->
-							<!-- <div class="mb-3 col-sm-2 col-md-2">
-                <p for="exampleFormControlInput1" class="form-Label mt-2">
-                  Complete<span class="text-danger ">*</span>
-                </p>
-                <select class="form-select form-control col-sm col-md outline form-dropdown" aria-label="Default select example"
-                  formControlName="complete"
-                  [class.is-invalid]=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty || add().controls[filed].get('complete').touched) ">
-                  <option selected hidden>Select</option>
-                  <option class="mr-1" value="yes">Yes</option>
-                  <option class="mr-1" value="no">No</option>
-                </select>
-                <span
-                  *ngIf=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty  || add().controls[filed].get('complete').touched) "
-                  class="invalid-feedback">
-                  This Field is Required</span>
-              </div> -->
 
 							<div class="mb-3 mt-2 col-sm-2 col-md-2">
 								<p
@@ -4133,14 +3922,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <span class="material-icons" (click)="addAction()">add_circle_outline
-      </span>
-
-      <span class="material-icons" (click)="removeAction()">
-        remove_circle_outline
-      </span>
-      <span class="material-icons"> keyboard_arrow_up </span>
-      <span class="material-icons"> keyboard_arrow_down </span> -->
 		</div>
 
 		<div class="row">

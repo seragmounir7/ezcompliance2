@@ -70,11 +70,6 @@ export class SetRelationComponent implements OnInit {
 			i: 0,
 			code: 'resRiskLevel'
 		},
-		// {
-		//   name:'Code of Practice',
-		//   i:0,
-		//    code:'codeOfPract'
-		// },
 		{
 			name: 'Chemical related Task',
 			i: 0,
@@ -151,13 +146,11 @@ export class SetRelationComponent implements OnInit {
 
 	getAllResidualRiskLevel() {
 		this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
-			//  console.log('this.resiRiskLevelData', res.data);
 			this.resiRiskLevelData = res.data;
 		});
 	}
 	getAllRiskLevel() {
 		this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
-			//console.log('this.riskLevelData', res.data);
 			this.riskLevelData = res.data;
 		});
 	}
@@ -169,19 +162,16 @@ export class SetRelationComponent implements OnInit {
 	}
 	getAllHighRisk() {
 		this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-			//console.log('Risk=>', res);
 			this.highRiskConstructionData = res.data;
 		});
 	}
 	getAllPPE() {
 		this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-			//  console.log('PPE=>', res);
 			this.PPESelectionData = res.data;
 		});
 	}
 	getAllCodeOfPractice() {
 		this.logicalFormInfo.getAllCOP().subscribe((res: any) => {
-			//console.log('codeOfPractice=>', res);
 			this.allCodeOfPract = res.data;
 		});
 	}
@@ -197,14 +187,10 @@ export class SetRelationComponent implements OnInit {
 	}
 	getAllContrActReq() {
 		this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
-			//  console.log('getAllHazards=>', res);
 			this.allContrlActReq = (res.data as any[]).filter(
 				(x) => x.jobTaskId === this.jobTaskId || !x.jobTaskId
 			);
 			this.sendContrlActReq = this.allContrlActReq;
-			// if(!this.allContrlActReq.includes(x => x.jobTaskId == this.jobTaskId)){
-			//   this.allContrlActReq = this.allContrlActReq.filter(x => x.jobTaskId == this.jobTaskId)
-			// }
 			console.log('this.allContrlActReq =>> ', this.allContrlActReq);
 		});
 	}
@@ -212,7 +198,6 @@ export class SetRelationComponent implements OnInit {
 		console.log('getLicenceByTradeCat', id);
 
 		this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
-			//   console.log('getAllLicenceCat=>', res);
 			this.licenceByTradecat = res.data.licenceData;
 		});
 	}
@@ -347,7 +332,6 @@ export class SetRelationComponent implements OnInit {
 
 		const dialogRef = this.dialog.open(AddItemComponent, {
 			width: '550px',
-			// height:'50%',
 			data: temp
 		});
 
@@ -437,44 +421,6 @@ export class SetRelationComponent implements OnInit {
 		});
 		this.stepperList[this.count].i = 1;
 	}
-	// addItem(type) {
-	//   switch (type) {
-	//     case 'highRisk': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'ppe': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'licence': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'identifyHazards': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'riskLevel': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'ctrlActreq': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'resRiskLevel': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-	//     case 'perResbl': {
-	//       this.openDialogBox(type);
-	//       break;
-	//     }
-
-	//   }
-	// }
-
 	contrActReqUpdateAll(event, id) {
 		console.log(event, id);
 		this.sendContrlActReq = this.allContrlActReq.slice().map((item) => {
@@ -504,15 +450,6 @@ export class SetRelationComponent implements OnInit {
 				}
 			}
 			return { _id: item._id, jobTaskId: item.jobTaskId };
-			// return {
-			// 	_id: item._id,
-			// 	jobTaskId:
-			// 		event.value == item._id
-			// 			? event.selected
-			// 				? this.jobTaskId
-			// 				: ''
-			// 			: item?.jobTaskId
-			// };
 		});
 		console.table(this.sendHazards);
 	}

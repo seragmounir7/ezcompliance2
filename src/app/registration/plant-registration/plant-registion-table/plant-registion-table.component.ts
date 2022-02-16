@@ -48,26 +48,11 @@ export class PlantRegistionTableComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		//this.isHistory = this.router.url.includes('/plantRegistrationTable\/history')
 		this.id = this.activatedRoute.snapshot.params.id;
 		this.getData();
 		this.setTitle.setTitle('WHS-Employee Details');
 	}
 	getData() {
-		// this.logicalervice.getBySubmitedPPE(this.id).subscribe((res:any) => {
-		//   console.log(res)
-		//   let couponData = res.data;
-		//   couponData.forEach((element, index) => {
-		//     element.index = index + 1; //adding index
-		//   });
-		//   this.ELEMENT_DATA = couponData;
-		//   console.log("this.ELEMENT_DATA",this.ELEMENT_DATA);
-
-		//   this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-		//   this.dataSource.paginator = this.paginator;
-		//   //this.dataSource.sort = this.sort;
-		// });
-
 		this.logicalervice
 			.getSubmitedPPEPlantEmpId(this.id)
 			.subscribe((res: any) => {
@@ -81,31 +66,8 @@ export class PlantRegistionTableComponent implements OnInit {
 
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
-				//this.dataSource.sort = this.sort;
 			});
 	}
-
-	// delete(item) {
-	//   Swal.fire({
-	//     title: 'Are you sure?',
-	//     text: `Do you want to delete "${item.firstName}"?`,
-	//     icon: 'warning',
-	//     showCancelButton: true,
-	//     confirmButtonColor: '#00B96F',
-	//     cancelButtonColor: '#d33',
-	//     confirmButtonText: 'Yes, Delete!',
-	//   }).then((result) => {
-	//     if (result.value) {
-	//       console.log(result)
-	//       // this.model.attributes.splice(i,1);
-	//       void this.spinner.show()
-	//       this.employee.deleteEmployeeInfo(item._id).subscribe((res => {
-	//         this.getAllEmployee()
-	//         void this.spinner.hide()
-	//       }))
-	//     }
-	//   });
-	// }
 
 	view(id) {
 		this.router.navigate([

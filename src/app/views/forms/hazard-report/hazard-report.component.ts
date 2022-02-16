@@ -2,7 +2,6 @@ import {
 	AfterViewInit,
 	Component,
 	HostListener,
-	Inject,
 	NgZone,
 	OnDestroy,
 	OnInit
@@ -17,7 +16,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { ViewChild } from '@angular/core';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
 	startWith,
 	debounceTime,
@@ -26,10 +25,15 @@ import {
 	map,
 	filter,
 	take,
-	tap
+	tap,
+	last
 } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+	ActivatedRoute,
+	ActivatedRouteSnapshot,
+	Router
+} from '@angular/router';
 import Swal from 'sweetalert2';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -38,11 +42,9 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
-import { DOCUMENT, ViewportScroller } from '@angular/common';
-import { fromEvent } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-hazard-report',
 	templateUrl: './hazard-report.component.html',
@@ -76,7 +78,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('Signature1') signaturePad1: SignaturePad;
 	dataUrl: any;
 	@ViewChild('autosize') autosize: CdkTextareaAutosize;
-	sub: any;
+	sub: Subscription;
 	isPrint: Observable<any>;
 	obj: Actionedby = {
 		elliminateAction: null,
@@ -89,6 +91,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	ActionedbyStrings: string[];
 	uploadFile: any;
 	returnTo: Observable<string>;
+	doesQueryMobilExists: boolean;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -98,14 +101,15 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		this.router.navigateByUrl('/admin/forms/hazardTable');
 		this.shared.printNext(false);
-		// this.router.navigate(['/',{ outlets: {'print': ['print']}}])
 	}
 	maxDate = new Date();
 	minDate = new Date();
 	type: any;
 	empData: any;
 	check: any;
-
+	isImg: any;
+	// showImg:any;
+	image: any[] = ['tif', 'tiff', 'jpg', 'jpeg', 'gif', 'png', 'svg'];
 	constructor(
 		private fb: FormBuilder,
 		private employee: EmployeeRegistrationService,
@@ -134,7 +138,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			],
 			department: ['', Validators.required],
 			position: ['', Validators.required],
-			// projectName: ['', Validators.required],
 			date: [new Date(), Validators.required],
 			signaturePad1: ['', Validators.required],
 			describeHazard: ['', Validators.required],
@@ -196,8 +199,24 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.signaturePad1.off();
 		}
 	}
+	showImg() {
+		let ext = this.selectedImage ? this.selectedImage.split('.') : [];
+		console.log('ext.....', ext);
 
+		return ext.length != 0
+			? this.image.includes(ext[ext.length - 1])
+			: false;
+		// let ext = this.selectedImage.split('.');
+		// console.log('ext.....', ext);
+
+		// return this.image.includes(ext[ext.length - 1]);
+	}
 	ngOnInit() {
+		this.activatedRoute.queryParams.subscribe(
+			(res) => (this.doesQueryMobilExists = res?.mobile ? true : false)
+		);
+		// console.log();
+
 		this.isHistory = this.router.url.includes('/hazardTable/history');
 		if (this.isHistory) {
 			this.disableForm();
@@ -262,8 +281,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 						fullName ? this._filter(fullName) : this.empData.slice()
 					)
 				);
-				// let o = new Object(ctrlName,filter)
-				// Object.assign(obj,{...o})
 				this.obj[ctrlName] = filter;
 			});
 			console.log(this.obj);
@@ -336,6 +353,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				localStorage.setItem('key', ' ');
 			}
 		});
+		this.sub.add(this.mobileViewService.removeButton());
 		// this.signaturePad is now available
 		console.log(this.signaturePad1, this.dataUrl);
 		this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
@@ -344,7 +362,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			console.log(result);
 
 			if (result.matches) {
-				// this.reSizeSignArray(this.signaturePad2, 233, 114);
 				const sign = this.signaturePad1.toDataURL();
 				this.signaturePad1.set('canvasWidth', 247);
 				this.signaturePad1.set('canvasHeight', 106);
@@ -357,10 +374,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				this.signaturePad1.fromDataURL(sign);
 			}
 		});
-		// this.signaturePad1.fromDataURL(this.dataUrl);
-		// this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-		// this.signaturePad1.set('dotSize', 1); // set szimek/signature_pad options at runtime
-		// invoke functions from szimek/signature_pad API
 	}
 	ngOnDestroy(): void {
 		this.sub.unsubscribe();
@@ -437,10 +450,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			});
 			this.minDate = res.data.date;
 			this.selectedImage = res.data.fileUpload;
-			// this.uploadFile=this.selectedImage?.split(/-/)[1];
+
 			this.uploadFile = this.selectedImage?.slice(
 				this.selectedImage.indexOf('-') + 1
 			);
+
 			console.log(this.selectedImage, 'selectedImage');
 			this.dataUrl = res.data.signaturePad1;
 			const check = async () => {
@@ -455,7 +469,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	public signaturePadOptions: Object = {
-		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
 		canvasWidth: 500,
 		canvasHeight: 100
@@ -480,9 +493,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.singRequired = this.hazardReport.controls.signaturePad1.untouched;
 	}
 	drawStart() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
-		//this.singRequired = this.hazardReport.controls['signaturePad1'].invalid
 	}
 	Consequences: Array<any> = [
 		{ name: '1-Insignificant', value: 1 },
@@ -566,9 +577,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	change(event) {
 		console.log('evebt', event);
-		// this.hazardReport
-		// 	.get('myControl')
-		// 	.setValue(event.option.value.name || '');
 		this.hazardReport
 			.get('whsManagerEmail')
 			.setValue(event.option.value.email || '');
@@ -665,9 +673,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			PPEAction,
 			...rest
 		} = this.hazardReport.value;
-		// this.hazardReport.removeControl('fullName')
-		// this.hazardReport.removeControl('name')
-		// this.ActionedbyStrings.forEach(string => this.hazardReport.removeControl(string) )
 		console.log(
 			this.hazardReport.value,
 			fullName,
@@ -738,7 +743,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 						showConfirmButton: false,
 						timer: 1200
 					});
-					// this.router.navigate(["/admin/forms/tableData"]);
+					if (this.doesQueryMobilExists) return;
 					this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
 				},
 				(err) => console.error(err)
@@ -766,19 +771,14 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	employeeData(e: MatAutocompleteSelectedEvent) {
 		const data = e.option.value;
 		this.hazardReport.patchValue({
-			// fullName: data.fullName,
 			department: data.department,
 			email: data.email,
 			position: data.position,
 			phone: data.phone
-			// compilePosition:data.position,
-			// compileDepartment:data.department,
 		});
 		console.log('e.option', e.option);
 		console.log('data...');
 	}
-
-	// The form was compiled by:
 
 	employeeData1(e: MatAutocompleteSelectedEvent) {
 		const data = e.option.value;

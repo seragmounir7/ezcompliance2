@@ -15,6 +15,7 @@ import { merge } from 'rxjs';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { ConvertService } from 'src/app/utils/services/convert.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-saved-forms',
@@ -65,14 +66,13 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 		private spinner: NgxSpinnerService,
 		private shared: RoleManagementSharedServiceService,
 		public router: Router,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private setTitle: SetTitleService
 	) {}
 
 	ngAfterViewInit(): void {
 		this.sort.sortChange.subscribe(() => (this.paginator1.pageIndex = 0));
 		merge(this.sort.sortChange, this.paginator1.page).subscribe(() => {
-			// this.isLoadingResults = true;
-
 			this.changeState = {
 				field: this.sort.active || '',
 				value: this.sort.direction || '',
@@ -90,6 +90,8 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			searchInput: ['']
 		});
 		this.getSavedforms();
+
+		this.setTitle.setTitle('WHS-All Saved Forms');
 	}
 
 	getSavedforms(
@@ -126,7 +128,6 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			});
 	}
 	edit(id, type) {
-		// this.forms.formType.next(type);
 		const navigationExtras: NavigationExtras = {
 			queryParams: {
 				formType: type.toString()
@@ -166,20 +167,9 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			formName: type.toString()
 		});
 		console.log('check');
-		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
-		// $("<iframe>")                             // createdAt a new iframe element
-		//     .hide()                               // make it invisible
-		//     .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
-		//     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-
-		// let iframe=document.createElement("iframe")
-		//       iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
-		//       let body = document.getElementsByTagName("body")
-		//       body[0].appendChild(iframe)
 
 		this.spinner.show('printLoader');
-		// this.router.navigate(['/', { outlets: { 'print': ['print', 'riskAssessSWMS', id] } }])
 		const navigationExtras: NavigationExtras = {
 			queryParams: {
 				formType: type.toString()
@@ -246,13 +236,10 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 	paginator(event: PageEvent) {
 		this.page = event.pageIndex;
 		this.limit = event.pageSize;
-		// this.getSavedforms()
 	}
 
 	applyFilter(event: Event) {
 		this.searchString = (event.target as HTMLInputElement).value;
-		//  this.searchString = filterValue.trim().toLowerCase();
-		//  this.getSavedforms()
 	}
 
 	get f() {

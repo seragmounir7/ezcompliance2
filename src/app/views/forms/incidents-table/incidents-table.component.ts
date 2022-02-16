@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
@@ -37,10 +38,12 @@ export class IncidentsTableComponent implements OnInit {
 		public router: Router,
 		private shared: RoleManagementSharedServiceService,
 		private spinner: NgxSpinnerService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private setTitle: SetTitleService
 	) {}
 
 	ngOnInit(): void {
+		this.setTitle.setTitle('WHS-Accident Report List');
 		this.isHistory = this.router.url.includes('/incidentsTable/history');
 		console.log(this.isHistory);
 		if (this.isHistory) {
@@ -80,15 +83,10 @@ export class IncidentsTableComponent implements OnInit {
 					return (this.showDatas[i].index = i);
 				});
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				// this.tempArray.paginator = this.paginator;
-				//this.tempArray.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}
-	ngAfterViewInit() {
-		//   this.tempArray.paginator = this.paginator;
-		//   this.tempArray.sort = this.sort;
-	}
+	ngAfterViewInit() {}
 	delete(id) {
 		Swal.fire({
 			title: 'Are you sure?',
@@ -125,8 +123,6 @@ export class IncidentsTableComponent implements OnInit {
 					return (this.showDatas[i].index = i);
 				});
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				// this.tempArray.paginator = this.paginator;
-				// this.tempArray.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}
@@ -150,19 +146,7 @@ export class IncidentsTableComponent implements OnInit {
 		});
 
 		console.log('check');
-		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
-		// $("<iframe>")                             // create a new iframe element
-		//     .hide()                               // make it invisible
-		//     .attr("src", "http://localhost:4200/#/admin/forms/hazardRep/"+id) // point the iframe to the page you want to print
-		//     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-
-		//  let iframe=document.createElement("iframe")
-		//  iframe.id = "printIframe"
-		//        iframe.src= environment.stagingUrl+"#/admin/forms/incidentRep/"+id
-		//        iframe.style.display="none";
-		//        let body = document.getElementsByTagName("body")
-		//        body[0].appendChild(iframe)
 		void this.spinner.show();
 		this.router.navigate([
 			'/',

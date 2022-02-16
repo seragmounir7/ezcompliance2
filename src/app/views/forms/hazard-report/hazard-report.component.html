@@ -125,9 +125,6 @@
 						[class.is-invalid]="hazardReport.get('fullName')?.hasError('required')
             && (hazardReport.get('fullName').dirty || hazardReport.get('fullName').touched) "
 					/>
-					<!-- <datalist id="browsers" >
-              <option *ngFor="let option of empData ; let i = index " [value]="option.firstName">
-            </datalist> -->
 					<mat-autocomplete
 						#employee="matAutocomplete"
 						(optionSelected)="employeeData($event)"
@@ -151,18 +148,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputSurname" class="form-label">Surname</label>
-          <input
-            type="surname"
-            class="form-control"
-            formControlName="surname"
-            id="exampleInputSurname"
-            aria-describedby="emailHelp"
-          />
-        </div>
-      </div> -->
 		<div class="row">
 			<div class="col-md-6 col-sm-6-print">
 				<div class="mb-3">
@@ -266,31 +251,6 @@
 					>
 				</div>
 			</div>
-			<!-- <div class="col-md-6 col-sm-6-print">
-        <div class="mb-3">
-          <label for="exampleInputProjectNumber" class="form-label"
-            >Project Number</label
-          >
-          <input
-            type="Projectnumber"
-            class="form-control"
-            formControlName="projectName"
-            id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
-
-            [class.is-invalid]="hazardReport.get('projectName')?.hasError('required')
-            && (hazardReport.get('projectName').dirty || hazardReport.get('projectName').touched) "
-            />
-            <span
-            *ngIf="
-            hazardReport.get('projectName')?.hasError('required') && (hazardReport.get('projectName').dirty
-            || hazardReport.get('projectName').touched) "
-            class="invalid-feedback"
-          >
-          Project Number is Required</span
-          >
-        </div>
-      </div> -->
 		</div>
 
 		<hr />
@@ -334,13 +294,6 @@
 							{{manager.email}}
 						</option>
 					</select>
-					<!-- <input
-            type="email"
-            class="form-control"
-            formControlName="managerSupervisorEmail"
-            id="exampleInputProjectNumber"
-            aria-describedby="emailHelp"
-          />  -->
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
@@ -664,11 +617,6 @@
 					>
 						{{consequence.name}}
 					</option>
-					<!-- <option value="1">1-Insignificant</option>
-          <option value="2">2-Minor</option>
-          <option value="3">3-Moderate</option>
-          <option value="4">4-Major</option>
-          <option value="5">5-Catastrophic</option> -->
 				</select>
 			</div>
 			<div class="mb-3 col">
@@ -688,12 +636,6 @@
 					>
 						{{likelihood.name}}
 					</option>
-
-					<!-- <option value="1">1-Insignificant</option>
-          <option value="2">2-Minor</option>
-          <option value="3">3-Moderate</option>
-          <option value="4">4-Major</option>
-          <option value="5">5-Catastrophic</option> -->
 				</select>
 			</div>
 			<div class="mb-3 col">
@@ -712,9 +654,6 @@
 					>
 						{{rating.name}}
 					</option>
-					<!-- <option value="1">Low</option>
-          <option value="2">Medium</option>
-          <option value="3">High</option> -->
 				</select>
 			</div>
 		</div>
@@ -851,13 +790,6 @@
 						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
 					>
 						<label class="form-label label_1">By when</label>
-						<!-- <input
-              type="date"
-              class="form-control"
-              formControlName="eliminateWhen"
-
-              aria-describedby="emailHelp"
-            /> -->
 						<input
 							matInput
 							[matDatepicker]="pickerd1"
@@ -941,13 +873,6 @@
 						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
 					>
 						<label class="form-label label_1">By when</label>
-						<!-- <input
-              type="date"
-              class="form-control"
-              formControlName="substituteWhen"
-
-              aria-describedby="emailHelp"
-            /> -->
 						<input
 							matInput
 							[matDatepicker]="pickerd2"
@@ -1031,13 +956,6 @@
 						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
 					>
 						<label class="form-label label_1">By when</label>
-						<!-- <input
-              type="date"
-              class="form-control"
-              formControlName="isolatedWhen"
-
-              aria-describedby="emailHelp"
-            /> -->
 						<input
 							matInput
 							[matDatepicker]="pickerd3"
@@ -1121,13 +1039,6 @@
 						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
 					>
 						<label class="form-label label_1">By when</label>
-						<!-- <input
-            type="date"
-            class="form-control"
-            formControlName="solutionWhen"
-
-            aria-describedby="emailHelp"
-          /> -->
 						<input
 							matInput
 							[matDatepicker]="pickerd4"
@@ -1211,13 +1122,6 @@
 						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
 					>
 						<label class="form-label label_1">By when</label>
-						<!-- <input
-              type="date"
-              class="form-control"
-              formControlName="procedureRemove"
-
-              aria-describedby="emailHelp"
-            /> -->
 						<input
 							matInput
 							[matDatepicker]="pickerd5"
@@ -1301,13 +1205,6 @@
 						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
 					>
 						<label class="form-label label_1">By when</label>
-						<!-- <input
-              type="date"
-              class="form-control"
-              formControlName="PPEWhen"
-
-              aria-describedby="emailHelp"
-            /> -->
 						<input
 							matInput
 							[matDatepicker]="pickerd6"
@@ -1416,46 +1313,6 @@
 			>
 				<label class="form-label">File Upload</label>
 
-				<!-- <img
-        [src]="selectedImage"
-        onerror="this.src='../../../assets/img/uploadImg.png'"
-        class="imageStud"
-        alt=""
-        width="100"
-        height="100"
-      />
-      <input
-        type="file"
-        #contactImage
-        class="custom-file-input img1 form-control"
-        (change)="browser($event)"
-        id="inputGroupFile01"
-        name="avatar"
-        style="display: none"
-      />
-      <span
-      class="material-icons material-file"
-      (click)="contactImage.click()"
-      class="btn border bg-white"
-      style="
-        position: absolute;
-        top: 95px;
-        font-size: 1rem !important;
-      "
-    >
-      <i
-        class="fa fa-upload"
-        aria-hidden="true"
-        style="margin: 0px"
-      ></i>
-    </span> -->
-				<!-- <input
-          class="form-control"
-          formControlName="fileUpload"
-          type="file"
-          id="formFile"
-        /> -->
-
 				<input
 					type="file"
 					class="form-control"
@@ -1463,21 +1320,12 @@
 					#file
 					id="file"
 				/>
-				<!-- <img   [src]="selectedImage"alt="Site Logo" width="50" height="50"> -->
 			</div>
 			<div class="col-md-6 col-sm-6-print">
-				<!-- <mat-form-field appearance="outline">
-          <input formControlName="date" class="date_1" matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>  -->
 				<div class="mb-3">
 					<label for="exampleInputSurname" class="form-label"
 						>Date<span class="text-danger">*</span></label
 					>
-					<!-- <input type="date"value=""class="form-control" formControlName="date"   aria-describedby="emailHelp"
-            [class.is-invalid]="hazardReport.get('date')?.hasError('required')
-            && (hazardReport.get('date').dirty || hazardReport.get('date').touched) "/> -->
 					<input
 						matInput
 						[matDatepicker]="datepicker2"
@@ -1524,7 +1372,6 @@
 						This Field is Required</span
 					>
 				</div>
-				<!--mat-raised-button <a href="" (click)="clear()">Clear</a> -->
 				<button
 					*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
 					class="btn btn-outline-primary my-3"
@@ -1538,16 +1385,18 @@
 		<hr />
 
 		<br />
-		<div
-			style="padding-left: 30%"
-			*ngIf="(isPrint | async)===true && selectedImage"
-		>
-			<span>
-				<div>
-					<img height="400" width="400" [src]="selectedImage" />
-				</div>
-			</span>
-		</div>
+		<ng-container *ngIf="showImg()">
+			<div
+				style="padding-left: 30%"
+				*ngIf="(isPrint | async)===true && selectedImage"
+			>
+				<span>
+					<div>
+						<img height="400" width="400" [src]="selectedImage" />
+					</div>
+				</span>
+			</div>
+		</ng-container>
 		<div class="col-md-2 col-sm-2-print">
 			<button
 				type="submit"
@@ -1561,11 +1410,3 @@
 		</div>
 	</form>
 </div>
-<!-- Back to top button -->
-<!-- <button
-	type="button"
-	class="btn btn-primary rounded-circle btn-floating btn-lg"
-	id="btn-back-to-top"
->
-	<i class="fas fa-arrow-up"></i>
-</button> -->

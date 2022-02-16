@@ -33,7 +33,7 @@ export class ManagerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllManager();
-		this.setTitle.setTitle('WHS-Manager');
+		this.setTitle.setTitle('WHS-Manager List');
 	}
 	getAllManager(field = '', value = '') {
 		this.logicalFormInfo

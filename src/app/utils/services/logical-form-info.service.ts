@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 	providedIn: 'root'
 })
 export class LogicalFormInfoService {
+	[x: string]: any;
 	apiUrl = environment.apiUrl;
 
 	constructor(private https: HttpClient) {}
@@ -1353,6 +1354,7 @@ export interface ArrObj {
 	siteName: string;
 	streetAddress: string;
 	suburb: string;
+	postcode: string;
 	stateId: string;
 	customerName: string;
 	customerContact: string;

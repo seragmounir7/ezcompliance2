@@ -85,9 +85,6 @@ export class EditRateAndCouponComponent implements OnInit {
 		this.Subscription.getAllCoupon().subscribe((res) => {
 			console.log(res);
 			this.couponData = res.data;
-			// couponData.forEach((element, index) => {
-			//   element.index = index + 1; //adding index
-			// });
 		});
 	}
 }

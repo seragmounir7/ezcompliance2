@@ -9,6 +9,7 @@ import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { title } from 'process';
 import { FormControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-ques-ans',
@@ -36,12 +37,14 @@ export class QuesAnsComponent implements OnInit {
 	/////////////mat table end////////////////
 	constructor(
 		private landingPafeInfo: LandingPageInfoServiceService,
+		private setTitle: SetTitleService,
 		private dialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
 		this.getAllPortal();
 
+		this.setTitle.setTitle('WHS-FAQ List');
 		this.portal.valueChanges.subscribe((res) => {
 			if (res) {
 				console.log(res);
@@ -50,21 +53,6 @@ export class QuesAnsComponent implements OnInit {
 		});
 	}
 
-	// getAllQA() {
-	//   this.landingPafeInfo.getAllFaq().subscribe((res) => {
-	//     console.log('getAllFaq=>', res);
-	//     let data = res.data;
-	//     data.forEach((element, index) => {
-	//       element.index = index + 1; //adding index
-	//     });
-
-	//     this.ELEMENT_DATA = data;
-	//     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-	//     this.dataSource.paginator = this.paginator;
-
-	//   });
-
-	// }
 	getAllPortal() {
 		this.landingPafeInfo.getAllPortal().subscribe((res) => {
 			console.log('getAllPortal=>', res);

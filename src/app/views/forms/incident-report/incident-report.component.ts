@@ -25,13 +25,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import Swal from 'sweetalert2';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { debounceTime, map, startWith, take, tap } from 'rxjs/operators';
+import { map, startWith, take, tap } from 'rxjs/operators';
 import moment from 'moment';
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 @Component({
 	selector: 'app-incident-report',
 	templateUrl: './incident-report.component.html',
@@ -59,7 +60,7 @@ export class IncidentReportComponent
 	maxDate = new Date();
 	minDate = new Date();
 	@ViewChild('autosize') autosize: CdkTextareaAutosize;
-	sub: any;
+	sub: Subscription;
 	isPrint: Observable<any>;
 	editorDisable = false;
 	filteredOptions1: Observable<unknown>;
@@ -70,6 +71,11 @@ export class IncidentReportComponent
 	returnTo: Observable<string>;
 	personCompletingForm$: Observable<any>;
 	injuredorAffectedPersonName$: Observable<any>;
+	department$: Observable<any>;
+	roleData: any[] = [];
+	completedDepartment$: Observable<any[]>;
+	reviewedDepartment$: Observable<any[]>;
+	isImg: boolean = false;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -79,7 +85,6 @@ export class IncidentReportComponent
 		}
 		this.router.navigateByUrl('/admin/forms/incidentsTable');
 		this.shared.printNext(false);
-		// this.router.navigate(['/',{ outlets: {'print': ['print']}}])
 	}
 	projMan: any;
 	projectMang: any;
@@ -100,6 +105,8 @@ export class IncidentReportComponent
 	selectedImage: string;
 	singRequired: any;
 	singRequired1: any;
+	image: any[] = ['tif', 'tiff', 'jpg', 'jpeg', 'gif', 'png', 'svg'];
+
 	type: any;
 	check: any;
 	constructor(
@@ -114,7 +121,8 @@ export class IncidentReportComponent
 		private ngZone: NgZone,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		public mobileViewService: MobileViewService
+		public mobileViewService: MobileViewService,
+		public role: RoleManagementService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -128,9 +136,6 @@ export class IncidentReportComponent
 			rootCauseIncident: this.fb.array([]),
 			changes: this.fb.array([]),
 			arrObj: this.fb.array([]),
-			//correctAction: ['', Validators.required],
-			// complete: ['', Validators.required],
-			// date: ['', Validators.required],
 			jobNumber: ['', Validators.required],
 			projectName: ['', Validators.required],
 			siteName: ['', Validators.required],
@@ -157,7 +162,6 @@ export class IncidentReportComponent
 			reviewedPosition: ['', Validators.required],
 			reviewedDepartment: ['', Validators.required],
 			reviewedDate: [new Date(), Validators.required],
-			// typeofIncident: ['', Validators.required],
 			priorIncident: [''],
 			similarIncident: [''],
 			witnessStatement: ['', Validators.required],
@@ -165,7 +169,6 @@ export class IncidentReportComponent
 			file: [''],
 			similarIncidentText: [''],
 			priorIncidentText: [''],
-			//instructions: [''],
 			signaturePad: ['', Validators.required],
 			signaturePad1: ['', Validators.required],
 			changesMadeOther: [false],
@@ -175,21 +178,12 @@ export class IncidentReportComponent
 				disabled: this.editorDisable
 			})
 		});
-		// this.IncidentReport = this.data;
-		// this.IncidentReport.patchValue({
-		//   incidents:this.data.incidents,
-		//   PPE:this.data.PPE,
-		//   natureOFIncidents:this.data.natureOFIncidents,
-		//   rootCauseIncident:this.data.rootCauseIncident,
-		//   changes:this.data.changes,
-		//   arrObj:this.data.arrObj,
-		//   correctAction:this.data.correctAction,
-		// })
 	}
 	ngOnDestroy(): void {
 		this.sub.unsubscribe();
 		console.log('incident destroy');
 	}
+
 	triggerResize() {
 		// Wait for changes to be applied, then trigger textarea resize.
 		this.ngZone.onStable
@@ -221,12 +215,42 @@ export class IncidentReportComponent
 			);
 			this.returnTo.subscribe((res) => console.log(res));
 		}
+		this.role.getAllRole().subscribe((res: any) => {
+			console.log('getAllRole', res);
+			this.roleData = res.data;
+			this.completedDepartment$ = this.IncidentReport.controls.completedDepartment.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.role
+				),
+				map((role) =>
+					role ? this._filterRole(role) : this.roleData.slice()
+				)
+			);
+			this.reviewedDepartment$ = this.IncidentReport.controls.reviewedDepartment.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.role
+				),
+				map((role) =>
+					role ? this._filterRole(role) : this.roleData.slice()
+				)
+			);
+			this.department$ = this.IncidentReport.controls.department.valueChanges.pipe(
+				startWith(''),
+				map((value) =>
+					typeof value === 'string' ? value : value.role
+				),
+				map((role) =>
+					role ? this._filterRole(role) : this.roleData.slice()
+				)
+			);
+		});
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
 			const filteredOptions = () => {
 				return (
 					startWith(''),
-					debounceTime(400),
 					map((value: any) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -237,7 +261,6 @@ export class IncidentReportComponent
 			};
 			this.injuredorAffectedPersonName$ = this.IncidentReport.controls.name.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -247,7 +270,6 @@ export class IncidentReportComponent
 			);
 			this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -257,7 +279,6 @@ export class IncidentReportComponent
 			);
 			this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -267,7 +288,6 @@ export class IncidentReportComponent
 			);
 			this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
 				startWith(''),
-				debounceTime(400),
 				tap((value) => console.log('value', value)),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
@@ -282,10 +302,10 @@ export class IncidentReportComponent
 			this.type = params.formType;
 		});
 
-		console.log('IncidentReport', this.IncidentReport);
+		console.log('AccidentReport', this.IncidentReport);
 
 		this.dynamicFormsService.homebarTitle.next('Incident Report Form');
-		this.setTitle.setTitle('WHS-Incident Report Form');
+		this.setTitle.setTitle('WHS-Accident Report Form');
 
 		if (this.id !== 'Form') {
 			console.log('id', this.id);
@@ -309,8 +329,24 @@ export class IncidentReportComponent
 			option.fullName.toLowerCase().includes(filterValue)
 		);
 	}
+	private _filterRole(name: string): any[] {
+		const filterValue = name.toLowerCase();
+		return this.roleData.filter((option) =>
+			option.role.toLowerCase().includes(filterValue)
+		);
+	}
 	displayFn(user: any): string {
 		return user && user.fullName ? user.fullName : '';
+	}
+	displayFnRole(user: any): string {
+		return user && user.role ? user.role : '';
+	}
+	showImg() {
+		let ext = this.selectedImage ? this.selectedImage.split('.') : [];
+		console.log('ext.....', ext);
+
+		this.isImg =
+			ext.length != 0 ? this.image.includes(ext[ext.length - 1]) : false;
 	}
 	employeeData(e: MatAutocompleteSelectedEvent, controlName: string) {
 		const data = e.option.value;
@@ -516,6 +552,7 @@ export class IncidentReportComponent
 		console.log('check1...', this.check);
 		this.sub = this.shared.printObs$.subscribe((res) => {
 			this.check = res;
+			this.showImg();
 			if (this.check) {
 				setTimeout(() => {
 					window.print();
@@ -524,6 +561,7 @@ export class IncidentReportComponent
 				localStorage.setItem('key', ' ');
 			}
 		});
+		this.sub.add(this.mobileViewService.removeButton());
 		// this.signaturePad is now available
 		this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		this.signaturePad.set('dotSize', 1); // set szimek/signature_pad options at runtime
@@ -597,101 +635,12 @@ export class IncidentReportComponent
 			'signaturePad control',
 			this.IncidentReport.controls.signaturePad.touched
 		);
-		//this.singRequired = this.IncidentReport.controls['signaturePad'].invalid
 	}
 	drawStart1() {
 		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
-		//this.singRequired1 = this.IncidentReport.controls['signaturePad1'].invalid
 		console.log('begin drawing', this.singRequired1);
 	}
-
-	// onChangeIncident(e: any) {
-	//   const checkArray: FormArray = this.IncidentReport.get(
-	//     'incidents'
-	//   ) as FormArray;
-	//   let item = e.target.value;
-	//   if (e.target.checked) {
-	//     checkArray.push(new FormControl(item));
-	//     console.log(item);
-	//   } else {
-	//     let i: number = 0;
-	//     checkArray.controls.forEach((item) => {
-	//       if (item.value == e.target.value) {
-	//         checkArray.removeAt(i);
-	//       }
-	//     });
-	//   }
-	// }
-
-	// onNatureOFIncidents(e: any) {
-	//   const NatureArray: FormArray = this.IncidentReport.get(
-	//     'natureOFIncidents'
-	//   ) as FormArray;
-	//   let item = e.target.value;
-	//   if (e.target.checked) {
-	//     NatureArray.push(new FormControl(item));
-	//     console.log(item);
-	//   } else {
-	//     let i: number = 0;
-	//     NatureArray.controls.forEach((item) => {
-	//       if (item.value == e.target.value) {
-	//         NatureArray.removeAt(i);
-	//       }
-	//     });
-	//   }
-	// }
-
-	// onPPE(e: any) {
-
-	//   let item = e.target.value;
-	//   if (e.target.checked) {
-	//     this.ppeArr.push(item);
-	//     console.log(item);
-	//   } else {
-	//     this.ppeArr.forEach((item,i) => {
-	//       if (item.value == e.target.value) {
-	//         this.ppeArr.splice(i,1);
-	//       }
-	//     });
-	//   }
-	// }
-
-	// onRootCauseIncident(e: any) {
-	//   const IncidentArray: FormArray = this.IncidentReport.get(
-	//     'rootCauseIncident'
-	//   ) as FormArray;
-	//   let item = e.target.value;
-	//   if (e.target.checked) {
-	//     IncidentArray.push(new FormControl(item));
-	//     console.log(item);
-	//   } else {
-	//     let i: number = 0;
-	//     IncidentArray.controls.forEach((item) => {
-	//       if (item.value == e.target.value) {
-	//         IncidentArray.removeAt(i);
-	//       }
-	//     });
-	//   }
-	// }
-
-	// onChanges(e: any) {
-	//   const ChangeArray: FormArray = this.IncidentReport.get(
-	//     'changes'
-	//   ) as FormArray;
-	//   let item = e.target.value;
-	//   if (e.target.checked) {
-	//     ChangeArray.push(new FormControl(item));
-	//     console.log(item);
-	//   } else {
-	//     let i: number = 0;
-	//     ChangeArray.controls.forEach((item) => {
-	//       if (item.value == e.target.value) {
-	//         ChangeArray.removeAt(i);
-	//       }
-	//     });
-	//   }
-	// }
 	ppeSelected(e) {
 		const item = e.target.value;
 		if (e.target.checked) {
@@ -938,48 +887,6 @@ export class IncidentReportComponent
 					.setValue(res.data.rootCauseIncident[index][key]);
 			}
 
-			// for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
-			//   console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
-
-			//   let typeOfIncidentsIndex = this.incidentsAdd().length
-			//   console.log("typeOfIncidentsIndex",typeOfIncidentsIndex);
-
-			//   this.incidentsAdd().push(this.incidentsAction());
-			//   this.incidentsAdd().at(typeOfIncidentsIndex).get("id").setValue(this.typeOfIncidentsSelectedArr[index])
-			// }
-			// for (let index = 0; index < this.natureOfIncSelectedArr.length; index++) {
-			//   console.log("this.natureOfIncSelectedArr.length",this.natureOfIncSelectedArr.length);
-
-			//   let natureOfIncIndex = this.natureAdd().length
-			//   console.log("typeOfIncidentsIndex",natureOfIncIndex);
-
-			//   this.natureAdd().push(this.incidentsAction());
-			//   this.natureAdd().at(natureOfIncIndex).get("id").setValue(this.natureOfIncSelectedArr[index])
-			// }
-			// for (let index = 0; index < this.ppeSelectedArr.length; index++) {
-			//   console.log("this.ppeSelectedArr.length",this.ppeSelectedArr.length);
-
-			//   let ppeIndex = this.ppeAdd().length
-			//   console.log("ppeIndex",ppeIndex);
-
-			//   this.ppeAdd().push(this.ppeAction());
-			//   this.ppeAdd().at(ppeIndex).get("id").setValue(this.ppeSelectedArr[index])
-			// }
-			// for (let index = 0; index < this.rootSelectedArr.length; index++) {
-			//   console.log("this.rootSelectedArr.length",this.rootSelectedArr.length);
-
-			//   let rootIndex = this.rootCauseIncidentAdd().length
-			//   console.log("rootIndex",rootIndex);
-
-			//   this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction());
-			//   this.rootCauseIncidentAdd().at(rootIndex).get("id").setValue(this.rootSelectedArr[index])
-			// }
-			// this.add(res.data.arrObj);
-			// this.changeAdd(res.data.changes);
-			// this.incidentsAdd(res.data.attendees);
-			// this.natureAdd(res.data.attendees);
-			// this.ppeAdd(res.data.attendees);
-			// this.rootCauseIncidentAdd(res.data.attendees);
 			this.dataUrl = res.data.signaturePad1;
 			const check = async () => {
 				this.signaturePad1 != null;
@@ -993,12 +900,6 @@ export class IncidentReportComponent
 			check2().then(() => {
 				console.log(this.signaturePad);
 				this.signaturePad.fromDataURL(res.data.signaturePad);
-				// setTimeout(() => {
-				//   let signaturePadArr=this.signaturePad2.toArray()
-				//   res.data.attendees.forEach((x,i) => {
-				//     signaturePadArr[i].fromDataURL(x.signature)
-				//   });
-				// }, 2000);
 			});
 			this.IncidentReport.patchValue({
 				signaturePad: res.data.signaturePad,
@@ -1074,7 +975,6 @@ export class IncidentReportComponent
 			this.logicalFormInfo.addIncidentReport(data).subscribe(
 				(res) => {
 					console.log('addCustomerForm=>', res);
-					// this.IncidentReport.reset();
 					Swal.fire({
 						title: 'Submit successfully',
 						showConfirmButton: false,
@@ -1087,74 +987,7 @@ export class IncidentReportComponent
 				}
 			);
 		}
-
-		// // for (let index = 0; index < this.changesSelectedArr.length; index++) {
-		// //   console.log("this.changesSelectedArr.length",this.changesSelectedArr.length);
-
-		// //   let changeIndex = this.changeAdd().length
-		// //   console.log("changeIndex",changeIndex);
-
-		// //  // this.changeAdd().push(this.changeAction(index));
-		// //  this.changeAdd().get("61a9ba8bdee47f7c86631bf5").setValue("ssssssss")
-		// // }
-
-		// for (let index = 0; index < this.typeOfIncidentsSelectedArr.length; index++) {
-		//   console.log("this.typeOfIncidentsSelectedArr.length",this.typeOfIncidentsSelectedArr.length);
-
-		//   let typeOfIncidentsIndex = this.incidentsAdd().length
-		//   console.log("typeOfIncidentsIndex",typeOfIncidentsIndex);
-
-		//   this.incidentsAdd().push(this.incidentsAction());
-		//   this.incidentsAdd().at(typeOfIncidentsIndex).get("id").setValue(this.typeOfIncidentsSelectedArr[index])
-		// }
-		// for (let index = 0; index < this.natureOfIncSelectedArr.length; index++) {
-		//   console.log("this.natureOfIncSelectedArr.length",this.natureOfIncSelectedArr.length);
-
-		//   let natureOfIncIndex = this.natureAdd().length
-		//   console.log("typeOfIncidentsIndex",natureOfIncIndex);
-
-		//   this.natureAdd().push(this.incidentsAction());
-		//   this.natureAdd().at(natureOfIncIndex).get("id").setValue(this.natureOfIncSelectedArr[index])
-		// }
-		// for (let index = 0; index < this.ppeSelectedArr.length; index++) {
-		//   console.log("this.ppeSelectedArr.length",this.ppeSelectedArr.length);
-
-		//   let ppeIndex = this.ppeAdd().length
-		//   console.log("ppeIndex",ppeIndex);
-
-		//   this.ppeAdd().push(this.ppeAction());
-		//   this.ppeAdd().at(ppeIndex).get("id").setValue(this.ppeSelectedArr[index])
-		// }
-		// for (let index = 0; index < this.rootSelectedArr.length; index++) {
-		//   console.log("this.rootSelectedArr.length",this.rootSelectedArr.length);
-
-		//   let rootIndex = this.rootCauseIncidentAdd().length
-		//   console.log("rootIndex",rootIndex);
-
-		//   this.rootCauseIncidentAdd().push(this.rootCauseIncidentAction());
-		//   this.rootCauseIncidentAdd().at(rootIndex).get("id").setValue(this.rootSelectedArr[index])
-		// }
 	}
-	// upload(e) {
-	//   const fileListAsArray = Array.from(e);
-	//   fileListAsArray.forEach((item, i) => {
-	//     const file = (e as HTMLInputElement);
-	//     const url = URL.createObjectURL(file[i]);
-	//     this.imgArr.push(url);
-	//     this.fileArr.push({ item, url: url });
-	//   })
-
-	//   this.fileArr.forEach((item) => {
-	//     this.fileObj.push(item.item)
-	//   })
-
-	//   // Set files form control
-	//   this.IncidentReport.patchValue({
-	//     avatar: this.fileObj
-	//   })
-
-	//   this.IncidentReport.get('avatar').updateValueAndValidity()
-	// }
 
 	browser(event) {
 		const files = event.target.files[0];

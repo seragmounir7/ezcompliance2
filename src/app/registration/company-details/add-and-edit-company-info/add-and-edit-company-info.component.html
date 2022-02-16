@@ -1,14 +1,7 @@
-<!-- <div
-	class="btn btn-outline-primary"
-	[routerLink]="['/admin/registration/compdetails']"
->
-	<i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div> -->
-<div class="container card px-4 py-4 bg-white">
+<div class="card px-4 py-4 bg-white">
 	<h1 class="text-center mt-3 pt-3">
-		<p class="title">Company Details Preview</p>
+		<p class="title">Company Details</p>
 	</h1>
-	<!-- <h1 class="text-center">Company Details</h1> -->
 	<form [formGroup]="formData">
 		<mat-tab-group>
 			<mat-tab label="Company Details" (click)="companyShow()">
@@ -21,6 +14,7 @@
 							Company Name
 						</label>
 						<input
+							appTitleCase
 							type="text"
 							class="form-control"
 							formControlName="companyName"
@@ -146,27 +140,51 @@
 						>
 							state is required
 						</span>
-						<!-- <label for="exampleFormControlInput1" class="form-label"> Postcode </label>
-          <input type="text" class="form-control"  formControlName="postCode"
-            [class.is-invalid]="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required " />
-          <span class="text-danger"
-            *ngIf="(registerFormControl.postCode.touched || submitted) && registerFormControl.postCode.errors?.required">
-            Postcode is required
-          </span> -->
 					</div>
-					<!-- <div class="mb-3 mt-3 col-3">
-          <label for="exampleFormControlInput1" class="form-label"> Mailing Address </label>
-          <textarea type="text" class="form-control"  formControlName="mailingAddress"
-            [class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "></textarea>
-          <span class="text-danger"
-            *ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required">
-            Mailing Address is required
-          </span>
-        </div> -->
+					<div class="mb-3 mt-3 col-3">
+						<label
+							for="exampleFormControlInput1"
+							class="form-label"
+						>
+							Postcode
+						</label>
+						<input
+							type="text"
+							class="form-control"
+							formControlName="postcode"
+							[class.is-invalid]="(registerFormControl.postcode.touched || submitted) && registerFormControl.postcode.errors?.required "
+						/>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.postcode.touched || submitted) && registerFormControl.postcode.errors?.required"
+						>
+							Postcode is required
+						</span>
+					</div>
 				</div>
 
 				<div class="row">
-					<div class="mb-3 mt-3 col-3">
+					<div class="mb-3 mt-3 col-2">
+						<label
+							for="exampleFormControlInput1"
+							class="form-label"
+						>
+							Mailing Address
+						</label>
+						<textarea
+							type="text"
+							class="form-control"
+							formControlName="mailingAddress"
+							[class.is-invalid]="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required "
+						></textarea>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.mailingAddress.touched || submitted) && registerFormControl.mailingAddress.errors?.required"
+						>
+							Mailing Address is required
+						</span>
+					</div>
+					<div class="mb-3 mt-3 col-2">
 						<label
 							for="exampleFormControlInput1"
 							class="form-label"
@@ -207,7 +225,7 @@
 							Company Address is required
 						</span>
 					</div>
-					<div class="mb-3 mt-3 col-3">
+					<div class="mb-3 mt-3 col-2">
 						<label
 							for="exampleFormControlInput1"
 							class="form-label"
@@ -274,7 +292,7 @@
 				<div class="row">
 					<button
 						type="submit"
-						class="btn btn-outline-primary btn_1"
+						class="btn btn-outline-primary btn_1 ml-3"
 						*ngIf="dataPlant"
 						(click)="onFormUpdate($event)"
 					>
@@ -542,23 +560,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="mb-3 mt-3 col-12">
-						<label>Signature</label>
-						<div class="sign">
-							<signature-pad
-								#signature2
-								[options]="signaturePadOptions"
-								(onBeginEvent)="drawStart()"
-								(onEndEvent)="drawComplete2()"
-							></signature-pad>
-						</div>
-					</div>
-					<button
-						class="btn btn-outline-primary btn_1 ml-2"
-						(click)="clear2()"
-					>
-						Clear
-					</button>
 					<button
 						type="submit"
 						class="btn btn-outline-primary btn_1"
@@ -570,7 +571,7 @@
 					</button>
 					<button
 						type="submit"
-						class="btn btn-outline-primary btn_1"
+						class="btn btn-outline-primary btn_1 ml-3"
 						*ngIf="dataPlant"
 						(click)="onFormUpdate($event)"
 					>
@@ -707,7 +708,7 @@
 				<div class="row">
 					<button
 						type="submit"
-						class="btn btn-outline-primary btn_1 ml-2"
+						class="btn btn-outline-primary btn_1 ml-3"
 						*ngIf="dataPlant"
 						(click)="onFormUpdate($event)"
 					>

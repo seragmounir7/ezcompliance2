@@ -18,7 +18,8 @@ import {
 	ViewChildren,
 	QueryList,
 	LOCALE_ID,
-	Renderer2
+	Renderer2,
+	ChangeDetectorRef
 } from '@angular/core';
 import {
 	FormBuilder,
@@ -51,9 +52,9 @@ import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 })
 export class RiskAssessmentSWMSComponent
 	implements OnInit, AfterViewInit, OnDestroy {
+	@ViewChildren(MatCheckbox) jobTaskMatCheckBox: QueryList<MatCheckbox>;
 	@ViewChildren('parent') parent: QueryList<ElementRef>;
 	@ViewChild('projectManager') projectManager: ElementRef;
-	@ViewChild('signaturePad1Div') signaturePad1Div: ElementRef;
 	@ViewChild('Signature1') signaturePad1: SignaturePad;
 	@ViewChildren('Signature2') signaturePad2: QueryList<SignaturePad>;
 	@ViewChildren('check') checkBox: QueryList<ElementRef<HTMLInputElement>>;
@@ -74,7 +75,6 @@ export class RiskAssessmentSWMSComponent
 	RiskAssessment = true;
 	SWMSShow = false;
 	chemicalTask = false;
-	//checkboxes array
 	jobTask = [];
 	staff = [];
 	resiRiskLevel = [];
@@ -97,13 +97,11 @@ export class RiskAssessmentSWMSComponent
 	cardImageBase64: any;
 	type: any;
 	public signaturePadOptions1: Object = {
-		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
 		canvasWidth: 450,
 		canvasHeight: 100
 	};
 	public signaturePadOptions2: Object = {
-		// passed through to szimek/signature_pad constructor
 		minWidth: 1,
 		canvasWidth: 430,
 		canvasHeight: 100
@@ -226,7 +224,6 @@ export class RiskAssessmentSWMSComponent
 		}
 		void this.router.navigateByUrl('/admin/forms/riskAssessTable');
 		this.shared.printNext(false);
-		// this.router.navigate(['/',{ outlets: {'print': ['print']}}])
 	}
 	constructor(
 		public router: Router,
@@ -240,9 +237,9 @@ export class RiskAssessmentSWMSComponent
 		private shared: RoleManagementSharedServiceService,
 		private employee: EmployeeRegistrationService,
 		private renderer: Renderer2,
-		public mobileViewService: MobileViewService
+		public mobileViewService: MobileViewService,
+		private change: ChangeDetectorRef
 	) {
-		//this.check = localStorage.getItem('key');
 		console.log('key check', this.check);
 		this.id = this.activatedRoute.snapshot.params.id;
 		console.log('id', this.id);
@@ -251,10 +248,9 @@ export class RiskAssessmentSWMSComponent
 			jobNumber: ['', Validators.required],
 			siteName: ['', Validators.required],
 			customerName: ['', Validators.required],
-			// streetNo: ['', Validators.required],
 			streetAddr: ['', Validators.required],
 			suburb: ['', Validators.required],
-			// town: ['', Validators.required],
+			postcode: ['', Validators.required],
 			custConct: ['', Validators.required],
 			custConctPh: ['', Validators.required],
 			custEmail: ['', Validators.required],
@@ -269,7 +265,6 @@ export class RiskAssessmentSWMSComponent
 			regulator: ['', Validators.required],
 			location: [''],
 			qty: [],
-			//expiryDate: ['',Validators.required],
 			hazardous: this.fb.array([]),
 			ppeSelection: this.fb.array([]),
 			file: this.fb.array([]),
@@ -308,7 +303,6 @@ export class RiskAssessmentSWMSComponent
 			await check();
 			this.signaturePad1.off();
 			await check2();
-			//this.signaturePad2.off()
 		}
 	}
 
@@ -357,22 +351,6 @@ export class RiskAssessmentSWMSComponent
 		if (this.id != 'form') {
 			this.getAssessmentByid(this.id);
 		} else {
-			// this.getAllJobTask();
-			// this.getAllPPE();
-			// this.getAllHighRisk();
-			// this.getAllLicence();
-			// this.getAllProjectMang();
-			// this.getAllJobNumber();
-			// this.getAllResidualRiskLevel();
-			// this.getAllStaff();
-			// this.getAllRiskLevel();
-			// this.getAllChemical();
-			// this.getAllHazard();
-			// this.getAllContrActReq();
-			// this.getAllRegulator();
-			// this.getAllSafe();
-			// this.getAllState();
-			// this.getAllJurisdiction();
 			allApis.subscribe((res: any[]) => {
 				console.log('forkjoin', res);
 				this.getAllJobTask(res[0]);
@@ -416,38 +394,6 @@ export class RiskAssessmentSWMSComponent
 				)
 			);
 		}
-		// this.logicalFormInfo.printing$.subscribe((res)=>{
-		//   console.log(res);
-		//   if(res=='print')
-		//   {
-		//     console.log("print");
-		//     setTimeout( function() { window.print(); }, 3000);
-		//   }
-		// })
-
-		// this.riskAssessmentFb.get('jobNumber').valueChanges.subscribe((res) => {
-		//   if (res) {
-		//     console.log('jobNumberres', res);
-		//     this.allJobNumbers.forEach((item) => {
-		//       if (res === item._id) {
-		//         console.log('Id found', item);
-		//         this.riskAssessmentFb.patchValue({
-		//           siteName: item.siteName,
-		//           customerName: item.customerName,
-		//           streetNo: item.streetNumber,
-		//           streetAddr: item.streetAddress,
-		//           subUrb: item.suburb,
-		//           statesSWMS: item.state,
-		//           custConct: item.customerContact,
-		//           custConctPh: item.customerContactPhone,
-		//           custEmail: item.customerEmail,
-		//           jobNumberDupl: this.riskAssessmentFb.get('jobNumber').value,
-		//         });
-		//       }
-		//     });
-		//   }
-		//  // this.riskAssessmentFb.get('jobNumber').updateValueAndValidity();
-		// });
 
 		this.riskAssessmentFb
 			.get('statesSWMS')
@@ -534,28 +480,11 @@ export class RiskAssessmentSWMSComponent
 				this.signaturePad1.fromDataURL(res.data.signature1);
 			});
 
-			// let time=res.data.dateTime
-			//  let newTime=time.split(/[-,T]/)
-			//  newTime=newTime.splice(3).toString()
-			//  newTime=newTime.split("")
-			//  newTime=newTime.splice(0,5).join('')
-			//  this.setTime=newTime.toString()
-			//  console.log("date=================>>>>>>>>>.",res.data.dateTime);
-
 			const dateTime = new Date(res.data.dateTime);
 
 			const time = dateTime.toTimeString();
 			this.setTime = time.slice(0, 5);
-			// console.log("date2=================>>>>>>>>>.",newTime);
-			//this.setTime=newTime.splice(0,5).join('')
-			// newTime=newTime.split("")
-			// let  newTime2=newTime.splice(5,3).join('')
-			// this.setTime=newTime.toString()
-
 			const date = res.data.dateTime;
-			//let newDate=date.split(/[-,T]/)
-
-			//  newTime=newTime.splice(3).toString()
 			this.dateGet = new Date(date);
 
 			for (let i = 0; i < res.data.employeeList.length; i++) {
@@ -605,7 +534,6 @@ export class RiskAssessmentSWMSComponent
 				this.PushActionSDSRegister(element);
 				if (element.file) {
 					this.selectedFile1.push({
-						//fileName: element.file.split('-')[1],
 						fileName: element.file.substring(
 							element.file.indexOf('-') + 1
 						),
@@ -631,13 +559,9 @@ export class RiskAssessmentSWMSComponent
 			res.data.identifyHazards.forEach((element, index) => {
 				console.log('eleeeme', element);
 				this.checkHazards(element, index);
-				//  element.allHazardsTitle.forEach(ele => {
-				//   this.checkHazards(ele,index);
-				//  });
 			});
 			res.data.jobTask.forEach((element, index) => {
 				this.checkJobtask(element, index);
-				// this.checkCOP(element,index);
 			});
 			res.data.PPEselection.forEach((element, index) => {
 				this.checkPPE(element, index);
@@ -674,8 +598,6 @@ export class RiskAssessmentSWMSComponent
 	}
 	checkJobtask(element, index) {
 		const z = this.jobTaskData[index]._id;
-		//console.log("z", z);
-		// console.log("ele", element[z]);
 		const c = this.riskAssessmentFb.controls.jobTask as FormArray;
 		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
@@ -686,7 +608,6 @@ export class RiskAssessmentSWMSComponent
 	}
 	checkRisk(element, index) {
 		const z = this.highRiskConstruction[index]._id;
-		//console.log("ele", element[z]);
 		const c = this.riskAssessmentFb.controls.riskConstruction as FormArray;
 		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
@@ -695,7 +616,6 @@ export class RiskAssessmentSWMSComponent
 	}
 	checkPPE(element, index) {
 		const z = this.PPEselection[index]._id;
-		// console.log("ele", element[z]);
 		const c = this.riskAssessmentFb.controls.PPEselection as FormArray;
 		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
@@ -704,7 +624,6 @@ export class RiskAssessmentSWMSComponent
 	}
 	checkLicense(element, index) {
 		const z = this.licenseAndQualification[index]._id;
-		// console.log("ele", element[z]);
 		const c = this.riskAssessmentFb.controls.licence as FormArray;
 		const d = c.controls[index] as FormGroup;
 		if (element[z]) {
@@ -718,9 +637,9 @@ export class RiskAssessmentSWMSComponent
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
-					// streetNo: item.streetNumber,
 					streetAddr: item.streetAddress,
 					suburb: item.suburb,
+					postcode: item.postcode,
 					statesSWMS: item.stateId._id,
 					custConct: item.customerContact,
 					custConctPh: item.customerContactPhone,
@@ -909,9 +828,6 @@ export class RiskAssessmentSWMSComponent
 			[this.licenseAndQualification[index]._id]: ['']
 		});
 	}
-	// add(): FormArray {
-	//   return this.riskAssessmentFb.get('arrObj') as FormArray;
-	// }
 	sdsRegisterFG(): FormGroup {
 		return this.fb.group({
 			chemicalName: [''],
@@ -930,11 +846,6 @@ export class RiskAssessmentSWMSComponent
 			quantity: data.quantity,
 			expDate: data.expDate,
 			file: data.file
-
-			// this.add().controls[index].get("chemicalName").setValue(res.data.arrObj[index].chemicalName)
-			// this.add().controls[index].get("location").setValue(res.data.arrObj[index].location)
-			// this.add().controls[index].get("hazardous").setValue(res.data.arrObj[index].hazardous)
-			// this.add().controls[index].get("quantity").setValue(res.data.arrObj[index].quantity)
 		});
 	}
 	employeeField(): FormGroup {
@@ -1009,7 +920,6 @@ export class RiskAssessmentSWMSComponent
 			tap((x) => console.log(x))
 		);
 
-		// if(this.count==1){
 		this.mobileViewService.observeXsmall().subscribe((result) => {
 			console.log(result);
 
@@ -1035,14 +945,37 @@ export class RiskAssessmentSWMSComponent
 				this.signaturePad1.fromDataURL(sign);
 			}
 		});
-
-		// this.signaturePad is now available
-		//this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
-		// this.signaturePad2.set('minWidth', 1); // set szimek/signature_pad options at runtime
-		//this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
-		// this.signaturePad2.clear(); // invoke functions from szimek/signature_pad API
-		console.log('clear1 &2');
-		console.log(this.signaturePad1Div);
+		this.jobTaskMatCheckBox.changes.subscribe(
+			(res: QueryList<MatCheckbox>) => {
+				const matCheckArr = res.toArray();
+				console.table(matCheckArr);
+				matCheckArr.forEach((matCheck) => {
+					const checkTrue = Array.from(
+						matCheck._elementRef.nativeElement.parentNode.parentElement.querySelectorAll(
+							'input[type=checkbox]'
+						)
+					)
+						.map((x) => x['checked'])
+						.slice(1) as boolean[];
+					console.log(checkTrue.every((x) => x === true));
+					matCheck.indeterminate = !checkTrue.every(
+						(x) => x === true
+					);
+					if (checkTrue.every((x) => x === true)) {
+						matCheck.checked = true;
+					}
+					if (!checkTrue.every((x) => x === true)) {
+						matCheck.indeterminate = true;
+					}
+					if (!checkTrue.every((x) => x === true)) {
+						matCheck.indeterminate = false;
+						matCheck.checked = false;
+					}
+					this.change.detectChanges();
+				});
+				res;
+			}
+		);
 	}
 
 	reSizeSignArray(
@@ -1061,7 +994,6 @@ export class RiskAssessmentSWMSComponent
 	}
 
 	drawComplete1() {
-		// will be notified of szimek/signature_pad's onEnd event
 		console.log(this.signaturePad1.toDataURL());
 		this.riskAssessmentFb.controls.signature1.setValue(
 			this.signaturePad1.toDataURL()
@@ -1075,13 +1007,9 @@ export class RiskAssessmentSWMSComponent
 		this.singRequired = this.riskAssessmentFb.controls.signature1.untouched;
 	}
 	drawStart1() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
-
-		//this.singRequired = this.riskAssessmentFb.controls['signaturePad1'].invalid
 	}
 	drawComplete2(i) {
-		// will be notified of szimek/signature_pad's onEnd event
 		console.log('this.signaturePad2[i]', i);
 		this.employeeArr()
 			.at(i)
@@ -1100,10 +1028,7 @@ export class RiskAssessmentSWMSComponent
 			.get('signature2').untouched;
 	}
 	drawStart2() {
-		// will be notified of szimek/signature_pad's onBegin event
 		console.log('begin drawing');
-
-		//this.signRequired = this.riskAssessmentFb.controls['signaturePad2'].invalid
 	}
 
 	getAllJobTask(data = []) {
@@ -1121,13 +1046,10 @@ export class RiskAssessmentSWMSComponent
 				if (titleA > titleB) {
 					return 1;
 				}
-
-				// names must be equal
 				return 0;
 			});
 			console.log('jobTaskDetails=>', this.jobTaskData);
 			for (let i = 0; i < this.jobTaskData.length; i++) {
-				// this.taskArr[i] = 0;
 				this.jobtask().push(this.jobtaskk(i));
 			}
 			return;
@@ -1136,7 +1058,6 @@ export class RiskAssessmentSWMSComponent
 			this.jobTaskData = res.data;
 			console.log('jobTaskDetails=>', this.jobTaskData);
 			for (let i = 0; i < this.jobTaskData.length; i++) {
-				// this.taskArr[i] = 0;
 				this.jobtask().push(this.jobtaskk(i));
 			}
 		});
@@ -1144,7 +1065,6 @@ export class RiskAssessmentSWMSComponent
 
 	getAllPPE(data = []) {
 		if (data) {
-			// console.log('PPE=>', res);
 			this.PPEselection = data;
 			for (let i = 0; i < this.PPEselection.length; i++) {
 				this.ppeArr[i] = 0;
@@ -1154,7 +1074,6 @@ export class RiskAssessmentSWMSComponent
 			return;
 		}
 		this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-			// console.log('PPE=>', res);
 			this.PPEselection = res.data;
 			for (let i = 0; i < this.PPEselection.length; i++) {
 				this.ppeArr[i] = 0;
@@ -1170,12 +1089,10 @@ export class RiskAssessmentSWMSComponent
 		}
 		this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
 			this.projectMang = res.data;
-			// console.log('getAllProjectMang=>', this.projectMang);
 		});
 	}
 	getAllHighRisk(data = []) {
 		if (data) {
-			// console.log('Risk=>', res);
 			this.highRiskConstruction = data;
 			for (let i = 0; i < this.highRiskConstruction.length; i++) {
 				this.riskArr[i] = 0;
@@ -1185,7 +1102,6 @@ export class RiskAssessmentSWMSComponent
 			return;
 		}
 		this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-			// console.log('Risk=>', res);
 			this.highRiskConstruction = res.data;
 			for (let i = 0; i < this.highRiskConstruction.length; i++) {
 				this.riskArr[i] = 0;
@@ -1198,7 +1114,6 @@ export class RiskAssessmentSWMSComponent
 		const mode = 'Risk';
 		this.logicalFormInfo.getFormDataById(mode).subscribe((res) => {
 			this.highRiskConstruction = res.data[0].subComponents;
-			// console.log(' this.highRiskConstruction=>', this.highRiskConstruction);
 			for (let i = 0; i < this.highRiskConstruction.length; i++) {
 				this.riskArr[i] = 0;
 			}
@@ -1207,10 +1122,6 @@ export class RiskAssessmentSWMSComponent
 	getAllLicence(data = []) {
 		if (data) {
 			this.licenseAndQualification = data;
-			// console.log(
-			//   'this.licenseAndQualification=>',
-			//   this.licenseAndQualification
-			// );
 			for (let i = 0; i < this.licenseAndQualification.length; i++) {
 				this.licenceArr[i] = 0;
 				this.Licence().push(this.license(i));
@@ -1219,10 +1130,6 @@ export class RiskAssessmentSWMSComponent
 		}
 		this.logicalFormInfo.getAllLicence().subscribe((res) => {
 			this.licenseAndQualification = res.data;
-			// console.log(
-			//   'this.licenseAndQualification=>',
-			//   this.licenseAndQualification
-			// );
 			for (let i = 0; i < this.licenseAndQualification.length; i++) {
 				this.licenceArr[i] = 0;
 				this.Licence().push(this.license(i));
@@ -1235,7 +1142,6 @@ export class RiskAssessmentSWMSComponent
 			return;
 		}
 		this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
-			// console.log('getAllHazards=>', res);
 			this.allHazards = res.data;
 		});
 	}
@@ -1245,7 +1151,6 @@ export class RiskAssessmentSWMSComponent
 			return;
 		}
 		this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
-			// console.log('getAllHazards=>', res);
 			this.allContrlActReq = res.data;
 		});
 	}
@@ -1328,8 +1233,6 @@ export class RiskAssessmentSWMSComponent
 		}
 	}
 	onJobtaskSelect(e, jobTaskRecd) {
-		// this.jobTaskSelected=[];
-
 		console.log('event', e.target.value, jobTaskRecd);
 		const item = e.target.value;
 		if (e.target.checked) {
@@ -1378,8 +1281,6 @@ export class RiskAssessmentSWMSComponent
 		console.log('jobTaskSelected', this.jobTaskSelected);
 
 		this.jobTaskSelected.forEach((element) => {
-			//looking for chemical task
-
 			if (element.chemical == 'YES') {
 				this.chemicalTask = true;
 			}
@@ -1404,7 +1305,6 @@ export class RiskAssessmentSWMSComponent
 						].setValue(
 							'Working in or near trenches or shafts deeper than 1.5metres'
 						);
-						// //  c.controls[highRisk._id].value
 						console.log(
 							'x',
 							d.controls[this.highRiskConstruction[index]._id]
@@ -1448,48 +1348,6 @@ export class RiskAssessmentSWMSComponent
 				});
 			});
 		});
-		// this.checkArray.forEach((id) => {
-
-		//   this.jobTaskData.forEach((element) => {
-		//     //looking for chemical task
-
-		//     if(id === element._id && element.chemical == "YES"){
-		//       this.chemicalTask=true;
-		//     }
-		//     if (id === element._id) {
-		//       element.risk.forEach((riskItem) => {
-		//         this.highRiskConstruction.forEach((highRisk, riskIndex) => {
-
-		//           if (highRisk._id === riskItem) {
-		//             this.riskArr[riskIndex] = 1;
-		//           }
-		//         });
-		//       });
-		//       element.PPE.forEach((riskItem) => {
-		//         this.PPEselection.forEach((highRisk, index) => {
-		//           if (highRisk._id === riskItem) {
-		//             this.ppeArr[index] = 1;
-		//           }
-		//         });
-		//       });
-		//       // element.tradeCategoryId.forEach((riskItem) => {
-		//       //   this.licenseAndQualification.forEach((highRisk, index) => {
-		//       //     if (highRisk.tradeCategoryId._id === riskItem) {
-		//       //       this.licenceArr[index] = 1;
-		//       //     }
-		//       //   });
-		//       // });
-		//       this.licenseAndQualification.forEach((highRisk, index) => {
-
-		//         if (highRisk.tradeCategoryId._id === element.tradeCategoryId._id) {
-		//           this.licenceArr[index] = 1;
-		//         }
-		//       });
-
-		//     }
-		//   });
-		// });
-
 		while (this.riskLevelFA().length) {
 			this.riskLevelFA().removeAt(0);
 		}
@@ -1516,7 +1374,6 @@ export class RiskAssessmentSWMSComponent
 			console.log('data', data);
 			data.allCOPTitle.forEach((element, index) => {
 				this.allCOPSelected.push(element);
-				// this.COP().push(this.codeOfPrac(index));
 			});
 
 			console.log('allCOPSelected', this.allCOPSelected);
@@ -1642,7 +1499,6 @@ export class RiskAssessmentSWMSComponent
 	editHazrds(type, title, i) {
 		const dialogRef = this.dialog.open(AddItemComponent, {
 			width: '550px',
-			// height:'50%',
 			data: {
 				type,
 				title
@@ -1667,7 +1523,6 @@ export class RiskAssessmentSWMSComponent
 	addChemical() {
 		const dialogRef = this.dialog.open(AddItemComponent, {
 			width: '550px',
-			// height:'50%',
 			data: {
 				type: 'chemical',
 				title: ''
@@ -1767,7 +1622,6 @@ export class RiskAssessmentSWMSComponent
 		});
 		const data = {
 			...rest,
-			//  ... this.riskAssessmentFb.value,
 			tradeCategoryArr: this.tradeCategoryArr,
 			codeOfPract: this.allCOPSelected,
 			identifyHazards: this.jobTaskSelected,
@@ -1822,19 +1676,11 @@ export class RiskAssessmentSWMSComponent
 				console.log('this.riskAssessmentFb posted', res);
 			});
 		}
-
-		// this.signaturePad2.clear();
 	}
 	getDate(event) {
 		console.log(' event.terget.value', event.value);
 		this.dateGet = event.value;
 		console.log('timepicker', this.riskAssessmentFb.get('dateTime').value);
-		// d.setHours(12)
-		// d.setMinutes(30)
-		//  let a=[]
-		//     //a= d.split(" ");
-		//  // a= a.splice(0,4,'12:30:00')
-		//    console.log(" event.terget.valueeeeee",this.timepicker,d);
 	}
 	getTime(event, timePicker) {
 		console.log('this.dateGet', this.dateGet);
@@ -1868,32 +1714,22 @@ export class RiskAssessmentSWMSComponent
 		matCheck: MatCheckbox,
 		i: number
 	): void {
-		const checkBoxes = parent.querySelectorAll('input[type=checkbox]');
-		console.error(matCheck);
-
+		const checkBoxes = Array.from(
+			parent.querySelectorAll('input[type=checkbox]')
+		).slice(1);
 		this.tradeCategoryArr[i].checked = matCheck.checked;
 		console.table(this.tradeCategoryArr);
 		if (matCheck.checked) {
-			// this.tradeCategoryArr.map((x) =>
-			// 	x._id === matCheck.value
-			// 		? { ...x, checked: matCheck.checked }
-			// 		: { ...x }
-			// );
-			//   console.log(x._id,matCheck.value)
-			//   if (x._id === matCheck.value) {
-			//     x.checked = matCheck.checked
-			//   }
-			//   return x
-			// })
+			checkBoxes.forEach((checkBox) => {
+				if (checkBox['checked']) {
+					checkBox['click']();
+				}
+			});
 		}
 		checkBoxes.forEach((checkBox) => {
-			if (!checkBox.classList.contains('mat-checkbox-input')) {
-				// if(checkBox.classList.contains('mat-checkbox-input')){
-				//   console.log('mat-checkbox',checkBox)
-				// }
+			setTimeout(() => {
 				checkBox['click']();
-				// console.log(checkBox);
-			}
+			}, 50);
 		});
 	}
 

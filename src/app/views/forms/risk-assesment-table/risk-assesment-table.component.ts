@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { map } from 'rxjs/operators';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-risk-assesment-table',
@@ -36,11 +37,14 @@ export class RiskAssesmentTableComponent implements OnInit {
 		private logicalFormInfo: LogicalFormInfoService,
 		public router: Router,
 		private spinner: NgxSpinnerService,
+		private setTitle: SetTitleService,
 		private shared: RoleManagementSharedServiceService,
 		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
+		this.setTitle.setTitle('WHS-Risk Assessment List');
+
 		this.isHistory = this.router.url.includes('/riskAssessTable/history');
 		console.log(this.isHistory);
 		if (this.isHistory) {
@@ -75,16 +79,11 @@ export class RiskAssesmentTableComponent implements OnInit {
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				//this.tempArray.paginator = this.paginator;
-				//this.tempArray.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}
 
-	ngAfterViewInit() {
-		// this.tempArray.paginator = this.paginator;
-		// this.tempArray.sort = this.sort;
-	}
+	ngAfterViewInit() {}
 	delete(item) {
 		Swal.fire({
 			title: 'Are you sure?',
@@ -118,17 +117,7 @@ export class RiskAssesmentTableComponent implements OnInit {
 			formName: 'Risk Assessment and SWMS'
 		});
 		console.log('check');
-		// this.logicalFormInfo.printing.next('print');
 		localStorage.setItem('key', 'print');
-		// $("<iframe>")                             // create a new iframe element
-		//     .hide()                               // make it invisible
-		//     .attr("src", environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id) // point the iframe to the page you want to print
-		//     .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-
-		// let iframe=document.createElement("iframe")
-		//       iframe.src= environment.stagingUrl+"#/admin/forms/riskAssessSWMS/"+id
-		//       let body = document.getElementsByTagName("body")
-		//       body[0].appendChild(iframe)
 
 		this.spinner.show('printLoader');
 		this.router.navigate([
@@ -146,8 +135,6 @@ export class RiskAssesmentTableComponent implements OnInit {
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				//this.tempArray.paginator = this.paginator;
-				// this.tempArray.sort = this.sort;
 				console.log('get res', this.showDatas);
 			});
 	}

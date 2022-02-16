@@ -1,10 +1,21 @@
 <div
+	*ngIf="!isHistory;"
 	class="btn btn-outline-primary"
 	[routerLink]="['/admin/forms/fillConfigForm/'+1]"
 >
 	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
-<div class="col ml-2 pt-3">
+<div
+	*ngIf="isHistory;"
+	class="btn btn-outline-primary"
+	[routerLink]="[returnTo | async] "
+>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div *ngIf="isHistory;" class="col ml-2 pt-3">
+	<h1>Saved Dynamic Form History Table</h1>
+</div>
+<div *ngIf="!isHistory;">
 	<h1>Saved Dynamic Form Table</h1>
 </div>
 <div class=" ">
@@ -15,10 +26,10 @@
 		(matSortChange)="sortData($event)"
 	>
 		<!-- Position Column -->
-		<ng-container matColumnDef="position">
-			<th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+		<ng-container matColumnDef="version">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Version</th>
 			<td mat-cell *matCellDef="let element;let i=index">
-				{{element.index+1}}
+				{{element.version}}
 			</td>
 		</ng-container>
 
@@ -52,22 +63,22 @@
 				{{element.updatedAt |date:'mediumDate'}}
 			</td>
 		</ng-container>
+		<ng-container matColumnDef="createdTime">
+			<th mat-header-cell *matHeaderCellDef>Created Date</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.createdTime |date:'mediumDate'}}
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="updatedTime">
+			<th mat-header-cell *matHeaderCellDef>Updated Date</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.updatedTime |date:'mediumDate'}}
+			</td>
+		</ng-container>
 		<ng-container matColumnDef="action">
 			<th mat-header-cell *matHeaderCellDef>Action</th>
 			<td mat-cell *matCellDef="let element">
-				<!-- <i class="fa fa-eye "aria-hidden="true" title="view"></i> -->
-				<!-- <button [routerLink]="element.link" mat-icon-button aria-label="Example icon button with a delete icon">
-          <mat-icon>visibility</mat-icon>
-        </button>
-        <a (click)="goTo(element.title)">
-          <span style="cursor: pointer !important;">
-              <mat-icon >launch</mat-icon>
-          </span>
-      </a> -->
 				<div style="display: flex; justify-content: space-around">
-					<!-- <span class="material-icons" matTooltip="Edit The Form" (click)="edit(element._id)" >
-            <svg-icon name="Edit_form"></svg-icon>
-        </span> -->
 					<button
 						matTooltip="Edit The Form"
 						mat-icon-button
@@ -77,13 +88,17 @@
 						<svg-icon name="Edit_form"></svg-icon>
 					</button>
 
-					<!-- <button matTooltip="history" mat-icon-button >
-            <span class="material-icons  mt-2"  >
-              history
-            </span>
-          </button> -->
+					<button
+						matTooltip="history"
+						mat-icon-button
+						*ngIf="!isHistory"
+						(click)="onHistoryClick(element._id)"
+					>
+						<span class="material-icons mt-2"> history </span>
+					</button>
 
 					<button
+						*ngIf="!isHistory"
 						matTooltip="Delete"
 						mat-icon-button
 						(click)="delete(element)"

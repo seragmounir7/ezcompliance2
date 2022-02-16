@@ -29,7 +29,6 @@ export class AddContactComponent implements OnInit {
 	ngOnInit(): void {
 		console.log('dataContact=>', this.dataContact);
 
-		// this.getContact();
 		this.contactUsForm = this.fb.group({
 			fullName: ['', Validators.required],
 			phone: ['', Validators.required],
@@ -45,18 +44,9 @@ export class AddContactComponent implements OnInit {
 			});
 		}
 	}
-	// getContact() {
-	//   this.mode = 'HappyClient';
-	//   this.url.getAppServiceById(this.mode).subscribe((data) => {
-	//     this.dataContact = data.data;
-	//   });
-	// }
+
 	onSubmit() {
-		const data = {
-			// "title": this.HeaderInformation.get("heading").value,
-			// "description":  this.HeaderInformation.get("description").value,
-			// "fileUrl":this.HeaderInformation.get("uploadImage").value,
-		};
+		const data = {};
 		console.log(this.contactUsForm.value);
 		this.url.addContact(this.contactUsForm.value).subscribe((res) => {
 			console.log('AddContact', res);
@@ -69,8 +59,6 @@ export class AddContactComponent implements OnInit {
 		this.myId = this.dataContact._id;
 
 		console.log('form', this.contactUsForm.value);
-
-		// this.isEdit = true;
 		this.url
 			.editContactUs(this.myId, this.contactUsForm.value)
 			.subscribe((res) => {

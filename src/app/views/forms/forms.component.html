@@ -45,15 +45,6 @@
 		<ng-container matColumnDef="edit">
 			<th mat-header-cell *matHeaderCellDef>Action</th>
 			<td mat-cell *matCellDef="let element">
-				<!-- <i class="fa fa-eye "aria-hidden="true" title="view"></i> -->
-				<!-- <a [routerLink]="element.link" mat-icon-button aria-label="Example icon button with a delete icon">
-      <mat-icon>visibility</mat-icon>
-    </a>
-    <a (click)="goTo(element.title)">
-      <span style="cursor: pointer !important;">
-          <mat-icon >launch</mat-icon>
-      </span>
-  </a> -->
 				<div style="display: flex; justify-content: space-evenly">
 					<span
 						class="material-icons"
@@ -64,9 +55,7 @@
 					>
 						<svg-icon name="Fill_form"></svg-icon>
 					</span>
-					<!-- <button  matTooltip="Fill The Form" mat-icon-button aria-label="Example icon button with a delete icon" [routerLink]="element.link">
-       
-   </button> -->
+
 					<span
 						class="material-icons mt-2"
 						matTooltip="Saved Form List"

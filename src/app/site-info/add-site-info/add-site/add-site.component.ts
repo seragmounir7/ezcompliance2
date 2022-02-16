@@ -5,6 +5,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 @Component({
 	selector: 'app-add-site',
 	templateUrl: './add-site.component.html',
@@ -23,11 +24,13 @@ export class AddSiteComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllStates();
+
 		this.addSitesForm = this.fb.group({
 			siteName: ['', Validators.required],
 			// streetNumber: ['', Validators.required],
 			streetAddress: ['', Validators.required],
 			suburb: ['', Validators.required],
+			postcode: ['', Validators.required],
 			stateId: ['', Validators.required]
 		});
 	}

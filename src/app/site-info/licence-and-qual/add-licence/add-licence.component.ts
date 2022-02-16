@@ -41,7 +41,7 @@ export class AddLicenceComponent implements OnInit {
 	newAction(): FormGroup {
 		return this.fb.group({
 			title: ['', Validators.required],
-			tradeCategoryId: ['', Validators.required]
+			tradeCategoryId: []
 		});
 	}
 
@@ -58,6 +58,11 @@ export class AddLicenceComponent implements OnInit {
 			this.allCategories = (res.data as any[]).map(
 				(category) => category._id
 			);
+
+			for (let index = 0; index < this.add().length; index++) {
+				const element = this.add().at(index) as FormGroup;
+				element.controls.tradeCategoryId.patchValue(this.allCategories);
+			}
 		});
 	}
 	onFormSubmit() {

@@ -60,36 +60,14 @@ export class RateAndCouponComponent implements OnInit {
 				this.addPlan = false;
 				this.ELEMENT_DATA = dataPlan;
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-				// this.dataSource.sort = this.sort;
 			}
-
-			// console.log('mode=>', data);
-			// this.dataSource.data = data.data;
 			console.log('dataPlan=>', dataPlan);
-			// this.dataPlan = data.data;
 		});
 	}
 
 	editPlan() {
 		this.isValid = true;
 	}
-	// editPlanInfo(element) {
-	//   console.log('id=>', element);
-
-	//   this.myId = element._id;
-
-	//   console.log('form', this.rateAndCoupon.value);
-
-	//   // this.isEdit = true;
-	//   this.subscript
-	//     .editPlan(this.myId, this.rateAndCoupon.value)
-	//     .subscribe((res) => {
-	//       console.log('Data Set response' + res);
-	//       this.data = res.data;
-	//       console.log('new response' + this.data);
-	//       // this.dialogRef.close('true');
-	//     });
-	// }
 	edit(element) {
 		const dialogRef = this.dialog.open(EditRateAndCouponComponent, {
 			width: '550px',
@@ -109,9 +87,6 @@ export class RateAndCouponComponent implements OnInit {
 		this.subscript.getPlan(id).subscribe((res) => {
 			console.log('getId', res);
 			this.coupon = res.data;
-			// this.coupon.forEach((element, index) => {
-			//   element.index = index + 1; //adding index
-			// });
 		});
 	}
 }

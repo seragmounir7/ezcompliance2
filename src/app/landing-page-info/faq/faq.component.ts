@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { EditFaqComponent } from './edit-faq/edit-faq.component';
 import { MatSort } from '@angular/material/sort';
+import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 @Component({
 	selector: 'app-faq',
@@ -33,11 +34,13 @@ export class FAQComponent implements OnInit {
 	}
 	constructor(
 		private dialog: MatDialog,
+		private setTitle: SetTitleService,
 		private landingPageInfo: LandingPageInfoServiceService
 	) {}
 
 	ngOnInit(): void {
 		this.getAllPortal();
+		this.setTitle.setTitle('WHS-Portal List');
 	}
 	getAllPortal() {
 		this.landingPageInfo.getAllPortal().subscribe((res: any) => {
