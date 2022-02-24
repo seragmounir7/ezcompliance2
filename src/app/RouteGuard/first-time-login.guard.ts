@@ -24,26 +24,26 @@ export class FirstTimeLoginGuard implements CanActivate {
 		| boolean
 		| UrlTree {
 		console.log('FirstTimeLoginGuard');
-		// return this.authService.loginData$.pipe(
-		//   map(res => {
-		//     if(res?.accessToken && res.firstLogin){
-		//       return true;
-		//     }else{
-		//       return this.router.createUrlTree(['/admin']);
-		//     }
-		//   })
-		//   )
-		if (
-			sessionStorage.getItem('accessToken') &&
-			JSON.parse(sessionStorage.getItem('firstLogin')).firstLogin
-		) {
-			console.log('FirstTimeLoginGuard', true);
-			return true;
-		} else {
-			console.log(
-				'FirstTimeLoginGuard this.router.createUrlTree(["/admin"]);'
-			);
-			return this.router.createUrlTree(['/admin']);
-		}
+		return this.authService.loginData$.pipe(
+			map((res) => {
+				if (res?.accessToken && res.FirstLogin.firstLogin) {
+					return true;
+				} else {
+					return this.router.createUrlTree(['/admin']);
+				}
+			})
+		);
+		// if (
+		// 	sessionStorage.getItem('accessToken') &&
+		// 	JSON.parse(sessionStorage.getItem('firstLogin')).firstLogin
+		// ) {
+		// 	console.log('FirstTimeLoginGuard', true);
+		// 	return true;
+		// } else {
+		// 	console.log(
+		// 		'FirstTimeLoginGuard this.router.createUrlTree(["/admin"]);'
+		// 	);
+		// 	return this.router.createUrlTree(['/admin']);
+		// }
 	}
 }

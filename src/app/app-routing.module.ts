@@ -142,7 +142,11 @@ const routes: Routes = [
 		]
 	},
 	{ path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
-	{ path: 'resetPassword', component: ResetPasswordComponent },
+	{
+		path: 'resetPassword',
+		component: ResetPasswordComponent,
+		canActivate: [NonAuthGuard]
+	},
 	{
 		path: 'register',
 		component: RegisterComponent,
