@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { ViewChild } from '@angular/core';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AuthService } from '@utils/services/auth.service';
 
 @Component({
 	selector: 'app-employee-registration',
@@ -21,6 +22,8 @@ import { Observable } from 'rxjs';
 	styleUrls: ['./employee-registration.component.scss']
 })
 export class EmployeeRegistrationComponent implements OnInit {
+	@Output()
+	isEmpRegInvalid: EventEmitter<boolean> = new EventEmitter<boolean>();
 	ELEMENT_DATA = [];
 	displayedColumns: string[] = [
 		'index',
@@ -34,6 +37,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 	isEmployeeRegistration: Observable<string>;
+	employeePurchased: number;
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
@@ -44,18 +48,25 @@ export class EmployeeRegistrationComponent implements OnInit {
 		private dialog: MatDialog,
 		private spinner: NgxSpinnerService,
 		public router: Router,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private authService: AuthService
 	) {}
 
 	ngOnInit(): void {
+		this.authService.loginData$
+			.pipe(map((res) => res.employeePurchased))
+			.subscribe((res) => (this.employeePurchased = res));
 		this.isEmployeeRegistration = this.activatedRoute.url.pipe(
-			map((value) => value[0].path)
+			map((value) =>
+				typeof value[0]?.path === undefined ? null : value[0]?.path
+			)
 		);
 		this.getAllEmployee();
 		this.setTitle.setTitle('WHS-Employee Details');
 	}
 	getAllEmployee() {
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
+			this.isEmpRegInvalid.emit(res.length < this.employeePurchased);
 			console.log(res);
 			const couponData = res;
 			couponData.forEach((element, index) => {
@@ -95,12 +106,19 @@ export class EmployeeRegistrationComponent implements OnInit {
 		this.router.navigate(['/admin/registration/plantRegistration/' + id]);
 	}
 	openAddEmployee() {
-		this.dialog.open(AddEmployeeComponent, {
-			data: {
-				isDialog: true
-			},
-			height: '90%',
-			width: '90%'
-		});
+		this.dialog
+			.open(AddEmployeeComponent, {
+				data: {
+					isDialog: true
+				},
+				height: '90%',
+				width: '90%'
+			})
+			.afterClosed()
+			.subscribe((res: boolean) => {
+				if (res) {
+					this.getAllEmployee();
+				}
+			});
 	}
 }

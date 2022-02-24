@@ -7,6 +7,7 @@ import { RoleManagementRoutingModule } from './role-management-routing.module';
 import { RoleManagementComponent } from './role-management.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AddRoleComponent } from './add-role/add-role.component';
+import { DirectivesModule } from '../Directives/directives.module';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,8 @@ import { AddRoleComponent } from './add-role/add-role.component';
 		RoleManagementRoutingModule,
 		SharedModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		DirectivesModule
 	],
 	exports: [RoleManagementComponent, CheckboxComponent, AddRoleComponent]
 })

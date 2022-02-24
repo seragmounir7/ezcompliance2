@@ -7,7 +7,9 @@ import {
 	Renderer2,
 	ViewChild
 } from '@angular/core';
+import { AuthService } from 'src/app/utils/services/auth.service';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
+import { Designation } from 'src/app/utils/types/Designation.enum';
 
 @Component({
 	selector: 'app-main',
@@ -22,7 +24,8 @@ export class MainComponent implements OnInit, AfterViewInit {
 	logoUrl: string = 'logo';
 	constructor(
 		private renderer: Renderer2,
-		public mobileViewService: MobileViewService
+		public mobileViewService: MobileViewService,
+		private authService: AuthService
 	) {}
 	ngAfterViewInit(): void {
 		if (this.mobileViewService.isXsmall) {
@@ -70,17 +73,15 @@ export class MainComponent implements OnInit, AfterViewInit {
 		);
 	}
 
-	mainSidebarHeight(height) {
-		// this.renderer.setStyle(
-		//   this.contentWrapper.nativeElement,
-		//   'min-height',
-		//   height - 114 + 'px'
-		// );
-	}
-
 	toggleMenuSidebar() {
 		if (this.sidebarMenuOpened) {
-			this.logoUrl = 'sm-logo';
+			this.authService.loginData$.subscribe((res) => {
+				if (res.designation === Designation.clientAdmin) {
+					this.logoUrl = res.companyLogo;
+				} else {
+					this.logoUrl = 'sm-logo';
+				}
+			});
 			this.renderer.removeClass(
 				document.querySelector('app-root'),
 				'sidebar-open'
@@ -95,7 +96,13 @@ export class MainComponent implements OnInit, AfterViewInit {
 			);
 			this.sidebarMenuOpened = false;
 		} else {
-			this.logoUrl = 'logo';
+			this.authService.loginData$.subscribe((res) => {
+				if (res.designation === Designation.clientAdmin) {
+					this.logoUrl = res.companyLogo;
+				} else {
+					this.logoUrl = 'logo';
+				}
+			});
 			this.renderer.removeClass(
 				document.querySelector('app-root'),
 				'sidebar-collapse'

@@ -8,6 +8,9 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { FormName } from 'src/app/side-nav-access.enum';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 
 @Component({
 	selector: 'app-forms',
@@ -60,6 +63,7 @@ export class FormsComponent implements OnInit {
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	url: any;
+	accessObj: AccessObj;
 
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
@@ -71,7 +75,8 @@ export class FormsComponent implements OnInit {
 		private spinner: NgxSpinnerService,
 		public router: Router,
 		private setTitle: SetTitleService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private role: RoleManagementService
 	) {}
 	goTo(title) {
 		console.log('title', title);
@@ -104,6 +109,7 @@ export class FormsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.url = this.activatedRoute.snapshot.url;
 		this.setTitle.setTitle('WHS-Forms List');
 	}

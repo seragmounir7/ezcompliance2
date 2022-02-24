@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+	Component,
+	EventEmitter,
+	OnInit,
+	Output,
+	ViewChild
+} from '@angular/core';
 import {
 	AbstractControl,
 	FormArray,
@@ -9,7 +15,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthService } from 'src/app/utils/services/auth.service';
+import { AuthService, UserData } from 'src/app/utils/services/auth.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
@@ -22,6 +28,13 @@ import Swal from 'sweetalert2';
 	styleUrls: ['./add-and-edit-company-info.component.scss']
 })
 export class AddAndEditCompanyInfoComponent implements OnInit {
+	@Output() isInvalid: EventEmitter<boolean> = new EventEmitter<boolean>(
+		false
+	);
+	@Output()
+	updatedSuccessFull: EventEmitter<boolean> = new EventEmitter<boolean>(
+		false
+	);
 	formData: FormGroup;
 	submitted = false;
 	dataPlant: boolean;
@@ -38,6 +51,12 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	StatesData: any = [];
 	selectedLogo: any;
 	userId: string;
+	fields: string[] = [
+		'mailingAddress',
+		'mailingSubUrb',
+		'mailingState',
+		'mailingPostcode'
+	];
 	constructor(
 		private fb: FormBuilder,
 		private activatedRoute: ActivatedRoute,
@@ -62,15 +81,21 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			state: ['', Validators.required],
 			postcode: ['', Validators.required],
 			mailingAddress: ['', Validators.required],
+			mailingPostcode: ['', Validators.required],
+			mailingState: ['', Validators.required],
+			mailingSubUrb: ['', Validators.required],
 			companyABN: ['', Validators.required],
-			companyAddr: ['', Validators.required],
 			licenceNumber: ['', Validators.required],
 			companyWeb: ['', Validators.required],
+			isMailingAddress: [null, Validators.required],
 			companyLogo: [''],
-			plantArr: this.fb.array([]),
 			plantSignature: [''],
+			plantArr: this.fb.array([]),
 			insuranceArr: this.fb.array([])
 		});
+		this.formData.valueChanges.subscribe((res) =>
+			this.isInvalid.emit(this.formData.invalid)
+		);
 
 		this.id = this.activatedRoute.snapshot.params.id;
 
@@ -105,16 +130,16 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 					image.src = e.target.result as string;
 
 					//Validate the File Height and Width.
-					image.onload = function () {
-						let height = image.height;
-						let width = image.width;
-						if (height > 100 || width > 100) {
-							alert('Height and Width must not exceed 100px.');
-							return false;
-						}
-						alert('Uploaded image has valid Height and Width.');
-						return true;
-					};
+					// image.onload = function () {
+					// 	let height = image.height;
+					// 	let width = image.width;
+					// 	if (height > 100 || width > 100) {
+					// 		alert('Height and Width must not exceed 100px.');
+					// 		return false;
+					// 	}
+					// 	alert('Uploaded image has valid Height and Width.');
+					// 	return true;
+					// };
 				};
 			} else {
 				alert('This browser does not support HTML5.');
@@ -319,11 +344,13 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				streetAddress: this.formData.get('streetAddress').value,
 				suburb: this.formData.get('subUrb').value,
 				stateId: this.formData.get('state').value,
-
 				postcode: this.formData.get('postcode').value,
 				mailingAddress: this.formData.get('mailingAddress').value,
+				mailingSubUrb: this.formData.get('mailingSubUrb').value,
+				mailingState: this.formData.get('mailingState').value,
+				mailingPostcode: this.formData.get('mailingPostcode').value,
+				isMailingAddress: this.formData.get('isMailingAddress').value,
 				companyABN: this.formData.get('companyABN').value,
-				companyAddress: this.formData.get('companyAddr').value,
 				licenceNumber: this.formData.get('licenceNumber').value,
 				website: this.formData.get('companyWeb').value,
 				companyLogo: this.formData.get('companyLogo').value
@@ -341,11 +368,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		this.subscript.updateCompanyDetails(body).subscribe(
 			(data) => {
 				console.log('data=>', data);
-				Swal.fire({
-					title: 'Company Detail Added successfully',
-					showConfirmButton: false,
-					timer: 1200
-				});
+
 				this.router.navigate(['/admin/registration/compdetails']);
 			},
 			(err) => {
@@ -379,8 +402,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				state: data.data.stateId,
 				postcode: data.data.postcode,
 				mailingAddress: data.data.mailingAddress,
+				mailingSubUrb: data.data.mailingSubUrb,
+				mailingState: data.data.mailingState,
+				mailingPostcode: data.data.mailingPostcode,
+				isMailingAddress: data.data.isMailingAddress,
 				companyABN: data.data.companyABN,
-				companyAddr: data.data.companyAddress,
 				licenceNumber: data.data.licenceNumber,
 				companyWeb: data.data.website,
 				companyLogo: this.selectedLogo,
@@ -418,6 +444,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				reminderNotice:
 					data.data.insuranceRegister.insurance.reminderNotice
 			});
+			this.fields.forEach((field) =>
+				(this.registerFormControl.isMailingAddress.value as boolean)
+					? this.formData.get(field).disable()
+					: this.formData.get(field).enable()
+			);
 		});
 	}
 	onFormUpdate(id) {
@@ -475,7 +506,10 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			website: this.formData.get('companyWeb').value,
 			fax: this.formData.get('fax').value,
 			mailingAddress: this.formData.get('mailingAddress').value,
-			companyAddress: this.formData.get('companyAddr').value,
+			mailingSubUrb: this.formData.get('mailingSubUrb').value,
+			mailingState: this.formData.get('mailingState').value,
+			mailingPostcode: this.formData.get('mailingPostcode').value,
+			isMailingAddress: this.formData.get('isMailingAddress').value,
 			licenceNumber: this.formData.get('licenceNumber').value,
 			companyLogo: this.formData.get('companyLogo').value,
 			postcode: this.formData.get('postcode').value,
@@ -491,7 +525,15 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 
 		this.subscript.updateCompanyDetails(body).subscribe(
 			(resData) => {
+				this.updatedSuccessFull.emit(true);
 				console.log('updateData', resData);
+				let userData: UserData = JSON.parse(
+					sessionStorage.getItem('userData')
+				);
+				userData.companyLogo = body.companyLogo;
+				userData.username = body.companyName;
+				sessionStorage.setItem('userData', JSON.stringify(userData));
+				this.authService.nextLoginData(userData);
 				Swal.fire({
 					title: 'Company Detail Updated successfully',
 					showConfirmButton: false,
@@ -537,5 +579,20 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			default:
 				break;
 		}
+	}
+	sameAsStreet() {
+		const patchFields = ['streetAddress', 'subUrb', 'state', 'postcode'];
+		this.fields.forEach((field) =>
+			(this.registerFormControl.isMailingAddress.value as boolean)
+				? this.formData.get(field).disable()
+				: this.formData.get(field).enable()
+		);
+		this.fields.forEach((field, index) =>
+			this.registerFormControl.isMailingAddress.value === false
+				? this.formData.get(field).reset()
+				: this.formData
+						.get(field)
+						.setValue(this.formData.get(patchFields[index]).value)
+		);
 	}
 }

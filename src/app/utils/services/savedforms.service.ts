@@ -31,7 +31,7 @@ export class SavedformsService {
 				map((data: any) => {
 					if (data.data) {
 						data.data = (data.data as Array<any>).map((obj) => {
-							if (obj.fileType === 'Dynamic Form') {
+							if (obj?.isDynamic === 'Dynamic Form') {
 								obj.formName = obj.formIndex;
 							} else {
 								obj.formName = obj.formId;

@@ -136,9 +136,6 @@
 							type="text"
 							class="form-control"
 							numbersOnly
-							accessControl
-							moduleType="Users"
-							accessType="create_action"
 							formControlName="custConctPh"
 							[class.is-invalid]="toolBox.get('custConctPh')?.hasError('required')
           && (toolBox.get('custConctPh').dirty || toolBox.get('custConctPh').touched) "

@@ -17,7 +17,7 @@ export class RoleManagementSharedServiceService {
 		this.roleGet.next(value);
 		console.log('servies call');
 	}
-	getRoleEvent(): Observable<any> {
+	get getRoleEvent(): Observable<any> {
 		return this.roleGet.asObservable();
 	}
 	sendPrintData(value) {

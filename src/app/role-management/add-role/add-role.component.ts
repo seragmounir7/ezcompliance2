@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { RoleManagementService } from '../../utils/services/role-management.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
+import { AccessArr } from '@utils/types/AccessResponceTypes';
 @Component({
 	selector: 'app-add-role',
 	templateUrl: './add-role.component.html',
@@ -20,7 +21,7 @@ export class AddRoleComponent implements OnInit {
 		private roleService: RoleManagementService,
 		public dialogRef: MatDialogRef<AddRoleComponent>,
 		private roleSharedService: RoleManagementSharedServiceService,
-		@Inject(MAT_DIALOG_DATA) public data: any
+		@Inject(MAT_DIALOG_DATA) public data: AccessArr
 	) {
 		this.addRole = this.fb.group({
 			role: ['', Validators.required]
@@ -46,7 +47,7 @@ export class AddRoleComponent implements OnInit {
 		}
 		if (this.data.action === 'edit') {
 			this.roleService
-				.updateRole(this.data.role._id, this.addRole.value)
+				.updateRole(this.data.role.roleId._id, this.addRole.value)
 				.subscribe((res) => {
 					console.log('res', res);
 					this.roleSharedService.sendRoleEvent(true);

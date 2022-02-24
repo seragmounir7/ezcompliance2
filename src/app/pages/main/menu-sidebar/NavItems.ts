@@ -1,3 +1,4 @@
+import { Designation } from 'src/app/utils/types/Designation.enum';
 import { NavItem } from './nav-items';
 
 export class NavItems {
@@ -9,12 +10,15 @@ export class NavItems {
 	constructor() {
 		let role = sessionStorage.getItem('role') as string;
 		if (!role) return;
-		switch (role.toLowerCase()) {
-			case 'superadmin':
+		switch (role) {
+			case Designation.superAdmin:
 				this.returnNav = this.navItemsAll;
 				break;
-			case 'clientadmin':
+			case Designation.clientAdmin:
 				this.returnNav = this.clientAdminNav;
+				break;
+			case Designation.user:
+				this.returnNav = this.userNav;
 				break;
 			default:
 				break;
@@ -759,6 +763,45 @@ export class NavItems {
 							hasAccess: true
 						}
 					],
+					hasAccess: true
+				}
+			],
+			hasAccess: true
+		}
+	];
+	protected userNav: NavItem[] = [
+		{
+			displayedName: 'Dashboard',
+			icon: 'dash',
+			route: './',
+			hasAccess: true
+		},
+		{
+			displayedName: 'WHS Forms',
+			icon: 'whsForms',
+			childItem: [
+				{
+					displayedName: 'Generate a New Form',
+					icon: 'dynamic',
+					route: './dynamic/dynamicFormsList',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Logical Forms',
+					icon: 'logical',
+					route: './forms',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Form List',
+					icon: 'fillConfig',
+					route: './forms/fillConfigForm/0',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Submitted Forms',
+					icon: 'savedForms',
+					route: './savedForms',
 					hasAccess: true
 				}
 			],

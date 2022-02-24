@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
+import { RegulatorResponce } from '../types/Regulator';
+import { Observable } from 'rxjs';
+import { JurisDictionResponce } from '../types/Jurisdiction';
+import { SafetyLeslationResponce } from '../types/SafetyLegislation';
 
 @Injectable({
 	providedIn: 'root'
@@ -487,12 +491,15 @@ export class LogicalFormInfoService {
 			})
 		);
 	}
-	getAllJurisdiction(field = '', value = '') {
+	getAllJurisdiction(
+		field = '',
+		value = ''
+	): Observable<JurisDictionResponce> {
 		if (value == '') {
 			field = '';
 		}
 		return this.https
-			.get(
+			.get<JurisDictionResponce>(
 				this.apiUrl +
 					`jurisdiction/getAll?field=${field}&value=${value}`
 			)
@@ -530,12 +537,14 @@ export class LogicalFormInfoService {
 			})
 		);
 	}
-	getAllRegulator(field = '', value = '') {
+	getAllRegulator(field = '', value = ''): Observable<RegulatorResponce> {
 		if (value == '') {
 			field = '';
 		}
 		return this.https
-			.get(this.apiUrl + `regulator/getAll?field=${field}&value=${value}`)
+			.get<RegulatorResponce>(
+				this.apiUrl + `regulator/getAll?field=${field}&value=${value}`
+			)
 			.pipe(
 				map((res: any) => {
 					return res;
@@ -601,12 +610,12 @@ export class LogicalFormInfoService {
 				})
 			);
 	}
-	getAllSafety(field = '', value = '') {
+	getAllSafety(field = '', value = ''): Observable<SafetyLeslationResponce> {
 		if (value == '') {
 			field = '';
 		}
 		return this.https
-			.get(
+			.get<SafetyLeslationResponce>(
 				this.apiUrl +
 					`safetyLegislation/getAll?field=${field}&value=${value}`
 			)

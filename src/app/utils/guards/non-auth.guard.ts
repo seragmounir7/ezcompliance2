@@ -27,7 +27,10 @@ export class NonAuthGuard implements CanActivate, CanActivateChild, CanLoad {
 		| UrlTree {
 		if (sessionStorage.getItem('accessToken'))
 			this.router.navigate(['/admin']);
-
+		console.log(
+			'NonAuthGuard',
+			sessionStorage.getItem('accessToken') ? false : true
+		);
 		return sessionStorage.getItem('accessToken') ? false : true;
 	}
 	canActivateChild(

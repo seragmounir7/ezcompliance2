@@ -2,14 +2,16 @@
 	<h1>Employee Details</h1>
 </div>
 <div>
-	<button
-		*ngIf="(isEmployeeRegistration| async) !== 'employeeRegistration'"
-		type="button"
-		class="btn btn-outline-primary mr-2 float-right"
-		(click)="openAddEmployee()"
-	>
-		<i class="fas fa-plus"></i> Add Employee
-	</button>
+	<ng-container *ngIf="dataSource.data.length < employeePurchased">
+		<button
+			*ngIf="(isEmployeeRegistration| async) !== 'employeeRegistration'"
+			type="button"
+			class="btn btn-outline-primary mr-2 float-right"
+			(click)="openAddEmployee()"
+		>
+			<i class="fas fa-plus"></i> Add Employee
+		</button>
+	</ng-container>
 
 	<button
 		*ngIf="(isEmployeeRegistration| async) == 'employeeRegistration'"

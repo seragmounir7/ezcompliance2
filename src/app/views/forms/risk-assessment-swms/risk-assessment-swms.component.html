@@ -765,7 +765,7 @@
 								<input
 									[class.disableDiv]="isHistory"
 									[ngxMatTimepicker]="timepicker"
-									format="24"
+									[format]="24"
 									[value]="setTime"
 									class="form-control"
 								/>
@@ -1823,7 +1823,7 @@
 								style="width: 100%"
 								[editor]="Editor"
 								[data]="secondEditor"
-								disabled="true"
+								[disabled]="true"
 							>
 							</ckeditor>
 						</div>
@@ -2458,7 +2458,7 @@
 						<label class="form-label mt-1 mb-0">Time</label>
 						<input
 							[ngxMatTimepicker]="timepicker"
-							format="24"
+							[format]="24"
 							[value]="setTime"
 							class="form-control"
 						/>
@@ -2990,7 +2990,7 @@
 						style="width: 100%"
 						[editor]="Editor"
 						[data]="secondEditor"
-						disabled="true"
+						[disabled]="true"
 					></ckeditor>
 				</div>
 				<hr />

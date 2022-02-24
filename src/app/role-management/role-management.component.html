@@ -1,13 +1,15 @@
 <div class="row">
 	<div class="col mt-2 mb-2">
 		<button
+			*ngIf="roleLength < employeePurchased"
 			(click)="openDialog('')"
-			_ngcontent-hqi-c400=""
 			type="button"
 			class="btn btn-outline-primary mt-1 mr-2 float-right"
 		>
-			<i _ngcontent-hqi-c400="" class="fas fa-plus"></i> Add Role
+			<i class="fas fa-plus"></i> Add Role
 		</button>
 	</div>
 </div>
-<app-checkbox></app-checkbox>
+<app-checkbox
+	(roleLength)="roleLength = $event;isRoleInvaid.emit(roleLength < employeePurchased)"
+></app-checkbox>

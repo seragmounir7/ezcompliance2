@@ -3,6 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import {
+	JurisDictionResponce,
+	JurisDictionData
+} from 'src/app/utils/types/Jurisdiction';
+import { RegulatorData } from 'src/app/utils/types/Regulator';
+import {
+	SafetyLeslationData,
+	SafetyLeslationResponce
+} from 'src/app/utils/types/SafetyLegislation';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,10 +23,10 @@ export class AddStateRelationComponent implements OnInit {
 	SetState!: FormGroup;
 	states = null;
 	stateId = null;
-	JurisdictionData: [];
-	safety: [];
+	JurisdictionData: JurisDictionData[];
+	safety: SafetyLeslationData[];
 	codeData: [];
-	regulatorData: [];
+	regulatorData: RegulatorData[];
 	isLinear = false;
 
 	constructor(
@@ -59,23 +68,27 @@ export class AddStateRelationComponent implements OnInit {
 	}
 
 	getAllRegulator() {
-		this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
+		this.logicalFormInfo.getAllRegulator().subscribe((res) => {
 			console.log('this.regulatorData', res.data);
 			this.regulatorData = res.data;
 		});
 	}
 
 	getAllSafe() {
-		this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
-			console.log('this.safety', res);
-			this.safety = res.data;
-		});
+		this.logicalFormInfo
+			.getAllSafety()
+			.subscribe((res: SafetyLeslationResponce) => {
+				console.log('this.safety', res);
+				this.safety = res.data;
+			});
 	}
 	getAllJurisdiction() {
-		this.logicalFormInfo.getAllJurisdiction().subscribe((res: any) => {
-			console.log('JurisdictionData=>', res);
-			this.JurisdictionData = res.data;
-		});
+		this.logicalFormInfo
+			.getAllJurisdiction()
+			.subscribe((res: JurisDictionResponce) => {
+				console.log('JurisdictionData=>', res);
+				this.JurisdictionData = res.data;
+			});
 	}
 
 	setRelation() {

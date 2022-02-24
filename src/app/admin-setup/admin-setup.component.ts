@@ -1,24 +1,127 @@
-import { Component, OnInit } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	OnInit,
+	ViewChild
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatHorizontalStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
+import {
+	AuthService,
+	FirstLogin,
+	UserData
+} from '../utils/services/auth.service';
 
 @Component({
 	selector: 'app-admin-setup',
 	templateUrl: './admin-setup.component.html',
 	styleUrls: ['./admin-setup.component.scss']
 })
-export class AdminSetupComponent implements OnInit {
+export class AdminSetupComponent implements OnInit, AfterViewInit {
+	@ViewChild('stepper') stepper: MatHorizontalStepper;
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
 	isEditable = false;
+	userData: UserData;
+	companyInfoValid: boolean;
+	updatedSuccessFull: boolean;
+	isRoleInvaid: boolean;
+	isEmpRegInvalid: boolean;
 
-	constructor(private _formBuilder: FormBuilder) {}
+	constructor(
+		private _formBuilder: FormBuilder,
+		private router: Router,
+		private authService: AuthService,
+		private changeDetectorRef: ChangeDetectorRef
+	) {}
+	ngAfterViewInit(): void {
+		this.authService.loginData$.subscribe((res) => {
+			this.changeDetectorRef.detectChanges();
+			console.log(this.stepper.selectedIndex);
+			if (res.FirstLogin.step1 === false) {
+				this.stepper.selected.completed = true;
+				this.stepper.next();
+				// this.stepper.selectedIndex = 0;
+			}
+			if (res.FirstLogin.step2 === false) {
+				this.stepper.selected.completed = true;
+				this.stepper.next();
+			}
+			if (res.FirstLogin.step3 === false) {
+				this.stepper.selected.completed = true;
+				this.stepper.next();
+			}
+			if (res.FirstLogin.step4 === false) {
+				this.stepper.selected.completed = true;
+				this.stepper.next();
+			} else {
+				// this.stepper.selectedIndex = 4;
+			}
+			// if (!res.firstLogin.step1) {
+			// 	this.stepper.selectedIndex = 1;
+			// } else if (!res.firstLogin.step2) {
+			// 	this.stepper.selectedIndex = 2;
+			// } else if (!res.firstLogin.step3) {
+			// 	this.stepper.selectedIndex = 3;
+			// } else if (!res.firstLogin.step4) {
+			// 	this.stepper.selectedIndex = 4;
+			// }else{
+			//   this.stepper.selectedIndex = 3;
+			// }
+			console.log(this.stepper.selectedIndex);
+		});
+		console.log(this.stepper);
+	}
 
 	ngOnInit() {
+		this.authService.loginData$.subscribe((res) => {
+			console.log('admin setup', res);
+			this.userData = res;
+		});
 		this.firstFormGroup = this._formBuilder.group({
 			firstCtrl: ['', Validators.required]
 		});
 		this.secondFormGroup = this._formBuilder.group({
 			secondCtrl: ['', Validators.required]
 		});
+	}
+
+	updateFirstLogin(step: string) {
+		this.userData.FirstLogin[step] = false;
+		this.authService
+			.updateFirstLogin(this.userData.FirstLogin)
+			.subscribe((res) => {
+				console.log(res);
+				this.authService.nextLoginData(this.userData);
+				sessionStorage.setItem(
+					'userData',
+					JSON.stringify(this.userData)
+				);
+				sessionStorage.setItem(
+					'firstLogin',
+					JSON.stringify(this.userData.FirstLogin)
+				);
+			});
+	}
+
+	setupComplete() {
+		this.userData.FirstLogin.firstLogin = false;
+		this.authService
+			.updateFirstLogin(this.userData.FirstLogin)
+			.subscribe((res) => {
+				console.log(res);
+				sessionStorage.setItem(
+					'firstLogin',
+					JSON.stringify(this.userData.FirstLogin)
+				);
+				sessionStorage.setItem(
+					'userData',
+					JSON.stringify(this.userData)
+				);
+				this.authService.nextLoginData(this.userData);
+			});
+		this.router.navigate(['/admin']);
 	}
 }

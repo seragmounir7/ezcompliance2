@@ -23,7 +23,7 @@
 		mat-table
 		[dataSource]="tempArray"
 		matSort
-		(matSortChange)="sortData($event)"
+		(matSortChange)="sortData()"
 	>
 		<!-- Position Column -->
 		<ng-container matColumnDef="version">
@@ -80,6 +80,7 @@
 			<td mat-cell *matCellDef="let element">
 				<div style="display: flex; justify-content: space-around">
 					<button
+						*accessControl="accessObj.Edit"
 						matTooltip="Edit The Form"
 						mat-icon-button
 						aria-label="Example icon button with a delete icon"
@@ -96,15 +97,16 @@
 					>
 						<span class="material-icons mt-2"> history </span>
 					</button>
-
-					<button
-						*ngIf="!isHistory"
-						matTooltip="Delete"
-						mat-icon-button
-						(click)="delete(element)"
-					>
-						<span class="material-icons mt-2"> delete </span>
-					</button>
+					<ng-container *accessControl="accessObj.Delete">
+						<button
+							*ngIf="!isHistory"
+							matTooltip="Delete"
+							mat-icon-button
+							(click)="delete(element)"
+						>
+							<span class="material-icons mt-2"> delete </span>
+						</button>
+					</ng-container>
 				</div>
 			</td>
 		</ng-container>

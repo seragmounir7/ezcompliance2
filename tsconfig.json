@@ -16,7 +16,8 @@
 		"esModuleInterop": true
 	},
 	"angularCompilerOptions": {
-		"fullTemplateTypeCheck": true,
+		"strictTemplates": false,
+		"fullTemplateTypeCheck": false,
 		"strictInjectionParameters": true,
 		"skipLibCheck": true
 	}

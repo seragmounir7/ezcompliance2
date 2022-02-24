@@ -32,7 +32,7 @@
 <div
 	id="section-to-print"
 	class="container card px-4 py-4 content-center"
-	[class.px-4]="!(mobileViewService.isMobile| async)"
+	[class.px-4]="(mobileViewService.isMobile| async) === false"
 	[class.disableDiv]="isHistory"
 >
 	<form class="px-4 py-4" [formGroup]="hazardReport">
@@ -1385,7 +1385,7 @@
 		<hr />
 
 		<br />
-		<ng-container *ngIf="showImg()">
+		<ng-container *ngIf="selectedImage | checkImgExt">
 			<div
 				style="padding-left: 30%"
 				*ngIf="(isPrint | async)===true && selectedImage"

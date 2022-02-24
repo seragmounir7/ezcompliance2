@@ -54,6 +54,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { DirectivesModule } from './Directives/directives.module';
 import { MobileViewService } from './utils/services/mobile-view.service';
 import { ScrollModule } from './shared/scroll/scroll.module';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -77,7 +78,8 @@ registerLocaleData(localeEn, 'en-EN');
 		// ViewFormsComponent,
 		NotFoundPageComponent,
 		PrintLayoutComponent,
-		ResetPasswordComponent
+		ResetPasswordComponent,
+		ForgotPasswordComponent
 	],
 	imports: [
 		BrowserModule,
@@ -101,11 +103,9 @@ registerLocaleData(localeEn, 'en-EN');
 			positionClass: 'toast-bottom-right',
 			preventDuplicates: true
 		}),
-		// NgbModule,
 		NgxMatTimepickerModule,
 		HttpClientModule,
 		DndModule,
-		//   DxButtonModule,
 		ChartsModule,
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM'

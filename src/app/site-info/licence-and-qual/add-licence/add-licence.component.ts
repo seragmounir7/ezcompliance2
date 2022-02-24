@@ -86,7 +86,8 @@ export class AddLicenceComponent implements OnInit {
 			}
 		);
 	}
-	calcHeight(value) {
+	calcHeight(target) {
+		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
 		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}

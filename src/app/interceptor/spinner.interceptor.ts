@@ -4,7 +4,6 @@ import {
 	HttpHandler,
 	HttpEvent,
 	HttpInterceptor,
-	HttpEventType,
 	HttpResponse,
 	HttpErrorResponse
 } from '@angular/common/http';
@@ -24,16 +23,16 @@ export class SpinnerInterceptor implements HttpInterceptor {
 
 		void this.spinner.show();
 		return next.handle(request).pipe(
-			map((event: HttpEvent<any>) => {
+			map((event: HttpEvent<unknown>) => {
 				if (event instanceof HttpResponse) {
 					// console.log('spinnerhide====================>', request.url);
-					this.spinner.hide(undefined, 3000);
+					void this.spinner.hide(undefined, 3000);
 				}
 				return event;
 			}),
 			catchError((err: HttpErrorResponse) => {
 				if (err) {
-					this.spinner.hide(undefined, 3000);
+					void this.spinner.hide(undefined, 3000);
 				}
 				return throwError(err);
 			})

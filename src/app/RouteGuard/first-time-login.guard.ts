@@ -7,12 +7,14 @@ import {
 	Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AuthService } from '../utils/services/auth.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class FirstTimeLoginGuard implements CanActivate {
-	constructor(private router: Router) {}
+	constructor(private router: Router, private authService: AuthService) {}
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
@@ -22,9 +24,25 @@ export class FirstTimeLoginGuard implements CanActivate {
 		| boolean
 		| UrlTree {
 		console.log('FirstTimeLoginGuard');
-		if (JSON.parse(sessionStorage.getItem('userData')).firstTimeLogin) {
+		// return this.authService.loginData$.pipe(
+		//   map(res => {
+		//     if(res?.accessToken && res.firstLogin){
+		//       return true;
+		//     }else{
+		//       return this.router.createUrlTree(['/admin']);
+		//     }
+		//   })
+		//   )
+		if (
+			sessionStorage.getItem('accessToken') &&
+			JSON.parse(sessionStorage.getItem('firstLogin')).firstLogin
+		) {
+			console.log('FirstTimeLoginGuard', true);
 			return true;
 		} else {
+			console.log(
+				'FirstTimeLoginGuard this.router.createUrlTree(["/admin"]);'
+			);
 			return this.router.createUrlTree(['/admin']);
 		}
 	}

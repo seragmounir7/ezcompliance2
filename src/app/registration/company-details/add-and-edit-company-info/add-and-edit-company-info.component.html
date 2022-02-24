@@ -163,8 +163,24 @@
 					</div>
 				</div>
 
+				<div class="row ml-1" style="position: relative; bottom: -24px">
+					<div
+						class=""
+						style="display: flex; align-items: baseline; gap: 8px"
+					>
+						<input
+							type="checkbox"
+							(change)="sameAsStreet()"
+							class=""
+							formControlName="isMailingAddress"
+							id="checkbox"
+						/>
+						<label for="checkbox">Same as Street</label><br />
+					</div>
+				</div>
+
 				<div class="row">
-					<div class="mb-3 mt-3 col-2">
+					<div class="mb-3 mt-3 col-3">
 						<label
 							for="exampleFormControlInput1"
 							class="form-label"
@@ -184,6 +200,63 @@
 							Mailing Address is required
 						</span>
 					</div>
+
+					<div class="mb-3 mt-3 col-3">
+						<label> Suburb</label>
+						<textarea
+							type="text"
+							class="form-control"
+							formControlName="mailingSubUrb"
+							[class.is-invalid]="(registerFormControl.mailingSubUrb.touched||submitted) && registerFormControl.mailingSubUrb.errors?.required"
+						></textarea>
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.mailingSubUrb.touched || submitted) && registerFormControl.mailingSubUrb.errors?.required"
+						>
+							Suburb Address is required
+						</span>
+					</div>
+
+					<div class="mb-3 mt-3 col-3">
+						<label> State</label>
+						<select
+							class="form-select form-control col"
+							aria-label="Default select example"
+							formControlName="mailingState"
+							[class.is-invalid]="(registerFormControl.mailingState.touched || submitted) && registerFormControl.mailingState.errors?.required "
+						>
+							<option selected hidden>Select</option>
+							<option
+								[value]="state._id"
+								*ngFor="let state of StatesData"
+							>
+								{{state.title}}
+							</option>
+						</select>
+
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.mailingState.touched || submitted) && registerFormControl.mailingState.errors?.required"
+						>
+							state is required
+						</span>
+					</div>
+					<div class="mb-3 mt-3 col-3">
+						<label> Postcode</label>
+						<input
+							type="text"
+							class="form-control"
+							formControlName="mailingPostcode"
+							[class.is-invalid]="(registerFormControl.mailingPostcode.touched ||submitted) && registerFormControl.mailingPostcode.errors?.required"
+						/>
+
+						<span
+							class="text-danger"
+							*ngIf="(registerFormControl.mailingPostcode.touched ||submitted) && registerFormControl.mailingPostcode.errors?.required"
+							>Postcode is required</span
+						>
+					</div>
+
 					<div class="mb-3 mt-3 col-2">
 						<label
 							for="exampleFormControlInput1"
@@ -204,27 +277,10 @@
 							Company ABN is required
 						</span>
 					</div>
-					<div class="mb-3 mt-3 col-3">
-						<label
-							for="exampleFormControlInput1"
-							class="form-label"
-						>
-							Company Address
-						</label>
-						<textarea
-							type="text"
-							formControlName="companyAddr"
-							class="form-control inputData"
-							[class.is-invalid]="(registerFormControl.companyAddr.touched || submitted) && registerFormControl.companyAddr.errors?.required "
-						></textarea>
 
-						<span
-							class="text-danger"
-							*ngIf="(registerFormControl.companyAddr.touched || submitted) && registerFormControl.companyAddr.errors?.required"
-						>
-							Company Address is required
-						</span>
-					</div>
+					<br />
+					<br />
+
 					<div class="mb-3 mt-3 col-2">
 						<label
 							for="exampleFormControlInput1"
@@ -263,6 +319,51 @@
 							Website is required
 						</span>
 					</div>
+
+					<!-- <div class="mb-3 mt-3 mr-1  col-3">
+           <strong> Postal Street Address</strong><br>
+           <input type="checkbox" >
+           <label class="form-check-label" >
+             same as street
+           </label><br>
+           <label>PO Box</label>
+           <input type="text"  class=" form-control" formControlName="">
+          </div>
+
+          <div class="mb-3 mt-3 col-3">
+            <label>Suberb</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="subUrb"
+            />
+          </div>
+
+          <div class="mb-3 mt-3 col-3">
+            <label>State</label>
+            <select
+              class="form-select form-control col"
+              aria-label="Default select example"
+              formControlName="state"
+              [class.is-invalid]="(registerFormControl.state.touched || submitted) && registerFormControl.state.errors?.required "
+            >
+              <option selected hidden>Select</option>
+              <option
+                [value]="state._id"
+                *ngFor="let state of StatesData"
+              >
+                {{state.title}}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3 mt-3 col-2">
+            <label>Postcode</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="postcode"
+            />
+          </div> -->
 				</div>
 
 				<div class="row py-3">
@@ -294,6 +395,7 @@
 						type="submit"
 						class="btn btn-outline-primary btn_1 ml-3"
 						*ngIf="dataPlant"
+						[disabled]="!formData.valid"
 						(click)="onFormUpdate($event)"
 					>
 						Update

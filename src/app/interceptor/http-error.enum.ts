@@ -5,5 +5,6 @@ export enum HttpError {
 	NotFound = 404,
 	TimeOut = 408,
 	Conflict = 409,
-	InternalServerError = 500
+	InternalServerError = 500,
+	MovedPermanently = 301
 }

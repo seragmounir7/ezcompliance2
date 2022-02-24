@@ -46,15 +46,17 @@
 			<th mat-header-cell *matHeaderCellDef>Action</th>
 			<td mat-cell *matCellDef="let element">
 				<div style="display: flex; justify-content: space-evenly">
-					<span
-						class="material-icons"
-						matTooltip="Fill The Form"
-						[routerLink]="element.link"
-						style="font-size: 26px; cursor: pointer !important"
-						*ngIf="url[0].path=='fillConfigForm'"
-					>
-						<svg-icon name="Fill_form"></svg-icon>
-					</span>
+					<ng-container *accessControl="accessObj.Add">
+						<span
+							class="material-icons"
+							matTooltip="Fill The Form"
+							[routerLink]="element.link"
+							style="font-size: 26px; cursor: pointer !important"
+							*ngIf="url[0].path=='fillConfigForm'"
+						>
+							<svg-icon name="Fill_form"></svg-icon>
+						</span>
+					</ng-container>
 
 					<span
 						class="material-icons mt-2"

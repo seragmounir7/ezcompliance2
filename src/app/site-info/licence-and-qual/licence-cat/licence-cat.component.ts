@@ -105,7 +105,7 @@ export class LicenceCatComponent implements OnInit {
 		// this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 
-	sortData(sort: Sort) {
+	sortData(sort: Sort): void {
 		this.getAllLicenceCat(sort.active, sort.direction);
 	}
 	toggleCategory(event: MatCheckboxChange, element) {

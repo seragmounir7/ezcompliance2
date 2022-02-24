@@ -1,45 +1,87 @@
-<button mat-raised-button (click)="isEditable = !isEditable">
+<!-- <button mat-raised-button (click)="isEditable = !isEditable">
 	{{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
-</button>
-
-<mat-horizontal-stepper linear #stepper>
+</button> -->
+<div class="d-flex justify-content-end">
+	<div
+		class="col-4 card p-3 mr-4"
+		style="font-size: 24px; text-align: center"
+	>
+		Subscription Purchased For {{userData.employeePurchased||0}} Employees
+	</div>
+</div>
+<mat-horizontal-stepper #stepper>
 	<mat-step>
-		<ng-template matStepLabel>Eneter Company Details</ng-template>
+		<ng-template matStepLabel>Enter Company Details</ng-template>
 		<div>
-			<app-add-and-edit-company-info></app-add-and-edit-company-info>
+			<app-add-and-edit-company-info
+				(isInvalid)="companyInfoValid = $event"
+				(updatedSuccessFull)="updatedSuccessFull = $event"
+			></app-add-and-edit-company-info>
 		</div>
 		<div>
-			<button mat-button matStepperNext>Next</button>
+			<button
+				(click)="updateFirstLogin('step1')"
+				matTooltip="Please Update Company Details"
+				mat-button
+				[disabled]="!updatedSuccessFull"
+				matStepperNext
+			>
+				Next
+			</button>
 		</div>
 	</mat-step>
 	<mat-step>
 		<ng-template matStepLabel>Add Roles</ng-template>
 		<div>
-			<app-role-management></app-role-management>
+			<app-role-management
+				(isRoleInvaid)="isRoleInvaid = $event"
+			></app-role-management>
 		</div>
 		<div>
-			<button mat-button matStepperPrevious>Back</button>
-			<button mat-button matStepperNext>Next</button>
+			<!-- <button  mat-button matStepperPrevious>Back</button> -->
+			<button
+				[disabled]="isRoleInvaid"
+				(click)="updateFirstLogin('step2')"
+				mat-button
+				matStepperNext
+			>
+				Next
+			</button>
 		</div>
 	</mat-step>
 	<mat-step>
 		<ng-template matStepLabel>Employee Details</ng-template>
 		<div class="shadow">
-			<app-employee-registration></app-employee-registration>
+			<app-employee-registration
+				(isEmpRegInvalid)="isEmpRegInvalid = $event"
+			></app-employee-registration>
 		</div>
 		<div>
 			<button mat-button matStepperPrevious>Back</button>
-			<button mat-button matStepperNext>Next</button>
+			<button
+				[disabled]="isEmpRegInvalid"
+				(click)="updateFirstLogin('step3')"
+				mat-button
+				matStepperNext
+			>
+				Next
+			</button>
 		</div>
 	</mat-step>
 	<mat-step>
-		<ng-template matStepLabel>Add SubContractor</ng-template>
+		<ng-template matStepLabel>Add Sub Contractor</ng-template>
 		<div class="shadow">
 			<app-subcontract></app-subcontract>
 		</div>
 		<div>
 			<button mat-button matStepperPrevious>Back</button>
-			<button mat-button matStepperNext>Next</button>
+			<button
+				(click)="updateFirstLogin('step4')"
+				mat-button
+				matStepperNext
+			>
+				Next
+			</button>
 		</div>
 	</mat-step>
 
@@ -51,6 +93,7 @@
 		<div>
 			<!-- <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button> -->
+			<button mat-button (click)="setupComplete()">Goto Dashboard</button>
 			<button mat-button matStepperPrevious>Back</button>
 			<button mat-button (click)="stepper.reset()">Reset</button>
 		</div>
