@@ -83,6 +83,7 @@ export class AuthService {
 		this.pergeData() ? this.router.navigate(['/']) : '';
 	}
 	pergeData() {
+		this.nextLoginData({} as UserData);
 		sessionStorage.clear();
 		return true;
 	}
