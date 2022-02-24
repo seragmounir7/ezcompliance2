@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AuthService } from '@utils/services/auth.service';
+import { AuthService } from 'src/app/utils/services/auth.service';
 
 @Component({
 	selector: 'app-employee-registration',

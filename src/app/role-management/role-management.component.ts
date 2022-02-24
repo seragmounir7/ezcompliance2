@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '@utils/services/auth.service';
+import { AuthService } from 'src/app/utils/services/auth.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';

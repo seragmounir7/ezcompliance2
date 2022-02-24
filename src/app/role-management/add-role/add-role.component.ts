@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { RoleManagementService } from '../../utils/services/role-management.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
-import { AccessArr } from '@utils/types/AccessResponceTypes';
+import { AccessArr } from 'src/app/utils/types/AccessResponceTypes';
 @Component({
 	selector: 'app-add-role',
 	templateUrl: './add-role.component.html',
