@@ -4,6 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import {
 	debounceTime,
@@ -55,7 +56,7 @@ export class AddEmployeeComponent implements OnInit {
 	StatesData: any = [];
 	PPEValueChanges: Observable<any>[];
 	url: any;
-	private dialogRef = null;
+	private dialogRef: MatDialogRef<any, any> = null;
 	public dialogData = null;
 
 	constructor(
@@ -69,7 +70,8 @@ export class AddEmployeeComponent implements OnInit {
 		// @Inject(MAT_DIALOG_DATA) public data?,
 		// private matDialogRef?:MatDialogRef<AddEmployeeComponent>
 		private injector: Injector,
-		private setTitle: SetTitleService
+		private setTitle: SetTitleService,
+		private toast: ToastrService
 	) {
 		this.dialogRef = this.injector.get(MatDialogRef, null);
 		this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
@@ -168,7 +170,12 @@ export class AddEmployeeComponent implements OnInit {
 			? 'form'
 			: this.activatedRoute.snapshot.params.id;
 
-		if (this.id !== 'form') {
+		if (this.router.url.includes('setup')) {
+			this.dataEmp = false;
+			this.addFiled();
+			this.addFiled2();
+			this.addEquipFiled2();
+		} else if (this.id !== 'form') {
 			this.dataEmp = true;
 			this.patchData();
 		} else {
@@ -361,201 +368,6 @@ export class AddEmployeeComponent implements OnInit {
 		throw new Error('Method not implemented.');
 	}
 
-	onFormUpdate(id) {
-		const Sign = this.signaturePad.toDataURL();
-		const plantSignature = this.signaturePad2.toDataURL();
-		const ppeArr = () => {
-			this.addPPE().length;
-			const arr = [];
-			this.addPPE().controls.forEach((item: any) => {
-				console.log('item', item);
-				arr.push({
-					ppeSupplied: item.controls.PPESupplied.value,
-					brand: item.controls.BrandOrType.value,
-					issueDate: item.controls.IssueDate.value,
-					replacementDate: item.controls.ReplacementDate.value
-				});
-			});
-			return arr;
-		};
-		const equipArr = () => {
-			this.addPPE().length;
-			const arr = [];
-			this.addEquip().controls.forEach((item: any) => {
-				console.log('item', item);
-				arr.push({
-					plantType: item.controls.plantType.value,
-					modelNumber: item.controls.modelNumber.value,
-					serialNumber: item.controls.serialNumber.value,
-					serviceRenewDate: item.controls.serviceRenewDate.value
-				});
-			});
-			return arr;
-		};
-		const data = {
-			title: this.empDetails.get('profTitie').value,
-			email: this.empDetails.get('porfEmail').value,
-			position: this.empDetails.get('porfPosition').value,
-			mobile: this.empDetails.get('porfMobile').value,
-			roleId: this.empDetails.get('roleId').value,
-			// designation: this.empDetails.get('porfEmployee').value,
-			// deviceToken: '',porfPostalCode
-
-			suburb: this.empDetails.get('porfSuburb').value,
-			stateId: this.empDetails.get('porfState').value,
-			reportingTo: this.empDetails.get('reportingTo').value,
-			department: this.empDetails.get('porfDepartment').value,
-			phone: this.empDetails.get('porfPhone').value,
-			firstName: this.empDetails.get('profFirst').value,
-			lastName: this.empDetails.get('porfListName').value,
-			uploadImage: this.empDetails.get('porfUploadImage').value,
-			emergencyContact: {
-				firstName: this.empDetails.get('EmpFirst').value,
-				lastName: this.empDetails.get('empLastName').value,
-				email: this.empDetails.get('empEmail').value,
-				phone: this.empDetails.get('empPhone').value,
-				mobile: this.empDetails.get('empMobile').value,
-				relationship: this.empDetails.get('empRelationship').value
-			},
-			licence: {
-				licenceName: this.empDetails.get('LicenceName').value,
-				licenceNumber: this.empDetails.get('LicenceNumber').value,
-				trainingOrganisation: this.empDetails.get(
-					'TrainingQrginisation'
-				).value,
-				expiryDate: this.empDetails.get('ExpiryDate').value,
-				uploadLicence: this.empDetails.get('UploadLicenceArr').value
-			},
-			ppe: {
-				PPEArr: ppeArr(),
-				signature: Sign
-			},
-			location: {
-				address: this.empDetails.get('porfStreetAddress').value,
-				landmark: 'Nagpur',
-
-				state: this.empDetails.get('porfState').value,
-				postcode: this.empDetails.get('porfPostalCode').value,
-				country: 'India'
-			}
-		};
-
-		this.employee.updateEmployeeInfo(this.id, data).subscribe(
-			(resData) => {
-				console.log('updateData', resData);
-				Swal.fire({
-					title: 'Employee Updated successfully',
-					showConfirmButton: false,
-					timer: 1200
-				});
-				this.router.navigate([
-					'/admin/registration/employeeRegistration'
-				]);
-			},
-			(err) => {
-				console.error(err);
-			}
-		);
-	}
-	onFormSubmit() {
-		this.submitted = true;
-		const Sign = this.signaturePad.toDataURL();
-		console.log('sign=>', this.signaturePad.toDataURL());
-		const plantSignature = this.signaturePad2.toDataURL();
-
-		console.log('this.EmployeeInfo.value', this.empDetails.value);
-		const ppeArr = () => {
-			this.addPPE().length;
-			const arr = [];
-			this.addPPE().controls.forEach((item: any) => {
-				console.log('item', item);
-				arr.push({
-					ppeSupplied: item.controls.PPESupplied.value,
-					brand: item.controls.BrandOrType.value,
-					issueDate: item.controls.IssueDate.value,
-					replacementDate: item.controls.ReplacementDate.value
-				});
-			});
-			return arr;
-		};
-		const equipArr = () => {
-			this.addEquip().length;
-			const arr = [];
-			this.addEquip().controls.forEach((item: any) => {
-				console.log('item', item);
-				arr.push({
-					plantType: item.controls.plantType.value,
-					modelNumber: item.controls.modelNumber.value,
-					serialNumber: item.controls.serialNumber.value,
-					serviceRenewDate: item.controls.serviceRenewDate.value
-				});
-			});
-			return arr;
-		};
-		const body = {
-			title: this.empDetails.get('profTitie').value,
-			email: this.empDetails.get('porfEmail').value,
-			position: this.empDetails.get('porfPosition').value,
-			mobile: this.empDetails.get('porfMobile').value,
-			roleId: this.empDetails.get('roleId').value,
-			reportingTo: this.empDetails.get('reportingTo').value,
-
-			suburb: this.empDetails.get('porfSuburb').value,
-			stateId: this.empDetails.get('porfState').value,
-			department: this.empDetails.get('porfDepartment').value,
-			phone: this.empDetails.get('porfPhone').value,
-			firstName: this.empDetails.get('profFirst').value,
-			lastName: this.empDetails.get('porfListName').value,
-			uploadImage: this.empDetails.get('porfUploadImage').value,
-			emergencyContact: {
-				firstName: this.empDetails.get('EmpFirst').value,
-				lastName: this.empDetails.get('empLastName').value,
-				email: this.empDetails.get('empEmail').value,
-				phone: this.empDetails.get('empPhone').value,
-				mobile: this.empDetails.get('empMobile').value,
-				relationship: this.empDetails.get('empRelationship').value
-			},
-			licence: {
-				licenceName: this.empDetails.get('LicenceName').value,
-				licenceNumber: this.empDetails.get('LicenceNumber').value,
-				trainingOrganisation: this.empDetails.get(
-					'TrainingQrginisation'
-				).value,
-				expiryDate: this.empDetails.get('ExpiryDate').value,
-				uploadLicence: this.empDetails.get('UploadLicenceArr').value
-			},
-			ppe: {
-				PPEArr: ppeArr()
-			},
-			location: {
-				address: this.empDetails.get('porfStreetAddress').value,
-				landmark: 'Nagpur',
-				state: this.empDetails.get('porfState').value,
-				postcode: this.empDetails.get('porfPostalCode').value,
-				country: 'India'
-			}
-		};
-
-		console.log('body=>', body);
-
-		this.employee.addEmployeeInfo(body).subscribe(
-			(data) => {
-				console.log('data=>', data);
-				this.signaturePad.toDataURL();
-				Swal.fire({
-					title: 'Employee Added successfully',
-					showConfirmButton: false,
-					timer: 1200
-				});
-				this.router.navigate([
-					'/admin/registration/employeeRegistration'
-				]);
-			},
-			(err) => {
-				console.error(err);
-			}
-		);
-	}
 	sign(sign: any) {
 		throw new Error('Method not implemented.');
 	}
@@ -837,6 +649,209 @@ export class AddEmployeeComponent implements OnInit {
 
 				return response.data;
 			})
+		);
+	}
+
+	onFormSubmit() {
+		this.submitted = true;
+		const Sign = this.signaturePad.toDataURL();
+		console.log('sign=>', this.signaturePad.toDataURL());
+		const plantSignature = this.signaturePad2.toDataURL();
+
+		console.log('this.EmployeeInfo.value', this.empDetails.value);
+		const ppeArr = () => {
+			this.addPPE().length;
+			const arr = [];
+			this.addPPE().controls.forEach((item: any) => {
+				console.log('item', item);
+				arr.push({
+					ppeSupplied: item.controls.PPESupplied.value,
+					brand: item.controls.BrandOrType.value,
+					issueDate: item.controls.IssueDate.value,
+					replacementDate: item.controls.ReplacementDate.value
+				});
+			});
+			return arr;
+		};
+		const equipArr = () => {
+			this.addEquip().length;
+			const arr = [];
+			this.addEquip().controls.forEach((item: any) => {
+				console.log('item', item);
+				arr.push({
+					plantType: item.controls.plantType.value,
+					modelNumber: item.controls.modelNumber.value,
+					serialNumber: item.controls.serialNumber.value,
+					serviceRenewDate: item.controls.serviceRenewDate.value
+				});
+			});
+			return arr;
+		};
+		const body = {
+			designation: 'User',
+			title: this.empDetails.get('profTitie').value,
+			email: this.empDetails.get('porfEmail').value,
+			position: this.empDetails.get('porfPosition').value,
+			mobile: this.empDetails.get('porfMobile').value,
+			roleId: this.empDetails.get('roleId').value,
+			// reportingTo: this.empDetails.get('reportingTo').value,
+
+			suburb: this.empDetails.get('porfSuburb').value,
+			stateId: this.empDetails.get('porfState').value,
+			department: this.empDetails.get('porfDepartment').value,
+			phone: this.empDetails.get('porfPhone').value,
+			firstName: this.empDetails.get('profFirst').value,
+			lastName: this.empDetails.get('porfListName').value,
+			uploadImage: this.empDetails.get('porfUploadImage').value,
+			emergencyContact: {
+				firstName: this.empDetails.get('EmpFirst').value,
+				lastName: this.empDetails.get('empLastName').value,
+				email: this.empDetails.get('empEmail').value,
+				phone: this.empDetails.get('empPhone').value,
+				mobile: this.empDetails.get('empMobile').value,
+				relationship: this.empDetails.get('empRelationship').value
+			},
+			licence: {
+				licenceName: this.empDetails.get('LicenceName').value,
+				licenceNumber: this.empDetails.get('LicenceNumber').value,
+				trainingOrganisation: this.empDetails.get(
+					'TrainingQrginisation'
+				).value,
+				expiryDate: this.empDetails.get('ExpiryDate').value,
+				uploadLicence: this.empDetails.get('UploadLicenceArr').value
+			},
+			ppe: {
+				PPEArr: ppeArr()
+			},
+			location: {
+				address: this.empDetails.get('porfStreetAddress').value,
+				landmark: 'Nagpur',
+				state: this.empDetails.get('porfState').value,
+				postcode: this.empDetails.get('porfPostalCode').value,
+				country: 'India'
+			}
+		};
+
+		console.log('body=>', body);
+
+		this.employee.addEmployeeInfo(body).subscribe(
+			(data) => {
+				console.log('data=>', data);
+				this.signaturePad.toDataURL();
+				Swal.fire({
+					title: 'Employee Added successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+				if (this.dialogRef) {
+					this.dialogRef.close(true);
+					return;
+				}
+				this.router.navigate([
+					'/admin/registration/employeeRegistration'
+				]);
+			},
+			(err) => {
+				this.toast.error(err);
+				console.error(err);
+			}
+		);
+	}
+
+	onFormUpdate(id) {
+		const Sign = this.signaturePad.toDataURL();
+		const plantSignature = this.signaturePad2.toDataURL();
+		const ppeArr = () => {
+			this.addPPE().length;
+			const arr = [];
+			this.addPPE().controls.forEach((item: any) => {
+				console.log('item', item);
+				arr.push({
+					ppeSupplied: item.controls.PPESupplied.value,
+					brand: item.controls.BrandOrType.value,
+					issueDate: item.controls.IssueDate.value,
+					replacementDate: item.controls.ReplacementDate.value
+				});
+			});
+			return arr;
+		};
+		const equipArr = () => {
+			this.addPPE().length;
+			const arr = [];
+			this.addEquip().controls.forEach((item: any) => {
+				console.log('item', item);
+				arr.push({
+					plantType: item.controls.plantType.value,
+					modelNumber: item.controls.modelNumber.value,
+					serialNumber: item.controls.serialNumber.value,
+					serviceRenewDate: item.controls.serviceRenewDate.value
+				});
+			});
+			return arr;
+		};
+		const data = {
+			title: this.empDetails.get('profTitie').value,
+			email: this.empDetails.get('porfEmail').value,
+			position: this.empDetails.get('porfPosition').value,
+			mobile: this.empDetails.get('porfMobile').value,
+			roleId: this.empDetails.get('roleId').value,
+			// designation: this.empDetails.get('porfEmployee').value,
+			// deviceToken: '',porfPostalCode
+
+			suburb: this.empDetails.get('porfSuburb').value,
+			stateId: this.empDetails.get('porfState').value,
+			reportingTo: this.empDetails.get('reportingTo').value,
+			department: this.empDetails.get('porfDepartment').value,
+			phone: this.empDetails.get('porfPhone').value,
+			firstName: this.empDetails.get('profFirst').value,
+			lastName: this.empDetails.get('porfListName').value,
+			uploadImage: this.empDetails.get('porfUploadImage').value,
+			emergencyContact: {
+				firstName: this.empDetails.get('EmpFirst').value,
+				lastName: this.empDetails.get('empLastName').value,
+				email: this.empDetails.get('empEmail').value,
+				phone: this.empDetails.get('empPhone').value,
+				mobile: this.empDetails.get('empMobile').value,
+				relationship: this.empDetails.get('empRelationship').value
+			},
+			licence: {
+				licenceName: this.empDetails.get('LicenceName').value,
+				licenceNumber: this.empDetails.get('LicenceNumber').value,
+				trainingOrganisation: this.empDetails.get(
+					'TrainingQrginisation'
+				).value,
+				expiryDate: this.empDetails.get('ExpiryDate').value,
+				uploadLicence: this.empDetails.get('UploadLicenceArr').value
+			},
+			ppe: {
+				PPEArr: ppeArr(),
+				signature: Sign
+			},
+			location: {
+				address: this.empDetails.get('porfStreetAddress').value,
+				landmark: 'Nagpur',
+
+				state: this.empDetails.get('porfState').value,
+				postcode: this.empDetails.get('porfPostalCode').value,
+				country: 'India'
+			}
+		};
+
+		this.employee.updateEmployeeInfo(this.id, data).subscribe(
+			(resData) => {
+				console.log('updateData', resData);
+				Swal.fire({
+					title: 'Employee Updated successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+				this.router.navigate([
+					'/admin/registration/employeeRegistration'
+				]);
+			},
+			(err) => {
+				console.error(err);
+			}
 		);
 	}
 }

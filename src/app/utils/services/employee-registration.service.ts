@@ -10,23 +10,27 @@ export class EmployeeRegistrationService {
 	constructor(private https: HttpClient) {}
 
 	addEmployeeInfo(data) {
-		return this.https.post(this.apiUrl + 'employee/add', data).pipe(
-			map((res: any) => {
-				console.log('res.data=>', res.data);
-				return res;
-			})
-		);
+		return this.https
+			.post(this.apiUrl + 'authentication/register', data)
+			.pipe(
+				map((res: any) => {
+					console.log('res.data=>', res.data);
+					return res;
+				})
+			);
 	}
 	getAllEmployeeInfo() {
-		return this.https.get(this.apiUrl + 'employee/getAll').pipe(
-			map((res: any) => {
-				return res.data.map((item) => {
-					item.fullName = `${item.firstName} ${item.lastName}`;
-					return item;
-				});
-			}),
-			tap((res) => console.log('employee/getAll', res))
-		);
+		return this.https
+			.get(this.apiUrl + 'authentication/get/all/created/employees')
+			.pipe(
+				map((res: any) => {
+					return res.data.map((item) => {
+						item.fullName = `${item.firstName} ${item.lastName}`;
+						return item;
+					});
+				}),
+				tap((res) => console.log('employee/getAll', res))
+			);
 	}
 	getEmployeeInfoById(id) {
 		return this.https.get(this.apiUrl + 'employee/get/' + id).pipe(

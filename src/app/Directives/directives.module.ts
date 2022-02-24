@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { HideForRoleDirective } from './hide-for-role.directive';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { TitleCaseDirective } from './title-case.directive';
+import { ChangeTypePipe } from './change-type.pipe';
+import { CheckImgExtPipe } from './check-img-ext.pipe';
 
 @NgModule({
 	declarations: [
@@ -14,7 +16,9 @@ import { TitleCaseDirective } from './title-case.directive';
 		AccessControlDirective,
 		AppNotDirective,
 		NumberDirective,
-		TitleCaseDirective
+		TitleCaseDirective,
+		ChangeTypePipe,
+		CheckImgExtPipe
 	],
 	imports: [CommonModule],
 	exports: [
@@ -23,7 +27,9 @@ import { TitleCaseDirective } from './title-case.directive';
 		AccessControlDirective,
 		AppNotDirective,
 		NumberDirective,
-		TitleCaseDirective
+		TitleCaseDirective,
+		ChangeTypePipe,
+		CheckImgExtPipe
 	]
 })
 export class DirectivesModule {}

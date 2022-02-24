@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
+import { AddAndEditSubcontractComponent } from './add-and-edit-subcontract/add-and-edit-subcontract.component';
 
 @Component({
 	selector: 'app-subcontract',
@@ -28,6 +29,7 @@ export class SubcontractComponent implements OnInit {
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
+	isSetup: boolean = false;
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
@@ -41,6 +43,7 @@ export class SubcontractComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.isSetup = this.router.url.includes('setup');
 		this.getAllSubcontractor();
 		this.setTitle.setTitle('WHS-Subcontractor Details');
 	}
@@ -81,6 +84,32 @@ export class SubcontractComponent implements OnInit {
 	}
 
 	edit(id) {
+		if (this.isSetup) {
+			const dialogRef = this.dialog.open(AddAndEditSubcontractComponent, {
+				width: '80%',
+				height: '80%',
+				data: {
+					id
+				}
+			});
+			dialogRef.afterClosed().subscribe((res: boolean) => {
+				if (res) {
+					this.getAllSubcontractor();
+				}
+			});
+			return;
+		}
 		this.router.navigate(['/admin/registration/addSubcontract/' + id]);
+	}
+	addSubContractorModal() {
+		const dialogRef = this.dialog.open(AddAndEditSubcontractComponent, {
+			width: '80%',
+			height: '80%'
+		});
+		dialogRef.afterClosed().subscribe((res: boolean) => {
+			if (res) {
+				this.getAllSubcontractor();
+			}
+		});
 	}
 }

@@ -4,622 +4,6 @@
 	</div>
 </div>
 
-<div
-	class="example-container mat-elevation-z8 overflow-auto"
-	[formGroup]="rolemanagment"
-	*ngIf="false"
->
-	<ng-container *ngIf="formArr">
-		<table mat-table [dataSource]="tempArray" class="mat-elevation-z8">
-			<ng-container matColumnDef="role" sticky>
-				<th
-					[ngStyle]="{'display': 'none'}"
-					mat-header-cell
-					*matHeaderCellDef
-					[attr.rowspan]="2"
-				>
-					Role
-				</th>
-				<td mat-cell *matCellDef="let element">
-					<p class="d-flex">
-						{{element.role}}
-						<span
-							class="material-icons ml-2 col"
-							matTooltip="Edit"
-							(click)="openDialog(element)"
-						>
-							edit
-						</span>
-					</p>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dashboard.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dashboard_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dashboard.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dashboard_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dynamicForm.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dynamicForm_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dynamicForm.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dynamicForm_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dynamicForm.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dynamicForm_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dynamicForm.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dynamicForm_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="dynamicForm.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'dynamicForm_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="Logicalforms.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'Logicalforms_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="Logicalforms.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'Logicalforms_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="Logicalforms.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'Logicalforms_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="Logicalforms.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'Logicalforms_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="Logicalforms.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'Logicalforms_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<!-- ////////////// -->
-
-			<ng-container matColumnDef="FormConfigure.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'FormConfigure_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="FormConfigure.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'FormConfigure_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="FormConfigure.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'FormConfigure_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="FormConfigure.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'FormConfigure_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="FormConfigure.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'FormConfigure_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<!-- ////////////// -->
-
-			<ng-container matColumnDef="SubscriptionRates.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'SubscriptionRates_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="SubscriptionRates.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'SubscriptionRates_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="SubscriptionRates.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'SubscriptionRates_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="SubscriptionRates.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'SubscriptionRates_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="SubscriptionRates.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'SubscriptionRates_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="LogicalFormData.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'LogicalFormData_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="LogicalFormData.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'LogicalFormData_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="LogicalFormData.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'LogicalFormData_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="LogicalFormData.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'LogicalFormData_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="LogicalFormData.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'LogicalFormData_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<!-- ////////////// -->
-
-			<ng-container matColumnDef="CMS.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'CMS_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="CMS.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'CMS_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="CMS.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'CMS_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="CMS.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'CMS_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="CMS.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'CMS_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<!-- ////////////// -->
-
-			<ng-container matColumnDef="StateRelation.Access">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Access</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'StateRelation_Access_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="StateRelation.View">
-				<th mat-header-cell *matHeaderCellDef class="p-2">View</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'StateRelation_View_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="StateRelation.Delete">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Delete</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'StateRelation_Delete_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="StateRelation.Update">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Update</th>
-				<td
-					mat-cell
-					*matCellDef="let element; let i=index"
-					class="similar-cell-width"
-				>
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'StateRelation_Update_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="StateRelation.Add">
-				<th mat-header-cell *matHeaderCellDef class="p-2">Add</th>
-				<td mat-cell *matCellDef="let element; let i=index">
-					<input
-						type="checkbox"
-						[value]="true"
-						(change)="doCheckboxCheck($event)"
-						formControlName="{{'StateRelation_Add_'+roleArr[i]?.role}}"
-					/>
-				</td>
-			</ng-container>
-
-			<ng-container matColumnDef="roleheader" sticky>
-				<th
-					mat-header-cell
-					*matHeaderCellDef
-					class="roleZIndex"
-					[attr.rowspan]="2"
-				>
-					Role
-				</th>
-			</ng-container>
-			<ng-container matColumnDef="dashboard">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="2">
-					Dashboard
-				</th>
-			</ng-container>
-			<ng-container matColumnDef="dynamicForm">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					Dynamic Form
-				</th>
-			</ng-container>
-			<ng-container matColumnDef="logicalForms">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					Logical Forms
-				</th>
-			</ng-container>
-			<ng-container matColumnDef="formConfigure">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					Form Configure
-				</th>
-			</ng-container>
-			<ng-container matColumnDef="subscriptionRates">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					Subscription Rates
-				</th>
-			</ng-container>
-
-			<ng-container matColumnDef="logicalFormData">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					Logical Form Data
-				</th>
-			</ng-container>
-
-			<ng-container matColumnDef="cms">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					CMS
-				</th>
-			</ng-container>
-
-			<ng-container matColumnDef="stateRelation">
-				<th mat-header-cell *matHeaderCellDef [attr.colspan]="5">
-					State Relation
-				</th>
-			</ng-container>
-
-			<tr
-				mat-header-row
-				*matHeaderRowDef="['roleheader','dashboard','dynamicForm','logicalForms','formConfigure','subscriptionRates','logicalFormData','CMS','stateRelation']"
-			></tr>
-			<tr
-				mat-header-row
-				*matHeaderRowDef="displayedColumns;sticky:true"
-			></tr>
-			<tr
-				mat-row
-				*matRowDef="let row ; columns: displayedColumns;"
-				(click)="getdata(row)"
-			></tr>
-			<tr class="mat-row" *matNoDataRow>
-				<td class="mat-cell" colspan="4">Data Not Found</td>
-			</tr>
-		</table>
-	</ng-container>
-</div>
-
 <section class="">
 	<div class="">
 		<div class="row">
@@ -643,12 +27,12 @@
 					>
 						<i class="fa fa-user-circle-o mr-2"></i>
 						<span class="font-weight-bold small text-uppercase"
-							>{{ roleArr[i].role }}</span
+							>{{ (roleArr[i].roleId| changeType).role }}</span
 						>
 						<span
 							class="material-icons float-right"
 							style="color: rgba(236, 65, 65, 0.842)"
-							(click)=" deleteRole(roleArr[i]._id)"
+							(click)=" deleteRole(roleArr[i].roleId)"
 							matTooltip="Delete"
 						>
 							delete
@@ -694,7 +78,8 @@
 												display: flex;
 												justify-content: flex-end;
 											"
-											>{{ roleArr[i].role }}</span
+											>{{ (roleArr[i].roleId |
+											changeType).role }}</span
 										><span
 											class="material-icons ml-2 col-1"
 											style="font-size: 20px"
@@ -720,30 +105,28 @@
 											<input
 												type="checkbox"
 												[value]="true"
-												(change)="doCheckboxCheck($event)"
-												[id]="formNameArr[x]+'_Access_'+roleArr[i]?.role"
-												formControlName="{{formNameArr[x]+'_Access_'+roleArr[i]?.role}}"
+												[id]="formNameArr[x]+accessName.access+roleArr[i]?.role"
+												formControlName="{{formNameArr[x]+accessName.access+roleArr[i]?.role}}"
 											/>
 											<label
 												class="txtdefault fs-16 text-center label_2"
 												style="font-weight: 400"
-												[for]="formNameArr[x]+'_Access_'+roleArr[i]?.role"
-												>Access</label
+												[for]="formNameArr[x]+accessName.access+roleArr[i]?.role"
+												>{{accessLabel.access}}</label
 											>
 										</div>
 										<div class="col-3 mt-1">
 											<input
 												type="checkbox"
 												[value]="true"
-												(change)="doCheckboxCheck($event)"
-												[id]="formNameArr[x]+'_View_'+roleArr[i]?.role"
-												formControlName="{{formNameArr[x]+'_View_'+roleArr[i]?.role}}"
+												[id]="formNameArr[x]+accessName.view+roleArr[i]?.role"
+												formControlName="{{formNameArr[x]+accessName.view+roleArr[i]?.role}}"
 											/>
 											<label
 												class="txtdefault fs-16 text-center label_2"
 												style="font-weight: 400"
-												[for]="formNameArr[x]+'_View_'+roleArr[i]?.role"
-												>View</label
+												[for]="formNameArr[x]+accessName.view+roleArr[i]?.role"
+												>{{accessLabel.view}}</label
 											>
 										</div>
 										<div
@@ -753,15 +136,14 @@
 											<input
 												type="checkbox"
 												[value]="true"
-												(change)="doCheckboxCheck($event)"
-												[id]="formNameArr[x]+'_Add_'+roleArr[i]?.role"
-												formControlName="{{formNameArr[x]+'_Add_'+roleArr[i]?.role}}"
+												[id]="formNameArr[x]+accessName.add+roleArr[i]?.role"
+												formControlName="{{formNameArr[x]+accessName.add+roleArr[i]?.role}}"
 											/>
 											<label
 												class="txtdefault fs-16 text-center label_2"
 												style="font-weight: 400"
-												[for]="formNameArr[x]+'_Add_'+roleArr[i]?.role"
-												>Add</label
+												[for]="formNameArr[x]+accessName.add+roleArr[i]?.role"
+												>{{accessLabel.add}}</label
 											>
 										</div>
 										<div
@@ -771,15 +153,14 @@
 											<input
 												type="checkbox"
 												[value]="true"
-												(change)="doCheckboxCheck($event)"
-												[id]="formNameArr[x]+'_Update_'+roleArr[i]?.role"
-												formControlName="{{formNameArr[x]+'_Update_'+roleArr[i]?.role}}"
+												[id]="formNameArr[x]+accessName.edit+roleArr[i]?.role"
+												formControlName="{{formNameArr[x]+accessName.edit+roleArr[i]?.role}}"
 											/>
 											<label
 												class="txtdefault fs-16 text-center label_2"
 												style="font-weight: 400"
-												[for]="formNameArr[x]+'_Update_'+roleArr[i]?.role"
-												>Update</label
+												[for]="formNameArr[x]+accessName.edit+roleArr[i]?.role"
+												>{{accessLabel.edit}}</label
 											>
 										</div>
 
@@ -790,15 +171,14 @@
 											<input
 												type="checkbox"
 												[value]="true"
-												(change)="doCheckboxCheck($event)"
-												[id]="formNameArr[x]+'_Delete_'+roleArr[i]?.role"
-												formControlName="{{formNameArr[x]+'_Delete_'+roleArr[i]?.role}}"
+												[id]="formNameArr[x]+accessName.delete+roleArr[i]?.role"
+												formControlName="{{formNameArr[x]+accessName.delete+roleArr[i]?.role}}"
 											/>
 											<label
 												class="txtdefault fs-16 text-center label_2"
 												style="font-weight: 400"
-												[for]="formNameArr[x]+'_Delete_'+roleArr[i]?.role"
-												>Delete</label
+												[for]="formNameArr[x]+accessName.delete+roleArr[i]?.role"
+												>{{accessLabel.delete}}</label
 											>
 										</div>
 									</div>

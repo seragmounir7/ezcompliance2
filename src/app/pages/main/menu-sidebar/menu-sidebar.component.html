@@ -1,15 +1,28 @@
-<aside #mainSidebar class="main-sidebar sidebar-light-primary elevation-2">
+<aside
+	#mainSidebar
+	class="main-sidebar sidebar-light-primary elevation-2"
+	*ngIf="showSideNav | async"
+>
 	<!-- Brand Logo -->
 	<a [routerLink]="['/dashBoard']" class="brand-link">
-		<!-- <img [src]="logoUrl" alt="AdminLTE Logo" class="brand-image" style="opacity: 1" /> -->
+		<img
+			*ngIf="(isClient$ | async) || (isUser$ | async)"
+			[src]="logoUrl"
+			alt="Logo"
+			class="brand-image"
+			style="opacity: 1"
+		/>
 		<svg-icon
+			*ngIf="isAdmin$ | async"
 			alt="AdminLTE Logo"
-			applyClass="true"
+			[applyClass]="true"
 			class="brand-image"
 			[style]="{'width':'auto','height.px':30 ,'opacity': 1}"
 			[name]="logoUrl"
 		></svg-icon>
-		<span class="brand-text font-weight-light">Admin WHS</span>
+		<span class="brand-text font-weight-light" style="word-break: break-all"
+			>{{(userName$|async)||'Admin WHS'}}</span
+		>
 	</a>
 	<!-- Sidebar -->
 	<div class="sidebar m-t-20 m-b-20 mb-5">

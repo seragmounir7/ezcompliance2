@@ -13,6 +13,12 @@ import {
 } from '@angular/core';
 import { AppService } from 'src/app/utils/services/app.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Designation } from 'src/app/utils/types/Designation.enum';
+import { AccessArr } from 'src/app/utils/types/AccessResponceTypes';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-menu-sidebar',
@@ -22,21 +28,138 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 export class MenuSidebarComponent implements OnInit, AfterViewInit {
 	@ViewChild('mainSidebar', { static: false })
 	mainSidebar: ElementRef<HTMLElement>;
-	@Output() mainSidebarHeight: EventEmitter<any> = new EventEmitter<any>();
-	@Input() logoUrl;
+	@Input() logoUrl: string;
 	@Input() isMenuSideBarOpen: boolean;
 	activeNavValue: string;
+	regex = new RegExp('([a-zA-Z0-9s_\\.-:])+(.jpg|.png|.gif)$');
 	navItems: NavItem[];
-
+	isClient$: Observable<boolean>;
+	isAdmin$: Observable<boolean>;
+	afterNgOnInIt: boolean = false;
+	showSideNav: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	isUser$: Observable<boolean>;
+	userName$: Observable<string>;
 	constructor(
 		public appService: AppService,
 		private setTitle: SetTitleService,
-		private router: Router
+		private router: Router,
+		private role: RoleManagementService,
+		private authService: AuthService
 	) {
 		this.navItems = new NavItems().getNav;
 	}
 
 	ngOnInit() {
+		this.showSideNav.next(false);
+		this.isAdmin$ = this.authService.isAdmin$;
+		this.isClient$ = this.authService.isClient$;
+		this.isUser$ = this.authService.isUser$;
+		this.userName$ = this.authService.loginData$.pipe(
+			map((res) =>
+				res.designation ===
+				(Designation.clientAdmin ||
+					res.designation === Designation.user)
+					? res.username
+					: ''
+			)
+		);
+		this.userName$.subscribe((res) => console.log('username', res));
+		this.authService.loginData$.subscribe((res) => {
+			if (
+				res.designation === Designation.clientAdmin ||
+				res.designation === Designation.user
+			) {
+				this.logoUrl = res.companyLogo;
+			}
+			if (
+				res.designation === Designation.superAdmin ||
+				res.designation === Designation.clientAdmin
+			) {
+				this.showSideNav.next(true);
+			}
+			if (res.designation === Designation.user) {
+				this.role.getAccessByUserId().subscribe(
+					(accessArr: AccessArr[]) => {
+						this.role.accessArrNext(accessArr);
+						accessArr.forEach((accessObj) => {
+							this.navItems.map((item) => {
+								if (
+									item.displayedName
+										.toLowerCase()
+										.replace(' ', '') ===
+									accessObj.formName.toLowerCase()
+								) {
+									console.log(
+										'matched names',
+										item.displayedName
+											.toLowerCase()
+											.replace(' ', ''),
+										accessObj.formName.toLowerCase()
+									);
+									item.hasAccess = accessObj.Access;
+								}
+								if (item.childItem) {
+									console.log(item.childItem);
+
+									item.childItem = item.childItem.map(
+										(childItem) => {
+											console.log(
+												childItem.displayedName
+													.toLowerCase()
+													.split(' ')
+													.join('') ===
+													accessObj.formName.toLowerCase(),
+												childItem.displayedName
+													.toLowerCase()
+													.split(' ')
+													.join(''),
+												accessObj.formName.toLowerCase()
+											);
+											if (
+												childItem.displayedName
+													.toLowerCase()
+													.split(' ')
+													.join('') ===
+												accessObj.formName.toLowerCase()
+											) {
+												console.log(
+													'matched childItem names',
+													childItem.displayedName
+														.toLowerCase()
+														.replace(' ', ''),
+													accessObj.formName.toLowerCase()
+												);
+												// if(accessObj.Access){
+												//   item.hasAccess = true
+												// }
+												childItem.hasAccess =
+													accessObj.Access;
+											}
+											return childItem;
+										}
+									);
+									if (
+										item.childItem.every(
+											(value) => value.hasAccess === false
+										)
+									) {
+										item.hasAccess = false;
+									}
+								}
+								return item;
+							});
+						});
+						// this.navItems.map(item => {
+						//   if(item)
+						//   item.hasAccess =
+						// })
+					},
+					(err) => console.error('some error occured', err),
+					() => this.showSideNav.next(true)
+				);
+			}
+		});
+
 		console.log('logo=>', this.logoUrl);
 
 		console.log(this.router.url);
@@ -88,59 +211,57 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 
 		console.log(obj);
 		obj ? this.menuOpen(obj) : false;
+		this.afterNgOnInIt = true;
 	}
 
 	ngAfterViewInit() {
-		this.mainSidebarHeight.emit(
-			this.mainSidebar.nativeElement.offsetHeight
-		);
-		const mouseenter = () =>
-			(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
-		const mouseleave = () =>
-			(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
-		const observer = new MutationObserver(
-			(mutations: MutationRecord[], observer: MutationObserver) => {
-				console.log('side menu mutation');
-				mutations.forEach((item: any) => {
-					if (item.target.classList.contains('sidebar-mini')) {
-						this.mainSidebar.nativeElement.addEventListener(
-							'mouseenter',
-							mouseenter
-						);
-						this.mainSidebar.nativeElement.addEventListener(
-							'mouseleave',
-							mouseleave
-						);
-					} else {
-						this.mainSidebar.nativeElement.removeEventListener(
-							'mouseenter',
-							mouseenter
-						);
-						this.mainSidebar.nativeElement.removeEventListener(
-							'mouseleave',
-							mouseleave
-						);
-					}
-				});
-			}
-		);
-		observer.observe(document.querySelector('app-root'), {
-			attributes: true,
-			attributeFilter: ['class']
-		});
-		console.log(
-			this.mainSidebar.nativeElement.classList.contains('sidebar-mini')
-		);
-		if (this.mainSidebar.nativeElement.classList.contains('sidebar-mini')) {
-			this.mainSidebar.nativeElement.addEventListener(
-				'mouseenter',
-				() => (this.isMenuSideBarOpen = !this.isMenuSideBarOpen)
-			);
-			this.mainSidebar.nativeElement.addEventListener(
-				'mouseleave',
-				() => (this.isMenuSideBarOpen = !this.isMenuSideBarOpen)
-			);
-		}
+		// const mouseenter = () =>
+		// 	(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
+		// const mouseleave = () =>
+		// 	(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
+		// const observer = new MutationObserver(
+		// 	(mutations: MutationRecord[], observer: MutationObserver) => {
+		// 		console.log('side menu mutation');
+		// 		mutations.forEach((item: any) => {
+		// 			if (item.target.classList.contains('sidebar-mini')) {
+		// 				this.mainSidebar.nativeElement.addEventListener(
+		// 					'mouseenter',
+		// 					mouseenter
+		// 				);
+		// 				this.mainSidebar.nativeElement.addEventListener(
+		// 					'mouseleave',
+		// 					mouseleave
+		// 				);
+		// 			} else {
+		// 				this.mainSidebar.nativeElement.removeEventListener(
+		// 					'mouseenter',
+		// 					mouseenter
+		// 				);
+		// 				this.mainSidebar.nativeElement.removeEventListener(
+		// 					'mouseleave',
+		// 					mouseleave
+		// 				);
+		// 			}
+		// 		});
+		// 	}
+		// );
+		// observer.observe(document.querySelector('app-root'), {
+		// 	attributes: true,
+		// 	attributeFilter: ['class']
+		// });
+		// console.log(
+		// 	this.mainSidebar.nativeElement.classList.contains('sidebar-mini')
+		// );
+		// if (this.mainSidebar.nativeElement.classList.contains('sidebar-mini')) {
+		// 	this.mainSidebar.nativeElement.addEventListener(
+		// 		'mouseenter',
+		// 		() => (this.isMenuSideBarOpen = !this.isMenuSideBarOpen)
+		// 	);
+		// 	this.mainSidebar.nativeElement.addEventListener(
+		// 		'mouseleave',
+		// 		() => (this.isMenuSideBarOpen = !this.isMenuSideBarOpen)
+		// 	);
+		// }
 	}
 	dynamic = false;
 	landingPageVal = false;

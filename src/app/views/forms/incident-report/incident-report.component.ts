@@ -63,7 +63,7 @@ export class IncidentReportComponent
 	sub: Subscription;
 	isPrint: Observable<any>;
 	editorDisable = false;
-	filteredOptions1: Observable<unknown>;
+	filteredOptions1: Observable<any>;
 	empData: any;
 	filteredOptions2: Observable<any>;
 	uploadFile: string;

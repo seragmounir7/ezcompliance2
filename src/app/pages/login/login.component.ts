@@ -65,7 +65,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 					}
 				},
 				(err) => {
-					console.log(err);
+					console.log(err, navigator.onLine);
+					if (!navigator.onLine) {
+						this.toastr.warning(
+							'You Are Offline! Check Your Internet Connection.'
+						);
+						return;
+					}
 					this.toastr.error('Wrong credentials', '');
 				}
 			);

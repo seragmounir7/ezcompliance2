@@ -17,6 +17,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { DndModule } from 'ngx-drag-drop';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DirectivesModule } from 'src/app/Directives/directives.module';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 		MatTableModule,
 		DndModule,
 		MatButtonModule,
-		MatTooltipModule
+		MatTooltipModule,
+		DirectivesModule
 	],
 	exports: [FormsComponent]
 })

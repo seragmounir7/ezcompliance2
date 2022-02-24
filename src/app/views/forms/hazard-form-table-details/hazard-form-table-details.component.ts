@@ -10,6 +10,9 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { FormName } from 'src/app/side-nav-access.enum';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 
 @Component({
 	selector: 'app-hazard-form-table-details',
@@ -33,16 +36,19 @@ export class HazardFormTableDetailsComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 	isHistory: boolean;
 	id: string;
+	accessObj: AccessObj;
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
 		public router: Router,
 		private spinner: NgxSpinnerService,
 		private shared: RoleManagementSharedServiceService,
 		private activatedRoute: ActivatedRoute,
-		private setTitle: SetTitleService
+		private setTitle: SetTitleService,
+		private role: RoleManagementService
 	) {}
 
 	ngOnInit(): void {
+		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.setTitle.setTitle('WHS-Hazard Form List');
 		this.isHistory = this.router.url.includes('/hazardTable/history');
 		console.log(this.isHistory);

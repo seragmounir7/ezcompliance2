@@ -19,7 +19,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 		private _injector: Injector,
 		private router: Router,
 		private toastrService: ToastrService,
-		private authService: AuthService
+		private authService: AuthService,
+		private toast: ToastrService
 	) {}
 
 	intercept(
@@ -33,17 +34,20 @@ export class ErrorInterceptor implements HttpInterceptor {
 				if (err instanceof HttpErrorResponse) {
 					switch (err.status) {
 						case HttpError.BadRequest:
+							this.toast.error('400 Bad Request');
 							console.error('%c Bad Request 400', logFormat);
 							break;
 
 						case HttpError.Unauthorized:
 							console.error('%c Unauthorized 401', logFormat);
+							this.toast.error('401 Unauthorized');
 							this.authService.logout();
 							break;
 
 						case HttpError.NotFound:
 							//show error toast message
 							console.error('%c Not Found 404', logFormat);
+							this.toast.error('404 Not Found');
 							// const _toaster = this._injector.get(Toaster),
 							// _router = this._injector.get(Router);
 							//     this.toastrService.show({
@@ -62,6 +66,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 						case HttpError.Forbidden:
 							console.error('%c Forbidden 403', logFormat);
+							this.toast.error('403 Forbidden');
 							// const _authService = this._injector.get(AuthorizationService);
 							// _authService.showForbiddenModal();
 							break;
@@ -69,12 +74,16 @@ export class ErrorInterceptor implements HttpInterceptor {
 						case HttpError.InternalServerError:
 							console.error('%c big bad 500', logFormat);
 							break;
+
+						case HttpError.MovedPermanently:
+							console.error(
+								'%c Moved Permanently 301',
+								logFormat
+							);
+							this.toast.error(err.error.message);
+							console.log(err.message, err.error.message);
+							break;
 					}
-				}
-				if (err.status === 401) {
-					// auto logout if 401 response returned from api
-					// this.auth.logout();
-					// location.reload(true);
 				}
 
 				const error = err.error.message || err.statusText;

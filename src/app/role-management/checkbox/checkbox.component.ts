@@ -1,38 +1,37 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/prefer-for-of */
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
 	FormBuilder,
 	FormGroup,
 	Validators,
 	FormArray,
-	FormControl,
-	FormControlName
+	FormControl
 } from '@angular/forms';
 import { RoleManagementService } from '../../utils/services/role-management.service';
-import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRoleComponent } from '../add-role/add-role.component';
 import { RoleManagementSharedServiceService } from '../../utils/services/role-management-shared-service.service';
 import Swal from 'sweetalert2';
-import { SideNavAccess } from 'src/app/side-nav-access.enum';
+import { AccessLabel, AccessName, AccessType } from './accessName';
+import {
+	AccessArr,
+	Datum,
+	RoleID
+} from 'src/app/utils/types/AccessResponceTypes';
 @Component({
 	selector: 'app-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
+	@Output() roleLength: EventEmitter<number> = new EventEmitter<number>();
 	rolemanagment: FormGroup;
-
-	showDatas: any;
-	tempArray: MatTableDataSource<any>;
-	@ViewChild(MatSort) sort: MatSort;
-	@Input() Arry: any;
-	@Output() Arry1: any;
-	roleArr: any;
+	count: number = 0;
 	formArr = false;
-	roleData: any;
+	accessName: AccessType = new AccessName();
+	accessLabel: AccessType = new AccessLabel();
+	roleArr: Datum[];
 
 	constructor(
 		private fb: FormBuilder,
@@ -40,118 +39,43 @@ export class CheckboxComponent implements OnInit {
 		private dialog: MatDialog,
 		private roleSharedService: RoleManagementSharedServiceService
 	) {
-		this.roleSharedService.getRoleEvent().subscribe((res) => {
+		this.roleSharedService.getRoleEvent.subscribe((res) => {
 			if (res) {
 				this.getAllRole();
 			}
 		});
-		this.getAllRole();
 		this.rolemanagment = this.fb.group({});
 	}
 
 	formNameArr2 = [
 		'Dashboard',
-		'Generate a New Form',
-		'Logical Forms',
-		'Form List',
-		'Submitted Forms',
-		'Employee Details',
-		'Form Settings'
+		'WHS Forms',
+		// 'Generate a New Form',
+		// 'Logical Forms',
+		// 'Form List',
+		// 'Submitted Forms',
+		'Employee Details'
+		// 'Form Settings'
 	];
 	formNameArr = [
 		'dashboard',
-		'GenerateaNewForm',
-		'LogicalForms',
-		'FormList',
-		'SubmittedForms',
-		'EmployeeDetails',
-		'FormSettings'
-	];
-	/* formNameArr = [
-
-		'dashboard',
-		'dynamicForm',
-		'Logicalforms',
-		'FormConfigure',
-		'SubscriptionRates',
-		'LogicalFormData',
-		'CMS',
-		'StateRelation'
-	]; */
-	/* formNameArr2 = [
-		'Dashboard',
-		'Dynamic Form',
-		'Logical Forms',
-		'Form Configure',
-		'Subscription Rates',
-		'Logical FormData',
-		'CMS',
-		'State Relation'
-	]; */
-	displayedColumns: string[] = [
-		'dashboard.Access',
-		'dashboard.View',
-
-		'dynamicForm.Access',
-		'dynamicForm.Add',
-		'dynamicForm.Delete',
-		'dynamicForm.Update',
-		'dynamicForm.View',
-
-		'Logicalforms.Access',
-		'Logicalforms.Add',
-		'Logicalforms.Delete',
-		'Logicalforms.Update',
-		'Logicalforms.View',
-
-		'FormConfigure.Access',
-		'FormConfigure.Add',
-		'FormConfigure.Delete',
-		'FormConfigure.Update',
-		'FormConfigure.View',
-
-		'SubscriptionRates.Access',
-		'SubscriptionRates.Add',
-		'SubscriptionRates.Delete',
-		'SubscriptionRates.Update',
-		'SubscriptionRates.View',
-
-		'LogicalFormData.Access',
-		'LogicalFormData.Add',
-		'LogicalFormData.Delete',
-		'LogicalFormData.Update',
-		'LogicalFormData.View',
-
-		'CMS.Access',
-		'CMS.Add',
-		'CMS.Delete',
-		'CMS.Update',
-		'CMS.View',
-
-		'StateRelation.Access',
-		'StateRelation.Add',
-		'StateRelation.Delete',
-		'StateRelation.Update',
-		'StateRelation.View'
+		'WHSForms',
+		// 'GenerateaNewForm',
+		// 'LogicalForms',
+		// 'FormList',
+		// 'SubmittedForms',
+		'EmployeeDetails'
+		// 'FormSettings'
 	];
 
 	ngOnInit(): void {
 		this.getAllRole();
 	}
-	doCheckboxCheck(e): void {
-		console.log('event', e);
-	}
-	applyFilter($event) {}
-	ngOnChanges(changes: any): void {}
-	getdata(row) {
-		console.log('row', row);
-	}
-	getAllRole() {
-		this.roleService.getAllRole().subscribe((res: any) => {
+	getAllRole(): void {
+		this.roleService.getAllAcess().subscribe((res) => {
 			this.roleArr = res.data;
+			this.roleLength.emit(this.roleArr.length);
 			this.roleArr = this.roleArr.map((x, i) => {
-				console.log('i', i);
-
 				if (i === 0) {
 					x.i = 1;
 				} else {
@@ -159,47 +83,36 @@ export class CheckboxComponent implements OnInit {
 				}
 				return x;
 			});
-			console.log('res', this.roleArr);
-			this.tempArray = new MatTableDataSource<any>(this.roleArr);
-			this.tempArray.sort = this.sort;
 
 			for (let index = 0; index < this.roleArr.length; index++) {
-				for (let i = 1; i < this.formNameArr.length; i++) {
-					this.rolemanagment.addControl(
-						'dashboard_Access_' + this.roleArr[index].role,
-						new FormControl('', Validators.required)
-					);
-					this.rolemanagment.addControl(
-						'dashboard_View_' + this.roleArr[index].role,
-						new FormControl('', Validators.required)
-					);
+				for (let i = 0; i < this.formNameArr.length; i++) {
 					this.rolemanagment.addControl(
 						this.formNameArr[i] +
-							'_Access_' +
+							this.accessName.access +
 							this.roleArr[index].role,
 						new FormControl('', Validators.required)
 					);
 					this.rolemanagment.addControl(
 						this.formNameArr[i] +
-							'_View_' +
+							this.accessName.view +
 							this.roleArr[index].role,
 						new FormControl('', Validators.required)
 					);
 					this.rolemanagment.addControl(
 						this.formNameArr[i] +
-							'_Delete_' +
+							this.accessName.delete +
 							this.roleArr[index].role,
 						new FormControl('', Validators.required)
 					);
 					this.rolemanagment.addControl(
 						this.formNameArr[i] +
-							'_Update_' +
+							this.accessName.edit +
 							this.roleArr[index].role,
 						new FormControl('', Validators.required)
 					);
 					this.rolemanagment.addControl(
 						this.formNameArr[i] +
-							'_Add_' +
+							this.accessName.add +
 							this.roleArr[index].role,
 						new FormControl('', Validators.required)
 					);
@@ -211,7 +124,7 @@ export class CheckboxComponent implements OnInit {
 	add2(): FormArray {
 		return this.rolemanagment.get('attendees') as FormArray;
 	}
-	newAction2(index): FormGroup {
+	newAction2(index: number): FormGroup {
 		return this.fb.group({
 			['dashboard_Access_' + this.roleArr[index].role]: [
 				'',
@@ -219,26 +132,23 @@ export class CheckboxComponent implements OnInit {
 			]
 		});
 	}
-	onSubmit() {
-		console.log('submit', this.rolemanagment.value);
+	onSubmit(): void {
 		const key = Object.keys(this.rolemanagment.value);
 		const checkeBox = key.map((x: string) => {
-			const arr = x.split('_');
-			let obj;
-			obj = {
+			const arr: string[] = x.split('_');
+			const obj: AccessArr = {
 				form: arr[0],
 				role: arr[2]
 			};
 			obj[arr[1]] =
-				this.rolemanagment.get(x).value == ''
+				this.rolemanagment.get(x).value === ''
 					? false
-					: this.rolemanagment.get(x).value;
+					: (this.rolemanagment.get(x).value as boolean);
 			return obj;
 		});
-		console.log('form', checkeBox);
-		let filterArr;
-		let obj3;
-		const access = [];
+
+		let obj3: AccessArr;
+		const access: AccessArr[] = [];
 
 		for (let index = 0; index < this.roleArr.length; index++) {
 			for (let i = 0; i < this.formNameArr.length; i++) {
@@ -253,33 +163,39 @@ export class CheckboxComponent implements OnInit {
 				access.push(obj3);
 			}
 		}
-		const objArr = [];
+		const objArr: Datum[] = [];
 		for (let index = 0; index < this.roleArr.length; index++) {
-			let arr = [];
+			let arr: AccessArr[] = [];
 			arr = access.filter((x) => x.role === this.roleArr[index].role);
 			arr.forEach((x) => {
+				x.formName = x.form;
+				delete x.form;
 				delete x.role;
 			});
-			const obj = {
-				access: arr,
-				role: this.roleArr[index].role,
-				_id: this.roleArr[index]._id
+			const obj: Datum = {
+				accessArr: arr,
+				// role: this.roleArr[index].role,
+				roleId: (this.roleArr[index].roleId as RoleID)._id
 			};
 			objArr.push(obj);
 		}
-		console.log('acess', objArr);
-		this.roleService
-			.addMultipleRole(objArr)
-			.subscribe((res) => console.log(res));
+
+		this.roleService.updateAllAccess(objArr).subscribe(() => {
+			void Swal.fire({
+				title: 'Access Updated Successfully',
+				showConfirmButton: false,
+				timer: 1200
+			});
+		});
 	}
-	setValue() {
+	setValue(): void {
 		for (let index = 0; index < this.roleArr.length; index++) {
 			for (let x = 0; x < this.roleArr[index].access.length; x++) {
 				const key = Object.keys(this.roleArr[index].access[x]);
 
-				key.splice(0, 1);
-				key.forEach((z: any, i) => {
-					console.log('this.roleArr[index].access[x]');
+				// key.splice(0, 1);
+				key.forEach((z: string) => {
+					if ('form' === z || 'formName' === z || '_id' === z) return;
 					this.rolemanagment
 						.get(
 							this.roleArr[index].access[x].form +
@@ -292,7 +208,7 @@ export class CheckboxComponent implements OnInit {
 		}
 		this.formArr = true;
 	}
-	openDialog(role) {
+	openDialog(role: Datum): void {
 		const dialogRef = this.dialog.open(AddRoleComponent, {
 			height: '50%',
 			width: '500px',
@@ -306,16 +222,10 @@ export class CheckboxComponent implements OnInit {
 			if (result === 'true') {
 				this.ngOnInit();
 			}
-			console.log('AddRoleComponent -> openDialog -> result', result);
-
-			console.log('The dialog was closed');
 		});
 	}
 
-	count: number = 0;
-
-	handleClick(index) {
-		console.log(index);
+	handleClick(index: number): void {
 		this.count = index;
 		this.roleArr.map((x) => {
 			x.i = 0;
@@ -323,29 +233,28 @@ export class CheckboxComponent implements OnInit {
 		this.roleArr[this.count].i = 1;
 	}
 
-	deleteRole(id) {
-		{
-			Swal.fire({
-				title: 'Are you sure?',
-				text: `Do you want to delete `,
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#00B96F',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Yes, Delete!'
-			}).then((result) => {
-				if (result.value) {
-					this.roleService.deleteRole(id).subscribe((res) => {
-						Swal.fire({
+	deleteRole(id: string | RoleID): void {
+		void Swal.fire({
+			title: 'Are you sure?',
+			text: `Do you want to delete `,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#00B96F',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Delete!'
+		}).then((result) => {
+			if (result.value) {
+				this.roleService
+					.deleteRole((id as RoleID)._id)
+					.subscribe(() => {
+						void Swal.fire({
 							title: 'Deleted successfully',
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
 						this.getAllRole();
 					});
-				}
-			});
-		}
+			}
+		});
 	}
 }

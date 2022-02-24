@@ -1,44 +1,85 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import {
+	Directive,
+	ElementRef,
+	Input,
+	TemplateRef,
+	ViewContainerRef
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../utils/services/auth.service';
+import { RoleManagementService } from '../utils/services/role-management.service';
+import {
+	AccessArr,
+	AccessControlInput
+} from '../utils/types/AccessResponceTypes';
+import { Designation } from '../utils/types/Designation.enum';
 
 @Directive({
 	selector: '[accessControl]'
 })
 export class AccessControlDirective {
-	@Input('moduleType') moduleType: string;
+	@Input() set accessControl(accessControl: AccessControlInput) {
+		this.formName = accessControl.formName;
+		this.accessType = accessControl.accessType;
+	}
+	getAccessByUserId$: Observable<AccessArr[]>;
+	@Input('moduleType') formName: string;
 	@Input('accessType') accessType: string;
-	constructor(private elementRef: ElementRef) {}
+	constructor(
+		private templateRef: TemplateRef<any>,
+		private viewContainer: ViewContainerRef,
+		private elementRef: ElementRef,
+		private role: RoleManagementService,
+		private authService: AuthService
+	) {}
 
 	ngOnInit() {
-		console.log('AccessControlDirective');
-
-		this.elementRef.nativeElement.style.display = 'none';
-		this.checkAccess();
-	}
-	checkAccess() {
-		const accessControls = [
-			{
-				module_name: 'users',
-				create_action: true,
-				read_action: true,
-				update_action: true,
-				delete_action: false
-			},
-			{
-				module_name: 'articles',
-				create_action: true,
-				read_action: true,
-				update_action: false,
-				delete_action: false
+		this.authService.loginData$.subscribe((res) => {
+			if (res.designation === Designation.user) {
+				console.log('AccessControlDirective');
+				this.viewContainer.clear();
+				this.role.accessArrObs$.subscribe((accessArr) => {
+					// console.log(res)
+					this.checkAccess(accessArr);
+				});
+			} else {
+				this.viewContainer.createEmbeddedView(this.templateRef);
 			}
-		];
+			// if (res.designation === Designation.superAdmin || res.designation === Designation.clientAdmin) {
+			//   this.viewContainer.createEmbeddedView(this.templateRef)
+			// }
+		});
+
+		// this.elementRef.nativeElement.style.display = 'none';
+	}
+	checkAccess(access: AccessArr[]) {
+		const accessControls = access;
+		// const accessControls = [
+		// 	{
+		// 		module_name: 'users',
+		// 		create_action: true,
+		// 		read_action: true,
+		// 		update_action: true,
+		// 		delete_action: false
+		// 	},
+		// 	{
+		// 		module_name: 'articles',
+		// 		create_action: true,
+		// 		read_action: true,
+		// 		update_action: false,
+		// 		delete_action: false
+		// 	}
+		// ];
 
 		const module: any = accessControls.find(
 			(access) =>
-				access.module_name.toLowerCase() ===
-				this.moduleType.toLowerCase()
+				access.formName.toLowerCase() === this.formName.toLowerCase()
 		);
-		this.elementRef.nativeElement.style.display = module[this.accessType]
-			? 'block'
-			: 'none';
+		// this.elementRef.nativeElement.style.display = module[this.accessType]
+		// 	? 'block'
+		// 	: 'none';
+		module[this.accessType]
+			? this.viewContainer.createEmbeddedView(this.templateRef)
+			: this.viewContainer.clear();
 	}
 }

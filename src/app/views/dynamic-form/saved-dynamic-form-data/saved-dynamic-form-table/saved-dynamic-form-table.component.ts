@@ -9,6 +9,9 @@ import Swal from 'sweetalert2';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { FormName } from 'src/app/side-nav-access.enum';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 
 @Component({
 	selector: 'app-saved-dynamic-form-table',
@@ -32,15 +35,18 @@ export class SavedDynamicFormTableComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 	formId: any;
 	returnTo: Observable<string>;
+	accessObj: AccessObj;
 	constructor(
 		private dynamicFormsService: DynamicFormsService,
 		private setTitle: SetTitleService,
 		private activatedRoute: ActivatedRoute,
 		public router: Router,
-		private spinner: NgxSpinnerService
+		private spinner: NgxSpinnerService,
+		private role: RoleManagementService
 	) {}
 
 	ngOnInit(): void {
+		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.isHistory = this.router.url.includes('/history');
 		this.returnTo = this.activatedRoute.queryParams.pipe(
 			map((res) => res.returnTo)
@@ -155,7 +161,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 		});
 	}
 
-	sortData(sort: Sort) {
+	sortData() {
 		this.getSavedForm();
 		// if (this.isHistory) {
 		// 	this.getSavedFormHistory(sort.active);

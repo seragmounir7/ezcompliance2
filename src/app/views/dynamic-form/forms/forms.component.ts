@@ -12,6 +12,9 @@ import Swal from 'sweetalert2';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { accessType, FormName } from 'src/app/side-nav-access.enum';
+import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 export interface PeriodicElement {
 	categories: string;
 	position: number;
@@ -40,6 +43,8 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	url: any;
 
+	accessObj: AccessObj;
+
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
@@ -58,7 +63,8 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		public router: Router,
 		private fb: FormBuilder,
 		private dynamicFormServise: DynamicFormsService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private role: RoleManagementService
 	) {}
 
 	addDyForm() {
@@ -77,6 +83,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	}
 
 	ngOnInit(): void {
+		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.url = this.activatedRoute.snapshot.url;
 		console.log('url', this.url);
 

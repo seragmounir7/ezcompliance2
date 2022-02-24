@@ -1,15 +1,30 @@
 <div class="col ml-2 pt-1">
 	<h1>Subcontractor Details</h1>
 </div>
-<div>
-	<button
-		type="button"
-		class="btn btn-outline-primary mr-2 float-right"
-		[routerLink]="['/admin/registration/addSubcontract/'+'form']"
-	>
-		<i class="fas fa-plus"></i> Add Subcontractor
-	</button>
-</div>
+<ng-template [ngIf]="isSetup" [ngIfElse]="elseBlock">
+	<div>
+		<button
+			type="button"
+			class="btn btn-outline-primary mr-2 float-right"
+			(click)="addSubContractorModal()"
+		>
+			<i class="fas fa-plus"></i> Add Subcontractor
+		</button>
+	</div>
+</ng-template>
+
+<ng-template #elseBlock>
+	<div>
+		<button
+			type="button"
+			class="btn btn-outline-primary mr-2 float-right"
+			[routerLink]="['/admin/registration/addSubcontract/'+'form']"
+		>
+			<i class="fas fa-plus"></i> Add Subcontractor
+		</button>
+	</div>
+</ng-template>
+
 <div>
 	<table mat-table [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="index">

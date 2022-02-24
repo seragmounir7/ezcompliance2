@@ -39,6 +39,9 @@ const routes: Routes = [
 			{ path: 'hazardRep/:id', component: HazardReportComponent }
 		]
 	},
+	// {
+	//   path:'', redirectTo:'setup', pathMatch:"`"
+	// },
 	{
 		path: 'setup',
 		canActivate: [FirstTimeLoginGuard],

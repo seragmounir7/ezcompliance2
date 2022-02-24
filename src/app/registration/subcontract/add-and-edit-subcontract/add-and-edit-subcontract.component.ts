@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
@@ -33,14 +34,20 @@ export class AddAndEditSubcontractComponent implements OnInit {
 	submitted: boolean;
 	id: any;
 	StatesData: any = [];
+	dialogRef: MatDialogRef<any, any>;
+	dialogData: any = 'form';
+	isSetup: boolean = false;
 	constructor(
 		private fb: FormBuilder,
 		private upload: UploadFileService,
 		private activatedRoute: ActivatedRoute,
 		public router: Router,
 		private licenceInfo: LogicalFormInfoService,
-		private setTitle: SetTitleService
+		private setTitle: SetTitleService,
+		private injector: Injector
 	) {
+		this.dialogRef = this.injector.get(MatDialogRef, null);
+		this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
 		this.subcontractDetails = this.fb.group({
 			companyName: ['', Validators.required],
 			phone: ['', Validators.required],
@@ -65,10 +72,14 @@ export class AddAndEditSubcontractComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.isSetup = this.router.url.includes('setup');
 		this.getAllStates();
 		this.setTitle.setTitle('WHS-Subcontractor Information');
-		this.id = this.activatedRoute.snapshot.params.id;
-
+		this.id =
+			this.activatedRoute.snapshot.params.id ||
+			this.dialogData?.id ||
+			'form';
+		console.log(this.id);
 		if (this.id !== 'form') {
 			this.licenceInfo
 				.getAllLicence()
@@ -258,6 +269,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		return user && user.title ? user.title : '';
 	}
 	patchData() {
+		console.log('patchdata called');
 		this.licenceInfo.getSubcontract(this.id).subscribe((res: any) => {
 			console.log('dataId=>', res.data);
 
@@ -329,6 +341,10 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
+				if (this.dialogRef) {
+					this.dialogRef.close(true);
+					return;
+				}
 				this.router.navigate(['/admin/registration/subcontract']);
 			},
 			(err) => {
@@ -380,6 +396,10 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
+				if (this.dialogRef) {
+					this.dialogRef.close(true);
+					return;
+				}
 				this.router.navigate(['/admin/registration/subcontract']);
 			},
 			(err) => {

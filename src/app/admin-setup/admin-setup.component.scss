@@ -1,3 +1,6 @@
 .shadow {
 	box-shadow: 0px 6px 7px #80808042;
 }
+::ng-deep .mat-horizontal-stepper-header {
+	pointer-events: none !important;
+}
