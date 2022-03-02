@@ -15,7 +15,11 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
+import { map, startWith, tap } from 'rxjs/operators';
+import { CustomValidators } from 'src/app/custom-validators';
 import { AuthService, UserData } from 'src/app/utils/services/auth.service';
+import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
@@ -45,18 +49,21 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	plantRegister = false;
 	insuranceRegister = false;
 	plantDetails: any;
+	// checkedOutAuto:Observable<>
 	id: any;
 	dateGet: any;
 	dataUrl2: any;
 	StatesData: any = [];
 	selectedLogo: any;
 	userId: string;
+	empData: any[];
 	fields: string[] = [
 		'mailingAddress',
 		'mailingSubUrb',
 		'mailingState',
 		'mailingPostcode'
 	];
+	checkedOutAuto$: Observable<any>[];
 	constructor(
 		private fb: FormBuilder,
 		private activatedRoute: ActivatedRoute,
@@ -66,15 +73,22 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		private upload: UploadFileService,
 		private licenceInfo: LogicalFormInfoService,
 		private authService: AuthService,
-		private setTitle: SetTitleService
+		private setTitle: SetTitleService,
+		private employee: EmployeeRegistrationService
 	) {}
 
 	ngOnInit(): void {
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+		});
 		this.authService.loginData$.subscribe((res) => (this.userId = res.id));
 		this.formData = this.fb.group({
 			companyName: ['', Validators.required],
-			phone: ['', Validators.required],
-			fax: [''],
+			phone: [
+				'',
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
+			],
+			fax: ['', CustomValidators.PhoneNumberValidator()],
 			emailAddress: ['', Validators.required],
 			streetAddress: ['', Validators.required],
 			subUrb: ['', Validators.required],
@@ -93,6 +107,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			plantArr: this.fb.array([]),
 			insuranceArr: this.fb.array([])
 		});
+
 		this.formData.valueChanges.subscribe((res) =>
 			this.isInvalid.emit(this.formData.invalid)
 		);
@@ -113,6 +128,12 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Company Details');
 	}
 
+	private _filter(name: string): any[] {
+		const filterValue = name.toLowerCase();
+		return this.empData.filter((option) =>
+			option.fullName.toLowerCase().includes(filterValue)
+		);
+	}
 	browser(event) {
 		let regex = new RegExp('([a-zA-Z0-9s_\\.-:])+(.jpg|.png|.gif)$');
 
@@ -195,6 +216,39 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	addEquipFiled2() {
 		this.addEquip().push(this.newEquipFiled2());
 		console.log(this.formData.value);
+		this.checkedOutAuto$ = new Array<Observable<any>>();
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+			for (let index = 0; index < this.addEquip().length; index++) {
+				const element = this.addEquip().at(index) as FormGroup;
+				this.checkedOutAuto$.push(
+					(element.controls.checkedOut
+						.valueChanges as Observable<any>).pipe(
+						startWith({ firstName: '' }),
+						tap((value) =>
+							typeof value === 'object'
+								? ''
+								: typeof value === 'string'
+								? (element.controls
+										.employeeId as AbstractControl).setErrors(
+										{ incorrect: true }
+								  )
+								: ''
+						),
+						map((value) =>
+							typeof value === 'string' ? value : value?.fullName
+						),
+						map((fullName) =>
+							fullName
+								? this._filter(fullName)
+								: this.empData.slice()
+						)
+					)
+				);
+
+				console.log(element.valueChanges);
+			}
+		});
 	}
 	newEquipFiled3(data): FormGroup {
 		console.log('newData', data);
@@ -221,6 +275,39 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		console.log('data', data);
 		this.addEquip().push(this.newEquipFiled3(data));
 		console.log('addPPEFiled1', this.formData.value);
+		this.checkedOutAuto$ = new Array<Observable<any>>();
+		this.employee.getAllEmployeeInfo().subscribe((empData) => {
+			this.empData = empData;
+			for (let index = 0; index < this.addEquip().length; index++) {
+				const element = this.addEquip().at(index) as FormGroup;
+				this.checkedOutAuto$.push(
+					(element.controls.checkedOut
+						.valueChanges as Observable<any>).pipe(
+						startWith({ firstName: '' }),
+						tap((value) =>
+							typeof value === 'object'
+								? ''
+								: typeof value === 'string'
+								? (element.controls
+										.employeeId as AbstractControl).setErrors(
+										{ incorrect: true }
+								  )
+								: ''
+						),
+						map((value) =>
+							typeof value === 'string' ? value : value?.fullName
+						),
+						map((fullName) =>
+							fullName
+								? this._filter(fullName)
+								: this.empData.slice()
+						)
+					)
+				);
+
+				console.log(element.valueChanges);
+			}
+		});
 	}
 	removeEquipFiled1(i) {
 		const item = <FormArray>this.formData.controls.plantArr;
@@ -594,5 +681,8 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 						.get(field)
 						.setValue(this.formData.get(patchFields[index]).value)
 		);
+	}
+	displayFn(user: any): string {
+		return user && user.fullName ? user.fullName : '';
 	}
 }

@@ -40,7 +40,6 @@
 		<div>
 			<!-- <button  mat-button matStepperPrevious>Back</button> -->
 			<button
-				[disabled]="isRoleInvaid"
 				(click)="updateFirstLogin('step2')"
 				mat-button
 				matStepperNext
@@ -59,7 +58,6 @@
 		<div>
 			<button mat-button matStepperPrevious>Back</button>
 			<button
-				[disabled]="isEmpRegInvalid"
 				(click)="updateFirstLogin('step3')"
 				mat-button
 				matStepperNext

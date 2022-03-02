@@ -83,6 +83,7 @@
 										>Select PPE to Return </label
 									><br />
 									<input
+										#ppeCheckbox
 										type="checkbox"
 										formControlName="ppeCheck"
 										value=""
@@ -155,7 +156,7 @@
 						*ngIf="!isHistory"
 						(click)="peeSubmit()"
 						class="btn btn-outline-primary btn_1"
-						[disabled]="!ppeDetails.valid"
+						[disabled]="(!ppeDetails.valid) && (isOnePpeChecked === true)"
 					>
 						Submit
 					</button>

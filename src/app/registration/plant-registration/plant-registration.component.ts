@@ -184,6 +184,15 @@ export class PlantRegistrationComponent implements OnInit {
 	addPPE() {
 		return this.ppeDetails.get('PPEArr') as FormArray;
 	}
+	get isOnePpeChecked() {
+		console.log(
+			((this.ppeDetails.get('PPEArr') as FormArray).value as any[]).some(
+				(x) => x.ppeCheck == true
+			)
+		);
+		return ((this.ppeDetails.get('PPEArr') as FormArray)
+			.value as any[]).some((x) => x.ppeCheck == true);
+	}
 
 	newFiled3(data): FormGroup {
 		console.log('newData', data);
@@ -367,6 +376,9 @@ export class PlantRegistrationComponent implements OnInit {
 				this.employee
 					.updateEmployeeInfo(this.employeeData._id, data2)
 					.subscribe((resData) => {
+						this.router.navigate([
+							'admin/registration/employeeRegistration'
+						]);
 						Swal.fire({
 							title: 'Submit successfully',
 							showConfirmButton: false,
@@ -455,6 +467,9 @@ export class PlantRegistrationComponent implements OnInit {
 				this.employee
 					.updateEmployeeInfo(this.employeeData._id, data2)
 					.subscribe((resData) => {
+						this.router.navigate([
+							'admin/registration/employeeRegistration'
+						]);
 						Swal.fire({
 							title: 'Submit successfully',
 							showConfirmButton: false,

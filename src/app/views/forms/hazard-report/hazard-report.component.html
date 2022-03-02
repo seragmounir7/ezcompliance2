@@ -196,10 +196,11 @@
 						Phone Number is Required</span
 					>
 					<span
-						*ngIf="hazardReport.get('phone')?.hasError('pattern')"
+						*ngIf="hazardReport.get('phone')?.hasError('wrongNumber') && (hazardReport.get('phone').dirty
+            || hazardReport.get('phone').touched) "
 						class="invalid-feedback"
 					>
-						Phone Number Should be 10 digits</span
+						Enter Valid Phone Number.</span
 					>
 				</div>
 			</div>

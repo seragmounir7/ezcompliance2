@@ -21,6 +21,7 @@ import { IncidentReportComponent } from './views/forms/incident-report/incident-
 import { HazardReportComponent } from './views/forms/hazard-report/hazard-report.component';
 import { FirstTimeLoginGuard } from './RouteGuard/first-time-login.guard';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -145,6 +146,11 @@ const routes: Routes = [
 	{
 		path: 'resetPassword',
 		component: ResetPasswordComponent,
+		canActivate: [NonAuthGuard]
+	},
+	{
+		path: 'forgotPassword',
+		component: ForgotPasswordComponent,
 		canActivate: [NonAuthGuard]
 	},
 	{

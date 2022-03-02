@@ -35,15 +35,21 @@
 							type="text"
 							formControlName="phone"
 							class="form-control inputData"
-							[class.is-invalid]="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.required "
+							[class.is-invalid]="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.required"
 						/>
 
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.required"
 						>
 							Phone Number is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.wrongNumber"
+						>
+							Enter Valid Phone Number
+						</div>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
@@ -54,6 +60,12 @@
 							formControlName="fax"
 							class="form-control"
 						/>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.fax.touched || submitted) && registerFormControl.fax.errors?.wrongNumber"
+						>
+							Enter Valid Fax Number
+						</div>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
@@ -149,6 +161,7 @@
 							Postcode
 						</label>
 						<input
+							numbersOnly
 							type="text"
 							class="form-control"
 							formControlName="postcode"
@@ -244,6 +257,7 @@
 					<div class="mb-3 mt-3 col-3">
 						<label> Postcode</label>
 						<input
+							numbersOnly
 							type="text"
 							class="form-control"
 							formControlName="mailingPostcode"
@@ -437,10 +451,22 @@
 										>Checked Out To</label
 									>
 									<input
+										[matAutocomplete]="checkedOut"
 										type="text"
 										formControlName="checkedOut"
 										class="form-control"
 									/>
+									<mat-autocomplete
+										#checkedOut="matAutocomplete"
+										[displayWith]="displayFn"
+									>
+										<mat-option
+											*ngFor="let option of checkedOutAuto$[filed2] | async ; let i = index "
+											[value]="option"
+										>
+											{{option.fullName}}
+										</mat-option>
+									</mat-autocomplete>
 								</div>
 								<div class="mb-3 mt-3 col-3">
 									<label
@@ -682,7 +708,7 @@
 				</div>
 			</mat-tab>
 			<mat-tab
-				label="Insurance and contract register"
+				label="Insurance and Contract Register"
 				(click)="addInsuranceShow()"
 			>
 				<div formArrayName="insuranceArr" class="mt-4">
@@ -709,14 +735,12 @@
 										class="form-label"
 										>Document Type</label
 									>
-									<select
+									<input
+										type="text"
 										class="form-select form-control"
 										aria-label="Default select example"
 										formControlName="documentType"
-									>
-										<option selected hidden>Select</option>
-										<option [value]="">123</option>
-									</select>
+									/>
 								</div>
 								<div class="mb-3 mt-3 col-3">
 									<label
@@ -734,7 +758,7 @@
 									<label
 										for="exampleFormControlInput1"
 										class="form-label"
-										>Third Party</label
+										>Provider</label
 									>
 									<input
 										type="text"

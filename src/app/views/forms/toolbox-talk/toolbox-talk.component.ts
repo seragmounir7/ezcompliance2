@@ -29,6 +29,8 @@ import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	sub: Subscription;
 	isPrint: Observable<any>;
+	enable: boolean;
+	frequency: string;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -113,6 +115,10 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
+		this.activatedRoute.queryParams.subscribe(({ enable, frequency }) => {
+			this.enable = Boolean(enable);
+			this.frequency = frequency as string;
+		});
 		this.isHistory = this.router.url.includes('/tableData/history');
 		if (this.isHistory) {
 			this.disableForm();
@@ -417,7 +423,9 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		console.log('form data', this.toolBox.value);
 		if (this.id !== 'form') {
 			const data = {
-				...this.toolBox.value
+				...this.toolBox.value,
+				enable: this.enable,
+				frequency: this.frequency
 			};
 			this.logicalFormInfo.editToolBox(this.id, data).subscribe((res) => {
 				console.log('res', res);
@@ -430,7 +438,9 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			});
 		} else {
 			const data = {
-				...this.toolBox.value
+				...this.toolBox.value,
+				enable: this.enable,
+				frequency: this.frequency
 			};
 			this.logicalFormInfo.addtoolBox(data).subscribe((res) => {
 				console.log('res', res);

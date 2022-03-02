@@ -15,6 +15,8 @@ import { MatSort } from '@angular/material/sort';
 import { accessType, FormName } from 'src/app/side-nav-access.enum';
 import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { Designation } from 'src/app/utils/types/Designation.enum';
+import { AuthService } from 'src/app/utils/services/auth.service';
 export interface PeriodicElement {
 	categories: string;
 	position: number;
@@ -64,7 +66,8 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		private fb: FormBuilder,
 		private dynamicFormServise: DynamicFormsService,
 		private activatedRoute: ActivatedRoute,
-		private role: RoleManagementService
+		private role: RoleManagementService,
+		private authService: AuthService
 	) {}
 
 	addDyForm() {
@@ -83,6 +86,15 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	}
 
 	ngOnInit(): void {
+		this.authService.loginData$.subscribe((res) => {
+			if (res.designation === Designation.user)
+				this.displayedColumns = [
+					'index',
+					'formName',
+					'formCategory',
+					'edit'
+				];
+		});
 		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.url = this.activatedRoute.snapshot.url;
 		console.log('url', this.url);

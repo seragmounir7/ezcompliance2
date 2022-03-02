@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
+import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -11,6 +11,9 @@ import { MatSort } from '@angular/material/sort';
 import { FormName } from 'src/app/side-nav-access.enum';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import { Designation } from 'src/app/utils/types/Designation.enum';
 
 @Component({
 	selector: 'app-forms',
@@ -76,9 +79,11 @@ export class FormsComponent implements OnInit {
 		public router: Router,
 		private setTitle: SetTitleService,
 		private activatedRoute: ActivatedRoute,
-		private role: RoleManagementService
+		private logical: LogicalFormInfoService,
+		private role: RoleManagementService,
+		private authService: AuthService
 	) {}
-	goTo(title) {
+	goTo(title: string) {
 		console.log('title', title);
 		switch (title) {
 			case 'Toolbox Talk': {
@@ -109,8 +114,63 @@ export class FormsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.authService.loginData$.subscribe((res) => {
+			if (res.designation === Designation.user)
+				this.displayedColumns = ['index', 'formName', 'edit'];
+		});
+
+		this.logical.getLogicalFormFrequency().subscribe((res: any) => {
+			console.log(res);
+			res.data.forEach((resObj) => {
+				this.ELEMENT_DATA = this.ELEMENT_DATA.map((localObj) => {
+					if (resObj.formName === localObj.title) {
+						const { frequency, enable } = resObj;
+						// localObj['frequency'] = resObj.frequency
+						// localObj['enable'] = resObj.enable
+						localObj = {
+							...localObj,
+							...resObj
+						};
+						console.log(localObj);
+					}
+					return localObj;
+				});
+			});
+			console.log(this.ELEMENT_DATA);
+			this.dataSource.data = this.ELEMENT_DATA;
+		});
 		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.url = this.activatedRoute.snapshot.url;
 		this.setTitle.setTitle('WHS-Forms List');
+	}
+
+	slideChanged(e, form) {
+		this.logical
+			.enableDisableLogicalForm(form._id, e.checked)
+			.subscribe((res) => {
+				if (e.checked) {
+					Swal.fire({
+						title: 'Form Enabled successfully',
+						showConfirmButton: false,
+						timer: 1200
+					});
+				} else {
+					Swal.fire({
+						title: 'Form Disable successfully',
+						showConfirmButton: false,
+						timer: 1200
+					});
+				}
+			});
+	}
+
+	frequencyChange(e, element) {
+		console.log(e.target.value);
+
+		this.logical
+			.updateLogicalFormFrequency(element._id, e.target.value)
+			.subscribe((res) => {
+				Swal.fire('Form Frequency Changed successfully');
+			});
 	}
 }

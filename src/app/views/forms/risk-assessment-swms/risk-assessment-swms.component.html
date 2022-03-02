@@ -198,6 +198,7 @@
 								>
 								<input
 									autosize
+									numbersOnly
 									type="text"
 									class="form-control col-md col-sm"
 									formControlName="postcode"
@@ -940,6 +941,7 @@
 								<input
 									autosize
 									type="text"
+									numbersOnly
 									class="form-control col-md col-sm"
 									formControlName="postcode"
 									[class.is-invalid]="riskAssessmentFb.get('postcode')?.hasError('required')
@@ -2040,6 +2042,7 @@
 						<input
 							autosize
 							type="text"
+							numbersOnly
 							class="form-control col-md col-sm"
 							formControlName="postcode"
 							[class.is-invalid]="riskAssessmentFb.get('postcode')?.hasError('required')

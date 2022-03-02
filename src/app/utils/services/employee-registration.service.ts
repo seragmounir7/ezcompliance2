@@ -33,19 +33,26 @@ export class EmployeeRegistrationService {
 			);
 	}
 	getEmployeeInfoById(id) {
-		return this.https.get(this.apiUrl + 'employee/get/' + id).pipe(
-			map((res: any) => {
-				return res;
-			})
-		);
+		return this.https
+			.get(
+				this.apiUrl + 'authentication/clientAdmin/getUserProfile/' + id
+			)
+			.pipe(
+				map((res: any) => {
+					res.data = res.data[0];
+					return res;
+				})
+			);
 	}
 
 	updateEmployeeInfo(id, data) {
-		return this.https.put(this.apiUrl + 'employee/update/' + id, data).pipe(
-			map((res: any) => {
-				return res;
-			})
-		);
+		return this.https
+			.put(this.apiUrl + 'authentication/update/user/by/' + id, data)
+			.pipe(
+				map((res: any) => {
+					return res;
+				})
+			);
 	}
 	deleteEmployeeInfo(id) {
 		return this.https.delete(this.apiUrl + 'employee/delete/' + id).pipe(

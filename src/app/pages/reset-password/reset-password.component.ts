@@ -1,7 +1,13 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CustomValidators } from 'src/app/custom-validators';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
@@ -21,16 +27,44 @@ export class ResetPasswordComponent implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		private authService: AuthService,
 		private router: Router,
-		private toast: ToastrService
+		private toast: ToastrService,
+		private fb: FormBuilder
 	) {
-		this.resetForm = new FormGroup(
+		this.resetForm = this.fb.group(
 			{
-				oldPassword: new FormControl(null, Validators.required),
-				newPassword: new FormControl(null, Validators.required),
-				confirm_password: new FormControl(null, Validators.required)
+				oldPassword: ['', Validators.required],
+				newPassword: [
+					'',
+					Validators.compose([
+						// 1\. Password Field is Required
+						Validators.required,
+						// 2\. check whether the entered password has a number
+						CustomValidators.patternValidator(/\d/, {
+							hasNumber: true
+						}),
+						// 3\. check whether the entered password has upper case letter
+						CustomValidators.patternValidator(/[A-Z]/, {
+							hasCapitalCase: true
+						}),
+						// 4\. check whether the entered password has a lower-case letter
+						CustomValidators.patternValidator(/[a-z]/, {
+							hasSmallCase: true
+						}),
+						// 5\. check whether the entered password has a special character
+						CustomValidators.patternValidator(
+							/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
+							{
+								hasSpecialCharacters: true
+							}
+						),
+						// 6\. Has a minimum length of 8 characters
+						Validators.minLength(8)
+					])
+				],
+				confirm_password: ['', Validators.required]
 			},
 			{
-				validators: this.password.bind(this)
+				validators: CustomValidators.passwordMatchValidator
 			}
 		);
 	}
@@ -44,14 +78,6 @@ export class ResetPasswordComponent implements OnInit {
 			'login-page'
 		);
 		this.setTitle.setTitle('WHS-resetPassword');
-	}
-
-	password(formGroup: FormGroup) {
-		const { value: newPassword } = formGroup.get('newPassword');
-		const { value: confirm_password } = formGroup.get('confirm_password');
-		return newPassword === confirm_password
-			? null
-			: { passwordNotMatch: true };
 	}
 
 	changePassword() {

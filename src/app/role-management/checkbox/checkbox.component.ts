@@ -19,6 +19,7 @@ import {
 	Datum,
 	RoleID
 } from 'src/app/utils/types/AccessResponceTypes';
+import { AuthService } from 'src/app/utils/services/auth.service';
 @Component({
 	selector: 'app-checkbox',
 	templateUrl: './checkbox.component.html',
@@ -37,7 +38,8 @@ export class CheckboxComponent implements OnInit {
 		private fb: FormBuilder,
 		private roleService: RoleManagementService,
 		private dialog: MatDialog,
-		private roleSharedService: RoleManagementSharedServiceService
+		private roleSharedService: RoleManagementSharedServiceService,
+		private authService: AuthService
 	) {
 		this.roleSharedService.getRoleEvent.subscribe((res) => {
 			if (res) {
@@ -54,7 +56,7 @@ export class CheckboxComponent implements OnInit {
 		// 'Logical Forms',
 		// 'Form List',
 		// 'Submitted Forms',
-		'Employee Details'
+		'Company Information'
 		// 'Form Settings'
 	];
 	formNameArr = [
@@ -64,7 +66,7 @@ export class CheckboxComponent implements OnInit {
 		// 'LogicalForms',
 		// 'FormList',
 		// 'SubmittedForms',
-		'EmployeeDetails'
+		'CompanyInformation'
 		// 'FormSettings'
 	];
 

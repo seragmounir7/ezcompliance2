@@ -43,6 +43,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { CustomValidators } from 'src/app/custom-validators';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -92,6 +93,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	uploadFile: any;
 	returnTo: Observable<string>;
 	doesQueryMobilExists: boolean;
+	enable: boolean;
+	frequency: string;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -131,10 +134,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			email: ['', Validators.required],
 			phone: [
 				'',
-				[
-					Validators.required,
-					Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
-				]
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
 			],
 			department: ['', Validators.required],
 			position: ['', Validators.required],
@@ -206,16 +206,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		return ext.length != 0
 			? this.image.includes(ext[ext.length - 1])
 			: false;
-		// let ext = this.selectedImage.split('.');
-		// console.log('ext.....', ext);
-
-		// return this.image.includes(ext[ext.length - 1]);
 	}
 	ngOnInit() {
-		this.activatedRoute.queryParams.subscribe(
-			(res) => (this.doesQueryMobilExists = res?.mobile ? true : false)
-		);
-		// console.log();
+		this.activatedRoute.queryParams.subscribe(({ enable, frequency }) => {
+			this.enable = Boolean(enable);
+			this.frequency = frequency;
+		});
 
 		this.isHistory = this.router.url.includes('/hazardTable/history');
 		if (this.isHistory) {
@@ -712,10 +708,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 					? ''
 					: procedureRemoveAction.fullName || procedureRemoveAction,
 			PPEAction:
-				PPEAction.fullName == '' ? '' : PPEAction.fullName || PPEAction
+				PPEAction.fullName == '' ? '' : PPEAction.fullName || PPEAction,
+			enable: this.enable,
+			frequency: this.frequency
 		};
 		if (this.id != 'form') {
-			console.log(this.hazardReport.value, 'mmmmmmm');
 			this.url.updateHazardFormData(this.id, data).subscribe(
 				(res) => {
 					console.log('res', res);

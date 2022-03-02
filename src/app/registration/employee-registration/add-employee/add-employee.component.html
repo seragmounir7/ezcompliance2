@@ -85,12 +85,18 @@
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.porfEmail.touched || submitted) && registerFormControl.porfEmail.errors?.required "
 						/>
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.porfEmail.touched || submitted) && registerFormControl.porfEmail.errors?.required"
 						>
 							Email is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.porfEmail.touched || submitted) && registerFormControl.porfEmail.errors?.email"
+						>
+							Enter Valid Email.
+						</div>
 					</div>
 				</div>
 
@@ -140,12 +146,18 @@
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required "
 						/>
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.required"
 						>
 							Phone Number is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.porfPhone.touched || submitted) && registerFormControl.porfPhone.errors?.wrongNumber"
+						>
+							Enter Valid Phone Number
+						</div>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
@@ -157,12 +169,18 @@
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.porfMobile.touched || submitted) && registerFormControl.porfMobile.errors?.required "
 						/>
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.porfMobile.touched || submitted) && registerFormControl.porfMobile.errors?.required"
 						>
 							Mobile Number is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.porfMobile.touched || submitted) && registerFormControl.porfMobile.errors?.wrongNumber"
+						>
+							Enete Valid Mobile Number
+						</div>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label class="form-label mb-3"
@@ -284,6 +302,7 @@
 						>
 						<input
 							type="text"
+							numbersOnly
 							formControlName="porfPostalCode"
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.porfPostalCode.touched || submitted) && registerFormControl.porfPostalCode.errors?.required "
@@ -391,12 +410,18 @@
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.empEmail.touched || submitted) && registerFormControl.empEmail.errors?.required "
 						/>
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.empEmail.touched || submitted) && registerFormControl.empEmail.errors?.required"
 						>
 							Email is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.empEmail.touched || submitted) && registerFormControl.empEmail.errors?.email"
+						>
+							Enter Valid Email
+						</div>
 					</div>
 				</div>
 
@@ -412,12 +437,18 @@
 							id="siteName"
 							[class.is-invalid]="(registerFormControl.empPhone.touched || submitted) && registerFormControl.empPhone.errors?.required "
 						/>
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.empPhone.touched || submitted) && registerFormControl.empPhone.errors?.required"
 						>
 							Phone Number is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.empPhone.touched || submitted) && registerFormControl.empPhone.errors?.wrongNumber"
+						>
+							Enter Valid Phone Number
+						</div>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
@@ -429,12 +460,18 @@
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.empMobile.touched || submitted) && registerFormControl.empMobile.errors?.required "
 						/>
-						<span
+						<div
 							class="text-danger"
 							*ngIf="(registerFormControl.empMobile.touched || submitted) && registerFormControl.empMobile.errors?.required"
 						>
 							Mobile Number is required
-						</span>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="(registerFormControl.empMobile.touched || submitted) && registerFormControl.empMobile.errors?.wrongNumber"
+						>
+							Enter Valid Mobile Number
+						</div>
 					</div>
 				</div>
 				<button
