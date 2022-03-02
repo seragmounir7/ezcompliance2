@@ -82,7 +82,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 					(accessArr: AccessArr[]) => {
 						this.role.accessArrNext(accessArr);
 						accessArr.forEach((accessObj) => {
-							this.navItems.map((item) => {
+							this.navItems = this.navItems.map((item) => {
 								if (
 									item.displayedName
 										.toLowerCase()
@@ -96,7 +96,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 											.replace(' ', ''),
 										accessObj.formName.toLowerCase()
 									);
-									item.hasAccess = accessObj.Access;
+									item.hasAccess = accessObj.NavigationAccess;
 								}
 								if (item.childItem) {
 									console.log(item.childItem);
@@ -133,7 +133,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 												//   item.hasAccess = true
 												// }
 												childItem.hasAccess =
-													accessObj.Access;
+													accessObj.NavigationAccess;
 											}
 											return childItem;
 										}
@@ -153,6 +153,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 						//   if(item)
 						//   item.hasAccess =
 						// })
+						console.log(this.navItems);
 					},
 					(err) => console.error('some error occured', err),
 					() => this.showSideNav.next(true)

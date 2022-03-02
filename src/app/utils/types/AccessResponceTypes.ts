@@ -29,7 +29,7 @@ export interface Datum {
 
 export interface AccessArr {
 	[x: string]: any;
-	Access?: boolean;
+	NavigationAccess?: boolean;
 	Add?: boolean;
 	View?: boolean;
 	Edit?: boolean;

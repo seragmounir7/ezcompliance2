@@ -12,6 +12,7 @@ import {
 	switchMap,
 	tap
 } from 'rxjs/operators';
+import { CustomValidators } from 'src/app/custom-validators';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
@@ -50,9 +51,12 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
 		this.subcontractDetails = this.fb.group({
 			companyName: ['', Validators.required],
-			phone: ['', Validators.required],
-			fax: [''],
-			email: ['', Validators.required],
+			phone: [
+				'',
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
+			],
+			fax: ['', CustomValidators.PhoneNumberValidator()],
+			email: ['', [Validators.required, Validators.email]],
 			suburb: ['', Validators.required],
 			state: ['', Validators.required],
 			streetAddress: ['', Validators.required],
@@ -406,5 +410,8 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				console.error(err);
 			}
 		);
+	}
+	get f() {
+		return this.subcontractDetails.controls;
 	}
 }

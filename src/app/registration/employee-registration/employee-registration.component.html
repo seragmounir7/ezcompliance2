@@ -1,8 +1,8 @@
 <div class="col ml-2 pt-1">
 	<h1>Employee Details</h1>
 </div>
-<div>
-	<ng-container *ngIf="dataSource.data.length < employeePurchased">
+<div *ngIf="dataSource.data.length < employeePurchased">
+	<ng-container>
 		<button
 			*ngIf="(isEmployeeRegistration| async) !== 'employeeRegistration'"
 			type="button"

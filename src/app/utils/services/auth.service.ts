@@ -17,6 +17,9 @@ export class AuthService {
 	public loginData$: Observable<UserData> = this.loginObs$.pipe(
 		distinctUntilChanged()
 	);
+	get loginData() {
+		return this.loginDataSubject.value;
+	}
 	public isClient$: Observable<boolean> = this.loginObs$.pipe(
 		distinctUntilChanged(),
 		map((res) => res?.designation === Designation.clientAdmin)
@@ -58,6 +61,8 @@ export class AuthService {
 			.pipe(
 				map((res: ResponceBody) => {
 					console.log('res.data.accessToken', res.data.accessToken);
+					if (res.data.designation === Designation.user)
+						res.data.FirstLogin.firstLogin = false;
 					if (res.data.accessToken) {
 						this.nextLoginData(res.data);
 						sessionStorage.setItem(
@@ -92,6 +97,20 @@ export class AuthService {
 		return this.http.put(this.apiUrl + 'authentication/update/firstLogin', {
 			FirstLogin: data
 		});
+	}
+	sendForgotMail(email: string) {
+		return this.http.post(
+			this.apiUrl + 'authentication/forgot/password/' + email,
+			{}
+		);
+	}
+
+	forgotPassword(email: string, otp: number, password: { password: string }) {
+		console.log(email);
+		return this.http.post(
+			`${this.apiUrl}authentication/otp/forget/password/${email}/${otp}`,
+			password
+		);
 	}
 }
 

@@ -44,7 +44,7 @@
 				>
 					<option value="daily">Daily</option>
 					<option value="weekly">Weekly</option>
-					<option value="weekly">Monthly</option>
+					<option value="Monthly">Monthly</option>
 					<option value="quaterly">Quaterly</option>
 					<option value="halfYearly">Half yearly</option>
 					<option value="yearly">Yearly</option>
@@ -114,15 +114,17 @@
 							<svg-icon name="Fill_form"></svg-icon>
 						</button>
 					</ng-container>
-					<button
-						matTooltip="Saved Form List"
-						mat-icon-button
-						aria-label="Example icon button with a delete icon"
-						[routerLink]="['/admin/dynamic/savedDynamicFormTable/'+element._id]"
-						*ngIf="url[0].path=='fillConfigForm'"
-					>
-						<mat-icon>launch</mat-icon>
-					</button>
+					<ng-container *accessControl="accessObj.View">
+						<button
+							matTooltip="Saved Form List"
+							mat-icon-button
+							aria-label="Example icon button with a delete icon"
+							[routerLink]="['/admin/dynamic/savedDynamicFormTable/'+element._id]"
+							*ngIf="url[0].path=='fillConfigForm'"
+						>
+							<mat-icon>launch</mat-icon>
+						</button>
+					</ng-container>
 				</div>
 			</td>
 		</ng-container>

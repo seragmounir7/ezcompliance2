@@ -21,7 +21,16 @@
 						type="text"
 						formControlName="companyName"
 						class="form-control"
+						[class.is-invalid]="(f.companyName.touched || submitted) && f.companyName.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.companyName.touched &&f.companyName.errors"
+					>
+						<div *ngIf="f.companyName.errors.required">
+							Company Name is required
+						</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -31,7 +40,19 @@
 						type="text"
 						formControlName="phone"
 						class="form-control"
+						[class.is-invalid]="(f.phone.touched || submitted) && f.phone.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.phone.touched &&f.phone.errors"
+					>
+						<div *ngIf="f.phone.errors.required">
+							Phone is required
+						</div>
+						<div *ngIf="f.phone.errors.wrongNumber">
+							Enter Valid Phone Number
+						</div>
+					</div>
 				</div>
 
 				<div class="mb-3 mt-3 col-3">
@@ -42,7 +63,17 @@
 						type="text"
 						formControlName="fax"
 						class="form-control"
+						[class.is-invalid]="(f.fax.touched || submitted) && f.fax.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.fax.touched && f.fax.errors"
+					>
+						<div *ngIf="f.fax.errors.required">Fax is required</div>
+						<div *ngIf="f.fax.errors.wrongNumber">
+							Enter Valid Fax Number
+						</div>
+					</div>
 				</div>
 
 				<div class="mb-3 mt-3 col-3">
@@ -53,7 +84,19 @@
 						type="text"
 						formControlName="email"
 						class="form-control"
+						[class.is-invalid]="(f.email.touched || submitted) && f.email.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.email.touched && f.email.errors"
+					>
+						<div *ngIf="f.email.errors.required">
+							Email is required
+						</div>
+						<div *ngIf="f.email.errors.email">
+							Enter A Valid Email
+						</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -63,8 +106,17 @@
 						type="text"
 						formControlName="streetAddress"
 						class="form-control"
+						[class.is-invalid]="(f.streetAddress.touched || submitted) && f.streetAddress.errors"
 					>
 					</textarea>
+					<div
+						class="text-danger"
+						*ngIf="f.streetAddress.touched && f.streetAddress.errors"
+					>
+						<div *ngIf="f.streetAddress.errors.required">
+							Stree tAddress is required
+						</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -74,7 +126,16 @@
 						type="text"
 						formControlName="suburb"
 						class="form-control"
+						[class.is-invalid]="(f.suburb.touched || submitted) && f.suburb.errors"
 					></textarea>
+					<div
+						class="text-danger"
+						*ngIf="f.suburb.touched && f.suburb.errors"
+					>
+						<div *ngIf="f.suburb.errors.required">
+							Suburb is required
+						</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -84,6 +145,7 @@
 						class="form-select form-control col"
 						aria-label="Default select example"
 						formControlName="state"
+						[class.is-invalid]="(f.state.touched || submitted) && f.state.errors"
 					>
 						<option selected hidden>Select</option>
 						<option
@@ -93,6 +155,14 @@
 							{{state.title}}
 						</option>
 					</select>
+					<div
+						class="text-danger"
+						*ngIf="f.state.touched && f.state.errors"
+					>
+						<div *ngIf="f.state.errors.required">
+							State is required
+						</div>
+					</div>
 				</div>
 
 				<div class="mb-3 mt-3 col-3">
@@ -103,7 +173,17 @@
 						type="text"
 						formControlName="postCode"
 						class="form-control"
+						numbersOnly
+						[class.is-invalid]="(f.postCode.touched || submitted) && f.postCode.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.postCode.touched && f.postCode.errors"
+					>
+						<div *ngIf="f.postCode.errors.required">
+							PostCode is required
+						</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -113,7 +193,14 @@
 						type="text"
 						formControlName="ABN"
 						class="form-control"
+						[class.is-invalid]="(f.ABN.touched || submitted) && f.ABN.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.ABN.touched && f.ABN.errors"
+					>
+						<div *ngIf="f.ABN.errors.required">ABN is required</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -123,7 +210,16 @@
 						type="text"
 						formControlName="licenceNumber"
 						class="form-control"
+						[class.is-invalid]="(f.licenceNumber.touched || submitted) && f.licenceNumber.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.licenceNumber.touched && f.licenceNumber.errors"
+					>
+						<div *ngIf="f.licenceNumber.errors.required">
+							Licence Number is required
+						</div>
+					</div>
 				</div>
 				<div class="mb-3 mt-3 col-3">
 					<label for="exampleFormControlInput1" class="form-label"
@@ -133,7 +229,16 @@
 						type="text"
 						formControlName="website"
 						class="form-control"
+						[class.is-invalid]="(f.website.touched || submitted) && f.website.errors"
 					/>
+					<div
+						class="text-danger"
+						*ngIf="f.website.touched && f.website.errors"
+					>
+						<div *ngIf="f.website.errors.required">
+							Website is required
+						</div>
+					</div>
 				</div>
 			</div>
 			<button

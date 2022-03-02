@@ -7,15 +7,19 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Designation } from 'src/app/utils/types/Designation.enum';
+import { AuthService } from '../utils/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+	constructor(private authService: AuthService) {}
 	intercept(
 		request: HttpRequest<unknown>,
 		next: HttpHandler
 	): Observable<HttpEvent<unknown>> {
 		let role: string;
-		const id: string = sessionStorage.getItem('id');
+		const id: string = this.authService.loginData?.id
+			? this.authService.loginData.id
+			: null;
 		switch (sessionStorage.getItem('role')) {
 			case Designation.clientAdmin:
 				role = 'clientAdminId';
@@ -34,7 +38,10 @@ export class AuthInterceptor implements HttpInterceptor {
 		let body = {
 			...(request.body as Record<string, unknown>)
 		};
-		if (!request.url.includes('login')) {
+		if (
+			request.url.includes('authentication/register') ||
+			!request.url.includes('authentication')
+		) {
 			if (!request.url.includes('firstLogin')) {
 				body[role] = id;
 			}

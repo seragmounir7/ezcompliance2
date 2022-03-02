@@ -14,6 +14,7 @@ import {
 	switchMap,
 	tap
 } from 'rxjs/operators';
+import { CustomValidators } from 'src/app/custom-validators';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
@@ -81,11 +82,17 @@ export class AddEmployeeComponent implements OnInit {
 			profTitie: ['', Validators.required],
 			profFirst: ['', Validators.required],
 			porfListName: ['', Validators.required],
-			porfEmail: ['', Validators.required],
+			porfEmail: ['', [Validators.required, Validators.email]],
 			porfPosition: ['', Validators.required],
 			porfDepartment: ['', Validators.required],
-			porfPhone: ['', Validators.required],
-			porfMobile: ['', Validators.required],
+			porfPhone: [
+				'',
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
+			],
+			porfMobile: [
+				'',
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
+			],
 			// porfEmployee: ['', Validators.required],
 			// porfManager: ['', Validators.required],
 			// porfAdministrater: ['', Validators.required],
@@ -101,9 +108,15 @@ export class AddEmployeeComponent implements OnInit {
 			EmpFirst: ['', Validators.required],
 			empLastName: ['', Validators.required],
 			empRelationship: ['', Validators.required],
-			empEmail: ['', Validators.required],
-			empPhone: ['', Validators.required],
-			empMobile: ['', Validators.required],
+			empEmail: ['', [Validators.required, Validators.email]],
+			empPhone: [
+				'',
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
+			],
+			empMobile: [
+				'',
+				[Validators.required, CustomValidators.PhoneNumberValidator()]
+			],
 			LicenceName: [''],
 
 			LicenceNumber: [''],
@@ -834,6 +847,10 @@ export class AddEmployeeComponent implements OnInit {
 				state: this.empDetails.get('porfState').value,
 				postcode: this.empDetails.get('porfPostalCode').value,
 				country: 'India'
+			},
+			plant: {
+				plantArr: this.empDetails.get('plantArr').value,
+				plantSignature: this.empDetails.controls.plantSignature.value
 			}
 		};
 

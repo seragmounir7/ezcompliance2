@@ -76,6 +76,8 @@ export class IncidentReportComponent
 	completedDepartment$: Observable<any[]>;
 	reviewedDepartment$: Observable<any[]>;
 	isImg: boolean = false;
+	enable: boolean;
+	frequency: string;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -207,6 +209,10 @@ export class IncidentReportComponent
 		}
 	}
 	ngOnInit(): void {
+		this.activatedRoute.queryParams.subscribe(({ enable, frequency }) => {
+			this.enable = Boolean(enable);
+			this.frequency = frequency as string;
+		});
 		this.isHistory = this.router.url.includes('/incidentsTable/history');
 		if (this.isHistory) {
 			this.disableForm();
@@ -932,7 +938,9 @@ export class IncidentReportComponent
 				projectMangArr: this.projectMang,
 				staffArr: this.staff,
 				completedName: completedName.fullName || completedName,
-				reviewedName: reviewedName.fullName || reviewedName
+				reviewedName: reviewedName.fullName || reviewedName,
+				enable: this.enable,
+				frequency: this.frequency
 			};
 			console.log('data', data);
 
@@ -968,7 +976,9 @@ export class IncidentReportComponent
 				projectMangArr: this.projectMang,
 				staffArr: this.staff,
 				completedName: completedName.fullName || completedName,
-				reviewedName: reviewedName.fullName || reviewedName
+				reviewedName: reviewedName.fullName || reviewedName,
+				enable: this.enable,
+				frequency: this.frequency
 			};
 			console.log('data', data);
 
