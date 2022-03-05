@@ -1,0 +1,60 @@
+<mat-tab-group
+	[selectedIndex]="selectedIndex$|async"
+	(selectedIndexChange)="selectedIndexChange($event)"
+>
+	<mat-tab label="Add Instruction">
+		<ng-template matTabContent>
+			<app-instructions></app-instructions>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Risk-Level">
+		<ng-template matTabContent>
+			<app-risk-level></app-risk-level>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Residual Risk Level">
+		<ng-template matTabContent>
+			<app-residual-risk-level></app-residual-risk-level>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="High Risk Construct">
+		<ng-template matTabContent>
+			<app-high-risk-con></app-high-risk-con>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Code Of Practice">
+		<ng-template matTabContent>
+			<app-code-of-pract></app-code-of-pract>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Hazards">
+		<ng-template matTabContent>
+			<app-identify-hazards></app-identify-hazards>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Hazardous Substances">
+		<ng-template matTabContent>
+			<app-chemical></app-chemical>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Job Task">
+		<ng-template matTabContent>
+			<app-job-task></app-job-task>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Licence & Qualification">
+		<ng-template matTabContent>
+			<app-licence-and-qual></app-licence-and-qual>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Control And Action">
+		<ng-template matTabContent>
+			<app-contr-and-act-req></app-contr-and-act-req>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Set Relation">
+		<ng-template matTabContent>
+			<app-set-logic></app-set-logic>
+		</ng-template>
+	</mat-tab>
+</mat-tab-group>

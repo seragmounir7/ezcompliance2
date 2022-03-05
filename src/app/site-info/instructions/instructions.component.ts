@@ -4,11 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
-import { AddInstructionsComponent } from './add-instructions/add-instructions.component';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-instructions',
@@ -16,35 +17,37 @@ import { AddInstructionsComponent } from './add-instructions/add-instructions.co
 	styleUrls: ['./instructions.component.scss']
 })
 export class InstructionsComponent implements OnInit {
+	isDisabled: boolean = true;
+	instructionControl: FormControl = new FormControl();
+	public Editor = ClassicEditor;
 	jobTaskData: any = [];
 	ELEMENT_DATA = [];
 	/////////////mat table////////////////
 	displayedColumns: string[] = ['index', 'title', 'action'];
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
 	url: any;
 	addBtn = false;
-	ngAfterViewInit() {
-		this.dataSource.paginator = this.paginator;
-	}
+
 	/////////////mat table end////////////////
 
 	constructor(
 		private logicalFormInfo: LogicalFormInfoService,
 		private dialog: MatDialog,
 		private setTitle: SetTitleService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
+		this.instructionControl.disable();
 		this.setTitle.setTitle('WHS-Accident Instruction');
-		this.url = this.activatedRoute.snapshot.url[1].path;
+		this.url = this.activatedRoute.snapshot.url[1]?.path || null;
 		console.log('this.id', this.url);
-		if (this.url === 'accident') {
+		if (this.router.url.includes('notifiableAccident')) {
 			this.getInstructions();
-		} else if (this.url === 'riskAssess') {
+		}
+		if (this.router.url.includes('riskAssessmentSetting')) {
 			this.getRiskInstructions();
 		}
 	}
@@ -62,7 +65,7 @@ export class InstructionsComponent implements OnInit {
 				} else {
 					this.addBtn = true;
 				}
-
+				this.instructionControl.setValue(data[0].instruction || '');
 				this.ELEMENT_DATA = data;
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				// this.dataSource.sort = this.sort;
@@ -87,7 +90,7 @@ export class InstructionsComponent implements OnInit {
 				} else {
 					this.addBtn = true;
 				}
-
+				this.instructionControl.setValue(data[0].instruction || '');
 				this.ELEMENT_DATA = data;
 
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -101,25 +104,48 @@ export class InstructionsComponent implements OnInit {
 	}
 
 	edit(element) {
+		this.isDisabled = !this.isDisabled;
+		if (this.isDisabled) this.instructionControl.disable();
+		if (!this.isDisabled) this.instructionControl.enable();
+		if (!this.isDisabled) return;
 		this.addBtn = false;
-		const dialogRef = this.dialog.open(AddInstructionsComponent, {
-			width: '80%',
-			height: '500px',
-			data: {
-				element,
-				url: this.url
-			}
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-			if (result == 'true') {
-				if (this.url === 'accident') {
-					this.getInstructions();
-				} else if (this.url === 'riskAssess') {
-					this.getRiskInstructions();
-				}
-			}
-			console.log('The dialog was closed');
-		});
+		if (this.router.url.includes('notifiableAccident')) {
+			this.logicalFormInfo
+				.postInstruction({ instruction: this.instructionControl.value })
+				.subscribe(
+					(data) => {
+						Swal.fire({
+							title: 'Saved Successfully!',
+							showConfirmButton: false,
+							timer: 1200
+						});
+						console.log('nature=>', data);
+						this.getInstructions();
+					},
+					(err) => {
+						console.error(err);
+					}
+				);
+		}
+		if (this.router.url.includes('riskAssessmentSetting')) {
+			this.logicalFormInfo
+				.postRiskInstruction({
+					instruction: this.instructionControl.value
+				})
+				.subscribe(
+					(data) => {
+						Swal.fire({
+							title: 'Saved Successfully!',
+							showConfirmButton: false,
+							timer: 1200
+						});
+						this.getRiskInstructions();
+					},
+					(err) => {
+						console.error(err);
+					}
+				);
+		}
 	}
 	delete(item) {
 		Swal.fire({

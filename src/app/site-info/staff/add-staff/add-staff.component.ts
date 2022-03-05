@@ -3,6 +3,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
 	selector: 'app-add-staff',
@@ -15,7 +16,8 @@ export class AddStaffComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private logicalFormInfo: LogicalFormInfoService,
-		private router: Router
+		private router: Router,
+		private navigationService: NavigationService
 	) {
 		this.addStaffForm = this.fb.group({
 			arrObj: this.fb.array([])
@@ -53,7 +55,7 @@ export class AddStaffComponent implements OnInit {
 		this.logicalFormInfo.addMultipleStaff(data).subscribe(
 			(data) => {
 				console.log('chemical=>', data);
-				this.router.navigate(['/admin/siteInfo/staff']);
+				this.router.navigateByUrl(this.navigationService.returnUrl);
 			},
 			(err) => {
 				console.error(err);

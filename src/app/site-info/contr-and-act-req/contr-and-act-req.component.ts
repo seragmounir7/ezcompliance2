@@ -7,15 +7,17 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
-import { EditContActComponent } from './edit-cont-act/edit-cont-act.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MatSort, Sort } from '@angular/material/sort';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
 	selector: 'app-contr-and-act-req',
 	templateUrl: './contr-and-act-req.component.html',
 	styleUrls: ['./contr-and-act-req.component.scss']
 })
 export class ContrAndActReqComponent implements OnInit {
+	public Editor = ClassicEditor;
 	jobTaskData: any = [];
 	ELEMENT_DATA = [];
 	/////////////mat table////////////////
@@ -46,12 +48,14 @@ export class ContrAndActReqComponent implements OnInit {
 			.getAllContrlActReq(field, value)
 			.subscribe((res: any) => {
 				console.log('PPEAll=>', res);
-				const data = res.data;
+				const data: any[] = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});
 
-				this.ELEMENT_DATA = data;
+				this.ELEMENT_DATA = data.map((element) =>
+					Object.assign({}, { ...element, isDisabled: true })
+				);
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				//this.dataSource.sort = this.sort;
@@ -61,16 +65,30 @@ export class ContrAndActReqComponent implements OnInit {
 			});
 	}
 	edit(element) {
-		const dialogRef = this.dialog.open(EditContActComponent, {
-			width: '550px',
-			data: element
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-			if (result == 'true') {
+		if (element.isDisabled) return;
+		if (element.title === element.updatedValue) return;
+		const data = {
+			title: element.updatedValue
+		};
+		this.logicalFormInfo
+			.updateContrlActReq(data, element._id)
+			.subscribe((resData) => {
 				this.getAllContrlActReq();
-			}
-			console.log('The dialog was closed');
-		});
+				Swal.fire({
+					title: 'Parameter Edited successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			});
+		// const dialogRef = this.dialog.open(EditContActComponent, {
+		// 	width: '550px',
+		// 	data: element
+		// });
+		// dialogRef.afterClosed().subscribe((result) => {
+		// 	if (result == 'true') {
+		// 	}
+		// 	console.log('The dialog was closed');
+		// });
 	}
 	delete(item) {
 		Swal.fire({

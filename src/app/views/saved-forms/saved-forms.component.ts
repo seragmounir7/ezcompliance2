@@ -16,6 +16,10 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 import { SavedformsService } from 'src/app/utils/services/savedforms.service';
 import { ConvertService } from 'src/app/utils/services/convert.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import Swal from 'sweetalert2';
+import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
 	selector: 'app-saved-forms',
@@ -28,6 +32,8 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 	displayedColumns: string[] = [
 		'formName',
 		'formType',
+		'formFrequency',
+		'Disable/Enable',
 		'createdAt',
 		'updatedAt',
 		'Action'
@@ -67,7 +73,9 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 		private shared: RoleManagementSharedServiceService,
 		public router: Router,
 		private fb: FormBuilder,
-		private setTitle: SetTitleService
+		private setTitle: SetTitleService,
+		private logical: LogicalFormInfoService,
+		private dynamicFormServise: DynamicFormsService
 	) {}
 
 	ngAfterViewInit(): void {
@@ -253,6 +261,133 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 	search() {
 		this.searchString = this.f.searchInput.value;
 		this.searchString = this.f.searchInput.value;
+		this.getSavedforms();
+	}
+	slideChanged(e: MatSlideToggleChange, form) {
+		const showPopUp = () => {
+			if (e.checked) {
+				Swal.fire({
+					title: 'Form Enabled successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			} else {
+				Swal.fire({
+					title: 'Form Disable successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			}
+		};
+		form.enable = e.checked;
+		switch (form.fileType) {
+			case 'Site Inspection':
+				this.logical
+					.updateSiteInspection(form._id, form)
+					.subscribe(() => {
+						showPopUp();
+					});
+				break;
+			case 'Hazard Report':
+				this.logical
+					.updateHazardFormData(form._id, form)
+					.subscribe(() => {
+						showPopUp();
+					});
+				break;
+			case 'Notifiable Accident':
+				this.logical
+					.updateIncidentReport(form._id, form)
+					.subscribe(() => {
+						showPopUp();
+					});
+				break;
+			case 'Tool Box':
+				this.logical.editToolBox(form._id, form).subscribe(() => {
+					showPopUp();
+				});
+				break;
+			case 'Risk Assessment':
+				this.logical.updateAssessment(form._id, form).subscribe(() => {
+					showPopUp();
+				});
+				break;
+
+			default:
+				if (form?.isDynamic !== 'Dynamic Form') return;
+
+				this.dynamicFormServise
+					.editForm(form, form._id)
+					.subscribe((res) => {
+						showPopUp();
+					});
+				break;
+		}
+		this.getSavedforms();
+	}
+
+	frequencyChange(e, form) {
+		const showPopUp = () => {
+			if (e.checked) {
+				Swal.fire({
+					title: 'Form Enabled successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			} else {
+				Swal.fire({
+					title: 'Form Disable successfully',
+					showConfirmButton: false,
+					timer: 1200
+				});
+			}
+		};
+
+		form.frequency = e.target.value;
+		switch (form.fileType) {
+			case 'Site Inspection':
+				this.logical
+					.updateSiteInspection(form._id, form)
+					.subscribe(() => {
+						showPopUp();
+					});
+				break;
+			case 'Hazard Report':
+				this.logical
+					.updateHazardFormData(form._id, form)
+					.subscribe(() => {
+						showPopUp();
+					});
+				break;
+			case 'Notifiable Accident':
+				this.logical
+					.updateIncidentReport(form._id, form)
+					.subscribe(() => {
+						showPopUp();
+					});
+				break;
+			case 'Tool Box':
+				this.logical.editToolBox(form._id, form).subscribe(() => {
+					showPopUp();
+				});
+				break;
+			case 'Risk Assessment':
+				this.logical.updateAssessment(form._id, form).subscribe(() => {
+					showPopUp();
+				});
+				break;
+
+			default:
+				if (form?.isDynamic !== 'Dynamic Form') return;
+
+				this.dynamicFormServise
+					.editForm(form, form._id)
+					.subscribe((res) => {
+						showPopUp();
+					});
+				break;
+		}
+		console.log(e.target.value);
 		this.getSavedforms();
 	}
 }

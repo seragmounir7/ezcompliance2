@@ -50,6 +50,8 @@ export class SiteInspectionComponent
 	isHistory: boolean;
 	returnTo: Observable<string>;
 	valueChangesArr: Observable<any>[];
+	enable: boolean;
+	frequency: string;
 	@HostListener('window:afterprint', [])
 	function() {
 		console.log('Printing completed...');
@@ -143,6 +145,10 @@ export class SiteInspectionComponent
 		}
 	}
 	ngOnInit(): void {
+		this.activatedRoute.queryParams.subscribe(({ enable, frequency }) => {
+			this.enable = Boolean(enable);
+			this.frequency = frequency as string;
+		});
 		this.isHistory = this.router.url.includes(
 			'/siteinspectiontable/history'
 		);
@@ -506,7 +512,9 @@ export class SiteInspectionComponent
 			projectMangArr: this.projectMang,
 			staffArr: this.staff,
 			empName: empName._id,
-			siteAction
+			siteAction,
+			enable: this.enable,
+			frequency: this.frequency
 		};
 		if (this.id != 'form') {
 			this.sidePreview.removeControl('empName');

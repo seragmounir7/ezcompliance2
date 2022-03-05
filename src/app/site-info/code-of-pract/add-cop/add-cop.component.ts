@@ -55,7 +55,7 @@ export class AddCOPComponent implements OnInit {
 			(data) => {
 				console.log('codeOfPractice=>', data);
 
-				this.router.navigate(['/admin/siteInfo/codeOfpract']);
+				this.router.navigate(['/admin/setting/codeOfpract']);
 			},
 			(err) => {
 				console.error(err);

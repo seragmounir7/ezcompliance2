@@ -22,6 +22,7 @@ import { HazardReportComponent } from './views/forms/hazard-report/hazard-report
 import { FirstTimeLoginGuard } from './RouteGuard/first-time-login.guard';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { SuperAdminGuard } from './RouteGuard/super-admin.guard';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -90,10 +91,11 @@ const routes: Routes = [
 				loadChildren: () =>
 					import('./landing-page-info/landing-page-info.module').then(
 						(m) => m.LandingPageInfoModule
-					)
+					),
+				canActivate: [SuperAdminGuard]
 			},
 			{
-				path: 'siteInfo',
+				path: 'setting',
 				loadChildren: () =>
 					import('./site-info/site-info.module').then(
 						(m) => m.SiteInfoModule
@@ -117,7 +119,7 @@ const routes: Routes = [
 				canActivate: [DynamicFormAccessGuard]
 			},
 			{
-				path: 'stateRel',
+				path: 'setting',
 				loadChildren: () =>
 					import('./views/state-rel/state-rel.module').then(
 						(m) => m.StateRelModule

@@ -1,5 +1,11 @@
 <!-- new DashBoard  -->
-<div class="container">
+<div *ngIf="isUser$|async as value">
+	<h1>User Home Page</h1>
+</div>
+<div
+	class="container"
+	*accessControl="{formName:'DashBoard',accessType:'View'}"
+>
 	<h1 class="text-center">WHS performance Indicators</h1>
 	<div class="row">
 		<div class="col-md-4">

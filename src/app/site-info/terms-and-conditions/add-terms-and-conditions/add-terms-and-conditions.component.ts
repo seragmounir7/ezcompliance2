@@ -43,7 +43,7 @@ export class AddTermsAndConditionsComponent implements OnInit {
 			.subscribe(
 				(data) => {
 					console.log('nature=>', data);
-					this.router.navigate(['/admin/siteInfo/termsAndcondition']);
+					this.router.navigate(['/admin/setting/termsAndcondition']);
 					this.dialogRef.close('true');
 				},
 				(err) => {

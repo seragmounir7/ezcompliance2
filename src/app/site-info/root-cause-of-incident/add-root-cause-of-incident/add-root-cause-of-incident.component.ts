@@ -54,7 +54,7 @@ export class AddRootCauseOfIncidentComponent implements OnInit {
 		this.logicalFormInfo.addMultipleRootCause(data).subscribe(
 			(data) => {
 				console.log('nature=>', data);
-				this.router.navigate(['/admin/siteInfo/rootCauseOfIncident']);
+				this.router.navigate(['/admin/setting/rootCauseOfIncident']);
 			},
 			(err) => {
 				console.error(err);

@@ -42,7 +42,7 @@ export class AddFormCategoriesComponent implements OnInit {
 						console.log('addCustomerForm=>', res);
 						this.dialogRef.close('ok');
 						this.router.navigate([
-							'/admin/siteInfo/dynamicFormCategories'
+							'/admin/setting/dynamicFormCategories'
 						]);
 					},
 					(err) => {
@@ -60,7 +60,7 @@ export class AddFormCategoriesComponent implements OnInit {
 						console.log('addCustomerForm=>', res);
 						this.dialogRef.close('true');
 						this.router.navigate([
-							'/admin/siteInfo/dynamicFormCategories'
+							'/admin/setting/dynamicFormCategories'
 						]);
 					},
 					(err) => {

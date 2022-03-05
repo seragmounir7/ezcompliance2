@@ -53,7 +53,7 @@ export class AddResidualRiskLevelComponent implements OnInit {
 		this.logicalFormInfo.addMultipleResidual(data).subscribe(
 			(data) => {
 				console.log('chemical=>', data);
-				this.router.navigate(['/admin/siteInfo/residual']);
+				this.router.navigate(['/admin/setting/residual']);
 			},
 			(err) => {
 				console.error(err);

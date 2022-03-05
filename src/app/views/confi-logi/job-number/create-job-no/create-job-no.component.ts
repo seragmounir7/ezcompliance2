@@ -19,6 +19,8 @@ import {
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SiteData } from 'src/app/utils/types/SiteResponceTypes';
+import { CustomerData } from 'src/app/utils/types/CustomerResponceTypes';
 
 @Component({
 	selector: 'app-create-job-no',
@@ -32,6 +34,8 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 	addCustomerForm: FormGroup;
 	allCustomers: any[] = [];
 	allState: any = [];
+	siteId: string;
+	customerId: string;
 	constructor(
 		private dialog: MatDialog,
 		private dialogRef: MatDialogRef<CreateJobNoComponent>,
@@ -60,18 +64,22 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			],
 			customerEmail: [{ value: '', disabled: true }, Validators.required]
 		});
-		this.addJobNumberForm.get('siteName').valueChanges.subscribe((res) => {
-			console.log(res);
-			this.addJobNumberForm
-				.get('streetAddress')
-				.setValue(res.streetAddress);
-			this.addJobNumberForm.get('suburb').setValue(res.suburb);
-			this.addJobNumberForm.get('state').setValue(res.stateId._id);
-			this.addJobNumberForm.get('postcode').setValue(res.postcode);
-		});
+		this.addJobNumberForm
+			.get('siteName')
+			.valueChanges.subscribe((res: SiteData) => {
+				this.siteId = res._id;
+				console.log(res);
+				this.addJobNumberForm
+					.get('streetAddress')
+					.setValue(res.streetAddress);
+				this.addJobNumberForm.get('suburb').setValue(res.suburb);
+				this.addJobNumberForm.get('state').setValue(res.stateId._id);
+				this.addJobNumberForm.get('postcode').setValue(res.postcode);
+			});
 		this.addJobNumberForm
 			.get('customerName')
-			.valueChanges.subscribe((res) => {
+			.valueChanges.subscribe((res: CustomerData) => {
+				this.customerId = res._id;
 				console.log(res);
 				this.addJobNumberForm
 					.get('customerContact')
@@ -117,21 +125,24 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			: '';
 		let data: JobNumber;
 		data = {
-			arrObj: [
-				{
-					customerContact: this.f.customerContact.value,
-					customerContactPhone: this.f.customerContactPhone.value,
-					customerEmail: this.f.customerEmail.value,
-					customerName: this.f.customerName.value.customerName,
-					siteName: this.f.siteName.value.siteName,
-					stateId: this.f.state.value,
-					streetAddress: this.f.streetAddress.value,
-					suburb: this.f.suburb.value,
-					postcode: this.f.postcode.value,
-					...jobNumber
-				}
-			]
+			// arrObj: [
+			// {
+			// customerContact: this.f.customerContact.value,
+			// customerContactPhone: this.f.customerContactPhone.value,
+			// customerEmail: this.f.customerEmail.value,
+			// customerName: this.f.customerName.value.customerName,
+			// siteName: this.f.siteName.value.siteName,
+			// stateId: this.f.state.value,
+			// streetAddress: this.f.streetAddress.value,
+			// suburb: this.f.suburb.value,
+			// postcode: this.f.postcode.value,
+			stateId: this.f.state.value,
+			customerId: this.customerId,
+			siteId: this.siteId,
+			...jobNumber
 		};
+		// ]
+		// };
 		console.log(data);
 		this.logicalFormInfoService.addJobNumber(data).subscribe(
 			(res: any) => {

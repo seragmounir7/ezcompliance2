@@ -61,7 +61,7 @@ export class AddHazardComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
-				this.router.navigate(['/admin/siteInfo/hazards']);
+				this.router.navigate(['/admin/setting/hazards']);
 			},
 			(err) => {
 				console.error(err);

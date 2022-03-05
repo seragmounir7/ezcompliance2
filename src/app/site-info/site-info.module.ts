@@ -34,7 +34,6 @@ import { ContrAndActReqComponent } from './contr-and-act-req/contr-and-act-req.c
 import { AddHazardComponent } from './identify-hazards/add-hazard/add-hazard.component';
 import { EditHazardComponent } from './identify-hazards/edit-hazard/edit-hazard.component';
 import { AddContrActComponent } from './contr-and-act-req/add-contr-act/add-contr-act.component';
-import { EditContActComponent } from './contr-and-act-req/edit-cont-act/edit-cont-act.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 import { AddEditProjMangComponent } from './project-manager/add-edit-proj-mang/add-edit-proj-mang.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -79,12 +78,16 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynamic-form-categories.component';
 import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 import { InstructionsComponent } from './instructions/instructions.component';
-import { AddInstructionsComponent } from './instructions/add-instructions/add-instructions.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { AddTermsAndConditionsComponent } from './terms-and-conditions/add-terms-and-conditions/add-terms-and-conditions.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
+import { RiskAssessmentSettingComponent } from './risk-assessment-setting/risk-assessment-setting.component';
+import { ConfiLogiModule } from '../views/confi-logi/confi-logi.module';
+import { NotifiableAccidentSettingComponent } from './notifiable-accident/notifiable-accident.component';
+import { GeneralFormSettingComponent } from './general-form-setting/general-form-setting.component';
+import { DirectivesModule } from '../Directives/directives.module';
 
 @NgModule({
 	declarations: [
@@ -118,7 +121,6 @@ import { MatIconModule } from '@angular/material/icon';
 		AddHazardComponent,
 		EditHazardComponent,
 		AddContrActComponent,
-		EditContActComponent,
 		ProjectManagerComponent,
 		AddEditProjMangComponent,
 		StaffComponent,
@@ -160,13 +162,16 @@ import { MatIconModule } from '@angular/material/icon';
 		DynamicFormCategoriesComponent,
 		AddFormCategoriesComponent,
 		InstructionsComponent,
-		AddInstructionsComponent,
 		TermsAndConditionsComponent,
-		AddTermsAndConditionsComponent
+		AddTermsAndConditionsComponent,
+		RiskAssessmentSettingComponent,
+		NotifiableAccidentSettingComponent,
+		GeneralFormSettingComponent
 	],
 
 	imports: [
 		CommonModule,
+		ConfiLogiModule,
 		SiteInfoRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
@@ -176,7 +181,8 @@ import { MatIconModule } from '@angular/material/icon';
 		CKEditorModule,
 		MatDialogModule,
 		DragDropModule,
-		MatIconModule
+		MatIconModule,
+		DirectivesModule
 	]
 })
 export class SiteInfoModule {}

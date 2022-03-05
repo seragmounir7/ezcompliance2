@@ -32,7 +32,7 @@ export class AddSiteInspectionCategoryComponent implements OnInit {
 					console.log('addCustomerForm=>', res);
 					//this.dialogRef.close('ok')
 					this.router.navigate([
-						'/admin/siteInfo/siteinspectioncategory'
+						'/admin/setting/siteinspectioncategory'
 					]);
 				},
 				(err) => {

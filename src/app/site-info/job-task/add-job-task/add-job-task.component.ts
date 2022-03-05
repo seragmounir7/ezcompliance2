@@ -75,7 +75,7 @@ export class AddJobTaskComponent implements OnInit {
 					this.dialogRef.close('ok');
 					return;
 				}
-				this.router.navigate(['/admin/siteInfo/jobTask']);
+				this.router.navigate(['/admin/setting/jobTask']);
 			},
 			(err) => {
 				if (this.dialogRef) {

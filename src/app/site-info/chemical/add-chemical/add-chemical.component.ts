@@ -52,7 +52,7 @@ export class AddChemicalComponent implements OnInit {
 		this.logicalFormInfo.addMultipleChemical(data).subscribe(
 			(data) => {
 				console.log('chemical=>', data);
-				this.router.navigate(['/admin/siteInfo/chemical']);
+				this.router.navigate(['/admin/setting/chemical']);
 			},
 			(err) => {
 				console.error(err);

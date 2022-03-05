@@ -16,6 +16,7 @@ import {
 	RouterEvent
 } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
 	selector: 'app-root',
@@ -41,13 +42,15 @@ export class AppComponent implements OnInit {
 		private spinner: NgxSpinnerService,
 		private authService: AuthService,
 		private sessionManagementService: SessionManagementService,
-		private renderer: Renderer2
+		private renderer: Renderer2,
+		private navigationService: NavigationService
 	) {
 		router.events.subscribe((event: RouterEvent) => {
 			this.navigationInterceptor(event);
 		});
 	}
 	ngOnInit(): void {
+		this.navigationService.startSaveHistory();
 		this.authService.loginData$.subscribe((data) => {
 			console.log('data', data);
 			if (data) {

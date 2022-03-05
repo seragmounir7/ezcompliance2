@@ -26,13 +26,13 @@ export class SpinnerInterceptor implements HttpInterceptor {
 			map((event: HttpEvent<unknown>) => {
 				if (event instanceof HttpResponse) {
 					// console.log('spinnerhide====================>', request.url);
-					void this.spinner.hide(undefined, 3000);
+					void this.spinner.hide();
 				}
 				return event;
 			}),
 			catchError((err: HttpErrorResponse) => {
 				if (err) {
-					void this.spinner.hide(undefined, 3000);
+					void this.spinner.hide();
 				}
 				return throwError(err);
 			})

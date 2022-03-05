@@ -56,7 +56,7 @@ export class AddSiteInspectionTopicComponent implements OnInit {
 					console.log('addCustomerForm=>', res);
 					//this.dialogRef.close('ok')
 					this.router.navigate([
-						'/admin/siteInfo/siteinspectiontopic/' + this.categoryId
+						'/admin/setting/siteinspectiontopic/' + this.categoryId
 					]);
 				},
 				(err) => {

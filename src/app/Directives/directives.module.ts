@@ -8,6 +8,7 @@ import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { TitleCaseDirective } from './title-case.directive';
 import { ChangeTypePipe } from './change-type.pipe';
 import { CheckImgExtPipe } from './check-img-ext.pipe';
+import { BackButtonDirective } from './back-button.directive';
 
 @NgModule({
 	declarations: [
@@ -18,7 +19,8 @@ import { CheckImgExtPipe } from './check-img-ext.pipe';
 		NumberDirective,
 		TitleCaseDirective,
 		ChangeTypePipe,
-		CheckImgExtPipe
+		CheckImgExtPipe,
+		BackButtonDirective
 	],
 	imports: [CommonModule],
 	exports: [
@@ -29,7 +31,8 @@ import { CheckImgExtPipe } from './check-img-ext.pipe';
 		NumberDirective,
 		TitleCaseDirective,
 		ChangeTypePipe,
-		CheckImgExtPipe
+		CheckImgExtPipe,
+		BackButtonDirective
 	]
 })
 export class DirectivesModule {}

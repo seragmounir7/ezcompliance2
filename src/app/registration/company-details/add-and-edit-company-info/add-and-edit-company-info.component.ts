@@ -24,6 +24,7 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
+import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -56,7 +57,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	StatesData: any = [];
 	selectedLogo: any;
 	userId: string;
-	empData: any[];
+	empData: UserValue[];
 	fields: string[] = [
 		'mailingAddress',
 		'mailingSubUrb',

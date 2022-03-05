@@ -44,6 +44,8 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
+import { UserValue } from 'src/app/utils/types/UserResponceTypes';
+import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
 
 @Component({
 	selector: 'app-risk-assessment-swms',
@@ -63,7 +65,7 @@ export class RiskAssessmentSWMSComponent
 	isPrint: Observable<any>;
 	isHistory: any;
 	returnTo: Observable<string>;
-	empData: any[] = [];
+
 	valueChangesArr: Observable<any>[];
 	filteredOptions1: Observable<any>;
 	tradeCategoryArr: any[];
@@ -83,7 +85,7 @@ export class RiskAssessmentSWMSComponent
 	PPEselection = [];
 	licenseAndQualification = [];
 	checkArray = [];
-	allJobNumbers = [];
+	allJobNumbers: ModifiedJobNumber[] = [];
 	allHazards = [];
 	allContrlActReq = [];
 	id: any;
@@ -214,6 +216,9 @@ export class RiskAssessmentSWMSComponent
 	selectedFile1 = [];
 	dateGet: Date;
 	setTime: any;
+	enable: boolean;
+	frequency: string;
+	empData: UserValue[];
 	@HostListener('window:afterprint', [])
 	function(): void {
 		console.log('Printing completed...');
@@ -307,6 +312,10 @@ export class RiskAssessmentSWMSComponent
 	}
 
 	ngOnInit(): void {
+		this.activatedRoute.queryParams.subscribe(({ enable, frequency }) => {
+			this.enable = Boolean(enable);
+			this.frequency = frequency as string;
+		});
 		this.getEmployeeData();
 		this.isHistory = this.router.url.includes('/riskAssessTable/history');
 		if (this.isHistory) {
@@ -374,25 +383,6 @@ export class RiskAssessmentSWMSComponent
 				this.setTime = time.toTimeString().slice(0, 5);
 				this.addEmployee();
 			});
-
-			this.filteredOptions1 = this.riskAssessmentFb.controls.employee1.valueChanges.pipe(
-				startWith({ fullName: '' }),
-				tap((value) =>
-					typeof value === 'object'
-						? ''
-						: typeof value === 'string'
-						? this.riskAssessmentFb.controls.employee1.setErrors({
-								incorrect: true
-						  })
-						: ''
-				),
-				map((value) =>
-					typeof value === 'string' ? value : value?.fullName
-				),
-				map((fullName) =>
-					fullName ? this._filter(fullName) : this.empData.slice()
-				)
-			);
 		}
 
 		this.riskAssessmentFb
@@ -642,8 +632,8 @@ export class RiskAssessmentSWMSComponent
 					postcode: item.postcode,
 					statesSWMS: item.stateId._id,
 					custConct: item.customerContact,
-					custConctPh: item.customerContactPhone,
-					custEmail: item.customerEmail,
+					custConctPh: item.contacts[0].phone,
+					custEmail: item.contacts[0].email,
 					jobNumber: this.riskAssessmentFb.get('jobNumber').value
 				});
 			}
@@ -1037,7 +1027,7 @@ export class RiskAssessmentSWMSComponent
 				console.log('getAllLicenceCat', res);
 				this.tradeCategoryArr = res.data;
 			});
-			this.jobTaskData = data.sort(function (a, b) {
+			this.jobTaskData = data; /* .sort(function (a, b) {
 				const titleA = a.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
 				const titleB = b.tradeCategoryId.title.toUpperCase(); // ignore upper and lowercase
 				if (titleA < titleB) {
@@ -1047,7 +1037,7 @@ export class RiskAssessmentSWMSComponent
 					return 1;
 				}
 				return 0;
-			});
+			}); */
 			console.log('jobTaskDetails=>', this.jobTaskData);
 			for (let i = 0; i < this.jobTaskData.length; i++) {
 				this.jobtask().push(this.jobtaskk(i));
@@ -1642,7 +1632,9 @@ export class RiskAssessmentSWMSComponent
 			statesArr: this.states,
 			JurisdictionDataArr: this.JurisdictionData,
 			employee1: employee1._id,
-			employeeList
+			employeeList,
+			enable: this.enable,
+			frequency: this.frequency
 		};
 		console.log('data', data);
 		if (this.id !== 'form') {
@@ -1700,6 +1692,24 @@ export class RiskAssessmentSWMSComponent
 	getEmployeeData() {
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
+			this.filteredOptions1 = this.riskAssessmentFb.controls.employee1.valueChanges.pipe(
+				startWith({ fullName: '' }),
+				tap((value) =>
+					typeof value === 'object'
+						? ''
+						: typeof value === 'string'
+						? this.riskAssessmentFb.controls.employee1.setErrors({
+								incorrect: true
+						  })
+						: ''
+				),
+				map((value) =>
+					typeof value === 'string' ? value : value?.fullName
+				),
+				map((fullName) =>
+					fullName ? this._filter(fullName) : this.empData.slice()
+				)
+			);
 		});
 	}
 

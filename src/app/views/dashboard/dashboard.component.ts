@@ -3,6 +3,8 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import { Observable } from 'rxjs';
 interface marker {
 	lat: number;
 	lng: number;
@@ -168,6 +170,7 @@ export class DashboardComponent implements OnInit {
 		'Moderate'
 	];
 	formShow: any;
+	isUser$: Observable<boolean>;
 
 	// events
 	public chartClicked({
@@ -215,9 +218,13 @@ export class DashboardComponent implements OnInit {
 			draggable: true
 		}
 	];
-	constructor(private spinner: NgxSpinnerService) {}
+	constructor(
+		private spinner: NgxSpinnerService,
+		private authService: AuthService
+	) {}
 
 	ngOnInit() {
+		this.isUser$ = this.authService.isUser$;
 		void this.spinner.show();
 		setTimeout(() => {
 			/** spinner ends after 5 seconds */

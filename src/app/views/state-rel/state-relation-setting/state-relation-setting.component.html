@@ -1,0 +1,30 @@
+<mat-tab-group
+	[selectedIndex]="selectedIndex$|async"
+	(selectedIndexChange)="selectedIndexChange($event)"
+>
+	<mat-tab label="States">
+		<ng-template matTabContent>
+			<app-states></app-states>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Jurisdiction">
+		<ng-template matTabContent>
+			<app-juridiction></app-juridiction>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Safety Legislation">
+		<ng-template matTabContent>
+			<app-safety-legislation></app-safety-legislation>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Regulator">
+		<ng-template matTabContent>
+			<app-regulator></app-regulator>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Set State Relation">
+		<ng-template matTabContent>
+			<app-set-state-relation></app-set-state-relation>
+		</ng-template>
+	</mat-tab>
+</mat-tab-group>

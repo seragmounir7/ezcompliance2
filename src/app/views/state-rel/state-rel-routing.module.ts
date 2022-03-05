@@ -9,9 +9,10 @@ import { CodeOfPractComponent } from './code-of-pract/code-of-pract.component';
 import { StatesComponent } from './states/states.component';
 import { SetStateRelationComponent } from './set-state-relation/set-state-relation.component';
 import { AddStateRelationComponent } from './set-state-relation/add-state-relation/add-state-relation.component';
+import { StateRelationSettingComponent } from './state-relation-setting/state-relation-setting.component';
 
 const routes: Routes = [
-	{ path: '', component: StateRelComponent },
+	{ path: 'stateRelationSetting', component: StateRelationSettingComponent },
 	{ path: 'juridiction', component: JuridictionComponent },
 	{ path: 'safetyLegislation', component: SafetyLegislationComponent },
 	{ path: 'codeOfPract', component: CodeOfPractComponent },

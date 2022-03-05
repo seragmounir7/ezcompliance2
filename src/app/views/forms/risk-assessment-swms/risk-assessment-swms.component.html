@@ -336,10 +336,10 @@
 								>
 									<option selected hidden>Select</option>
 									<option
+										*ngFor="let mang of empData"
 										[value]="mang._id"
-										*ngFor="let mang of projectMang"
 									>
-										{{mang.title}}
+										{{mang.fullName}}
 									</option>
 								</select>
 								<span
@@ -1087,10 +1087,10 @@
 									>
 										<option selected hidden>Select</option>
 										<option
+											*ngFor="let mang of empData"
 											[value]="mang._id"
-											*ngFor="let mang of projectMang"
 										>
-											{{mang.title}}
+											{{mang.fullName}}
 										</option>
 									</select>
 									<span
@@ -2113,10 +2113,10 @@
 						>
 							<option selected hidden>Select</option>
 							<option
+								*ngFor="let mang of empData"
 								[value]="mang._id"
-								*ngFor="let mang of projectMang"
 							>
-								{{mang.title}}
+								{{mang.fullName}}
 							</option>
 						</select>
 					</div>

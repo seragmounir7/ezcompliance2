@@ -24,7 +24,6 @@ export class JobNumberComponent implements OnInit {
 	displayedColumns: string[] = [
 		'jobNumber',
 		'siteName',
-		'streetNumber',
 		'streetAddress',
 		'suburb',
 		'state',

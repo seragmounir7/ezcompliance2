@@ -42,12 +42,12 @@ export class NavItems {
 					route: './dynamic/dynamicFormsList',
 					hasAccess: true
 				},
-				{
-					displayedName: 'Logical Forms',
-					icon: 'logical',
-					route: './forms',
-					hasAccess: true
-				},
+				// {
+				// 	displayedName: 'Logical Forms',
+				// 	icon: 'logical',
+				// 	route: './forms',
+				// 	hasAccess: true
+				// },
 				{
 					displayedName: 'Form List',
 					icon: 'fillConfig',
@@ -73,28 +73,28 @@ export class NavItems {
 					route: './registration/companyDetail',
 					hasAccess: true
 				},
-				{
-					displayedName: 'Roles',
-					icon: 'roles',
-					route: './roleMangement',
-					hasAccess: true
-				},
-				{
-					displayedName: 'Employee Details',
-					icon: 'employee',
-					route: './registration/employeeRegistration',
-					hasAccess: true
-				},
-				{
-					displayedName: 'Subcontractor Details',
-					icon: 'subcontractor',
-					route: './registration/subcontract',
-					hasAccess: true
-				},
+				// {
+				// 	displayedName: 'Roles',
+				// 	icon: 'roles',
+				// 	route: './roleMangement',
+				// 	hasAccess: true
+				// },
+				// {
+				// 	displayedName: 'Employee Details',
+				// 	icon: 'employee',
+				// 	route: './registration/employeeRegistration',
+				// 	hasAccess: true
+				// },
+				// {
+				// 	displayedName: 'Subcontractor Details',
+				// 	icon: 'subcontractor',
+				// 	route: './registration/subcontract',
+				// 	hasAccess: true
+				// },
 				{
 					displayedName: 'Client Terms And Conditon ',
 					icon: 'terms',
-					route: './siteInfo/termsAndcondition',
+					route: './setting/termsAndcondition',
 					hasAccess: true
 				}
 			],
@@ -107,151 +107,154 @@ export class NavItems {
 				{
 					displayedName: 'State Relation',
 					icon: 'stateRelation',
-					childItem: [
-						{
-							displayedName: 'States',
-							icon: 'state',
-							route: './stateRel/states',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Jurisdiction',
-							icon: 'jurisdiction',
-							route: './stateRel/juridiction',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Safety Legislation',
-							icon: 'safety_legislation',
-							route: './stateRel/safetyLegislation',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Regulator',
-							icon: 'regulator',
-							route: './stateRel/regulator',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Set State Relation',
-							icon: 'state',
-							route: './stateRel/setState',
-							hasAccess: true
-						}
-					],
+					route: './setting/stateRelationSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'States',
+					// 		icon: 'state',
+					// 		route: './stateRel/states',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Jurisdiction',
+					// 		icon: 'jurisdiction',
+					// 		route: './stateRel/juridiction',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Safety Legislation',
+					// 		icon: 'safety_legislation',
+					// 		route: './stateRel/safetyLegislation',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Regulator',
+					// 		icon: 'regulator',
+					// 		route: './stateRel/regulator',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Set State Relation',
+					// 		icon: 'state',
+					// 		route: './stateRel/setState',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				},
 
 				{
 					displayedName: 'Risk Assessment ',
 					icon: 'riskAssessment',
-					childItem: [
-						{
-							displayedName: 'Add Instruction',
-							icon: 'addInstruction',
-							route: './siteInfo/instructions/riskAssess',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Risk-Level',
-							icon: 'riskLevel',
-							route: './siteInfo/riskLevel',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Residual Risk Level',
-							icon: 'riskLevel',
-							route: './siteInfo/residual',
-							hasAccess: true
-						},
-						{
-							displayedName: 'High Risk Construct',
-							icon: 'highRisk',
-							route: './siteInfo/highRisk',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Code Of Practice',
-							icon: 'cop',
-							route: './siteInfo/codeOfpract',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Hazards',
-							icon: 'hazard',
-							route: './siteInfo/hazards',
-							hasAccess: true
-						},
+					route: './setting/riskAssessmentSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'Add Instruction',
+					// 		icon: 'addInstruction',
+					// 		route: './siteInfo/instructions/riskAssess',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Risk-Level',
+					// 		icon: 'riskLevel',
+					// 		route: './siteInfo/riskLevel',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Residual Risk Level',
+					// 		icon: 'riskLevel',
+					// 		route: './siteInfo/residual',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'High Risk Construct',
+					// 		icon: 'highRisk',
+					// 		route: './siteInfo/highRisk',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Code Of Practice',
+					// 		icon: 'cop',
+					// 		route: './siteInfo/codeOfpract',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Hazards',
+					// 		icon: 'hazard',
+					// 		route: './siteInfo/hazards',
+					// 		hasAccess: true
+					// 	},
 
-						{
-							displayedName: 'Hazardous Substances',
-							icon: 'chemical',
-							route: './siteInfo/chemical',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Job Task',
-							icon: 'job_task',
-							route: './siteInfo/jobTask',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Licence & Qualification',
-							icon: 'license',
-							route: './siteInfo/licenceAndQual',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Control And Action',
-							icon: 'controlAndAction',
-							route: './siteInfo/contrlActReq',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Set Relation',
-							icon: 'setRelation',
-							route: './confiLogi/setLogic',
-							hasAccess: true
-						}
-					],
+					// 	{
+					// 		displayedName: 'Hazardous Substances',
+					// 		icon: 'chemical',
+					// 		route: './siteInfo/chemical',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Job Task',
+					// 		icon: 'job_task',
+					// 		route: './siteInfo/jobTask',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Licence & Qualification',
+					// 		icon: 'license',
+					// 		route: './siteInfo/licenceAndQual',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Control And Action',
+					// 		icon: 'controlAndAction',
+					// 		route: './siteInfo/contrlActReq',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Set Relation',
+					// 		icon: 'setRelation',
+					// 		route: './confiLogi/setLogic',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				},
 
 				{
 					displayedName: 'Notifiable Accident',
 					icon: 'notifiableAccident',
-					childItem: [
-						{
-							displayedName: 'Accident Instruction',
-							icon: 'addInstruction',
-							route: './siteInfo/instructions/accident',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Nature Of Incident',
-							icon: 'natureOfIncident',
-							route: './siteInfo/natureOfIncident',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Type Of Incident',
-							icon: 'natureOfIncident',
-							route: './siteInfo/typeOfIncident',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Changes Made',
-							icon: 'changesMade',
-							route: './siteInfo/changesMade',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Root Cause Of Incident',
-							icon: 'rootCause',
-							route: './siteInfo/rootCauseOfIncident',
-							hasAccess: true
-						}
-					],
+					route: './setting/notifiableAccidentSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'Accident Instruction',
+					// 		icon: 'addInstruction',
+					// 		route: './siteInfo/instructions/accident',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Nature Of Incident',
+					// 		icon: 'natureOfIncident',
+					// 		route: './siteInfo/natureOfIncident',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Type Of Incident',
+					// 		icon: 'natureOfIncident',
+					// 		route: './siteInfo/typeOfIncident',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Changes Made',
+					// 		icon: 'changesMade',
+					// 		route: './siteInfo/changesMade',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Root Cause Of Incident',
+					// 		icon: 'rootCause',
+					// 		route: './siteInfo/rootCauseOfIncident',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				},
 				{
@@ -263,76 +266,77 @@ export class NavItems {
 				{
 					displayedName: 'Site Inspection Category',
 					icon: 'category',
-					route: './siteInfo/siteinspectioncategory',
+					route: './setting/siteinspectioncategory',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Dynamic Form Categories',
 					icon: 'category',
-					route: './siteInfo/dynamicFormCategories',
+					route: './setting/dynamicFormCategories',
 					hasAccess: true
 				},
 				{
 					displayedName: 'General Form Settings',
 					icon: 'genFormSet',
-					childItem: [
-						{
-							displayedName: 'Set Job Number',
-							icon: 'jobNumber',
-							route: './confiLogi/setJobNumber',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Site',
-							icon: 'site',
-							route: './siteInfo/addSite',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Customer',
-							icon: 'customer',
-							route: './siteInfo/addCustomer',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Project Manager',
-							icon: 'customer',
-							route: './siteInfo/projMang',
-							hasAccess: true
-						},
+					route: './setting/generalFormSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'Set Job Number',
+					// 		icon: 'jobNumber',
+					// 		route: './confiLogi/setJobNumber',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Site',
+					// 		icon: 'site',
+					// 		route: './siteInfo/addSite',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Customer',
+					// 		icon: 'customer',
+					// 		route: './siteInfo/addCustomer',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Project Manager',
+					// 		icon: 'customer',
+					// 		route: './siteInfo/projMang',
+					// 		hasAccess: true
+					// 	},
 
-						{
-							displayedName: 'Trade Category',
-							icon: 'tradeCategory',
-							route: './siteInfo/licenceCat',
-							hasAccess: true
-						},
-						{
-							displayedName: 'PPE Selection',
-							icon: 'PPESelection',
-							route: './siteInfo/ppeSel',
-							hasAccess: true
-						},
+					// 	{
+					// 		displayedName: 'Trade Category',
+					// 		icon: 'tradeCategory',
+					// 		route: './siteInfo/licenceCat',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'PPE Selection',
+					// 		icon: 'PPESelection',
+					// 		route: './siteInfo/ppeSel',
+					// 		hasAccess: true
+					// 	},
 
-						{
-							displayedName: 'Staff',
-							icon: 'staff',
-							route: './siteInfo/staff',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Manager',
-							icon: 'manager',
-							route: './siteInfo/manager',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Whs-Manager',
-							icon: 'manager',
-							route: './siteInfo/WHS-Manager',
-							hasAccess: true
-						}
-					],
+					// 	{
+					// 		displayedName: 'Staff',
+					// 		icon: 'staff',
+					// 		route: './siteInfo/staff',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Manager',
+					// 		icon: 'manager',
+					// 		route: './siteInfo/manager',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Whs-Manager',
+					// 		icon: 'manager',
+					// 		route: './siteInfo/WHS-Manager',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				}
 			],
@@ -473,12 +477,12 @@ export class NavItems {
 					route: './dynamic/dynamicFormsList',
 					hasAccess: true
 				},
-				{
-					displayedName: 'Logical Forms',
-					icon: 'logical',
-					route: './forms',
-					hasAccess: true
-				},
+				// {
+				// 	displayedName: 'Logical Forms',
+				// 	icon: 'logical',
+				// 	route: './forms',
+				// 	hasAccess: true
+				// },
 				{
 					displayedName: 'Form List',
 					icon: 'fillConfig',
@@ -521,12 +525,6 @@ export class NavItems {
 					icon: 'subcontractor',
 					route: './registration/subcontract',
 					hasAccess: true
-				},
-				{
-					displayedName: 'Client Terms And Conditon ',
-					icon: 'terms',
-					route: './siteInfo/termsAndcondition',
-					hasAccess: true
 				}
 			],
 			hasAccess: true
@@ -538,150 +536,154 @@ export class NavItems {
 				{
 					displayedName: 'State Relation',
 					icon: 'stateRelation',
-					childItem: [
-						{
-							displayedName: 'States',
-							icon: 'state',
-							route: './stateRel/states',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Jurisdiction',
-							icon: 'jurisdiction',
-							route: './stateRel/juridiction',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Safety Legislation',
-							icon: 'safety_legislation',
-							route: './stateRel/safetyLegislation',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Regulator',
-							icon: 'regulator',
-							route: './stateRel/regulator',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Set State Relation',
-							icon: 'state',
-							route: './stateRel/setState',
-							hasAccess: true
-						}
-					],
+					route: './setting/stateRelationSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'States',
+					// 		icon: 'state',
+					// 		route: './stateRel/states',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Jurisdiction',
+					// 		icon: 'jurisdiction',
+					// 		route: './stateRel/juridiction',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Safety Legislation',
+					// 		icon: 'safety_legislation',
+					// 		route: './stateRel/safetyLegislation',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Regulator',
+					// 		icon: 'regulator',
+					// 		route: './stateRel/regulator',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Set State Relation',
+					// 		icon: 'state',
+					// 		route: './stateRel/setState',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				},
 
 				{
 					displayedName: 'Risk Assessment ',
 					icon: 'riskAssessment',
-					childItem: [
-						{
-							displayedName: 'Add Instruction',
-							icon: 'addInstruction',
-							route: './siteInfo/instructions/riskAssess',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Risk-Level',
-							icon: 'riskLevel',
-							route: './siteInfo/riskLevel',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Residual Risk Level',
-							icon: 'riskLevel',
-							route: './siteInfo/residual',
-							hasAccess: true
-						},
-						{
-							displayedName: 'High Risk Construct',
-							icon: 'highRisk',
-							route: './siteInfo/highRisk',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Code Of Practice',
-							icon: 'cop',
-							route: './siteInfo/codeOfpract',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Hazards',
-							icon: 'hazard',
-							route: './siteInfo/hazards',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Hazardous Substances',
-							icon: 'chemical',
-							route: './siteInfo/chemical',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Job Task',
-							icon: 'job_task',
-							route: './siteInfo/jobTask',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Licence & Qualification',
-							icon: 'license',
-							route: './siteInfo/licenceAndQual',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Control And Action',
-							icon: 'controlAndAction',
-							route: './siteInfo/contrlActReq',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Set Relation',
-							icon: 'setRelation',
-							route: './confiLogi/setLogic',
-							hasAccess: true
-						}
-					],
+					route: './setting/riskAssessmentSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'Add Instruction',
+					// 		icon: 'addInstruction',
+					// 		route: './siteInfo/instructions/riskAssess',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Risk-Level',
+					// 		icon: 'riskLevel',
+					// 		route: './siteInfo/riskLevel',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Residual Risk Level',
+					// 		icon: 'riskLevel',
+					// 		route: './siteInfo/residual',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'High Risk Construct',
+					// 		icon: 'highRisk',
+					// 		route: './siteInfo/highRisk',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Code Of Practice',
+					// 		icon: 'cop',
+					// 		route: './siteInfo/codeOfpract',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Hazards',
+					// 		icon: 'hazard',
+					// 		route: './siteInfo/hazards',
+					// 		hasAccess: true
+					// 	},
+
+					// 	{
+					// 		displayedName: 'Hazardous Substances',
+					// 		icon: 'chemical',
+					// 		route: './siteInfo/chemical',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Job Task',
+					// 		icon: 'job_task',
+					// 		route: './siteInfo/jobTask',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Licence & Qualification',
+					// 		icon: 'license',
+					// 		route: './siteInfo/licenceAndQual',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Control And Action',
+					// 		icon: 'controlAndAction',
+					// 		route: './siteInfo/contrlActReq',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Set Relation',
+					// 		icon: 'setRelation',
+					// 		route: './confiLogi/setLogic',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				},
 
 				{
 					displayedName: 'Notifiable Accident',
 					icon: 'notifiableAccident',
-					childItem: [
-						{
-							displayedName: 'Accident Instruction',
-							icon: 'addInstruction',
-							route: './siteInfo/instructions/accident',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Nature Of Incident',
-							icon: 'natureOfIncident',
-							route: './siteInfo/natureOfIncident',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Type Of Incident',
-							icon: 'natureOfIncident',
-							route: './siteInfo/typeOfIncident',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Changes Made',
-							icon: 'changesMade',
-							route: './siteInfo/changesMade',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Root Cause Of Incident',
-							icon: 'rootCause',
-							route: './siteInfo/rootCauseOfIncident',
-							hasAccess: true
-						}
-					],
+					route: './setting/notifiableAccidentSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'Accident Instruction',
+					// 		icon: 'addInstruction',
+					// 		route: './siteInfo/instructions/accident',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Nature Of Incident',
+					// 		icon: 'natureOfIncident',
+					// 		route: './siteInfo/natureOfIncident',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Type Of Incident',
+					// 		icon: 'natureOfIncident',
+					// 		route: './siteInfo/typeOfIncident',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Changes Made',
+					// 		icon: 'changesMade',
+					// 		route: './siteInfo/changesMade',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Root Cause Of Incident',
+					// 		icon: 'rootCause',
+					// 		route: './siteInfo/rootCauseOfIncident',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				},
 				{
@@ -693,76 +695,77 @@ export class NavItems {
 				{
 					displayedName: 'Site Inspection Category',
 					icon: 'category',
-					route: './siteInfo/siteinspectioncategory',
+					route: './setting/siteinspectioncategory',
 					hasAccess: true
 				},
 				{
 					displayedName: 'Dynamic Form Categories',
 					icon: 'category',
-					route: './siteInfo/dynamicFormCategories',
+					route: './setting/dynamicFormCategories',
 					hasAccess: true
 				},
 				{
 					displayedName: 'General Form Settings',
 					icon: 'genFormSet',
-					childItem: [
-						{
-							displayedName: 'Set Job Number',
-							icon: 'jobNumber',
-							route: './confiLogi/setJobNumber',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Site',
-							icon: 'site',
-							route: './siteInfo/addSite',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Customer',
-							icon: 'customer',
-							route: './siteInfo/addCustomer',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Project Manager',
-							icon: 'customer',
-							route: './siteInfo/projMang',
-							hasAccess: true
-						},
+					route: './setting/generalFormSetting',
+					// childItem: [
+					// 	{
+					// 		displayedName: 'Set Job Number',
+					// 		icon: 'jobNumber',
+					// 		route: './confiLogi/setJobNumber',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Site',
+					// 		icon: 'site',
+					// 		route: './siteInfo/addSite',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Customer',
+					// 		icon: 'customer',
+					// 		route: './siteInfo/addCustomer',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Project Manager',
+					// 		icon: 'customer',
+					// 		route: './siteInfo/projMang',
+					// 		hasAccess: true
+					// 	},
 
-						{
-							displayedName: 'Trade Category',
-							icon: 'tradeCategory',
-							route: './siteInfo/licenceCat',
-							hasAccess: true
-						},
-						{
-							displayedName: 'PPE Selection',
-							icon: 'PPESelection',
-							route: './siteInfo/ppeSel',
-							hasAccess: true
-						},
+					// 	{
+					// 		displayedName: 'Trade Category',
+					// 		icon: 'tradeCategory',
+					// 		route: './siteInfo/licenceCat',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'PPE Selection',
+					// 		icon: 'PPESelection',
+					// 		route: './siteInfo/ppeSel',
+					// 		hasAccess: true
+					// 	},
 
-						{
-							displayedName: 'Staff',
-							icon: 'staff',
-							route: './siteInfo/staff',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Manager',
-							icon: 'manager',
-							route: './siteInfo/manager',
-							hasAccess: true
-						},
-						{
-							displayedName: 'Whs-Manager',
-							icon: 'manager',
-							route: './siteInfo/WHS-Manager',
-							hasAccess: true
-						}
-					],
+					// 	{
+					// 		displayedName: 'Staff',
+					// 		icon: 'staff',
+					// 		route: './siteInfo/staff',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Manager',
+					// 		icon: 'manager',
+					// 		route: './siteInfo/manager',
+					// 		hasAccess: true
+					// 	},
+					// 	{
+					// 		displayedName: 'Whs-Manager',
+					// 		icon: 'manager',
+					// 		route: './siteInfo/WHS-Manager',
+					// 		hasAccess: true
+					// 	}
+					// ],
 					hasAccess: true
 				}
 			],
@@ -786,12 +789,12 @@ export class NavItems {
 					route: './dynamic/dynamicFormsList',
 					hasAccess: true
 				},
-				{
-					displayedName: 'Logical Forms',
-					icon: 'logical',
-					route: './forms',
-					hasAccess: true
-				},
+				// {
+				// 	displayedName: 'Logical Forms',
+				// 	icon: 'logical',
+				// 	route: './forms',
+				// 	hasAccess: true
+				// },
 				{
 					displayedName: 'Form List',
 					icon: 'fillConfig',

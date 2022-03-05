@@ -32,6 +32,10 @@ span.spinner {
 	-webkit-animation: spinner 1s linear infinite;
 }
 
+.zindex {
+	z-index: 1000;
+}
+
 @keyframes spinner {
 	to {
 		transform: rotate(1turn);
