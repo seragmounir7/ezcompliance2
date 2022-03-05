@@ -41,7 +41,7 @@ export class EditSiteInspectionCategoryComponent implements OnInit {
 					console.log('addCustomerForm=>', res);
 					this.dialogRef.close('true');
 					this.router.navigate([
-						'/admin/siteInfo/siteinspectioncategory'
+						'/admin/setting/siteinspectioncategory'
 					]);
 				},
 				(err) => {

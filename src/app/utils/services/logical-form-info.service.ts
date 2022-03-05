@@ -6,6 +6,13 @@ import { RegulatorResponce } from '../types/Regulator';
 import { Observable, of } from 'rxjs';
 import { JurisDictionResponce } from '../types/Jurisdiction';
 import { SafetyLeslationResponce } from '../types/SafetyLegislation';
+import { SiteResponceTypes } from '../types/SiteResponceTypes';
+import { CustomerResponceTypes } from '../types/CustomerResponceTypes';
+import {
+	JobNumberResponceTypes,
+	ModifiedJobNumber,
+	OriginalJobNumber
+} from '../types/JobNumberResponceTypes';
 
 @Injectable({
 	providedIn: 'root'
@@ -398,11 +405,11 @@ export class LogicalFormInfoService {
 	}
 	///project manager end/////
 	///job no/////
-	getAllSite(field = '', value = '') {
+	getAllSite(field = '', value = ''): Observable<SiteResponceTypes> {
 		if (value == '') {
 			field = '';
 		}
-		return this.https.get(
+		return this.https.get<SiteResponceTypes>(
 			this.apiUrl + `site/getAll?field=${field}&value=${value}`
 		);
 	}
@@ -422,11 +429,11 @@ export class LogicalFormInfoService {
 	///site end/////
 
 	///customer strat/////
-	getAllCustomer(field = '', value = '') {
+	getAllCustomer(field = '', value = ''): Observable<CustomerResponceTypes> {
 		if (value == '') {
 			field = '';
 		}
-		return this.https.get(
+		return this.https.get<CustomerResponceTypes>(
 			this.apiUrl + `customer/getAll?field=${field}&value=${value}`
 		);
 	}
@@ -442,13 +449,33 @@ export class LogicalFormInfoService {
 	///customer end/////
 
 	///job number start/////
-	getAllJobNumber(field = '', value = '') {
+	getAllJobNumber(
+		field = '',
+		value = ''
+	): Observable<JobNumberResponceTypes> {
 		if (value == '') {
 			field = '';
 		}
-		return this.https.get(
-			this.apiUrl + `jobNumber/getAll?field=${field}&value=${value}`
-		);
+		return this.https
+			.get<JobNumberResponceTypes>(
+				this.apiUrl + `jobNumber/getAll?field=${field}&value=${value}`
+			)
+			.pipe(
+				map((res) => {
+					res.data = (res.data as OriginalJobNumber[]).map((obj) => {
+						const { customerId, siteId, ...rest } = obj;
+
+						const modifiedObj: ModifiedJobNumber = {
+							...customerId,
+							...siteId,
+							...rest
+						};
+
+						return modifiedObj;
+					});
+					return res;
+				})
+			);
 	}
 	addJobNumber(data: JobNumber) {
 		return this.https.post(this.apiUrl + 'jobNumber/add', data);
@@ -1431,19 +1458,21 @@ export interface Customer {
 	customerEmail: string;
 }
 
-export interface JobNumber {
-	arrObj: ArrObj[];
-}
+// export interface JobNumber {
+// 	arrObj: ArrObj[];
+// }
 
-export interface ArrObj {
+export interface JobNumber {
 	jobNumber?: string;
-	siteName: string;
-	streetAddress: string;
-	suburb: string;
-	postcode: string;
+	customerId: string;
+	siteId: string;
 	stateId: string;
-	customerName: string;
-	customerContact: string;
-	customerContactPhone: string;
-	customerEmail: string;
+	// siteName: string;
+	// streetAddress: string;
+	// suburb: string;
+	// postcode: string;
+	// customerName: string;
+	// customerContact: string;
+	// customerContactPhone: string;
+	// customerEmail: string;
 }

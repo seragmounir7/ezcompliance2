@@ -67,7 +67,7 @@ export class AddingCustComponent implements OnInit {
 						return;
 					}
 					//this.dialogRef.close('ok')
-					this.router.navigate(['/admin/siteInfo/addCustomer']);
+					this.router.navigate(['/admin/setting/addCustomer']);
 				},
 				(err) => {
 					console.error(err);

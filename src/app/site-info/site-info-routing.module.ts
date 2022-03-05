@@ -58,8 +58,23 @@ import { EditWhsManagerComponent } from './whs-manager/edit-whs-manager/edit-whs
 import { DynamicFormCategoriesComponent } from './dynamic-form-categories/dynamic-form-categories.component';
 import { AddFormCategoriesComponent } from './dynamic-form-categories/add-form-categories/add-form-categories.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { RiskAssessmentSettingComponent } from './risk-assessment-setting/risk-assessment-setting.component';
+import { NotifiableAccidentSettingComponent } from './notifiable-accident/notifiable-accident.component';
+import { GeneralFormSettingComponent } from './general-form-setting/general-form-setting.component';
 
 const routes: Routes = [
+	{
+		path: 'riskAssessmentSetting',
+		component: RiskAssessmentSettingComponent
+	},
+	{
+		path: 'notifiableAccidentSetting',
+		component: NotifiableAccidentSettingComponent
+	},
+	{
+		path: 'generalFormSetting',
+		component: GeneralFormSettingComponent
+	},
 	{
 		path: 'addSite',
 		component: AddSiteInfoComponent,

@@ -62,7 +62,7 @@ export class AddContrActComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
-				this.router.navigate(['/admin/siteInfo/contrlActReq']);
+				this.router.navigate(['/admin/setting/contrlActReq']);
 			},
 			(err) => {
 				console.error(err);

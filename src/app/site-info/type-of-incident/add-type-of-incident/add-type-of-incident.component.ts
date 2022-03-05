@@ -54,7 +54,7 @@ export class AddTypeOfIncidentComponent implements OnInit {
 		this.logicalFormInfo.addMultipleTypeOfIncident(data).subscribe(
 			(data) => {
 				console.log('nature=>', data);
-				this.router.navigate(['/admin/siteInfo/typeOfIncident']);
+				this.router.navigate(['/admin/setting/typeOfIncident']);
 			},
 			(err) => {
 				console.error(err);

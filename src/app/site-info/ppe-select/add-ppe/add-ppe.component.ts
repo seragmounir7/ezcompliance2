@@ -53,7 +53,7 @@ export class AddPPEComponent implements OnInit {
 		this.logicalFormInfo.addMultiplePPE(data).subscribe(
 			(data) => {
 				console.log('PPE=>', data);
-				this.router.navigate(['/admin/siteInfo/ppeSel']);
+				this.router.navigate(['/admin/setting/ppeSel']);
 			},
 			(err) => {
 				console.error(err);

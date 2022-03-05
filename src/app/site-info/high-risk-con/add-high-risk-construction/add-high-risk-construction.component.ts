@@ -98,7 +98,7 @@ export class AddHighRiskConstructionComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
-				this.router.navigate(['/admin/siteInfo/highRisk']);
+				this.router.navigate(['/admin/setting/highRisk']);
 			},
 			(err) => {
 				console.error(err);

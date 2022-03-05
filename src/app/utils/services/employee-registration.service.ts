@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map, tap } from 'rxjs/operators';
+import { UserValue, UserResponce } from '../types/UserResponceTypes';
+import { Observable } from 'rxjs';
 @Injectable({
 	providedIn: 'root'
 })
@@ -19,11 +21,13 @@ export class EmployeeRegistrationService {
 				})
 			);
 	}
-	getAllEmployeeInfo() {
+	getAllEmployeeInfo(): Observable<UserValue[]> {
 		return this.https
-			.get(this.apiUrl + 'authentication/get/all/created/employees')
+			.get<UserResponce>(
+				this.apiUrl + 'authentication/get/all/created/employees'
+			)
 			.pipe(
-				map((res: any) => {
+				map((res) => {
 					return res.data.map((item) => {
 						item.fullName = `${item.firstName} ${item.lastName}`;
 						return item;

@@ -22,6 +22,7 @@ import { AddAndEditStatesComponent } from './states/add-and-edit-states/add-and-
 import { SetStateRelationComponent } from './set-state-relation/set-state-relation.component';
 import { AddStateRelationComponent } from './set-state-relation/add-state-relation/add-state-relation.component';
 import { MatSortModule } from '@angular/material/sort';
+import { StateRelationSettingComponent } from './state-relation-setting/state-relation-setting.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { MatSortModule } from '@angular/material/sort';
 		StatesComponent,
 		AddAndEditStatesComponent,
 		SetStateRelationComponent,
-		AddStateRelationComponent
+		AddStateRelationComponent,
+		StateRelationSettingComponent
 	],
 	imports: [
 		MatSortModule,

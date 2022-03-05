@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
 	selector: 'app-add-manager',
@@ -15,7 +16,8 @@ export class AddManagerComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private router: Router,
-		private logicalFormInfo: LogicalFormInfoService
+		private logicalFormInfo: LogicalFormInfoService,
+		private navigationService: NavigationService
 	) {
 		this.ManagerDetails = this.fb.group({
 			// mode:"JobTask",
@@ -61,7 +63,7 @@ export class AddManagerComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
-				this.router.navigate(['/admin/siteInfo/manager']);
+				this.router.navigateByUrl(this.navigationService.returnUrl);
 			},
 			(err) => {
 				console.error(err);

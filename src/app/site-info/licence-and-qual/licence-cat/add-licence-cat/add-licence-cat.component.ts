@@ -51,7 +51,7 @@ export class AddLicenceCatComponent implements OnInit {
 		this.logicalFormInfo.addLicenceCat(data).subscribe(
 			(data) => {
 				console.log('JOBTask=>', data);
-				this.router.navigate(['/admin/siteInfo/licenceCat']);
+				this.router.navigate(['/admin/setting/licenceCat']);
 			},
 			(err) => {
 				console.error(err);

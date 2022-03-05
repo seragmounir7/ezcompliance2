@@ -262,7 +262,7 @@ export class AddEmployeeComponent implements OnInit {
 				porfPosition: data.data.position,
 				porfDepartment: data.data.department,
 				porfPhone: data.data.phone,
-				porfMobile: data.data.mobile,
+				porfMobile: data.data.mobileNumber,
 
 				roleId: data.data.roleId,
 				reportingTo: data.data.reportingTo,
@@ -705,7 +705,7 @@ export class AddEmployeeComponent implements OnInit {
 			title: this.empDetails.get('profTitie').value,
 			email: this.empDetails.get('porfEmail').value,
 			position: this.empDetails.get('porfPosition').value,
-			mobile: this.empDetails.get('porfMobile').value,
+			mobileNumber: this.empDetails.get('porfMobile').value,
 			roleId: this.empDetails.get('roleId').value,
 			// reportingTo: this.empDetails.get('reportingTo').value,
 
@@ -806,7 +806,7 @@ export class AddEmployeeComponent implements OnInit {
 			title: this.empDetails.get('profTitie').value,
 			email: this.empDetails.get('porfEmail').value,
 			position: this.empDetails.get('porfPosition').value,
-			mobile: this.empDetails.get('porfMobile').value,
+			mobileNumber: this.empDetails.get('porfMobile').value,
 			roleId: this.empDetails.get('roleId').value,
 			// designation: this.empDetails.get('porfEmployee').value,
 			// deviceToken: '',porfPostalCode

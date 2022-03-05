@@ -54,7 +54,7 @@ export class AddAndEditNatureIncidentComponent implements OnInit {
 		this.logicalFormInfo.addMultipleNatOfInc(data).subscribe(
 			(data) => {
 				console.log('nature=>', data);
-				this.router.navigate(['/admin/siteInfo/natureOfIncident']);
+				this.router.navigate(['/admin/setting/natureOfIncident']);
 			},
 			(err) => {
 				console.error(err);

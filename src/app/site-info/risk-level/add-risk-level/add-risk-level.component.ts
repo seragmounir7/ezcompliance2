@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
 	selector: 'app-add-risk-level',
@@ -12,6 +13,7 @@ export class AddRiskLevelComponent implements OnInit {
 	addRiskForm: FormGroup;
 	numberOfLineBreaks: any;
 	constructor(
+		public nav: NavigationService,
 		private fb: FormBuilder,
 		private logicalFormInfo: LogicalFormInfoService,
 		private router: Router
@@ -52,7 +54,7 @@ export class AddRiskLevelComponent implements OnInit {
 		this.logicalFormInfo.addMultipleRiskLevel(data).subscribe(
 			(data) => {
 				console.log('chemical=>', data);
-				this.router.navigate(['/admin/siteInfo/riskLevel']);
+				this.router.navigate(['/admin/setting/riskLevel']);
 			},
 			(err) => {
 				console.error(err);

@@ -44,6 +44,28 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 		MatButtonModule,
 		AutosizeModule,
 		CKEditorModule
+	],
+	exports: [
+		ConfiLogiComponent,
+		SetLogicComponent,
+		JobNumberComponent,
+		CreateJobNoComponent,
+		SetRelationComponent,
+		AddItemComponent,
+		TestLogicComponent,
+		AddJobTaskComponent,
+		HazardTreatmentComponent,
+		AddHazardRelationComponent,
+		CommonModule,
+		ConfiLogiRoutingModule,
+		SharedModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatStepperModule,
+		MatIconModule,
+		MatButtonModule,
+		AutosizeModule,
+		CKEditorModule
 	]
 })
 export class ConfiLogiModule {}

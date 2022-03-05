@@ -1,0 +1,50 @@
+<mat-tab-group
+	[selectedIndex]="selectedIndex$|async"
+	(selectedIndexChange)="selectedIndexChange($event)"
+>
+	<mat-tab *ngIf="!(isAdmin$|async)" label="Set Job Number">
+		<ng-template matTabContent>
+			<app-job-number></app-job-number>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Site">
+		<ng-template matTabContent>
+			<app-add-site-info></app-add-site-info>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Customer">
+		<ng-template matTabContent>
+			<app-add-customer></app-add-customer>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Project Manager">
+		<ng-template matTabContent>
+			<app-project-manager></app-project-manager>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Trade Category">
+		<ng-template matTabContent>
+			<app-licence-cat></app-licence-cat>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="PPE Selection">
+		<ng-template matTabContent>
+			<app-ppe-select></app-ppe-select>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Staff">
+		<ng-template matTabContent>
+			<app-staff></app-staff>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Manager">
+		<ng-template matTabContent>
+			<app-manager></app-manager>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Whs-Manager">
+		<ng-template matTabContent>
+			<app-whs-manager></app-whs-manager>
+		</ng-template>
+	</mat-tab>
+</mat-tab-group>

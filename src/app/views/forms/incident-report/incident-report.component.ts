@@ -33,6 +33,7 @@ import { Observable, Subscription } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 @Component({
 	selector: 'app-incident-report',
 	templateUrl: './incident-report.component.html',
@@ -44,7 +45,7 @@ export class IncidentReportComponent
 	IncidentReport: FormGroup;
 	fileData: any;
 	data: any;
-	staff: any;
+	staff: UserValue[];
 	fileArr = [];
 	imgArr = [];
 	fileObj = [];
@@ -725,7 +726,7 @@ export class IncidentReportComponent
 	}
 	getAllStaff() {
 		this;
-		this.employee.getAllEmployeeInfo().subscribe((res: any) => {
+		this.employee.getAllEmployeeInfo().subscribe((res) => {
 			this.staff = res;
 			console.log('res', this.staff);
 		});

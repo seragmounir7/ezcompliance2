@@ -1,0 +1,30 @@
+<mat-tab-group
+	[selectedIndex]="selectedIndex$|async"
+	(selectedIndexChange)="selectedIndexChange($event)"
+>
+	<mat-tab label="Accident Instruction">
+		<ng-template matTabContent>
+			<app-instructions></app-instructions>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Nature Of Incident">
+		<ng-template matTabContent>
+			<app-nature-of-incident></app-nature-of-incident>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Type Of Incident">
+		<ng-template matTabContent>
+			<app-type-of-incident></app-type-of-incident>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Changes Made">
+		<ng-template matTabContent>
+			<app-changes-made></app-changes-made>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="Root Cause Of Incident">
+		<ng-template matTabContent>
+			<app-root-cause-of-incident></app-root-cause-of-incident>
+		</ng-template>
+	</mat-tab>
+</mat-tab-group>

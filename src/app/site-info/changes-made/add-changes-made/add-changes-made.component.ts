@@ -54,7 +54,7 @@ export class AddChangesMadeComponent implements OnInit {
 		this.logicalFormInfo.addMultipleChangesMade(data).subscribe(
 			(data) => {
 				console.log('nature=>', data);
-				this.router.navigate(['/admin/siteInfo/changesMade']);
+				this.router.navigate(['/admin/setting/changesMade']);
 			},
 			(err) => {
 				console.error(err);

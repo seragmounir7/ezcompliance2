@@ -79,7 +79,7 @@ export class AddLicenceComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 1200
 				});
-				this.router.navigate(['/admin/siteInfo/licenceAndQual']);
+				this.router.navigate(['/admin/setting/licenceAndQual']);
 			},
 			(err) => {
 				console.error(err);
