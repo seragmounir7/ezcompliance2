@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { EditWhsManagerComponent } from './edit-whs-manager/edit-whs-manager.component';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-whs-manager',
 	templateUrl: './whs-manager.component.html',
@@ -38,7 +40,6 @@ export class WHSManagerComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllWHSManager(field, value)
 			.subscribe((res: any) => {
-				console.log('getAllWHSManager=>', res);
 				// this.jobTaskData = res.data[0].subComponents;
 				const data = res.data;
 				data.forEach((element, index) => {
@@ -61,7 +62,6 @@ export class WHSManagerComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllWHSManager();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -83,7 +83,7 @@ export class WHSManagerComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllWHSManager();
 					});
 			}

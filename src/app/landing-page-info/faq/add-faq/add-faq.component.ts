@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { Router } from '@angular/router';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-faq',
 	templateUrl: './add-faq.component.html',
@@ -47,7 +49,6 @@ export class AddFaqComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.portalDetails.value);
 		const data = {
 			title: this.portalDetails.value
 		};
@@ -55,8 +56,6 @@ export class AddFaqComponent implements OnInit {
 			.addPortal(this.portalDetails.value)
 			.subscribe(
 				(data) => {
-					console.log('portal=>', data);
-
 					this.router.navigate(['/admin/landingPageInfo/faq']);
 				},
 				(err) => {

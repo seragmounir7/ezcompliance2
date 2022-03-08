@@ -35,8 +35,6 @@ export class MobileViewService {
 	}
 	removeButton() {
 		return this.observeXsmall().subscribe((result) => {
-			console.log(result);
-
 			if (result.matches) {
 				this.renderer.addClass(
 					document.querySelector('.btn.btn-outline-primary'),

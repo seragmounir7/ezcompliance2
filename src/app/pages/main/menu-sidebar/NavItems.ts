@@ -1,3 +1,4 @@
+import { TableDetails } from 'src/app/super-admin/table-details.enum';
 import { Designation } from 'src/app/utils/types/Designation.enum';
 import { NavItem } from './nav-items';
 
@@ -31,6 +32,19 @@ export class NavItems {
 			icon: 'dash',
 			route: './',
 			hasAccess: true
+		},
+		{
+			displayedName: 'SuperAdmin',
+			icon: 'roleMgmt',
+			hasAccess: true,
+			childItem: [
+				{
+					displayedName: 'Client Admin List',
+					icon: '',
+					route: `./superadmin/${TableDetails.clientList}`,
+					hasAccess: true
+				}
+			]
 		},
 		{
 			displayedName: 'WHS Forms',

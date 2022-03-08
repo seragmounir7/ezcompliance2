@@ -81,7 +81,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 								logFormat
 							);
 							this.toast.error(err.error.message);
-							console.log(err.message, err.error.message);
+
 							break;
 					}
 				}

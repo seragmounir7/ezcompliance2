@@ -11,6 +11,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditSocialMediaComponent } from './add-and-edit-social-media/add-and-edit-social-media.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-social-media',
 	templateUrl: './social-media.component.html',
@@ -45,7 +47,6 @@ export class SocialMediaComponent implements OnInit {
 	}
 	getSocialMedia() {
 		this.landingPageInfo.getAllSocialMedia().subscribe((res: any) => {
-			console.log('SocialMediaDetails=>', res);
 			const SocialMediaData = res.data;
 
 			this.ELEMENT_DATA = SocialMediaData;
@@ -63,7 +64,6 @@ export class SocialMediaComponent implements OnInit {
 			if (result == 'true') {
 				this.getSocialMedia();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 

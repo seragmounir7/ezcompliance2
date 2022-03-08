@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-safety',
 	templateUrl: './add-and-edit-safety.component.html',
@@ -37,8 +39,6 @@ export class AddAndEditSafetyComponent implements OnInit {
 		this.logicalFormInfo
 			.updateSafety(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('SafetyLegislation', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Safety Legislation Edited successfully',
@@ -53,8 +53,6 @@ export class AddAndEditSafetyComponent implements OnInit {
 			regulation: this.editTitle.get('regulation').value
 		};
 		this.logicalFormInfo.addSafety(data).subscribe((resData) => {
-			console.log('SafetyLegislation', resData);
-
 			this.dialogRef.close('true');
 			if (this.dataRec) {
 				Swal.fire({

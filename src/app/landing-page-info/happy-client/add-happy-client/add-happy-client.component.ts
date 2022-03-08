@@ -11,6 +11,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-happy-client',
 	templateUrl: './add-happy-client.component.html',
@@ -63,10 +65,9 @@ export class AddHappyClientComponent implements OnInit {
 				mode: 'HappyClient',
 				title: this.data.EditData.title
 			});
-			(this.selectedImage = this.data.EditData.subModules[
+			this.selectedImage = this.data.EditData.subModules[
 				this.data.index
-			].fileUrl),
-				console.log('img', this.selectedImage);
+			].fileUrl;
 		}
 
 		const index = this.data.index;
@@ -173,11 +174,10 @@ export class AddHappyClientComponent implements OnInit {
 				title: this.clientDetail.controls.title.value,
 				arrObj: this.fb.array([])
 			};
-			console.log(data);
+
 			this.landingPageInfo
 				.addAppService(this.clientDetail.value)
 				.subscribe((data) => {
-					console.log('data=>', data);
 					this.happyClientData = data;
 				});
 		}

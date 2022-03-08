@@ -8,6 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-code-of-pract',
 	templateUrl: './code-of-pract.component.html',
@@ -41,7 +43,6 @@ export class CodeOfPractComponent implements OnInit {
 
 	getAllCodeOfPractice(field = '', value = '') {
 		this.logicalFormInfo.getAllCOP(field, value).subscribe((res: any) => {
-			console.log('codeOfPractice=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
@@ -64,7 +65,6 @@ export class CodeOfPractComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllCodeOfPractice();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {

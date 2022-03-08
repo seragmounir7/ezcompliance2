@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddEditCouponComponent } from './add-edit-coupon/add-edit-coupon.component';
 import { MatSort, Sort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-coupon',
 	templateUrl: './coupon.component.html',
@@ -37,7 +39,6 @@ export class CouponComponent implements OnInit {
 	}
 	getAllCoupon(field = '', value = '') {
 		this.subscript.getAllCoupon(field, value).subscribe((res) => {
-			console.log(res);
 			const couponData = res.data;
 			couponData.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -57,7 +58,6 @@ export class CouponComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllCoupon();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -71,7 +71,6 @@ export class CouponComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				void this.spinner.show();
 				this.subscript.deleteCoupon(item._id).subscribe((res) => {
 					this.getAllCoupon();

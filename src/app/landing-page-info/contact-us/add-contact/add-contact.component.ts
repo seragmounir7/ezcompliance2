@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-contact',
 	templateUrl: './add-contact.component.html',
@@ -27,8 +29,6 @@ export class AddContactComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('dataContact=>', this.dataContact);
-
 		this.contactUsForm = this.fb.group({
 			fullName: ['', Validators.required],
 			phone: ['', Validators.required],
@@ -47,24 +47,20 @@ export class AddContactComponent implements OnInit {
 
 	onSubmit() {
 		const data = {};
-		console.log(this.contactUsForm.value);
+
 		this.url.addContact(this.contactUsForm.value).subscribe((res) => {
-			console.log('AddContact', res);
 			this.dialogRef.close();
 		});
 	}
 
 	editContactUs(id) {
-		console.log('id=>', id);
 		this.myId = this.dataContact._id;
 
-		console.log('form', this.contactUsForm.value);
 		this.url
 			.editContactUs(this.myId, this.contactUsForm.value)
 			.subscribe((res) => {
-				console.log('Data Set response' + res);
 				this.data = res.data;
-				console.log('new response' + this.data);
+
 				this.dialogRef.close('true');
 			});
 	}

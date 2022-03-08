@@ -6,6 +6,8 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 import { Router } from '@angular/router';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-question',
 	templateUrl: './add-question.component.html',
@@ -35,12 +37,8 @@ export class AddQuestionComponent implements OnInit {
 	}
 
 	onFormSubmit() {
-		console.log(this.faqDetails.value);
-
 		this.landingPageInfoService.addFAQ(this.faqDetails.value).subscribe(
 			(data) => {
-				console.log('portal=>', data);
-
 				this.router.navigate(['/admin/landingPageInfo/QA']);
 			},
 			(err) => {
@@ -50,9 +48,7 @@ export class AddQuestionComponent implements OnInit {
 	}
 	getAllPortal() {
 		this.landingPageInfoService.getAllPortal().subscribe((res) => {
-			console.log('getAllPortal=>', res);
 			this.portalData = res.data;
-			console.log('portalData=>', this.portalData);
 		});
 	}
 }

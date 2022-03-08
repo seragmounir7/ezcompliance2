@@ -11,7 +11,6 @@ export class LandingPageInfoServiceService {
 	getAppServiceById(id: any) {
 		return this.https.get(this.apiUrl + 'module/get/data/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -20,7 +19,6 @@ export class LandingPageInfoServiceService {
 	addAppService(data) {
 		return this.https.post(this.apiUrl + 'module/multiple', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -28,7 +26,6 @@ export class LandingPageInfoServiceService {
 	editModule(data, id) {
 		return this.https.put(this.apiUrl + 'module/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -36,7 +33,6 @@ export class LandingPageInfoServiceService {
 	deleteModule(id) {
 		return this.https.delete(this.apiUrl + 'module/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -45,7 +41,6 @@ export class LandingPageInfoServiceService {
 	editHeader(id, data) {
 		return this.https.put(this.apiUrl + 'mainPage/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -53,7 +48,6 @@ export class LandingPageInfoServiceService {
 	AddHeader(data) {
 		return this.https.post(this.apiUrl + 'mainPage/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -61,7 +55,6 @@ export class LandingPageInfoServiceService {
 	getHeaderBYId() {
 		return this.https.get(this.apiUrl + 'mainPage/get').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -71,7 +64,6 @@ export class LandingPageInfoServiceService {
 			.put(this.apiUrl + 'subModule/update/' + id, data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -79,7 +71,6 @@ export class LandingPageInfoServiceService {
 	deletesubModule(id) {
 		return this.https.delete(this.apiUrl + 'subModule/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -87,7 +78,6 @@ export class LandingPageInfoServiceService {
 	addSubModule(data) {
 		return this.https.post(this.apiUrl + 'subModule/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -95,7 +85,6 @@ export class LandingPageInfoServiceService {
 	getAboutUsById(id: any) {
 		return this.https.get(this.apiUrl + 'aboutUs/getAll/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -103,7 +92,6 @@ export class LandingPageInfoServiceService {
 	addAboutUs(data) {
 		return this.https.post(this.apiUrl + 'aboutUs/multiple', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -111,7 +99,6 @@ export class LandingPageInfoServiceService {
 	editAboutUs(data, id) {
 		return this.https.put(this.apiUrl + 'aboutUs/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -119,7 +106,6 @@ export class LandingPageInfoServiceService {
 	addTeam(data) {
 		return this.https.post(this.apiUrl + 'team/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -127,7 +113,6 @@ export class LandingPageInfoServiceService {
 	editTeam(data, id) {
 		return this.https.put(this.apiUrl + 'team/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -135,7 +120,6 @@ export class LandingPageInfoServiceService {
 	deleteTeam(id) {
 		return this.https.delete(this.apiUrl + 'team/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -143,7 +127,6 @@ export class LandingPageInfoServiceService {
 	addContact(data) {
 		return this.https.post(this.apiUrl + 'contactUs/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -153,7 +136,6 @@ export class LandingPageInfoServiceService {
 			.put(this.apiUrl + 'contactUs/update/' + id, data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -161,7 +143,6 @@ export class LandingPageInfoServiceService {
 	getContactById(id) {
 		return this.https.get(this.apiUrl + 'contactUs/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -170,7 +151,6 @@ export class LandingPageInfoServiceService {
 	getContact() {
 		return this.https.get(this.apiUrl + 'contactUs/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -179,7 +159,6 @@ export class LandingPageInfoServiceService {
 	deleteContactUs(id) {
 		return this.https.delete(this.apiUrl + 'contactUs/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -187,7 +166,6 @@ export class LandingPageInfoServiceService {
 	getAllPortal() {
 		return this.https.get(this.apiUrl + 'portal/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -195,7 +173,6 @@ export class LandingPageInfoServiceService {
 	addPortal(data) {
 		return this.https.post(this.apiUrl + 'portal/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -203,7 +180,6 @@ export class LandingPageInfoServiceService {
 	editportal(data, id) {
 		return this.https.put(this.apiUrl + 'portal/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -211,7 +187,6 @@ export class LandingPageInfoServiceService {
 	deletePortal(id) {
 		return this.https.delete(this.apiUrl + 'portal/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -219,7 +194,6 @@ export class LandingPageInfoServiceService {
 	getAllFaq() {
 		return this.https.get(this.apiUrl + 'faq/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -227,7 +201,6 @@ export class LandingPageInfoServiceService {
 	addFAQ(data) {
 		return this.https.post(this.apiUrl + 'faq/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -235,7 +208,6 @@ export class LandingPageInfoServiceService {
 	editFAQ(data, id) {
 		return this.https.put(this.apiUrl + 'faq/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -243,7 +215,6 @@ export class LandingPageInfoServiceService {
 	deleteFaq(id) {
 		return this.https.delete(this.apiUrl + 'faq/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -251,7 +222,6 @@ export class LandingPageInfoServiceService {
 	getAllFaqbasedOnPortal(id) {
 		return this.https.get(this.apiUrl + 'portal/getAll/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -261,7 +231,6 @@ export class LandingPageInfoServiceService {
 	getAllSocialMedia() {
 		return this.https.get(this.apiUrl + 'socialMedia/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -269,7 +238,6 @@ export class LandingPageInfoServiceService {
 	addSocialMedia(data) {
 		return this.https.post(this.apiUrl + 'socialMedia/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -279,7 +247,6 @@ export class LandingPageInfoServiceService {
 			.put(this.apiUrl + 'socialMedia/update/' + id, data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -287,7 +254,6 @@ export class LandingPageInfoServiceService {
 	deleteSocialMedia(id) {
 		return this.https.delete(this.apiUrl + 'socialMedia/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -298,7 +264,6 @@ export class LandingPageInfoServiceService {
 	addWork(data) {
 		return this.https.post(this.apiUrl + 'ourWork/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -306,7 +271,6 @@ export class LandingPageInfoServiceService {
 	editWorK(id, data) {
 		return this.https.put(this.apiUrl + 'ourWork/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -314,7 +278,6 @@ export class LandingPageInfoServiceService {
 	getWorkById(id) {
 		return this.https.get(this.apiUrl + 'ourWork/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -326,7 +289,6 @@ export class LandingPageInfoServiceService {
 	addSubWork(data) {
 		return this.https.post(this.apiUrl + 'subWork/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -334,7 +296,6 @@ export class LandingPageInfoServiceService {
 	editSubWorK(id, data) {
 		return this.https.put(this.apiUrl + 'subWork/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -342,7 +303,6 @@ export class LandingPageInfoServiceService {
 	deleteSubWorK(id) {
 		return this.https.delete(this.apiUrl + 'subWork/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -350,7 +310,6 @@ export class LandingPageInfoServiceService {
 	getSubWorkById(id) {
 		return this.https.get(this.apiUrl + 'subWork/get/data/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);

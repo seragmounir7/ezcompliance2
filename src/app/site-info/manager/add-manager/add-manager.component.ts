@@ -6,6 +6,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigation.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-manager',
 	templateUrl: './add-manager.component.html',
@@ -51,13 +53,11 @@ export class AddManagerComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.ManagerDetails.get('arrObj').value);
 		const data = {
 			arrObj: this.ManagerDetails.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleManager(data).subscribe(
 			(data) => {
-				console.log('ManagerDetails=>', data);
 				Swal.fire({
 					title: 'Manager Detail Added successfully',
 					showConfirmButton: false,

@@ -14,6 +14,8 @@ import { MatSort } from '@angular/material/sort';
 import { EditDifferentWorkComponent } from './edit-different-work/edit-different-work.component';
 import { AddDifferentWorkComponent } from './add-different-work/add-different-work.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-different-module',
 	templateUrl: './different-module.component.html',
@@ -55,7 +57,6 @@ export class DifferentModuleComponent implements OnInit {
 	getScreenWork() {
 		this.mode = 'Different';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-			console.log('Different', res.data);
 			this.dataSource.data = res.data;
 			const differentData = res.data[0].subModules;
 			differentData.forEach((element, index) => {
@@ -100,7 +101,7 @@ export class DifferentModuleComponent implements OnInit {
 		this.mode = 'Different';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.differentData = data.data[0];
-			console.log(this.differentData);
+
 			const dialogRef = this.dialog.open(AddDifferentWorkComponent, {
 				data: {
 					action: 'new',

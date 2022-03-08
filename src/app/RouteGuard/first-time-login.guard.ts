@@ -23,7 +23,6 @@ export class FirstTimeLoginGuard implements CanActivate {
 		| Promise<boolean | UrlTree>
 		| boolean
 		| UrlTree {
-		console.log('FirstTimeLoginGuard');
 		return this.authService.loginData$.pipe(
 			map((res) => {
 				if (res?.accessToken && res.FirstLogin.firstLogin) {
@@ -37,10 +36,10 @@ export class FirstTimeLoginGuard implements CanActivate {
 		// 	sessionStorage.getItem('accessToken') &&
 		// 	JSON.parse(sessionStorage.getItem('firstLogin')).firstLogin
 		// ) {
-		// 	console.log('FirstTimeLoginGuard', true);
+		//
 		// 	return true;
 		// } else {
-		// 	console.log(
+		//
 		// 		'FirstTimeLoginGuard this.router.createUrlTree(["/admin"]);'
 		// 	);
 		// 	return this.router.createUrlTree(['/admin']);

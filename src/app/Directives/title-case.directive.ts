@@ -7,7 +7,6 @@ export class TitleCaseDirective {
 	constructor(private el: ElementRef) {}
 
 	@HostListener('keyup') onKeyUp() {
-		console.log('titleCase Working');
 		if (this.el.nativeElement.value) {
 			const arr: string[] = this.el.nativeElement.value.split('');
 			arr[0] = arr[0].toUpperCase();

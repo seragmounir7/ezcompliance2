@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-adding-cust',
 	templateUrl: './adding-cust.component.html',
@@ -55,13 +57,10 @@ export class AddingCustComponent implements OnInit {
 		}
 	}
 	onSubmit() {
-		console.log(this.addCustomerForm.value);
-
 		this.logicalFormInfoService
 			.addCustomer(this.addCustomerForm.value)
 			.subscribe(
 				(res) => {
-					console.log('addCustomerForm=>', res);
 					if (this.dialogRef) {
 						this.dialogRef.close('ok');
 						return;
@@ -77,13 +76,11 @@ export class AddingCustComponent implements OnInit {
 
 	getAllStates() {
 		this.logicalFormInfoService.getAllStates().subscribe((res: any) => {
-			console.log('setStatesDetails=>', res);
 			this.StatesData = res.data;
 		});
 	}
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

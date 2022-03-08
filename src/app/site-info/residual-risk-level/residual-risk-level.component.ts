@@ -9,6 +9,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditResidualRiskLevelComponent } from './edit-residual-risk-level/edit-residual-risk-level.component';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-residual-risk-level',
 	templateUrl: './residual-risk-level.component.html',
@@ -40,7 +42,6 @@ export class ResidualRiskLevelComponent implements OnInit {
 		this.logicalFormInfoService
 			.getAllResidual(field, value)
 			.subscribe((res: any) => {
-				console.log(res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -50,7 +51,6 @@ export class ResidualRiskLevelComponent implements OnInit {
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 			});
 	}
 
@@ -64,7 +64,6 @@ export class ResidualRiskLevelComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllResidualRiskLevel();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -78,7 +77,6 @@ export class ResidualRiskLevelComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				// this.model.attributes.splice(i,1);
 				void this.spinner.show();
 				this.logicalFormInfoService

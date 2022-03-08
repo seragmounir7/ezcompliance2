@@ -12,6 +12,8 @@ import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { EmployeeRegistrationService } from 'src/app/utils/services/employee-registration.service';
 import { LogicalFormInfoService } from '../../utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-plant-registration',
 	templateUrl: './plant-registration.component.html',
@@ -86,7 +88,6 @@ export class PlantRegistrationComponent implements OnInit {
 	ngOnInit(): void {
 		this.isHistory = this.router.url.includes('/plantRegistration/history');
 		this.id = this.activatedRoute.snapshot.params.id;
-		console.log(this.isHistory, this.id);
 
 		this.patchData();
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
@@ -146,8 +147,6 @@ export class PlantRegistrationComponent implements OnInit {
 	}
 
 	newEquipFiled3(data): FormGroup {
-		console.log('newData', data);
-
 		return this.fb.group({
 			plantType: [data.plantType],
 			modelNumber: [data.modelNumber],
@@ -157,9 +156,8 @@ export class PlantRegistrationComponent implements OnInit {
 		});
 	}
 	addEquipFiled3(data) {
-		console.log('data', data);
 		this.addEquip().push(this.newEquipFiled3(data));
-		console.log('addPPEFiled1', this.plantDetails.value);
+
 		this.disableForm('Plant/Equipment');
 	}
 	public signaturePadOptions: Object = {
@@ -171,32 +169,22 @@ export class PlantRegistrationComponent implements OnInit {
 		this.plantDetails.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
-		console.log(this.signaturePad2.toDataURL());
 	}
 	clear2() {
 		this.signaturePad2.clear();
 		this.plantDetails.controls.plantSignature.setValue('');
 	}
-	drawStart() {
-		console.log('begin drawing');
-	}
+	drawStart() {}
 
 	addPPE() {
 		return this.ppeDetails.get('PPEArr') as FormArray;
 	}
 	get isOnePpeChecked() {
-		console.log(
-			((this.ppeDetails.get('PPEArr') as FormArray).value as any[]).some(
-				(x) => x.ppeCheck == true
-			)
-		);
 		return ((this.ppeDetails.get('PPEArr') as FormArray)
 			.value as any[]).some((x) => x.ppeCheck == true);
 	}
 
 	newFiled3(data): FormGroup {
-		console.log('newData', data);
-
 		return this.fb.group({
 			PPESupplied: [data.ppeSupplied],
 			BrandOrType: [data.brand],
@@ -206,9 +194,8 @@ export class PlantRegistrationComponent implements OnInit {
 		});
 	}
 	addFiled3(data) {
-		console.log('data', data);
 		this.addPPE().push(this.newFiled3(data));
-		console.log('addPPEFiled1', this.plantDetails.value);
+
 		this.disableForm('PPE');
 	}
 
@@ -227,12 +214,10 @@ export class PlantRegistrationComponent implements OnInit {
 
 	drawComplete() {
 		this.ppeDetails.controls.Sign.setValue(this.signaturePad.toDataURL());
-		console.log(this.signaturePad.toDataURL());
 	}
 	patchData() {
 		if (!this.isHistory) {
 			this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
-				console.log('data=>', data);
 				this.employeeData = data.data;
 
 				data.data.ppe.PPEArr.forEach((ele) => {
@@ -246,15 +231,12 @@ export class PlantRegistrationComponent implements OnInit {
 			this.logicalService
 				.getSubmitedPPEPlantById(this.id)
 				.subscribe((res: any) => {
-					console.log('res===========>', res);
-
 					if (res.data[0].fileType === 'PPE') {
 						this.selectValue = 0;
 						this.ppeDataHistory = res.data[0];
 
 						this.ppeDataHistory.managerName.fullName = `${this.ppeDataHistory.managerName.firstName} ${this.ppeDataHistory.managerName.lastName}`;
 
-						console.log('this.ppeDataHistory', this.ppeDataHistory);
 						this.empId = this.ppeDataHistory.employeeId._id;
 						this.ppeDataHistory.submitPPEArr.forEach((ele) => {
 							this.addFiled3(ele);
@@ -271,12 +253,6 @@ export class PlantRegistrationComponent implements OnInit {
 						};
 						check().then((res) => {
 							setTimeout(() => {
-								console.log(
-									'this.signaturePad',
-									this.signaturePad,
-									res
-								);
-
 								this.signaturePad.fromDataURL(this.dataUrl);
 							}, 1000);
 						});
@@ -299,12 +275,6 @@ export class PlantRegistrationComponent implements OnInit {
 						};
 						check2().then((res) => {
 							setTimeout(() => {
-								console.log(
-									'this.signaturePad',
-									this.signaturePad2,
-									res
-								);
-
 								this.signaturePad2.fromDataURL(this.dataUrl);
 							}, 1000);
 						});
@@ -329,7 +299,6 @@ export class PlantRegistrationComponent implements OnInit {
 						.get('ReplacementDate').value
 				};
 				submitPPEArr.push(arr);
-				console.log('submitPPEArr', submitPPEArr);
 			} else {
 				const arr = {
 					ppeSupplied: this.addPPE().at(index).get('PPESupplied')
@@ -341,7 +310,6 @@ export class PlantRegistrationComponent implements OnInit {
 						.get('ReplacementDate').value
 				};
 				notSubPPEArr.push(arr);
-				console.log('PPEArr', notSubPPEArr);
 			}
 		}
 		const data = {
@@ -352,7 +320,6 @@ export class PlantRegistrationComponent implements OnInit {
 			employeeId: this.employeeData._id
 		};
 		let data2 = {};
-		console.log('ppe submit', notSubPPEArr.length, this.addPPE().length);
 		if (notSubPPEArr.length !== 0) {
 			data2 = {
 				...rest,
@@ -370,7 +337,7 @@ export class PlantRegistrationComponent implements OnInit {
 				}
 			};
 		}
-		console.log('this.ppe', this.ppeDataHistory, data2);
+
 		this.logicalService.postSubmitedPPE(data).subscribe(
 			(res) => {
 				this.employee
@@ -403,10 +370,6 @@ export class PlantRegistrationComponent implements OnInit {
 		const { plant, ...rest } = this.employeeData;
 
 		for (let index = 0; index < this.addEquip().length; index++) {
-			console.log(
-				'this.addEquip().at(index).get',
-				this.addEquip().at(index).get('plantCheck').value
-			);
 			if (this.addEquip().at(index).get('plantCheck').value) {
 				const arr = {
 					plantType: this.addEquip().at(index).get('plantType').value,
@@ -419,7 +382,6 @@ export class PlantRegistrationComponent implements OnInit {
 						.get('serviceRenewDate').value
 				};
 				submitPlant.push(arr);
-				console.log('submitPlant', submitPlant);
 			} else {
 				const arr = {
 					plantType: this.addEquip().at(index).get('plantType').value,
@@ -432,7 +394,6 @@ export class PlantRegistrationComponent implements OnInit {
 						.get('serviceRenewDate').value
 				};
 				notSubPlant.push(arr);
-				console.log('PPEArr', notSubPlant);
 			}
 		}
 		const data = {
@@ -443,7 +404,7 @@ export class PlantRegistrationComponent implements OnInit {
 			employeeId: this.employeeData._id
 		};
 		let data2 = {};
-		console.log('plant submit', data);
+
 		if (notSubPlant.length !== 0) {
 			data2 = {
 				...rest,
@@ -461,7 +422,7 @@ export class PlantRegistrationComponent implements OnInit {
 				}
 			};
 		}
-		console.log('this.', this.employeeData, data2);
+
 		this.logicalService.postSubmitedPlant(data).subscribe(
 			(res) => {
 				this.employee

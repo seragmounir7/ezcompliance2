@@ -17,6 +17,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-team-info',
 	templateUrl: './edit-team-info.component.html',
@@ -53,8 +55,6 @@ export class EditTeamInfoComponent implements OnInit {
 	) {
 		this.Is_Mod = data.moduleName;
 		this.Is_subMod = data.modulename;
-		console.log('this.Is_Mod', this.Is_Mod);
-		console.log('this.Is_subMod', this.Is_subMod);
 
 		this.companyDetail = this.fb.group({
 			imageUrl: ['', Validators.required],
@@ -65,7 +65,6 @@ export class EditTeamInfoComponent implements OnInit {
 			subTitle: ['', Validators.required],
 			arrObj: this.fb.array([])
 		});
-		console.log('companyDetail=>', this.companyDetail);
 	}
 
 	ngOnInit(): void {
@@ -80,13 +79,11 @@ export class EditTeamInfoComponent implements OnInit {
 			this.module = true;
 			this.subModule = false;
 		}
-		console.log('data action=>', this.data.action);
+
 		if (this.data.action == 'edit') {
 			this.Update = true;
-			console.log('data to patch=>', this.data);
+
 			this.Image = this.data.EditData.fileUrl;
-			console.log('1', this.Image);
-			console.log('1', this.Image1);
 
 			this.companyDetail.patchValue({
 				desc: this.data.EditData.desc,
@@ -97,16 +94,13 @@ export class EditTeamInfoComponent implements OnInit {
 			this.add().at(0).patchValue({
 				title: this.data.EditData.team[this.data.index].title
 			});
-			(this.selectedImage = this.data.EditData.team[
+			this.selectedImage = this.data.EditData.team[
 				this.data.index
-			].imageUrl),
-				console.log('img', this.selectedImage);
+			].imageUrl;
 		}
 
 		const index = this.data.index;
 		this.subId = this.data.EditData.team[index]._id;
-
-		console.log('aaaaaaa', this.subId);
 	}
 	Added() {
 		if (this.Edit == true) {

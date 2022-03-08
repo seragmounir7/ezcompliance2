@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-juri',
 	templateUrl: './add-and-edit-juri.component.html',
@@ -35,8 +37,6 @@ export class AddAndEditJuriComponent implements OnInit {
 		this.logicalFormInfo
 			.updateJurisdiction(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('addJurisdiction', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Jurisdiction Edited successfully',
@@ -50,8 +50,6 @@ export class AddAndEditJuriComponent implements OnInit {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo.addJurisdiction(data).subscribe((resData) => {
-			console.log('addRegulator', resData);
-
 			this.dialogRef.close('true');
 			if (this.dataRec) {
 				Swal.fire({

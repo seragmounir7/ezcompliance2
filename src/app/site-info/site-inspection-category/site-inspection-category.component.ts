@@ -10,6 +10,8 @@ import { EditSiteInspectionCategoryComponent } from './edit-site-inspection-cate
 import { MatSort, Sort } from '@angular/material/sort';
 import { SiteInspectionTopicComponent } from './site-inspection-topic/site-inspection-topic.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-site-inspection-category',
 	templateUrl: './site-inspection-category.component.html',
@@ -39,7 +41,6 @@ export class SiteInspectionCategoryComponent implements OnInit {
 		this.logicalFormInfoService
 			.getAllSiteInspectionCategory(field, value)
 			.subscribe((res: any) => {
-				console.log(res);
 				this.dataSource.data = res.data;
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
@@ -60,16 +61,9 @@ export class SiteInspectionCategoryComponent implements OnInit {
 			if (result === 'ok') {
 				this.getAllCategory();
 			}
-			console.log(
-				'CustomerInfoComponent -> openDialog -> result',
-				result
-			);
-
-			console.log('The dialog was closed');
 		});
 	}
 	edit(element) {
-		console.log(element);
 		const dialogRef = this.dialog.open(
 			EditSiteInspectionCategoryComponent,
 			{
@@ -84,7 +78,6 @@ export class SiteInspectionCategoryComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllCategory();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -106,7 +99,7 @@ export class SiteInspectionCategoryComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllCategory();
 					});
 			}

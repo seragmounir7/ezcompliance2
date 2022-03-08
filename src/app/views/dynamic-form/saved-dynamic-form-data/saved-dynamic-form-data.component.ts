@@ -1,9 +1,13 @@
 import { SetTitleService } from '../../../utils/services/set-title.service';
 import {
+	AfterViewInit,
 	Component,
 	ElementRef,
+	HostListener,
+	OnDestroy,
 	OnInit,
 	QueryList,
+	Renderer2,
 	ViewChild,
 	ViewChildren
 } from '@angular/core';
@@ -18,15 +22,30 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { error } from 'protractor';
 import { templateJitUrl } from '@angular/compiler';
+import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Subscription } from 'rxjs';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-saved-dynamic-form-data',
 	templateUrl: './saved-dynamic-form-data.component.html',
 	styleUrls: ['./saved-dynamic-form-data.component.scss']
 })
-export class SavedDynamicFormDataComponent implements OnInit {
+export class SavedDynamicFormDataComponent
+	implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChildren('Signature') SignaturePad: QueryList<SignaturePad>;
 	@ViewChild('projectManager') projectManager: ElementRef;
+	@HostListener('window:afterprint', [])
+	function(): void {
+		this.renderer.removeClass(document.querySelector('app-main'), 'hidden');
+		this.shared.printNext(false);
+		if (this.router.url.includes('/admin/savedForms')) {
+			void this.router.navigateByUrl('/admin/savedForms');
+			return;
+		}
+		void this.router.navigateByUrl('/admin/dynamic/savedDynamicFormTable');
+	}
 	projectMang: any;
 	isHidden = false;
 	check = false;
@@ -141,7 +160,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			type: 'addRemove',
 			icon: 'fa-minus-circle',
 			label: 'Add Remove'
-			//  placeholder: 'Type your text to display here only',
 		},
 		{
 			type: 'checkbox',
@@ -211,8 +229,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			type: 'signature',
 			icon: 'fas fa-file-signature',
 			label: 'Signature'
-			// "className": "form-control",
-			// "subtype": "file"
 		},
 		{
 			type: 'table',
@@ -226,43 +242,14 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				['', '', '', '']
 			]
 		}
-		// {
-		//   type: 'button',
-		//   icon: 'fa-paper-plane',
-		//   subtype: 'submit',
-		//   label: 'Submit',
-		// },
 	];
 	type: string = '';
 	formIdRec = '';
 	rows = [];
 	formData = [];
 	tableIndexMap = new Map();
-	//   modelFields:Array<field>=[];
-	//  modelFields:Array<field>=[];
 
-	model: any = [
-		// {
-		//   name: '',
-		//   description: '',
-		//   theme: {
-		//     bgColor: '#ffffff',
-		//     textColor: '#555555',
-		//     bannerImage: '',
-		//   },
-		//   attributes: this.modelFields0,
-		// },
-		// {
-		//   name: '',
-		//   description: '',
-		//   theme: {
-		//     bgColor: '#ffffff',
-		//     textColor: '#555555',
-		//     bannerImage: '',
-		//   },
-		//   attributes: this.modelFields1,
-		// },
-	];
+	model: any = [];
 	totalModels = ['', '', '', '', ''];
 	report = false;
 	reports: any = [];
@@ -273,6 +260,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	states: any;
 	savedFormData: any;
 	mainFormId: any;
+	sub: Subscription;
 	constructor(
 		public router: Router,
 		private spinner: NgxSpinnerService,
@@ -280,7 +268,9 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		private dynamicFormsService: DynamicFormsService,
 		private setTitle: SetTitleService,
 		private fb: FormBuilder,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private shared: RoleManagementSharedServiceService,
+		private renderer: Renderer2
 	) {
 		this.riskAssessmentFb = this.fb.group({
 			siteName: [''],
@@ -307,21 +297,19 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			jobNumber: ['']
 		});
 	}
+	ngOnDestroy(): void {
+		this.sub.unsubscribe();
+	}
 	onChange2(eve) {
 		this.isHidden = eve.target.checked;
-		console.log('eve', eve.target.checked);
 	}
 	ngOnInit() {
 		this.activatedRoute.queryParams.subscribe((params) => {
-			console.log('params', params);
 			this.savedFormData = params;
 		});
 		this.getAllProjectMang();
 		this.getAllState();
-		console.log(
-			"sessionStorage.getItem('type')",
-			sessionStorage.getItem('type')
-		);
+
 		this.setTitle.setTitle('WHS-Saved Dynamic Forms');
 		this.getAllJobNumber();
 		if (this.savedFormData.type == 'add') {
@@ -333,7 +321,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					attributes: modelFields
 				};
 				this.model.push(modelRow);
-				console.log('model', this.model);
 			}
 		}
 		if (this.savedFormData.type == 'add') {
@@ -344,7 +331,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			this.dynamicFormsService
 				.getFormById(this.formIdRec)
 				.subscribe((res) => {
-					console.log('form=>', res);
 					this.model = [];
 					this.formNameRecieved = res.data.title;
 					this.enableForm = res.data.enable;
@@ -371,7 +357,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			this.dynamicFormsService
 				.savedFormGetById(this.formIdRec)
 				.subscribe((res: any) => {
-					console.log('formView=>', res);
 					this.formNameRecieved = res.data.title;
 					this.model = res.data.htmlObject;
 
@@ -379,7 +364,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					this.formCategories = res.data.formCategoryId;
 					this.isHidden = res.data.check;
 					this.mainFormId = res.data.formId._id;
-					console.log('is hidden', this.isHidden);
+
 					void this.spinner.hide();
 				});
 		}
@@ -416,24 +401,16 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	getAllProjectMang() {
 		this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
 			this.projectMang = res.data;
-			// console.log('getAllProjectMang=>', this.projectMang);
+			//
 		});
 	}
-	onDragStart(event: DragEvent) {
-		//  console.log('drag started', JSON.stringify(event, null, 2));
-	}
+	onDragStart(event: DragEvent) {}
 
-	onDragEnd(event: DragEvent) {
-		// console.log('drag ended', JSON.stringify(event, null, 2));
-	}
+	onDragEnd(event: DragEvent) {}
 
-	onDraggableCopied(event: DragEvent) {
-		//  console.log('draggable copied', JSON.stringify(event, null, 2));
-	}
+	onDraggableCopied(event: DragEvent) {}
 
-	onDraggableLinked(event: DragEvent) {
-		// console.log('draggable linked', JSON.stringify(event, null, 2));
-	}
+	onDraggableLinked(event: DragEvent) {}
 
 	onDragged(item: any, list: any[], effect: DropEffect) {
 		if (effect === 'move') {
@@ -442,18 +419,11 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		}
 	}
 
-	onDragCanceled(event: DragEvent) {
-		//  console.log('drag cancelled', JSON.stringify(event, null, 2));
-	}
+	onDragCanceled(event: DragEvent) {}
 
-	onDragover(event: DragEvent) {
-		//   console.log('dragover', JSON.stringify(event, null, 2));
-	}
+	onDragover(event: DragEvent) {}
 
 	onDrop(event: DndDropEvent, list?: any[]) {
-		console.log('event', event);
-		console.log('list', list);
-
 		if (
 			list &&
 			(event.dropEffect === 'copy' || event.dropEffect === 'move')
@@ -466,11 +436,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			}
 			list.splice(index, 0, event.data);
 
-			console.log('event.data.type ', event.data.type);
-
-			console.log(this.rows);
-
-			// console.log('table Map', this.tableIndexMap);
+			//
 		}
 	}
 
@@ -478,12 +444,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		values.push(this.value);
 		this.value = { label: '', value: '' };
 	}
-	deleteItem() {
-		console.log('delete');
-	}
+	deleteItem() {}
 	removeField(j, i, item) {
-		console.log('item', item);
-
 		Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to remove "${item}"?`,
@@ -494,13 +456,7 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			confirmButtonText: 'Yes, remove!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(
-					'this.model.attributes[i]',
-					this.model[j].attributes[i]
-				);
-
 				if (this.model[j].attributes[i].type == 'table') {
-					console.log('table found', i);
 					const index = this.tableIndexMap.get(i);
 
 					this.rows.splice(index, 1);
@@ -508,8 +464,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				this.model[j].attributes.splice(i, 1);
 			}
 		});
-
-		console.log(i);
 	}
 	getAllJobNumber() {
 		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
@@ -517,14 +471,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		});
 	}
 	jobNoSel() {
-		console.log(
-			"this.riskAssessmentFb.get('jobNumber').value",
-			this.riskAssessmentFb.get('jobNumber').value
-		);
-
 		this.allJobNumbers.forEach((item) => {
 			if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
-				console.log('Id found', item);
 				// this.configData=item;
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
@@ -544,14 +492,8 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 
 	jobNoSel1() {
-		console.log(
-			"this.riskAssessmentFb.get('jobNumber').value",
-			this.riskAssessmentFb.get('jobNumber').value
-		);
-
 		this.allJobNumbers.forEach((item) => {
 			if (this.previewform.get('jobNumber').value === item._id) {
-				console.log('Id found', item);
 				// this.configData=item;
 				this.previewform.patchValue({
 					siteName: item.siteName,
@@ -575,13 +517,10 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 
 	initReport() {
-		//  console.log('model.attributes=>', this.model);
+		//
 		this.configData = { ...this.riskAssessmentFb.value };
-		console.log('config', this.configData);
-		console.log('hidden', this.isHidden);
-		if (this.configData && this.isHidden) {
-			console.log('check hidden', this.isHidden);
 
+		if (this.configData && this.isHidden) {
 			if (this.type == 'add') {
 				this.previewform.patchValue({
 					siteName: this.configData.siteName,
@@ -637,42 +576,29 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		const allTableRows = Array.from(
 			document.querySelectorAll('.tableRows')
 		);
-		allTableHeadings.forEach((element: any) => {
-			console.log('allTableHeadings.value', element.value);
-		});
-		allTableRows.forEach((element: any) => {
-			console.log('allTableRows.value', element.value);
-		});
-		//  console.log("heading=>",t[0]);
+		allTableHeadings.forEach((element: any) => {});
+		allTableRows.forEach((element: any) => {});
+		//
 
-		console.log('model', this.model);
-		console.log('thsi.riskAssessmentFb', this.riskAssessmentFb.value);
 		this.regexErr = [];
 
 		this.submitBtn = true;
 		const valid = true;
 		/* commenting for future use
-    console.log('this.model.attributes', this.model.attributes);
+
     let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
     validationArray.reverse().forEach((field, index) => {
-      console.log(field.label + '=>' + field.required + '=>' + field.value);
+
       // if(field.required && !field.value && field.type != 'checkbox'){
-      //   console.log("field.required ",field.required );
-      //   console.log("!field.value",!field.value);
-      //   console.log("field",field);
+      //
+      //
+      //
 
       //   Swal.fire('Error','Please enter '+field.label,'error');
       //   valid = false;
       //   return false;
       // }
-      console.log(
-        'field.regex',
-        field.regex + 'field.label',
-        field.label + 'index',
-        index
-      );
-
-      if (field.required && field.regex) {
+            if (field.required && field.regex) {
         let regex = new RegExp(field.regex);
         if (regex.test(field.value) == false) {
           // Swal.fire('Error',field.errorText,'error');
@@ -691,18 +617,18 @@ export class SavedDynamicFormDataComponent implements OnInit {
         }
       }
     });
-    console.log(this.regexErr);
+
 
     if (!valid) {
       return false;
     }
-    console.log('Save', this.model);
+
     let input = new FormData();
     input.append('formId', this.model._id);
     input.append('attributes', JSON.stringify(this.model.attributes));*/
 		//////////////////upto this//////////
 		// this.us.postDataApi('/user/formFill',input).subscribe(r=>{
-		//   console.log(r);
+		//
 		//   Swal.fire('Success','You have contact sucessfully','success');
 		//   this.success = true;
 		// },error=>{
@@ -713,8 +639,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	ngAfterViewInit() {
 		const indexOfSignature = new Map();
 		let index = 0;
-		console.log('SignaturePad', this.SignaturePad.toArray());
-		console.log('SignaturePadArr', this.SignaturePad.toArray()[0]);
 		this.SignaturePad.changes.subscribe((item: QueryList<SignaturePad>) => {
 			this.model[0].attributes.forEach((element, i) => {
 				if (element.type == 'signature') {
@@ -728,8 +652,16 @@ export class SavedDynamicFormDataComponent implements OnInit {
 						x.fromDataURL(this.model[0].attributes[m].value);
 					});
 				}
-				//console.log("indexOfSignature",indexOfSignature);
+				//
 			});
+		});
+		this.sub = this.shared.printObs$.subscribe((res) => {
+			if (res) {
+				setTimeout(function () {
+					window.print();
+				}, 3000);
+				localStorage.setItem('key', ' ');
+			}
 		});
 	}
 	drawComplete(j, i) {
@@ -744,16 +676,13 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					const myIndex = k.toString() + l.toString();
 					indexOfSignature.set(myIndex, index);
 					index++;
-					console.log('indexOfSignature', indexOfSignature);
 				}
 			});
 		});
 
 		const temp = i.toString() + j.toString(); //making unique code
-		console.log('temp', temp);
 
 		const m = indexOfSignature.get(temp);
-		console.log('m', m);
 
 		this.model[0].attributes[j].value = this.SignaturePad.toArray()[
 			m
@@ -769,29 +698,23 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					const myIndex = k.toString() + l.toString();
 					indexOfSignature.set(myIndex, index);
 					index++;
-					console.log('indexOfSignature', indexOfSignature);
 				}
 			});
 		});
 
 		const temp = i.toString() + j.toString(); //making unique code
-		console.log('temp', temp);
 
 		const m = indexOfSignature.get(temp);
-		console.log('m', m);
 
 		this.SignaturePad.toArray()[m].clear();
 		this.model[0].attributes[j].value = '';
 	}
 	drawStart() {
 		// will be notified of szimek/signature_pad's onBegin event
-		console.log('begin drawing');
 	}
 
 	////table//add row column
 	addCol(j, i) {
-		console.log(this.model[j].attributes);
-
 		this.model[j].attributes[i].tableHeading.push('');
 		this.model[j].attributes[i].tableRows.forEach((item) => {
 			item.push('');
@@ -830,7 +753,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 				.setValue(e.target.value);
 		}
 		if (value === 'projectManager') {
-			console.log('setProjectManager==>', this.projectManager);
 			this.riskAssessmentFb
 				.get('projectManagerSWMS')
 				.setValue(e.target.value);
@@ -838,7 +760,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 	}
 	getAllState() {
 		this.logicalFormInfo.getAllStates().subscribe((res: any) => {
-			console.log('getAllStates=>', res);
 			this.states = res.data;
 		});
 	}
@@ -846,26 +767,20 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.model[i].attributes[j].tableHeading[l] = e.target.value;
 	}
 	addForm() {
-		console.log('model', this.model);
-
 		if (!this.isHidden) {
-			console.log('isHidden', this.isHidden);
-
 			this.previewform.reset();
 		}
 		if (this.type == 'add') {
-			console.log('add', this.model);
 			const tempModel = [];
 			this.model.forEach((element) => {
 				if (element.attributes.length) {
 					tempModel.push(element);
 				}
 			});
-			console.log(tempModel);
+
 			if (tempModel.length) {
 				const d = [];
 				d.push(this.previewform.value);
-				console.log('d', d);
 
 				const data = {
 					title: this.formNameRecieved,
@@ -876,7 +791,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 					formId: this.mainFormId,
 					formCategoryId: this.formCategories._id
 				};
-				console.log('data', data);
 
 				this.dynamicFormsService
 					.savedFormPost(data)
@@ -892,18 +806,17 @@ export class SavedDynamicFormDataComponent implements OnInit {
 			}
 		}
 		if (this.type == 'edit') {
-			console.log('edit');
 			const tempModel = [];
 			this.model.forEach((element) => {
 				if (element.attributes.length) {
 					tempModel.push(element);
 				}
 			});
-			console.log(tempModel);
+
 			if (tempModel.length) {
 				const d = [];
 				d.push(this.previewform.value);
-				console.log('d', d);
+
 				const data = {
 					title: this.formNameRecieved,
 					htmlObject: tempModel,
@@ -931,7 +844,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		}
 	}
 	duplicate(i, j) {
-		console.log('duplicate', i, j, this.model[i].attributes);
 		const modelFields: Array<field> = [];
 		const modelRow = {
 			attributes: modelFields
@@ -940,7 +852,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.model[i].attributes.forEach((element) => {
 			this.fieldModels.forEach((field) => {
 				if (element.type == field.type) {
-					console.log('field', field);
 					field.label = element.label;
 					const temp = Object.assign({}, element);
 					modelFields.push(temp);
@@ -951,9 +862,6 @@ export class SavedDynamicFormDataComponent implements OnInit {
 		this.model.splice(i + 1, 0, modelRow);
 	}
 	removeDuplicate(i, j) {
-		console.log('remove duplicate', i, j);
-		console.log(this.model);
-		console.log(this.model[i]);
 		this.model.splice(i, 1);
 
 		for (let k = 0; k < this.model.length; k++) {

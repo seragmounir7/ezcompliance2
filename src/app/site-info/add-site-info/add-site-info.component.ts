@@ -10,6 +10,8 @@ import { AddSiteComponent } from './add-site/add-site.component';
 import { EditSiteComponent } from './edit-site/edit-site.component';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-site-info',
 	templateUrl: './add-site-info.component.html',
@@ -54,7 +56,6 @@ export class AddSiteInfoComponent implements OnInit {
 		this.logicalFormInfoService
 			.getAllSite(field, value)
 			.subscribe((res: any) => {
-				console.log(res);
 				this.dataSource.data = res.data;
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
@@ -63,7 +64,7 @@ export class AddSiteInfoComponent implements OnInit {
 
 	getAllJobTask() {
 		// this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
-		//   console.log('jobTaskDetails=>', res);
+		//
 		//   // this.jobTaskData = res.data[0].subComponents;
 		//   let data = res.data
 		//   data.forEach((element, index) => {
@@ -90,12 +91,6 @@ export class AddSiteInfoComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllSites();
 			}
-			console.log(
-				'CustomerInfoComponent -> openDialog -> result',
-				result
-			);
-
-			console.log('The dialog was closed');
 		});
 	}
 	edit(element) {
@@ -109,7 +104,6 @@ export class AddSiteInfoComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllSites();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -123,7 +117,6 @@ export class AddSiteInfoComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				// this.model.attributes.splice(i,1);
 				void this.spinner.show();
 				this.logicalFormInfoService

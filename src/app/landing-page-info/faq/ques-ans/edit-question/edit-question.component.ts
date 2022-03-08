@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-question',
 	templateUrl: './edit-question.component.html',
@@ -26,8 +28,6 @@ export class EditQuestionComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.dataRec);
-
 		this.editTitle = this.fb.group({
 			question: [this.dataRec.question, Validators.required],
 			answer: [this.dataRec.answer, Validators.required],
@@ -37,7 +37,6 @@ export class EditQuestionComponent implements OnInit {
 	}
 	getAllFaq() {
 		this.landingPageInfo.getAllFaq().subscribe((res) => {
-			console.log('getaLlFAQ=>', res);
 			this.FAQ = res.data;
 		});
 	}
@@ -47,13 +46,10 @@ export class EditQuestionComponent implements OnInit {
 			answer: this.editTitle.get('answer').value,
 			portalId: this.editTitle.get('portalId').value
 		};
-		console.log('dataaa', data);
 
 		this.landingPageInfo
 			.editFAQ(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('editFAQ', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire('Question Edited successfully');
 			});
@@ -63,9 +59,7 @@ export class EditQuestionComponent implements OnInit {
 	}
 	getAllPortal() {
 		this.landingPageInfo.getAllPortal().subscribe((res) => {
-			console.log('getAllPortal=>', res);
 			this.portalData = res.data;
-			console.log('portalData=>', this.portalData);
 		});
 	}
 }

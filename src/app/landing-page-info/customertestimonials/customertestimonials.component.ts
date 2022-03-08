@@ -13,6 +13,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-customertestimonials',
 	templateUrl: './customertestimonials.component.html',

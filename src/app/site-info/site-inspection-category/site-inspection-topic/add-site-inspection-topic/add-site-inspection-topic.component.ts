@@ -4,6 +4,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-site-inspection-topic',
 	templateUrl: './add-site-inspection-topic.component.html',
@@ -47,13 +49,10 @@ export class AddSiteInspectionTopicComponent implements OnInit {
 		}
 	}
 	onSubmit() {
-		console.log(this.siteInspectionTopicAdd.value);
-
 		this.logicalFormInfoService
 			.addMultipleSiteInspectionTopic(this.siteInspectionTopicAdd.value)
 			.subscribe(
 				(res) => {
-					console.log('addCustomerForm=>', res);
 					//this.dialogRef.close('ok')
 					this.router.navigate([
 						'/admin/setting/siteinspectiontopic/' + this.categoryId

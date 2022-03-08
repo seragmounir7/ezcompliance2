@@ -5,6 +5,8 @@ import { element } from 'protractor';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-social-media',
 	templateUrl: './add-and-edit-social-media.component.html',
@@ -28,7 +30,6 @@ export class AddAndEditSocialMediaComponent implements OnInit {
 		});
 		this.data1 = data;
 		if (data._id) {
-			console.log('dataId', data._id);
 			this.socialMediaDetail.patchValue({
 				facebook: this.data1.facebook,
 				twitter: this.data1.twitter,
@@ -40,8 +41,6 @@ export class AddAndEditSocialMediaComponent implements OnInit {
 
 	ngOnInit(): void {}
 	onSubmit() {
-		console.log('this.socialMedieDetail', this.socialMediaDetail.value);
-
 		this.landingPageInfo
 			.addSocialMedia(this.socialMediaDetail.value)
 			.subscribe((data) => {
@@ -56,13 +55,9 @@ export class AddAndEditSocialMediaComponent implements OnInit {
 	}
 
 	onFormUpdate(data) {
-		console.log('this.socialMedieDetail', this.socialMediaDetail.value);
-
 		this.landingPageInfo
 			.editSocialMedia(this.socialMediaDetail.value, this.data._id)
 			.subscribe((resData) => {
-				console.log('updateSocialMedia', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Social Media Edited successfully',

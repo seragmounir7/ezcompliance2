@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-job-task',
 	templateUrl: './add-job-task.component.html',
@@ -33,7 +35,6 @@ export class AddJobTaskComponent implements OnInit {
 	}
 	getAllCategories() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.licenceCatAll = res.data;
 		});
 	}
@@ -59,13 +60,11 @@ export class AddJobTaskComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.jobTaskDetails.get('arrObj').value);
 		const data = {
 			arrObj: this.jobTaskDetails.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleJobTask(data).subscribe(
 			(data) => {
-				console.log('JOBTask=>', data);
 				Swal.fire({
 					title: 'Parameter Added successfully',
 					showConfirmButton: false,
@@ -88,6 +87,5 @@ export class AddJobTaskComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

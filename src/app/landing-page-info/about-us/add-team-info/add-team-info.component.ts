@@ -9,6 +9,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-team-info',
 	templateUrl: './add-team-info.component.html',

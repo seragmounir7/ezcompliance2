@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-plant-registion-table',
 	templateUrl: './plant-registion-table.component.html',
@@ -56,13 +58,11 @@ export class PlantRegistionTableComponent implements OnInit {
 		this.logicalervice
 			.getSubmitedPPEPlantEmpId(this.id)
 			.subscribe((res: any) => {
-				console.log(res);
 				const couponData = res.data;
 				couponData.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});
 				this.ELEMENT_DATA = couponData;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;

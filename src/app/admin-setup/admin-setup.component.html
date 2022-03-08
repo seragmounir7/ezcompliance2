@@ -1,6 +1,3 @@
-<!-- <button mat-raised-button (click)="isEditable = !isEditable">
-	{{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
-</button> -->
 <div class="d-flex justify-content-end">
 	<div
 		class="col-4 card p-3 mr-4"
@@ -18,11 +15,11 @@
 				(updatedSuccessFull)="updatedSuccessFull = $event"
 			></app-add-and-edit-company-info>
 		</div>
-		<div>
+		<div class="buttonDiv">
 			<button
 				(click)="updateFirstLogin('step1')"
 				matTooltip="Please Update Company Details"
-				mat-button
+				mat-raised-button
 				[disabled]="!updatedSuccessFull"
 				matStepperNext
 			>
@@ -37,11 +34,11 @@
 				(isRoleInvaid)="isRoleInvaid = $event"
 			></app-role-management>
 		</div>
-		<div>
-			<!-- <button  mat-button matStepperPrevious>Back</button> -->
+		<div class="buttonDiv">
+			<!-- <button  mat-raised-button matStepperPrevious>Back</button> -->
 			<button
 				(click)="updateFirstLogin('step2')"
-				mat-button
+				mat-raised-button
 				matStepperNext
 			>
 				Next
@@ -55,11 +52,11 @@
 				(isEmpRegInvalid)="isEmpRegInvalid = $event"
 			></app-employee-registration>
 		</div>
-		<div>
-			<button mat-button matStepperPrevious>Back</button>
+		<div class="buttonDiv">
+			<button mat-raised-button matStepperPrevious>Back</button>
 			<button
 				(click)="updateFirstLogin('step3')"
-				mat-button
+				mat-raised-button
 				matStepperNext
 			>
 				Next
@@ -71,29 +68,14 @@
 		<div class="shadow">
 			<app-subcontract></app-subcontract>
 		</div>
-		<div>
-			<button mat-button matStepperPrevious>Back</button>
+		<div class="buttonDiv">
 			<button
-				(click)="updateFirstLogin('step4')"
-				mat-button
+				(click)="updateFirstLogin('step4');"
+				mat-raised-button
 				matStepperNext
 			>
-				Next
+				Goto DashBoard
 			</button>
-		</div>
-	</mat-step>
-
-	<mat-step>
-		<ng-template matStepLabel>Done</ng-template>
-		<div>
-			<!-- <app-employee-registration></app-employee-registration> -->
-		</div>
-		<div>
-			<!-- <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button> -->
-			<button mat-button (click)="setupComplete()">Goto Dashboard</button>
-			<button mat-button matStepperPrevious>Back</button>
-			<button mat-button (click)="stepper.reset()">Reset</button>
 		</div>
 	</mat-step>
 </mat-horizontal-stepper>

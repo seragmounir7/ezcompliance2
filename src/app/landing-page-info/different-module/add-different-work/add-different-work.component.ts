@@ -16,6 +16,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-different-work',
 	templateUrl: './add-different-work.component.html',
@@ -40,7 +42,6 @@ export class AddDifferentWorkComponent implements OnInit {
 			description: ['', Validators.required],
 			fileUrl: ''
 		});
-		console.log('data', data);
 	}
 
 	ngOnInit(): void {}

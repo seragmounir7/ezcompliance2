@@ -11,6 +11,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-safety-module',
 	templateUrl: './add-safety-module.component.html',
@@ -73,10 +75,9 @@ export class AddSafetyModuleComponent implements OnInit {
 			this.safetyImgArr().at(0).patchValue({
 				title: this.data.EditData.subModules[this.data.index].title
 			});
-			(this.selectedImage = this.data.EditData.subModules[
+			this.selectedImage = this.data.EditData.subModules[
 				this.data.index
-			].fileUrl),
-				console.log('img', this.selectedImage);
+			].fileUrl;
 		}
 		const index = this.data.index;
 		this.subId = this.data.EditData.subModules[index]._id;

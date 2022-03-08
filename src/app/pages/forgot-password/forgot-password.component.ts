@@ -12,6 +12,8 @@ import { CustomValidators } from 'src/app/custom-validators';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-forgot-password',
 	templateUrl: './forgot-password.component.html',
@@ -104,10 +106,9 @@ export class ForgotPasswordComponent implements OnInit {
 	changePassword() {
 		this.submitBtn = true;
 		if (this.forgotPasswordForm.invalid) {
-			console.log(this.forgotPasswordForm.invalid);
 			return;
 		}
-		console.log(this.forgotPasswordForm.value);
+
 		this.authService
 			.resetPassword(
 				this.email,
@@ -116,7 +117,6 @@ export class ForgotPasswordComponent implements OnInit {
 			)
 			.subscribe(
 				(res) => {
-					console.log(res);
 					this.toast.success('Password Successfully Changed!', '', {
 						timeOut: 3000
 					});
@@ -134,7 +134,7 @@ export class ForgotPasswordComponent implements OnInit {
 			{},
 			{ email: this.emailControl.value as string }
 		);
-		console.log(email, this.emailControl);
+
 		this.authService.sendForgotMail(this.emailControl.value).subscribe(
 			(res) => {
 				this.toast.success('OTP sent To the Email.');
@@ -157,7 +157,6 @@ export class ForgotPasswordComponent implements OnInit {
 			)
 			.subscribe(
 				(res) => {
-					console.log(res);
 					this.toast.success('Password Changed SuccessFully!');
 					sessionStorage.removeItem('resetEmail');
 					this.router.navigate(['']);

@@ -56,6 +56,7 @@ import { MobileViewService } from './utils/services/mobile-view.service';
 import { ScrollModule } from './shared/scroll/scroll.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { NavigationService } from './services/navigation.service';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -80,7 +81,8 @@ registerLocaleData(localeEn, 'en-EN');
 		NotFoundPageComponent,
 		PrintLayoutComponent,
 		ResetPasswordComponent,
-		ForgotPasswordComponent
+		ForgotPasswordComponent,
+		InvoiceComponent
 	],
 	imports: [
 		BrowserModule,

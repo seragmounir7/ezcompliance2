@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-risk-assessment-setting',
 	templateUrl: './risk-assessment-setting.component.html',
@@ -19,13 +21,11 @@ export class RiskAssessmentSettingComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.selectedIndex$ = this.activatedRoute.queryParams.pipe(
-			tap((x) => console.log(x)),
 			map((x) => x.selectedTab)
 		);
 	}
 
 	selectedIndexChange(event) {
-		console.log(event);
 		this.router.navigate([], {
 			relativeTo: this.activatedRoute,
 			queryParams: { selectedTab: event }

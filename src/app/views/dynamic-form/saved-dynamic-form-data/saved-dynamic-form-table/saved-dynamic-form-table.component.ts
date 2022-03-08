@@ -13,6 +13,8 @@ import { FormName } from 'src/app/side-nav-access.enum';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-saved-dynamic-form-table',
 	templateUrl: './saved-dynamic-form-table.component.html',
@@ -56,14 +58,9 @@ export class SavedDynamicFormTableComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Saved Dynamic Form');
 		// this.getSavedForm();
 
-		console.log('asdfghj', this.formId);
-
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
-				.pipe(
-					tap(console.log),
-					map((params) => params.get('id'))
-				)
+				.pipe(map((params) => params.get('id')))
 				.subscribe((res) => {
 					this.id = res;
 					this.displayedColumns = [
@@ -113,7 +110,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			.getSavedFormHistory(this.formId)
 			.subscribe((res: any) => {
 				this.showDatas = res;
-				console.log('get res', this.showDatas);
+
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
 				});
@@ -121,7 +118,6 @@ export class SavedDynamicFormTableComponent implements OnInit {
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
 				this.tempArray.paginator = this.paginator;
 				this.tempArray.sort = this.sort;
-				console.log('get res', this.showDatas);
 			});
 	}
 	getSavedForm() {
@@ -129,7 +125,7 @@ export class SavedDynamicFormTableComponent implements OnInit {
 			.getsavedFormByFormId(this.formId)
 			.subscribe((res: any) => {
 				this.showDatas = res.data[0].result;
-				console.log('get res', this.showDatas);
+
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
 				});
@@ -137,7 +133,6 @@ export class SavedDynamicFormTableComponent implements OnInit {
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
 				this.tempArray.paginator = this.paginator;
 				this.tempArray.sort = this.sort;
-				console.log('get res', this.showDatas);
 			});
 	}
 	edit(id) {

@@ -27,6 +27,8 @@ import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-company-info',
 	templateUrl: './add-and-edit-company-info.component.html',
@@ -169,17 +171,10 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			}
 			const formdata = new FormData();
 			formdata.append('', files);
-			console.log(files);
 
 			this.upload.upload(formdata).subscribe((res) => {
-				console.log('AddProductComponent -> browser -> res', res);
-
 				this.selectedLogo = res.files[0];
 				this.formData.get('companyLogo').patchValue(this.selectedLogo);
-				console.log(
-					'AddProductComponent -> browse -> this.selectedLogo',
-					this.selectedLogo
-				);
 			});
 		} else {
 			alert('Please select a valid Image file.');
@@ -191,7 +186,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	getAllStates() {
 		this.licenceInfo.getAllStates().subscribe((res: any) => {
-			console.log('setStatesDetails=>', res);
 			this.StatesData = res.data;
 		});
 	}
@@ -216,7 +210,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	addEquipFiled2() {
 		this.addEquip().push(this.newEquipFiled2());
-		console.log(this.formData.value);
+
 		this.checkedOutAuto$ = new Array<Observable<any>>();
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
@@ -246,14 +240,10 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 						)
 					)
 				);
-
-				console.log(element.valueChanges);
 			}
 		});
 	}
 	newEquipFiled3(data): FormGroup {
-		console.log('newData', data);
-
 		return this.fb.group({
 			plantName: [data.plantName],
 			checkedOut: [data.checkedOut],
@@ -273,9 +263,8 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		});
 	}
 	addEquipFiled3(data) {
-		console.log('data', data);
 		this.addEquip().push(this.newEquipFiled3(data));
-		console.log('addPPEFiled1', this.formData.value);
+
 		this.checkedOutAuto$ = new Array<Observable<any>>();
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
@@ -305,8 +294,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 						)
 					)
 				);
-
-				console.log(element.valueChanges);
 			}
 		});
 	}
@@ -333,7 +320,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	addInsuranceFiled2() {
 		this.addInsurance().push(this.newInsuranceFiled2());
-		console.log(this.formData.value);
 	}
 	newInsurance(data): FormGroup {
 		return this.fb.group({
@@ -348,7 +334,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	addInsurance2(data) {
 		this.addInsurance().push(this.newInsurance(data));
-		console.log(this.formData.value);
 	}
 	removeInsuranceFiled1(i) {
 		const item = <FormArray>this.formData.controls.insuranceArr;
@@ -378,12 +363,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	onFormSubmit() {
 		this.submitted = true;
-		console.log('this.EmployeeInfo.value', this.formData.value);
+
 		const insuranceArr = () => {
 			this.addInsurance().length;
 			const arr = [];
 			this.addInsurance().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					documentNumber: item.controls.documentNumber.value,
 					documentType: item.controls.documentType.value,
@@ -400,7 +384,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			this.addEquip().length;
 			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					plantName: item.controls.plantName.value,
 					checkedOut: item.controls.checkedOut.value,
@@ -451,12 +434,8 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			}
 		};
 
-		console.log('body=>', body);
-
 		this.subscript.updateCompanyDetails(body).subscribe(
 			(data) => {
-				console.log('data=>', data);
-
 				this.router.navigate(['/admin/registration/compdetails']);
 			},
 			(err) => {
@@ -466,8 +445,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 	}
 	patchData() {
 		this.subscript.getCompanyDeatils().subscribe((data: any) => {
-			console.log('data=>', data);
-
 			data.data.insuranceRegister.insurance.length > 0
 				? data.data.insuranceRegister.insurance.forEach((ele) => {
 						this.addInsurance2(ele);
@@ -544,7 +521,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			this.addInsurance().length;
 			const arr = [];
 			this.addInsurance().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					documentNumber: item.controls.documentNumber.value,
 					documentType: item.controls.documentType.value,
@@ -561,7 +537,6 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			this.addEquip().length;
 			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					plantName: item.controls.plantName.value,
 					checkedOut: item.controls.checkedOut.value,
@@ -614,7 +589,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		this.subscript.updateCompanyDetails(body).subscribe(
 			(resData) => {
 				this.updatedSuccessFull.emit(true);
-				console.log('updateData', resData);
+
 				let userData: UserData = JSON.parse(
 					sessionStorage.getItem('userData')
 				);

@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-licence',
 	templateUrl: './edit-licence.component.html',
@@ -24,8 +26,6 @@ export class EditLicenceComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.dataRec);
-
 		this.editTitle = this.fb.group({
 			title: [this.dataRec.title, Validators.required],
 			tradeCategoryId: [
@@ -33,14 +33,12 @@ export class EditLicenceComponent implements OnInit {
 				Validators.required
 			]
 		});
-		console.log(this.editTitle.value);
+
 		this.getAllLicenceCat();
 	}
 	getAllLicenceCat() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.categories = res.data;
-			console.log('categories=>', res.data);
 		});
 	}
 	onFormSubmit() {
@@ -48,13 +46,10 @@ export class EditLicenceComponent implements OnInit {
 			title: this.editTitle.get('title').value,
 			tradeCategoryId: this.editTitle.get('tradeCategoryId').value
 		};
-		console.log('tradeCategoryId', data);
 
 		this.logicalFormInfo
 			.updateLicence(this.dataRec._id, data)
 			.subscribe((resData) => {
-				console.log('updateLicence', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire('Parameter Edited successfully');
 			});

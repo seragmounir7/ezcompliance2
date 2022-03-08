@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddItemComponent } from './set-relation/add-item/add-item.component';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-set-logic',
 	templateUrl: './set-logic.component.html',
@@ -152,12 +154,9 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 		this.getJobTask();
 	}
 
-	onFormSubmit() {
-		console.log(this.JobTaskDetail);
-	}
+	onFormSubmit() {}
 	getJobTask() {
 		this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
-			console.log('jobTaskDetails=>', res);
 			this.jobTaskData = res.data;
 
 			this.jobTaskData.forEach((element, index) => {
@@ -171,38 +170,32 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 	}
 	getAllHighRisk() {
 		this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-			console.log('Risk=>', res);
 			this.highRiskConstructionData = res.data;
 		});
 	}
 	getAllPPE() {
 		this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-			console.log('PPE=>', res);
 			this.PPESelectionData = res.data;
 		});
 	}
 
 	getAllLicence() {
 		this.logicalFormInfo.getAllLicence().subscribe((res) => {
-			console.log('Licence=>', res);
 			this.licenseAndQual = res.data;
 		});
 	}
 	getAllHazard() {
 		this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
-			console.log('getAllHazards=>', res);
 			this.allHazards = res.data;
 		});
 	}
 	getAllContrActReq() {
 		this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
-			console.log('getAllHazards=>', res);
 			this.allContrlActReq = res.data;
 		});
 	}
 	getAllCategories() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.licenceCatAll = res.data;
 		});
 	}
@@ -216,7 +209,6 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 	categorySel(catArr) {
 		this.licenseAndQualificationData = [];
 
-		console.log(catArr);
 		catArr.forEach((element) => {
 			this.licenseAndQual.forEach((item) => {
 				if (element === item.licenceCategoryId._id) {
@@ -224,10 +216,6 @@ export class SetLogicComponent implements AfterViewInit, OnInit {
 				}
 			});
 		});
-		console.log(
-			' this.licenseAndQualificationData',
-			this.licenseAndQualificationData
-		);
 	}
 
 	addJobTask() {

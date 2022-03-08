@@ -129,6 +129,34 @@
 			</td>
 		</ng-container>
 
+		<ng-container matColumnDef="adminEdit">
+			<th mat-header-cell *matHeaderCellDef>Action</th>
+			<td mat-cell *matCellDef="let element">
+				<div style="display: flex; justify-content: space-evenly">
+					<ng-container>
+						<button
+							matTooltip="Edit"
+							mat-icon-button
+							class="mr-2"
+							aria-label="Example icon button with a delete icon"
+							(click)="editForm(element)"
+						>
+							<button
+								matTooltip="View"
+								mat-icon-button
+								class="mr-2"
+								aria-label="Example icon button with a delete icon"
+								(click)="viewForm(element)"
+							>
+								<mat-icon>visibility</mat-icon>
+							</button>
+							<mat-icon>edit</mat-icon>
+						</button>
+					</ng-container>
+				</div>
+			</td>
+		</ng-container>
+
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 		<tr class="mat-row" *matNoDataRow>

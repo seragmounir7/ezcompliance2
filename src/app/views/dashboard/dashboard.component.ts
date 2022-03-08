@@ -11,6 +11,8 @@ interface marker {
 	label?: string;
 	draggable: boolean;
 }
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
@@ -179,9 +181,7 @@ export class DashboardComponent implements OnInit {
 	}: {
 		event: MouseEvent;
 		active: {}[];
-	}): void {
-		console.log(event, active);
-	}
+	}): void {}
 
 	public chartHovered({
 		event,
@@ -189,9 +189,7 @@ export class DashboardComponent implements OnInit {
 	}: {
 		event: MouseEvent;
 		active: {}[];
-	}): void {
-		console.log(event, active);
-	}
+	}): void {}
 
 	///AGM angular google map
 

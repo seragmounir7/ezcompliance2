@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-task',
 	templateUrl: './edit-task.component.html',
@@ -27,8 +29,6 @@ export class EditTaskComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('this.dataRec', this.dataRec);
-
 		this.editTitle = this.fb.group({
 			title: [this.dataRec.title, Validators.required],
 			tradeCategoryId: [
@@ -50,8 +50,6 @@ export class EditTaskComponent implements OnInit {
 		this.logicalFormInfo
 			.updateJobTask(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('submodulesData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Edited successfully',
@@ -65,9 +63,7 @@ export class EditTaskComponent implements OnInit {
 	}
 	getAllLicenceCat() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.categories = res.data;
-			console.log('categories=>', res.data);
 		});
 	}
 }

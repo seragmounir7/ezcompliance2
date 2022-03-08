@@ -8,13 +8,17 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddTermsAndConditionsComponent } from './add-terms-and-conditions/add-terms-and-conditions.component';
 import Swal from 'sweetalert2';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-terms-and-conditions',
 	templateUrl: './terms-and-conditions.component.html',
 	styleUrls: ['./terms-and-conditions.component.scss']
 })
 export class TermsAndConditionsComponent implements OnInit {
+	public Editor = ClassicEditor;
 	jobTaskData: any = [];
 	ELEMENT_DATA = [];
 	/////////////mat table////////////////
@@ -40,15 +44,14 @@ export class TermsAndConditionsComponent implements OnInit {
 	ngOnInit(): void {
 		this.setTitle.setTitle('WHS-Terms & Conditions');
 		this.url = this.activatedRoute.snapshot.url[0].path;
-		console.log('this.id', this.url);
+
 		// this.getInstructions();
 		this.getTermsAndConditions();
 	}
 	getTermsAndConditions() {
 		this.logicalFormInfo.getTermsAndConditions().subscribe(
 			(res: any) => {
-				console.log('NatOfIncAll=>', res);
-				const data = res.data;
+				const data = res;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
 				});
@@ -58,10 +61,12 @@ export class TermsAndConditionsComponent implements OnInit {
 					this.addBtn = true;
 				}
 
-				this.ELEMENT_DATA = data;
+				this.ELEMENT_DATA = data.map((obj) => {
+					obj.isDisabled = true;
+					return obj;
+				});
 
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 			},
 			(err) => (this.addBtn = false)
 		);
@@ -69,22 +74,16 @@ export class TermsAndConditionsComponent implements OnInit {
 
 	edit(element) {
 		this.addBtn = false;
-		const dialogRef = this.dialog.open(AddTermsAndConditionsComponent, {
-			width: '950px',
-			height: '500px',
-			data: {
-				element,
-				url: this.url
-			}
-		});
-		dialogRef.afterClosed().subscribe((result) => {
-			if (result == 'true') {
-				this.getTermsAndConditions();
-			} else {
-				this.getTermsAndConditions();
-			}
-			console.log('The dialog was closed');
-		});
+		if (element.isDisabled) return;
+		if (element.title === element.updatedValue) return;
+		this.logicalFormInfo
+			.postTermsAndConditions(element.updatedValue)
+			.subscribe(
+				(data) => {},
+				(err) => {
+					console.error(err);
+				}
+			);
 	}
 	delete(item) {
 		Swal.fire({
@@ -105,7 +104,7 @@ export class TermsAndConditionsComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						// this.getInstructions();
 					});
 			}

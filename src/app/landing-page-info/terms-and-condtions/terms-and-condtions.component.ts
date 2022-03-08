@@ -14,6 +14,8 @@ import { MatSort } from '@angular/material/sort';
 import { EditTermsAndCondtionsComponent } from './edit-terms-and-condtions/edit-terms-and-condtions.component';
 import { AddTermsAndCondtionsComponent } from './add-terms-and-condtions/add-terms-and-condtions.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-terms-and-condtions',
 	templateUrl: './terms-and-condtions.component.html',

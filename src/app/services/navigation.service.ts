@@ -11,7 +11,6 @@ export class NavigationService {
 	public startSaveHistory(): void {
 		this.router.events.subscribe((event) => {
 			if (event instanceof NavigationEnd) {
-				console.log(event.urlAfterRedirects);
 				this.history.push(event.urlAfterRedirects);
 				localStorage.setItem(
 					'returnUrl',
@@ -27,7 +26,6 @@ export class NavigationService {
 
 	public goBack(): void {
 		const returnUrl = this.history.pop();
-		console.log('pop', returnUrl);
 
 		if (this.history.length > 0) {
 			this.location.back();

@@ -10,6 +10,8 @@ import { EditSiteComponent } from 'src/app/site-info/add-site-info/edit-site/edi
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-job-number',
 	templateUrl: './job-number.component.html',
@@ -53,9 +55,8 @@ export class JobNumberComponent implements OnInit {
 		this.logicalFormInfoService
 			.getAllJobNumber(field, value)
 			.subscribe((res: any) => {
-				console.log(res);
 				this.dataSource = res.data;
-				console.log('getAllJobNumber', this.dataSource);
+
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
 			});
@@ -76,11 +77,6 @@ export class JobNumberComponent implements OnInit {
 			}
 		});
 		dialogRef.afterClosed().subscribe((result) => {
-			console.log(
-				'CustomerInfoComponent -> openDialog -> result',
-				result
-			);
-			console.log('result', result);
 			if (result === 'success') {
 				this.getAllJobNumber();
 				Swal.fire({
@@ -89,7 +85,6 @@ export class JobNumberComponent implements OnInit {
 					timer: 1200
 				});
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	edit(element) {
@@ -101,7 +96,6 @@ export class JobNumberComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllJobTask();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -123,7 +117,7 @@ export class JobNumberComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllJobNumber();
 					});
 			}

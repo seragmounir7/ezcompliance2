@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-residual-risk-level',
 	templateUrl: './add-residual-risk-level.component.html',
@@ -46,13 +48,11 @@ export class AddResidualRiskLevelComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.addResidualForm.value);
 		const data = {
 			arrObj: this.addResidualForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleResidual(data).subscribe(
 			(data) => {
-				console.log('chemical=>', data);
 				this.router.navigate(['/admin/setting/residual']);
 			},
 			(err) => {
@@ -63,6 +63,5 @@ export class AddResidualRiskLevelComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

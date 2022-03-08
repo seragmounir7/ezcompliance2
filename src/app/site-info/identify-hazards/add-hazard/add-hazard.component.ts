@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-hazard',
 	templateUrl: './add-hazard.component.html',
@@ -49,13 +51,11 @@ export class AddHazardComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.hazardFG.value);
 		const data = {
 			arrObj: this.hazardFG.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleHazards(data).subscribe(
 			(data) => {
-				console.log('PPE=>', data);
 				Swal.fire({
 					title: 'Parameter Added successfully',
 					showConfirmButton: false,
@@ -71,6 +71,5 @@ export class AddHazardComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

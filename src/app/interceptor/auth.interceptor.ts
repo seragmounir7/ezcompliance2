@@ -33,8 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			request.method === 'PUT' ||
 			request.method === 'PATCH'
 		)
-			console.log(request);
-		if (request.url.includes('upload')) return next.handle(request);
+			if (request.url.includes('upload')) return next.handle(request);
 		let body = {
 			...(request.body as Record<string, unknown>)
 		};

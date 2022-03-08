@@ -8,6 +8,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { EditChangesMadeComponent } from './edit-changes-made/edit-changes-made.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-changes-made',
 	templateUrl: './changes-made.component.html',
@@ -42,7 +44,6 @@ export class ChangesMadeComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllChangesMade(field, value)
 			.subscribe((res: any) => {
-				console.log('Changes=>', res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -52,7 +53,6 @@ export class ChangesMadeComponent implements OnInit {
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				//  this.task = res.data.subComponents;
 			});
@@ -67,7 +67,6 @@ export class ChangesMadeComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllChanges();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -89,7 +88,7 @@ export class ChangesMadeComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllChanges();
 					});
 			}

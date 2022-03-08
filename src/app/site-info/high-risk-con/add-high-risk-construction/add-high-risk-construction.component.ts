@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-high-risk-construction',
 	templateUrl: './add-high-risk-construction.component.html',
@@ -25,20 +27,20 @@ export class AddHighRiskConstructionComponent implements OnInit {
 	//     this.riskDetails = this.fb.group({
 	//       title: ['', Validators.required],
 	//     });
-	//     console.log('riskDetails=>', this.riskDetails);
+	//
 	//   }
 	// }
 
 	// ngOnInit(): void {}
 
 	// onFormSubmit() {
-	//   console.log(this.riskDetails);
+	//
 	//   let data = {
 	//     componentId: this.data.EditData,
 	//     title: this.riskDetails.get('title').value,
 	//   };
 	//   this.logicalFormInfo.addSubComponent(data).subscribe((data) => {
-	//     console.log('riskDetails=>', data);
+	//
 	//     // this.riskData = data;
 	//     this.dialogRef.close('true');
 	//     this.riskDetails.reset();
@@ -84,15 +86,14 @@ export class AddHighRiskConstructionComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		// console.log(this.riskConstr.value);
+		//
 		const data = {
 			arrObj: this.riskConstr.get('arrObj').value
 		};
-		// console.log(data);
+		//
 
 		this.logicalFormInfo.addMultipleRisk(data).subscribe(
 			(data) => {
-				console.log('Risk=>', data);
 				Swal.fire({
 					title: 'Parameter Added successfully',
 					showConfirmButton: false,
@@ -108,6 +109,5 @@ export class AddHighRiskConstructionComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

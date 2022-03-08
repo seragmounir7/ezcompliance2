@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-contr-act',
 	templateUrl: './add-contr-act.component.html',
@@ -50,13 +52,11 @@ export class AddContrActComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.contrlAndActFG.value);
 		const data = {
 			arrObj: this.contrlAndActFG.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleContrlActReq(data).subscribe(
 			(data) => {
-				console.log('PPE=>', data);
 				Swal.fire({
 					title: 'Parameter Added successfully',
 					showConfirmButton: false,
@@ -72,6 +72,5 @@ export class AddContrActComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

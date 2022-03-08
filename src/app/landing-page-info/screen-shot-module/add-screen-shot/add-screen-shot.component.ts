@@ -16,6 +16,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-screen-shot',
 	templateUrl: './add-screen-shot.component.html',
@@ -40,7 +42,6 @@ export class AddScreenShotComponent implements OnInit {
 			description: ['', Validators.required],
 			fileUrl: ['', Validators.required]
 		});
-		console.log('data', data);
 	}
 
 	ngOnInit(): void {}
@@ -54,7 +55,6 @@ export class AddScreenShotComponent implements OnInit {
 		});
 	}
 	onSubmit() {
-		console.log('this.addWork.value', this.addWork.value);
 		this.addWork.get('fileUrl')?.setValue(this.selectedImage[0].toString());
 
 		this.landingPageInfo

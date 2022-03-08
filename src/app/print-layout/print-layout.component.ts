@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RoleManagementSharedServiceService } from '../utils/services/role-management-shared-service.service';
 import { SubscriptionService } from '../utils/services/subscription.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-print-layout',
 	templateUrl: './print-layout.component.html',
@@ -39,7 +41,6 @@ export class PrintLayoutComponent implements OnInit {
 	ngOnInit(): void {
 		this.getData();
 		this.shared.printDataObs$.subscribe((res) => {
-			console.log('check print data obs::', res);
 			this.formNam = res.formName;
 			this.version = res.version;
 
@@ -48,11 +49,8 @@ export class PrintLayoutComponent implements OnInit {
 	}
 
 	getData() {
-		console.log('is Calling >>>>>>>>>>>>>>>>');
-
 		this.id = '62090789d083841874e3faad';
 		this.subscript.getCompanyDeatils().subscribe((data: any) => {
-			console.log('data=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', data);
 			// this.companyData = data;
 			(this.companyName = data.data.companyName),
 				(this.phone = data.data.phone),

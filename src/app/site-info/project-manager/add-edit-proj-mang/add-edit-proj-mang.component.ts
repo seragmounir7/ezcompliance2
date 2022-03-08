@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-edit-proj-mang',
 	templateUrl: './add-edit-proj-mang.component.html',
@@ -35,8 +37,6 @@ export class AddEditProjMangComponent implements OnInit {
 		this.logicalFormInfo
 			.updateProjectMang(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('projectManager', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Project Manager Edited successfully',
@@ -50,8 +50,6 @@ export class AddEditProjMangComponent implements OnInit {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo.addProjectMang(data).subscribe((resData) => {
-			console.log('projectManager', resData);
-
 			this.dialogRef.close('true');
 
 			Swal.fire({

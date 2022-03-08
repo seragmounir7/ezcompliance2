@@ -11,6 +11,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-flexible-info',
 	templateUrl: './edit-flexible-info.component.html',
@@ -78,10 +80,9 @@ export class EditFlexibleInfoComponent implements OnInit {
 				subTitle: this.data.EditData.subModules[this.data.index]
 					.subTitle
 			});
-			(this.selectedImage = this.data.EditData.subModules[
+			this.selectedImage = this.data.EditData.subModules[
 				this.data.index
-			].fileUrl),
-				console.log('img', this.selectedImage);
+			].fileUrl;
 		}
 
 		const index = this.data.index;
@@ -154,7 +155,6 @@ export class EditFlexibleInfoComponent implements OnInit {
 				.editModule(flexibleData, this.data.EditData._id)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('editModule', resData);
 
 					this.dialogRef.close('true');
 					this.flexibleDetail.reset();

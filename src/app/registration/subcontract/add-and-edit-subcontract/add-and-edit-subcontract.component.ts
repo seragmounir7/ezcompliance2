@@ -18,6 +18,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-subcontract',
 	templateUrl: './add-and-edit-subcontract.component.html',
@@ -83,7 +85,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			this.activatedRoute.snapshot.params.id ||
 			this.dialogData?.id ||
 			'form';
-		console.log(this.id);
+
 		if (this.id !== 'form') {
 			this.licenceInfo
 				.getAllLicence()
@@ -97,7 +99,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				)
 				.subscribe((empData) => {
 					this.licenceData = empData;
-					console.log('this.empData', this.licenceData);
 				});
 			this.dataEmp = true;
 			this.patchData();
@@ -115,7 +116,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				)
 				.subscribe((empData) => {
 					this.licenceData = empData;
-					console.log('this.empData', this.licenceData);
+
 					this.addFiled();
 				});
 		}
@@ -124,14 +125,12 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			debounceTime(800),
 			distinctUntilChanged(),
 			switchMap((val) => {
-				console.log('myControl22..', val, this.filteredOptions2);
 				return this.filter2(val || '');
 			})
 		);
 	}
 	getAllStates() {
 		this.licenceInfo.getAllStates().subscribe((res: any) => {
-			console.log('setStatesDetails=>', res);
 			this.StatesData = res.data;
 		});
 	}
@@ -166,8 +165,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			this.licenceValueChanges.push(
 				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
-					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -178,7 +175,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					)
 				)
 			);
-			console.log(element.valueChanges);
 		}
 	}
 	addFiled() {
@@ -190,8 +186,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				(element.controls.LicenceName
 					.valueChanges as Observable<any>).pipe(
 					startWith(''),
-					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -202,7 +196,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					)
 				)
 			);
-			console.log(element.valueChanges);
 		}
 	}
 	private _filter(name: string): any[] {
@@ -223,20 +216,13 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.selectedImage = res.files;
 			this.addLicence()
 				.at(index)
 				.get('file')
 				.patchValue(this.selectedImage);
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 	profileshow() {
@@ -273,10 +259,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 		return user && user.title ? user.title : '';
 	}
 	patchData() {
-		console.log('patchdata called');
 		this.licenceInfo.getSubcontract(this.id).subscribe((res: any) => {
-			console.log('dataId=>', res.data);
-
 			res.data.licenceAndQualifications.length > 0
 				? res.data.licenceAndQualifications.forEach((ele) => {
 						this.addFiled1(ele);
@@ -306,7 +289,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			this.addLicence().length;
 			const arr = [];
 			this.addLicence().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					LicenceName: item.controls.LicenceName.value,
 					LicenceNumber: item.controls.LicenceNumber.value,
@@ -334,12 +316,8 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			website: this.subcontractDetails.get('website').value
 		};
 
-		console.log('body=>', body);
-
 		this.licenceInfo.addSubcontract(body).subscribe(
 			(data) => {
-				console.log('data=>', data);
-
 				Swal.fire({
 					title: 'Subcontractor Added successfully',
 					showConfirmButton: false,
@@ -361,7 +339,6 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			this.addLicence().length;
 			const arr = [];
 			this.addLicence().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					LicenceName: item.controls.LicenceName.value,
 					LicenceNumber: item.controls.LicenceNumber.value,
@@ -390,11 +367,8 @@ export class AddAndEditSubcontractComponent implements OnInit {
 			website: this.subcontractDetails.get('website').value
 		};
 
-		console.log('body=>', body);
-
 		this.licenceInfo.updateSubcontract(this.id, body).subscribe(
 			(resData) => {
-				console.log('updateData', resData);
 				Swal.fire({
 					title: 'Subcontractor Updated successfully',
 					showConfirmButton: false,

@@ -9,6 +9,8 @@ import {
 } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-different-work',
 	templateUrl: './edit-different-work.component.html',
@@ -40,11 +42,8 @@ export class EditDifferentWorkComponent implements OnInit {
 		public dialogRef: MatDialogRef<EditDifferentWorkComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
-		console.log(data);
 		this.Is_Mod = data.moduleName;
 		this.Is_subMod = data.modulename;
-
-		console.log(this.Is_Mod);
 
 		this.SubWorkDetail = this.fb.group({
 			title: ['', Validators.required],
@@ -69,7 +68,7 @@ export class EditDifferentWorkComponent implements OnInit {
 
 		if (this.data.action == 'edit') {
 			this.Update = true;
-			console.log(' subTitle', this.data);
+
 			this.SubWorkDetail.patchValue({
 				mode: 'Different',
 				title: this.data.EditData.title
@@ -125,22 +124,18 @@ export class EditDifferentWorkComponent implements OnInit {
 		}
 	}
 
-	onFormSubmit() {
-		console.log(this.SubWorkDetail.value);
-	}
+	onFormSubmit() {}
 	editModule() {
 		if (this.data.action == 'edit') {
 			const ServiceData = {
 				title: this.SubWorkDetail.controls.title.value,
 				mode: 'Different'
 			};
-			console.log('asdfgh', ServiceData);
-			console.log('this.EditData', this.data.EditData._id);
+
 			this.url
 				.editModule(ServiceData, this.data.EditData._id)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('editModule', resData);
 
 					this.dialogRef.close('true');
 					this.SubWorkDetail.reset();
@@ -155,13 +150,11 @@ export class EditDifferentWorkComponent implements OnInit {
 				fileUrl: '',
 				description: this.add().at(0).get('description')?.value
 			};
-			console.log(' submodulesData', submodulesData);
 
 			this.url
 				.editsubModule(submodulesData, this.subId)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('submodulesData', resData);
 
 					this.dialogRef.close('true');
 					this.SubWorkDetail.reset();

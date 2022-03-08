@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-ppe',
 	templateUrl: './edit-ppe.component.html',
@@ -33,8 +35,6 @@ export class EditPPEComponent implements OnInit {
 		this.logicalFormInfo
 			.updatePPE(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('resData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Updated successfully',

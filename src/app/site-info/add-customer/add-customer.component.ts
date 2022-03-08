@@ -9,6 +9,8 @@ import { AddingCustComponent } from './adding-cust/adding-cust.component';
 import { EditCustComponent } from './edit-cust/edit-cust.component';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-customer',
 	templateUrl: './add-customer.component.html',
@@ -45,7 +47,6 @@ export class AddCustomerComponent implements OnInit {
 		this.logicalFormInfoService
 			.getAllCustomer(field, value)
 			.subscribe((res: any) => {
-				console.log(res);
 				this.dataSource.data = res.data;
 				this.dataSource.paginator = this.paginator;
 				//this.dataSource.sort = this.sort;
@@ -54,7 +55,7 @@ export class AddCustomerComponent implements OnInit {
 
 	// getAllJobTask() {
 	//   // this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
-	//   //   console.log('jobTaskDetails=>', res);
+	//   //
 	//   //   // this.jobTaskData = res.data[0].subComponents;
 	//   //   let data = res.data
 	//   //   data.forEach((element, index) => {
@@ -84,16 +85,9 @@ export class AddCustomerComponent implements OnInit {
 			if (result === 'ok') {
 				this.getAllCustomers();
 			}
-			console.log(
-				'CustomerInfoComponent -> openDialog -> result',
-				result
-			);
-
-			console.log('The dialog was closed');
 		});
 	}
 	edit(element) {
-		console.log(element);
 		const dialogRef = this.dialog.open(EditCustComponent, {
 			height: '700px',
 			width: '750px',
@@ -105,7 +99,6 @@ export class AddCustomerComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllCustomers();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -127,7 +120,7 @@ export class AddCustomerComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllCustomers();
 					});
 			}

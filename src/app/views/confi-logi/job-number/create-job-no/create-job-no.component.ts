@@ -22,6 +22,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SiteData } from 'src/app/utils/types/SiteResponceTypes';
 import { CustomerData } from 'src/app/utils/types/CustomerResponceTypes';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-create-job-no',
 	templateUrl: './create-job-no.component.html',
@@ -68,7 +70,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			.get('siteName')
 			.valueChanges.subscribe((res: SiteData) => {
 				this.siteId = res._id;
-				console.log(res);
+
 				this.addJobNumberForm
 					.get('streetAddress')
 					.setValue(res.streetAddress);
@@ -80,7 +82,7 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			.get('customerName')
 			.valueChanges.subscribe((res: CustomerData) => {
 				this.customerId = res._id;
-				console.log(res);
+
 				this.addJobNumberForm
 					.get('customerContact')
 					.setValue(res.customerContact);
@@ -105,7 +107,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 			(res: any) => {
 				this.jobHasError = false;
 				this.allSites = res.data;
-				console.log(res.data);
 			},
 			(err) => {
 				if (err instanceof HttpErrorResponse && err.status === 422) {
@@ -119,7 +120,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		return this.addJobNumberForm.controls;
 	}
 	onSubmit() {
-		console.log(this.addJobNumberForm.value);
 		const jobNumber = this.f?.jobNumber?.value
 			? { jobNumber: this.f.jobNumber.value }
 			: '';
@@ -143,10 +143,9 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		};
 		// ]
 		// };
-		console.log(data);
+
 		this.logicalFormInfoService.addJobNumber(data).subscribe(
 			(res: any) => {
-				console.log(res);
 				this.dialogRef.close('success');
 			},
 			(err) => {
@@ -160,7 +159,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		);
 	}
 	setSite(item) {
-		console.log(item);
 		this.addJobNumberForm.get('streetAddress').setValue(item.streetAddress);
 		this.addJobNumberForm.get('suburb').setValue(item.suburb);
 		this.addJobNumberForm.get('state').setValue(item.stateId._id);
@@ -182,12 +180,10 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 	}
 	getAllStates() {
 		this.logicalFormInfoService.getAllStates().subscribe((res) => {
-			console.log('getAllStates=>', res);
 			this.allState = res.data;
 		});
 	}
 	jobNumberChecked(e: MatCheckboxChange) {
-		console.log(e);
 		if (e.checked) {
 			this.addJobNumberForm.addControl(
 				'jobNumber',
@@ -196,12 +192,6 @@ export class CreateJobNoComponent implements OnInit, AfterViewInit {
 		} else {
 			this.addJobNumberForm.removeControl('jobNumber');
 		}
-
-		console.log(
-			'this.addJobNumberForm.controls.jobNumber',
-			this.addJobNumberForm.controls.jobNumber.errors,
-			this.addJobNumberForm.invalid
-		);
 	}
 	addSite() {
 		const dialog = this.dialog.open(AddSiteComponent, {});

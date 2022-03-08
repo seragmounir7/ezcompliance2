@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigation.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-risk-level',
 	templateUrl: './add-risk-level.component.html',
@@ -47,13 +49,11 @@ export class AddRiskLevelComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.addRiskForm.value);
 		const data = {
 			arrObj: this.addRiskForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleRiskLevel(data).subscribe(
 			(data) => {
-				console.log('chemical=>', data);
 				this.router.navigate(['/admin/setting/riskLevel']);
 			},
 			(err) => {
@@ -64,6 +64,5 @@ export class AddRiskLevelComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

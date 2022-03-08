@@ -13,6 +13,8 @@ import { AddSafetyModuleComponent } from './add-safety-module/add-safety-module.
 import { AddModulesInfoComponent } from './add-modules-info/add-modules-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-safety-modules',
 	templateUrl: './safety-modules.component.html',

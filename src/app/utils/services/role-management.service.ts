@@ -57,9 +57,6 @@ export class RoleManagementService {
 		return this.https
 			.get<AccessResponce>(this.apiUrl + 'access/getAll')
 			.pipe(
-				tap((res) =>
-					console.log('tap getAllAcess', [...res.data.slice()])
-				),
 				map((res) => {
 					res.data = res.data.map((item) => {
 						item.access = item.accessArr.map((item2) => {

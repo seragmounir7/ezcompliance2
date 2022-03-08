@@ -9,6 +9,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { EditManagerComponent } from './edit-manager/edit-manager.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-manager',
 	templateUrl: './manager.component.html',
@@ -39,7 +41,6 @@ export class ManagerComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllManager(field, value)
 			.subscribe((res: any) => {
-				console.log('getAllManager=>', res);
 				// this.jobTaskData = res.data[0].subComponents;
 				const data = res.data;
 				data.forEach((element, index) => {
@@ -62,7 +63,6 @@ export class ManagerComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllManager();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -84,7 +84,7 @@ export class ManagerComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllManager();
 					});
 			}

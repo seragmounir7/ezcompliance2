@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-site-inspection-table',
 	templateUrl: './site-inspection-table.component.html',
@@ -47,7 +49,7 @@ export class SiteInspectionTableComponent implements OnInit {
 		this.isHistory = this.router.url.includes(
 			'/siteinspectiontable/history'
 		);
-		console.log(this.isHistory);
+
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
 				.pipe(map((params) => params.get('id')))
@@ -91,7 +93,7 @@ export class SiteInspectionTableComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getsiteInspection();
 					});
 			}
@@ -101,32 +103,26 @@ export class SiteInspectionTableComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllSiteInspection(field, value)
 			.subscribe((res: any) => {
-				console.log('res', res.data);
-
 				this.showDatas = res.data;
-				console.log('res', this.showDatas);
+
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	getsiteInspectionHistory(field = '', value = '', id = this.id) {
 		this.logicalFormInfo
 			.getAllSiteInspectionHistory(field, value, id)
 			.subscribe((res: any) => {
-				console.log('res', res.result);
-
 				this.showDatas = res.result;
-				console.log('res', this.showDatas);
+
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	edit(id) {
@@ -147,7 +143,7 @@ export class SiteInspectionTableComponent implements OnInit {
 			...element,
 			formName: 'Site Inspection Form'
 		});
-		console.log('check');
+
 		localStorage.clear();
 		localStorage.setItem('key', 'print');
 		void this.spinner.show();

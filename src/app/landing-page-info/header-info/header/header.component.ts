@@ -4,6 +4,8 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 import { UploadFileServiceService } from 'src/app/utils/services/upload-file-service.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-header',
 	templateUrl: './header.component.html',
@@ -32,7 +34,6 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getHeaderById();
-		console.log('data1', this.data1);
 
 		this.HeaderInformation = this.fb.group({
 			fileUrl: ['', Validators.required],
@@ -52,49 +53,36 @@ export class HeaderComponent implements OnInit {
 	onSubmit() {
 		this.HeaderInformation.get('fileUrl')?.setValue(this.selectedImage);
 
-		this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
-			console.log('HeaderInformation -> browser -> res', res);
-		});
+		this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {});
 	}
 	browser(event) {
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.selectedImage = res.files[0];
-
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 
 	getHeaderById() {
 		this.url.getHeaderBYId().subscribe((data) => {
-			console.log('mode=>', data);
 			this.infoData = data.data;
 		});
 	}
 
 	editHeaderInfo(id) {
-		console.log('id=>', id);
 		this.myId = this.dataHeader._id;
 		this.HeaderInformation.get('fileUrl').setValue(this.selectedImage);
-		console.log('form', this.HeaderInformation.value);
 
 		this.isEdit = true;
 		this.url
 			.editHeader(this.myId, this.HeaderInformation.value)
 			.subscribe((res) => {
 				Swal.fire(' Edited Successfully');
-				console.log('Data Set response' + res);
+
 				this.data = res.data;
-				console.log('new response' + this.data);
+
 				this.dialogRef.close('true');
 			});
 	}
@@ -103,14 +91,10 @@ export class HeaderComponent implements OnInit {
 	}
 	onFormSubmit() {
 		const value = this.selectedImage[0];
-		console.log('value', value);
 
 		const serviceData = {};
 
-		console.log('file: ~ onFormSubmit ~ data', serviceData);
-
 		this.url.AddHeader(this.HeaderInformation.value).subscribe((data) => {
-			console.log('data=>', data);
 			this.serviceData = data;
 		});
 	}

@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { AppService } from 'src/app/utils/services/app.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-user-dropdown-menu',
 	templateUrl: './user-dropdown-menu.component.html',

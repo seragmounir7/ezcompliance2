@@ -11,6 +11,8 @@ import { SubscriptionService } from 'src/app/utils/services/subscription.service
 import Swal from 'sweetalert2';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-company-details',
 	templateUrl: './company-details.component.html',
@@ -46,7 +48,6 @@ export class CompanyDetailsComponent implements OnInit {
 	}
 	getAllSubscription() {
 		this.subscript.getAllsubscription().subscribe((res) => {
-			console.log('getAll', res);
 			const companyData = res.data;
 			companyData.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -68,7 +69,6 @@ export class CompanyDetailsComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				void this.spinner.show();
 				this.subscript.deletesubscription(item._id).subscribe((res) => {
 					this.getAllSubscription();

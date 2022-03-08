@@ -3,6 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-changes-made',
 	templateUrl: './add-changes-made.component.html',
@@ -47,13 +49,11 @@ export class AddChangesMadeComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.changesformgp.value);
 		const data = {
 			arrObj: this.changesformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleChangesMade(data).subscribe(
 			(data) => {
-				console.log('nature=>', data);
 				this.router.navigate(['/admin/setting/changesMade']);
 			},
 			(err) => {
@@ -64,6 +64,5 @@ export class AddChangesMadeComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

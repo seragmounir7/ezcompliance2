@@ -10,6 +10,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { AddJobTaskComponent } from './add-job-task/add-job-task.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-job-task',
 	templateUrl: './job-task.component.html',
@@ -50,7 +52,6 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
 		this.logicalFormInfo
 			.getAllJobtask(field, value)
 			.subscribe((res: any) => {
-				console.log('jobTaskDetails=>', res);
 				// this.jobTaskData = res.data[0].subComponents;
 				const data = res.data;
 				data.forEach((element, index) => {
@@ -73,7 +74,6 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
 			if (result == 'true') {
 				this.getAllJobTask();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -95,7 +95,7 @@ export class JobTaskComponent implements AfterViewInit, OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllJobTask();
 					});
 			}

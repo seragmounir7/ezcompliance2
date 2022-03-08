@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-item',
 	templateUrl: './add-item.component.html',
@@ -22,8 +24,6 @@ export class AddItemComponent implements OnInit {
 		this.dataRec = data;
 	}
 	ngOnInit(): void {
-		console.log(this.dataRec);
-
 		this.addItem = this.fb.group({
 			title: ['', Validators.required]
 		});

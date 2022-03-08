@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditRateAndCouponComponent } from './edit-rate-and-coupon/edit-rate-and-coupon.component';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-rate-and-coupon',
 	templateUrl: './rate-and-coupon.component.html',
@@ -61,7 +63,6 @@ export class RateAndCouponComponent implements OnInit {
 				this.ELEMENT_DATA = dataPlan;
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			}
-			console.log('dataPlan=>', dataPlan);
 		});
 	}
 
@@ -78,14 +79,12 @@ export class RateAndCouponComponent implements OnInit {
 			if (result == 'true') {
 				this.getPlan();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
 	getPlanById() {
 		const id = '61b739367f7aba4a9f8684e1';
 		this.subscript.getPlan(id).subscribe((res) => {
-			console.log('getId', res);
 			this.coupon = res.data;
 		});
 	}

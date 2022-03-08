@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-cop',
 	templateUrl: './edit-cop.component.html',
@@ -35,8 +37,6 @@ export class EditCOPComponent implements OnInit {
 		this.logicalFormInfo
 			.updateCOP(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('resData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Edited successfully',

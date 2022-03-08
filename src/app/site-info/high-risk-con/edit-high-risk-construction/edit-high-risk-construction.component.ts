@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-high-risk-construction',
 	templateUrl: './edit-high-risk-construction.component.html',
@@ -25,8 +27,6 @@ export class EditHighRiskConstructionComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('this.dataRec', this.dataRec);
-
 		this.editTitle = this.fb.group({
 			title: [this.dataRec.title, Validators.required]
 		});

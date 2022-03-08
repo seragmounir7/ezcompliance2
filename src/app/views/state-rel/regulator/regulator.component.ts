@@ -8,6 +8,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditRegComponent } from './add-and-edit-reg/add-and-edit-reg.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-regulator',
 	templateUrl: './regulator.component.html',
@@ -40,7 +42,6 @@ export class RegulatorComponent implements OnInit {
 
 	getAllRegulator(field = '', value = '') {
 		this.logicalFormInfo.getAllRegulator(field, value).subscribe((res) => {
-			console.log('getAllRegulator=>', res);
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -61,7 +62,6 @@ export class RegulatorComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllRegulator();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -84,7 +84,7 @@ export class RegulatorComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllRegulator();
 					});
 			}

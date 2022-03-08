@@ -11,6 +11,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-customer-testimonail',
 	templateUrl: './edit-customer-testimonail.component.html',
@@ -82,10 +84,9 @@ export class EditCustomerTestimonailComponent implements OnInit {
 				description: this.data.EditData.subModules[this.data.index]
 					.description
 			});
-			(this.selectedImage = this.data.EditData.subModules[
+			this.selectedImage = this.data.EditData.subModules[
 				this.data.index
-			].fileUrl),
-				console.log('img', this.selectedImage);
+			].fileUrl;
 		}
 
 		const index = this.data.index;
@@ -109,13 +110,10 @@ export class EditCustomerTestimonailComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log('data action=>', this.data.action);
-
 		this.editModule();
 		this.editSubModule();
 		const value = this.selectedImage;
 
-		console.log(this.testiomnial.value);
 		const arrlength = this.add().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.add()
@@ -144,7 +142,6 @@ export class EditCustomerTestimonailComponent implements OnInit {
 		this.add().removeAt(i);
 	}
 	browser(event, i) {
-		console.log(event, i);
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
@@ -152,13 +149,10 @@ export class EditCustomerTestimonailComponent implements OnInit {
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
-				console.log(' browser -> res', res);
-
 				this.selectedImage = res.files[0];
 			});
 		} else {
 			this.upload.upload(formData).subscribe((res) => {
-				console.log(' browser -> res', res);
 				this.testiomnial.patchValue({
 					filePath: res.filePath
 				});
@@ -174,13 +168,11 @@ export class EditCustomerTestimonailComponent implements OnInit {
 				description: this.testiomnial.controls.description.value,
 				mode: 'Testimonial'
 			};
-			console.log('asdfgh', ServiceData);
-			console.log('this.EditData', this.data.EditData._id);
+
 			this.landingPageInfo
 				.editModule(ServiceData, this.data.EditData._id)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('editModule', resData);
 
 					this.dialogRef.close('true');
 					this.testiomnial.reset();
@@ -200,7 +192,6 @@ export class EditCustomerTestimonailComponent implements OnInit {
 				.editsubModule(submodulesData, this.subId)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('submodulesData', resData);
 
 					this.dialogRef.close('true');
 					this.testiomnial.reset();
@@ -217,7 +208,6 @@ export class EditCustomerTestimonailComponent implements OnInit {
 			this.landingPageInfo
 				.addAppService(this.testiomnial.value)
 				.subscribe((data) => {
-					console.log('data=>', data);
 					this.testimonailData = data;
 				});
 		}

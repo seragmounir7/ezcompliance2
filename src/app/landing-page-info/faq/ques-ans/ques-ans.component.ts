@@ -11,6 +11,8 @@ import { FormControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-ques-ans',
 	templateUrl: './ques-ans.component.html',
@@ -47,7 +49,6 @@ export class QuesAnsComponent implements OnInit {
 		this.setTitle.setTitle('WHS-FAQ List');
 		this.portal.valueChanges.subscribe((res) => {
 			if (res) {
-				console.log(res);
 				this.getAllFaqbasedOnPortal(res);
 			}
 		});
@@ -55,11 +56,8 @@ export class QuesAnsComponent implements OnInit {
 
 	getAllPortal() {
 		this.landingPafeInfo.getAllPortal().subscribe((res) => {
-			console.log('getAllPortal=>', res);
-
 			this.portalData = res.data;
 
-			console.log('portalData=>', this.portalData);
 			this.portal.setValue(res.data[0]._id);
 			this.getAllFaqbasedOnPortal(res.data[0]._id);
 		});
@@ -67,7 +65,7 @@ export class QuesAnsComponent implements OnInit {
 	getAllFaqbasedOnPortal(id) {
 		this.landingPafeInfo.getAllFaqbasedOnPortal(id).subscribe((res) => {
 			const allData = res.data;
-			console.log('getAllFaqbasedOnPortal', allData);
+
 			allData[0].faq.forEach((element, index) => {
 				element.index = index + 1;
 			});
@@ -78,7 +76,6 @@ export class QuesAnsComponent implements OnInit {
 		});
 	}
 	edit(element) {
-		console.log(',ele', element);
 		const dialogRef = this.dialog.open(EditQuestionComponent, {
 			width: '600px',
 			data: element
@@ -87,12 +84,9 @@ export class QuesAnsComponent implements OnInit {
 			if (result == 'true') {
 				this.ngOnInit();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
-		console.log('delete', item);
-
 		Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to delete "${item.title}"?`,
@@ -109,7 +103,7 @@ export class QuesAnsComponent implements OnInit {
 						showConfirmButton: false,
 						timer: 1000
 					});
-					console.log('deleted res', res);
+
 					this.ngOnInit();
 				});
 			}

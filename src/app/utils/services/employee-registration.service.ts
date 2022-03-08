@@ -16,7 +16,6 @@ export class EmployeeRegistrationService {
 			.post(this.apiUrl + 'authentication/register', data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -32,8 +31,7 @@ export class EmployeeRegistrationService {
 						item.fullName = `${item.firstName} ${item.lastName}`;
 						return item;
 					});
-				}),
-				tap((res) => console.log('employee/getAll', res))
+				})
 			);
 	}
 	getEmployeeInfoById(id) {

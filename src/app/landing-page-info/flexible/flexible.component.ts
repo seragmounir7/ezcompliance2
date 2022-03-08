@@ -19,6 +19,8 @@ import { AddFlexibleInfoComponent } from './add-flexible-info/add-flexible-info.
 import { EditFlexibleInfoComponent } from './edit-flexible-info/edit-flexible-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-flexible',
 	templateUrl: './flexible.component.html',

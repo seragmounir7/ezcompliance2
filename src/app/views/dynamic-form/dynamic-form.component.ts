@@ -18,6 +18,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { error } from 'protractor';
 import { templateJitUrl } from '@angular/compiler';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dynamic-form',
 	templateUrl: './dynamic-form.component.html',
@@ -290,15 +292,11 @@ export class DynamicFormComponent implements OnInit {
 	}
 	onChange2(eve) {
 		this.isHidden = eve.target.checked;
-		console.log('eve', eve.target.checked);
 	}
 	ngOnInit() {
 		this.getAllProjectMang();
 		this.getAllState();
-		console.log(
-			"sessionStorage.getItem('type')",
-			sessionStorage.getItem('type')
-		);
+
 		this.setTitle.setTitle('WHS-Dynamic Forms');
 		// this.dynamicFormsService.homebarTitle.next('Dynamic Forms');
 		this.getAllJobNumber();
@@ -310,7 +308,6 @@ export class DynamicFormComponent implements OnInit {
 			this.formCategories = JSON.parse(
 				sessionStorage.getItem('formCategories')
 			);
-			console.log('formCategories', this.formCategories.title);
 
 			for (let i = 0; i < this.totalModels.length; i++) {
 				const modelFields: Array<field> = [];
@@ -318,7 +315,6 @@ export class DynamicFormComponent implements OnInit {
 					attributes: modelFields
 				};
 				this.model.push(modelRow);
-				console.log('model', this.model);
 			}
 		}
 		if (sessionStorage.getItem('type') == 'edit') {
@@ -330,7 +326,6 @@ export class DynamicFormComponent implements OnInit {
 			this.dynamicFormsService
 				.getFormById(this.formIdRec)
 				.subscribe((res) => {
-					console.log('form=>', res);
 					this.model = [];
 					this.enableForm = res.data.enable;
 					this.frequency = res.data.frequency;
@@ -353,13 +348,12 @@ export class DynamicFormComponent implements OnInit {
 			this.dynamicFormsService
 				.getFormById(this.formIdRec)
 				.subscribe((res) => {
-					console.log('formView=>', res);
 					this.formNameRecieved = res.data.title;
 					this.model = res.data.htmlObject;
 					this.previewform.patchValue(res.data.configure[0]);
 					this.isHidden = res.data.check;
 					this.formCategories = res.data.formCategoryId;
-					console.log('is hidden', this.isHidden);
+
 					void this.spinner.hide();
 				});
 		}
@@ -396,24 +390,16 @@ export class DynamicFormComponent implements OnInit {
 	getAllProjectMang() {
 		this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
 			this.projectMang = res.data;
-			// console.log('getAllProjectMang=>', this.projectMang);
+			//
 		});
 	}
-	onDragStart(event: DragEvent) {
-		//  console.log('drag started', JSON.stringify(event, null, 2));
-	}
+	onDragStart(event: DragEvent) {}
 
-	onDragEnd(event: DragEvent) {
-		// console.log('drag ended', JSON.stringify(event, null, 2));
-	}
+	onDragEnd(event: DragEvent) {}
 
-	onDraggableCopied(event: DragEvent) {
-		//  console.log('draggable copied', JSON.stringify(event, null, 2));
-	}
+	onDraggableCopied(event: DragEvent) {}
 
-	onDraggableLinked(event: DragEvent) {
-		// console.log('draggable linked', JSON.stringify(event, null, 2));
-	}
+	onDraggableLinked(event: DragEvent) {}
 
 	onDragged(item: any, list: any[], effect: DropEffect) {
 		if (effect === 'move') {
@@ -422,18 +408,11 @@ export class DynamicFormComponent implements OnInit {
 		}
 	}
 
-	onDragCanceled(event: DragEvent) {
-		//  console.log('drag cancelled', JSON.stringify(event, null, 2));
-	}
+	onDragCanceled(event: DragEvent) {}
 
-	onDragover(event: DragEvent) {
-		//   console.log('dragover', JSON.stringify(event, null, 2));
-	}
+	onDragover(event: DragEvent) {}
 
 	onDrop(event: DndDropEvent, list?: any[]) {
-		console.log('event', event);
-		console.log('list', list);
-
 		if (
 			list &&
 			(event.dropEffect === 'copy' || event.dropEffect === 'move')
@@ -445,10 +424,6 @@ export class DynamicFormComponent implements OnInit {
 				index = list.length;
 			}
 			list.splice(index, 0, event.data);
-
-			console.log('event.data.type ', event.data.type);
-
-			console.log(this.rows);
 		}
 	}
 
@@ -456,12 +431,8 @@ export class DynamicFormComponent implements OnInit {
 		values.push(this.value);
 		this.value = { label: '', value: '' };
 	}
-	deleteItem() {
-		console.log('delete');
-	}
+	deleteItem() {}
 	removeField(j, i, item) {
-		console.log('item', item);
-
 		Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to remove "${item}"?`,
@@ -472,13 +443,7 @@ export class DynamicFormComponent implements OnInit {
 			confirmButtonText: 'Yes, remove!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(
-					'this.model.attributes[i]',
-					this.model[j].attributes[i]
-				);
-
 				if (this.model[j].attributes[i].type == 'table') {
-					console.log('table found', i);
 					const index = this.tableIndexMap.get(i);
 
 					this.rows.splice(index, 1);
@@ -486,8 +451,6 @@ export class DynamicFormComponent implements OnInit {
 				this.model[j].attributes.splice(i, 1);
 			}
 		});
-
-		console.log(i);
 	}
 	getAllJobNumber() {
 		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
@@ -495,14 +458,8 @@ export class DynamicFormComponent implements OnInit {
 		});
 	}
 	jobNoSel() {
-		console.log(
-			"this.riskAssessmentFb.get('jobNumber').value",
-			this.riskAssessmentFb.get('jobNumber').value
-		);
-
 		this.allJobNumbers.forEach((item) => {
 			if (this.riskAssessmentFb.get('jobNumber').value === item._id) {
-				console.log('Id found', item);
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
@@ -522,14 +479,8 @@ export class DynamicFormComponent implements OnInit {
 	}
 
 	jobNoSel1() {
-		console.log(
-			"this.riskAssessmentFb.get('jobNumber').value",
-			this.riskAssessmentFb.get('jobNumber').value
-		);
-
 		this.allJobNumbers.forEach((item) => {
 			if (this.previewform.get('jobNumber').value === item._id) {
-				console.log('Id found', item);
 				this.previewform.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
@@ -554,11 +505,8 @@ export class DynamicFormComponent implements OnInit {
 
 	initReport() {
 		this.configData = { ...this.riskAssessmentFb.value };
-		console.log('config', this.configData);
-		console.log('hidden', this.isHidden);
-		if (this.configData && this.isHidden) {
-			console.log('check hidden', this.isHidden);
 
+		if (this.configData && this.isHidden) {
 			if (this.type == 'add') {
 				this.previewform.patchValue({
 					siteName: this.configData.siteName,
@@ -600,7 +548,7 @@ export class DynamicFormComponent implements OnInit {
 			}
 			this.formData.push(temp);
 		}
-		// console.log('formData', this.formData);
+		//
 	}
 
 	toggleValue(item) {
@@ -617,15 +565,9 @@ export class DynamicFormComponent implements OnInit {
 		const allTableRows = Array.from(
 			document.querySelectorAll('.tableRows')
 		);
-		allTableHeadings.forEach((element: any) => {
-			console.log('allTableHeadings.value', element.value);
-		});
-		allTableRows.forEach((element: any) => {
-			console.log('allTableRows.value', element.value);
-		});
-		//  console.log("heading=>",t[0]);
-
-		console.log('model', this.model);
+		allTableHeadings.forEach((element: any) => {});
+		allTableRows.forEach((element: any) => {});
+		//
 
 		this.regexErr = [];
 
@@ -633,14 +575,7 @@ export class DynamicFormComponent implements OnInit {
 		const valid = true;
 	}
 
-	ngAfterViewInit() {
-		console.log(this.SignaturePad.toArray());
-		console.log(this.SignaturePad.toArray()[0]);
-	}
-	drawComplete() {
-		// will be notified of szimek/signature_pad's onEnd event
-		// console.log(this.signaturePad1.toDataURL());
-	}
+	drawComplete() {}
 	clear(i, j) {
 		const indexOfSignature = new Map();
 		let index = 0;
@@ -662,13 +597,10 @@ export class DynamicFormComponent implements OnInit {
 	}
 	drawStart() {
 		// will be notified of szimek/signature_pad's onBegin event
-		console.log('begin drawing');
 	}
 
 	////table//add row column
 	addCol(j, i) {
-		console.log(this.model[j].attributes);
-
 		this.model[j].attributes[i].tableHeading.push('');
 		this.model[j].attributes[i].tableRows.forEach((item) => {
 			item.push('');
@@ -707,7 +639,6 @@ export class DynamicFormComponent implements OnInit {
 				.setValue(e.target.value);
 		}
 		if (value === 'projectManager') {
-			console.log('setProjectManager==>', this.projectManager);
 			this.riskAssessmentFb
 				.get('projectManagerSWMS')
 				.setValue(e.target.value);
@@ -715,7 +646,6 @@ export class DynamicFormComponent implements OnInit {
 	}
 	getAllState() {
 		this.logicalFormInfo.getAllStates().subscribe((res: any) => {
-			console.log('getAllStates=>', res);
 			this.states = res.data;
 		});
 	}
@@ -723,26 +653,20 @@ export class DynamicFormComponent implements OnInit {
 		this.model[i].attributes[j].tableHeading[l] = e.target.value;
 	}
 	addForm() {
-		console.log('model', this.model);
-
 		if (!this.isHidden) {
-			console.log('isHidden', this.isHidden);
-
 			this.riskAssessmentFb.reset();
 		}
 		if (this.type == 'add') {
-			console.log('add', this.model);
 			const tempModel = [];
 			this.model.forEach((element) => {
 				if (element.attributes.length) {
 					tempModel.push(element);
 				}
 			});
-			console.log(tempModel);
+
 			if (tempModel.length) {
 				const d = [];
 				d.push(this.riskAssessmentFb.value);
-				console.log('d', d);
 
 				const data = {
 					title: this.formNameRecieved,
@@ -752,7 +676,6 @@ export class DynamicFormComponent implements OnInit {
 					check: this.isHidden,
 					formCategoryId: this.formCategories._id
 				};
-				console.log('data', data);
 
 				this.dynamicFormsService.addForm(data).subscribe((res) => {
 					Swal.fire('Form added successfully');
@@ -764,20 +687,18 @@ export class DynamicFormComponent implements OnInit {
 			}
 		}
 		if (this.type == 'edit') {
-			console.log('edit');
 			const tempModel = [];
 			this.model.forEach((element, i) => {
-				console.log('element', element);
 				element.attributes[0].value = '';
 				if (element.attributes.length) {
 					tempModel.push(element);
 				}
 			});
-			console.log(tempModel);
+
 			if (tempModel.length) {
 				const d = [];
 				d.push(this.riskAssessmentFb.value);
-				console.log('d', d);
+
 				const data = {
 					title: this.formNameRecieved,
 					htmlObject: tempModel,
@@ -803,7 +724,6 @@ export class DynamicFormComponent implements OnInit {
 		}
 	}
 	duplicate(i, j) {
-		console.log('duplicate', i, j, this.model[i].attributes);
 		const modelFields: Array<field> = [];
 		const modelRow = {
 			attributes: modelFields
@@ -812,7 +732,6 @@ export class DynamicFormComponent implements OnInit {
 		this.model[i].attributes.forEach((element) => {
 			this.fieldModels.forEach((field) => {
 				if (element.type == field.type) {
-					console.log('field', field);
 					field.label = element.label;
 					const temp = Object.assign({}, element);
 					modelFields.push(temp);
@@ -823,9 +742,6 @@ export class DynamicFormComponent implements OnInit {
 		this.model.splice(i + 1, 0, modelRow);
 	}
 	removeDuplicate(i, j) {
-		console.log('remove duplicate', i, j);
-		console.log(this.model);
-		console.log(this.model[i]);
 		this.model.splice(i, 1);
 
 		for (let k = 0; k < this.model.length; k++) {

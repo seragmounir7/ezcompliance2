@@ -22,6 +22,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-employee',
 	templateUrl: './add-employee.component.html',
@@ -76,7 +78,6 @@ export class AddEmployeeComponent implements OnInit {
 	) {
 		this.dialogRef = this.injector.get(MatDialogRef, null);
 		this.dialogData = this.injector.get(MAT_DIALOG_DATA, null);
-		console.log(this.dialogData);
 
 		this.empDetails = this.fb.group({
 			profTitie: ['', Validators.required],
@@ -145,7 +146,6 @@ export class AddEmployeeComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Employee Information');
 		this.empDetails.get('reportingTo').valueChanges.subscribe((res) => {
 			if (res) {
-				console.log(res);
 			}
 		});
 		this.licenceInfo
@@ -160,7 +160,6 @@ export class AddEmployeeComponent implements OnInit {
 			)
 			.subscribe((empData) => {
 				this.empData = empData;
-				console.log('this.empData', this.empData);
 			});
 		this.licenceInfo
 			.getAllPPE()
@@ -174,7 +173,6 @@ export class AddEmployeeComponent implements OnInit {
 			)
 			.subscribe((empData) => {
 				this.PPEData = empData;
-				console.log('this.empData2', this.PPEData);
 			});
 
 		this.getAllRoles();
@@ -202,7 +200,6 @@ export class AddEmployeeComponent implements OnInit {
 			debounceTime(800),
 			distinctUntilChanged(),
 			switchMap((val) => {
-				console.log('myControl22..', val, this.filteredOptions2);
 				return this.filter2(val || '');
 			})
 		);
@@ -211,7 +208,6 @@ export class AddEmployeeComponent implements OnInit {
 			debounceTime(800),
 			distinctUntilChanged(),
 			switchMap((val) => {
-				console.log('myControl..', val, this.filteredOptions1);
 				return this.filter1(val || '');
 			})
 		);
@@ -220,21 +216,17 @@ export class AddEmployeeComponent implements OnInit {
 
 	getall() {
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
-			console.log('getAll = > ', res);
 			this.reportingData = res;
-			console.log(this.reportingData);
 		});
 	}
 
 	getAllRoles() {
 		this.role.getAllRole().subscribe((res: any) => {
-			console.log('role..', res);
 			this.roleData = res.data;
 		});
 	}
 	patchData() {
 		this.employee.getEmployeeInfoById(this.id).subscribe((data) => {
-			console.log('data=>', data);
 			data.data.licence.forEach((element) => {
 				element.uploadLicence.length > 0
 					? element.uploadLicence.forEach((ele) => {
@@ -293,22 +285,17 @@ export class AddEmployeeComponent implements OnInit {
 
 			this.dataUrl = data.data.ppe.signature;
 			this.dataUrl2 = data.data.plant.plantSignature;
-			console.log('data.data.ppe.signature;', data.data.ppe.signature);
 
 			const check = async () => {
 				this.signaturePad != null;
 			};
 			check().then((res) => {
-				console.log('this.signaturePad', this.signaturePad, res);
-
 				this.signaturePad.fromDataURL(data.data.ppe.signature);
 			});
 			const check2 = async () => {
 				this.signaturePad2 != null;
 			};
 			check2().then((res) => {
-				console.log('this.signaturePad', this.signaturePad2, res);
-
 				this.signaturePad2.fromDataURL(data.data.plant.plantSignature);
 			});
 		});
@@ -322,44 +309,31 @@ export class AddEmployeeComponent implements OnInit {
 		this.empDetails.controls.plantSignature.setValue(
 			this.signaturePad2.toDataURL()
 		);
-		console.log(this.signaturePad2.toDataURL());
 	}
 	clear2() {
 		this.signaturePad2.clear();
 	}
-	drawStart2() {
-		console.log('begin drawing');
-	}
+	drawStart2() {}
 	drawComplete() {
 		this.empDetails.controls.Sign.setValue(this.signaturePad.toDataURL());
-		console.log(this.signaturePad.toDataURL());
 	}
 
 	clear() {
 		this.signaturePad.clear();
 	}
-	drawStart() {
-		console.log('begin drawing');
-	}
+	drawStart() {}
 
 	browser(event, index) {
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.selectedImage = res.files;
 			this.addLicence()
 				.at(index)
 				.get('file')
 				.patchValue(this.selectedImage);
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 
@@ -367,13 +341,10 @@ export class AddEmployeeComponent implements OnInit {
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.file1 = res.files[0];
-			console.log('file', this.file1);
+
 			this.empDetails.get('porfUploadImage').patchValue(this.file1);
 		});
 	}
@@ -429,11 +400,8 @@ export class AddEmployeeComponent implements OnInit {
 	}
 	addEquipFiled2() {
 		this.addEquip().push(this.newEquipFiled2());
-		console.log(this.empDetails.value);
 	}
 	newEquipFiled3(data): FormGroup {
-		console.log('newData', data);
-
 		return this.fb.group({
 			plantType: [data.plantType],
 			modelNumber: [data.modelNumber],
@@ -442,9 +410,7 @@ export class AddEmployeeComponent implements OnInit {
 		});
 	}
 	addEquipFiled3(data) {
-		console.log('data', data);
 		this.addEquip().push(this.newEquipFiled3(data));
-		console.log('addPPEFiled1', this.empDetails.value);
 	}
 	removeEquipFiled1(i) {
 		const item = <FormArray>this.empDetails.controls.plantArr;
@@ -465,15 +431,13 @@ export class AddEmployeeComponent implements OnInit {
 	}
 	addFiled2() {
 		this.addPPE().push(this.newFiled2());
-		console.log(this.empDetails.value);
+
 		this.PPEValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addPPE().length; index++) {
 			const element = this.addPPE().at(index) as FormGroup;
 			this.PPEValueChanges.push(
 				element.controls.PPESupplied.valueChanges.pipe(
 					startWith(''),
-					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -484,7 +448,6 @@ export class AddEmployeeComponent implements OnInit {
 					)
 				)
 			);
-			console.log(element.valueChanges);
 		}
 	}
 	removeFiled1(i) {
@@ -494,8 +457,6 @@ export class AddEmployeeComponent implements OnInit {
 		}
 	}
 	newFiled3(data): FormGroup {
-		console.log('newData', data);
-
 		return this.fb.group({
 			PPESupplied: [data.ppeSupplied],
 			BrandOrType: [data.brand],
@@ -504,9 +465,8 @@ export class AddEmployeeComponent implements OnInit {
 		});
 	}
 	addFiled3(data) {
-		console.log('data', data);
 		this.addPPE().push(this.newFiled3(data));
-		console.log('addPPEFiled1', this.empDetails.value);
+
 		this.PPEValueChanges = new Array<Observable<any>>();
 		for (let index = 0; index < this.addPPE().length; index++) {
 			const element = this.addPPE().at(index) as FormGroup;
@@ -514,7 +474,6 @@ export class AddEmployeeComponent implements OnInit {
 				element.controls.PPESupplied.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -525,7 +484,6 @@ export class AddEmployeeComponent implements OnInit {
 					)
 				)
 			);
-			console.log(element.valueChanges);
 		}
 	}
 	newFiled(): FormGroup {
@@ -554,8 +512,6 @@ export class AddEmployeeComponent implements OnInit {
 			this.licenceValueChanges.push(
 				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
-					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -564,7 +520,6 @@ export class AddEmployeeComponent implements OnInit {
 					)
 				)
 			);
-			console.log(element.valueChanges);
 		}
 	}
 	addFiled() {
@@ -576,7 +531,6 @@ export class AddEmployeeComponent implements OnInit {
 				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -585,7 +539,6 @@ export class AddEmployeeComponent implements OnInit {
 					)
 				)
 			);
-			console.log(element.valueChanges);
 		}
 	}
 	removeFiled(i) {
@@ -597,7 +550,6 @@ export class AddEmployeeComponent implements OnInit {
 	//
 	getAllStates() {
 		this.licenceInfo.getAllStates().subscribe((res: any) => {
-			console.log('setStatesDetails=>', res);
 			this.StatesData = res.data;
 		});
 	}
@@ -651,14 +603,12 @@ export class AddEmployeeComponent implements OnInit {
 			}),
 			map((response: any) => {
 				response.data = response.data.filter((option) => {
-					console.log('11option>>', val);
 					return (
 						option.PPESupplied.toLowerCase().indexOf(
 							val.toLowerCase()
 						) === 0
 					);
 				});
-				console.log('response.data>>', response.data);
 
 				return response.data;
 			})
@@ -668,15 +618,13 @@ export class AddEmployeeComponent implements OnInit {
 	onFormSubmit() {
 		this.submitted = true;
 		const Sign = this.signaturePad.toDataURL();
-		console.log('sign=>', this.signaturePad.toDataURL());
+
 		const plantSignature = this.signaturePad2.toDataURL();
 
-		console.log('this.EmployeeInfo.value', this.empDetails.value);
 		const ppeArr = () => {
 			this.addPPE().length;
 			const arr = [];
 			this.addPPE().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					ppeSupplied: item.controls.PPESupplied.value,
 					brand: item.controls.BrandOrType.value,
@@ -690,7 +638,6 @@ export class AddEmployeeComponent implements OnInit {
 			this.addEquip().length;
 			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					plantType: item.controls.plantType.value,
 					modelNumber: item.controls.modelNumber.value,
@@ -745,11 +692,8 @@ export class AddEmployeeComponent implements OnInit {
 			}
 		};
 
-		console.log('body=>', body);
-
 		this.employee.addEmployeeInfo(body).subscribe(
 			(data) => {
-				console.log('data=>', data);
 				this.signaturePad.toDataURL();
 				Swal.fire({
 					title: 'Employee Added successfully',
@@ -778,7 +722,6 @@ export class AddEmployeeComponent implements OnInit {
 			this.addPPE().length;
 			const arr = [];
 			this.addPPE().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					ppeSupplied: item.controls.PPESupplied.value,
 					brand: item.controls.BrandOrType.value,
@@ -792,7 +735,6 @@ export class AddEmployeeComponent implements OnInit {
 			this.addPPE().length;
 			const arr = [];
 			this.addEquip().controls.forEach((item: any) => {
-				console.log('item', item);
 				arr.push({
 					plantType: item.controls.plantType.value,
 					modelNumber: item.controls.modelNumber.value,
@@ -856,7 +798,6 @@ export class AddEmployeeComponent implements OnInit {
 
 		this.employee.updateEmployeeInfo(this.id, data).subscribe(
 			(resData) => {
-				console.log('updateData', resData);
 				Swal.fire({
 					title: 'Employee Updated successfully',
 					showConfirmButton: false,

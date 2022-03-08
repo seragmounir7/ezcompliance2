@@ -30,6 +30,8 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-site-inspection',
 	templateUrl: './site-inspection.component.html',
@@ -54,14 +56,13 @@ export class SiteInspectionComponent
 	frequency: string;
 	@HostListener('window:afterprint', [])
 	function() {
-		console.log('Printing completed...');
+		this.shared.printNext(false);
 		if (this.router.url.includes('/admin/savedForms')) {
 			this.router.navigateByUrl('/admin/savedForms');
 			return;
 		}
-		console.log('url', this.router.url);
+
 		this.router.navigateByUrl('/admin/forms/siteinspectiontable');
-		this.shared.printNext(false);
 	}
 	maxDate = new Date();
 	minDate = new Date();
@@ -125,9 +126,7 @@ export class SiteInspectionComponent
 			siteCategorytTopic: this.fb.array([])
 		});
 	}
-	ngOnDestroy(): void {
-		console.log('site destroy');
-	}
+	ngOnDestroy(): void {}
 	public signaturePadOptions1: Object = {
 		minWidth: 1,
 		canvasWidth: 350,
@@ -157,7 +156,7 @@ export class SiteInspectionComponent
 			this.returnTo = this.activatedRoute.queryParamMap.pipe(
 				map((param) => param.get('returnTo'))
 			);
-			this.returnTo.subscribe((res) => console.log(res));
+			this.returnTo.subscribe();
 		}
 
 		this.isPrint = this.shared.printObs$ as Observable<any>;
@@ -173,8 +172,6 @@ export class SiteInspectionComponent
 			this.logicalFormInfo
 				.getSiteInspection(this.id)
 				.subscribe((res: any) => {
-					console.log('res', res);
-
 					this.showDatas = res.data;
 					this.allTopic = this.showDatas.allTopic;
 					this.allcategory = this.showDatas.allcategory;
@@ -186,7 +183,7 @@ export class SiteInspectionComponent
 					for (let index = 0; index < this.allTopic.length; index++) {
 						this.add2().push(this.newAction2(index));
 					}
-					console.log(this.sidePreview.value);
+
 					setTimeout(() => {
 						let formatDate;
 						if (this.showDatas.date) {
@@ -259,10 +256,6 @@ export class SiteInspectionComponent
 								index < this.showDatas.siteAction.length;
 								index++
 							) {
-								console.log(
-									this.showDatas.siteAction[index].item
-								);
-
 								this.addAction();
 								this.add()
 									.controls[index].get('item')
@@ -322,8 +315,6 @@ export class SiteInspectionComponent
 	}
 
 	private _filter(name: string): any[] {
-		console.log('name', name);
-
 		const filterValue = name.toLowerCase();
 		return this.empData.filter((option) =>
 			option.fullName.toLowerCase().includes(filterValue)
@@ -340,11 +331,10 @@ export class SiteInspectionComponent
 		this.sub.add(
 			this.shared.printObs$.subscribe((res) => {
 				this.check = res;
-				console.log('check1...', this.check);
+
 				if (this.check) {
 					setTimeout(() => {
 						window.print();
-						console.log('printing....');
 					}, 3000);
 					localStorage.setItem('key', ' ');
 				}
@@ -352,25 +342,20 @@ export class SiteInspectionComponent
 		);
 	}
 	drawComplete1() {
-		console.log(this.signaturePad.toDataURL());
 		this.sidePreview.controls.signature.setValue(
 			this.signaturePad.toDataURL()
 		);
 		this.singRequired = this.sidePreview.controls.signature.invalid;
 	}
 	clear1() {
-		console.log('clear1');
 		this.signaturePad.clear();
 		this.sidePreview.controls.signature.setValue('');
 		this.singRequired = this.sidePreview.controls.signature.untouched;
 	}
-	drawStart1() {
-		console.log('begin drawing');
-	}
+	drawStart1() {}
 	jobNoSel() {
 		this.allJobNumbers.forEach((item) => {
 			if (this.sidePreview.get('jobNumber').value === item._id) {
-				console.log('Id found', item);
 				this.sidePreview.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
@@ -415,8 +400,6 @@ export class SiteInspectionComponent
 						)
 					)
 				);
-
-				console.log(element.valueChanges);
 			}
 		}
 	}
@@ -435,7 +418,6 @@ export class SiteInspectionComponent
 	showsite() {
 		this.siteshow = true;
 		this.siteAction = false;
-		console.log(this.sidePreview);
 	}
 	showAction() {
 		this.siteAction = true;
@@ -447,19 +429,17 @@ export class SiteInspectionComponent
 	}
 	addAcionData(data) {
 		const b = Object.keys(this.sidePreview.value);
-		console.log('data', data);
+
 		const index = this.add().length;
 		this.addAction();
 		this.add().controls[index].get('item').setValue(data.item);
 		this.add().controls[index].get('action').setValue(data.action);
 		this.add().controls[index].get('topicId').setValue(data._id);
-		console.log(this.sidePreview.controls[b[0]].value);
 	}
 	removeAcionData(data) {
 		for (let index = 0; index < this.add().length; index++) {
 			if (this.add().at(index).get('topicId').value == data._id) {
 				this.add().removeAt(index);
-				console.log('formcontrol remove');
 			}
 		}
 	}
@@ -467,7 +447,6 @@ export class SiteInspectionComponent
 	getAllJobTask() {
 		this.logicalFormInfo.getAllJobtask().subscribe((res: any) => {
 			this.jobTaskData = res.data;
-			console.log('jobTaskDetails=>', this.jobTaskData);
 		});
 	}
 	getAllProjectMang() {
@@ -481,7 +460,6 @@ export class SiteInspectionComponent
 		});
 	}
 	tabClick(eve) {
-		console.log('tab changed', eve);
 		if (eve.index == 0) {
 			this.showsite();
 		}
@@ -493,7 +471,6 @@ export class SiteInspectionComponent
 	onSave() {
 		let { empName, siteAction, ...rest } = this.sidePreview.value;
 
-		console.log('form data', this.sidePreview.value);
 		//let empName = this.sidePreview.controls.empName.value
 		siteAction = siteAction.map((res) => {
 			return {
@@ -522,7 +499,6 @@ export class SiteInspectionComponent
 			this.logicalFormInfo
 				.updateSiteInspection(this.id, data)
 				.subscribe((res) => {
-					console.log('res', res);
 					Swal.fire({
 						title: 'Update successfully',
 						showConfirmButton: false,
@@ -534,7 +510,6 @@ export class SiteInspectionComponent
 			const empName = this.sidePreview.controls.empName.value;
 			this.sidePreview.removeControl('empName');
 			this.logicalFormInfo.addSiteInspection(data).subscribe((res) => {
-				console.log('res', res);
 				Swal.fire({
 					title: 'Submit successfully',
 					showConfirmButton: false,
@@ -542,7 +517,6 @@ export class SiteInspectionComponent
 				});
 				this.router.navigate(['/admin/forms/fillConfigForm/' + 0]);
 			});
-			console.log('data', data);
 		}
 		this.sidePreview.reset();
 		this.signaturePad.clear();
@@ -552,7 +526,6 @@ export class SiteInspectionComponent
 			.getAllSiteInspectionCategory()
 			.subscribe((res: any) => {
 				this.allcategory = res.data;
-				console.log('Allcategory', res);
 			});
 	}
 	add2(): FormArray {
@@ -568,13 +541,11 @@ export class SiteInspectionComponent
 			.getAllSiteInspectionTopic()
 			.subscribe((res: any) => {
 				this.allTopic = res.data;
-				console.log('alltopic', this.allTopic);
 
 				for (let index = 0; index < this.allTopic.length; index++) {
 					this.add2().push(this.newAction2(index));
 					this.disableForm();
 				}
-				console.log(this.sidePreview.value);
 			});
 	}
 	categorychecked(index) {
@@ -587,7 +558,6 @@ export class SiteInspectionComponent
 	getAllStaff() {
 		this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
 			this.staff = res.data;
-			console.log('res', this.staff);
 		});
 	}
 }

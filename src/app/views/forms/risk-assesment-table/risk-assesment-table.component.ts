@@ -11,6 +11,8 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 import { map } from 'rxjs/operators';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-risk-assesment-table',
 	templateUrl: './risk-assesment-table.component.html',
@@ -46,7 +48,7 @@ export class RiskAssesmentTableComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Risk Assessment List');
 
 		this.isHistory = this.router.url.includes('/riskAssessTable/history');
-		console.log(this.isHistory);
+
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
 				.pipe(map((params) => params.get('id')))
@@ -79,7 +81,6 @@ export class RiskAssesmentTableComponent implements OnInit {
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 
@@ -116,7 +117,7 @@ export class RiskAssesmentTableComponent implements OnInit {
 			...element,
 			formName: 'Risk Assessment and SWMS'
 		});
-		console.log('check');
+
 		localStorage.setItem('key', 'print');
 
 		this.spinner.show('printLoader');
@@ -135,7 +136,6 @@ export class RiskAssesmentTableComponent implements OnInit {
 				});
 
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	edit(id) {

@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-type-of-incident',
 	templateUrl: './edit-type-of-incident.component.html',
@@ -33,8 +35,6 @@ export class EditTypeOfIncidentComponent implements OnInit {
 		this.logicalFormInfo
 			.updateTypeOfIncident(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('resData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Updated successfully',

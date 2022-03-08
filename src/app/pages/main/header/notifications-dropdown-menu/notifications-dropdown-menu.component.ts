@@ -7,6 +7,8 @@ import {
 	Renderer2
 } from '@angular/core';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-notifications-dropdown-menu',
 	templateUrl: './notifications-dropdown-menu.component.html',

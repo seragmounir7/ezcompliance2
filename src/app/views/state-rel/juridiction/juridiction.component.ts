@@ -8,6 +8,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditJuriComponent } from './add-and-edit-juri/add-and-edit-juri.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-juridiction',
 	templateUrl: './juridiction.component.html',
@@ -42,7 +44,6 @@ export class JuridictionComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllJurisdiction(field, value)
 			.subscribe((res) => {
-				console.log('getAllJurisdiction=>', res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -63,7 +64,6 @@ export class JuridictionComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllJurisdiction();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -86,7 +86,7 @@ export class JuridictionComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllJurisdiction();
 					});
 			}

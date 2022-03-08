@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyRegistrationService } from 'src/app/utils/services/company-registration.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-company-registration',
 	templateUrl: './company-registration.component.html',
@@ -43,30 +45,19 @@ export class CompanyRegistrationComponent implements OnInit {
 	}
 
 	browser(event) {
-		console.log('event=>', event);
-
 		const files = event.target.files[0];
-		console.log('event.target=>', event.target.files[0]);
+
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.company.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.selectedImage = res.files;
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 	onFormSubmit() {
-		console.log('this.companyInfo.value', this.companyInfo.value);
 		this.company
 			.addCompanyInfo(this.companyInfo.value)
 			.subscribe((data) => {
-				console.log('data=>', data);
 				this.browser(event);
 			});
 	}

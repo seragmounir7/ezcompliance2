@@ -4,6 +4,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-licence',
 	templateUrl: './add-licence.component.html',
@@ -53,7 +55,6 @@ export class AddLicenceComponent implements OnInit {
 	}
 	getAllLicenceCat() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.categories = res.data;
 			this.allCategories = (res.data as any[]).map(
 				(category) => category._id
@@ -69,11 +70,9 @@ export class AddLicenceComponent implements OnInit {
 		const data = {
 			arrObj: this.addLicenceFG.get('arrObj').value
 		};
-		console.log('data li cat', data);
 
 		this.logicalFormInfo.addMultipleLicence(data).subscribe(
 			(res) => {
-				console.log('licence=>', res);
 				Swal.fire({
 					title: 'Parameter added successfully',
 					showConfirmButton: false,
@@ -89,6 +88,5 @@ export class AddLicenceComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

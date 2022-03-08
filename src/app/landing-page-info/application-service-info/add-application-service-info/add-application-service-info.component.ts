@@ -11,6 +11,8 @@ import {
 	MatDialogRef,
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-application-service-info',
 	templateUrl: './add-application-service-info.component.html',
@@ -84,10 +86,9 @@ export class AddApplicationServiceInfoComponent implements OnInit {
 				description: this.data.EditData.subModules[this.data.index]
 					.description
 			});
-			(this.selectedImage = this.data.EditData.subModules[
+			this.selectedImage = this.data.EditData.subModules[
 				this.data.index
-			].fileUrl),
-				console.log('img', this.selectedImage);
+			].fileUrl;
 		}
 
 		const index = this.data.index;

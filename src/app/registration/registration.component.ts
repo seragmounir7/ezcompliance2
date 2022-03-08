@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SetTitleService } from '../utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-registration',
 	templateUrl: './registration.component.html',

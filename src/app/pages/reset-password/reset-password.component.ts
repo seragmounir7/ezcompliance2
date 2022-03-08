@@ -11,6 +11,8 @@ import { CustomValidators } from 'src/app/custom-validators';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-reset-password',
 	templateUrl: './reset-password.component.html',
@@ -83,10 +85,9 @@ export class ResetPasswordComponent implements OnInit {
 	changePassword() {
 		this.submitBtn = true;
 		if (this.resetForm.invalid) {
-			console.log(this.resetForm.invalid);
 			return;
 		}
-		console.log(this.resetForm.value);
+
 		this.authService
 			.resetPassword(
 				this.email,
@@ -95,7 +96,6 @@ export class ResetPasswordComponent implements OnInit {
 			)
 			.subscribe(
 				(res) => {
-					console.log(res);
 					this.toast.success('Password Successfully Changed!', '', {
 						timeOut: 3000
 					});

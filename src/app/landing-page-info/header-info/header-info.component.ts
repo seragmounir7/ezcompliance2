@@ -10,6 +10,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { data } from 'jquery';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-header-info',
 	templateUrl: './header-info.component.html',
@@ -75,40 +77,30 @@ export class HeaderInfoComponent implements OnInit {
 	}
 
 	browser(event, i) {
-		console.log(event, i);
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
 		const value = this.selectedImage[0];
-		console.log('vvvvvv', value);
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
-				console.log(' browser -> res', res);
-
 				this.selectedImage[i] = res.files[0];
 			});
 		} else {
 			this.upload.upload(formData).subscribe((res) => {
-				console.log(' browser -> res', res);
 				this.serviceDetail.patchValue({
 					filePath: res.filePath
 				});
 				this.selectedImage.push(res.files[0]);
-
-				console.log('browse -> this.selectedImage', this.selectedImage);
 			});
 		}
 	}
 
 	editService(id) {
-		console.log(id);
 		this.myId = id;
 		this.isEdit = true;
 		this.url.editHeader(id, data).subscribe((res) => {
-			console.log('Data Set response' + res);
 			this.data = res.data;
-			console.log('new response' + this.data);
 		});
 	}
 	openDialog(id): void {
@@ -120,9 +112,7 @@ export class HeaderInfoComponent implements OnInit {
 			}
 		});
 
-		dialogRef.afterClosed().subscribe((result) => {
-			console.log('The dialog was closed');
-		});
+		dialogRef.afterClosed().subscribe((result) => {});
 	}
 
 	openDialogEdit(serviceDetail) {
@@ -134,12 +124,7 @@ export class HeaderInfoComponent implements OnInit {
 			width: '800px'
 		});
 		dialogRef.afterClosed().subscribe((result) => {
-			console.log(
-				'ExpensesInfoComponent -> openDialog -> result',
-				result
-			);
 			this.getHeaderById();
-			console.log('The dialog was closed');
 		});
 	}
 	refreshList(): void {
@@ -149,7 +134,6 @@ export class HeaderInfoComponent implements OnInit {
 	service: any;
 	getHeaderById() {
 		this.url.getHeaderBYId().subscribe((data) => {
-			console.log('mode=>', data);
 			this.infoData = data.data;
 		});
 	}

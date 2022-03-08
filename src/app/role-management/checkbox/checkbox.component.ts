@@ -20,6 +20,8 @@ import {
 	RoleID
 } from 'src/app/utils/types/AccessResponceTypes';
 import { AuthService } from 'src/app/utils/services/auth.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-checkbox',
 	templateUrl: './checkbox.component.html',
@@ -238,7 +240,7 @@ export class CheckboxComponent implements OnInit {
 	deleteRole(id: string | RoleID): void {
 		void Swal.fire({
 			title: 'Are you sure?',
-			text: `Do you want to delete `,
+			text: `This will delete the Role And mark accociated user account as dectivated!`,
 			icon: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#00B96F',

@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/utils/services/auth.service';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 import { Designation } from 'src/app/utils/types/Designation.enum';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-main',
 	templateUrl: './main.component.html',
@@ -37,7 +39,6 @@ export class MainComponent implements OnInit, AfterViewInit {
 
 	ngOnInit() {
 		this.mobileViewService.observeXsmall().subscribe((result) => {
-			console.log(result);
 			if (result.matches) {
 				this.renderer.addClass(
 					document.querySelector('app-header'),

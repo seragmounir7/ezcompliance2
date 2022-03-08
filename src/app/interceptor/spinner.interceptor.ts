@@ -19,13 +19,13 @@ export class SpinnerInterceptor implements HttpInterceptor {
 		request: HttpRequest<unknown>,
 		next: HttpHandler
 	): Observable<HttpEvent<unknown>> {
-		//console.log('spinner====================>', request.url);
+		//
 
 		void this.spinner.show();
 		return next.handle(request).pipe(
 			map((event: HttpEvent<unknown>) => {
 				if (event instanceof HttpResponse) {
-					// console.log('spinnerhide====================>', request.url);
+					//
 					void this.spinner.hide();
 				}
 				return event;

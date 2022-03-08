@@ -60,7 +60,6 @@ export class AuthService {
 			.post<ResponceBody>(this.apiUrl + 'authentication/login', data)
 			.pipe(
 				map((res: ResponceBody) => {
-					console.log('res.data.accessToken', res.data.accessToken);
 					if (res.data.designation === Designation.user)
 						res.data.FirstLogin.firstLogin = false;
 					if (res.data.accessToken) {
@@ -93,7 +92,6 @@ export class AuthService {
 		return true;
 	}
 	updateFirstLogin(data: FirstLogin) {
-		console.log(data);
 		return this.http.put(this.apiUrl + 'authentication/update/firstLogin', {
 			FirstLogin: data
 		});
@@ -106,7 +104,6 @@ export class AuthService {
 	}
 
 	forgotPassword(email: string, otp: number, password: { password: string }) {
-		console.log(email);
 		return this.http.post(
 			`${this.apiUrl}authentication/otp/forget/password/${email}/${otp}`,
 			password

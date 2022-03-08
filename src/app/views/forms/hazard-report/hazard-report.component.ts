@@ -42,7 +42,7 @@ import { EmployeeRegistrationService } from 'src/app/utils/services/employee-reg
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { CustomValidators } from 'src/app/custom-validators';
 
 @UntilDestroy({ checkProperties: true })
@@ -97,13 +97,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	frequency: string;
 	@HostListener('window:afterprint', [])
 	function() {
-		console.log('Printing completed...');
+		this.shared.printNext(false);
 		if (this.router.url.includes('/admin/savedForms')) {
 			this.router.navigateByUrl('/admin/savedForms');
 			return;
 		}
 		this.router.navigateByUrl('/admin/forms/hazardTable');
-		this.shared.printNext(false);
 	}
 	maxDate = new Date();
 	minDate = new Date();
@@ -201,7 +200,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 	showImg() {
 		let ext = this.selectedImage ? this.selectedImage.split('.') : [];
-		console.log('ext.....', ext);
 
 		return ext.length != 0
 			? this.image.includes(ext[ext.length - 1])
@@ -219,12 +217,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.returnTo = this.activatedRoute.queryParamMap.pipe(
 				map((param) => param.get('returnTo'))
 			);
-			this.returnTo.subscribe((res) => console.log(res));
+			this.returnTo.subscribe();
 		}
 
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
-			console.log('this.empData', this.empData);
+
 			this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
@@ -236,7 +234,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			);
 			this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
 				startWith(''),
-				tap((value) => console.log('value', value)),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -246,7 +243,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			);
 			this.filteredOptions = this.hazardReport.controls.myControl.valueChanges.pipe(
 				startWith(''),
-				tap((res) => console.log(res)),
 				map((value) =>
 					typeof value === 'string' ? value : value.fullName
 				),
@@ -269,7 +265,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				].valueChanges.pipe(
 					startWith(''),
 					debounceTime(400),
-					tap((value) => console.log('value', value)),
 					map((value) =>
 						typeof value === 'string' ? value : value.fullName
 					),
@@ -279,7 +274,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				);
 				this.obj[ctrlName] = filter;
 			});
-			console.log(this.obj);
 		});
 		this.isPrint = this.shared.printObs$ as Observable<any>;
 
@@ -292,7 +286,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			debounceTime(400),
 			distinctUntilChanged(),
 			switchMap((val) => {
-				console.log('myControlManager', val);
 				return this.filter(val || '');
 			})
 		);
@@ -306,12 +299,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			.get('managerSupervisor')
 			.valueChanges.subscribe((res) => {
 				if (res) {
-					console.log(res);
-
 					for (let i = 0; i < this.whsData.length; i++) {
 						if (res === this.whsData[i]._id) {
-							console.log('id found');
-
 							this.hazardReport
 								.get('managerSupervisorEmail')
 								.setValue(this.whsData[i].email);
@@ -323,7 +312,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			});
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id != 'form') {
-			console.log('id', this.id);
 			this.getHazardByid(this.id);
 		}
 	}
@@ -338,25 +326,21 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	ngAfterViewInit() {
-		console.log('check1...', this.check);
 		this.sub = this.shared.printObs$.subscribe((res) => {
 			this.check = res;
 			if (this.check) {
 				setTimeout(() => {
 					window.print();
-					console.log('printing....');
 				}, 3000);
 				localStorage.setItem('key', ' ');
 			}
 		});
 		this.sub.add(this.mobileViewService.removeButton());
 		// this.signaturePad is now available
-		console.log(this.signaturePad1, this.dataUrl);
+
 		this.signaturePad1.set('minWidth', 1); // set szimek/signature_pad options at runtime
 		this.signaturePad1.clear();
 		this.mobileViewService.observeXsmall().subscribe((result) => {
-			console.log(result);
-
 			if (result.matches) {
 				const sign = this.signaturePad1.toDataURL();
 				this.signaturePad1.set('canvasWidth', 247);
@@ -373,7 +357,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 	ngOnDestroy(): void {
 		this.sub.unsubscribe();
-		console.log('hazard destroy');
 	}
 	triggerResize() {
 		// Wait for changes to be applied, then trigger textarea resize.
@@ -384,65 +367,64 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	getHazardByid(id) {
 		this.url.getHazardFormDataById(id).subscribe((res: any) => {
-			console.log(res);
-
+			this.hazardReport.patchValue(res.data);
 			this.hazardReport.patchValue({
-				myControl: res.data.myControl,
-				myControlManager: res.data.myControlManager,
-				employeeParttime: res.data.employeeParttime,
-				fullName: { fullName: res.data.fullName },
-				email: res.data.email,
-				phone: res.data.phone,
-				department: res.data.department,
-				position: res.data.position,
-				projectName: res.data.projectName,
-				managerSupervisor: res.data.managerSupervisor,
-				managerSupervisorEmail: res.data.managerSupervisorEmail,
-				whsManagerEmail: res.data.whsManagerEmail,
-				describeHazard: res.data.describeHazard,
-				dateHazardReport: res.data.dateHazardReport,
-				jobNumberId: res.data.jobNumberId,
-				action: res.data.action,
-				eliminateHazard: res.data.eliminateHazard,
-				eliminateCorrect: res.data.eliminateCorrect,
+				// myControl: res.data.myControl,
+				// myControlManager: res.data.myControlManager,
+				// employeeParttime: res.data.employeeParttime,
+				// email: res.data.email,
+				// phone: res.data.phone,
+				// department: res.data.department,
+				// position: res.data.position,
+				// projectName: res.data.projectName,
+				// managerSupervisor: res.data.managerSupervisor,
+				// managerSupervisorEmail: res.data.managerSupervisorEmail,
+				// whsManagerEmail: res.data.whsManagerEmail,
+				// describeHazard: res.data.describeHazard,
+				// dateHazardReport: res.data.dateHazardReport,
+				// jobNumberId: res.data.jobNumberId,
+				// action: res.data.action,
+				// eliminateHazard: res.data.eliminateHazard,
+				// eliminateCorrect: res.data.eliminateCorrect,
+				// eliminateWhen: res.data.eliminateWhen,
+				// substituteCorrect: res.data.substituteCorrect,
+				// substituteWhen: res.data.substituteWhen,
+				// isolatedCorrect: res.data.isolatedCorrect,
+				// isolatedWhen: res.data.isolatedWhen,
+				// solutionCorrect: res.data.solutionCorrect,
+				// customerName: res.data.customerName,
+				// solutionWhen: res.data.solutionWhen,
+				// procedureRemove: res.data.procedureRemove,
+				// procedureRemoveCorrect: res.data.procedureRemoveCorrect,
+				// procedureRemoveWhen: res.data.procedureRemoveWhen,
+				// PPECorrect: res.data.PPECorrect,
+				// PPEWhen: res.data.PPEWhen,
+				// locationHazard: res.data.locationHazard,
+				// compilePosition: res.data.compilePosition,
+				// compileDepartment: res.data.compileDepartment,
+				// date: res.data.date,
+				// complete: res.data.complete,
+				// consequence: res.data.consequence,
+				// riskRating: res.data.riskRating,
+				// actionRequired: res.data.actionRequired,
+				// likelihood: res.data.likelihood,
+				// reduceRisk: res.data.reduceRisk,
+				// procedures: res.data.procedures,
+				// process: res.data.process,
+				// isolatedHazard: res.data.isolatedHazard,
+				// dateHazardIdentify: res.data.dateHazardIdentify,
+				// eliminateHazardAction: res.data.eliminateHazardAction,
+				// signaturePad1: res.data.signaturePad1,
 				elliminateAction: { fullName: res.data.elliminateAction },
-				eliminateWhen: res.data.eliminateWhen,
-				substituteCorrect: res.data.substituteCorrect,
 				substituteAction: { fullName: res.data.substituteAction },
-				substituteWhen: res.data.substituteWhen,
-				isolatedCorrect: res.data.isolatedCorrect,
 				isolatedAction: { fullName: res.data.isolatedAction },
-				isolatedWhen: res.data.isolatedWhen,
-				solutionCorrect: res.data.solutionCorrect,
 				solutionAction: { fullName: res.data.solutionAction },
-				customerName: res.data.customerName,
-				solutionWhen: res.data.solutionWhen,
-				procedureRemove: res.data.procedureRemove,
-				procedureRemoveCorrect: res.data.procedureRemoveCorrect,
 				procedureRemoveAction: {
 					fullName: res.data.procedureRemoveAction
 				},
-				procedureRemoveWhen: res.data.procedureRemoveWhen,
-				PPECorrect: res.data.PPECorrect,
 				PPEAction: { fullName: res.data.PPEAction },
-				PPEWhen: res.data.PPEWhen,
 				name: { fullName: res.data.name },
-				locationHazard: res.data.locationHazard,
-				compilePosition: res.data.compilePosition,
-				compileDepartment: res.data.compileDepartment,
-				date: res.data.date,
-				complete: res.data.complete,
-				consequence: res.data.consequence,
-				riskRating: res.data.riskRating,
-				actionRequired: res.data.actionRequired,
-				likelihood: res.data.likelihood,
-				reduceRisk: res.data.reduceRisk,
-				procedures: res.data.procedures,
-				process: res.data.process,
-				isolatedHazard: res.data.isolatedHazard,
-				dateHazardIdentify: res.data.dateHazardIdentify,
-				eliminateHazardAction: res.data.eliminateHazardAction,
-				signaturePad1: res.data.signaturePad1
+				fullName: { fullName: res.data.fullName }
 			});
 			this.minDate = res.data.date;
 			this.selectedImage = res.data.fileUpload;
@@ -451,14 +433,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				this.selectedImage.indexOf('-') + 1
 			);
 
-			console.log(this.selectedImage, 'selectedImage');
 			this.dataUrl = res.data.signaturePad1;
 			const check = async () => {
 				this.signaturePad1 != null;
 			};
 			check().then(() => {
-				console.log('singpachet');
-
 				this.signaturePad1.fromDataURL(res.data.signaturePad1);
 			});
 		});
@@ -471,26 +450,18 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	};
 
 	drawComplete() {
-		console.log('signnn', this.signaturePad1);
 		this.hazardReport.controls.signaturePad1.setValue(
 			this.signaturePad1.toDataURL()
 		);
-		console.log(
-			'signaturePad1 control',
-			this.hazardReport.controls.signaturePad1.value
-		);
 		this.singRequired = this.hazardReport.controls.signaturePad1.invalid;
 		// will be notified of szimek/signature_pad's onEnd event
-		console.log(this.signaturePad1.toDataURL());
 	}
 	clear() {
 		this.signaturePad1.clear();
 		this.hazardReport.controls.signaturePad1.setValue('');
 		this.singRequired = this.hazardReport.controls.signaturePad1.untouched;
 	}
-	drawStart() {
-		console.log('begin drawing');
-	}
+	drawStart() {}
 	Consequences: Array<any> = [
 		{ name: '1-Insignificant', value: 1 },
 		{ name: '2-Minor', value: 2 },
@@ -525,13 +496,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		return this.employee.getAllEmployeeInfo().pipe(
 			map((response: any) => {
 				response.data = response.data.filter((option) => {
-					console.log('option>>', option);
 					return (
 						option.name.toLowerCase().indexOf(val.toLowerCase()) ===
 						0
 					);
 				});
-				console.log('response.data>>', response.data);
 
 				return response.data;
 			})
@@ -543,13 +512,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		return this.employee.getAllEmployeeInfo().pipe(
 			map((response: any) => {
 				response.data = response.data.filter((option) => {
-					console.log('option>>', option);
 					return (
 						option.name.toLowerCase().indexOf(val.toLowerCase()) ===
 						0
 					);
 				});
-				console.log('response.data>>', response.data);
 
 				return response.data;
 			})
@@ -572,19 +539,15 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	change(event) {
-		console.log('evebt', event);
 		this.hazardReport
 			.get('whsManagerEmail')
 			.setValue(event.option.value.email || '');
 	}
-	changeName() {
-		console.log('changeName');
-	}
+	changeName() {}
 
 	jobNoSel() {
 		this.allJobNumbers.forEach((item) => {
 			if (this.hazardReport.get('jobNumberId').value === item._id) {
-				console.log('Id found', item);
 				this.hazardReport.patchValue({
 					jobNumberId: this.hazardReport.get('jobNumberId').value,
 					projectName: item.projectName,
@@ -604,13 +567,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	getAllJobNumber() {
 		this.url.getAllJobNumber().subscribe((res: any) => {
 			this.allJobNumbers = res.data;
-			console.log('this.allJobNumbers', this.allJobNumbers);
 		});
 	}
 
 	getall() {
 		this.url.getAllManager().subscribe((res: any) => {
-			console.log(res);
 			this.whsData = res.data;
 		});
 	}
@@ -622,10 +583,9 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			const addition =
 				parseInt(this.hazardReport.get('consequence').value) +
 				parseInt(this.hazardReport.get('likelihood').value);
-			console.log(addition);
+
 			this.hazardData.forEach((item) => {
 				if (addition === item.title) {
-					console.log('Id found', item.title);
 					this.hazardReport.patchValue({
 						riskRating: item.riskRating,
 						actionRequired: item.actionRequired
@@ -636,7 +596,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 	getAllHazardTreatmentRelation() {
 		this.url.getAllHazardTreatmentRelation().subscribe((res: any) => {
-			console.log('getAllHazardTreatmentRelation=>', res);
 			this.hazardData = res.data;
 		});
 	}
@@ -654,9 +613,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	onFormSubmit() {
 		this.hazardReport.get('fileUpload')?.setValue(this.selectedImage);
 
-		console.log('form data', this.hazardReport.value);
 		this.singRequired = this.hazardReport.controls.signaturePad1.invalid;
-		console.log(this.id);
 
 		const {
 			fullName,
@@ -669,19 +626,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			PPEAction,
 			...rest
 		} = this.hazardReport.value;
-		console.log(
-			this.hazardReport.value,
-			fullName,
-			name,
-			elliminateAction,
-			substituteAction,
-			isolatedAction,
-			solutionAction,
-			procedureRemoveAction,
-			PPEAction,
-			rest
-		);
-
 		const data = {
 			...rest,
 			fullName:
@@ -715,7 +659,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		if (this.id != 'form') {
 			this.url.updateHazardFormData(this.id, data).subscribe(
 				(res) => {
-					console.log('res', res);
 					this.router.navigate(['/admin/forms']);
 					this.hazardReport.reset();
 
@@ -734,7 +677,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.url.addHazardFormData(data).subscribe(
 				(res) => {
 					this.hazardReport.reset();
-					console.log('res', res);
+
 					Swal.fire({
 						title: 'Submit successfully',
 						showConfirmButton: false,
@@ -745,24 +688,15 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				},
 				(err) => console.error(err)
 			);
-			console.log('data', data);
 		}
 	}
 	browser(event) {
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.selectedImage = res.files[0];
-
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 	employeeData(e: MatAutocompleteSelectedEvent) {
@@ -773,8 +707,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			position: data.position,
 			phone: data.phone
 		});
-		console.log('e.option', e.option);
-		console.log('data...');
 	}
 
 	employeeData1(e: MatAutocompleteSelectedEvent) {
@@ -785,8 +717,16 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			compilePosition: data.position
 			// elliminateAction:data.name
 		});
-		console.log('e.option', e.option);
-		console.log('data...');
+	}
+	public findInvalidControls(): Array<any> {
+		const invalid = [];
+		const controls = this.hazardReport.controls;
+		for (const name in controls) {
+			if (controls[name].invalid) {
+				invalid.push(name);
+			}
+		}
+		return invalid;
 	}
 }
 

@@ -20,6 +20,8 @@ import { Designation } from 'src/app/utils/types/Designation.enum';
 import { AccessArr } from 'src/app/utils/types/AccessResponceTypes';
 import { map, tap } from 'rxjs/operators';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-menu-sidebar',
 	templateUrl: './menu-sidebar.component.html',
@@ -63,7 +65,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 					: ''
 			)
 		);
-		this.userName$.subscribe((res) => console.log('username', res));
 		this.authService.loginData$.subscribe((res) => {
 			if (
 				res.designation === Designation.clientAdmin ||
@@ -89,32 +90,11 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 										.replace(' ', '') ===
 									accessObj.formName.toLowerCase()
 								) {
-									console.log(
-										'matched names',
-										item.displayedName
-											.toLowerCase()
-											.replace(' ', ''),
-										accessObj.formName.toLowerCase()
-									);
 									item.hasAccess = accessObj.NavigationAccess;
 								}
 								if (item.childItem) {
-									console.log(item.childItem);
-
 									item.childItem = item.childItem.map(
 										(childItem) => {
-											console.log(
-												childItem.displayedName
-													.toLowerCase()
-													.split(' ')
-													.join('') ===
-													accessObj.formName.toLowerCase(),
-												childItem.displayedName
-													.toLowerCase()
-													.split(' ')
-													.join(''),
-												accessObj.formName.toLowerCase()
-											);
 											if (
 												childItem.displayedName
 													.toLowerCase()
@@ -122,13 +102,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 													.join('') ===
 												accessObj.formName.toLowerCase()
 											) {
-												console.log(
-													'matched childItem names',
-													childItem.displayedName
-														.toLowerCase()
-														.replace(' ', ''),
-													accessObj.formName.toLowerCase()
-												);
 												// if(accessObj.Access){
 												//   item.hasAccess = true
 												// }
@@ -153,7 +126,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 						//   if(item)
 						//   item.hasAccess =
 						// })
-						console.log(this.navItems);
 					},
 					(err) => console.error('some error occured', err),
 					() => this.showSideNav.next(true)
@@ -161,14 +133,10 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			}
 		});
 
-		console.log('logo=>', this.logoUrl);
-
-		console.log(this.router.url);
 		const rLink = this.router.url;
 		this.navItems.forEach((x) => this.treeArr.push(false));
 		this.setTitle.setTitle('WHS-Menu Sidebar');
 		this.openMenuOnLoad();
-		console.log(this.navItems);
 	}
 
 	openMenuOnLoad() {
@@ -178,7 +146,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			if (x.childItem) {
 				x.menuOpen = false;
 				x.childItem.map((y: NavItem) => {
-					console.log(y.childItem ? true : false);
 					y.childItem ? (y.menuOpen = false) : '';
 					return y;
 				});
@@ -187,7 +154,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			x.childItem
 				? (x.menuOpen = false) &&
 				  x.childItem.map((y: NavItem) => {
-						console.log(y.childItem ? true : false);
 						y.childItem ? (y.menuOpen = false) : '';
 						return y;
 				  })
@@ -210,60 +176,11 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			return o.route === rLink ? o.route === rLink : Cobj ? Cobj : CCobj;
 		});
 
-		console.log(obj);
 		obj ? this.menuOpen(obj) : false;
 		this.afterNgOnInIt = true;
 	}
 
-	ngAfterViewInit() {
-		// const mouseenter = () =>
-		// 	(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
-		// const mouseleave = () =>
-		// 	(this.isMenuSideBarOpen = !this.isMenuSideBarOpen);
-		// const observer = new MutationObserver(
-		// 	(mutations: MutationRecord[], observer: MutationObserver) => {
-		// 		console.log('side menu mutation');
-		// 		mutations.forEach((item: any) => {
-		// 			if (item.target.classList.contains('sidebar-mini')) {
-		// 				this.mainSidebar.nativeElement.addEventListener(
-		// 					'mouseenter',
-		// 					mouseenter
-		// 				);
-		// 				this.mainSidebar.nativeElement.addEventListener(
-		// 					'mouseleave',
-		// 					mouseleave
-		// 				);
-		// 			} else {
-		// 				this.mainSidebar.nativeElement.removeEventListener(
-		// 					'mouseenter',
-		// 					mouseenter
-		// 				);
-		// 				this.mainSidebar.nativeElement.removeEventListener(
-		// 					'mouseleave',
-		// 					mouseleave
-		// 				);
-		// 			}
-		// 		});
-		// 	}
-		// );
-		// observer.observe(document.querySelector('app-root'), {
-		// 	attributes: true,
-		// 	attributeFilter: ['class']
-		// });
-		// console.log(
-		// 	this.mainSidebar.nativeElement.classList.contains('sidebar-mini')
-		// );
-		// if (this.mainSidebar.nativeElement.classList.contains('sidebar-mini')) {
-		// 	this.mainSidebar.nativeElement.addEventListener(
-		// 		'mouseenter',
-		// 		() => (this.isMenuSideBarOpen = !this.isMenuSideBarOpen)
-		// 	);
-		// 	this.mainSidebar.nativeElement.addEventListener(
-		// 		'mouseleave',
-		// 		() => (this.isMenuSideBarOpen = !this.isMenuSideBarOpen)
-		// 	);
-		// }
-	}
+	ngAfterViewInit() {}
 	dynamic = false;
 	landingPageVal = false;
 	subscription = false;
@@ -276,7 +193,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		const temp = this.treeArr[i];
 		this.resetAll();
 		this.treeArr[i] = !temp;
-		console.log(i, temp, this.treeArr);
 	}
 	resetAll() {
 		for (let i = 0; i < this.treeArr.length; i++) {
@@ -289,15 +205,7 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			this.activeNavValue = item.displayedName;
 			this.navItems.map((x: NavItem) => {
 				if (x.displayedName == item.displayedName) {
-					console.log(
-						x.displayedName,
-						'==',
-						item.displayedName,
-						x.displayedName == item.displayedName,
-						x.menuOpen
-					);
 					x.menuOpen = false;
-					console.log(x.menuOpen);
 				}
 				return x;
 			});
@@ -316,10 +224,8 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			});
 			return;
 		}
-		console.log(item);
+
 		this.navItems.map((x: NavItem) => {
-			// x.hasAccess = true
-			// console.log(item.displayedName ,'==', x.displayedName,item.displayedName == x.displayedName)
 			if (
 				x.childItem &&
 				x.menuOpen == false &&
@@ -329,8 +235,6 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 			}
 			x.childItem
 				? x.childItem.map((y) => {
-						// console.log(item.displayedName, '==', y.displayedName, item.displayedName == y.displayedName, y.childItem && y.menuOpen == false && item.displayedName == y.displayedName)
-
 						if (
 							y.childItem &&
 							y.menuOpen == false &&

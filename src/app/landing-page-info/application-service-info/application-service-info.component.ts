@@ -13,6 +13,8 @@ import { AddServiceInfoComponent } from './add-service-info/add-service-info.com
 import Swal from 'sweetalert2';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-application-service-info',
 	templateUrl: './application-service-info.component.html',

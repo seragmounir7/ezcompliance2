@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-ppe',
 	templateUrl: './add-ppe.component.html',
@@ -46,13 +48,11 @@ export class AddPPEComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.PPEformgp.value);
 		const data = {
 			arrObj: this.PPEformgp.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultiplePPE(data).subscribe(
 			(data) => {
-				console.log('PPE=>', data);
 				this.router.navigate(['/admin/setting/ppeSel']);
 			},
 			(err) => {
@@ -63,6 +63,5 @@ export class AddPPEComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

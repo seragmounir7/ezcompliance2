@@ -20,7 +20,10 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import Swal from 'sweetalert2';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { LogicalFormName } from 'src/app/utils/types/logical-form-name.enum';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-saved-forms',
 	templateUrl: './saved-forms.component.html',
@@ -88,7 +91,6 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 				limit: this.paginator1.pageSize
 			};
 			this.getSavedforms();
-			console.log(this.changeState);
 		});
 	}
 
@@ -124,7 +126,7 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			)
 			.subscribe((res: any) => {
 				this.showDatas = res.data;
-				console.log('get res', this.showDatas);
+
 				this.totalCount = res.totalCount;
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
@@ -174,7 +176,7 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 			...element,
 			formName: type.toString()
 		});
-		console.log('check');
+
 		localStorage.setItem('key', 'print');
 
 		this.spinner.show('printLoader');
@@ -183,7 +185,90 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 				formType: type.toString()
 			}
 		};
-		if (type == 'Hazard Report') {
+		switch (type) {
+			case LogicalFormName.Hazard:
+				this.router.navigate(
+					[
+						'/',
+						{
+							outlets: {
+								print: ['print', 'hazardRep', element._id]
+							}
+						}
+					],
+					navigationExtras
+				);
+				break;
+			case LogicalFormName.Accident:
+				this.router.navigate(
+					[
+						'/',
+						{
+							outlets: {
+								print: ['print', 'incidentRep', element._id]
+							}
+						}
+					],
+					navigationExtras
+				);
+				break;
+			case LogicalFormName.SiteInspection:
+				this.router.navigate(
+					[
+						'/',
+						{
+							outlets: {
+								print: ['print', 'siteInspect', element._id]
+							}
+						}
+					],
+					navigationExtras
+				);
+				break;
+			case LogicalFormName.ToolBox:
+				this.router.navigate(
+					[
+						'/',
+						{
+							outlets: {
+								print: ['print', 'toolboxTalk', element._id]
+							}
+						}
+					],
+					navigationExtras
+				);
+				break;
+			case LogicalFormName.RiskAssessment:
+				this.router.navigate(
+					[
+						'/',
+						{
+							outlets: {
+								print: ['print', 'riskAssessSWMS', element._id]
+							}
+						}
+					],
+					navigationExtras
+				);
+				break;
+			default:
+				this.router.navigate(
+					[
+						'/',
+						{
+							outlets: {
+								print: ['print', 'savedDynamicForm']
+							}
+						}
+					],
+					{
+						queryParams: { id: element._id, type: 'edit' }
+					}
+				);
+
+				break;
+		}
+		/* 	if (type == 'Hazard Report') {
 			this.router.navigate(
 				[
 					'/',
@@ -239,7 +324,7 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 				],
 				navigationExtras
 			);
-		}
+		} */
 	}
 	paginator(event: PageEvent) {
 		this.page = event.pageIndex;
@@ -387,7 +472,7 @@ export class SavedFormsComponent implements OnInit, AfterViewInit {
 					});
 				break;
 		}
-		console.log(e.target.value);
+
 		this.getSavedforms();
 	}
 }

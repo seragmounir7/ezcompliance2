@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-licence-cat',
 	templateUrl: './edit-licence-cat.component.html',
@@ -35,8 +37,6 @@ export class EditLicenceCatComponent implements OnInit {
 		this.logicalFormInfo
 			.updateLicenceCat(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('submodulesData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Category Edited successfully',
@@ -50,8 +50,6 @@ export class EditLicenceCatComponent implements OnInit {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo.addLicenceCat(data).subscribe((resData) => {
-			console.log('category', resData);
-
 			this.dialogRef.close('true');
 			if (this.dataRec) {
 				Swal.fire({

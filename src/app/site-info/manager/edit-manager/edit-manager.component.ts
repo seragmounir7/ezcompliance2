@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-manager',
 	templateUrl: './edit-manager.component.html',
@@ -24,8 +26,6 @@ export class EditManagerComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('this.dataRec', this.dataRec);
-
 		this.editTitle = this.fb.group({
 			name: [this.dataRec.name, Validators.required],
 			email: [this.dataRec.email, Validators.required]
@@ -39,8 +39,6 @@ export class EditManagerComponent implements OnInit {
 		this.logicalFormInfo
 			.editManager(this.dataRec._id, data)
 			.subscribe((resData) => {
-				console.log('submodulesData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Edited successfully',

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-view-contact',
 	templateUrl: './view-contact.component.html',
@@ -20,8 +22,6 @@ export class ViewContactComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		console.log('this.dataContact', this.Contact);
-
 		this.contactUsForm = this.fb.group({
 			fullName: ['', Validators.required],
 			phone: ['', Validators.required],

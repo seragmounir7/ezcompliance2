@@ -14,6 +14,8 @@ import {
 } from 'src/app/utils/types/SafetyLegislation';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-state-relation',
 	templateUrl: './add-state-relation.component.html',
@@ -43,14 +45,12 @@ export class AddStateRelationComponent implements OnInit {
 			regulatorId: ['', Validators.required]
 		});
 		this.route.queryParams.subscribe((id) => {
-			console.log(id);
 			this.stateId = id.id;
 			this.logicalFormInfo
 				.getstatesById(this.stateId)
 				.subscribe((res: any) => {
-					console.log('getstatesById=>', res);
 					this.states = res.data;
-					console.log('states', this.states);
+
 					if (this.states.set == true) {
 						this.SetState.patchValue({
 							jurisdictionId: this.states.jurisdictionId,
@@ -69,7 +69,6 @@ export class AddStateRelationComponent implements OnInit {
 
 	getAllRegulator() {
 		this.logicalFormInfo.getAllRegulator().subscribe((res) => {
-			console.log('this.regulatorData', res.data);
 			this.regulatorData = res.data;
 		});
 	}
@@ -78,7 +77,6 @@ export class AddStateRelationComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllSafety()
 			.subscribe((res: SafetyLeslationResponce) => {
-				console.log('this.safety', res);
 				this.safety = res.data;
 			});
 	}
@@ -86,7 +84,6 @@ export class AddStateRelationComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllJurisdiction()
 			.subscribe((res: JurisDictionResponce) => {
-				console.log('JurisdictionData=>', res);
 				this.JurisdictionData = res.data;
 			});
 	}
@@ -99,13 +96,10 @@ export class AddStateRelationComponent implements OnInit {
 			safetyLegislationId: this.SetState.get('safetyLegislationId').value,
 			regulatorId: this.SetState.get('regulatorId').value
 		};
-		console.log('data=>', data);
-		console.log('stateId=>', this.stateId);
+
 		this.logicalFormInfo
 			.updateStates(data, this.stateId)
 			.subscribe((res: any) => {
-				console.log('updateStates=>', res);
-
 				Swal.fire({
 					title: 'Updated successfully',
 					showConfirmButton: false,

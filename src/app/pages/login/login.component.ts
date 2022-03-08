@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../utils/services/auth.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
@@ -48,12 +50,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 		const data = {
 			...this.loginForm.value
 		};
-		console.log('data', data);
+
 		if (this.loginForm.valid) {
 			this.AuthService.login(data).subscribe(
 				(resData: any) => {
-					console.log('resData', resData);
-					console.log('res', resData.status);
 					if (resData.status == 'SUCCESS') {
 						sessionStorage.setItem(
 							'userName',
@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 					}
 				},
 				(err) => {
-					console.log(err, navigator.onLine);
 					if (!navigator.onLine) {
 						this.toastr.warning(
 							'You Are Offline! Check Your Internet Connection.'

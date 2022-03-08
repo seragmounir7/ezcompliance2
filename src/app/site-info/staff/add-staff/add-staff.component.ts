@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigation.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-staff',
 	templateUrl: './add-staff.component.html',
@@ -48,13 +50,11 @@ export class AddStaffComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.addStaffForm.value);
 		const data = {
 			arrObj: this.addStaffForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleStaff(data).subscribe(
 			(data) => {
-				console.log('chemical=>', data);
 				this.router.navigateByUrl(this.navigationService.returnUrl);
 			},
 			(err) => {
@@ -65,6 +65,5 @@ export class AddStaffComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }
