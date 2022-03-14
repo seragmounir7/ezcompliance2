@@ -38,7 +38,7 @@ export class AccessControlDirective {
 			if (res.designation === Designation.user) {
 				this.viewContainer.clear();
 				this.role.accessArrObs$.subscribe((accessArr) => {
-					this.checkAccess(accessArr);
+					if (accessArr.length > 0) this.checkAccess(accessArr);
 				});
 			} else {
 				this.viewContainer.createEmbeddedView(this.templateRef);

@@ -87,8 +87,8 @@ export class AuthService {
 		this.pergeData() ? this.router.navigate(['/']) : '';
 	}
 	pergeData() {
-		this.nextLoginData({} as UserData);
 		sessionStorage.clear();
+		this.nextLoginData({} as UserData);
 		return true;
 	}
 	updateFirstLogin(data: FirstLogin) {

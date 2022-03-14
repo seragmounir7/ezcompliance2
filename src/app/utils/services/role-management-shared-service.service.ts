@@ -6,7 +6,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 })
 export class RoleManagementSharedServiceService {
 	private roleGet = new Subject<any>();
-	private printSubject = new BehaviorSubject<Boolean>(false);
+	private printSubject = new BehaviorSubject<boolean>(false);
 	private printData = new BehaviorSubject<any>({});
 	public printDataObs$ = this.printData.asObservable();
 

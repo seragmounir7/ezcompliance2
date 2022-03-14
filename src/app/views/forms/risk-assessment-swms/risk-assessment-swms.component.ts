@@ -1321,8 +1321,12 @@ export class RiskAssessmentSWMSComponent
 		if (data) {
 			this.allJobNumbers = data;
 		}
-		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-			this.allJobNumbers = res.data;
+		this.logicalFormInfo.getAllJobNumber().subscribe((res) => {
+			this.allJobNumbers = res.data as ModifiedJobNumber[];
+			console.log(
+				'🚀 ~ file: risk-assessment-swms.component.ts ~ line 1326 ~ this.logicalFormInfo.getAllJobNumber ~ this.allJobNumbers',
+				this.allJobNumbers
+			);
 		});
 	}
 	getAllStaff(data = []) {

@@ -25,7 +25,6 @@ export class AddSiteInfoComponent implements OnInit {
 	displayedColumns: string[] = [
 		'index',
 		'siteName',
-		/* 'siteForemen', */ 'streetNo',
 		'streetAddress',
 		'Suburb',
 		'State',

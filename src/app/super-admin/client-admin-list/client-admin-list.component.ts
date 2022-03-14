@@ -40,6 +40,7 @@ export class ClientAdminListComponent implements OnInit {
 	dataSource: Observable<MatTableDataSource<ClinetAdminObj | UserList>>;
 	displayedColumns: any[] = [
 		'designation',
+		'companyName',
 		'email',
 		'mobileNumber',
 		'isEmailVerified',

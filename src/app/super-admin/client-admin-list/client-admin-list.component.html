@@ -12,6 +12,11 @@
 		matSort
 		(matSortChange)="sortData($event)"
 	>
+		<ng-container matColumnDef="companyName">
+			<th mat-header-cell *matHeaderCellDef>Company Name</th>
+			<td mat-cell *matCellDef="let element">{{element.companyName}}</td>
+		</ng-container>
+
 		<ng-container matColumnDef="isEmailVerified">
 			<th mat-header-cell *matHeaderCellDef>isEmailVerified</th>
 			<td mat-cell *matCellDef="let element">

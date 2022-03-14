@@ -166,7 +166,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName
@@ -187,7 +187,7 @@ export class AddAndEditSubcontractComponent implements OnInit {
 					.valueChanges as Observable<any>).pipe(
 					startWith(''),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName

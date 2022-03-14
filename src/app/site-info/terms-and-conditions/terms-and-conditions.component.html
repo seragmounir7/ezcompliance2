@@ -50,7 +50,7 @@
 					class="mr-2"
 					aria-label="Example icon button with a delete icon"
 					(click)="edit(element);element.isDisabled=!element.isDisabled"
-					[matTooltip]="element.isDisabled?'Edit':Save"
+					[matTooltip]="element.isDisabled?'Edit':'Save'"
 				>
 					<mat-icon>{{element.isDisabled?'edit':'save'}}</mat-icon>
 				</button>

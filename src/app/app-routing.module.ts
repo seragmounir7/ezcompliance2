@@ -25,11 +25,13 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { SuperAdminGuard } from './RouteGuard/super-admin.guard';
 import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { IsPrintGuard } from './RouteGuard/is-print.guard';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
 	{
 		path: 'print',
+		canActivate: [IsPrintGuard],
 		outlet: 'print',
 		component: PrintLayoutComponent,
 		children: [
@@ -41,11 +43,17 @@ const routes: Routes = [
 			{ path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
 			{ path: 'incidentRep/:id', component: IncidentReportComponent },
 			{ path: 'hazardRep/:id', component: HazardReportComponent },
+			{ path: 'invoice', component: InvoiceComponent },
 			{
 				path: 'savedDynamicForm',
 				component: SavedDynamicFormDataComponent
 			}
 		]
+	},
+	{
+		path: 'printinvoice',
+		outlet: 'printInvoice',
+		component: InvoiceComponent
 	},
 	// {
 	//   path:'', redirectTo:'setup', pathMatch:"`"

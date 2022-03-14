@@ -15,7 +15,8 @@ import {
 	FormBuilder,
 	Validators,
 	FormArray,
-	FormControl
+	FormControl,
+	AbstractControl
 } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -35,6 +36,10 @@ import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
+import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import { Designation } from 'src/app/utils/types/Designation.enum';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-incident-report',
@@ -57,7 +62,7 @@ export class IncidentReportComponent
 	natureOfIncArr = [];
 	incidentsArr = [];
 	rootArr = [];
-	allJobNumbers = [];
+	allJobNumbers: ModifiedJobNumber[] = [];
 	@ViewChild('signature') signaturePad: SignaturePad;
 	@ViewChild('signature1') signaturePad1: SignaturePad;
 	maxDate = new Date();
@@ -67,7 +72,7 @@ export class IncidentReportComponent
 	isPrint: Observable<any>;
 	editorDisable = false;
 	filteredOptions1: Observable<any>;
-	empData: any;
+	empData: UserValue[];
 	filteredOptions2: Observable<any>;
 	uploadFile: string;
 	isHistory: boolean;
@@ -75,12 +80,15 @@ export class IncidentReportComponent
 	personCompletingForm$: Observable<any>;
 	injuredorAffectedPersonName$: Observable<any>;
 	department$: Observable<any>;
-	roleData: any[] = [];
+	roleData: RoleValue[] = [];
 	completedDepartment$: Observable<any[]>;
 	reviewedDepartment$: Observable<any[]>;
 	isImg: boolean = false;
 	enable: boolean;
 	frequency: string;
+	position$: Observable<any[]>;
+	completedPosition$: Observable<any[]>;
+	reviewedPosition$: Observable<any[]>;
 	@HostListener('window:afterprint', [])
 	function() {
 		this.shared.printNext(false);
@@ -126,7 +134,8 @@ export class IncidentReportComponent
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
 		public mobileViewService: MobileViewService,
-		public role: RoleManagementService
+		public role: RoleManagementService,
+		public authService: AuthService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -141,7 +150,7 @@ export class IncidentReportComponent
 			changes: this.fb.array([]),
 			arrObj: this.fb.array([]),
 			jobNumber: ['', Validators.required],
-			projectName: ['', Validators.required],
+			// projectName: ['', Validators.required],
 			siteName: ['', Validators.required],
 			customerName: ['', Validators.required],
 			streetAddress: ['', Validators.required],
@@ -222,12 +231,22 @@ export class IncidentReportComponent
 			);
 			this.returnTo.subscribe();
 		}
-		this.role.getAllRole().subscribe((res: any) => {
+		this.role.getAllRole().subscribe((res) => {
 			this.roleData = res.data;
+			this.completedPosition$ = this.role.getRoleAutocomplete(
+				this.IncidentReport,
+				'completedPosition',
+				this.roleData
+			);
+			this.reviewedPosition$ = this.role.getRoleAutocomplete(
+				this.IncidentReport,
+				'reviewedPosition',
+				this.roleData
+			);
 			this.completedDepartment$ = this.IncidentReport.controls.completedDepartment.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.role
+					typeof value === 'string' ? value : value?.role
 				),
 				map((role) =>
 					role ? this._filterRole(role) : this.roleData.slice()
@@ -236,16 +255,21 @@ export class IncidentReportComponent
 			this.reviewedDepartment$ = this.IncidentReport.controls.reviewedDepartment.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.role
+					typeof value === 'string' ? value : value?.role
 				),
 				map((role) =>
 					role ? this._filterRole(role) : this.roleData.slice()
 				)
 			);
+			this.position$ = this.role.getRoleAutocomplete(
+				this.IncidentReport,
+				'position',
+				this.roleData
+			);
 			this.department$ = this.IncidentReport.controls.department.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.role
+					typeof value === 'string' ? value : value?.role
 				),
 				map((role) =>
 					role ? this._filterRole(role) : this.roleData.slice()
@@ -254,11 +278,19 @@ export class IncidentReportComponent
 		});
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
+			empData.forEach((item) => {
+				if (this.authService.loginData.designation === Designation.user)
+					if (this.authService.loginData.id === item._id) {
+						this.IncidentReport.controls.personCompletingForm.patchValue(
+							item
+						);
+					}
+			});
 			const filteredOptions = () => {
 				return (
 					startWith(''),
 					map((value: any) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName: string) =>
 						fullName ? this._filter(fullName) : this.empData.slice()
@@ -268,25 +300,30 @@ export class IncidentReportComponent
 			this.injuredorAffectedPersonName$ = this.IncidentReport.controls.name.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
 				)
 			);
-			this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
+			this.personCompletingForm$ = this.employee.getEmpAutoComplete(
+				this.IncidentReport,
+				'personCompletingForm',
+				this.empData
+			);
+			/* this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
 				)
-			);
+			); */
 			this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -295,7 +332,7 @@ export class IncidentReportComponent
 			this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -353,14 +390,28 @@ export class IncidentReportComponent
 		const data = e.option.value;
 		if (controlName == 'completedName') {
 			this.IncidentReport.patchValue({
-				completedDepartment: data.department,
-				completedPosition: data.position
+				completedDepartment: this.roleData.find(
+					(x) => x._id == data.department
+				),
+				completedPosition: this.roleData.find(
+					(x) => x._id == data.position
+				)
 			});
 		}
 		if (controlName == 'reviewedName') {
 			this.IncidentReport.patchValue({
-				reviewedDepartment: data.department,
-				reviewedPosition: data.position
+				reviewedDepartment: this.roleData.find(
+					(x) => x._id == data.department
+				),
+				reviewedPosition: this.roleData.find(
+					(x) => x._id == data.position
+				)
+			});
+		}
+		if (controlName == 'injuredorAffectedPersonName') {
+			this.IncidentReport.patchValue({
+				department: this.roleData.find((x) => x._id == data.department),
+				position: this.roleData.find((x) => x._id == data.position)
 			});
 		}
 	}
@@ -436,23 +487,23 @@ export class IncidentReportComponent
 			if (this.IncidentReport.get('jobNumber').value === item._id) {
 				this.IncidentReport.patchValue({
 					jobNumber: this.IncidentReport.get('jobNumber').value,
-					projectName: item.projectName,
+					// projectName: item.projectName,
 					siteName: item.siteName,
 					customerName: item.customerName,
 					streetAddress: item.streetAddress,
-					projectManager: item.projectManager,
+					// projectManager: item.projectManager,
 					customerContact: item.customerContact,
-					personCompletingForm: item.personCompletingForm,
-					customerContactPhone: item.customerContactPhone,
-					customerEmail: item.customerEmail
+					// personCompletingForm: item.personCompletingForm,
+					customerContactPhone: item.contacts[0].phone,
+					customerEmail: item.contacts[0].email
 				});
 			}
 		});
 		this.IncidentReport.get('jobNumber').updateValueAndValidity();
 	}
 	getAllJobNumber() {
-		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-			this.allJobNumbers = res.data;
+		this.logicalFormInfo.getAllJobNumber().subscribe((res) => {
+			this.allJobNumbers = res.data as ModifiedJobNumber[];
 		});
 	}
 	getAllProjectMang() {
@@ -730,21 +781,27 @@ export class IncidentReportComponent
 				this.ppeAdd().push(this.ppeAction(i));
 				this.disableForm();
 			}
+			console.log(
+				'🚀 ~ file: incident-report.component.ts ~ line 743 ~ this.logicalFormInfo.getIncidentReportById ~ res.data.personCompletingForm',
+				res.data.personCompletingForm
+			);
 			this.IncidentReport.patchValue({
-				projectName: res.data.projectName,
+				// projectName: res.data.projectName,
 				siteName: res.data.siteName,
 				customerName: res.data.customerName,
 				streetAddress: res.data.streetAddress,
 				customerContact: res.data.customerContact,
 				projectManager: res.data.projectManager,
-				personCompletingForm: res.data.personCompletingForm,
+				personCompletingForm: this.staff.find(
+					(x) => x._id === res.data.personCompletingForm
+				),
 				customerContactPhone: res.data.customerContactPhone,
 				customerEmail: res.data.customerEmail,
 				jobNumber: res.data.jobNumber,
 				dateOfFormCompletion: res.data.dateOfFormCompletion,
-				name: res.data.name,
-				department: res.data.department,
-				position: res.data.position,
+				name: { fullName: res.data.name },
+				department: { role: res.data.department },
+				position: { role: res.data.position },
 				locationOfTheIncident: res.data.locationOfTheIncident,
 				dateOfTheIncident: res.data.dateOfTheIncident,
 				timeOfTheIncident: res.data.timeOfTheIncident,
@@ -756,12 +813,12 @@ export class IncidentReportComponent
 				priorIncident: res.data.priorIncident,
 				similarIncident: res.data.similarIncident,
 				completedName: { fullName: res.data.completedName },
-				completedPosition: res.data.completedPosition,
-				completedDepartment: res.data.completedDepartment,
+				completedPosition: { role: res.data.completedPosition },
+				completedDepartment: { role: res.data.completedDepartment },
 				completedDate: res.data.completedDate,
 				reviewedName: { fullName: res.data.reviewedName },
-				reviewedPosition: res.data.reviewedPosition,
-				reviewedDepartment: res.data.reviewedDepartment,
+				reviewedPosition: { role: res.data.reviewedPosition },
+				reviewedDepartment: { role: res.data.reviewedDepartment },
 				reviewedDate: res.data.reviewedDate,
 				similarIncidentText: res.data.similarIncidentText,
 				priorIncidentText: res.data.priorIncidentText,
@@ -867,30 +924,59 @@ export class IncidentReportComponent
 	}
 	onSubmit() {
 		this.IncidentReport.get('file')?.patchValue(this.selectedImage);
+		let removeArr = [
+			'completedPosition',
+			'completedDepartment',
+			'reviewedPosition',
+			'reviewedDepartment',
+			'name',
+			'department',
+			'position'
+		];
+		const completedName = this.IncidentReport.controls.completedName
+			.value as UserValue;
+		const reviewedName = this.IncidentReport.controls.reviewedName
+			.value as UserValue;
+		const {
+			completedPosition,
+			completedDepartment,
+			reviewedPosition,
+			reviewedDepartment,
+			name,
+			department,
+			position
+		} = this.IncidentReport.controls;
+		removeArr.forEach((value) => this.IncidentReport.removeControl(value));
+		this.IncidentReport.removeControl('completedName');
+		this.IncidentReport.removeControl('reviewedName');
+		const data = {
+			...this.IncidentReport.value,
+			changesArr: this.changes,
+			natureOFIncidentsArr: this.natureOFIncidents,
+			incidentsArr: this.incidents,
+			ppeArr: this.PPE,
+			rootCauseIncidentArr: this.rootCauseIncident,
+			allJobNumbersArr: this.allJobNumbers,
+			projectMangArr: this.projectMang,
+			staffArr: this.staff,
+			name: name.value.fullName,
+			department: department.value.role,
+			position: position.value.role,
+			completedName: completedName.fullName || completedName,
+			reviewedName: reviewedName.fullName || reviewedName,
+			completedPosition: completedPosition.value.role,
+			completedDepartment: completedDepartment.value.role,
+			reviewedPosition: reviewedPosition.value.role,
+			reviewedDepartment: reviewedDepartment.value.role,
+			enable: this.enable,
+			frequency: this.frequency
+		};
+		console.log(
+			'🚀 ~ file: incident-report.component.ts ~ line 911 ~ onSubmit ~ data',
+			data
+		);
 
 		if (this.id !== 'Form') {
-			const completedName = this.IncidentReport.controls.completedName
-				.value;
-			const reviewedName = this.IncidentReport.controls.reviewedName
-				.value;
-			this.IncidentReport.removeControl('completedName');
-			this.IncidentReport.removeControl('reviewedName');
-			const data = {
-				...this.IncidentReport.value,
-				changesArr: this.changes,
-				natureOFIncidentsArr: this.natureOFIncidents,
-				incidentsArr: this.incidents,
-				ppeArr: this.PPE,
-				rootCauseIncidentArr: this.rootCauseIncident,
-				allJobNumbersArr: this.allJobNumbers,
-				projectMangArr: this.projectMang,
-				staffArr: this.staff,
-				completedName: completedName.fullName || completedName,
-				reviewedName: reviewedName.fullName || reviewedName,
-				enable: this.enable,
-				frequency: this.frequency
-			};
-
 			this.logicalFormInfo.updateIncidentReport(this.id, data).subscribe(
 				(res) => {
 					Swal.fire({
@@ -905,28 +991,6 @@ export class IncidentReportComponent
 				}
 			);
 		} else {
-			const completedName = this.IncidentReport.controls.completedName
-				.value;
-			const reviewedName = this.IncidentReport.controls.reviewedName
-				.value;
-			this.IncidentReport.removeControl('completedName');
-			this.IncidentReport.removeControl('reviewedName');
-			const data = {
-				...this.IncidentReport.value,
-				changesArr: this.changes,
-				natureOFIncidentsArr: this.natureOFIncidents,
-				incidentsArr: this.incidents,
-				ppeArr: this.PPE,
-				rootCauseIncidentArr: this.rootCauseIncident,
-				allJobNumbersArr: this.allJobNumbers,
-				projectMangArr: this.projectMang,
-				staffArr: this.staff,
-				completedName: completedName.fullName || completedName,
-				reviewedName: reviewedName.fullName || reviewedName,
-				enable: this.enable,
-				frequency: this.frequency
-			};
-
 			this.logicalFormInfo.addIncidentReport(data).subscribe(
 				(res) => {
 					Swal.fire({

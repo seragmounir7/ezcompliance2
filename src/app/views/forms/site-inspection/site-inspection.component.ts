@@ -31,6 +31,7 @@ import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-site-inspection',
@@ -68,7 +69,7 @@ export class SiteInspectionComponent
 	minDate = new Date();
 	item_values: any = ['In Progress', 'Completed', 'Closed'];
 	jobTaskData: any;
-	allJobNumbers = [];
+	allJobNumbers: ModifiedJobNumber[] = [];
 	projectMang = [];
 	keyArr = [
 		'jobNumber',
@@ -305,7 +306,7 @@ export class SiteInspectionComponent
 				startWith(''),
 				debounceTime(400),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -361,8 +362,8 @@ export class SiteInspectionComponent
 					customerName: item.customerName,
 					streetAddr: item.streetAddress,
 					custConct: item.customerContact,
-					custConctPh: item.customerContactPhone,
-					custEmail: item.customerEmail,
+					custConctPh: item.contacts[0].phone,
+					custEmail: item.contacts[0].email,
 					jobNumber: this.sidePreview.get('jobNumber').value
 				});
 			}
@@ -455,8 +456,8 @@ export class SiteInspectionComponent
 		});
 	}
 	getAllJobNumber() {
-		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-			this.allJobNumbers = res.data;
+		this.logicalFormInfo.getAllJobNumber().subscribe((res) => {
+			this.allJobNumbers = res.data as ModifiedJobNumber[];
 		});
 	}
 	tabClick(eve) {

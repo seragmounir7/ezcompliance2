@@ -33,6 +33,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 		'firstName',
 		'lastName',
 		'email',
+		'role',
 		'action'
 	];
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);

@@ -197,7 +197,11 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 				this.addAttendee();
 				this.attendee()
 					.controls[i].get('employee')
-					.patchValue(res.data.attendees[i].employee);
+					.patchValue(
+						this.staff?.find(
+							(x) => x._id == res.data.attendees[i].employee
+						)
+					);
 				this.attendee()
 					.controls[i].get('signature')
 					.patchValue(res.data.attendees[i].signature);
@@ -443,7 +447,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			rest: Record<string, unknown>;
 		} = this.toolBox.value;
 		attendees = attendees.map((obj) => {
-			obj.employee = obj.employee_id;
+			obj.employee = obj.employee._id;
 			return obj;
 		});
 		const data = {
@@ -452,6 +456,10 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			enable: this.enable,
 			frequency: this.frequency
 		};
+		console.log(
+			'🚀 ~ file: toolbox-talk.component.ts ~ line 450 ~ ToolboxTalkComponent ~ onSave ~ data',
+			data
+		);
 		if (this.id !== 'form') {
 			this.logicalFormInfo.editToolBox(this.id, data).subscribe((res) => {
 				Swal.fire({

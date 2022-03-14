@@ -11,11 +11,12 @@ export class NumberDirective {
 	@HostListener('input', ['$event']) onInputChange(event) {
 		if (
 			['porfPostalCode', 'postcode'].includes(
-				this._el.nativeElement.formcontrolname
+				this._el.nativeElement['getAttribute']('formcontrolname')
 			)
 		) {
-			this._el.nativeElement.maxlength = 4;
+			this._el.nativeElement['setAttribute']('maxlength', 4);
 		}
+
 		const initalValue = this._el.nativeElement.value;
 		this._el.nativeElement.value = initalValue.replace(/[^0-9]*/g, '');
 		if (initalValue !== this._el.nativeElement.value) {

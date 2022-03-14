@@ -8,14 +8,7 @@ export interface AccessControlInput {
 	formName: string;
 	accessType: string;
 }
-
-export interface AccessResponce {
-	status: string;
-	code: number;
-	data: Datum[];
-}
-
-export interface Datum {
+export interface AccessValue {
 	status?: string;
 	_id?: string;
 	roleId: RoleID | string;
@@ -48,3 +41,13 @@ export interface RoleID {
 }
 
 type RoleIDType = RoleID & string;
+
+export interface RoleValue {
+	status: string;
+	_id: string;
+	role: string;
+	clientAdminId: string;
+	createdAt: Date;
+	updatedAt: Date;
+	__v: number;
+}

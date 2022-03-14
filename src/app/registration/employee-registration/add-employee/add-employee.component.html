@@ -1,4 +1,4 @@
-<div class="btn btn-outline-primary" *ngIf="!dialogData?.isDialog">
+<div backbutton class="btn btn-outline-primary" *ngIf="!dialogData?.isDialog">
 	<i class="fa fa-arrow-left" aria-hidden="true"></i>
 </div>
 
@@ -104,6 +104,7 @@
 						<input
 							type="text"
 							formControlName="porfPosition"
+							[matAutocomplete]="porfPosition"
 							class="form-control"
 							id="siteName"
 							[class.is-invalid]="(registerFormControl.porfPosition.touched || submitted) && registerFormControl.porfPosition.errors?.required "
@@ -114,6 +115,16 @@
 						>
 							Position is required
 						</span>
+						<mat-autocomplete
+							[displayWith]="displayFnRole"
+							#porfPosition="matAutocomplete"
+						>
+							<mat-option
+								*ngFor="let item of porfPosition$ | async as list"
+								[value]="item"
+								>{{item.role}}</mat-option
+							>
+						</mat-autocomplete>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"
@@ -121,6 +132,7 @@
 						>
 						<input
 							type="text"
+							[matAutocomplete]="porfDepartment"
 							formControlName="porfDepartment"
 							class="form-control"
 							[class.is-invalid]="(registerFormControl.porfDepartment.touched || submitted) && registerFormControl.porfDepartment.errors?.required "
@@ -131,6 +143,16 @@
 						>
 							Department is required
 						</span>
+						<mat-autocomplete
+							[displayWith]="displayFnRole"
+							#porfDepartment="matAutocomplete"
+						>
+							<mat-option
+								*ngFor="let item of porfDepartment$ | async as list"
+								[value]="item"
+								>{{item.role}}</mat-option
+							>
+						</mat-autocomplete>
 					</div>
 					<div class="mb-3 mt-3 col-3">
 						<label for="exampleFormControlInput1" class="form-label"

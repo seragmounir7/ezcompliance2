@@ -26,6 +26,7 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
+import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-saved-dynamic-form-data',
@@ -255,7 +256,7 @@ export class SavedDynamicFormDataComponent
 	reports: any = [];
 	riskAssessmentFb!: FormGroup;
 	previewform: FormGroup;
-	allJobNumbers: any;
+	allJobNumbers: ModifiedJobNumber[];
 	formNameRecieved = '';
 	states: any;
 	savedFormData: any;
@@ -278,6 +279,7 @@ export class SavedDynamicFormDataComponent
 			streetNo: [''],
 			streetAddr: [''],
 			subUrb: [''],
+			postcode: [''],
 			statesSWMS: [''],
 			custConct: [''],
 			custConctPh: [''],
@@ -290,6 +292,7 @@ export class SavedDynamicFormDataComponent
 			streetNo: [''],
 			streetAddr: [''],
 			subUrb: [''],
+			postcode: [''],
 			statesSWMS: [''],
 			custConct: [''],
 			custConctPh: [''],
@@ -466,8 +469,8 @@ export class SavedDynamicFormDataComponent
 		});
 	}
 	getAllJobNumber() {
-		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-			this.allJobNumbers = res.data;
+		this.logicalFormInfo.getAllJobNumber().subscribe((res) => {
+			this.allJobNumbers = res.data as ModifiedJobNumber[];
 		});
 	}
 	jobNoSel() {
@@ -477,13 +480,12 @@ export class SavedDynamicFormDataComponent
 				this.riskAssessmentFb.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
-					streetNo: item.streetNumber,
 					streetAddr: item.streetAddress,
 					subUrb: item.suburb,
 					statesSWMS: item.stateId._id,
 					custConct: item.customerContact,
-					custConctPh: item.customerContactPhone,
-					custEmail: item.customerEmail,
+					custConctPh: item.contacts[0].phone,
+					custEmail: item.contacts[0].email,
 					jobNumber: this.riskAssessmentFb.get('jobNumber').value
 				});
 			}
@@ -498,13 +500,12 @@ export class SavedDynamicFormDataComponent
 				this.previewform.patchValue({
 					siteName: item.siteName,
 					customerName: item.customerName,
-					streetNo: item.streetNumber,
-					streetAddr: item.streetAddress,
+					postcode: item.postcode,
 					subUrb: item.suburb,
 					statesSWMS: item.stateId._id,
 					custConct: item.customerContact,
-					custConctPh: item.customerContactPhone,
-					custEmail: item.customerEmail,
+					custConctPh: item.contacts[0].phone,
+					custEmail: item.contacts[0].email,
 					jobNumber: this.previewform.get('jobNumber').value
 				});
 			}

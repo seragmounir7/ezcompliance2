@@ -794,6 +794,25 @@ export class NavItems {
 			hasAccess: true
 		},
 		{
+			displayedName: 'Company Information',
+			icon: 'roleMgmt',
+			childItem: [
+				{
+					displayedName: 'Employee Details',
+					icon: 'employee',
+					route: './registration/employeeRegistration',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Subcontractor Details',
+					icon: 'subcontractor',
+					route: './registration/subcontract',
+					hasAccess: true
+				}
+			],
+			hasAccess: true
+		},
+		{
 			displayedName: 'WHS Forms',
 			icon: 'whsForms',
 			childItem: [

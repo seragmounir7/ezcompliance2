@@ -16,6 +16,12 @@ export class AuthInterceptor implements HttpInterceptor {
 		request: HttpRequest<unknown>,
 		next: HttpHandler
 	): Observable<HttpEvent<unknown>> {
+		const { url } = request;
+		console.log(
+			'🚀 ~ file: auth.interceptor.ts ~ line 20 ~ AuthInterceptor ~ url',
+			url
+		);
+
 		let role: string;
 		const id: string = this.authService.loginData?.id
 			? this.authService.loginData.id
@@ -28,6 +34,8 @@ export class AuthInterceptor implements HttpInterceptor {
 			default:
 				break;
 		}
+		if (request.url.includes('assets/json/svg.json'))
+			return next.handle(request);
 		if (
 			request.method === 'POST' ||
 			request.method === 'PUT' ||

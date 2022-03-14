@@ -23,6 +23,8 @@ import { UploadFileService } from 'src/app/utils/services/upload-file.service';
 import Swal from 'sweetalert2';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
+import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-employee',
@@ -49,7 +51,7 @@ export class AddEmployeeComponent implements OnInit {
 	file1: any;
 	dataUrl: any;
 	dataUrl2: any;
-	roleData: any = [''];
+	roleData: RoleValue[];
 	filteredOptions2: Observable<any>;
 	filteredOptions1: Observable<any>;
 	filteredOptions3: Observable<any>;
@@ -61,6 +63,9 @@ export class AddEmployeeComponent implements OnInit {
 	url: any;
 	private dialogRef: MatDialogRef<any, any> = null;
 	public dialogData = null;
+	displayFnRole: any;
+	porfPosition$: Observable<any[]>;
+	porfDepartment$: Observable<any[]>;
 
 	constructor(
 		private fb: FormBuilder,
@@ -221,8 +226,21 @@ export class AddEmployeeComponent implements OnInit {
 	}
 
 	getAllRoles() {
-		this.role.getAllRole().subscribe((res: any) => {
+		this.role.getAllRole().subscribe((res) => {
 			this.roleData = res.data;
+			this.displayFnRole = this.role.displayFnRole;
+			this.role.getAllRole().subscribe((res) => {
+				this.porfPosition$ = this.role.getRoleAutocomplete(
+					this.empDetails,
+					'porfPosition',
+					res.data
+				);
+				this.porfDepartment$ = this.role.getRoleAutocomplete(
+					this.empDetails,
+					'porfDepartment',
+					res.data
+				);
+			});
 		});
 	}
 	patchData() {
@@ -251,12 +269,12 @@ export class AddEmployeeComponent implements OnInit {
 				profFirst: data.data.firstName,
 				porfListName: data.data.lastName,
 				porfEmail: data.data.email,
-				porfPosition: data.data.position,
-				porfDepartment: data.data.department,
+				porfPosition: data.data.position as UserValue,
+				porfDepartment: data.data.department as UserValue,
 				porfPhone: data.data.phone,
 				porfMobile: data.data.mobileNumber,
 
-				roleId: data.data.roleId,
+				roleId: (data.data.roleId as UserValue)._id,
 				reportingTo: data.data.reportingTo,
 				porfStreetAddress: data.data.location.address,
 				porfSuburb: data.data.suburb,
@@ -439,7 +457,7 @@ export class AddEmployeeComponent implements OnInit {
 				element.controls.PPESupplied.valueChanges.pipe(
 					startWith(''),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName
@@ -475,7 +493,7 @@ export class AddEmployeeComponent implements OnInit {
 					startWith(''),
 					debounceTime(400),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName
@@ -513,7 +531,7 @@ export class AddEmployeeComponent implements OnInit {
 				element.controls.LicenceName.valueChanges.pipe(
 					startWith(''),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName ? this._filter(fullName) : this.empData.slice()
@@ -532,7 +550,7 @@ export class AddEmployeeComponent implements OnInit {
 					startWith(''),
 					debounceTime(400),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName ? this._filter(fullName) : this.empData.slice()
@@ -747,7 +765,8 @@ export class AddEmployeeComponent implements OnInit {
 		const data = {
 			title: this.empDetails.get('profTitie').value,
 			email: this.empDetails.get('porfEmail').value,
-			position: this.empDetails.get('porfPosition').value,
+			position: (this.empDetails.get('porfPosition').value as RoleValue)
+				._id,
 			mobileNumber: this.empDetails.get('porfMobile').value,
 			roleId: this.empDetails.get('roleId').value,
 			// designation: this.empDetails.get('porfEmployee').value,
@@ -756,7 +775,8 @@ export class AddEmployeeComponent implements OnInit {
 			suburb: this.empDetails.get('porfSuburb').value,
 			stateId: this.empDetails.get('porfState').value,
 			reportingTo: this.empDetails.get('reportingTo').value,
-			department: this.empDetails.get('porfDepartment').value,
+			department: (this.empDetails.get('porfDepartment')
+				.value as RoleValue)._id,
 			phone: this.empDetails.get('porfPhone').value,
 			firstName: this.empDetails.get('profFirst').value,
 			lastName: this.empDetails.get('porfListName').value,

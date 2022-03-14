@@ -44,6 +44,9 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { CustomValidators } from 'src/app/custom-validators';
+import { UserValue } from 'src/app/utils/types/UserResponceTypes';
+import { RoleManagementService } from 'src/app/utils/services/role-management.service';
+import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -95,6 +98,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	doesQueryMobilExists: boolean;
 	enable: boolean;
 	frequency: string;
+	compileDepartment$: Observable<any[]>;
+	public displayFnRole: (user: any) => string;
+	department$: Observable<any[]>;
+	position$: Observable<any[]>;
+	compilePosition$: Observable<any[]>;
+	roleValue: RoleValue[];
 	@HostListener('window:afterprint', [])
 	function() {
 		this.shared.printNext(false);
@@ -107,7 +116,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	maxDate = new Date();
 	minDate = new Date();
 	type: any;
-	empData: any;
+	empData: UserValue[];
 	check: any;
 	isImg: any;
 	// showImg:any;
@@ -124,7 +133,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		private ngZone: NgZone,
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
-		public mobileViewService: MobileViewService
+		public mobileViewService: MobileViewService,
+		private roleManagementService: RoleManagementService
 	) {
 		this.check = localStorage.getItem('key');
 
@@ -226,7 +236,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.filteredOptions2 = this.hazardReport.controls.fullName.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -235,7 +245,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.filteredOptions3 = this.hazardReport.controls.name.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -244,7 +254,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.filteredOptions = this.hazardReport.controls.myControl.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -266,7 +276,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 					startWith(''),
 					debounceTime(400),
 					map((value) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName) =>
 						fullName ? this._filter(fullName) : this.empData.slice()
@@ -291,7 +301,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		);
 		this.getAllHazardTreatmentRelation();
 		this.getAllJobNumber();
-		this.getall();
 
 		this.dynamicFormsService.homebarTitle.next('Hazard Report Form');
 		this.setTitle.setTitle('WHS-Hazard Report Form');
@@ -314,6 +323,31 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		if (this.id != 'form') {
 			this.getHazardByid(this.id);
 		}
+
+		this.displayFnRole = this.roleManagementService.displayFnRole;
+		this.roleManagementService.getAllRole().subscribe((res) => {
+			this.roleValue = res.data;
+			this.compileDepartment$ = this.roleManagementService.getRoleAutocomplete(
+				this.hazardReport,
+				'compileDepartment',
+				res.data
+			);
+			this.department$ = this.roleManagementService.getRoleAutocomplete(
+				this.hazardReport,
+				'department',
+				res.data
+			);
+			this.position$ = this.roleManagementService.getRoleAutocomplete(
+				this.hazardReport,
+				'position',
+				res.data
+			);
+			this.compilePosition$ = this.roleManagementService.getRoleAutocomplete(
+				this.hazardReport,
+				'compilePosition',
+				res.data
+			);
+		});
 	}
 	private _filter(name: string): any[] {
 		const filterValue = name.toLowerCase();
@@ -369,7 +403,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.url.getHazardFormDataById(id).subscribe((res: any) => {
 			this.hazardReport.patchValue(res.data);
 			this.hazardReport.patchValue({
-				// myControl: res.data.myControl,
 				// myControlManager: res.data.myControlManager,
 				// employeeParttime: res.data.employeeParttime,
 				// email: res.data.email,
@@ -377,7 +410,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				// department: res.data.department,
 				// position: res.data.position,
 				// projectName: res.data.projectName,
-				// managerSupervisor: res.data.managerSupervisor,
 				// managerSupervisorEmail: res.data.managerSupervisorEmail,
 				// whsManagerEmail: res.data.whsManagerEmail,
 				// describeHazard: res.data.describeHazard,
@@ -415,6 +447,10 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 				// dateHazardIdentify: res.data.dateHazardIdentify,
 				// eliminateHazardAction: res.data.eliminateHazardAction,
 				// signaturePad1: res.data.signaturePad1,
+				myControl: this.empData.find(
+					(x) => x._id == res.data.myControl._id
+				),
+				managerSupervisor: res.data.managerSupervisor._id,
 				elliminateAction: { fullName: res.data.elliminateAction },
 				substituteAction: { fullName: res.data.substituteAction },
 				isolatedAction: { fullName: res.data.isolatedAction },
@@ -570,11 +606,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 
-	getall() {
-		this.url.getAllManager().subscribe((res: any) => {
-			this.whsData = res.data;
-		});
-	}
 	getHazardNo() {
 		if (
 			this.hazardReport.get('consequence').value &&
@@ -700,11 +731,12 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 	employeeData(e: MatAutocompleteSelectedEvent) {
-		const data = e.option.value;
+		const data: UserValue = e.option.value as UserValue;
+
 		this.hazardReport.patchValue({
-			department: data.department,
+			department: this.roleValue.find((x) => x._id == data.department),
 			email: data.email,
-			position: data.position,
+			position: this.roleValue.find((x) => x._id == data.position),
 			phone: data.phone
 		});
 	}
@@ -713,17 +745,26 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		const data = e.option.value;
 		this.hazardReport.patchValue({
 			// name: data.name,
-			compileDepartment: data.department,
-			compilePosition: data.position
+			compileDepartment: this.roleValue.find(
+				(x) => x._id == data.department
+			),
+			compilePosition: this.roleValue.find((x) => x._id == data.position)
 			// elliminateAction:data.name
 		});
 	}
+
+	setSupervisorEmail(e) {
+		console.log(e);
+		const val = this.empData.find((item) => e.target.value === item._id);
+		this.hazardReport.controls.managerSupervisorEmail.setValue(val.email);
+	}
+
 	public findInvalidControls(): Array<any> {
 		const invalid = [];
 		const controls = this.hazardReport.controls;
 		for (const name in controls) {
 			if (controls[name].invalid) {
-				invalid.push(name);
+				invalid.push({ name, error: controls[name].errors });
 			}
 		}
 		return invalid;
