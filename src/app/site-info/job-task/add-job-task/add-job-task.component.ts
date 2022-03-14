@@ -17,6 +17,7 @@ export class AddJobTaskComponent implements OnInit {
 	formData: any;
 	numberOfLineBreaks: any;
 	licenceCatAll = [];
+	licenceCatAllIds: string;
 	constructor(
 		private fb: FormBuilder,
 		private router: Router,
@@ -36,6 +37,7 @@ export class AddJobTaskComponent implements OnInit {
 	getAllCategories() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
 			this.licenceCatAll = res.data;
+			this.licenceCatAllIds = res.data?.map((x) => x._id);
 		});
 	}
 	addAction() {

@@ -16,12 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
 		request: HttpRequest<unknown>,
 		next: HttpHandler
 	): Observable<HttpEvent<unknown>> {
-		const { url } = request;
-		console.log(
-			'🚀 ~ file: auth.interceptor.ts ~ line 20 ~ AuthInterceptor ~ url',
-			url
-		);
-
 		let role: string;
 		const id: string = this.authService.loginData?.id
 			? this.authService.loginData.id
@@ -29,6 +23,8 @@ export class AuthInterceptor implements HttpInterceptor {
 		switch (sessionStorage.getItem('role')) {
 			case Designation.clientAdmin:
 				role = 'clientAdminId';
+			case Designation.user:
+				role = 'userId';
 				break;
 
 			default:
