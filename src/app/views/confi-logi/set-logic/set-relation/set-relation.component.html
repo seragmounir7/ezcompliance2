@@ -218,15 +218,18 @@
 						<mat-option
 							*ngFor="let parameter of allHazards"
 							#matOption
-							(click)="hazardsUpdateAll(matOption,parameter._id)"
-							[value]="parameter._id"
-							[matTooltip]="span.innerText"
+							(click)="hazardsUpdateAll(matOption,parameter?._id)"
+							[value]="parameter?._id"
 						>
 							<span
 								style="display: none"
 								#span
 								[innerHTML]="parameter.title"
 							></span>
+							<button
+								style="display: none"
+								[matTooltip]="span?.innerText"
+							></button>
 							{{ span.innerText }}
 						</mat-option>
 					</mat-select>
