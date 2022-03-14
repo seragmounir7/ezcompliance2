@@ -8,6 +8,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditStatesComponent } from './add-and-edit-states/add-and-edit-states.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-states',
 	templateUrl: './states.component.html',
@@ -40,7 +42,6 @@ export class StatesComponent implements OnInit {
 
 	getAllStates() {
 		this.logicalFormInfo.getAllStates().subscribe((res) => {
-			console.log('getAllStates=>', res);
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -61,7 +62,6 @@ export class StatesComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllStates();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -82,7 +82,7 @@ export class StatesComponent implements OnInit {
 						showConfirmButton: false,
 						timer: 1200
 					});
-					console.log('deleted res', res);
+
 					this.getAllStates();
 				});
 			}

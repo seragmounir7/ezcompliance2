@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { filter, map, share, shareReplay, tap } from 'rxjs/operators';
+import {
+	filter,
+	map,
+	share,
+	shareReplay,
+	startWith,
+	tap
+} from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
 	AccessArr,
 	AccessObj,
-	AccessResponce,
-	Datum,
-	RoleID
+	AccessValue,
+	RoleID,
+	RoleValue
 } from '../types/AccessResponceTypes';
 import { accessType, FormName } from 'src/app/side-nav-access.enum';
+import { ResponceBody } from '../types/ResponceBody';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
 	providedIn: 'root'
@@ -46,20 +55,39 @@ export class RoleManagementService {
 	deleteRole(id) {
 		return this.https.delete(this.apiUrl + 'role/delete/' + id);
 	}
-	getAllRole() {
-		return this.https.get(this.apiUrl + 'role/getAll');
+	getAllRole(): Observable<ResponceBody<RoleValue>> {
+		return this.https.get<ResponceBody<RoleValue>>(
+			this.apiUrl + 'role/getAll'
+		);
 	}
-	// getRiskById(id) {
-	//   return this.https.get(this.apiUrl + 'risk/get/' + id)
-	// }
 
-	getAllAcess(): Observable<AccessResponce> {
+	getRoleAutocomplete(
+		formGroupName: FormGroup,
+		controlName: string,
+		roleArray: RoleValue[]
+	) {
+		return formGroupName.controls[controlName].valueChanges.pipe(
+			startWith(''),
+			map((value) => (typeof value === 'string' ? value : value?.role)),
+			map((role) =>
+				role ? this._filterRole(role, roleArray) : roleArray.slice()
+			)
+		);
+	}
+	private _filterRole(name: string, roleArray: RoleValue[]): any[] {
+		const filterValue = name.toLowerCase();
+		return roleArray.filter((option) =>
+			option.role.toLowerCase().includes(filterValue)
+		);
+	}
+	displayFnRole(user: any): string {
+		return user && user.role ? user.role : '';
+	}
+
+	getAllAcess(): Observable<ResponceBody<AccessValue>> {
 		return this.https
-			.get<AccessResponce>(this.apiUrl + 'access/getAll')
+			.get<ResponceBody<AccessValue>>(this.apiUrl + 'access/getAll')
 			.pipe(
-				tap((res) =>
-					console.log('tap getAllAcess', [...res.data.slice()])
-				),
 				map((res) => {
 					res.data = res.data.map((item) => {
 						item.access = item.accessArr.map((item2) => {
@@ -74,7 +102,7 @@ export class RoleManagementService {
 				shareReplay()
 			);
 	}
-	updateAllAccess(data: Datum[]) {
+	updateAllAccess(data: AccessValue[]) {
 		return this.https
 			.put(this.apiUrl + 'access/update/multiple', {
 				arrObj: data
@@ -84,7 +112,7 @@ export class RoleManagementService {
 
 	getAccessByUserId(): Observable<AccessArr[]> {
 		return this.https
-			.get<AccessResponce>(
+			.get<ResponceBody<AccessValue>>(
 				this.apiUrl +
 					'authentication/get/user/access/by/' +
 					sessionStorage.getItem('id')

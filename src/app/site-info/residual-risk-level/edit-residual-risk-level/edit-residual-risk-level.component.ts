@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-residual-risk-level',
 	templateUrl: './edit-residual-risk-level.component.html',
@@ -33,8 +35,6 @@ export class EditResidualRiskLevelComponent implements OnInit {
 		this.logicalFormInfo
 			.updateResidual(this.dataRec._id, data)
 			.subscribe((resData) => {
-				console.log('resData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Residual-Risk Updated successfully',

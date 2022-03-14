@@ -9,6 +9,7 @@ import { TitleCaseDirective } from './title-case.directive';
 import { ChangeTypePipe } from './change-type.pipe';
 import { CheckImgExtPipe } from './check-img-ext.pipe';
 import { BackButtonDirective } from './back-button.directive';
+import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,7 @@ import { BackButtonDirective } from './back-button.directive';
 		CheckImgExtPipe,
 		BackButtonDirective
 	],
-	imports: [CommonModule],
+	imports: [CommonModule, AutosizeModule],
 	exports: [
 		TextareaAutoresizeDirective,
 		HideForRoleDirective,
@@ -32,7 +33,8 @@ import { BackButtonDirective } from './back-button.directive';
 		TitleCaseDirective,
 		ChangeTypePipe,
 		CheckImgExtPipe,
-		BackButtonDirective
+		BackButtonDirective,
+		AutosizeModule
 	]
 })
 export class DirectivesModule {}

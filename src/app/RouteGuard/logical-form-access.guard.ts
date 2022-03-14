@@ -22,7 +22,6 @@ export class LogicalFormAccessGuard implements CanActivate {
 		| Promise<boolean | UrlTree>
 		| boolean
 		| UrlTree {
-		console.log('blocked');
 		if (!environment.allRouteTemp) {
 			const activeToast = this.toastr.error(
 				'You Are Not allowed to access this route.',

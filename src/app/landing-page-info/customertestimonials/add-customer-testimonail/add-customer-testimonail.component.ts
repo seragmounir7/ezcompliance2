@@ -17,6 +17,8 @@ import {
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-customer-testimonail',
 	templateUrl: './add-customer-testimonail.component.html',
@@ -41,36 +43,27 @@ export class AddCustomerTestimonailComponent implements OnInit {
 			description: ['', Validators.required],
 			fileUrl: ['', Validators.required]
 		});
-		console.log('', data);
 	}
 	ngOnInit(): void {}
 	browser(event) {
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
 			this.selectedImage.push(res.files[0]);
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 	onSubmit() {
 		this.testiomnial
 			.get('fileUrl')
 			?.setValue(this.selectedImage[0].toString());
-		console.log(this.testiomnial.value);
 
-		console.log(this.testiomnial.value);
 		this.landingPageInfo
 			.addSubModule(this.testiomnial.value)
 			.subscribe((data) => {
 				Swal.fire('Customer Added Successfully');
-				console.log('data=>', data);
+
 				this.testimonailData = data;
 				this.dialogRef.close('true');
 				this.testiomnial.reset();

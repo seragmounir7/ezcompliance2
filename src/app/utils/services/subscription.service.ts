@@ -13,7 +13,6 @@ export class SubscriptionService {
 	getPlan(id: any) {
 		return this.https.get(this.apiUrl + 'plan/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -21,7 +20,6 @@ export class SubscriptionService {
 	getAllPlan() {
 		return this.https.get(this.apiUrl + 'plan/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -30,7 +28,6 @@ export class SubscriptionService {
 	editPlan(id, data) {
 		return this.https.put(this.apiUrl + 'plan/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -39,7 +36,6 @@ export class SubscriptionService {
 	addPlan(data) {
 		return this.https.post(this.apiUrl + 'plan/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -47,7 +43,6 @@ export class SubscriptionService {
 	getCoupon(id: any) {
 		return this.https.get(this.apiUrl + 'coupon/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -60,7 +55,6 @@ export class SubscriptionService {
 			.get(this.apiUrl + `coupon/getAll?field=${field}&value=${value}`)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -69,7 +63,6 @@ export class SubscriptionService {
 	editCoupon(id, data) {
 		return this.https.put(this.apiUrl + 'coupon/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -78,7 +71,6 @@ export class SubscriptionService {
 	addCoupon(data) {
 		return this.https.post(this.apiUrl + 'coupon/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -86,7 +78,6 @@ export class SubscriptionService {
 	deleteCoupon(id) {
 		return this.https.delete(this.apiUrl + 'coupon/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -102,7 +93,6 @@ export class SubscriptionService {
 	getsubscription(id: any) {
 		return this.https.get(this.apiUrl + 'subscription/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -110,7 +100,6 @@ export class SubscriptionService {
 	getAllsubscription() {
 		return this.https.get(this.apiUrl + 'subscription/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -121,7 +110,6 @@ export class SubscriptionService {
 			.put(this.apiUrl + 'subscription/update/' + id, data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -130,7 +118,6 @@ export class SubscriptionService {
 	addsubscription(data) {
 		return this.https.post(this.apiUrl + 'subscription/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -140,7 +127,6 @@ export class SubscriptionService {
 			.delete(this.apiUrl + 'subscription/delete/' + id)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);

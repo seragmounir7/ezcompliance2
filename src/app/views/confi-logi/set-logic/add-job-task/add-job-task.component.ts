@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-job-task',
 	templateUrl: './add-job-task.component.html',
@@ -28,7 +30,6 @@ export class AddJobTaskComponent implements OnInit {
 	) {
 		this.dataRec = data;
 
-		console.log('datarec', this.dataRec);
 		this.addjob = this.fb.group({
 			title: ['', Validators.required],
 			tradeCategory: ['', Validators.required]
@@ -74,20 +75,17 @@ export class AddJobTaskComponent implements OnInit {
 	}
 	getAllCategories() {
 		this.logicalFormInfo.getAllLicenceCat().subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.licenceCatAll = res.data;
 		});
 	}
 	onFormSubmit() {
-		console.log(this.jobTaskDetails.get('title').value);
 		const data = {
 			title: this.jobTaskDetails.get('title').value,
 			tradeCategoryId: this.jobTaskDetails.get('tradeCategoryId').value
 		};
-		console.log('edit', data);
+
 		this.logicalFormInfo.updateJobTask(data, this.dataRec._id).subscribe(
 			(data) => {
-				console.log('JOBTask=>', data);
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'JobTask Updated successfully',
@@ -101,10 +99,8 @@ export class AddJobTaskComponent implements OnInit {
 		);
 	}
 	addForm() {
-		console.log('addForm', this.addjob.value);
 		this.logicalFormInfo.addJobTask(this.addjob.value).subscribe(
 			(data) => {
-				console.log('JOBTask=>', data);
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Added successfully',

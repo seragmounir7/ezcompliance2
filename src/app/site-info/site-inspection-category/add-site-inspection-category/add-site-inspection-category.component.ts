@@ -4,6 +4,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-site-inspection-category',
 	templateUrl: './add-site-inspection-category.component.html',
@@ -23,13 +25,10 @@ export class AddSiteInspectionCategoryComponent implements OnInit {
 		});
 	}
 	onSubmit() {
-		console.log(this.siteInspectionCategoryAdd.value);
-
 		this.logicalFormInfoService
 			.addSiteInspectionCategory(this.siteInspectionCategoryAdd.value)
 			.subscribe(
 				(res) => {
-					console.log('addCustomerForm=>', res);
 					//this.dialogRef.close('ok')
 					this.router.navigate([
 						'/admin/setting/siteinspectioncategory'

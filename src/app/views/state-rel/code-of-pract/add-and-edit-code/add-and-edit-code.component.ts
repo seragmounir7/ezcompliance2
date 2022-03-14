@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-code',
 	templateUrl: './add-and-edit-code.component.html',
@@ -35,8 +37,6 @@ export class AddAndEditCodeComponent implements OnInit {
 		this.logicalFormInfo
 			.updateCode(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('updateCOP', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'COP Edited successfully',
@@ -50,8 +50,6 @@ export class AddAndEditCodeComponent implements OnInit {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo.addCode(data).subscribe((resData) => {
-			console.log('addCOP', resData);
-
 			this.dialogRef.close('true');
 			if (this.dataRec) {
 				Swal.fire({

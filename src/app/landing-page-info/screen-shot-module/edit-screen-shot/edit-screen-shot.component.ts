@@ -9,6 +9,8 @@ import {
 } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-screen-shot',
 	templateUrl: './edit-screen-shot.component.html',
@@ -39,11 +41,8 @@ export class EditScreenShotComponent implements OnInit {
 		public dialogRef: MatDialogRef<EditScreenShotComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
-		console.log(data);
 		this.Is_Mod = data.moduleName;
 		this.Is_subMod = data.modulename;
-
-		console.log(this.Is_Mod);
 
 		this.SubWorkDetail = this.fb.group({
 			title: ['', Validators.required],
@@ -68,7 +67,7 @@ export class EditScreenShotComponent implements OnInit {
 
 		if (this.data.action == 'edit') {
 			this.Update = true;
-			console.log(' subTitle', this.data);
+
 			this.SubWorkDetail.patchValue({
 				mode: 'Screenshot',
 				title: this.data.EditData.title
@@ -81,16 +80,14 @@ export class EditScreenShotComponent implements OnInit {
 					.description
 			});
 
-			(this.selectedImage = this.data.EditData.subModules[
+			this.selectedImage = this.data.EditData.subModules[
 				this.data.index
-			].fileUrl),
-				console.log('img', this.selectedImage);
+			].fileUrl;
 		}
 
 		const index = this.data.index;
-		console.log(index, 'index');
+
 		this.subId = this.data.EditData.subModules[index]._id;
-		console.log(this.subId, 'subId');
 	}
 	Added() {
 		if (this.Edit == true) {
@@ -133,36 +130,27 @@ export class EditScreenShotComponent implements OnInit {
 	}
 
 	browser(event, i) {
-		console.log(event, i);
 		const files = event.target.files[0];
 		const formData = new FormData();
 		formData.append('', files);
 		const value = this.selectedImage;
-		console.log('vvvvvv', value);
 
 		if (value) {
 			this.upload.upload(formData).subscribe((res) => {
-				console.log(' browser -> res', res);
-
 				this.selectedImage = res.files[0];
 			});
 		} else {
 			this.upload.upload(formData).subscribe((res) => {
-				console.log(' browser -> res', res);
 				this.SubWorkDetail.patchValue({
 					filePath: res.filePath
 				});
 				this.selectedImage.push(res.files[0]);
-
-				console.log('browse -> this.selectedImage', this.selectedImage);
 			});
 		}
 	}
 	onFormSubmit() {
 		const value = this.selectedImage;
-		console.log('vvvvvv', value);
 
-		console.log(this.SubWorkDetail.value);
 		const arrlength = this.add().length;
 		for (let i = 0; i < arrlength; i++) {
 			this.add()
@@ -170,7 +158,6 @@ export class EditScreenShotComponent implements OnInit {
 				.get('fileUrl')
 				?.setValue(this.selectedImage[i].toString());
 		}
-		console.log(this.SubWorkDetail.value);
 	}
 	editModule() {
 		if (this.data.action == 'edit') {
@@ -178,13 +165,11 @@ export class EditScreenShotComponent implements OnInit {
 				title: this.SubWorkDetail.controls.title.value,
 				mode: 'Screenshot'
 			};
-			console.log('asdfgh', ServiceData);
-			console.log('this.EditData', this.data.EditData._id);
+
 			this.url
 				.editModule(ServiceData, this.data.EditData._id)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('editModule', resData);
 
 					this.dialogRef.close('true');
 					this.SubWorkDetail.reset();
@@ -199,13 +184,11 @@ export class EditScreenShotComponent implements OnInit {
 				fileUrl: this.selectedImage,
 				description: this.add().at(0).get('description')?.value
 			};
-			console.log(' submodulesData', submodulesData);
 
 			this.url
 				.editsubModule(submodulesData, this.subId)
 				.subscribe((resData) => {
 					Swal.fire('Edited Successfully');
-					console.log('submodulesData', resData);
 
 					this.dialogRef.close('true');
 					this.SubWorkDetail.reset();

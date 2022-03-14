@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl } from '@angular/forms';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-instructions',
 	templateUrl: './instructions.component.html',
@@ -43,7 +45,7 @@ export class InstructionsComponent implements OnInit {
 		this.instructionControl.disable();
 		this.setTitle.setTitle('WHS-Accident Instruction');
 		this.url = this.activatedRoute.snapshot.url[1]?.path || null;
-		console.log('this.id', this.url);
+
 		if (this.router.url.includes('notifiableAccident')) {
 			this.getInstructions();
 		}
@@ -55,7 +57,6 @@ export class InstructionsComponent implements OnInit {
 	getInstructions() {
 		this.logicalFormInfo.getInstruction().subscribe(
 			(res: any) => {
-				console.log('NatOfIncAll=>', res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -69,7 +70,6 @@ export class InstructionsComponent implements OnInit {
 				this.ELEMENT_DATA = data;
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				// this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				//  this.task = res.data.subComponents;
 			},
@@ -80,7 +80,6 @@ export class InstructionsComponent implements OnInit {
 	getRiskInstructions() {
 		this.logicalFormInfo.getRiskInstruction().subscribe(
 			(res: any) => {
-				console.log('NatOfIncAll=>', res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -95,7 +94,6 @@ export class InstructionsComponent implements OnInit {
 
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				// this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				//  this.task = res.data.subComponents;
 			},
@@ -119,7 +117,7 @@ export class InstructionsComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('nature=>', data);
+
 						this.getInstructions();
 					},
 					(err) => {
@@ -166,7 +164,7 @@ export class InstructionsComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getInstructions();
 					});
 			}

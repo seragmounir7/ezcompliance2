@@ -15,7 +15,8 @@ import {
 	FormBuilder,
 	Validators,
 	FormArray,
-	FormControl
+	FormControl,
+	AbstractControl
 } from '@angular/forms';
 import { SignaturePad } from 'angular2-signaturepad';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
@@ -34,6 +35,12 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MobileViewService } from 'src/app/utils/services/mobile-view.service';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { UserValue } from 'src/app/utils/types/UserResponceTypes';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
+import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import { Designation } from 'src/app/utils/types/Designation.enum';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-incident-report',
 	templateUrl: './incident-report.component.html',
@@ -55,7 +62,7 @@ export class IncidentReportComponent
 	natureOfIncArr = [];
 	incidentsArr = [];
 	rootArr = [];
-	allJobNumbers = [];
+	allJobNumbers: ModifiedJobNumber[] = [];
 	@ViewChild('signature') signaturePad: SignaturePad;
 	@ViewChild('signature1') signaturePad1: SignaturePad;
 	maxDate = new Date();
@@ -65,7 +72,7 @@ export class IncidentReportComponent
 	isPrint: Observable<any>;
 	editorDisable = false;
 	filteredOptions1: Observable<any>;
-	empData: any;
+	empData: UserValue[];
 	filteredOptions2: Observable<any>;
 	uploadFile: string;
 	isHistory: boolean;
@@ -73,21 +80,23 @@ export class IncidentReportComponent
 	personCompletingForm$: Observable<any>;
 	injuredorAffectedPersonName$: Observable<any>;
 	department$: Observable<any>;
-	roleData: any[] = [];
+	roleData: RoleValue[] = [];
 	completedDepartment$: Observable<any[]>;
 	reviewedDepartment$: Observable<any[]>;
 	isImg: boolean = false;
 	enable: boolean;
 	frequency: string;
+	position$: Observable<any[]>;
+	completedPosition$: Observable<any[]>;
+	reviewedPosition$: Observable<any[]>;
 	@HostListener('window:afterprint', [])
 	function() {
-		console.log('Printing completed...');
+		this.shared.printNext(false);
 		if (this.router.url.includes('/admin/savedForms')) {
 			this.router.navigateByUrl('/admin/savedForms');
 			return;
 		}
 		this.router.navigateByUrl('/admin/forms/incidentsTable');
-		this.shared.printNext(false);
 	}
 	projMan: any;
 	projectMang: any;
@@ -125,7 +134,8 @@ export class IncidentReportComponent
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
 		public mobileViewService: MobileViewService,
-		public role: RoleManagementService
+		public role: RoleManagementService,
+		public authService: AuthService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -140,7 +150,7 @@ export class IncidentReportComponent
 			changes: this.fb.array([]),
 			arrObj: this.fb.array([]),
 			jobNumber: ['', Validators.required],
-			projectName: ['', Validators.required],
+			// projectName: ['', Validators.required],
 			siteName: ['', Validators.required],
 			customerName: ['', Validators.required],
 			streetAddress: ['', Validators.required],
@@ -184,7 +194,6 @@ export class IncidentReportComponent
 	}
 	ngOnDestroy(): void {
 		this.sub.unsubscribe();
-		console.log('incident destroy');
 	}
 
 	triggerResize() {
@@ -220,15 +229,24 @@ export class IncidentReportComponent
 			this.returnTo = this.activatedRoute.queryParamMap.pipe(
 				map((param) => param.get('returnTo'))
 			);
-			this.returnTo.subscribe((res) => console.log(res));
+			this.returnTo.subscribe();
 		}
-		this.role.getAllRole().subscribe((res: any) => {
-			console.log('getAllRole', res);
+		this.role.getAllRole().subscribe((res) => {
 			this.roleData = res.data;
+			this.completedPosition$ = this.role.getRoleAutocomplete(
+				this.IncidentReport,
+				'completedPosition',
+				this.roleData
+			);
+			this.reviewedPosition$ = this.role.getRoleAutocomplete(
+				this.IncidentReport,
+				'reviewedPosition',
+				this.roleData
+			);
 			this.completedDepartment$ = this.IncidentReport.controls.completedDepartment.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.role
+					typeof value === 'string' ? value : value?.role
 				),
 				map((role) =>
 					role ? this._filterRole(role) : this.roleData.slice()
@@ -237,16 +255,21 @@ export class IncidentReportComponent
 			this.reviewedDepartment$ = this.IncidentReport.controls.reviewedDepartment.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.role
+					typeof value === 'string' ? value : value?.role
 				),
 				map((role) =>
 					role ? this._filterRole(role) : this.roleData.slice()
 				)
 			);
+			this.position$ = this.role.getRoleAutocomplete(
+				this.IncidentReport,
+				'position',
+				this.roleData
+			);
 			this.department$ = this.IncidentReport.controls.department.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.role
+					typeof value === 'string' ? value : value?.role
 				),
 				map((role) =>
 					role ? this._filterRole(role) : this.roleData.slice()
@@ -255,11 +278,19 @@ export class IncidentReportComponent
 		});
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
+			empData.forEach((item) => {
+				if (this.authService.loginData.designation === Designation.user)
+					if (this.authService.loginData.id === item._id) {
+						this.IncidentReport.controls.personCompletingForm.patchValue(
+							item
+						);
+					}
+			});
 			const filteredOptions = () => {
 				return (
 					startWith(''),
 					map((value: any) =>
-						typeof value === 'string' ? value : value.fullName
+						typeof value === 'string' ? value : value?.fullName
 					),
 					map((fullName: string) =>
 						fullName ? this._filter(fullName) : this.empData.slice()
@@ -269,25 +300,30 @@ export class IncidentReportComponent
 			this.injuredorAffectedPersonName$ = this.IncidentReport.controls.name.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
 				)
 			);
-			this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
+			this.personCompletingForm$ = this.employee.getEmpAutoComplete(
+				this.IncidentReport,
+				'personCompletingForm',
+				this.empData
+			);
+			/* this.personCompletingForm$ = this.IncidentReport.controls.personCompletingForm.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
 				)
-			);
+			); */
 			this.filteredOptions1 = this.IncidentReport.controls.completedName.valueChanges.pipe(
 				startWith(''),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -295,9 +331,8 @@ export class IncidentReportComponent
 			);
 			this.filteredOptions2 = this.IncidentReport.controls.reviewedName.valueChanges.pipe(
 				startWith(''),
-				tap((value) => console.log('value', value)),
 				map((value) =>
-					typeof value === 'string' ? value : value.fullName
+					typeof value === 'string' ? value : value?.fullName
 				),
 				map((fullName) =>
 					fullName ? this._filter(fullName) : this.empData.slice()
@@ -309,13 +344,10 @@ export class IncidentReportComponent
 			this.type = params.formType;
 		});
 
-		console.log('AccidentReport', this.IncidentReport);
-
 		this.dynamicFormsService.homebarTitle.next('Incident Report Form');
 		this.setTitle.setTitle('WHS-Accident Report Form');
 
 		if (this.id !== 'Form') {
-			console.log('id', this.id);
 			this.getIncidentsByid(this.id);
 		} else {
 			this.addAction();
@@ -350,7 +382,6 @@ export class IncidentReportComponent
 	}
 	showImg() {
 		let ext = this.selectedImage ? this.selectedImage.split('.') : [];
-		console.log('ext.....', ext);
 
 		this.isImg =
 			ext.length != 0 ? this.image.includes(ext[ext.length - 1]) : false;
@@ -359,18 +390,30 @@ export class IncidentReportComponent
 		const data = e.option.value;
 		if (controlName == 'completedName') {
 			this.IncidentReport.patchValue({
-				completedDepartment: data.department,
-				completedPosition: data.position
+				completedDepartment: this.roleData.find(
+					(x) => x._id == data.department
+				),
+				completedPosition: this.roleData.find(
+					(x) => x._id == data.position
+				)
 			});
 		}
 		if (controlName == 'reviewedName') {
 			this.IncidentReport.patchValue({
-				reviewedDepartment: data.department,
-				reviewedPosition: data.position
+				reviewedDepartment: this.roleData.find(
+					(x) => x._id == data.department
+				),
+				reviewedPosition: this.roleData.find(
+					(x) => x._id == data.position
+				)
 			});
 		}
-		console.log('e.option', e.option);
-		console.log('data...');
+		if (controlName == 'injuredorAffectedPersonName') {
+			this.IncidentReport.patchValue({
+				department: this.roleData.find((x) => x._id == data.department),
+				position: this.roleData.find((x) => x._id == data.position)
+			});
+		}
 	}
 
 	addAction() {
@@ -442,38 +485,34 @@ export class IncidentReportComponent
 	jobNoSel() {
 		this.allJobNumbers.forEach((item) => {
 			if (this.IncidentReport.get('jobNumber').value === item._id) {
-				console.log('Id found', item);
 				this.IncidentReport.patchValue({
 					jobNumber: this.IncidentReport.get('jobNumber').value,
-					projectName: item.projectName,
+					// projectName: item.projectName,
 					siteName: item.siteName,
 					customerName: item.customerName,
 					streetAddress: item.streetAddress,
-					projectManager: item.projectManager,
+					// projectManager: item.projectManager,
 					customerContact: item.customerContact,
-					personCompletingForm: item.personCompletingForm,
-					customerContactPhone: item.customerContactPhone,
-					customerEmail: item.customerEmail
+					// personCompletingForm: item.personCompletingForm,
+					customerContactPhone: item.contacts[0].phone,
+					customerEmail: item.contacts[0].email
 				});
 			}
 		});
 		this.IncidentReport.get('jobNumber').updateValueAndValidity();
 	}
 	getAllJobNumber() {
-		this.logicalFormInfo.getAllJobNumber().subscribe((res: any) => {
-			this.allJobNumbers = res.data;
-			console.log('this.allJobNumbers', this.allJobNumbers);
+		this.logicalFormInfo.getAllJobNumber().subscribe((res) => {
+			this.allJobNumbers = res.data as ModifiedJobNumber[];
 		});
 	}
 	getAllProjectMang() {
 		this.logicalFormInfo.getAllProjectMang().subscribe((res: any) => {
 			this.projectMang = res.data;
-			console.log('this.projectMang=>', this.projectMang);
 		});
 	}
 	getAllPPE() {
 		this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-			console.log('PPE=>', res);
 			this.PPE = res.data;
 			for (let i = 0; i < this.PPE.length; i++) {
 				this.ppeArr[i] = 0;
@@ -483,7 +522,6 @@ export class IncidentReportComponent
 	}
 	getAllTypeOfInc() {
 		this.logicalFormInfo.getAllTypeOfIncident().subscribe((res: any) => {
-			console.log('typeOfIncident=>', res);
 			this.incidents = res.data;
 			for (let i = 0; i < this.incidents.length; i++) {
 				this.incidentsArr[i] = 0;
@@ -493,7 +531,6 @@ export class IncidentReportComponent
 	}
 	getAllRoot() {
 		this.logicalFormInfo.getAllRootCause().subscribe((res: any) => {
-			console.log('root=>', res);
 			this.rootCauseIncident = res.data;
 			for (let i = 0; i < this.rootCauseIncident.length; i++) {
 				this.rootArr[i] = 0;
@@ -505,7 +542,6 @@ export class IncidentReportComponent
 	}
 	getAllNatureOfInc() {
 		this.logicalFormInfo.getAllNatOfInc().subscribe((res: any) => {
-			console.log('NatOfIncAll=>', res);
 			this.natureOFIncidents = res.data;
 			for (let i = 0; i < this.natureOFIncidents.length; i++) {
 				this.natureOfIncArr[i] = 0;
@@ -515,7 +551,6 @@ export class IncidentReportComponent
 	}
 	getAllChanges() {
 		this.logicalFormInfo.getAllChangesMade().subscribe((res: any) => {
-			console.log('Changes=>', res);
 			this.changes = res.data;
 			this.changesArr = [];
 			for (let i = 0; i < this.changes.length; i++) {
@@ -538,9 +573,7 @@ export class IncidentReportComponent
 		}
 	}
 
-	submit() {
-		console.log(this.IncidentReport.value);
-	}
+	submit() {}
 
 	public signaturePadOptions: Object = {
 		// passed through to szimek/signature_pad constructor
@@ -556,14 +589,12 @@ export class IncidentReportComponent
 	};
 
 	ngAfterViewInit() {
-		console.log('check1...', this.check);
 		this.sub = this.shared.printObs$.subscribe((res) => {
 			this.check = res;
 			this.showImg();
 			if (this.check) {
 				setTimeout(() => {
 					window.print();
-					console.log('printing....');
 				}, 3000);
 				localStorage.setItem('key', ' ');
 			}
@@ -576,8 +607,6 @@ export class IncidentReportComponent
 		this.signaturePad1.clear(); // invoke functions from szimek/signature_pad API
 
 		this.mobileViewService.observeXsmall().subscribe((result) => {
-			console.log(result);
-
 			if (result.matches) {
 				// this.reSizeSignArray(this.signaturePad2, 233, 114);
 				const sign = this.signaturePad.toDataURL();
@@ -604,8 +633,6 @@ export class IncidentReportComponent
 
 	drawComplete() {
 		// will be notified of szimek/signature_pad's onEnd event
-		console.log(this.signaturePad.toDataURL());
-		console.log('signnn', this.signaturePad);
 
 		this.IncidentReport.controls.signaturePad.setValue(
 			this.signaturePad.toDataURL()
@@ -614,14 +641,9 @@ export class IncidentReportComponent
 	}
 	drawComplete1() {
 		// will be notified of szimek/signature_pad's onEnd event
-		console.log(this.signaturePad1.toDataURL());
-		console.log('signnn', this.signaturePad1);
+
 		this.IncidentReport.controls.signaturePad1.setValue(
 			this.signaturePad1.toDataURL()
-		);
-		console.log(
-			'signaturePad1 control',
-			this.IncidentReport.controls.signaturePad1.value
 		);
 		this.singRequired1 = this.IncidentReport.controls.signaturePad1.invalid;
 	}
@@ -630,23 +652,14 @@ export class IncidentReportComponent
 		this.singRequired = this.IncidentReport.controls.signaturePad1.untouched;
 	}
 	clear1() {
-		console.log('cl1');
-
 		this.signaturePad1.clear();
 		this.singRequired1 = this.IncidentReport.controls.signaturePad1.untouched;
 	}
 	drawStart() {
 		// will be notified of szimek/signature_pad's onBegin event
-		console.log('begin drawing');
-		console.log(
-			'signaturePad control',
-			this.IncidentReport.controls.signaturePad.touched
-		);
 	}
 	drawStart1() {
 		// will be notified of szimek/signature_pad's onBegin event
-		console.log('begin drawing');
-		console.log('begin drawing', this.singRequired1);
 	}
 	ppeSelected(e) {
 		const item = e.target.value;
@@ -660,7 +673,6 @@ export class IncidentReportComponent
 				}
 			});
 		}
-		console.log('ppeSelectedArr', this.ppeSelectedArr);
 	}
 	changesSelected(e, i) {
 		const item = e.target.value;
@@ -677,7 +689,6 @@ export class IncidentReportComponent
 		if (!this.IncidentReport.get('changesMadeOther').value) {
 			this.IncidentReport.get('changesMadeOtherText').setValue('');
 		}
-		console.log('changesSelected', this.changesSelectedArr);
 	}
 
 	natureOfIncSelected(e) {
@@ -692,7 +703,6 @@ export class IncidentReportComponent
 				}
 			});
 		}
-		console.log('natureOfIncSelectedArr', this.natureOfIncSelectedArr);
 	}
 
 	typeOfIncidentsSelected(e) {
@@ -707,7 +717,6 @@ export class IncidentReportComponent
 				}
 			});
 		}
-		console.log('natureOfIncSelectedArr', this.typeOfIncidentsSelectedArr);
 	}
 
 	rootSelected(e) {
@@ -722,20 +731,16 @@ export class IncidentReportComponent
 				}
 			});
 		}
-		console.log('natureOfIncSelectedArr', this.rootSelectedArr);
 	}
 	getAllStaff() {
 		this;
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
 			this.staff = res;
-			console.log('res', this.staff);
 		});
 	}
 
 	getIncidentsByid(id) {
 		this.logicalFormInfo.getIncidentReportById(id).subscribe((res: any) => {
-			console.log('getById', res);
-
 			this.changes = res.data.changesArr;
 			this.natureOFIncidents = res.data.natureOFIncidentsArr;
 			this.incidents = res.data.incidentsArr;
@@ -776,21 +781,27 @@ export class IncidentReportComponent
 				this.ppeAdd().push(this.ppeAction(i));
 				this.disableForm();
 			}
+			console.log(
+				'🚀 ~ file: incident-report.component.ts ~ line 743 ~ this.logicalFormInfo.getIncidentReportById ~ res.data.personCompletingForm',
+				res.data.personCompletingForm
+			);
 			this.IncidentReport.patchValue({
-				projectName: res.data.projectName,
+				// projectName: res.data.projectName,
 				siteName: res.data.siteName,
 				customerName: res.data.customerName,
 				streetAddress: res.data.streetAddress,
 				customerContact: res.data.customerContact,
 				projectManager: res.data.projectManager,
-				personCompletingForm: res.data.personCompletingForm,
+				personCompletingForm: this.staff.find(
+					(x) => x._id === res.data.personCompletingForm
+				),
 				customerContactPhone: res.data.customerContactPhone,
 				customerEmail: res.data.customerEmail,
 				jobNumber: res.data.jobNumber,
 				dateOfFormCompletion: res.data.dateOfFormCompletion,
-				name: res.data.name,
-				department: res.data.department,
-				position: res.data.position,
+				name: { fullName: res.data.name },
+				department: { role: res.data.department },
+				position: { role: res.data.position },
 				locationOfTheIncident: res.data.locationOfTheIncident,
 				dateOfTheIncident: res.data.dateOfTheIncident,
 				timeOfTheIncident: res.data.timeOfTheIncident,
@@ -802,12 +813,12 @@ export class IncidentReportComponent
 				priorIncident: res.data.priorIncident,
 				similarIncident: res.data.similarIncident,
 				completedName: { fullName: res.data.completedName },
-				completedPosition: res.data.completedPosition,
-				completedDepartment: res.data.completedDepartment,
+				completedPosition: { role: res.data.completedPosition },
+				completedDepartment: { role: res.data.completedDepartment },
 				completedDate: res.data.completedDate,
 				reviewedName: { fullName: res.data.reviewedName },
-				reviewedPosition: res.data.reviewedPosition,
-				reviewedDepartment: res.data.reviewedDepartment,
+				reviewedPosition: { role: res.data.reviewedPosition },
+				reviewedDepartment: { role: res.data.reviewedDepartment },
 				reviewedDate: res.data.reviewedDate,
 				similarIncidentText: res.data.similarIncidentText,
 				priorIncidentText: res.data.priorIncidentText,
@@ -817,8 +828,6 @@ export class IncidentReportComponent
 			});
 
 			for (let index = 0; index < res.data.arrObj.length; index++) {
-				console.log('res.data.arrObj.length', res.data.arrObj.length);
-
 				let key;
 				key = Object.keys(res.data.arrObj[index]);
 
@@ -905,7 +914,6 @@ export class IncidentReportComponent
 				this.signaturePad != null;
 			};
 			check2().then(() => {
-				console.log(this.signaturePad);
 				this.signaturePad.fromDataURL(res.data.signaturePad);
 			});
 			this.IncidentReport.patchValue({
@@ -913,41 +921,64 @@ export class IncidentReportComponent
 				signaturePad1: res.data.signaturePad1
 			});
 		});
-
-		console.log(' this.editorDisable', this.editorDisable);
 	}
 	onSubmit() {
-		console.log(this.IncidentReport.value);
 		this.IncidentReport.get('file')?.patchValue(this.selectedImage);
-		console.log(this.IncidentReport.value);
-		if (this.id !== 'Form') {
-			console.log('update');
-			const completedName = this.IncidentReport.controls.completedName
-				.value;
-			const reviewedName = this.IncidentReport.controls.reviewedName
-				.value;
-			this.IncidentReport.removeControl('completedName');
-			this.IncidentReport.removeControl('reviewedName');
-			const data = {
-				...this.IncidentReport.value,
-				changesArr: this.changes,
-				natureOFIncidentsArr: this.natureOFIncidents,
-				incidentsArr: this.incidents,
-				ppeArr: this.PPE,
-				rootCauseIncidentArr: this.rootCauseIncident,
-				allJobNumbersArr: this.allJobNumbers,
-				projectMangArr: this.projectMang,
-				staffArr: this.staff,
-				completedName: completedName.fullName || completedName,
-				reviewedName: reviewedName.fullName || reviewedName,
-				enable: this.enable,
-				frequency: this.frequency
-			};
-			console.log('data', data);
+		let removeArr = [
+			'completedPosition',
+			'completedDepartment',
+			'reviewedPosition',
+			'reviewedDepartment',
+			'name',
+			'department',
+			'position'
+		];
+		const completedName = this.IncidentReport.controls.completedName
+			.value as UserValue;
+		const reviewedName = this.IncidentReport.controls.reviewedName
+			.value as UserValue;
+		const {
+			completedPosition,
+			completedDepartment,
+			reviewedPosition,
+			reviewedDepartment,
+			name,
+			department,
+			position
+		} = this.IncidentReport.controls;
+		removeArr.forEach((value) => this.IncidentReport.removeControl(value));
+		this.IncidentReport.removeControl('completedName');
+		this.IncidentReport.removeControl('reviewedName');
+		const data = {
+			...this.IncidentReport.value,
+			changesArr: this.changes,
+			natureOFIncidentsArr: this.natureOFIncidents,
+			incidentsArr: this.incidents,
+			ppeArr: this.PPE,
+			rootCauseIncidentArr: this.rootCauseIncident,
+			allJobNumbersArr: this.allJobNumbers,
+			projectMangArr: this.projectMang,
+			staffArr: this.staff,
+			name: name.value.fullName,
+			department: department.value.role,
+			position: position.value.role,
+			completedName: completedName.fullName || completedName,
+			reviewedName: reviewedName.fullName || reviewedName,
+			completedPosition: completedPosition.value.role,
+			completedDepartment: completedDepartment.value.role,
+			reviewedPosition: reviewedPosition.value.role,
+			reviewedDepartment: reviewedDepartment.value.role,
+			enable: this.enable,
+			frequency: this.frequency
+		};
+		console.log(
+			'🚀 ~ file: incident-report.component.ts ~ line 911 ~ onSubmit ~ data',
+			data
+		);
 
+		if (this.id !== 'Form') {
 			this.logicalFormInfo.updateIncidentReport(this.id, data).subscribe(
 				(res) => {
-					console.log('res', res);
 					Swal.fire({
 						title: 'Update successfully',
 						showConfirmButton: false,
@@ -960,32 +991,8 @@ export class IncidentReportComponent
 				}
 			);
 		} else {
-			const completedName = this.IncidentReport.controls.completedName
-				.value;
-			const reviewedName = this.IncidentReport.controls.reviewedName
-				.value;
-			this.IncidentReport.removeControl('completedName');
-			this.IncidentReport.removeControl('reviewedName');
-			const data = {
-				...this.IncidentReport.value,
-				changesArr: this.changes,
-				natureOFIncidentsArr: this.natureOFIncidents,
-				incidentsArr: this.incidents,
-				ppeArr: this.PPE,
-				rootCauseIncidentArr: this.rootCauseIncident,
-				allJobNumbersArr: this.allJobNumbers,
-				projectMangArr: this.projectMang,
-				staffArr: this.staff,
-				completedName: completedName.fullName || completedName,
-				reviewedName: reviewedName.fullName || reviewedName,
-				enable: this.enable,
-				frequency: this.frequency
-			};
-			console.log('data', data);
-
 			this.logicalFormInfo.addIncidentReport(data).subscribe(
 				(res) => {
-					console.log('addCustomerForm=>', res);
 					Swal.fire({
 						title: 'Submit successfully',
 						showConfirmButton: false,
@@ -1004,23 +1011,13 @@ export class IncidentReportComponent
 		const files = event.target.files[0];
 		const formdata = new FormData();
 		formdata.append('', files);
-		console.log(files);
 
 		this.upload.upload(formdata).subscribe((res) => {
-			console.log('AddProductComponent -> browser -> res', res);
-
 			this.selectedImage = res.files[0];
-
-			console.log(
-				'AddProductComponent -> browse -> this.selectedImage',
-				this.selectedImage
-			);
 		});
 	}
 	getInstruction() {
 		this.logicalFormInfo.getInstruction().subscribe((res: any) => {
-			console.log('res', res.data[0].instruction);
-
 			this.IncidentReport.patchValue({
 				instructions: res.data[0].instruction
 			});

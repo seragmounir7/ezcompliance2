@@ -19,6 +19,8 @@ import { AddTeamInfoComponent } from './add-team-info/add-team-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-about-us',
 	templateUrl: './about-us.component.html',
@@ -64,7 +66,6 @@ export class AboutUsComponent implements OnInit {
 			subTitle: ['', Validators.required],
 			arrObj: this.fb.array([])
 		});
-		console.log('companyDetail=>', this.companyDetail);
 	}
 
 	ngOnInit(): void {
@@ -90,7 +91,6 @@ export class AboutUsComponent implements OnInit {
 	}
 
 	editForm(id, name: boolean, i?: any) {
-		console.log('sakshi', id);
 		this.myId = id;
 		this.isEdit = true;
 		this.Id = '61767ab18031f2102a69ef71';
@@ -109,21 +109,17 @@ export class AboutUsComponent implements OnInit {
 				height: '700px'
 			});
 			dialogRef.afterClosed().subscribe((result) => {
-				console.log('-> openDialog -> result', result);
-
 				if ((result = 'true')) {
 					this.ngOnInit();
 				}
-				console.log('The dialog was closed');
 			});
 		});
 	}
 
 	addForm(id) {
 		this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
-			console.log('teamData=>', data);
 			this.teamData = data.data[0];
-			console.log('', this.teamData);
+
 			const dialogRef = this.dialog.open(AddTeamInfoComponent, {
 				data: {
 					action: 'new',
@@ -134,7 +130,6 @@ export class AboutUsComponent implements OnInit {
 				height: '500px'
 			});
 			dialogRef.afterClosed().subscribe((result) => {
-				console.log('openDialog->result', result);
 				if ((result = 'true')) {
 					this.ngOnInit();
 				}

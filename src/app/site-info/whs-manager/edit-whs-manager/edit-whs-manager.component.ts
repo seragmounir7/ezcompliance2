@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-whs-manager',
 	templateUrl: './edit-whs-manager.component.html',
@@ -23,8 +25,6 @@ export class EditWhsManagerComponent implements OnInit {
 		this.dataRec = data;
 	}
 	ngOnInit(): void {
-		console.log('this.dataRec', this.dataRec);
-
 		this.editTitle = this.fb.group({
 			name: [this.dataRec.name, Validators.required],
 			email: [this.dataRec.email, Validators.required]
@@ -38,8 +38,6 @@ export class EditWhsManagerComponent implements OnInit {
 		this.logicalFormInfo
 			.editWHSManager(this.dataRec._id, data)
 			.subscribe((resData) => {
-				console.log('submodulesData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Edited successfully',

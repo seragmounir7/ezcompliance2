@@ -12,7 +12,6 @@ export class CompanyRegistrationService {
 	upload(files) {
 		return this.https.post(this.apiUrl + 'upload', files).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -20,7 +19,6 @@ export class CompanyRegistrationService {
 	addCompanyInfo(data) {
 		return this.https.post(this.apiUrl + 'company/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);

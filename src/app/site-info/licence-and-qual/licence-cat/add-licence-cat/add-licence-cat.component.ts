@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-licence-cat',
 	templateUrl: './add-licence-cat.component.html',
@@ -50,7 +52,6 @@ export class AddLicenceCatComponent implements OnInit {
 		};
 		this.logicalFormInfo.addLicenceCat(data).subscribe(
 			(data) => {
-				console.log('JOBTask=>', data);
 				this.router.navigate(['/admin/setting/licenceCat']);
 			},
 			(err) => {

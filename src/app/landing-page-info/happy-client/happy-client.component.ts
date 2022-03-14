@@ -13,6 +13,8 @@ import { AddHappyClientComponent } from './add-happy-client/add-happy-client.com
 import { AddClientInfoComponent } from './add-client-info/add-client-info.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-happy-client',
 	templateUrl: './happy-client.component.html',
@@ -103,9 +105,8 @@ export class HappyClientComponent implements OnInit {
 	addForm(id) {
 		void this.spinner.show();
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
-			console.log('HappyClient=>', data);
 			this.happyClientData = data.data[0];
-			console.log('', this.happyClientData);
+
 			const dialogRef = this.dialog.open(AddClientInfoComponent, {
 				data: {
 					action: 'new',
@@ -116,7 +117,6 @@ export class HappyClientComponent implements OnInit {
 				height: '500px'
 			});
 			dialogRef.afterClosed().subscribe((result) => {
-				console.log('openDialog->result', result);
 				if ((result = 'true')) {
 					this.ngOnInit();
 				}

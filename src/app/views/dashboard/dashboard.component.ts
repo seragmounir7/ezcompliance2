@@ -4,13 +4,21 @@ import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/utils/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 interface marker {
 	lat: number;
 	lng: number;
 	label?: string;
 	draggable: boolean;
 }
+import { UntilDestroy } from '@ngneat/until-destroy';
+import {
+	DashboardApiService,
+	FormsCount
+} from 'src/app/utils/services/dashboard-api.service';
+import { Designation } from 'src/app/utils/types/Designation.enum';
+import { switchMap } from 'rxjs/operators';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
@@ -171,6 +179,7 @@ export class DashboardComponent implements OnInit {
 	];
 	formShow: any;
 	isUser$: Observable<boolean>;
+	formsCount$: Observable<FormsCount>;
 
 	// events
 	public chartClicked({
@@ -179,9 +188,7 @@ export class DashboardComponent implements OnInit {
 	}: {
 		event: MouseEvent;
 		active: {}[];
-	}): void {
-		console.log(event, active);
-	}
+	}): void {}
 
 	public chartHovered({
 		event,
@@ -189,9 +196,7 @@ export class DashboardComponent implements OnInit {
 	}: {
 		event: MouseEvent;
 		active: {}[];
-	}): void {
-		console.log(event, active);
-	}
+	}): void {}
 
 	///AGM angular google map
 
@@ -220,10 +225,25 @@ export class DashboardComponent implements OnInit {
 	];
 	constructor(
 		private spinner: NgxSpinnerService,
-		private authService: AuthService
+		private authService: AuthService,
+		private dashboardApiService: DashboardApiService
 	) {}
 
 	ngOnInit() {
+		this.formsCount$ = this.authService.loginData$.pipe(
+			switchMap((res) => {
+				if (res.accessToken)
+					switch (res.designation) {
+						case Designation.superAdmin:
+							return this.dashboardApiService.getFormCount();
+						case Designation.clientAdmin:
+							return this.dashboardApiService.getFormCount();
+						default:
+							return of({} as FormsCount);
+							break;
+					}
+			})
+		);
 		this.isUser$ = this.authService.isUser$;
 		void this.spinner.show();
 		setTimeout(() => {

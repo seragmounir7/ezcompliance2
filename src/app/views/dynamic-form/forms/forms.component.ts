@@ -24,6 +24,8 @@ export interface PeriodicElement {
 	formName: string;
 }
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dynamic-list',
 	templateUrl: './forms.component.html',
@@ -71,8 +73,6 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	) {}
 
 	addDyForm() {
-		console.log('jjjj');
-
 		const dialogRef = this.dialog.open(AddFormComponent, {
 			width: '700px',
 			data: ''
@@ -81,23 +81,30 @@ export class FormsComponent implements AfterViewInit, OnInit {
 			if (result == 'true') {
 				this.getAllForms();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
 	ngOnInit(): void {
 		this.authService.loginData$.subscribe((res) => {
-			if (res.designation === Designation.user)
+			if (res.designation === Designation.superAdmin) {
+				this.displayedColumns = [
+					'index',
+					'formName',
+					'formCategory',
+					'adminEdit'
+				];
+			}
+			if (res.designation === Designation.user) {
 				this.displayedColumns = [
 					'index',
 					'formName',
 					'formCategory',
 					'edit'
 				];
+			}
 		});
 		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.url = this.activatedRoute.snapshot.url;
-		console.log('url', this.url);
 
 		sessionStorage.setItem('formId', '');
 		sessionStorage.setItem('type', '');
@@ -115,8 +122,8 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		void this.spinner.show();
 		this.dynamicFormServise.getAllForm().subscribe((resF) => {
 			// this.allForms=res.data;
-			console.log('allForms', resF);
-			// console.log('allForms', resF.data);
+
+			//
 			this.allForms = resF.data;
 			const data = resF.data;
 			data.forEach((element, index) => {
@@ -179,7 +186,6 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	}
 
 	editForm(form) {
-		console.log(form);
 		sessionStorage.setItem('formId', form._id);
 		sessionStorage.setItem('type', 'edit');
 		sessionStorage.setItem('formTitle', form.title);
@@ -188,7 +194,6 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		//   {queryParams: {  type:'edit',formId:form._id, formName: form.title}});
 	}
 	viewForm(form) {
-		console.log('view', form);
 		sessionStorage.setItem('formId', form._id);
 		sessionStorage.setItem('type', 'view');
 		sessionStorage.setItem('formTitle', form.title);
@@ -197,7 +202,6 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	}
 
 	frequencyChange(e, form) {
-		console.log(e.target.value);
 		const data = {
 			title: form.title,
 			htmlObject: form.htmlObject,
@@ -211,7 +215,6 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		});
 	}
 	add(element) {
-		console.log('element', element._id);
 		const data = {
 			id: element._id,
 			type: 'add'

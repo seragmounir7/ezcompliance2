@@ -18,6 +18,8 @@ import {
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NavigationService } from './services/navigation.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -28,13 +30,11 @@ export class AppComponent implements OnInit {
 	@ViewChild('mainrouter') mainRouteroutlet: any;
 	@HostListener('window:beforeprint', [])
 	beforePrint() {
-		console.log('beforeprint');
 		this.renderer.addClass(document.querySelector('.wrapper'), 'hidden');
 	}
 
 	@HostListener('window:afterprint', [])
 	afterPrint() {
-		console.log('afterprint');
 		this.renderer.removeClass(document.querySelector('.wrapper'), 'hidden');
 	}
 	constructor(
@@ -52,7 +52,6 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		this.navigationService.startSaveHistory();
 		this.authService.loginData$.subscribe((data) => {
-			console.log('data', data);
 			if (data) {
 				// this.sessionManagementService.startSession(20);
 			}
@@ -61,24 +60,20 @@ export class AppComponent implements OnInit {
 	navigationInterceptor(event: RouterEvent): void {
 		if (event instanceof NavigationStart) {
 			void this.spinner.show();
-			setTimeout(() => {
-				this.spinner.hide(undefined, 3000);
-			}, 2000);
-			console.log('NavigationStart');
+			// setTimeout(() => {
+			// 	this.spinner.hide(undefined, 3000);
+			// }, 2000);
 		}
 		if (event instanceof NavigationEnd) {
-			this.spinner.hide(undefined, 3000);
-			console.log('NavigationEnd');
+			this.spinner.hide();
 		}
 
 		// Set loading state .hide() in both of the below events to hide the spinner in case a request fails
 		if (event instanceof NavigationCancel) {
-			this.spinner.hide(undefined, 3000);
-			console.log('NavigationCancel');
+			this.spinner.hide();
 		}
 		if (event instanceof NavigationError) {
-			this.spinner.hide(undefined, 3000);
-			console.log('NavigationError');
+			this.spinner.hide();
 		}
 	}
 }

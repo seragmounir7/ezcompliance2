@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from 'src/app/utils/services/app.service';
 import { ToastrService } from 'ngx-toastr';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html',

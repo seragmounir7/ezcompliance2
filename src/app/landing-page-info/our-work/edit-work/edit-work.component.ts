@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-work',
 	templateUrl: './edit-work.component.html',
@@ -26,7 +28,6 @@ export class EditWorkComponent implements OnInit {
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
 		this.workData = data.EditData;
-		console.log('editData', this.workData);
 	}
 	ngOnInit(): void {
 		this.workDetail = this.fb.group({
@@ -63,19 +64,17 @@ export class EditWorkComponent implements OnInit {
 			});
 	}
 	editHeaderInfo(id) {
-		console.log('id=>', id);
 		this.myId = this.workData._id;
 		this.workDetail.get('image').setValue(this.selectedImage);
-		console.log('form', this.workDetail.value);
 
 		this.isEdit = true;
 		this.landingPageInfo
 			.editWorK(this.myId, this.workDetail.value)
 			.subscribe((res) => {
 				Swal.fire(' Edited Successfully');
-				console.log('Data Set response' + res);
+
 				this.data = res.data;
-				console.log('new response' + this.data);
+
 				this.dialogRef.close('true');
 			});
 	}

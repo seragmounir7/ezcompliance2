@@ -17,6 +17,8 @@ import {
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-client-info',
 	templateUrl: './add-client-info.component.html',

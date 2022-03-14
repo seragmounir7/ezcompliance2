@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-edit-coupon',
 	templateUrl: './add-edit-coupon.component.html',
@@ -48,8 +50,6 @@ export class AddEditCouponComponent implements OnInit {
 	addForm() {
 		this.Subscription.addCoupon(this.couponDetails.value).subscribe(
 			(resData) => {
-				console.log('addCoupon', resData);
-
 				this.dialogRef.close('true');
 
 				Swal.fire({

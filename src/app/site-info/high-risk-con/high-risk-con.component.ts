@@ -18,6 +18,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-high-risk-con',
 	templateUrl: './high-risk-con.component.html',
@@ -60,25 +62,25 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 	}
 
 	// onFormSubmit() {
-	//   console.log(this.riskDetails);
+	//
 	//   this.logicalFormInfo
 	//     .addFormData(this.riskDetails.getRawValue())
 	//     .subscribe((data) => {
-	//       console.log('risk=>', data);
+	//
 	//       this.formData = data;
 	//     });
 	// }
 	// getAllHighRisk() {
 	//   this.mode = 'Risk';
 	//   this.logicalFormInfo.getFormDataById(this.mode).subscribe((res) => {
-	//     console.log('riskDetails data=>', res);
+	//
 	//     this.componentId = res.data[0]._id;
 	//     this.highRiskConstructionData = res.data[0];
-	//     console.log('highRiskConstructionData', this.highRiskConstructionData);
+	//
 	//   });
 	// }
 	// editTask(title,id, i) {
-	//   console.log('id', id);
+	//
 	//   this.myId = id;
 	//   this.isEdit = true;
 	//   this.mode = 'Risk';
@@ -96,12 +98,12 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 	//     height: '500px',
 	//   });
 	//   dialogRef.afterClosed().subscribe((result) => {
-	//     console.log('-> openDialog -> result', result);
+	//
 
 	//     if ((result = 'true')) {
 	//       this.getAllHighRisk();
 	//     }
-	//     console.log('The dialog was closed');
+	//
 	//   });
 	// }
 
@@ -115,7 +117,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 	//     height: '400px',
 	//   });
 	//   dialogRef.afterClosed().subscribe((result) => {
-	//     console.log('openDialog->result', result);
+	//
 	//     if ((result = 'true')) {
 	//       this.getAllHighRisk();
 	//     }
@@ -123,25 +125,25 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 
 	// }
 	// deleteopen(content, id) {
-	//   console.log('deleteopen close id=>', id);
+	//
 	//   this.Is_id = id;
 	//   this.modalService
 	//     .open(content, { ariaLabelledBy: 'modal-basic-title' })
 	//     .result.then(
 	//       (result) => {
 	//         this.closeResult = `Closed with: ${result}`;
-	//         console.log('deleting');
+	//
 	//         this.logicalFormInfo
 	//           .deleteSubComponent(this.Is_id)
 	//           .subscribe((res) => {
 	//             Swal.fire('Deleted Successfully');
-	//             console.log('deleted res', res);
+	//
 	//             this.getAllHighRisk();
 	//           });
 	//       },
 	//       (reason) => {
 	//         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-	//         console.log('dismissed');
+	//
 	//       }
 	//     );
 	// }
@@ -171,7 +173,6 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 	// }
 	getAllHighRisk(field = '', value = '') {
 		this.logicalFormInfo.getAllRisk(field, value).subscribe((res: any) => {
-			console.log('Risk=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
@@ -194,7 +195,6 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 			if (result == 'true') {
 				this.getAllHighRisk();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -214,7 +214,7 @@ export class HighRiskConComponent implements AfterViewInit, OnInit {
 						showConfirmButton: false,
 						timer: 1200
 					});
-					console.log('deleted res', res);
+
 					this.getAllHighRisk();
 				});
 			}

@@ -63,7 +63,7 @@
 				>
 					<mat-icon
 						(click)="edit(element);element.isDisabled=!element.isDisabled"
-						[matTooltip]="element.isDisabled?'Edit':Save"
+						[matTooltip]="element.isDisabled?'Edit':'Save'"
 						>{{element.isDisabled?'edit':'save'}}</mat-icon
 					>
 				</button>

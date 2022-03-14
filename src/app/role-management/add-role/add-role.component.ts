@@ -9,6 +9,8 @@ import { RoleManagementService } from '../../utils/services/role-management.serv
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { AccessArr } from 'src/app/utils/types/AccessResponceTypes';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-role',
 	templateUrl: './add-role.component.html',
@@ -26,7 +28,6 @@ export class AddRoleComponent implements OnInit {
 		this.addRole = this.fb.group({
 			role: ['', Validators.required]
 		});
-		console.log('', data);
 	}
 
 	ngOnInit(): void {
@@ -36,10 +37,7 @@ export class AddRoleComponent implements OnInit {
 	}
 	onSubmit() {
 		if (this.data.action === 'new') {
-			console.log(this.addRole.value);
-
 			this.roleService.addRole(this.addRole.value).subscribe((res) => {
-				console.log('res', res);
 				this.roleSharedService.sendRoleEvent('true');
 				Swal.fire('Added Successfully');
 				this.dialogRef.close();
@@ -49,7 +47,6 @@ export class AddRoleComponent implements OnInit {
 			this.roleService
 				.updateRole(this.data.role.roleId._id, this.addRole.value)
 				.subscribe((res) => {
-					console.log('res', res);
 					this.roleSharedService.sendRoleEvent(true);
 					Swal.fire('Update Successfully');
 					this.dialogRef.close('true');

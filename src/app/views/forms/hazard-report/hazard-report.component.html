@@ -179,7 +179,6 @@
 						>Phone<span class="text-danger">*</span></label
 					>
 					<input
-						maxlength="10"
 						class="form-control"
 						formControlName="phone"
 						id="exampleInputPhone"
@@ -211,6 +210,7 @@
 					>
 					<input
 						type="department"
+						[matAutocomplete]="department"
 						class="form-control"
 						formControlName="department"
 						id="exampleInputDepartment"
@@ -226,6 +226,16 @@
 					>
 						Department is Required</span
 					>
+					<mat-autocomplete
+						[displayWith]="displayFnRole"
+						#department="matAutocomplete"
+					>
+						<mat-option
+							*ngFor="let item of department$ | async as list"
+							[value]="item"
+							>{{item.role}}</mat-option
+						>
+					</mat-autocomplete>
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
@@ -235,6 +245,7 @@
 					>
 					<input
 						type="position"
+						[matAutocomplete]="position"
 						class="form-control"
 						formControlName="position"
 						id="exampleInputPosition"
@@ -250,6 +261,16 @@
 					>
 						Position is Required</span
 					>
+					<mat-autocomplete
+						[displayWith]="displayFnRole"
+						#position="matAutocomplete"
+					>
+						<mat-option
+							*ngFor="let item of position$ | async as list"
+							[value]="item"
+							>{{item.role}}</mat-option
+						>
+					</mat-autocomplete>
 				</div>
 			</div>
 		</div>
@@ -268,13 +289,14 @@
 						formControlName="managerSupervisor"
 						class="form-select form-control col form-dropdown"
 						aria-label="Default select example"
+						(change)="setSupervisorEmail($event)"
 					>
 						<option selected hidden>Select</option>
 						<option
-							*ngFor="let manager of whsData"
+							*ngFor="let manager of empData"
 							[value]="manager._id"
 						>
-							{{manager.name}}
+							{{manager.fullName}}
 						</option>
 					</select>
 				</div>
@@ -282,19 +304,11 @@
 			<div class="col-md-6 col-sm-6-print">
 				<div class="mb-3">
 					<label for="email" class="form-label">Email Address</label>
-					<select
+					<input
 						formControlName="managerSupervisorEmail"
-						class="form-select form-control col form-dropdown"
+						class="form-control"
 						aria-label="Default select example"
-					>
-						<option selected hidden>Select</option>
-						<option
-							*ngFor="let manager of whsData"
-							[value]="manager.email"
-						>
-							{{manager.email}}
-						</option>
-					</select>
+					/>
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
@@ -1270,6 +1284,7 @@
 					<input
 						type="surname"
 						class="form-control"
+						[matAutocomplete]="compilePosition"
 						formControlName="compilePosition"
 						aria-describedby="emailHelp"
 						[class.is-invalid]="hazardReport.get('compilePosition')?.hasError('required')
@@ -1283,6 +1298,16 @@
 					>
 						Position is Required</span
 					>
+					<mat-autocomplete
+						[displayWith]="displayFnRole"
+						#compilePosition="matAutocomplete"
+					>
+						<mat-option
+							*ngFor="let item of compilePosition$ | async as list"
+							[value]="item"
+							>{{item.role}}</mat-option
+						>
+					</mat-autocomplete>
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
@@ -1291,6 +1316,7 @@
 						>Department<span class="text-danger">*</span></label
 					>
 					<input
+						[matAutocomplete]="compileDepartment"
 						type="surname"
 						class="form-control"
 						formControlName="compileDepartment"
@@ -1306,6 +1332,16 @@
 					>
 						Department is Required</span
 					>
+					<mat-autocomplete
+						[displayWith]="displayFnRole"
+						#compileDepartment="matAutocomplete"
+					>
+						<mat-option
+							*ngFor="let item of compileDepartment$ | async as list"
+							[value]="item"
+							>{{item.role}}</mat-option
+						>
+					</mat-autocomplete>
 				</div>
 			</div>
 			<div

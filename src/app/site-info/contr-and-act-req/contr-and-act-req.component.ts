@@ -11,6 +11,8 @@ import { SnackbarService } from '../../services/snackbar.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-contr-and-act-req',
 	templateUrl: './contr-and-act-req.component.html',
@@ -47,7 +49,6 @@ export class ContrAndActReqComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllContrlActReq(field, value)
 			.subscribe((res: any) => {
-				console.log('PPEAll=>', res);
 				const data: any[] = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -59,7 +60,6 @@ export class ContrAndActReqComponent implements OnInit {
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				//this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				//  this.task = res.data.subComponents;
 			});
@@ -87,7 +87,7 @@ export class ContrAndActReqComponent implements OnInit {
 		// dialogRef.afterClosed().subscribe((result) => {
 		// 	if (result == 'true') {
 		// 	}
-		// 	console.log('The dialog was closed');
+		//
 		// });
 	}
 	delete(item) {
@@ -109,7 +109,7 @@ export class ContrAndActReqComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllContrlActReq();
 					});
 			}
@@ -120,7 +120,6 @@ export class ContrAndActReqComponent implements OnInit {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 	copySuccess() {
-		console.log('copy successfull');
 		this.snack.openSnackBar('Copied to clipboard');
 	}
 	sortData(sort: Sort) {

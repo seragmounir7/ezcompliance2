@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-notifiable-accident',
 	templateUrl: './notifiable-accident.component.html',
@@ -18,13 +20,11 @@ export class NotifiableAccidentSettingComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.selectedIndex$ = this.activatedRoute.queryParams.pipe(
-			tap((x) => console.log(x)),
 			map((x) => x.selectedTab)
 		);
 	}
 
 	selectedIndexChange(event) {
-		console.log(event);
 		this.router.navigate([], {
 			relativeTo: this.activatedRoute,
 			queryParams: { selectedTab: event }

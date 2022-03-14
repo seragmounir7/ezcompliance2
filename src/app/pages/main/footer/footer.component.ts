@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { version } from './../../../../../package.json';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-footer',
 	templateUrl: './footer.component.html',

@@ -6,6 +6,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import Swal from 'sweetalert2';
 import { AddAndEditCodeComponent } from './add-and-edit-code/add-and-edit-code.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-code-of-pract',
 	templateUrl: './code-of-pract.component.html',
@@ -37,7 +39,6 @@ export class CodeOfPractComponent implements OnInit {
 
 	getAllCode() {
 		this.logicalFormInfo.getAllCode().subscribe((res) => {
-			console.log('getAllCode=>', res);
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -60,7 +61,6 @@ export class CodeOfPractComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllCode();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -81,7 +81,7 @@ export class CodeOfPractComponent implements OnInit {
 						showConfirmButton: false,
 						timer: 1200
 					});
-					console.log('deleted res', res);
+
 					this.getAllCode();
 				});
 			}

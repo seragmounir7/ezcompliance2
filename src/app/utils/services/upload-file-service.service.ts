@@ -12,7 +12,6 @@ export class UploadFileServiceService {
 	upload(files) {
 		return this.https.post(this.apiUrl + 'upload', files).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.files);
 				return res;
 			})
 		);

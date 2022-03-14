@@ -11,6 +11,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditSubcontractComponent } from './add-and-edit-subcontract/add-and-edit-subcontract.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-subcontract',
 	templateUrl: './subcontract.component.html',
@@ -49,7 +51,6 @@ export class SubcontractComponent implements OnInit {
 	}
 	getAllSubcontractor() {
 		this.subContract.getAllSubcontract().subscribe((res: any) => {
-			console.log(res);
 			const couponData = res.data;
 			couponData.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -71,7 +72,6 @@ export class SubcontractComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				void this.spinner.show();
 				this.subContract
 					.deleteSubcontract(item._id)

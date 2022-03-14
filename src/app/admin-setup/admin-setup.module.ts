@@ -6,6 +6,7 @@ import { AdminSetupComponent } from './admin-setup.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RegistrationModule } from '../registration/registration.module';
 import { RoleManagementModule } from '../role-management/role-management.module';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
 	declarations: [AdminSetupComponent],
@@ -14,7 +15,8 @@ import { RoleManagementModule } from '../role-management/role-management.module'
 		AdminSetupRoutingModule,
 		MatStepperModule,
 		RegistrationModule,
-		RoleManagementModule
+		RoleManagementModule,
+		CKEditorModule
 	]
 })
 export class AdminSetupModule {}

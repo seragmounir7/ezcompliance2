@@ -9,6 +9,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditChemicalComponent } from './edit-chemical/edit-chemical.component';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-chemical',
 	templateUrl: './chemical.component.html',
@@ -41,7 +43,6 @@ export class ChemicalComponent implements OnInit {
 		this.logicalFormInfoService
 			.getAllChemical(field, value)
 			.subscribe((res: any) => {
-				console.log(res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -51,7 +52,6 @@ export class ChemicalComponent implements OnInit {
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				//this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 			});
 	}
 
@@ -65,7 +65,6 @@ export class ChemicalComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllChemical();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -79,7 +78,6 @@ export class ChemicalComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				// this.model.attributes.splice(i,1);
 				void this.spinner.show();
 				this.logicalFormInfoService

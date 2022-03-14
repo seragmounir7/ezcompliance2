@@ -11,6 +11,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-licence-cat',
 	templateUrl: './licence-cat.component.html',
@@ -46,7 +48,6 @@ export class LicenceCatComponent implements OnInit {
 
 	getAllLicenceCat(field = '', value = '') {
 		this.logicalFormInfo.getAllLicenceCat(field, value).subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
@@ -71,7 +72,6 @@ export class LicenceCatComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllLicenceCat();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -94,7 +94,7 @@ export class LicenceCatComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllLicenceCat();
 					});
 			}
@@ -110,7 +110,7 @@ export class LicenceCatComponent implements OnInit {
 	}
 	toggleCategory(event: MatCheckboxChange, element) {
 		// if(event.checked){
-		console.log(element, event.checked);
+
 		this.logicalFormInfo
 			.updateLicenceCat({ show: event.checked }, element._id)
 			.subscribe((res) => {
@@ -131,12 +131,9 @@ export class LicenceCatComponent implements OnInit {
 		);
 		moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
 		this.table.renderRows();
-		console.log(this.dataSource);
 	}
 	onSaveOrder() {
 		this.displayedColumns = ['title', 'action'];
-		this.logicalFormInfo.reOrderCat(this.dataSource).subscribe((res) => {
-			console.log(res);
-		});
+		this.logicalFormInfo.reOrderCat(this.dataSource).subscribe((res) => {});
 	}
 }

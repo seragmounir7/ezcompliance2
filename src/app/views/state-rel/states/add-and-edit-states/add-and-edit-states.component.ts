@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-and-edit-states',
 	templateUrl: './add-and-edit-states.component.html',
@@ -35,8 +37,6 @@ export class AddAndEditStatesComponent implements OnInit {
 		this.logicalFormInfo
 			.updateStates(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('updateStates', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'States Edited successfully',
@@ -50,8 +50,6 @@ export class AddAndEditStatesComponent implements OnInit {
 			title: this.editTitle.get('title').value
 		};
 		this.logicalFormInfo.addStates(data).subscribe((resData) => {
-			console.log('addStates', resData);
-
 			this.dialogRef.close('true');
 			if (this.dataRec) {
 				Swal.fire({

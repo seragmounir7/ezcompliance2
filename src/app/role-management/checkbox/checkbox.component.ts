@@ -16,10 +16,12 @@ import Swal from 'sweetalert2';
 import { AccessLabel, AccessName, AccessType } from './accessName';
 import {
 	AccessArr,
-	Datum,
+	AccessValue,
 	RoleID
 } from 'src/app/utils/types/AccessResponceTypes';
 import { AuthService } from 'src/app/utils/services/auth.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-checkbox',
 	templateUrl: './checkbox.component.html',
@@ -32,7 +34,7 @@ export class CheckboxComponent implements OnInit {
 	formArr = false;
 	accessName: AccessType = new AccessName();
 	accessLabel: AccessType = new AccessLabel();
-	roleArr: Datum[];
+	roleArr: AccessValue[];
 
 	constructor(
 		private fb: FormBuilder,
@@ -165,7 +167,7 @@ export class CheckboxComponent implements OnInit {
 				access.push(obj3);
 			}
 		}
-		const objArr: Datum[] = [];
+		const objArr: AccessValue[] = [];
 		for (let index = 0; index < this.roleArr.length; index++) {
 			let arr: AccessArr[] = [];
 			arr = access.filter((x) => x.role === this.roleArr[index].role);
@@ -174,7 +176,7 @@ export class CheckboxComponent implements OnInit {
 				delete x.form;
 				delete x.role;
 			});
-			const obj: Datum = {
+			const obj: AccessValue = {
 				accessArr: arr,
 				// role: this.roleArr[index].role,
 				roleId: (this.roleArr[index].roleId as RoleID)._id
@@ -210,7 +212,7 @@ export class CheckboxComponent implements OnInit {
 		}
 		this.formArr = true;
 	}
-	openDialog(role: Datum): void {
+	openDialog(role: AccessValue): void {
 		const dialogRef = this.dialog.open(AddRoleComponent, {
 			height: '50%',
 			width: '500px',
@@ -238,7 +240,7 @@ export class CheckboxComponent implements OnInit {
 	deleteRole(id: string | RoleID): void {
 		void Swal.fire({
 			title: 'Are you sure?',
-			text: `Do you want to delete `,
+			text: `This will delete the Role And mark accociated user account as dectivated!`,
 			icon: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#00B96F',

@@ -5,6 +5,8 @@ import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-pa
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-hazard-relation',
 	templateUrl: './add-hazard-relation.component.html',
@@ -32,14 +34,12 @@ export class AddHazardRelationComponent implements OnInit {
 			actionRequired: ['', Validators.required]
 		});
 		this.route.queryParams.subscribe((id) => {
-			console.log(id);
 			this.hazardId = id.id;
 			this.logicalFormInfo
 				.getHazardTreatmentById(this.hazardId)
 				.subscribe((res: any) => {
-					console.log('getHazardTreatmentById=>', res);
 					this.hazard = res.data;
-					console.log('hazard', this.hazard);
+
 					if (this.hazard.set == true) {
 						this.setHazard.patchValue({
 							riskRating: this.hazard.riskRating,
@@ -77,20 +77,16 @@ export class AddHazardRelationComponent implements OnInit {
 	];
 
 	setRelation() {
-		console.log(this.setHazard.value);
 		const data = {
 			set: true,
 			title: this.hazard.title,
 			riskRating: this.setHazard.get('riskRating').value,
 			actionRequired: this.setHazard.get('actionRequired').value
 		};
-		console.log('data=>', data);
-		console.log('hazardId=>', this.hazardId);
+
 		this.logicalFormInfo
 			.updateHazardTreatmentRelation(this.hazardId, data)
 			.subscribe((res: any) => {
-				console.log('updateStates=>', res);
-
 				Swal.fire({
 					title: 'Updated successfully',
 					showConfirmButton: false,

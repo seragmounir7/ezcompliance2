@@ -14,6 +14,8 @@ import { FormName } from 'src/app/side-nav-access.enum';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-hazard-form-table-details',
 	templateUrl: './hazard-form-table-details.component.html',
@@ -51,7 +53,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
 		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
 		this.setTitle.setTitle('WHS-Hazard Form List');
 		this.isHistory = this.router.url.includes('/hazardTable/history');
-		console.log(this.isHistory);
+
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
 				.pipe(map((params) => params.get('id')))
@@ -78,16 +80,12 @@ export class HazardFormTableDetailsComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllHazardFormDataHistory(field, value, id)
 			.subscribe((res: any) => {
-				console.log('res', res.data);
-
 				this.showDatas = res.result;
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
 				});
-				console.log('this.showDatas', this.showDatas);
 
 				this.dataSource = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	delete(id) {
@@ -109,7 +107,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllHazardFormData();
 					});
 			}
@@ -119,16 +117,12 @@ export class HazardFormTableDetailsComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllHazardFormData(field, value)
 			.subscribe((res: any) => {
-				console.log('res', res.data);
-
 				this.showDatas = res.data;
 				this.showDatas.forEach((element, i) => {
 					return (this.showDatas[i].index = i);
 				});
-				console.log('this.showDatas', this.showDatas);
 
 				this.dataSource = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	edit(id) {
@@ -141,7 +135,7 @@ export class HazardFormTableDetailsComponent implements OnInit {
 			...element,
 			formName: 'Hazard Report Form'
 		});
-		console.log('check');
+
 		localStorage.setItem('key', 'print');
 
 		this.spinner.show('printLoader');

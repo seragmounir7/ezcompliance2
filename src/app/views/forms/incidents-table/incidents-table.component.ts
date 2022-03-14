@@ -10,6 +10,8 @@ import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-incidents-table',
 	templateUrl: './incidents-table.component.html',
@@ -44,7 +46,7 @@ export class IncidentsTableComponent implements OnInit {
 	ngOnInit(): void {
 		this.setTitle.setTitle('WHS-Accident Report List');
 		this.isHistory = this.router.url.includes('/incidentsTable/history');
-		console.log(this.isHistory);
+
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
 				.pipe(map((params) => params.get('id')))
@@ -82,7 +84,6 @@ export class IncidentsTableComponent implements OnInit {
 					return (this.showDatas[i].index = i);
 				});
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	ngAfterViewInit() {}
@@ -100,14 +101,12 @@ export class IncidentsTableComponent implements OnInit {
 				this.logicalFormInfo
 					.deleteIncidentReport(id)
 					.subscribe((res) => {
-						console.log('deleted', res);
-
 						Swal.fire({
 							title: 'Deleted successfully',
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getIncidentReport();
 					});
 			}
@@ -122,7 +121,6 @@ export class IncidentsTableComponent implements OnInit {
 					return (this.showDatas[i].index = i);
 				});
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	edit(id) {
@@ -144,7 +142,6 @@ export class IncidentsTableComponent implements OnInit {
 			formName: 'Accident Report'
 		});
 
-		console.log('check');
 		localStorage.setItem('key', 'print');
 		void this.spinner.show();
 		this.router.navigate([

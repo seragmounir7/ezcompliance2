@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 import { RoleManagementSharedServiceService } from 'src/app/utils/services/role-management-shared-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-display-table',
 	templateUrl: './display-table.component.html',
@@ -44,7 +46,7 @@ export class DisplayTableComponent implements OnInit {
 	ngOnInit(): void {
 		this.setTitle.setTitle('WHS-ToolBox Talk List');
 		this.isHistory = this.router.url.includes('/tableData/history');
-		console.log(this.isHistory);
+
 		if (this.isHistory) {
 			this.activatedRoute.paramMap
 				.pipe(map((params) => params.get('id')))
@@ -70,7 +72,6 @@ export class DisplayTableComponent implements OnInit {
 	ngAfterViewInit() {}
 	delete(id) {
 		this.logicalFormInfo.deleteToolBox(id).subscribe((res) => {
-			console.log('deleted', res);
 			this.getToolBox();
 		});
 	}
@@ -81,7 +82,6 @@ export class DisplayTableComponent implements OnInit {
 				return (this.showDatas[i].index = i);
 			});
 			this.tempArray = new MatTableDataSource<any>(this.showDatas);
-			console.log('get res', this.showDatas);
 		});
 	}
 	getToolBoxHistory(field = '', value = '', id = this.id) {
@@ -93,7 +93,6 @@ export class DisplayTableComponent implements OnInit {
 					return (this.showDatas[i].index = i);
 				});
 				this.tempArray = new MatTableDataSource<any>(this.showDatas);
-				console.log('get res', this.showDatas);
 			});
 	}
 	edit(id) {
@@ -118,7 +117,7 @@ export class DisplayTableComponent implements OnInit {
 	printPage(element) {
 		this.shared.printNext(true);
 		this.shared.sendPrintData({ ...element, formName: 'Toolbox Talk' });
-		console.log('check');
+
 		localStorage.setItem('key', 'print');
 		void this.spinner.show();
 		this.router.navigate([

@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-cop',
 	templateUrl: './add-cop.component.html',
@@ -53,8 +55,6 @@ export class AddCOPComponent implements OnInit {
 		};
 		this.logicalFormInfo.addMultipleCOP(data).subscribe(
 			(data) => {
-				console.log('codeOfPractice=>', data);
-
 				this.router.navigate(['/admin/setting/codeOfpract']);
 			},
 			(err) => {
@@ -65,6 +65,5 @@ export class AddCOPComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

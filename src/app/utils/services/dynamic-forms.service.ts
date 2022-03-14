@@ -17,7 +17,6 @@ export class DynamicFormsService {
 	login(data) {
 		return this.https.post(this.apiUrl + 'authentication/login', data).pipe(
 			map((res: any) => {
-				console.log('res.data.accessToken', res.data.accessToken);
 				if (res.data.accessToken) {
 					sessionStorage.setItem('accessToken', res.data.accessToken);
 				}
@@ -28,7 +27,6 @@ export class DynamicFormsService {
 	addCategory(data) {
 		return this.https.post(this.apiUrl + 'category/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -36,7 +34,6 @@ export class DynamicFormsService {
 	deleteCategory(id) {
 		return this.https.delete(this.apiUrl + 'category/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -44,7 +41,6 @@ export class DynamicFormsService {
 	editCategory(data, id) {
 		return this.https.put(this.apiUrl + 'category/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -52,7 +48,6 @@ export class DynamicFormsService {
 	getAllCategory() {
 		return this.https.get(this.apiUrl + 'category/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -60,7 +55,6 @@ export class DynamicFormsService {
 	getCategoryById(id) {
 		return this.https.get(this.apiUrl + 'category/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -68,7 +62,6 @@ export class DynamicFormsService {
 	addForm(data) {
 		return this.https.post(this.apiUrl + 'form/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -76,7 +69,6 @@ export class DynamicFormsService {
 	deleteForm(id) {
 		return this.https.delete(this.apiUrl + 'form/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -84,7 +76,6 @@ export class DynamicFormsService {
 	editForm(data, id) {
 		return this.https.put(this.apiUrl + 'form/update/' + id, data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -92,7 +83,6 @@ export class DynamicFormsService {
 	getAllForm() {
 		return this.https.get(this.apiUrl + 'form/getAll').pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -100,7 +90,6 @@ export class DynamicFormsService {
 	getFormById(id) {
 		return this.https.get(this.apiUrl + 'form/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -108,7 +97,6 @@ export class DynamicFormsService {
 	addFormBuilder(data) {
 		return this.https.post(this.apiUrl + 'formBuilder/add', data).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -116,7 +104,6 @@ export class DynamicFormsService {
 	deleteFormBuilder(id) {
 		return this.https.delete(this.apiUrl + 'formBuilder/delete/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);
@@ -126,7 +113,6 @@ export class DynamicFormsService {
 			.put(this.apiUrl + 'formBuilder/update/' + id, data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -135,7 +121,6 @@ export class DynamicFormsService {
 	getFormBuilderById(id) {
 		return this.https.get(this.apiUrl + 'formBuilder/get/' + id).pipe(
 			map((res: any) => {
-				console.log('res.data=>', res.data);
 				return res;
 			})
 		);

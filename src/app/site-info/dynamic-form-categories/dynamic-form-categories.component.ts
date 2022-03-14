@@ -9,6 +9,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddFormCategoriesComponent } from './add-form-categories/add-form-categories.component';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dynamic-form-categories',
 	templateUrl: './dynamic-form-categories.component.html',
@@ -36,7 +38,6 @@ export class DynamicFormCategoriesComponent implements OnInit {
 
 	getAllCategory() {
 		this.dynamicService.formCategoriesGetAll().subscribe((res: any) => {
-			console.log(res);
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
 			// this.dataSource.sort = this.sort;
@@ -56,16 +57,9 @@ export class DynamicFormCategoriesComponent implements OnInit {
 			if (result === 'ok') {
 				this.getAllCategory();
 			}
-			console.log(
-				'CustomerInfoComponent -> openDialog -> result',
-				result
-			);
-
-			console.log('The dialog was closed');
 		});
 	}
 	edit(element) {
-		console.log(element);
 		const dialogRef = this.dialog.open(AddFormCategoriesComponent, {
 			height: '700px',
 			width: '750px',
@@ -80,7 +74,6 @@ export class DynamicFormCategoriesComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllCategory();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -102,7 +95,7 @@ export class DynamicFormCategoriesComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllCategory();
 					});
 			}

@@ -15,6 +15,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { Designation } from 'src/app/utils/types/Designation.enum';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-forms',
 	templateUrl: './forms.component.html',
@@ -84,7 +86,6 @@ export class FormsComponent implements OnInit {
 		private authService: AuthService
 	) {}
 	goTo(title: string) {
-		console.log('title', title);
 		switch (title) {
 			case 'Toolbox Talk': {
 				this.router.navigate(['/admin/forms/tableData']);
@@ -107,7 +108,6 @@ export class FormsComponent implements OnInit {
 				break;
 			}
 			default: {
-				console.log('No such Title exists!');
 				break;
 			}
 		}
@@ -115,12 +115,13 @@ export class FormsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.authService.loginData$.subscribe((res) => {
+			if (res.designation === Designation.superAdmin)
+				this.displayedColumns = ['index', 'formName', 'adminEdit'];
 			if (res.designation === Designation.user)
 				this.displayedColumns = ['index', 'formName', 'edit'];
 		});
 
 		this.logical.getLogicalFormFrequency().subscribe((res: any) => {
-			console.log(res);
 			res.data.forEach((resObj) => {
 				this.ELEMENT_DATA = this.ELEMENT_DATA.map((localObj) => {
 					if (resObj.formName === localObj.title) {
@@ -131,12 +132,11 @@ export class FormsComponent implements OnInit {
 							...localObj,
 							...resObj
 						};
-						console.log(localObj);
 					}
 					return localObj;
 				});
 			});
-			console.log(this.ELEMENT_DATA);
+
 			this.dataSource.data = this.ELEMENT_DATA;
 		});
 		this.accessObj = this.role.getAccessObj(FormName.WHSForms);
@@ -165,8 +165,6 @@ export class FormsComponent implements OnInit {
 	}
 
 	frequencyChange(e, element) {
-		console.log(e.target.value);
-
 		this.logical
 			.updateLogicalFormFrequency(element._id, e.target.value)
 			.subscribe((res) => {

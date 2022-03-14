@@ -6,6 +6,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-site',
 	templateUrl: './add-site.component.html',
@@ -36,17 +38,14 @@ export class AddSiteComponent implements OnInit {
 	}
 	getAllStates() {
 		this.logicalFormInfoService.getAllStates().subscribe((res) => {
-			console.log('getAllStates=>', res);
 			this.allState = res.data;
 		});
 	}
 
 	onSubmit() {
-		console.log(this.addSitesForm.value);
 		this.logicalFormInfoService
 			.addSite(this.addSitesForm.value)
 			.subscribe((res) => {
-				console.log(res);
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Site Added successfully',
@@ -61,6 +60,5 @@ export class AddSiteComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

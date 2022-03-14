@@ -2,6 +2,8 @@ import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.servic
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AppService } from 'src/app/utils/services/app.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-header',
 	templateUrl: './header.component.html',

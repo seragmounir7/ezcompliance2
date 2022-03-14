@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-form-categories',
 	templateUrl: './add-form-categories.component.html',
@@ -25,21 +27,17 @@ export class AddFormCategoriesComponent implements OnInit {
 			title: ['', Validators.required]
 		});
 		if (this.data.action == 'edit') {
-			console.log('edit');
-
 			this.dynamicFormCategoryAdd.controls.title.setValue(
 				this.data?.element?.title
 			);
 		}
 	}
 	onSubmit() {
-		console.log(this.dynamicFormCategoryAdd.value);
 		if (this.data.action === 'new') {
 			this.dynamicService
 				.formCategoriesPost(this.dynamicFormCategoryAdd.value)
 				.subscribe(
 					(res) => {
-						console.log('addCustomerForm=>', res);
 						this.dialogRef.close('ok');
 						this.router.navigate([
 							'/admin/setting/dynamicFormCategories'
@@ -57,7 +55,6 @@ export class AddFormCategoriesComponent implements OnInit {
 				)
 				.subscribe(
 					(res) => {
-						console.log('addCustomerForm=>', res);
 						this.dialogRef.close('true');
 						this.router.navigate([
 							'/admin/setting/dynamicFormCategories'

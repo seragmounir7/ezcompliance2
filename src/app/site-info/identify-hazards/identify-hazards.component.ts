@@ -11,6 +11,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { EditHazardComponent } from './edit-hazard/edit-hazard.component';
 import { MatSort, Sort } from '@angular/material/sort';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-identify-hazards',
 	templateUrl: './identify-hazards.component.html',
@@ -48,7 +50,6 @@ export class IdentifyHazardsComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllHazards(field, value)
 			.subscribe((res: any) => {
-				console.log('getAllHazards=>', res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -59,7 +60,6 @@ export class IdentifyHazardsComponent implements OnInit {
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				//  this.task = res.data.subComponents;
 			});
@@ -73,7 +73,6 @@ export class IdentifyHazardsComponent implements OnInit {
 		this.logicalFormInfo
 			.updateHazards(data, element._id)
 			.subscribe((resData) => {
-				console.log('resData', resData);
 				this.getAllHazards();
 				Swal.fire({
 					title: 'Parameter Updated successfully',
@@ -88,7 +87,7 @@ export class IdentifyHazardsComponent implements OnInit {
 		// dialogRef.afterClosed().subscribe((result) => {
 		// 	if (result == 'true') {
 		// 	}
-		// 	console.log('The dialog was closed');
+		//
 		// });
 	}
 	delete(item) {
@@ -110,7 +109,7 @@ export class IdentifyHazardsComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllHazards();
 					});
 			}
@@ -121,7 +120,6 @@ export class IdentifyHazardsComponent implements OnInit {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 	copySuccess() {
-		console.log('copy successfull');
 		this.snack.openSnackBar('Copied to clipboard');
 	}
 	sortData(sort: Sort) {

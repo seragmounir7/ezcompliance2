@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LandingPageInfoServiceService } from 'src/app/utils/services/landing-page-info-service.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-faq',
 	templateUrl: './edit-faq.component.html',
@@ -31,12 +33,10 @@ export class EditFaqComponent implements OnInit {
 		const data = {
 			title: this.editPortal.get('title').value
 		};
-		console.log('porataldata', data, this.dataRec._id);
+
 		this.landingPageInfo
 			.editportal(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('portal', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Portal Edited successfully',
@@ -50,8 +50,6 @@ export class EditFaqComponent implements OnInit {
 			title: this.editPortal.get('title').value
 		};
 		this.landingPageInfo.addPortal(data).subscribe((resData) => {
-			console.log('Portal', resData);
-
 			this.dialogRef.close('true');
 			if (this.dataRec) {
 				Swal.fire({

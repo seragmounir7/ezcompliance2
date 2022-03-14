@@ -36,11 +36,9 @@ export class AccessControlDirective {
 	ngOnInit() {
 		this.authService.loginData$.subscribe((res) => {
 			if (res.designation === Designation.user) {
-				console.log('AccessControlDirective');
 				this.viewContainer.clear();
 				this.role.accessArrObs$.subscribe((accessArr) => {
-					// console.log(res)
-					this.checkAccess(accessArr);
+					if (accessArr.length > 0) this.checkAccess(accessArr);
 				});
 			} else {
 				this.viewContainer.createEmbeddedView(this.templateRef);

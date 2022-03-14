@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { AddRoleComponent } from './add-role/add-role.component';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-role-management',
 	templateUrl: './role-management.component.html',
@@ -40,9 +42,6 @@ export class RoleManagementComponent implements OnInit {
 		dialogRef.afterClosed().subscribe((result) => {
 			if (result === 'true') {
 			}
-			console.log('AddRoleComponent -> openDialog -> result', result);
-
-			console.log('The dialog was closed');
 		});
 	}
 }

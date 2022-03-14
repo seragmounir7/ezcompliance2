@@ -9,6 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditPPEComponent } from './edit-ppe/edit-ppe.component';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-ppe-select',
 	templateUrl: './ppe-select.component.html',
@@ -41,7 +43,6 @@ export class PpeSelectComponent implements AfterViewInit, OnInit {
 
 	getAllPPEs(field = '', value = '') {
 		this.logicalFormInfo.getAllPPE(field, value).subscribe((res: any) => {
-			console.log('PPEAll=>', res);
 			const data = res.data;
 			data.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -51,7 +52,6 @@ export class PpeSelectComponent implements AfterViewInit, OnInit {
 			this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 			this.dataSource.paginator = this.paginator;
 			// this.dataSource.sort = this.sort;
-			console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 			//  this.task = res.data.subComponents;
 		});
@@ -65,7 +65,6 @@ export class PpeSelectComponent implements AfterViewInit, OnInit {
 			if (result == 'true') {
 				this.getAllPPEs();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -85,7 +84,7 @@ export class PpeSelectComponent implements AfterViewInit, OnInit {
 						showConfirmButton: false,
 						timer: 1200
 					});
-					console.log('deleted res', res);
+
 					this.getAllPPEs();
 				});
 			}

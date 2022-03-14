@@ -14,6 +14,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-hazard-treatment',
 	templateUrl: './hazard-treatment.component.html',
@@ -45,14 +47,11 @@ export class HazardTreatmentComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Set Hazard Relation');
 		this.getAllHazardTreatmentRelation();
 	}
-	onFormSubmit() {
-		console.log(this.setStatesDetail);
-	}
+	onFormSubmit() {}
 	getAllHazardTreatmentRelation() {
 		this.logicalFormInfo
 			.getAllHazardTreatmentRelation()
 			.subscribe((res: any) => {
-				console.log('getAllHazardTreatmentRelation=>', res);
 				this.hazardData = res.data;
 
 				this.hazardData.forEach((element, index) => {

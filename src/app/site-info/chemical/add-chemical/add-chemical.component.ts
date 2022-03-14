@@ -3,6 +3,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-chemical',
 	templateUrl: './add-chemical.component.html',
@@ -45,13 +47,11 @@ export class AddChemicalComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.addChemicalForm.value);
 		const data = {
 			arrObj: this.addChemicalForm.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleChemical(data).subscribe(
 			(data) => {
-				console.log('chemical=>', data);
 				this.router.navigate(['/admin/setting/chemical']);
 			},
 			(err) => {
@@ -62,6 +62,5 @@ export class AddChemicalComponent implements OnInit {
 	calcHeight(target) {
 		let value = target.value;
 		this.numberOfLineBreaks = (value.match(/\n/g) || []).length + 1;
-		console.log('numberOfLineBreaks', this.numberOfLineBreaks);
 	}
 }

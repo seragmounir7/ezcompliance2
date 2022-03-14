@@ -1,23 +1,18 @@
-<div
-	class="btn btn-outline-primary"
-	(click)="closeDialog()"
-	[routerLink]="['/admin/setting/termsAndcondition']"
->
-	<i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
 <div class="container px-4 py-4 bg-white">
-	<form [formGroup]="addTerms" (ngSubmit)="onFormSubmit()">
-		<h2 class="text-center">Add Terms And Conditions</h2>
+	<form>
+		<h2 class="text-center">Acknowledgement</h2>
 		<br />
 		<hr />
 		<div class="col">
 			<!-- <textarea autosize [rows]="numberOfLineBreaks" type="text" formControlName="instruction"
                 class="form-control sign" id="name"></textarea> -->
 			<ckeditor
+				*ngIf="acknowledgment$|async as value"
 				class="toolbarborder"
-				formControlName="termsAndCond"
 				style="width: 100%"
 				[editor]="Editor"
+				[disabled]="true"
+				data="{{value.termsAndCond}}"
 			>
 			</ckeditor>
 		</div>
@@ -27,9 +22,9 @@
 			<button
 				type="submit"
 				class="btn btn-primary"
-				[disabled]="!addTerms.valid"
+				(click)="onFormSubmit()"
 			>
-				Add
+				I Acknowledge
 			</button>
 		</div>
 	</form>

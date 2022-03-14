@@ -5,6 +5,6 @@ export class ConvertService {
 	constructor() {}
 
 	inputDateToIso(date: string): string {
-		return new Date(Date.parse(date)).toISOString();
+		return new Date(Date.parse(date)).toISOString().slice(0, 10);
 	}
 }

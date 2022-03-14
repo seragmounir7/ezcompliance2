@@ -10,6 +10,8 @@ import { EditFaqComponent } from './edit-faq/edit-faq.component';
 import { MatSort } from '@angular/material/sort';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-faq',
 	templateUrl: './faq.component.html',
@@ -44,7 +46,6 @@ export class FAQComponent implements OnInit {
 	}
 	getAllPortal() {
 		this.landingPageInfo.getAllPortal().subscribe((res: any) => {
-			console.log('portalDetails=>', res);
 			const faqData = res.data;
 			faqData.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -66,12 +67,9 @@ export class FAQComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllPortal();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
-		console.log('delete', item);
-
 		Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to delete "${item.title}"?`,
@@ -88,7 +86,7 @@ export class FAQComponent implements OnInit {
 						showConfirmButton: false,
 						timer: 1000
 					});
-					console.log('deleted res', res);
+
 					this.getAllPortal();
 				});
 			}

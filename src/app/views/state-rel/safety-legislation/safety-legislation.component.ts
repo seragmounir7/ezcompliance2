@@ -8,6 +8,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { AddAndEditSafetyComponent } from './add-and-edit-safety/add-and-edit-safety.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-safety-legislation',
 	templateUrl: './safety-legislation.component.html',
@@ -40,7 +42,6 @@ export class SafetyLegislationComponent implements OnInit {
 
 	getAllSafetyReg(field = '', value = '') {
 		this.logicalFormInfo.getAllSafety(field, value).subscribe((res) => {
-			console.log('getAllRegulator=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
@@ -62,7 +63,6 @@ export class SafetyLegislationComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllSafetyReg();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -83,7 +83,7 @@ export class SafetyLegislationComponent implements OnInit {
 						showConfirmButton: false,
 						timer: 1200
 					});
-					console.log('deleted res', res);
+
 					this.getAllSafetyReg();
 				});
 			}

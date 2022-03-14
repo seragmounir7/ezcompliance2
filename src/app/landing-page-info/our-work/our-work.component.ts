@@ -14,6 +14,8 @@ import { MatSort } from '@angular/material/sort';
 import { EditWorkComponent } from './edit-work/edit-work.component';
 import { AddEditSubWorkComponent } from './add-edit-sub-work/add-edit-sub-work.component';
 import { AddSubWorkComponent } from './add-sub-work/add-sub-work.component';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-our-work',
 	templateUrl: './our-work.component.html',
@@ -61,13 +63,11 @@ export class OurWorkComponent implements OnInit {
 	getWork() {
 		this.myId = '61a20b0cdba3f562225fba01';
 		this.landingPageInfo.getWorkById(this.myId).subscribe((res) => {
-			console.log('sakshi', res.data);
 			this.workData = res.data;
 		});
 	}
 
 	editWork(id) {
-		console.log('work', id);
 		void this.spinner.show();
 		this.myId = id;
 		this.isEdit = true;
@@ -91,7 +91,6 @@ export class OurWorkComponent implements OnInit {
 	getSystemWork() {
 		this.mode = 'System';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-			console.log('System', res.data);
 			this.dataSource.data = res.data;
 			const SystemData = res.data[0].subModules;
 			SystemData.forEach((element, index) => {
@@ -136,7 +135,7 @@ export class OurWorkComponent implements OnInit {
 		this.mode = 'System';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.SystemData = data.data[0];
-			console.log(this.SystemData);
+
 			const dialogRef = this.dialog.open(AddSubWorkComponent, {
 				data: {
 					action: 'new',

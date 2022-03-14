@@ -27,13 +27,16 @@
 			</table>
 		</div>
 
-		<div class="col-md-8">
+		<div class="col-md-8" *ngIf="formsCount$| async as formObj">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="flex-container">
 						<div class="small-box bg-warning">
 							<div class="inner">
-								<b>3</b>
+								<b
+									>{{formObj.nearMissCount||'No Data
+									Found'}}</b
+								>
 								<h5>Near Miss</h5>
 							</div>
 							<div class="icon">
@@ -43,7 +46,10 @@
 
 						<div class="small-box bg-teal">
 							<div class="inner">
-								<b>1</b>
+								<b
+									>{{formObj.firstAidCount||'No Data
+									Found'}}</b
+								>
 								<h5>First Aid Treatments</h5>
 							</div>
 							<div class="icon">
@@ -56,7 +62,10 @@
 							style="background-color: #7fffd4"
 						>
 							<div class="inner">
-								<b>1</b>
+								<b
+									>{{formObj.medicalTreatmentCount||'No Data
+									Found'}}</b
+								>
 								<h5>Medical Treatments</h5>
 							</div>
 							<div class="icon">
@@ -69,7 +78,10 @@
 							style="background-color: #e2f516"
 						>
 							<div class="inner">
-								<b>1</b>
+								<b
+									>{{formObj.lostTimeInjuryCount||'No Data
+									Found'}}</b
+								>
 								<h5>Lost Time Injury</h5>
 							</div>
 							<div class="icon">
@@ -79,8 +91,11 @@
 
 						<div class="small-box bg-orange">
 							<div class="inner">
-								<b>0</b>
-								<h5>Death or Series Injury</h5>
+								<b
+									>{{formObj.deathDataCount||'No Data
+									Found'}}</b
+								>
+								<h5>Death</h5>
 							</div>
 							<div class="icon">
 								<i class="fas fa-procedures"></i>
@@ -97,7 +112,10 @@
 							style="background-color: #659ec7; color: #fff"
 						>
 							<div class="inner">
-								<b>6</b>
+								<b
+									>{{formObj.riskAssessmentResult||'No Data
+									Found'}}</b
+								>
 								<h5>Risk Assessments</h5>
 							</div>
 							<div class="icon">
@@ -106,7 +124,10 @@
 						</div>
 						<div class="small-box bg-warning">
 							<div class="inner">
-								<b>6</b>
+								<b
+									>{{formObj.riskAssessmentResult||'No Data
+									Found'}}</b
+								>
 								<h5>SWMS</h5>
 							</div>
 							<div class="icon">
@@ -115,7 +136,10 @@
 						</div>
 						<div class="small-box bg-danger">
 							<div class="inner">
-								<b>8</b>
+								<b
+									>{{formObj.toolBoxResult||'No Data
+									Found'}}</b
+								>
 								<h5>Tool Box Talks</h5>
 							</div>
 							<div class="icon">
@@ -124,7 +148,10 @@
 						</div>
 						<div class="small-box bg-cyan">
 							<div class="inner">
-								<b>1</b>
+								<b
+									>{{formObj.siteInspectionResult||'No Data
+									Found'}}</b
+								>
 								<h5>Incident Reports</h5>
 							</div>
 							<div class="icon">
@@ -136,7 +163,7 @@
 							style="background-color: #737ca1; color: #fff"
 						>
 							<div class="inner">
-								<b>3</b>
+								<b>{{formObj.hazardResult||'No Data Found'}}</b>
 								<h5>Hazard Reports</h5>
 							</div>
 							<div class="icon">

@@ -6,14 +6,19 @@ import {
 	ViewChild
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { AddTermsAndConditionsComponent } from '../site-info/terms-and-conditions/add-terms-and-conditions/add-terms-and-conditions.component';
 import {
 	AuthService,
 	FirstLogin,
 	UserData
 } from '../utils/services/auth.service';
+import { Designation } from '../utils/types/Designation.enum';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-admin-setup',
 	templateUrl: './admin-setup.component.html',
@@ -34,12 +39,14 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 		private _formBuilder: FormBuilder,
 		private router: Router,
 		private authService: AuthService,
-		private changeDetectorRef: ChangeDetectorRef
+		private changeDetectorRef: ChangeDetectorRef,
+		private dialog: MatDialog
 	) {}
 	ngAfterViewInit(): void {
 		this.authService.loginData$.subscribe((res) => {
+			if (res.designation !== Designation.clientAdmin) return;
 			this.changeDetectorRef.detectChanges();
-			console.log(this.stepper.selectedIndex);
+
 			if (res.FirstLogin.step1 === false) {
 				this.stepper.selected.completed = true;
 				this.stepper.next();
@@ -59,25 +66,14 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 			} else {
 				// this.stepper.selectedIndex = 4;
 			}
-			// if (!res.firstLogin.step1) {
-			// 	this.stepper.selectedIndex = 1;
-			// } else if (!res.firstLogin.step2) {
-			// 	this.stepper.selectedIndex = 2;
-			// } else if (!res.firstLogin.step3) {
-			// 	this.stepper.selectedIndex = 3;
-			// } else if (!res.firstLogin.step4) {
-			// 	this.stepper.selectedIndex = 4;
-			// }else{
-			//   this.stepper.selectedIndex = 3;
-			// }
-			console.log(this.stepper.selectedIndex);
 		});
-		console.log(this.stepper);
 	}
 
 	ngOnInit() {
 		this.authService.loginData$.subscribe((res) => {
-			console.log('admin setup', res);
+			if (res.designation === Designation.clientAdmin)
+				if (res.FirstLogin.step1) this.openDialog();
+
 			this.userData = res;
 		});
 		this.firstFormGroup = this._formBuilder.group({
@@ -93,7 +89,8 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 		this.authService
 			.updateFirstLogin(this.userData.FirstLogin)
 			.subscribe((res) => {
-				console.log(res);
+				if (step === 'step4') this.setupComplete();
+
 				this.authService.nextLoginData(this.userData);
 				sessionStorage.setItem(
 					'userData',
@@ -111,7 +108,6 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 		this.authService
 			.updateFirstLogin(this.userData.FirstLogin)
 			.subscribe((res) => {
-				console.log(res);
 				sessionStorage.setItem(
 					'firstLogin',
 					JSON.stringify(this.userData.FirstLogin)
@@ -123,5 +119,14 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 				this.authService.nextLoginData(this.userData);
 			});
 		this.router.navigate(['/admin']);
+	}
+	openDialog() {
+		try {
+			this.dialog.open(AddTermsAndConditionsComponent, {
+				disableClose: true
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	}
 }

@@ -14,30 +14,33 @@
 					role="tablist"
 					aria-orientation="vertical"
 				>
-					<p
-						*ngFor="let item of roleArr; let i = index"
-						(click)="handleClick(i)"
-						class="nav-link mb-3 p-3 shadow"
-						[class.active]="roleArr[i].i"
-						id="v-pills-home-tab"
-						data-toggle="pill"
-						role="tab"
-						aria-controls="v-pills-home"
-						aria-selected="true"
-					>
-						<i class="fa fa-user-circle-o mr-2"></i>
-						<span class="font-weight-bold small text-uppercase"
-							>{{ (roleArr[i].roleId| changeType).role }}</span
+					<ng-container *ngIf="roleArr?.length > 0;else elseBlock">
+						<p
+							*ngFor="let item of roleArr; let i = index"
+							(click)="handleClick(i)"
+							class="nav-link mb-3 p-3 shadow"
+							[class.active]="roleArr[i].i"
+							id="v-pills-home-tab"
+							data-toggle="pill"
+							role="tab"
+							aria-controls="v-pills-home"
+							aria-selected="true"
 						>
-						<span
-							class="material-icons float-right"
-							style="color: rgba(236, 65, 65, 0.842)"
-							(click)=" deleteRole(roleArr[i].roleId)"
-							matTooltip="Delete"
-						>
-							delete
-						</span>
-					</p>
+							<i class="fa fa-user-circle-o mr-2"></i>
+							<span class="font-weight-bold small text-uppercase"
+								>{{ (roleArr[i].roleId| changeType).role
+								}}</span
+							>
+							<span
+								class="material-icons float-right"
+								style="color: rgba(236, 65, 65, 0.842)"
+								(click)=" deleteRole(roleArr[i].roleId)"
+								matTooltip="Delete"
+							>
+								delete
+							</span>
+						</p>
+					</ng-container>
 				</div>
 			</div>
 
@@ -200,4 +203,9 @@
 			</div>
 		</div>
 	</div>
+	<ng-template #elseBlock>
+		<div style="display: flex; justify-content: center; padding: 2%">
+			<h1 class="text-danger">No Role Available.</h1>
+		</div>
+	</ng-template>
 </section>

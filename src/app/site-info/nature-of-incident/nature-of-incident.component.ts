@@ -8,6 +8,8 @@ import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
 import { EditNatureIncidentComponent } from './edit-nature-incident/edit-nature-incident.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-nature-of-incident',
 	templateUrl: './nature-of-incident.component.html',
@@ -42,7 +44,6 @@ export class NatureOfIncidentComponent implements OnInit {
 		this.logicalFormInfo
 			.getAllNatOfInc(field, value)
 			.subscribe((res: any) => {
-				console.log('NatOfIncAll=>', res);
 				const data = res.data;
 				data.forEach((element, index) => {
 					element.index = index + 1; //adding index
@@ -52,7 +53,6 @@ export class NatureOfIncidentComponent implements OnInit {
 				this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 				this.dataSource.paginator = this.paginator;
 				// this.dataSource.sort = this.sort;
-				console.log('this.ELEMENT_DATA', this.ELEMENT_DATA);
 
 				//  this.task = res.data.subComponents;
 			});
@@ -67,7 +67,6 @@ export class NatureOfIncidentComponent implements OnInit {
 			if (result == 'true') {
 				this.getAllNatureOfInc();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
@@ -89,7 +88,7 @@ export class NatureOfIncidentComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1200
 						});
-						console.log('deleted res', res);
+
 						this.getAllNatureOfInc();
 					});
 			}

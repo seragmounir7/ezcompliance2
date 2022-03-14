@@ -23,11 +23,15 @@ import { FirstTimeLoginGuard } from './RouteGuard/first-time-login.guard';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { SuperAdminGuard } from './RouteGuard/super-admin.guard';
+import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { IsPrintGuard } from './RouteGuard/is-print.guard';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
 	{
 		path: 'print',
+		canActivate: [IsPrintGuard],
 		outlet: 'print',
 		component: PrintLayoutComponent,
 		children: [
@@ -38,8 +42,18 @@ const routes: Routes = [
 			{ path: 'siteInspect/:id', component: SiteInspectionComponent },
 			{ path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
 			{ path: 'incidentRep/:id', component: IncidentReportComponent },
-			{ path: 'hazardRep/:id', component: HazardReportComponent }
+			{ path: 'hazardRep/:id', component: HazardReportComponent },
+			{ path: 'invoice', component: InvoiceComponent },
+			{
+				path: 'savedDynamicForm',
+				component: SavedDynamicFormDataComponent
+			}
 		]
+	},
+	{
+		path: 'printinvoice',
+		outlet: 'printInvoice',
+		component: InvoiceComponent
 	},
 	// {
 	//   path:'', redirectTo:'setup', pathMatch:"`"
@@ -61,8 +75,17 @@ const routes: Routes = [
 			// { path: '', component: LoginComponent },
 
 			{ path: '', component: DashboardComponent },
+			{ path: 'invoice', component: InvoiceComponent },
 			{ path: 'profile', component: ProfileComponent },
 			{ path: 'blank', component: BlankComponent },
+			{
+				path: 'superadmin',
+				canActivate: [SuperAdminGuard],
+				loadChildren: () =>
+					import('./super-admin/super-admin.module').then(
+						(m) => m.SuperAdminModule
+					)
+			},
 			{
 				path: 'forms',
 				loadChildren: () =>

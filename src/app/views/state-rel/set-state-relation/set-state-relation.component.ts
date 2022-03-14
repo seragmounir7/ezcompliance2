@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-set-state-relation',
 	templateUrl: './set-state-relation.component.html',
@@ -110,12 +112,9 @@ export class SetStateRelationComponent implements OnInit {
 		});
 	}
 
-	onFormSubmit() {
-		console.log(this.setStatesDetail);
-	}
+	onFormSubmit() {}
 	getStates() {
 		this.logicalFormInfo.getAllStates().subscribe((res: any) => {
-			console.log('setStatesDetails=>', res);
 			this.StatesData = res.data;
 
 			this.StatesData.forEach((element, index) => {
@@ -130,26 +129,22 @@ export class SetStateRelationComponent implements OnInit {
 	}
 	getJurisdiction() {
 		this.logicalFormInfo.getAllJurisdiction().subscribe((res: any) => {
-			console.log('Jurisdiction=>', res);
 			this.Jurisdiction = res.data;
 		});
 	}
 	getSafety() {
 		this.logicalFormInfo.getAllSafety().subscribe((res: any) => {
-			console.log('Safety=>', res);
 			this.SafetyData = res.data;
 		});
 	}
 
 	getCode() {
 		this.logicalFormInfo.getAllCode().subscribe((res) => {
-			console.log('COP=>', res);
 			this.COP = res.data;
 		});
 	}
 	getRegulator() {
 		this.logicalFormInfo.getAllRegulator().subscribe((res: any) => {
-			console.log('Regulator=>', res);
 			this.regulator = res.data;
 		});
 	}
@@ -161,9 +156,6 @@ export class SetStateRelationComponent implements OnInit {
 		);
 	}
 	setRelation(title, id, i) {
-		console.log('index', title);
-		console.log('id', id);
-		console.log('id', i);
 		const risk = [];
 		const ppe = [];
 		const licence = [];
@@ -209,10 +201,8 @@ export class SetStateRelationComponent implements OnInit {
 
 			set: true
 		};
-		console.log(data);
 
 		this.logicalFormInfo.updateStates(data, id).subscribe((res) => {
-			console.log('resStates Task=>', res);
 			this.getStates();
 
 			Swal.fire({

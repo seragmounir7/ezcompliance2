@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DynamicFormsService } from 'src/app/utils/services/dynamic-forms.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-form',
 	templateUrl: './add-form.component.html',
@@ -24,7 +26,6 @@ export class AddFormComponent implements OnInit {
 		this.dialogRef.close();
 	}
 	ngOnInit(): void {
-		console.log('data', this.data);
 		this.addForm = this.fb.group({
 			formName: ['', Validators.required],
 			frequency: ['', Validators.required],
@@ -34,8 +35,8 @@ export class AddFormComponent implements OnInit {
 	}
 	createForm() {
 		// let a=this.addForm.get('formCategories').value
-		// console.log("aaaaaaaaaaaaaaa=>>>>>>>>>",a);
-		console.log('aaaaaaaaaaaaaaa=>>>>>>>>>', this.formCategoryObj);
+		//
+
 		sessionStorage.setItem('type', 'add');
 		sessionStorage.setItem('formTitle', this.addForm.get('formName').value);
 		sessionStorage.setItem(
@@ -56,7 +57,6 @@ export class AddFormComponent implements OnInit {
 	getFormCategories() {
 		this.dynamicService.formCategoriesGetAll().subscribe((res: any) => {
 			this.formCategores = res.data;
-			console.log(this.formCategores);
 		});
 	}
 	getCategory(category) {

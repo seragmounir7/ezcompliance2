@@ -17,6 +17,8 @@ import {
 	MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-terms-and-condtions',
 	templateUrl: './add-terms-and-condtions.component.html',

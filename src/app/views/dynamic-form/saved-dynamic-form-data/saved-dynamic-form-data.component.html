@@ -14,7 +14,12 @@
 </div>
 <ng-container>
 	<!-- *ngIf="report" -->
-	<div *ngIf="model" class="container" style="min-width: 1000px">
+	<div
+		*ngIf="model"
+		class="container"
+		id="section-to-print"
+		style="min-width: 1000px"
+	>
 		<div
 			class="row"
 			style="padding: 30px"
@@ -65,7 +70,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="my-3 col-2">
+							<!-- <div class="my-3 col-2">
 								<label class="form-label">Street Number</label>
 
 								<input
@@ -73,17 +78,18 @@
 									class="form-control col"
 									formControlName="streetNo"
 								/>
-							</div>
+							</div> -->
 							<div class="my-3 col-4">
 								<label class="form-label">Street Address</label>
 
-								<input
+								<textarea
 									type="text"
 									class="form-control col"
 									formControlName="streetAddr"
-								/>
+									autosize
+								></textarea>
 							</div>
-							<div class="my-3 col-4">
+							<div class="my-3 col-2">
 								<label class="form-label">Suburb</label>
 
 								<input
@@ -92,7 +98,7 @@
 									formControlName="subUrb"
 								/>
 							</div>
-							<div class="my-3 col-2">
+							<div class="my-3 col-3">
 								<label class="form-label">State</label>
 								<select
 									class="form-select form-control col"
@@ -107,6 +113,15 @@
 										{{state.title}}
 									</option>
 								</select>
+							</div>
+							<div class="my-3 col-3">
+								<label class="form-label">Postcode</label>
+
+								<input
+									type="text"
+									class="form-control col"
+									formControlName="postcode"
+								/>
 							</div>
 						</div>
 

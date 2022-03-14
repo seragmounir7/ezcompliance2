@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-test-logic',
 	templateUrl: './test-logic.component.html',
@@ -99,11 +101,10 @@ export class TestLogicComponent implements OnInit {
 		});
 
 		this.route.queryParams.subscribe((id) => {
-			console.log(id);
 			this.jobTaskId = id.id;
 			this.logicalFormInfo.getJobtaskById(id.id).subscribe((res: any) => {
 				this.jobTask = res.data;
-				console.log('this.jobTask ', this.jobTask);
+
 				this.getLicenceByTradeCat(this.jobTask.tradeCategoryId);
 
 				if (this.jobTask.set == true) {
@@ -138,63 +139,51 @@ export class TestLogicComponent implements OnInit {
 
 	getAllResidualRiskLevel() {
 		this.logicalFormInfo.getAllResidual().subscribe((res: any) => {
-			console.log('this.resiRiskLevelData', res.data);
 			this.resiRiskLevelData = res.data;
 		});
 	}
 	getAllRiskLevel() {
 		this.logicalFormInfo.getAllRiskLevel().subscribe((res: any) => {
-			console.log('this.riskLevelData', res.data);
 			this.riskLevelData = res.data;
 		});
 	}
 	getAllStaff() {
 		this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
-			console.log(res);
 			this.staff = res.data;
 		});
 	}
 	getAllHighRisk() {
 		this.logicalFormInfo.getAllRisk().subscribe((res: any) => {
-			console.log('Risk=>', res);
 			this.highRiskConstructionData = res.data;
 		});
 	}
 	getAllPPE() {
 		this.logicalFormInfo.getAllPPE().subscribe((res: any) => {
-			console.log('PPE=>', res);
 			this.PPESelectionData = res.data;
 		});
 	}
 	getAllCodeOfPractice() {
 		this.logicalFormInfo.getAllCOP().subscribe((res: any) => {
-			console.log('codeOfPractice=>', res);
 			this.allCodeOfPract = res.data;
 		});
 	}
 
 	getAllHazard() {
 		this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
-			console.log('getAllHazards=>', res);
 			this.allHazards = res.data;
 		});
 	}
 	getAllContrActReq() {
 		this.logicalFormInfo.getAllContrlActReq().subscribe((res: any) => {
-			console.log('getAllHazards=>', res);
 			this.allContrlActReq = res.data;
 		});
 	}
 	getLicenceByTradeCat(id) {
-		console.log('getLicenceByTradeCat', id);
-
 		this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
-			console.log('getAllLicenceCat=>', res);
 			this.licenceByTradecat = res.data.licenceData;
 		});
 	}
 	setRelation() {
-		console.log(this.JobTaskDetail.value);
 		const allContrlActReqTitle = [];
 		const temp1 = this.JobTaskDetail.get('contrActReq').value;
 		this.allContrlActReq.forEach((element1) => {
@@ -237,13 +226,9 @@ export class TestLogicComponent implements OnInit {
 			set: true
 		};
 
-		console.log('send data', data);
-
 		this.logicalFormInfo
 			.updateJobTask(data, this.jobTaskId)
 			.subscribe((res) => {
-				console.log('resJob Task=>', res);
-
 				Swal.fire({
 					title: 'Relation set successfully',
 					showConfirmButton: false,
@@ -332,7 +317,6 @@ export class TestLogicComponent implements OnInit {
 					break;
 				}
 			}
-			console.log('The dialog was closed');
 		});
 	}
 
@@ -355,7 +339,6 @@ export class TestLogicComponent implements OnInit {
 		}
 	}
 	handleClick(index) {
-		console.log(index);
 		this.count = index;
 		this.stepperList.map((x) => {
 			x.i = 0;

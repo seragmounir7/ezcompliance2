@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-cust',
 	templateUrl: './edit-cust.component.html',
@@ -19,12 +21,9 @@ export class EditCustComponent implements OnInit {
 		private logicalFormInfoService: LogicalFormInfoService
 	) {
 		this.formData = data;
-		console.log('fdata', this.formData);
 	}
 
 	ngOnInit(): void {
-		console.log(this.formData);
-
 		this.editCustomerForm = this.fb.group({
 			customerName: [this.formData.customerName],
 			customerContact: [this.formData.customerContact],
@@ -51,7 +50,6 @@ export class EditCustComponent implements OnInit {
 		this.logicalFormInfoService
 			.updateCustomer(this.data._id, this.editCustomerForm.value)
 			.subscribe((res) => {
-				console.log(res);
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Customer Edited successfully',
@@ -84,7 +82,6 @@ export class EditCustComponent implements OnInit {
 	}
 	getAllStates() {
 		this.logicalFormInfoService.getAllStates().subscribe((res: any) => {
-			console.log('setStatesDetails=>', res);
 			this.StatesData = res.data;
 		});
 	}

@@ -4,6 +4,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-site-inspection-topic',
 	templateUrl: './edit-site-inspection-topic.component.html',
@@ -23,7 +25,6 @@ export class EditSiteInspectionTopicComponent implements OnInit {
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
 		this.formData = data.element;
-		console.log('fdata', this.formData);
 	}
 
 	ngOnInit(): void {
@@ -36,8 +37,6 @@ export class EditSiteInspectionTopicComponent implements OnInit {
 	}
 
 	onSubmit() {
-		console.log(this.siteInspectionTopicEdit.value);
-
 		this.logicalFormInfoService
 			.updateSiteInspectionTopic(
 				this.formData._id,
@@ -45,7 +44,6 @@ export class EditSiteInspectionTopicComponent implements OnInit {
 			)
 			.subscribe(
 				(res) => {
-					console.log('addCustomerForm=>', res);
 					this.dialogRef.close('true');
 					this.router.navigate([
 						'/admin/setting/siteinspectiontopic/' +

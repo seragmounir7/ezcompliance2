@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-item',
 	templateUrl: './add-item.component.html',
@@ -22,8 +24,6 @@ export class AddItemComponent implements OnInit {
 		this.dataRec = data;
 	}
 	ngOnInit(): void {
-		console.log(this.dataRec);
-
 		this.addItem = this.fb.group({
 			title: ['', Validators.required]
 		});
@@ -78,8 +78,6 @@ export class AddItemComponent implements OnInit {
 
 	addHighRisk(data) {
 		this.logicalFormInfo.addRisk(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('highRisk');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -90,8 +88,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addPPE(data) {
 		this.logicalFormInfo.addPPE(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('ppe');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -102,8 +98,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addRiskLevel(data) {
 		this.logicalFormInfo.addRiskLevel(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('riskLevel');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -114,8 +108,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addResidRiskLevel(data) {
 		this.logicalFormInfo.addResidual(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('resRiskLevel');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -126,8 +118,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addHazard(data) {
 		this.logicalFormInfo.addHazards(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('identifyHazards');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -142,8 +132,6 @@ export class AddItemComponent implements OnInit {
 			tradeCategoryId: this.dataRec.tradeCategoryId
 		};
 		this.logicalFormInfo.addLicence(dataTemp).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('licence');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -154,8 +142,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addControlActReq(data) {
 		this.logicalFormInfo.addContrlActReq(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('ctrlActreq');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -166,8 +152,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addStaff(data) {
 		this.logicalFormInfo.addStaff(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('perResbl');
 			Swal.fire({
 				title: 'Item  Added successfully',
@@ -178,8 +162,6 @@ export class AddItemComponent implements OnInit {
 	}
 	addCOP(data) {
 		this.logicalFormInfo.addCode(data).subscribe((resData) => {
-			console.log('resData', resData);
-
 			this.dialogRef.close('codeOfPract');
 			Swal.fire({
 				title: 'Item  Added successfully',

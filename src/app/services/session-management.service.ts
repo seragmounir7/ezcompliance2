@@ -11,10 +11,8 @@ export class SessionManagementService {
 	) {}
 
 	startSession(time: number) {
-		console.log('session started', time);
 		this.bnIdle.startWatching(time).subscribe((res) => {
 			if (res) {
-				console.log('session expired');
 				this.authService.logout();
 			}
 		});

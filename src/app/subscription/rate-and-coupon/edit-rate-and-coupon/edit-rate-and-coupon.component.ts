@@ -3,6 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SubscriptionService } from 'src/app/utils/services/subscription.service';
 import Swal from 'sweetalert2';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-rate-and-coupon',
 	templateUrl: './edit-rate-and-coupon.component.html',
@@ -25,12 +27,10 @@ export class EditRateAndCouponComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.data);
 		this.getAllCoupon();
 		this.dataRec.coupons.forEach((element) => {
 			this.couponsId.push(element._id);
 		});
-		console.log('this.couponsId', this.couponsId);
 
 		this.editSubcriptionForm = this.fb.group({
 			monthly: [this.dataRec.monthly, Validators.required],
@@ -52,7 +52,6 @@ export class EditRateAndCouponComponent implements OnInit {
 			coupons: this.editSubcriptionForm.get('coupons').value
 		};
 		this.Subscription.editPlan(this.dataRec._id, data).subscribe((res) => {
-			console.log(res);
 			this.dialogRef.close('true');
 			Swal.fire({
 				title: ' Updated successfully',
@@ -66,8 +65,6 @@ export class EditRateAndCouponComponent implements OnInit {
 	addForm() {
 		this.Subscription.addPlan(this.editSubcriptionForm.value).subscribe(
 			(resData) => {
-				console.log('addPlan', resData);
-
 				this.dialogRef.close('true');
 
 				Swal.fire({
@@ -83,7 +80,6 @@ export class EditRateAndCouponComponent implements OnInit {
 	}
 	getAllCoupon() {
 		this.Subscription.getAllCoupon().subscribe((res) => {
-			console.log(res);
 			this.couponData = res.data;
 		});
 	}

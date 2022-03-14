@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map, tap } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { UserValue, UserResponce } from '../types/UserResponceTypes';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 @Injectable({
 	providedIn: 'root'
 })
@@ -16,7 +17,6 @@ export class EmployeeRegistrationService {
 			.post(this.apiUrl + 'authentication/register', data)
 			.pipe(
 				map((res: any) => {
-					console.log('res.data=>', res.data);
 					return res;
 				})
 			);
@@ -32,10 +32,36 @@ export class EmployeeRegistrationService {
 						item.fullName = `${item.firstName} ${item.lastName}`;
 						return item;
 					});
-				}),
-				tap((res) => console.log('employee/getAll', res))
+				})
 			);
 	}
+
+	getEmpAutoComplete(
+		formGroupName: FormGroup,
+		controlName: string,
+		empArray: UserValue[]
+	) {
+		return formGroupName.controls[controlName].valueChanges.pipe(
+			startWith(''),
+			map((value) =>
+				typeof value === 'string' ? value : value?.fullName
+			),
+			map((fullName) =>
+				fullName ? this._filter(fullName, empArray) : empArray.slice()
+			)
+		);
+	}
+
+	private _filter(name: string, empArray: UserValue[]): any[] {
+		const filterValue = name.toLowerCase();
+		return empArray.filter((option) =>
+			option.fullName.toLowerCase().includes(filterValue)
+		);
+	}
+	displayFn(user: any): string {
+		return user && user.fullName ? user.fullName : '';
+	}
+
 	getEmployeeInfoById(id) {
 		return this.https
 			.get(

@@ -16,6 +16,8 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/utils/services/auth.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-employee-registration',
 	templateUrl: './employee-registration.component.html',
@@ -31,6 +33,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 		'firstName',
 		'lastName',
 		'email',
+		'role',
 		'action'
 	];
 	dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -67,7 +70,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 	getAllEmployee() {
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
 			this.isEmpRegInvalid.emit(res.length < this.employeePurchased);
-			console.log(res);
+
 			const couponData = res;
 			couponData.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -89,7 +92,6 @@ export class EmployeeRegistrationComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				void this.spinner.show();
 				this.employee.deleteEmployeeInfo(item._id).subscribe((res) => {
 					this.getAllEmployee();

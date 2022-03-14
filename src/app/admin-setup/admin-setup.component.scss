@@ -4,3 +4,15 @@
 ::ng-deep .mat-horizontal-stepper-header {
 	pointer-events: none !important;
 }
+
+.buttonDiv {
+	display: flex;
+	justify-content: flex-end;
+	padding: 2%;
+	button {
+		width: 100%;
+		height: 200px;
+		box-shadow: inset;
+		font-size: 30px;
+	}
+}

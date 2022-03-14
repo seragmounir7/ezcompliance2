@@ -1030,7 +1030,6 @@ export class LogicalFormInfoService {
 			.pipe(
 				map((res: any) => {
 					(res.data as any[]).map((x) => {
-						console.log(x);
 						return {
 							...x,
 							_id: x._id
@@ -1049,20 +1048,7 @@ export class LogicalFormInfoService {
 				this.apiUrl +
 					`siteInspection/getRelatedOldData/${id}?field=${field}&value=${value}`
 			)
-			.pipe(
-				map((data: any) => data.data[0]),
-				tap(console.log)
-				// map((res:any) => {
-				//   (res.result as any[]).map(x => {
-				//     console.log(x)
-				//     return {
-				//       ...x,
-				//       _id: x._id,
-				//     }
-				//   })
-				//   return res
-				// })
-			);
+			.pipe(map((data: any) => data.data[0]));
 	}
 	addSiteInspection(data) {
 		return this.https.post(this.apiUrl + 'siteInspection/add', data);
@@ -1298,10 +1284,14 @@ export class LogicalFormInfoService {
 	////////////////////Start Add client Terms And Conditions ////////////////
 
 	getTermsAndConditions() {
-		return this.https.get(this.apiUrl + 'termsAndCondition/getAll');
+		return this.https
+			.get(this.apiUrl + 'termsAndCondition/getAll')
+			.pipe(map((res: any) => res.data));
 	}
 	postTermsAndConditions(data) {
-		return this.https.post(this.apiUrl + 'termsAndCondition/add', data);
+		return this.https.post(this.apiUrl + 'termsAndCondition/add', {
+			termsAndCond: data
+		});
 	}
 	deleteTermsAndConditions(id) {
 		return this.https.delete(
@@ -1362,68 +1352,6 @@ export class LogicalFormInfoService {
 	//////////////////Start of Frequency/Enable  //////////////////
 
 	getLogicalFormFrequency() {
-		// return of({
-		// 	status: 'SUCCESS',
-		// 	code: 200,
-		// 	data: [
-		// 		{
-		// 			enable: true,
-		// 			status: 'active',
-		// 			_id: '621ded0ef01c6824cc1eeb22',
-		// 			formName: 'Hazard Reported',
-		// 			frequency: 'daily',
-		// 			clientAdminId: '621ded0ef01c6824cc1eeb1f',
-		// 			__v: 0,
-		// 			createdAt: '2022-03-01T09:53:18.302Z',
-		// 			updatedAt: '2022-03-01T09:53:18.302Z'
-		// 		},
-		// 		{
-		// 			enable: true,
-		// 			status: 'active',
-		// 			_id: '621ded0ef01c6824cc1eeb23',
-		// 			formName: 'Accident Report',
-		// 			frequency: 'daily',
-		// 			clientAdminId: '621ded0ef01c6824cc1eeb1f',
-		// 			__v: 0,
-		// 			createdAt: '2022-03-01T09:53:18.302Z',
-		// 			updatedAt: '2022-03-01T09:53:18.302Z'
-		// 		},
-		// 		{
-		// 			enable: true,
-		// 			status: 'active',
-		// 			_id: '621ded0ef01c6824cc1eeb24',
-		// 			formName: 'Toolbox Talk',
-		// 			frequency: 'daily',
-		// 			clientAdminId: '621ded0ef01c6824cc1eeb1f',
-		// 			__v: 0,
-		// 			createdAt: '2022-03-01T09:53:18.303Z',
-		// 			updatedAt: '2022-03-01T09:53:18.303Z'
-		// 		},
-		// 		{
-		// 			enable: true,
-		// 			status: 'active',
-		// 			_id: '621ded0ef01c6824cc1eeb25',
-		// 			formName: 'Site Inspection',
-		// 			frequency: 'daily',
-		// 			clientAdminId: '621ded0ef01c6824cc1eeb1f',
-		// 			__v: 0,
-		// 			createdAt: '2022-03-01T09:53:18.303Z',
-		// 			updatedAt: '2022-03-01T09:53:18.303Z'
-		// 		},
-		// 		{
-		// 			enable: true,
-		// 			status: 'active',
-		// 			_id: '621ded0ef01c6824cc1eeb26',
-		// 			formName: 'Risk Assestment and SWMS',
-		// 			frequency: 'daily',
-		// 			clientAdminId: '621ded0ef01c6824cc1eeb1f',
-		// 			__v: 0,
-		// 			createdAt: '2022-03-01T09:53:18.303Z',
-		// 			updatedAt: '2022-03-01T09:53:18.303Z'
-		// 		}
-		// 	]
-		// });
-
 		return this.https.get(this.apiUrl + 'logicalFormFrequency/getall');
 	}
 

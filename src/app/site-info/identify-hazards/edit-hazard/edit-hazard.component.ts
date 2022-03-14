@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-edit-hazard',
 	templateUrl: './edit-hazard.component.html',
@@ -34,8 +36,6 @@ export class EditHazardComponent implements OnInit {
 		this.logicalFormInfo
 			.updateHazards(data, this.dataRec._id)
 			.subscribe((resData) => {
-				console.log('resData', resData);
-
 				this.dialogRef.close('true');
 				Swal.fire({
 					title: 'Parameter Updated successfully',

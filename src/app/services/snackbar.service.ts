@@ -23,6 +23,8 @@ export class SnackbarService {
 	}
 }
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'selector-name',
 	template: `<span class="example-pizza-party"> test </span> `,

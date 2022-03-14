@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-set-relation',
 	templateUrl: './set-relation.component.html',
@@ -107,11 +109,10 @@ export class SetRelationComponent implements OnInit {
 		});
 
 		this.route.queryParams.subscribe((id) => {
-			console.log(id);
 			this.jobTaskId = id.id;
 			this.logicalFormInfo.getJobtaskById(id.id).subscribe((res: any) => {
 				this.jobTask = res.data;
-				console.log('this.jobTask ', this.jobTask);
+
 				this.getLicenceByTradeCat(this.jobTask.tradeCategoryId);
 
 				if (this.jobTask.set == true) {
@@ -156,7 +157,6 @@ export class SetRelationComponent implements OnInit {
 	}
 	getAllStaff() {
 		this.logicalFormInfo.getAllStaff().subscribe((res: any) => {
-			console.log(res);
 			this.staff = res.data;
 		});
 	}
@@ -178,7 +178,7 @@ export class SetRelationComponent implements OnInit {
 
 	getAllHazard() {
 		this.logicalFormInfo.getAllHazards().subscribe((res: any) => {
-			//   console.log('getAllHazards=>', res);
+			//
 			this.allHazards = (res.data as any[]).filter(
 				(x) => x.jobTaskId === this.jobTaskId || !x.jobTaskId
 			);
@@ -191,18 +191,14 @@ export class SetRelationComponent implements OnInit {
 				(x) => x.jobTaskId === this.jobTaskId || !x.jobTaskId
 			);
 			this.sendContrlActReq = this.allContrlActReq;
-			console.log('this.allContrlActReq =>> ', this.allContrlActReq);
 		});
 	}
 	getLicenceByTradeCat(id) {
-		console.log('getLicenceByTradeCat', id);
-
 		this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
 			this.licenceByTradecat = res.data.licenceData;
 		});
 	}
 	setRelation() {
-		console.log(this.JobTaskDetail.value);
 		const allContrlActReqTitle = [];
 		const temp1 = this.JobTaskDetail.get('contrActReq').value;
 		if (temp1 != null) {
@@ -253,8 +249,6 @@ export class SetRelationComponent implements OnInit {
 		const staffTitle = [];
 		const temp4 = this.JobTaskDetail.get('personResp').value;
 		if (temp4 != null) {
-			console.log(temp4);
-
 			this.staff.forEach((element1) => {
 				temp4.forEach((element2) => {
 					if (element1._id === element2) {
@@ -289,8 +283,6 @@ export class SetRelationComponent implements OnInit {
 			set: true
 		};
 
-		console.log('send data', data);
-
 		this.logicalFormInfo
 			.updateJobTask(data, this.jobTaskId)
 			.subscribe((res) => {
@@ -299,11 +291,10 @@ export class SetRelationComponent implements OnInit {
 						this.sendContrlActReq,
 						this.jobTaskId
 					)
-					.subscribe((res) => console.log(res));
+					.subscribe();
 				this.logicalFormInfo
 					.updateAllHazards(this.sendHazards, this.jobTaskId)
-					.subscribe((res) => console.log(res));
-				console.log('resJob Task=>', res);
+					.subscribe();
 
 				Swal.fire({
 					title: 'Relation set successfully',
@@ -392,7 +383,6 @@ export class SetRelationComponent implements OnInit {
 					break;
 				}
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	prev() {
@@ -414,7 +404,6 @@ export class SetRelationComponent implements OnInit {
 		}
 	}
 	handleClick(index) {
-		console.log(index);
 		this.count = index;
 		this.stepperList.map((x) => {
 			x.i = 0;
@@ -422,7 +411,6 @@ export class SetRelationComponent implements OnInit {
 		this.stepperList[this.count].i = 1;
 	}
 	contrActReqUpdateAll(event, id) {
-		console.log(event, id);
 		this.sendContrlActReq = this.allContrlActReq.slice().map((item) => {
 			if (event.value == item._id) {
 				if (event.selected) {
@@ -440,7 +428,6 @@ export class SetRelationComponent implements OnInit {
 	}
 
 	hazardsUpdateAll(event, id) {
-		console.log(event, id);
 		this.sendHazards = this.allHazards.slice().map((item) => {
 			if (event.value == item._id) {
 				if (event.selected) {

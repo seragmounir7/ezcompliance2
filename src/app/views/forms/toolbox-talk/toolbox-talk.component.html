@@ -539,11 +539,23 @@
 							</p>
 							<input
 								type="text"
+								[matAutocomplete]="empAuto"
 								class="form-control"
 								formControlName="employee"
 								[class.is-invalid]="attendee().controls[i].get('employee')?.hasError('required')
               && (attendee().controls[i].get('employee').dirty || attendee().controls[i].get('employee').touched) "
 							/>
+							<mat-autocomplete
+								#empAuto="matAutocomplete"
+								[displayWith]="displayFn"
+							>
+								<mat-option
+									*ngFor="let option of empObsArr$[i] | async ; let i = index "
+									[value]="option"
+								>
+									{{option.fullName}}
+								</mat-option>
+							</mat-autocomplete>
 							<span
 								*ngIf="
               attendee().controls[i].get('employee')?.hasError('required') && (attendee().controls[i].get('employee').dirty

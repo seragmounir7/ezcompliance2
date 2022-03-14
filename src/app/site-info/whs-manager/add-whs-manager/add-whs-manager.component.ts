@@ -6,6 +6,8 @@ import { LogicalFormInfoService } from 'src/app/utils/services/logical-form-info
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigation.service';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-whs-manager',
 	templateUrl: './add-whs-manager.component.html',
@@ -51,13 +53,11 @@ export class AddWhsManagerComponent implements OnInit {
 		}
 	}
 	onFormSubmit() {
-		console.log(this.WHSManagerDetails.get('arrObj').value);
 		const data = {
 			arrObj: this.WHSManagerDetails.get('arrObj').value
 		};
 		this.logicalFormInfo.addMultipleWHSManager(data).subscribe(
 			(data) => {
-				console.log('WHSManagerDetails=>', data);
 				Swal.fire({
 					title: 'WHSManager Detail Added successfully',
 					showConfirmButton: false,

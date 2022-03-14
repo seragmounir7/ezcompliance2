@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup } from '@angular/forms';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 import { MatSort, Sort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-licence-and-qual',
 	templateUrl: './licence-and-qual.component.html',
@@ -46,7 +48,6 @@ export class LicenceAndQualComponent implements OnInit {
 
 	getAllLicence(field = '', value = '') {
 		this.logicalFormInfo.getAllLicence(field, value).subscribe((res) => {
-			console.log('getAllLicence=>', res);
 			// this.jobTaskData = res.data[0].subComponents;
 			const data = res.data;
 			data.forEach((element, index) => {
@@ -65,17 +66,14 @@ export class LicenceAndQualComponent implements OnInit {
 			width: '550px',
 			data: element
 		});
-		console.log(element);
+
 		dialogRef.afterClosed().subscribe((result) => {
 			if (result == 'true') {
 				this.getAllLicence();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 	delete(item) {
-		console.log('delete', item);
-
 		Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to delete "${item.title}"?`,
@@ -94,7 +92,7 @@ export class LicenceAndQualComponent implements OnInit {
 							showConfirmButton: false,
 							timer: 1000
 						});
-						console.log('deleted res', res);
+
 						this.getAllLicence();
 					});
 			}

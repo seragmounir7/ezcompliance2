@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-contact-us',
 	templateUrl: './contact-us.component.html',
@@ -61,25 +63,16 @@ export class ContactUsComponent implements OnInit {
 		this.setTitle.setTitle('WHS-Contact Us');
 	}
 	view(data) {
-		console.log('dataView', data);
 		const dialogRef = this.dialog.open(ViewContactComponent, {
 			width: '800px',
 			data
 		});
 
-		dialogRef.afterClosed().subscribe((result) => {
-			console.log(
-				'ExpensesInfoComponent -> openDialog -> result',
-				result
-			);
-
-			console.log('The dialog was closed');
-		});
+		dialogRef.afterClosed().subscribe((result) => {});
 	}
 
 	getContact() {
 		this.url.getContact().subscribe((res) => {
-			console.log('mode=>', res);
 			const dataContact = res.data;
 			dataContact.forEach((element, index) => {
 				element.index = index + 1; //adding index
@@ -92,7 +85,6 @@ export class ContactUsComponent implements OnInit {
 	}
 
 	delete(item) {
-		console.log(item);
 		Swal.fire({
 			title: 'Are you sure?',
 			text: `Do you want to delete "${item.fullName}"?`,
@@ -103,11 +95,10 @@ export class ContactUsComponent implements OnInit {
 			confirmButtonText: 'Yes, Delete!'
 		}).then((result) => {
 			if (result.value) {
-				console.log(result);
 				void this.spinner.show();
 				this.url.deleteContactUs(item._id).subscribe((res) => {
 					Swal.fire('Deleted Successfully');
-					console.log('deleted res', res);
+
 					this.getContact();
 					this.ngOnInit();
 					void this.spinner.hide();

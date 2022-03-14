@@ -14,6 +14,8 @@ import { MatSort } from '@angular/material/sort';
 import { EditScreenShotComponent } from './edit-screen-shot/edit-screen-shot.component';
 import { AddScreenShotComponent } from './add-screen-shot/add-screen-shot.component';
 
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-screen-shot-module',
 	templateUrl: './screen-shot-module.component.html',
@@ -61,7 +63,6 @@ export class ScreenShotModuleComponent implements OnInit {
 	getScreenWork() {
 		this.mode = 'Screenshot';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((res) => {
-			console.log('Screenshot', res.data);
 			this.dataSource.data = res.data;
 			// this.ScreenData = res.data;
 			const ScreenData = res.data[0].subModules;
@@ -107,7 +108,7 @@ export class ScreenShotModuleComponent implements OnInit {
 		this.mode = 'Screenshot';
 		this.landingPageInfo.getAppServiceById(this.mode).subscribe((data) => {
 			this.ScreenData = data.data[0];
-			console.log(this.ScreenData);
+
 			const dialogRef = this.dialog.open(AddScreenShotComponent, {
 				data: {
 					action: 'new',
