@@ -44,23 +44,23 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 	) {}
 	ngAfterViewInit(): void {
 		this.authService.loginData$.subscribe((res) => {
-			if (res.designation !== Designation.clientAdmin) return;
+			if (res?.designation !== Designation.clientAdmin) return;
 			this.changeDetectorRef.detectChanges();
 
-			if (res.FirstLogin.step1 === false) {
+			if (res?.FirstLogin.step1 === false) {
 				this.stepper.selected.completed = true;
 				this.stepper.next();
 				// this.stepper.selectedIndex = 0;
 			}
-			if (res.FirstLogin.step2 === false) {
+			if (res?.FirstLogin.step2 === false) {
 				this.stepper.selected.completed = true;
 				this.stepper.next();
 			}
-			if (res.FirstLogin.step3 === false) {
+			if (res?.FirstLogin.step3 === false) {
 				this.stepper.selected.completed = true;
 				this.stepper.next();
 			}
-			if (res.FirstLogin.step4 === false) {
+			if (res?.FirstLogin.step4 === false) {
 				this.stepper.selected.completed = true;
 				this.stepper.next();
 			} else {
@@ -71,8 +71,8 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 
 	ngOnInit() {
 		this.authService.loginData$.subscribe((res) => {
-			if (res.designation === Designation.clientAdmin)
-				if (res.FirstLogin.step1) this.openDialog();
+			if (res?.designation === Designation.clientAdmin)
+				if (res?.FirstLogin.step1) this.openDialog();
 
 			this.userData = res;
 		});

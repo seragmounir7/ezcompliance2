@@ -232,7 +232,7 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		this.formsCount$ = this.authService.loginData$.pipe(
 			switchMap((res) => {
-				if (res.accessToken)
+				if (res.accessToken) {
 					switch (res.designation) {
 						case Designation.superAdmin:
 							return this.dashboardApiService.getFormCount();
@@ -240,8 +240,10 @@ export class DashboardComponent implements OnInit {
 							return this.dashboardApiService.getFormCount();
 						default:
 							return of({} as FormsCount);
-							break;
 					}
+				} else {
+					return of({} as FormsCount);
+				}
 			})
 		);
 		this.isUser$ = this.authService.isUser$;

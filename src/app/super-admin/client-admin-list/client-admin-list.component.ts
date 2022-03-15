@@ -93,7 +93,7 @@ export class ClientAdminListComponent implements OnInit {
 				//     map(res =>  new MatTableDataSource(res))
 				//   )
 				// }
-				switch (res.value) {
+				switch (res?.value) {
 					case TableDetails.clientList:
 						return this.superAuth
 							.getAllClientAdmin()

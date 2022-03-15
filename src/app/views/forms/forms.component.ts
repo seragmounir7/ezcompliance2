@@ -115,9 +115,9 @@ export class FormsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.authService.loginData$.subscribe((res) => {
-			if (res.designation === Designation.superAdmin)
+			if (res?.designation === Designation.superAdmin)
 				this.displayedColumns = ['index', 'formName', 'adminEdit'];
-			if (res.designation === Designation.user)
+			if (res?.designation === Designation.user)
 				this.displayedColumns = ['index', 'formName', 'edit'];
 		});
 

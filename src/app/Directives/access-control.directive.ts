@@ -35,7 +35,7 @@ export class AccessControlDirective {
 
 	ngOnInit() {
 		this.authService.loginData$.subscribe((res) => {
-			if (res.designation === Designation.user) {
+			if (res?.designation === Designation.user) {
 				this.viewContainer.clear();
 				this.role.accessArrObs$.subscribe((accessArr) => {
 					if (accessArr.length > 0) this.checkAccess(accessArr);
