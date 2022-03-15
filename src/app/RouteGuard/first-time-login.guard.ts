@@ -25,7 +25,7 @@ export class FirstTimeLoginGuard implements CanActivate {
 		| UrlTree {
 		return this.authService.loginData$.pipe(
 			map((res) => {
-				if (res?.accessToken && res.FirstLogin.firstLogin) {
+				if (res?.accessToken && res?.FirstLogin.firstLogin) {
 					return true;
 				} else {
 					return this.router.createUrlTree(['/admin']);

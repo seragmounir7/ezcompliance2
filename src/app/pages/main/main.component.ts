@@ -77,7 +77,7 @@ export class MainComponent implements OnInit, AfterViewInit {
 	toggleMenuSidebar() {
 		if (this.sidebarMenuOpened) {
 			this.authService.loginData$.subscribe((res) => {
-				if (res.designation === Designation.clientAdmin) {
+				if (res?.designation === Designation.clientAdmin) {
 					this.logoUrl = res.companyLogo;
 				} else {
 					this.logoUrl = 'sm-logo';
@@ -98,7 +98,7 @@ export class MainComponent implements OnInit, AfterViewInit {
 			this.sidebarMenuOpened = false;
 		} else {
 			this.authService.loginData$.subscribe((res) => {
-				if (res.designation === Designation.clientAdmin) {
+				if (res?.designation === Designation.clientAdmin) {
 					this.logoUrl = res.companyLogo;
 				} else {
 					this.logoUrl = 'logo';

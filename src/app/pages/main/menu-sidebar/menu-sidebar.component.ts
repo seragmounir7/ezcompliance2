@@ -58,17 +58,17 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		this.isUser$ = this.authService.isUser$;
 		this.userName$ = this.authService.loginData$.pipe(
 			map((res) =>
-				res.designation ===
+				res?.designation ===
 				(Designation.clientAdmin ||
-					res.designation === Designation.user)
+					res?.designation === Designation.user)
 					? res.username
 					: ''
 			)
 		);
 		this.authService.loginData$.subscribe((res) => {
 			if (
-				res.designation === Designation.clientAdmin ||
-				res.designation === Designation.user
+				res?.designation === Designation.clientAdmin ||
+				res?.designation === Designation.user
 			) {
 				this.logoUrl = res.companyLogo;
 			}
