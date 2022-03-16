@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
 			// }, 2000);
 		}
 		if (event instanceof NavigationEnd) {
-			// this.spinner.hide();
+			this.spinner.hide();
 		}
 
 		// Set loading state .hide() in both of the below events to hide the spinner in case a request fails
