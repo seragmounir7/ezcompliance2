@@ -174,6 +174,11 @@ const routes: Routes = [
 		canActivate: [NonAuthGuard]
 	},
 	{
+		path: 'resetPassword/:email',
+		component: ResetPasswordComponent,
+		canActivate: [NonAuthGuard]
+	},
+	{
 		path: 'forgotPassword',
 		component: ForgotPasswordComponent,
 		canActivate: [NonAuthGuard]

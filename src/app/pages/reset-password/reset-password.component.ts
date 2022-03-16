@@ -72,8 +72,8 @@ export class ResetPasswordComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.activatedRoute.queryParams.subscribe(
-			(res) => (this.email = res['email'])
+		this.activatedRoute.params.subscribe(
+			(res) => (this.email = atob(res['email']))
 		);
 		this.renderer.addClass(
 			document.querySelector('app-root'),
