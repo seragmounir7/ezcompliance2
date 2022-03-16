@@ -44,6 +44,6 @@ export class AddTermsAndConditionsComponent implements OnInit {
 			);
 	}
 	onFormSubmit() {
-		this.dialogRef.close('false');
+		this.dialogRef.close(true);
 	}
 }

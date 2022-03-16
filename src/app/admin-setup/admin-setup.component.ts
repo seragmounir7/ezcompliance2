@@ -34,6 +34,7 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 	updatedSuccessFull: boolean;
 	isRoleInvaid: boolean;
 	isEmpRegInvalid: boolean;
+	closed: boolean = false;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -72,7 +73,7 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		this.authService.loginData$.subscribe((res) => {
 			if (res?.designation === Designation.clientAdmin)
-				if (res?.FirstLogin.step1) this.openDialog();
+				if (res?.FirstLogin.step1 && !this.closed) this.openDialog();
 
 			this.userData = res;
 		});
@@ -122,8 +123,11 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 	}
 	openDialog() {
 		try {
-			this.dialog.open(AddTermsAndConditionsComponent, {
+			const dbModal = this.dialog.open(AddTermsAndConditionsComponent, {
 				disableClose: true
+			});
+			dbModal.afterClosed().subscribe((res) => {
+				this.closed = res;
 			});
 		} catch (error) {
 			console.error(error);
