@@ -20,6 +20,7 @@ import {
 import { accessType, FormName } from 'src/app/side-nav-access.enum';
 import { ResponceBody } from '../types/ResponceBody';
 import { FormGroup } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -32,7 +33,7 @@ export class RoleManagementService {
 	>([]);
 	public accessArrObs$ = this.accessSubject.asObservable();
 
-	constructor(private https: HttpClient) {}
+	constructor(private https: HttpClient, private authService: AuthService) {}
 
 	accessArrNext(data: AccessArr[]) {
 		this.accessSubject.next(data);
@@ -115,6 +116,7 @@ export class RoleManagementService {
 			.get<ResponceBody<AccessValue>>(
 				this.apiUrl +
 					'authentication/get/user/access/by/' +
+					this.authService.loginData.id ||
 					sessionStorage.getItem('id')
 			)
 			.pipe(

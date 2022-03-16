@@ -33,10 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 			catchError((err) => {
 				if (err instanceof HttpErrorResponse) {
 					const url = request;
-					console.log(
-						'🚀 ~ file: error.interceptor.ts ~ line 36 ~ ErrorInterceptor ~ catchError ~ url',
-						url
-					);
+
 					switch (err.status) {
 						case HttpError.BadRequest:
 							this.toast.error('400 Bad Request');

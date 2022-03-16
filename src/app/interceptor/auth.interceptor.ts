@@ -20,9 +20,13 @@ export class AuthInterceptor implements HttpInterceptor {
 		const id: string = this.authService.loginData?.id
 			? this.authService.loginData.id
 			: null;
-		switch (sessionStorage.getItem('role')) {
+		switch (
+			this.authService.loginData.designation ||
+			sessionStorage.getItem('role')
+		) {
 			case Designation.clientAdmin:
 				role = 'clientAdminId';
+				break;
 			case Designation.user:
 				role = 'userId';
 				break;

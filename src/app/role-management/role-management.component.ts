@@ -25,7 +25,7 @@ export class RoleManagementComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.authService.loginData$
-			.pipe(map((res) => res.employeePurchased))
+			.pipe(map((res) => res?.employeePurchased))
 			.subscribe((res) => (this.employeePurchased = res));
 		this.setTitle.setTitle('WHS-Role Management');
 	}

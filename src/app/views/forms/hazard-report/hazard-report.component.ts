@@ -754,7 +754,6 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	setSupervisorEmail(e) {
-		console.log(e);
 		const val = this.empData.find((item) => e.target.value === item._id);
 		this.hazardReport.controls.managerSupervisorEmail.setValue(val.email);
 	}
