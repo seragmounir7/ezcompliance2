@@ -3,6 +3,7 @@ import { AuthService } from './utils/services/auth.service';
 import {
 	Component,
 	HostListener,
+	Injector,
 	OnInit,
 	Renderer2,
 	ViewChild
@@ -19,6 +20,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NavigationService } from './services/navigation.service';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { setAppInjector } from './app-injector';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-root',
@@ -43,8 +45,11 @@ export class AppComponent implements OnInit {
 		private authService: AuthService,
 		private sessionManagementService: SessionManagementService,
 		private renderer: Renderer2,
-		private navigationService: NavigationService
+		private navigationService: NavigationService,
+		injector: Injector
 	) {
+		setAppInjector(injector);
+
 		router.events.subscribe((event: RouterEvent) => {
 			this.navigationInterceptor(event);
 		});
@@ -65,7 +70,7 @@ export class AppComponent implements OnInit {
 			// }, 2000);
 		}
 		if (event instanceof NavigationEnd) {
-			this.spinner.hide();
+			// this.spinner.hide();
 		}
 
 		// Set loading state .hide() in both of the below events to hide the spinner in case a request fails

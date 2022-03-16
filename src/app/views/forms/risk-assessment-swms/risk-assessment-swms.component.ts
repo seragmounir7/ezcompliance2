@@ -48,12 +48,14 @@ import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { StopSpinner } from 'src/app/stop-spinner-after-view-init';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-risk-assessment-swms',
 	templateUrl: './risk-assessment-swms.component.html',
 	styleUrls: ['./risk-assessment-swms.component.scss']
 })
+@StopSpinner()
 export class RiskAssessmentSWMSComponent
 	implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChildren(MatCheckbox) jobTaskMatCheckBox: QueryList<MatCheckbox>;
@@ -1323,10 +1325,6 @@ export class RiskAssessmentSWMSComponent
 		}
 		this.logicalFormInfo.getAllJobNumber().subscribe((res) => {
 			this.allJobNumbers = res.data as ModifiedJobNumber[];
-			console.log(
-				'🚀 ~ file: risk-assessment-swms.component.ts ~ line 1326 ~ this.logicalFormInfo.getAllJobNumber ~ this.allJobNumbers',
-				this.allJobNumbers
-			);
 		});
 	}
 	getAllStaff(data = []) {

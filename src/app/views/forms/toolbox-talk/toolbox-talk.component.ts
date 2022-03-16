@@ -294,6 +294,10 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	addAttendee() {
 		this.attendee().push(this.attendeeForm());
 		this.empObsArr$ = new Array<Observable<any>>();
+		this.valueChangesAutocomplete();
+		this.disableForm();
+	}
+	private valueChangesAutocomplete() {
 		for (let index = 0; index < this.attendee().length; index++) {
 			const element = this.attendee().at(index) as FormGroup;
 			this.empObsArr$.push(
@@ -319,8 +323,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 				)
 			);
 		}
-		this.disableForm();
 	}
+
 	attendee(): FormArray {
 		return this.toolBox.get('attendees') as FormArray;
 	}
@@ -456,10 +460,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			enable: this.enable,
 			frequency: this.frequency
 		};
-		console.log(
-			'🚀 ~ file: toolbox-talk.component.ts ~ line 450 ~ ToolboxTalkComponent ~ onSave ~ data',
-			data
-		);
+
 		if (this.id !== 'form') {
 			this.logicalFormInfo.editToolBox(this.id, data).subscribe((res) => {
 				Swal.fire({
@@ -485,6 +486,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	getAllStaff() {
 		this.employee.getAllEmployeeInfo().subscribe((res) => {
 			this.staff = res;
+			this.empObsArr$ = new Array<Observable<any>>();
+			this.valueChangesAutocomplete();
 		});
 	}
 	private _filter(name: string): any[] {

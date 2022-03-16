@@ -781,10 +781,7 @@ export class IncidentReportComponent
 				this.ppeAdd().push(this.ppeAction(i));
 				this.disableForm();
 			}
-			console.log(
-				'🚀 ~ file: incident-report.component.ts ~ line 743 ~ this.logicalFormInfo.getIncidentReportById ~ res.data.personCompletingForm',
-				res.data.personCompletingForm
-			);
+
 			this.IncidentReport.patchValue({
 				// projectName: res.data.projectName,
 				siteName: res.data.siteName,
@@ -971,10 +968,6 @@ export class IncidentReportComponent
 			enable: this.enable,
 			frequency: this.frequency
 		};
-		console.log(
-			'🚀 ~ file: incident-report.component.ts ~ line 911 ~ onSubmit ~ data',
-			data
-		);
 
 		if (this.id !== 'Form') {
 			this.logicalFormInfo.updateIncidentReport(this.id, data).subscribe(

@@ -14,7 +14,9 @@
 	>
 		<ng-container matColumnDef="companyName">
 			<th mat-header-cell *matHeaderCellDef>Company Name</th>
-			<td mat-cell *matCellDef="let element">{{element.companyName}}</td>
+			<td mat-cell *matCellDef="let element">
+				{{element.companydetail[0].companyName}}
+			</td>
 		</ng-container>
 
 		<ng-container matColumnDef="isEmailVerified">

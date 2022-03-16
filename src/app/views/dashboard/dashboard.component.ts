@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
@@ -18,12 +18,14 @@ import {
 } from 'src/app/utils/services/dashboard-api.service';
 import { Designation } from 'src/app/utils/types/Designation.enum';
 import { switchMap } from 'rxjs/operators';
+import { StopSpinner } from 'src/app/stop-spinner-after-view-init';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
+@StopSpinner()
 export class DashboardComponent implements OnInit {
 	// Doughnut
 
