@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			? this.authService.loginData.id
 			: null;
 		switch (
-			this.authService.loginData.designation ||
+			this.authService.loginData?.designation ||
 			sessionStorage.getItem('role')
 		) {
 			case Designation.clientAdmin:
