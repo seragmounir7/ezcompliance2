@@ -27,15 +27,15 @@
 			</table>
 		</div>
 
-		<div class="col-md-8" *ngIf="formsCount$| async as formObj">
+		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="flex-container">
 						<div class="small-box bg-warning">
 							<div class="inner">
 								<b
-									>{{formObj.nearMissCount||'No Data
-									Found'}}</b
+									>{{(this.cards$| async).nearMissCount||'No
+									DataFound'}}</b
 								>
 								<h5>Near Miss</h5>
 							</div>
@@ -47,8 +47,8 @@
 						<div class="small-box bg-teal">
 							<div class="inner">
 								<b
-									>{{formObj.firstAidCount||'No Data
-									Found'}}</b
+									>{{(this.cards$| async).firstAidCount||'No
+									Data Found'}}</b
 								>
 								<h5>First Aid Treatments</h5>
 							</div>
@@ -63,7 +63,8 @@
 						>
 							<div class="inner">
 								<b
-									>{{formObj.medicalTreatmentCount||'No Data
+									>{{(this.cards$|
+									async).medicalTreatmentCount||'No Data
 									Found'}}</b
 								>
 								<h5>Medical Treatments</h5>
@@ -79,7 +80,8 @@
 						>
 							<div class="inner">
 								<b
-									>{{formObj.lostTimeInjuryCount||'No Data
+									>{{(this.cards$|
+									async).lostTimeInjuryCount||'No Data
 									Found'}}</b
 								>
 								<h5>Lost Time Injury</h5>
@@ -92,8 +94,8 @@
 						<div class="small-box bg-orange">
 							<div class="inner">
 								<b
-									>{{formObj.deathDataCount||'No Data
-									Found'}}</b
+									>{{(this.cards$| async).deathDataCount||'No
+									Data Found'}}</b
 								>
 								<h5>Death</h5>
 							</div>
@@ -113,7 +115,8 @@
 						>
 							<div class="inner">
 								<b
-									>{{formObj.riskAssessmentResult||'No Data
+									>{{(this.cards$|
+									async).riskAssessmentResult||'No Data
 									Found'}}</b
 								>
 								<h5>Risk Assessments</h5>
@@ -125,7 +128,8 @@
 						<div class="small-box bg-warning">
 							<div class="inner">
 								<b
-									>{{formObj.riskAssessmentResult||'No Data
+									>{{(this.cards$|
+									async).riskAssessmentResult||'No Data
 									Found'}}</b
 								>
 								<h5>SWMS</h5>
@@ -137,8 +141,8 @@
 						<div class="small-box bg-danger">
 							<div class="inner">
 								<b
-									>{{formObj.toolBoxResult||'No Data
-									Found'}}</b
+									>{{(this.cards$| async).toolBoxResult||'No
+									Data Found'}}</b
 								>
 								<h5>Tool Box Talks</h5>
 							</div>
@@ -149,7 +153,8 @@
 						<div class="small-box bg-cyan">
 							<div class="inner">
 								<b
-									>{{formObj.siteInspectionResult||'No Data
+									>{{(this.cards$|
+									async).siteInspectionResult||'No Data
 									Found'}}</b
 								>
 								<h5>Incident Reports</h5>
@@ -163,7 +168,10 @@
 							style="background-color: #737ca1; color: #fff"
 						>
 							<div class="inner">
-								<b>{{formObj.hazardResult||'No Data Found'}}</b>
+								<b
+									>{{(this.cards$| async).hazardResult||'No
+									Data Found'}}</b
+								>
 								<h5>Hazard Reports</h5>
 							</div>
 							<div class="icon">

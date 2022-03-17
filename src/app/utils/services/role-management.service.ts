@@ -56,8 +56,8 @@ export class RoleManagementService {
 	deleteRole(id) {
 		return this.https.delete(this.apiUrl + 'role/delete/' + id);
 	}
-	getAllRole(): Observable<ResponceBody<RoleValue>> {
-		return this.https.get<ResponceBody<RoleValue>>(
+	getAllRole(): Observable<ResponceBody<RoleValue[]>> {
+		return this.https.get<ResponceBody<RoleValue[]>>(
 			this.apiUrl + 'role/getAll'
 		);
 	}
@@ -85,9 +85,9 @@ export class RoleManagementService {
 		return user && user.role ? user.role : '';
 	}
 
-	getAllAcess(): Observable<ResponceBody<AccessValue>> {
+	getAllAcess(): Observable<ResponceBody<AccessValue[]>> {
 		return this.https
-			.get<ResponceBody<AccessValue>>(this.apiUrl + 'access/getAll')
+			.get<ResponceBody<AccessValue[]>>(this.apiUrl + 'access/getAll')
 			.pipe(
 				map((res) => {
 					res.data = res.data.map((item) => {

@@ -1,23 +1,19 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { Observable, of } from 'rxjs';
-interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable: boolean;
-}
 import { UntilDestroy } from '@ngneat/until-destroy';
 import {
-	DashboardApiService,
-	FormsCount
+	BarChart,
+	Cards,
+	CountData,
+	DashboardApiService
 } from 'src/app/utils/services/dashboard-api.service';
 import { Designation } from 'src/app/utils/types/Designation.enum';
-import { switchMap } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { StopSpinner } from 'src/app/stop-spinner-after-view-init';
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -134,20 +130,24 @@ export class DashboardComponent implements OnInit {
 		'Location7'
 	];
 
-	public barChartLabels1: Label[] = [
-		// new DashBoard
-		'Abrasion',
-		'Amputation',
-		'Broken Bone',
-		'Bruise',
-		'Burn',
-		'Crushing Injury',
-		'Cuts',
-		'Head Injury',
-		'Hernia',
-		'Illness',
-		'Other'
-	];
+	public barChartLabels1: Label[] = [];
+	public barChartData1: ChartDataSets[] = [];
+	set barChardData(value: BarChart) {
+		this.barChartLabels1 = Object.keys(value).map((label) =>
+			label
+				.split(/(?=[A-Z])/)
+				.filter((count) => count.toLowerCase() !== 'count')
+				.join(' ')
+				.toUpperCase()
+		);
+		this.barChartData1 = [
+			{
+				label: 'Type of Injuries',
+				data: Object.entries(value).map((x) => x[1] as number)
+			}
+		];
+	}
+
 	public barChartType: ChartType = 'bar';
 	public barChartType1: ChartType = 'bar';
 	public barChartLegend = true;
@@ -159,11 +159,6 @@ export class DashboardComponent implements OnInit {
 		{ data: [55, 59, 80, 81, 56, 55, 40], label: 'Near miss' },
 		{ data: [28, 48, 40, 19, 86, 27, 90], label: 'Incident' },
 		{ data: [18, 28, 20, 49, 36, 37, 50], label: 'Hazard' }
-	];
-
-	public barChartData1: ChartDataSets[] = [
-		// new DashBoard
-		{ data: [10, 0, 1, 10, 2, 1, 7, 1, 1, 1, 3], label: 'Type of Injuries' }
 	];
 
 	////horizontal chart
@@ -181,7 +176,8 @@ export class DashboardComponent implements OnInit {
 	];
 	formShow: any;
 	isUser$: Observable<boolean>;
-	formsCount$: Observable<FormsCount>;
+	formsCount$: Observable<CountData>;
+	cards$: Observable<Cards>;
 
 	// events
 	public chartClicked({
@@ -199,32 +195,6 @@ export class DashboardComponent implements OnInit {
 		event: MouseEvent;
 		active: {}[];
 	}): void {}
-
-	///AGM angular google map
-
-	title = 'My first AGM project';
-	lat = 51.678418;
-	lng = 7.809007;
-	markers: marker[] = [
-		{
-			lat: 51.673858,
-			lng: 7.815982,
-			label: 'A',
-			draggable: true
-		},
-		{
-			lat: 51.373858,
-			lng: 7.215982,
-			label: 'B',
-			draggable: false
-		},
-		{
-			lat: 51.723858,
-			lng: 7.895982,
-			label: 'C',
-			draggable: true
-		}
-	];
 	constructor(
 		private spinner: NgxSpinnerService,
 		private authService: AuthService,
@@ -240,14 +210,24 @@ export class DashboardComponent implements OnInit {
 							return this.dashboardApiService.getFormCount();
 						case Designation.clientAdmin:
 							return this.dashboardApiService.getFormCount();
+						case Designation.user:
+							return this.dashboardApiService.getFormCount();
 						default:
-							return of({} as FormsCount);
+							return of({} as CountData);
 					}
 				} else {
-					return of({} as FormsCount);
+					return of({} as CountData);
 				}
 			})
 		);
+		this.cards$ = this.formsCount$.pipe(
+			map((res) => {
+				this.barChardData = res.barChart;
+				return res.cards;
+			}),
+			shareReplay()
+		);
+		this.formsCount$ = this.formsCount$.pipe(shareReplay());
 		this.isUser$ = this.authService.isUser$;
 		void this.spinner.show();
 		setTimeout(() => {
