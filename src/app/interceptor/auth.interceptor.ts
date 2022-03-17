@@ -56,7 +56,10 @@ export class AuthInterceptor implements HttpInterceptor {
 		request = request.clone({
 			setHeaders: {
 				// eslint-disable-next-line @typescript-eslint/naming-convention
-				Authorization: `${sessionStorage.getItem('accessToken')}`
+				Authorization: `${
+					this.authService?.loginData?.accessToken ||
+					sessionStorage.getItem('accessToken')
+				}`
 			},
 			body
 		});

@@ -16,6 +16,7 @@
 		"esModuleInterop": true
 	},
 	"angularCompilerOptions": {
+		"enableIvy": true,
 		"strictTemplates": false,
 		"fullTemplateTypeCheck": false,
 		"strictInjectionParameters": true,
