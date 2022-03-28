@@ -47,6 +47,7 @@ import { CustomValidators } from 'src/app/custom-validators';
 import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
+import { Action } from 'src/app/utils/types/HazardTypes';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -92,7 +93,14 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		procedureRemoveAction: null,
 		PPEAction: null
 	};
-	ActionedbyStrings: string[];
+	ActionedbyStrings: string[] = [
+		'elliminateAction',
+		'substituteAction',
+		'isolatedAction',
+		'solutionAction',
+		'procedureRemoveAction',
+		'PPEAction'
+	];
 	uploadFile: any;
 	returnTo: Observable<string>;
 	doesQueryMobilExists: boolean;
@@ -164,25 +172,25 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			managerSupervisorEmail: [''],
 			whsManagerEmail: [''],
 			action: [''],
-			eliminateHazard: [''],
-			eliminateCorrect: [''],
-			elliminateAction: [''],
-			eliminateWhen: [new Date()],
+			// eliminateHazard: [''],
+			// eliminateCorrect: [''],
+			elliminateAction: this.correctiveActionFG(),
+			// eliminateWhen: [new Date()],
 			substituteCorrect: [''],
-			substituteAction: [''],
+			substituteAction: this.correctiveActionFG(),
 			substituteWhen: [new Date()],
 			isolatedCorrect: [''],
-			isolatedAction: [''],
+			isolatedAction: this.correctiveActionFG(),
 			isolatedWhen: [new Date()],
 			solutionCorrect: [''],
-			solutionAction: [''],
+			solutionAction: this.correctiveActionFG(),
 			solutionWhen: [new Date()],
 			procedureRemove: [new Date()],
 			procedureRemoveCorrect: [''],
-			procedureRemoveAction: [''],
+			procedureRemoveAction: this.correctiveActionFG(),
 			procedureRemoveWhen: [''],
 			PPECorrect: [''],
-			PPEAction: [''],
+			PPEAction: this.correctiveActionFG(),
 			PPEWhen: [new Date()],
 			fileUpload: [''],
 			complete: [''],
@@ -197,6 +205,15 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			eliminateHazardAction: ['']
 		});
 	}
+	private correctiveActionFG(): any {
+		return this.fb.group({
+			action: [''],
+			personRes: [{ fullname: '' }],
+			date: [''],
+			completed: [false]
+		});
+	}
+
 	async disableForm() {
 		if (this.isHistory) {
 			this.hazardReport.disable();
@@ -260,21 +277,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 					fullName ? this._filter(fullName) : this.empData.slice()
 				)
 			);
-			this.ActionedbyStrings = [
-				'elliminateAction',
-				'substituteAction',
-				'isolatedAction',
-				'solutionAction',
-				'procedureRemoveAction',
-				'PPEAction'
-			];
-			// this.obj = new Object()
 			this.ActionedbyStrings.forEach((ctrlName) => {
-				const filter = this.hazardReport.controls[
+				const filter = (this.hazardReport.controls[
 					ctrlName
-				].valueChanges.pipe(
-					startWith(''),
-					debounceTime(400),
+				] as FormGroup).controls['personRes'].valueChanges.pipe(
+					startWith({ fullName: '' }),
 					map((value) =>
 						typeof value === 'string' ? value : value?.fullName
 					),
@@ -400,8 +407,21 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	getHazardByid(id) {
-		this.url.getHazardFormDataById(id).subscribe((res: any) => {
+		this.url.getHazardFormDataById(id).subscribe((res) => {
+			this.ActionedbyStrings.forEach((value) => {
+				(res.data[value] as Action).personRes = this.empData.find(
+					(item) =>
+						item._id ===
+						((res.data[value] as Action).personRes as string)
+				);
+				console.log((res.data[value] as Action).personRes);
+			});
 			this.hazardReport.patchValue(res.data);
+			// res.data.PPEAction.personRes
+			// res.data.isolatedAction
+			// res.data.solutionAction
+			// res.data.eliminateHazardAction
+			// res.data.procedureRemoveAction
 			this.hazardReport.patchValue({
 				// myControlManager: res.data.myControlManager,
 				// employeeParttime: res.data.employeeParttime,
@@ -754,7 +774,14 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	setSupervisorEmail(e) {
-		const val = this.empData.find((item) => e.target.value === item._id);
+		const val = this.empData.find((item) => {
+			console.log(
+				typeof e.target.value,
+				typeof item._id,
+				e.target.value === item._id
+			);
+			return e.target.value === item._id;
+		});
 		this.hazardReport.controls.managerSupervisorEmail.setValue(val.email);
 	}
 

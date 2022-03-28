@@ -106,7 +106,7 @@ export class NavItems {
 				// 	hasAccess: true
 				// },
 				{
-					displayedName: 'Client Terms And Conditon ',
+					displayedName: 'Acknowledgement and Acceptance',
 					icon: 'terms',
 					route: './setting/termsAndcondition',
 					hasAccess: true
@@ -526,6 +526,12 @@ export class NavItems {
 					displayedName: 'Roles',
 					icon: 'roles',
 					route: './roleMangement',
+					hasAccess: true
+				},
+				{
+					displayedName: 'Department',
+					icon: 'roles',
+					route: './department',
 					hasAccess: true
 				},
 				{

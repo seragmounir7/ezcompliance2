@@ -21,18 +21,18 @@ export class SpinnerInterceptor implements HttpInterceptor {
 	): Observable<HttpEvent<unknown>> {
 		//
 
-		void this.spinner.show();
+		void this.spinner.show('apiSpinner');
 		return next.handle(request).pipe(
 			map((event: HttpEvent<unknown>) => {
 				if (event instanceof HttpResponse) {
 					//
-					void this.spinner.hide();
+					void this.spinner.hide('apiSpinner');
 				}
 				return event;
 			}),
 			catchError((err: HttpErrorResponse) => {
 				if (err) {
-					void this.spinner.hide();
+					void this.spinner.hide('apiSpinner');
 				}
 				return throwError(err);
 			})

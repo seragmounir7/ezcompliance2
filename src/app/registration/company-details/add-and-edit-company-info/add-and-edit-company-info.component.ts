@@ -91,7 +91,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 				'',
 				[Validators.required, CustomValidators.PhoneNumberValidator()]
 			],
-			fax: ['', CustomValidators.PhoneNumberValidator()],
+			fax: [''],
 			emailAddress: ['', Validators.required],
 			streetAddress: ['', Validators.required],
 			subUrb: ['', Validators.required],
@@ -102,7 +102,7 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			mailingState: ['', Validators.required],
 			mailingSubUrb: ['', Validators.required],
 			companyABN: ['', Validators.required],
-			licenceNumber: ['', Validators.required],
+			licenceNumber: [''],
 			companyWeb: ['', Validators.required],
 			isMailingAddress: [null, Validators.required],
 			companyLogo: [''],

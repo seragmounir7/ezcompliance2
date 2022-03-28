@@ -144,13 +144,13 @@
 							Department is required
 						</span>
 						<mat-autocomplete
-							[displayWith]="displayFnRole"
+							[displayWith]="displayFnDepartmentName"
 							#porfDepartment="matAutocomplete"
 						>
 							<mat-option
 								*ngFor="let item of porfDepartment$ | async as list"
 								[value]="item"
-								>{{item.role}}</mat-option
+								>{{item.departmentName}}</mat-option
 							>
 						</mat-autocomplete>
 					</div>

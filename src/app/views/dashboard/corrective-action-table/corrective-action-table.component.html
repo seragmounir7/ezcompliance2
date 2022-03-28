@@ -1,0 +1,103 @@
+<div class="btn btn-outline-primary" backbutton>
+	<i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
+
+<div class="col ml-2 pt-3">
+	<h1>Corrective Actions</h1>
+</div>
+<div class=" ">
+	<table mat-table [dataSource]="correctiveActions$|async" matSort>
+		<!-- Position Column -->
+		<ng-container matColumnDef="item">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>item</th>
+			<td mat-cell *matCellDef="let element">{{element.item}}</td>
+		</ng-container>
+		<ng-container matColumnDef="action">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+			<td mat-cell *matCellDef="let element;let i=index">
+				{{element.action}}
+			</td>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="personRes">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Person Responsible
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.personRes.fullName}}
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="date">
+			<th mat-header-cell *matHeaderCellDef>Date</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.date | date:'medium'}}
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="completed">
+			<th mat-header-cell *matHeaderCellDef>Completed</th>
+			<td mat-cell *matCellDef="let element;let i = index">
+				<select
+					[disabled]="element.completed"
+					(change)="updateCorrectiveAction(element,i)"
+				>
+					<option value="" disabled>Select Option</option>
+					<option
+						value="true"
+						#yes
+						[selected]="element.completed.toString() === yes.value"
+					>
+						Yes
+					</option>
+					<option
+						value="false"
+						#no
+						[selected]="element.completed.toString() === no.value "
+					>
+						no
+					</option>
+				</select>
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="email">
+			<th mat-header-cell *matHeaderCellDef>Email</th>
+			<td mat-cell *matCellDef="let element">{{element.custEmail}}</td>
+		</ng-container>
+		<ng-container matColumnDef="site">
+			<th mat-header-cell *matHeaderCellDef>Site Name</th>
+			<td mat-cell *matCellDef="let element">{{element.siteName}}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="updatedAt">
+			<th mat-header-cell *matHeaderCellDef>Updated Date</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.updatedAt | date:'medium'}}
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="createdTime">
+			<th mat-header-cell *matHeaderCellDef>Created Date</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.createdTime | date:'medium'}}
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="updatedTime">
+			<th mat-header-cell *matHeaderCellDef>Updated Date</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.updatedTime | date:'medium'}}
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		<tr class="mat-row" *matNoDataRow>
+			<td class="mat-cell" colspan="4">Data Not Found</td>
+		</tr>
+	</table>
+
+	<mat-paginator
+		[pageSizeOptions]="[20]"
+		showFirstLastButtons
+		aria-label="Select page of periodic elements"
+	>
+	</mat-paginator>
+</div>

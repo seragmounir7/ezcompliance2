@@ -34,7 +34,7 @@
 						<div class="small-box bg-warning">
 							<div class="inner">
 								<b
-									>{{(this.cards$| async).nearMissCount||'No
+									>{{(this.cards$| async)?.nearMissCount||'No
 									DataFound'}}</b
 								>
 								<h5>Near Miss</h5>
@@ -47,7 +47,7 @@
 						<div class="small-box bg-teal">
 							<div class="inner">
 								<b
-									>{{(this.cards$| async).firstAidCount||'No
+									>{{(this.cards$| async)?.firstAidCount||'No
 									Data Found'}}</b
 								>
 								<h5>First Aid Treatments</h5>
@@ -64,7 +64,7 @@
 							<div class="inner">
 								<b
 									>{{(this.cards$|
-									async).medicalTreatmentCount||'No Data
+									async)?.medicalTreatmentCount||'No Data
 									Found'}}</b
 								>
 								<h5>Medical Treatments</h5>
@@ -81,7 +81,7 @@
 							<div class="inner">
 								<b
 									>{{(this.cards$|
-									async).lostTimeInjuryCount||'No Data
+									async)?.lostTimeInjuryCount||'No Data
 									Found'}}</b
 								>
 								<h5>Lost Time Injury</h5>
@@ -94,7 +94,7 @@
 						<div class="small-box bg-orange">
 							<div class="inner">
 								<b
-									>{{(this.cards$| async).deathDataCount||'No
+									>{{(this.cards$| async)?.deathDataCount||'No
 									Data Found'}}</b
 								>
 								<h5>Death</h5>
@@ -116,7 +116,7 @@
 							<div class="inner">
 								<b
 									>{{(this.cards$|
-									async).riskAssessmentResult||'No Data
+									async)?.riskAssessmentResult||'No Data
 									Found'}}</b
 								>
 								<h5>Risk Assessments</h5>
@@ -129,7 +129,7 @@
 							<div class="inner">
 								<b
 									>{{(this.cards$|
-									async).riskAssessmentResult||'No Data
+									async)?.riskAssessmentResult||'No Data
 									Found'}}</b
 								>
 								<h5>SWMS</h5>
@@ -141,7 +141,7 @@
 						<div class="small-box bg-danger">
 							<div class="inner">
 								<b
-									>{{(this.cards$| async).toolBoxResult||'No
+									>{{(this.cards$| async)?.toolBoxResult||'No
 									Data Found'}}</b
 								>
 								<h5>Tool Box Talks</h5>
@@ -154,7 +154,7 @@
 							<div class="inner">
 								<b
 									>{{(this.cards$|
-									async).siteInspectionResult||'No Data
+									async)?.siteInspectionResult||'No Data
 									Found'}}</b
 								>
 								<h5>Incident Reports</h5>
@@ -169,7 +169,7 @@
 						>
 							<div class="inner">
 								<b
-									>{{(this.cards$| async).hazardResult||'No
+									>{{(this.cards$| async)?.hazardResult||'No
 									Data Found'}}</b
 								>
 								<h5>Hazard Reports</h5>
@@ -191,20 +191,54 @@
 						<th colspan="4" class="text-center">
 							Corrective Actions
 						</th>
+						<th colspan="1" class="text-center">
+							<button
+								mat-icon-button
+								tooltip="All Corrective Action"
+								[routerLink]="['correctiveAction']"
+								routerLinkActive="router-link-active"
+							>
+								<mat-icon>list</mat-icon>
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<th>Item</th>
 						<th>Action</th>
 						<th>Person Responsible</th>
 						<th>Due Date</th>
+						<th>Completed</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let a of corrAct">
+					<tr *ngFor="let a of (correctiveAction$|async) ">
 						<td>{{a.Item}}</td>
-						<td>{{a.Action}}</td>
-						<td>{{a.personResposibility}}</td>
-						<td>{{a.date}}</td>
+						<td>{{a.action}}</td>
+						<td>{{a.personRes.fullName}}</td>
+						<td>{{a.date | date:'medium'}}</td>
+						<td>
+							<select
+								[disabled]="a.completed"
+								[value]="a.completed"
+								(change)="updateCorrectiveAction(a)"
+							>
+								<option value="" disabled>Select Option</option>
+								<option
+									[value]="true"
+									#yes
+									[selected]="a.completed.toString() === yes.value"
+								>
+									Yes
+								</option>
+								<option
+									[value]="false"
+									#no
+									[selected]="a.completed.toString() === no.value "
+								>
+									No
+								</option>
+							</select>
+						</td>
 					</tr>
 				</tbody>
 			</table>

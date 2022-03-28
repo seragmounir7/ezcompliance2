@@ -479,9 +479,9 @@
 								[matDatepicker]="datepicker2"
 								[min]="minDate"
 								class="form-control"
-								formControlName="complete"
-								[class.is-invalid-date]="correctAct().at(i).get('complete')?.hasError('required')
-           && (correctAct().at(i).get('complete').dirty || correctAct().at(i).get('complete').touched) "
+								formControlName="date"
+								[class.is-invalid-date]="correctAct().at(i).get('date')?.hasError('required')
+           && (correctAct().at(i).get('date').dirty || correctAct().at(i).get('date').touched) "
 								placeholder="dd-mm-yyyy"
 							/>
 							<mat-datepicker-toggle
@@ -490,8 +490,8 @@
 							></mat-datepicker-toggle>
 							<mat-datepicker #datepicker2></mat-datepicker>
 							<span
-								*ngIf=" correctAct().at(i).get('complete')?.hasError('required') && (correctAct().at(i).get('complete').dirty
-          || correctAct().at(i).get('complete').touched)"
+								*ngIf=" correctAct().at(i).get('date')?.hasError('required') && (correctAct().at(i).get('date').dirty
+          || correctAct().at(i).get('date').touched)"
 								class="invalid-feedback1"
 							>
 								Date is Required</span

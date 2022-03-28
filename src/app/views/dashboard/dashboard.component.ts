@@ -9,6 +9,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import {
 	BarChart,
 	Cards,
+	CorrectiveActionData,
 	CountData,
 	DashboardApiService
 } from 'src/app/utils/services/dashboard-api.service';
@@ -132,6 +133,7 @@ export class DashboardComponent implements OnInit {
 
 	public barChartLabels1: Label[] = [];
 	public barChartData1: ChartDataSets[] = [];
+	correctiveAction$: Observable<CorrectiveActionData[]>;
 	set barChardData(value: BarChart) {
 		this.barChartLabels1 = Object.keys(value).map((label) =>
 			label
@@ -202,6 +204,7 @@ export class DashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.correctiveAction$ = this.dashboardApiService.getCorrectiveAction();
 		this.formsCount$ = this.authService.loginData$.pipe(
 			switchMap((res) => {
 				if (res.accessToken) {
@@ -243,5 +246,15 @@ export class DashboardComponent implements OnInit {
 	};
 	slideChanged(event) {
 		this.formShow = event.checked;
+	}
+
+	updateCorrectiveAction(item: CorrectiveActionData, i: number) {
+		let { _id, formName } = item;
+		this.dashboardApiService
+			.updateCorrectiveAction({ _id, formName })
+			.subscribe((res) => {
+				console.log(res);
+				this.correctiveAction$ = this.dashboardApiService.getCorrectiveAction();
+			});
 	}
 }

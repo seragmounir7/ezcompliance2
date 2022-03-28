@@ -212,8 +212,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 					.controls[x].get('action')
 					.patchValue(res.data.corrAction[x].action);
 				this.correctAct()
-					.controls[x].get('complete')
-					.patchValue(res.data.corrAction[x].complete);
+					.controls[x].get('date')
+					.patchValue(res.data.corrAction[x].date);
 				this.correctAct()
 					.controls[x].get('personRes')
 					.patchValue(res.data.corrAction[x].personRes);
@@ -284,7 +284,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		return this.fb.group({
 			action: ['', Validators.required],
 			personRes: ['', Validators.required],
-			complete: ['', Validators.required]
+			date: ['', Validators.required]
 		});
 	}
 	removeCorrectAct(i) {

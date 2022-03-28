@@ -738,7 +738,7 @@
 		<h2 class="mt-3">Corrective Action</h2>
 
 		<ng-container *ngIf="obj">
-			<div class="row">
+			<div formGroupName="elliminateAction" class="row">
 				<div class="col-md-4 col-sm-4-print">
 					<div class="mb-3">
 						<label class="form-label"
@@ -747,24 +747,24 @@
 						<select
 							class="form-select form-control col outline form-dropdown"
 							aria-label="Default select example"
-							formControlName="eliminateHazard"
+							formControlName="completed"
 						>
 							<option selected hidden>Select</option>
-							<option class="mr-1" value="yes">Yes</option>
-							<option class="mr-1" value="no">No</option>
+							<option class="mr-1" [ngValue]="true">Yes</option>
+							<option class="mr-1" [ngValue]="false">No</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('elliminateAction').get('completed').value"
 					>
 						<label class="form-label">Corrective Action</label>
 						<textarea
 							type="surname"
 							class="form-control"
-							formControlName="eliminateCorrect"
+							formControlName="action"
 							cdkTextareaAutosize
 							#autosize="cdkTextareaAutosize"
 							cdkAutosizeMinRows="1.6"
@@ -776,14 +776,14 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('elliminateAction').get('completed').value"
 					>
 						<label class="form-label label_1">Actioned by</label>
 						<input
 							type="email"
 							class="form-control"
 							[matAutocomplete]="actionedBy1"
-							formControlName="elliminateAction"
+							formControlName="personRes"
 							aria-describedby="emailHelp"
 						/>
 						<mat-autocomplete
@@ -802,7 +802,7 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('eliminateHazard').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('elliminateAction').get('completed').value"
 					>
 						<label class="form-label label_1">By when</label>
 						<input
@@ -810,7 +810,7 @@
 							[matDatepicker]="pickerd1"
 							class="form-control"
 							[min]="minDate"
-							formControlName="eliminateWhen"
+							formControlName="date"
 							placeholder="dd-mm-yyyy"
 						/>
 						<mat-datepicker-toggle
@@ -821,7 +821,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div formGroupName="substituteAction" class="row">
 				<div class="col-md-4 col-sm-4-print">
 					<div class="mb-3">
 						<label class="form-label"
@@ -830,24 +830,24 @@
 						<select
 							class="form-select form-control col outline form-dropdown"
 							aria-label="Default select example"
-							formControlName="process"
+							formControlName="completed"
 						>
 							<option selected hidden>Select</option>
-							<option class="mr-1" value="yes">Yes</option>
-							<option class="mr-1" value="no">No</option>
+							<option class="mr-1" [ngValue]="true">Yes</option>
+							<option class="mr-1" [ngValue]="false">No</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('substituteAction')?.get('completed').value"
 					>
 						<label class="form-label">Corrective Action</label>
 						<textarea
 							type="surname"
 							class="form-control textarea-autosize"
-							formControlName="substituteCorrect"
+							formControlName="action"
 							cdkTextareaAutosize
 							#autosize="cdkTextareaAutosize"
 							cdkAutosizeMinRows="1.6"
@@ -859,14 +859,14 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('substituteAction')?.get('completed').value"
 					>
 						<label class="form-label label_1">Actioned by</label>
 						<input
 							type="email"
 							class="form-control"
 							[matAutocomplete]="actionedBy2"
-							formControlName="substituteAction"
+							formControlName="personRes"
 							aria-describedby="emailHelp"
 						/>
 						<mat-autocomplete
@@ -885,7 +885,7 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('process').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('substituteAction')?.get('completed').value"
 					>
 						<label class="form-label label_1">By when</label>
 						<input
@@ -893,7 +893,7 @@
 							[matDatepicker]="pickerd2"
 							class="form-control"
 							[min]="minDate"
-							formControlName="substituteWhen"
+							formControlName="date"
 							placeholder="dd-mm-yyyy"
 						/>
 						<mat-datepicker-toggle
@@ -904,7 +904,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div formGroupName="isolatedAction" class="row">
 				<div class="col-md-4 col-sm-4-print">
 					<div class="mb-3">
 						<label class="form-label"
@@ -913,24 +913,24 @@
 						<select
 							class="form-select form-control col outline form-dropdown"
 							aria-label="Default select example"
-							formControlName="isolatedHazard"
+							formControlName="completed"
 						>
 							<option selected hidden>Select</option>
-							<option class="mr-1" value="yes">Yes</option>
-							<option class="mr-1" value="no">No</option>
+							<option class="mr-1" [ngValue]="true">Yes</option>
+							<option class="mr-1" [ngValue]="false">No</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('isolatedAction').get('completed').value"
 					>
 						<label class="form-label">Corrective Action</label>
 						<textarea
 							type="surname"
 							class="form-control"
-							formControlName="isolatedCorrect"
+							formControlName="action"
 							cdkTextareaAutosize
 							#autosize="cdkTextareaAutosize"
 							cdkAutosizeMinRows="1.6"
@@ -942,14 +942,14 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('isolatedAction').get('completed').value"
 					>
 						<label class="form-label label_1">Actioned by</label>
 						<input
 							type="email"
 							class="form-control"
 							[matAutocomplete]="actionedBy3"
-							formControlName="isolatedAction"
+							formControlName="personRes"
 							aria-describedby="emailHelp"
 						/>
 						<mat-autocomplete
@@ -968,7 +968,7 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('isolatedHazard').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('isolatedAction').get('completed').value"
 					>
 						<label class="form-label label_1">By when</label>
 						<input
@@ -976,7 +976,7 @@
 							[matDatepicker]="pickerd3"
 							class="form-control"
 							[min]="minDate"
-							formControlName="isolatedWhen"
+							formControlName="date"
 							placeholder="dd-mm-yyyy"
 						/>
 						<mat-datepicker-toggle
@@ -987,7 +987,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div formGroupName="solutionAction" class="row">
 				<div class="col-md-4 col-sm-4-print">
 					<div class="mb-3">
 						<label class="form-label"
@@ -996,24 +996,24 @@
 						<select
 							class="form-select form-control col outline form-dropdown"
 							aria-label="Default select example"
-							formControlName="complete"
+							formControlName="completed"
 						>
 							<option selected hidden>Select</option>
-							<option class="mr-1" value="yes">Yes</option>
-							<option class="mr-1" value="no">No</option>
+							<option class="mr-1" [ngValue]="true">Yes</option>
+							<option class="mr-1" [ngValue]="false">No</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('solutionAction').get('completed').value"
 					>
 						<label class="form-label">Corrective Action</label>
 						<textarea
 							type="surname"
 							class="form-control"
-							formControlName="solutionCorrect"
+							formControlName="action"
 							cdkTextareaAutosize
 							#autosize="cdkTextareaAutosize"
 							cdkAutosizeMinRows="1.6"
@@ -1025,14 +1025,14 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('solutionAction').get('completed').value"
 					>
 						<label class="form-label label_1">Actioned by</label>
 						<input
 							type="email"
 							class="form-control"
 							[matAutocomplete]="actionedBy4"
-							formControlName="solutionAction"
+							formControlName="personRes"
 							aria-describedby="emailHelp"
 						/>
 						<mat-autocomplete
@@ -1051,7 +1051,7 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('complete').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('solutionAction').get('completed').value"
 					>
 						<label class="form-label label_1">By when</label>
 						<input
@@ -1059,7 +1059,7 @@
 							[matDatepicker]="pickerd4"
 							class="form-control"
 							[min]="minDate"
-							formControlName="solutionWhen"
+							formControlName="date"
 							placeholder="dd-mm-yyyy"
 						/>
 						<mat-datepicker-toggle
@@ -1070,7 +1070,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="row pagebreak-print">
+			<div
+				formGroupName="procedureRemoveAction"
+				class="row pagebreak-print"
+			>
 				<div class="col-md-4 col-sm-4-print">
 					<div class="mb-3">
 						<label class="form-label"
@@ -1079,24 +1082,24 @@
 						<select
 							class="form-select form-control col outline form-dropdown"
 							aria-label="Default select example"
-							formControlName="procedures"
+							formControlName="completed"
 						>
 							<option selected hidden>Select</option>
-							<option class="mr-1" value="yes">Yes</option>
-							<option class="mr-1" value="no">No</option>
+							<option class="mr-1" [ngValue]="true">Yes</option>
+							<option class="mr-1" [ngValue]="false">No</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('procedureRemoveAction').get('completed').value"
 					>
 						<label class="form-label">Corrective Action</label>
 						<textarea
 							type="surname"
 							class="form-control"
-							formControlName="procedureRemoveCorrect"
+							formControlName="action"
 							cdkTextareaAutosize
 							#autosize="cdkTextareaAutosize"
 							cdkAutosizeMinRows="1.6"
@@ -1108,14 +1111,14 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('procedureRemoveAction').get('completed').value"
 					>
 						<label class="form-label label_1">Actioned by</label>
 						<input
 							type="email"
 							class="form-control"
 							[matAutocomplete]="actionedBy5"
-							formControlName="procedureRemoveAction"
+							formControlName="personRes"
 							aria-describedby="emailHelp"
 						/>
 						<mat-autocomplete
@@ -1134,7 +1137,7 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('procedures').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('procedureRemoveAction').get('completed').value"
 					>
 						<label class="form-label label_1">By when</label>
 						<input
@@ -1142,7 +1145,7 @@
 							[matDatepicker]="pickerd5"
 							class="form-control"
 							[min]="minDate"
-							formControlName="procedureRemove"
+							formControlName="date"
 							placeholder="dd-mm-yyyy"
 						/>
 						<mat-datepicker-toggle
@@ -1153,7 +1156,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div formGroupName="PPEAction" class="row">
 				<div class="col-md-4 col-sm-4-print">
 					<div class="mb-3">
 						<label class="form-label"
@@ -1162,24 +1165,24 @@
 						<select
 							class="form-select form-control col outline form-dropdown"
 							aria-label="Default select example"
-							formControlName="reduceRisk"
+							formControlName="completed"
 						>
 							<option selected hidden>Select</option>
-							<option class="mr-1" value="yes">Yes</option>
-							<option class="mr-1" value="no">No</option>
+							<option class="mr-1" [ngValue]="true">Yes</option>
+							<option class="mr-1" [ngValue]="false">No</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('PPEAction').get('completed').value"
 					>
 						<label class="form-label">Corrective Action</label>
 						<textarea
 							type="surname"
 							class="form-control"
-							formControlName="PPECorrect"
+							formControlName="action"
 							cdkTextareaAutosize
 							#autosize="cdkTextareaAutosize"
 							cdkAutosizeMinRows="1.6"
@@ -1191,14 +1194,14 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('PPEAction').get('completed').value"
 					>
 						<label class="form-label label_1">Actioned by</label>
 						<input
 							type="email"
 							class="form-control"
 							[matAutocomplete]="actionedBy6"
-							formControlName="PPEAction"
+							formControlName="personRes"
 							aria-describedby="emailHelp"
 						/>
 						<mat-autocomplete
@@ -1217,7 +1220,7 @@
 				<div class="col-md-2 col-sm-2-print">
 					<div
 						class="mb-3"
-						[class.disableDiv]="hazardReport.get('reduceRisk').value  == 'no'"
+						[class.disableDiv]="hazardReport.get('PPEAction').get('completed').value"
 					>
 						<label class="form-label label_1">By when</label>
 						<input
@@ -1225,7 +1228,7 @@
 							[matDatepicker]="pickerd6"
 							class="form-control"
 							[min]="minDate"
-							formControlName="PPEWhen"
+							formControlName="date"
 							placeholder="dd-mm-yyyy"
 						/>
 						<mat-datepicker-toggle

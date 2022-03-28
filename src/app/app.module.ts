@@ -57,6 +57,9 @@ import { ScrollModule } from './shared/scroll/scroll.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { NavigationService } from './services/navigation.service';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { CorrectiveActionTableComponent } from './views/dashboard/corrective-action-table/corrective-action-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -82,12 +85,15 @@ registerLocaleData(localeEn, 'en-EN');
 		PrintLayoutComponent,
 		ResetPasswordComponent,
 		ForgotPasswordComponent,
-		InvoiceComponent
+		InvoiceComponent,
+		CorrectiveActionTableComponent
 	],
 	imports: [
 		BrowserModule,
 		SharedModule,
 		ScrollModule,
+		MatButtonModule,
+		MatTableModule,
 		MatStepperModule,
 		AppRoutingModule,
 		AngularSvgIconModule.forRoot(),

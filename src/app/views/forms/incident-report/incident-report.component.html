@@ -996,7 +996,7 @@
 	</div>
 	<hr />
 	<div class="box" class="row">
-		<ng-container formArrayName="arrObj">
+		<ng-container formArrayName="corrAction">
 			<ng-container
 				*ngFor="let control of add().controls; let i = index"
 				[formGroupName]="i"
@@ -1011,19 +1011,19 @@
 
 						<textarea
 							type="text"
-							formControlName="correctAction"
+							formControlName="action"
 							class="form-control"
 							[class.is-invalid]="
-                add().controls[i].get('correctAction')?.hasError('required') &&
-                (add().controls[i].get('correctAction').dirty ||
-                  add().controls[i].get('correctAction').touched)
+                add().controls[i].get('action')?.hasError('required') &&
+                (add().controls[i].get('action').dirty ||
+                  add().controls[i].get('action').touched)
               "
 						></textarea>
 						<span
 							*ngIf="
-                add().controls[i].get('correctAction')?.hasError('required') &&
-                (add().controls[i].get('correctAction').dirty ||
-                  add().controls[i].get('correctAction').touched)
+                add().controls[i].get('action')?.hasError('required') &&
+                (add().controls[i].get('action').dirty ||
+                  add().controls[i].get('action').touched)
               "
 							class="invalid-feedback"
 						>

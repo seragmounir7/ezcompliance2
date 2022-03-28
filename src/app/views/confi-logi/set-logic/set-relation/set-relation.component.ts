@@ -194,7 +194,7 @@ export class SetRelationComponent implements OnInit {
 		});
 	}
 	getLicenceByTradeCat(id) {
-		this.logicalFormInfo.getLicenceByTradeCat(id).subscribe((res) => {
+		this.logicalFormInfo.getAllLicence().subscribe((res) => {
 			this.licenceByTradecat = res.data;
 		});
 	}
