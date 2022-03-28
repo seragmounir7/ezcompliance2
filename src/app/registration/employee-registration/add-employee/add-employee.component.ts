@@ -25,6 +25,7 @@ import Swal from 'sweetalert2';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
 import { UserValue } from 'src/app/utils/types/UserResponceTypes';
+import { DepartmentService } from 'src/app/utils/services/department.service';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-employee',
@@ -66,6 +67,7 @@ export class AddEmployeeComponent implements OnInit {
 	displayFnRole: any;
 	porfPosition$: Observable<any[]>;
 	porfDepartment$: Observable<any[]>;
+	displayFnDepartmentName: (user: any) => string;
 
 	constructor(
 		private fb: FormBuilder,
@@ -74,6 +76,7 @@ export class AddEmployeeComponent implements OnInit {
 		private licenceInfo: LogicalFormInfoService,
 		private upload: UploadFileService,
 		private activatedRoute: ActivatedRoute,
+		private departmentService: DepartmentService,
 		public router: Router,
 		// @Inject(MAT_DIALOG_DATA) public data?,
 		// private matDialogRef?:MatDialogRef<AddEmployeeComponent>
@@ -181,6 +184,7 @@ export class AddEmployeeComponent implements OnInit {
 			});
 
 		this.getAllRoles();
+		this.getAllDepartment();
 
 		this.id = this.dialogData?.isDialog
 			? 'form'
@@ -235,12 +239,17 @@ export class AddEmployeeComponent implements OnInit {
 					'porfPosition',
 					res.data
 				);
-				this.porfDepartment$ = this.role.getRoleAutocomplete(
-					this.empDetails,
-					'porfDepartment',
-					res.data
-				);
 			});
+		});
+	}
+	getAllDepartment() {
+		this.departmentService.getAllDepartment().subscribe((res) => {
+			this.displayFnDepartmentName = this.departmentService.displayFnDepartmentName;
+			this.porfDepartment$ = this.departmentService.getDepartmentNameAutocomplete(
+				this.empDetails,
+				'porfDepartment',
+				res.data
+			);
 		});
 	}
 	patchData() {

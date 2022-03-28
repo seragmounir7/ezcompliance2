@@ -247,7 +247,7 @@ export class SiteInspectionComponent
 					if (this.id !== 'form') {
 						this.showDatas.siteAction = this.showDatas.siteAction.map(
 							(item) => {
-								item.personResponsible.fullName = `${item.personResponsible.firstName} ${item.personResponsible.lastName}`;
+								item.personRes.fullName = `${item.personRes.firstName} ${item.personRes.lastName}`;
 								return item;
 							}
 						);
@@ -274,10 +274,10 @@ export class SiteInspectionComponent
 										this.showDatas.siteAction[index].topicId
 									);
 								this.add()
-									.controls[index].get('personResponsible')
+									.controls[index].get('personRes')
 									.setValue(
 										this.showDatas.siteAction[index]
-											.personResponsible
+											.personRes
 									);
 								this.add()
 									.controls[index].get('complete')
@@ -378,7 +378,7 @@ export class SiteInspectionComponent
 			for (let index = 0; index < this.add().length; index++) {
 				const element = this.add().at(index) as FormGroup;
 				this.valueChangesArr.push(
-					(element.controls.personResponsible
+					(element.controls.personRes
 						.valueChanges as Observable<any>).pipe(
 						startWith({ fullName: '' }),
 						tap((value) =>
@@ -386,7 +386,7 @@ export class SiteInspectionComponent
 								? ''
 								: typeof value === 'string'
 								? (element.controls
-										.personResponsible as AbstractControl).setErrors(
+										.personRes as AbstractControl).setErrors(
 										{ incorrect: true }
 								  )
 								: ''
@@ -411,8 +411,8 @@ export class SiteInspectionComponent
 		return this.fb.group({
 			item: ['', Validators.required],
 			action: ['', Validators.required],
-			personResponsible: ['', Validators.required],
-			complete: [new Date(), Validators.required],
+			personRes: ['', Validators.required],
+			date: [new Date(), Validators.required],
 			topicId: ['']
 		});
 	}
@@ -475,7 +475,7 @@ export class SiteInspectionComponent
 		//let empName = this.sidePreview.controls.empName.value
 		siteAction = siteAction.map((res) => {
 			return {
-				personResponsible: res.personResponsible._id,
+				personRes: res.personRes._id,
 				action: res.action,
 				complete: res.complete,
 				item: res.item,

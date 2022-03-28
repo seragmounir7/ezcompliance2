@@ -26,6 +26,7 @@ import { SuperAdminGuard } from './RouteGuard/super-admin.guard';
 import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynamic-form-data/saved-dynamic-form-data.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { IsPrintGuard } from './RouteGuard/is-print.guard';
+import { CorrectiveActionTableComponent } from './views/dashboard/corrective-action-table/corrective-action-table.component';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -78,6 +79,10 @@ const routes: Routes = [
 			{ path: 'invoice', component: InvoiceComponent },
 			{ path: 'profile', component: ProfileComponent },
 			{ path: 'blank', component: BlankComponent },
+			{
+				path: 'correctiveAction',
+				component: CorrectiveActionTableComponent
+			},
 			{
 				path: 'superadmin',
 				canActivate: [SuperAdminGuard],
@@ -154,6 +159,14 @@ const routes: Routes = [
 				loadChildren: () =>
 					import('./role-management/role-management.module').then(
 						(m) => m.RoleManagementModule
+					),
+				canActivate: [DynamicFormAccessGuard]
+			},
+			{
+				path: 'department',
+				loadChildren: () =>
+					import('./department/department.module').then(
+						(m) => m.DepartmentModule
 					),
 				canActivate: [DynamicFormAccessGuard]
 			},

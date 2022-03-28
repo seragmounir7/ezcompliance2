@@ -148,7 +148,7 @@ export class IncidentReportComponent
 			PPE: this.fb.array([]),
 			rootCauseIncident: this.fb.array([]),
 			changes: this.fb.array([]),
-			arrObj: this.fb.array([]),
+			corrAction: this.fb.array([]),
 			jobNumber: ['', Validators.required],
 			// projectName: ['', Validators.required],
 			siteName: ['', Validators.required],
@@ -424,18 +424,18 @@ export class IncidentReportComponent
 	}
 
 	add(): FormArray {
-		return this.IncidentReport.get('arrObj') as FormArray;
+		return this.IncidentReport.get('corrAction') as FormArray;
 	}
 	newAction(): FormGroup {
 		return this.fb.group({
-			correctAction: ['', Validators.required],
+			action: ['', Validators.required],
 			personRes: ['', Validators.required],
 			// complete: ["", Validators.required],
 			date: [new Date(), Validators.required]
 		});
 	}
 	removeIncident(i) {
-		const item = <FormArray>this.IncidentReport.controls.arrObj;
+		const item = <FormArray>this.IncidentReport.controls.corrAction;
 		if (item.length > 1) {
 			item.removeAt(i);
 		}
@@ -824,22 +824,22 @@ export class IncidentReportComponent
 				instructions: res.data.instructions
 			});
 
-			for (let index = 0; index < res.data.arrObj.length; index++) {
+			for (let index = 0; index < res.data.corrAction.length; index++) {
 				let key;
-				key = Object.keys(res.data.arrObj[index]);
+				key = Object.keys(res.data.corrAction[index]);
 
 				const changeIndex = this.changeAdd().length;
 				this.addAction();
-				// this.add().controls[index].get("complete").setValue(res.data.arrObj[index].complete)
+				// this.add().controls[index].get("complete").setValue(res.data.corrAction[index].complete)
 				this.add()
-					.controls[index].get('correctAction')
-					.setValue(res.data.arrObj[index].correctAction);
+					.controls[index].get('action')
+					.setValue(res.data.corrAction[index].action);
 				this.add()
 					.controls[index].get('date')
-					.setValue(res.data.arrObj[index].date);
+					.setValue(res.data.corrAction[index].date);
 				this.add()
 					.controls[index].get('personRes')
-					.setValue(res.data.arrObj[index].personRes);
+					.setValue(res.data.corrAction[index].personRes);
 			}
 			for (let index = 0; index < res.data.changes.length; index++) {
 				let key;

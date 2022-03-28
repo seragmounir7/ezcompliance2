@@ -13,6 +13,8 @@ import {
 	ModifiedJobNumber,
 	OriginalJobNumber
 } from '../types/JobNumberResponceTypes';
+import { ResponceBody } from '../types/ResponceBody';
+import { HazardGetByID } from '../types/HazardTypes';
 
 @Injectable({
 	providedIn: 'root'
@@ -1097,7 +1099,9 @@ export class LogicalFormInfoService {
 		return this.https.post(this.apiUrl + 'hazard/add', data);
 	}
 	getHazardFormDataById(id) {
-		return this.https.get(this.apiUrl + 'hazard/get/' + id);
+		return this.https.get<ResponceBody<HazardGetByID>>(
+			this.apiUrl + 'hazard/get/' + id
+		);
 	}
 	updateHazardFormData(id, data) {
 		return this.https.put(this.apiUrl + 'hazard/update/' + id, data);

@@ -1959,14 +1959,14 @@
 										type="input"
 										class="mr-1 form-control"
 										value=""
-										formControlName="personResponsible"
-										[class.is-invalid]="add().controls[filed].get('personResponsible')?.errors
-                  && (add().controls[filed].get('personResponsible').dirty || add().controls[filed].get('personResponsible').touched)"
-										[matAutocomplete]="personResponsible"
+										formControlName="personRes"
+										[class.is-invalid]="add().controls[filed].get('personRes')?.errors
+                  && (add().controls[filed].get('personRes').dirty || add().controls[filed].get('personRes').touched)"
+										[matAutocomplete]="personRes"
 										autocomplete="off"
 									/>
 									<mat-autocomplete
-										#personResponsible="matAutocomplete"
+										#personRes="matAutocomplete"
 										[displayWith]="displayFn"
 									>
 										<mat-option
@@ -1977,17 +1977,17 @@
 										</mat-option>
 									</mat-autocomplete>
 									<span
-										*ngIf=" add().controls[filed].get('personResponsible')?.hasError('required') && (add().controls[filed].get('personResponsible').dirty  || add().controls[filed].get('personResponsible').touched) "
+										*ngIf=" add().controls[filed].get('personRes')?.hasError('required') && (add().controls[filed].get('personRes').dirty  || add().controls[filed].get('personRes').touched) "
 										class="invalid-feedback"
 									>
 										This Field is Required</span
 									>
 									<ng-container
-										*ngIf="add().controls[filed].get('personResponsible')?.errors"
+										*ngIf="add().controls[filed].get('personRes')?.errors"
 									>
 										<span
 											*ngIf="
-                   add().controls[filed].get('personResponsible')?.errors.incorrect "
+                   add().controls[filed].get('personRes')?.errors.incorrect "
 											class="invalid-feedback"
 										>
 											Select Employee Form List
@@ -2009,8 +2009,8 @@
 										[matDatepicker]="datepicker2"
 										[min]="minDate"
 										class="form-control outline"
-										formControlName="complete"
-										[class.is-invalid-date]="add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty || add().controls[filed].get('complete').touched) "
+										formControlName="date"
+										[class.is-invalid-date]="add().controls[filed].get('date')?.hasError('required') && (add().controls[filed].get('date').dirty || add().controls[filed].get('date').touched) "
 										placeholder="dd-mm-yyyy"
 									/>
 									<mat-datepicker-toggle
@@ -2022,7 +2022,7 @@
 									></mat-datepicker>
 
 									<span
-										*ngIf=" add().controls[filed].get('complete')?.hasError('required') && (add().controls[filed].get('complete').dirty  || add().controls[filed].get('complete').touched) "
+										*ngIf=" add().controls[filed].get('date')?.hasError('required') && (add().controls[filed].get('date').dirty  || add().controls[filed].get('date').touched) "
 										class="invalid-feedback1"
 									>
 										Date is Required</span
