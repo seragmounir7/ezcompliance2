@@ -26,6 +26,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
 import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import { DepartmentService } from 'src/app/utils/services/department.service';
+import { Department } from 'src/app/utils/types/DepartmentTypes';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-employee',
@@ -68,6 +69,7 @@ export class AddEmployeeComponent implements OnInit {
 	porfPosition$: Observable<any[]>;
 	porfDepartment$: Observable<any[]>;
 	displayFnDepartmentName: (user: any) => string;
+	departments: Department[];
 
 	constructor(
 		private fb: FormBuilder,
@@ -244,6 +246,7 @@ export class AddEmployeeComponent implements OnInit {
 	}
 	getAllDepartment() {
 		this.departmentService.getAllDepartment().subscribe((res) => {
+			this.departments = res.data;
 			this.displayFnDepartmentName = this.departmentService.displayFnDepartmentName;
 			this.porfDepartment$ = this.departmentService.getDepartmentNameAutocomplete(
 				this.empDetails,
@@ -279,7 +282,7 @@ export class AddEmployeeComponent implements OnInit {
 				porfListName: data.data.lastName,
 				porfEmail: data.data.email,
 				porfPosition: data.data.position as UserValue,
-				porfDepartment: data.data.department as UserValue,
+				porfDepartment: data.data.department as Department,
 				porfPhone: data.data.phone,
 				porfMobile: data.data.mobileNumber,
 

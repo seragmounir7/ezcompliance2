@@ -227,13 +227,13 @@
 						Department is Required</span
 					>
 					<mat-autocomplete
-						[displayWith]="displayFnRole"
+						[displayWith]="displayFnDepartmentName"
 						#department="matAutocomplete"
 					>
 						<mat-option
 							*ngFor="let item of department$ | async as list"
 							[value]="item"
-							>{{item.role}}</mat-option
+							>{{item.departmentName}}</mat-option
 						>
 					</mat-autocomplete>
 				</div>
@@ -1336,13 +1336,13 @@
 						Department is Required</span
 					>
 					<mat-autocomplete
-						[displayWith]="displayFnRole"
+						[displayWith]="displayFnDepartmentName"
 						#compileDepartment="matAutocomplete"
 					>
 						<mat-option
 							*ngFor="let item of compileDepartment$ | async as list"
 							[value]="item"
-							>{{item.role}}</mat-option
+							>{{item.departmentName}}</mat-option
 						>
 					</mat-autocomplete>
 				</div>

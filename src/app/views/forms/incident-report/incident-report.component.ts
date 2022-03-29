@@ -40,6 +40,8 @@ import { ModifiedJobNumber } from 'src/app/utils/types/JobNumberResponceTypes';
 import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import { Designation } from 'src/app/utils/types/Designation.enum';
+import { DepartmentService } from 'src/app/utils/services/department.service';
+import { Department } from 'src/app/utils/types/DepartmentTypes';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-incident-report',
@@ -89,6 +91,8 @@ export class IncidentReportComponent
 	position$: Observable<any[]>;
 	completedPosition$: Observable<any[]>;
 	reviewedPosition$: Observable<any[]>;
+	department: Department[];
+	displayFnDepartmentName: (user: any) => string;
 	@HostListener('window:afterprint', [])
 	function() {
 		this.shared.printNext(false);
@@ -135,7 +139,8 @@ export class IncidentReportComponent
 		private shared: RoleManagementSharedServiceService,
 		public mobileViewService: MobileViewService,
 		public role: RoleManagementService,
-		public authService: AuthService
+		public authService: AuthService,
+		private departmentService: DepartmentService
 	) {
 		this.id = this.activatedRoute.snapshot.params.id;
 		if (this.id !== 'Form') {
@@ -231,6 +236,25 @@ export class IncidentReportComponent
 			);
 			this.returnTo.subscribe();
 		}
+		this.departmentService.getAllDepartment().subscribe((res) => {
+			this.department = res.data;
+			this.displayFnDepartmentName = this.departmentService.displayFnDepartmentName;
+			this.department$ = this.departmentService.getDepartmentNameAutocomplete(
+				this.IncidentReport,
+				'department',
+				this.department
+			);
+			this.completedDepartment$ = this.departmentService.getDepartmentNameAutocomplete(
+				this.IncidentReport,
+				'completedDepartment',
+				this.department
+			);
+			this.reviewedDepartment$ = this.departmentService.getDepartmentNameAutocomplete(
+				this.IncidentReport,
+				'reviewedDepartment',
+				this.department
+			);
+		});
 		this.role.getAllRole().subscribe((res) => {
 			this.roleData = res.data;
 			this.completedPosition$ = this.role.getRoleAutocomplete(
@@ -243,37 +267,11 @@ export class IncidentReportComponent
 				'reviewedPosition',
 				this.roleData
 			);
-			this.completedDepartment$ = this.IncidentReport.controls.completedDepartment.valueChanges.pipe(
-				startWith(''),
-				map((value) =>
-					typeof value === 'string' ? value : value?.role
-				),
-				map((role) =>
-					role ? this._filterRole(role) : this.roleData.slice()
-				)
-			);
-			this.reviewedDepartment$ = this.IncidentReport.controls.reviewedDepartment.valueChanges.pipe(
-				startWith(''),
-				map((value) =>
-					typeof value === 'string' ? value : value?.role
-				),
-				map((role) =>
-					role ? this._filterRole(role) : this.roleData.slice()
-				)
-			);
+
 			this.position$ = this.role.getRoleAutocomplete(
 				this.IncidentReport,
 				'position',
 				this.roleData
-			);
-			this.department$ = this.IncidentReport.controls.department.valueChanges.pipe(
-				startWith(''),
-				map((value) =>
-					typeof value === 'string' ? value : value?.role
-				),
-				map((role) =>
-					role ? this._filterRole(role) : this.roleData.slice()
-				)
 			);
 		});
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
@@ -390,7 +388,7 @@ export class IncidentReportComponent
 		const data = e.option.value;
 		if (controlName == 'completedName') {
 			this.IncidentReport.patchValue({
-				completedDepartment: this.roleData.find(
+				completedDepartment: this.department.find(
 					(x) => x._id == data.department
 				),
 				completedPosition: this.roleData.find(
@@ -400,7 +398,7 @@ export class IncidentReportComponent
 		}
 		if (controlName == 'reviewedName') {
 			this.IncidentReport.patchValue({
-				reviewedDepartment: this.roleData.find(
+				reviewedDepartment: this.department.find(
 					(x) => x._id == data.department
 				),
 				reviewedPosition: this.roleData.find(
@@ -410,7 +408,9 @@ export class IncidentReportComponent
 		}
 		if (controlName == 'injuredorAffectedPersonName') {
 			this.IncidentReport.patchValue({
-				department: this.roleData.find((x) => x._id == data.department),
+				department: this.department.find(
+					(x) => x._id == data.department
+				),
 				position: this.roleData.find((x) => x._id == data.position)
 			});
 		}
