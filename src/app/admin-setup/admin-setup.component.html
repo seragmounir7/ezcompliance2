@@ -46,6 +46,22 @@
 		</div>
 	</mat-step>
 	<mat-step>
+		<ng-template matStepLabel>Add Department</ng-template>
+		<div>
+			<app-department></app-department>
+		</div>
+		<div class="buttonDiv">
+			<!-- <button  mat-raised-button matStepperPrevious>Back</button> -->
+			<button
+				(click)="updateFirstLogin('step3')"
+				mat-raised-button
+				matStepperNext
+			>
+				Next
+			</button>
+		</div>
+	</mat-step>
+	<mat-step>
 		<ng-template matStepLabel>Employee Details</ng-template>
 		<div class="shadow">
 			<app-employee-registration
@@ -55,7 +71,7 @@
 		<div class="buttonDiv">
 			<!-- <button mat-raised-button matStepperPrevious>Back</button> -->
 			<button
-				(click)="updateFirstLogin('step3')"
+				(click)="updateFirstLogin('step4')"
 				mat-raised-button
 				matStepperNext
 			>
@@ -70,7 +86,7 @@
 		</div>
 		<div class="buttonDiv">
 			<button
-				(click)="updateFirstLogin('step4');"
+				(click)="updateFirstLogin('step5');"
 				mat-raised-button
 				matStepperNext
 			>

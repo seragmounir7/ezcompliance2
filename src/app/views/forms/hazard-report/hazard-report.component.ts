@@ -48,6 +48,8 @@ import { UserValue } from 'src/app/utils/types/UserResponceTypes';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
 import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
 import { Action } from 'src/app/utils/types/HazardTypes';
+import { DepartmentService } from 'src/app/utils/services/department.service';
+import { Department } from 'src/app/utils/types/DepartmentTypes';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -112,6 +114,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 	position$: Observable<any[]>;
 	compilePosition$: Observable<any[]>;
 	roleValue: RoleValue[];
+	displayFnDepartmentName: (user: any) => string;
+	department: Department[];
 	@HostListener('window:afterprint', [])
 	function() {
 		this.shared.printNext(false);
@@ -142,7 +146,8 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		public forms: SavedformsService,
 		private shared: RoleManagementSharedServiceService,
 		public mobileViewService: MobileViewService,
-		private roleManagementService: RoleManagementService
+		private roleManagementService: RoleManagementService,
+		private departmentService: DepartmentService
 	) {
 		this.check = localStorage.getItem('key');
 
@@ -330,20 +335,11 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		if (this.id != 'form') {
 			this.getHazardByid(this.id);
 		}
-
+		this.getAllDepartment();
 		this.displayFnRole = this.roleManagementService.displayFnRole;
 		this.roleManagementService.getAllRole().subscribe((res) => {
 			this.roleValue = res.data;
-			this.compileDepartment$ = this.roleManagementService.getRoleAutocomplete(
-				this.hazardReport,
-				'compileDepartment',
-				res.data
-			);
-			this.department$ = this.roleManagementService.getRoleAutocomplete(
-				this.hazardReport,
-				'department',
-				res.data
-			);
+
 			this.position$ = this.roleManagementService.getRoleAutocomplete(
 				this.hazardReport,
 				'position',
@@ -356,6 +352,24 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			);
 		});
 	}
+
+	getAllDepartment() {
+		this.departmentService.getAllDepartment().subscribe((res) => {
+			this.department = res.data;
+			this.displayFnDepartmentName = this.departmentService.displayFnDepartmentName;
+			this.department$ = this.departmentService.getDepartmentNameAutocomplete(
+				this.hazardReport,
+				'department',
+				res.data
+			);
+			this.compileDepartment$ = this.departmentService.getDepartmentNameAutocomplete(
+				this.hazardReport,
+				'compileDepartment',
+				res.data
+			);
+		});
+	}
+
 	private _filter(name: string): any[] {
 		const filterValue = name.toLowerCase();
 		return this.empData.filter((option) =>
@@ -754,7 +768,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		const data: UserValue = e.option.value as UserValue;
 
 		this.hazardReport.patchValue({
-			department: this.roleValue.find((x) => x._id == data.department),
+			department: this.department.find((x) => x._id == data.department),
 			email: data.email,
 			position: this.roleValue.find((x) => x._id == data.position),
 			phone: data.phone
@@ -765,7 +779,7 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		const data = e.option.value;
 		this.hazardReport.patchValue({
 			// name: data.name,
-			compileDepartment: this.roleValue.find(
+			compileDepartment: this.department.find(
 				(x) => x._id == data.department
 			),
 			compilePosition: this.roleValue.find((x) => x._id == data.position)

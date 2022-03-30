@@ -517,13 +517,13 @@
 				/>
 				<mat-autocomplete
 					#department="matAutocomplete"
-					[displayWith]="displayFnRole"
+					[displayWith]="displayFnDepartmentName"
 				>
 					<mat-option
 						*ngFor="let option of department$ | async ; let i = index "
 						[value]="option"
 					>
-						{{option.role}}
+						{{option.departmentName}}
 					</mat-option>
 				</mat-autocomplete>
 				<span
@@ -1216,13 +1216,13 @@
 					/>
 					<mat-autocomplete
 						#completedDepartment="matAutocomplete"
-						[displayWith]="displayFnRole"
+						[displayWith]="displayFnDepartmentName"
 					>
 						<mat-option
 							*ngFor="let option of completedDepartment$ | async ; let i = index "
 							[value]="option"
 						>
-							{{option.role}}
+							{{option.departmentName}}
 						</mat-option>
 					</mat-autocomplete>
 					<span
@@ -1402,13 +1402,13 @@
 						/>
 						<mat-autocomplete
 							#reviewedDepartment="matAutocomplete"
-							[displayWith]="displayFnRole"
+							[displayWith]="displayFnDepartmentName"
 						>
 							<mat-option
 								*ngFor="let option of reviewedDepartment$ | async ; let i = index "
 								[value]="option"
 							>
-								{{option.role}}
+								{{option.departmentName}}
 							</mat-option>
 						</mat-autocomplete>
 						<span

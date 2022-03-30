@@ -64,6 +64,10 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 			if (res?.FirstLogin.step4 === false) {
 				this.stepper.selected.completed = true;
 				this.stepper.next();
+			}
+			if (res?.FirstLogin.step5 === false) {
+				this.stepper.selected.completed = true;
+				this.stepper.next();
 			} else {
 				// this.stepper.selectedIndex = 4;
 			}
@@ -90,7 +94,7 @@ export class AdminSetupComponent implements OnInit, AfterViewInit {
 		this.authService
 			.updateFirstLogin(this.userData.FirstLogin)
 			.subscribe((res) => {
-				if (step === 'step4') this.setupComplete();
+				if (step === 'step5') this.setupComplete();
 
 				this.authService.nextLoginData(this.userData);
 				sessionStorage.setItem(

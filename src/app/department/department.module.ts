@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		MatSortModule,
 		MatFormFieldModule,
 		MatInputModule
-	]
+	],
+	exports: [DepartmentComponent, AddDepartmentComponent]
 })
 export class DepartmentModule {}
