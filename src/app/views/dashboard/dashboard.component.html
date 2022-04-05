@@ -183,15 +183,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" *ngIf="resDesignation !== designation.superAdmin">
 		<div class="col-md-6 p-2">
-			<table class="table table-bordered table-sm tab shadowBxSet">
+			<table
+				*ngIf="resDesignation !== designation.superAdmin"
+				class="table table-bordered table-sm tab shadowBxSet"
+			>
 				<thead>
 					<tr>
 						<th colspan="4" class="text-center">
 							Corrective Actions
 						</th>
-						<th colspan="1" class="text-center">
+						<th
+							*ngIf="resDesignation !== designation.clientAdmin"
+							colspan="1"
+							class="text-center"
+						>
 							<button
 								mat-icon-button
 								tooltip="All Corrective Action"
