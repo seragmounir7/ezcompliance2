@@ -7,6 +7,7 @@ import { AuthService } from '../../utils/services/auth.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { HttpErrorResponse } from '@angular/common/http';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-login',
@@ -65,13 +66,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 					}
 				},
 				(err) => {
-					if (!navigator.onLine) {
-						this.toastr.warning(
-							'You Are Offline! Check Your Internet Connection.'
-						);
-						return;
+					if (err) {
+						if (!navigator.onLine) {
+							this.toastr.warning(
+								'You Are Offline! Check Your Internet Connection.'
+							);
+							return;
+						}
+						console.log(err);
+						this.toastr.error(err || 'Wrong credentials', '');
 					}
-					this.toastr.error('Wrong credentials', '');
 				}
 			);
 		} else {

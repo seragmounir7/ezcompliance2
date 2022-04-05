@@ -4,7 +4,13 @@
 <div class="col ml-2 pt-3">
 	<h1>{{title}}</h1>
 </div>
+<!-- <input type="text" class="formcontrol" > -->
 <div class=" ">
+	<mat-form-field>
+		<mat-label>Filter</mat-label>
+		<input matInput [formControl]="searchControl" placeholder="Ex. ium" />
+	</mat-form-field>
+
 	<table
 		*ngIf="dataSource|async as data"
 		mat-table

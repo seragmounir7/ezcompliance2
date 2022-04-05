@@ -8,7 +8,7 @@ import {
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import {
 	ClinetAdminObj,
 	SuperAdminAuthServiceService,
@@ -19,6 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TableDetails } from '../table-details.enum';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { FormControl } from '@angular/forms';
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-client-admin-list',
@@ -38,6 +39,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 export class ClientAdminListComponent implements OnInit {
 	expandedElement: ClinetAdminObj;
 	dataSource: Observable<MatTableDataSource<ClinetAdminObj | UserList>>;
+	searchControl: FormControl = new FormControl('');
 	displayedColumns: any[] = [
 		'designation',
 		'companyName',
@@ -88,11 +90,6 @@ export class ClientAdminListComponent implements OnInit {
 				this.changeDetectorRef.detectChanges();
 			}),
 			switchMap((res) => {
-				// if(this.router.url.includes(TableDetails.clientList)){
-				//   return this.superAuth.getAllClientAdmin().pipe(
-				//     map(res =>  new MatTableDataSource(res))
-				//   )
-				// }
 				switch (res?.value) {
 					case TableDetails.clientList:
 						return this.superAuth
@@ -112,9 +109,32 @@ export class ClientAdminListComponent implements OnInit {
 							.getAllClientAdmin()
 							.pipe(map((res) => new MatTableDataSource(res)));
 				}
+			}),
+			switchMap((dataSource) => {
+				return this.searchControl.valueChanges.pipe(
+					startWith(''),
+					map((searchValue: string) => {
+						dataSource.filter = searchValue.trim().toLowerCase();
+						return dataSource;
+					})
+				);
 			})
 		);
+		/* console.log({res})) .pipe(switchMap(searchControl => {
+      console.log({searchControl})
+      return this.dataSource.pipe(
+        map(res => {
+          // res.filter = searchControl.trim().toLowerCase()
+          return res
+        })
+      )
+    })) */
 	}
+
+	// applyFilter(event: Event) {
+	//   const filterValue = (event.target as HTMLInputElement).value;
+	//   this.dataSource.filter = filterValue.trim().toLowerCase();
+	// }
 
 	getUserData(_id: string) {}
 

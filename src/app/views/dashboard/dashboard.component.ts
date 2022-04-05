@@ -134,6 +134,8 @@ export class DashboardComponent implements OnInit {
 	public barChartLabels1: Label[] = [];
 	public barChartData1: ChartDataSets[] = [];
 	correctiveAction$: Observable<CorrectiveActionData[]>;
+	resDesignation: string;
+	designation: typeof Designation;
 	set barChardData(value: BarChart) {
 		this.barChartLabels1 = Object.keys(value).map((label) =>
 			label
@@ -204,10 +206,12 @@ export class DashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.designation = Designation;
 		this.correctiveAction$ = this.dashboardApiService.getCorrectiveAction();
 		this.formsCount$ = this.authService.loginData$.pipe(
 			switchMap((res) => {
 				if (res.accessToken) {
+					this.resDesignation = res.designation;
 					switch (res.designation) {
 						case Designation.superAdmin:
 							return this.dashboardApiService.getFormCount();
