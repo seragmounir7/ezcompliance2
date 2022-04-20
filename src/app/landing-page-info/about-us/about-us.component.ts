@@ -75,7 +75,7 @@ export class AboutUsComponent implements OnInit {
 	/////////////////////// 61767ab18031f2102a69ef71 it is aboutusId and it never  be change so plz do not remove from this //////////////////
 	getTeam() {
 		this.Id = '61767ab18031f2102a69ef71';
-		this.landingPageInfo.getAboutUsById(this.Id).subscribe((res) => {
+		this.landingPageInfo.getAboutUsById().subscribe((res) => {
 			this.dataSource.data = res.data;
 			this.dataSource.paginator = this.paginator;
 			const teamData = res.data[0].team;
@@ -94,7 +94,7 @@ export class AboutUsComponent implements OnInit {
 		this.myId = id;
 		this.isEdit = true;
 		this.Id = '61767ab18031f2102a69ef71';
-		this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
+		this.landingPageInfo.getAboutUsById().subscribe((data) => {
 			this.teamData = data.data[0];
 			const dialogRef = this.dialog.open(EditTeamInfoComponent, {
 				data: {
@@ -117,7 +117,7 @@ export class AboutUsComponent implements OnInit {
 	}
 
 	addForm(id) {
-		this.landingPageInfo.getAboutUsById(this.Id).subscribe((data) => {
+		this.landingPageInfo.getAboutUsById().subscribe((data) => {
 			this.teamData = data.data[0];
 
 			const dialogRef = this.dialog.open(AddTeamInfoComponent, {
