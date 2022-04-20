@@ -41,12 +41,15 @@ export class HeaderComponent implements OnInit {
 			description: ['', Validators.required]
 		});
 		if (this.data1.action == 'edit') {
-			(this.selectedImage = this.dataHeader.fileUrl),
-				this.HeaderInformation.patchValue({
-					description: this.dataHeader.description,
-
-					title: this.dataHeader.title
-				});
+			this.selectedImage = this.dataHeader?.fileUrl
+				? this.dataHeader.fileUrl
+				: '';
+			this.HeaderInformation.patchValue({
+				description: this.dataHeader?.description
+					? this.dataHeader.description
+					: '',
+				title: this.dataHeader?.title ? this.dataHeader.title : ''
+			});
 		}
 	}
 
@@ -71,29 +74,23 @@ export class HeaderComponent implements OnInit {
 		});
 	}
 
-	editHeaderInfo(id) {
-		this.myId = this.dataHeader._id;
+	editHeaderInfo() {
 		this.HeaderInformation.get('fileUrl').setValue(this.selectedImage);
 
 		this.isEdit = true;
-		this.url
-			.editHeader(this.myId, this.HeaderInformation.value)
-			.subscribe((res) => {
-				Swal.fire(' Edited Successfully');
+		this.url.AddHeader(this.HeaderInformation.value).subscribe((res) => {
+			Swal.fire(' Edited Successfully');
 
-				this.data = res.data;
+			this.data = res.data;
 
-				this.dialogRef.close('true');
-			});
+			this.dialogRef.close('true');
+		});
 	}
 	close() {
 		this.dialogRef.close();
 	}
 	onFormSubmit() {
 		const value = this.selectedImage[0];
-
-		const serviceData = {};
-
 		this.url.AddHeader(this.HeaderInformation.value).subscribe((data) => {
 			this.serviceData = data;
 		});
