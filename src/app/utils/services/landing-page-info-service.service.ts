@@ -82,8 +82,8 @@ export class LandingPageInfoServiceService {
 			})
 		);
 	}
-	getAboutUsById(id: any) {
-		return this.https.get(this.apiUrl + 'aboutUs/getAll/' + id).pipe(
+	getAboutUsById() {
+		return this.https.get(this.apiUrl + 'aboutUs/getAll/').pipe(
 			map((res: any) => {
 				return res;
 			})
