@@ -352,7 +352,8 @@ export class RiskAssessmentSWMSComponent
 			this.logicalFormInfo.getAllRegulator().pipe(dataMap),
 			this.logicalFormInfo.getAllSafety().pipe(dataMap),
 			this.logicalFormInfo.getAllStates().pipe(dataMap),
-			this.logicalFormInfo.getAllJurisdiction().pipe(dataMap)
+			this.logicalFormInfo.getAllJurisdiction().pipe(dataMap),
+			this.logicalFormInfo.getRiskInstruction().pipe(dataMap)
 		];
 
 		const allApis = forkJoin(allApiObs$);
@@ -378,6 +379,9 @@ export class RiskAssessmentSWMSComponent
 				this.getAllSafe(res[13]);
 				this.getAllState(res[14]);
 				this.getAllJurisdiction(res[15]);
+				this.riskAssessmentFb.controls.editor.setValue(
+					res[16][0].instruction
+				);
 				const time = new Date();
 				this.dateGet = time;
 				this.setTime = time.toTimeString().slice(0, 5);
@@ -875,7 +879,6 @@ export class RiskAssessmentSWMSComponent
 					);
 
 					arr.push(allChecked);
-					console.count(allChecked);
 				});
 				return of(arr);
 			})
@@ -907,7 +910,6 @@ export class RiskAssessmentSWMSComponent
 		this.jobTaskMatCheckBox.changes.subscribe(
 			(res: QueryList<MatCheckbox>) => {
 				const matCheckArr = res.toArray();
-				console.table(matCheckArr);
 				matCheckArr.forEach((matCheck) => {
 					const checkTrue = Array.from(
 						matCheck._elementRef.nativeElement.parentNode.parentElement.querySelectorAll(
@@ -1643,7 +1645,6 @@ export class RiskAssessmentSWMSComponent
 			parent.querySelectorAll('input[type=checkbox]')
 		).slice(1);
 		this.tradeCategoryArr[i].checked = matCheck.checked;
-		console.table(this.tradeCategoryArr);
 		if (matCheck.checked) {
 			checkBoxes.forEach((checkBox) => {
 				if (checkBox['checked']) {
