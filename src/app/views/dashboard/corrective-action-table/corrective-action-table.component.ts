@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -21,6 +22,7 @@ export class CorrectiveActionTableComponent implements OnInit {
 			date: ''
 		}
 	];
+	dateParams: string;
 	public get data() {
 		return this._data;
 	}
@@ -30,10 +32,23 @@ export class CorrectiveActionTableComponent implements OnInit {
 
 	correctiveActions$: Observable<CorrectiveActionData[]>;
 
-	constructor(private dashboardApiService: DashboardApiService) {}
+	constructor(
+		private dashboardApiService: DashboardApiService,
+		private activatedRoute: ActivatedRoute
+	) {
+		activatedRoute.queryParams.subscribe((res) => {
+			console.log(
+				'🚀 ~ file: corrective-action-table.component.ts ~ line 40 ~ CorrectiveActionTableComponent ~ res',
+				res
+			);
+			this.dateParams = res.date;
+		});
+	}
 
 	ngOnInit(): void {
-		this.correctiveActions$ = this.dashboardApiService.getCorrectiveAction();
+		this.correctiveActions$ = this.dashboardApiService.getCorrectiveAction(
+			this.dateParams
+		);
 	}
 	updateCorrectiveAction(item: CorrectiveActionData, i: number) {
 		let { _id, formName } = item;

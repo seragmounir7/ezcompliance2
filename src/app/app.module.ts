@@ -60,6 +60,10 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { CorrectiveActionTableComponent } from './views/dashboard/corrective-action-table/corrective-action-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import {
+	MatMomentDateModule,
+	MomentDateModule
+} from '@angular/material-moment-adapter';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -93,6 +97,8 @@ registerLocaleData(localeEn, 'en-EN');
 		SharedModule,
 		ScrollModule,
 		MatButtonModule,
+		MomentDateModule,
+		MatMomentDateModule,
 		MatTableModule,
 		MatStepperModule,
 		AppRoutingModule,
@@ -115,10 +121,10 @@ registerLocaleData(localeEn, 'en-EN');
 		NgxMatTimepickerModule,
 		HttpClientModule,
 		DndModule,
-		ChartsModule,
-		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM'
-		})
+		ChartsModule
+		// AgmCoreModule.forRoot({
+		// 	apiKey: 'AIzaSyAjf0hShAAp6Na6Cd9YJ600hc17DqjS-hM'
+		// })
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	providers: [

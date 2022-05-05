@@ -9,7 +9,7 @@
 	<h1 class="text-center">WHS performance Indicators</h1>
 	<div class="row">
 		<div class="col-md-4">
-			<table class="table table-bordered shadowBxSet">
+			<!-- <table class="table table-bordered shadowBxSet">
 				<thead>
 					<tr>
 						<th>Month</th>
@@ -24,7 +24,53 @@
 						<td>All Sites</td>
 					</tr>
 				</tbody>
-			</table>
+			</table> -->
+
+			<div
+				style="display: flex; flex-direction: column"
+				class="shadowBxSet"
+			>
+				<mat-form-field appearance="fill">
+					<mat-label>Filter By </mat-label>
+					<mat-label>Month and Year</mat-label>
+					<input matInput [matDatepicker]="dp" [formControl]="date" />
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="dp"
+					></mat-datepicker-toggle>
+					<mat-datepicker
+						#dp
+						startView="multi-year"
+						(yearSelected)="chosenYearHandler($event)"
+						(monthSelected)="chosenMonthHandler($event, dp)"
+						panelClass="example-month-picker"
+					>
+						<mat-datepicker-actions>
+							<button mat-button matDatepickerCancel>
+								Cancel
+							</button>
+							<button
+								mat-raised-button
+								color="primary"
+								matDatepickerApply
+							>
+								Apply
+							</button>
+						</mat-datepicker-actions>
+					</mat-datepicker>
+				</mat-form-field>
+				<button
+					mat-raised-button
+					color="primary"
+					[disabled]="!date.value"
+					(click)="applyFilter()"
+				>
+					Apply
+				</button>
+				<button mat-button [disabled]="!date.value" (click)="reset()">
+					Reset
+				</button>
+			</div>
 		</div>
 
 		<div class="col-md-8">
@@ -203,6 +249,7 @@
 								mat-icon-button
 								tooltip="All Corrective Action"
 								[routerLink]="['correctiveAction']"
+								[queryParams]="{date:dateParams}"
 								routerLinkActive="router-link-active"
 							>
 								<mat-icon>list</mat-icon>

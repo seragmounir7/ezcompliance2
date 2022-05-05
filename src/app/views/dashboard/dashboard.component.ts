@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MultiDataSet, Label, Color } from 'ng2-charts';
 import 'chart.piecelabel.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/utils/services/auth.service';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import {
 	BarChart,
@@ -16,36 +17,50 @@ import {
 import { Designation } from 'src/app/utils/types/Designation.enum';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { StopSpinner } from 'src/app/stop-spinner-after-view-init';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
+// import moment, { Moment } from 'moment';
+
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment: any = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+	parse: {
+		dateInput: 'MM/YYYY'
+	},
+	display: {
+		dateInput: 'MM/YYYY',
+		monthYearLabel: 'MMM YYYY',
+		dateA11yLabel: 'LL',
+		monthYearA11yLabel: 'MMMM YYYY'
+	}
+};
+
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.scss']
+	styleUrls: ['./dashboard.component.scss'],
+	providers: [
+		// {
+		// 	provide: DateAdapter,
+		// 	useClass: MomentDateAdapter,
+		// 	deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+		//   },
+
+		{ provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+	]
 })
 @StopSpinner()
 export class DashboardComponent implements OnInit {
-	// Doughnut
-
-	corrAct = [
-		{
-			Item: 'Incorrect Singage',
-			Action: 'Install correct singage',
-			personResposibility: 'Tim Smith',
-			date: '11-01-22'
-		},
-		{
-			Item: 'PPE not issued',
-			Action: 'issue PPE',
-			personResposibility: 'John Hunt',
-			date: '11-01-22'
-		},
-		{
-			Item: 'Staff to be inducted',
-			Action: 'Induct new staff members',
-			personResposibility: 'John Hunt',
-			date: '11-01-22'
-		}
-	];
+	applyFilterSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
+		''
+	);
 
 	expRem = [
 		{ name: 'Tim Smith', type: 'driver Licence', expdate: '10-01-2022' },
@@ -136,7 +151,9 @@ export class DashboardComponent implements OnInit {
 	correctiveAction$: Observable<CorrectiveActionData[]>;
 	resDesignation: string;
 	designation: typeof Designation;
+	dateParams: string;
 	set barChardData(value: BarChart) {
+		if (!value) return;
 		this.barChartLabels1 = Object.keys(value).map((label) =>
 			label
 				.split(/(?=[A-Z])/)
@@ -206,26 +223,64 @@ export class DashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.initilization();
+	}
+
+	public chartOptions: any = {
+		labels: {
+			render: 'percentage'
+		}
+	};
+	private initilization() {
+		console.count('initi');
 		this.designation = Designation;
-		this.correctiveAction$ = this.dashboardApiService.getCorrectiveAction();
-		this.formsCount$ = this.authService.loginData$.pipe(
-			switchMap((res) => {
-				if (res.accessToken) {
-					this.resDesignation = res.designation;
-					switch (res.designation) {
-						case Designation.superAdmin:
-							return this.dashboardApiService.getFormCount();
-						case Designation.clientAdmin:
-							return this.dashboardApiService.getFormCount();
-						case Designation.user:
-							return this.dashboardApiService.getFormCount();
-						default:
+		this.getCorrectiveAction();
+		this.getFormCountAndCards();
+		this.isUser$ = this.authService.isUser$;
+		void this.spinner.show();
+		setTimeout(() => {
+			/** spinner ends after 5 seconds */
+			void this.spinner.hide();
+		}, 2000);
+	}
+
+	private getCorrectiveAction(dateParams: string = this.dateParams) {
+		this.correctiveAction$ = this.applyFilterSubject.pipe(
+			switchMap((value) =>
+				this.dashboardApiService.getCorrectiveAction(value)
+			)
+		);
+	}
+
+	private getFormCountAndCards(dateParams: string = this.dateParams) {
+		this.formsCount$ = this.applyFilterSubject.pipe(
+			switchMap((value) =>
+				this.authService.loginData$.pipe(
+					switchMap((res) => {
+						if (res.accessToken) {
+							this.resDesignation = res.designation;
+							switch (res.designation) {
+								case Designation.superAdmin:
+									return this.dashboardApiService.getFormCount(
+										value
+									);
+								case Designation.clientAdmin:
+									return this.dashboardApiService.getFormCount(
+										value
+									);
+								case Designation.user:
+									return this.dashboardApiService.getFormCount(
+										value
+									);
+								default:
+									return of({} as CountData);
+							}
+						} else {
 							return of({} as CountData);
-					}
-				} else {
-					return of({} as CountData);
-				}
-			})
+						}
+					})
+				)
+			)
 		);
 		this.cards$ = this.formsCount$.pipe(
 			map((res) => {
@@ -235,19 +290,8 @@ export class DashboardComponent implements OnInit {
 			shareReplay()
 		);
 		this.formsCount$ = this.formsCount$.pipe(shareReplay());
-		this.isUser$ = this.authService.isUser$;
-		void this.spinner.show();
-		setTimeout(() => {
-			/** spinner ends after 5 seconds */
-			void this.spinner.hide();
-		}, 2000);
 	}
 
-	public chartOptions: any = {
-		labels: {
-			render: 'percentage'
-		}
-	};
 	slideChanged(event) {
 		this.formShow = event.checked;
 	}
@@ -258,7 +302,39 @@ export class DashboardComponent implements OnInit {
 			.updateCorrectiveAction({ _id, formName })
 			.subscribe((res) => {
 				console.log(res);
-				this.correctiveAction$ = this.dashboardApiService.getCorrectiveAction();
+				this.correctiveAction$ = this.dashboardApiService.getCorrectiveAction(
+					this.dateParams
+				);
 			});
+	}
+
+	date = new FormControl(null);
+
+	chosenYearHandler(normalizedYear: Moment) {
+		const ctrlValue = this.date.value || moment();
+		ctrlValue.year(normalizedYear.year());
+		this.date.setValue(ctrlValue);
+	}
+
+	chosenMonthHandler(
+		normalizedMonth: Moment,
+		datepicker: MatDatepicker<Moment>
+	) {
+		const ctrlValue = this.date.value || moment();
+		ctrlValue.month(normalizedMonth.month());
+		this.date.setValue(ctrlValue);
+		datepicker.close();
+	}
+
+	applyFilter() {
+		const date = this.date.value as Moment;
+		this.dateParams = date.toISOString().slice(0, 10);
+		console.log(date.toISOString().slice(0, 10), date);
+		this.applyFilterSubject.next(this.dateParams);
+	}
+	reset() {
+		this.date.setValue(null);
+		this.dateParams = null;
+		this.applyFilterSubject.next(this.dateParams);
 	}
 }

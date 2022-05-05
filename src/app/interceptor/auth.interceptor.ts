@@ -53,16 +53,21 @@ export class AuthInterceptor implements HttpInterceptor {
 				body[role] = id;
 			}
 		}
-		request = request.clone({
-			setHeaders: {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				Authorization: `${
-					this.authService?.loginData?.accessToken ||
-					sessionStorage.getItem('accessToken')
-				}`
-			},
-			body
-		});
+		request = request.clone(
+			this.authService?.loginData?.accessToken ||
+				sessionStorage.getItem('accessToken')
+				? {
+						setHeaders: {
+							// eslint-disable-next-line @typescript-eslint/naming-convention
+							Authorization: `${
+								this.authService?.loginData?.accessToken ||
+								sessionStorage.getItem('accessToken')
+							}`
+						},
+						body
+				  }
+				: { body }
+		);
 		return next.handle(request);
 	}
 }

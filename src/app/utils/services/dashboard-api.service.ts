@@ -12,18 +12,20 @@ import { UserValue } from '../types/UserResponceTypes';
 export class DashboardApiService {
 	constructor(private http: HttpClient) {}
 
-	getFormCount(): Observable<CountData> {
+	getFormCount(date: string): Observable<CountData> {
 		return this.http
 			.get<ResponceBody<CountData>>(
-				`${environment.apiUrl}dashboard/getCount`
+				`${environment.apiUrl}dashboard/getCount`,
+				date ? { params: { date } } : {}
 			)
 			.pipe(map((res) => res.data));
 	}
 
-	getCorrectiveAction(): Observable<CorrectiveActionData[]> {
+	getCorrectiveAction(date: string): Observable<CorrectiveActionData[]> {
 		return this.http
 			.get<ResponceBody<CorrectiveActionData[]>>(
-				`${environment.apiUrl}dashboard/get/corrective/action`
+				`${environment.apiUrl}dashboard/get/corrective/action`,
+				date ? { params: { date } } : {}
 			)
 			.pipe(
 				map((res) =>
