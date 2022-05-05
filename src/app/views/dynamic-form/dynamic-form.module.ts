@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { DndModule } from 'ngx-drag-drop';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DirectivesModule } from 'src/app/Directives/directives.module';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
 	declarations: [
@@ -41,7 +42,8 @@ import { DirectivesModule } from 'src/app/Directives/directives.module';
 		DndModule,
 		MatButtonModule,
 		MatTooltipModule,
-		DirectivesModule
+		DirectivesModule,
+		MatSortModule
 	],
 	exports: [FormsComponent]
 })

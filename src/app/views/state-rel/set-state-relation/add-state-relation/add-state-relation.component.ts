@@ -15,6 +15,7 @@ import {
 import Swal from 'sweetalert2';
 
 import { UntilDestroy } from '@ngneat/until-destroy';
+
 @UntilDestroy({ checkProperties: true })
 @Component({
 	selector: 'app-add-state-relation',

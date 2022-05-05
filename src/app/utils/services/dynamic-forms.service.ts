@@ -80,12 +80,17 @@ export class DynamicFormsService {
 			})
 		);
 	}
-	getAllForm() {
-		return this.https.get(this.apiUrl + 'form/getAll').pipe(
-			map((res: any) => {
-				return res;
-			})
-		);
+	getAllForm(field = '', value = '') {
+		return this.https
+			.get(
+				this.apiUrl + 'form/getAll',
+				field && value ? { params: { field, value } } : {}
+			)
+			.pipe(
+				map((res: any) => {
+					return res;
+				})
+			);
 	}
 	getFormById(id) {
 		return this.https.get(this.apiUrl + 'form/get/' + id).pipe(

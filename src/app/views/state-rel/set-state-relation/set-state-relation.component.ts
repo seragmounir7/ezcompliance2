@@ -150,7 +150,7 @@ export class SetStateRelationComponent implements OnInit {
 	}
 	setRelation_2(id) {
 		this.router.navigate(
-			['/admin/stateRel/addState'],
+			['/admin/setting/addState'],
 
 			{ queryParams: { id } }
 		);

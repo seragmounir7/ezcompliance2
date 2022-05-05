@@ -50,6 +50,8 @@ import { RoleValue } from 'src/app/utils/types/AccessResponceTypes';
 import { Action } from 'src/app/utils/types/HazardTypes';
 import { DepartmentService } from 'src/app/utils/services/department.service';
 import { Department } from 'src/app/utils/types/DepartmentTypes';
+import { FormValue } from './hazard.model';
+import { Actionedby } from './hazard.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -689,10 +691,20 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 			solutionAction,
 			procedureRemoveAction,
 			PPEAction,
+			myControl,
+			department,
+			position,
+			compilePosition,
+			compileDepartment,
 			...rest
 		} = this.hazardReport.value;
 		const data = {
 			...rest,
+			myControl: myControl._id,
+			department: department._id,
+			position: position._id,
+			compilePosition: compilePosition._id,
+			compileDepartment: compileDepartment._id,
 			fullName:
 				fullName.fullName == '' ? '' : fullName.fullName || fullName,
 			name: name.fullName == '' ? '' : name.fullName || name,
@@ -809,13 +821,4 @@ export class HazardReportComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		return invalid;
 	}
-}
-
-export interface Actionedby {
-	elliminateAction: Observable<any>;
-	substituteAction: Observable<any>;
-	isolatedAction: Observable<any>;
-	solutionAction: Observable<any>;
-	procedureRemoveAction: Observable<any>;
-	PPEAction: Observable<any>;
 }

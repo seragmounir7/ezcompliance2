@@ -23,6 +23,7 @@ import { SetStateRelationComponent } from './set-state-relation/set-state-relati
 import { AddStateRelationComponent } from './set-state-relation/add-state-relation/add-state-relation.component';
 import { MatSortModule } from '@angular/material/sort';
 import { StateRelationSettingComponent } from './state-relation-setting/state-relation-setting.component';
+import { DirectivesModule } from 'src/app/Directives/directives.module';
 
 @NgModule({
 	declarations: [
@@ -50,7 +51,8 @@ import { StateRelationSettingComponent } from './state-relation-setting/state-re
 		MatPaginatorModule,
 		MatTableModule,
 		MatFormFieldModule,
-		SharedModule
+		SharedModule,
+		DirectivesModule
 	]
 })
 export class StateRelModule {}

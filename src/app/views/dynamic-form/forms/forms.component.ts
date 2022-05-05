@@ -11,7 +11,7 @@ import { AfterViewInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { accessType, FormName } from 'src/app/side-nav-access.enum';
 import { AccessObj } from 'src/app/utils/types/AccessResponceTypes';
 import { RoleManagementService } from 'src/app/utils/services/role-management.service';
@@ -120,9 +120,11 @@ export class FormsComponent implements AfterViewInit, OnInit {
 	}
 	getAllForms() {
 		void this.spinner.show();
-		this.dynamicFormServise.getAllForm().subscribe((resF) => {
+		this.getDyanmicFormList();
+	}
+	private getDyanmicFormList(field = '', value = '') {
+		this.dynamicFormServise.getAllForm(field, value).subscribe((resF) => {
 			// this.allForms=res.data;
-
 			//
 			this.allForms = resF.data;
 			const data = resF.data;
@@ -136,6 +138,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 			void this.spinner.hide();
 		});
 	}
+
 	slideChanged(e, form) {
 		const data = {
 			title: form.title,
@@ -223,5 +226,9 @@ export class FormsComponent implements AfterViewInit, OnInit {
 		this.router.navigate(['/admin/dynamic/savedDynamicForm'], {
 			queryParams: data
 		});
+	}
+
+	sortData(sort: Sort) {
+		this.getDyanmicFormList('title', sort.direction);
 	}
 }
