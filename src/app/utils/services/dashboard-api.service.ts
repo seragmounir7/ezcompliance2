@@ -21,6 +21,38 @@ export class DashboardApiService {
 			.pipe(map((res) => res.data));
 	}
 
+	getExp(): Observable<CountData> {
+		return this.http
+			.get<ResponceBody<CountData>>(
+				`${environment.apiUrl}dashboard/get/expiry/dates`
+			)
+			.pipe(map((res) => res.data));
+	}
+
+	getFormCounts(): Observable<CountData> {
+		return this.http
+			.get<ResponceBody<CountData>>(
+				`${environment.apiUrl}dashboard/get/SavedDynamicForm/list`
+			)
+			.pipe(map((res) => res.data));
+	}
+
+	updateJobs(id, name): Observable<CountData> {
+		return this.http
+			.get<ResponceBody<CountData>>(
+				`${environment.apiUrl}dashboard/get/jobs/update/${id}/${name}`
+			)
+			.pipe(map((res) => res.data));
+	}
+
+	getJobs(): Observable<CountData> {
+		return this.http
+			.get<ResponceBody<CountData>>(
+				`${environment.apiUrl}dashboard/get/jobs/list`
+			)
+			.pipe(map((res) => res.data));
+	}
+
 	getCorrectiveAction(date: string): Observable<CorrectiveActionData[]> {
 		return this.http
 			.get<ResponceBody<CorrectiveActionData[]>>(
@@ -29,11 +61,15 @@ export class DashboardApiService {
 			)
 			.pipe(
 				map((res) =>
-					res.data.map((item) => {
-						console.log();
-						item.personRes.fullName = `${item.personRes.firstName} ${item.personRes.lastName}`;
-						return item;
-					})
+					res.data
+						.filter((ele) => ele.personRes)
+						.map((item) => {
+							item.personRes['fullName'] = [
+								item.personRes.firstName,
+								item.personRes.lastName
+							].join(' ');
+							return item;
+						})
 				)
 			);
 	}

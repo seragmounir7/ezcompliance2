@@ -182,7 +182,7 @@
 							class="form-select form-control col form-dropdown"
 							aria-label="Default select example"
 							formControlName="jobNumberId"
-							(change)="jobNoSel()"
+							(change)="jobNoSel($event)"
 							[class.is-invalid]="toolBox.get('jobNumberId')?.hasError('required')
             && (toolBox.get('jobNumberId').dirty || toolBox.get('jobNumberId').touched) "
 						>
@@ -273,7 +273,8 @@
 								(onEndEvent)="drawComplete1()"
 								#Signature1
 								[class.is-invalid]="singRequired"
-							></signature-pad>
+							>
+							</signature-pad>
 							<span *ngIf="singRequired" class="invalid-feedback">
 								This Field is Required</span
 							>

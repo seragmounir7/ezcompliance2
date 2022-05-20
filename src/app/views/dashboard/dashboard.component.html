@@ -3,7 +3,7 @@
 	<h1>User Home Page</h1>
 </div>
 <div
-	class="container"
+	class="container-fluid"
 	*accessControl="{formName:'DashBoard',accessType:'View'}"
 >
 	<h1 class="text-center">WHS performance Indicators</h1>
@@ -230,7 +230,7 @@
 		</div>
 	</div>
 	<div class="row" *ngIf="resDesignation !== designation.superAdmin">
-		<div class="col-md-6 p-2">
+		<div class="col-md-4 p-2">
 			<table
 				*ngIf="resDesignation !== designation.superAdmin"
 				class="table table-bordered table-sm tab shadowBxSet"
@@ -265,8 +265,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let a of (correctiveAction$|async) ">
-						<td>{{a.Item}}</td>
+					<tr
+						*ngFor="let a of (correctiveAction$|async); let in = index"
+					>
+						<td>{{in + 1}}</td>
 						<td>{{a.action}}</td>
 						<td>{{a.personRes.fullName}}</td>
 						<td>{{a.date | date:'medium'}}</td>
@@ -311,7 +313,7 @@
 				</canvas>
 			</div>
 		</div>
-		<div class="col-md-3 p-2">
+		<div class="col-md-4 p-2">
 			<table class="table table-bordered tab shadowBxSet">
 				<thead>
 					<tr>
@@ -334,7 +336,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-3 p-2">
+		<div class="col-md-4 p-2">
 			<table class="table table-bordered tab shadowBxSet">
 				<thead>
 					<tr>
@@ -349,6 +351,36 @@
 					<tr *ngFor="let c of auditAndForm">
 						<td>{{c.audit}}</td>
 						<td>{{c.quantity}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4 p-2">
+			<table class="table table-bordered tab shadowBxSet">
+				<thead>
+					<tr>
+						<th colspan="2">Pending Jobs</th>
+					</tr>
+					<tr>
+						<th>Name</th>
+						<th>Descriptions</th>
+						<th>Job Number</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let c of jobsList">
+						<td>{{c.name}}</td>
+						<td>{{c.disc}}</td>
+						<td>{{c.jobNumber}}</td>
+						<td>
+							<button
+								(click)="completed(c.id, c.name)"
+								mat-raised-button
+							>
+								Completed
+							</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>

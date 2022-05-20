@@ -237,23 +237,53 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.allJobNumbers = res.data;
 		});
 	}
-	jobNoSel() {
-		this.allJobNumbers.forEach((item) => {
-			if (this.toolBox.get('jobNumberId').value === item._id) {
-				this.toolBox.patchValue({
-					siteName: item.siteName,
-					customerName: item.customerName,
-					streetAddr: item.streetAddress,
-					custConct: item.customerContact,
-					custConctPh: item.contacts[0].phone,
-					custEmail: item.contacts[0].email,
-					jobNumber: this.toolBox.get('jobNumberId').value
-				});
+	jobNoSel($event) {
+		if (this.id == 'form') {
+			for (
+				let index = this.issues().value.length - 1;
+				index >= 0;
+				index--
+			) {
+				console.log('000000000000', this.id);
+				this.removeIssues(index);
 			}
-			this.toolBox.controls.custConctPh.valueChanges.pipe();
-			this.toolBox.controls.custEmail.valueChanges.pipe();
-		});
-		this.toolBox.get('jobNumberId').updateValueAndValidity();
+		}
+
+		this.logicalFormInfo
+			.getJobs($event.target.value)
+			.subscribe((res: any) => {
+				if (res.length > 0 && this.id == 'form') {
+					for (let i = 0; i < res.length; i++) {
+						this.addIssues();
+						this.issues()
+							.controls[i].get('index')
+							.patchValue(res[i].index);
+						this.issues()
+							.controls[i].get('topicDisc')
+							.patchValue(res[i].topicDisc);
+						this.issues()
+							.controls[i].get('topicRes')
+							.patchValue(res[i].topicRes);
+					}
+				}
+
+				this.allJobNumbers.forEach((item) => {
+					if (this.toolBox.get('jobNumberId').value === item._id) {
+						this.toolBox.patchValue({
+							siteName: item.siteName,
+							customerName: item.customerName,
+							streetAddr: item.streetAddress,
+							custConct: item.customerContact,
+							custConctPh: item.contacts[0].phone,
+							custEmail: item.contacts[0].email,
+							jobNumber: this.toolBox.get('jobNumberId').value
+						});
+					}
+					this.toolBox.controls.custConctPh.valueChanges.pipe();
+					this.toolBox.controls.custEmail.valueChanges.pipe();
+				});
+				this.toolBox.get('jobNumberId').updateValueAndValidity();
+			});
 	}
 	addIssues() {
 		this.issues().push(this.issuesForm());
@@ -273,6 +303,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		const item = <FormArray>this.toolBox.controls.issues;
 		if (item.length > 1) item.removeAt(i);
 	}
+
 	addCorrectAct() {
 		this.correctAct().push(this.correctActForm());
 		this.disableForm();

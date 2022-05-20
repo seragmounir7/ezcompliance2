@@ -61,38 +61,8 @@ export class DashboardComponent implements OnInit {
 	applyFilterSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
 		''
 	);
-
-	expRem = [
-		{ name: 'Tim Smith', type: 'driver Licence', expdate: '10-01-2022' },
-		{ name: 'Bob Green', type: 'Security Licence', expdate: '19-01-2022' },
-		{ name: 'John Hunt', type: 'EWP Licence', expdate: '22-01-2022' },
-		{
-			name: 'Thomas Do',
-			type: 'Electrical Licence',
-			expdate: '01-02-2022'
-		},
-		{ name: 'Mark jones', type: 'EWP Licence', expdate: '06-02-2022' },
-		{
-			name: 'Mick Smart',
-			type: 'COVID Vacs Passport',
-			expdate: '07-03-2022'
-		},
-		{ name: 'Phil Collins', type: 'Driver Licence', expdate: '10-03-2022' },
-		{ name: 'Steve Carol', type: 'Police Check', expdate: '11-03-2022' }
-	];
-
-	auditAndForm = [
-		{ audit: 'Take 5', quantity: '20' },
-		{ audit: 'site Induction', quantity: '15' },
-		{ audit: 'Safety Meetings', quantity: '4' },
-		{ audit: 'Site Inspections', quantity: '6' },
-		{ audit: 'Plant Inspections', quantity: '5' },
-		{ audit: 'Corrective Actions', quantity: '5' },
-		{ audit: 'Return to work plan', quantity: '1' },
-		{ audit: 'Vehicle Inspections', quantity: '12' },
-		{ audit: 'Permit to Work', quantity: '4' }
-	];
-
+	expRem: any;
+	auditAndForm: any;
 	public doughnutChartLabels: Label[] = ['Near Miss', 'Incident', 'Hazard'];
 	public doughnutChartLabels1: Label[] = [];
 	public doughnutChartData: MultiDataSet = [[350, 450, 100]];
@@ -152,6 +122,7 @@ export class DashboardComponent implements OnInit {
 	resDesignation: string;
 	designation: typeof Designation;
 	dateParams: string;
+	jobsList: any;
 	set barChardData(value: BarChart) {
 		if (!value) return;
 		this.barChartLabels1 = Object.keys(value).map((label) =>
@@ -224,6 +195,9 @@ export class DashboardComponent implements OnInit {
 
 	ngOnInit() {
 		this.initilization();
+		this.getExpiry();
+		this.getFormCounts();
+		this.getJobs();
 	}
 
 	public chartOptions: any = {
@@ -242,6 +216,31 @@ export class DashboardComponent implements OnInit {
 			/** spinner ends after 5 seconds */
 			void this.spinner.hide();
 		}, 2000);
+	}
+
+	getExpiry() {
+		this.dashboardApiService.getExp().subscribe((resData) => {
+			// console.log("this.expRemthis.expRemthis.expRem", resData)
+			this.expRem = resData;
+		});
+	}
+
+	getFormCounts() {
+		this.dashboardApiService.getFormCounts().subscribe((resData) => {
+			this.auditAndForm = resData;
+		});
+	}
+
+	completed(id, name) {
+		this.dashboardApiService.updateJobs(id, name).subscribe((resData) => {
+			this.getJobs();
+		});
+	}
+
+	getJobs() {
+		this.dashboardApiService.getJobs().subscribe((resData) => {
+			this.jobsList = resData;
+		});
 	}
 
 	private getCorrectiveAction(dateParams: string = this.dateParams) {
