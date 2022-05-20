@@ -672,6 +672,15 @@ export class LogicalFormInfoService {
 				})
 			);
 	}
+
+	getJobs(id): Observable<any> {
+		return this.https
+			.get<ResponceBody<any>>(
+				`${environment.apiUrl}dashboard/get/jobs/list/${id}`
+			)
+			.pipe(map((res) => res.data));
+	}
+
 	///Safety Legislation end/////
 
 	//////////////// States start//////////////////
