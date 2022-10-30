@@ -27,6 +27,7 @@ import { SavedDynamicFormDataComponent } from './views/dynamic-form/saved-dynami
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { IsPrintGuard } from './RouteGuard/is-print.guard';
 import { CorrectiveActionTableComponent } from './views/dashboard/corrective-action-table/corrective-action-table.component';
+import { DistributionLogsComponent } from './pages/distribution-logs/distribution-logs.component';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent, canActivate: [NonAuthGuard] },
@@ -76,6 +77,7 @@ const routes: Routes = [
 			// { path: '', component: LoginComponent },
 
 			{ path: '', component: DashboardComponent },
+			{ path: 'distribution-logs', component: DistributionLogsComponent },
 			{ path: 'invoice', component: InvoiceComponent },
 			{ path: 'profile', component: ProfileComponent },
 			{ path: 'blank', component: BlankComponent },

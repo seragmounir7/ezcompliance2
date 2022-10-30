@@ -1,643 +1,1071 @@
-<app-scroll></app-scroll>
-<div
-	class="btn btn-outline-primary"
-	*ngIf="id ==='form' && type!=='Tool Box'"
-	[routerLink]="['/admin/forms/fillConfigForm/'+0]"
->
-	<i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
-<div
-	class="btn btn-outline-primary"
-	*ngIf="!isHistory && id!=='form' && type!=='Tool Box' "
-	[routerLink]="['/admin/forms/tableData']"
->
-	<i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
-<div
-	class="btn btn-outline-primary"
-	*ngIf="type==='Tool Box'"
-	[routerLink]="['/admin/savedForms']"
->
-	<i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
-<div
-	class="btn btn-outline-primary"
-	*ngIf="isHistory"
-	[routerLink]="returnTo | async"
->
-	<i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
-
-<form [formGroup]="toolBox">
-	<div id="section-to-print" class="container px-4 py-4 card">
-		<h1 class="text-center pt-3">
-			<p>Toolbox Talk</p>
-		</h1>
-		<hr />
-		<div [class.disableDiv]="isHistory">
-			<p class="title">Site Information</p>
-			<div>
-				<div class="row">
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Site Name<span class="text-danger">*</span>
-						</p>
-						<input
-							type="text"
-							class="form-control"
-							id="siteName"
-							formControlName="siteName"
-							[class.is-invalid]="toolBox.get('siteName')?.hasError('required')
+<style>
+	.row {
+		flex-wrap: nowrap;
+	}
+</style>
+<!--begin::Main-->
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+	<!--begin::Content wrapper-->
+	<div class="d-flex flex-column flex-column-fluid">
+		<!--begin::Toolbar-->
+		<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+			<!--begin::Toolbar container-->
+			<div
+				id="kt_app_toolbar_container"
+				class="app-container container-xxl d-flex flex-stack"
+			>
+				<!--begin::Page title-->
+				<div
+					class="page-title d-flex flex-column justify-content-center flex-wrap me-3"
+				>
+					<!--begin::Title-->
+					<h1
+						class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0"
+					>
+						Toolbox talk
+					</h1>
+					<!--end::Title-->
+					<!--begin::Breadcrumb-->
+					<ul
+						class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1"
+					>
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a
+								href="<?php echo $base; ?>/index.php"
+								class="text-muted text-hover-primary"
+								>Home</a
+							>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">Form List</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">Toolbox talk</li>
+						<!--end::Item-->
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+		<!--begin::Content-->
+		<div id="kt_app_content" class="app-content flex-column-fluid">
+			<!--begin::Content container-->
+			<div
+				id="kt_app_content_container"
+				class="app-container container-xxl"
+			>
+				<!--begin::Card-->
+				<div class="card card-flush">
+					<!--begin::Card body-->
+					<div class="card-body">
+						<!--begin:::Tab content-->
+						<div class="tab-content" id="myTabContent">
+							<!--begin:::Tab pane-->
+							<div
+								class="tab-pane fade show first-tab-content active"
+								id="kt_ecommerce_settings_general"
+								role="tabpanel"
+							>
+								<form [formGroup]="toolBox">
+									<div id="section-to-print" class="">
+										<div [class.disableDiv]="isHistory">
+											<p class="title">
+												Site Information
+											</p>
+											<div>
+												<div class="row">
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															type="text"
+															class="form-control"
+															id="siteName"
+															formControlName="siteName"
+															placeholder="dd"
+															[class.is-invalid]="toolBox.get('siteName')?.hasError('required')
           && (toolBox.get('siteName').dirty || toolBox.get('siteName').touched) "
-						/>
-						<span
-							*ngIf="
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Site Name<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('siteName')?.hasError('required') && (toolBox.get('siteName').dirty
           || toolBox.get('siteName').touched) "
-							class="invalid-feedback"
-						>
-							Site Name is Required</span
-						>
-					</div>
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Customer Name<span class="text-danger">*</span>
-						</p>
-						<input
-							type="text"
-							class="form-control"
-							formControlName="customerName"
-							[class.is-invalid]="toolBox.get('customerName')?.hasError('required')
+															class="invalid-feedback"
+														>
+															Site Name is
+															Required</span
+														>
+													</div>
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															type="text"
+															class="form-control"
+															formControlName="customerName"
+															placeholder="dd"
+															[class.is-invalid]="toolBox.get('customerName')?.hasError('required')
           && (toolBox.get('customerName').dirty || toolBox.get('customerName').touched) "
-						/>
-						<span
-							*ngIf="
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Customer Name<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('customerName')?.hasError('required') && (toolBox.get('customerName').dirty
           || toolBox.get('customerName').touched) "
-							class="invalid-feedback"
-						>
-							Customer Name is Required</span
-						>
-					</div>
-				</div>
-				<div class="row">
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Site Address<span class="text-danger">*</span>
-						</p>
-						<textarea
-							autosize
-							type="text"
-							formControlName="streetAddr"
-							class="form-control"
-							id="name"
-							[class.is-invalid]="toolBox.get('streetAddr')?.hasError('required')
+															class="invalid-feedback"
+														>
+															Customer Name is
+															Required</span
+														>
+													</div>
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															autosize
+															type="text"
+															formControlName="streetAddr"
+															placeholder="dd"
+															class="form-control"
+															id="name"
+															[class.is-invalid]="toolBox.get('streetAddr')?.hasError('required')
           && (toolBox.get('streetAddr').dirty || toolBox.get('streetAddr').touched) "
-						></textarea>
-						<span
-							*ngIf="
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Site Address<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('streetAddr')?.hasError('required') && (toolBox.get('streetAddr').dirty
           || toolBox.get('streetAddr').touched) "
-							class="invalid-feedback"
-						>
-							Site Address is Required</span
-						>
-					</div>
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Customer Contact<span class="text-danger">*</span>
-						</p>
-						<input
-							type="text"
-							class="form-control"
-							formControlName="custConct"
-							[class.is-invalid]="toolBox.get('custConct')?.hasError('required')
+															class="invalid-feedback"
+														>
+															Site Address is
+															Required</span
+														>
+													</div>
+												</div>
+												<div class="row">
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															type="text"
+															class="form-control"
+															formControlName="custConct"
+															placeholder="dd"
+															[class.is-invalid]="toolBox.get('custConct')?.hasError('required')
           && (toolBox.get('custConct').dirty || toolBox.get('custConct').touched) "
-						/>
-						<span
-							*ngIf="
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Customer
+															Contact<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('custConct')?.hasError('required') && (toolBox.get('custConct').dirty
           || toolBox.get('custConct').touched) "
-							class="invalid-feedback"
-						>
-							Customer Contact is Required</span
-						>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Customer Contact Phone<span class="text-danger"
-								>*</span
-							>
-						</p>
-						<input
-							type="text"
-							class="form-control"
-							numbersOnly
-							formControlName="custConctPh"
-							[class.is-invalid]="toolBox.get('custConctPh')?.hasError('required')
+															class="invalid-feedback"
+														>
+															Customer Contact is
+															Required</span
+														>
+													</div>
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															type="text"
+															class="form-control"
+															numbersOnly
+															formControlName="custConctPh"
+															placeholder="dd"
+															[class.is-invalid]="toolBox.get('custConctPh')?.hasError('required')
           && (toolBox.get('custConctPh').dirty || toolBox.get('custConctPh').touched) "
-						/>
-						<span
-							*ngIf="
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Customer Contact
+															Phone<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('custConctPh')?.hasError('required') && (toolBox.get('custConctPh').dirty
           || toolBox.get('custConctPh').touched) "
-							class="invalid-feedback"
-						>
-							Phone Number is Required</span
-						>
-					</div>
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Customer Contact Email<span class="text-danger"
-								>*</span
-							>
-						</p>
-						<input
-							type="text"
-							class="form-control"
-							formControlName="custEmail"
-							[class.is-invalid]="toolBox.get('custEmail')?.hasError('required')
+															class="invalid-feedback"
+														>
+															Phone Number is
+															Required</span
+														>
+													</div>
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															type="text"
+															class="form-control"
+															formControlName="custEmail"
+															placeholder="dd"
+															[class.is-invalid]="toolBox.get('custEmail')?.hasError('required')
           && (toolBox.get('custEmail').dirty || toolBox.get('custEmail').touched) "
-						/>
-						<span
-							*ngIf="
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Customer Contact
+															Email<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('custEmail')?.hasError('required') && (toolBox.get('custEmail').dirty
           || toolBox.get('custEmail').touched) "
-							class="invalid-feedback"
-						>
-							Email is Required</span
-						>
-					</div>
-				</div>
-				<div class="row">
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Job Number<span class="text-danger">*</span>
-						</p>
-
-						<select
-							class="form-select form-control col form-dropdown"
-							aria-label="Default select example"
-							formControlName="jobNumberId"
-							(change)="jobNoSel($event)"
-							[class.is-invalid]="toolBox.get('jobNumberId')?.hasError('required')
+															class="invalid-feedback"
+														>
+															Email is
+															Required</span
+														>
+													</div>
+												</div>
+												<div class="row">
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<select
+															class="form-select form-control col form-dropdown"
+															aria-label="Default select example"
+															formControlName="jobNumberId"
+															placeholder="dd"
+															(change)="jobNoSel($event)"
+															[class.is-invalid]="toolBox.get('jobNumberId')?.hasError('required')
             && (toolBox.get('jobNumberId').dirty || toolBox.get('jobNumberId').touched) "
-						>
-							<option selected hidden>Select</option>
-							<option
-								*ngFor="let jobNo of allJobNumbers"
-								[value]="jobNo._id"
-							>
-								{{jobNo.jobNumber}}
-							</option>
-						</select>
-						<span
-							*ngIf="
+														>
+															<option
+																selected
+																hidden
+															>
+																Select
+															</option>
+															<option
+																*ngFor="let jobNo of allJobNumbers"
+																[value]="jobNo._id"
+															>
+																{{jobNo.jobNumber}}
+															</option>
+														</select>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Job Number<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf="
           toolBox.get('jobNumberId')?.hasError('required') && (toolBox.get('jobNumberId').dirty
           || toolBox.get('jobNumberId').touched) "
-							class="invalid-feedback"
-						>
-							Job Number is Required</span
-						>
-					</div>
+															class="invalid-feedback"
+														>
+															Job Number is
+															Required</span
+														>
+													</div>
 
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Date<span class="text-danger">*</span>
-						</p>
-						<input
-							matInput
-							[matDatepicker]="datepicker2"
-							[max]="maxDate"
-							[min]="minDate"
-							class="form-control"
-							formControlName="date"
-							[class.is-invalid-date]="toolBox.get('date')?.hasError('required')
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<input
+															matInput
+															[matDatepicker]="datepicker2"
+															[max]="maxDate"
+															[min]="minDate"
+															class="form-control"
+															formControlName="date"
+															placeholder="dd"
+															[class.is-invalid-date]="toolBox.get('date')?.hasError('required')
            && (toolBox.get('date').dirty || toolBox.get('date').touched) "
-							placeholder="dd-mm-yyyy"
-						/>
-						<mat-datepicker-toggle
-							matSuffix
-							[for]="datepicker2"
-						></mat-datepicker-toggle>
-						<mat-datepicker #datepicker2></mat-datepicker>
-						<span
-							*ngIf=" toolBox.get('date')?.hasError('required') && (toolBox.get('date').dirty
+															placeholder="dd-mm-yyyy"
+														/>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Date<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<mat-datepicker-toggle
+															matSuffix
+															[for]="datepicker2"
+														></mat-datepicker-toggle>
+														<mat-datepicker
+															#datepicker2
+														></mat-datepicker>
+														<span
+															*ngIf=" toolBox.get('date')?.hasError('required') && (toolBox.get('date').dirty
           || toolBox.get('date').touched) "
-							class="invalid-feedback1"
-						>
-							Date is Required</span
-						>
-					</div>
-				</div>
-				<div class="row">
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Meeting Conducted By<span class="text-danger"
-								>*</span
-							>
-						</p>
-						<select
-							formControlName="meetingBy"
-							class="form-select form-control col form-dropdown"
-							aria-label="Default select example"
-							[class.is-invalid]="toolBox.get('meetingBy')?.hasError('required')
+															class="invalid-feedback1"
+														>
+															Date is
+															Required</span
+														>
+													</div>
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<select
+															formControlName="meetingBy"
+															placeholder="dd"
+															class="form-select form-control col form-dropdown"
+															aria-label="Default select example"
+															[class.is-invalid]="toolBox.get('meetingBy')?.hasError('required')
             && (toolBox.get('meetingBy').dirty || toolBox.get('meetingBy').touched) "
-						>
-							<option *ngFor="let p of staff" [value]="p?._id">
-								{{p.fullName}}
-							</option>
-						</select>
-						<span
-							*ngIf=" toolBox.get('meetingBy')?.hasError('required') && (toolBox.get('meetingBy').dirty
+														>
+															<option
+																*ngFor="let p of staff"
+																[value]="p?._id"
+															>
+																{{p.fullName}}
+															</option>
+														</select>
+
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Meeting Conducted
+															By<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf=" toolBox.get('meetingBy')?.hasError('required') && (toolBox.get('meetingBy').dirty
           || toolBox.get('meetingBy').touched) "
-							class="invalid-feedback"
-						>
-							This Field is Required</span
-						>
-					</div>
-					<div class="my-3 col-sm col-md">
-						<p for="exampleFormControlInput1" class="form-Label">
-							Signature<span class="text-danger">*</span>
-						</p>
-						<div
-							class="sign"
-							style="border: 1px solid rgb(149 162 173)"
-						>
-							<signature-pad
-								[options]="signaturePadOptions1"
-								(onBeginEvent)="drawStart1()"
-								(onEndEvent)="drawComplete1()"
-								#Signature1
-								[class.is-invalid]="singRequired"
-							>
-							</signature-pad>
-							<span *ngIf="singRequired" class="invalid-feedback">
-								This Field is Required</span
-							>
-						</div>
-						<button
-							*ngIf="(isPrint | async)===false"
-							class="btn btn-outline-primary mt-1"
-							(click)="clear1()"
-						>
-							Clear
-						</button>
-					</div>
-				</div>
-			</div>
-			<div>
-				<p class="title">Issues/Topics to be covered:</p>
-			</div>
-			<ng-container formArrayName="issues">
-				<ng-container
-					*ngFor="let control of issues().controls; let i = index"
-					[formGroupName]="i"
-				>
-					<div>
-						<div class="row">
-							<div class="my-3 col-sm-2 col-md-2">
-								<p
-									for="exampleFormControlInput1"
-									class="form-Label"
-								>
-									Issue<span class="text-danger">*</span>
-								</p>
-								<input
-									type="text"
-									class="form-control"
-									formControlName="index"
-									[class.is-invalid]=" issues().at(i).get('index')?.hasError('required')
+															class="invalid-feedback"
+														>
+															This Field is
+															Required</span
+														>
+													</div>
+												</div>
+												<div class="row">
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<select
+															formControlName="meetingBy"
+															placeholder="dd"
+															class="form-select form-control col form-dropdown"
+															aria-label="Default select example"
+															[class.is-invalid]="toolBox.get('meetingBy')?.hasError('required')
+            && (toolBox.get('meetingBy').dirty || toolBox.get('meetingBy').touched) "
+														>
+															<option
+																*ngFor="let p of staff"
+																[value]="p?._id"
+															>
+																{{p.fullName}}
+															</option>
+														</select>
+														<label
+															for="exampleFormControlInput1"
+															class="form-Label"
+														>
+															Meeting Conducted
+															By<span
+																class="text-danger"
+																>*</span
+															>
+														</label>
+														<span
+															*ngIf=" toolBox.get('meetingBy')?.hasError('required') && (toolBox.get('meetingBy').dirty
+          || toolBox.get('meetingBy').touched) "
+															class="invalid-feedback"
+														>
+															This Field is
+															Required</span
+														>
+													</div>
+													<div
+														class="my-3 col-sm col-md form-floating col-md-4"
+													>
+														<div
+															class="sign form-floating"
+															style="
+																border: 1px
+																	solid
+																	rgb(
+																		149 162
+																			173
+																	);
+															"
+														>
+															<signature-pad
+																[options]="signaturePadOptions1"
+																(onBeginEvent)="drawStart1()"
+																(onEndEvent)="drawComplete1()"
+																#Signature1
+																[class.is-invalid]="singRequired"
+															>
+															</signature-pad>
+															<label
+																for="exampleFormControlInput1"
+																class="form-Label"
+															>
+																Signature<span
+																	class="text-danger"
+																	>*</span
+																>
+															</label>
+															<span
+																*ngIf="singRequired"
+																class="invalid-feedback"
+															>
+																This Field is
+																Required</span
+															>
+														</div>
+														<button
+															*ngIf="(isPrint | async)===false"
+															class="btn btn-outline-primary mt-1"
+															(click)="clear1()"
+														>
+															Clear
+														</button>
+													</div>
+												</div>
+											</div>
+											<div>
+												<p class="title">
+													Issues/Topics to be covered:
+												</p>
+											</div>
+											<ng-container
+												formArrayName="issues"
+											>
+												<ng-container
+													*ngFor="let control of issues().controls; let i = index"
+													[formGroupName]="i"
+												>
+													<div>
+														<div class="row">
+															<div
+																class="my-3 col-sm-2 col-md-2 form-floating col-md-3"
+															>
+																<input
+																	type="text"
+																	class="form-control"
+																	formControlName="index"
+																	placeholder="dd"
+																	[class.is-invalid]=" issues().at(i).get('index')?.hasError('required')
             && ( issues().at(i).get('index').dirty ||  issues().at(i).get('index').touched) "
-								/>
-								<span
-									*ngIf="
+																/>
+																<label
+																	for="exampleFormControlInput1"
+																	class="form-Label"
+																>
+																	Issue<span
+																		class="text-danger"
+																		>*</span
+																	>
+																</label>
+																<span
+																	*ngIf="
                issues().at(i).get('index')?.hasError('required') && ( issues().at(i).get('index').dirty
               || issues().at(i).get('index').touched) "
-									class="invalid-feedback"
-								>
-									This Field is Required</span
-								>
-							</div>
-							<div class="my-3 col-sm-6 col-md-6">
-								<p
-									for="exampleFormControlInput1"
-									class="form-Label"
-								>
-									Comments<span class="text-danger">*</span>
-								</p>
-								<textarea
-									type="text"
-									class="form-control"
-									formControlName="topicDisc"
-									[class.is-invalid]="  issues().at(i).get('topicDisc')?.hasError('required')
+																	class="invalid-feedback"
+																>
+																	This Field
+																	is
+																	Required</span
+																>
+															</div>
+															<div
+																class="my-3 form-floating col-md-3"
+															>
+																<textarea
+																	type="text"
+																	class="form-control"
+																	formControlName="topicDisc"
+																	placeholder="dd"
+																	[class.is-invalid]="  issues().at(i).get('topicDisc')?.hasError('required')
             && (  issues().at(i).get('topicDisc').dirty ||   issues().at(i).get('topicDisc').touched) "
-								></textarea>
-								<span
-									*ngIf="
+																></textarea>
+																<label
+																	for="exampleFormControlInput1"
+																	class="form-Label"
+																>
+																	Comments<span
+																		class="text-danger"
+																		>*</span
+																	>
+																</label>
+																<span
+																	*ngIf="
                 issues().at(i).get('topicDisc')?.hasError('required') && (  issues().at(i).get('topicDisc').dirty
               ||  issues().at(i).get('topicDisc').touched) "
-									class="invalid-feedback"
-								>
-									This Field is Required</span
-								>
-							</div>
-							<div class="my-3 col-sm-2 col-md-2">
-								<p
-									for="exampleFormControlInput1"
-									class="form-Label"
-								>
-									Topic Resolution<span class="text-danger"
-										>*</span
-									>
-								</p>
-								<select
-									class="form-select form-control col form-dropdown"
-									aria-label="Default select example"
-									formControlName="topicRes"
-									[class.is-invalid]=" issues().at(i).get('topicRes')?.hasError('required')
+																	class="invalid-feedback"
+																>
+																	This Field
+																	is
+																	Required</span
+																>
+															</div>
+															<div
+																class="my-3 col-sm-2 col-md-2 form-floating col-md-3"
+															>
+																<select
+																	class="form-select form-control col form-dropdown"
+																	aria-label="Default select example"
+																	formControlName="topicRes"
+																	placeholder="dd"
+																	[class.is-invalid]=" issues().at(i).get('topicRes')?.hasError('required')
                 && ( issues().at(i).get('topicRes').dirty ||  issues().at(i).get('topicRes').touched) "
-								>
-									<option selected hidden>Select</option>
-									<option value="Yes">Yes</option>
-									<option value="No">No</option>
-								</select>
-								<span
-									*ngIf="
+																>
+																	<option
+																		selected
+																		hidden
+																	>
+																		Select
+																	</option>
+																	<option
+																		value="Yes"
+																	>
+																		Yes
+																	</option>
+																	<option
+																		value="No"
+																	>
+																		No
+																	</option>
+																</select>
+																<label
+																	for="exampleFormControlInput1"
+																	class="form-Label"
+																>
+																	Topic
+																	Resolution<span
+																		class="text-danger"
+																		>*</span
+																	>
+																</label>
+																<span
+																	*ngIf="
                issues().at(i).get('topicRes')?.hasError('required') && ( issues().at(i).get('topicRes').dirty
               || issues().at(i).get('topicRes').touched) "
-									class="invalid-feedback"
-								>
-									This Field is Required</span
-								>
-							</div>
-							<div class="d-flex">
-								<div class="my-3 col-sm-1 col-md-1 my-auto">
-									<span
-										class="material-icons"
-										style="margin-top: 35%"
-										(click)="addIssues()"
-										>add_circle_outline
-									</span>
-								</div>
-								<div
-									class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
-								>
-									<span
-										class="material-icons"
-										style="margin-top: 35%"
-										(click)="removeIssues(i)"
-									>
-										remove_circle_outline
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</ng-container>
-			</ng-container>
-			<div class="pagebreak-print">
-				<p class="title">Corrective Action</p>
-			</div>
+																	class="invalid-feedback"
+																>
+																	This Field
+																	is
+																	Required</span
+																>
+															</div>
+															<div class="d-flex">
+																<div
+																	class="my-3 col-sm-1 col-md-1 my-auto"
+																>
+																	<span
+																		class="material-icons"
+																		style="
+																			margin-top: 35%;
+																		"
+																		(click)="addIssues()"
+																		>add_circle_outline
+																	</span>
+																</div>
+																<div
+																	class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
+																>
+																	<span
+																		class="material-icons"
+																		style="
+																			margin-top: 35%;
+																		"
+																		(click)="removeIssues(i)"
+																	>
+																		remove_circle_outline
+																	</span>
+																</div>
+															</div>
+														</div>
+													</div>
+												</ng-container>
+											</ng-container>
+											<div class="pagebreak-print">
+												<p class="title">
+													Corrective Action
+												</p>
+											</div>
 
-			<div formArrayName="corrAction">
-				<ng-container
-					*ngFor="let control of correctAct().controls; let i = index"
-					[formGroupName]="i"
-				>
-					<div class="row">
-						<div class="my-3 col-sm-6 col-md-6">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Action<span class="text-danger">*</span>
-							</p>
-
-							<textarea
-								type="text"
-								class="form-control"
-								formControlName="action"
-								[class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required')
+											<div formArrayName="corrAction">
+												<ng-container
+													*ngFor="let control of correctAct().controls; let i = index"
+													[formGroupName]="i"
+												>
+													<div class="row">
+														<div
+															class="my-3 form-floating col-md-3"
+														>
+															<textarea
+																type="text"
+																class="form-control"
+																formControlName="action"
+																placeholder="dd"
+																[class.is-invalid]=" correctAct().at(i).get('action')?.hasError('required')
               && ( correctAct().at(i).get('action').dirty ||  correctAct().at(i).get('action').touched) "
-							></textarea>
-							<span
-								*ngIf="
+															></textarea>
+															<label
+																for="exampleFormControlInput1"
+																class="form-Label"
+															>
+																Action<span
+																	class="text-danger"
+																	>*</span
+																>
+															</label>
+															<span
+																*ngIf="
                correctAct().at(i).get('action')?.hasError('required') && ( correctAct().at(i).get('action').dirty
               || correctAct().at(i).get('action').touched) "
-								class="invalid-feedback"
-							>
-								This Field is Required</span
-							>
-						</div>
-						<div class="my-3 col-sm-2 col-md-2">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Person Responsible<span class="text-danger"
-									>*</span
-								>
-							</p>
-							<select
-								class="form-select form-control col form-dropdown"
-								aria-label="Default select example"
-								formControlName="personRes"
-								[class.is-invalid]=" correctAct().at(i).get('personRes')?.hasError('required')
+																class="invalid-feedback"
+															>
+																This Field is
+																Required</span
+															>
+														</div>
+														<div
+															class="my-3 col-sm-2 col-md-2 form-floating col-md-3"
+														>
+															<select
+																class="form-select form-control col form-dropdown"
+																aria-label="Default select example"
+																formControlName="personRes"
+																placeholder="dd"
+																[class.is-invalid]=" correctAct().at(i).get('personRes')?.hasError('required')
                 && ( correctAct().at(i).get('personRes').dirty ||  correctAct().at(i).get('personRes').touched) "
-							>
-								<option selected hidden>Select</option>
-								<option
-									*ngFor="let j of staff"
-									[value]="j?._id"
-								>
-									{{j?.fullName}}
-								</option>
-							</select>
-							<span
-								*ngIf="
+															>
+																<label
+																	for="exampleFormControlInput1"
+																	class="form-Label"
+																>
+																	Person
+																	Responsible<span
+																		class="text-danger"
+																		>*</span
+																	>
+																</label>
+																<option
+																	selected
+																	hidden
+																>
+																	Select
+																</option>
+																<option
+																	*ngFor="let j of staff"
+																	[value]="j?._id"
+																>
+																	{{j?.fullName}}
+																</option>
+															</select>
+															<span
+																*ngIf="
                correctAct().at(i).get('personRes')?.hasError('required') && ( correctAct().at(i).get('personRes').dirty
               || correctAct().at(i).get('personRes').touched) "
-								class="invalid-feedback"
-							>
-								This Field is Required</span
-							>
-						</div>
-						<div class="my-3 col-sm-2 col-md-2">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Complete By Date<span class="text-danger"
-									>*</span
-								>
-							</p>
-							<input
-								matInput
-								[matDatepicker]="datepicker2"
-								[min]="minDate"
-								class="form-control"
-								formControlName="date"
-								[class.is-invalid-date]="correctAct().at(i).get('date')?.hasError('required')
+																class="invalid-feedback"
+															>
+																This Field is
+																Required</span
+															>
+														</div>
+														<div
+															class="my-3 col-sm-2 col-md-2 form-floating col-md-3"
+														>
+															<input
+																matInput
+																[matDatepicker]="datepicker2"
+																[min]="minDate"
+																class="form-control"
+																formControlName="date"
+																placeholder="dd"
+																[class.is-invalid-date]="correctAct().at(i).get('date')?.hasError('required')
            && (correctAct().at(i).get('date').dirty || correctAct().at(i).get('date').touched) "
-								placeholder="dd-mm-yyyy"
-							/>
-							<mat-datepicker-toggle
-								matSuffix
-								[for]="datepicker2"
-							></mat-datepicker-toggle>
-							<mat-datepicker #datepicker2></mat-datepicker>
-							<span
-								*ngIf=" correctAct().at(i).get('date')?.hasError('required') && (correctAct().at(i).get('date').dirty
+																placeholder="dd-mm-yyyy"
+															/>
+															<label
+																for="exampleFormControlInput1"
+																class="form-Label"
+															>
+																Complete By
+																Date<span
+																	class="text-danger"
+																	>*</span
+																>
+															</label>
+															<mat-datepicker-toggle
+																matSuffix
+																[for]="datepicker2"
+															></mat-datepicker-toggle>
+															<mat-datepicker
+																#datepicker2
+															></mat-datepicker>
+															<span
+																*ngIf=" correctAct().at(i).get('date')?.hasError('required') && (correctAct().at(i).get('date').dirty
           || correctAct().at(i).get('date').touched)"
-								class="invalid-feedback1"
-							>
-								Date is Required</span
-							>
-						</div>
-						<div class="d-flex">
-							<div class="my-3 col-sm-1 col-md-1 my-auto">
-								<span
-									class="material-icons"
-									style="margin-top: 35%"
-									(click)="addCorrectAct()"
-									>add_circle_outline
-								</span>
-							</div>
-							<div class="my-3 col-sm-1 col-md-1 my-auto mx-auto">
-								<span
-									class="material-icons"
-									style="margin-top: 35%"
-									(click)="removeCorrectAct(i)"
-								>
-									remove_circle_outline
-								</span>
-							</div>
-						</div>
-					</div>
-				</ng-container>
-			</div>
-			<div class="">
-				<p class="title pagebreak-print">Attendee (Print and Sign)</p>
-			</div>
+																class="invalid-feedback1"
+															>
+																Date is
+																Required</span
+															>
+														</div>
+														<div class="d-flex">
+															<div
+																class="my-3 col-sm-1 col-md-1 my-auto"
+															>
+																<span
+																	class="material-icons"
+																	style="
+																		margin-top: 35%;
+																	"
+																	(click)="addCorrectAct()"
+																	>add_circle_outline
+																</span>
+															</div>
+															<div
+																class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
+															>
+																<span
+																	class="material-icons"
+																	style="
+																		margin-top: 35%;
+																	"
+																	(click)="removeCorrectAct(i)"
+																>
+																	remove_circle_outline
+																</span>
+															</div>
+														</div>
+													</div>
+												</ng-container>
+											</div>
+											<div class="">
+												<p
+													class="title pagebreak-print"
+												>
+													Attendee (Print and Sign)
+												</p>
+											</div>
 
-			<div formArrayName="attendees">
-				<ng-container
-					*ngFor="let control of attendee().controls; let i = index"
-					[formGroupName]="i"
-				>
-					<div class="row">
-						<div class="my-3 col-sm-5 col-md-5">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Employee {{ i + 1 }}
-								<span class="text-danger">*</span>
-							</p>
-							<input
-								type="text"
-								[matAutocomplete]="empAuto"
-								class="form-control"
-								formControlName="employee"
-								[class.is-invalid]="attendee().controls[i].get('employee')?.hasError('required')
+											<div formArrayName="attendees">
+												<ng-container
+													*ngFor="let control of attendee().controls; let i = index"
+													[formGroupName]="i"
+												>
+													<div
+														class="row flex-nowrap"
+													>
+														<div
+															class="my-3 col-sm-5 col-md-5 form-floating"
+														>
+															<input
+																type="text"
+																[matAutocomplete]="empAuto"
+																class="form-control"
+																formControlName="employee"
+																placeholder="dd"
+																[class.is-invalid]="attendee().controls[i].get('employee')?.hasError('required')
               && (attendee().controls[i].get('employee').dirty || attendee().controls[i].get('employee').touched) "
-							/>
-							<mat-autocomplete
-								#empAuto="matAutocomplete"
-								[displayWith]="displayFn"
-							>
-								<mat-option
-									*ngFor="let option of empObsArr$[i] | async ; let i = index "
-									[value]="option"
-								>
-									{{option.fullName}}
-								</mat-option>
-							</mat-autocomplete>
-							<span
-								*ngIf="
+															/>
+															<label
+																for="exampleFormControlInput1"
+																class="form-Label"
+															>
+																Employee {{ i +
+																1 }}
+																<span
+																	class="text-danger"
+																	>*</span
+																>
+															</label>
+															<mat-autocomplete
+																#empAuto="matAutocomplete"
+																[displayWith]="displayFn"
+															>
+																<mat-option
+																	*ngFor="let option of empObsArr$[i] | async ; let i = index "
+																	[value]="option"
+																>
+																	{{option.fullName}}
+																</mat-option>
+															</mat-autocomplete>
+															<span
+																*ngIf="
               attendee().controls[i].get('employee')?.hasError('required') && (attendee().controls[i].get('employee').dirty
               ||attendee().controls[i].get('employee').touched) "
-								class="invalid-feedback"
-							>
-								This Field is Required</span
-							>
-						</div>
-						<div class="my-3 col-sm-5 col-md-5">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Signature<span class="text-danger">*</span>
-							</p>
-
-							<div
-								class="sign"
-								style="border: 1px solid rgb(149 162 173)"
-							>
-								<signature-pad
-									[options]="signaturePadOptions2"
-									(onBeginEvent)="drawStart2(i)"
-									(onEndEvent)="drawComplete2(i,sign)"
-									#Signature2
-									[class.is-invalid]="sing2Required[i]"
-									#sign
-								>
-								</signature-pad>
-								<span
-									*ngIf="sing2Required[i]"
-									class="invalid-feedback"
-								>
-									This Field is Required</span
-								>
+																class="invalid-feedback"
+															>
+																This Field is
+																Required</span
+															>
+														</div>
+														<div
+															class="my-3 col-sm-5 col-md-5 form-floating"
+														>
+															<div
+																class="sign form-floating"
+																style="
+																	border: 1px
+																		solid
+																		rgb(
+																			149
+																				162
+																				173
+																		);
+																"
+															>
+																<signature-pad
+																	[options]="signaturePadOptions2"
+																	(onBeginEvent)="drawStart2(i)"
+																	(onEndEvent)="drawComplete2(i,sign)"
+																	#Signature2
+																	[class.is-invalid]="sing2Required[i]"
+																	#sign
+																>
+																</signature-pad>
+																<label
+																	for="exampleFormControlInput1"
+																	class="form-Label"
+																>
+																	Signature<span
+																		class="text-danger"
+																		>*</span
+																	>
+																</label>
+																<span
+																	*ngIf="sing2Required[i]"
+																	class="invalid-feedback"
+																>
+																	This Field
+																	is
+																	Required</span
+																>
+															</div>
+															<ng-container
+																*ngIf="!isHistory"
+															>
+																<button
+																	*ngIf="(isPrint | async)===false"
+																	class="btn btn-outline-primary mt-1"
+																	(click)="sign.clear(); clear2(i)"
+																>
+																	Clear
+																</button>
+															</ng-container>
+														</div>
+														<ng-container
+															*ngIf="!isHistory"
+														>
+															<div class="d-flex">
+																<div
+																	class="my-3 col-sm-1 col-md-1 my-auto"
+																>
+																	<span
+																		class="material-icons"
+																		(click)="addAttendee()"
+																		>add_circle_outline
+																	</span>
+																</div>
+																<div
+																	class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
+																>
+																	<span
+																		class="material-icons"
+																		(click)="removeAttendee(i)"
+																	>
+																		remove_circle_outline
+																	</span>
+																</div>
+															</div>
+														</ng-container>
+													</div>
+												</ng-container>
+											</div>
+										</div>
+										<button
+											*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
+											class="btn btn-primary btn-block mt-1"
+											type="submit"
+											(click)="onSave()"
+											style="
+												width: 10rem;
+												align-self: center;
+											"
+										>
+											Submit
+										</button>
+									</div>
+								</form>
+								<!--end::Form-->
 							</div>
-							<ng-container *ngIf="!isHistory">
-								<button
-									*ngIf="(isPrint | async)===false"
-									class="btn btn-outline-primary mt-1"
-									(click)="sign.clear(); clear2(i)"
-								>
-									Clear
-								</button>
-							</ng-container>
+							<!--end:::Tab pane-->
 						</div>
-						<ng-container *ngIf="!isHistory">
-							<div class="d-flex">
-								<div class="my-3 col-sm-1 col-md-1 my-auto">
-									<span
-										class="material-icons"
-										(click)="addAttendee()"
-										>add_circle_outline
-									</span>
-								</div>
-								<div
-									class="my-3 col-sm-1 col-md-1 my-auto mx-auto"
-								>
-									<span
-										class="material-icons"
-										(click)="removeAttendee(i)"
-									>
-										remove_circle_outline
-									</span>
-								</div>
-							</div>
-						</ng-container>
+						<!--end:::Tab content-->
 					</div>
-				</ng-container>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
 			</div>
+			<!--end::Content container-->
 		</div>
-		<button
-			*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
-			class="btn btn-primary btn-block mt-1"
-			type="submit"
-			[disabled]="!toolBox.valid || singRequired "
-			(click)="onSave()"
-			style="width: 10rem; align-self: center"
-		>
-			Submit
-		</button>
+		<!--end::Content-->
 	</div>
-</form>
+	<!--end::Content wrapper-->
+	<!--begin::Footer-->
+	<div id="kt_app_footer" class="app-footer">
+		<!--begin::Footer container-->
+		<div
+			class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3"
+		>
+			<!--begin::Copyright-->
+			<div class="text-dark order-2 order-md-1">
+				<span class="text-muted fw-semibold me-1">2022©</span>
+				<a
+					href="https://feur.com.au"
+					target="_blank"
+					class="text-gray-800 text-hover-primary"
+					>By Feur Media House</a
+				>
+			</div>
+			<!--end::Copyright-->
+			<!--begin::Menu-->
+			<ul
+				class="menu menu-gray-600 menu-hover-primary fw-semibold order-1"
+			>
+				<li class="menu-item">
+					<a href="#" target="_blank" class="menu-link px-2">About</a>
+				</li>
+				<li class="menu-item">
+					<a href="#" target="_blank" class="menu-link px-2"
+						>Support</a
+					>
+				</li>
+			</ul>
+			<!--end::Menu-->
+		</div>
+		<!--end::Footer container-->
+	</div>
+	<!--end::Footer-->
+</div>
+<!--end:::Main-->
+
+<script>
+	//clicking on next move me to SWMS
+	let formSubmit = document.querySelector('.custom-transition-to-swms');
+	formSubmit.addEventListener('click', function (e) {
+		e.preventDefault();
+
+		//tabs active
+		let prev = document.querySelector('.first-tab');
+		let swms = document.querySelector('.second-tab');
+		prev.classList.remove('active');
+		swms.classList.add('active');
+
+		//tabs content active
+		let prev_content = document.querySelector('.first-tab-content');
+		let swms_content = document.querySelector('.second-tab-content');
+		prev_content.classList.remove('active');
+		swms_content.classList.add('active');
+		prev_content.classList.add('fade');
+		swms_content.classList.remove('fade');
+
+		window.scrollTo(0, 0);
+	});
+
+	//get the list of the inputs that have patterns
+	let checkboxes = document.querySelectorAll('.has-pattern');
+	let has_pattern = [...checkboxes];
+
+	let has_patterns_and_checked = [];
+
+	//listen to the inputs that have patterns
+	has_pattern.forEach((checkbox_to_listen) => {
+		checkbox_to_listen.addEventListener('click', () => {
+			has_patterns_and_checked = has_pattern.filter(
+				(checkbox_to_filter) => {
+					return checkbox_to_filter.checked;
+				}
+			);
+			uncheck_all_assessments();
+			check_assessments(has_patterns_and_checked);
+		});
+	});
+
+	//uncheck all assements inputs
+	let uncheck_all_assessments = function () {
+		let all_assessments = document.querySelectorAll('.assessment');
+		all_assessments.forEach((assessment) => {
+			assessment.checked = false;
+		});
+	};
+
+	//check all assements inputs
+	let check_assessments = function (checked_list) {
+		let classes_as_string = '';
+		let classes_as_list = [];
+		checked_list.forEach((checkbox) => {
+			classes_as_string += checkbox.classList[3].substr(8) + '-';
+			classes_as_list = classes_as_string.split('-');
+			classes_as_list.pop();
+		});
+
+		classes_as_list.forEach((input_class) => {
+			const risk_assement = document.querySelector(`.${input_class}`);
+			risk_assement.checked = true;
+		});
+	};
+</script>

@@ -64,6 +64,7 @@ import {
 	MatMomentDateModule,
 	MomentDateModule
 } from '@angular/material-moment-adapter';
+import { DistributionLogsComponent } from './pages/distribution-logs/distribution-logs.component';
 
 registerLocaleData(localeAu, 'en-au');
 
@@ -90,7 +91,8 @@ registerLocaleData(localeEn, 'en-EN');
 		ResetPasswordComponent,
 		ForgotPasswordComponent,
 		InvoiceComponent,
-		CorrectiveActionTableComponent
+		CorrectiveActionTableComponent,
+		DistributionLogsComponent
 	],
 	imports: [
 		BrowserModule,

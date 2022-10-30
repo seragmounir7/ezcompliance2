@@ -93,17 +93,11 @@ export class AddEmployeeComponent implements OnInit {
 			profTitie: ['', Validators.required],
 			profFirst: ['', Validators.required],
 			porfListName: ['', Validators.required],
-			porfEmail: ['', [Validators.required, Validators.email]],
+			porfEmail: ['', [Validators.required]],
 			porfPosition: ['', Validators.required],
 			porfDepartment: ['', Validators.required],
-			porfPhone: [
-				'',
-				[Validators.required, CustomValidators.PhoneNumberValidator()]
-			],
-			porfMobile: [
-				'',
-				[Validators.required, CustomValidators.PhoneNumberValidator()]
-			],
+			porfPhone: ['', [Validators.required]],
+			porfMobile: ['', [Validators.required]],
 			// porfEmployee: ['', Validators.required],
 			// porfManager: ['', Validators.required],
 			// porfAdministrater: ['', Validators.required],
@@ -120,14 +114,8 @@ export class AddEmployeeComponent implements OnInit {
 			empLastName: ['', Validators.required],
 			empRelationship: ['', Validators.required],
 			empEmail: ['', [Validators.required, Validators.email]],
-			empPhone: [
-				'',
-				[Validators.required, CustomValidators.PhoneNumberValidator()]
-			],
-			empMobile: [
-				'',
-				[Validators.required, CustomValidators.PhoneNumberValidator()]
-			],
+			empPhone: ['', [Validators.required]],
+			empMobile: ['', [Validators.required]],
 			LicenceName: [''],
 
 			LicenceNumber: [''],

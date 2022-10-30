@@ -44,14 +44,12 @@
 
 	<div class="box">
 		<div class="row">
-			<div class="col col-md col-sm-6-print">
-				<label class="form-label mb-3"
-					>Job Number<span class="text-danger">*</span></label
-				>
+			<div class="col col-md col-sm-6-print form-floating">
 				<select
 					class="form-select form-control"
 					aria-label="Default select example"
 					formControlName="jobNumber"
+					placeholder="dd"
 					(change)="jobNoSel()"
 					[class.is-invalid]="
             IncidentReport.get('jobNumber')?.hasError('required') &&
@@ -70,6 +68,9 @@
 						{{ jobNo.jobNumber }}
 					</option>
 				</select>
+				<label class="form-label mb-3"
+					>Job Number<span class="text-danger">*</span></label
+				>
 				<span
 					*ngIf="
             IncidentReport.get('jobNumber')?.hasError('required') &&
@@ -111,13 +112,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Site Name<span class="text-danger">*</span></label
-					>
+				<div class="form-floating">
 					<input
 						type="text"
 						class="form-control"
+						placeholder="dd"
 						formControlName="siteName"
 						[class.is-invalid]="
               IncidentReport.get('siteName')?.hasError('required') &&
@@ -125,6 +124,9 @@
                 IncidentReport.get('siteName').touched)
             "
 					/>
+					<label class="cols" class="form-Label"
+						>Site Name<span class="text-danger">*</span></label
+					>
 					<span
 						*ngIf="
               IncidentReport.get('siteName')?.hasError('required') &&
@@ -138,13 +140,11 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Customer Name<span class="text-danger">*</span></label
-					>
+				<div class="form-floating">
 					<input
 						type="text"
 						class="form-control"
+						placeholder="dd"
 						formControlName="customerName"
 						[class.is-invalid]="
               IncidentReport.get('customerName')?.hasError('required') &&
@@ -152,6 +152,9 @@
                 IncidentReport.get('customerName').touched)
             "
 					/>
+					<label class="cols" class="form-Label"
+						>Customer Name<span class="text-danger">*</span></label
+					>
 					<span
 						*ngIf="
               IncidentReport.get('customerName')?.hasError('required') &&
@@ -167,13 +170,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Site Address<span class="text-danger">*</span></label
-					>
+				<div class="form-floating">
 					<textarea
 						autosize
 						type="text"
+						placeholder="dd"
 						formControlName="streetAddress"
 						class="form-control"
 						id="name"
@@ -183,6 +184,9 @@
                 IncidentReport.get('streetAddress').touched)
             "
 					></textarea>
+					<label class="cols" class="form-Label"
+						>Site Address<span class="text-danger">*</span></label
+					>
 					<span
 						*ngIf="
               IncidentReport.get('streetAddress')?.hasError('required') &&
@@ -196,15 +200,11 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Customer Contact<span class="text-danger"
-							>*</span
-						></label
-					>
+				<div class="form-floating">
 					<input
 						placeholder=""
 						type="text"
+						placeholder="dd"
 						class="form-control"
 						formControlName="customerContact"
 						[class.is-invalid]="
@@ -213,6 +213,11 @@
                 IncidentReport.get('customerContact').touched)
             "
 					/>
+					<label class="cols" class="form-Label"
+						>Customer Contact<span class="text-danger"
+							>*</span
+						></label
+					>
 					<span
 						*ngIf="
               IncidentReport.get('customerContact')?.hasError('required') &&
@@ -227,12 +232,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6 col-sm-6-print">
-				<label class="form-label mb-3"
-					>Project Manager<span class="text-danger">*</span></label
-				>
+			<div class="col-md-6 col-sm-6-print form-floating">
 				<select
 					class="form-select form-control col"
+					placeholder="dd"
 					aria-label="Default select example"
 					formControlName="projectManager"
 					[class.is-invalid]="
@@ -248,6 +251,9 @@
 						{{ mang.fullName }}
 					</option>
 				</select>
+				<label class="form-label mb-3"
+					>Project Manager<span class="text-danger">*</span></label
+				>
 				<span
 					*ngIf="
             IncidentReport.get('projectManager')?.hasError('required') &&
@@ -261,13 +267,10 @@
 			</div>
 
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Person Completing Form
-						<span class="text-danger">*</span></label
-					>
+				<div class="form-floating">
 					<input
 						type="text"
+						placeholder="dd"
 						[matAutocomplete]="personCompletingForm"
 						class="form-control"
 						formControlName="personCompletingForm"
@@ -279,6 +282,10 @@
                 IncidentReport.get('personCompletingForm').touched)
             "
 					/>
+					<label class="cols" class="form-Label"
+						>Person Completing Form
+						<span class="text-danger">*</span></label
+					>
 					<mat-autocomplete
 						#personCompletingForm="matAutocomplete"
 						(optionSelected)="employeeData($event,'personCompletingForm')"
@@ -308,15 +315,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Customer Contact Phone<span class="text-danger"
-							>*</span
-						></label
-					>
+				<div class="form-floating">
 					<input
 						placeholder="(000) 000-0000"
 						type="text"
+						placeholder="dd"
 						class="form-control"
 						formControlName="customerContactPhone"
 						[class.is-invalid]="
@@ -327,6 +330,11 @@
                 IncidentReport.get('customerContactPhone').touched)
             "
 					/>
+					<label class="cols" class="form-Label"
+						>Customer Contact Phone<span class="text-danger"
+							>*</span
+						></label
+					>
 					<span
 						*ngIf="
               IncidentReport.get('customerContactPhone')?.hasError(
@@ -343,15 +351,11 @@
 			</div>
 
 			<div class="col-md-6 col-sm-6-print">
-				<div>
-					<label class="cols" class="form-Label"
-						>Customer Contact Email<span class="text-danger"
-							>*</span
-						></label
-					>
+				<div class="form-floating">
 					<input
 						placeholder="ex: email@yahoo.com"
 						type="text"
+						placeholder="dd"
 						class="form-control"
 						formControlName="customerEmail"
 						[class.is-invalid]="
@@ -360,6 +364,11 @@
                 IncidentReport.get('customerEmail').touched)
             "
 					/>
+					<label class="cols" class="form-Label"
+						>Customer Contact Email<span class="text-danger"
+							>*</span
+						></label
+					>
 					<span
 						*ngIf="
               IncidentReport.get('customerEmail')?.hasError('required') &&
@@ -374,22 +383,23 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6 col-sm-6-print">
-				<label class="cols" class="form-Label"
-					>Date of Form Completion<span class="text-danger"
-						>*</span
-					></label
-				>
+			<div class="col-md-6 col-sm-6-print form-floating">
 				<input
 					matInput
 					[matDatepicker]="datepicker"
 					[max]="maxDate"
+					placeholder="dd"
 					[min]="minDate"
 					class="form-control"
 					formControlName="dateOfFormCompletion"
 					[class.is-invalid-date]="IncidentReport.get('dateOfFormCompletion')?.hasError('required') && (IncidentReport.get('dateOfFormCompletion').dirty || IncidentReport.get('dateOfFormCompletion').touched) "
 					placeholder="dd-mm-yyyy"
 				/>
+				<label class="cols" class="form-Label"
+					>Date of Form Completion<span class="text-danger"
+						>*</span
+					></label
+				>
 				<mat-datepicker-toggle
 					matSuffix
 					[for]="datepicker"
@@ -1495,7 +1505,6 @@
 			*ngIf="(isPrint | async)===true?false:isHistory===true?false:true"
 			type="submit"
 			class="btn btn-primary btn-block"
-			[disabled]="!IncidentReport.valid || singRequired || singRequired1"
 			(click)="onSubmit()"
 		>
 			Submit

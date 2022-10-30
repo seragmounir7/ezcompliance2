@@ -70,6 +70,8 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 	check: any;
 	isHistory: boolean;
 	returnTo: Observable<string>;
+
+	snippet: string;
 	constructor(
 		private fb: FormBuilder,
 		private dynamicFormsService: DynamicFormsService,
@@ -282,6 +284,7 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 					this.toolBox.controls.custConctPh.valueChanges.pipe();
 					this.toolBox.controls.custEmail.valueChanges.pipe();
 				});
+				console.log(this.allJobNumbers);
 				this.toolBox.get('jobNumberId').updateValueAndValidity();
 			});
 	}
@@ -395,6 +398,23 @@ export class ToolboxTalkComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 	ngAfterViewInit() {
+		this.snippet = `
+			$('.mat-datepicker-toggle-default-icon').on('click',function(){
+				setTimeout(()=>{
+					var position = $('.mat-datepicker-toggle-active').offset();
+					console.log(position)
+					$('.cdk-overlay-container').css(position)
+				},10)
+			});
+		`;
+		let date_script_to_render = document.createElement('script');
+		date_script_to_render.type = 'text/javascript';
+		date_script_to_render.async = false;
+		date_script_to_render.appendChild(
+			document.createTextNode(this.snippet)
+		);
+		//document.getElementsByTagName('body')[0].appendChild(date_script_to_render)
+
 		this.disableForm();
 
 		this.sub = this.shared.printObs$.subscribe((res) => {

@@ -3,6 +3,7 @@ import {
 	EventEmitter,
 	OnInit,
 	Output,
+	AfterContentInit,
 	ViewChild
 } from '@angular/core';
 import {
@@ -34,7 +35,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 	templateUrl: './add-and-edit-company-info.component.html',
 	styleUrls: ['./add-and-edit-company-info.component.scss']
 })
-export class AddAndEditCompanyInfoComponent implements OnInit {
+export class AddAndEditCompanyInfoComponent
+	implements OnInit, AfterContentInit {
 	@Output() isInvalid: EventEmitter<boolean> = new EventEmitter<boolean>(
 		false
 	);
@@ -80,6 +82,12 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		private employee: EmployeeRegistrationService
 	) {}
 
+	ngAfterContentInit() {
+		setTimeout(() => {
+			console.log(this.formData.value);
+		}, 5000);
+	}
+
 	ngOnInit(): void {
 		this.employee.getAllEmployeeInfo().subscribe((empData) => {
 			this.empData = empData;
@@ -87,6 +95,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		this.authService.loginData$.subscribe((res) => (this.userId = res.id));
 		this.formData = this.fb.group({
 			companyName: ['', Validators.required],
+			companyAddress: ['', Validators.required],
+			linkedIn: ['', Validators.required],
+			departments: ['', Validators.required],
+			instgram: ['', Validators.required],
+			numberOfEmpoyees: ['', Validators.required],
 			phone: [
 				'',
 				[Validators.required, CustomValidators.PhoneNumberValidator()]
@@ -409,6 +422,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		const body = {
 			customerDetails: {
 				companyName: this.formData.get('companyName').value,
+				companyAddress: this.formData.get('companyAddress').value,
+				linkedIn: this.formData.get('linkedIn').value,
+				departments: this.formData.get('departments').value,
+				instgram: this.formData.get('instgram').value,
+				numberOfEmpoyees: this.formData.get('numberOfEmpoyees').value,
 				fax: this.formData.get('fax').value,
 				phone: this.formData.get('phone').value,
 				email: this.formData.get('emailAddress').value,
@@ -459,6 +477,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 			this.selectedLogo = data.data.companyLogo;
 			this.formData.patchValue({
 				companyName: data.data.companyName,
+				companyAddress: data.data.companyAddress,
+				linkedIn: data.data.linkedIn,
+				departments: data.data.departments,
+				instgram: data.data.instgram,
+				numberOfEmpoyees: data.data.numberOfEmpoyees,
 				phone: data.data.phone,
 				fax: data.data.fax,
 				emailAddress: data.data.email,
@@ -561,6 +584,11 @@ export class AddAndEditCompanyInfoComponent implements OnInit {
 		};
 		const body = {
 			companyName: this.formData.get('companyName').value,
+			companyAddress: this.formData.get('companyAddress').value,
+			linkedIn: this.formData.get('linkedIn').value,
+			departments: this.formData.get('departments').value,
+			instgram: this.formData.get('instgram').value,
+			numberOfEmpoyees: this.formData.get('numberOfEmpoyees').value,
 			email: this.formData.get('emailAddress').value,
 			phone: this.formData.get('phone').value,
 			companyABN: this.formData.get('companyABN').value,

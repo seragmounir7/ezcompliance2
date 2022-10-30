@@ -54,20 +54,21 @@
 				</div>
 				<div>
 					<div class="row">
-						<div class="mb-3 col-sm col-md">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Site Name<span class="text-danger">*</span>
-							</p>
+						<div class="mb-4 col-sm col-md form-floating">
 							<input
 								type="text"
 								class="form-control outline"
 								id="siteName"
 								formControlName="siteName"
+								placeholder="dd"
 								[class.is-invalid]="sidePreview.get('siteName')?.hasError('required') && (sidePreview.get('siteName').dirty || sidePreview.get('siteName').touched) "
 							/>
+							<label
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Site Name<span class="text-danger">*</span>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('siteName')?.hasError('required') && (sidePreview.get('siteName').dirty  || sidePreview.get('siteName').touched) "
 								class="invalid-feedback"
@@ -75,19 +76,20 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col-sm col-md">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Customer Name<span class="text-danger">*</span>
-							</p>
+						<div class="mb-4 col-sm col-md form-floating">
 							<input
 								type="text"
 								class="form-control outline"
 								formControlName="customerName"
+								placeholder="dd"
 								[class.is-invalid]="sidePreview.get('customerName')?.hasError('required') && (sidePreview.get('customerName').dirty || sidePreview.get('customerName').touched) "
 							/>
+							<label
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Customer Name<span class="text-danger">*</span>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('customerName')?.hasError('required') && (sidePreview.get('customerName').dirty  || sidePreview.get('customerName').touched) "
 								class="invalid-feedback"
@@ -95,23 +97,22 @@
 								This Field is Required</span
 							>
 						</div>
-					</div>
-					<div class="row">
-						<div class="mb-3 col-sm col-md">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Site Address<span class="text-danger">*</span>
-							</p>
+						<div class="mb-4 col-sm col-md form-floating">
 							<textarea
 								autosize
 								type="text"
 								formControlName="streetAddr"
+								placeholder="dd"
 								class="form-control outline"
 								id="name"
 								[class.is-invalid]="sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty || sidePreview.get('streetAddr').touched) "
 							></textarea>
+							<label
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Site Address<span class="text-danger">*</span>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('streetAddr')?.hasError('required') && (sidePreview.get('streetAddr').dirty  || sidePreview.get('streetAddr').touched) "
 								class="invalid-feedback"
@@ -119,21 +120,24 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col-sm col-md">
-							<p
+					</div>
+					<div class="row">
+						<div class="mb-4 col-sm col-md form-floating">
+							<input
+								type="text"
+								class="form-control outline"
+								formControlName="custConct"
+								placeholder="dd"
+								[class.is-invalid]="sidePreview.get('custConct')?.hasError('required') && (sidePreview.get('custConct').dirty || sidePreview.get('custConct').touched) "
+							/>
+							<label
 								for="exampleFormControlInput1"
 								class="form-Label"
 							>
 								Customer Contact<span class="text-danger"
 									>*</span
 								>
-							</p>
-							<input
-								type="text"
-								class="form-control outline"
-								formControlName="custConct"
-								[class.is-invalid]="sidePreview.get('custConct')?.hasError('required') && (sidePreview.get('custConct').dirty || sidePreview.get('custConct').touched) "
-							/>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('custConct')?.hasError('required') && (sidePreview.get('custConct').dirty  || sidePreview.get('custConct').touched) "
 								class="invalid-feedback"
@@ -141,24 +145,23 @@
 								This Field is Required</span
 							>
 						</div>
-					</div>
 
-					<div class="row">
-						<div class="mb-3 col-sm col-md">
-							<p
+						<div class="mb-4 col-sm col-md form-floating">
+							<input
+								type="text"
+								class="form-control outline"
+								placeholder="dd"
+								formControlName="custConctPh"
+								[class.is-invalid]="sidePreview.get('custConctPh')?.hasError('required') && (sidePreview.get('custConctPh').dirty || sidePreview.get('custConctPh').touched) "
+							/>
+							<label
 								for="exampleFormControlInput1"
 								class="form-Label"
 							>
 								Customer Contact Phone<span class="text-danger"
 									>*</span
 								>
-							</p>
-							<input
-								type="text"
-								class="form-control outline"
-								formControlName="custConctPh"
-								[class.is-invalid]="sidePreview.get('custConctPh')?.hasError('required') && (sidePreview.get('custConctPh').dirty || sidePreview.get('custConctPh').touched) "
-							/>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('custConctPh')?.hasError('required') && (sidePreview.get('custConctPh').dirty  || sidePreview.get('custConctPh').touched) "
 								class="invalid-feedback"
@@ -166,21 +169,22 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col-sm col-md">
-							<p
+						<div class="mb-4 col-sm col-md form-floating">
+							<input
+								type="text"
+								class="form-control outline"
+								formControlName="custEmail"
+								placeholder="dd"
+								[class.is-invalid]="sidePreview.get('custEmail')?.hasError('required') && (sidePreview.get('custEmail').dirty || sidePreview.get('custEmail').touched) "
+							/>
+							<label
 								for="exampleFormControlInput1"
 								class="form-Label"
 							>
 								Customer Contact Email<span class="text-danger"
 									>*</span
 								>
-							</p>
-							<input
-								type="text"
-								class="form-control outline"
-								formControlName="custEmail"
-								[class.is-invalid]="sidePreview.get('custEmail')?.hasError('required') && (sidePreview.get('custEmail').dirty || sidePreview.get('custEmail').touched) "
-							/>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('custEmail')?.hasError('required') && (sidePreview.get('custEmail').dirty  || sidePreview.get('custEmail').touched) "
 								class="invalid-feedback"
@@ -190,18 +194,12 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="mb-3 col-sm col-md">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Job Number<span class="text-danger">*</span>
-							</p>
-
+						<div class="mb-4 col-sm col-md form-floating">
 							<select
 								class="form-select form-control col-sm col-md outline form-dropdown"
 								aria-label="Default select example"
 								formControlName="jobNumber"
+								placeholder="dd"
 								(change)="jobNoSel()"
 								[class.is-invalid]="sidePreview.get('jobNumber')?.hasError('required') && (sidePreview.get('jobNumber').dirty || sidePreview.get('jobNumber').touched) "
 							>
@@ -216,6 +214,12 @@
               <option value="2">1001</option>
               <option value="3">1002</option> -->
 							</select>
+							<label
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Job Number<span class="text-danger">*</span>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('jobNumber')?.hasError('required') && (sidePreview.get('jobNumber').dirty  || sidePreview.get('jobNumber').touched) "
 								class="invalid-feedback"
@@ -223,19 +227,12 @@
 								This Field is Required</span
 							>
 						</div>
-						<div class="mb-3 col-sm col-md">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Project Manager<span class="text-danger"
-									>*</span
-								>
-							</p>
+						<div class="mb-4 col-sm col-md form-floating">
 							<select
 								class="form-select form-control col-sm col-md outline form-dropdown"
 								aria-label="Default select example"
 								formControlName="projectManager"
+								placeholder="dd"
 								[class.is-invalid]="sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty || sidePreview.get('projectManager').touched) "
 							>
 								<option selected hidden>Select</option>
@@ -246,6 +243,14 @@
 									{{mang.fullName}}
 								</option>
 							</select>
+							<label
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Project Manager<span class="text-danger"
+									>*</span
+								>
+							</label>
 							<span
 								*ngIf=" sidePreview.get('projectManager')?.hasError('required') && (sidePreview.get('projectManager').dirty  || sidePreview.get('projectManager').touched) "
 								class="invalid-feedback"
@@ -253,25 +258,25 @@
 								This Field is Required</span
 							>
 						</div>
-					</div>
-					<div class="row">
-						<div class="mb-3 col-sm-6 col-md-6">
-							<p
-								for="exampleFormControlInput1"
-								class="form-Label"
-							>
-								Date<span class="text-danger">*</span>
-							</p>
+
+						<div class="mb-4 col-sm col-md form-floating">
 							<input
 								matInput
 								[matDatepicker]="datepicker2"
 								[max]="maxDate"
 								[min]="minDate"
+								placeholder="dd"
 								class="form-control outline"
 								formControlName="date"
 								[class.is-invalid-date]="sidePreview.get('date')?.hasError('required') && (sidePreview.get('date').dirty || sidePreview.get('date').touched) "
 								placeholder="dd-mm-yyyy"
 							/>
+							<label
+								for="exampleFormControlInput1"
+								class="form-Label"
+							>
+								Date<span class="text-danger">*</span>
+							</label>
 							<mat-datepicker-toggle
 								matSuffix
 								[for]="datepicker2"
@@ -1901,20 +1906,23 @@
 				<div formArrayName="siteAction">
 					<div *ngFor="let row of add().controls; let filed = index">
 						<div [formGroupName]="filed">
-							<div class="row">
-								<div class="mb-3 col-sm-3 col-md-3">
-									<p
+							<div class="row mt-4">
+								<div
+									class="mb-3 col-sm-3 col-md-3 form-floating"
+								>
+									<input
+										type="text"
+										class="form-control outline"
+										placeholder="dd"
+										formControlName="item"
+										[class.is-invalid]=" add().controls[filed].get('item')?.hasError('required') && (add().controls[filed].get('item').dirty || add().controls[filed].get('item').touched) "
+									/>
+									<label
 										for="exampleFormControlInput1"
 										class="form-Label mt-2"
 									>
 										Item<span class="text-danger">*</span>
-									</p>
-									<input
-										type="text"
-										class="form-control outline"
-										formControlName="item"
-										[class.is-invalid]=" add().controls[filed].get('item')?.hasError('required') && (add().controls[filed].get('item').dirty || add().controls[filed].get('item').touched) "
-									/>
+									</label>
 									<span
 										*ngIf=" add().controls[filed].get('item')?.hasError('required') && (add().controls[filed].get('item').dirty  || add().controls[filed].get('item').touched) "
 										class="invalid-feedback"
@@ -1923,19 +1931,22 @@
 									>
 								</div>
 
-								<div class="mb-3 col-sm-3 col-md-3">
-									<p
+								<div
+									class="mb-3 col-sm-3 col-md-3 form-floating"
+								>
+									<input
+										type="text"
+										class="form-control outline"
+										placeholder="dd"
+										formControlName="action"
+										[class.is-invalid]=" add().controls[filed].get('action')?.hasError('required') && (add().controls[filed].get('action').dirty || add().controls[filed].get('action').touched) "
+									/>
+									<label
 										for="exampleFormControlInput1"
 										class="form-Label mt-2"
 									>
 										Action<span class="text-danger">*</span>
-									</p>
-									<input
-										type="text"
-										class="form-control outline"
-										formControlName="action"
-										[class.is-invalid]=" add().controls[filed].get('action')?.hasError('required') && (add().controls[filed].get('action').dirty || add().controls[filed].get('action').touched) "
-									/>
+									</label>
 									<span
 										*ngIf=" add().controls[filed].get('action')?.hasError('required') && (add().controls[filed].get('action').dirty  || add().controls[filed].get('action').touched) "
 										class="invalid-feedback"
@@ -1944,8 +1955,19 @@
 									>
 								</div>
 
-								<div class="my-2 col-sm-2 col-md-2">
-									<p
+								<div class="col-sm-2 col-md-2 form-floating">
+									<input
+										type="input"
+										class="mr-1 form-control"
+										value=""
+										placeholder="dd"
+										formControlName="personRes"
+										[class.is-invalid]="add().controls[filed].get('personRes')?.errors
+                  && (add().controls[filed].get('personRes').dirty || add().controls[filed].get('personRes').touched)"
+										[matAutocomplete]="personRes"
+										autocomplete="off"
+									/>
+									<label
 										for="exampleFormControlInput1"
 										class="form-Label"
 									>
@@ -1953,18 +1975,7 @@
 											class="text-danger"
 											>*</span
 										>
-									</p>
-
-									<input
-										type="input"
-										class="mr-1 form-control"
-										value=""
-										formControlName="personRes"
-										[class.is-invalid]="add().controls[filed].get('personRes')?.errors
-                  && (add().controls[filed].get('personRes').dirty || add().controls[filed].get('personRes').touched)"
-										[matAutocomplete]="personRes"
-										autocomplete="off"
-									/>
+									</label>
 									<mat-autocomplete
 										#personRes="matAutocomplete"
 										[displayWith]="displayFn"
@@ -1995,24 +2006,27 @@
 									</ng-container>
 								</div>
 
-								<div class="mb-3 mt-2 col-sm-2 col-md-2">
-									<p
-										for="exampleFormControlInput1"
-										class="form-Label"
-									>
-										Complete By<span class="text-danger"
-											>*</span
-										>
-									</p>
+								<div
+									class="mb-3 mt-2 col-sm-2 col-md-2 form-floating"
+								>
 									<input
 										matInput
 										[matDatepicker]="datepicker2"
 										[min]="minDate"
 										class="form-control outline"
 										formControlName="date"
+										placeholder="dd"
 										[class.is-invalid-date]="add().controls[filed].get('date')?.hasError('required') && (add().controls[filed].get('date').dirty || add().controls[filed].get('date').touched) "
 										placeholder="dd-mm-yyyy"
 									/>
+									<label
+										for="exampleFormControlInput1"
+										class="form-Label"
+									>
+										Complete By<span class="text-danger"
+											>*</span
+										>
+									</label>
 									<mat-datepicker-toggle
 										matSuffix
 										[for]="datepicker2"
@@ -2055,19 +2069,20 @@
 			</div>
 
 			<div class="row">
-				<div class="mb-3 mt-3 col-sm-6 col-md-6">
-					<p for="exampleFormControlInput1" class="form-Label">
-						Employee Name<span class="text-danger">*</span>
-					</p>
+				<div class="mb-3 mt-3 col-sm-6 col-md-6 form-floating">
 					<input
 						type="text"
 						class="form-control outline"
 						id="empName"
 						[matAutocomplete]="employee1"
 						autocomplete="off"
+						placeholder="dd"
 						formControlName="empName"
 						[class.is-invalid]="sidePreview.get('empName')?.hasError('required') && (sidePreview.get('empName').dirty || sidePreview.get('empName').touched) "
 					/>
+					<label for="exampleFormControlInput1" class="form-Label">
+						Employee Name<span class="text-danger">*</span>
+					</label>
 
 					<mat-autocomplete
 						#employee1="matAutocomplete"
@@ -2090,20 +2105,21 @@
 					>
 				</div>
 
-				<div class="mb-3 mt-3 col-sm-4 col-md-4">
-					<p for="exampleFormControlInput1" class="form-Label">
-						Date<span class="text-danger">*</span>
-					</p>
+				<div class="mb-3 mt-3 col-sm-4 col-md-4 form-floating">
 					<input
 						matInput
 						[matDatepicker]="datepicker2"
 						[max]="maxDate"
+						placeholder="dd"
 						[min]="minDate"
 						class="form-control outline"
 						formControlName="submitDate"
 						[class.is-invalid-date]="sidePreview.get('submitDate')?.hasError('required') && (sidePreview.get('submitDate').dirty || sidePreview.get('submitDate').touched) "
 						placeholder="dd-mm-yyyy"
 					/>
+					<label for="exampleFormControlInput1" class="form-Label">
+						Date<span class="text-danger">*</span>
+					</label>
 					<mat-datepicker-toggle
 						matSuffix
 						[for]="datepicker2"
@@ -3847,7 +3863,7 @@
 								>
 							</div>
 
-							<div class="my-2 col-sm-2 col-md-2">
+							<div class="col-sm-2 col-md-2">
 								<p
 									for="exampleFormControlInput1"
 									class="form-Label"

@@ -9,7 +9,8 @@ import {
 	Output,
 	EventEmitter,
 	Input,
-	ElementRef
+	ElementRef,
+	AfterContentInit
 } from '@angular/core';
 import { AppService } from 'src/app/utils/services/app.service';
 import { SetTitleService } from 'src/app/utils/services/set-title.service';
@@ -27,7 +28,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 	templateUrl: './menu-sidebar.component.html',
 	styleUrls: ['./menu-sidebar.component.scss']
 })
-export class MenuSidebarComponent implements OnInit, AfterViewInit {
+export class MenuSidebarComponent
+	implements OnInit, AfterViewInit, AfterContentInit {
 	@ViewChild('mainSidebar', { static: false })
 	mainSidebar: ElementRef<HTMLElement>;
 	@Input() logoUrl: string;
@@ -180,7 +182,31 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 		this.afterNgOnInIt = true;
 	}
 
-	ngAfterViewInit() {}
+	ngAfterContentInit() {}
+
+	snippet: string;
+
+	ngAfterViewInit() {
+		this.snippet = `
+		$('.menu-accordion').on('click',function(){
+			if($(this).hasClass('active')){
+				//do nothing
+			}else{
+				$('.menu-accordion').removeClass('active');
+				$('.menu-sub').slideUp();
+				$(this).addClass('active');
+				$(this).find('.menu-sub').slideToggle();
+			}
+		})
+		
+		`;
+
+		let internalScript = document.createElement('script');
+		internalScript.type = 'text/javascript';
+		internalScript.async = false;
+		internalScript.appendChild(document.createTextNode(this.snippet));
+		document.getElementsByTagName('body')[0].appendChild(internalScript);
+	}
 	dynamic = false;
 	landingPageVal = false;
 	subscription = false;

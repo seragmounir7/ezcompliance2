@@ -33,19 +33,26 @@ export class NavItems {
 			route: './',
 			hasAccess: true
 		},
+
 		{
-			displayedName: 'SuperAdmin',
+			displayedName: 'Distribution Logs',
 			icon: 'roleMgmt',
-			hasAccess: true,
-			childItem: [
-				{
-					displayedName: 'Client Admin List',
-					icon: '',
-					route: `./superadmin/${TableDetails.clientList}`,
-					hasAccess: true
-				}
-			]
+			route: './distribution-logs',
+			hasAccess: true
 		},
+		// {
+		// 	displayedName: 'SuperAdmin',
+		// 	icon: 'roleMgmt',
+		// 	hasAccess: true,
+		// 	childItem: [
+		// 		{
+		// 			displayedName: 'Client Admin List',
+		// 			icon: '',
+		// 			route: `./superadmin/${TableDetails.clientList}`,
+		// 			hasAccess: true
+		// 		}
+		// 	]
+		// },
 		{
 			displayedName: 'WHS Forms',
 			icon: 'whsForms',
@@ -479,6 +486,13 @@ export class NavItems {
 			displayedName: 'Dashboard',
 			icon: 'dash',
 			route: './',
+			hasAccess: true
+		},
+
+		{
+			displayedName: 'Distribution Logs',
+			icon: 'roleMgmt',
+			route: './distribution-logs',
 			hasAccess: true
 		},
 		{
