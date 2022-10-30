@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SiteInspectionTableComponent } from './site-inspection-table.component';
+import { VehicleInspectionTableComponent } from './vehicle-inspection-table.component';
 
-describe('SiteInspectionTableComponent', () => {
-	let component: SiteInspectionTableComponent;
-	let fixture: ComponentFixture<SiteInspectionTableComponent>;
+describe('VehicleInspectionTableComponent', () => {
+	let component: VehicleInspectionTableComponent;
+	let fixture: ComponentFixture<VehicleInspectionTableComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [SiteInspectionTableComponent]
+			declarations: [VehicleInspectionTableComponent]
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(SiteInspectionTableComponent);
+		fixture = TestBed.createComponent(VehicleInspectionTableComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
