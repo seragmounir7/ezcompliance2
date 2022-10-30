@@ -13,10 +13,13 @@ import { SiteInspectionTableComponent } from './site-inspection-table/site-inspe
 import { HazardFormTableDetailsComponent } from './hazard-form-table-details/hazard-form-table-details.component';
 import { IncidentsTableComponent } from './incidents-table/incidents-table.component';
 import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesment-table.component';
+import { VehicleInspectionComponent } from './vehicle-inspection/vehicle-inspection.component';
+import { VehicleInspectionTableComponent } from './vehicle-inspection-table/vehicle-inspection-table.component';
 const routes: Routes = [
 	{ path: '', component: FormsComponent },
 	{ path: 'forms', component: FormsComponent },
 	{ path: 'siteInspect/:id', component: SiteInspectionComponent },
+	{ path: 'vehicleInspect/:id', component: VehicleInspectionComponent },
 	{ path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
 	{ path: 'hazardRep/:id', component: HazardReportComponent },
 	{ path: 'incidentRep/:id', component: IncidentReportComponent },
@@ -33,6 +36,10 @@ const routes: Routes = [
 	{
 		path: 'siteinspectiontable/history/:id',
 		component: SiteInspectionTableComponent
+	},
+	{
+		path: 'vehicleinspectiontable/history/:id',
+		component: VehicleInspectionTableComponent
 	},
 	{
 		path: 'hazardTable/history/:id',
@@ -53,6 +60,10 @@ const routes: Routes = [
 		component: SiteInspectionComponent
 	},
 	{
+		path: 'vehicleinspectiontable/history/vehicleInspect/:id',
+		component: VehicleInspectionComponent
+	},
+	{
 		path: 'hazardTable/history/hazardRep/:id',
 		component: HazardReportComponent
 	},
@@ -62,6 +73,10 @@ const routes: Routes = [
 	},
 
 	{ path: 'siteinspectiontable', component: SiteInspectionTableComponent },
+	{
+		path: 'vehicleinspectiontable',
+		component: VehicleInspectionTableComponent
+	},
 	{ path: 'hazardTable', component: HazardFormTableDetailsComponent },
 	{ path: 'incidentsTable', component: IncidentsTableComponent },
 	{ path: 'fillConfigForm/:index', component: FillConfiguredFormComponent }

@@ -54,6 +54,11 @@ export class FormsComponent implements OnInit {
 			index: 5,
 			title: 'Risk Assessment and SWMS',
 			link: ['/admin/forms/riskAssessSWMS/' + 'form']
+		},
+		{
+			index: 6,
+			title: 'Vehicle Inspection',
+			link: ['/admin/forms/vehicleInspect/' + 'form']
 		}
 	];
 	formName = '';
@@ -93,6 +98,10 @@ export class FormsComponent implements OnInit {
 			}
 			case 'Site Inspection': {
 				this.router.navigate(['/admin/forms/siteinspectiontable']);
+				break;
+			}
+			case 'Vehicle Inspection': {
+				this.router.navigate(['/admin/forms/vehicleinspectiontable']);
 				break;
 			}
 			case 'Hazards Reported': {
