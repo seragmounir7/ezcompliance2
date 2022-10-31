@@ -15,12 +15,14 @@ import { IncidentsTableComponent } from './incidents-table/incidents-table.compo
 import { RiskAssesmentTableComponent } from './risk-assesment-table/risk-assesment-table.component';
 import { VehicleInspectionComponent } from './vehicle-inspection/vehicle-inspection.component';
 import { VehicleInspectionTableComponent } from './vehicle-inspection-table/vehicle-inspection-table.component';
+import { MeetingMinutesComponent } from './meeting minutes/meeting-minutes.component';
 const routes: Routes = [
 	{ path: '', component: FormsComponent },
 	{ path: 'forms', component: FormsComponent },
 	{ path: 'siteInspect/:id', component: SiteInspectionComponent },
 	{ path: 'vehicleInspect/:id', component: VehicleInspectionComponent },
 	{ path: 'toolboxTalk/:id', component: ToolboxTalkComponent },
+	{ path: 'meetingMinutes/:id', component: MeetingMinutesComponent },
 	{ path: 'hazardRep/:id', component: HazardReportComponent },
 	{ path: 'incidentRep/:id', component: IncidentReportComponent },
 	{ path: 'riskAssessSWMS/:id', component: RiskAssessmentSWMSComponent },
@@ -50,6 +52,10 @@ const routes: Routes = [
 	{
 		path: 'tableData/history/toolboxTalk/:id',
 		component: ToolboxTalkComponent
+	},
+	{
+		path: 'tableData/history/meetingMinutes/:id',
+		component: MeetingMinutesComponent
 	},
 	{
 		path: 'riskAssessTable/history/riskAssessSWMS/:id',

@@ -43,7 +43,7 @@ export class FormsComponent implements OnInit {
 		{
 			index: 3,
 			title: 'Toolbox Talk',
-			link: ['/admin/forms/toolboxTalk/' + 'form']
+			link: ['/admin/forms/meetingMinutes/' + 'form']
 		},
 		{
 			index: 4,
@@ -59,6 +59,11 @@ export class FormsComponent implements OnInit {
 			index: 6,
 			title: 'Vehicle Inspection',
 			link: ['/admin/forms/vehicleInspect/' + 'form']
+		},
+		{
+			index: 7,
+			title: 'Meeting Minutes',
+			link: ['/admin/forms/meetingMinutes/' + 'form']
 		}
 	];
 	formName = '';

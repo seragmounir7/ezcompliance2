@@ -36,6 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollModule } from 'src/app/shared/scroll/scroll.module';
 import { VehicleInspectionComponent } from './vehicle-inspection/vehicle-inspection.component';
 import { VehicleInspectionTableComponent } from './vehicle-inspection-table/vehicle-inspection-table.component';
+import { MeetingMinutesComponent } from './meeting minutes/meeting-minutes.component';
 @NgModule({
 	declarations: [
 		FormsComponent,
@@ -52,7 +53,8 @@ import { VehicleInspectionTableComponent } from './vehicle-inspection-table/vehi
 		HazardFormTableDetailsComponent,
 		IncidentsTableComponent,
 		RiskAssesmentTableComponent,
-		FillConfiguredFormComponent
+		FillConfiguredFormComponent,
+		MeetingMinutesComponent
 	],
 	imports: [
 		CommonModule,
